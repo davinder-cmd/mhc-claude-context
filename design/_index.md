@@ -23,6 +23,28 @@
 
 ---
 
+## Elements
+*Source: DF space (Product Design). Individual, primitive UI building blocks.*
+
+| Element | Status | File |
+|---------|--------|------|
+| Avatar | ✅ | [elements/avatar.md](elements/avatar.md) |
+| Badge | ✅ | [elements/badge.md](elements/badge.md) |
+| Card | ✅ | [elements/card.md](elements/card.md) |
+| Checkbox | ✅ | [elements/checkbox.md](elements/checkbox.md) |
+| Chip | ✅ | [elements/chip.md](elements/chip.md) |
+| Dropdown | 🔶 | [elements/dropdown.md](elements/dropdown.md) |
+| Loading Indicator | 🚧 | [elements/loading-indicator.md](elements/loading-indicator.md) |
+| Progress Indicator | 🚧 | [elements/progress-indicator.md](elements/progress-indicator.md) |
+| Radio Button | 🚧 | [elements/radio-button.md](elements/radio-button.md) |
+| Range Slider | 🚧 | [elements/range-slider.md](elements/range-slider.md) |
+| Stepper | 🚧 | [elements/stepper.md](elements/stepper.md) |
+| Tag | ✅ | [elements/tag.md](elements/tag.md) |
+| Text Area | ✅ | [elements/text-area.md](elements/text-area.md) |
+| Text Field | 🚧 | [elements/text-field.md](elements/text-field.md) |
+
+---
+
 ## Components
 
 | Component | Status | File |
