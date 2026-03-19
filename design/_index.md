@@ -16,10 +16,10 @@
 | Colors | 🔶 | [foundation/colors.md](foundation/colors.md) |
 | Spacing | ✅ | [foundation/spacing.md](foundation/spacing.md) |
 | Typography | ✅ | [foundation/typography.md](foundation/typography.md) |
-| Aspect Ratios | 🚧 | https://mobilehealthc.atlassian.net/wiki/spaces/MDS/pages/1344045135 |
-| Layout | 🚧 | https://mobilehealthc.atlassian.net/wiki/spaces/MDS/pages/1344045185 |
-| Object Styles | 🚧 | https://mobilehealthc.atlassian.net/wiki/spaces/MDS/pages/1344045199 |
-| Responsive Grid | 🚧 | https://mobilehealthc.atlassian.net/wiki/spaces/MDS/pages/1344045221 |
+| Aspect Ratios | ✅ | [foundation/aspect-ratios.md](foundation/aspect-ratios.md) |
+| Layout | 🚧 | [foundation/layout.md](foundation/layout.md) |
+| Object Styles | ✅ | [foundation/object-styles.md](foundation/object-styles.md) |
+| Responsive Grid | 🔶 | [foundation/responsive-grid.md](foundation/responsive-grid.md) |
 
 ---
 
