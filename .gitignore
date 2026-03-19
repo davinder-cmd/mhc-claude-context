@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude internals
+.claude/
+
+# Skills and plugins (managed separately)
+.skills/
+.remote-plugins/

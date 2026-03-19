@@ -1,0 +1,33 @@
+name,category,priority,core,notes
+Personify Health,direct,primary,yes,
+Evive,direct,primary,yes,
+Sharecare,direct,primary,yes,
+Thrive Global,direct,primary,yes,
+Grokker AI,direct,primary,yes,
+Limeade,direct,secondary,,
+Wellworks,direct,secondary,,
+Castlight,direct,secondary,,
+Rally,direct,secondary,,
+Welltok,direct,secondary,,
+Hinge Health,dtx,secondary,yes,MSK focused
+Sword Health,dtx,secondary,yes,MSK + AI therapy
+Omada,dtx,secondary,,
+Livongo,dtx,secondary,,
+Headspace Health,dtx,secondary,yes,Mental health
+Hippocratic AI,dtx,secondary,yes,Safety-focused AI agents for clinical outreach
+Kaia Health,dtx,secondary,,
+Noom,dtx,tertiary,,
+Blue Mesa,dtx,tertiary,,Part of Personify Health
+Lark,dtx,tertiary,,
+Vida Health,dtx,tertiary,,
+Big Health,dtx,tertiary,,
+Pear Therapeutics,dtx,tertiary,,
+Click Therapeutics,dtx,tertiary,,
+VIRTA,dtx,tertiary,,Diabetes reversal
+Oura,consumer,primary,yes,
+Fitbit,consumer,primary,yes,
+Apple Health,consumer,primary,yes,
+Google Fit,consumer,primary,yes,
+Samsung,consumer,tertiary,,
+ChatGPT Health,foundation-model,primary,yes,
+Claude Health,foundation-model,primary,yes,
