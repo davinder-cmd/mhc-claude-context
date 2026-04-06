@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Direction Explorer — Mobile Health</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #FAF8F5; color: #252220; }
+  code { font-family: 'JetBrains Mono', monospace; }
+
+  .page-header {
+    background: linear-gradient(135deg, #252220, #3A3632);
+    color: white; padding: 48px;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  .page-header p { font-size: 15px; opacity: 0.5; margin-top: 8px; max-width: 700px; line-height: 1.6; }
+
+  .section { padding: 48px; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #918981; font-weight: 700; margin-bottom: 8px; }
+  .section h2 { font-size: 24px; font-weight: 700; color: #252220; margin-bottom: 6px; }
+  .section .desc { font-size: 14px; color: #6E6860; max-width: 640px; margin-bottom: 32px; line-height: 1.6; }
+
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+
+  .direction-card {
+    background: white; border-radius: 20px; overflow: hidden;
+    border: 2px solid #EDE9E4; transition: border-color 0.2s;
+  }
+  .direction-card:hover { border-color: #B5AEA4; }
+
+  .dir-header { padding: 24px 24px 16px; }
+  .dir-name { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+  .dir-desc { font-size: 12px; color: #6E6860; line-height: 1.5; }
+
+  .ramp-strip {
+    display: flex; height: 40px; margin: 0 24px;
+    border-radius: 10px; overflow: hidden;
+  }
+  .ramp-strip > div { flex: 1; position: relative; }
+  .ramp-strip > div span {
+    position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+    font-size: 7px; font-weight: 600; white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .contrast-info {
+    padding: 16px 24px; font-size: 11px; color: #6E6860;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .contrast-row {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; font-family: 'JetBrains Mono'; }
+  .badge-pass { background: #EEFBF3; color: #166B3C; }
+  .badge-aaa { background: #D1F5DF; color: #0A3D22; }
+
+  /* Mini phone mockup */
+  .mini-phone {
+    width: 100%; aspect-ratio: 9/16; max-height: 420px;
+    border-radius: 24px; border: 5px solid #252220;
+    overflow: hidden; margin: 16px auto 0;
+    position: relative;
+  }
+  .mini-phone-body { padding: 0 12px 60px; }
+
+  .mp-card {
+    border-radius: 12px; padding: 10px; margin-bottom: 8px;
+    background: white; border: 1px solid #EDE9E4;
+  }
+  .mp-pill {
+    display: inline-block; padding: 4px 10px; border-radius: 14px;
+    font-size: 9px; font-weight: 700; margin-right: 4px;
+  }
+  .mp-spark { display: flex; align-items: flex-end; gap: 2px; height: 20px; }
+  .mp-bar { width: 4px; border-radius: 2px; }
+
+  .mp-tabs {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 48px;
+    background: white; border-top: 1px solid #EDE9E4;
+    display: flex; align-items: center; justify-content: space-around; padding: 0 8px;
+    font-size: 7px; font-weight: 500;
+  }
+  .mp-tab-dot { width: 16px; height: 16px; border-radius: 5px; margin-bottom: 2px; }
+
+  /* Current blue reference */
+  .current-ref {
+    background: white; border-radius: 16px; padding: 24px;
+    border: 2px dashed #D5CFC7; margin-bottom: 32px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .current-swatch {
+    width: 80px; height: 80px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .comparison-table {
+    width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 24px;
+  }
+  .comparison-table th {
+    text-align: left; padding: 10px 14px; font-weight: 700; color: #524D47;
+    border-bottom: 2px solid #EDE9E4;
+  }
+  .comparison-table td {
+    padding: 10px 14px; border-bottom: 1px solid #F5F2EE;
+  }
+  .comparison-table tr:hover td { background: #FDFCFA; }
+
+  .swatch-inline {
+    display: inline-block; width: 16px; height: 16px; border-radius: 4px;
+    vertical-align: middle; margin-right: 6px; border: 1px solid rgba(0,0,0,0.08);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>The Blue Question</h1>
+  <p>Four directions to make the primary blue more memorable. Same warm-taupe system from v3 — we're only changing the blue. Each direction keeps WCAG AA compliance.</p>
+</div>
+
+<!-- Current reference -->
+<div class="section" style="padding-bottom: 0;">
+  <div class="current-ref">
+    <div class="current-swatch" style="background: #2D6CA4;">
+      <span style="color: white; font-weight: 800; font-size: 14px;">#2D6CA4</span>
+    </div>
+    <div>
+      <div style="font-size: 14px; font-weight: 700; color: #252220;">Current v3 blue — "forgettable"</div>
+      <div style="font-size: 12px; color: #6E6860; margin-top: 4px;">HSL(208, 57%, 41%) — Mid-saturation, mid-lightness. Competent but generic. Could be a bank, an insurance company, or a health app. Doesn't have a point of view.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4 Directions -->
+<div class="section">
+  <div class="section-label">Four directions</div>
+  <h2>Pick the personality</h2>
+  <div class="desc">Each is more saturated and committed than the current blue. They diverge on hue and depth — from bright ocean to deep sapphire.</div>
+
+  <div class="grid-4">
+
+    <!-- A: Vivid Ocean -->
+    <div class="direction-card">
+      <div class="dir-header">
+        <div class="dir-name" style="color: #1865A9;">A. Vivid Ocean</div>
+        <div class="dir-desc">Same hue (208°), way more saturation. Like the current blue but with the dial turned up. Clean, bright, confident. Think Stripe blue.</div>
+      </div>
+      <div class="ramp-strip">
+        <div style="background: #EDF4FC;"><span style="color: #666;">50</span></div>
+        <div style="background: #C0D9F2;"><span style="color: #666;">200</span></div>
+        <div style="background: #4A9EDF;"><span style="color: #fff;">400</span></div>
+        <div style="background: #1E78C8;"><span style="color: #fff;">500</span></div>
+        <div style="background: #1865A9;"><span style="color: #fff;">600</span></div>
+        <div style="background: #144F86;"><span style="color: #fff;">700</span></div>
+        <div style="background: #0D3459;"><span style="color: #fff;">900</span></div>
+      </div>
+      <div class="contrast-info">
+        <div class="contrast-row"><span>600 on white</span> <span class="badge badge-pass" id="a-ratio"></span></div>
+        <div class="contrast-row"><span>White on 600 btn</span> <span class="badge badge-pass" id="a-btn"></span></div>
+      </div>
+      <div style="padding: 0 16px 16px;">
+        <div class="mini-phone" style="background: #FAF8F5;">
+          <div style="background: linear-gradient(180deg, #0D3459, #144F86); padding: 32px 14px 14px; color: white;">
+            <div style="font-size: 10px; opacity: 0.4;">Good morning</div>
+            <div style="font-size: 17px; font-weight: 800;">Andrew</div>
+            <div style="margin-top: 10px; background: rgba(255,255,255,0.07); border-radius: 10px; padding: 10px; display: flex; align-items: center; gap: 8px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; border: 3px solid #35B89E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900;">78</div>
+              <div><div style="font-size: 10px; font-weight: 600;">Wellness Score</div><div style="font-size: 8px; opacity: 0.4;">+3 from last week</div></div>
+            </div>
+          </div>
+          <div class="mini-phone-body" style="padding-top: 10px;">
+            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+              <div class="mp-pill" style="background: #239882; color: white;">Activity</div>
+              <div class="mp-pill" style="background: #8B7FC0; color: white;">Mind</div>
+              <div class="mp-pill" style="background: #D97B2E; color: white;">Rewards</div>
+            </div>
+            <div class="mp-card">
+              <div style="font-size: 8px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+              <div style="font-size: 18px; font-weight: 900; color: #239882;">9,344</div>
+              <div style="height: 5px; border-radius: 3px; background: #F5F2EE; margin-top: 6px;"><div style="height: 100%; width: 93%; border-radius: 3px; background: linear-gradient(90deg, #239882, #35B89E);"></div></div>
+            </div>
+            <div class="mp-card" style="background: #F5F3FA; border-color: #D2CAE9;">
+              <div style="font-size: 9px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+              <div style="font-size: 8px; color: #574B8C; margin-top: 2px;">Your sleep dipped to 5h 40m</div>
+            </div>
+            <div style="display: block; padding: 10px; border-radius: 10px; background: #1865A9; color: white; font-size: 10px; font-weight: 700; text-align: center; margin-top: 8px;">Start a walk</div>
+          </div>
+          <div class="mp-tabs">
+            <div style="display: flex; flex-direction: column; align-items: center; color: #1865A9; font-weight: 700;">
+              <div class="mp-tab-dot" style="background: #EDF4FC;"></div>Home
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Care
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Benefits
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Rewards
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B: Cerulean Punch -->
+    <div class="direction-card">
+      <div class="dir-header">
+        <div class="dir-name" style="color: #0B74B8;">B. Cerulean Punch</div>
+        <div class="dir-desc">Slightly warmer hue (205°), pushed bright. Has energy and optimism — a blue that feels like it's moving forward. Think Headspace meets Calm.</div>
+      </div>
+      <div class="ramp-strip">
+        <div style="background: #EAF5FD;"><span style="color: #666;">50</span></div>
+        <div style="background: #A8D8F4;"><span style="color: #666;">200</span></div>
+        <div style="background: #32A3E2;"><span style="color: #fff;">400</span></div>
+        <div style="background: #0F8DD0;"><span style="color: #fff;">500</span></div>
+        <div style="background: #0B74B8;"><span style="color: #fff;">600</span></div>
+        <div style="background: #0A5C8E;"><span style="color: #fff;">700</span></div>
+        <div style="background: #073D5E;"><span style="color: #fff;">900</span></div>
+      </div>
+      <div class="contrast-info">
+        <div class="contrast-row"><span>600 on white</span> <span class="badge badge-pass" id="b-ratio"></span></div>
+        <div class="contrast-row"><span>White on 600 btn</span> <span class="badge badge-pass" id="b-btn"></span></div>
+      </div>
+      <div style="padding: 0 16px 16px;">
+        <div class="mini-phone" style="background: #FAF8F5;">
+          <div style="background: linear-gradient(180deg, #073D5E, #0A5C8E); padding: 32px 14px 14px; color: white;">
+            <div style="font-size: 10px; opacity: 0.4;">Good morning</div>
+            <div style="font-size: 17px; font-weight: 800;">Andrew</div>
+            <div style="margin-top: 10px; background: rgba(255,255,255,0.07); border-radius: 10px; padding: 10px; display: flex; align-items: center; gap: 8px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; border: 3px solid #35B89E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900;">78</div>
+              <div><div style="font-size: 10px; font-weight: 600;">Wellness Score</div><div style="font-size: 8px; opacity: 0.4;">+3 from last week</div></div>
+            </div>
+          </div>
+          <div class="mini-phone-body" style="padding-top: 10px;">
+            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+              <div class="mp-pill" style="background: #239882; color: white;">Activity</div>
+              <div class="mp-pill" style="background: #8B7FC0; color: white;">Mind</div>
+              <div class="mp-pill" style="background: #D97B2E; color: white;">Rewards</div>
+            </div>
+            <div class="mp-card">
+              <div style="font-size: 8px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+              <div style="font-size: 18px; font-weight: 900; color: #239882;">9,344</div>
+              <div style="height: 5px; border-radius: 3px; background: #F5F2EE; margin-top: 6px;"><div style="height: 100%; width: 93%; border-radius: 3px; background: linear-gradient(90deg, #239882, #35B89E);"></div></div>
+            </div>
+            <div class="mp-card" style="background: #F5F3FA; border-color: #D2CAE9;">
+              <div style="font-size: 9px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+              <div style="font-size: 8px; color: #574B8C; margin-top: 2px;">Your sleep dipped to 5h 40m</div>
+            </div>
+            <div style="display: block; padding: 10px; border-radius: 10px; background: #0B74B8; color: white; font-size: 10px; font-weight: 700; text-align: center; margin-top: 8px;">Start a walk</div>
+          </div>
+          <div class="mp-tabs">
+            <div style="display: flex; flex-direction: column; align-items: center; color: #0B74B8; font-weight: 700;">
+              <div class="mp-tab-dot" style="background: #EAF5FD;"></div>Home
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Care
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Benefits
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Rewards
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C: Electric Cobalt -->
+    <div class="direction-card">
+      <div class="dir-header">
+        <div class="dir-name" style="color: #1D55B0;">C. Electric Cobalt</div>
+        <div class="dir-desc">Shifted cooler (218°) with high saturation. Has depth and authority — a blue that feels premium and intentional. Think Revolut, Linear.</div>
+      </div>
+      <div class="ramp-strip">
+        <div style="background: #EDF1FC;"><span style="color: #666;">50</span></div>
+        <div style="background: #B5C6EE;"><span style="color: #666;">200</span></div>
+        <div style="background: #4878D8;"><span style="color: #fff;">400</span></div>
+        <div style="background: #2460C0;"><span style="color: #fff;">500</span></div>
+        <div style="background: #1D55B0;"><span style="color: #fff;">600</span></div>
+        <div style="background: #174188;"><span style="color: #fff;">700</span></div>
+        <div style="background: #0F2B58;"><span style="color: #fff;">900</span></div>
+      </div>
+      <div class="contrast-info">
+        <div class="contrast-row"><span>600 on white</span> <span class="badge badge-pass" id="c-ratio"></span></div>
+        <div class="contrast-row"><span>White on 600 btn</span> <span class="badge badge-pass" id="c-btn"></span></div>
+      </div>
+      <div style="padding: 0 16px 16px;">
+        <div class="mini-phone" style="background: #FAF8F5;">
+          <div style="background: linear-gradient(180deg, #0F2B58, #174188); padding: 32px 14px 14px; color: white;">
+            <div style="font-size: 10px; opacity: 0.4;">Good morning</div>
+            <div style="font-size: 17px; font-weight: 800;">Andrew</div>
+            <div style="margin-top: 10px; background: rgba(255,255,255,0.07); border-radius: 10px; padding: 10px; display: flex; align-items: center; gap: 8px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; border: 3px solid #35B89E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900;">78</div>
+              <div><div style="font-size: 10px; font-weight: 600;">Wellness Score</div><div style="font-size: 8px; opacity: 0.4;">+3 from last week</div></div>
+            </div>
+          </div>
+          <div class="mini-phone-body" style="padding-top: 10px;">
+            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+              <div class="mp-pill" style="background: #239882; color: white;">Activity</div>
+              <div class="mp-pill" style="background: #8B7FC0; color: white;">Mind</div>
+              <div class="mp-pill" style="background: #D97B2E; color: white;">Rewards</div>
+            </div>
+            <div class="mp-card">
+              <div style="font-size: 8px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+              <div style="font-size: 18px; font-weight: 900; color: #239882;">9,344</div>
+              <div style="height: 5px; border-radius: 3px; background: #F5F2EE; margin-top: 6px;"><div style="height: 100%; width: 93%; border-radius: 3px; background: linear-gradient(90deg, #239882, #35B89E);"></div></div>
+            </div>
+            <div class="mp-card" style="background: #F5F3FA; border-color: #D2CAE9;">
+              <div style="font-size: 9px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+              <div style="font-size: 8px; color: #574B8C; margin-top: 2px;">Your sleep dipped to 5h 40m</div>
+            </div>
+            <div style="display: block; padding: 10px; border-radius: 10px; background: #1D55B0; color: white; font-size: 10px; font-weight: 700; text-align: center; margin-top: 8px;">Start a walk</div>
+          </div>
+          <div class="mp-tabs">
+            <div style="display: flex; flex-direction: column; align-items: center; color: #1D55B0; font-weight: 700;">
+              <div class="mp-tab-dot" style="background: #EDF1FC;"></div>Home
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Care
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Benefits
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Rewards
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D: Deep Sapphire -->
+    <div class="direction-card">
+      <div class="dir-header">
+        <div class="dir-name" style="color: #24479E;">D. Deep Sapphire</div>
+        <div class="dir-desc">Pushed toward indigo (222°) with richness. Has gravitas and distinction — a blue that owns the room. Think Wise, Monzo's bolder cousin.</div>
+      </div>
+      <div class="ramp-strip">
+        <div style="background: #EEF0FB;"><span style="color: #666;">50</span></div>
+        <div style="background: #B3BBEA;"><span style="color: #666;">200</span></div>
+        <div style="background: #4E63CC;"><span style="color: #fff;">400</span></div>
+        <div style="background: #3050B5;"><span style="color: #fff;">500</span></div>
+        <div style="background: #24479E;"><span style="color: #fff;">600</span></div>
+        <div style="background: #1C3778;"><span style="color: #fff;">700</span></div>
+        <div style="background: #12244E;"><span style="color: #fff;">900</span></div>
+      </div>
+      <div class="contrast-info">
+        <div class="contrast-row"><span>600 on white</span> <span class="badge badge-pass" id="d-ratio"></span></div>
+        <div class="contrast-row"><span>White on 600 btn</span> <span class="badge badge-pass" id="d-btn"></span></div>
+      </div>
+      <div style="padding: 0 16px 16px;">
+        <div class="mini-phone" style="background: #FAF8F5;">
+          <div style="background: linear-gradient(180deg, #12244E, #1C3778); padding: 32px 14px 14px; color: white;">
+            <div style="font-size: 10px; opacity: 0.4;">Good morning</div>
+            <div style="font-size: 17px; font-weight: 800;">Andrew</div>
+            <div style="margin-top: 10px; background: rgba(255,255,255,0.07); border-radius: 10px; padding: 10px; display: flex; align-items: center; gap: 8px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; border: 3px solid #35B89E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900;">78</div>
+              <div><div style="font-size: 10px; font-weight: 600;">Wellness Score</div><div style="font-size: 8px; opacity: 0.4;">+3 from last week</div></div>
+            </div>
+          </div>
+          <div class="mini-phone-body" style="padding-top: 10px;">
+            <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+              <div class="mp-pill" style="background: #239882; color: white;">Activity</div>
+              <div class="mp-pill" style="background: #8B7FC0; color: white;">Mind</div>
+              <div class="mp-pill" style="background: #D97B2E; color: white;">Rewards</div>
+            </div>
+            <div class="mp-card">
+              <div style="font-size: 8px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+              <div style="font-size: 18px; font-weight: 900; color: #239882;">9,344</div>
+              <div style="height: 5px; border-radius: 3px; background: #F5F2EE; margin-top: 6px;"><div style="height: 100%; width: 93%; border-radius: 3px; background: linear-gradient(90deg, #239882, #35B89E);"></div></div>
+            </div>
+            <div class="mp-card" style="background: #F5F3FA; border-color: #D2CAE9;">
+              <div style="font-size: 9px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+              <div style="font-size: 8px; color: #574B8C; margin-top: 2px;">Your sleep dipped to 5h 40m</div>
+            </div>
+            <div style="display: block; padding: 10px; border-radius: 10px; background: #24479E; color: white; font-size: 10px; font-weight: 700; text-align: center; margin-top: 8px;">Start a walk</div>
+          </div>
+          <div class="mp-tabs">
+            <div style="display: flex; flex-direction: column; align-items: center; color: #24479E; font-weight: 700;">
+              <div class="mp-tab-dot" style="background: #EEF0FB;"></div>Home
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Care
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Benefits
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; color: #B5AEA4;">
+              <div class="mp-tab-dot" style="background: #F5F2EE;"></div>Rewards
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Comparison table -->
+<div class="section" style="background: white;">
+  <div class="section-label">Side by side</div>
+  <h2>Quick comparison</h2>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Current</th>
+        <th>A. Vivid Ocean</th>
+        <th>B. Cerulean Punch</th>
+        <th>C. Electric Cobalt</th>
+        <th>D. Deep Sapphire</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight: 600;">Hero color (600)</td>
+        <td><span class="swatch-inline" style="background: #2D6CA4;"></span><code>#2D6CA4</code></td>
+        <td><span class="swatch-inline" style="background: #1865A9;"></span><code>#1865A9</code></td>
+        <td><span class="swatch-inline" style="background: #0B74B8;"></span><code>#0B74B8</code></td>
+        <td><span class="swatch-inline" style="background: #1D55B0;"></span><code>#1D55B0</code></td>
+        <td><span class="swatch-inline" style="background: #24479E;"></span><code>#24479E</code></td>
+      </tr>
+      <tr>
+        <td style="font-weight: 600;">Hue</td>
+        <td>208°</td>
+        <td>208°</td>
+        <td>205°</td>
+        <td>218°</td>
+        <td>222°</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 600;">Saturation</td>
+        <td>57%</td>
+        <td>75%</td>
+        <td>82%</td>
+        <td>72%</td>
+        <td>65%</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 600;">Personality</td>
+        <td style="color: #918981;">Safe, generic</td>
+        <td>Clean, bright, trustworthy</td>
+        <td>Energetic, optimistic, fresh</td>
+        <td>Premium, intentional, tech-forward</td>
+        <td>Distinguished, deep, authoritative</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 600;">Warmth with taupe bg</td>
+        <td style="color: #918981;">Neutral</td>
+        <td>Good — feels crisp on cream</td>
+        <td>Best — warm hue sings on warm bg</td>
+        <td>Cooler contrast — feels premium</td>
+        <td>Most contrast — dramatic tension</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 600;">Risk</td>
+        <td style="color: #918981;">—</td>
+        <td>Closest to current — might still feel safe</td>
+        <td>Could trend toward "tech startup"</td>
+        <td>Might pull away from warm palette story</td>
+        <td>Might feel too corporate/financial</td>
+      </tr>
+      <tr>
+        <td style="font-weight: 600;">Reminds me of…</td>
+        <td style="color: #918981;">Generic SaaS</td>
+        <td>Stripe, Calm</td>
+        <td>Headspace, Withings</td>
+        <td>Linear, Revolut</td>
+        <td>Wise, N26</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="padding: 48px; text-align: center; color: #918981; font-size: 13px;">
+  <p>My gut: <strong style="color: #524D47;">B (Cerulean Punch)</strong> or <strong style="color: #524D47;">C (Electric Cobalt)</strong> hit the sweet spot. B plays best with the warm-taupe system; C gives you the most distinctive identity.</p>
+</div>
+
+<script>
+function hexToRgb(hex) {
+  hex = hex.replace('#', '');
+  return { r: parseInt(hex.substring(0,2),16), g: parseInt(hex.substring(2,4),16), b: parseInt(hex.substring(4,6),16) };
+}
+function luminance(rgb) {
+  const [rs, gs, bs] = [rgb.r/255, rgb.g/255, rgb.b/255];
+  const r = rs <= 0.03928 ? rs/12.92 : Math.pow((rs+0.055)/1.055, 2.4);
+  const g = gs <= 0.03928 ? gs/12.92 : Math.pow((gs+0.055)/1.055, 2.4);
+  const b = bs <= 0.03928 ? bs/12.92 : Math.pow((bs+0.055)/1.055, 2.4);
+  return 0.2126*r + 0.7152*g + 0.0722*b;
+}
+function contrast(h1, h2) {
+  const l1 = luminance(hexToRgb(h1)), l2 = luminance(hexToRgb(h2));
+  return (Math.max(l1,l2)+0.05) / (Math.min(l1,l2)+0.05);
+}
+
+const blues = {a: '#1865A9', b: '#0B74B8', c: '#1D55B0', d: '#24479E'};
+Object.entries(blues).forEach(([key, hex]) => {
+  const r = contrast(hex, '#FFFFFF').toFixed(2);
+  const level = r >= 7 ? 'AAA' : r >= 4.5 ? 'AA' : 'Fail';
+  document.getElementById(key + '-ratio').textContent = r + ':1 ' + level;
+  document.getElementById(key + '-ratio').className = 'badge ' + (r >= 7 ? 'badge-aaa' : 'badge-pass');
+  document.getElementById(key + '-btn').textContent = r + ':1 ' + level;
+  document.getElementById(key + '-btn').className = 'badge ' + (r >= 7 ? 'badge-aaa' : 'badge-pass');
+});
+</script>
+
+</body>
+</html>

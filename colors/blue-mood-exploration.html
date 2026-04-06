@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue as Mood — Light + Atmospheric</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #FAF8F5; color: #252220; }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
+  .page-header {
+    background: linear-gradient(135deg, #252220, #3A3632);
+    color: white; padding: 48px;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  .page-header p { font-size: 15px; opacity: 0.5; margin-top: 8px; max-width: 700px; line-height: 1.6; }
+
+  .section { padding: 48px; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #918981; font-weight: 700; margin-bottom: 8px; }
+  .section h2 { font-size: 24px; font-weight: 700; color: #252220; margin-bottom: 6px; }
+  .section .desc { font-size: 14px; color: #6E6860; max-width: 700px; margin-bottom: 32px; line-height: 1.6; }
+
+  .card { background: white; border-radius: 16px; border: 1px solid #EDE9E4; padding: 32px; margin-bottom: 24px; }
+  .card h3 { font-size: 16px; font-weight: 700; color: #252220; margin-bottom: 16px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+
+  .phone {
+    width: 375px; min-height: 780px; border-radius: 40px;
+    border: 8px solid #252220; overflow: hidden; position: relative;
+    margin: 0 auto; text-align: left;
+  }
+  .phone-body { padding: 0 20px 80px; }
+  .p-card { border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+  .p-row { display: flex; align-items: center; gap: 12px; }
+  .p-avatar {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .p-chip {
+    display: inline-block; padding: 5px 12px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; margin-right: 6px;
+  }
+  .p-progress { height: 8px; border-radius: 4px; margin-top: 10px; overflow: hidden; }
+  .p-progress-fill { height: 100%; border-radius: 4px; }
+  .p-btn {
+    display: block; padding: 13px; border-radius: 12px;
+    font-size: 13px; font-weight: 700; text-align: center; margin-top: 10px;
+  }
+  .p-tabs {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 68px;
+    display: flex; align-items: center; justify-content: space-around; padding: 0 16px;
+  }
+  .p-tab {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 9px; font-weight: 500;
+  }
+  .p-tab-icon { width: 24px; height: 24px; border-radius: 8px; }
+  .p-sparkline { display: flex; align-items: flex-end; gap: 3px; height: 32px; }
+  .p-spark-bar { width: 6px; border-radius: 3px; }
+  .cat-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 10px; font-weight: 700;
+  }
+
+  .comparison-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 16px; text-align: center;
+  }
+  .mockup-col { text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Blue as Mood — Light + Atmospheric</h1>
+  <p>Still light, still warm. But the blue now sets a mood in the header zone — a gradient that breathes, that shifts from deep to luminous, that makes you feel something before you read anything. Inspired by Calm's atmospheric color, adapted for a light, multi-domain health app.</p>
+</div>
+
+<!-- ===== THE PRINCIPLE ===== -->
+<div class="section">
+  <div class="section-label">The shift</div>
+  <h2>Color as mood, not just function</h2>
+  <div class="desc">In v3, blue was a button color and a header background. Here, blue is an atmosphere in the hero zone — a luminous gradient that transitions from deep to light, creating a sense of sky and calm. Below the fold, the warm-taupe canvas takes over for data. The result: emotional resonance at the top, readability at the bottom.</div>
+
+  <div class="card">
+    <h3>Three zones of a screen</h3>
+    <div style="display: flex; gap: 0; border-radius: 16px; overflow: hidden; height: 200px;">
+      <div style="flex: 2; background: linear-gradient(180deg, #0A3F6E 0%, #1A6DA8 40%, #5AA3D4 70%, #B8D9F0 100%); display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div style="text-align: center; color: white;">
+          <div style="font-size: 14px; font-weight: 800;">Mood Zone</div>
+          <div style="font-size: 11px; opacity: 0.6; margin-top: 4px;">Atmospheric gradient<br>Emotional, immersive<br>Blue sets the tone</div>
+        </div>
+      </div>
+      <div style="flex: 1; background: linear-gradient(180deg, #EAF3FB, #FAF8F5); display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div style="text-align: center; color: #6E6860;">
+          <div style="font-size: 14px; font-weight: 800; color: #252220;">Transition</div>
+          <div style="font-size: 11px; margin-top: 4px;">Blue fades to warm<br>Smooth crossover</div>
+        </div>
+      </div>
+      <div style="flex: 3; background: #FAF8F5; display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div style="text-align: center; color: #6E6860;">
+          <div style="font-size: 14px; font-weight: 800; color: #252220;">Content Zone</div>
+          <div style="font-size: 11px; margin-top: 4px;">Warm-taupe canvas<br>White cards, bold data<br>Domain colors shine</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== B MOOD vs C MOOD ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">B vs C — with mood</div>
+  <h2>Full home screens</h2>
+  <div class="desc">Both use a luminous gradient header that fades into the warm canvas. B's gradient is warmer and brighter — morning sky energy. C's gradient is deeper and more indigo — Calm-inspired gravitas. Both stay light and airy overall.</div>
+
+  <div class="two-col">
+    <!-- B MOOD PHONE -->
+    <div class="mockup-col">
+      <div class="comparison-label" style="color: #0A68A6;">B. Cerulean — "Morning Sky"</div>
+      <div class="phone" style="background: #FAF8F5;">
+        <!-- ATMOSPHERIC HEADER — luminous gradient -->
+        <div style="background: linear-gradient(180deg, #073E64 0%, #0B6BA6 25%, #3A96CC 50%, #8EC4E6 72%, #D2E8F5 88%, #FAF8F5 100%); padding: 48px 24px 32px; color: white; min-height: 220px;">
+          <div style="font-size: 13px; opacity: 0.5;">Good morning</div>
+          <div style="font-size: 26px; font-weight: 800; margin-top: 2px;">Andrew</div>
+          <!-- Wellness score — frosted glass feel -->
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 20px; background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.2);">
+            <div style="position: relative; width: 52px; height: 52px;">
+              <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="5"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#5CCDB8" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 900;">78</div>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">Wellness Score</div>
+              <div style="font-size: 11px; opacity: 0.5;">+3 from last week</div>
+            </div>
+            <div style="margin-left: auto; font-size: 11px; color: #B0F0E0; font-weight: 600;">View →</div>
+          </div>
+        </div>
+
+        <div class="phone-body" style="padding-top: 14px;">
+          <!-- Category pills — on warm canvas now -->
+          <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+            <div class="cat-pill" style="background: #239882; color: white;">Activity</div>
+            <div class="cat-pill" style="background: #6E60A8; color: white;">Mind</div>
+            <div class="cat-pill" style="background: #519446; color: white;">Nutrition</div>
+            <div class="cat-pill" style="background: #D97B2E; color: white;">Rewards</div>
+          </div>
+
+          <!-- Steps card -->
+          <div class="p-card" style="background: white; border: 1px solid #EDE9E4;">
+            <div class="p-row" style="margin-bottom: 10px;">
+              <div class="p-avatar" style="background: #239882; border-radius: 14px;"><span style="font-size: 20px;">🏃</span></div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+                <div style="display: flex; align-items: baseline; gap: 4px;">
+                  <span style="font-size: 26px; font-weight: 900; color: #239882; letter-spacing: -1px;">9,344</span>
+                  <span style="font-size: 11px; color: #B5AEA4;">/ 10k</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-progress" style="background: #F5F2EE;">
+              <div class="p-progress-fill" style="width: 93%; background: linear-gradient(90deg, #239882, #35B89E);"></div>
+            </div>
+            <!-- Weekly bars -->
+            <div style="display: flex; justify-content: space-between; margin-top: 12px;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 30px; background: #35B89E; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">M</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 40px; background: #35B89E; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">T</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 20px; background: #96DFD0; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">W</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 35px; background: #35B89E; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">T</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 44px; background: #239882; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">F</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div><span style="font-size: 8px; color: #D5CFC7;">S</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div><span style="font-size: 8px; color: #D5CFC7;">S</span></div>
+            </div>
+          </div>
+
+          <!-- Sleep insight — lavender -->
+          <div class="p-card" style="background: #F5F3FA; border: 1px solid #D2CAE9;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: #6E60A8; display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+              <div style="font-size: 12px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+            </div>
+            <div style="font-size: 11px; color: #574B8C; line-height: 1.5;">Your sleep dipped last night. Try a wind-down routine.</div>
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+              <span class="p-chip" style="background: white; color: #574B8C; font-size: 10px; border: 1px solid #D2CAE9;">Sleep tips</span>
+              <span class="p-chip" style="background: #6E60A8; color: white; font-size: 10px;">Start now</span>
+            </div>
+          </div>
+
+          <!-- Rewards — apricot -->
+          <div class="p-card" style="background: #FFF6F0; border: 1px solid #FBD1AE;">
+            <div class="p-row">
+              <div class="p-avatar" style="background: #D97B2E; border-radius: 50%; color: white;">⭐</div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; font-weight: 600; color: #924E1A;">7-day streak!</div>
+                <div style="font-size: 20px; font-weight: 900; color: #B86422; letter-spacing: -0.5px;">150 pts</div>
+              </div>
+              <div style="background: #D97B2E; color: white; padding: 7px 16px; border-radius: 18px; font-size: 11px; font-weight: 700;">Claim</div>
+            </div>
+          </div>
+
+          <!-- Health grid -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;">
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">HEART RATE</div>
+              <div style="font-size: 22px; font-weight: 900; color: #E8706A; letter-spacing: -1px;">72 <span style="font-size: 11px; font-weight: 500; color: #B5AEA4;">bpm</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 12px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 18px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #EE8E89;"></div>
+                <div class="p-spark-bar" style="height: 22px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 10px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #D4524C;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #E8706A;"></div>
+              </div>
+            </div>
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">SLEEP</div>
+              <div style="font-size: 22px; font-weight: 900; color: #6E60A8; letter-spacing: -1px;">7h <span style="font-size: 14px;">16m</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #6E60A8;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 8px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #AEA3D5;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-btn" style="background: #0A68A6; color: white; margin-top: 4px;">Start a walk</div>
+        </div>
+
+        <div class="p-tabs" style="background: white; border-top: 1px solid #EDE9E4;">
+          <div class="p-tab" style="color: #0A68A6; font-weight: 700;"><div class="p-tab-icon" style="background: #BFE0F6;"></div>Home</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Care</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Benefits</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Rewards</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Profile</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C MOOD PHONE -->
+    <div class="mockup-col">
+      <div class="comparison-label" style="color: #1D479A;">C. Cobalt — "Deep Calm"</div>
+      <div class="phone" style="background: #FAF8F5;">
+        <!-- ATMOSPHERIC HEADER — indigo-shifted, Calm-inspired -->
+        <div style="background: linear-gradient(180deg, #0D1F45 0%, #1A3878 20%, #2B5AAE 42%, #6B94CF 62%, #A8C5E6 78%, #DDE9F4 92%, #FAF8F5 100%); padding: 48px 24px 32px; color: white; min-height: 220px;">
+          <div style="font-size: 13px; opacity: 0.45;">Good morning</div>
+          <div style="font-size: 26px; font-weight: 800; margin-top: 2px;">Andrew</div>
+          <!-- Wellness score — frosted glass -->
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 20px; background: rgba(255,255,255,0.12); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.15);">
+            <div style="position: relative; width: 52px; height: 52px;">
+              <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="5"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#5CCDB8" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 900;">78</div>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">Wellness Score</div>
+              <div style="font-size: 11px; opacity: 0.45;">+3 from last week</div>
+            </div>
+            <div style="margin-left: auto; font-size: 11px; color: #B0F0E0; font-weight: 600;">View →</div>
+          </div>
+        </div>
+
+        <div class="phone-body" style="padding-top: 14px;">
+          <!-- Category pills -->
+          <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+            <div class="cat-pill" style="background: #239882; color: white;">Activity</div>
+            <div class="cat-pill" style="background: #6E60A8; color: white;">Mind</div>
+            <div class="cat-pill" style="background: #519446; color: white;">Nutrition</div>
+            <div class="cat-pill" style="background: #D97B2E; color: white;">Rewards</div>
+          </div>
+
+          <!-- Steps card -->
+          <div class="p-card" style="background: white; border: 1px solid #EDE9E4;">
+            <div class="p-row" style="margin-bottom: 10px;">
+              <div class="p-avatar" style="background: #239882; border-radius: 14px;"><span style="font-size: 20px;">🏃</span></div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+                <div style="display: flex; align-items: baseline; gap: 4px;">
+                  <span style="font-size: 26px; font-weight: 900; color: #239882; letter-spacing: -1px;">9,344</span>
+                  <span style="font-size: 11px; color: #B5AEA4;">/ 10k</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-progress" style="background: #F5F2EE;">
+              <div class="p-progress-fill" style="width: 93%; background: linear-gradient(90deg, #239882, #35B89E);"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 12px;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 30px; background: #35B89E; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">M</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 40px; background: #35B89E; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">T</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 20px; background: #96DFD0; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">W</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 35px; background: #35B89E; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">T</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 44px; background: #239882; border-radius: 4px;"></div><span style="font-size: 8px; color: #B5AEA4;">F</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div><span style="font-size: 8px; color: #D5CFC7;">S</span></div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;"><div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div><span style="font-size: 8px; color: #D5CFC7;">S</span></div>
+            </div>
+          </div>
+
+          <!-- Sleep insight -->
+          <div class="p-card" style="background: #F5F3FA; border: 1px solid #D2CAE9;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: #6E60A8; display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+              <div style="font-size: 12px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+            </div>
+            <div style="font-size: 11px; color: #574B8C; line-height: 1.5;">Your sleep dipped last night. Try a wind-down routine.</div>
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+              <span class="p-chip" style="background: white; color: #574B8C; font-size: 10px; border: 1px solid #D2CAE9;">Sleep tips</span>
+              <span class="p-chip" style="background: #6E60A8; color: white; font-size: 10px;">Start now</span>
+            </div>
+          </div>
+
+          <!-- Rewards -->
+          <div class="p-card" style="background: #FFF6F0; border: 1px solid #FBD1AE;">
+            <div class="p-row">
+              <div class="p-avatar" style="background: #D97B2E; border-radius: 50%; color: white;">⭐</div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; font-weight: 600; color: #924E1A;">7-day streak!</div>
+                <div style="font-size: 20px; font-weight: 900; color: #B86422; letter-spacing: -0.5px;">150 pts</div>
+              </div>
+              <div style="background: #D97B2E; color: white; padding: 7px 16px; border-radius: 18px; font-size: 11px; font-weight: 700;">Claim</div>
+            </div>
+          </div>
+
+          <!-- Health grid -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;">
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">HEART RATE</div>
+              <div style="font-size: 22px; font-weight: 900; color: #E8706A; letter-spacing: -1px;">72 <span style="font-size: 11px; font-weight: 500; color: #B5AEA4;">bpm</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 12px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 18px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #EE8E89;"></div>
+                <div class="p-spark-bar" style="height: 22px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 10px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #D4524C;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #E8706A;"></div>
+              </div>
+            </div>
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">SLEEP</div>
+              <div style="font-size: 22px; font-weight: 900; color: #6E60A8; letter-spacing: -1px;">7h <span style="font-size: 14px;">16m</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #6E60A8;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 8px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #AEA3D5;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-btn" style="background: #1D479A; color: white; margin-top: 4px;">Start a walk</div>
+        </div>
+
+        <div class="p-tabs" style="background: white; border-top: 1px solid #EDE9E4;">
+          <div class="p-tab" style="color: #1D479A; font-weight: 700;"><div class="p-tab-icon" style="background: #C8D4F2;"></div>Home</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Care</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Benefits</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Rewards</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Profile</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GRADIENT ANATOMY ===== -->
+<div class="section">
+  <div class="section-label">Gradient anatomy</div>
+  <h2>How the mood gradient works</h2>
+  <div class="desc">The key trick: the gradient doesn't stop at an edge — it dissolves smoothly into the warm-taupe canvas. No hard line. The blue atmosphere just evaporates as you scroll into content territory.</div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3 style="color: #0A68A6;">B. Cerulean — "Morning Sky" gradient</h3>
+      <div style="height: 280px; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #073E64 0%, #0B6BA6 25%, #3A96CC 50%, #8EC4E6 72%, #D2E8F5 88%, #FAF8F5 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 16px;">
+        <div style="font-size: 10px; color: white; font-weight: 600; opacity: 0.7;">0% — Deep ocean · #073E64</div>
+        <div style="font-size: 10px; color: white; font-weight: 600; opacity: 0.8;">25% — Cerulean · #0B6BA6</div>
+        <div style="font-size: 10px; color: white; font-weight: 600;">50% — Sky · #3A96CC</div>
+        <div style="font-size: 10px; color: #524D47; font-weight: 600;">72% — Mist · #8EC4E6</div>
+        <div style="font-size: 10px; color: #524D47; font-weight: 600;">88% — Haze · #D2E8F5</div>
+        <div style="font-size: 10px; color: #918981; font-weight: 600;">100% — Warm canvas · #FAF8F5</div>
+      </div>
+      <div style="margin-top: 12px; font-size: 12px; color: #6E6860; line-height: 1.6;">Feels like looking at the horizon over water at 7am. Warm, hopeful, energetic. The hue stays consistent (205°) as it desaturates and lightens toward the canvas.</div>
+    </div>
+    <div class="card">
+      <h3 style="color: #1D479A;">C. Cobalt — "Deep Calm" gradient</h3>
+      <div style="height: 280px; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #0D1F45 0%, #1A3878 20%, #2B5AAE 42%, #6B94CF 62%, #A8C5E6 78%, #DDE9F4 92%, #FAF8F5 100%); display: flex; flex-direction: column; justify-content: space-between; padding: 16px;">
+        <div style="font-size: 10px; color: white; font-weight: 600; opacity: 0.7;">0% — Midnight · #0D1F45</div>
+        <div style="font-size: 10px; color: white; font-weight: 600; opacity: 0.8;">20% — Deep cobalt · #1A3878</div>
+        <div style="font-size: 10px; color: white; font-weight: 600;">42% — Electric · #2B5AAE</div>
+        <div style="font-size: 10px; color: white; font-weight: 600;">62% — Periwinkle · #6B94CF</div>
+        <div style="font-size: 10px; color: #524D47; font-weight: 600;">78% — Steel mist · #A8C5E6</div>
+        <div style="font-size: 10px; color: #918981; font-weight: 600;">92% — Faint haze · #DDE9F4</div>
+      </div>
+      <div style="margin-top: 12px; font-size: 12px; color: #6E6860; line-height: 1.6;">Feels like deep water — rich, contemplative, premium. The indigo shift (218°) gives it the Calm-like quality. More gravitas, more distinction, more mood.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCROLL BEHAVIOR ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Scroll behavior</div>
+  <h2>The gradient collapses as you scroll</h2>
+  <div class="desc">On scroll, the header compresses from the full atmospheric gradient to a compact colored bar. The mood shrinks but doesn't disappear — you still feel the blue presence even in a collapsed nav.</div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3>B. Collapsed header state</h3>
+      <div style="border-radius: 12px; overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #073E64, #0B6BA6); padding: 12px 20px; color: white; display: flex; align-items: center; justify-content: space-between;">
+          <div style="font-size: 16px; font-weight: 800;">Andrew</div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #5CCDB8; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900;">78</div>
+            <div style="width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 12px;">🔔</div>
+          </div>
+        </div>
+        <div style="height: 4px; background: linear-gradient(90deg, #0B6BA6, #3A96CC, #8EC4E6, #FAF8F5);"></div>
+        <div style="background: #FAF8F5; padding: 16px 20px; font-size: 12px; color: #918981;">Content scrolls beneath...</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>C. Collapsed header state</h3>
+      <div style="border-radius: 12px; overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #0D1F45, #1A3878); padding: 12px 20px; color: white; display: flex; align-items: center; justify-content: space-between;">
+          <div style="font-size: 16px; font-weight: 800;">Andrew</div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid #5CCDB8; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900;">78</div>
+            <div style="width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 12px;">🔔</div>
+          </div>
+        </div>
+        <div style="height: 4px; background: linear-gradient(90deg, #1A3878, #2B5AAE, #A8C5E6, #FAF8F5);"></div>
+        <div style="background: #FAF8F5; padding: 16px 20px; font-size: 12px; color: #918981;">Content scrolls beneath...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OTHER SCREENS ===== -->
+<div class="section">
+  <div class="section-label">Across screens</div>
+  <h2>The mood adapts to context</h2>
+  <div class="desc">Not every screen gets the same gradient depth. The home screen has the fullest expression. Secondary screens get a shorter, quieter version. Detail screens may use just a hint. The mood is a spectrum, not a switch.</div>
+
+  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+    <!-- Home -->
+    <div style="background: white; border-radius: 16px; border: 1px solid #EDE9E4; overflow: hidden;">
+      <div style="height: 100px; background: linear-gradient(180deg, #0D1F45 0%, #2B5AAE 50%, #A8C5E6 85%, #FAF8F5 100%);"></div>
+      <div style="padding: 12px; font-size: 11px; font-weight: 700; color: #252220;">Home</div>
+      <div style="padding: 0 12px 12px; font-size: 10px; color: #918981;">Full atmospheric gradient. Maximum mood. Your daily entry point.</div>
+    </div>
+    <!-- Care -->
+    <div style="background: white; border-radius: 16px; border: 1px solid #EDE9E4; overflow: hidden;">
+      <div style="height: 100px; background: linear-gradient(180deg, #122D60 0%, #3D6EC0 60%, #C8D8EE 90%, #FAF8F5 100%);"></div>
+      <div style="padding: 12px; font-size: 11px; font-weight: 700; color: #252220;">Care</div>
+      <div style="padding: 0 12px 12px; font-size: 10px; color: #918981;">Medium gradient. Shorter header, still has presence.</div>
+    </div>
+    <!-- Benefits -->
+    <div style="background: white; border-radius: 16px; border: 1px solid #EDE9E4; overflow: hidden;">
+      <div style="height: 100px; background: linear-gradient(180deg, #1A3878 0%, #4A78C0 50%, #DDE9F4 90%, #FAF8F5 100%);"></div>
+      <div style="padding: 12px; font-size: 11px; font-weight: 700; color: #252220;">Benefits</div>
+      <div style="padding: 0 12px 12px; font-size: 10px; color: #918981;">Lighter gradient. Functional screen, subtle mood.</div>
+    </div>
+    <!-- Detail -->
+    <div style="background: white; border-radius: 16px; border: 1px solid #EDE9E4; overflow: hidden;">
+      <div style="height: 100px; background: linear-gradient(180deg, #1A3878, #2B5AAE); display: flex; align-items: center; justify-content: center;">
+        <div style="color: white; font-size: 12px; font-weight: 700; opacity: 0.8;">← Back</div>
+      </div>
+      <div style="padding: 12px; font-size: 11px; font-weight: 700; color: #252220;">Detail / Modal</div>
+      <div style="padding: 0 12px 12px; font-size: 10px; color: #918981;">Compact solid bar. Just enough blue to feel connected to the system.</div>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 48px; text-align: center; color: #918981; font-size: 13px;">
+  <p style="font-size: 15px; color: #524D47; font-weight: 600; margin-bottom: 8px;">B feels like a morning walk. C feels like a deep breath.</p>
+  <p>Both are light, warm, and data-friendly below the header. The difference is what happens when you first open the app.</p>
+</div>
+
+</body>
+</html>

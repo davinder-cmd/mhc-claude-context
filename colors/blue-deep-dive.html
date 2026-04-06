@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Deep Dive — B vs C with Icon Treatments</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #FAF8F5; color: #252220; }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
+  .page-header {
+    background: linear-gradient(135deg, #252220, #3A3632);
+    color: white; padding: 48px;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  .page-header p { font-size: 15px; opacity: 0.5; margin-top: 8px; max-width: 700px; line-height: 1.6; }
+
+  .section { padding: 48px; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #918981; font-weight: 700; margin-bottom: 8px; }
+  .section h2 { font-size: 24px; font-weight: 700; color: #252220; margin-bottom: 6px; }
+  .section .desc { font-size: 14px; color: #6E6860; max-width: 700px; margin-bottom: 32px; line-height: 1.6; }
+
+  .card { background: white; border-radius: 16px; border: 1px solid #EDE9E4; padding: 32px; margin-bottom: 24px; }
+  .card h3 { font-size: 16px; font-weight: 700; color: #252220; margin-bottom: 16px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+  /* Phone */
+  .phone {
+    width: 375px; min-height: 760px; border-radius: 40px;
+    border: 8px solid #252220; overflow: hidden; position: relative;
+    margin: 0 auto; text-align: left;
+  }
+  .phone-body { padding: 0 20px 80px; }
+  .p-card { border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+  .p-row { display: flex; align-items: center; gap: 12px; }
+  .p-avatar {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .p-chip {
+    display: inline-block; padding: 5px 12px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; margin-right: 6px;
+  }
+  .p-progress { height: 8px; border-radius: 4px; margin-top: 10px; overflow: hidden; }
+  .p-progress-fill { height: 100%; border-radius: 4px; }
+  .p-btn {
+    display: block; padding: 13px; border-radius: 12px;
+    font-size: 13px; font-weight: 700; text-align: center; margin-top: 10px;
+  }
+  .p-tabs {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 68px;
+    display: flex; align-items: center; justify-content: space-around; padding: 0 16px;
+  }
+  .p-tab {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 9px; font-weight: 500;
+  }
+  .p-tab-icon { width: 24px; height: 24px; border-radius: 8px; }
+  .p-sparkline { display: flex; align-items: flex-end; gap: 3px; height: 32px; }
+  .p-spark-bar { width: 6px; border-radius: 3px; }
+
+  .cat-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 11px; font-weight: 700;
+  }
+
+  /* Icon grid */
+  .icon-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+  }
+  .icon-cell {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .icon-bg {
+    width: 56px; height: 56px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+  }
+  .icon-label { font-size: 10px; color: #6E6860; font-weight: 500; text-align: center; }
+
+  /* Nav item style */
+  .nav-item-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  }
+  .nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 12px 8px; border-radius: 12px;
+  }
+  .nav-icon {
+    width: 32px; height: 32px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .nav-label { font-size: 10px; font-weight: 600; }
+
+  .comparison-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 16px; text-align: center;
+  }
+
+  .swatch-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .swatch-sm { width: 36px; height: 36px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+  .ramp-strip {
+    display: flex; border-radius: 10px; overflow: hidden; height: 40px;
+  }
+  .ramp-strip > div { flex: 1; position: relative; }
+  .ramp-strip > div span {
+    position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+    font-size: 7px; font-weight: 600; white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .contrast-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 8px;
+    font-size: 10px; font-weight: 700; font-family: 'JetBrains Mono';
+  }
+  .badge-pass { background: #EEFBF3; color: #166B3C; }
+  .badge-aaa { background: #D1F5DF; color: #0A3D22; }
+
+  .mockup-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .mockup-col { text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>B vs C — Deep Dive</h1>
+  <p>Cerulean Punch and Electric Cobalt, each fully realized with icon treatments, the blue+teal pairing, data screens, and interaction patterns. Everything sits on the v3 warm-taupe canvas.</p>
+</div>
+
+<!-- ===== THE TWO BLUES SIDE BY SIDE ===== -->
+<div class="section">
+  <div class="section-label">The two finalists</div>
+  <h2>Full ramps compared</h2>
+  <div class="desc">Both are significantly more saturated than the current blue. B leans warmer (hue 205°), C leans cooler and deeper (hue 218°). See how each behaves across its full range.</div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3 style="color: #0B74B8;">B. Cerulean Punch</h3>
+      <div style="font-size: 12px; color: #6E6860; margin-bottom: 12px;">Hue 205° · Saturation 78-82% · Warm-leaning, energetic</div>
+      <div class="ramp-strip">
+        <div style="background: #EAF5FD;"><span style="color: #555;">50</span></div>
+        <div style="background: #BFE0F6;"><span style="color: #555;">100</span></div>
+        <div style="background: #7DC4ED;"><span style="color: #555;">200</span></div>
+        <div style="background: #3AA6E2;"><span style="color: #fff;">300</span></div>
+        <div style="background: #1290D4;"><span style="color: #fff;">400</span></div>
+        <div style="background: #0B7DC2;"><span style="color: #fff;">500</span></div>
+        <div style="background: #0A68A6;"><span style="color: #fff;">600</span></div>
+        <div style="background: #095385;"><span style="color: #fff;">700</span></div>
+        <div style="background: #073E64;"><span style="color: #fff;">800</span></div>
+        <div style="background: #052C47;"><span style="color: #fff;">900</span></div>
+        <div style="background: #031C2E;"><span style="color: #fff;">950</span></div>
+      </div>
+      <div style="margin-top: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #524D47; margin-bottom: 8px;">Key usage stops</div>
+        <div style="display: flex; gap: 12px; font-size: 11px;">
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #0A68A6; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">600<br/>CTA</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #095385; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">700<br/>Hover</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #073E64; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">800<br/>Header</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #EAF5FD; border: 1px solid #BFE0F6; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">50<br/>Icon BG</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #BFE0F6; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">100<br/>Selection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1D55B0;">C. Electric Cobalt</h3>
+      <div style="font-size: 12px; color: #6E6860; margin-bottom: 12px;">Hue 218° · Saturation 70-74% · Cool-leaning, premium</div>
+      <div class="ramp-strip">
+        <div style="background: #EDF1FC;"><span style="color: #555;">50</span></div>
+        <div style="background: #C8D4F2;"><span style="color: #555;">100</span></div>
+        <div style="background: #90A9E5;"><span style="color: #555;">200</span></div>
+        <div style="background: #5B7ED6;"><span style="color: #fff;">300</span></div>
+        <div style="background: #3562C6;"><span style="color: #fff;">400</span></div>
+        <div style="background: #2454B2;"><span style="color: #fff;">500</span></div>
+        <div style="background: #1D479A;"><span style="color: #fff;">600</span></div>
+        <div style="background: #173A7E;"><span style="color: #fff;">700</span></div>
+        <div style="background: #122D60;"><span style="color: #fff;">800</span></div>
+        <div style="background: #0D2145;"><span style="color: #fff;">900</span></div>
+        <div style="background: #08152D;"><span style="color: #fff;">950</span></div>
+      </div>
+      <div style="margin-top: 16px;">
+        <div style="font-size: 12px; font-weight: 700; color: #524D47; margin-bottom: 8px;">Key usage stops</div>
+        <div style="display: flex; gap: 12px; font-size: 11px;">
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #1D479A; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">600<br/>CTA</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #173A7E; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">700<br/>Hover</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #122D60; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">800<br/>Header</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #EDF1FC; border: 1px solid #C8D4F2; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">50<br/>Icon BG</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #C8D4F2; margin-bottom: 4px;"></div>
+            <div style="color: #6E6860;">100<br/>Selection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BLUE + TEAL PAIRING ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">The primary personality</div>
+  <h2>Blue + Sea Glass Teal — the duo</h2>
+  <div class="desc">Blue handles structure and action (headers, buttons, links). Teal handles health data and vitality (progress, scores, activity). Together they're 80% of what the user sees. They need to feel like a deliberate pair, not a coincidence.</div>
+
+  <div class="two-col">
+    <!-- B pairing -->
+    <div class="card">
+      <h3 style="color: #0A68A6;">B + Teal pairing</h3>
+      <div style="font-size: 12px; color: #6E6860; margin-bottom: 16px;">Warm cerulean + sea glass = coastal wellness energy. Both lean warm. Harmonious and optimistic.</div>
+      <div style="display: flex; gap: 4px; border-radius: 12px; overflow: hidden; height: 80px;">
+        <div style="flex: 3; background: linear-gradient(135deg, #073E64, #0A68A6);"></div>
+        <div style="flex: 2; background: linear-gradient(135deg, #239882, #35B89E);"></div>
+      </div>
+      <div style="display: flex; gap: 12px; margin-top: 16px;">
+        <!-- Button + data number pairing -->
+        <div style="flex: 1; background: #FAF8F5; border-radius: 12px; padding: 16px;">
+          <div style="background: #0A68A6; color: white; padding: 10px; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 700;">Primary action</div>
+          <div style="margin-top: 12px; font-size: 10px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+          <div style="font-size: 24px; font-weight: 900; color: #239882;">9,344</div>
+        </div>
+        <div style="flex: 1; background: #FAF8F5; border-radius: 12px; padding: 16px;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #EAF5FD; display: flex; align-items: center; justify-content: center; font-size: 16px;">📊</div>
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #ECF9F6; display: flex; align-items: center; justify-content: center; font-size: 16px;">🏃</div>
+          </div>
+          <div style="margin-top: 10px; font-size: 10px; color: #6E6860;">Blue for UI icons, teal for health icons. Clean domain separation.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C pairing -->
+    <div class="card">
+      <h3 style="color: #1D479A;">C + Teal pairing</h3>
+      <div style="font-size: 12px; color: #6E6860; margin-bottom: 16px;">Cool cobalt + warm teal = sophisticated tension. The temperature contrast creates visual depth and distinction.</div>
+      <div style="display: flex; gap: 4px; border-radius: 12px; overflow: hidden; height: 80px;">
+        <div style="flex: 3; background: linear-gradient(135deg, #122D60, #1D479A);"></div>
+        <div style="flex: 2; background: linear-gradient(135deg, #239882, #35B89E);"></div>
+      </div>
+      <div style="display: flex; gap: 12px; margin-top: 16px;">
+        <div style="flex: 1; background: #FAF8F5; border-radius: 12px; padding: 16px;">
+          <div style="background: #1D479A; color: white; padding: 10px; border-radius: 10px; text-align: center; font-size: 12px; font-weight: 700;">Primary action</div>
+          <div style="margin-top: 12px; font-size: 10px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+          <div style="font-size: 24px; font-weight: 900; color: #239882;">9,344</div>
+        </div>
+        <div style="flex: 1; background: #FAF8F5; border-radius: 12px; padding: 16px;">
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #EDF1FC; display: flex; align-items: center; justify-content: center; font-size: 16px;">📊</div>
+            <div style="width: 36px; height: 36px; border-radius: 10px; background: #ECF9F6; display: flex; align-items: center; justify-content: center; font-size: 16px;">🏃</div>
+          </div>
+          <div style="margin-top: 10px; font-size: 10px; color: #6E6860;">Blue for UI icons, teal for health icons. The hue gap is wider — more distinctive.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ICON TREATMENT ===== -->
+<div class="section">
+  <div class="section-label">Icon system</div>
+  <h2>Bold icon backgrounds — dark symbol on vivid field</h2>
+  <div class="desc">Instead of the safe "tinted background with colored icon" pattern, we go bolder: vivid saturated backgrounds with dark or white symbols on top. More energy, more character — like the category-forward approach in Withings and the bold icon fields in Sword Health.</div>
+
+  <div class="two-col">
+    <!-- B icons -->
+    <div class="card">
+      <h3 style="color: #0A68A6;">B. Cerulean Punch — Icon treatments</h3>
+      <div style="font-size: 12px; color: #6E6860; margin-bottom: 20px;">Three tiers: vivid fill (primary actions), medium tint (secondary), subtle tint (tertiary).</div>
+
+      <div style="font-size: 11px; font-weight: 700; color: #524D47; margin-bottom: 10px;">Tier 1 — Vivid fill (primary actions, nav active)</div>
+      <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #0A68A6;">
+            <span style="font-size: 24px;">🏠</span>
+          </div>
+          <div class="icon-label">Home</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #239882;">
+            <span style="font-size: 24px;">🏃</span>
+          </div>
+          <div class="icon-label">Activity</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #6E60A8;">
+            <span style="font-size: 24px;">😴</span>
+          </div>
+          <div class="icon-label">Sleep</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #D97B2E;">
+            <span style="font-size: 24px;">⭐</span>
+          </div>
+          <div class="icon-label">Rewards</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #519446;">
+            <span style="font-size: 24px;">🥗</span>
+          </div>
+          <div class="icon-label">Nutrition</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #E8706A;">
+            <span style="font-size: 24px;">❤️</span>
+          </div>
+          <div class="icon-label">Heart</div>
+        </div>
+      </div>
+
+      <div style="font-size: 11px; font-weight: 700; color: #524D47; margin-bottom: 10px;">Tier 2 — Bold tint (cards, list items)</div>
+      <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #BFE0F6;">
+            <span style="font-size: 22px; filter: saturate(1.2);">🏠</span>
+          </div>
+          <div class="icon-label">Home</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #96DFD0;">
+            <span style="font-size: 22px;">🏃</span>
+          </div>
+          <div class="icon-label">Activity</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #D2CAE9;">
+            <span style="font-size: 22px;">😴</span>
+          </div>
+          <div class="icon-label">Sleep</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #FBD1AE;">
+            <span style="font-size: 22px;">⭐</span>
+          </div>
+          <div class="icon-label">Rewards</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #BDDAB6;">
+            <span style="font-size: 22px;">🥗</span>
+          </div>
+          <div class="icon-label">Nutrition</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #F2B0AD;">
+            <span style="font-size: 22px;">❤️</span>
+          </div>
+          <div class="icon-label">Heart</div>
+        </div>
+      </div>
+
+      <div style="font-size: 11px; font-weight: 700; color: #524D47; margin-bottom: 10px;">Tier 3 — Subtle tint (secondary, disabled)</div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #EAF5FD;">
+            <span style="font-size: 22px; opacity: 0.8;">🏠</span>
+          </div>
+          <div class="icon-label">Home</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #ECF9F6;">
+            <span style="font-size: 22px; opacity: 0.8;">🏃</span>
+          </div>
+          <div class="icon-label">Activity</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #F5F3FA;">
+            <span style="font-size: 22px; opacity: 0.8;">😴</span>
+          </div>
+          <div class="icon-label">Sleep</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #FFF6F0;">
+            <span style="font-size: 22px; opacity: 0.8;">⭐</span>
+          </div>
+          <div class="icon-label">Rewards</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #F1F7EF;">
+            <span style="font-size: 22px; opacity: 0.8;">🥗</span>
+          </div>
+          <div class="icon-label">Nutrition</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #FEF2F2;">
+            <span style="font-size: 22px; opacity: 0.8;">❤️</span>
+          </div>
+          <div class="icon-label">Heart</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C icons -->
+    <div class="card">
+      <h3 style="color: #1D479A;">C. Electric Cobalt — Icon treatments</h3>
+      <div style="font-size: 12px; color: #6E6860; margin-bottom: 20px;">Same three tiers. The cobalt's deeper hue creates a more dramatic tier 1 and slightly cooler tier 2.</div>
+
+      <div style="font-size: 11px; font-weight: 700; color: #524D47; margin-bottom: 10px;">Tier 1 — Vivid fill (primary actions, nav active)</div>
+      <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #1D479A;">
+            <span style="font-size: 24px;">🏠</span>
+          </div>
+          <div class="icon-label">Home</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #239882;">
+            <span style="font-size: 24px;">🏃</span>
+          </div>
+          <div class="icon-label">Activity</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #6E60A8;">
+            <span style="font-size: 24px;">😴</span>
+          </div>
+          <div class="icon-label">Sleep</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #D97B2E;">
+            <span style="font-size: 24px;">⭐</span>
+          </div>
+          <div class="icon-label">Rewards</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #519446;">
+            <span style="font-size: 24px;">🥗</span>
+          </div>
+          <div class="icon-label">Nutrition</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #E8706A;">
+            <span style="font-size: 24px;">❤️</span>
+          </div>
+          <div class="icon-label">Heart</div>
+        </div>
+      </div>
+
+      <div style="font-size: 11px; font-weight: 700; color: #524D47; margin-bottom: 10px;">Tier 2 — Bold tint (cards, list items)</div>
+      <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #C8D4F2;">
+            <span style="font-size: 22px;">🏠</span>
+          </div>
+          <div class="icon-label">Home</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #96DFD0;">
+            <span style="font-size: 22px;">🏃</span>
+          </div>
+          <div class="icon-label">Activity</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #D2CAE9;">
+            <span style="font-size: 22px;">😴</span>
+          </div>
+          <div class="icon-label">Sleep</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #FBD1AE;">
+            <span style="font-size: 22px;">⭐</span>
+          </div>
+          <div class="icon-label">Rewards</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #BDDAB6;">
+            <span style="font-size: 22px;">🥗</span>
+          </div>
+          <div class="icon-label">Nutrition</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #F2B0AD;">
+            <span style="font-size: 22px;">❤️</span>
+          </div>
+          <div class="icon-label">Heart</div>
+        </div>
+      </div>
+
+      <div style="font-size: 11px; font-weight: 700; color: #524D47; margin-bottom: 10px;">Tier 3 — Subtle tint (secondary, disabled)</div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #EDF1FC;">
+            <span style="font-size: 22px; opacity: 0.8;">🏠</span>
+          </div>
+          <div class="icon-label">Home</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #ECF9F6;">
+            <span style="font-size: 22px; opacity: 0.8;">🏃</span>
+          </div>
+          <div class="icon-label">Activity</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #F5F3FA;">
+            <span style="font-size: 22px; opacity: 0.8;">😴</span>
+          </div>
+          <div class="icon-label">Sleep</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #FFF6F0;">
+            <span style="font-size: 22px; opacity: 0.8;">⭐</span>
+          </div>
+          <div class="icon-label">Rewards</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #F1F7EF;">
+            <span style="font-size: 22px; opacity: 0.8;">🥗</span>
+          </div>
+          <div class="icon-label">Nutrition</div>
+        </div>
+        <div class="icon-cell">
+          <div class="icon-bg" style="background: #FEF2F2;">
+            <span style="font-size: 22px; opacity: 0.8;">❤️</span>
+          </div>
+          <div class="icon-label">Heart</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FULL PHONE MOCKUPS ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Full mockups</div>
+  <h2>Home screen — B vs C</h2>
+  <div class="desc">Same layout, same warm-taupe canvas, same domain colors. Only the blue changes. See which one owns the screen.</div>
+
+  <div class="mockup-pair">
+    <!-- B Phone -->
+    <div class="mockup-col">
+      <div class="comparison-label" style="color: #0A68A6;">B. Cerulean Punch</div>
+      <div class="phone" style="background: #FAF8F5;">
+        <div style="background: linear-gradient(180deg, #052C47 0%, #073E64 100%); padding: 48px 24px 20px; color: white;">
+          <div style="font-size: 13px; opacity: 0.4;">Good morning</div>
+          <div style="font-size: 24px; font-weight: 800; margin-top: 2px;">Andrew</div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; background: rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px;">
+            <div style="position: relative; width: 52px; height: 52px;">
+              <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="5"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#35B89E" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 900;">78</div>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">Wellness Score</div>
+              <div style="font-size: 11px; opacity: 0.35;">+3 from last week</div>
+            </div>
+            <div style="margin-left: auto; font-size: 11px; color: #5CCDB8; font-weight: 600;">View →</div>
+          </div>
+        </div>
+
+        <div class="phone-body" style="padding-top: 14px;">
+          <!-- Category pills -->
+          <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+            <div class="cat-pill" style="background: #239882; color: white; font-size: 10px; padding: 5px 12px;">Activity</div>
+            <div class="cat-pill" style="background: #6E60A8; color: white; font-size: 10px; padding: 5px 12px;">Mind</div>
+            <div class="cat-pill" style="background: #519446; color: white; font-size: 10px; padding: 5px 12px;">Nutrition</div>
+            <div class="cat-pill" style="background: #D97B2E; color: white; font-size: 10px; padding: 5px 12px;">Rewards</div>
+          </div>
+
+          <!-- Steps -->
+          <div class="p-card" style="background: white; border: 1px solid #EDE9E4;">
+            <div class="p-row" style="margin-bottom: 10px;">
+              <div class="p-avatar" style="background: #239882; border-radius: 14px;">
+                <span style="font-size: 20px;">🏃</span>
+              </div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+                <div style="display: flex; align-items: baseline; gap: 4px;">
+                  <span style="font-size: 26px; font-weight: 900; color: #239882; letter-spacing: -1px;">9,344</span>
+                  <span style="font-size: 11px; color: #B5AEA4;">/ 10k</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-progress" style="background: #F5F2EE;">
+              <div class="p-progress-fill" style="width: 93%; background: linear-gradient(90deg, #239882, #35B89E);"></div>
+            </div>
+            <!-- Weekly bars -->
+            <div style="display: flex; justify-content: space-between; margin-top: 12px;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 30px; background: #35B89E; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">M</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 40px; background: #35B89E; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">T</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 20px; background: #96DFD0; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">W</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 35px; background: #35B89E; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">T</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 44px; background: #239882; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">F</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div>
+                <span style="font-size: 8px; color: #D5CFC7;">S</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div>
+                <span style="font-size: 8px; color: #D5CFC7;">S</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Insight -->
+          <div class="p-card" style="background: #F5F3FA; border: 1px solid #D2CAE9;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: #6E60A8; display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+              <div style="font-size: 12px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+            </div>
+            <div style="font-size: 11px; color: #574B8C; line-height: 1.5;">Your sleep dipped last night. Try a wind-down routine.</div>
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+              <span class="p-chip" style="background: white; color: #574B8C; font-size: 10px; border: 1px solid #D2CAE9;">Sleep tips</span>
+              <span class="p-chip" style="background: #6E60A8; color: white; font-size: 10px;">Start now</span>
+            </div>
+          </div>
+
+          <!-- Rewards -->
+          <div class="p-card" style="background: #FFF6F0; border: 1px solid #FBD1AE;">
+            <div class="p-row">
+              <div class="p-avatar" style="background: #D97B2E; border-radius: 50%; color: white;">⭐</div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; font-weight: 600; color: #924E1A;">7-day streak!</div>
+                <div style="font-size: 20px; font-weight: 900; color: #B86422; letter-spacing: -0.5px;">150 pts</div>
+              </div>
+              <div style="background: #D97B2E; color: white; padding: 7px 16px; border-radius: 18px; font-size: 11px; font-weight: 700;">Claim</div>
+            </div>
+          </div>
+
+          <!-- Health grid -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;">
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">HEART RATE</div>
+              <div style="font-size: 22px; font-weight: 900; color: #E8706A; letter-spacing: -1px;">72 <span style="font-size: 11px; font-weight: 500; color: #B5AEA4;">bpm</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 12px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 18px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #EE8E89;"></div>
+                <div class="p-spark-bar" style="height: 22px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 10px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #D4524C;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #E8706A;"></div>
+              </div>
+            </div>
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">SLEEP</div>
+              <div style="font-size: 22px; font-weight: 900; color: #6E60A8; letter-spacing: -1px;">7h <span style="font-size: 14px;">16m</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #6E60A8;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 8px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #AEA3D5;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="p-btn" style="background: #0A68A6; color: white; margin-top: 4px;">Start a walk</div>
+        </div>
+
+        <div class="p-tabs" style="background: white; border-top: 1px solid #EDE9E4;">
+          <div class="p-tab" style="color: #0A68A6; font-weight: 700;">
+            <div class="p-tab-icon" style="background: #BFE0F6;"></div>Home
+          </div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Care</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Benefits</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Rewards</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Profile</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C Phone -->
+    <div class="mockup-col">
+      <div class="comparison-label" style="color: #1D479A;">C. Electric Cobalt</div>
+      <div class="phone" style="background: #FAF8F5;">
+        <div style="background: linear-gradient(180deg, #0D2145 0%, #122D60 100%); padding: 48px 24px 20px; color: white;">
+          <div style="font-size: 13px; opacity: 0.4;">Good morning</div>
+          <div style="font-size: 24px; font-weight: 800; margin-top: 2px;">Andrew</div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; background: rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px;">
+            <div style="position: relative; width: 52px; height: 52px;">
+              <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="5"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#35B89E" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 900;">78</div>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">Wellness Score</div>
+              <div style="font-size: 11px; opacity: 0.35;">+3 from last week</div>
+            </div>
+            <div style="margin-left: auto; font-size: 11px; color: #5CCDB8; font-weight: 600;">View →</div>
+          </div>
+        </div>
+
+        <div class="phone-body" style="padding-top: 14px;">
+          <!-- Category pills -->
+          <div style="display: flex; gap: 6px; margin-bottom: 14px;">
+            <div class="cat-pill" style="background: #239882; color: white; font-size: 10px; padding: 5px 12px;">Activity</div>
+            <div class="cat-pill" style="background: #6E60A8; color: white; font-size: 10px; padding: 5px 12px;">Mind</div>
+            <div class="cat-pill" style="background: #519446; color: white; font-size: 10px; padding: 5px 12px;">Nutrition</div>
+            <div class="cat-pill" style="background: #D97B2E; color: white; font-size: 10px; padding: 5px 12px;">Rewards</div>
+          </div>
+
+          <!-- Steps -->
+          <div class="p-card" style="background: white; border: 1px solid #EDE9E4;">
+            <div class="p-row" style="margin-bottom: 10px;">
+              <div class="p-avatar" style="background: #239882; border-radius: 14px;">
+                <span style="font-size: 20px;">🏃</span>
+              </div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; color: #918981; font-weight: 600;">STEPS TODAY</div>
+                <div style="display: flex; align-items: baseline; gap: 4px;">
+                  <span style="font-size: 26px; font-weight: 900; color: #239882; letter-spacing: -1px;">9,344</span>
+                  <span style="font-size: 11px; color: #B5AEA4;">/ 10k</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-progress" style="background: #F5F2EE;">
+              <div class="p-progress-fill" style="width: 93%; background: linear-gradient(90deg, #239882, #35B89E);"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 12px;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 30px; background: #35B89E; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">M</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 40px; background: #35B89E; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">T</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 20px; background: #96DFD0; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">W</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 35px; background: #35B89E; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">T</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 44px; background: #239882; border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #B5AEA4;">F</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div>
+                <span style="font-size: 8px; color: #D5CFC7;">S</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 26px; height: 10px; background: #EDE9E4; border-radius: 4px; border: 1px dashed #D5CFC7;"></div>
+                <span style="font-size: 8px; color: #D5CFC7;">S</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Insight -->
+          <div class="p-card" style="background: #F5F3FA; border: 1px solid #D2CAE9;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: #6E60A8; display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+              <div style="font-size: 12px; font-weight: 700; color: #433A6D;">Sleep Insight</div>
+            </div>
+            <div style="font-size: 11px; color: #574B8C; line-height: 1.5;">Your sleep dipped last night. Try a wind-down routine.</div>
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+              <span class="p-chip" style="background: white; color: #574B8C; font-size: 10px; border: 1px solid #D2CAE9;">Sleep tips</span>
+              <span class="p-chip" style="background: #6E60A8; color: white; font-size: 10px;">Start now</span>
+            </div>
+          </div>
+
+          <!-- Rewards -->
+          <div class="p-card" style="background: #FFF6F0; border: 1px solid #FBD1AE;">
+            <div class="p-row">
+              <div class="p-avatar" style="background: #D97B2E; border-radius: 50%; color: white;">⭐</div>
+              <div style="flex: 1;">
+                <div style="font-size: 10px; font-weight: 600; color: #924E1A;">7-day streak!</div>
+                <div style="font-size: 20px; font-weight: 900; color: #B86422; letter-spacing: -0.5px;">150 pts</div>
+              </div>
+              <div style="background: #D97B2E; color: white; padding: 7px 16px; border-radius: 18px; font-size: 11px; font-weight: 700;">Claim</div>
+            </div>
+          </div>
+
+          <!-- Health grid -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px;">
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">HEART RATE</div>
+              <div style="font-size: 22px; font-weight: 900; color: #E8706A; letter-spacing: -1px;">72 <span style="font-size: 11px; font-weight: 500; color: #B5AEA4;">bpm</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 12px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 18px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #EE8E89;"></div>
+                <div class="p-spark-bar" style="height: 22px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 10px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #D4524C;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #E8706A;"></div>
+              </div>
+            </div>
+            <div class="p-card" style="background: white; border: 1px solid #EDE9E4; padding: 12px;">
+              <div style="font-size: 9px; color: #918981; font-weight: 600;">SLEEP</div>
+              <div style="font-size: 22px; font-weight: 900; color: #6E60A8; letter-spacing: -1px;">7h <span style="font-size: 14px;">16m</span></div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 26px; background: #6E60A8;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 8px; background: #D2CAE9;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #8B7FC0;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #AEA3D5;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="p-btn" style="background: #1D479A; color: white; margin-top: 4px;">Start a walk</div>
+        </div>
+
+        <div class="p-tabs" style="background: white; border-top: 1px solid #EDE9E4;">
+          <div class="p-tab" style="color: #1D479A; font-weight: 700;">
+            <div class="p-tab-icon" style="background: #C8D4F2;"></div>Home
+          </div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Care</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Benefits</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Rewards</div>
+          <div class="p-tab" style="color: #B5AEA4;"><div class="p-tab-icon" style="background: #F5F2EE;"></div>Profile</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BUTTON STATES ===== -->
+<div class="section">
+  <div class="section-label">Interaction states</div>
+  <h2>How each blue behaves under your thumb</h2>
+
+  <div class="two-col">
+    <div class="card">
+      <h3 style="color: #0A68A6;">B. Cerulean Punch — button states</h3>
+      <div style="display: flex; gap: 12px; margin-top: 12px;">
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #0A68A6; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Default</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">600 · #0A68A6</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #095385; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Hover</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">700 · #095385</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #073E64; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Pressed</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">800 · #073E64</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #D5CFC7; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Disabled</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">neutral-200</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; margin-top: 16px;">
+        <div style="flex: 1; text-align: center;">
+          <div style="background: white; border: 2px solid #0A68A6; color: #0A68A6; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">Secondary</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: white; border: 2px solid #095385; color: #095385; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">Sec hover</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #EAF5FD; color: #0A68A6; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Tertiary</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="color: #0A68A6; padding: 14px; font-size: 13px; font-weight: 700; text-decoration: underline;">Link →</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="color: #1D479A;">C. Electric Cobalt — button states</h3>
+      <div style="display: flex; gap: 12px; margin-top: 12px;">
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #1D479A; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Default</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">600 · #1D479A</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #173A7E; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Hover</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">700 · #173A7E</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #122D60; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Pressed</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">800 · #122D60</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #D5CFC7; color: white; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Disabled</div>
+          <div style="font-size: 10px; color: #918981; margin-top: 6px;">neutral-200</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; margin-top: 16px;">
+        <div style="flex: 1; text-align: center;">
+          <div style="background: white; border: 2px solid #1D479A; color: #1D479A; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">Secondary</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: white; border: 2px solid #173A7E; color: #173A7E; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">Sec hover</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="background: #EDF1FC; color: #1D479A; padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700;">Tertiary</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <div style="color: #1D479A; padding: 14px; font-size: 13px; font-weight: 700; text-decoration: underline;">Link →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VERDICT ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Recommendation</div>
+  <h2>The case for each</h2>
+
+  <div class="two-col">
+    <div class="card" style="border: 2px solid #BFE0F6;">
+      <h3 style="color: #0A68A6;">B. Cerulean Punch</h3>
+      <div style="font-size: 13px; color: #6E6860; line-height: 1.7;">
+        <strong style="color: #524D47;">Choose B if you want warmth to be the whole story.</strong> The warmer hue (205°) sings on the warm-taupe canvas. The blue+teal pair feels like they grew up together — coastal, health-forward, optimistic. This is the Headspace/Calm lane: approachable, energetic, human.<br><br>
+        <strong style="color: #524D47;">Best for:</strong> consumer-first health apps where warmth and approachability are the primary brand attributes. People use this because it feels good, not because their employer told them to.
+      </div>
+    </div>
+    <div class="card" style="border: 2px solid #C8D4F2;">
+      <h3 style="color: #1D479A;">C. Electric Cobalt</h3>
+      <div style="font-size: 13px; color: #6E6860; line-height: 1.7;">
+        <strong style="color: #524D47;">Choose C if you want a point of view that's harder to copy.</strong> The cooler hue (218°) creates deliberate tension with the warm canvas — and that tension is what makes it memorable. The blue is clearly different from the teal, which strengthens domain coding. This is the Linear/Revolut lane: premium, intentional, distinctive.<br><br>
+        <strong style="color: #524D47;">Best for:</strong> enterprise health platforms where credibility and sophistication matter alongside warmth. People trust this because it looks like it was designed by people who care about details.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 48px; text-align: center; color: #918981; font-size: 13px;">
+  <p>Both pass WCAG AA across all pairings. Both work in light and dark mode. The question isn't accessibility or function — it's personality.</p>
+</div>
+
+</body>
+</html>

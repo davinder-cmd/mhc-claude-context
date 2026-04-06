@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personify Health — Information Architecture Sitemap</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #0d6e6e;
+    --accent-light: #e6f4f4;
+    --home: #2563eb;
+    --health: #dc2626;
+    --social: #7c3aed;
+    --programs: #ea580c;
+    --more: #4b5563;
+    --rewards: #ca8a04;
+    --global: #0891b2;
+    --home-bg: #eff6ff;
+    --health-bg: #fef2f2;
+    --social-bg: #f5f3ff;
+    --programs-bg: #fff7ed;
+    --more-bg: #f3f4f6;
+    --rewards-bg: #fefce8;
+    --global-bg: #ecfeff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 40px 24px;
+  }
+
+  .header {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .header p {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px auto;
+    max-width: 1200px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .sitemap {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .tab-section {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .tab-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .tab-header:hover {
+    filter: brightness(0.97);
+  }
+
+  .tab-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    flex: 1;
+  }
+
+  .tab-header .tab-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 100px;
+    background: rgba(0,0,0,0.08);
+    color: rgba(0,0,0,0.6);
+  }
+
+  .tab-header .chevron {
+    font-size: 18px;
+    transition: transform 0.2s;
+    color: var(--muted);
+  }
+
+  .tab-section.collapsed .chevron {
+    transform: rotate(-90deg);
+  }
+
+  .tab-section.collapsed .tab-body {
+    display: none;
+  }
+
+  .tab-body {
+    padding: 0 24px 24px;
+  }
+
+  .level {
+    margin-top: 16px;
+  }
+
+  .level-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .nodes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .node {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: white;
+    position: relative;
+    cursor: default;
+    transition: all 0.15s;
+  }
+
+  .node:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .node.has-children {
+    cursor: pointer;
+  }
+
+  .node.has-children::after {
+    content: " ›";
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .node .node-detail {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 260px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    z-index: 100;
+    line-height: 1.6;
+  }
+
+  .node:hover .node-detail {
+    display: block;
+  }
+
+  /* Tab-specific colors */
+  .tab-home .tab-header { background: var(--home-bg); }
+  .tab-home .node { border-color: color-mix(in srgb, var(--home) 20%, transparent); }
+  .tab-home .level-label { color: var(--home); }
+
+  .tab-health .tab-header { background: var(--health-bg); }
+  .tab-health .node { border-color: color-mix(in srgb, var(--health) 20%, transparent); }
+  .tab-health .level-label { color: var(--health); }
+
+  .tab-social .tab-header { background: var(--social-bg); }
+  .tab-social .node { border-color: color-mix(in srgb, var(--social) 20%, transparent); }
+  .tab-social .level-label { color: var(--social); }
+
+  .tab-programs .tab-header { background: var(--programs-bg); }
+  .tab-programs .node { border-color: color-mix(in srgb, var(--programs) 20%, transparent); }
+  .tab-programs .level-label { color: var(--programs); }
+
+  .tab-more .tab-header { background: var(--more-bg); }
+  .tab-more .node { border-color: color-mix(in srgb, var(--more) 20%, transparent); }
+  .tab-more .level-label { color: var(--more); }
+
+  .tab-rewards .tab-header { background: var(--rewards-bg); }
+  .tab-rewards .node { border-color: color-mix(in srgb, var(--rewards) 20%, transparent); }
+  .tab-rewards .level-label { color: var(--rewards); }
+
+  .tab-global .tab-header { background: var(--global-bg); }
+  .tab-global .node { border-color: color-mix(in srgb, var(--global) 20%, transparent); }
+  .tab-global .level-label { color: var(--global); }
+
+  .connector-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin: 8px 0 4px 8px;
+  }
+
+  .depth-indicator {
+    display: inline-block;
+    width: 16px;
+    height: 1px;
+    background: var(--border);
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+
+  .sub-group {
+    margin-top: 12px;
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+  }
+
+  .sub-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .notes {
+    margin-top: 24px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 24px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #92400e;
+  }
+
+  .notes strong { color: #78350f; }
+
+  @media (max-width: 768px) {
+    body { padding: 20px 12px; }
+    .header h1 { font-size: 22px; }
+    .nodes { flex-direction: column; }
+    .node { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Personify Health — Information Architecture</h1>
+  <p>Competitive analysis · 263 screenshots · March 30, 2026</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--home)"></div> Home</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--health)"></div> Health</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--social)"></div> Social</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--programs)"></div> Programs</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--more)"></div> More</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--rewards)"></div> Rewards (cross-cutting)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--global)"></div> Global elements</div>
+</div>
+
+<div class="sitemap">
+
+  <!-- GLOBAL ELEMENTS -->
+  <div class="tab-section tab-global">
+    <div class="tab-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <h2>Global Elements</h2>
+      <span class="tab-badge">Persistent across tabs</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="tab-body">
+      <div class="level">
+        <div class="nodes">
+          <div class="node">Bottom Tab Bar (5 tabs)</div>
+          <div class="node has-children">Profile Avatar
+            <div class="node-detail">Top-right corner on Home. Leads to Edit My Profile (photo, cover, name, title, department, location, personality prompts, goals, gallery).</div>
+          </div>
+          <div class="node">Notification Badges</div>
+          <div class="node has-children">Achievement Modals
+            <div class="node-detail">Triggered by milestone completion (e.g., "7,000 Steps Today", "10,000 Steps Today"). Shows badge, earned date, manage notifications link.</div>
+          </div>
+          <div class="node has-children">Devices & Apps Modal
+            <div class="node-detail">Apple Health, Fitbit, Garmin, Oura Ring, WHOOP, Strava, Polar, Withings, MyFitnessPal, Max GO / Max / Max Buzz. Accessible from Stats and Settings.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="tab-section tab-home">
+    <div class="tab-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <h2>1. Home</h2>
+      <span class="tab-badge">Dashboard feed</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="tab-body">
+      <div class="level">
+        <div class="level-label">Primary Content (above fold)</div>
+        <div class="nodes">
+          <div class="node has-children">Rewards Bar
+            <div class="node-detail">Progress indicator: points earned vs. total available (e.g., "5,200 / 10,000"). Taps through to full Rewards section.</div>
+          </div>
+          <div class="node has-children">Announcements Carousel
+            <div class="node-detail">Employer-published content cards. Each expands to detail view with title, date, body text, and "Add to my calendar" CTA.</div>
+          </div>
+          <div class="node has-children">Daily Cards Carousel
+            <div class="node-detail">Swipeable health education cards. Types include: True/False quizzes, educational tips (sleep posture, meds), "Got it!" confirmations. Points-earning.</div>
+          </div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Secondary Content (below fold)</div>
+        <div class="nodes">
+          <div class="node has-children">Stats Summary
+            <div class="node-detail">Three circular icons: Steps, Sleep, Active Minutes with today's values. Taps to Stats detail screens.</div>
+          </div>
+          <div class="node has-children">My Actions
+            <div class="node-detail">Point-earning task list (e.g., "Enter measurements — 50 pts", "Set wellbeing goal — 600 pts"). "View All" expands full list.</div>
+          </div>
+          <div class="node">Healthy Habits Card</div>
+          <div class="node">Featured Article</div>
+          <div class="node">Coaching Promo</div>
+          <div class="node">My Programs (horizontal scroll)</div>
+          <div class="node">Discover Section</div>
+          <div class="node">Challenge Promo ("Join" CTA)</div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Tertiary Content (detail screens)</div>
+        <div class="sub-group">
+          <div class="sub-group-label">Stats Detail (per metric)</div>
+          <div class="nodes">
+            <div class="node">Steps (chart, goal, source filter, add/edit)</div>
+            <div class="node">Sleep (chart, goal, add/edit)</div>
+            <div class="node">Active Minutes</div>
+            <div class="node">Mindful Minutes</div>
+            <div class="node">Workouts</div>
+            <div class="node">Trends</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Biometrics (manual entry + tracking)</div>
+          <div class="nodes">
+            <div class="node">Weight</div>
+            <div class="node">Waist</div>
+            <div class="node">Hip</div>
+            <div class="node">Blood Pressure</div>
+            <div class="node">Cholesterol</div>
+            <div class="node">Glucose</div>
+            <div class="node">A1C</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Announcements Detail</div>
+          <div class="nodes">
+            <div class="node">Article view (title, date, body, calendar CTA)</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Daily Cards Detail</div>
+          <div class="nodes">
+            <div class="node">Education card (image, text, "Got it!")</div>
+            <div class="node">Quiz card (True/False interaction)</div>
+            <div class="node">Care Checklist promo card</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEALTH -->
+  <div class="tab-section tab-health">
+    <div class="tab-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <h2>2. Health</h2>
+      <span class="tab-badge">Data + Journeys + Preventive Care</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="tab-body">
+      <div class="level">
+        <div class="level-label">Primary Content (landing page)</div>
+        <div class="nodes">
+          <div class="node">Category Icon Row (quick-access shortcuts)</div>
+          <div class="node has-children">Journeys
+            <div class="node-detail">Cards with active journeys showing progress (e.g., "1 of 5 Steps Complete"). "View All Journeys" link. Also accessible from Programs tab.</div>
+          </div>
+          <div class="node has-children">My Care Checklist
+            <div class="node-detail">Preventive care tracking. Counts by category (e.g., "3 Preventive activities"). Also accessible from Programs tab.</div>
+          </div>
+          <div class="node">Health Situations</div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Secondary Content</div>
+        <div class="sub-group">
+          <div class="sub-group-label">Journeys List (filterable)</div>
+          <div class="nodes">
+            <div class="node has-children">Journey Filters
+              <div class="node-detail">Learning New Things (5), Sleeping Well (4), Building Relationships (7), Contributing to My Community (2), Acting Sustainably (3), Embracing Diversity (2), Being Effective (0), Fuel: Eating Healthy (8), Movement: Getting Active (10)</div>
+            </div>
+            <div class="node">Journey cards (title, progress, image)</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Care Checklist Detail</div>
+          <div class="nodes">
+            <div class="node">Preventive Care (age/sex-based recommendations)</div>
+            <div class="node">Fuel activities</div>
+            <div class="node">Activity dates + frequencies</div>
+            <div class="node">Rewards link</div>
+          </div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Tertiary Content</div>
+        <div class="sub-group">
+          <div class="sub-group-label">Journey Detail</div>
+          <div class="nodes">
+            <div class="node">Title + Sources</div>
+            <div class="node">Goal & Progress (step completion bar)</div>
+            <div class="node">My Completed Steps (checklist)</div>
+            <div class="node">Time-gated progression</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Health Check (HRA) — 6-section survey</div>
+          <div class="nodes">
+            <div class="node">ℹ Info</div>
+            <div class="node">🍎 Nutrition</div>
+            <div class="node">⚡ Activity</div>
+            <div class="node">🧠 Mental Health</div>
+            <div class="node">🩺 Conditions</div>
+            <div class="node">📊 Results (risk scores by category)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="tab-section tab-social">
+    <div class="tab-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <h2>3. Social</h2>
+      <span class="tab-badge">Community + Competition</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="tab-body">
+      <div class="level">
+        <div class="level-label">Primary Content (4 category buttons)</div>
+        <div class="nodes">
+          <div class="node has-children">Challenges
+            <div class="node-detail">Available and active challenges. Destination challenges (themed, company-wide) with map visualization, teams, and leaderboards.</div>
+          </div>
+          <div class="node has-children">Friends
+            <div class="node-detail">Friend Requests tab + Leaderboard tab. Suggested friends, Add Friends, Invite Friends buttons.</div>
+          </div>
+          <div class="node has-children">Groups
+            <div class="node-detail">Favorites, My Groups, Browse tabs. "Create a Group" flow with name, description, topics, photo, privacy.</div>
+          </div>
+          <div class="node">Events Calendar</div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Secondary Content</div>
+        <div class="sub-group">
+          <div class="sub-group-label">Challenge Detail (e.g., Pacific Crest Trail)</div>
+          <div class="nodes">
+            <div class="node">Description tab</div>
+            <div class="node">Leaderboard tab</div>
+            <div class="node">Resources tab</div>
+            <div class="node">Chat With Peers</div>
+            <div class="node">All Players / My Team / Rival Teams</div>
+            <div class="node">Challenge Details + Rules</div>
+            <div class="node">Location Content Cards</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Friends Detail</div>
+          <div class="nodes">
+            <div class="node">Friend Requests (pending)</div>
+            <div class="node">Leaderboard</div>
+            <div class="node">Suggested Friends</div>
+            <div class="node">Build Your Support Group CTA</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Groups Detail</div>
+          <div class="nodes">
+            <div class="node">Favorites</div>
+            <div class="node">My Groups</div>
+            <div class="node">Create a Group (name, description, topic, photo)</div>
+          </div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Tertiary Content</div>
+        <div class="sub-group">
+          <div class="sub-group-label">Team Creation Wizard (4 steps)</div>
+          <div class="nodes">
+            <div class="node">1. Name</div>
+            <div class="node">2. Motto</div>
+            <div class="node">3. Image (stock library)</div>
+            <div class="node">4. Public / Private</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Join Team Flow</div>
+          <div class="nodes">
+            <div class="node">Team roster preview</div>
+            <div class="node">Join confirmation</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Challenge Rules Modal</div>
+          <div class="nodes">
+            <div class="node">Start/end dates, scoring, team size limits</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAMS -->
+  <div class="tab-section tab-programs">
+    <div class="tab-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <h2>4. Programs</h2>
+      <span class="tab-badge">Browsable catalog</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="tab-body">
+      <div class="level">
+        <div class="level-label">Primary Content (3 views)</div>
+        <div class="nodes">
+          <div class="node has-children">Explore Tab
+            <div class="node-detail">Filterable program list with tag chips: Getting Active, Reducing Stress, Eating Healthy. Search icon. Filter button.</div>
+          </div>
+          <div class="node">Saved Tab (bookmarked/enrolled)</div>
+          <div class="node">View All (unfiltered list)</div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Secondary Content (program types)</div>
+        <div class="nodes">
+          <div class="node has-children">Coaching
+            <div class="node-detail">Multiple tracks: Reduce Stress, Manage Weight, Pregnancy, Substance Support. Credential display (NCHEC, NBDCE). FAQ. "Schedule a Session" CTA.</div>
+          </div>
+          <div class="node">Coaching: Be Tobacco-Free</div>
+          <div class="node">How to Earn (rewards guide)</div>
+          <div class="node">Journeys (cross-linked from Health)</div>
+          <div class="node">My Care Checklist (cross-linked from Health)</div>
+          <div class="node">Personify Health — Participating Countries</div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Tertiary Content</div>
+        <div class="sub-group">
+          <div class="sub-group-label">Coaching Detail</div>
+          <div class="nodes">
+            <div class="node">"Why Coaching Works" expandable</div>
+            <div class="node">Coach credentials</div>
+            <div class="node">FAQ (cost, topics, format)</div>
+            <div class="node">Schedule a Session</div>
+            <div class="node">Category pages (Pregnancy, Substance, etc.)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MORE -->
+  <div class="tab-section tab-more">
+    <div class="tab-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <h2>5. More</h2>
+      <span class="tab-badge">Utilities + Settings</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="tab-body">
+      <div class="level">
+        <div class="level-label">Primary Content (menu items)</div>
+        <div class="nodes">
+          <div class="node has-children">Media
+            <div class="node-detail">Video/article content library. Category filters. Includes "Coach Minute" video series, educational articles.</div>
+          </div>
+          <div class="node has-children">Topics of Interest
+            <div class="node-detail">"Set My Interests" personalization. Recommended topics from Health Check. Categories: Get Rewarded, Balance, Fuel, Movement. "Load More" for additional.</div>
+          </div>
+          <div class="node has-children">Devices & Apps
+            <div class="node-detail">Connected device management. My Connected Devices section + Available Devices list. 12+ integrations.</div>
+          </div>
+          <div class="node has-children">Trophy Case
+            <div class="node-detail">Achievement badge grid. Each badge shows: image, title, earned date, rarity stats (total earned, last earned). Badges for step milestones, streaks, profile, activities.</div>
+          </div>
+          <div class="node has-children">Store
+            <div class="node-detail">Personify Health-branded merchandise store. External webview. Product categories, New Arrivals, search.</div>
+          </div>
+          <div class="node has-children">Settings
+            <div class="node-detail">Activity Achievements toggles, Measurement Settings (units), Cell Phone Number, Member Phone Number.</div>
+          </div>
+          <div class="node has-children">Support
+            <div class="node-detail">Article topics: Devices & Apps, Google Fit, Apple Health, Account & Profile, Challenges, Biometric Screening & Pop Forms, Programs, General, Video Tutorials, Ways To Contact Us. Technical Support with Chat with Agent + FAQ.</div>
+          </div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-label">Secondary Content</div>
+        <div class="sub-group">
+          <div class="sub-group-label">Support Detail</div>
+          <div class="nodes">
+            <div class="node">Technical Support (Chat with Agent)</div>
+            <div class="node">FAQ Support Page</div>
+            <div class="node">Help articles (searchable, by device/topic)</div>
+          </div>
+        </div>
+        <div class="sub-group" style="margin-top:8px">
+          <div class="sub-group-label">Trophy Case Detail</div>
+          <div class="nodes">
+            <div class="node">Badge detail (image, title, date, rarity)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REWARDS (cross-cutting) -->
+  <div class="tab-section tab-rewards">
+    <div class="tab-header" onclick="this.parentElement.classList.toggle('collapsed')">
+      <h2>Rewards (Cross-cutting)</h2>
+      <span class="tab-badge">Accessed from Home + Programs</span>
+      <span class="chevron">▾</span>
+    </div>
+    <div class="tab-body">
+      <div class="level">
+        <div class="level-label">Primary Content</div>
+        <div class="nodes">
+          <div class="node has-children">Overview
+            <div class="node-detail">Welcome message, total points, level rewards thresholds (5K pts = $10, 10K pts = $25), rewards cash balance. $325 max reward.</div>
+          </div>
+          <div class="node has-children">How to Earn
+            <div class="node-detail">Categorized point values: Steps milestones, Sleep tracking, Challenges, Journeys, Health Check, Coaching, Daily Cards, Biometric Screening.</div>
+          </div>
+          <div class="node">Earnings History (transaction log)</div>
+          <div class="node has-children">Spend Rewards
+            <div class="node-detail">Gift card catalog. Brands: Nike, Athleta. Range: $10–$250. Filtered by country (United States).</div>
+          </div>
+          <div class="node has-children">Redeem a Voucher
+            <div class="node-detail">10-digit voucher code entry for bonus points. Physical voucher with code printed on it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="notes">
+  <strong>FigJam Recreation Guide:</strong> Each collapsible section maps to a FigJam section/frame. Primary Content = top-level sticky notes. Secondary Content = connected child nodes. Tertiary Content = leaf nodes. Hover any node with › for detail text to include as annotations. Color coding matches the legend above.
+</div>
+
+<script>
+  // All sections start expanded
+</script>
+</body>
+</html>

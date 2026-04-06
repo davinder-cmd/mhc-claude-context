@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Health — Primary Color Directions</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #F7F8FA;
+    color: #1a1a2e;
+    line-height: 1.6;
+  }
+
+  .header {
+    background: white;
+    border-bottom: 1px solid #E8E8EE;
+    padding: 32px 48px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a2e;
+    letter-spacing: -0.3px;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: #6B7084;
+    margin-top: 4px;
+  }
+
+  .current-brand {
+    background: white;
+    margin: 32px 48px;
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid #E8E8EE;
+  }
+
+  .current-brand h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #9B9DB2;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .current-swatches {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .current-swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .current-swatch .label {
+    position: absolute;
+    top: 56px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #9B9DB2;
+    white-space: nowrap;
+  }
+
+  .current-swatch .hex {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #B0B2C3;
+    font-family: monospace;
+  }
+
+  .directions {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .direction {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #E8E8EE;
+    transition: box-shadow 0.3s;
+  }
+
+  .direction:hover {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  .direction-header {
+    padding: 32px 36px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .direction-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .direction-title {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+
+  .direction-subtitle {
+    font-size: 15px;
+    color: #6B7084;
+    max-width: 600px;
+  }
+
+  .direction-body {
+    padding: 0 36px 36px;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .swatch-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .swatch {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: relative;
+  }
+
+  .swatch-role {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6B7084;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a2e;
+  }
+
+  .swatch-hex {
+    font-size: 12px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: #9B9DB2;
+  }
+
+  .swatch-hsl {
+    font-size: 10px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: #B0B2C3;
+  }
+
+  /* Mini app mockups */
+  .mockup-row {
+    display: grid;
+    grid-template-columns: 280px 280px 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .phone-frame {
+    width: 280px;
+    height: 500px;
+    border-radius: 32px;
+    border: 8px solid #1a1a2e;
+    overflow: hidden;
+    position: relative;
+    background: white;
+  }
+
+  .phone-status-bar {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .phone-nav {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .phone-content {
+    padding: 16px 20px;
+    flex: 1;
+  }
+
+  .mock-card {
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  .mock-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .mock-card-body {
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .mock-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+    text-align: center;
+  }
+
+  .mock-progress {
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .mock-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  .mock-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .mock-tab-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    border-top: 1px solid #E8E8EE;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: white;
+    padding: 0 8px;
+  }
+
+  .mock-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 9px;
+    color: #B0B2C3;
+  }
+
+  .mock-tab-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+  }
+
+  .rationale {
+    padding: 24px 36px 32px;
+    border-top: 1px solid #F0F0F5;
+  }
+
+  .rationale h3 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9B9DB2;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .rationale-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+
+  .rationale-item h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+
+  .rationale-item p {
+    font-size: 13px;
+    color: #6B7084;
+    line-height: 1.5;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+
+  .comparison-section {
+    margin: 0 48px 48px;
+    background: white;
+    border-radius: 20px;
+    padding: 36px;
+    border: 1px solid #E8E8EE;
+  }
+
+  .comparison-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .comparison-table th {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid #E8E8EE;
+    color: #6B7084;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .comparison-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #F0F0F5;
+    color: #1a1a2e;
+  }
+
+  .dark-mock {
+    background: #111318;
+  }
+
+  .dark-mock .phone-nav { color: white; }
+  .dark-mock .mock-tab-bar { background: #1A1B23; border-color: #2A2B35; }
+  .dark-mock .mock-tab { color: #555666; }
+
+  .notes-panel {
+    background: #FAFBFD;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px dashed #D8D9E5;
+  }
+
+  .notes-panel h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9B9DB2;
+    margin-bottom: 12px;
+  }
+
+  .notes-panel ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .notes-panel li {
+    font-size: 13px;
+    color: #6B7084;
+    padding: 6px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .notes-panel li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #B0B2C3;
+  }
+
+  .contrast-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-family: monospace;
+  }
+
+  .contrast-pass { background: #E8F5E9; color: #2E7D32; }
+  .contrast-fail { background: #FFEBEE; color: #C62828; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Mobile Health — Primary Color Direction Explorer</h1>
+  <p>Three directions for anchoring the app's visual identity. Each represents a different emotional positioning.</p>
+</div>
+
+<!-- Current Brand -->
+<div class="current-brand">
+  <h2>Current Brand (for reference)</h2>
+  <div class="current-swatches" style="margin-bottom: 40px;">
+    <div class="current-swatch" style="background: #0F497F;">
+      <span class="label">Brand Blue</span>
+      <span class="hex">#0F497F</span>
+    </div>
+    <div class="current-swatch" style="background: #04A0B7;">
+      <span class="label">Aqua Blue</span>
+      <span class="hex">#04A0B7</span>
+    </div>
+    <div class="current-swatch" style="background: #52A045;">
+      <span class="label">Spring Green</span>
+      <span class="hex">#52A045</span>
+    </div>
+    <div class="current-swatch" style="background: #F15922;">
+      <span class="label">Lava Orange</span>
+      <span class="hex">#F15922</span>
+    </div>
+    <div class="current-swatch" style="background: #062A42;">
+      <span class="label">Night Sky</span>
+      <span class="hex">#062A42</span>
+    </div>
+    <div class="current-swatch" style="background: #6E7A7D;">
+      <span class="label">Slate</span>
+      <span class="hex">#6E7A7D</span>
+    </div>
+    <div class="current-swatch" style="background: #E6EBEC;">
+      <span class="label">Cloud</span>
+      <span class="hex">#E6EBEC</span>
+    </div>
+  </div>
+  <p style="font-size: 13px; color: #9B9DB2; margin-top: 16px;">↑ High saturation, cold, lots of competing hues. Reads as "enterprise SaaS."</p>
+</div>
+
+<div class="directions">
+
+  <!-- DIRECTION A: Warm Teal -->
+  <div class="direction">
+    <div class="direction-header">
+      <div>
+        <div class="direction-label" style="background: #E0F4F1; color: #1A7A6D;">Direction A</div>
+        <div class="direction-title">Warm Teal — "Calm Authority"</div>
+        <div class="direction-subtitle">Evolves your existing Aqua Blue DNA into a warmer, more sophisticated teal. Feels like a premium wellness brand. Think Headspace meets Withings.</div>
+      </div>
+    </div>
+
+    <div class="direction-body">
+      <div class="palette-row">
+        <div class="swatch-card">
+          <div class="swatch" style="background: #1B7A6F;"></div>
+          <div class="swatch-role">Primary</div>
+          <div class="swatch-name">Evergreen Teal</div>
+          <div class="swatch-hex">#1B7A6F</div>
+          <div class="swatch-hsl">HSL(173, 63%, 29%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #2AA89B;"></div>
+          <div class="swatch-role">Interactive</div>
+          <div class="swatch-name">Active Teal</div>
+          <div class="swatch-hex">#2AA89B</div>
+          <div class="swatch-hsl">HSL(173, 59%, 41%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #0F3D3A;"></div>
+          <div class="swatch-role">Deep</div>
+          <div class="swatch-name">Deep Forest</div>
+          <div class="swatch-hex">#0F3D3A</div>
+          <div class="swatch-hsl">HSL(176, 60%, 15%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #E8F5F3;"></div>
+          <div class="swatch-role">Surface</div>
+          <div class="swatch-name">Mist</div>
+          <div class="swatch-hex">#E8F5F3</div>
+          <div class="swatch-hsl">HSL(168, 36%, 93%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #F6F9F8;"></div>
+          <div class="swatch-role">Background</div>
+          <div class="swatch-name">Cloud</div>
+          <div class="swatch-hex">#F6F9F8</div>
+          <div class="swatch-hsl">HSL(160, 20%, 97%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #E8985A;"></div>
+          <div class="swatch-role">Accent</div>
+          <div class="swatch-name">Warm Apricot</div>
+          <div class="swatch-hex">#E8985A</div>
+          <div class="swatch-hsl">HSL(26, 76%, 63%)</div>
+        </div>
+      </div>
+
+      <!-- Neutral ramp -->
+      <div style="margin-bottom: 24px;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #9B9DB2; margin-bottom: 8px; font-weight: 600;">Warm-tinted neutral ramp</div>
+        <div style="display: flex; gap: 4px;">
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #F6F9F8;" title="50"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #E8EDEC;" title="100"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #CDD5D3;" title="200"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #A8B3B0;" title="300"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #7E8C89;" title="400"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #5B6764;" title="500"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #3F4B48;" title="600"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #2A3331;" title="700"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #1A2220;" title="800"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #0E1514;" title="900"></div>
+        </div>
+      </div>
+
+      <div class="mockup-row">
+        <!-- Light mode phone -->
+        <div class="phone-frame">
+          <div class="phone-status-bar" style="background: #F6F9F8; color: #2A3331;">9:41</div>
+          <div class="phone-nav" style="background: #F6F9F8; color: #0F3D3A;">Good morning, Sarah</div>
+          <div class="phone-content" style="background: #F6F9F8;">
+            <div class="mock-card" style="background: white; border: 1px solid #E8EDEC;">
+              <div class="mock-card-title" style="color: #0F3D3A;">Daily wellness score</div>
+              <div style="font-size: 32px; font-weight: 700; color: #1B7A6F; margin: 8px 0;">78</div>
+              <div class="mock-progress" style="background: #E8F5F3;">
+                <div class="mock-progress-fill" style="width: 78%; background: linear-gradient(90deg, #2AA89B, #1B7A6F);"></div>
+              </div>
+            </div>
+            <div class="mock-card" style="background: white; border: 1px solid #E8EDEC;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="mock-avatar" style="background: #1B7A6F;">🏃</div>
+                <div>
+                  <div class="mock-card-title" style="color: #0F3D3A;">Move more today</div>
+                  <div class="mock-card-body" style="color: #5B6764;">2,340 steps to goal</div>
+                </div>
+              </div>
+              <div class="mock-btn" style="background: #2AA89B; color: white; width: 100%;">Start activity</div>
+            </div>
+            <div class="mock-card" style="background: #FDF6F0; border: 1px solid #F5E6D6;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="mock-avatar" style="background: #E8985A;">💊</div>
+                <div>
+                  <div class="mock-card-title" style="color: #0F3D3A;">Medication reminder</div>
+                  <div class="mock-card-body" style="color: #5B6764;">Vitamin D — 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-tab-bar">
+            <div class="mock-tab" style="color: #1B7A6F; font-weight: 600;">
+              <div class="mock-tab-icon" style="background: #1B7A6F; border-radius: 50%;"></div>Home
+            </div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #CDD5D3; border-radius: 50%;"></div>Benefits</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #CDD5D3; border-radius: 50%;"></div>Programs</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #CDD5D3; border-radius: 50%;"></div>Profile</div>
+          </div>
+        </div>
+
+        <!-- Dark mode phone -->
+        <div class="phone-frame dark-mock">
+          <div class="phone-status-bar" style="background: #111318; color: #A8B3B0;">9:41</div>
+          <div class="phone-nav" style="background: #111318; color: #E8F5F3;">Good morning, Sarah</div>
+          <div class="phone-content" style="background: #111318;">
+            <div class="mock-card" style="background: #1A1F24; border: 1px solid #2A3331;">
+              <div class="mock-card-title" style="color: #E8F5F3;">Daily wellness score</div>
+              <div style="font-size: 32px; font-weight: 700; color: #2AA89B; margin: 8px 0;">78</div>
+              <div class="mock-progress" style="background: #2A3331;">
+                <div class="mock-progress-fill" style="width: 78%; background: linear-gradient(90deg, #2AA89B, #3BC4B5);"></div>
+              </div>
+            </div>
+            <div class="mock-card" style="background: #1A1F24; border: 1px solid #2A3331;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="mock-avatar" style="background: #1B7A6F;">🏃</div>
+                <div>
+                  <div class="mock-card-title" style="color: #E8F5F3;">Move more today</div>
+                  <div class="mock-card-body" style="color: #7E8C89;">2,340 steps to goal</div>
+                </div>
+              </div>
+              <div class="mock-btn" style="background: #2AA89B; color: #0F3D3A; width: 100%;">Start activity</div>
+            </div>
+            <div class="mock-card" style="background: #2A2218; border: 1px solid #3D3224;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="mock-avatar" style="background: #E8985A;">💊</div>
+                <div>
+                  <div class="mock-card-title" style="color: #E8F5F3;">Medication reminder</div>
+                  <div class="mock-card-body" style="color: #7E8C89;">Vitamin D — 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-tab-bar">
+            <div class="mock-tab" style="color: #2AA89B; font-weight: 600;">
+              <div class="mock-tab-icon" style="background: #2AA89B; border-radius: 50%;"></div>Home
+            </div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #3F4B48; border-radius: 50%;"></div>Benefits</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #3F4B48; border-radius: 50%;"></div>Programs</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #3F4B48; border-radius: 50%;"></div>Profile</div>
+          </div>
+        </div>
+
+        <div class="notes-panel">
+          <h4>Panel notes — Direction A</h4>
+          <ul>
+            <li>Teal carries natural health connotations (water, life) without being clinical</li>
+            <li>Warm apricot accent creates complementary tension — prevents feeling "cold"</li>
+            <li>Deep Forest (#0F3D3A) replaces Night Sky as the dark anchor — warmer, less corporate</li>
+            <li>Hinge Health uses a similar green-family commitment but theirs is more saturated — this is softer</li>
+            <li>Differentiates clearly from Personify Health's mustard-teal and Thrive's dark teal</li>
+            <li>The neutral ramp is teal-tinted — everything feels cohesive, not assembled from parts</li>
+            <li><strong>Risk:</strong> Could feel too "wellness spa" if not grounded with strong typography and structure</li>
+          </ul>
+          <div style="margin-top: 16px;">
+            <span class="contrast-badge contrast-pass">Primary on white: 5.2:1 ✓ AA</span>
+            <span class="contrast-badge contrast-pass">Interactive on white: 3.4:1 ✓ AA Large</span>
+            <span class="contrast-badge contrast-pass">Deep on surface: 12.8:1 ✓ AAA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>Positioning</h3>
+      <div class="rationale-grid">
+        <div class="rationale-item">
+          <h4>Emotional register</h4>
+          <p>Grounded, natural, trustworthy but warm. "Your health is in good hands." Less corporate authority, more wise companion.</p>
+        </div>
+        <div class="rationale-item">
+          <h4>Competitive space</h4>
+          <p>Sits between Withings' minimalism and Noom's warmth. Distinct from Personify's mustard warmth. Doesn't overlap Thrive's dark teal.</p>
+        </div>
+        <div class="rationale-item">
+          <h4>Brand bridge</h4>
+          <p>Directly evolves your existing Aqua Blue — stakeholders will see the lineage. The teal family is already in your DNA.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRECTION B: Soft Indigo -->
+  <div class="direction">
+    <div class="direction-header">
+      <div>
+        <div class="direction-label" style="background: #EDE8F5; color: #5B4A9E;">Direction B</div>
+        <div class="direction-title">Soft Indigo — "Modern Wellbeing"</div>
+        <div class="direction-subtitle">A departure from blue-teal into a warmer, more distinctive violet-indigo. Feels contemporary, premium, and emotionally intelligent. Think Calm app meets Monzo.</div>
+      </div>
+    </div>
+
+    <div class="direction-body">
+      <div class="palette-row">
+        <div class="swatch-card">
+          <div class="swatch" style="background: #4A3F8F;"></div>
+          <div class="swatch-role">Primary</div>
+          <div class="swatch-name">Indigo</div>
+          <div class="swatch-hex">#4A3F8F</div>
+          <div class="swatch-hsl">HSL(248, 39%, 40%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #6C5FC7;"></div>
+          <div class="swatch-role">Interactive</div>
+          <div class="swatch-name">Violet</div>
+          <div class="swatch-hex">#6C5FC7</div>
+          <div class="swatch-hsl">HSL(248, 44%, 58%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #1E1A3A;"></div>
+          <div class="swatch-role">Deep</div>
+          <div class="swatch-name">Midnight</div>
+          <div class="swatch-hex">#1E1A3A</div>
+          <div class="swatch-hsl">HSL(248, 38%, 16%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #F0EDF8;"></div>
+          <div class="swatch-role">Surface</div>
+          <div class="swatch-name">Lavender Mist</div>
+          <div class="swatch-hex">#F0EDF8</div>
+          <div class="swatch-hsl">HSL(253, 38%, 95%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #F8F7FB;"></div>
+          <div class="swatch-role">Background</div>
+          <div class="swatch-name">Haze</div>
+          <div class="swatch-hex">#F8F7FB</div>
+          <div class="swatch-hsl">HSL(255, 25%, 97%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #E8785A;"></div>
+          <div class="swatch-role">Accent</div>
+          <div class="swatch-name">Coral</div>
+          <div class="swatch-hex">#E8785A</div>
+          <div class="swatch-hsl">HSL(13, 76%, 63%)</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #9B9DB2; margin-bottom: 8px; font-weight: 600;">Warm-violet neutral ramp</div>
+        <div style="display: flex; gap: 4px;">
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #F8F7FB;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #ECEAF2;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #D4D1E0;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #B0ACBF;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #8A869C;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #65617A;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #474359;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #302D40;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #1E1A2E;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #100E1C;"></div>
+        </div>
+      </div>
+
+      <div class="mockup-row">
+        <div class="phone-frame">
+          <div class="phone-status-bar" style="background: #F8F7FB; color: #302D40;">9:41</div>
+          <div class="phone-nav" style="background: #F8F7FB; color: #1E1A3A;">Good morning, Sarah</div>
+          <div class="phone-content" style="background: #F8F7FB;">
+            <div class="mock-card" style="background: white; border: 1px solid #ECEAF2;">
+              <div class="mock-card-title" style="color: #1E1A3A;">Daily wellness score</div>
+              <div style="font-size: 32px; font-weight: 700; color: #4A3F8F; margin: 8px 0;">78</div>
+              <div class="mock-progress" style="background: #F0EDF8;">
+                <div class="mock-progress-fill" style="width: 78%; background: linear-gradient(90deg, #6C5FC7, #4A3F8F);"></div>
+              </div>
+            </div>
+            <div class="mock-card" style="background: white; border: 1px solid #ECEAF2;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="mock-avatar" style="background: #6C5FC7;">🏃</div>
+                <div>
+                  <div class="mock-card-title" style="color: #1E1A3A;">Move more today</div>
+                  <div class="mock-card-body" style="color: #65617A;">2,340 steps to goal</div>
+                </div>
+              </div>
+              <div class="mock-btn" style="background: #6C5FC7; color: white; width: 100%;">Start activity</div>
+            </div>
+            <div class="mock-card" style="background: #FEF4F1; border: 1px solid #F8DDD4;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="mock-avatar" style="background: #E8785A;">💊</div>
+                <div>
+                  <div class="mock-card-title" style="color: #1E1A3A;">Medication reminder</div>
+                  <div class="mock-card-body" style="color: #65617A;">Vitamin D — 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-tab-bar">
+            <div class="mock-tab" style="color: #4A3F8F; font-weight: 600;">
+              <div class="mock-tab-icon" style="background: #4A3F8F; border-radius: 50%;"></div>Home
+            </div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #D4D1E0; border-radius: 50%;"></div>Benefits</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #D4D1E0; border-radius: 50%;"></div>Programs</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #D4D1E0; border-radius: 50%;"></div>Profile</div>
+          </div>
+        </div>
+
+        <div class="phone-frame dark-mock">
+          <div class="phone-status-bar" style="background: #100E1C; color: #B0ACBF;">9:41</div>
+          <div class="phone-nav" style="background: #100E1C; color: #F0EDF8;">Good morning, Sarah</div>
+          <div class="phone-content" style="background: #100E1C;">
+            <div class="mock-card" style="background: #1E1A2E; border: 1px solid #302D40;">
+              <div class="mock-card-title" style="color: #F0EDF8;">Daily wellness score</div>
+              <div style="font-size: 32px; font-weight: 700; color: #8B7FE8; margin: 8px 0;">78</div>
+              <div class="mock-progress" style="background: #302D40;">
+                <div class="mock-progress-fill" style="width: 78%; background: linear-gradient(90deg, #6C5FC7, #8B7FE8);"></div>
+              </div>
+            </div>
+            <div class="mock-card" style="background: #1E1A2E; border: 1px solid #302D40;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="mock-avatar" style="background: #6C5FC7;">🏃</div>
+                <div>
+                  <div class="mock-card-title" style="color: #F0EDF8;">Move more today</div>
+                  <div class="mock-card-body" style="color: #8A869C;">2,340 steps to goal</div>
+                </div>
+              </div>
+              <div class="mock-btn" style="background: #6C5FC7; color: white; width: 100%;">Start activity</div>
+            </div>
+            <div class="mock-card" style="background: #2A1E1C; border: 1px solid #3D302C;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="mock-avatar" style="background: #E8785A;">💊</div>
+                <div>
+                  <div class="mock-card-title" style="color: #F0EDF8;">Medication reminder</div>
+                  <div class="mock-card-body" style="color: #8A869C;">Vitamin D — 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-tab-bar">
+            <div class="mock-tab" style="color: #8B7FE8; font-weight: 600;">
+              <div class="mock-tab-icon" style="background: #8B7FE8; border-radius: 50%;"></div>Home
+            </div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #474359; border-radius: 50%;"></div>Benefits</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #474359; border-radius: 50%;"></div>Programs</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #474359; border-radius: 50%;"></div>Profile</div>
+          </div>
+        </div>
+
+        <div class="notes-panel">
+          <h4>Panel notes — Direction B</h4>
+          <ul>
+            <li>Indigo/violet is increasingly associated with wellness, mindfulness, and mental health</li>
+            <li>No major digital health competitor owns this color space — high differentiation</li>
+            <li>Coral accent is warm and inviting — signals care and humanity</li>
+            <li>Dark mode is particularly beautiful — the purple-dark surfaces feel premium</li>
+            <li>Biggest departure from current brand — may face internal resistance</li>
+            <li>Calm, Headspace, and some therapy apps use adjacent purples — could signal "mental health only" if not careful</li>
+            <li><strong>Risk:</strong> Furthest from existing brand. Stakeholder buy-in could be challenging. May read as "meditation app" rather than full-spectrum health platform.</li>
+          </ul>
+          <div style="margin-top: 16px;">
+            <span class="contrast-badge contrast-pass">Primary on white: 6.8:1 ✓ AAA</span>
+            <span class="contrast-badge contrast-pass">Interactive on white: 3.6:1 ✓ AA Large</span>
+            <span class="contrast-badge contrast-pass">Deep on surface: 14.2:1 ✓ AAA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>Positioning</h3>
+      <div class="rationale-grid">
+        <div class="rationale-item">
+          <h4>Emotional register</h4>
+          <p>Contemporary, emotionally aware, sophisticated. "We see you as a whole person." Signals that this isn't just another benefits portal.</p>
+        </div>
+        <div class="rationale-item">
+          <h4>Competitive space</h4>
+          <p>Wide open. No direct competitor in digital health owns indigo. Clear differentiation from Personify's warm gold and Thrive's teal.</p>
+        </div>
+        <div class="rationale-item">
+          <h4>Brand bridge</h4>
+          <p>Weakest link to current brand. Would require the strongest internal narrative about why the app deserves its own identity.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIRECTION C: Refined Ocean Blue -->
+  <div class="direction">
+    <div class="direction-header">
+      <div>
+        <div class="direction-label" style="background: #E3EFF8; color: #2E6DA4;">Direction C</div>
+        <div class="direction-title">Refined Blue — "Trusted Companion"</div>
+        <div class="direction-subtitle">Keeps blue as the anchor but shifts it warmer, lighter, and more human. Softens the corporate edge without losing the trust signal. Think Apple Health meets One Medical.</div>
+      </div>
+    </div>
+
+    <div class="direction-body">
+      <div class="palette-row">
+        <div class="swatch-card">
+          <div class="swatch" style="background: #2E6DA4;"></div>
+          <div class="swatch-role">Primary</div>
+          <div class="swatch-name">Ocean Blue</div>
+          <div class="swatch-hex">#2E6DA4</div>
+          <div class="swatch-hsl">HSL(209, 56%, 41%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #3D8AC4;"></div>
+          <div class="swatch-role">Interactive</div>
+          <div class="swatch-name">Sky</div>
+          <div class="swatch-hex">#3D8AC4</div>
+          <div class="swatch-hsl">HSL(209, 52%, 50%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #153352;"></div>
+          <div class="swatch-role">Deep</div>
+          <div class="swatch-name">Deep Water</div>
+          <div class="swatch-hex">#153352</div>
+          <div class="swatch-hsl">HSL(211, 57%, 20%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #EBF3FA;"></div>
+          <div class="swatch-role">Surface</div>
+          <div class="swatch-name">Frost</div>
+          <div class="swatch-hex">#EBF3FA</div>
+          <div class="swatch-hsl">HSL(212, 52%, 95%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #F5F8FB;"></div>
+          <div class="swatch-role">Background</div>
+          <div class="swatch-name">Breath</div>
+          <div class="swatch-hex">#F5F8FB</div>
+          <div class="swatch-hsl">HSL(210, 33%, 97%)</div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch" style="background: #48B5A0;"></div>
+          <div class="swatch-role">Accent</div>
+          <div class="swatch-name">Sea Glass</div>
+          <div class="swatch-hex">#48B5A0</div>
+          <div class="swatch-hsl">HSL(168, 43%, 49%)</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #9B9DB2; margin-bottom: 8px; font-weight: 600;">Cool-blue neutral ramp (slightly warmed)</div>
+        <div style="display: flex; gap: 4px;">
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #F5F8FB;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #E6ECF2;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #CCD6E0;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #A4B1BF;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #7C8C9C;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #5A6878;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #3E4B58;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #2A3542;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #1A2430;"></div>
+          <div style="width: 48px; height: 32px; border-radius: 6px; background: #0E151E;"></div>
+        </div>
+      </div>
+
+      <div class="mockup-row">
+        <div class="phone-frame">
+          <div class="phone-status-bar" style="background: #F5F8FB; color: #2A3542;">9:41</div>
+          <div class="phone-nav" style="background: #F5F8FB; color: #153352;">Good morning, Sarah</div>
+          <div class="phone-content" style="background: #F5F8FB;">
+            <div class="mock-card" style="background: white; border: 1px solid #E6ECF2;">
+              <div class="mock-card-title" style="color: #153352;">Daily wellness score</div>
+              <div style="font-size: 32px; font-weight: 700; color: #2E6DA4; margin: 8px 0;">78</div>
+              <div class="mock-progress" style="background: #EBF3FA;">
+                <div class="mock-progress-fill" style="width: 78%; background: linear-gradient(90deg, #3D8AC4, #2E6DA4);"></div>
+              </div>
+            </div>
+            <div class="mock-card" style="background: white; border: 1px solid #E6ECF2;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="mock-avatar" style="background: #48B5A0;">🏃</div>
+                <div>
+                  <div class="mock-card-title" style="color: #153352;">Move more today</div>
+                  <div class="mock-card-body" style="color: #5A6878;">2,340 steps to goal</div>
+                </div>
+              </div>
+              <div class="mock-btn" style="background: #3D8AC4; color: white; width: 100%;">Start activity</div>
+            </div>
+            <div class="mock-card" style="background: #EFF8F6; border: 1px solid #D4EDE8;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="mock-avatar" style="background: #48B5A0;">💊</div>
+                <div>
+                  <div class="mock-card-title" style="color: #153352;">Medication reminder</div>
+                  <div class="mock-card-body" style="color: #5A6878;">Vitamin D — 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-tab-bar">
+            <div class="mock-tab" style="color: #2E6DA4; font-weight: 600;">
+              <div class="mock-tab-icon" style="background: #2E6DA4; border-radius: 50%;"></div>Home
+            </div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #CCD6E0; border-radius: 50%;"></div>Benefits</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #CCD6E0; border-radius: 50%;"></div>Programs</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #CCD6E0; border-radius: 50%;"></div>Profile</div>
+          </div>
+        </div>
+
+        <div class="phone-frame dark-mock">
+          <div class="phone-status-bar" style="background: #0E151E; color: #A4B1BF;">9:41</div>
+          <div class="phone-nav" style="background: #0E151E; color: #EBF3FA;">Good morning, Sarah</div>
+          <div class="phone-content" style="background: #0E151E;">
+            <div class="mock-card" style="background: #1A2430; border: 1px solid #2A3542;">
+              <div class="mock-card-title" style="color: #EBF3FA;">Daily wellness score</div>
+              <div style="font-size: 32px; font-weight: 700; color: #5A9FD4; margin: 8px 0;">78</div>
+              <div class="mock-progress" style="background: #2A3542;">
+                <div class="mock-progress-fill" style="width: 78%; background: linear-gradient(90deg, #3D8AC4, #5A9FD4);"></div>
+              </div>
+            </div>
+            <div class="mock-card" style="background: #1A2430; border: 1px solid #2A3542;">
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="mock-avatar" style="background: #48B5A0;">🏃</div>
+                <div>
+                  <div class="mock-card-title" style="color: #EBF3FA;">Move more today</div>
+                  <div class="mock-card-body" style="color: #7C8C9C;">2,340 steps to goal</div>
+                </div>
+              </div>
+              <div class="mock-btn" style="background: #3D8AC4; color: white; width: 100%;">Start activity</div>
+            </div>
+            <div class="mock-card" style="background: #162420; border: 1px solid #243530;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="mock-avatar" style="background: #48B5A0;">💊</div>
+                <div>
+                  <div class="mock-card-title" style="color: #EBF3FA;">Medication reminder</div>
+                  <div class="mock-card-body" style="color: #7C8C9C;">Vitamin D — 2:00 PM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-tab-bar">
+            <div class="mock-tab" style="color: #5A9FD4; font-weight: 600;">
+              <div class="mock-tab-icon" style="background: #5A9FD4; border-radius: 50%;"></div>Home
+            </div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #3E4B58; border-radius: 50%;"></div>Benefits</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #3E4B58; border-radius: 50%;"></div>Programs</div>
+            <div class="mock-tab"><div class="mock-tab-icon" style="background: #3E4B58; border-radius: 50%;"></div>Profile</div>
+          </div>
+        </div>
+
+        <div class="notes-panel">
+          <h4>Panel notes — Direction C</h4>
+          <ul>
+            <li>Safest evolution — clearly "Mobile Health" but refined, warmer, more human</li>
+            <li>Ocean Blue (#2E6DA4) is lighter and warmer than Brand Blue (#0F497F) — less corporate, more approachable</li>
+            <li>Sea Glass accent bridges to your existing Aqua Blue heritage but is desaturated and warmer</li>
+            <li>Apple Health, One Medical, and Forward all use adjacent blues — you'd be in premium health company</li>
+            <li>Easiest stakeholder sell — "we evolved it" not "we replaced it"</li>
+            <li>The blue-teal combination is the most conventional digital health pairing</li>
+            <li><strong>Risk:</strong> May not feel like enough of a change. Could still read as "another blue health app." Lowest differentiation of the three options.</li>
+          </ul>
+          <div style="margin-top: 16px;">
+            <span class="contrast-badge contrast-pass">Primary on white: 4.8:1 ✓ AA</span>
+            <span class="contrast-badge contrast-pass">Interactive on white: 3.2:1 ✓ AA Large</span>
+            <span class="contrast-badge contrast-pass">Deep on surface: 11.4:1 ✓ AAA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rationale">
+      <h3>Positioning</h3>
+      <div class="rationale-grid">
+        <div class="rationale-item">
+          <h4>Emotional register</h4>
+          <p>Reliable, clean, professional but warm. "We're the health platform you already trust." Evolutionary, not revolutionary.</p>
+        </div>
+        <div class="rationale-item">
+          <h4>Competitive space</h4>
+          <p>Sits alongside Apple Health and One Medical — premium but familiar. Risk of blending in with other blue health apps.</p>
+        </div>
+        <div class="rationale-item">
+          <h4>Brand bridge</h4>
+          <p>Strongest connection to existing brand. Stakeholders will immediately recognize the evolution. Lowest internal friction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Comparison -->
+<div class="comparison-section">
+  <h2>Side-by-side comparison</h2>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th style="min-width: 160px;">
+          <span style="display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #1B7A6F; margin-right: 6px; vertical-align: middle;"></span>
+          A: Warm Teal
+        </th>
+        <th style="min-width: 160px;">
+          <span style="display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #4A3F8F; margin-right: 6px; vertical-align: middle;"></span>
+          B: Soft Indigo
+        </th>
+        <th style="min-width: 160px;">
+          <span style="display: inline-block; width: 12px; height: 12px; border-radius: 3px; background: #2E6DA4; margin-right: 6px; vertical-align: middle;"></span>
+          C: Refined Blue
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Differentiation</strong></td>
+        <td>High — teal-first is uncommon in direct competitors</td>
+        <td>Very high — no competitor in this color space</td>
+        <td>Low — blue is the most common health app color</td>
+      </tr>
+      <tr>
+        <td><strong>Brand bridge</strong></td>
+        <td>Strong — evolves existing Aqua Blue</td>
+        <td>Weak — biggest departure from current brand</td>
+        <td>Very strong — clear evolution of Brand Blue</td>
+      </tr>
+      <tr>
+        <td><strong>Health signal</strong></td>
+        <td>Strong — teal = water, life, vitality</td>
+        <td>Moderate — purple = mindfulness, wellness (narrower)</td>
+        <td>Strong — blue = trust, calm, clinical credibility</td>
+      </tr>
+      <tr>
+        <td><strong>Warmth</strong></td>
+        <td>Warm-cool balance (teal + apricot accent)</td>
+        <td>Warmest (violet inherently warmer than blue/teal)</td>
+        <td>Coolest of the three, but warmer than current brand</td>
+      </tr>
+      <tr>
+        <td><strong>Dark mode quality</strong></td>
+        <td>Excellent — deep forest tones feel premium</td>
+        <td>Best — purple/dark is inherently luxurious</td>
+        <td>Good — familiar Apple Health feel</td>
+      </tr>
+      <tr>
+        <td><strong>Stakeholder friction</strong></td>
+        <td>Moderate — "we shifted from blue to teal"</td>
+        <td>High — "we changed everything"</td>
+        <td>Low — "we refined what we had"</td>
+      </tr>
+      <tr>
+        <td><strong>Panel recommendation</strong></td>
+        <td><strong style="color: #1B7A6F;">★ Recommended</strong></td>
+        <td>Bold option if appetite exists</td>
+        <td>Safe fallback</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Health — Color System v2 (Bold)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F0F2F5; color: #1a1a2e; }
+
+  .page-header {
+    background: linear-gradient(135deg, #153352, #1B3F63);
+    color: white;
+    padding: 48px;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  .page-header p { font-size: 15px; opacity: 0.6; margin-top: 8px; max-width: 700px; line-height: 1.6; }
+
+  .section { padding: 48px; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #7C8C9C; font-weight: 700; margin-bottom: 8px; }
+  .section h2 { font-size: 24px; font-weight: 700; color: #153352; letter-spacing: -0.3px; margin-bottom: 6px; }
+  .section .desc { font-size: 14px; color: #5A6878; max-width: 640px; margin-bottom: 32px; line-height: 1.6; }
+
+  .card { background: white; border-radius: 16px; border: 1px solid #E6ECF2; padding: 32px; margin-bottom: 24px; }
+  .card h3 { font-size: 16px; font-weight: 700; color: #153352; margin-bottom: 16px; }
+
+  .diagnosis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .problem-card {
+    background: #FEF2F2;
+    border: 1px solid #FEE2E2;
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .problem-card h4 { font-size: 14px; font-weight: 700; color: #922A2A; margin-bottom: 8px; }
+  .problem-card p { font-size: 13px; color: #B83636; line-height: 1.6; }
+
+  .fix-card {
+    background: #EEFBF3;
+    border: 1px solid #D1F5DF;
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .fix-card h4 { font-size: 14px; font-weight: 700; color: #166B3C; margin-bottom: 8px; }
+  .fix-card p { font-size: 13px; color: #1E8A4E; line-height: 1.6; }
+
+  /* Phone mockup */
+  .mockup-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 24px;
+  }
+  .mockup-col { text-align: center; }
+  .mockup-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 16px;
+  }
+  .mockup-label.before { color: #B83636; }
+  .mockup-label.after { color: #1E8A4E; }
+
+  .phone {
+    width: 375px;
+    min-height: 720px;
+    border-radius: 40px;
+    border: 8px solid #1a1a2e;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .phone-status {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .phone-header {
+    padding: 0 24px 16px;
+  }
+  .phone-header h2 { font-size: 22px; font-weight: 700; }
+  .phone-header p { font-size: 13px; opacity: 0.6; margin-top: 2px; }
+  .phone-body { padding: 0 20px 80px; }
+
+  .p-card {
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .p-card-sm { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .p-card-lg { font-size: 28px; font-weight: 800; }
+  .p-card-sub { font-size: 11px; opacity: 0.6; margin-top: 2px; }
+  .p-card-body { font-size: 12px; line-height: 1.5; }
+
+  .p-progress {
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .p-progress-fill { height: 100%; border-radius: 3px; }
+
+  .p-btn {
+    display: block;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .p-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .p-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .p-chip {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 6px;
+    margin-top: 8px;
+  }
+
+  .p-tabs {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 16px;
+  }
+  .p-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 500;
+  }
+  .p-tab-icon { width: 24px; height: 24px; border-radius: 8px; }
+
+  .p-banner {
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .p-sparkline {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 24px;
+  }
+  .p-spark-bar { width: 4px; border-radius: 2px; }
+
+  /* Data viz colors */
+  .mini-chart { display: flex; gap: 3px; align-items: flex-end; }
+  .mini-bar { width: 6px; border-radius: 3px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .callout {
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-top: 16px;
+  }
+  .callout h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .callout p { font-size: 13px; line-height: 1.6; }
+
+  .rule-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .rule-item {
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #E6ECF2;
+  }
+  .rule-item h5 { font-size: 12px; font-weight: 700; color: #153352; margin-bottom: 6px; }
+  .rule-item p { font-size: 12px; color: #5A6878; line-height: 1.5; }
+
+  .swatch-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .swatch-sm {
+    width: 36px; height: 36px; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Mobile Health — Color System v2</h1>
+  <p>The v1 was too safe. This version pushes harder on where color actually lives in the interface — colored surfaces, domain-coded cards, bolder header treatments, and proper warmth. The palette is the same; the conviction is higher.</p>
+</div>
+
+<!-- ===== DIAGNOSIS ===== -->
+<div class="section">
+  <div class="section-label">The Problem</div>
+  <h2>Why the current app feels bland</h2>
+  <div class="desc">Four structural issues that no hex code change alone can fix. The palette matters, but <em>where</em> and <em>how much</em> color appears matters more.</div>
+
+  <div class="diagnosis-grid">
+    <div class="problem-card">
+      <h4>1. White-on-white flatness</h4>
+      <p>Every surface is white or near-white. Cards sit on white backgrounds with 1px gray borders. There's no visual depth, no layering, no hierarchy between the page and the content on it. Everything floats in the same blank plane.</p>
+    </div>
+    <div class="fix-card">
+      <h4>Fix: Tinted app background + white cards</h4>
+      <p>The app background shifts to a subtle blue-tinted off-white (#F5F8FB). Cards pop against it. Some cards get domain-specific tinted backgrounds (teal-50 for health, apricot-50 for rewards). Depth returns through color, not drop shadows.</p>
+    </div>
+    <div class="problem-card">
+      <h4>2. Single-point-of-color syndrome</h4>
+      <p>The only color in the entire app is one cyan button and the active nav item. Everything else is black text on white. The app has no color personality — it could be any product in any industry.</p>
+    </div>
+    <div class="fix-card">
+      <h4>Fix: Distributed color moments</h4>
+      <p>Color appears at 5–7 points per screen: the header gradient, category-coded icon backgrounds, progress bar fills, chip/pill treatments, tinted card surfaces, and the warm accent for rewards. Each has a clear purpose — never decorative.</p>
+    </div>
+    <div class="problem-card">
+      <h4>3. Photography dependency</h4>
+      <p>Stock photos are carrying the entire visual load. Remove them and the screen is a wireframe. The interface has no identity without borrowed imagery.</p>
+    </div>
+    <div class="fix-card">
+      <h4>Fix: Color-as-content</h4>
+      <p>Domain-colored avatars, tinted surfaces, and illustrated icons give each card its own identity. Photography becomes enhancement, not crutch. The app is recognizable at a glance even without images.</p>
+    </div>
+    <div class="problem-card">
+      <h4>4. Zero warmth or personality</h4>
+      <p>The cool gray neutrals + clinical cyan make the app feel like a form you fill out, not a companion on your health journey. There's no emotional warmth anywhere. It feels institutional.</p>
+    </div>
+    <div class="fix-card">
+      <h4>Fix: Warm accent presence + teal vitality</h4>
+      <p>Apricot warmth appears in rewards, streaks, and celebration moments. Teal brings life energy to health data and progress. Lavender softens mental health touchpoints. The app feels like it cares about you.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BEFORE/AFTER: HOME ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Before → After</div>
+  <h2>Home screen reimagined</h2>
+  <div class="desc">Same content structure, same information. But color is now doing real work — creating hierarchy, signaling category, and building personality.</div>
+
+  <div class="mockup-compare">
+    <!-- BEFORE -->
+    <div class="mockup-col">
+      <div class="mockup-label before">Current — Bland</div>
+      <div class="phone" style="background: white;">
+        <div class="phone-status" style="background: white; color: #333;">9:41</div>
+        <div style="padding: 0 20px 8px; background: white; border-bottom: 1px solid #eee;">
+          <div style="font-size: 11px; color: #999; margin-bottom: 2px;">Home</div>
+          <div style="font-size: 20px; font-weight: 700; color: #333;">Welcome Andrew</div>
+        </div>
+        <div class="phone-body" style="background: white; padding-top: 12px;">
+          <!-- Bland hero card -->
+          <div class="p-card" style="background: white; border: 1px solid #E8E8E8; padding: 0; overflow: hidden;">
+            <div style="height: 80px; background: linear-gradient(135deg, #ddd, #ccc);"></div>
+            <div style="padding: 12px;">
+              <div style="font-size: 13px; font-weight: 600; color: #333;">Complete Managing Depression</div>
+              <div style="font-size: 11px; color: #999;">Challenge family and colleagues</div>
+              <div style="background: #04A0B7; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; display: inline-block; margin-top: 8px;">View details</div>
+            </div>
+          </div>
+
+          <!-- Bland section -->
+          <div style="font-size: 14px; font-weight: 600; color: #333; margin: 16px 0 8px;">Your Action Items</div>
+          <div style="display: flex; gap: 8px;">
+            <div style="flex: 1; background: white; border: 1px solid #E8E8E8; border-radius: 8px; padding: 8px;">
+              <div style="height: 48px; background: #f0f0f0; border-radius: 4px; margin-bottom: 6px;"></div>
+              <div style="font-size: 10px; color: #333;">Get A1C Checked</div>
+              <div style="font-size: 9px; color: #999;">Earn 100 pts</div>
+            </div>
+            <div style="flex: 1; background: white; border: 1px solid #E8E8E8; border-radius: 8px; padding: 8px;">
+              <div style="height: 48px; background: #f0f0f0; border-radius: 4px; margin-bottom: 6px;"></div>
+              <div style="font-size: 10px; color: #333;">Talk Life Out</div>
+              <div style="font-size: 9px; color: #999;">Therapy</div>
+            </div>
+          </div>
+
+          <!-- Bland AI insight -->
+          <div class="p-card" style="background: white; border: 1px solid #E8E8E8; margin-top: 12px;">
+            <div style="font-size: 12px; font-weight: 600; color: #333;">Insights</div>
+            <div style="font-size: 11px; color: #666; margin-top: 4px; line-height: 1.5;">Looks like shut-eye has been in short supply lately. Let's help you reclaim those restful hours.</div>
+            <div style="margin-top: 8px;">
+              <span style="display: inline-block; padding: 4px 10px; border: 1px solid #ddd; border-radius: 16px; font-size: 10px; color: #666;">Sleep Optimization</span>
+            </div>
+          </div>
+
+          <!-- Bland health data -->
+          <div style="font-size: 14px; font-weight: 600; color: #333; margin: 16px 0 8px;">Latest Health Data</div>
+          <div class="p-card" style="background: white; border: 1px solid #E8E8E8;">
+            <div style="font-size: 11px; color: #999;">Steps</div>
+            <div style="font-size: 20px; font-weight: 700; color: #333;">9,344</div>
+          </div>
+          <div class="p-card" style="background: white; border: 1px solid #E8E8E8;">
+            <div style="font-size: 11px; color: #999;">Sleep</div>
+            <div style="font-size: 20px; font-weight: 700; color: #333;">7h 16m</div>
+          </div>
+        </div>
+
+        <div class="p-tabs" style="background: white; border-top: 1px solid #eee;">
+          <div class="p-tab" style="color: #04A0B7;"><div class="p-tab-icon" style="background: #04A0B7;"></div>Home</div>
+          <div class="p-tab" style="color: #ccc;"><div class="p-tab-icon" style="background: #eee;"></div>Care</div>
+          <div class="p-tab" style="color: #ccc;"><div class="p-tab-icon" style="background: #eee;"></div>Benefits</div>
+          <div class="p-tab" style="color: #ccc;"><div class="p-tab-icon" style="background: #eee;"></div>Rewards</div>
+          <div class="p-tab" style="color: #ccc;"><div class="p-tab-icon" style="background: #eee;"></div>Profile</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AFTER -->
+    <div class="mockup-col">
+      <div class="mockup-label after">v2 — With conviction</div>
+      <div class="phone" style="background: #F5F8FB;">
+        <!-- Gradient header -->
+        <div style="background: linear-gradient(180deg, #153352 0%, #1B3F63 100%); padding: 48px 24px 20px; color: white;">
+          <div style="font-size: 13px; opacity: 0.6;">Good morning</div>
+          <div style="font-size: 24px; font-weight: 700; margin-top: 2px;">Andrew</div>
+          <!-- Wellness score inline -->
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; background: rgba(255,255,255,0.08); border-radius: 14px; padding: 14px 16px;">
+            <div style="position: relative; width: 52px; height: 52px;">
+              <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="5"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#48B5A0" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: white;">78</div>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">Wellness Score</div>
+              <div style="font-size: 11px; opacity: 0.5; margin-top: 1px;">+3 from last week</div>
+            </div>
+            <div style="margin-left: auto; font-size: 11px; color: #48B5A0; font-weight: 600;">View →</div>
+          </div>
+        </div>
+
+        <div class="phone-body" style="padding-top: 16px;">
+          <!-- AI Insight card with personality -->
+          <div class="p-card" style="background: linear-gradient(135deg, #F6F4FA, #EDE8F5); border: 1px solid #E5DFF2; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -8px; right: -8px; width: 48px; height: 48px; background: rgba(145,137,189,0.1); border-radius: 50%;"></div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: #9189BD; display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+              <div style="font-size: 12px; font-weight: 700; color: #453F6A;">Sleep Insight</div>
+            </div>
+            <div style="font-size: 12px; color: #5A5287; line-height: 1.6;">Your sleep has dipped this week. Try these evidence-based strategies.</div>
+            <div style="margin-top: 10px; display: flex; gap: 6px;">
+              <span class="p-chip" style="background: white; color: #5A5287; border: 1px solid #D5D0E8;">Sleep Optimization</span>
+              <span class="p-chip" style="background: white; color: #5A5287; border: 1px solid #D5D0E8;">Wind Down</span>
+            </div>
+          </div>
+
+          <!-- Activity card with TEAL energy -->
+          <div class="p-card" style="background: white; border: 1px solid #E6ECF2;">
+            <div class="p-row" style="margin-bottom: 10px;">
+              <div class="p-avatar" style="background: #EFF8F6; color: #329385; font-size: 16px; font-weight: 800;">🏃</div>
+              <div style="flex: 1;">
+                <div class="p-card-sm" style="color: #153352;">Today's movement</div>
+                <div style="display: flex; align-items: baseline; gap: 4px;">
+                  <span style="font-size: 22px; font-weight: 800; color: #329385;">2,340</span>
+                  <span style="font-size: 11px; color: #7C8C9C;">/ 8,000 steps</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-progress" style="background: #EFF8F6;">
+              <div class="p-progress-fill" style="width: 29%; background: linear-gradient(90deg, #48B5A0, #72C5B6);"></div>
+            </div>
+            <div class="p-btn" style="background: #3D8AC4; color: white;">Start a walk</div>
+          </div>
+
+          <!-- Rewards card with APRICOT warmth -->
+          <div class="p-card" style="background: linear-gradient(135deg, #FEF6F1, #FCEADB); border: 1px solid #F8D2B4; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -12px; right: -12px; width: 56px; height: 56px; background: rgba(232,152,90,0.1); border-radius: 50%;"></div>
+            <div class="p-row">
+              <div class="p-avatar" style="background: #E8985A; border-radius: 50%;">⭐</div>
+              <div style="flex: 1;">
+                <div class="p-card-sm" style="color: #8F5125;">Weekly streak!</div>
+                <div style="font-size: 18px; font-weight: 800; color: #B56830;">150 pts earned</div>
+              </div>
+              <div style="background: white; border: 1.5px solid #E8985A; color: #B56830; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600;">Claim</div>
+            </div>
+          </div>
+
+          <!-- Health data with mini sparklines -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin: 16px 0 10px;">
+            <div style="font-size: 14px; font-weight: 700; color: #153352;">Health data</div>
+            <div style="font-size: 12px; color: #3D8AC4; font-weight: 600;">All data →</div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="p-card" style="background: white; border: 1px solid #E6ECF2; padding: 14px;">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                <div style="width: 20px; height: 20px; border-radius: 6px; background: #EFF8F6; display: flex; align-items: center; justify-content: center; font-size: 10px;">🏃</div>
+                <span style="font-size: 10px; color: #7C8C9C; font-weight: 600;">STEPS</span>
+              </div>
+              <div style="font-size: 20px; font-weight: 800; color: #153352;">9,344</div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 8px; background: #D4EDE8;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #A8DCD2;"></div>
+                <div class="p-spark-bar" style="height: 6px; background: #D4EDE8;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #72C5B6;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #48B5A0;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #72C5B6;"></div>
+                <div class="p-spark-bar" style="height: 24px; background: #329385;"></div>
+              </div>
+            </div>
+            <div class="p-card" style="background: white; border: 1px solid #E6ECF2; padding: 14px;">
+              <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                <div style="width: 20px; height: 20px; border-radius: 6px; background: #F6F4FA; display: flex; align-items: center; justify-content: center; font-size: 10px;">😴</div>
+                <span style="font-size: 10px; color: #7C8C9C; font-weight: 600;">SLEEP</span>
+              </div>
+              <div style="font-size: 20px; font-weight: 800; color: #153352;">7h 16m</div>
+              <div class="p-sparkline" style="margin-top: 6px;">
+                <div class="p-spark-bar" style="height: 18px; background: #B5AED4;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #9189BD;"></div>
+                <div class="p-spark-bar" style="height: 10px; background: #D5D0E8;"></div>
+                <div class="p-spark-bar" style="height: 14px; background: #B5AED4;"></div>
+                <div class="p-spark-bar" style="height: 8px; background: #D5D0E8;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #9189BD;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #B5AED4;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action items with domain coding -->
+          <div style="font-size: 14px; font-weight: 700; color: #153352; margin: 16px 0 10px;">Recommended for you</div>
+          <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px;">
+            <div style="min-width: 140px; border-radius: 14px; overflow: hidden; background: white; border: 1px solid #E6ECF2;">
+              <div style="height: 72px; background: linear-gradient(135deg, #EFF8F6, #D4EDE8);"></div>
+              <div style="padding: 10px;">
+                <div style="font-size: 11px; font-weight: 600; color: #153352;">Get A1C Checked</div>
+                <div style="font-size: 10px; color: #48B5A0; font-weight: 600; margin-top: 2px;">+100 pts</div>
+              </div>
+            </div>
+            <div style="min-width: 140px; border-radius: 14px; overflow: hidden; background: white; border: 1px solid #E6ECF2;">
+              <div style="height: 72px; background: linear-gradient(135deg, #F6F4FA, #ECEAF5);"></div>
+              <div style="padding: 10px;">
+                <div style="font-size: 11px; font-weight: 600; color: #153352;">Talk Life Out</div>
+                <div style="font-size: 10px; color: #9189BD; font-weight: 600; margin-top: 2px;">Therapy</div>
+              </div>
+            </div>
+            <div style="min-width: 140px; border-radius: 14px; overflow: hidden; background: white; border: 1px solid #E6ECF2;">
+              <div style="height: 72px; background: linear-gradient(135deg, #F3F7F2, #E2EDE0);"></div>
+              <div style="padding: 10px;">
+                <div style="font-size: 11px; font-weight: 600; color: #153352;">Nutrition Plan</div>
+                <div style="font-size: 10px; color: #5E8E56; font-weight: 600; margin-top: 2px;">Wellness</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab bar with personality -->
+        <div class="p-tabs" style="background: white; border-top: 1px solid #E6ECF2;">
+          <div class="p-tab" style="color: #2E6DA4; font-weight: 700;">
+            <div class="p-tab-icon" style="background: #EBF3FA; border-radius: 8px;"></div>Home
+          </div>
+          <div class="p-tab" style="color: #A4B1BF;">
+            <div class="p-tab-icon" style="background: #F5F8FB; border-radius: 8px;"></div>Care
+          </div>
+          <div class="p-tab" style="color: #A4B1BF;">
+            <div class="p-tab-icon" style="background: #F5F8FB; border-radius: 8px;"></div>Benefits
+          </div>
+          <div class="p-tab" style="color: #A4B1BF;">
+            <div class="p-tab-icon" style="background: #F5F8FB; border-radius: 8px;"></div>Rewards
+          </div>
+          <div class="p-tab" style="color: #A4B1BF;">
+            <div class="p-tab-icon" style="background: #F5F8FB; border-radius: 8px;"></div>Profile
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DARK MODE ===== -->
+<div class="section">
+  <div class="section-label">Dark Mode</div>
+  <h2>Same conviction, different context</h2>
+  <div class="desc">Dark mode isn't just "invert the colors." The tinted surfaces shift to dark-tinted variants. Accent colors lighten one step to maintain vibrancy against dark backgrounds.</div>
+
+  <div style="max-width: 375px; margin: 0 auto;">
+    <div class="phone" style="border-color: #333; background: #0E151E;">
+      <!-- Dark gradient header -->
+      <div style="background: linear-gradient(180deg, #0E151E 0%, #1A2430 100%); padding: 48px 24px 20px; color: white;">
+        <div style="font-size: 13px; opacity: 0.4;">Good morning</div>
+        <div style="font-size: 24px; font-weight: 700; margin-top: 2px;">Andrew</div>
+        <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px;">
+          <div style="position: relative; width: 52px; height: 52px;">
+            <svg width="52" height="52" viewBox="0 0 52 52">
+              <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+              <circle cx="26" cy="26" r="22" fill="none" stroke="#48B5A0" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+            </svg>
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: white;">78</div>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 600; color: #EBF3FA;">Wellness Score</div>
+            <div style="font-size: 11px; color: #5A6878;">+3 from last week</div>
+          </div>
+          <div style="margin-left: auto; font-size: 11px; color: #72C5B6; font-weight: 600;">View →</div>
+        </div>
+      </div>
+
+      <div class="phone-body" style="padding-top: 16px;">
+        <!-- AI Insight - dark lavender -->
+        <div class="p-card" style="background: #1E1A2E; border: 1px solid #302D40;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+            <div style="width: 28px; height: 28px; border-radius: 8px; background: #453F6A; display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+            <div style="font-size: 12px; font-weight: 700; color: #B5AED4;">Sleep Insight</div>
+          </div>
+          <div style="font-size: 12px; color: #8A869C; line-height: 1.6;">Your sleep has dipped this week. Try these evidence-based strategies.</div>
+          <div style="margin-top: 10px; display: flex; gap: 6px;">
+            <span class="p-chip" style="background: #302D40; color: #B5AED4; border: 1px solid #453F6A;">Sleep Optimization</span>
+            <span class="p-chip" style="background: #302D40; color: #B5AED4; border: 1px solid #453F6A;">Wind Down</span>
+          </div>
+        </div>
+
+        <!-- Activity - dark -->
+        <div class="p-card" style="background: #1A2430; border: 1px solid #2A3542;">
+          <div class="p-row" style="margin-bottom: 10px;">
+            <div class="p-avatar" style="background: #17443E; font-size: 16px;">🏃</div>
+            <div style="flex: 1;">
+              <div class="p-card-sm" style="color: #EBF3FA;">Today's movement</div>
+              <div style="display: flex; align-items: baseline; gap: 4px;">
+                <span style="font-size: 22px; font-weight: 800; color: #72C5B6;">2,340</span>
+                <span style="font-size: 11px; color: #5A6878;">/ 8,000</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-progress" style="background: #2A3542;">
+            <div class="p-progress-fill" style="width: 29%; background: linear-gradient(90deg, #48B5A0, #72C5B6);"></div>
+          </div>
+          <div class="p-btn" style="background: #3D8AC4; color: white;">Start a walk</div>
+        </div>
+
+        <!-- Rewards - dark apricot -->
+        <div class="p-card" style="background: #2A2018; border: 1px solid #3D3224;">
+          <div class="p-row">
+            <div class="p-avatar" style="background: #D4803E; border-radius: 50%;">⭐</div>
+            <div style="flex: 1;">
+              <div class="p-card-sm" style="color: #F2B485;">Weekly streak!</div>
+              <div style="font-size: 18px; font-weight: 800; color: #E8985A;">150 pts</div>
+            </div>
+            <div style="border: 1.5px solid #E8985A; color: #E8985A; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600;">Claim</div>
+          </div>
+        </div>
+
+        <!-- Health data - dark -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px;">
+          <div class="p-card" style="background: #1A2430; border: 1px solid #2A3542; padding: 14px;">
+            <div style="font-size: 10px; color: #5A6878; font-weight: 600; margin-bottom: 4px;">STEPS</div>
+            <div style="font-size: 20px; font-weight: 800; color: #EBF3FA;">9,344</div>
+            <div class="p-sparkline" style="margin-top: 6px;">
+              <div class="p-spark-bar" style="height: 8px; background: #1F5C53;"></div>
+              <div class="p-spark-bar" style="height: 12px; background: #27756A;"></div>
+              <div class="p-spark-bar" style="height: 6px; background: #1F5C53;"></div>
+              <div class="p-spark-bar" style="height: 16px; background: #329385;"></div>
+              <div class="p-spark-bar" style="height: 20px; background: #48B5A0;"></div>
+              <div class="p-spark-bar" style="height: 14px; background: #329385;"></div>
+              <div class="p-spark-bar" style="height: 24px; background: #48B5A0;"></div>
+            </div>
+          </div>
+          <div class="p-card" style="background: #1A2430; border: 1px solid #2A3542; padding: 14px;">
+            <div style="font-size: 10px; color: #5A6878; font-weight: 600; margin-bottom: 4px;">SLEEP</div>
+            <div style="font-size: 20px; font-weight: 800; color: #EBF3FA;">7h 16m</div>
+            <div class="p-sparkline" style="margin-top: 6px;">
+              <div class="p-spark-bar" style="height: 18px; background: #5A5287;"></div>
+              <div class="p-spark-bar" style="height: 20px; background: #726AA3;"></div>
+              <div class="p-spark-bar" style="height: 10px; background: #453F6A;"></div>
+              <div class="p-spark-bar" style="height: 14px; background: #5A5287;"></div>
+              <div class="p-spark-bar" style="height: 8px; background: #453F6A;"></div>
+              <div class="p-spark-bar" style="height: 16px; background: #726AA3;"></div>
+              <div class="p-spark-bar" style="height: 12px; background: #5A5287;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-tabs" style="background: #1A2430; border-top: 1px solid #2A3542;">
+        <div class="p-tab" style="color: #5A9FD4; font-weight: 700;">
+          <div class="p-tab-icon" style="background: #1B3F63; border-radius: 8px;"></div>Home
+        </div>
+        <div class="p-tab" style="color: #3E4B58;">
+          <div class="p-tab-icon" style="background: #2A3542; border-radius: 8px;"></div>Care
+        </div>
+        <div class="p-tab" style="color: #3E4B58;">
+          <div class="p-tab-icon" style="background: #2A3542; border-radius: 8px;"></div>Benefits
+        </div>
+        <div class="p-tab" style="color: #3E4B58;">
+          <div class="p-tab-icon" style="background: #2A3542; border-radius: 8px;"></div>Rewards
+        </div>
+        <div class="p-tab" style="color: #3E4B58;">
+          <div class="p-tab-icon" style="background: #2A3542; border-radius: 8px;"></div>Profile
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COLOR USAGE RULES ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Usage rules</div>
+  <h2>Where each color earns its place</h2>
+  <div class="desc">Every accent color has a specific job. They never appear randomly. This is what turns a palette into a system.</div>
+
+  <div class="card">
+    <div class="rule-grid">
+      <div class="rule-item" style="border-left: 4px solid #2E6DA4;">
+        <h5>Ocean Blue — Structure</h5>
+        <p>Header gradients, primary buttons, active navigation, links, focus rings. The backbone of every screen. Where the eye goes first for action.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: #153352;"></div>
+          <div class="swatch-sm" style="background: #2E6DA4;"></div>
+          <div class="swatch-sm" style="background: #3D8AC4;"></div>
+          <div class="swatch-sm" style="background: #EBF3FA;"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid #48B5A0;">
+        <h5>Sea Glass Teal — Vitality</h5>
+        <p>Health data, activity progress, fitness domain, wellness scores, step counters. Anything about your body being active and alive.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: #329385;"></div>
+          <div class="swatch-sm" style="background: #48B5A0;"></div>
+          <div class="swatch-sm" style="background: #72C5B6;"></div>
+          <div class="swatch-sm" style="background: #EFF8F6;"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid #E8985A;">
+        <h5>Warm Apricot — Reward</h5>
+        <p>Points, streaks, badges, gamification, celebration moments, premium features. The warm payoff that makes engagement feel good.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: #B56830;"></div>
+          <div class="swatch-sm" style="background: #E8985A;"></div>
+          <div class="swatch-sm" style="background: #F2B485;"></div>
+          <div class="swatch-sm" style="background: #FEF6F1;"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid #9189BD;">
+        <h5>Soft Lavender — Mind</h5>
+        <p>Mental health, sleep, mindfulness, therapy, emotional coaching, AI insights. The gentle, introspective moments in the experience.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: #5A5287;"></div>
+          <div class="swatch-sm" style="background: #9189BD;"></div>
+          <div class="swatch-sm" style="background: #B5AED4;"></div>
+          <div class="swatch-sm" style="background: #F6F4FA;"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid #7AA872;">
+        <h5>Sage — Nourish</h5>
+        <p>Nutrition, diet, recipes, meal tracking, preventive care, wellness programs. The "tending your garden" moments.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: #4A7144;"></div>
+          <div class="swatch-sm" style="background: #7AA872;"></div>
+          <div class="swatch-sm" style="background: #9EC096;"></div>
+          <div class="swatch-sm" style="background: #F3F7F2;"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid #5A6878;">
+        <h5>Neutral — Foundation</h5>
+        <p>Everything structural: body text, borders, dividers, disabled states, backgrounds. The quiet scaffold that lets the other colors sing.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: #153352;"></div>
+          <div class="swatch-sm" style="background: #5A6878;"></div>
+          <div class="swatch-sm" style="background: #A4B1BF;"></div>
+          <div class="swatch-sm" style="background: #F5F8FB;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The 60-30-10 rule for any screen</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 12px;">
+      <div>
+        <div style="height: 80px; border-radius: 12px; background: linear-gradient(180deg, #F5F8FB, white); border: 1px solid #E6ECF2; display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; font-weight: 800; color: #2E6DA4;">60%</span>
+        </div>
+        <div style="font-size: 13px; font-weight: 700; color: #153352; margin-top: 8px;">Neutrals + surfaces</div>
+        <div style="font-size: 12px; color: #5A6878; margin-top: 2px;">White cards, off-white background, gray text, borders. The breathable canvas.</div>
+      </div>
+      <div>
+        <div style="height: 80px; border-radius: 12px; background: linear-gradient(135deg, #153352, #2E6DA4); display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; font-weight: 800; color: white;">30%</span>
+        </div>
+        <div style="font-size: 13px; font-weight: 700; color: #153352; margin-top: 8px;">Primary blue</div>
+        <div style="font-size: 12px; color: #5A6878; margin-top: 2px;">Header, buttons, active states, links. Structural color that guides action.</div>
+      </div>
+      <div>
+        <div style="height: 80px; border-radius: 12px; background: linear-gradient(135deg, #48B5A0, #E8985A 50%, #9189BD); display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; font-weight: 800; color: white;">10%</span>
+        </div>
+        <div style="font-size: 13px; font-weight: 700; color: #153352; margin-top: 8px;">Domain accents</div>
+        <div style="font-size: 12px; color: #5A6878; margin-top: 2px;">Teal, apricot, lavender, sage. Appear only in their domain context. Never random.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KEY CHANGES -->
+<div class="section">
+  <div class="section-label">What changed from v1</div>
+  <h2>v1 → v2 changelog</h2>
+  <div class="card">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 13px;">
+      <div>
+        <div style="font-weight: 700; color: #153352; margin-bottom: 8px;">Palette (unchanged)</div>
+        <div style="color: #5A6878; line-height: 1.8;">Same hex values. The colors were never the problem — the conviction was. Every token, ramp, and accessibility finding from v1 still applies.</div>
+      </div>
+      <div>
+        <div style="font-weight: 700; color: #153352; margin-bottom: 8px;">Usage (overhauled)</div>
+        <div style="color: #5A6878; line-height: 1.8;">
+          Gradient header replaces flat white bar. Tinted app background (#F5F8FB) replaces pure white. Domain-coded card surfaces (lavender for mental health, apricot for rewards, teal for activity). Sparkline data viz uses domain palette. 60-30-10 distribution enforced. Photography dependency removed — color carries identity alone.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 48px; text-align: center; color: #7C8C9C; font-size: 13px;">
+  <p>Mobile Health App Color System v2 — Working Draft</p>
+  <p style="margin-top: 4px; font-size: 11px;">Palette from v1 + bolder usage conviction. All tokens and accessibility data from v1 remain valid.</p>
+</div>
+
+</body>
+</html>

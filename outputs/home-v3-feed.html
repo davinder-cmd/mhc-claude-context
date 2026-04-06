@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V3 · Feed-First Home Screen — Umbrella Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+  :root {
+    --w-bg: #FFFFFF;
+    --w-surface: #F4F4F5;
+    --w-border: #D4D4D8;
+    --w-text: #27272A;
+    --w-secondary: #71717A;
+    --w-muted: #A1A1AA;
+    --w-dark: #18181B;
+    --w-placeholder: #E4E4E7;
+    --w-tag-bg: #EDE9FE;
+    --w-tag-text: #6D28D9;
+    --w-tag-border: #C4B5FD;
+    --brand-primary: #0f497f;
+    --brand-light: #e8f0f8;
+    --brand-accent: #1a6bb5;
+    --reward-gold: #F9A825;
+    --reward-gold-light: #FFF8E1;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #F8F8FA;
+    color: var(--w-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ====== PAGE CHROME ====== */
+  .page-header {
+    padding: 40px 40px 20px;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+  .page-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--w-secondary); line-height: 1.5; max-width: 800px; }
+
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px;
+    padding: 10px 14px; background: #FFF; border: 1px solid var(--w-border);
+    border-radius: 8px; font-size: 11px; color: var(--w-secondary);
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 14px; height: 10px; border-radius: 2px; border: 1px solid var(--w-border); }
+
+  .frames-row {
+    display: flex; gap: 28px; padding: 20px 40px 60px;
+    overflow-x: auto; max-width: 100vw; align-items: flex-start;
+  }
+
+  .frame-wrapper { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .frame-label { font-size: 13px; font-weight: 700; color: var(--w-text); margin-bottom: 3px; }
+  .frame-subtitle { font-size: 10px; color: var(--w-muted); margin-bottom: 10px; text-align: center; max-width: 280px; line-height: 1.4; }
+
+  /* ====== DEVICE ====== */
+  .device {
+    width: 310px; height: 672px; background: var(--w-bg);
+    border-radius: 40px; border: 2px solid #C4C4C8; overflow: hidden; position: relative;
+  }
+  .device::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 96px; height: 24px; background: #C4C4C8; border-radius: 0 0 14px 14px; z-index: 50;
+  }
+  .device-scroll {
+    height: 100%; overflow-y: auto; padding-top: 32px; padding-bottom: 56px; scrollbar-width: none;
+  }
+  .device-scroll::-webkit-scrollbar { display: none; }
+
+  /* ====== COMPONENT TAG (purple pill) ====== */
+  .mtag {
+    display: inline-flex; align-items: center; gap: 2px;
+    font-size: 7.5px; font-weight: 600; font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--w-tag-text); background: var(--w-tag-bg); border: 1px solid var(--w-tag-border);
+    padding: 1px 5px; border-radius: 3px; white-space: nowrap; letter-spacing: 0.2px;
+    vertical-align: middle; line-height: 1.4;
+  }
+
+  /* ====== WIREFRAME ATOMS ====== */
+  .w-appbar {
+    height: 44px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px; border-bottom: 1px solid var(--w-border); position: relative;
+  }
+  .w-appbar .mtag { position: absolute; top: 2px; right: 14px; }
+  .w-appbar-left, .w-appbar-right { display: flex; gap: 6px; align-items: center; }
+  .w-icon {
+    width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid var(--w-border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-icon.circle { border-radius: 50%; }
+  .w-icon .material-symbols-outlined { font-size: 13px; color: var(--w-muted); }
+  .w-logo { font-size: 11px; font-weight: 600; color: var(--w-secondary); }
+
+  .w-card {
+    background: var(--w-surface); border: 1px solid var(--w-border);
+    border-radius: 10px; padding: 10px; margin-bottom: 12px; position: relative;
+  }
+  .w-card > .mtag:first-child { position: absolute; top: -8px; left: 8px; }
+
+  .w-progress { height: 5px; background: var(--w-placeholder); border-radius: 3px; margin: 6px 0 3px; overflow: hidden; position: relative; }
+  .w-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--w-dark); border-radius: 3px; }
+
+  /* Stories row */
+  .w-stories-row {
+    display: flex; gap: 10px; padding: 0 14px 12px; margin-bottom: 8px;
+    overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
+  }
+  .w-stories-row::-webkit-scrollbar { display: none; }
+  .w-story-circle {
+    width: 48px; height: 56px; display: flex; flex-direction: column;
+    align-items: center; gap: 2px; flex-shrink: 0; position: relative;
+  }
+  .w-story-avatar {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--w-placeholder);
+    border: 2px solid var(--w-border); display: flex; align-items: center;
+    justify-content: center;
+  }
+  .w-story-avatar .material-symbols-outlined { font-size: 18px; color: var(--w-muted); }
+  .w-story-label { font-size: 8px; color: var(--w-text); text-align: center; line-height: 1.2; }
+
+  /* Compact status bar */
+  .w-status-bar {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    padding: 8px 14px; border-bottom: 1px solid var(--w-border);
+    font-size: 10px; color: var(--w-text); margin-bottom: 8px;
+  }
+  .w-status-item { display: flex; align-items: center; gap: 3px; }
+  .w-status-item .material-symbols-outlined { font-size: 13px; color: var(--w-secondary); }
+
+  /* Reward chips grid */
+  .w-reward-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+  .w-chip {
+    font-size: 8px; background: var(--w-placeholder); border: 1px solid var(--w-border);
+    color: var(--w-text); padding: 3px 6px; border-radius: 12px; display: inline-flex;
+    align-items: center; gap: 2px;
+  }
+
+  /* Card-type label */
+  .w-card-label {
+    font-size: 7px; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--w-muted); font-weight: 600; margin-bottom: 4px;
+  }
+
+  /* Action card */
+  .w-action-card { padding: 10px; }
+  .w-action-title { font-size: 11px; font-weight: 600; color: var(--w-text); margin-bottom: 6px; }
+  .w-action-badge {
+    display: inline-flex; align-items: center; gap: 2px;
+    font-size: 8px; font-weight: 600; background: var(--reward-gold-light);
+    color: #92400E; padding: 2px 6px; border-radius: 4px; margin-bottom: 6px;
+  }
+  .w-btn {
+    display: inline-block; font-size: 9px; font-weight: 600; padding: 4px 10px;
+    border-radius: 12px; background: var(--brand-primary); color: white;
+  }
+
+  /* Daily card */
+  .w-daily-card { padding: 0; overflow: hidden; }
+  .w-daily-img {
+    height: 60px; background: var(--w-placeholder); display: flex;
+    align-items: center; justify-content: center;
+  }
+  .w-daily-img .material-symbols-outlined { font-size: 22px; color: var(--w-muted); }
+  .w-daily-body { padding: 8px 10px; }
+  .w-daily-title { font-size: 10px; font-weight: 600; color: var(--w-text); margin-bottom: 4px; }
+  .w-daily-pts { font-size: 8px; color: var(--w-muted); }
+
+  /* Challenge card (dark) */
+  .w-challenge-card {
+    background: var(--w-dark); color: white; padding: 12px; position: relative;
+  }
+  .w-challenge-card > .mtag { position: absolute; top: -8px; left: 8px; }
+  .w-challenge-tag { font-size: 7px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.6; margin-bottom: 4px; }
+  .w-challenge-title { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+  .w-challenge-desc { font-size: 9px; opacity: 0.7; margin-bottom: 8px; }
+
+  /* Content card */
+  .w-content-row { display: flex; gap: 8px; align-items: center; padding: 8px 10px; }
+  .w-thumb {
+    width: 48px; height: 48px; border-radius: 8px; background: var(--w-placeholder); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-thumb .material-symbols-outlined { font-size: 18px; color: var(--w-muted); }
+  .w-content-text { flex: 1; }
+  .w-content-title { font-size: 10px; font-weight: 600; color: var(--w-text); margin-bottom: 2px; }
+  .w-content-sub { font-size: 8px; color: var(--w-muted); line-height: 1.3; }
+
+  /* Habits summary row */
+  .w-habits-summary { display: flex; gap: 5px; padding: 8px 10px; }
+  .w-habit-mini {
+    flex: 1; background: var(--w-bg); border: 1px solid var(--w-border);
+    border-radius: 6px; padding: 6px 4px; text-align: center;
+  }
+  .w-habit-mini-val { font-size: 11px; font-weight: 700; color: var(--w-text); line-height: 1; margin-bottom: 2px; }
+  .w-habit-mini-label { font-size: 7px; color: var(--w-muted); }
+
+  .w-bottomnav {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 46px;
+    background: var(--w-bg); border-top: 1px solid var(--w-border);
+    display: flex; align-items: center; justify-content: space-around; z-index: 40;
+  }
+  .w-nav-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .w-nav-item .material-symbols-outlined { font-size: 16px; color: var(--w-muted); }
+  .w-nav-item.active .material-symbols-outlined { color: var(--w-text); font-variation-settings: 'FILL' 1; }
+  .w-nav-label { font-size: 7px; color: var(--w-muted); }
+  .w-nav-item.active .w-nav-label { color: var(--w-text); font-weight: 600; }
+
+  .w-link { font-size: 9px; font-weight: 500; color: var(--w-secondary); text-decoration: underline; }
+
+  /* Annotation box */
+  .w-note {
+    background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 5px;
+    padding: 5px 8px; margin: 6px 14px 10px; font-size: 8px; color: #92400E; line-height: 1.4;
+  }
+  .w-note strong { font-weight: 700; display: block; margin-bottom: 1px; }
+
+  /* Frame notes below device */
+  .frame-notes {
+    max-width: 280px; margin-top: 10px; padding: 8px 10px;
+    background: #FFF; border: 1px solid var(--w-border); border-radius: 8px;
+    font-size: 9px; color: var(--w-secondary); line-height: 1.5;
+  }
+  .frame-notes strong { color: var(--w-text); display: block; margin-bottom: 2px; }
+
+  /* Component map table under each frame */
+  .comp-map {
+    max-width: 280px; margin-top: 6px; width: 100%;
+    border-collapse: collapse; font-size: 8px;
+  }
+  .comp-map th {
+    text-align: left; padding: 4px 6px; background: var(--w-surface);
+    border: 1px solid var(--w-border); font-weight: 600; color: var(--w-text);
+  }
+  .comp-map td {
+    padding: 3px 6px; border: 1px solid var(--w-border); color: var(--w-secondary);
+    vertical-align: top; line-height: 1.4;
+  }
+  .comp-map code {
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 7.5px;
+    color: var(--w-tag-text); background: var(--w-tag-bg);
+    padding: 0 3px; border-radius: 2px;
+  }
+
+  .w-greeting { font-size: 14px; font-weight: 400; color: var(--w-text); padding: 8px 14px 2px; }
+  .w-greeting strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>V3 · Feed-First</h1>
+  <p>Home screen as activity feed with inline health nudges, rewards updates, and content mixed chronologically. Prioritizes recency and engagement. Stories-style quick-access row + card feed hybrid.</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-tag-bg);border-color:var(--w-tag-border);"></div> Material component tag</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#FFFBEB;border-color:#FDE68A;"></div> Design annotation (yellow)</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-surface);"></div> Card surface</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-placeholder);"></div> Placeholder / image</div>
+  </div>
+</div>
+
+<div class="frames-row">
+
+<!-- ====================================================================
+     V3: FEED-FIRST VARIANT
+     ==================================================================== -->
+<div class="frame-wrapper">
+  <div class="frame-label">V3 · Feed-First</div>
+  <div class="frame-subtitle">Chronological feed. Stories row for navigation. Inline rewards, actions, and health content.</div>
+  <div class="device">
+    <div class="device-scroll">
+
+      <!-- APP BAR -->
+      <div class="w-appbar">
+        <div class="w-appbar-left">
+          <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+          <div class="w-icon" style="border-radius:6px;background:var(--w-placeholder);"></div>
+        </div>
+        <span class="w-logo">Umbrella Partners</span>
+        <div class="w-appbar-right">
+          <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+          <div class="w-icon circle" style="background:var(--w-placeholder);"></div>
+        </div>
+        <span class="mtag">mat-toolbar</span>
+      </div>
+
+      <!-- GREETING -->
+      <div class="w-greeting">Hi <strong>Andrew</strong> <span class="mtag">headline-medium</span></div>
+
+      <div class="w-note"><strong>Feed-First Concept:</strong> Stories row replaces fixed tabs. Feed interleaves rewards, actions, and content chronologically. Each card tagged with its category (2h ago, Daily Card, Action, Challenge).</div>
+
+      <!-- STORIES ROW (quick-access categories) -->
+      <div class="w-stories-row" style="position:relative;">
+        <div class="w-story-circle">
+          <div class="w-story-avatar"><span class="material-symbols-outlined">receipt_long</span></div>
+          <div class="w-story-label">Daily Cards</div>
+        </div>
+        <div class="w-story-circle">
+          <div class="w-story-avatar"><span class="material-symbols-outlined">emoji_events</span></div>
+          <div class="w-story-label">Challenges</div>
+        </div>
+        <div class="w-story-circle">
+          <div class="w-story-avatar"><span class="material-symbols-outlined">card_giftcard</span></div>
+          <div class="w-story-label">Rewards</div>
+        </div>
+        <div class="w-story-circle">
+          <div class="w-story-avatar"><span class="material-symbols-outlined">favorite</span></div>
+          <div class="w-story-label">Health Check</div>
+        </div>
+        <div class="w-story-circle">
+          <div class="w-story-avatar"><span class="material-symbols-outlined">school</span></div>
+          <div class="w-story-label">Programs</div>
+        </div>
+        <span class="mtag" style="position:absolute;top:-12px;left:14px;">mat-chip group</span>
+      </div>
+
+      <!-- COMPACT STATUS BAR (inline metrics, no card) -->
+      <div class="w-status-bar" style="position:relative;">
+        <div class="w-status-item"><span class="material-symbols-outlined">directions_walk</span> 6,842</div>
+        <span style="color:var(--w-muted);">·</span>
+        <div class="w-status-item"><span class="material-symbols-outlined">bedtime</span> 7.2h</div>
+        <span style="color:var(--w-muted);">·</span>
+        <div class="w-status-item" style="color:var(--reward-gold);"><span class="material-symbols-outlined" style="color:var(--reward-gold);">emoji_events</span> 1,240</div>
+        <span class="mtag" style="position:absolute;top:-10px;right:14px;">text ribbon</span>
+      </div>
+
+      <!-- FEED CARDS (interleaved content) -->
+
+      <!-- CARD 1: Reward Update -->
+      <div class="w-card" style="position:relative;">
+        <span class="mtag">mat-card · z1</span>
+        <div class="w-card-label">2h ago</div>
+        <div style="font-size:11px;font-weight:600;color:var(--w-text);margin-bottom:6px;">You earned 140 pts from steps today</div>
+        <div class="w-progress" style="margin-bottom:6px;"><div class="w-progress-fill" style="width:45%;background:var(--reward-gold);"></div></div>
+        <div class="w-reward-chips">
+          <div class="w-chip" style="background:var(--reward-gold-light);color:#92400E;border-color:#FFC857;">Points: 1,240</div>
+          <div class="w-chip">Gift Cards: $50</div>
+          <div class="w-chip">Credits: 860</div>
+          <div class="w-chip">Raffles: 3</div>
+        </div>
+        <span class="w-link" style="font-size:8px;">View rewards →</span>
+      </div>
+
+      <!-- CARD 2: Action Card (Health Assessment) -->
+      <div class="w-card" style="padding:10px;position:relative;">
+        <span class="mtag">mat-card · z2</span>
+        <div class="w-card-label">Action</div>
+        <div class="w-action-title">Complete your Health Assessment</div>
+        <div class="w-action-badge"><span class="material-symbols-outlined" style="font-size:10px;">emoji_events</span> 500 pts</div>
+        <button class="w-btn">Start now</button>
+      </div>
+
+      <!-- CARD 3: Daily Card (Mindful Breathing) -->
+      <div class="w-card w-daily-card" style="position:relative;">
+        <span class="mtag">mat-card · z1</span>
+        <div style="padding:8px 10px;">
+          <div class="w-card-label">1h ago</div>
+        </div>
+        <div class="w-daily-img"><span class="material-symbols-outlined">self_improvement</span></div>
+        <div class="w-daily-body">
+          <div class="w-daily-title">5-Min Mindful Breathing</div>
+          <div class="w-daily-pts">5 pts earned</div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Challenge Card (Spring Into Wellness) -->
+      <div class="w-card w-challenge-card" style="position:relative;">
+        <span class="mtag">mat-card · z2</span>
+        <div class="w-challenge-tag">Active Challenge</div>
+        <div class="w-challenge-title">Spring Into Wellness</div>
+        <div class="w-challenge-desc">3 of 8 destinations unlocked <span class="mtag" style="position:absolute;bottom:6px;right:10px;">mat-progress-bar</span></div>
+        <div class="w-progress" style="margin:6px 0;background:rgba(255,255,255,0.2);"><div class="w-progress-fill" style="width:37.5%;background:white;"></div></div>
+        <button class="w-btn" style="background:white;color:var(--w-dark);">Join Now</button>
+      </div>
+
+      <!-- CARD 5: Content Card (Improve Sleep) -->
+      <div class="w-card" style="padding:0;position:relative;">
+        <span class="mtag">mat-card · z1</span>
+        <div class="w-content-row">
+          <div class="w-card-label" style="position:absolute;top:8px;left:10px;">Just for you</div>
+          <div class="w-thumb" style="margin-top:18px;"><span class="material-symbols-outlined">nights_stay</span></div>
+          <div class="w-content-text" style="margin-top:18px;">
+            <div class="w-content-title">Improve your sleep</div>
+            <div class="w-content-sub">Evidence-based techniques</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6: Action Card (A1C Check - $100 Gift Card) -->
+      <div class="w-card" style="padding:10px;position:relative;">
+        <span class="mtag">mat-card · z1</span>
+        <div class="w-card-label">Recommended</div>
+        <div class="w-action-title">Get your A1C checked</div>
+        <div class="w-action-badge" style="background:var(--reward-gold-light);color:#92400E;"><span class="material-symbols-outlined" style="font-size:10px;">card_giftcard</span> $100 gift card</div>
+        <span class="w-link" style="font-size:8px;">Learn more →</span>
+      </div>
+
+      <!-- CARD 7: Habits Summary (3-stat row with link) -->
+      <div class="w-card" style="padding:0;position:relative;">
+        <span class="mtag">mat-card · z1</span>
+        <div class="w-habits-summary">
+          <div class="w-habit-mini">
+            <span class="material-symbols-outlined" style="font-size:14px;color:var(--w-muted);display:block;margin-bottom:3px;">directions_walk</span>
+            <div class="w-habit-mini-val">6,842</div>
+            <div class="w-habit-mini-label">Steps</div>
+          </div>
+          <div class="w-habit-mini">
+            <span class="material-symbols-outlined" style="font-size:14px;color:var(--w-muted);display:block;margin-bottom:3px;">bedtime</span>
+            <div class="w-habit-mini-val">7.2h</div>
+            <div class="w-habit-mini-label">Sleep</div>
+          </div>
+          <div class="w-habit-mini">
+            <span class="material-symbols-outlined" style="font-size:14px;color:var(--w-muted);display:block;margin-bottom:3px;">local_fire_department</span>
+            <div class="w-habit-mini-val">34</div>
+            <div class="w-habit-mini-label">Active Min</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid var(--w-border);padding:6px 10px;">
+          <span class="w-link" style="font-size:8px;">Track habits → <span class="mtag">[mat-button]</span></span>
+        </div>
+      </div>
+
+    </div>
+    <nav class="w-bottomnav" style="position:relative;">
+      <span class="mtag" style="position:absolute;top:2px;right:8px;">mat-tab-nav-bar</span>
+      <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+    </nav>
+  </div>
+
+  <div class="frame-notes">
+    <strong>Design Decisions:</strong>
+    <br>• Stories row replaces fixed section headers. Each icon = category quick-link (48px circles).
+    <br>• Status bar is a bare text ribbon, not a card—saves vertical space.
+    <br>• Feed cards have 12px gap, chronologically ordered.
+    <br>• Each card tagged (top-left) with type: "2h ago", "Action", "Challenge", "Just for you".
+    <br>• No fixed sections. Content mixed by recency + engagement.
+    <br>• Margins: 14px. Card padding: 10–12px.
+  </div>
+
+  <table class="comp-map">
+    <tr><th>Section</th><th>Material Components</th></tr>
+    <tr><td>App bar</td><td><code>mat-toolbar</code> + <code>mat-icon-button</code></td></tr>
+    <tr><td>Stories row</td><td><code>mat-chip</code> group (horizontal scroll, custom styling)</td></tr>
+    <tr><td>Status bar</td><td>Text ribbon + <code>mat-icon</code></td></tr>
+    <tr><td>Feed cards</td><td><code>mat-card</code> (z1, z2) with varied inner layouts</td></tr>
+    <tr><td>Reward update</td><td><code>mat-card</code> z1 + <code>mat-chip</code> (reward types) + <code>mat-progress-bar</code></td></tr>
+    <tr><td>Action cards</td><td><code>mat-card</code> z1/z2 + <code>[mat-flat-button]</code> + <code>mat-chip</code> (pts badge)</td></tr>
+    <tr><td>Daily card</td><td><code>mat-card</code> z1 + image placeholder</td></tr>
+    <tr><td>Challenge</td><td><code>mat-card</code> z2 (dark) + <code>mat-progress-bar</code> + <code>[mat-flat-button]</code></td></tr>
+    <tr><td>Content card</td><td><code>mat-card</code> z1 + thumbnail + text</td></tr>
+    <tr><td>Habits summary</td><td><code>mat-card</code> z1 + <code>mat-icon</code> (3-stat grid)</td></tr>
+    <tr><td>Bottom nav</td><td><code>mat-tab-nav-bar</code></td></tr>
+  </table>
+</div>
+
+</div>
+
+</body>
+</html>

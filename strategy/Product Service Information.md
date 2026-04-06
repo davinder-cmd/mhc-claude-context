@@ -125,10 +125,64 @@ Be transparent when the AI is drawing on platform data: "Based on your health as
 
 | Layer | Technology | Design Implications |
 |-------|-----------|---------------------|
-| Frontend | [e.g., React / React Native] | [e.g., Component-based — maps cleanly to our design system] |
-| Design system | [e.g., Custom / MUI / Radix] | [e.g., Token-driven, all spacing uses 4px base grid] |
-| Token pipeline | [e.g., Tokens Studio + Style Dictionary] | [e.g., JSON export to codebase on every design system update] |
-| Accessibility | [e.g., Aria-compliant components] | [e.g., All interactive components must pass automated a11y tests] |
+| Backend | Django / Python | Business logic lives on server; frontends are thin UI presentation layers |
+| Database | PostgreSQL | — |
+| Background jobs | Celery + RabbitMQ | Nightly processing ("nightlies") runs scheduled tasks — design for async/delayed states |
+| Web frontend | Angular | Receives Page Layout data from API and renders it dynamically |
+| iOS app | Swift (native) | — |
+| Android app | Java (native) | — |
+| Templating | Mustache | Used for dynamic HTML within Page Layout Elements |
+| Infrastructure | AWS RDS + nginx + UWSGI | Sharded by partner cluster (each shard = subset of partners/clients with shared DB) |
+| Auth | Separate login cluster | Authentication is handled separately; users are redirected to their shard post-login |
+
+---
+
+## How the Product is Built — Page Layout System
+
+> This is critical context for design. Understanding how MHC's UI is assembled directly affects what is and isn't buildable, and how design decisions translate to engineering.
+
+MHC's UI is **not built from hardcoded screens**. It uses a configurable building-block system:
+
+**The two layers:**
+- **Engineering** (Engineering dept) — builds reusable "Page Layout Elements" (UI widgets). They don't design end-user screens; they create the components.
+- **Innovations dept** — assembles and configures those components into actual screens ("Page Layouts") that members see. Innovations has technical staff but are not software developers.
+- **Client Services (CS)** — further customizes configuration per employer client. Tech Leads are semi-technical; Account Managers are non-technical.
+
+**Page Layouts** = a full screen or page, made of an ordered stack of Page Layout Elements.
+
+**Page Layout Elements** (the building blocks):
+
+| Type | What it does |
+|------|-------------|
+| HTML | Container for HTML with Mustache dynamic content |
+| User Input | Text boxes, checkboxes, date pickers, select buttons |
+| List | Paginated list of data rows, populated by a backend formula |
+| Search | Search box + filtered list |
+| Button | Triggers configurable actions + redirects to destination |
+| Filtered List | List with frontend-side filtering controls |
+| Tabs | Tabbed container where each tab pulls from another Page Layout |
+
+**Design implications:**
+- New screens are assembled from existing Page Layout Elements, not built from scratch
+- New UI patterns require Engineering to build a new Element type first
+- Designs that don't map to existing elements require eng investment before Innovations can build
+- The API call `getPageLayoutForID` is how frontends retrieve and render screens dynamically
+- New Page Layout Elements may require new API functions to support data submission
+
+**When designing:** always check whether the pattern you're designing maps to existing elements. If it requires a new element type, flag it — that's an engineering dependency, not just a design handoff.
+
+---
+
+## Company Structure (Relevant to How Design Gets Built)
+
+| Department | Role | Design Relevance |
+|-----------|------|-----------------|
+| **Engineering** | Builds backend + frontend code, Page Layout Elements (building blocks), admin system | Creates the components designers design against |
+| **Innovations** | Assembles Page Layout Elements into actual member-facing screens | Executes design decisions; technical but not developers |
+| **Client Services — Tech Leads** | Customizes configuration per employer client | May diverge from design intent at client level |
+| **Client Services — Account Managers** | Non-technical; manages client relationships | Surface client feedback; not implementation |
+
+> Design decisions flow: Designer (Davinder) → Innovations (assembly) → CS Tech Leads (client customization). Engineering only gets involved when new component types are needed.
 
 ---
 

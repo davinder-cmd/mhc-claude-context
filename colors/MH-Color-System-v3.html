@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Health — Color System v3 (Warm + Bold Data)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    /* ========================================
+       GLOBAL TOKENS — v3 REVISED PALETTE
+       Key changes from v2:
+       1. Warm-taupe neutral ramp (no more blue tint)
+       2. Domain colors boosted 15-20% saturation
+       3. Data viz palette punched up significantly
+       4. Warm cream app background
+       ======================================== */
+
+    /* Primary: Ocean Blue (warmed slightly) */
+    --blue-50: #F4F7FB;
+    --blue-100: #E8F0F8;
+    --blue-200: #C5DAEE;
+    --blue-300: #88BAE0;
+    --blue-400: #5A9FD4;
+    --blue-500: #3B86C0;
+    --blue-600: #2D6CA4;
+    --blue-700: #245584;
+    --blue-800: #1B3F63;
+    --blue-900: #153352;
+    --blue-950: #0D2038;
+
+    /* Secondary: Sea Glass Teal — BOOSTED saturation */
+    --teal-50: #ECF9F6;
+    --teal-100: #CCEFE8;
+    --teal-200: #96DFD0;
+    --teal-300: #5CCDB8;
+    --teal-400: #35B89E;
+    --teal-500: #239882;
+    --teal-600: #1B7B69;
+    --teal-700: #155F51;
+    --teal-800: #10473D;
+    --teal-900: #0A2F28;
+
+    /* Accent: Warm Apricot — BOOSTED warmth */
+    --apricot-50: #FFF6F0;
+    --apricot-100: #FEEADB;
+    --apricot-200: #FBD1AE;
+    --apricot-300: #F4B078;
+    --apricot-400: #EC9448;
+    --apricot-500: #D97B2E;
+    --apricot-600: #B86422;
+    --apricot-700: #924E1A;
+    --apricot-800: #6E3B14;
+    --apricot-900: #4A280E;
+
+    /* Tertiary: Sage — BOOSTED life */
+    --sage-50: #F1F7EF;
+    --sage-100: #DFEDDC;
+    --sage-200: #BDDAB6;
+    --sage-300: #8FC285;
+    --sage-400: #6BAD5E;
+    --sage-500: #519446;
+    --sage-600: #3F7737;
+    --sage-700: #315D2B;
+    --sage-800: #254621;
+    --sage-900: #1A3017;
+
+    /* Tertiary: Soft Lavender — richer purple */
+    --lavender-50: #F5F3FA;
+    --lavender-100: #EAE6F5;
+    --lavender-200: #D2CAE9;
+    --lavender-300: #AEA3D5;
+    --lavender-400: #8B7FC0;
+    --lavender-500: #6E60A8;
+    --lavender-600: #574B8C;
+    --lavender-700: #433A6D;
+    --lavender-800: #312C51;
+    --lavender-900: #201E38;
+
+    /* ★ WARM-TAUPE NEUTRAL RAMP ★
+       This is the biggest change in v3.
+       No more blue tint. These are warm-undertone grays
+       with a hint of taupe/stone — like Sword Health's cream canvas. */
+    --neutral-0: #FFFFFF;
+    --neutral-25: #FDFCFA;
+    --neutral-50: #FAF8F5;
+    --neutral-75: #F5F2EE;
+    --neutral-100: #EDE9E4;
+    --neutral-150: #E3DED8;
+    --neutral-200: #D5CFC7;
+    --neutral-300: #B5AEA4;
+    --neutral-400: #918981;
+    --neutral-500: #6E6860;
+    --neutral-600: #524D47;
+    --neutral-700: #3A3632;
+    --neutral-800: #252220;
+    --neutral-900: #141210;
+
+    /* Semantic: Feedback */
+    --success-50: #EEFBF3;
+    --success-100: #D1F5DF;
+    --success-400: #4ABA7A;
+    --success-500: #2DA664;
+    --success-600: #1E8A4E;
+    --success-700: #166B3C;
+    --success-900: #0A3D22;
+
+    --warning-50: #FFFBEB;
+    --warning-100: #FFF3C4;
+    --warning-400: #F0BD3E;
+    --warning-500: #E6A817;
+    --warning-600: #C48E0F;
+    --warning-700: #9A6F0C;
+    --warning-900: #5C4207;
+
+    --error-50: #FEF2F2;
+    --error-100: #FEE2E2;
+    --error-400: #E66565;
+    --error-500: #DC4545;
+    --error-600: #B83636;
+    --error-700: #922A2A;
+    --error-900: #5C1919;
+
+    --info-50: #EFF6FF;
+    --info-100: #DBEAFE;
+    --info-500: #3B82F6;
+    --info-600: #2563EB;
+    --info-700: #1D4ED8;
+
+    /* ★ DATA VIZ PALETTE — Bold, Withings-inspired ★ */
+    --dataviz-blue: #2D6CA4;
+    --dataviz-teal: #35B89E;
+    --dataviz-coral: #E8706A;
+    --dataviz-gold: #E8A832;
+    --dataviz-purple: #8B7FC0;
+    --dataviz-sage: #6BAD5E;
+    --dataviz-rose: #D4698C;
+    --dataviz-sky: #52A8E0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--neutral-75); color: var(--neutral-800); }
+  code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .page-header {
+    background: linear-gradient(135deg, #153352, #1B3F63);
+    color: white;
+    padding: 48px;
+  }
+  .page-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  .page-header .sub { font-size: 15px; opacity: 0.55; margin-top: 8px; max-width: 700px; line-height: 1.6; }
+  .page-header .badges { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+  .page-header .badge {
+    display: inline-block; padding: 4px 14px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .section { padding: 48px; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--neutral-400); font-weight: 700; margin-bottom: 8px; }
+  .section h2 { font-size: 24px; font-weight: 700; color: var(--neutral-800); letter-spacing: -0.3px; margin-bottom: 6px; }
+  .section .desc { font-size: 14px; color: var(--neutral-500); max-width: 640px; margin-bottom: 32px; line-height: 1.6; }
+
+  .card { background: white; border-radius: 16px; border: 1px solid var(--neutral-100); padding: 32px; margin-bottom: 24px; }
+  .card h3 { font-size: 16px; font-weight: 700; color: var(--neutral-800); margin-bottom: 16px; }
+
+  /* Phone mockup */
+  .phone {
+    width: 375px;
+    min-height: 740px;
+    border-radius: 40px;
+    border: 8px solid var(--neutral-800);
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    text-align: left;
+  }
+  .phone-body { padding: 0 20px 80px; }
+
+  .p-card {
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .p-card-sm { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .p-card-lg { font-size: 28px; font-weight: 800; }
+  .p-card-sub { font-size: 11px; opacity: 0.6; margin-top: 2px; }
+
+  .p-progress {
+    height: 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .p-progress-fill { height: 100%; border-radius: 4px; }
+
+  .p-btn {
+    display: block;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .p-row { display: flex; align-items: center; gap: 12px; }
+  .p-avatar {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .p-chip {
+    display: inline-block; padding: 5px 12px; border-radius: 20px;
+    font-size: 11px; font-weight: 600; margin-right: 6px; margin-top: 8px;
+  }
+
+  .p-tabs {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 68px;
+    display: flex; align-items: center; justify-content: space-around; padding: 0 16px;
+  }
+  .p-tab {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 9px; font-weight: 500;
+  }
+  .p-tab-icon { width: 24px; height: 24px; border-radius: 8px; }
+
+  .p-sparkline { display: flex; align-items: flex-end; gap: 3px; height: 32px; }
+  .p-spark-bar { width: 6px; border-radius: 3px; }
+
+  /* Category pills — Withings style */
+  .cat-pill {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; margin-right: 6px;
+  }
+  .cat-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  /* Swatch displays */
+  .swatch-row { display: flex; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+  .swatch-sm {
+    width: 36px; height: 36px; border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .swatch-lg {
+    width: 64px; height: 64px; border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex; align-items: flex-end; padding: 6px;
+  }
+  .swatch-lg span { font-size: 8px; font-weight: 600; }
+
+  .ramp-strip {
+    display: flex; border-radius: 12px; overflow: hidden;
+    height: 48px; margin: 12px 0;
+  }
+  .ramp-strip > div { flex: 1; position: relative; }
+  .ramp-strip > div span {
+    position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    font-size: 7px; font-weight: 600; white-space: nowrap;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  .callout {
+    border-radius: 12px; padding: 20px 24px; margin-top: 16px;
+  }
+  .callout h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .callout p { font-size: 13px; line-height: 1.6; }
+
+  .contrast-badge {
+    display: inline-block; padding: 3px 10px; border-radius: 8px;
+    font-size: 10px; font-weight: 700; font-family: 'JetBrains Mono', monospace;
+  }
+  .contrast-pass { background: #EEFBF3; color: #166B3C; }
+  .contrast-fail { background: #FEF2F2; color: #922A2A; }
+  .contrast-warn { background: #FFFBEB; color: #9A6F0C; }
+
+  .rule-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+  .rule-item { padding: 16px; border-radius: 12px; border: 1px solid var(--neutral-100); }
+  .rule-item h5 { font-size: 12px; font-weight: 700; color: var(--neutral-800); margin-bottom: 6px; }
+  .rule-item p { font-size: 12px; color: var(--neutral-500); line-height: 1.5; }
+
+  /* Data viz */
+  .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 120px; padding-top: 8px; }
+  .bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .bar { border-radius: 4px 4px 0 0; width: 100%; min-width: 20px; }
+  .bar-label { font-size: 9px; color: var(--neutral-400); font-weight: 500; }
+
+  .donut-legend { display: flex; flex-direction: column; gap: 8px; }
+  .legend-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  .mockup-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 24px; }
+  .mockup-col { text-align: center; }
+  .mockup-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1.5px; margin-bottom: 16px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Mobile Health — Color System v3</h1>
+  <div class="sub">Warm canvas. Confident domain colors. Bold data. Inspired by the patterns that make Sword Health and Withings feel alive — warm neutral bases, saturated category indicators, and data visualization that's the most colorful thing on screen.</div>
+  <div class="badges">
+    <span class="badge">Warm-taupe neutrals</span>
+    <span class="badge">+20% domain saturation</span>
+    <span class="badge">Bold data viz palette</span>
+    <span class="badge">WCAG AA compliant</span>
+  </div>
+</div>
+
+<!-- ===== WHAT CHANGED ===== -->
+<div class="section">
+  <div class="section-label">v2 → v3 changes</div>
+  <h2>What's different and why</h2>
+  <div class="desc">v2 had the right structure but the wrong temperature and too little contrast in the places that matter most. Here's what moved.</div>
+
+  <div class="two-col">
+    <div class="card">
+      <h3 style="color: var(--error-600);">What wasn't working</h3>
+      <div style="font-size: 13px; color: var(--neutral-500); line-height: 1.8;">
+        <strong style="color: var(--neutral-700);">Blue-tinted neutrals</strong> — Cool grays (#F5F8FB, #E6ECF2) made the app feel clinical and corporate. Every screen had a faint blue wash that read "enterprise dashboard."<br><br>
+        <strong style="color: var(--neutral-700);">Under-saturated domains</strong> — Teal #48B5A0, Apricot #E8985A, Lavender #9189BD were all playing it safe. Category indicators whispered when they needed to speak. Compare to Withings' bold green/purple/red pills.<br><br>
+        <strong style="color: var(--neutral-700);">Timid data viz</strong> — Sparklines used the lightest end of each ramp. Data — the thing people actually come to see — had the least visual weight on screen.
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color: var(--success-600);">What v3 fixes</h3>
+      <div style="font-size: 13px; color: var(--neutral-500); line-height: 1.8;">
+        <strong style="color: var(--neutral-700);">Warm-taupe neutral ramp</strong> — #FAF8F5 replaces #F5F8FB. The entire app shifts from "hospital corridor" to "warm linen." This is the single biggest change — it transforms how every other color reads on top of it.<br><br>
+        <strong style="color: var(--neutral-700);">Boosted domain saturation</strong> — Every domain color pushed 15-20% more saturated. Teal #35B89E, Sage #6BAD5E, Lavender #8B7FC0. Category pills are now confident, like Withings'.<br><br>
+        <strong style="color: var(--neutral-700);">Data gets the loudest color</strong> — Charts and progress bars use bold, punchy fills. Data typography is large and high-contrast. Like both reference apps: quiet structure, loud data.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WARM NEUTRAL RAMP ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">The foundation</div>
+  <h2>Warm-taupe neutral ramp</h2>
+  <div class="desc">The most important change in v3. These are the colors that cover 60%+ of every screen. Getting the undertone right transforms the entire experience from clinical to human.</div>
+
+  <div class="card" style="background: var(--neutral-50); border: 1px solid var(--neutral-100);">
+    <h3>v2 neutrals (blue-tinted) → v3 neutrals (warm-taupe)</h3>
+    <div class="two-col" style="margin-top: 16px;">
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--error-600); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">v2 — Cool blue-gray</div>
+        <div class="ramp-strip">
+          <div style="background: #F5F8FB;"><span style="color: #666;">#F5F8FB</span></div>
+          <div style="background: #E6ECF2;"><span style="color: #666;">#E6ECF2</span></div>
+          <div style="background: #CCD6E0;"><span style="color: #666;">#CCD6E0</span></div>
+          <div style="background: #A4B1BF;"><span style="color: #fff;">#A4B1BF</span></div>
+          <div style="background: #7C8C9C;"><span style="color: #fff;">#7C8C9C</span></div>
+          <div style="background: #5A6878;"><span style="color: #fff;">#5A6878</span></div>
+          <div style="background: #3E4B58;"><span style="color: #fff;">#3E4B58</span></div>
+          <div style="background: #1A2430;"><span style="color: #fff;">#1A2430</span></div>
+        </div>
+        <div style="font-size: 12px; color: var(--neutral-400); margin-top: 6px;">Blue undertone. Feels clinical, corporate, cold.</div>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--success-600); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">v3 — Warm taupe</div>
+        <div class="ramp-strip">
+          <div style="background: #FAF8F5;"><span style="color: #666;">#FAF8F5</span></div>
+          <div style="background: #EDE9E4;"><span style="color: #666;">#EDE9E4</span></div>
+          <div style="background: #D5CFC7;"><span style="color: #666;">#D5CFC7</span></div>
+          <div style="background: #B5AEA4;"><span style="color: #fff;">#B5AEA4</span></div>
+          <div style="background: #918981;"><span style="color: #fff;">#918981</span></div>
+          <div style="background: #6E6860;"><span style="color: #fff;">#6E6860</span></div>
+          <div style="background: #524D47;"><span style="color: #fff;">#524D47</span></div>
+          <div style="background: #252220;"><span style="color: #fff;">#252220</span></div>
+        </div>
+        <div style="font-size: 12px; color: var(--neutral-400); margin-top: 6px;">Warm taupe undertone. Feels human, linen, approachable.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DOMAIN COLORS COMPARISON ===== -->
+<div class="section">
+  <div class="section-label">Domain palette</div>
+  <h2>Boosted domain colors</h2>
+  <div class="desc">Every domain color pushed further — more saturated, more committed. Like Withings' category pills: you should be able to identify the domain from across the room.</div>
+
+  <div class="card">
+    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
+      <!-- Teal -->
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); margin-bottom: 8px;">Activity / Teal</div>
+        <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #48B5A0; position: relative;">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 7px; color: white; font-weight: 700;">v2</div>
+          </div>
+          <div style="font-size: 18px; color: var(--neutral-300);">→</div>
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #35B89E; position: relative;">
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 7px; color: white; font-weight: 700;">v3</div>
+          </div>
+        </div>
+        <div class="ramp-strip" style="height: 32px;">
+          <div style="background: var(--teal-50);"></div>
+          <div style="background: var(--teal-200);"></div>
+          <div style="background: var(--teal-400);"></div>
+          <div style="background: var(--teal-600);"></div>
+          <div style="background: var(--teal-800);"></div>
+        </div>
+        <div class="cat-pill" style="background: var(--teal-500); color: white; margin-top: 8px;">
+          <div class="cat-dot" style="background: white;"></div> Activity
+        </div>
+      </div>
+      <!-- Apricot -->
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); margin-bottom: 8px;">Rewards / Apricot</div>
+        <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #E8985A;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v2</div></div>
+          <div style="font-size: 18px; color: var(--neutral-300);">→</div>
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #EC9448;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v3</div></div>
+        </div>
+        <div class="ramp-strip" style="height: 32px;">
+          <div style="background: var(--apricot-50);"></div>
+          <div style="background: var(--apricot-200);"></div>
+          <div style="background: var(--apricot-400);"></div>
+          <div style="background: var(--apricot-600);"></div>
+          <div style="background: var(--apricot-800);"></div>
+        </div>
+        <div class="cat-pill" style="background: var(--apricot-500); color: white; margin-top: 8px;">
+          <div class="cat-dot" style="background: white;"></div> Rewards
+        </div>
+      </div>
+      <!-- Lavender -->
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); margin-bottom: 8px;">Mind / Lavender</div>
+        <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #9189BD;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v2</div></div>
+          <div style="font-size: 18px; color: var(--neutral-300);">→</div>
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #8B7FC0;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v3</div></div>
+        </div>
+        <div class="ramp-strip" style="height: 32px;">
+          <div style="background: var(--lavender-50);"></div>
+          <div style="background: var(--lavender-200);"></div>
+          <div style="background: var(--lavender-400);"></div>
+          <div style="background: var(--lavender-600);"></div>
+          <div style="background: var(--lavender-800);"></div>
+        </div>
+        <div class="cat-pill" style="background: var(--lavender-400); color: white; margin-top: 8px;">
+          <div class="cat-dot" style="background: white;"></div> Mind
+        </div>
+      </div>
+      <!-- Sage -->
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); margin-bottom: 8px;">Nutrition / Sage</div>
+        <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #7AA872;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v2</div></div>
+          <div style="font-size: 18px; color: var(--neutral-300);">→</div>
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #6BAD5E;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v3</div></div>
+        </div>
+        <div class="ramp-strip" style="height: 32px;">
+          <div style="background: var(--sage-50);"></div>
+          <div style="background: var(--sage-200);"></div>
+          <div style="background: var(--sage-400);"></div>
+          <div style="background: var(--sage-600);"></div>
+          <div style="background: var(--sage-800);"></div>
+        </div>
+        <div class="cat-pill" style="background: var(--sage-500); color: white; margin-top: 8px;">
+          <div class="cat-dot" style="background: white;"></div> Nutrition
+        </div>
+      </div>
+      <!-- Blue -->
+      <div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-500); margin-bottom: 8px;">Primary / Blue</div>
+        <div style="display: flex; gap: 4px; margin-bottom: 8px;">
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #2E6DA4;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v2</div></div>
+          <div style="font-size: 18px; color: var(--neutral-300);">→</div>
+          <div style="width: 28px; height: 28px; border-radius: 6px; background: #2D6CA4;"><div style="display: flex; align-items: center; justify-content: center; height: 100%; font-size: 7px; color: white; font-weight: 700;">v3</div></div>
+        </div>
+        <div class="ramp-strip" style="height: 32px;">
+          <div style="background: var(--blue-50);"></div>
+          <div style="background: var(--blue-200);"></div>
+          <div style="background: var(--blue-500);"></div>
+          <div style="background: var(--blue-700);"></div>
+          <div style="background: var(--blue-950);"></div>
+        </div>
+        <div class="cat-pill" style="background: var(--blue-600); color: white; margin-top: 8px;">
+          <div class="cat-dot" style="background: white;"></div> Primary
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LIGHT MODE MOCKUP ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Light mode</div>
+  <h2>Home screen — warm canvas with bold data</h2>
+  <div class="desc">Notice the warm cream background (#FAF8F5), confident category pills, large bold data numbers, and saturated progress/chart colors. UI chrome stays quiet; data gets the loudest treatment.</div>
+
+  <div class="mockup-pair">
+    <!-- LIGHT MODE HOME -->
+    <div class="mockup-col">
+      <div class="mockup-label" style="color: var(--blue-600);">Light mode — Home</div>
+      <div class="phone" style="background: var(--neutral-50);">
+        <!-- Warm gradient header -->
+        <div style="background: linear-gradient(180deg, #153352 0%, #1E4468 100%); padding: 48px 24px 20px; color: white;">
+          <div style="font-size: 13px; opacity: 0.5;">Good morning</div>
+          <div style="font-size: 24px; font-weight: 800; margin-top: 2px;">Andrew</div>
+          <!-- Wellness score -->
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; background: rgba(255,255,255,0.07); border-radius: 14px; padding: 14px 16px;">
+            <div style="position: relative; width: 52px; height: 52px;">
+              <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="5"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#35B89E" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 900; color: white;">78</div>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">Wellness Score</div>
+              <div style="font-size: 11px; opacity: 0.4; margin-top: 1px;">+3 from last week</div>
+            </div>
+            <div style="margin-left: auto; font-size: 11px; color: #5CCDB8; font-weight: 600;">View →</div>
+          </div>
+        </div>
+
+        <div class="phone-body" style="padding-top: 16px;">
+          <!-- Category pills row — Withings-inspired -->
+          <div style="display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto;">
+            <div class="cat-pill" style="background: var(--teal-500); color: white;">
+              <div class="cat-dot" style="background: rgba(255,255,255,0.4);"></div> Activity
+            </div>
+            <div class="cat-pill" style="background: var(--lavender-400); color: white;">
+              <div class="cat-dot" style="background: rgba(255,255,255,0.4);"></div> Mind
+            </div>
+            <div class="cat-pill" style="background: var(--sage-500); color: white;">
+              <div class="cat-dot" style="background: rgba(255,255,255,0.4);"></div> Nutrition
+            </div>
+            <div class="cat-pill" style="background: var(--apricot-500); color: white;">
+              <div class="cat-dot" style="background: rgba(255,255,255,0.4);"></div> Rewards
+            </div>
+          </div>
+
+          <!-- Steps card — BOLD data, Sword Health style -->
+          <div class="p-card" style="background: white; border: 1px solid var(--neutral-100);">
+            <div class="p-row" style="margin-bottom: 12px;">
+              <div class="p-avatar" style="background: var(--teal-50); border-radius: 12px;">
+                <span style="font-size: 18px;">🏃</span>
+              </div>
+              <div style="flex: 1;">
+                <div class="p-card-sm" style="color: var(--neutral-500);">STEPS TODAY</div>
+                <div style="display: flex; align-items: baseline; gap: 6px;">
+                  <span style="font-size: 28px; font-weight: 900; color: var(--teal-500); letter-spacing: -1px;">9,344</span>
+                  <span style="font-size: 12px; color: var(--neutral-400);">/ 10,000</span>
+                </div>
+              </div>
+            </div>
+            <!-- Bold progress bar — like Sword Health -->
+            <div class="p-progress" style="background: var(--neutral-75);">
+              <div class="p-progress-fill" style="width: 93%; background: linear-gradient(90deg, var(--teal-500), var(--teal-400));"></div>
+            </div>
+            <!-- Weekly sparkline — bold fills -->
+            <div style="display: flex; justify-content: space-between; margin-top: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 32px; background: var(--teal-400); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: var(--neutral-400); font-weight: 500;">Mon</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 42px; background: var(--teal-400); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: var(--neutral-400); font-weight: 500;">Tue</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 22px; background: var(--teal-200); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: var(--neutral-400); font-weight: 500;">Wed</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 38px; background: var(--teal-400); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: var(--neutral-400); font-weight: 500;">Thu</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 46px; background: var(--teal-500); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: var(--neutral-400); font-weight: 500;">Fri</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 12px; background: var(--neutral-150); border-radius: 4px; border: 1px dashed var(--neutral-200);"></div>
+                <span style="font-size: 8px; color: var(--neutral-300); font-weight: 500;">Sat</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 12px; background: var(--neutral-150); border-radius: 4px; border: 1px dashed var(--neutral-200);"></div>
+                <span style="font-size: 8px; color: var(--neutral-300); font-weight: 500;">Sun</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sleep insight card — lavender tinted surface -->
+          <div class="p-card" style="background: var(--lavender-50); border: 1px solid var(--lavender-200);">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--lavender-400); display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--lavender-700);">Sleep Insight</div>
+            </div>
+            <div style="font-size: 12px; color: var(--lavender-600); line-height: 1.6;">Your sleep dipped to 5h 40m last night. Try a wind-down routine to get back on track.</div>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+              <span class="p-chip" style="background: white; color: var(--lavender-600); border: 1px solid var(--lavender-200);">Sleep tips</span>
+              <span class="p-chip" style="background: var(--lavender-400); color: white;">Start wind-down</span>
+            </div>
+          </div>
+
+          <!-- Rewards card — apricot warm surface -->
+          <div class="p-card" style="background: var(--apricot-50); border: 1px solid var(--apricot-200);">
+            <div class="p-row">
+              <div class="p-avatar" style="background: var(--apricot-400); border-radius: 50%; color: white;">⭐</div>
+              <div style="flex: 1;">
+                <div class="p-card-sm" style="color: var(--apricot-700);">7-day streak!</div>
+                <div style="font-size: 22px; font-weight: 900; color: var(--apricot-600); letter-spacing: -0.5px;">150 pts</div>
+              </div>
+              <div style="background: var(--apricot-400); color: white; padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: 700;">Claim</div>
+            </div>
+          </div>
+
+          <!-- Health overview — grid with BOLD numbers like Withings -->
+          <div style="font-size: 14px; font-weight: 700; color: var(--neutral-700); margin: 14px 0 10px;">Health overview</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="p-card" style="background: white; border: 1px solid var(--neutral-100); padding: 14px;">
+              <div style="font-size: 10px; color: var(--neutral-400); font-weight: 600; text-transform: uppercase;">Heart rate</div>
+              <div style="font-size: 26px; font-weight: 900; color: var(--dataviz-coral); margin-top: 2px; letter-spacing: -1px;">72 <span style="font-size: 12px; font-weight: 500; color: var(--neutral-400);">bpm</span></div>
+              <div class="p-sparkline" style="margin-top: 8px;">
+                <div class="p-spark-bar" style="height: 14px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #EE8E89;"></div>
+                <div class="p-spark-bar" style="height: 24px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #F2B0AD;"></div>
+                <div class="p-spark-bar" style="height: 28px; background: #D4524C;"></div>
+                <div class="p-spark-bar" style="height: 18px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 22px; background: #E8706A;"></div>
+              </div>
+            </div>
+            <div class="p-card" style="background: white; border: 1px solid var(--neutral-100); padding: 14px;">
+              <div style="font-size: 10px; color: var(--neutral-400); font-weight: 600; text-transform: uppercase;">Sleep</div>
+              <div style="font-size: 26px; font-weight: 900; color: var(--lavender-500); margin-top: 2px; letter-spacing: -1px;">7h <span style="font-size: 16px;">16m</span></div>
+              <div class="p-sparkline" style="margin-top: 8px;">
+                <div class="p-spark-bar" style="height: 24px; background: var(--lavender-400);"></div>
+                <div class="p-spark-bar" style="height: 28px; background: var(--lavender-500);"></div>
+                <div class="p-spark-bar" style="height: 14px; background: var(--lavender-200);"></div>
+                <div class="p-spark-bar" style="height: 18px; background: var(--lavender-400);"></div>
+                <div class="p-spark-bar" style="height: 10px; background: var(--lavender-200);"></div>
+                <div class="p-spark-bar" style="height: 22px; background: var(--lavender-400);"></div>
+                <div class="p-spark-bar" style="height: 16px; background: var(--lavender-300);"></div>
+                <div class="p-spark-bar" style="height: 20px; background: var(--lavender-400);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="p-tabs" style="background: white; border-top: 1px solid var(--neutral-100);">
+          <div class="p-tab" style="color: var(--blue-600); font-weight: 700;">
+            <div class="p-tab-icon" style="background: var(--blue-100); border-radius: 8px;"></div>Home
+          </div>
+          <div class="p-tab" style="color: var(--neutral-300);">
+            <div class="p-tab-icon" style="background: var(--neutral-75); border-radius: 8px;"></div>Care
+          </div>
+          <div class="p-tab" style="color: var(--neutral-300);">
+            <div class="p-tab-icon" style="background: var(--neutral-75); border-radius: 8px;"></div>Benefits
+          </div>
+          <div class="p-tab" style="color: var(--neutral-300);">
+            <div class="p-tab-icon" style="background: var(--neutral-75); border-radius: 8px;"></div>Rewards
+          </div>
+          <div class="p-tab" style="color: var(--neutral-300);">
+            <div class="p-tab-icon" style="background: var(--neutral-75); border-radius: 8px;"></div>Profile
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DARK MODE HOME -->
+    <div class="mockup-col">
+      <div class="mockup-label" style="color: var(--neutral-400);">Dark mode — Home</div>
+      <div class="phone" style="border-color: #333; background: #141210;">
+        <!-- Dark header -->
+        <div style="background: linear-gradient(180deg, #141210 0%, #1E1C18 100%); padding: 48px 24px 20px; color: white;">
+          <div style="font-size: 13px; opacity: 0.35;">Good morning</div>
+          <div style="font-size: 24px; font-weight: 800; margin-top: 2px;">Andrew</div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px 16px;">
+            <div style="position: relative; width: 52px; height: 52px;">
+              <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle cx="26" cy="26" r="22" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="5"/>
+                <circle cx="26" cy="26" r="22" fill="none" stroke="#35B89E" stroke-width="5" stroke-dasharray="110" stroke-dashoffset="24" stroke-linecap="round" transform="rotate(-90 26 26)"/>
+              </svg>
+              <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 900; color: white;">78</div>
+            </div>
+            <div>
+              <div style="font-size: 13px; font-weight: 600; color: #F5F2EE;">Wellness Score</div>
+              <div style="font-size: 11px; color: #6E6860;">+3 from last week</div>
+            </div>
+            <div style="margin-left: auto; font-size: 11px; color: #5CCDB8; font-weight: 600;">View →</div>
+          </div>
+        </div>
+
+        <div class="phone-body" style="padding-top: 16px;">
+          <!-- Category pills — dark mode -->
+          <div style="display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto;">
+            <div class="cat-pill" style="background: rgba(53,184,158,0.15); color: #5CCDB8; border: 1px solid rgba(53,184,158,0.2);">Activity</div>
+            <div class="cat-pill" style="background: rgba(139,127,192,0.15); color: #AEA3D5; border: 1px solid rgba(139,127,192,0.2);">Mind</div>
+            <div class="cat-pill" style="background: rgba(107,173,94,0.15); color: #8FC285; border: 1px solid rgba(107,173,94,0.2);">Nutrition</div>
+            <div class="cat-pill" style="background: rgba(236,148,72,0.12); color: #F4B078; border: 1px solid rgba(236,148,72,0.18);">Rewards</div>
+          </div>
+
+          <!-- Steps card — dark -->
+          <div class="p-card" style="background: #1E1C18; border: 1px solid #2E2B25;">
+            <div class="p-row" style="margin-bottom: 12px;">
+              <div class="p-avatar" style="background: rgba(53,184,158,0.12); border-radius: 12px;"><span style="font-size: 18px;">🏃</span></div>
+              <div style="flex: 1;">
+                <div class="p-card-sm" style="color: #918981;">STEPS TODAY</div>
+                <div style="display: flex; align-items: baseline; gap: 6px;">
+                  <span style="font-size: 28px; font-weight: 900; color: #5CCDB8; letter-spacing: -1px;">9,344</span>
+                  <span style="font-size: 12px; color: #6E6860;">/ 10,000</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-progress" style="background: #2E2B25;">
+              <div class="p-progress-fill" style="width: 93%; background: linear-gradient(90deg, var(--teal-500), var(--teal-400));"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 14px;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 32px; background: var(--teal-600); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #6E6860;">Mon</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 42px; background: var(--teal-500); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #6E6860;">Tue</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 22px; background: var(--teal-700); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #6E6860;">Wed</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 38px; background: var(--teal-600); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #6E6860;">Thu</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 46px; background: var(--teal-500); border-radius: 4px;"></div>
+                <span style="font-size: 8px; color: #6E6860;">Fri</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 12px; background: #2E2B25; border-radius: 4px; border: 1px dashed #3A3632;"></div>
+                <span style="font-size: 8px; color: #524D47;">Sat</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 3px;">
+                <div style="width: 28px; height: 12px; background: #2E2B25; border-radius: 4px; border: 1px dashed #3A3632;"></div>
+                <span style="font-size: 8px; color: #524D47;">Sun</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sleep insight — dark lavender -->
+          <div class="p-card" style="background: #1E1A28; border: 1px solid #302B3E;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <div style="width: 28px; height: 28px; border-radius: 8px; background: var(--lavender-600); display: flex; align-items: center; justify-content: center; font-size: 14px;">✨</div>
+              <div style="font-size: 12px; font-weight: 700; color: var(--lavender-300);">Sleep Insight</div>
+            </div>
+            <div style="font-size: 12px; color: #8A85A0; line-height: 1.6;">Your sleep dipped to 5h 40m last night. Try a wind-down routine.</div>
+            <div style="display: flex; gap: 6px; margin-top: 10px;">
+              <span class="p-chip" style="background: #302B3E; color: var(--lavender-300); border: 1px solid #433A6D;">Sleep tips</span>
+              <span class="p-chip" style="background: var(--lavender-500); color: white;">Start wind-down</span>
+            </div>
+          </div>
+
+          <!-- Rewards — dark apricot -->
+          <div class="p-card" style="background: #221E16; border: 1px solid #3A3428;">
+            <div class="p-row">
+              <div class="p-avatar" style="background: var(--apricot-600); border-radius: 50%; color: white;">⭐</div>
+              <div style="flex: 1;">
+                <div class="p-card-sm" style="color: var(--apricot-300);">7-day streak!</div>
+                <div style="font-size: 22px; font-weight: 900; color: var(--apricot-400); letter-spacing: -0.5px;">150 pts</div>
+              </div>
+              <div style="background: var(--apricot-500); color: white; padding: 8px 18px; border-radius: 20px; font-size: 12px; font-weight: 700;">Claim</div>
+            </div>
+          </div>
+
+          <!-- Health grid — dark -->
+          <div style="font-size: 14px; font-weight: 700; color: #F5F2EE; margin: 14px 0 10px;">Health overview</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="p-card" style="background: #1E1C18; border: 1px solid #2E2B25; padding: 14px;">
+              <div style="font-size: 10px; color: #918981; font-weight: 600;">HEART RATE</div>
+              <div style="font-size: 26px; font-weight: 900; color: #EE8E89; margin-top: 2px; letter-spacing: -1px;">72 <span style="font-size: 12px; font-weight: 500; color: #6E6860;">bpm</span></div>
+              <div class="p-sparkline" style="margin-top: 8px;">
+                <div class="p-spark-bar" style="height: 14px; background: #6B2A28;"></div>
+                <div class="p-spark-bar" style="height: 20px; background: #A04440;"></div>
+                <div class="p-spark-bar" style="height: 16px; background: #8A3835;"></div>
+                <div class="p-spark-bar" style="height: 24px; background: #C45550;"></div>
+                <div class="p-spark-bar" style="height: 12px; background: #6B2A28;"></div>
+                <div class="p-spark-bar" style="height: 28px; background: #E8706A;"></div>
+                <div class="p-spark-bar" style="height: 18px; background: #A04440;"></div>
+                <div class="p-spark-bar" style="height: 22px; background: #C45550;"></div>
+              </div>
+            </div>
+            <div class="p-card" style="background: #1E1C18; border: 1px solid #2E2B25; padding: 14px;">
+              <div style="font-size: 10px; color: #918981; font-weight: 600;">SLEEP</div>
+              <div style="font-size: 26px; font-weight: 900; color: var(--lavender-300); margin-top: 2px; letter-spacing: -1px;">7h <span style="font-size: 16px;">16m</span></div>
+              <div class="p-sparkline" style="margin-top: 8px;">
+                <div class="p-spark-bar" style="height: 24px; background: var(--lavender-600);"></div>
+                <div class="p-spark-bar" style="height: 28px; background: var(--lavender-500);"></div>
+                <div class="p-spark-bar" style="height: 14px; background: var(--lavender-700);"></div>
+                <div class="p-spark-bar" style="height: 18px; background: var(--lavender-600);"></div>
+                <div class="p-spark-bar" style="height: 10px; background: var(--lavender-700);"></div>
+                <div class="p-spark-bar" style="height: 22px; background: var(--lavender-500);"></div>
+                <div class="p-spark-bar" style="height: 16px; background: var(--lavender-600);"></div>
+                <div class="p-spark-bar" style="height: 20px; background: var(--lavender-500);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab bar — dark -->
+        <div class="p-tabs" style="background: #1E1C18; border-top: 1px solid #2E2B25;">
+          <div class="p-tab" style="color: #88BAE0; font-weight: 700;">
+            <div class="p-tab-icon" style="background: rgba(45,108,164,0.2); border-radius: 8px;"></div>Home
+          </div>
+          <div class="p-tab" style="color: #524D47;">
+            <div class="p-tab-icon" style="background: #2E2B25; border-radius: 8px;"></div>Care
+          </div>
+          <div class="p-tab" style="color: #524D47;">
+            <div class="p-tab-icon" style="background: #2E2B25; border-radius: 8px;"></div>Benefits
+          </div>
+          <div class="p-tab" style="color: #524D47;">
+            <div class="p-tab-icon" style="background: #2E2B25; border-radius: 8px;"></div>Rewards
+          </div>
+          <div class="p-tab" style="color: #524D47;">
+            <div class="p-tab-icon" style="background: #2E2B25; border-radius: 8px;"></div>Profile
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DATA VISUALIZATION ===== -->
+<div class="section">
+  <div class="section-label">Data visualization</div>
+  <h2>Bold data palette — inspired by Withings + Sword Health</h2>
+  <div class="desc">Data is the most colorful thing on screen. The 8-color viz palette is designed for maximum legibility and category distinction, including under color vision deficiency.</div>
+
+  <div class="card">
+    <h3>Data viz palette</h3>
+    <div style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-blue);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Blue</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#2D6CA4</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-teal);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Teal</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#35B89E</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-coral);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Coral</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#E8706A</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-gold);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Gold</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#E8A832</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-purple);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Purple</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#8B7FC0</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-sage);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Sage</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#6BAD5E</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-rose);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Rose</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#D4698C</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 12px; background: var(--dataviz-sky);"></div>
+        <div style="font-size: 10px; font-weight: 600; color: var(--neutral-500); margin-top: 6px;">Sky</div>
+        <div style="font-size: 9px; font-family: 'JetBrains Mono'; color: var(--neutral-400);">#52A8E0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sample charts -->
+  <div class="two-col" style="margin-top: 24px;">
+    <div class="card">
+      <h3>Weekly wellness breakdown</h3>
+      <div style="font-size: 12px; color: var(--neutral-400); margin-bottom: 16px;">How data viz colors map to health domains</div>
+      <div class="bar-chart">
+        <div class="bar-col">
+          <div class="bar" style="height: 80px; background: var(--dataviz-teal);"></div>
+          <div class="bar-label">Activity</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 60px; background: var(--dataviz-purple);"></div>
+          <div class="bar-label">Sleep</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 90px; background: var(--dataviz-sage);"></div>
+          <div class="bar-label">Nutrition</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 45px; background: var(--dataviz-coral);"></div>
+          <div class="bar-label">Heart</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 70px; background: var(--dataviz-gold);"></div>
+          <div class="bar-label">Rewards</div>
+        </div>
+        <div class="bar-col">
+          <div class="bar" style="height: 50px; background: var(--dataviz-blue);"></div>
+          <div class="bar-label">Benefits</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Health domain distribution</h3>
+      <div style="font-size: 12px; color: var(--neutral-400); margin-bottom: 16px;">Donut chart with bold fills</div>
+      <div style="display: flex; align-items: center; gap: 24px;">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--dataviz-teal)" stroke-width="20" stroke-dasharray="100 202" stroke-dashoffset="0" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--dataviz-purple)" stroke-width="20" stroke-dasharray="65 237" stroke-dashoffset="-100" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--dataviz-coral)" stroke-width="20" stroke-dasharray="50 252" stroke-dashoffset="-165" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--dataviz-gold)" stroke-width="20" stroke-dasharray="45 257" stroke-dashoffset="-215" transform="rotate(-90 60 60)"/>
+          <circle cx="60" cy="60" r="48" fill="none" stroke="var(--dataviz-sage)" stroke-width="20" stroke-dasharray="42 260" stroke-dashoffset="-260" transform="rotate(-90 60 60)"/>
+        </svg>
+        <div class="donut-legend">
+          <div class="legend-row"><div class="legend-dot" style="background: var(--dataviz-teal);"></div><span style="color: var(--neutral-600);">Activity <strong>33%</strong></span></div>
+          <div class="legend-row"><div class="legend-dot" style="background: var(--dataviz-purple);"></div><span style="color: var(--neutral-600);">Sleep <strong>22%</strong></span></div>
+          <div class="legend-row"><div class="legend-dot" style="background: var(--dataviz-coral);"></div><span style="color: var(--neutral-600);">Heart <strong>17%</strong></span></div>
+          <div class="legend-row"><div class="legend-dot" style="background: var(--dataviz-gold);"></div><span style="color: var(--neutral-600);">Rewards <strong>15%</strong></span></div>
+          <div class="legend-row"><div class="legend-dot" style="background: var(--dataviz-sage);"></div><span style="color: var(--neutral-600);">Nutrition <strong>13%</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== USAGE RULES ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Usage system</div>
+  <h2>Where each color earns its place</h2>
+  <div class="desc">Same domain-coding logic as v2, but with boosted saturation and warm neutral foundation.</div>
+
+  <div class="card">
+    <div class="rule-grid">
+      <div class="rule-item" style="border-left: 4px solid var(--blue-600);">
+        <h5>Ocean Blue — Structure & Action</h5>
+        <p>Header gradients, primary CTA buttons, active navigation, links, focus rings. The spine of every screen. Stays strong and confident.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: var(--blue-900);"></div>
+          <div class="swatch-sm" style="background: var(--blue-600);"></div>
+          <div class="swatch-sm" style="background: var(--blue-400);"></div>
+          <div class="swatch-sm" style="background: var(--blue-100);"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid var(--teal-400);">
+        <h5>Teal — Activity & Vitality</h5>
+        <p>Steps, workouts, fitness goals, movement data, wellness scores. The "body in motion" color. Used boldly in progress bars and data numbers.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: var(--teal-700);"></div>
+          <div class="swatch-sm" style="background: var(--teal-400);"></div>
+          <div class="swatch-sm" style="background: var(--teal-200);"></div>
+          <div class="swatch-sm" style="background: var(--teal-50);"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid var(--apricot-400);">
+        <h5>Apricot — Rewards & Warmth</h5>
+        <p>Points, streaks, badges, achievements, premium features. The warm "payoff" color. Used on tinted card surfaces and bold accent numbers.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: var(--apricot-700);"></div>
+          <div class="swatch-sm" style="background: var(--apricot-400);"></div>
+          <div class="swatch-sm" style="background: var(--apricot-200);"></div>
+          <div class="swatch-sm" style="background: var(--apricot-50);"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid var(--lavender-400);">
+        <h5>Lavender — Mind & Rest</h5>
+        <p>Sleep, mental health, therapy, mindfulness, AI insights, emotional wellbeing. The introspective color. Tinted surfaces and data numbers.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: var(--lavender-700);"></div>
+          <div class="swatch-sm" style="background: var(--lavender-400);"></div>
+          <div class="swatch-sm" style="background: var(--lavender-200);"></div>
+          <div class="swatch-sm" style="background: var(--lavender-50);"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid var(--sage-400);">
+        <h5>Sage — Nutrition & Prevention</h5>
+        <p>Diet, recipes, meal plans, preventive care, wellness programs. The "tending your garden" color. Category pills and chart segments.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: var(--sage-700);"></div>
+          <div class="swatch-sm" style="background: var(--sage-400);"></div>
+          <div class="swatch-sm" style="background: var(--sage-200);"></div>
+          <div class="swatch-sm" style="background: var(--sage-50);"></div>
+        </div>
+      </div>
+      <div class="rule-item" style="border-left: 4px solid var(--neutral-400);">
+        <h5>Warm Neutrals — Canvas</h5>
+        <p>App backgrounds (#FAF8F5), card surfaces (white), body text, borders, dividers. The warm linen canvas that makes everything else pop.</p>
+        <div class="swatch-row">
+          <div class="swatch-sm" style="background: var(--neutral-800);"></div>
+          <div class="swatch-sm" style="background: var(--neutral-500);"></div>
+          <div class="swatch-sm" style="background: var(--neutral-200);"></div>
+          <div class="swatch-sm" style="background: var(--neutral-50);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 60-30-10 -->
+  <div class="card">
+    <h3>The 60-30-10 rule (revised for v3)</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 12px;">
+      <div>
+        <div style="height: 80px; border-radius: 12px; background: linear-gradient(180deg, #FAF8F5, white); border: 1px solid var(--neutral-100); display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; font-weight: 800; color: var(--neutral-500);">60%</span>
+        </div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--neutral-700); margin-top: 8px;">Warm neutrals + surfaces</div>
+        <div style="font-size: 12px; color: var(--neutral-500); margin-top: 2px;">Cream backgrounds, white cards, warm-taupe text and borders. The breathable, human canvas.</div>
+      </div>
+      <div>
+        <div style="height: 80px; border-radius: 12px; background: linear-gradient(135deg, #153352, #2D6CA4); display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; font-weight: 800; color: white;">30%</span>
+        </div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--neutral-700); margin-top: 8px;">Primary blue</div>
+        <div style="font-size: 12px; color: var(--neutral-500); margin-top: 2px;">Header, CTA buttons, active states, links. Structural color that anchors every screen.</div>
+      </div>
+      <div>
+        <div style="height: 80px; border-radius: 12px; background: linear-gradient(135deg, var(--teal-400), var(--apricot-400) 40%, var(--lavender-400) 70%, var(--sage-400)); display: flex; align-items: center; justify-content: center;">
+          <span style="font-size: 28px; font-weight: 800; color: white;">10%</span>
+        </div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--neutral-700); margin-top: 8px;">Domain accents — bold and committed</div>
+        <div style="font-size: 12px; color: var(--neutral-500); margin-top: 2px;">Category pills, data numbers, chart fills, tinted card surfaces. Small area, high saturation. This is where character lives.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOKEN ARCHITECTURE ===== -->
+<div class="section">
+  <div class="section-label">Token architecture</div>
+  <h2>Design token map (v3 updated values)</h2>
+  <div class="desc">3-tier token system. Global → Semantic → Component. Same structure as v1, but with warm-taupe neutrals and boosted domain values.</div>
+
+  <div class="card" style="overflow-x: auto;">
+    <h3>Semantic token mapping</h3>
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 12px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--neutral-100);">
+          <th style="text-align: left; padding: 8px 12px; font-weight: 700; color: var(--neutral-700);">Semantic Token</th>
+          <th style="text-align: left; padding: 8px 12px; font-weight: 700; color: var(--neutral-700);">Light Mode</th>
+          <th style="text-align: left; padding: 8px 12px; font-weight: 700; color: var(--neutral-700);">Dark Mode</th>
+          <th style="text-align: left; padding: 8px 12px; font-weight: 700; color: var(--neutral-700);">Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.surface.app</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #FAF8F5; border: 1px solid #ddd; vertical-align: middle;"></span> <code>#FAF8F5</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #141210; vertical-align: middle;"></span> <code>#141210</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">App background</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.surface.card</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #FFFFFF; border: 1px solid #ddd; vertical-align: middle;"></span> <code>#FFFFFF</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #1E1C18; vertical-align: middle;"></span> <code>#1E1C18</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Card, modal, elevated surface</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.surface.subtle</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #F5F2EE; border: 1px solid #ddd; vertical-align: middle;"></span> <code>#F5F2EE</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #252220; vertical-align: middle;"></span> <code>#252220</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Section backgrounds, input fields</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.border.default</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #EDE9E4; border: 1px solid #ddd; vertical-align: middle;"></span> <code>#EDE9E4</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #2E2B25; vertical-align: middle;"></span> <code>#2E2B25</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Card borders, dividers</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.text.primary</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #252220; vertical-align: middle;"></span> <code>#252220</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #F5F2EE; border: 1px solid #555; vertical-align: middle;"></span> <code>#F5F2EE</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Headlines, body text</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.text.secondary</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #6E6860; vertical-align: middle;"></span> <code>#6E6860</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #918981; vertical-align: middle;"></span> <code>#918981</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Captions, metadata, labels</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.text.tertiary</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #918981; vertical-align: middle;"></span> <code>#918981</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #6E6860; vertical-align: middle;"></span> <code>#6E6860</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Placeholder text, disabled</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.interactive.default</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #2D6CA4; vertical-align: middle;"></span> <code>#2D6CA4</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #5A9FD4; vertical-align: middle;"></span> <code>#5A9FD4</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Primary buttons, links, toggles</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--neutral-75);">
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.interactive.hover</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #245584; vertical-align: middle;"></span> <code>#245584</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #88BAE0; vertical-align: middle;"></span> <code>#88BAE0</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Hover states</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 12px; font-family: 'JetBrains Mono'; color: var(--blue-600);">color.interactive.pressed</td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #1B3F63; vertical-align: middle;"></span> <code>#1B3F63</code></td>
+          <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: #C5DAEE; vertical-align: middle;"></span> <code>#C5DAEE</code></td>
+          <td style="padding: 8px 12px; color: var(--neutral-500);">Pressed / active states</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== CONTRAST TABLE ===== -->
+<div class="section" style="background: white;">
+  <div class="section-label">Accessibility</div>
+  <h2>Contrast ratios — key pairings</h2>
+  <div class="desc">All text/background combinations verified against WCAG 2.1 AA. Data colors are used for fills/indicators, not text.</div>
+
+  <div class="card" id="contrast-results">
+    <h3>Light mode text pairings</h3>
+    <div style="font-size: 12px; color: var(--neutral-400); margin-bottom: 12px;">Calculated programmatically. Ratios shown to 2 decimal places.</div>
+    <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--neutral-100);">
+          <th style="text-align: left; padding: 8px 12px; font-weight: 700;">Pairing</th>
+          <th style="text-align: left; padding: 8px 12px; font-weight: 700;">Foreground</th>
+          <th style="text-align: left; padding: 8px 12px; font-weight: 700;">Background</th>
+          <th style="text-align: center; padding: 8px 12px; font-weight: 700;">Ratio</th>
+          <th style="text-align: center; padding: 8px 12px; font-weight: 700;">Result</th>
+        </tr>
+      </thead>
+      <tbody id="contrast-table-body">
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== BRAND BRIDGE ===== -->
+<div class="section">
+  <div class="section-label">Brand connection</div>
+  <h2>Corporate → App palette bridge</h2>
+  <div class="desc">How the v3 app palette connects back to the corporate brand. A sibling, not a twin — same DNA, different personality.</div>
+
+  <div class="card">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+      <div style="text-align: center;">
+        <div style="display: flex; gap: 4px; justify-content: center; align-items: center; margin-bottom: 8px;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: #0F497F;"></div>
+          <div style="font-size: 16px; color: var(--neutral-300);">→</div>
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--blue-600);"></div>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-700);">Brand Blue → Ocean Blue</div>
+        <div style="font-size: 10px; color: var(--neutral-500); margin-top: 2px;">Warmed, lightened 1 stop. Same authority, more approachable.</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="display: flex; gap: 4px; justify-content: center; align-items: center; margin-bottom: 8px;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: #04A0B7;"></div>
+          <div style="font-size: 16px; color: var(--neutral-300);">→</div>
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--teal-400);"></div>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-700);">Aqua Blue → Sea Glass Teal</div>
+        <div style="font-size: 10px; color: var(--neutral-500); margin-top: 2px;">Shifted green, desaturated slightly. Health/vitality role.</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="display: flex; gap: 4px; justify-content: center; align-items: center; margin-bottom: 8px;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: #F15922;"></div>
+          <div style="font-size: 16px; color: var(--neutral-300);">→</div>
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--apricot-400);"></div>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-700);">Lava Orange → Warm Apricot</div>
+        <div style="font-size: 10px; color: var(--neutral-500); margin-top: 2px;">Softened, less aggressive. Rewards/warmth role.</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="display: flex; gap: 4px; justify-content: center; align-items: center; margin-bottom: 8px;">
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: #52A045;"></div>
+          <div style="font-size: 16px; color: var(--neutral-300);">→</div>
+          <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--sage-400);"></div>
+        </div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--neutral-700);">Spring Green → Sage</div>
+        <div style="font-size: 10px; color: var(--neutral-500); margin-top: 2px;">Muted to sage. Nutrition/prevention role.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="padding: 48px; text-align: center; color: var(--neutral-400); font-size: 13px;">
+  <p>Mobile Health App Color System v3 — Working Draft</p>
+  <p style="margin-top: 4px; font-size: 11px;">Warm-taupe neutrals + boosted domain saturation + bold data viz. Inspired by Sword Health warmth and Withings data confidence.</p>
+</div>
+
+<script>
+// Contrast ratio calculator
+function hexToRgb(hex) {
+  hex = hex.replace('#', '');
+  return {
+    r: parseInt(hex.substring(0, 2), 16),
+    g: parseInt(hex.substring(2, 4), 16),
+    b: parseInt(hex.substring(4, 6), 16)
+  };
+}
+
+function relativeLuminance(rgb) {
+  const [rs, gs, bs] = [rgb.r / 255, rgb.g / 255, rgb.b / 255];
+  const r = rs <= 0.03928 ? rs / 12.92 : Math.pow((rs + 0.055) / 1.055, 2.4);
+  const g = gs <= 0.03928 ? gs / 12.92 : Math.pow((gs + 0.055) / 1.055, 2.4);
+  const b = bs <= 0.03928 ? bs / 12.92 : Math.pow((bs + 0.055) / 1.055, 2.4);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrastRatio(hex1, hex2) {
+  const l1 = relativeLuminance(hexToRgb(hex1));
+  const l2 = relativeLuminance(hexToRgb(hex2));
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
+const pairings = [
+  { name: 'Primary text on app bg', fg: '#252220', bg: '#FAF8F5', min: 4.5 },
+  { name: 'Secondary text on app bg', fg: '#6E6860', bg: '#FAF8F5', min: 4.5 },
+  { name: 'Primary text on white card', fg: '#252220', bg: '#FFFFFF', min: 4.5 },
+  { name: 'Secondary text on white card', fg: '#6E6860', bg: '#FFFFFF', min: 4.5 },
+  { name: 'Interactive blue on white', fg: '#2D6CA4', bg: '#FFFFFF', min: 4.5 },
+  { name: 'Interactive blue on app bg', fg: '#2D6CA4', bg: '#FAF8F5', min: 4.5 },
+  { name: 'Deep blue header on white', fg: '#153352', bg: '#FFFFFF', min: 4.5 },
+  { name: 'White on interactive blue (button)', fg: '#FFFFFF', bg: '#2D6CA4', min: 4.5 },
+  { name: 'White on teal pill (500)', fg: '#FFFFFF', bg: '#239882', min: 3.0 },
+  { name: 'White on lavender pill (400)', fg: '#FFFFFF', bg: '#8B7FC0', min: 3.0 },
+  { name: 'White on apricot pill (500)', fg: '#FFFFFF', bg: '#D97B2E', min: 3.0 },
+  { name: 'White on sage pill (500)', fg: '#FFFFFF', bg: '#519446', min: 3.0 },
+  { name: 'Lavender-700 on lavender-50', fg: '#433A6D', bg: '#F5F3FA', min: 4.5 },
+  { name: 'Apricot-700 on apricot-50', fg: '#924E1A', bg: '#FFF6F0', min: 4.5 },
+  { name: 'Teal-500 text on white (data)', fg: '#239882', bg: '#FFFFFF', min: 3.0 },
+  { name: 'Lavender-500 text on white (data)', fg: '#6E60A8', bg: '#FFFFFF', min: 3.0 },
+  { name: 'DM: primary text on card', fg: '#F5F2EE', bg: '#1E1C18', min: 4.5 },
+  { name: 'DM: secondary text on card', fg: '#918981', bg: '#1E1C18', min: 4.5 },
+  { name: 'DM: teal data on card', fg: '#5CCDB8', bg: '#1E1C18', min: 3.0 },
+  { name: 'DM: lavender data on card', fg: '#AEA3D5', bg: '#1E1C18', min: 3.0 },
+];
+
+const tbody = document.getElementById('contrast-table-body');
+pairings.forEach(p => {
+  const ratio = contrastRatio(p.fg, p.bg);
+  const pass = ratio >= p.min;
+  const level = ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : ratio >= 3 ? 'AA Large' : 'Fail';
+  const tr = document.createElement('tr');
+  tr.style.borderBottom = '1px solid #F5F2EE';
+  tr.innerHTML = `
+    <td style="padding: 8px 12px; color: #524D47;">${p.name}</td>
+    <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: ${p.fg}; border: 1px solid #ddd; vertical-align: middle;"></span> <code style="font-size: 11px;">${p.fg}</code></td>
+    <td style="padding: 8px 12px;"><span style="display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: ${p.bg}; border: 1px solid #ddd; vertical-align: middle;"></span> <code style="font-size: 11px;">${p.bg}</code></td>
+    <td style="padding: 8px 12px; text-align: center; font-family: 'JetBrains Mono'; font-weight: 600; font-size: 12px;">${ratio.toFixed(2)}:1</td>
+    <td style="padding: 8px 12px; text-align: center;">
+      <span class="contrast-badge ${pass ? (ratio >= 7 ? 'contrast-pass' : 'contrast-pass') : 'contrast-fail'}">${pass ? '✓ ' + level : '✗ Fail (need ' + p.min + ':1)'}</span>
+    </td>
+  `;
+  tbody.appendChild(tr);
+});
+</script>
+
+</body>
+</html>
