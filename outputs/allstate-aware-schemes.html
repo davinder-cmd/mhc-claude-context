@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC in Allstate Good Life — Color Schemes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Raleway', -apple-system, sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 40px 24px 80px;
+  }
+
+  h1 { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 16px; line-height: 1.5; }
+
+  .context-box {
+    max-width: 640px;
+    margin: 0 auto 48px;
+    background: #222;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.6;
+  }
+  .context-box strong { color: #fff; }
+  .context-label {
+    font-size: 11px; font-weight: 700; color: #666;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .partner-swatches { display: flex; gap: 8px; margin: 12px 0; }
+  .partner-swatch { width: 32px; height: 32px; border-radius: 8px; }
+  .partner-swatch-label { font-size: 10px; color: #666; text-align: center; width: 32px; }
+  .partner-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+
+  .screen-section { margin-bottom: 72px; }
+  .screen-number { font-size: 12px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+  .screen-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .screen-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px; margin-bottom: 4px; }
+  .screen-desc { color: #aaa; font-size: 14px; margin-bottom: 20px; max-width: 640px; line-height: 1.5; }
+  .screen-row { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+
+  .phone { width: 320px; border-radius: 36px; overflow: hidden; flex-shrink: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .phone-header { padding: 40px 20px 16px; display: flex; justify-content: space-between; align-items: center; }
+  .phone-header h2 { font-size: 18px; font-weight: 700; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .content { padding: 0 14px 14px; }
+  .card { border-radius: 16px; margin-bottom: 12px; overflow: hidden; }
+  .card-pad { padding: 16px; }
+
+  .stats-title { font-size: 13px; font-weight: 600; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .stats-title .arrow { font-size: 16px; opacity: 0.5; }
+  .stats-row { display: flex; justify-content: space-around; text-align: center; }
+  .stat-ring { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .stat-value { font-size: 14px; font-weight: 700; }
+  .stat-label { font-size: 11px; opacity: 0.55; }
+
+  .habit-inner { display: flex; align-items: center; gap: 12px; padding: 16px; }
+  .habit-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .habit-info { flex: 1; }
+  .habit-title { font-size: 14px; font-weight: 600; }
+  .habit-sub { font-size: 12px; opacity: 0.55; }
+  .habit-pts { font-size: 11px; font-weight: 600; margin-top: 2px; }
+  .habit-arrow { font-size: 16px; opacity: 0.4; }
+
+  .challenge-inner { display: flex; gap: 12px; padding: 16px; }
+  .challenge-info { flex: 1; }
+  .challenge-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .challenge-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .challenge-date { font-size: 12px; opacity: 0.5; margin-bottom: 6px; }
+  .challenge-desc { font-size: 12px; opacity: 0.6; line-height: 1.4; }
+  .challenge-img { width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+
+  .bottom-nav { display: flex; justify-content: space-around; padding: 10px 0 6px; border-top: 1px solid rgba(0,0,0,0.06); }
+  .nav-item { text-align: center; font-size: 10px; opacity: 0.45; }
+  .nav-item.active { opacity: 1; }
+  .nav-icon { font-size: 18px; margin-bottom: 2px; }
+
+  .swatch-strip { display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
+  .swatch-group-label { font-size: 11px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+  .swatch-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .swatch-item { display: flex; flex-direction: column; align-items: center; }
+  .swatch { width: 48px; height: 48px; border-radius: 10px; }
+  .swatch-label { font-size: 9px; color: #888; text-align: center; margin-top: 3px; width: 48px; }
+  .swatch-hex { font-size: 8px; color: #555; font-family: monospace; }
+  .source-tag { display: inline-block; font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: #2a2a2a; color: #888; margin-left: 4px; }
+
+  .annotation-strip { padding: 8px 0 0; max-width: 320px; }
+  .annotation { display: flex; gap: 10px; margin-bottom: 12px; }
+  .annotation-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .annotation-text { font-size: 13px; color: #aaa; line-height: 1.45; }
+  .annotation-text strong { color: #ddd; font-weight: 600; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td { padding: 10px 8px; }
+</style>
+</head>
+<body>
+
+<h1>MHC Inside Allstate Good Life</h1>
+<p class="subtitle">3 schemes designed to differentiate MHC within the Allstate partner shell</p>
+
+<div class="context-box">
+  <div class="context-label">Design Problem</div>
+  <strong>Allstate Good Life</strong> uses indigo/purple headers, warm cream/peach coach cards, white backgrounds, and photo-heavy content. The UI is airy, warm, and consumer-friendly — which is close to where MHC wants to be. The challenge here is more subtle than Alight: Allstate already feels wellness-y, so MHC needs to carve out a distinct "clinical health" identity without looking generic.
+  <div class="partner-swatches">
+    <div class="partner-item"><div class="partner-swatch" style="background: #3b3a8e;"></div><div class="partner-swatch-label">Indigo</div></div>
+    <div class="partner-item"><div class="partner-swatch" style="background: #fdf5e0;"></div><div class="partner-swatch-label">Cream</div></div>
+    <div class="partner-item"><div class="partner-swatch" style="background: #ffffff; border: 1px solid #ccc;"></div><div class="partner-swatch-label">White BG</div></div>
+    <div class="partner-item"><div class="partner-swatch" style="background: #4a6cf7;"></div><div class="partner-swatch-label">Blue Link</div></div>
+    <div class="partner-item"><div class="partner-swatch" style="background: #eef0f8;"></div><div class="partner-swatch-label">Insight BG</div></div>
+  </div>
+  <strong>Avoid:</strong> Indigo/purple (Allstate's identity), pale cream (their coach cards), white-only backgrounds (merge with their shell), blue-purple links (their CTA color).
+</div>
+
+<!-- ===================== SCHEME 1: AQUA TEAL + WARM SAND ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Scheme 01</div>
+    <div class="screen-name">Aqua Teal + Warm Sand</div>
+    <br>
+    <span class="screen-tag" style="background: #04a0b7; color: #fff;">Recommended — clearest identity break</span>
+  </div>
+  <p class="screen-desc">Teal is the sharpest differentiator from Allstate's purple-blue world. The warm sand background is distinctly not-white, creating an immediate context shift. Mango for rewards avoids Allstate's cream-yellow while feeling warmer. This is the safest bet for SDK embeds where MHC needs to clearly be "the health experience" inside Allstate's benefits wrapper.</p>
+
+  <div class="screen-row">
+    <div class="phone" style="background: #f5f1ec;">
+      <div class="phone-header" style="background: #04a0b7; color: #fff;">
+        <h2>Welcome Andrew!</h2>
+        <div class="avatar" style="border: 2px solid rgba(255,255,255,0.3); color: #fff;">A</div>
+      </div>
+      <div class="content" style="color: #323e48;">
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="card-pad">
+            <div class="stats-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e4f6f7; border: 3px solid #04a0b7;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e2eaf2; border: 3px solid #0f497f;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #fdf5e0; border: 3px solid #f3b31e;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="habit-inner">
+            <div class="habit-icon" style="background: #fdf5e0; color: #f3b31e;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-pts" style="color: #f6851f;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+        </div>
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="challenge-inner">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #04a0b7;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #e4f6f7;">🌿</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav" style="background: #f5f1ec;">
+        <div class="nav-item active" style="color: #04a0b7;"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="swatch-strip">
+        <div class="swatch-group-label">Backgrounds</div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f5f1ec;"></div><div class="swatch-label">Sand</div><div class="swatch-hex">#f5f1ec</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fff; border: 1px solid #ddd;"></div><div class="swatch-label">Card</div><div class="swatch-hex">#ffffff</div></div>
+        </div>
+        <div class="swatch-group-label">Primary <span class="source-tag">Aqua Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #04a0b7;"></div><div class="swatch-label">Aqua Blue</div><div class="swatch-hex">#04a0b7</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #92d5da;"></div><div class="swatch-label">Sky Blue</div><div class="swatch-hex">#92d5da</div></div>
+        </div>
+        <div class="swatch-group-label">Warm Accents <span class="source-tag">Mango + Tangerine</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f3b31e;"></div><div class="swatch-label">Mango</div><div class="swatch-hex">#f3b31e</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #f6851f;"></div><div class="swatch-label">Tangerine</div><div class="swatch-hex">#f6851f</div></div>
+        </div>
+        <div class="swatch-group-label">Depth <span class="source-tag">Brand Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #0f497f;"></div><div class="swatch-label">Brand Blue</div><div class="swatch-hex">#0f497f</div></div>
+        </div>
+        <div class="swatch-group-label">Text <span class="source-tag">Charcoal + Slate</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #323e48;"></div><div class="swatch-label">Charcoal</div><div class="swatch-hex">#323e48</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #6e7a7d;"></div><div class="swatch-label">Slate</div><div class="swatch-hex">#6e7a7d</div></div>
+        </div>
+      </div>
+      <div class="annotation-strip" style="margin-top: 16px;">
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #04a0b7;"></div>
+          <div class="annotation-text"><strong>Teal vs. Allstate's indigo.</strong> Completely different hue. Allstate lives in purple-blue; MHC owns teal-cyan. No visual bleed.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f5f1ec;"></div>
+          <div class="annotation-text"><strong>Sand background vs. Allstate's white.</strong> Immediate warmth shift. Allstate's "Insights" section uses a cool blue-gray card — MHC's warmth is the opposite signal.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f3b31e;"></div>
+          <div class="annotation-text"><strong>Mango ≠ Allstate's cream.</strong> Allstate's coach cards use pale cream (#fdf5e0). Mango is saturated amber — a reward signal, not a background tint. Different role, different energy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCHEME 2: NIGHT SKY + LAVA ORANGE ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Scheme 02</div>
+    <div class="screen-name">Night Sky + Lava</div>
+  </div>
+  <p class="screen-desc">The bold play. Allstate Good Life is entirely light and airy — a Night Sky header is the hardest possible break. Lava Orange as the signature accent has zero overlap with Allstate's palette. This reads as a distinct premium health app that happens to be accessible from within Allstate. The strongest "you're in a different place now" signal.</p>
+
+  <div class="screen-row">
+    <div class="phone" style="background: #f3efea;">
+      <div class="phone-header" style="background: #062a42; color: #fff;">
+        <h2>Welcome Andrew!</h2>
+        <div class="avatar" style="border: 2px solid #f15922; color: #f15922; background: rgba(241,89,34,0.12);">A</div>
+      </div>
+      <div class="content" style="color: #323e48;">
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="card-pad">
+            <div class="stats-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e4f6f7; border: 3px solid #04a0b7;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e2eaf2; border: 3px solid #0f497f;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #fdeee6; border: 3px solid #f15922;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="habit-inner">
+            <div class="habit-icon" style="background: #fef0e4; color: #f6851f;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-pts" style="color: #f15922;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+        </div>
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="challenge-inner">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #f6851f;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #fdeee6;">🌿</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav" style="background: #f3efea;">
+        <div class="nav-item active" style="color: #062a42;"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="swatch-strip">
+        <div class="swatch-group-label">Backgrounds</div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f3efea;"></div><div class="swatch-label">Linen</div><div class="swatch-hex">#f3efea</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fff; border: 1px solid #ddd;"></div><div class="swatch-label">Card</div><div class="swatch-hex">#ffffff</div></div>
+        </div>
+        <div class="swatch-group-label">Primary <span class="source-tag">Night Sky</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #062a42;"></div><div class="swatch-label">Night Sky</div><div class="swatch-hex">#062a42</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #0f497f;"></div><div class="swatch-label">Brand Blue</div><div class="swatch-hex">#0f497f</div></div>
+        </div>
+        <div class="swatch-group-label">Signature <span class="source-tag">Lava + Tangerine</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f15922;"></div><div class="swatch-label">Lava Orng</div><div class="swatch-hex">#f15922</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #f6851f;"></div><div class="swatch-label">Tangerine</div><div class="swatch-hex">#f6851f</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fdeee6;"></div><div class="swatch-label">Lava Tint</div><div class="swatch-hex">#fdeee6</div></div>
+        </div>
+        <div class="swatch-group-label">Secondary <span class="source-tag">Aqua Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #04a0b7;"></div><div class="swatch-label">Aqua Blue</div><div class="swatch-hex">#04a0b7</div></div>
+        </div>
+        <div class="swatch-group-label">Text <span class="source-tag">Charcoal + Slate</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #323e48;"></div><div class="swatch-label">Charcoal</div><div class="swatch-hex">#323e48</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #6e7a7d;"></div><div class="swatch-label">Slate</div><div class="swatch-hex">#6e7a7d</div></div>
+        </div>
+      </div>
+      <div class="annotation-strip" style="margin-top: 16px;">
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #062a42;"></div>
+          <div class="annotation-text"><strong>Dark header vs. Allstate's all-white.</strong> Allstate Good Life has zero dark surfaces. Night Sky is the sharpest possible "you've entered MHC" transition.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f15922;"></div>
+          <div class="annotation-text"><strong>Lava Orange is MHC's signature here.</strong> Allstate has no orange anywhere. Active minutes, points, challenge labels — all Lava. Becomes the thing members associate with MHC specifically.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #04a0b7;"></div>
+          <div class="annotation-text"><strong>Aqua plays secondary.</strong> Steps ring stays teal — keeps the clinical health feeling while the orange carries the engagement energy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCHEME 3: SPRING GREEN FORWARD ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Scheme 03</div>
+    <div class="screen-name">Spring Green Vitality</div>
+  </div>
+  <p class="screen-desc">Nature-forward health. Allstate's "Wellbeing Assistants" section uses cream/peach — no green at all. MHC can own green as the health vitality signal. Brand Blue header gives familiar trust; Spring Green and Lime do the differentiation work in the body. This is the "health lives here" play — Allstate handles benefits, MHC is where you get healthier.</p>
+
+  <div class="screen-row">
+    <div class="phone" style="background: #f0f3ed;">
+      <div class="phone-header" style="background: #0f497f; color: #fff;">
+        <h2>Welcome Andrew!</h2>
+        <div class="avatar" style="border: 2px solid #90c73e; color: #90c73e; background: rgba(144,199,62,0.15);">A</div>
+      </div>
+      <div class="content" style="color: #323e48;">
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="card-pad">
+            <div class="stats-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #eaf5e8; border: 3px solid #52a045;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e2eaf2; border: 3px solid #0f497f;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f0fbe2; border: 3px solid #90c73e;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="habit-inner">
+            <div class="habit-icon" style="background: #eaf5e8; color: #52a045;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-pts" style="color: #f3b31e;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+        </div>
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="challenge-inner">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #52a045;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #eaf5e8;">🌿</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav" style="background: #f0f3ed;">
+        <div class="nav-item active" style="color: #52a045;"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="swatch-strip">
+        <div class="swatch-group-label">Backgrounds</div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f0f3ed;"></div><div class="swatch-label">Warm Leaf</div><div class="swatch-hex">#f0f3ed</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fff; border: 1px solid #ddd;"></div><div class="swatch-label">Card</div><div class="swatch-hex">#ffffff</div></div>
+        </div>
+        <div class="swatch-group-label">Authority <span class="source-tag">Brand Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #0f497f;"></div><div class="swatch-label">Brand Blue</div><div class="swatch-hex">#0f497f</div></div>
+        </div>
+        <div class="swatch-group-label">Signature <span class="source-tag">Spring + Lime Green</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #52a045;"></div><div class="swatch-label">Spring Grn</div><div class="swatch-hex">#52a045</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #90c73e;"></div><div class="swatch-label">Lime Green</div><div class="swatch-hex">#90c73e</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #eaf5e8;"></div><div class="swatch-label">Green Tint</div><div class="swatch-hex">#eaf5e8</div></div>
+        </div>
+        <div class="swatch-group-label">Rewards <span class="source-tag">Mango</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f3b31e;"></div><div class="swatch-label">Mango</div><div class="swatch-hex">#f3b31e</div></div>
+        </div>
+        <div class="swatch-group-label">Text <span class="source-tag">Charcoal + Slate</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #323e48;"></div><div class="swatch-label">Charcoal</div><div class="swatch-hex">#323e48</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #6e7a7d;"></div><div class="swatch-label">Slate</div><div class="swatch-hex">#6e7a7d</div></div>
+        </div>
+      </div>
+      <div class="annotation-strip" style="margin-top: 16px;">
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #52a045;"></div>
+          <div class="annotation-text"><strong>Green owns the body.</strong> Allstate has zero green in their UI. Nav, habits, challenges, activity rings — all green. MHC = health vitality inside Allstate's benefits wrapper.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #0f497f;"></div>
+          <div class="annotation-text"><strong>Brand Blue header vs. Allstate's indigo.</strong> Different enough to distinguish (#0f497f vs ~#3b3a8e) but close enough to feel like it belongs. This is the co-branded-friendly option.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f0f3ed;"></div>
+          <div class="annotation-text"><strong>Green-tinted warm background.</strong> Allstate is pure white. The subtle green warmth reinforces "you're in the health space" with every scroll.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COMPARISON ===== -->
+<div class="screen-section" style="max-width: 700px;">
+  <div class="screen-header">
+    <div class="screen-number">Comparison</div>
+    <div class="screen-name">Differentiation From Allstate Good Life</div>
+  </div>
+  <div style="margin-top: 20px;">
+    <table>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888; width: 150px;"></td>
+        <td style="color: #04a0b7; font-weight: 600;">01 Aqua + Sand</td>
+        <td style="color: #f15922; font-weight: 600;">02 Night Sky + Lava</td>
+        <td style="color: #52a045; font-weight: 600;">03 Green Vitality</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">Allstate differentiation</td>
+        <td>High — teal vs. indigo</td>
+        <td>Highest — dark + orange</td>
+        <td>High — green vs. purple</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">Warmth</td>
+        <td>High — sand + Mango</td>
+        <td>Highest — linen + Lava</td>
+        <td>Moderate — green-warm</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">Co-brand friendliness</td>
+        <td>Good — distinct but not jarring</td>
+        <td>Low — very bold break</td>
+        <td>Best — Brand Blue near Allstate's indigo</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">SDK embed safety</td>
+        <td>Best — warm BG is the break</td>
+        <td>Good — dark header could feel heavy inline</td>
+        <td>Good — green-tinted BG differentiates</td>
+      </tr>
+      <tr>
+        <td style="color: #888;">Reads as</td>
+        <td>Health platform, approachable</td>
+        <td>Premium health experience</td>
+        <td>Natural wellness zone</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

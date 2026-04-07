@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umbrella Partners — Home Screen Wireframes (5 Layout Variants)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+  :root {
+    --wire-bg: #FFFFFF;
+    --wire-surface: #F4F4F5;
+    --wire-border: #D4D4D8;
+    --wire-text: #27272A;
+    --wire-text-secondary: #71717A;
+    --wire-text-muted: #A1A1AA;
+    --wire-accent: #3F3F46;
+    --wire-placeholder: #E4E4E7;
+    --wire-highlight: #18181B;
+    --frame-radius: 44px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #F8F8FA;
+    color: var(--wire-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ====== PAGE LAYOUT ====== */
+  .page-header {
+    padding: 40px 48px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .page-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .page-header p {
+    font-size: 14px;
+    color: var(--wire-text-secondary);
+    line-height: 1.5;
+    max-width: 720px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: #FFF;
+    border: 1px solid var(--wire-border);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--wire-text-secondary);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .legend-swatch {
+    width: 16px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid var(--wire-border);
+  }
+
+  .frames-row {
+    display: flex;
+    gap: 24px;
+    padding: 24px 48px 60px;
+    overflow-x: auto;
+    max-width: 100vw;
+    align-items: flex-start;
+  }
+
+  /* ====== SINGLE FRAME ====== */
+  .frame-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .frame-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--wire-text);
+    margin-bottom: 4px;
+    text-align: center;
+    letter-spacing: -0.2px;
+  }
+
+  .frame-subtitle {
+    font-size: 11px;
+    color: var(--wire-text-muted);
+    margin-bottom: 12px;
+    text-align: center;
+    max-width: 260px;
+    line-height: 1.4;
+  }
+
+  .device {
+    width: 300px;
+    height: 650px;
+    background: var(--wire-bg);
+    border-radius: var(--frame-radius);
+    border: 2px solid #D4D4D8;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Notch */
+  .device::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 26px;
+    background: #D4D4D8;
+    border-radius: 0 0 16px 16px;
+    z-index: 50;
+  }
+
+  .device-scroll {
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 36px;
+    padding-bottom: 60px;
+    scrollbar-width: none;
+  }
+
+  .device-scroll::-webkit-scrollbar { display: none; }
+
+  /* ====== WIREFRAME ATOMS ====== */
+
+  /* Status bar placeholder */
+  .w-status {
+    height: 12px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .w-status-dot {
+    width: 32px;
+    height: 4px;
+    background: var(--wire-placeholder);
+    border-radius: 2px;
+  }
+
+  /* App bar */
+  .w-appbar {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--wire-border);
+  }
+
+  .w-appbar-left, .w-appbar-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .w-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1.5px solid var(--wire-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .w-icon.circle { border-radius: 50%; }
+
+  .w-icon .material-symbols-outlined {
+    font-size: 14px;
+    color: var(--wire-text-muted);
+  }
+
+  .w-logo-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--wire-text-secondary);
+    letter-spacing: -0.3px;
+  }
+
+  /* Section wrapper */
+  .w-section {
+    padding: 0 16px;
+    margin-bottom: 20px;
+  }
+
+  .w-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-top: 4px;
+  }
+
+  .w-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--wire-text);
+  }
+
+  .w-chevron {
+    font-size: 16px;
+    color: var(--wire-text-muted);
+  }
+
+  /* Greeting */
+  .w-greeting {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--wire-text);
+    padding: 12px 16px 4px;
+  }
+
+  .w-greeting strong { font-weight: 700; }
+
+  /* Generic card surface */
+  .w-card {
+    background: var(--wire-surface);
+    border: 1px solid var(--wire-border);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  /* Text placeholder lines */
+  .w-line {
+    height: 6px;
+    background: var(--wire-placeholder);
+    border-radius: 3px;
+    margin-bottom: 5px;
+  }
+
+  .w-line.w-lg { height: 10px; width: 40%; }
+  .w-line.w-md { width: 65%; }
+  .w-line.w-sm { width: 45%; }
+  .w-line.w-xs { width: 30%; }
+  .w-line.w-full { width: 100%; }
+
+  /* Metric (big number) */
+  .w-metric {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--wire-highlight);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .w-metric-label {
+    font-size: 10px;
+    color: var(--wire-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Progress bar */
+  .w-progress {
+    height: 6px;
+    background: var(--wire-placeholder);
+    border-radius: 3px;
+    margin: 8px 0 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .w-progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--wire-accent);
+    border-radius: 3px;
+  }
+
+  /* Action list row */
+  .w-action-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--wire-placeholder);
+  }
+
+  .w-action-row:last-child { border-bottom: none; }
+
+  .w-action-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--wire-border);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .w-action-check.done {
+    background: var(--wire-accent);
+    border-color: var(--wire-accent);
+  }
+
+  .w-action-check.done::after {
+    content: '✓';
+    font-size: 10px;
+    color: white;
+    font-weight: 700;
+  }
+
+  .w-action-text {
+    flex: 1;
+    font-size: 11px;
+    color: var(--wire-text);
+    line-height: 1.3;
+  }
+
+  .w-action-text.done { color: var(--wire-text-muted); text-decoration: line-through; }
+
+  .w-action-pts {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--wire-text-secondary);
+    background: var(--wire-placeholder);
+    padding: 2px 6px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Horizontal card scroll */
+  .w-hscroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    scrollbar-width: none;
+  }
+
+  .w-hscroll::-webkit-scrollbar { display: none; }
+
+  .w-hcard {
+    min-width: 152px;
+    max-width: 152px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--wire-border);
+    background: var(--wire-bg);
+    flex-shrink: 0;
+  }
+
+  .w-hcard-img {
+    height: 72px;
+    background: var(--wire-placeholder);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .w-hcard-img .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--wire-text-muted);
+  }
+
+  .w-hcard-body {
+    padding: 8px;
+  }
+
+  .w-hcard-title {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--wire-text);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .w-hcard-pts {
+    font-size: 9px;
+    color: var(--wire-text-muted);
+  }
+
+  /* Challenge banner */
+  .w-challenge {
+    background: var(--wire-accent);
+    border-radius: 10px;
+    padding: 14px;
+    color: white;
+    position: relative;
+  }
+
+  .w-challenge-tag {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  .w-challenge-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .w-challenge-desc {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+
+  .w-btn {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 14px;
+    background: white;
+    color: var(--wire-accent);
+  }
+
+  .w-btn-outline {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 14px;
+    background: transparent;
+    color: var(--wire-text-secondary);
+    border: 1.5px solid var(--wire-border);
+  }
+
+  /* Content row (horizontal: thumb + text) */
+  .w-content-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--wire-placeholder);
+  }
+
+  .w-content-row:last-child { border-bottom: none; }
+
+  .w-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    background: var(--wire-placeholder);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .w-thumb .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--wire-text-muted);
+  }
+
+  .w-content-text { flex: 1; }
+
+  .w-content-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--wire-text);
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+
+  .w-content-sub {
+    font-size: 10px;
+    color: var(--wire-text-muted);
+    line-height: 1.3;
+  }
+
+  /* Habit stats row */
+  .w-habits-row {
+    display: flex;
+    gap: 6px;
+  }
+
+  .w-habit {
+    flex: 1;
+    background: var(--wire-surface);
+    border: 1px solid var(--wire-border);
+    border-radius: 8px;
+    padding: 10px 6px;
+    text-align: center;
+  }
+
+  .w-habit .material-symbols-outlined {
+    font-size: 16px;
+    color: var(--wire-text-muted);
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .w-habit-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--wire-text);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .w-habit-label {
+    font-size: 9px;
+    color: var(--wire-text-muted);
+  }
+
+  /* Bottom nav */
+  .w-bottomnav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    background: var(--wire-bg);
+    border-top: 1px solid var(--wire-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 40;
+  }
+
+  .w-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+  }
+
+  .w-nav-item .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--wire-text-muted);
+  }
+
+  .w-nav-item.active .material-symbols-outlined {
+    color: var(--wire-text);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .w-nav-label {
+    font-size: 8px;
+    color: var(--wire-text-muted);
+  }
+
+  .w-nav-item.active .w-nav-label { color: var(--wire-text); font-weight: 600; }
+
+  /* Link text */
+  .w-link {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--wire-text-secondary);
+    text-decoration: underline;
+    text-decoration-color: var(--wire-border);
+    text-underline-offset: 2px;
+  }
+
+  /* Divider */
+  .w-divider {
+    height: 1px;
+    background: var(--wire-placeholder);
+    margin: 4px 0;
+  }
+
+  /* Reward type pills */
+  .w-reward-types {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+
+  .w-reward-pill {
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--wire-text-secondary);
+    background: var(--wire-bg);
+    border: 1px solid var(--wire-border);
+    padding: 2px 6px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  /* Rewards grid (for multi-type display) */
+  .w-rewards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .w-reward-cell {
+    background: var(--wire-bg);
+    border: 1px solid var(--wire-border);
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .w-reward-cell-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--wire-highlight);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .w-reward-cell-label {
+    font-size: 8px;
+    color: var(--wire-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  /* Reward tabs */
+  .w-reward-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--wire-border);
+  }
+
+  .w-reward-tab {
+    flex: 1;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--wire-text-muted);
+    padding: 6px 4px 8px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .w-reward-tab.active {
+    color: var(--wire-text);
+    font-weight: 700;
+    border-bottom-color: var(--wire-accent);
+  }
+
+  /* Chip scroll */
+  .w-chips {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .w-chips::-webkit-scrollbar { display: none; }
+
+  .w-chip {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--wire-text-secondary);
+    background: var(--wire-bg);
+    border: 1px solid var(--wire-border);
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .w-chip.active {
+    background: var(--wire-accent);
+    color: white;
+    border-color: var(--wire-accent);
+  }
+
+  /* Stacked metric (for earning rows) */
+  .w-earning-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--wire-placeholder);
+  }
+
+  .w-earning-row:last-child { border-bottom: none; }
+
+  .w-earning-label {
+    font-size: 10px;
+    color: var(--wire-text);
+  }
+
+  .w-earning-value {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--wire-text);
+  }
+
+  /* Variant annotation callout */
+  .w-annotation {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin: 8px 16px 12px;
+    font-size: 9px;
+    color: #92400E;
+    line-height: 1.4;
+  }
+
+  .w-annotation strong {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* Inline small metric row */
+  .w-metric-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .w-metric-sm {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--wire-highlight);
+    line-height: 1;
+  }
+
+  .w-metric-unit {
+    font-size: 10px;
+    color: var(--wire-text-muted);
+  }
+
+  /* Progress ring placeholder */
+  .w-ring {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 3px solid var(--wire-placeholder);
+    border-top-color: var(--wire-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .w-ring-value {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--wire-text);
+  }
+
+  /* ====== FRAME NOTES BELOW ====== */
+  .frame-notes {
+    max-width: 260px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #FFF;
+    border: 1px solid var(--wire-border);
+    border-radius: 8px;
+    font-size: 10px;
+    color: var(--wire-text-secondary);
+    line-height: 1.5;
+  }
+
+  .frame-notes strong {
+    color: var(--wire-text);
+    display: block;
+    margin-bottom: 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE HEADER ============ -->
+<div class="page-header">
+  <h1>Home Screen — Layout Wireframes</h1>
+  <p>5 layout variants exploring section order, rewards presentation (4 reward types: gift cards, points, store currency, raffles), and content priority. All use Personify's design patterns: bold section headers with chevrons, generous inter-section spacing, single hero moment, progressive disclosure.</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:#3F3F46"></div> Interactive / CTA</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#E4E4E7"></div> Placeholder image</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#F4F4F5"></div> Card surface</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#FFF; border-color:#FDE68A"></div> Design annotation</div>
+  </div>
+</div>
+
+<!-- ============ 5 FRAMES ============ -->
+<div class="frames-row">
+
+  <!-- ============================================================
+       VARIANT 1: REWARDS-DOMINANT
+       Personify pattern: Hero rewards → Actions → Daily → Rest
+       ============================================================ -->
+  <div class="frame-wrapper">
+    <div class="frame-label">1 · Rewards-Dominant</div>
+    <div class="frame-subtitle">Hero rewards card with all 4 types visible. Personify's primary pattern.</div>
+    <div class="device">
+      <div class="device-scroll">
+        <div class="w-status"><span class="w-status-dot"></span><span class="w-status-dot"></span></div>
+        <div class="w-appbar">
+          <div class="w-appbar-left">
+            <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+            <div class="w-icon" style="border-radius:6px;background:var(--wire-placeholder)"></div>
+          </div>
+          <span class="w-logo-text">Umbrella Partners</span>
+          <div class="w-appbar-right">
+            <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+            <div class="w-icon circle" style="background:var(--wire-placeholder)"></div>
+          </div>
+        </div>
+
+        <div class="w-greeting">Hi <strong>Andrew</strong></div>
+
+        <div class="w-annotation">
+          <strong>Rewards hero — 4 types in a 2×2 grid</strong>
+          Dominant visual moment. Each cell shows one reward type's balance. Unified progress bar below tracks overall earning.
+        </div>
+
+        <!-- Rewards Hero: 2×2 grid -->
+        <div class="w-section">
+          <div class="w-card" style="padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <span style="font-size:11px;font-weight:600;color:var(--wire-text-secondary);text-transform:uppercase;letter-spacing:0.5px;">My Rewards</span>
+              <span class="w-link">View all →</span>
+            </div>
+            <div class="w-rewards-grid">
+              <div class="w-reward-cell">
+                <div class="w-reward-cell-value">$50</div>
+                <div class="w-reward-cell-label">Gift Cards</div>
+              </div>
+              <div class="w-reward-cell">
+                <div class="w-reward-cell-value">1,240</div>
+                <div class="w-reward-cell-label">Points</div>
+              </div>
+              <div class="w-reward-cell">
+                <div class="w-reward-cell-value">860</div>
+                <div class="w-reward-cell-label">Store Credit</div>
+              </div>
+              <div class="w-reward-cell">
+                <div class="w-reward-cell-value">3</div>
+                <div class="w-reward-cell-label">Raffle Entries</div>
+              </div>
+            </div>
+            <div class="w-progress"><div class="w-progress-fill" style="width:62%"></div></div>
+            <div style="display:flex;justify-content:space-between;margin-top:4px;">
+              <span style="font-size:8px;color:var(--wire-text-muted);">62% to next reward</span>
+              <span style="font-size:8px;color:var(--wire-text-muted);">2,000 pts goal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- What to do next -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">What to do next</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-card" style="padding:4px 12px;">
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Complete Health Assessment</span>
+              <span class="w-action-pts">500 pts</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Get your A1C checked</span>
+              <span class="w-action-pts">200 pts</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Join a Team Challenge</span>
+              <span class="w-action-pts">100 pts</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check done"></div>
+              <span class="w-action-text done">Connect a wearable</span>
+              <span class="w-action-pts">Earned</span>
+            </div>
+          </div>
+          <span class="w-link" style="display:block;margin-top:6px;">See all actions →</span>
+        </div>
+
+        <!-- Daily Cards -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Daily Cards</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-hscroll">
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">self_improvement</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">5-Min Mindful Breathing</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">restaurant</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Healthy Lunch Swaps</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">bedtime</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Better Sleep Habits</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenge CTA -->
+        <div class="w-section">
+          <div class="w-challenge">
+            <div class="w-challenge-tag">Active Challenge</div>
+            <div class="w-challenge-title">Spring Into Wellness</div>
+            <div class="w-challenge-desc">3 of 8 destinations unlocked</div>
+            <span class="w-btn">Join Now</span>
+          </div>
+        </div>
+
+        <!-- Healthy Habits -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Healthy Habits</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-habits-row">
+            <div class="w-habit"><span class="material-symbols-outlined">directions_walk</span><div class="w-habit-val">6,842</div><div class="w-habit-label">Steps</div></div>
+            <div class="w-habit"><span class="material-symbols-outlined">bedtime</span><div class="w-habit-val">7.2h</div><div class="w-habit-label">Sleep</div></div>
+            <div class="w-habit"><span class="material-symbols-outlined">local_fire_department</span><div class="w-habit-val">34</div><div class="w-habit-label">Active Min</div></div>
+          </div>
+        </div>
+
+        <!-- Just For You -->
+        <div class="w-section" style="margin-bottom:40px;">
+          <div class="w-section-header">
+            <span class="w-section-title">Just for you</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">nights_stay</span></div>
+            <div class="w-content-text"><div class="w-content-title">Improve your sleep</div><div class="w-content-sub">Evidence-based techniques for better rest</div></div>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">monitor_heart</span></div>
+            <div class="w-content-text"><div class="w-content-title">Get your A1C checked</div><div class="w-content-sub">Understand your blood sugar levels</div></div>
+          </div>
+        </div>
+
+      </div>
+      <nav class="w-bottomnav">
+        <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+      </nav>
+    </div>
+    <div class="frame-notes">
+      <strong>Rewards: 2×2 grid</strong>
+      All 4 reward types visible at once. Simple, glanceable. Trade-off: each cell gets less space. Works best when all 4 types are active for a given client.
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VARIANT 2: ACTIONS-FIRST
+       Lead with what the user should DO, not what they've earned
+       ============================================================ -->
+  <div class="frame-wrapper">
+    <div class="frame-label">2 · Actions-First</div>
+    <div class="frame-subtitle">Lead with curated actions. Rewards inline as earned-today summary.</div>
+    <div class="device">
+      <div class="device-scroll">
+        <div class="w-status"><span class="w-status-dot"></span><span class="w-status-dot"></span></div>
+        <div class="w-appbar">
+          <div class="w-appbar-left">
+            <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+            <div class="w-icon" style="border-radius:6px;background:var(--wire-placeholder)"></div>
+          </div>
+          <span class="w-logo-text">Umbrella Partners</span>
+          <div class="w-appbar-right">
+            <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+            <div class="w-icon circle" style="background:var(--wire-placeholder)"></div>
+          </div>
+        </div>
+
+        <div class="w-greeting">Hi <strong>Andrew</strong></div>
+
+        <div class="w-annotation">
+          <strong>Actions-first — immediate engagement hook</strong>
+          "What should I do?" is answered before scrolling. Compact rewards ribbon sits below greeting as context, not hero.
+        </div>
+
+        <!-- Compact rewards ribbon -->
+        <div class="w-section">
+          <div class="w-card" style="padding:10px 14px; display:flex; align-items:center; justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="w-ring"><span class="w-ring-value">62%</span></div>
+              <div>
+                <div style="font-size:14px;font-weight:700;color:var(--wire-highlight);">1,240 pts</div>
+                <div style="font-size:9px;color:var(--wire-text-muted);">+165 earned today</div>
+              </div>
+            </div>
+            <span class="w-link" style="font-size:9px;">View rewards →</span>
+          </div>
+        </div>
+
+        <!-- Actions — hero section -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">What to do next</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-card" style="padding:4px 12px;">
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Complete Health Assessment</span>
+              <span class="w-action-pts">500 pts</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Get your A1C checked</span>
+              <span class="w-action-pts">$100 gift card</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Join a Team Challenge</span>
+              <span class="w-action-pts">1 raffle entry</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check done"></div>
+              <span class="w-action-text done">Connect a wearable</span>
+              <span class="w-action-pts">Earned</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Complete Diabetes Prevention</span>
+              <span class="w-action-pts">200 credits</span>
+            </div>
+          </div>
+          <span class="w-link" style="display:block;margin-top:6px;">See all actions →</span>
+        </div>
+
+        <!-- Challenge CTA (promoted higher) -->
+        <div class="w-section">
+          <div class="w-challenge">
+            <div class="w-challenge-tag">Active Challenge</div>
+            <div class="w-challenge-title">Spring Into Wellness</div>
+            <div class="w-challenge-desc">3 of 8 destinations unlocked</div>
+            <span class="w-btn">Join Now</span>
+          </div>
+        </div>
+
+        <!-- Daily Cards -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Daily Cards</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-hscroll">
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">self_improvement</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">5-Min Mindful Breathing</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">restaurant</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Healthy Lunch Swaps</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">bedtime</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Better Sleep Habits</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Healthy Habits -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Healthy Habits</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-habits-row">
+            <div class="w-habit"><span class="material-symbols-outlined">directions_walk</span><div class="w-habit-val">6,842</div><div class="w-habit-label">Steps</div></div>
+            <div class="w-habit"><span class="material-symbols-outlined">bedtime</span><div class="w-habit-val">7.2h</div><div class="w-habit-label">Sleep</div></div>
+            <div class="w-habit"><span class="material-symbols-outlined">local_fire_department</span><div class="w-habit-val">34</div><div class="w-habit-label">Active Min</div></div>
+          </div>
+        </div>
+
+        <!-- Just For You -->
+        <div class="w-section" style="margin-bottom:40px;">
+          <div class="w-section-header">
+            <span class="w-section-title">Just for you</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">nights_stay</span></div>
+            <div class="w-content-text"><div class="w-content-title">Improve your sleep</div><div class="w-content-sub">Evidence-based techniques</div></div>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">monitor_heart</span></div>
+            <div class="w-content-text"><div class="w-content-title">Get your A1C checked</div><div class="w-content-sub">Understand your blood sugar</div></div>
+          </div>
+        </div>
+      </div>
+      <nav class="w-bottomnav">
+        <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+      </nav>
+    </div>
+    <div class="frame-notes">
+      <strong>Rewards: compact ribbon + ring</strong>
+      Points balance and % to goal in one row. Action badges show the specific reward type per action (pts, gift card, raffle, credits). Rewards detail lives in the Rewards tab.
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VARIANT 3: TABBED REWARDS
+       Rewards section uses tabs to cycle through 4 reward types
+       ============================================================ -->
+  <div class="frame-wrapper">
+    <div class="frame-label">3 · Tabbed Rewards</div>
+    <div class="frame-subtitle">Rewards hero with tab navigation between 4 reward types.</div>
+    <div class="device">
+      <div class="device-scroll">
+        <div class="w-status"><span class="w-status-dot"></span><span class="w-status-dot"></span></div>
+        <div class="w-appbar">
+          <div class="w-appbar-left">
+            <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+            <div class="w-icon" style="border-radius:6px;background:var(--wire-placeholder)"></div>
+          </div>
+          <span class="w-logo-text">Umbrella Partners</span>
+          <div class="w-appbar-right">
+            <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+            <div class="w-icon circle" style="background:var(--wire-placeholder)"></div>
+          </div>
+        </div>
+
+        <div class="w-greeting">Hi <strong>Andrew</strong></div>
+
+        <div class="w-annotation">
+          <strong>Tabbed rewards — scalable to any type count</strong>
+          Tabs cycle content per reward type. Only the active type shows detail. Gracefully degrades to 1 tab if client has only one type.
+        </div>
+
+        <!-- Tabbed Rewards Hero -->
+        <div class="w-section">
+          <div class="w-card" style="padding:0;overflow:hidden;">
+            <div class="w-reward-tabs">
+              <div class="w-reward-tab active">Points</div>
+              <div class="w-reward-tab">Gift Cards</div>
+              <div class="w-reward-tab">Store</div>
+              <div class="w-reward-tab">Raffles</div>
+            </div>
+            <div style="padding:14px;">
+              <div class="w-metric">1,240</div>
+              <div class="w-metric-label" style="margin-bottom:8px;">Points earned</div>
+              <div class="w-progress"><div class="w-progress-fill" style="width:62%"></div></div>
+              <div style="display:flex;justify-content:space-between;margin-top:4px;">
+                <span style="font-size:8px;color:var(--wire-text-muted);">0 pts</span>
+                <span style="font-size:8px;color:var(--wire-text-muted);">2,000 pts goal</span>
+              </div>
+              <div style="margin-top:10px;border-top:1px solid var(--wire-placeholder);padding-top:8px;">
+                <div class="w-earning-row"><span class="w-earning-label">Daily Cards</span><span class="w-earning-value">+20</span></div>
+                <div class="w-earning-row"><span class="w-earning-label">Challenge steps</span><span class="w-earning-value">+140</span></div>
+                <div class="w-earning-row"><span class="w-earning-label">Wearable sync</span><span class="w-earning-value">+5</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What to do next -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">What to do next</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-card" style="padding:4px 12px;">
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Complete Health Assessment</span>
+              <span class="w-action-pts">500 pts</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Get your A1C checked</span>
+              <span class="w-action-pts">200 pts</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check done"></div>
+              <span class="w-action-text done">Connect a wearable</span>
+              <span class="w-action-pts">Earned</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daily Cards -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Daily Cards</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-hscroll">
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">self_improvement</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">5-Min Mindful Breathing</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">restaurant</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Healthy Lunch Swaps</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenge -->
+        <div class="w-section">
+          <div class="w-challenge">
+            <div class="w-challenge-tag">Active Challenge</div>
+            <div class="w-challenge-title">Spring Into Wellness</div>
+            <div class="w-challenge-desc">3 of 8 destinations unlocked</div>
+            <span class="w-btn">Join Now</span>
+          </div>
+        </div>
+
+        <!-- Healthy Habits -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Healthy Habits</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-habits-row">
+            <div class="w-habit"><span class="material-symbols-outlined">directions_walk</span><div class="w-habit-val">6,842</div><div class="w-habit-label">Steps</div></div>
+            <div class="w-habit"><span class="material-symbols-outlined">bedtime</span><div class="w-habit-val">7.2h</div><div class="w-habit-label">Sleep</div></div>
+            <div class="w-habit"><span class="material-symbols-outlined">local_fire_department</span><div class="w-habit-val">34</div><div class="w-habit-label">Active Min</div></div>
+          </div>
+        </div>
+
+        <!-- Just For You -->
+        <div class="w-section" style="margin-bottom:40px;">
+          <div class="w-section-header">
+            <span class="w-section-title">Just for you</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">nights_stay</span></div>
+            <div class="w-content-text"><div class="w-content-title">Improve your sleep</div><div class="w-content-sub">Evidence-based techniques</div></div>
+          </div>
+        </div>
+      </div>
+      <nav class="w-bottomnav">
+        <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+      </nav>
+    </div>
+    <div class="frame-notes">
+      <strong>Rewards: tabbed switcher</strong>
+      Each tab shows that type's balance, progress, and recent earnings. Scales from 1–4 tabs based on client config. Drawback: adds a tap to see other types. Includes Personify-style "earned today" itemized list.
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VARIANT 4: HABITS + HEALTH FORWARD
+       Health data hero → Rewards compact → Actions → Content
+       ============================================================ -->
+  <div class="frame-wrapper">
+    <div class="frame-label">4 · Health-Forward</div>
+    <div class="frame-subtitle">Healthy habits as hero. Rewards + actions follow. Health-first framing.</div>
+    <div class="device">
+      <div class="device-scroll">
+        <div class="w-status"><span class="w-status-dot"></span><span class="w-status-dot"></span></div>
+        <div class="w-appbar">
+          <div class="w-appbar-left">
+            <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+            <div class="w-icon" style="border-radius:6px;background:var(--wire-placeholder)"></div>
+          </div>
+          <span class="w-logo-text">Umbrella Partners</span>
+          <div class="w-appbar-right">
+            <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+            <div class="w-icon circle" style="background:var(--wire-placeholder)"></div>
+          </div>
+        </div>
+
+        <div class="w-greeting">Hi <strong>Andrew</strong></div>
+
+        <div class="w-annotation">
+          <strong>Health-first — lead with today's activity</strong>
+          Hero is health data rings. Positions the app as a health tool first, rewards second. Better for employers who want to lead with outcomes, not incentives.
+        </div>
+
+        <!-- Health Data Hero -->
+        <div class="w-section">
+          <div class="w-card" style="padding:16px;">
+            <div style="font-size:11px;font-weight:600;color:var(--wire-text-secondary);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;">Today's Activity</div>
+            <div style="display:flex;justify-content:space-around;align-items:center;margin-bottom:12px;">
+              <div style="text-align:center;">
+                <div class="w-ring" style="width:56px;height:56px;border-width:4px;margin:0 auto 6px;"><span class="w-ring-value" style="font-size:12px;">68%</span></div>
+                <div style="font-size:15px;font-weight:700;color:var(--wire-highlight);">6,842</div>
+                <div style="font-size:9px;color:var(--wire-text-muted);">Steps</div>
+              </div>
+              <div style="text-align:center;">
+                <div class="w-ring" style="width:56px;height:56px;border-width:4px;margin:0 auto 6px;"><span class="w-ring-value" style="font-size:12px;">90%</span></div>
+                <div style="font-size:15px;font-weight:700;color:var(--wire-highlight);">7.2h</div>
+                <div style="font-size:9px;color:var(--wire-text-muted);">Sleep</div>
+              </div>
+              <div style="text-align:center;">
+                <div class="w-ring" style="width:56px;height:56px;border-width:4px;margin:0 auto 6px;"><span class="w-ring-value" style="font-size:12px;">57%</span></div>
+                <div style="font-size:15px;font-weight:700;color:var(--wire-highlight);">34</div>
+                <div style="font-size:9px;color:var(--wire-text-muted);">Active Min</div>
+              </div>
+            </div>
+            <span class="w-link" style="font-size:10px;">Track my habits →</span>
+          </div>
+        </div>
+
+        <!-- Rewards — horizontal chip-based -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">My Rewards</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px 4px;">
+            <div style="flex:0 0 auto;background:var(--wire-surface);border:1px solid var(--wire-border);border-radius:10px;padding:10px 14px;text-align:center;min-width:100px;">
+              <div style="font-size:16px;font-weight:700;color:var(--wire-highlight);">1,240</div>
+              <div style="font-size:9px;color:var(--wire-text-muted);">Points</div>
+            </div>
+            <div style="flex:0 0 auto;background:var(--wire-surface);border:1px solid var(--wire-border);border-radius:10px;padding:10px 14px;text-align:center;min-width:100px;">
+              <div style="font-size:16px;font-weight:700;color:var(--wire-highlight);">$50</div>
+              <div style="font-size:9px;color:var(--wire-text-muted);">Gift Cards</div>
+            </div>
+            <div style="flex:0 0 auto;background:var(--wire-surface);border:1px solid var(--wire-border);border-radius:10px;padding:10px 14px;text-align:center;min-width:100px;">
+              <div style="font-size:16px;font-weight:700;color:var(--wire-highlight);">860</div>
+              <div style="font-size:9px;color:var(--wire-text-muted);">Store Credit</div>
+            </div>
+            <div style="flex:0 0 auto;background:var(--wire-surface);border:1px solid var(--wire-border);border-radius:10px;padding:10px 14px;text-align:center;min-width:100px;">
+              <div style="font-size:16px;font-weight:700;color:var(--wire-highlight);">3</div>
+              <div style="font-size:9px;color:var(--wire-text-muted);">Raffle Entries</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What to do next -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">What to do next</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-card" style="padding:4px 12px;">
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Complete Health Assessment</span>
+              <span class="w-action-pts">500 pts</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Get your A1C checked</span>
+              <span class="w-action-pts">$100 gift card</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Join a Team Challenge</span>
+              <span class="w-action-pts">1 raffle entry</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenge -->
+        <div class="w-section">
+          <div class="w-challenge">
+            <div class="w-challenge-tag">Active Challenge</div>
+            <div class="w-challenge-title">Spring Into Wellness</div>
+            <div class="w-challenge-desc">3 of 8 destinations unlocked</div>
+            <span class="w-btn">Join Now</span>
+          </div>
+        </div>
+
+        <!-- Daily Cards -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Daily Cards</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-hscroll">
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">self_improvement</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">5-Min Mindful Breathing</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">restaurant</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Healthy Lunch Swaps</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Just For You -->
+        <div class="w-section" style="margin-bottom:40px;">
+          <div class="w-section-header">
+            <span class="w-section-title">Just for you</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">nights_stay</span></div>
+            <div class="w-content-text"><div class="w-content-title">Improve your sleep</div><div class="w-content-sub">Evidence-based techniques</div></div>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">monitor_heart</span></div>
+            <div class="w-content-text"><div class="w-content-title">Get your A1C checked</div><div class="w-content-sub">Understand your blood sugar</div></div>
+          </div>
+        </div>
+      </div>
+      <nav class="w-bottomnav">
+        <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+      </nav>
+    </div>
+    <div class="frame-notes">
+      <strong>Rewards: horizontal scroll cards</strong>
+      Each reward type is a scrollable card. Shows only types the client has configured — naturally scales from 1–4. Health data hero with progress rings positions the app as health-first, rewards-second.
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       VARIANT 5: COMBINED HERO
+       Single unified card: health + rewards + next action
+       ============================================================ -->
+  <div class="frame-wrapper">
+    <div class="frame-label">5 · Combined Hero</div>
+    <div class="frame-subtitle">Unified hero merges health, rewards, and next action into one card.</div>
+    <div class="device">
+      <div class="device-scroll">
+        <div class="w-status"><span class="w-status-dot"></span><span class="w-status-dot"></span></div>
+        <div class="w-appbar">
+          <div class="w-appbar-left">
+            <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+            <div class="w-icon" style="border-radius:6px;background:var(--wire-placeholder)"></div>
+          </div>
+          <span class="w-logo-text">Umbrella Partners</span>
+          <div class="w-appbar-right">
+            <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+            <div class="w-icon circle" style="background:var(--wire-placeholder)"></div>
+          </div>
+        </div>
+
+        <div class="w-greeting">Hi <strong>Andrew</strong></div>
+
+        <div class="w-annotation">
+          <strong>Combined hero — everything at a glance</strong>
+          One card answers three questions: How am I doing? What have I earned? What should I do next? Highest information density above the fold.
+        </div>
+
+        <!-- COMBINED HERO CARD -->
+        <div class="w-section">
+          <div class="w-card" style="padding:0;overflow:hidden;">
+            <!-- Top: health rings -->
+            <div style="padding:14px;border-bottom:1px solid var(--wire-placeholder);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <span style="font-size:11px;font-weight:600;color:var(--wire-text-secondary);text-transform:uppercase;letter-spacing:0.5px;">Today</span>
+                <span class="w-link" style="font-size:9px;">Details →</span>
+              </div>
+              <div style="display:flex;justify-content:space-around;align-items:center;">
+                <div style="text-align:center;">
+                  <div class="w-ring" style="margin:0 auto 4px;"><span class="w-ring-value">68%</span></div>
+                  <div style="font-size:9px;color:var(--wire-text-muted);">Steps</div>
+                </div>
+                <div style="text-align:center;">
+                  <div class="w-ring" style="margin:0 auto 4px;"><span class="w-ring-value">90%</span></div>
+                  <div style="font-size:9px;color:var(--wire-text-muted);">Sleep</div>
+                </div>
+                <div style="text-align:center;">
+                  <div class="w-ring" style="margin:0 auto 4px;"><span class="w-ring-value">57%</span></div>
+                  <div style="font-size:9px;color:var(--wire-text-muted);">Active</div>
+                </div>
+              </div>
+            </div>
+            <!-- Middle: rewards summary row -->
+            <div style="padding:12px 14px;border-bottom:1px solid var(--wire-placeholder);display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;gap:12px;">
+                <div style="text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--wire-highlight);">1,240</div><div style="font-size:8px;color:var(--wire-text-muted);">Points</div></div>
+                <div style="width:1px;background:var(--wire-placeholder);"></div>
+                <div style="text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--wire-highlight);">$50</div><div style="font-size:8px;color:var(--wire-text-muted);">Gift Cards</div></div>
+                <div style="width:1px;background:var(--wire-placeholder);"></div>
+                <div style="text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--wire-highlight);">860</div><div style="font-size:8px;color:var(--wire-text-muted);">Credits</div></div>
+                <div style="width:1px;background:var(--wire-placeholder);"></div>
+                <div style="text-align:center;"><div style="font-size:14px;font-weight:700;color:var(--wire-highlight);">3</div><div style="font-size:8px;color:var(--wire-text-muted);">Raffles</div></div>
+              </div>
+            </div>
+            <!-- Bottom: next action -->
+            <div style="padding:12px 14px;display:flex;align-items:center;gap:10px;">
+              <div style="flex:1;">
+                <div style="font-size:9px;color:var(--wire-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;">Up next</div>
+                <div style="font-size:11px;font-weight:600;color:var(--wire-text);">Complete Health Assessment</div>
+              </div>
+              <span class="w-btn-outline">500 pts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions (rest of list) -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">More actions</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-card" style="padding:4px 12px;">
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Get your A1C checked</span>
+              <span class="w-action-pts">$100 gift card</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check"></div>
+              <span class="w-action-text">Join a Team Challenge</span>
+              <span class="w-action-pts">1 raffle entry</span>
+            </div>
+            <div class="w-action-row">
+              <div class="w-action-check done"></div>
+              <span class="w-action-text done">Connect a wearable</span>
+              <span class="w-action-pts">Earned</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenge -->
+        <div class="w-section">
+          <div class="w-challenge">
+            <div class="w-challenge-tag">Active Challenge</div>
+            <div class="w-challenge-title">Spring Into Wellness</div>
+            <div class="w-challenge-desc">3 of 8 destinations unlocked</div>
+            <span class="w-btn">Join Now</span>
+          </div>
+        </div>
+
+        <!-- Daily Cards -->
+        <div class="w-section">
+          <div class="w-section-header">
+            <span class="w-section-title">Daily Cards</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-hscroll">
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">self_improvement</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">5-Min Mindful Breathing</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">restaurant</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Healthy Lunch Swaps</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+            <div class="w-hcard">
+              <div class="w-hcard-img"><span class="material-symbols-outlined">bedtime</span></div>
+              <div class="w-hcard-body"><div class="w-hcard-title">Better Sleep Habits</div><div class="w-hcard-pts">5 pts</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Just For You -->
+        <div class="w-section" style="margin-bottom:40px;">
+          <div class="w-section-header">
+            <span class="w-section-title">Just for you</span>
+            <span class="material-symbols-outlined w-chevron">chevron_right</span>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">nights_stay</span></div>
+            <div class="w-content-text"><div class="w-content-title">Improve your sleep</div><div class="w-content-sub">Evidence-based techniques</div></div>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">monitor_heart</span></div>
+            <div class="w-content-text"><div class="w-content-title">Get your A1C checked</div><div class="w-content-sub">Understand your blood sugar</div></div>
+          </div>
+        </div>
+      </div>
+      <nav class="w-bottomnav">
+        <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+        <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+      </nav>
+    </div>
+    <div class="frame-notes">
+      <strong>Rewards: inline metric row in hero</strong>
+      All 4 types as a single horizontal row with dividers — compact, scannable. The combined hero packs health + rewards + next action into one card. Risk: card gets tall; may feel dense. Benefit: answers all three key questions without scrolling.
+    </div>
+  </div>
+
+</div><!-- /frames-row -->
+
+</body>
+</html>

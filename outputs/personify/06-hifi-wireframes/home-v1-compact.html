@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umbrella Partners — Home V1 Wireframe (Compact / Data-Dense)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+  :root {
+    --w-bg: #FFFFFF;
+    --w-surface: #F4F4F5;
+    --w-border: #D4D4D8;
+    --w-text: #27272A;
+    --w-secondary: #71717A;
+    --w-muted: #A1A1AA;
+    --w-dark: #0f497f;
+    --w-placeholder: #E4E4E7;
+    --w-tag-bg: #EDE9FE;
+    --w-tag-text: #6D28D9;
+    --w-tag-border: #C4B5FD;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #F8F8FA;
+    color: var(--w-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ====== PAGE CHROME ====== */
+  .page-header {
+    padding: 40px 40px 20px;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+  .page-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--w-secondary); line-height: 1.5; max-width: 800px; }
+
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px;
+    padding: 10px 14px; background: #FFF; border: 1px solid var(--w-border);
+    border-radius: 8px; font-size: 11px; color: var(--w-secondary);
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 14px; height: 10px; border-radius: 2px; border: 1px solid var(--w-border); }
+
+  .frames-row {
+    display: flex; gap: 28px; padding: 20px 40px 60px;
+    overflow-x: auto; max-width: 100vw; align-items: flex-start;
+  }
+
+  /* ====== FRAME WRAPPER ====== */
+  .frame-wrapper { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .frame-label { font-size: 13px; font-weight: 700; color: var(--w-text); margin-bottom: 3px; }
+  .frame-subtitle { font-size: 10px; color: var(--w-muted); margin-bottom: 10px; text-align: center; max-width: 280px; line-height: 1.4; }
+
+  /* ====== DEVICE ====== */
+  .device {
+    width: 310px; height: 672px; background: var(--w-bg);
+    border-radius: 40px; border: 2px solid #C4C4C8; overflow: hidden; position: relative;
+  }
+  .device::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 96px; height: 24px; background: #C4C4C8; border-radius: 0 0 14px 14px; z-index: 50;
+  }
+  .device-scroll {
+    height: 100%; overflow-y: auto; padding-top: 32px; padding-bottom: 44px; scrollbar-width: none;
+  }
+  .device-scroll::-webkit-scrollbar { display: none; }
+
+  /* ====== COMPONENT TAG (purple pill) ====== */
+  .mtag {
+    display: inline-flex; align-items: center; gap: 2px;
+    font-size: 7.5px; font-weight: 600; font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--w-tag-text); background: var(--w-tag-bg); border: 1px solid var(--w-tag-border);
+    padding: 1px 5px; border-radius: 3px; white-space: nowrap; letter-spacing: 0.2px;
+    vertical-align: middle; line-height: 1.4;
+  }
+
+  /* ====== WIREFRAME ATOMS ====== */
+  .w-appbar {
+    height: 44px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; border-bottom: 1px solid var(--w-border); position: relative;
+  }
+  .w-appbar .mtag { position: absolute; top: 2px; right: 12px; }
+  .w-appbar-left, .w-appbar-right { display: flex; gap: 6px; align-items: center; }
+  .w-icon {
+    width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid var(--w-border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-icon.circle { border-radius: 50%; }
+  .w-icon .material-symbols-outlined { font-size: 13px; color: var(--w-muted); }
+  .w-logo { font-size: 10px; font-weight: 600; color: var(--w-secondary); }
+
+  .w-section { padding: 0 12px; margin-bottom: 10px; }
+
+  .w-section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px; padding-top: 2px;
+  }
+  .w-section-title { font-size: 12px; font-weight: 700; color: var(--w-text); }
+  .w-chevron { font-size: 14px; color: var(--w-muted); }
+
+  .w-greeting { font-size: 14px; font-weight: 400; color: var(--w-text); padding: 8px 12px 3px; }
+  .w-greeting strong { font-weight: 700; }
+
+  .w-card {
+    background: var(--w-surface); border: 1px solid var(--w-border);
+    border-radius: 8px; padding: 8px; margin-bottom: 4px; position: relative;
+  }
+  .w-card > .mtag:first-child { position: absolute; top: -8px; left: 8px; }
+
+  .w-progress { height: 4px; background: var(--w-placeholder); border-radius: 2px; margin: 4px 0 2px; overflow: hidden; position: relative; }
+  .w-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--w-dark); border-radius: 2px; }
+
+  .w-action-row {
+    display: flex; align-items: center; gap: 6px; padding: 4px 0;
+    border-bottom: 1px solid var(--w-placeholder); font-size: 10px;
+  }
+  .w-action-row:last-child { border-bottom: none; }
+  .w-action-check {
+    width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--w-border); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-action-check.done { background: var(--w-dark); border-color: var(--w-dark); }
+  .w-action-check.done::after { content: '✓'; font-size: 8px; color: white; font-weight: 700; }
+  .w-action-text { flex: 1; color: var(--w-text); line-height: 1.2; font-size: 9px; }
+  .w-action-text.done { color: var(--w-muted); text-decoration: line-through; }
+  .w-action-pts {
+    font-size: 7px; font-weight: 600; color: var(--w-secondary);
+    background: var(--w-placeholder); padding: 2px 4px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+  }
+
+  .w-hscroll {
+    display: flex; gap: 4px; overflow-x: auto; padding-bottom: 2px;
+    margin: 0 -12px; padding-left: 12px; padding-right: 12px; scrollbar-width: none;
+  }
+  .w-hscroll::-webkit-scrollbar { display: none; }
+  .w-hcard {
+    min-width: 120px; max-width: 120px; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--w-border); background: var(--w-bg); flex-shrink: 0; position: relative;
+  }
+  .w-hcard > .mtag { position: absolute; top: 3px; left: 3px; z-index: 2; }
+  .w-hcard-img {
+    height: 56px; background: var(--w-placeholder);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-hcard-img .material-symbols-outlined { font-size: 18px; color: var(--w-muted); }
+  .w-hcard-body { padding: 5px 6px; }
+  .w-hcard-title { font-size: 8px; font-weight: 600; color: var(--w-text); margin-bottom: 2px; line-height: 1.2; }
+  .w-hcard-pts { font-size: 7px; color: var(--w-muted); }
+
+  .w-challenge {
+    background: var(--w-dark); border-radius: 8px; padding: 8px; color: white; position: relative;
+    font-size: 10px; min-height: 120px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .w-challenge > .mtag:first-child { position: absolute; top: -8px; left: 8px; }
+  .w-challenge-tag { font-size: 7px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; opacity: 0.6; margin-bottom: 2px; }
+  .w-challenge-title { font-size: 12px; font-weight: 700; margin-bottom: 2px; line-height: 1.2; }
+  .w-challenge-desc { font-size: 8px; opacity: 0.6; margin-bottom: 6px; line-height: 1.2; }
+  .w-btn {
+    display: inline-block; font-size: 8px; font-weight: 600; padding: 3px 8px;
+    border-radius: 10px; background: white; color: var(--w-dark); text-align: center;
+  }
+
+  .w-metrics-row { display: flex; gap: 4px; position: relative; }
+  .w-metric {
+    flex: 1; background: var(--w-surface); border: 1px solid var(--w-border);
+    border-radius: 8px; padding: 6px 4px; text-align: center; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; font-size: 9px;
+  }
+  .w-metric .material-symbols-outlined { font-size: 12px; color: var(--w-muted); margin-bottom: 2px; }
+  .w-metric-val { font-size: 10px; font-weight: 700; color: var(--w-text); line-height: 1; margin-bottom: 1px; }
+  .w-metric-label { font-size: 7px; color: var(--w-muted); }
+
+  .w-rewards-strip { display: flex; gap: 0; position: relative; }
+  .w-reward-col {
+    flex: 1; padding: 6px 4px; text-align: center; border-right: 1px solid var(--w-border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .w-reward-col:last-child { border-right: none; }
+  .w-reward-val { font-size: 11px; font-weight: 700; color: var(--w-dark); line-height: 1; margin-bottom: 1px; }
+  .w-reward-label { font-size: 6px; color: var(--w-muted); text-transform: uppercase; letter-spacing: 0.2px; }
+
+  .w-bottomnav {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 44px;
+    background: var(--w-bg); border-top: 1px solid var(--w-border);
+    display: flex; align-items: center; justify-content: space-around; z-index: 40;
+  }
+  .w-nav-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .w-nav-item .material-symbols-outlined { font-size: 16px; color: var(--w-muted); }
+  .w-nav-item.active .material-symbols-outlined { color: var(--w-text); font-variation-settings: 'FILL' 1; }
+  .w-nav-label { font-size: 7px; color: var(--w-muted); }
+  .w-nav-item.active .w-nav-label { color: var(--w-text); font-weight: 600; }
+
+  .w-link { font-size: 8px; font-weight: 500; color: var(--w-secondary); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Annotation box */
+  .w-note {
+    background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 5px;
+    padding: 5px 8px; margin: 6px 12px 10px; font-size: 8px; color: #92400E; line-height: 1.4;
+  }
+  .w-note strong { font-weight: 700; display: block; margin-bottom: 1px; }
+
+  /* Component map table under each frame */
+  .comp-map {
+    max-width: 280px; margin-top: 8px; width: 100%;
+    border-collapse: collapse; font-size: 8px;
+  }
+  .comp-map th {
+    text-align: left; padding: 4px 6px; background: var(--w-surface);
+    border: 1px solid var(--w-border); font-weight: 600; color: var(--w-text);
+  }
+  .comp-map td {
+    padding: 3px 6px; border: 1px solid var(--w-border); color: var(--w-secondary);
+    vertical-align: top; line-height: 1.4;
+  }
+  .comp-map code {
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 7.5px;
+    color: var(--w-tag-text); background: var(--w-tag-bg);
+    padding: 0 3px; border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Home Screen — V1 Wireframe (Compact / Data-Dense)</h1>
+  <p>Maximizes information density for power users. Reduced spacing (12px sections, 8-10px card padding), compressed typography, 4-column reward strip, 3-column health metrics, dense action list, smaller daily cards (120×140px), compact challenge card, 44px bottom nav. Purple tags = Material components. Yellow boxes = V1-specific design decisions.</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-tag-bg);border-color:var(--w-tag-border);"></div> Material component tag</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#FFFBEB;border-color:#FDE68A;"></div> Design annotation</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-surface);"></div> Card surface</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-placeholder);"></div> Placeholder image</div>
+  </div>
+</div>
+
+<div class="frames-row">
+
+<!-- ====================================================================
+     V1: COMPACT / DATA-DENSE
+     ==================================================================== -->
+<div class="frame-wrapper">
+  <div class="frame-label">V1 · Compact / Data-Dense</div>
+  <div class="frame-subtitle">Dashboard-dense layout for power users. 40% tighter spacing, 4-column rewards strip, tabular health metrics.</div>
+  <div class="device">
+    <div class="device-scroll">
+
+      <!-- APP BAR -->
+      <div class="w-appbar">
+        <div class="w-appbar-left">
+          <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+          <div class="w-icon" style="border-radius:6px;background:var(--w-placeholder);"></div>
+        </div>
+        <span class="w-logo">Umbrella Partners</span>
+        <div class="w-appbar-right">
+          <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+          <div class="w-icon circle" style="background:var(--w-placeholder);"></div>
+        </div>
+        <span class="mtag">mat-toolbar</span>
+      </div>
+
+      <!-- GREETING -->
+      <div class="w-greeting">Hi <strong>Andrew</strong> <span class="mtag">body-medium · 12sp</span></div>
+
+      <!-- REWARDS STRIP: HORIZONTAL 4-COLUMN -->
+      <div class="w-section">
+        <div class="w-card" style="padding:6px 8px;position:relative;">
+          <span class="mtag" style="position:absolute;top:-8px;left:8px;">mat-card · z1</span>
+          <div style="font-size:9px;font-weight:600;color:var(--w-secondary);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;">
+            <span>My Rewards</span><span class="w-link" style="text-decoration:none;font-weight:500;">→</span>
+          </div>
+          <div class="w-rewards-strip">
+            <div class="w-reward-col" style="position:relative;">
+              <span class="mtag" style="position:absolute;bottom:-12px;left:2px;">mat-grid-list cols=4</span>
+              <div class="w-reward-val">$50</div>
+              <div class="w-reward-label">Gift Cards</div>
+            </div>
+            <div class="w-reward-col">
+              <div class="w-reward-val">1,240</div>
+              <div class="w-reward-label">Points</div>
+            </div>
+            <div class="w-reward-col">
+              <div class="w-reward-val">860</div>
+              <div class="w-reward-label">Store Credit</div>
+            </div>
+            <div class="w-reward-col">
+              <div class="w-reward-val">3</div>
+              <div class="w-reward-label">Raffle</div>
+            </div>
+          </div>
+          <div class="w-progress" style="position:relative;margin-top:6px;"><div class="w-progress-fill" style="width:62%"></div><span class="mtag" style="position:absolute;top:-9px;right:0;">mat-progress-bar</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:6px;color:var(--w-muted);margin-top:2px;"><span>62% to goal</span><span>2,000 pts</span></div>
+        </div>
+      </div>
+
+      <!-- HEALTH METRICS: 3-COLUMN TABULAR -->
+      <div class="w-section">
+        <div class="w-section-header">
+          <span class="w-section-title">Health Metrics</span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div class="w-metrics-row">
+          <div class="w-metric" style="position:relative;">
+            <span class="mtag" style="position:absolute;top:-8px;right:4px;">mat-grid-list cols=3</span>
+            <span class="material-symbols-outlined">directions_walk</span>
+            <div class="w-metric-val">6,842</div>
+            <div class="w-metric-label">Steps</div>
+            <div style="font-size:6px;color:var(--w-muted);margin-top:1px;">10k goal</div>
+          </div>
+          <div class="w-metric">
+            <span class="material-symbols-outlined">bedtime</span>
+            <div class="w-metric-val">7.2h</div>
+            <div class="w-metric-label">Sleep</div>
+            <div style="font-size:6px;color:var(--w-muted);margin-top:1px;">8h goal</div>
+          </div>
+          <div class="w-metric">
+            <span class="material-symbols-outlined">local_fire_department</span>
+            <div class="w-metric-val">34</div>
+            <div class="w-metric-label">Active Min</div>
+            <div style="font-size:6px;color:var(--w-muted);margin-top:1px;">60 min goal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIONS: DENSE LIST -->
+      <div class="w-section">
+        <div class="w-section-header">
+          <span class="w-section-title">My Actions</span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div class="w-card" style="padding:6px 8px;position:relative;">
+          <span class="mtag" style="position:absolute;top:-8px;left:8px;">mat-list + mat-chip</span>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">Complete Health Assessment</span>
+            <span class="w-action-pts">500 pts</span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">Get A1C checked</span>
+            <span class="w-action-pts">$100 GC</span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">Join Team Challenge</span>
+            <span class="w-action-pts">1 raffle</span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check done"></div>
+            <span class="w-action-text done">Connect wearable</span>
+            <span class="w-action-pts">Earned</span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">Diabetes Prevention DCP</span>
+            <span class="w-action-pts">200 cr</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAILY CARDS: SMALLER, TIGHTER SCROLL -->
+      <div class="w-section">
+        <div class="w-section-header">
+          <span class="w-section-title">Daily Cards</span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div class="w-note"><strong>Smaller cards (120×140px):</strong> Reduced image height (56px), tighter padding. Scans quickly as micro-tasks.</div>
+        <div class="w-hscroll">
+          <div class="w-hcard">
+            <span class="mtag">mat-card</span>
+            <div class="w-hcard-img"><span class="material-symbols-outlined">self_improvement</span></div>
+            <div class="w-hcard-body"><div class="w-hcard-title">Mindful Breathing</div><div class="w-hcard-pts">5 pts</div></div>
+          </div>
+          <div class="w-hcard">
+            <div class="w-hcard-img"><span class="material-symbols-outlined">restaurant</span></div>
+            <div class="w-hcard-body"><div class="w-hcard-title">Healthy Lunch Swaps</div><div class="w-hcard-pts">5 pts</div></div>
+          </div>
+          <div class="w-hcard">
+            <div class="w-hcard-img"><span class="material-symbols-outlined">bedtime</span></div>
+            <div class="w-hcard-body"><div class="w-hcard-title">Better Sleep Habits</div><div class="w-hcard-pts">5 pts</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHALLENGE: COMPACT, 120PX TALL -->
+      <div class="w-section">
+        <div class="w-challenge" style="position:relative;">
+          <span class="mtag" style="position:absolute;top:-8px;left:8px;">mat-card · image overlay</span>
+          <div>
+            <div class="w-challenge-tag">Challenge</div>
+            <div class="w-challenge-title">Spring Into Wellness</div>
+            <div class="w-challenge-desc" style="margin-bottom:4px;">3 of 8 destinations <span class="mtag">mat-progress-bar</span></div>
+          </div>
+          <span class="w-btn">[mat-flat-button]</span>
+        </div>
+      </div>
+
+      <!-- JUST FOR YOU: COMPACT RECOMMENDATIONS -->
+      <div class="w-section" style="margin-bottom:40px;">
+        <div class="w-section-header">
+          <span class="w-section-title">Just for you</span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div class="w-card" style="padding:6px 8px;position:relative;">
+          <span class="mtag" style="position:absolute;top:-8px;left:8px;">mat-list</span>
+          <div class="w-action-row" style="gap:4px;">
+            <div style="width:28px;height:28px;border-radius:4px;background:var(--w-placeholder);flex-shrink:0;display:flex;align-items:center;justify-content:center;"><span class="material-symbols-outlined" style="font-size:12px;color:var(--w-muted);">nights_stay</span></div>
+            <div style="flex:1;font-size:8px;"><div style="font-weight:600;color:var(--w-text);margin-bottom:1px;">Improve your sleep</div><div style="color:var(--w-muted);font-size:7px;">Evidence-based</div></div>
+          </div>
+          <div class="w-action-row" style="gap:4px;">
+            <div style="width:28px;height:28px;border-radius:4px;background:var(--w-placeholder);flex-shrink:0;display:flex;align-items:center;justify-content:center;"><span class="material-symbols-outlined" style="font-size:12px;color:var(--w-muted);">monitor_heart</span></div>
+            <div style="flex:1;font-size:8px;"><div style="font-weight:600;color:var(--w-text);margin-bottom:1px;">Get your A1C checked</div><div style="color:var(--w-muted);font-size:7px;">Blood sugar levels</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <nav class="w-bottomnav" style="position:relative;">
+      <span class="mtag" style="position:absolute;top:2px;right:8px;">mat-tab-nav-bar · 44px</span>
+      <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+    </nav>
+  </div>
+
+  <table class="comp-map">
+    <tr><th>Section</th><th>Material Components</th></tr>
+    <tr><td>App bar</td><td><code>mat-toolbar</code> + <code>mat-icon-button</code></td></tr>
+    <tr><td>Rewards strip</td><td><code>mat-card</code> z1 + <code>mat-grid-list</code> cols=4 + <code>mat-progress-bar</code></td></tr>
+    <tr><td>Health metrics</td><td><code>mat-grid-list</code> cols=3 + <code>mat-icon</code></td></tr>
+    <tr><td>Actions</td><td><code>mat-list</code> + <code>mat-chip</code> (badges) + icon checkmarks</td></tr>
+    <tr><td>Daily cards</td><td>Horizontal scroll <code>mat-card</code> (CSS) · 120×140px</td></tr>
+    <tr><td>Challenge</td><td><code>mat-card</code> + image overlay + <code>[mat-flat-button]</code></td></tr>
+    <tr><td>Recommendations</td><td><code>mat-list</code> + thumbnail icons</td></tr>
+    <tr><td>Bottom nav</td><td><code>mat-tab-nav-bar</code> · 44px height (compact)</td></tr>
+  </table>
+
+</div>
+
+</div>
+
+</body>
+</html>

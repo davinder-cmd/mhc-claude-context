@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC — Material Design 3 Color System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Raleway', -apple-system, sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 40px 24px 80px;
+  }
+
+  h1 { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 16px; line-height: 1.5; }
+
+  .context-box {
+    max-width: 700px; margin: 0 auto 48px;
+    background: #222; border-radius: 12px; padding: 20px;
+    font-size: 13px; color: #bbb; line-height: 1.6;
+  }
+  .context-box strong { color: #fff; }
+  .context-label {
+    font-size: 11px; font-weight: 700; color: #666;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+  }
+
+  .section { margin-bottom: 56px; }
+  .section-header { margin-bottom: 16px; }
+  .section-number { font-size: 12px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+  .section-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .section-desc { color: #aaa; font-size: 14px; max-width: 700px; line-height: 1.5; }
+
+  /* Tonal palette strips */
+  .tonal-row { margin-bottom: 20px; }
+  .tonal-label {
+    font-size: 12px; font-weight: 600; color: #888;
+    margin-bottom: 6px;
+  }
+  .tonal-strip { display: flex; gap: 2px; border-radius: 10px; overflow: hidden; }
+  .tone {
+    flex: 1; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 600;
+    position: relative;
+  }
+  .tone-num {
+    font-size: 8px; font-weight: 700;
+    position: absolute; bottom: 3px;
+    opacity: 0.7;
+  }
+  .tone.used {
+    border: 2px solid #fff;
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  /* Color roles grid */
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    max-width: 700px;
+  }
+  .role {
+    padding: 12px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    min-height: 56px;
+  }
+  .role-name { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
+  .role-token { font-weight: 500; margin-top: 2px; font-family: monospace; font-size: 9px; opacity: 0.6; }
+
+  /* Phone mockup */
+  .screen-row { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+  .phone { width: 320px; border-radius: 36px; overflow: hidden; flex-shrink: 0; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+  .m3-header { padding: 40px 20px 16px; display: flex; justify-content: space-between; align-items: center; }
+  .m3-header h2 { font-size: 18px; font-weight: 700; }
+  .m3-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+
+  .m3-content { padding: 0 14px 14px; }
+  .m3-card { border-radius: 16px; margin-bottom: 12px; overflow: hidden; }
+  .m3-card-pad { padding: 16px; }
+
+  .m3-stats-title { font-size: 13px; font-weight: 600; margin-bottom: 14px; display: flex; justify-content: space-between; }
+  .m3-stats-row { display: flex; justify-content: space-around; text-align: center; }
+  .m3-ring { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .m3-stat-val { font-size: 14px; font-weight: 700; }
+  .m3-stat-lbl { font-size: 11px; opacity: 0.55; }
+
+  .m3-habit { display: flex; align-items: center; gap: 12px; padding: 16px; }
+  .m3-habit-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .m3-habit-info { flex: 1; }
+  .m3-habit-title { font-size: 14px; font-weight: 600; }
+  .m3-habit-sub { font-size: 12px; opacity: 0.55; }
+  .m3-habit-pts { font-size: 11px; font-weight: 600; margin-top: 2px; }
+
+  .m3-challenge { display: flex; gap: 12px; padding: 16px; }
+  .m3-chal-info { flex: 1; }
+  .m3-chal-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .m3-chal-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .m3-chal-date { font-size: 12px; opacity: 0.5; margin-bottom: 6px; }
+  .m3-chal-desc { font-size: 12px; opacity: 0.6; line-height: 1.4; }
+  .m3-chal-img { width: 80px; height: 80px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+
+  .m3-nav { display: flex; justify-content: space-around; padding: 10px 0 6px; border-top: 1px solid rgba(0,0,0,0.06); }
+  .m3-nav-item { text-align: center; font-size: 10px; opacity: 0.45; }
+  .m3-nav-item.active { opacity: 1; }
+  .m3-nav-icon { font-size: 18px; margin-bottom: 2px; }
+
+  /* Annotation */
+  .annotation-strip { padding: 8px 0 0; max-width: 340px; }
+  .annotation { display: flex; gap: 10px; margin-bottom: 12px; }
+  .annotation-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .annotation-text { font-size: 13px; color: #aaa; line-height: 1.45; }
+  .annotation-text strong { color: #ddd; font-weight: 600; }
+
+  .source-tag { display: inline-block; font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 4px; background: #2a2a2a; color: #888; margin-left: 4px; }
+
+  /* Token table */
+  .token-table { max-width: 700px; }
+  .token-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .token-table td { padding: 8px 10px; border-bottom: 1px solid #2a2a2a; }
+  .token-table .t-swatch { width: 20px; height: 20px; border-radius: 4px; display: inline-block; vertical-align: middle; margin-right: 8px; }
+  .token-table .t-name { font-weight: 600; color: #ddd; }
+  .token-table .t-hex { font-family: monospace; font-size: 11px; color: #888; }
+  .token-table .t-tone { font-size: 10px; color: #666; }
+  .token-table .t-use { color: #999; }
+</style>
+</head>
+<body>
+
+<h1>MHC — Material Design 3</h1>
+<p class="subtitle">Full M3 color system generated from MHC brand key colors<br>Tonal palettes · Semantic roles · Applied mockup</p>
+
+<div class="context-box">
+  <div class="context-label">How M3 Color Works</div>
+  <strong>Material Design 3</strong> generates a full scheme from 3 key colors: <strong>Primary</strong>, <strong>Secondary</strong>, and <strong>Tertiary</strong>. Each key color produces a tonal palette (13 tones from 0–100). Light theme roles pull from specific tones: Primary = tone 40, Container = tone 90, On-Container = tone 10, etc. This creates automatic contrast ratios and a complete system from just 3 inputs.
+  <br><br>
+  <strong>MHC key colors used:</strong><br>
+  Primary → <strong>Brand Blue #0f497f</strong> (trust, authority, clinical)<br>
+  Secondary → <strong>Aqua Blue #04a0b7</strong> (engagement, interactive)<br>
+  Tertiary → <strong>Mango #f3b31e</strong> (rewards, warmth, achievement)
+</div>
+
+<!-- ===== TONAL PALETTES ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">Part 1</div>
+    <div class="section-name">Tonal Palettes</div>
+  </div>
+  <p class="section-desc" style="margin-bottom: 20px;">Each key color generates 13 tones. Light theme roles pull from highlighted tones. The warm neutral is derived from Primary's hue with minimal chroma — giving the surfaces a slight blue-warm tint instead of pure gray.</p>
+
+  <!-- Primary tonal palette (Brand Blue hue ~210°) -->
+  <div class="tonal-row">
+    <div class="tonal-label">Primary <span class="source-tag">Brand Blue #0f497f</span></div>
+    <div class="tonal-strip">
+      <div class="tone" style="background: #000000; color: #fff;"><span class="tone-num">0</span></div>
+      <div class="tone" style="background: #001b3a; color: #fff;"><span class="tone-num">10</span></div>
+      <div class="tone" style="background: #003060; color: #fff;"><span class="tone-num">20</span></div>
+      <div class="tone" style="background: #004785; color: #fff;"><span class="tone-num">30</span></div>
+      <div class="tone used" style="background: #0f5f9e; color: #fff;"><span class="tone-num">40</span></div>
+      <div class="tone" style="background: #3878b8; color: #fff;"><span class="tone-num">50</span></div>
+      <div class="tone" style="background: #5492d3; color: #000;"><span class="tone-num">60</span></div>
+      <div class="tone" style="background: #72adef; color: #000;"><span class="tone-num">70</span></div>
+      <div class="tone" style="background: #a3c9f5; color: #000;"><span class="tone-num">80</span></div>
+      <div class="tone used" style="background: #d1e4fa; color: #000;"><span class="tone-num">90</span></div>
+      <div class="tone" style="background: #e8f0fd; color: #000;"><span class="tone-num">95</span></div>
+      <div class="tone" style="background: #f5f8ff; color: #000;"><span class="tone-num">99</span></div>
+      <div class="tone" style="background: #ffffff; color: #000;"><span class="tone-num">100</span></div>
+    </div>
+  </div>
+
+  <!-- Secondary tonal palette (Aqua Blue hue ~188°) -->
+  <div class="tonal-row">
+    <div class="tonal-label">Secondary <span class="source-tag">Aqua Blue #04a0b7</span></div>
+    <div class="tonal-strip">
+      <div class="tone" style="background: #000000; color: #fff;"><span class="tone-num">0</span></div>
+      <div class="tone" style="background: #002025; color: #fff;"><span class="tone-num">10</span></div>
+      <div class="tone" style="background: #00363e; color: #fff;"><span class="tone-num">20</span></div>
+      <div class="tone" style="background: #004e58; color: #fff;"><span class="tone-num">30</span></div>
+      <div class="tone used" style="background: #006874; color: #fff;"><span class="tone-num">40</span></div>
+      <div class="tone" style="background: #00838f; color: #fff;"><span class="tone-num">50</span></div>
+      <div class="tone" style="background: #1e9eaa; color: #000;"><span class="tone-num">60</span></div>
+      <div class="tone" style="background: #4db9c5; color: #000;"><span class="tone-num">70</span></div>
+      <div class="tone" style="background: #7cd5e0; color: #000;"><span class="tone-num">80</span></div>
+      <div class="tone used" style="background: #b2ecf2; color: #000;"><span class="tone-num">90</span></div>
+      <div class="tone" style="background: #d5f5f8; color: #000;"><span class="tone-num">95</span></div>
+      <div class="tone" style="background: #edfcfd; color: #000;"><span class="tone-num">99</span></div>
+      <div class="tone" style="background: #ffffff; color: #000;"><span class="tone-num">100</span></div>
+    </div>
+  </div>
+
+  <!-- Tertiary tonal palette (Mango hue ~42°) -->
+  <div class="tonal-row">
+    <div class="tonal-label">Tertiary <span class="source-tag">Mango #f3b31e</span></div>
+    <div class="tonal-strip">
+      <div class="tone" style="background: #000000; color: #fff;"><span class="tone-num">0</span></div>
+      <div class="tone" style="background: #261900; color: #fff;"><span class="tone-num">10</span></div>
+      <div class="tone" style="background: #412d00; color: #fff;"><span class="tone-num">20</span></div>
+      <div class="tone" style="background: #5e4200; color: #fff;"><span class="tone-num">30</span></div>
+      <div class="tone used" style="background: #7c5800; color: #fff;"><span class="tone-num">40</span></div>
+      <div class="tone" style="background: #9a7000; color: #fff;"><span class="tone-num">50</span></div>
+      <div class="tone" style="background: #b8891a; color: #000;"><span class="tone-num">60</span></div>
+      <div class="tone" style="background: #d6a33a; color: #000;"><span class="tone-num">70</span></div>
+      <div class="tone" style="background: #f0be58; color: #000;"><span class="tone-num">80</span></div>
+      <div class="tone used" style="background: #ffdea0; color: #000;"><span class="tone-num">90</span></div>
+      <div class="tone" style="background: #ffefd0; color: #000;"><span class="tone-num">95</span></div>
+      <div class="tone" style="background: #fff8f0; color: #000;"><span class="tone-num">99</span></div>
+      <div class="tone" style="background: #ffffff; color: #000;"><span class="tone-num">100</span></div>
+    </div>
+  </div>
+
+  <!-- Neutral tonal palette (derived from Primary, low chroma) -->
+  <div class="tonal-row">
+    <div class="tonal-label">Neutral <span class="source-tag">Derived from Primary · low chroma</span></div>
+    <div class="tonal-strip">
+      <div class="tone" style="background: #000000; color: #fff;"><span class="tone-num">0</span></div>
+      <div class="tone used" style="background: #1a1c1e; color: #fff;"><span class="tone-num">10</span></div>
+      <div class="tone" style="background: #2f3133; color: #fff;"><span class="tone-num">20</span></div>
+      <div class="tone" style="background: #464749; color: #fff;"><span class="tone-num">30</span></div>
+      <div class="tone" style="background: #5e5f61; color: #fff;"><span class="tone-num">40</span></div>
+      <div class="tone" style="background: #76787a; color: #fff;"><span class="tone-num">50</span></div>
+      <div class="tone" style="background: #909294; color: #000;"><span class="tone-num">60</span></div>
+      <div class="tone" style="background: #abacae; color: #000;"><span class="tone-num">70</span></div>
+      <div class="tone" style="background: #c6c7c9; color: #000;"><span class="tone-num">80</span></div>
+      <div class="tone" style="background: #e3e2e4; color: #000;"><span class="tone-num">90</span></div>
+      <div class="tone used" style="background: #f1f0f2; color: #000;"><span class="tone-num">95</span></div>
+      <div class="tone used" style="background: #faf8fb; color: #000;"><span class="tone-num">99</span></div>
+      <div class="tone" style="background: #ffffff; color: #000;"><span class="tone-num">100</span></div>
+    </div>
+  </div>
+
+  <!-- Error tonal palette -->
+  <div class="tonal-row">
+    <div class="tonal-label">Error <span class="source-tag">M3 Standard</span></div>
+    <div class="tonal-strip">
+      <div class="tone" style="background: #000000; color: #fff;"><span class="tone-num">0</span></div>
+      <div class="tone" style="background: #410002; color: #fff;"><span class="tone-num">10</span></div>
+      <div class="tone" style="background: #690005; color: #fff;"><span class="tone-num">20</span></div>
+      <div class="tone" style="background: #93000a; color: #fff;"><span class="tone-num">30</span></div>
+      <div class="tone used" style="background: #ba1a1a; color: #fff;"><span class="tone-num">40</span></div>
+      <div class="tone" style="background: #de3730; color: #fff;"><span class="tone-num">50</span></div>
+      <div class="tone" style="background: #ff5449; color: #000;"><span class="tone-num">60</span></div>
+      <div class="tone" style="background: #ff897d; color: #000;"><span class="tone-num">70</span></div>
+      <div class="tone" style="background: #ffb4ab; color: #000;"><span class="tone-num">80</span></div>
+      <div class="tone used" style="background: #ffdad6; color: #000;"><span class="tone-num">90</span></div>
+      <div class="tone" style="background: #ffedea; color: #000;"><span class="tone-num">95</span></div>
+      <div class="tone" style="background: #fff8f7; color: #000;"><span class="tone-num">99</span></div>
+      <div class="tone" style="background: #ffffff; color: #000;"><span class="tone-num">100</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LIGHT THEME ROLES ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">Part 2</div>
+    <div class="section-name">Light Theme — Semantic Roles</div>
+  </div>
+  <p class="section-desc" style="margin-bottom: 20px;">Each role maps to a specific tone. Primary at tone 40 gives clinical authority. Secondary at tone 40 provides the teal engagement layer. Tertiary at tone 40 is a deep amber for rewards. Surface containers step from tone 99 → 90 for visual hierarchy.</p>
+
+  <div class="roles-grid">
+    <!-- Primary group -->
+    <div class="role" style="background: #0f5f9e; color: #fff;">
+      <div class="role-name">Primary</div>
+      <div class="role-token">P-40 · #0f5f9e</div>
+    </div>
+    <div class="role" style="background: #ffffff; color: #0f5f9e; border: 1px solid #ddd;">
+      <div class="role-name">On Primary</div>
+      <div class="role-token">P-100 · #ffffff</div>
+    </div>
+    <div class="role" style="background: #d1e4fa; color: #001b3a;">
+      <div class="role-name">Primary Container</div>
+      <div class="role-token">P-90 · #d1e4fa</div>
+    </div>
+    <div class="role" style="background: #001b3a; color: #d1e4fa;">
+      <div class="role-name">On Primary Cntr</div>
+      <div class="role-token">P-10 · #001b3a</div>
+    </div>
+
+    <!-- Secondary group -->
+    <div class="role" style="background: #006874; color: #fff;">
+      <div class="role-name">Secondary</div>
+      <div class="role-token">S-40 · #006874</div>
+    </div>
+    <div class="role" style="background: #ffffff; color: #006874; border: 1px solid #ddd;">
+      <div class="role-name">On Secondary</div>
+      <div class="role-token">S-100 · #ffffff</div>
+    </div>
+    <div class="role" style="background: #b2ecf2; color: #002025;">
+      <div class="role-name">Secondary Container</div>
+      <div class="role-token">S-90 · #b2ecf2</div>
+    </div>
+    <div class="role" style="background: #002025; color: #b2ecf2;">
+      <div class="role-name">On Secondary Cntr</div>
+      <div class="role-token">S-10 · #002025</div>
+    </div>
+
+    <!-- Tertiary group -->
+    <div class="role" style="background: #7c5800; color: #fff;">
+      <div class="role-name">Tertiary</div>
+      <div class="role-token">T-40 · #7c5800</div>
+    </div>
+    <div class="role" style="background: #ffffff; color: #7c5800; border: 1px solid #ddd;">
+      <div class="role-name">On Tertiary</div>
+      <div class="role-token">T-100 · #ffffff</div>
+    </div>
+    <div class="role" style="background: #ffdea0; color: #261900;">
+      <div class="role-name">Tertiary Container</div>
+      <div class="role-token">T-90 · #ffdea0</div>
+    </div>
+    <div class="role" style="background: #261900; color: #ffdea0;">
+      <div class="role-name">On Tertiary Cntr</div>
+      <div class="role-token">T-10 · #261900</div>
+    </div>
+
+    <!-- Error group -->
+    <div class="role" style="background: #ba1a1a; color: #fff;">
+      <div class="role-name">Error</div>
+      <div class="role-token">E-40 · #ba1a1a</div>
+    </div>
+    <div class="role" style="background: #ffffff; color: #ba1a1a; border: 1px solid #ddd;">
+      <div class="role-name">On Error</div>
+      <div class="role-token">E-100 · #ffffff</div>
+    </div>
+    <div class="role" style="background: #ffdad6; color: #410002;">
+      <div class="role-name">Error Container</div>
+      <div class="role-token">E-90 · #ffdad6</div>
+    </div>
+    <div class="role" style="background: #410002; color: #ffdad6;">
+      <div class="role-name">On Error Cntr</div>
+      <div class="role-token">E-10 · #410002</div>
+    </div>
+
+    <!-- Surface group -->
+    <div class="role" style="background: #faf8fb; color: #1a1c1e;">
+      <div class="role-name">Surface</div>
+      <div class="role-token">N-99 · #faf8fb</div>
+    </div>
+    <div class="role" style="background: #1a1c1e; color: #e3e2e4;">
+      <div class="role-name">On Surface</div>
+      <div class="role-token">N-10 · #1a1c1e</div>
+    </div>
+    <div class="role" style="background: #e3e2e4; color: #464749;">
+      <div class="role-name">Surface Variant</div>
+      <div class="role-token">NV-90 · #e3e2e4</div>
+    </div>
+    <div class="role" style="background: #464749; color: #e3e2e4;">
+      <div class="role-name">On Surface Var</div>
+      <div class="role-token">NV-30 · #464749</div>
+    </div>
+  </div>
+
+  <!-- Surface containers -->
+  <div style="margin-top: 16px;">
+    <div class="tonal-label" style="margin-bottom: 8px;">Surface Container Hierarchy (M3 elevation system)</div>
+    <div style="display: flex; gap: 2px; border-radius: 10px; overflow: hidden; max-width: 700px;">
+      <div style="flex:1; padding: 14px 8px; background: #faf8fb; color: #1a1c1e; text-align: center; font-size: 10px; font-weight: 600;">
+        Surface<br><span style="font-weight: 400; opacity: 0.6;">N-99</span>
+      </div>
+      <div style="flex:1; padding: 14px 8px; background: #f5f3f6; color: #1a1c1e; text-align: center; font-size: 10px; font-weight: 600;">
+        Cntr Lowest<br><span style="font-weight: 400; opacity: 0.6;">N-96</span>
+      </div>
+      <div style="flex:1; padding: 14px 8px; background: #f1f0f2; color: #1a1c1e; text-align: center; font-size: 10px; font-weight: 600;">
+        Cntr Low<br><span style="font-weight: 400; opacity: 0.6;">N-95</span>
+      </div>
+      <div style="flex:1; padding: 14px 8px; background: #eceaed; color: #1a1c1e; text-align: center; font-size: 10px; font-weight: 600;">
+        Container<br><span style="font-weight: 400; opacity: 0.6;">N-94</span>
+      </div>
+      <div style="flex:1; padding: 14px 8px; background: #e6e5e7; color: #1a1c1e; text-align: center; font-size: 10px; font-weight: 600;">
+        Cntr High<br><span style="font-weight: 400; opacity: 0.6;">N-92</span>
+      </div>
+      <div style="flex:1; padding: 14px 8px; background: #e3e2e4; color: #1a1c1e; text-align: center; font-size: 10px; font-weight: 600;">
+        Cntr Highest<br><span style="font-weight: 400; opacity: 0.6;">N-90</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== APPLIED MOCKUP ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-number">Part 3</div>
+    <div class="section-name">Applied — Home Screen</div>
+  </div>
+  <p class="section-desc" style="margin-bottom: 20px;">M3 roles mapped to MHC's Home screen. Surface (N-99) as the page background, Surface Container Low (N-95) for card elevations, Primary for header and nav, Secondary Container for habit/challenge accents, Tertiary Container for rewards.</p>
+
+  <div class="screen-row">
+    <div class="phone" style="background: #faf8fb;">
+
+      <!-- Header: Primary (P-40) -->
+      <div class="m3-header" style="background: #0f5f9e; color: #fff;">
+        <h2>Welcome Percy!</h2>
+        <div class="m3-avatar" style="background: #d1e4fa; color: #001b3a;">P</div>
+      </div>
+
+      <div class="m3-content" style="color: #1a1c1e;">
+
+        <!-- Stats card: Surface Container Low -->
+        <div class="m3-card" style="background: #f1f0f2; box-shadow: none;">
+          <div class="m3-card-pad">
+            <div class="m3-stats-title">Stats <span style="opacity:0.5;">›</span></div>
+            <div class="m3-stats-row">
+              <div>
+                <div class="m3-ring" style="background: #d1e4fa; border: 3px solid #0f5f9e;">👟</div>
+                <div class="m3-stat-val">2,000</div>
+                <div class="m3-stat-lbl">Steps</div>
+              </div>
+              <div>
+                <div class="m3-ring" style="background: #b2ecf2; border: 3px solid #006874;">🌙</div>
+                <div class="m3-stat-val">7 hrs</div>
+                <div class="m3-stat-lbl">Sleep</div>
+              </div>
+              <div>
+                <div class="m3-ring" style="background: #ffdea0; border: 3px solid #7c5800;">🏃</div>
+                <div class="m3-stat-val">60</div>
+                <div class="m3-stat-lbl">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Habit card: Secondary Container accent -->
+        <div class="m3-card" style="background: #f1f0f2;">
+          <div class="m3-habit">
+            <div class="m3-habit-icon" style="background: #b2ecf2; color: #002025;">✓</div>
+            <div class="m3-habit-info">
+              <div class="m3-habit-title">Healthy Habits</div>
+              <div class="m3-habit-sub">Track 1 habit</div>
+              <div class="m3-habit-pts" style="color: #7c5800;">⭐ 10 Points</div>
+            </div>
+            <span style="opacity: 0.4;">›</span>
+          </div>
+        </div>
+
+        <!-- Challenge card: Tertiary Container accent -->
+        <div class="m3-card" style="background: #f1f0f2;">
+          <div class="m3-challenge">
+            <div class="m3-chal-info">
+              <div class="m3-chal-label" style="color: #006874;">Healthy Habit Challenge</div>
+              <div class="m3-chal-title">Love Yourself</div>
+              <div class="m3-chal-date">⏱ Starts April 24</div>
+              <div class="m3-chal-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="m3-chal-img" style="background: #b2ecf2;">🌿</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav: Primary for active -->
+      <div class="m3-nav" style="background: #faf8fb;">
+        <div class="m3-nav-item active" style="color: #0f5f9e;"><div class="m3-nav-icon">🏠</div>Home</div>
+        <div class="m3-nav-item"><div class="m3-nav-icon">📋</div>Plans</div>
+        <div class="m3-nav-item"><div class="m3-nav-icon">📄</div>Claims</div>
+        <div class="m3-nav-item"><div class="m3-nav-icon">❤️</div>Health</div>
+        <div class="m3-nav-item"><div class="m3-nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="annotation-strip">
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #0f5f9e;"></div>
+          <div class="annotation-text"><strong>Primary (P-40)</strong> → header, nav active, steps ring. Brand Blue at M3's prescribed tone. On-Primary is white (P-100). Avatar uses Primary Container (P-90).</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #006874;"></div>
+          <div class="annotation-text"><strong>Secondary (S-40)</strong> → sleep ring, challenge label. Aqua Blue at tone 40. Secondary Container (S-90, #b2ecf2) for habit icon and challenge illustration backgrounds.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #7c5800;"></div>
+          <div class="annotation-text"><strong>Tertiary (T-40)</strong> → rewards/points text, active minutes ring. Mango at tone 40 is a deep amber. Tertiary Container (T-90, #ffdea0) for the active minutes ring fill.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f1f0f2;"></div>
+          <div class="annotation-text"><strong>Surface Container Low (N-95)</strong> → cards. M3 uses surface containers instead of white cards + shadow. The slight warmth comes from the neutral palette derived from Primary's hue.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #faf8fb;"></div>
+          <div class="annotation-text"><strong>Surface (N-99)</strong> → page background. Nearly white but with a faint blue-warm undertone from the neutral derivation. This is M3's way of creating a warm background systemically, not arbitrarily.</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px;">
+        <div class="tonal-label">M3 Role → MHC Brand Source</div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 11px; max-width: 340px;">
+          <tr style="border-bottom: 1px solid #333;">
+            <td style="padding: 6px; color: #888;">Primary</td>
+            <td style="padding: 6px;">Brand Blue #0f497f</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #333;">
+            <td style="padding: 6px; color: #888;">Secondary</td>
+            <td style="padding: 6px;">Aqua Blue #04a0b7</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #333;">
+            <td style="padding: 6px; color: #888;">Tertiary</td>
+            <td style="padding: 6px;">Mango #f3b31e</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #333;">
+            <td style="padding: 6px; color: #888;">Neutral</td>
+            <td style="padding: 6px;">Derived from Primary hue</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px; color: #888;">Error</td>
+            <td style="padding: 6px;">M3 standard red</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHY M3 ===== -->
+<div class="section" style="max-width: 700px;">
+  <div class="section-header">
+    <div class="section-number">Notes</div>
+    <div class="section-name">What M3 Gets You</div>
+  </div>
+  <div style="margin-top: 12px; font-size: 13px; color: #aaa; line-height: 1.7;">
+    <p style="margin-bottom: 12px;"><strong style="color: #ddd;">Systematic contrast.</strong> Every On-color is guaranteed to meet WCAG AA against its background. No manual checking. Primary (P-40) on On-Primary (P-100) = 7.3:1 ratio.</p>
+    <p style="margin-bottom: 12px;"><strong style="color: #ddd;">Dark mode for free.</strong> Flip the tone mappings: Primary goes from P-40 → P-80, containers from tone 90 → tone 30. The whole system inverts without redesigning anything.</p>
+    <p style="margin-bottom: 12px;"><strong style="color: #ddd;">Surface hierarchy without shadows.</strong> M3's surface containers (N-96 through N-90) create depth through color steps, not box-shadow. Cleaner rendering, especially on lower-end Android devices in your member base.</p>
+    <p style="margin-bottom: 12px;"><strong style="color: #ddd;">Partner theming.</strong> The three key colors are the only inputs. For white-label SDK distributions (Alight, Allstate), you can swap key colors and the entire system regenerates. One system, multiple brand expressions.</p>
+    <p><strong style="color: #ddd;">Android-native alignment.</strong> MHC's Android app is Java/native. M3 is the Android design system. Adopting it means your design tokens map 1:1 to what Android engineers expect. Less translation, fewer bugs.</p>
+  </div>
+</div>
+
+</body>
+</html>

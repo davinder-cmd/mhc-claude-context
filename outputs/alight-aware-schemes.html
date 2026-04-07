@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC in Alight — Color Schemes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Raleway', -apple-system, sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 40px 24px 80px;
+  }
+
+  h1 { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 16px; line-height: 1.5; }
+
+  /* Context box */
+  .context-box {
+    max-width: 640px;
+    margin: 0 auto 48px;
+    background: #222;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 13px;
+    color: #bbb;
+    line-height: 1.6;
+  }
+  .context-box strong { color: #fff; }
+  .context-label {
+    font-size: 11px; font-weight: 700; color: #666;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .alight-swatches {
+    display: flex; gap: 8px; margin: 12px 0;
+  }
+  .alight-swatch {
+    width: 32px; height: 32px; border-radius: 8px;
+  }
+  .alight-swatch-label {
+    font-size: 10px; color: #666; text-align: center; width: 32px;
+  }
+  .alight-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+
+  .screen-section { margin-bottom: 72px; }
+  .screen-header { margin-bottom: 6px; }
+  .screen-number {
+    font-size: 12px; font-weight: 600; color: #666;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .screen-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .screen-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 12px;
+    margin-bottom: 4px;
+  }
+  .screen-desc { color: #aaa; font-size: 14px; margin-bottom: 20px; max-width: 640px; line-height: 1.5; }
+
+  .screen-row {
+    display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;
+  }
+
+  /* Phone */
+  .phone {
+    width: 320px;
+    border-radius: 36px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  .phone-header {
+    padding: 40px 20px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phone-header h2 { font-size: 18px; font-weight: 700; }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+
+  .content { padding: 0 14px 14px; }
+
+  .card {
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .card-pad { padding: 16px; }
+
+  .stats-title {
+    font-size: 13px; font-weight: 600;
+    margin-bottom: 14px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .stats-title .arrow { font-size: 16px; opacity: 0.5; }
+  .stats-row {
+    display: flex; justify-content: space-around; text-align: center;
+  }
+  .stat-ring {
+    width: 48px; height: 48px; border-radius: 50%;
+    margin: 0 auto 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .stat-value { font-size: 14px; font-weight: 700; }
+  .stat-label { font-size: 11px; opacity: 0.55; }
+
+  .habit-inner {
+    display: flex; align-items: center; gap: 12px; padding: 16px;
+  }
+  .habit-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .habit-info { flex: 1; }
+  .habit-title { font-size: 14px; font-weight: 600; }
+  .habit-sub { font-size: 12px; opacity: 0.55; }
+  .habit-pts { font-size: 11px; font-weight: 600; margin-top: 2px; }
+  .habit-arrow { font-size: 16px; opacity: 0.4; }
+
+  .challenge-inner {
+    display: flex; gap: 12px; padding: 16px;
+  }
+  .challenge-info { flex: 1; }
+  .challenge-label {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .challenge-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .challenge-date { font-size: 12px; opacity: 0.5; margin-bottom: 6px; }
+  .challenge-desc { font-size: 12px; opacity: 0.6; line-height: 1.4; }
+  .challenge-img {
+    width: 80px; height: 80px; border-radius: 12px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+  }
+
+  .bottom-nav {
+    display: flex; justify-content: space-around;
+    padding: 10px 0 6px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .nav-item { text-align: center; font-size: 10px; opacity: 0.45; }
+  .nav-item.active { opacity: 1; }
+  .nav-icon { font-size: 18px; margin-bottom: 2px; }
+
+  /* Swatches */
+  .swatch-strip {
+    display: flex; flex-direction: column; gap: 10px; padding-top: 4px;
+  }
+  .swatch-group-label {
+    font-size: 11px; font-weight: 600; color: #555;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 6px;
+  }
+  .swatch-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .swatch-item { display: flex; flex-direction: column; align-items: center; }
+  .swatch { width: 48px; height: 48px; border-radius: 10px; }
+  .swatch-label { font-size: 9px; color: #888; text-align: center; margin-top: 3px; width: 48px; }
+  .swatch-hex { font-size: 8px; color: #555; font-family: monospace; }
+
+  .source-tag {
+    display: inline-block;
+    font-size: 9px; font-weight: 600;
+    padding: 2px 6px; border-radius: 4px;
+    background: #2a2a2a; color: #888;
+    margin-left: 4px;
+  }
+
+  /* Annotations */
+  .annotation-strip { padding: 8px 0 0; max-width: 320px; }
+  .annotation { display: flex; gap: 10px; margin-bottom: 12px; }
+  .annotation-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    margin-top: 5px; flex-shrink: 0;
+  }
+  .annotation-text { font-size: 13px; color: #aaa; line-height: 1.45; }
+  .annotation-text strong { color: #ddd; font-weight: 600; }
+
+  /* Comparison */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  td { padding: 10px 8px; }
+</style>
+</head>
+<body>
+
+<h1>MHC Inside Alight</h1>
+<p class="subtitle">3 schemes designed to differentiate MHC within the Alight Worklife shell</p>
+
+<!-- Context box -->
+<div class="context-box">
+  <div class="context-label">Design Problem</div>
+  <strong>Alight Worklife</strong> uses cornflower blue, light gray backgrounds, green progress bars, and pink accents. MHC's experience lives inside this container for partner-distributed members. The risk: MHC blends into Alight's chrome and loses its identity. Each scheme below creates a <strong>clear visual break</strong> — the member should feel they've entered a distinct health experience, not another tab.
+  <div class="alight-swatches">
+    <div class="alight-item"><div class="alight-swatch" style="background: #4078d4;"></div><div class="alight-swatch-label">Blue</div></div>
+    <div class="alight-item"><div class="alight-swatch" style="background: #f0f0f0;"></div><div class="alight-swatch-label">Gray BG</div></div>
+    <div class="alight-item"><div class="alight-swatch" style="background: #3da63d;"></div><div class="alight-swatch-label">Green</div></div>
+    <div class="alight-item"><div class="alight-swatch" style="background: #e84393;"></div><div class="alight-swatch-label">Pink</div></div>
+    <div class="alight-item"><div class="alight-swatch" style="background: #e8e8ec;"></div><div class="alight-swatch-label">Cards</div></div>
+  </div>
+  <strong>Avoid:</strong> Cornflower blue (too close to Alight's primary), cool gray backgrounds (merge with Alight's shell), bright green (Alight's progress bar).
+</div>
+
+<!-- ===================== SCHEME 1: AQUA + MANGO WARMTH ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Scheme 01</div>
+    <div class="screen-name">Aqua Warmth</div>
+    <br>
+    <span class="screen-tag" style="background: #04a0b7; color: #fff;">Recommended — best differentiation</span>
+  </div>
+  <p class="screen-desc">MHC's Aqua Blue is teal — visually distinct from Alight's cornflower blue. The warm sand background immediately signals "you've left Alight's space." Mango rewards pop against the teal in a way Alight's green progress bar can't. This is the clearest identity break with the lowest brand risk.</p>
+
+  <div class="screen-row">
+    <div class="phone" style="background: #f5f1ec;">
+      <div class="phone-header" style="background: #04a0b7; color: #fff;">
+        <h2>Welcome Percy!</h2>
+        <div class="avatar" style="border: 2px solid rgba(255,255,255,0.3); color: #fff;">P</div>
+      </div>
+      <div class="content" style="color: #323e48;">
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="card-pad">
+            <div class="stats-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e4f6f7; border: 3px solid #04a0b7;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e2eaf2; border: 3px solid #0f497f;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #fdf5e0; border: 3px solid #f3b31e;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="habit-inner">
+            <div class="habit-icon" style="background: #fdf5e0; color: #f3b31e;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-pts" style="color: #f6851f;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="challenge-inner">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #04a0b7;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #e4f6f7;">🌿</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav" style="background: #f5f1ec;">
+        <div class="nav-item active" style="color: #04a0b7;"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="swatch-strip">
+        <div class="swatch-group-label">Backgrounds</div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f5f1ec;"></div><div class="swatch-label">Sand</div><div class="swatch-hex">#f5f1ec</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fff; border: 1px solid #ddd;"></div><div class="swatch-label">Card</div><div class="swatch-hex">#ffffff</div></div>
+        </div>
+        <div class="swatch-group-label">Primary <span class="source-tag">Aqua Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #04a0b7;"></div><div class="swatch-label">Aqua Blue</div><div class="swatch-hex">#04a0b7</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #92d5da;"></div><div class="swatch-label">Sky Blue</div><div class="swatch-hex">#92d5da</div></div>
+        </div>
+        <div class="swatch-group-label">Warm Accents <span class="source-tag">Mango + Tangerine</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f3b31e;"></div><div class="swatch-label">Mango</div><div class="swatch-hex">#f3b31e</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #f6851f;"></div><div class="swatch-label">Tangerine</div><div class="swatch-hex">#f6851f</div></div>
+        </div>
+        <div class="swatch-group-label">Depth <span class="source-tag">Brand Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #0f497f;"></div><div class="swatch-label">Brand Blue</div><div class="swatch-hex">#0f497f</div></div>
+        </div>
+        <div class="swatch-group-label">Text <span class="source-tag">Charcoal + Slate</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #323e48;"></div><div class="swatch-label">Charcoal</div><div class="swatch-hex">#323e48</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #6e7a7d;"></div><div class="swatch-label">Slate</div><div class="swatch-hex">#6e7a7d</div></div>
+        </div>
+      </div>
+
+      <div class="annotation-strip" style="margin-top: 16px;">
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #04a0b7;"></div>
+          <div class="annotation-text"><strong>Aqua ≠ Alight blue.</strong> Alight uses cornflower (#4078d4). MHC's Aqua (#04a0b7) is teal — completely different hue family. No visual confusion.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f5f1ec;"></div>
+          <div class="annotation-text"><strong>Warm background is the instant break.</strong> Alight is cool gray (#f0f0f0). The moment a member taps into MHC, the sand background signals a different space.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f3b31e;"></div>
+          <div class="annotation-text"><strong>Mango runs the reward engine.</strong> Alight has no amber/gold anywhere. This becomes MHC's signature warmth — habits, points, active minutes all feel rewarding.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCHEME 2: NIGHT SKY + TANGERINE ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Scheme 02</div>
+    <div class="screen-name">Night Sky + Tangerine</div>
+  </div>
+  <p class="screen-desc">Maximum contrast. Night Sky header creates an unmistakable visual break from Alight's light chrome. Tangerine as the signature accent is bold, warm, and completely absent from Alight's palette. This says "you've entered a premium health experience" the moment you land. The Lava Orange adds energy to CTAs without competing with Tangerine's role on engagement.</p>
+
+  <div class="screen-row">
+    <div class="phone" style="background: #f3efea;">
+      <div class="phone-header" style="background: #062a42; color: #fff;">
+        <h2>Welcome Percy!</h2>
+        <div class="avatar" style="border: 2px solid #f6851f; color: #f6851f; background: rgba(246,133,31,0.15);">P</div>
+      </div>
+      <div class="content" style="color: #323e48;">
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="card-pad">
+            <div class="stats-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e4f6f7; border: 3px solid #04a0b7;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e2eaf2; border: 3px solid #0f497f;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #fef0e4; border: 3px solid #f6851f;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="habit-inner">
+            <div class="habit-icon" style="background: #fef0e4; color: #f6851f;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-pts" style="color: #f15922;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="challenge-inner">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #f6851f;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #fef0e4;">🌿</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav" style="background: #f3efea;">
+        <div class="nav-item active" style="color: #062a42;"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="swatch-strip">
+        <div class="swatch-group-label">Backgrounds</div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f3efea;"></div><div class="swatch-label">Warm Linen</div><div class="swatch-hex">#f3efea</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fff; border: 1px solid #ddd;"></div><div class="swatch-label">Card</div><div class="swatch-hex">#ffffff</div></div>
+        </div>
+        <div class="swatch-group-label">Primary <span class="source-tag">Night Sky</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #062a42;"></div><div class="swatch-label">Night Sky</div><div class="swatch-hex">#062a42</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #0f497f;"></div><div class="swatch-label">Brand Blue</div><div class="swatch-hex">#0f497f</div></div>
+        </div>
+        <div class="swatch-group-label">Signature <span class="source-tag">Tangerine + Lava</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f6851f;"></div><div class="swatch-label">Tangerine</div><div class="swatch-hex">#f6851f</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #f15922;"></div><div class="swatch-label">Lava Orng</div><div class="swatch-hex">#f15922</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fef0e4;"></div><div class="swatch-label">Tint</div><div class="swatch-hex">#fef0e4</div></div>
+        </div>
+        <div class="swatch-group-label">Secondary <span class="source-tag">Aqua Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #04a0b7;"></div><div class="swatch-label">Aqua Blue</div><div class="swatch-hex">#04a0b7</div></div>
+        </div>
+        <div class="swatch-group-label">Text <span class="source-tag">Charcoal + Slate</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #323e48;"></div><div class="swatch-label">Charcoal</div><div class="swatch-hex">#323e48</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #6e7a7d;"></div><div class="swatch-label">Slate</div><div class="swatch-hex">#6e7a7d</div></div>
+        </div>
+      </div>
+
+      <div class="annotation-strip" style="margin-top: 16px;">
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #062a42;"></div>
+          <div class="annotation-text"><strong>Night Sky header is the hard break.</strong> Alight's entire UI is light. The dark header creates an immediate "you're somewhere else" signal. Works especially well when MHC is embedded via SDK.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f6851f;"></div>
+          <div class="annotation-text"><strong>Tangerine is completely absent from Alight.</strong> No orange or amber anywhere in their palette. This becomes MHC's unmistakable signature color — habits, engagement, rewards.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f6851f;"></div>
+          <div class="annotation-text"><strong>Avatar border in Tangerine</strong> — small detail, but it signals the member is in MHC's space. Their avatar in Alight has a pink badge; here it's warm orange.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCHEME 3: BRAND BLUE + SPRING GREEN ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Scheme 03</div>
+    <div class="screen-name">Brand Blue + Living Green</div>
+  </div>
+  <p class="screen-desc">Leans into health. Brand Blue header for trust, Spring Green and Lime as the dominant accents. Alight uses green sparingly (progress bar only) — MHC can own it as a full identity layer. This says "health and vitality" in a way Alight's benefits-focused UI doesn't attempt. Risk: the Brand Blue header is closest to Alight's blue of any scheme, so the green has to do more differentiation work.</p>
+
+  <div class="screen-row">
+    <div class="phone" style="background: #f0f3ed;">
+      <div class="phone-header" style="background: #0f497f; color: #fff;">
+        <h2>Welcome Percy!</h2>
+        <div class="avatar" style="border: 2px solid #90c73e; color: #90c73e; background: rgba(144,199,62,0.15);">P</div>
+      </div>
+      <div class="content" style="color: #323e48;">
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="card-pad">
+            <div class="stats-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #eaf5e8; border: 3px solid #52a045;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e2eaf2; border: 3px solid #0f497f;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f0fbe2; border: 3px solid #90c73e;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="habit-inner">
+            <div class="habit-icon" style="background: #eaf5e8; color: #52a045;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-pts" style="color: #f3b31e;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+        </div>
+
+        <div class="card" style="background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+          <div class="challenge-inner">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #52a045;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #f0fbe2;">🌿</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav" style="background: #f0f3ed;">
+        <div class="nav-item active" style="color: #52a045;"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="swatch-strip">
+        <div class="swatch-group-label">Backgrounds</div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f0f3ed;"></div><div class="swatch-label">Warm Leaf</div><div class="swatch-hex">#f0f3ed</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #fff; border: 1px solid #ddd;"></div><div class="swatch-label">Card</div><div class="swatch-hex">#ffffff</div></div>
+        </div>
+        <div class="swatch-group-label">Authority <span class="source-tag">Brand Blue</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #0f497f;"></div><div class="swatch-label">Brand Blue</div><div class="swatch-hex">#0f497f</div></div>
+        </div>
+        <div class="swatch-group-label">Signature <span class="source-tag">Spring + Lime Green</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #52a045;"></div><div class="swatch-label">Spring Grn</div><div class="swatch-hex">#52a045</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #90c73e;"></div><div class="swatch-label">Lime Green</div><div class="swatch-hex">#90c73e</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #eaf5e8;"></div><div class="swatch-label">Tint</div><div class="swatch-hex">#eaf5e8</div></div>
+        </div>
+        <div class="swatch-group-label">Rewards <span class="source-tag">Mango</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #f3b31e;"></div><div class="swatch-label">Mango</div><div class="swatch-hex">#f3b31e</div></div>
+        </div>
+        <div class="swatch-group-label">Text <span class="source-tag">Charcoal + Slate</span></div>
+        <div class="swatch-row">
+          <div class="swatch-item"><div class="swatch" style="background: #323e48;"></div><div class="swatch-label">Charcoal</div><div class="swatch-hex">#323e48</div></div>
+          <div class="swatch-item"><div class="swatch" style="background: #6e7a7d;"></div><div class="swatch-label">Slate</div><div class="swatch-hex">#6e7a7d</div></div>
+        </div>
+      </div>
+
+      <div class="annotation-strip" style="margin-top: 16px;">
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #52a045;"></div>
+          <div class="annotation-text"><strong>Green as MHC's identity layer.</strong> Alight only uses green for progress bars. MHC can own it for nav, habits, challenges, and activity — it becomes "the health zone" inside Alight's benefits shell.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #0f497f;"></div>
+          <div class="annotation-text"><strong>Brand Blue header risk.</strong> Closest to Alight's blue of any scheme. Works if MHC has its own header space; risky if it's embedded inline within Alight's blue chrome.</div>
+        </div>
+        <div class="annotation">
+          <div class="annotation-dot" style="background: #f0f3ed;"></div>
+          <div class="annotation-text"><strong>Green-tinted warm background.</strong> Subtle but distinct from Alight's neutral gray. Reinforces the nature/health identity throughout the scroll.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COMPARISON ===== -->
+<div class="screen-section" style="max-width: 700px;">
+  <div class="screen-header">
+    <div class="screen-number">Comparison</div>
+    <div class="screen-name">Differentiation From Alight</div>
+  </div>
+  <div style="margin-top: 20px;">
+    <table>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888; width: 150px;"></td>
+        <td style="color: #04a0b7; font-weight: 600;">01 Aqua Warmth</td>
+        <td style="color: #f6851f; font-weight: 600;">02 Night Sky + Tang.</td>
+        <td style="color: #52a045; font-weight: 600;">03 Blue + Green</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">Alight differentiation</td>
+        <td>High — different hue + warm BG</td>
+        <td>Highest — dark header + orange</td>
+        <td>Moderate — green must carry it</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">Brand fidelity</td>
+        <td>High — Aqua is the hero</td>
+        <td>High — all approved colors</td>
+        <td>Highest — Brand Blue leads</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">Warmth</td>
+        <td>High — sand + Mango</td>
+        <td>Highest — linen + Tangerine</td>
+        <td>Moderate — green-warm</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">SDK embed safety</td>
+        <td>Good — clear hue break</td>
+        <td>Best — impossible to confuse</td>
+        <td>Risky — blue header near Alight's blue</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="color: #888;">Reads as</td>
+        <td>Health-focused, approachable</td>
+        <td>Premium health experience</td>
+        <td>Natural wellness</td>
+      </tr>
+      <tr>
+        <td style="color: #888;">Best for</td>
+        <td>General partner distribution</td>
+        <td>SDK where MHC needs its own space</td>
+        <td>Co-branded with Alight</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

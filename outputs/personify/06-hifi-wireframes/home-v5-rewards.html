@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V5 · Rewards-Forward — Home Screen Wireframe</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+  :root {
+    --w-bg: #FFFFFF;
+    --w-surface: #F4F4F5;
+    --w-border: #D4D4D8;
+    --w-text: #27272A;
+    --w-secondary: #71717A;
+    --w-muted: #A1A1AA;
+    --w-dark: #18181B;
+    --w-placeholder: #E4E4E7;
+    --w-tag-bg: #EDE9FE;
+    --w-tag-text: #6D28D9;
+    --w-tag-border: #C4B5FD;
+    --w-gold: #F9A825;
+    --w-gold-light: #FFF8E1;
+    --w-gold-dark: #F57F17;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #F8F8FA;
+    color: var(--w-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ====== PAGE CHROME ====== */
+  .page-header {
+    padding: 40px 40px 20px;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+  .page-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; color: var(--w-secondary); line-height: 1.5; max-width: 800px; }
+
+  .legend {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px;
+    padding: 10px 14px; background: #FFF; border: 1px solid var(--w-border);
+    border-radius: 8px; font-size: 11px; color: var(--w-secondary);
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-swatch { width: 14px; height: 10px; border-radius: 2px; border: 1px solid var(--w-border); }
+
+  .frames-row {
+    display: flex; gap: 28px; padding: 20px 40px 60px;
+    overflow-x: auto; max-width: 100vw; align-items: flex-start;
+  }
+
+  /* ====== FRAME WRAPPER ====== */
+  .frame-wrapper { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .frame-label { font-size: 13px; font-weight: 700; color: var(--w-text); margin-bottom: 3px; }
+  .frame-subtitle { font-size: 10px; color: var(--w-muted); margin-bottom: 10px; text-align: center; max-width: 280px; line-height: 1.4; }
+
+  /* ====== DEVICE ====== */
+  .device {
+    width: 310px; height: 672px; background: var(--w-bg);
+    border-radius: 40px; border: 2px solid #C4C4C8; overflow: hidden; position: relative;
+  }
+  .device::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 96px; height: 24px; background: #C4C4C8; border-radius: 0 0 14px 14px; z-index: 50;
+  }
+  .device-scroll {
+    height: 100%; overflow-y: auto; padding-top: 32px; padding-bottom: 56px; scrollbar-width: none;
+  }
+  .device-scroll::-webkit-scrollbar { display: none; }
+
+  /* ====== COMPONENT TAG (purple pill) ====== */
+  .mtag {
+    display: inline-flex; align-items: center; gap: 2px;
+    font-size: 7.5px; font-weight: 600; font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--w-tag-text); background: var(--w-tag-bg); border: 1px solid var(--w-tag-border);
+    padding: 1px 5px; border-radius: 3px; white-space: nowrap; letter-spacing: 0.2px;
+    vertical-align: middle; line-height: 1.4;
+  }
+
+  /* ====== WIREFRAME ATOMS ====== */
+  .w-appbar {
+    height: 44px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px; border-bottom: 1px solid var(--w-border); position: relative;
+  }
+  .w-appbar .mtag { position: absolute; top: 2px; right: 14px; }
+  .w-appbar-left, .w-appbar-right { display: flex; gap: 6px; align-items: center; }
+  .w-icon {
+    width: 20px; height: 20px; border-radius: 4px; border: 1.5px solid var(--w-border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-icon.circle { border-radius: 50%; }
+  .w-icon .material-symbols-outlined { font-size: 13px; color: var(--w-muted); }
+  .w-logo { font-size: 11px; font-weight: 600; color: var(--w-secondary); }
+
+  .w-section { padding: 0 14px; margin-bottom: 20px; }
+
+  .w-section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px; padding-top: 2px;
+  }
+  .w-section-title { font-size: 13px; font-weight: 700; color: var(--w-text); }
+  .w-chevron { font-size: 16px; color: var(--w-muted); }
+
+  .w-greeting { font-size: 16px; font-weight: 400; color: var(--w-text); padding: 10px 14px 4px; }
+  .w-greeting strong { font-weight: 700; }
+
+  .w-card {
+    background: var(--w-surface); border: 1px solid var(--w-border);
+    border-radius: 10px; padding: 10px; margin-bottom: 6px; position: relative;
+  }
+  .w-card > .mtag:first-child { position: absolute; top: -8px; left: 8px; }
+
+  .w-card.gold-hero {
+    background: var(--w-gold-light); border-color: var(--w-gold);
+  }
+
+  .w-progress { height: 5px; background: var(--w-placeholder); border-radius: 3px; margin: 6px 0 3px; overflow: hidden; position: relative; }
+  .w-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--w-dark); border-radius: 3px; }
+  .w-progress-fill.gold { background: var(--w-gold); }
+
+  .w-action-row {
+    display: flex; align-items: center; gap: 6px; padding: 6px 0;
+    border-bottom: 1px solid var(--w-placeholder);
+  }
+  .w-action-row:last-child { border-bottom: none; }
+  .w-action-check {
+    width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--w-border); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-action-check.done { background: var(--w-dark); border-color: var(--w-dark); }
+  .w-action-check.done::after { content: '✓'; font-size: 9px; color: white; font-weight: 700; }
+  .w-action-text { flex: 1; font-size: 10px; color: var(--w-text); line-height: 1.3; }
+  .w-action-text.done { color: var(--w-muted); text-decoration: line-through; }
+  .w-action-pts {
+    font-size: 8px; font-weight: 600; color: white; background: var(--w-gold);
+    padding: 2px 5px; border-radius: 6px; white-space: nowrap; flex-shrink: 0;
+  }
+
+  .w-hscroll {
+    display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;
+    margin: 0 -14px; padding-left: 14px; padding-right: 14px; scrollbar-width: none;
+  }
+  .w-hscroll::-webkit-scrollbar { display: none; }
+  .w-hcard {
+    min-width: 136px; max-width: 136px; border-radius: 8px; overflow: hidden;
+    border: 1px solid var(--w-border); background: var(--w-bg); flex-shrink: 0; position: relative;
+  }
+  .w-hcard > .mtag { position: absolute; top: 4px; left: 4px; z-index: 2; }
+  .w-hcard-img {
+    height: 64px; background: var(--w-placeholder);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-hcard-img .material-symbols-outlined { font-size: 22px; color: var(--w-muted); }
+  .w-hcard-body { padding: 6px 8px; }
+  .w-hcard-title { font-size: 9px; font-weight: 600; color: var(--w-text); margin-bottom: 3px; line-height: 1.3; }
+  .w-hcard-pts { font-size: 8px; color: var(--w-muted); }
+
+  .w-challenge {
+    background: var(--w-dark); border-radius: 10px; padding: 12px; color: white; position: relative;
+  }
+  .w-challenge > .mtag:first-child { position: absolute; top: -8px; left: 8px; }
+  .w-challenge-tag { font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.6; margin-bottom: 4px; }
+  .w-challenge-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+  .w-challenge-desc { font-size: 9px; opacity: 0.6; margin-bottom: 8px; }
+  .w-btn {
+    display: inline-block; font-size: 9px; font-weight: 600; padding: 4px 10px;
+    border-radius: 12px; background: white; color: var(--w-dark);
+  }
+
+  .w-content-row {
+    display: flex; gap: 8px; align-items: center; padding: 6px 0;
+    border-bottom: 1px solid var(--w-placeholder);
+  }
+  .w-content-row:last-child { border-bottom: none; }
+  .w-thumb {
+    width: 48px; height: 48px; border-radius: 8px; background: var(--w-placeholder); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .w-thumb .material-symbols-outlined { font-size: 18px; color: var(--w-muted); }
+  .w-content-text { flex: 1; }
+  .w-content-title { font-size: 10px; font-weight: 600; color: var(--w-text); margin-bottom: 1px; }
+  .w-content-sub { font-size: 9px; color: var(--w-muted); line-height: 1.3; }
+
+  .w-habits-row { display: flex; gap: 5px; }
+  .w-habit {
+    flex: 1; background: var(--w-surface); border: 1px solid var(--w-border);
+    border-radius: 8px; padding: 8px 4px; text-align: center; position: relative;
+  }
+  .w-habit .material-symbols-outlined { font-size: 14px; color: var(--w-muted); margin-bottom: 3px; display: block; }
+  .w-habit-val { font-size: 13px; font-weight: 700; color: var(--w-text); line-height: 1; margin-bottom: 1px; }
+  .w-habit-label { font-size: 8px; color: var(--w-muted); }
+  .w-habit-pts { font-size: 7px; color: var(--w-gold); font-weight: 600; margin-top: 2px; }
+
+  .w-bottomnav {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 46px;
+    background: var(--w-bg); border-top: 1px solid var(--w-border);
+    display: flex; align-items: center; justify-content: space-around; z-index: 40;
+  }
+  .w-nav-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .w-nav-item .material-symbols-outlined { font-size: 16px; color: var(--w-muted); }
+  .w-nav-item.active .material-symbols-outlined { color: var(--w-text); font-variation-settings: 'FILL' 1; }
+  .w-nav-label { font-size: 7px; color: var(--w-muted); }
+  .w-nav-item.active .w-nav-label { color: var(--w-text); font-weight: 600; }
+
+  .w-link { font-size: 9px; font-weight: 500; color: var(--w-secondary); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Reward tabs */
+  .w-reward-tabs { display: flex; border-bottom: 1px solid var(--w-border); }
+  .w-reward-tab {
+    flex: 1; text-align: center; font-size: 8px; font-weight: 500;
+    color: var(--w-muted); padding: 6px 2px 7px; border-bottom: 2px solid transparent;
+  }
+  .w-reward-tab.active { color: var(--w-text); font-weight: 700; border-bottom-color: var(--w-gold); }
+
+  /* Streak chip */
+  .w-streak {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 8px; font-weight: 600; color: var(--w-dark);
+    background: var(--w-gold); padding: 3px 7px; border-radius: 12px;
+    line-height: 1.2;
+  }
+
+  /* Earning row */
+  .w-earning-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--w-placeholder); }
+  .w-earning-row:last-child { border-bottom: none; }
+  .w-earning-label { font-size: 9px; color: var(--w-text); }
+  .w-earning-value { font-size: 9px; font-weight: 700; color: var(--w-text); }
+
+  /* Annotation box */
+  .w-note {
+    background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 5px;
+    padding: 5px 8px; margin: 6px 14px 10px; font-size: 8px; color: #92400E; line-height: 1.4;
+  }
+  .w-note strong { font-weight: 700; display: block; margin-bottom: 1px; }
+
+  /* Frame notes below device */
+  .frame-notes {
+    max-width: 280px; margin-top: 10px; padding: 8px 10px;
+    background: #FFF; border: 1px solid var(--w-border); border-radius: 8px;
+    font-size: 9px; color: var(--w-secondary); line-height: 1.5;
+  }
+  .frame-notes strong { color: var(--w-text); display: block; margin-bottom: 2px; }
+
+  /* Component map table under each frame */
+  .comp-map {
+    max-width: 280px; margin-top: 6px; width: 100%;
+    border-collapse: collapse; font-size: 8px;
+  }
+  .comp-map th {
+    text-align: left; padding: 4px 6px; background: var(--w-surface);
+    border: 1px solid var(--w-border); font-weight: 600; color: var(--w-text);
+  }
+  .comp-map td {
+    padding: 3px 6px; border: 1px solid var(--w-border); color: var(--w-secondary);
+    vertical-align: top; line-height: 1.4;
+  }
+  .comp-map code {
+    font-family: 'SF Mono', 'Fira Code', monospace; font-size: 7.5px;
+    color: var(--w-tag-text); background: var(--w-tag-bg);
+    padding: 0 3px; border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>V5 · Rewards-Forward</h1>
+  <p>Gamified engagement hero with tabbed rewards dashboard, "Earn more" reframing of actions, and challenge positioning as earning mechanic. Gold accent (#F9A825) on rewards only. All other elements neutral grey/monochrome.</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-tag-bg);border-color:var(--w-tag-border);"></div> Material component tag</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#FFFBEB;border-color:#FDE68A;"></div> Design annotation</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-gold-light);border-color:var(--w-gold);"></div> Reward hero (gold accent)</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--w-surface);"></div> Card surface</div>
+  </div>
+</div>
+
+<div class="frames-row">
+
+<!-- ====================================================================
+     VARIANT V5: REWARDS-FORWARD
+     ==================================================================== -->
+<div class="frame-wrapper">
+  <div class="frame-label">V5 · Rewards-Forward</div>
+  <div class="frame-subtitle">Hero rewards card with tabbed balance view. Challenges and actions reframed as earning mechanisms. Points, streaks, and progress dominate.</div>
+  <div class="device">
+    <div class="device-scroll">
+
+      <!-- APP BAR -->
+      <div class="w-appbar">
+        <div class="w-appbar-left">
+          <div class="w-icon"><span class="material-symbols-outlined">menu</span></div>
+          <div class="w-icon" style="border-radius:6px;background:var(--w-placeholder);"></div>
+        </div>
+        <span class="w-logo">Umbrella Partners</span>
+        <div class="w-appbar-right">
+          <div class="w-icon"><span class="material-symbols-outlined">notifications</span></div>
+          <div class="w-icon circle" style="background:var(--w-placeholder);"></div>
+        </div>
+        <span class="mtag">mat-toolbar</span>
+      </div>
+
+      <!-- GREETING -->
+      <div class="w-greeting">Hi <strong>Andrew</strong></div>
+
+      <div class="w-note"><strong>V5 Hero: Rewards dashboard</strong>Massive points number (36sp), 4 tabs for reward types, progress bar to goal, streak badge. Everything else frames earning mechanics. Only rewards section uses gold (#F9A825).</div>
+
+      <!-- REWARDS HERO (GOLD ACCENT) -->
+      <div class="w-section">
+        <div class="w-card gold-hero" style="padding:0;overflow:hidden;">
+          <span class="mtag" style="position:absolute;top:-8px;left:8px;">mat-card · z2</span>
+
+          <!-- Tabs -->
+          <div class="w-reward-tabs" style="position:relative;">
+            <div class="w-reward-tab active">Points</div>
+            <div class="w-reward-tab">Gift Cards</div>
+            <div class="w-reward-tab">Store</div>
+            <div class="w-reward-tab">Raffles</div>
+            <span class="mtag" style="position:absolute;top:-8px;right:4px;">mat-tab-group</span>
+          </div>
+
+          <!-- Points Tab Content -->
+          <div style="padding:14px;">
+            <!-- Big Number -->
+            <div style="font-size:32px;font-weight:700;color:var(--w-dark);line-height:1;margin-bottom:2px;">1,240</div>
+            <div style="font-size:9px;color:var(--w-muted);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:10px;">points earned</div>
+
+            <!-- Streak Badge + Earned Today -->
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <div class="w-streak">🔥 12-day streak</div>
+              <div style="font-size:9px;color:var(--w-muted);">+165 today</div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-progress" style="position:relative;"><div class="w-progress-fill gold" style="width:62%"></div><span class="mtag" style="position:absolute;top:-9px;right:0;">mat-progress-bar</span></div>
+            <div style="display:flex;justify-content:space-between;"><span style="font-size:7px;color:var(--w-muted);">1,240 pts</span><span style="font-size:7px;color:var(--w-muted);">2,000 goal</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EARN MORE (Reframed Actions) -->
+      <div class="w-section">
+        <div class="w-section-header">
+          <span class="w-section-title">Earn more <span class="mtag">title-large</span></span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div class="w-card" style="padding:2px 10px;position:relative;">
+          <span class="mtag" style="position:absolute;top:-8px;left:8px;">mat-list</span>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">Health Assessment</span>
+            <span class="w-action-pts">500 pts <span class="mtag">mat-chip</span></span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">A1C check screening</span>
+            <span class="w-action-pts">$100 GC</span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">Team Challenge entry</span>
+            <span class="w-action-pts">1 raffle</span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check done"></div>
+            <span class="w-action-text done">Connect wearable</span>
+            <span class="w-action-pts">Earned</span>
+          </div>
+          <div class="w-action-row">
+            <div class="w-action-check"></div>
+            <span class="w-action-text">Diabetes Prevention</span>
+            <span class="w-action-pts">200 credits</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHALLENGE (Positioned as Earning Mechanic) -->
+      <div class="w-section">
+        <div class="w-challenge" style="position:relative;">
+          <span class="mtag" style="position:absolute;top:-8px;left:8px;">mat-card · image</span>
+          <div class="w-challenge-tag">Active Challenge</div>
+          <div class="w-challenge-title">Spring Into Wellness</div>
+          <div class="w-challenge-desc" style="margin-bottom:6px;">Earn 500 pts for completing · 3/8 destinations <span class="mtag">mat-progress-bar</span></div>
+          <span class="w-btn">Join Now <span class="mtag">[mat-flat-button]</span></span>
+        </div>
+      </div>
+
+      <!-- QUICK EARNS (Daily Cards Reframed) -->
+      <div class="w-section">
+        <div class="w-section-header">
+          <span class="w-section-title">Quick earns</span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div class="w-hscroll">
+          <div class="w-hcard">
+            <span class="mtag">mat-card</span>
+            <div class="w-hcard-img"><span class="material-symbols-outlined">self_improvement</span></div>
+            <div class="w-hcard-body"><div class="w-hcard-title">Mindful Breathing</div><div class="w-hcard-pts" style="color:var(--w-gold);font-weight:700;">5 pts</div></div>
+          </div>
+          <div class="w-hcard">
+            <div class="w-hcard-img"><span class="material-symbols-outlined">restaurant</span></div>
+            <div class="w-hcard-body"><div class="w-hcard-title">Lunch Swaps</div><div class="w-hcard-pts" style="color:var(--w-gold);font-weight:700;">5 pts</div></div>
+          </div>
+          <div class="w-hcard">
+            <div class="w-hcard-img"><span class="material-symbols-outlined">bedtime</span></div>
+            <div class="w-hcard-body"><div class="w-hcard-title">Sleep Habits</div><div class="w-hcard-pts" style="color:var(--w-gold);font-weight:700;">5 pts</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POINTS FROM ACTIVITY (Health Data Reframed) -->
+      <div class="w-section">
+        <div class="w-section-header">
+          <span class="w-section-title">Points from activity <span class="mtag">title-medium</span></span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div class="w-habits-row" style="position:relative;">
+          <div class="w-habit">
+            <span class="material-symbols-outlined">directions_walk</span>
+            <div class="w-habit-val">6,842</div>
+            <div class="w-habit-label">Steps</div>
+            <div class="w-habit-pts">+140 pts</div>
+          </div>
+          <div class="w-habit">
+            <span class="material-symbols-outlined">bedtime</span>
+            <div class="w-habit-val">7.2h</div>
+            <div class="w-habit-label">Sleep</div>
+            <div class="w-habit-pts">—</div>
+          </div>
+          <div class="w-habit">
+            <span class="material-symbols-outlined">local_fire_department</span>
+            <div class="w-habit-val">34</div>
+            <div class="w-habit-label">Active Min</div>
+            <div class="w-habit-pts">+20 pts</div>
+          </div>
+          <span class="mtag" style="position:absolute;top:-8px;right:0;">mat-grid-list cols=3</span>
+        </div>
+      </div>
+
+      <!-- JUST FOR YOU -->
+      <div class="w-section" style="margin-bottom:36px;">
+        <div class="w-section-header">
+          <span class="w-section-title">Just for you</span>
+          <span class="material-symbols-outlined w-chevron">chevron_right</span>
+        </div>
+        <div style="position:relative;">
+          <span class="mtag" style="position:absolute;top:-2px;right:0;">mat-list</span>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">nights_stay</span></div>
+            <div class="w-content-text"><div class="w-content-title">Improve your sleep</div><div class="w-content-sub">Evidence-based techniques</div></div>
+          </div>
+          <div class="w-content-row">
+            <div class="w-thumb"><span class="material-symbols-outlined">monitor_heart</span></div>
+            <div class="w-content-text"><div class="w-content-title">Get your A1C checked</div><div class="w-content-sub">Understand blood sugar levels</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <nav class="w-bottomnav" style="position:relative;">
+      <span class="mtag" style="position:absolute;top:2px;right:8px;">mat-tab-nav-bar</span>
+      <div class="w-nav-item active"><span class="material-symbols-outlined">home</span><span class="w-nav-label">Home</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">explore</span><span class="w-nav-label">Explore</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">emoji_events</span><span class="w-nav-label">Rewards</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">favorite</span><span class="w-nav-label">Health</span></div>
+      <div class="w-nav-item"><span class="material-symbols-outlined">more_horiz</span><span class="w-nav-label">More</span></div>
+    </nav>
+  </div>
+
+  <div class="frame-notes">
+    <strong>V5 Design Strategy</strong>
+    Rewards dashboard is the hero with massive 1,240 points display, 4-tab type switching, gold progress bar, and 12-day streak badge. Sections below reframe health actions as earning opportunities: "Earn more" (not "What to do next"), "Quick earns" (daily cards), "Points from activity" (habits). Gold (#F9A825) accent only on rewards elements. Challenges positioned as earning mechanics. All other UI stays neutral grey/monochrome.
+  </div>
+
+  <table class="comp-map">
+    <tr><th>Section</th><th>Material Components</th></tr>
+    <tr><td>Rewards hero</td><td><code>mat-card</code> z2 · gold bg + <code>mat-tab-group</code> (4 tabs) + <code>mat-progress-bar</code> (gold) + <code>mat-chip</code> (streak)</td></tr>
+    <tr><td>Earn more</td><td><code>mat-list</code> + <code>mat-list-item</code> + <code>mat-chip</code> (reward type badge, gold bg)</td></tr>
+    <tr><td>Challenge</td><td><code>mat-card</code> + <code>mat-progress-bar</code> + <code>[mat-flat-button]</code></td></tr>
+    <tr><td>Quick earns</td><td>Horizontal <code>mat-card</code> scroll (CSS) · gold pts badge</td></tr>
+    <tr><td>Points from activity</td><td><code>mat-grid-list</code> cols=3 · gold pts text</td></tr>
+    <tr><td>Just for you</td><td><code>mat-list</code> + thumbnail icon</td></tr>
+    <tr><td>Bottom nav</td><td><code>mat-tab-nav-bar</code> (mobile)</td></tr>
+  </table>
+</div>
+
+</div>
+
+</body>
+</html>

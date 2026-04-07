@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umbrella Partners — Home (Rich)</title>
+
+<!-- Google Fonts: Roboto + Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+<style>
+  /* ================================================
+     CSS CUSTOM PROPERTIES — MHC Design Tokens
+     ================================================ */
+  :root {
+    /* Primary brand — health-forward teal */
+    --mat-primary: #00897B;
+    --mat-primary-dark: #00695C;
+    --mat-primary-light: #B2DFDB;
+    --mat-primary-50: #E0F2F1;
+
+    /* Reward accent — warm gold/amber */
+    --mhc-reward-accent: #FF8F00;
+    --mhc-reward-accent-light: #FFF3E0;
+    --mhc-reward-accent-dark: #E65100;
+
+    /* Success / completion */
+    --mhc-success: #43A047;
+    --mhc-success-light: #E8F5E9;
+
+    /* Error */
+    --mat-error: #D32F2F;
+
+    /* Text hierarchy */
+    --text-primary: #212121;
+    --text-secondary: #616161;
+    --text-placeholder: #9E9E9E;
+    --text-on-primary: #FFFFFF;
+    --text-on-dark: #FFFFFF;
+
+    /* Backgrounds & surfaces */
+    --background: #F9F6F2;
+    --surface: #FFFFFF;
+    --surface-variant: #FAFAFA;
+
+    /* Elevation shadows (Material z2) */
+    --elevation-z1: 0 1px 4px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.06);
+    --elevation-z2: 0 2px 8px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06);
+    --elevation-z4: 0 4px 16px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.06);
+
+    /* MHC Spacing tokens — EDITORIAL DENSITY */
+    --spacing-01: 2px;
+    --spacing-02: 4px;
+    --spacing-03: 8px;
+    --spacing-04: 16px;
+    --spacing-05: 32px;
+    --spacing-06: 32px;
+    --spacing-07: 56px;
+    --spacing-08: 80px;
+
+    /* Typography sizes — EDITORIAL SCALE */
+    --type-headline-medium: 32px;
+    --type-title-large: 24px;
+    --type-title-medium: 16px;
+    --type-body-medium: 14px;
+    --type-label-medium: 12px;
+  }
+
+  /* ================================================
+     RESET & BASE
+     ================================================ */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #1A1A2E;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 32px 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ================================================
+     DEVICE FRAME — iPhone 14 simulation
+     ================================================ */
+  .device-frame {
+    width: 390px;
+    min-height: 844px;
+    background: var(--background);
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 0 0 2px #333,
+      0 0 0 6px #1a1a1a,
+      0 0 0 8px #333,
+      0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .device-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 34px;
+    background: #1a1a1a;
+    border-radius: 0 0 20px 20px;
+    z-index: 100;
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: 54px;
+    background: var(--surface);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 var(--spacing-05);
+    padding-bottom: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+  }
+
+  .status-bar .time { font-weight: 600; }
+  .status-bar .icons {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  /* ================================================
+     SCROLLABLE CONTENT AREA
+     ================================================ */
+  .scroll-container {
+    height: 790px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    width: 0;
+  }
+
+  /* ================================================
+     VARIANT LABEL BADGE
+     ================================================ */
+  .variant-badge {
+    position: absolute;
+    top: 60px;
+    left: 16px;
+    z-index: 85;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  /* ================================================
+     APP BAR — 56dp mobile
+     ================================================ */
+  .app-bar {
+    height: 56px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-04);
+    box-shadow: var(--elevation-z1);
+    position: sticky;
+    top: 0;
+    z-index: 80;
+  }
+
+  .app-bar-left, .app-bar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-03);
+  }
+
+  .app-bar-center {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .app-bar .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 4px;
+    transition: background 150ms ease;
+  }
+
+  .app-bar .material-symbols-outlined:hover {
+    background: rgba(0,0,0,0.04);
+  }
+
+  .employer-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #00897B, #004D40), var(--mat-primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .brand-mark {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--mat-primary);
+    letter-spacing: -0.3px;
+  }
+
+  .brand-mark span {
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  .profile-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7E57C2, #5C6BC0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .notification-badge {
+    position: relative;
+  }
+
+  .notification-badge::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    background: var(--mat-error);
+    border-radius: 50%;
+    border: 1.5px solid var(--surface);
+  }
+
+  /* ================================================
+     PAGE BODY
+     ================================================ */
+  .page-body {
+    padding: 20px;
+    padding-bottom: var(--spacing-08);
+  }
+
+  /* ================================================
+     SECTION 2: GREETING + REWARDS HERO
+     ================================================ */
+  .greeting {
+    font-size: var(--type-headline-medium);
+    font-weight: 400;
+    color: var(--text-primary);
+    line-height: 1.125;
+    margin-bottom: var(--spacing-04);
+  }
+
+  .greeting strong {
+    font-weight: 600;
+  }
+
+  .rewards-card {
+    background: linear-gradient(180deg, #FFF3E0 0%, #FFFFFF 40%);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: var(--elevation-z2);
+    margin-bottom: var(--spacing-07);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rewards-card::before {\1;
+    background: linear-gradient(90deg, var(--mhc-reward-accent), var(--mhc-reward-accent-dark));
+  }
+
+  .rewards-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-04);
+  }
+
+  .rewards-label {
+    font-size: var(--type-label-medium);
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .rewards-label .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--mhc-reward-accent);
+  }
+
+  .rewards-link {
+    font-size: var(--type-body-medium);
+    font-weight: 500;
+    color: var(--mat-primary);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .rewards-link:hover {
+    text-decoration: underline;
+  }
+
+  .rewards-balance {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-03);
+    margin-bottom: var(--spacing-02);
+  }
+
+  .rewards-points {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .rewards-unit {
+    font-size: var(--type-body-medium);
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .rewards-earned {
+    font-size: var(--type-body-medium);
+    color: var(--mhc-success);
+    font-weight: 500;
+    margin-bottom: var(--spacing-04);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .rewards-earned .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  .progress-container {
+    margin-bottom: var(--spacing-03);
+  }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .progress-labels span {
+    font-size: var(--type-label-medium);
+    color: var(--text-secondary);
+  }
+
+  .progress-bar-track {
+    width: 100%;
+    height: 10px;
+    background: #E0E0E0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    width: 62%;
+    background: linear-gradient(90deg, #FFB300, #FF8F00, #E65100), var(--mhc-reward-accent-dark));
+    border-radius: 4px;
+    transition: width 600ms ease;
+  }
+
+  /* ================================================
+     SECTION HEADERS (reusable)
+     ================================================ */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .section-header h2 {
+    font-size: var(--type-title-large);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.125;
+  }
+  .section-header h2::after { content: ''; display: block; width: 32px; height: 3px; background: var(--mat-primary); border-radius: 2px; margin-top: 6px; }
+
+  .section-header .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--text-secondary);
+  }
+
+  /* ================================================
+     SECTION 3: WHAT TO DO NEXT
+     ================================================ */
+  .actions-section {
+    margin-bottom: var(--spacing-05);
+  }
+
+  .action-list {
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: var(--elevation-z1);
+    overflow: hidden;
+    margin-bottom: var(--spacing-03);
+  }
+
+  .action-item {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    gap: var(--spacing-03);
+    border-bottom: 1px solid #F0F0F0;
+    cursor: pointer;
+    transition: background 150ms ease;
+  }
+
+  .action-item:last-child { border-bottom: none; }
+  .action-item:hover { background: var(--surface-variant); }
+
+  .action-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .action-icon.pending {
+    background: var(--mat-primary-50);
+  }
+
+  .action-icon.pending .material-symbols-outlined {
+    font-size: 22px;
+    color: var(--mat-primary);
+  }
+
+  .action-icon.completed {
+    background: var(--mhc-success-light);
+  }
+
+  .action-icon.completed .material-symbols-outlined {
+    font-size: 22px;
+    color: var(--mhc-success);
+  }
+
+  .action-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .action-name {
+    font-size: var(--type-body-medium);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .action-name.done {
+    color: var(--text-secondary);
+    text-decoration: line-through;
+    text-decoration-color: var(--text-placeholder);
+  }
+
+  .action-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .action-badge.points {
+    background: var(--mhc-reward-accent-light);
+    color: var(--mhc-reward-accent-dark);
+  }
+
+  .action-badge.earned {
+    background: var(--mhc-success-light);
+    color: var(--mhc-success);
+  }
+
+  .see-all-link {
+    font-size: var(--type-body-medium);
+    font-weight: 500;
+    color: var(--mat-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    padding-left: 4px;
+  }
+
+  .see-all-link:hover { text-decoration: underline; }
+
+  .see-all-link .material-symbols-outlined {
+    font-size: 18px;
+  }
+
+  /* ================================================
+     SECTION 4: DAILY CARDS — horizontal scroll
+     ================================================ */
+  .daily-cards-section {
+    margin-bottom: var(--spacing-05);
+  }
+
+  .cards-scroll {
+    display: flex;
+    gap: var(--spacing-03);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--spacing-03);
+    margin: 0 calc(-1 * 20px);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cards-scroll::-webkit-scrollbar { display: none; }
+
+  .daily-card {
+    min-width: 272px;
+    max-width: 272px;
+    height: 228px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--elevation-z2);
+    scroll-snap-align: start;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    background: var(--surface);
+  }
+
+  .daily-card-image {
+    width: 100%;
+    height: 136px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .daily-card-img-placeholder {
+    width: 100%;
+    height: 136px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .daily-card-img-placeholder .material-symbols-outlined {
+    font-size: 40px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .daily-card-body {
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 84px;
+  }
+
+  .daily-card-title {
+    font-size: var(--type-title-medium);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .daily-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .daily-card-pts {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mhc-reward-accent-dark);
+    background: var(--mhc-reward-accent-light);
+    padding: 2px 8px;
+    border-radius: 8px;
+  }
+
+  .daily-card-time {
+    font-size: var(--type-label-medium);
+    color: var(--text-placeholder);
+  }
+
+  /* ================================================
+     SECTION 5: ACTIVE CHALLENGE CTA
+     ================================================ */
+  .challenge-section {
+    margin-bottom: var(--spacing-05);
+  }
+
+  .challenge-card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    height: 226px;
+    box-shadow: var(--elevation-z2);
+    cursor: pointer;
+    background: linear-gradient(135deg, #004D40 0%, #00695C 30%, #00897B 60%, #26A69A 100%);
+  }
+
+  .challenge-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--spacing-05);
+  }
+
+  .challenge-tag {
+    position: absolute;
+    top: var(--spacing-04);
+    left: var(--spacing-04);
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(4px);
+    padding: 4px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .challenge-name {
+    font-size: var(--type-title-large);
+    font-weight: 700;
+    color: var(--text-on-dark);
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .challenge-desc {
+    font-size: var(--type-body-medium);
+    color: rgba(255,255,255,0.85);
+    margin-bottom: var(--spacing-03);
+  }
+
+  .challenge-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .challenge-progress-text {
+    font-size: var(--type-label-medium);
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .challenge-progress-text .material-symbols-outlined {
+    font-size: 16px;
+  }
+
+  /* ================================================
+     BUTTONS
+     ================================================ */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 var(--spacing-04);
+    background: var(--mat-primary);
+    color: var(--text-on-primary);
+    border: none;
+    border-radius: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--type-body-medium);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 150ms ease, box-shadow 150ms ease;
+    letter-spacing: 0.2px;
+  }
+
+  .btn-primary:hover {
+    background: var(--mat-primary-dark);
+    box-shadow: var(--elevation-z2);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--mat-primary);
+    outline-offset: 2px;
+  }
+
+  .btn-primary.on-dark {
+    background: white;
+    color: var(--mat-primary-dark);
+  }
+
+  .btn-primary.on-dark:hover {
+    background: #F5F5F5;
+  }
+
+  /* ================================================
+     SECTION 6: JUST FOR YOU
+     ================================================ */
+  .just-for-you-section {
+    margin-bottom: var(--spacing-05);
+  }
+
+  .content-card {
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--elevation-z1);
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    margin-bottom: var(--spacing-03);
+    cursor: pointer;
+    transition: background 150ms ease, box-shadow 150ms ease;
+  }
+
+  .content-card:last-child { margin-bottom: 0; }
+  .content-card:hover { box-shadow: var(--elevation-z2); }
+
+  .content-thumb {
+    width: 88px;
+    height: 88px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .content-thumb .material-symbols-outlined {
+    font-size: 32px;
+    color: white;
+  }
+
+  .content-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .content-title {
+    font-size: var(--type-title-medium);
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+
+  .content-subtitle {
+    font-size: var(--type-body-medium);
+    color: var(--text-secondary);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .content-chevron {
+    flex-shrink: 0;
+    color: var(--text-placeholder);
+  }
+
+  .content-chevron .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  /* ================================================
+     SECTION 7: HEALTHY HABITS
+     ================================================ */
+  .habits-section {
+    margin-bottom: var(--spacing-08);
+  }
+
+  .habits-stats {
+    display: flex;
+    gap: var(--spacing-03);
+    margin-bottom: var(--spacing-03);
+  }
+
+  .habit-stat {
+    flex: 1;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: var(--elevation-z1);
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 150ms ease;
+  }
+
+  .habit-stat:hover { box-shadow: var(--elevation-z2); }
+
+  .habit-stat .material-symbols-outlined {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .habit-stat .value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  .habit-stat .label {
+    font-size: var(--type-label-medium);
+    color: var(--text-secondary);
+  }
+
+  /* ================================================
+     BOTTOM NAVIGATION — mobile
+     ================================================ */
+  .bottom-nav {
+    height: 56px;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid #E0E0E0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 80;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background 150ms ease;
+    text-decoration: none;
+  }
+
+  .nav-item:hover { background: rgba(0,0,0,0.04); }
+
+  .nav-item .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--text-secondary);
+  }
+
+  .nav-item .nav-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .nav-item.active .material-symbols-outlined {
+    color: var(--mat-primary);
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .nav-item.active .nav-label {
+    color: var(--mat-primary);
+    font-weight: 600;
+  }
+
+  /* ================================================
+     CELEBRATION MODAL
+     ================================================ */
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+
+  .modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-content {background: radial-gradient(circle at 50% 30%, rgba(255,143,0,0.08) 0%, transparent 60%), var(--surface); 
+    text-align: center;
+    padding: var(--spacing-06);
+    max-width: 300px;
+    transform: scale(0.9);
+    transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .modal-overlay.visible .modal-content {background: radial-gradient(circle at 50% 30%, rgba(255,143,0,0.08) 0%, transparent 60%), var(--surface); 
+    transform: scale(1);
+  }
+
+  .modal-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-05);
+    background: linear-gradient(135deg, #FF8F00, #E65100, #BF360C), var(--mhc-reward-accent-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 50px rgba(255,143,0,0.5);
+  }
+
+  .modal-icon .material-symbols-outlined {
+    font-size: 40px;
+    color: white;
+    font-variation-settings: 'FILL' 1;
+  }
+
+  .modal-title {
+    font-size: var(--type-headline-medium);
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-03);
+  }
+
+  .modal-subtitle {
+    font-size: var(--type-body-medium);
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-05);
+  }
+
+  .modal-points {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--type-title-medium);
+    font-weight: 600;
+    color: var(--mhc-reward-accent);
+    margin-bottom: var(--spacing-05);
+  }
+
+  .modal-points .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  .btn-dismiss {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 32px;
+    background: white;
+    color: var(--mat-primary-dark);
+    border: none;
+    border-radius: 22px;
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--type-title-medium);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 150ms ease, transform 100ms ease;
+  }
+
+  .btn-dismiss:hover { background: #F5F5F5; }
+  .btn-dismiss:active { transform: scale(0.97); }
+  .btn-dismiss:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  /* Demo trigger button */
+  .demo-trigger {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    height: 44px;
+    padding: 0 20px;
+    background: var(--mhc-reward-accent);
+    color: #333;
+    border: none;
+    border-radius: 22px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--elevation-z4);
+    z-index: 300;
+    transition: transform 100ms ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .demo-trigger:hover { transform: scale(1.03); }
+  .demo-trigger .material-symbols-outlined { font-size: 20px; }
+
+  /* ================================================
+     UTILITY
+     ================================================ */
+  .text-link {
+    font-size: var(--type-body-medium);
+    font-weight: 500;
+    color: var(--mat-primary);
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .text-link:hover { text-decoration: underline; }
+
+  .text-link .material-symbols-outlined {
+    font-size: 18px;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ============================================
+     DEMO TRIGGER — outside device frame
+     ============================================ -->
+<button class="demo-trigger" onclick="toggleModal()">
+  <span class="material-symbols-outlined">emoji_events</span>
+  Trigger Celebration
+</button>
+
+<!-- ============================================
+     DEVICE FRAME
+     ============================================ -->
+<div class="device-frame">
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <span class="icons">
+      <span class="material-symbols-outlined" style="font-size:17px">signal_cellular_alt</span>
+      <span class="material-symbols-outlined" style="font-size:17px">wifi</span>
+      <span class="material-symbols-outlined" style="font-size:17px">battery_5_bar</span>
+    </span>
+  </div>
+
+  <!-- Scrollable Content -->
+  <div class="scroll-container">
+
+    <!-- Variant Label Badge -->
+    <div class="variant-badge">F · Rich</div>
+
+    <!-- ========== SECTION 1: APP BAR ========== -->
+    <div class="app-bar">
+      <div class="app-bar-left">
+        <span class="material-symbols-outlined">menu</span>
+        <div class="employer-logo">U</div>
+      </div>
+      <div class="app-bar-center">
+        <span class="brand-mark">Umbrella <span>Partners</span></span>
+      </div>
+      <div class="app-bar-right">
+        <span class="notification-badge">
+          <span class="material-symbols-outlined">notifications</span>
+        </span>
+        <div class="profile-avatar">AR</div>
+      </div>
+    </div>
+
+    <!-- ========== PAGE BODY ========== -->
+    <div class="page-body">
+
+      <!-- ========== SECTION 2: GREETING + REWARDS HERO ========== -->
+      <h1 class="greeting">Hi <strong>Andrew</strong></h1>
+
+      <div class="rewards-card">
+        <div class="rewards-header">
+          <span class="rewards-label">
+            <span class="material-symbols-outlined">workspace_premium</span>
+            Rewards Balance
+          </span>
+          <a class="rewards-link" href="#">View Rewards</a>
+        </div>
+
+        <div class="rewards-balance">
+          <span class="rewards-points">1,240</span>
+          <span class="rewards-unit">pts</span>
+        </div>
+
+        <div class="rewards-earned">
+          <span class="material-symbols-outlined">trending_up</span>
+          $12.40 earned toward gift cards
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-labels">
+            <span>0 pts</span>
+            <span>2,000 pts goal</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== SECTION 3: WHAT TO DO NEXT ========== -->
+      <section class="actions-section">
+        <div class="section-header">
+          <h2>What to do next</h2>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+
+        <div class="action-list">
+          <!-- Action 1: pending -->
+          <div class="action-item">
+            <div class="action-icon pending">
+              <span class="material-symbols-outlined">assignment</span>
+            </div>
+            <div class="action-text">
+              <div class="action-name">Complete Health Assessment</div>
+            </div>
+            <span class="action-badge points">500 pts</span>
+          </div>
+
+          <!-- Action 2: pending -->
+          <div class="action-item">
+            <div class="action-icon pending">
+              <span class="material-symbols-outlined">biotech</span>
+            </div>
+            <div class="action-text">
+              <div class="action-name">Get your A1C checked</div>
+            </div>
+            <span class="action-badge points">200 pts</span>
+          </div>
+
+          <!-- Action 3: pending -->
+          <div class="action-item">
+            <div class="action-icon pending">
+              <span class="material-symbols-outlined">groups</span>
+            </div>
+            <div class="action-text">
+              <div class="action-name">Join a Team Challenge</div>
+            </div>
+            <span class="action-badge points">100 pts</span>
+          </div>
+
+          <!-- Action 4: completed -->
+          <div class="action-item">
+            <div class="action-icon completed">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <div class="action-text">
+              <div class="action-name done">Connect a wearable device</div>
+            </div>
+            <span class="action-badge earned">Earned</span>
+          </div>
+        </div>
+
+        <a class="see-all-link" href="#">
+          See all actions
+          <span class="material-symbols-outlined">chevron_right</span>
+        </a>
+      </section>
+
+      <!-- ========== SECTION 4: DAILY CARDS ========== -->
+      <section class="daily-cards-section">
+        <div class="section-header">
+          <h2>Daily Cards</h2>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+
+        <div class="cards-scroll">
+          <!-- Card 1 -->
+          <div class="daily-card">
+            <div class="daily-card-img-placeholder" style="background: linear-gradient(135deg, #4FC3F7, #0288D1);">
+              <span class="material-symbols-outlined">self_improvement</span>
+            </div>
+            <div class="daily-card-body">
+              <div class="daily-card-title">5-Minute Mindful Breathing</div>
+              <div class="daily-card-meta">
+                <span class="daily-card-pts">5 pts</span>
+                <span class="daily-card-time">2 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="daily-card">
+            <div class="daily-card-img-placeholder" style="background: linear-gradient(135deg, #81C784, #388E3C);">
+              <span class="material-symbols-outlined">restaurant</span>
+            </div>
+            <div class="daily-card-body">
+              <div class="daily-card-title">Healthy Lunch Swaps</div>
+              <div class="daily-card-meta">
+                <span class="daily-card-pts">5 pts</span>
+                <span class="daily-card-time">3 min read</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="daily-card">
+            <div class="daily-card-img-placeholder" style="background: linear-gradient(135deg, #FFB74D, #F57C00);">
+              <span class="material-symbols-outlined">bedtime</span>
+            </div>
+            <div class="daily-card-body">
+              <div class="daily-card-title">Better Sleep Habits</div>
+              <div class="daily-card-meta">
+                <span class="daily-card-pts">5 pts</span>
+                <span class="daily-card-time">4 min read</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION 5: ACTIVE CHALLENGE CTA ========== -->
+      <section class="challenge-section">
+        <div class="challenge-card">
+          <div class="challenge-card-overlay">
+            <span class="challenge-tag">Active Challenge</span>
+            <div class="challenge-name">Spring Into Wellness</div>
+            <div class="challenge-desc">Walk across the Grand Canyon — virtually</div>
+            <div class="challenge-footer">
+              <span class="challenge-progress-text">
+                <span class="material-symbols-outlined">lock_open</span>
+                3 of 8 destinations unlocked
+              </span>
+              <button class="btn-primary on-dark">Join Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION 6: JUST FOR YOU ========== -->
+      <section class="just-for-you-section">
+        <div class="section-header">
+          <h2>Just for you</h2>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+
+        <div class="content-card">
+          <div class="content-thumb" style="background: linear-gradient(135deg, #7E57C2, #512DA8);">
+            <span class="material-symbols-outlined">nights_stay</span>
+          </div>
+          <div class="content-info">
+            <div class="content-title">Improve your sleep</div>
+            <div class="content-subtitle">Learn evidence-based techniques for better rest and recovery</div>
+          </div>
+          <div class="content-chevron">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <div class="content-thumb" style="background: linear-gradient(135deg, #EF5350, #C62828);">
+            <span class="material-symbols-outlined">monitor_heart</span>
+          </div>
+          <div class="content-info">
+            <div class="content-title">Get your A1C checked</div>
+            <div class="content-subtitle">Understand your blood sugar levels and what they mean for you</div>
+          </div>
+          <div class="content-chevron">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== SECTION 7: HEALTHY HABITS ========== -->
+      <section class="habits-section">
+        <div class="section-header">
+          <h2>Healthy Habits</h2>
+          <span class="material-symbols-outlined">chevron_right</span>
+        </div>
+
+        <div class="habits-stats">
+          <div class="habit-stat">
+            <span class="material-symbols-outlined" style="color: var(--mat-primary);">directions_walk</span>
+            <div class="value">6,842</div>
+            <div class="label">Steps</div>
+          </div>
+          <div class="habit-stat">
+            <span class="material-symbols-outlined" style="color: #7E57C2;">bedtime</span>
+            <div class="value">7.2h</div>
+            <div class="label">Sleep</div>
+          </div>
+          <div class="habit-stat">
+            <span class="material-symbols-outlined" style="color: #EF5350;">local_fire_department</span>
+            <div class="value">34</div>
+            <div class="label">Active Min</div>
+          </div>
+        </div>
+
+        <a class="text-link" href="#">
+          Track my healthy habits
+          <span class="material-symbols-outlined">chevron_right</span>
+        </a>
+      </section>
+
+    </div><!-- /page-body -->
+  </div><!-- /scroll-container -->
+
+  <!-- ========== BOTTOM NAVIGATION ========== -->
+  <nav class="bottom-nav">
+    <a class="nav-item active" href="#">
+      <span class="material-symbols-outlined">home</span>
+      <span class="nav-label">Home</span>
+    </a>
+    <a class="nav-item" href="#">
+      <span class="material-symbols-outlined">explore</span>
+      <span class="nav-label">Explore</span>
+    </a>
+    <a class="nav-item" href="#">
+      <span class="material-symbols-outlined">emoji_events</span>
+      <span class="nav-label">Rewards</span>
+    </a>
+    <a class="nav-item" href="#">
+      <span class="material-symbols-outlined">favorite</span>
+      <span class="nav-label">Health</span>
+    </a>
+    <a class="nav-item" href="#">
+      <span class="material-symbols-outlined">more_horiz</span>
+      <span class="nav-label">More</span>
+    </a>
+  </nav>
+
+  <!-- ========== CELEBRATION MODAL ========== -->
+  <div class="modal-overlay" id="celebrationModal">
+    <div class="modal-content">
+      <div class="modal-icon">
+        <span class="material-symbols-outlined">emoji_events</span>
+      </div>
+      <div class="modal-title">Achievement Unlocked!</div>
+      <div class="modal-points">
+        <span class="material-symbols-outlined">workspace_premium</span>
+        +500 points earned
+      </div>
+      <div class="modal-subtitle">You completed the Health Assessment. 67 of 330 members have earned this achievement.</div>
+      <button class="btn-dismiss" onclick="toggleModal()">Continue</button>
+    </div>
+  </div>
+
+</div><!-- /device-frame -->
+
+<script>
+  function toggleModal() {
+    const modal = document.getElementById('celebrationModal');
+    modal.classList.toggle('visible');
+  }
+
+  // Close modal on overlay click (outside content)
+  document.getElementById('celebrationModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('visible');
+    }
+  });
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.getElementById('celebrationModal').classList.remove('visible');
+    }
+  });
+</script>
+
+</body>
+</html>

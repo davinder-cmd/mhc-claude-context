@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC Color Palette Explorations</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 40px 24px 80px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 48px;
+  }
+
+  .palette-section {
+    margin-bottom: 64px;
+  }
+  .palette-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .palette-number {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .palette-name {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .palette-tag {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    background: #333;
+    color: #aaa;
+  }
+  .palette-tag.recommended {
+    background: #2d6a4f;
+    color: #b7e4c7;
+  }
+  .palette-desc {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 20px;
+    max-width: 600px;
+  }
+
+  .palette-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* Phone mockup */
+  .phone {
+    width: 300px;
+    min-height: 580px;
+    border-radius: 36px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .phone-inner {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+
+  /* Header area */
+  .phone-header {
+    padding: 40px 20px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phone-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* Content area */
+  .phone-content {
+    padding: 0 14px 14px;
+  }
+
+  /* Stats card */
+  .stats-card {
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .stats-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stats-card-title .arrow {
+    font-size: 16px;
+    opacity: 0.5;
+  }
+  .stats-row {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  .stat-item {}
+  .stat-ring {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .stat-value {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .stat-label {
+    font-size: 11px;
+    opacity: 0.6;
+  }
+
+  /* Habit card */
+  .habit-card {
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .habit-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .habit-info { flex: 1; }
+  .habit-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .habit-sub {
+    font-size: 12px;
+    opacity: 0.6;
+  }
+  .habit-points {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .habit-arrow {
+    font-size: 16px;
+    opacity: 0.4;
+  }
+
+  /* Challenge card */
+  .challenge-card {
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 12px;
+  }
+  .challenge-info { flex: 1; }
+  .challenge-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.5;
+    margin-bottom: 4px;
+  }
+  .challenge-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .challenge-date {
+    font-size: 12px;
+    opacity: 0.5;
+    margin-bottom: 6px;
+  }
+  .challenge-desc {
+    font-size: 12px;
+    opacity: 0.65;
+    line-height: 1.4;
+  }
+  .challenge-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin-top: 4px;
+  }
+  .nav-item {
+    text-align: center;
+    font-size: 10px;
+    opacity: 0.5;
+  }
+  .nav-item.active { opacity: 1; }
+  .nav-icon {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+
+  /* Swatch strip */
+  .swatch-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  .swatch-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 8px;
+  }
+  .swatch-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    position: relative;
+  }
+  .swatch-label {
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+    margin-top: 4px;
+    width: 48px;
+  }
+  .swatch-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>MHC Home Screen — Color Explorations</h1>
+<p class="subtitle">5 warm-background palettes · one recommended · one Withings-inspired</p>
+
+<!-- ===================== PALETTE 1: SAGE & SAND ===================== -->
+<div class="palette-section">
+  <div class="palette-header">
+    <span class="palette-number">01</span>
+    <span class="palette-name">Sage & Sand</span>
+    <span class="palette-tag recommended">★ Recommended</span>
+  </div>
+  <p class="palette-desc">Earthy, grounded, calming. Sage green primary on warm sand. Feels clinical enough for health, warm enough for consumer. Strong hierarchy without the yellow intensity.</p>
+  <div class="palette-row">
+    <div class="phone" style="background: #f5f0e8;">
+      <div class="phone-inner">
+        <div class="phone-header" style="background: #6b8f71; color: #fff;">
+          <h2>Welcome Percy!</h2>
+          <div class="avatar" style="border-color: rgba(255,255,255,0.4); color: #fff;">P</div>
+        </div>
+        <div class="phone-content" style="color: #2c2c2c;">
+          <div class="stats-card" style="background: #fff;">
+            <div class="stats-card-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e8f0e5; border: 3px solid #6b8f71;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e5eae8; border: 3px solid #4a7c6f;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #fdf3e7; border: 3px solid #c4956a;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+          <div class="habit-card" style="background: #fff;">
+            <div class="habit-icon" style="background: #e8f0e5; color: #6b8f71;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-points" style="color: #c4956a;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+          <div class="challenge-card" style="background: #fff;">
+            <div class="challenge-info">
+              <div class="challenge-label">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #e8f0e5;">🌿</div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item active" style="color: #6b8f71;"><div class="nav-icon">🏠</div>Home</div>
+            <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+            <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+            <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+            <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swatch-strip">
+      <div class="swatch-group-label">Background</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #f5f0e8;"></div><div class="swatch-label">Sand</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #ffffff;"></div><div class="swatch-label">Card</div></div>
+      </div>
+      <div class="swatch-group-label">Primary</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #6b8f71;"></div><div class="swatch-label">Sage</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #4a7c6f;"></div><div class="swatch-label">Deep Sage</div></div>
+      </div>
+      <div class="swatch-group-label">Accent</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #c4956a;"></div><div class="swatch-label">Amber</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #e8f0e5;"></div><div class="swatch-label">Tint</div></div>
+      </div>
+      <div class="swatch-group-label">Text</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #2c2c2c;"></div><div class="swatch-label">Primary</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #7a7a7a;"></div><div class="swatch-label">Secondary</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PALETTE 2: WITHINGS-INSPIRED ===================== -->
+<div class="palette-section">
+  <div class="palette-header">
+    <span class="palette-number">02</span>
+    <span class="palette-name">Pearl & Teal</span>
+    <span class="palette-tag" style="background: #1a3a4a; color: #7ec8c8;">Withings-inspired</span>
+  </div>
+  <p class="palette-desc">Clean, premium, restrained. Warm pearl background, teal-blue accents, generous whitespace. The Withings DNA: sophisticated health tech that doesn't feel clinical. Header is understated — no color block, just confident typography.</p>
+  <div class="palette-row">
+    <div class="phone" style="background: #f7f5f2;">
+      <div class="phone-inner">
+        <div class="phone-header" style="background: #f7f5f2; color: #1a2e35;">
+          <h2>Welcome Percy!</h2>
+          <div class="avatar" style="border-color: #1a8a8a; color: #1a8a8a; background: #e6f5f3;">P</div>
+        </div>
+        <div class="phone-content" style="color: #1a2e35;">
+          <div class="stats-card" style="background: #ffffff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+            <div class="stats-card-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f0faf8; border: 3px solid #1a8a8a;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #eef3f8; border: 3px solid #4a7fa0;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f5f0e8; border: 3px solid #c49a6c;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+          <div class="habit-card" style="background: #ffffff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+            <div class="habit-icon" style="background: #f0faf8; color: #1a8a8a;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-points" style="color: #c49a6c;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+          <div class="challenge-card" style="background: #ffffff; box-shadow: 0 1px 4px rgba(0,0,0,0.06);">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #1a8a8a;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #f0faf8;">🌿</div>
+          </div>
+          <div class="bottom-nav" style="border-color: rgba(0,0,0,0.06);">
+            <div class="nav-item active" style="color: #1a8a8a;"><div class="nav-icon">🏠</div>Home</div>
+            <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+            <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+            <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+            <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swatch-strip">
+      <div class="swatch-group-label">Background</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #f7f5f2;"></div><div class="swatch-label">Pearl</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #ffffff;"></div><div class="swatch-label">Card</div></div>
+      </div>
+      <div class="swatch-group-label">Primary</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #1a8a8a;"></div><div class="swatch-label">Teal</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #4a7fa0;"></div><div class="swatch-label">Slate Blue</div></div>
+      </div>
+      <div class="swatch-group-label">Accent</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #c49a6c;"></div><div class="swatch-label">Warm Gold</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #f0faf8;"></div><div class="swatch-label">Tint</div></div>
+      </div>
+      <div class="swatch-group-label">Text</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #1a2e35;"></div><div class="swatch-label">Primary</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #8a9499;"></div><div class="swatch-label">Secondary</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PALETTE 3: TERRACOTTA & CREAM ===================== -->
+<div class="palette-section">
+  <div class="palette-header">
+    <span class="palette-number">03</span>
+    <span class="palette-name">Terracotta & Cream</span>
+  </div>
+  <p class="palette-desc">Warm, energetic, approachable. Coral-terracotta replaces the yellow header — similar energy but more refined. Pairs with cream and olive for depth. Feels motivating without the neon fitness-app vibe.</p>
+  <div class="palette-row">
+    <div class="phone" style="background: #faf5ef;">
+      <div class="phone-inner">
+        <div class="phone-header" style="background: #c67a5c; color: #fff;">
+          <h2>Welcome Percy!</h2>
+          <div class="avatar" style="border-color: rgba(255,255,255,0.4); color: #fff;">P</div>
+        </div>
+        <div class="phone-content" style="color: #3a2e28;">
+          <div class="stats-card" style="background: #fff;">
+            <div class="stats-card-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #fdf0e8; border: 3px solid #c67a5c;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #eef1e8; border: 3px solid #7a8c5a;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f5ede4; border: 3px solid #b08a5c;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+          <div class="habit-card" style="background: #fff;">
+            <div class="habit-icon" style="background: #fdf0e8; color: #c67a5c;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-points" style="color: #b08a5c;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+          <div class="challenge-card" style="background: #fff;">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #c67a5c;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #eef1e8;">🌿</div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item active" style="color: #c67a5c;"><div class="nav-icon">🏠</div>Home</div>
+            <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+            <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+            <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+            <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swatch-strip">
+      <div class="swatch-group-label">Background</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #faf5ef;"></div><div class="swatch-label">Cream</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #ffffff;"></div><div class="swatch-label">Card</div></div>
+      </div>
+      <div class="swatch-group-label">Primary</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #c67a5c;"></div><div class="swatch-label">Terracotta</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #7a8c5a;"></div><div class="swatch-label">Olive</div></div>
+      </div>
+      <div class="swatch-group-label">Accent</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #b08a5c;"></div><div class="swatch-label">Camel</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #fdf0e8;"></div><div class="swatch-label">Blush</div></div>
+      </div>
+      <div class="swatch-group-label">Text</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #3a2e28;"></div><div class="swatch-label">Primary</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #8a7e78;"></div><div class="swatch-label">Secondary</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PALETTE 4: LAVENDER & WARM GRAY ===================== -->
+<div class="palette-section">
+  <div class="palette-header">
+    <span class="palette-number">04</span>
+    <span class="palette-name">Lavender Dusk</span>
+  </div>
+  <p class="palette-desc">Calm, modern, wellness-forward. Soft purple on warm linen gray. Differentiates from the green-centric health app default. Works especially well for behavioral health positioning (anxiety, depression DCPs).</p>
+  <div class="palette-row">
+    <div class="phone" style="background: #f5f2ee;">
+      <div class="phone-inner">
+        <div class="phone-header" style="background: #7b6b8a; color: #fff;">
+          <h2>Welcome Percy!</h2>
+          <div class="avatar" style="border-color: rgba(255,255,255,0.4); color: #fff;">P</div>
+        </div>
+        <div class="phone-content" style="color: #2e2a33;">
+          <div class="stats-card" style="background: #fff;">
+            <div class="stats-card-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f0ecf4; border: 3px solid #7b6b8a;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #ece8f2; border: 3px solid #5e5a7a;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f5ede4; border: 3px solid #b09070;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+          <div class="habit-card" style="background: #fff;">
+            <div class="habit-icon" style="background: #f0ecf4; color: #7b6b8a;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-points" style="color: #b09070;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+          <div class="challenge-card" style="background: #fff;">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #7b6b8a;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #f0ecf4;">🧘</div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item active" style="color: #7b6b8a;"><div class="nav-icon">🏠</div>Home</div>
+            <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+            <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+            <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+            <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swatch-strip">
+      <div class="swatch-group-label">Background</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #f5f2ee;"></div><div class="swatch-label">Linen</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #ffffff;"></div><div class="swatch-label">Card</div></div>
+      </div>
+      <div class="swatch-group-label">Primary</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #7b6b8a;"></div><div class="swatch-label">Lavender</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #5e5a7a;"></div><div class="swatch-label">Deep Plum</div></div>
+      </div>
+      <div class="swatch-group-label">Accent</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #b09070;"></div><div class="swatch-label">Bronze</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #f0ecf4;"></div><div class="swatch-label">Tint</div></div>
+      </div>
+      <div class="swatch-group-label">Text</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #2e2a33;"></div><div class="swatch-label">Primary</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #888088;"></div><div class="swatch-label">Secondary</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PALETTE 5: FOREST & OAT ===================== -->
+<div class="palette-section">
+  <div class="palette-header">
+    <span class="palette-number">05</span>
+    <span class="palette-name">Forest & Oat</span>
+  </div>
+  <p class="palette-desc">Bold, confident, nature-anchored. Deep forest green header with warm oat background. Closest to the current palette's green DNA but with more contrast and sophistication. The header carries authority; the body stays approachable.</p>
+  <div class="palette-row">
+    <div class="phone" style="background: #f3efe7;">
+      <div class="phone-inner">
+        <div class="phone-header" style="background: #2d4a3e; color: #fff;">
+          <h2>Welcome Percy!</h2>
+          <div class="avatar" style="border-color: rgba(255,255,255,0.3); color: #fff;">P</div>
+        </div>
+        <div class="phone-content" style="color: #2a2a2a;">
+          <div class="stats-card" style="background: #fff;">
+            <div class="stats-card-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e5ede8; border: 3px solid #2d4a3e;">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #e5ede8; border: 3px solid #5a8a6a;">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: #f5ede0; border: 3px solid #c4a050;">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+          <div class="habit-card" style="background: #fff;">
+            <div class="habit-icon" style="background: #e5ede8; color: #2d4a3e;">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-points" style="color: #c4a050;">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+          <div class="challenge-card" style="background: #fff;">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: #2d4a3e;">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: #e5ede8;">🌲</div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item active" style="color: #2d4a3e;"><div class="nav-icon">🏠</div>Home</div>
+            <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+            <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+            <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+            <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="swatch-strip">
+      <div class="swatch-group-label">Background</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #f3efe7;"></div><div class="swatch-label">Oat</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #ffffff;"></div><div class="swatch-label">Card</div></div>
+      </div>
+      <div class="swatch-group-label">Primary</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #2d4a3e;"></div><div class="swatch-label">Forest</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #5a8a6a;"></div><div class="swatch-label">Fern</div></div>
+      </div>
+      <div class="swatch-group-label">Accent</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #c4a050;"></div><div class="swatch-label">Harvest</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #e5ede8;"></div><div class="swatch-label">Tint</div></div>
+      </div>
+      <div class="swatch-group-label">Text</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #2a2a2a;"></div><div class="swatch-label">Primary</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #7a7a7a;"></div><div class="swatch-label">Secondary</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

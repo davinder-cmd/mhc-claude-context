@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pearl & Teal + Rose — All Screens</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 40px 24px 80px;
+  }
+
+  h1 { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+  .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 48px; }
+
+  .screen-section { margin-bottom: 72px; }
+  .screen-header { margin-bottom: 6px; }
+  .screen-number {
+    font-size: 12px; font-weight: 600; color: #666;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .screen-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .screen-desc { color: #aaa; font-size: 14px; margin-bottom: 20px; max-width: 640px; line-height: 1.5; }
+
+  .screen-row {
+    display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;
+  }
+
+  /* Phone frame */
+  .phone {
+    width: 320px;
+    border-radius: 36px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    background: #f7f5f2;
+  }
+
+  /* ===== DESIGN TOKENS ===== */
+  :root {
+    --bg: #f7f5f2;
+    --card: #ffffff;
+    --card-shadow: 0 1px 4px rgba(0,0,0,0.06);
+
+    /* Primary */
+    --teal: #1a8a8a;
+    --teal-light: #f0faf8;
+    --teal-dark: #14706e;
+
+    /* Secondary */
+    --slate: #4a7fa0;
+    --slate-light: #eef3f8;
+
+    /* Accent — warm */
+    --gold: #c49a6c;
+    --gold-light: #f5f0e8;
+
+    /* Accent — rose (NEW) */
+    --rose: #c4788a;
+    --rose-light: #faf0f2;
+    --rose-dark: #a8606f;
+
+    /* Text */
+    --text-primary: #1a2e35;
+    --text-secondary: #8a9499;
+    --text-tertiary: #b0b5b8;
+    --divider: rgba(0,0,0,0.06);
+  }
+
+  /* Status bar */
+  .status-bar {
+    height: 44px;
+    padding: 14px 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .status-icons { font-size: 11px; display: flex; gap: 6px; }
+
+  /* Content area */
+  .content { padding: 0 14px 14px; }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .card-pad { padding: 16px; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 6px;
+    border-top: 1px solid var(--divider);
+    background: var(--bg);
+  }
+  .nav-item { text-align: center; font-size: 10px; color: var(--text-tertiary); }
+  .nav-item.active { color: var(--teal); }
+  .nav-icon { font-size: 18px; margin-bottom: 2px; }
+
+  /* ===== HOME SCREEN ===== */
+
+  .home-header {
+    padding: 40px 20px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+  }
+  .home-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .stats-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-primary);
+  }
+  .stats-card-title .arrow { font-size: 16px; opacity: 0.5; }
+  .stats-row {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  .stat-ring {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 0 auto 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .stat-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  .habit-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  .habit-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .habit-info { flex: 1; }
+  .habit-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .habit-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .habit-points {
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .habit-arrow {
+    font-size: 16px;
+    color: var(--text-tertiary);
+  }
+
+  .challenge-card-inner {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+  }
+  .challenge-info { flex: 1; }
+  .challenge-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .challenge-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .challenge-date {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .challenge-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+  .challenge-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  /* ===== DCP SCREEN ===== */
+
+  .dcp-hero {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    padding: 20px 20px 24px;
+    color: #fff;
+  }
+  .dcp-hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+  .dcp-hero h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .dcp-hero-sub {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 16px;
+  }
+  .dcp-progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .dcp-progress-fill {
+    height: 100%;
+    background: #fff;
+    border-radius: 3px;
+    width: 35%;
+  }
+  .dcp-progress-text {
+    font-size: 11px;
+    opacity: 0.7;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dcp-stats-row {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+  }
+  .dcp-stat {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 12px;
+  }
+  .dcp-stat-value {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .dcp-stat-label {
+    font-size: 10px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dcp-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 16px 16px 10px;
+  }
+
+  .dcp-lesson {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .dcp-lesson:last-child { border-bottom: none; }
+  .dcp-lesson-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .dcp-lesson-num.done { background: var(--teal); color: #fff; }
+  .dcp-lesson-num.current {
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 2px solid var(--teal);
+  }
+  .dcp-lesson-num.locked { background: #f0f0ee; color: var(--text-tertiary); }
+  .dcp-lesson-info { flex: 1; }
+  .dcp-lesson-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .dcp-lesson-meta {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .dcp-ai-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, var(--teal-light) 0%, #e6f5f3 100%);
+    border-radius: 16px;
+    margin-bottom: 12px;
+  }
+  .dcp-ai-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .dcp-ai-info { flex: 1; }
+  .dcp-ai-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .dcp-ai-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 1px;
+  }
+  .dcp-ai-arrow {
+    font-size: 16px;
+    color: var(--teal);
+  }
+
+  /* ===== HEALTH DATA ===== */
+
+  .hd-greeting {
+    padding: 20px 20px 8px;
+    background: var(--bg);
+  }
+  .hd-greeting h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .hd-greeting-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .hd-insight-card {
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    color: #fff;
+  }
+  .hd-insight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .hd-insight-text {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .hd-insight-action {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .hd-period-tabs {
+    display: flex;
+    gap: 6px;
+    padding: 14px 0 10px;
+  }
+  .hd-tab {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: transparent;
+  }
+  .hd-tab.active { background: var(--teal); color: #fff; }
+
+  .hd-metric-card {
+    padding: 16px;
+    border-bottom: 1px solid var(--divider);
+  }
+  .hd-metric-card:last-child { border-bottom: none; }
+  .hd-metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .hd-metric-label-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hd-metric-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .hd-metric-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .hd-metric-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .hd-metric-unit {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  .hd-sparkline {
+    height: 48px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hd-sparkline svg { width: 100%; height: 100%; }
+
+  .hd-metric-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .hd-trend-up { color: var(--teal); font-weight: 600; }
+  .hd-trend-down { color: var(--rose); font-weight: 600; }
+
+  /* ===== SWATCH SECTION ===== */
+
+  .swatch-section {
+    margin-bottom: 72px;
+  }
+  .swatch-grid {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .swatch-group { }
+  .swatch-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .swatch-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .swatch-item { display: flex; flex-direction: column; align-items: center; }
+  .swatch {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+  }
+  .swatch-label {
+    font-size: 10px;
+    color: #888;
+    text-align: center;
+    margin-top: 4px;
+    width: 52px;
+  }
+  .swatch-hex {
+    font-size: 9px;
+    color: #555;
+    font-family: monospace;
+  }
+
+  /* ===== ANNOTATIONS ===== */
+
+  .annotation-strip {
+    padding: 12px 0 0;
+    max-width: 320px;
+  }
+  .annotation {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .annotation-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .annotation-text {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.45;
+  }
+  .annotation-text strong {
+    color: #ddd;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<h1>Pearl, Teal & Rose</h1>
+<p class="subtitle">Updated palette with dusty rose · 3 screens · token reference</p>
+
+<!-- ===== TOKEN REFERENCE ===== -->
+<div class="swatch-section">
+  <div class="screen-header">
+    <div class="screen-number">Palette</div>
+    <div class="screen-name">Updated Token Set</div>
+  </div>
+  <p class="screen-desc">Rose enters as a fourth voice — used for wellness/habit moments, challenge engagement, and downtrend indicators. It replaces slate-blue for sleep (rest maps naturally to softer tones) and gives the habit/challenge cards their own personality distinct from the clinical teal.</p>
+  <div class="swatch-grid">
+    <div class="swatch-group">
+      <div class="swatch-group-label">Backgrounds</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #f7f5f2;"></div><div class="swatch-label">Pearl</div><div class="swatch-hex">#f7f5f2</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #ffffff; border: 1px solid #eee;"></div><div class="swatch-label">Card</div><div class="swatch-hex">#ffffff</div></div>
+      </div>
+    </div>
+    <div class="swatch-group">
+      <div class="swatch-group-label">Primary — Teal</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #1a8a8a;"></div><div class="swatch-label">Teal</div><div class="swatch-hex">#1a8a8a</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #14706e;"></div><div class="swatch-label">Deep</div><div class="swatch-hex">#14706e</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #f0faf8;"></div><div class="swatch-label">Tint</div><div class="swatch-hex">#f0faf8</div></div>
+      </div>
+    </div>
+    <div class="swatch-group">
+      <div class="swatch-group-label">Accent — Rose (new)</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #c4788a;"></div><div class="swatch-label">Rose</div><div class="swatch-hex">#c4788a</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #a8606f;"></div><div class="swatch-label">Deep</div><div class="swatch-hex">#a8606f</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #faf0f2;"></div><div class="swatch-label">Tint</div><div class="swatch-hex">#faf0f2</div></div>
+      </div>
+    </div>
+    <div class="swatch-group">
+      <div class="swatch-group-label">Accent — Gold</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #c49a6c;"></div><div class="swatch-label">Gold</div><div class="swatch-hex">#c49a6c</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #f5f0e8;"></div><div class="swatch-label">Tint</div><div class="swatch-hex">#f5f0e8</div></div>
+      </div>
+    </div>
+    <div class="swatch-group">
+      <div class="swatch-group-label">Text</div>
+      <div class="swatch-row">
+        <div class="swatch-item"><div class="swatch" style="background: #1a2e35;"></div><div class="swatch-label">Primary</div><div class="swatch-hex">#1a2e35</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #8a9499;"></div><div class="swatch-label">Secondary</div><div class="swatch-hex">#8a9499</div></div>
+        <div class="swatch-item"><div class="swatch" style="background: #b0b5b8;"></div><div class="swatch-label">Tertiary</div><div class="swatch-hex">#b0b5b8</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 1: HOME ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Screen 01</div>
+    <div class="screen-name">Home</div>
+  </div>
+  <p class="screen-desc">Rose now owns the habit icon and challenge card label — giving the wellness/engagement layer a distinct voice from clinical teal. Sleep ring shifts to rose. Gold stays on points/rewards only.</p>
+
+  <div class="screen-row">
+    <div class="phone">
+      <div class="home-header">
+        <h2>Welcome Percy!</h2>
+        <div class="avatar" style="border: 2px solid var(--teal); color: var(--teal); background: var(--teal-light);">P</div>
+      </div>
+      <div class="content" style="color: var(--text-primary);">
+        <!-- Stats -->
+        <div class="card">
+          <div class="card-pad">
+            <div class="stats-card-title">Stats <span class="arrow">›</span></div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-ring" style="background: var(--teal-light); border: 3px solid var(--teal);">👟</div>
+                <div class="stat-value">2,000</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: var(--rose-light); border: 3px solid var(--rose);">🌙</div>
+                <div class="stat-value">7 hrs</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-ring" style="background: var(--gold-light); border: 3px solid var(--gold);">🏃</div>
+                <div class="stat-value">60</div>
+                <div class="stat-label">Active Min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Habit card — rose icon -->
+        <div class="card">
+          <div class="habit-card-inner">
+            <div class="habit-icon" style="background: var(--rose-light); color: var(--rose);">✓</div>
+            <div class="habit-info">
+              <div class="habit-title">Healthy Habits</div>
+              <div class="habit-sub">Track 1 habit</div>
+              <div class="habit-points" style="color: var(--gold);">⭐ 10 Points</div>
+            </div>
+            <div class="habit-arrow">›</div>
+          </div>
+        </div>
+
+        <!-- Challenge card — rose label -->
+        <div class="card">
+          <div class="challenge-card-inner">
+            <div class="challenge-info">
+              <div class="challenge-label" style="color: var(--rose);">Healthy Habit Challenge</div>
+              <div class="challenge-title">Love Yourself</div>
+              <div class="challenge-date">⏱ Starts April 24</div>
+              <div class="challenge-desc">Look no further for the motivation you need. You're invited!</div>
+            </div>
+            <div class="challenge-img" style="background: var(--rose-light);">🌿</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <div class="nav-item active"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div class="annotation-strip">
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--rose);"></div>
+        <div class="annotation-text"><strong>Sleep ring → rose.</strong> Rest/recovery maps naturally to softer, warmer tones. Differentiates it from the activity-focused teal without needing a fourth hue family.</div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--rose);"></div>
+        <div class="annotation-text"><strong>Habit icon → rose tint.</strong> Wellness habits get their own color identity, separate from clinical DCPs (teal). The checkmark in rose says "personal wellbeing" not "medical program."</div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--rose);"></div>
+        <div class="annotation-text"><strong>Challenge label → rose.</strong> Engagement content (challenges, social) uses rose as its accent. Creates a clear visual language: teal = clinical, rose = wellness/social, gold = rewards.</div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--gold);"></div>
+        <div class="annotation-text"><strong>Gold stays on points only.</strong> Rewards and earned value keep their exclusive accent — gold means "you earned something" everywhere in the product.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 2: DCP DETAIL ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Screen 02</div>
+    <div class="screen-name">Digital Care Path — Back Pain</div>
+  </div>
+  <p class="screen-desc">Clinical screens stay teal-dominant — rose appears only in the earned rewards stat to create warmth inside an otherwise clinical context. The AI coach banner keeps its teal gradient to signal "medical intelligence."</p>
+
+  <div class="screen-row">
+    <div class="phone">
+      <div class="status-bar" style="background: var(--teal); color: #fff;">
+        <span>9:41</span>
+        <div class="status-icons">📶 📡 🔋</div>
+      </div>
+
+      <div class="dcp-hero">
+        <div class="dcp-hero-badge">MSK Program</div>
+        <h2>Back Pain Relief</h2>
+        <div class="dcp-hero-sub">12-week guided program</div>
+        <div class="dcp-progress-bar"><div class="dcp-progress-fill"></div></div>
+        <div class="dcp-progress-text">
+          <span>Week 4 of 12</span>
+          <span>35% complete</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="card">
+          <div class="dcp-stats-row">
+            <div class="dcp-stat" style="background: var(--teal-light);">
+              <div class="dcp-stat-value" style="color: var(--teal);">4/10</div>
+              <div class="dcp-stat-label">Pain Today</div>
+            </div>
+            <div class="dcp-stat" style="background: var(--teal-light);">
+              <div class="dcp-stat-value" style="color: var(--teal);">12</div>
+              <div class="dcp-stat-label">Lessons Done</div>
+            </div>
+            <div class="dcp-stat" style="background: var(--rose-light);">
+              <div class="dcp-stat-value" style="color: var(--rose);">$35</div>
+              <div class="dcp-stat-label">Earned</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dcp-ai-banner">
+          <div class="dcp-ai-icon">✦</div>
+          <div class="dcp-ai-info">
+            <div class="dcp-ai-title">A.I. MSK Coach</div>
+            <div class="dcp-ai-sub">Ask anything about your back pain</div>
+          </div>
+          <div class="dcp-ai-arrow">›</div>
+        </div>
+
+        <div class="card">
+          <div class="dcp-section-title">This Week</div>
+          <div class="dcp-lesson">
+            <div class="dcp-lesson-num done">✓</div>
+            <div class="dcp-lesson-info">
+              <div class="dcp-lesson-title">Understanding Your Pain</div>
+              <div class="dcp-lesson-meta">Video · 8 min</div>
+            </div>
+            <span style="color: var(--teal); font-size: 16px;">✓</span>
+          </div>
+          <div class="dcp-lesson">
+            <div class="dcp-lesson-num done">✓</div>
+            <div class="dcp-lesson-info">
+              <div class="dcp-lesson-title">Core Activation Basics</div>
+              <div class="dcp-lesson-meta">Exercise · 12 min</div>
+            </div>
+            <span style="color: var(--teal); font-size: 16px;">✓</span>
+          </div>
+          <div class="dcp-lesson">
+            <div class="dcp-lesson-num current">3</div>
+            <div class="dcp-lesson-info">
+              <div class="dcp-lesson-title">Seated Posture Reset</div>
+              <div class="dcp-lesson-meta">Exercise · 10 min · <span style="color: var(--gold); font-weight: 600;">10 pts</span></div>
+            </div>
+            <span style="color: var(--teal); font-size: 16px;">›</span>
+          </div>
+          <div class="dcp-lesson">
+            <div class="dcp-lesson-num locked">4</div>
+            <div class="dcp-lesson-info">
+              <div class="dcp-lesson-title" style="color: var(--text-tertiary);">Pain Check-in</div>
+              <div class="dcp-lesson-meta">Assessment · 3 min</div>
+            </div>
+            <span style="color: var(--text-tertiary); font-size: 14px;">🔒</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item active"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div class="annotation-strip">
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--teal);"></div>
+        <div class="annotation-text"><strong>DCP stays teal-dominant.</strong> Clinical programs need authority. Rose doesn't compete with the hero or lesson states — it only appears in the rewards stat.</div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--rose);"></div>
+        <div class="annotation-text"><strong>Earned stat → rose-light background.</strong> Pulls the eye to the incentive without breaking the clinical tone. The rose-on-pink creates a moment of warmth inside an otherwise serious screen.</div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--gold);"></div>
+        <div class="annotation-text"><strong>Points stay gold inline.</strong> The "10 pts" on the current lesson uses gold — consistent with Home. Rose and gold work in tandem here: rose = what you've earned, gold = what's next.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SCREEN 3: HEALTH DATA ===================== -->
+<div class="screen-section">
+  <div class="screen-header">
+    <div class="screen-number">Screen 03</div>
+    <div class="screen-name">Health Data — Stats Overview</div>
+  </div>
+  <p class="screen-desc">Rose takes over the sleep metric — rest and recovery get a distinctly softer, warmer voice. The downtrend indicator also uses rose, which means the same color that represents "calm/rest" also flags "needs attention" — intentional double duty.</p>
+
+  <div class="screen-row">
+    <div class="phone">
+      <div class="status-bar" style="background: var(--bg); color: var(--text-primary);">
+        <span>9:41</span>
+        <div class="status-icons" style="color: var(--text-secondary);">📶 📡 🔋</div>
+      </div>
+
+      <div class="hd-greeting">
+        <h2>Your Health</h2>
+        <div class="hd-greeting-sub">Monday, April 6</div>
+      </div>
+
+      <div class="content">
+        <div class="hd-insight-card">
+          <div class="hd-insight-badge">✦ A.I. Health Insight</div>
+          <div class="hd-insight-text">Your sleep dropped below 7 hours three nights this week. Even 20 extra minutes tonight could improve tomorrow's energy.</div>
+          <div class="hd-insight-action">Set a bedtime reminder →</div>
+        </div>
+
+        <div class="card">
+          <div class="card-pad" style="padding-bottom: 0;">
+            <div class="hd-period-tabs">
+              <div class="hd-tab active">7 Days</div>
+              <div class="hd-tab">30 Days</div>
+              <div class="hd-tab">90 Days</div>
+            </div>
+          </div>
+
+          <!-- Steps — teal -->
+          <div class="hd-metric-card">
+            <div class="hd-metric-header">
+              <div class="hd-metric-label-row">
+                <div class="hd-metric-dot" style="background: var(--teal);"></div>
+                <div class="hd-metric-label">Steps</div>
+              </div>
+              <div>
+                <span class="hd-metric-value">4,832</span>
+                <span class="hd-metric-unit">avg/day</span>
+              </div>
+            </div>
+            <div class="hd-sparkline">
+              <svg viewBox="0 0 280 48" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="stepsFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1a8a8a" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#1a8a8a" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,38 L40,30 L80,35 L120,20 L160,24 L200,12 L240,18 L280,8 L280,48 L0,48Z" fill="url(#stepsFill)"/>
+                <path d="M0,38 L40,30 L80,35 L120,20 L160,24 L200,12 L240,18 L280,8" fill="none" stroke="#1a8a8a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="280" cy="8" r="4" fill="#1a8a8a"/>
+              </svg>
+            </div>
+            <div class="hd-metric-footer">
+              <span>Mon — Sun</span>
+              <span class="hd-trend-up">↑ 12% vs last week</span>
+            </div>
+          </div>
+
+          <!-- Sleep — ROSE -->
+          <div class="hd-metric-card">
+            <div class="hd-metric-header">
+              <div class="hd-metric-label-row">
+                <div class="hd-metric-dot" style="background: var(--rose);"></div>
+                <div class="hd-metric-label">Sleep</div>
+              </div>
+              <div>
+                <span class="hd-metric-value">6.4</span>
+                <span class="hd-metric-unit">hrs avg</span>
+              </div>
+            </div>
+            <div class="hd-sparkline">
+              <svg viewBox="0 0 280 48" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="sleepFill2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#c4788a" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#c4788a" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,18 L40,22 L80,14 L120,28 L160,32 L200,26 L240,34 L280,30 L280,48 L0,48Z" fill="url(#sleepFill2)"/>
+                <path d="M0,18 L40,22 L80,14 L120,28 L160,32 L200,26 L240,34 L280,30" fill="none" stroke="#c4788a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="280" cy="30" r="4" fill="#c4788a"/>
+              </svg>
+            </div>
+            <div class="hd-metric-footer">
+              <span>Mon — Sun</span>
+              <span class="hd-trend-down">↓ 8% vs last week</span>
+            </div>
+          </div>
+
+          <!-- Active Minutes — gold -->
+          <div class="hd-metric-card">
+            <div class="hd-metric-header">
+              <div class="hd-metric-label-row">
+                <div class="hd-metric-dot" style="background: var(--gold);"></div>
+                <div class="hd-metric-label">Active Minutes</div>
+              </div>
+              <div>
+                <span class="hd-metric-value">42</span>
+                <span class="hd-metric-unit">min avg</span>
+              </div>
+            </div>
+            <div class="hd-sparkline">
+              <svg viewBox="0 0 280 48" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="activeFill2" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#c49a6c" stop-opacity="0.15"/>
+                    <stop offset="100%" stop-color="#c49a6c" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,24 L40,18 L80,30 L120,12 L160,20 L200,8 L240,22 L280,14 L280,48 L0,48Z" fill="url(#activeFill2)"/>
+                <path d="M0,24 L40,18 L80,30 L120,12 L160,20 L200,8 L240,22 L280,14" fill="none" stroke="#c49a6c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="280" cy="14" r="4" fill="#c49a6c"/>
+              </svg>
+            </div>
+            <div class="hd-metric-footer">
+              <span>Mon — Sun</span>
+              <span class="hd-trend-up">↑ 5% vs last week</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">🏠</div>Home</div>
+        <div class="nav-item"><div class="nav-icon">📋</div>Plans</div>
+        <div class="nav-item"><div class="nav-icon">📄</div>Claims</div>
+        <div class="nav-item active"><div class="nav-icon">❤️</div>Health</div>
+        <div class="nav-item"><div class="nav-icon">•••</div>More</div>
+      </div>
+    </div>
+
+    <div class="annotation-strip">
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--rose);"></div>
+        <div class="annotation-text"><strong>Sleep → rose sparkline.</strong> Rest/recovery gets the softer, warmer hue. The rose line + rose gradient fill is visually distinct from the teal activity metrics without clashing.</div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--rose);"></div>
+        <div class="annotation-text"><strong>Downtrend indicator → rose.</strong> Rose does double duty: it's the sleep color AND the "needs attention" signal. This works because sleep is the metric most likely to trend down — the color is already contextually correct.</div>
+      </div>
+      <div class="annotation">
+        <div class="annotation-dot" style="background: var(--teal);"></div>
+        <div class="annotation-text"><strong>Three-color metric system now reads clearly.</strong> Teal = movement (steps), rose = rest (sleep), gold = effort (active minutes). Each metric has its own lane.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== COLOR ROLE SUMMARY ===== -->
+<div class="screen-section" style="max-width: 640px;">
+  <div class="screen-header">
+    <div class="screen-number">System</div>
+    <div class="screen-name">Color Role Map</div>
+  </div>
+  <div style="margin-top: 16px;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="padding: 10px 0; color: #888; width: 100px;">Teal</td>
+        <td style="padding: 10px 0;">Clinical programs, activity/steps, primary actions, nav active state, AI coach, DCP hero</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="padding: 10px 0; color: var(--rose);">Rose</td>
+        <td style="padding: 10px 0;">Sleep/rest metrics, habit card, challenge engagement, downtrend indicator, wellness moments</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #333;">
+        <td style="padding: 10px 0; color: var(--gold);">Gold</td>
+        <td style="padding: 10px 0;">Points, rewards earned, active minutes, incentive callouts — exclusively "you earned/achieved"</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 0; color: #888;">Pearl</td>
+        <td style="padding: 10px 0;">Page background, card containers, text hierarchy — the quiet foundation</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+</body>
+</html>

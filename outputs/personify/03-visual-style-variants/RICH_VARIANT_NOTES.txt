@@ -1,0 +1,75 @@
+# Umbrella Home — Rich Variant (Option F)
+
+## File Created
+umbrella-home-rich.html
+
+## Key Visual Changes Applied
+
+### Color Palette (Warmer, More Vibrant)
+- Primary: #0097A7 → #00897B (warmer teal-green)
+- Primary Dark: #00838F → #00695C
+- Primary Light: #B2EBF2 → #B2DFDB
+- Primary 50: #E0F7FA → #E0F2F1
+- Reward Accent: #F9A825 → #FF8F00 (richer amber)
+- Reward Accent Light: #FFF8E1 → #FFF3E0
+- Reward Accent Dark: #F57F17 → #E65100
+- Background: #F5F5F5 → #F9F6F2 (warm off-white)
+
+### Elevation Shadows (Richer, Slightly Deeper)
+- --elevation-z1: Updated for subtler depth
+- --elevation-z2: Updated for subtler depth
+- --elevation-z4: Updated for subtler depth
+
+### Rewards Card
+- Border-radius: 20px → 24px (softer, more premium)
+- Top stripe height: 4px → 6px
+- Background gradient: Added gradient from warm amber to white
+
+### Daily Cards
+- Image placeholders: Applied rich photo-like gradients
+  - Card 1 (mindful): Teal-green gradient
+  - Card 2 (lunch): Green gradient
+  - Card 3 (sleep): Purple gradient
+- Height increased: +8px for more visual presence
+
+### Challenge Card
+- Background gradient: More dramatic multi-tone gradient
+- Overlay gradient: Darker bottom for better text contrast
+- Height increased: +16px for visual impact
+
+### Just For You Cards
+- Thumbnails: Richer, more saturated gradients
+- Border-radius: 10px → 12px
+
+### Avatar & Logos
+- Avatar gradient: Warmer teal-green tones
+- Employer logo gradient: Warmer primary tones
+
+### Progress Bar
+- Fill gradient: Rich amber-to-orange progression (#FFB300 → #FF8F00 → #E65100)
+
+### Habit Icons
+- Steps: #00897B (primary)
+- Sleep: #7E57C2 (purple, unchanged)
+- Active: #FF7043 (warm orange-red)
+
+### Modal Elements
+- Icon background: Multi-tone orange gradient (#FF8F00 → #E65100 → #BF360C)
+- Icon glow: Larger shadow with amber tint (50px radius)
+- Modal background: Added subtle radial glow effect
+
+### Section Headers
+- Added decorative bar below h2 using ::after pseudo-element
+- Bar: 32px wide, 3px tall, uses primary color
+
+### Variant Badge
+- Updated to "F · Rich"
+
+## Design Intent
+Option F: Rich variant emphasizes emotional warmth through a more vibrant color palette, richer gradients mimicking photography, and enhanced elevation/depth. Maintains the same editorial density and layout as Option C while transforming the visual feel to be warmer, more premium, and more emotionally engaging.
+
+## Compatibility
+- All HTML structure and functionality identical to Editorial variant
+- All JavaScript functionality preserved
+- Responsive design maintained
+- Uses same Google Fonts and Material Symbols
