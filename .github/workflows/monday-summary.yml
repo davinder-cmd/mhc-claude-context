@@ -1,0 +1,30 @@
+name: Monday Morning Summary
+
+on:
+  schedule:
+    # 8am Pacific (15:00 UTC during PDT, 16:00 UTC during PST)
+    # Using 15:00 UTC - will be 8am PDT / 7am PST
+    - cron: '0 15 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  generate-summary:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install anthropic requests
+
+      - name: Generate and post summary
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+        run: python .github/scripts/monday_summary.py
