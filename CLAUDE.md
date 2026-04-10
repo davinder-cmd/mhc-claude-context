@@ -86,6 +86,24 @@ The `reference/` folder contains expert guides and principles for different doma
 - **Local MD** = routing layer + Claude context
 - **Index** = `design/_index.md` for component inventory
 
+## Pre-flight: Design & UX work
+
+**Before starting any design review, UX assessment, redesign, or flow critique**, read and confirm you have loaded:
+
+| Context | File | What You Get |
+|---------|------|--------------|
+| Component inventory | `design/_index.md` | What exists in the system |
+| UX heuristics | `reference/ux-usability-experts.md` | Nielsen's 10, Norman's principles |
+| Cognitive laws | `reference/ux-laws-quick-reference.md` | Fitts, Hick, Gestalt, Peak-End |
+| Visual principles | `reference/visual-design-experts.md` | Typography, hierarchy, Rams' 10 |
+| Feature context | `projects/feature-[name]/_brief.md` | If feature-specific |
+
+**State which files you loaded** at the start of your response before presenting analysis. Example:
+
+> "Loaded: `ux-usability-experts.md`, `ux-laws-quick-reference.md`, `feature-rewards/_brief.md`"
+
+This ensures reviews are grounded in principles, not just opinion.
+
 ## Non-negotiables
 
 - Always confirm you've read the relevant context files before starting work
