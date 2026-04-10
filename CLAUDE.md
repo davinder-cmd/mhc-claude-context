@@ -18,6 +18,8 @@ You are working with Davinder, a product leader at Mobile Health Consumer.
 - `launches/` — GTM plans and release notes
 - `outputs/` — save ALL deliverables here
 - `projects/` — feature-specific work (see below)
+- `design/` — design system documentation (index at `design/_index.md`)
+- `reference/` — principles and external references for ongoing work
 
 ## Projects folder
 
@@ -49,6 +51,19 @@ Each feature lives in `projects/feature-[name]/`. Read the feature's `_brief.md`
 | `feature-health-data/digital-advisor/` | Digital Advisor (A.I. Health Coach) |
 
 **Iteration sub-folders:** Dated work items live inside the feature folder, e.g. `feature-rewards/2026-03_page-redesign/`. Each has its own `_ask.md` with the specific request. Small one-off updates go in `feature-rewards/quick-updates/`.
+
+## Design system work
+
+When working on design system tasks, also read:
+
+- `reference/design-system-principles.md` — 10 principles to validate decisions against
+- `reference/design-system-people-to-follow.md` — external experts and systems to reference
+- `design/_index.md` — current component inventory and status
+
+**Architecture:**
+- Figma = visual source of truth (what it looks like)
+- Notion = behavioral source of truth (when to use, rules)
+- Local MD = routing layer + Claude context
 
 ## Non-negotiables
 
