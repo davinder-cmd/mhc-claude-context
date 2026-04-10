@@ -9,17 +9,30 @@ You are working with Davinder, a product leader at Mobile Health Consumer.
 - `strategy/Product Service Information.md` — what the product is
 - `strategy/Ideal Customer Profile.md` — who the customer is
 
+## When to load context
+
+Load additional context based on the task at hand:
+
+| Task Type | Load These Files |
+|-----------|------------------|
+| **Feature work** | `projects/feature-[name]/_brief.md`, `_decisions.md` |
+| **Design system** | `design/_index.md`, `reference/design-system-*.md` |
+| **UX review / usability** | `reference/ux-usability-experts.md`, `reference/ux-laws-quick-reference.md` |
+| **Visual design review** | `reference/visual-design-experts.md` |
+| **Product strategy** | `reference/product-design-experts.md`, `competitive/competitive-analysis.md` |
+| **Competitive positioning** | `competitive/battlecards/*`, `competitive/profiles/*` |
+
 ## Folder structure
 
-- `strategy/` — brand voice guides, ICP, product service information
-- `competitive/` — market research, battlecards, competitor profiles; master summary at `competitive-analysis.md`
-- `research/` — user research and insights
-- `specs/` — PRDs and feature briefs
-- `launches/` — GTM plans and release notes
-- `outputs/` — save ALL deliverables here
-- `projects/` — feature-specific work (see below)
-- `design/` — design system documentation (index at `design/_index.md`)
-- `reference/` — principles and external references for ongoing work
+| Folder | Purpose | When to Reference |
+|--------|---------|-------------------|
+| `strategy/` | Brand voice, ICP, product info | Every session (core context) |
+| `projects/` | Feature briefs, decisions | When working on a specific feature |
+| `design/` | Design system docs (foundation, atoms, components) | Design system tasks |
+| `reference/` | Experts, principles, UX laws | Evaluating or reviewing work |
+| `competitive/` | Battlecards, profiles, analysis | Positioning, strategy, differentiation |
+| `outputs/` | All deliverables saved here | Writing deliverables |
+| `archive/` | Cold storage (old explorations) | Rarely — historical reference only |
 
 ## Projects folder
 
@@ -52,18 +65,26 @@ Each feature lives in `projects/feature-[name]/`. Read the feature's `_brief.md`
 
 **Iteration sub-folders:** Dated work items live inside the feature folder, e.g. `feature-rewards/2026-03_page-redesign/`. Each has its own `_ask.md` with the specific request. Small one-off updates go in `feature-rewards/quick-updates/`.
 
-## Design system work
+## Reference library
 
-When working on design system tasks, also read:
+The `reference/` folder contains expert guides and principles for different domains:
 
-- `reference/design-system-principles.md` — 10 principles to validate decisions against
-- `reference/design-system-people-to-follow.md` — external experts and systems to reference
-- `design/_index.md` — current component inventory and status
+| File | Domain | Use For |
+|------|--------|---------|
+| `design-system-principles.md` | Design systems | Validating component decisions |
+| `design-system-people-to-follow.md` | Design systems | External experts and systems to study |
+| `ux-usability-experts.md` | UX | Nielsen heuristics, usability evaluation |
+| `ux-laws-quick-reference.md` | UX | Cognitive/behavioral laws (Fitts, Hick, etc.) |
+| `visual-design-experts.md` | Visual | Typography, color, layout principles |
+| `product-design-experts.md` | Product | Strategy, discovery, execution frameworks |
+| `davinder-product-workflow.md` | Workflow | Davinder's tools and automation stack |
 
-**Architecture:**
-- Figma = visual source of truth (what it looks like)
-- Notion = behavioral source of truth (when to use, rules)
-- Local MD = routing layer + Claude context
+## Design system architecture
+
+- **Figma** = visual source of truth (what it looks like)
+- **Notion** = behavioral source of truth (when to use, rules)
+- **Local MD** = routing layer + Claude context
+- **Index** = `design/_index.md` for component inventory
 
 ## Non-negotiables
 
@@ -72,3 +93,4 @@ When working on design system tasks, also read:
 - Follow all instructions in `working-preferences.md` — no exceptions
 - Present a brief plan before executing anything significant
 - If the task is ambiguous, ask one clarifying question — not five
+- Do not reference `archive/` unless explicitly asked for historical context
