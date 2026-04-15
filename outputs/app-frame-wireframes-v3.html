@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MHC App Frame — Wireframes v3</title>
+  <style>
+    :root {
+      --bg-warm: #F9F7F4;
+      --bg-card: #FFFFFF;
+      --bg-nav: #FFFFFF;
+      --bg-sidebar: #FAFAF8;
+      --border: #E5E2DD;
+      --border-light: #F0EDE8;
+      --text-primary: #1A1A1A;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+      --accent-primary: #2E7D32;
+      --accent-gold: #D4A853;
+      --accent-blue: #1976D2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-nav: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-sidebar: 4px 0 12px rgba(0,0,0,0.08);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --max-content: 1200px;
+      --sidebar-expanded: 240px;
+      --sidebar-collapsed: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F5F5F5;
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 32px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 48px;
+    }
+
+    .version-badge {
+      display: inline-block;
+      background: var(--accent-blue);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 64px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-intro {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 720px;
+    }
+
+    /* Callouts */
+    .annotation {
+      background: #FFF9C4;
+      border-left: 3px solid #FBC02D;
+      padding: 12px 16px;
+      font-size: 13px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .annotation strong {
+      color: #F57F17;
+    }
+
+    .decision {
+      background: #E8F5E9;
+      border-left: 3px solid var(--accent-primary);
+      padding: 12px 16px;
+      font-size: 13px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .decision strong {
+      color: var(--accent-primary);
+    }
+
+    .change {
+      background: #E3F2FD;
+      border-left: 3px solid var(--accent-blue);
+      padding: 12px 16px;
+      font-size: 13px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .change strong {
+      color: var(--accent-blue);
+    }
+
+    /* ========================================
+       WEB APP FRAME — SIDEBAR NAVIGATION
+       ======================================== */
+
+    .web-frame {
+      background: var(--bg-warm);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 32px;
+    }
+
+    /* Top Bar — Full Width, No Nav Links */
+    .web-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 64px;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: var(--shadow-nav);
+    }
+
+    .web-topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .sidebar-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-toggle:hover {
+      background: var(--bg-warm);
+      color: var(--text-primary);
+    }
+
+    .web-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .web-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-primary), #43A047);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .web-topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .web-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E0E0E0, #BDBDBD);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Rewards Bar — Full Width */
+    .web-rewards-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .web-rewards-bar-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .rewards-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .rewards-track {
+      flex: 1;
+      max-width: 300px;
+      height: 10px;
+      background: #E8E4DF;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .rewards-fill {
+      height: 100%;
+      width: 52%;
+      background: linear-gradient(90deg, var(--accent-gold), #E8B86D);
+      border-radius: 5px;
+    }
+
+    .rewards-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .rewards-link {
+      font-size: 13px;
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    /* Layout Container — Sidebar + Content */
+    .web-layout {
+      display: flex;
+      min-height: 600px;
+    }
+
+    /* Sidebar — Collapsible */
+    .sidebar {
+      width: var(--sidebar-expanded);
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      transition: width 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .sidebar.collapsed {
+      width: var(--sidebar-collapsed);
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px;
+      flex: 1;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .sidebar-item:hover {
+      background: white;
+      color: var(--text-primary);
+    }
+
+    .sidebar-item.active {
+      background: #E8F5E9;
+      color: var(--accent-primary);
+    }
+
+    .sidebar-item-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-item-label {
+      flex: 1;
+      opacity: 1;
+      transition: opacity 0.15s ease;
+    }
+
+    .sidebar.collapsed .sidebar-item-label {
+      opacity: 0;
+      width: 0;
+    }
+
+    .sidebar-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 12px 14px;
+    }
+
+    .sidebar-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 14px 4px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .sidebar.collapsed .sidebar-section-label {
+      opacity: 0;
+    }
+
+    /* Content Area */
+    .web-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .web-content-inner {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: var(--max-content);
+    }
+
+    .column-action {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .column-discovery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      align-content: start;
+    }
+
+    .column-discovery .card-wide {
+      grid-column: span 2;
+    }
+
+    /* Card */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .card-placeholder {
+      height: 80px;
+      background: repeating-linear-gradient(
+        45deg,
+        #F5F5F5,
+        #F5F5F5 10px,
+        #FAFAFA 10px,
+        #FAFAFA 20px
+      );
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ========================================
+       MOBILE — SAME AS V2
+       ======================================== */
+
+    .mobile-frame-container {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .mobile-frame-wrapper {
+      flex: 1;
+      min-width: 340px;
+      max-width: 420px;
+    }
+
+    .mobile-frame {
+      width: 375px;
+      background: var(--bg-warm);
+      border: 8px solid #1A1A1A;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .mobile-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-logo-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-primary), #43A047);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    .mobile-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E0E0E0, #BDBDBD);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .mobile-body {
+      padding: 16px;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .mobile-welcome {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .mobile-rewards-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mobile-rewards-bar .rewards-label {
+      font-size: 12px;
+    }
+
+    .mobile-rewards-bar .rewards-track {
+      height: 8px;
+      max-width: none;
+    }
+
+    .mobile-rewards-bar .rewards-value {
+      font-size: 13px;
+    }
+
+    .mobile-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .mobile-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-card-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .mobile-card-placeholder {
+      height: 50px;
+      background: #F5F5F5;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: flex;
+      justify-content: space-around;
+      gap: 8px;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 6px;
+      font-size: 18px;
+    }
+
+    .stat-icon.sleep { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); }
+    .stat-icon.active { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+
+    .stat-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    /* Action List */
+    .action-list {
+      list-style: none;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .action-item:last-child {
+      border-bottom: none;
+    }
+
+    .action-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .action-checkbox.done {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+    }
+
+    .action-text {
+      flex: 1;
+      font-size: 13px;
+    }
+
+    .action-points {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      background: #FEF7E0;
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+
+    /* AI Insights Card */
+    .insights-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+      border: 1px solid #C8E6C9;
+    }
+
+    .insights-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent-primary);
+      background: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .insights-headline {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .insights-body {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .insights-action {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--accent-primary);
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* DCP Progress Card */
+    .dcp-card {
+      border-left: 4px solid var(--accent-blue);
+    }
+
+    .dcp-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .dcp-week {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .dcp-progress-bar {
+      height: 6px;
+      background: #E3F2FD;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+
+    .dcp-progress-fill {
+      height: 100%;
+      width: 37.5%;
+      background: var(--accent-blue);
+      border-radius: 3px;
+    }
+
+    .dcp-progress-text {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Habits */
+    .habit-item {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .habit-item:last-child {
+      border-bottom: none;
+    }
+
+    .habit-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+
+    .habit-check.pending {
+      background: none;
+      border: 2px solid var(--border);
+    }
+
+    .habit-name {
+      flex: 1;
+      font-size: 13px;
+    }
+
+    /* Content Card Mini */
+    .content-card-mini {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      margin-bottom: 8px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .content-card-mini:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-thumb {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #CFD8DC, #B0BEC5);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .content-points-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: var(--accent-gold);
+      color: white;
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 5px;
+      border-radius: 8px;
+    }
+
+    .content-meta {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .content-tag {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .content-title-mini {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    /* Challenge Card */
+    .challenge-card {
+      background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+      border: 1px solid #FFE082;
+    }
+
+    .challenge-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .challenge-status {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      text-align: center;
+      padding: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      background: linear-gradient(180deg, transparent, var(--bg-warm));
+    }
+
+    .mobile-tabs {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 4px 24px;
+      background: var(--bg-nav);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .mobile-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 4px 8px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      min-width: 56px;
+    }
+
+    .mobile-tab.active {
+      color: var(--accent-primary);
+    }
+
+    .mobile-tab-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    /* ========================================
+       COMPARISON & SPECS
+       ======================================== */
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 1100px) {
+      .comparison-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .comparison-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-top: 16px;
+    }
+
+    .specs-table th,
+    .specs-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .specs-table th {
+      background: #FAFAFA;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .specs-table td {
+      font-size: 14px;
+    }
+
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .code-block {
+      background: #2D2D2D;
+      color: #F8F8F2;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre;
+      margin-top: 12px;
+    }
+
+    /* State indicators */
+    .state-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    .state-badge.expanded {
+      background: #E8F5E9;
+      color: var(--accent-primary);
+    }
+
+    .state-badge.collapsed {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>MHC App Frame — Wireframes <span class="version-badge">v3</span></h1>
+  <p class="meta">Collapsible sidebar navigation • Centered content (1200px) • Full-width chrome | April 2026</p>
+
+  <div class="change">
+    <strong>v3 Changes from v2:</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li><strong>Sidebar navigation:</strong> Replaces top nav links with collapsible left sidebar</li>
+      <li><strong>Top bar simplified:</strong> Logo + toggle + avatar only (no nav links)</li>
+      <li><strong>Sidebar states:</strong> Expanded (240px with labels) ↔ Collapsed (72px icons only)</li>
+      <li><strong>Content area:</strong> Same 1200px max, centered (from v2)</li>
+      <li><strong>Mobile:</strong> Unchanged from v2 (bottom tabs, no sidebar)</li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 1: SIDEBAR EXPANDED
+       ============================================ -->
+
+  <h2>1. Web Layout — Sidebar Expanded (240px)</h2>
+
+  <p class="section-intro">
+    Sidebar navigation replaces top nav links. Expanded state shows icons + labels.
+    Toggle button collapses to icon-only mode. Content area shifts accordingly.
+  </p>
+
+  <div class="web-frame" style="max-width: 1440px;">
+    <!-- Top Bar -->
+    <header class="web-topbar">
+      <div class="web-topbar-left">
+        <button class="sidebar-toggle" title="Toggle sidebar">☰</button>
+        <div class="web-logo">
+          <div class="web-logo-icon">M</div>
+          Mobile Health
+        </div>
+      </div>
+      <div class="web-topbar-right">
+        <div class="web-avatar">DR</div>
+      </div>
+    </header>
+
+    <!-- Rewards Bar -->
+    <div class="web-rewards-bar">
+      <div class="web-rewards-bar-inner">
+        <span class="rewards-label">Rewards Progress</span>
+        <div class="rewards-track">
+          <div class="rewards-fill"></div>
+        </div>
+        <span class="rewards-value">5,200 / 10,000 pts</span>
+        <a href="#" class="rewards-link">View details →</a>
+      </div>
+    </div>
+
+    <!-- Layout: Sidebar + Content -->
+    <div class="web-layout">
+      <!-- Sidebar Expanded -->
+      <nav class="sidebar">
+        <div class="sidebar-nav">
+          <a href="#" class="sidebar-item active">
+            <span class="sidebar-item-icon">🏠</span>
+            <span class="sidebar-item-label">Home</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <span class="sidebar-item-icon">💊</span>
+            <span class="sidebar-item-label">Digital Care</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <span class="sidebar-item-icon">🌿</span>
+            <span class="sidebar-item-label">Wellbeing</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <span class="sidebar-item-icon">🛡️</span>
+            <span class="sidebar-item-label">Benefits</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <span class="sidebar-item-icon">⭐</span>
+            <span class="sidebar-item-label">Rewards</span>
+          </a>
+
+          <div class="sidebar-divider"></div>
+          <div class="sidebar-section-label">More</div>
+
+          <a href="#" class="sidebar-item">
+            <span class="sidebar-item-icon">⚙️</span>
+            <span class="sidebar-item-label">Settings</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <span class="sidebar-item-icon">📱</span>
+            <span class="sidebar-item-label">Devices & Apps</span>
+          </a>
+          <a href="#" class="sidebar-item">
+            <span class="sidebar-item-icon">❓</span>
+            <span class="sidebar-item-label">Help & Support</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Content Area -->
+      <main class="web-content">
+        <div class="web-content-inner">
+          <!-- Action Column -->
+          <div class="column-action">
+            <div class="card">
+              <div class="card-title">Stats</div>
+              <div class="card-placeholder">Steps • Sleep • Active Minutes</div>
+            </div>
+            <div class="card">
+              <div class="card-title">My Actions</div>
+              <div class="card-placeholder">Point-earning tasks</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--accent-blue);">
+              <div class="card-title">Active Program</div>
+              <div class="card-placeholder">DCP Progress — Week 3 of 8</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Healthy Habits</div>
+              <div class="card-placeholder">Daily habit checklist</div>
+            </div>
+          </div>
+
+          <!-- Discovery Column -->
+          <div class="column-discovery">
+            <div class="card card-wide" style="background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border: 1px solid #C8E6C9;">
+              <div class="card-title" style="color: var(--accent-primary);">AI Health Insights</div>
+              <div class="card-placeholder" style="background: rgba(255,255,255,0.5);">Personalized insight + action</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Content</div>
+              <div class="card-placeholder">Article card</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Content</div>
+              <div class="card-placeholder">Article card</div>
+            </div>
+            <div class="card card-wide" style="background: linear-gradient(135deg, #FFF8E1, #FFECB3); border: 1px solid #FFE082;">
+              <div class="card-title" style="color: #F57C00;">Active Challenge</div>
+              <div class="card-placeholder" style="background: rgba(255,255,255,0.5);">Challenge progress</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="decision">
+    <strong>Sidebar expanded state:</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li><strong>Width:</strong> 240px</li>
+      <li><strong>Items:</strong> Icon (24px) + Label</li>
+      <li><strong>Sections:</strong> Primary nav (5 items) + Divider + More section</li>
+      <li><strong>"More" items:</strong> Settings, Devices & Apps, Help & Support (moved from top nav dropdown)</li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 2: SIDEBAR COLLAPSED
+       ============================================ -->
+
+  <h2>2. Web Layout — Sidebar Collapsed (72px)</h2>
+
+  <p class="section-intro">
+    Collapsed state shows icons only. Hover reveals tooltip with label.
+    Content area expands to fill available space.
+  </p>
+
+  <div class="web-frame" style="max-width: 1440px;">
+    <!-- Top Bar -->
+    <header class="web-topbar">
+      <div class="web-topbar-left">
+        <button class="sidebar-toggle" title="Toggle sidebar">☰</button>
+        <div class="web-logo">
+          <div class="web-logo-icon">M</div>
+          Mobile Health
+        </div>
+      </div>
+      <div class="web-topbar-right">
+        <div class="web-avatar">DR</div>
+      </div>
+    </header>
+
+    <!-- Rewards Bar -->
+    <div class="web-rewards-bar">
+      <div class="web-rewards-bar-inner">
+        <span class="rewards-label">Rewards Progress</span>
+        <div class="rewards-track">
+          <div class="rewards-fill"></div>
+        </div>
+        <span class="rewards-value">5,200 / 10,000 pts</span>
+        <a href="#" class="rewards-link">View details →</a>
+      </div>
+    </div>
+
+    <!-- Layout: Collapsed Sidebar + Content -->
+    <div class="web-layout">
+      <!-- Sidebar Collapsed -->
+      <nav class="sidebar collapsed">
+        <div class="sidebar-nav">
+          <a href="#" class="sidebar-item active" title="Home">
+            <span class="sidebar-item-icon">🏠</span>
+            <span class="sidebar-item-label">Home</span>
+          </a>
+          <a href="#" class="sidebar-item" title="Digital Care">
+            <span class="sidebar-item-icon">💊</span>
+            <span class="sidebar-item-label">Digital Care</span>
+          </a>
+          <a href="#" class="sidebar-item" title="Wellbeing">
+            <span class="sidebar-item-icon">🌿</span>
+            <span class="sidebar-item-label">Wellbeing</span>
+          </a>
+          <a href="#" class="sidebar-item" title="Benefits">
+            <span class="sidebar-item-icon">🛡️</span>
+            <span class="sidebar-item-label">Benefits</span>
+          </a>
+          <a href="#" class="sidebar-item" title="Rewards">
+            <span class="sidebar-item-icon">⭐</span>
+            <span class="sidebar-item-label">Rewards</span>
+          </a>
+
+          <div class="sidebar-divider"></div>
+
+          <a href="#" class="sidebar-item" title="Settings">
+            <span class="sidebar-item-icon">⚙️</span>
+            <span class="sidebar-item-label">Settings</span>
+          </a>
+          <a href="#" class="sidebar-item" title="Devices & Apps">
+            <span class="sidebar-item-icon">📱</span>
+            <span class="sidebar-item-label">Devices & Apps</span>
+          </a>
+          <a href="#" class="sidebar-item" title="Help & Support">
+            <span class="sidebar-item-icon">❓</span>
+            <span class="sidebar-item-label">Help & Support</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Content Area (wider) -->
+      <main class="web-content">
+        <div class="web-content-inner">
+          <!-- Action Column -->
+          <div class="column-action">
+            <div class="card">
+              <div class="card-title">Stats</div>
+              <div class="card-placeholder">Steps • Sleep • Active Minutes</div>
+            </div>
+            <div class="card">
+              <div class="card-title">My Actions</div>
+              <div class="card-placeholder">Point-earning tasks</div>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--accent-blue);">
+              <div class="card-title">Active Program</div>
+              <div class="card-placeholder">DCP Progress — Week 3 of 8</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Healthy Habits</div>
+              <div class="card-placeholder">Daily habit checklist</div>
+            </div>
+          </div>
+
+          <!-- Discovery Column -->
+          <div class="column-discovery">
+            <div class="card card-wide" style="background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border: 1px solid #C8E6C9;">
+              <div class="card-title" style="color: var(--accent-primary);">AI Health Insights</div>
+              <div class="card-placeholder" style="background: rgba(255,255,255,0.5);">Personalized insight + action</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Content</div>
+              <div class="card-placeholder">Article card</div>
+            </div>
+            <div class="card">
+              <div class="card-title">Content</div>
+              <div class="card-placeholder">Article card</div>
+            </div>
+            <div class="card card-wide" style="background: linear-gradient(135deg, #FFF8E1, #FFECB3); border: 1px solid #FFE082;">
+              <div class="card-title" style="color: #F57C00;">Active Challenge</div>
+              <div class="card-placeholder" style="background: rgba(255,255,255,0.5);">Challenge progress</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <strong>Collapsed state behavior:</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li><strong>Width:</strong> 72px (icon + padding)</li>
+      <li><strong>Labels:</strong> Hidden, revealed on hover as tooltip</li>
+      <li><strong>Section labels:</strong> Hidden</li>
+      <li><strong>Content gain:</strong> ~168px more horizontal space</li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 3: SIDEBAR COMPARISON
+       ============================================ -->
+
+  <h2>3. Sidebar States Comparison</h2>
+
+  <div class="comparison-row">
+    <div>
+      <div class="comparison-label">Expanded <span class="state-badge expanded">240px</span></div>
+      <div style="background: var(--bg-sidebar); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border);">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #E8F5E9; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">🏠</span>
+          <span style="font-size: 14px; font-weight: 500; color: var(--accent-primary);">Home</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">💊</span>
+          <span style="font-size: 14px; color: var(--text-secondary);">Digital Care</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">🌿</span>
+          <span style="font-size: 14px; color: var(--text-secondary);">Wellbeing</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">🛡️</span>
+          <span style="font-size: 14px; color: var(--text-secondary);">Benefits</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 8px;">
+          <span style="font-size: 18px;">⭐</span>
+          <span style="font-size: 14px; color: var(--text-secondary);">Rewards</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="comparison-label">Collapsed <span class="state-badge collapsed">72px</span></div>
+      <div style="background: var(--bg-sidebar); border-radius: var(--radius); padding: 16px; border: 1px solid var(--border); width: 72px;">
+        <div style="display: flex; align-items: center; justify-content: center; padding: 12px; background: #E8F5E9; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">🏠</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">💊</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">🌿</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 18px;">🛡️</span>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 12px; border-radius: 8px;">
+          <span style="font-size: 18px;">⭐</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 4: MOBILE (UNCHANGED)
+       ============================================ -->
+
+  <h2>4. Mobile Layout (Unchanged from v2)</h2>
+
+  <p class="section-intro">
+    Mobile continues to use bottom tabs — sidebar doesn't apply. Same content parity as v2.
+  </p>
+
+  <div class="mobile-frame-container">
+    <div class="mobile-frame-wrapper">
+      <div class="comparison-label">Mobile — Bottom Tabs (No Sidebar)</div>
+      <div class="mobile-frame">
+        <header class="mobile-header">
+          <div class="mobile-logo">
+            <div class="mobile-logo-icon">M</div>
+            Mobile Health
+          </div>
+          <div class="mobile-avatar">DR</div>
+        </header>
+
+        <div class="mobile-body" style="max-height: 800px;">
+          <div class="mobile-welcome">Welcome, Davinder</div>
+
+          <!-- Rewards Bar -->
+          <div class="mobile-rewards-bar">
+            <span class="rewards-label">Rewards</span>
+            <div class="rewards-track">
+              <div class="rewards-fill"></div>
+            </div>
+            <span class="rewards-value">5,200 / 10,000</span>
+          </div>
+
+          <!-- Stats -->
+          <div class="mobile-card">
+            <div class="mobile-card-title">Today's Stats</div>
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-icon">👟</div>
+                <div class="stat-value">5,218</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon sleep">😴</div>
+                <div class="stat-value">7.5 hr</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon active">⚡</div>
+                <div class="stat-value">32 min</div>
+                <div class="stat-label">Active</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- My Actions -->
+          <div class="mobile-card">
+            <div class="mobile-card-title">
+              My Actions
+              <span class="mobile-card-subtitle">3 available</span>
+            </div>
+            <ul class="action-list">
+              <li class="action-item">
+                <div class="action-checkbox done">✓</div>
+                <span class="action-text">Complete daily check-in</span>
+                <span class="action-points">+25</span>
+              </li>
+              <li class="action-item">
+                <div class="action-checkbox"></div>
+                <span class="action-text">Log your breakfast</span>
+                <span class="action-points">+20</span>
+              </li>
+              <li class="action-item">
+                <div class="action-checkbox"></div>
+                <span class="action-text">Complete Week 3 lesson</span>
+                <span class="action-points">+100</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- AI Insights -->
+          <div class="mobile-card insights-card">
+            <div class="insights-badge">✨ AI Insight</div>
+            <div class="insights-headline">Your sleep improved 12% this week</div>
+            <div class="insights-body">
+              You've been consistent with your 10pm wind-down. Tonight, try adding 5 minutes of deep breathing.
+            </div>
+            <a href="#" class="insights-action">Start wind-down routine</a>
+          </div>
+
+          <!-- DCP Progress -->
+          <div class="mobile-card dcp-card">
+            <div class="dcp-title">Back Pain Program</div>
+            <div class="dcp-week">Week 3 of 8</div>
+            <div class="dcp-progress-bar">
+              <div class="dcp-progress-fill"></div>
+            </div>
+            <div class="dcp-progress-text">3 of 8 weeks complete • Next: Core strengthening</div>
+          </div>
+
+          <!-- Healthy Habits -->
+          <div class="mobile-card">
+            <div class="mobile-card-title">
+              Healthy Habits
+              <span class="mobile-card-subtitle">5/7 today</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-check">✓</div>
+              <span class="habit-name">Morning stretch</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-check">✓</div>
+              <span class="habit-name">Drink water (8 glasses)</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-check pending"></div>
+              <span class="habit-name">Evening walk</span>
+            </div>
+          </div>
+
+          <!-- Content Cards -->
+          <div class="mobile-card" style="padding: 12px;">
+            <div class="mobile-card-title" style="margin-bottom: 12px;">For You</div>
+            <div class="content-card-mini">
+              <div class="content-thumb" style="background: linear-gradient(135deg, #A5D6A7, #81C784);">
+                <span class="content-points-badge">+20</span>
+              </div>
+              <div class="content-meta">
+                <div class="content-tag">Daily Tip • Heart Health</div>
+                <div class="content-title-mini">Watch Your Weight</div>
+              </div>
+            </div>
+            <div class="content-card-mini">
+              <div class="content-thumb" style="background: linear-gradient(135deg, #90CAF9, #64B5F6);">
+                <span class="content-points-badge">+20</span>
+              </div>
+              <div class="content-meta">
+                <div class="content-tag">Daily Tip • Mental Health</div>
+                <div class="content-title-mini">Be Kind to Yourself</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Challenge -->
+          <div class="mobile-card challenge-card">
+            <div class="challenge-title">🏔️ Pacific Crest Challenge</div>
+            <div class="challenge-status">Your team is 3rd place • 2,450 steps behind leaders</div>
+          </div>
+
+          <div class="scroll-indicator">↑ Scroll for more</div>
+        </div>
+
+        <nav class="mobile-tabs">
+          <a href="#" class="mobile-tab active">
+            <span class="mobile-tab-icon">🏠</span>
+            Home
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">💊</span>
+            Care
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🌿</span>
+            Wellbeing
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🛡️</span>
+            Benefits
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">⭐</span>
+            Rewards
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="mobile-frame-wrapper" style="max-width: 500px;">
+      <div class="comparison-label">Web vs Mobile Navigation</div>
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Element</th>
+            <th>Web</th>
+            <th>Mobile</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Primary nav</td>
+            <td>Sidebar (left)</td>
+            <td>Bottom tabs</td>
+          </tr>
+          <tr>
+            <td>Nav items</td>
+            <td>5 + More section</td>
+            <td>5 tabs</td>
+          </tr>
+          <tr>
+            <td>Collapse behavior</td>
+            <td>240px ↔ 72px</td>
+            <td>N/A (always visible)</td>
+          </tr>
+          <tr>
+            <td>Settings access</td>
+            <td>Sidebar "More" section</td>
+            <td>Profile avatar menu</td>
+          </tr>
+          <tr>
+            <td>Toggle control</td>
+            <td>☰ in top bar</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="decision" style="margin-top: 24px;">
+        <strong>Why sidebar on web, tabs on mobile:</strong>
+        <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+          <li>Sidebar maximizes vertical content space on wide screens</li>
+          <li>Bottom tabs follow mobile platform conventions (iOS/Android)</li>
+          <li>Sidebar can accommodate more items (Settings, Devices, Help) without crowding</li>
+          <li>Collapsible sidebar gives user control over information density</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 5: SPECIFICATIONS
+       ============================================ -->
+
+  <h2>5. Sidebar Specifications</h2>
+
+  <h3>Dimensions</h3>
+  <div class="code-block">Sidebar Expanded:
+  - Width:             240px
+  - Item padding:      12px 14px
+  - Icon size:         24px (18px emoji)
+  - Icon-label gap:    12px
+  - Item font:         14px, 500 weight
+  - Item radius:       8px
+  - Section divider:   1px, 12px margin
+
+Sidebar Collapsed:
+  - Width:             72px
+  - Item padding:      12px (centered)
+  - Icon size:         24px
+  - Labels:            Hidden (tooltip on hover)
+
+Transition:
+  - Duration:          200ms ease
+  - Properties:        width, opacity (labels)</div>
+
+  <h3 style="margin-top: 32px;">Top Bar (v3)</h3>
+  <div class="code-block">Top Bar:
+  - Height:            64px
+  - Background:        white
+  - Left:              Toggle (40px) + Logo
+  - Right:             Avatar (36px)
+  - No nav links (moved to sidebar)
+
+Toggle Button:
+  - Size:              40px × 40px
+  - Icon:              ☰ (hamburger)
+  - Hover:             Warm background</div>
+
+  <!-- ============================================
+       SECTION 6: VERSION COMPARISON
+       ============================================ -->
+
+  <h2>6. Version Comparison</h2>
+
+  <table class="specs-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>v1</th>
+        <th>v2</th>
+        <th>v3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Web navigation</strong></td>
+        <td>Top nav (horizontal)</td>
+        <td>Top nav (horizontal)</td>
+        <td>Sidebar (collapsible)</td>
+      </tr>
+      <tr>
+        <td><strong>Content max-width</strong></td>
+        <td>Fluid (fills viewport)</td>
+        <td>1200px centered</td>
+        <td>1200px centered</td>
+      </tr>
+      <tr>
+        <td><strong>Chrome width</strong></td>
+        <td>Full viewport</td>
+        <td>Full viewport</td>
+        <td>Full viewport</td>
+      </tr>
+      <tr>
+        <td><strong>Mobile nav</strong></td>
+        <td>Bottom tabs</td>
+        <td>Bottom tabs</td>
+        <td>Bottom tabs</td>
+      </tr>
+      <tr>
+        <td><strong>Mobile content</strong></td>
+        <td>Full parity</td>
+        <td>Full parity</td>
+        <td>Full parity</td>
+      </tr>
+      <tr>
+        <td><strong>Settings location (web)</strong></td>
+        <td>More menu (•••)</td>
+        <td>More menu (•••)</td>
+        <td>Sidebar "More" section</td>
+      </tr>
+      <tr>
+        <td><strong>User preference</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td>Sidebar expanded/collapsed</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="change" style="margin-top: 24px;">
+    <strong>When to use v3 (sidebar):</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li>Users spend extended time in app (desktop power users)</li>
+      <li>Navigation needs to accommodate more items in future</li>
+      <li>Want to match patterns from productivity apps (Notion, Slack, Linear)</li>
+      <li>Users prefer persistent nav visibility vs. header space</li>
+    </ul>
+  </div>
+
+  <div class="annotation" style="margin-top: 16px;">
+    <strong>When to use v2 (top nav):</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li>Simpler mental model (same horizontal nav as mobile tabs)</li>
+      <li>Maximum horizontal content space</li>
+      <li>Less visual complexity</li>
+      <li>Closer to Personify's pattern (competitive familiarity)</li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 7: NEXT STEPS
+       ============================================ -->
+
+  <h2>7. Next Steps</h2>
+
+  <table class="specs-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Task</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>App frame v1 (top nav, fluid content)</td>
+        <td>✅ Saved</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>App frame v2 (top nav, 1200px centered)</td>
+        <td>✅ Saved</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>App frame v3 (sidebar, 1200px centered)</td>
+        <td>✅ This document</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Choose direction: v2 or v3</td>
+        <td>⏳ Decision needed</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Update decision document</td>
+        <td>⏳ Pending</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Figma wireframes</td>
+        <td>⏳ Week of April 21</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

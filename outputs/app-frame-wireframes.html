@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MHC App Frame — Wireframes</title>
+  <style>
+    :root {
+      --bg-warm: #F9F7F4;
+      --bg-card: #FFFFFF;
+      --bg-nav: #FFFFFF;
+      --border: #E5E2DD;
+      --border-light: #F0EDE8;
+      --text-primary: #1A1A1A;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+      --accent-primary: #2E7D32;
+      --accent-gold: #D4A853;
+      --accent-blue: #1976D2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-nav: 0 2px 8px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F5F5F5;
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 32px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .meta {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 64px 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-intro {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 720px;
+    }
+
+    /* Annotation callouts */
+    .annotation {
+      background: #FFF9C4;
+      border-left: 3px solid #FBC02D;
+      padding: 12px 16px;
+      font-size: 13px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .annotation strong {
+      color: #F57F17;
+    }
+
+    .decision {
+      background: #E8F5E9;
+      border-left: 3px solid var(--accent-primary);
+      padding: 12px 16px;
+      font-size: 13px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .decision strong {
+      color: var(--accent-primary);
+    }
+
+    /* ========================================
+       WEB APP FRAME
+       ======================================== */
+
+    .web-frame {
+      background: var(--bg-warm);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 32px;
+    }
+
+    /* Top Navigation Bar */
+    .web-topnav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 64px;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: var(--shadow-nav);
+    }
+
+    .web-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .web-logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent-primary), #43A047);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .web-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .web-nav-item {
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease;
+    }
+
+    .web-nav-item:hover {
+      background: var(--bg-warm);
+      color: var(--text-primary);
+    }
+
+    .web-nav-item.active {
+      background: #E8F5E9;
+      color: var(--accent-primary);
+    }
+
+    .web-nav-more {
+      padding: 8px 12px;
+      font-size: 18px;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+    }
+
+    .web-nav-more:hover {
+      background: var(--bg-warm);
+      color: var(--text-primary);
+    }
+
+    .web-topnav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .web-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E0E0E0, #BDBDBD);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Rewards Bar (below nav) */
+    .web-rewards-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .rewards-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .rewards-track {
+      flex: 1;
+      max-width: 300px;
+      height: 10px;
+      background: #E8E4DF;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .rewards-fill {
+      height: 100%;
+      width: 52%;
+      background: linear-gradient(90deg, var(--accent-gold), #E8B86D);
+      border-radius: 5px;
+    }
+
+    .rewards-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .rewards-link {
+      font-size: 13px;
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    /* Body Layout */
+    .web-body {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+      padding: 24px;
+      min-height: 500px;
+    }
+
+    .web-body-full {
+      grid-template-columns: 1fr;
+    }
+
+    .column-action {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .column-discovery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      align-content: start;
+    }
+
+    .column-discovery .card-wide {
+      grid-column: span 2;
+    }
+
+    /* Card placeholder */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .card-placeholder {
+      height: 80px;
+      background: repeating-linear-gradient(
+        45deg,
+        #F5F5F5,
+        #F5F5F5 10px,
+        #FAFAFA 10px,
+        #FAFAFA 20px
+      );
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ========================================
+       MOBILE APP FRAME
+       ======================================== */
+
+    .mobile-frame-container {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-frame-wrapper {
+      flex: 1;
+      min-width: 320px;
+      max-width: 400px;
+    }
+
+    .mobile-frame {
+      width: 375px;
+      background: var(--bg-warm);
+      border: 8px solid #1A1A1A;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .mobile-logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mobile-logo-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-primary), #43A047);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+
+    .mobile-page-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .mobile-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E0E0E0, #BDBDBD);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Mobile Body */
+    .mobile-body {
+      padding: 16px;
+      min-height: 500px;
+      max-height: 580px;
+      overflow-y: auto;
+    }
+
+    .mobile-welcome {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    /* Mobile Rewards Bar */
+    .mobile-rewards-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mobile-rewards-bar .rewards-label {
+      font-size: 12px;
+    }
+
+    .mobile-rewards-bar .rewards-track {
+      height: 8px;
+    }
+
+    .mobile-rewards-bar .rewards-value {
+      font-size: 13px;
+    }
+
+    /* Mobile Bottom Tabs */
+    .mobile-tabs {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 4px 24px;
+      background: var(--bg-nav);
+      border-top: 1px solid var(--border-light);
+    }
+
+    .mobile-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 4px 8px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      min-width: 56px;
+    }
+
+    .mobile-tab.active {
+      color: var(--accent-primary);
+    }
+
+    .mobile-tab-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    /* Profile Menu */
+    .profile-menu {
+      position: absolute;
+      top: 52px;
+      right: 16px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 8px 0;
+      min-width: 200px;
+      z-index: 100;
+    }
+
+    .profile-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .profile-menu-item:hover {
+      background: var(--bg-warm);
+    }
+
+    .profile-menu-item-icon {
+      width: 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .profile-menu-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 8px 0;
+    }
+
+    .profile-menu-item.danger {
+      color: #D32F2F;
+    }
+
+    /* More Menu (Web) */
+    .more-menu {
+      position: absolute;
+      top: 56px;
+      right: 80px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 8px 0;
+      min-width: 220px;
+      z-index: 100;
+    }
+
+    /* ========================================
+       RESPONSIVE DIAGRAM
+       ======================================== */
+
+    .responsive-diagram {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    @media (max-width: 1200px) {
+      .responsive-diagram {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .responsive-diagram {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .breakpoint-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .breakpoint-card:nth-child(4),
+    .breakpoint-card:nth-child(5) {
+      background: #FFFBF0;
+      border: 1px solid #FFE082;
+    }
+
+    .breakpoint-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-primary);
+      background: #E8F5E9;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .breakpoint-card:nth-child(4) .breakpoint-label,
+    .breakpoint-card:nth-child(5) .breakpoint-label {
+      background: #FFF3E0;
+      color: #E65100;
+    }
+
+    .breakpoint-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .breakpoint-details {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding-left: 16px;
+    }
+
+    .breakpoint-details li {
+      margin-bottom: 3px;
+    }
+
+    /* ========================================
+       SPECS TABLE
+       ======================================== */
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .specs-table th,
+    .specs-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .specs-table th {
+      background: #FAFAFA;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .specs-table td {
+      font-size: 14px;
+    }
+
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Layout helpers */
+    .flex-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .flex-col {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    /* Code block */
+    .code-block {
+      background: #2D2D2D;
+      color: #F8F8F2;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>MHC App Frame — Wireframes</h1>
+  <p class="meta">App shell, navigation, and responsive layout | April 2026</p>
+
+  <!-- ============================================
+       SECTION 1: WEB APP FRAME
+       ============================================ -->
+
+  <h2>1. Web App Frame (≥960px)</h2>
+
+  <p class="section-intro">
+    The web experience uses a top navigation bar with 5 primary tabs plus a "More" overflow menu.
+    Logo is persistent. Profile avatar in top-right contains account actions.
+    Rewards bar sits below navigation, always visible.
+  </p>
+
+  <h3>Full Desktop Layout (1200px+)</h3>
+
+  <div class="web-frame" style="max-width: 1200px;">
+    <!-- Top Navigation -->
+    <nav class="web-topnav">
+      <div class="web-logo">
+        <div class="web-logo-icon">M</div>
+        Mobile Health
+      </div>
+
+      <div class="web-nav">
+        <a href="#" class="web-nav-item active">Home</a>
+        <a href="#" class="web-nav-item">Digital Care</a>
+        <a href="#" class="web-nav-item">Wellbeing</a>
+        <a href="#" class="web-nav-item">Benefits</a>
+        <a href="#" class="web-nav-item">Rewards</a>
+        <span class="web-nav-more">•••</span>
+      </div>
+
+      <div class="web-topnav-right">
+        <div class="web-avatar">DR</div>
+      </div>
+    </nav>
+
+    <!-- Rewards Bar -->
+    <div class="web-rewards-bar">
+      <span class="rewards-label">Rewards Progress</span>
+      <div class="rewards-track">
+        <div class="rewards-fill"></div>
+      </div>
+      <span class="rewards-value">5,200 / 10,000 pts</span>
+      <a href="#" class="rewards-link">View details →</a>
+    </div>
+
+    <!-- Body: 2-Column Layout -->
+    <div class="web-body">
+      <!-- Left: Action Column -->
+      <div class="column-action">
+        <div class="card">
+          <div class="card-title">Stats</div>
+          <div class="card-placeholder">Steps • Sleep • Active Minutes</div>
+        </div>
+        <div class="card">
+          <div class="card-title">My Actions</div>
+          <div class="card-placeholder">Point-earning tasks</div>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--accent-blue);">
+          <div class="card-title">Active Program</div>
+          <div class="card-placeholder">DCP Progress — Week 3 of 8</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Healthy Habits</div>
+          <div class="card-placeholder">Daily habit checklist</div>
+        </div>
+      </div>
+
+      <!-- Right: Discovery Column -->
+      <div class="column-discovery">
+        <div class="card card-wide" style="background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border: 1px solid #C8E6C9;">
+          <div class="card-title" style="color: var(--accent-primary);">AI Health Insights</div>
+          <div class="card-placeholder" style="background: rgba(255,255,255,0.5);">Personalized insight + action</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Content</div>
+          <div class="card-placeholder">Article card</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Content</div>
+          <div class="card-placeholder">Article card</div>
+        </div>
+        <div class="card card-wide" style="background: linear-gradient(135deg, #FFF8E1, #FFECB3); border: 1px solid #FFE082;">
+          <div class="card-title" style="color: #F57C00;">Active Challenge</div>
+          <div class="card-placeholder" style="background: rgba(255,255,255,0.5);">Challenge progress + leaderboard teaser</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="decision">
+    <strong>Design decisions:</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li>Logo + tabs + avatar in single top bar (no second header row)</li>
+      <li>5 primary tabs match mobile — Digital Care, Wellbeing, Benefits, Rewards are MHC differentiators</li>
+      <li>"More" overflow contains: Profile, Settings, Devices, Support, Sign out</li>
+      <li>Rewards bar below nav, not in nav — keeps nav clean, rewards always visible</li>
+      <li>2-column body: fixed left (340px) for action, fluid right for discovery</li>
+    </ul>
+  </div>
+
+  <!-- More Menu Detail -->
+  <h3 style="margin-top: 48px;">More Menu (•••)</h3>
+
+  <div class="flex-row">
+    <div class="flex-col">
+      <div style="position: relative; display: inline-block;">
+        <div class="more-menu" style="position: relative; top: 0; right: 0;">
+          <div class="profile-menu-item">
+            <span class="profile-menu-item-icon">👤</span>
+            Profile
+          </div>
+          <div class="profile-menu-item">
+            <span class="profile-menu-item-icon">⚙️</span>
+            Settings
+          </div>
+          <div class="profile-menu-item">
+            <span class="profile-menu-item-icon">📱</span>
+            Devices & Apps
+          </div>
+          <div class="profile-menu-item">
+            <span class="profile-menu-item-icon">🔔</span>
+            Notifications
+          </div>
+          <div class="profile-menu-divider"></div>
+          <div class="profile-menu-item">
+            <span class="profile-menu-item-icon">❓</span>
+            Help & Support
+          </div>
+          <div class="profile-menu-item">
+            <span class="profile-menu-item-icon">📄</span>
+            Privacy Policy
+          </div>
+          <div class="profile-menu-divider"></div>
+          <div class="profile-menu-item danger">
+            <span class="profile-menu-item-icon">🚪</span>
+            Sign out
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-col">
+      <div class="annotation">
+        <strong>More menu contents:</strong> Secondary features that don't need top-level nav.
+        Profile and Settings live here on web (accessible via avatar too).
+        Sign out is always last, visually distinct.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 2: MOBILE APP FRAME
+       ============================================ -->
+
+  <h2>2. Mobile App Frame (&lt;600px)</h2>
+
+  <p class="section-intro">
+    Mobile uses bottom 5-tab navigation (no hamburger menu). Profile avatar in header
+    replaces hamburger — tap to access settings, account, support. Logo on home page;
+    page title on other pages.
+  </p>
+
+  <div class="mobile-frame-container">
+
+    <!-- Home Screen -->
+    <div class="mobile-frame-wrapper">
+      <h3>Home Screen</h3>
+      <div class="mobile-frame">
+        <header class="mobile-header">
+          <div class="mobile-logo">
+            <div class="mobile-logo-icon">M</div>
+            Mobile Health
+          </div>
+          <div class="mobile-avatar">DR</div>
+        </header>
+
+        <div class="mobile-body">
+          <div class="mobile-welcome">Welcome, Davinder</div>
+
+          <div class="mobile-rewards-bar">
+            <span class="rewards-label">Rewards</span>
+            <div class="rewards-track">
+              <div class="rewards-fill"></div>
+            </div>
+            <span class="rewards-value">5,200</span>
+          </div>
+
+          <div class="card" style="margin-bottom: 12px;">
+            <div class="card-title">Stats</div>
+            <div class="card-placeholder" style="height: 60px;">Steps • Sleep • Active</div>
+          </div>
+
+          <div class="card" style="margin-bottom: 12px;">
+            <div class="card-title">My Actions</div>
+            <div class="card-placeholder" style="height: 60px;">3 tasks available</div>
+          </div>
+
+          <div class="card" style="background: linear-gradient(135deg, #E8F5E9, #F1F8E9); border: 1px solid #C8E6C9;">
+            <div class="card-title" style="color: var(--accent-primary);">AI Insight</div>
+            <div class="card-placeholder" style="height: 50px; background: rgba(255,255,255,0.5);">Sleep improved 12%</div>
+          </div>
+        </div>
+
+        <nav class="mobile-tabs">
+          <a href="#" class="mobile-tab active">
+            <span class="mobile-tab-icon">🏠</span>
+            Home
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">💊</span>
+            Care
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🌿</span>
+            Wellbeing
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🛡️</span>
+            Benefits
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">⭐</span>
+            Rewards
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Other Page (with page title) -->
+    <div class="mobile-frame-wrapper">
+      <h3>Other Page (e.g., Digital Care)</h3>
+      <div class="mobile-frame">
+        <header class="mobile-header">
+          <div style="width: 32px;"></div>
+          <div class="mobile-page-title">Digital Care</div>
+          <div class="mobile-avatar">DR</div>
+        </header>
+
+        <div class="mobile-body">
+          <div class="card" style="margin-bottom: 12px;">
+            <div class="card-title">Special Programs</div>
+            <div class="card-placeholder">GLP-1 • Cancer Prevention</div>
+          </div>
+
+          <div class="card" style="margin-bottom: 12px; border-left: 4px solid var(--accent-blue);">
+            <div class="card-title">Back Pain Program</div>
+            <div class="card-placeholder">Week 3 of 8</div>
+          </div>
+
+          <div class="card" style="margin-bottom: 12px;">
+            <div class="card-title">Care Paths</div>
+            <div class="card-placeholder" style="height: 120px;">
+              Insomnia • Depression • Anxiety<br>
+              Blood Pressure • Diabetes
+            </div>
+          </div>
+        </div>
+
+        <nav class="mobile-tabs">
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🏠</span>
+            Home
+          </a>
+          <a href="#" class="mobile-tab active">
+            <span class="mobile-tab-icon">💊</span>
+            Care
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🌿</span>
+            Wellbeing
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🛡️</span>
+            Benefits
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">⭐</span>
+            Rewards
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Profile Menu Open -->
+    <div class="mobile-frame-wrapper">
+      <h3>Profile Menu (tap avatar)</h3>
+      <div class="mobile-frame">
+        <header class="mobile-header" style="position: relative;">
+          <div class="mobile-logo">
+            <div class="mobile-logo-icon">M</div>
+            Mobile Health
+          </div>
+          <div class="mobile-avatar" style="background: var(--accent-primary); color: white;">DR</div>
+
+          <!-- Profile Menu -->
+          <div class="profile-menu" style="top: 44px; right: 8px;">
+            <div class="profile-menu-item">
+              <span class="profile-menu-item-icon">👤</span>
+              Profile
+            </div>
+            <div class="profile-menu-item">
+              <span class="profile-menu-item-icon">⚙️</span>
+              Settings
+            </div>
+            <div class="profile-menu-item">
+              <span class="profile-menu-item-icon">📱</span>
+              Devices & Apps
+            </div>
+            <div class="profile-menu-item">
+              <span class="profile-menu-item-icon">🔔</span>
+              Notifications
+            </div>
+            <div class="profile-menu-divider"></div>
+            <div class="profile-menu-item">
+              <span class="profile-menu-item-icon">❓</span>
+              Help & Support
+            </div>
+            <div class="profile-menu-divider"></div>
+            <div class="profile-menu-item danger">
+              <span class="profile-menu-item-icon">🚪</span>
+              Sign out
+            </div>
+          </div>
+        </header>
+
+        <div class="mobile-body" style="opacity: 0.4;">
+          <div class="mobile-welcome">Welcome, Davinder</div>
+          <div class="card" style="margin-bottom: 12px;">
+            <div class="card-placeholder" style="height: 200px;"></div>
+          </div>
+        </div>
+
+        <nav class="mobile-tabs" style="opacity: 0.4;">
+          <a href="#" class="mobile-tab active">
+            <span class="mobile-tab-icon">🏠</span>
+            Home
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">💊</span>
+            Care
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🌿</span>
+            Wellbeing
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">🛡️</span>
+            Benefits
+          </a>
+          <a href="#" class="mobile-tab">
+            <span class="mobile-tab-icon">⭐</span>
+            Rewards
+          </a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="decision" style="margin-top: 24px;">
+    <strong>Mobile design decisions:</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li>No hamburger menu — profile avatar replaces it</li>
+      <li>5 bottom tabs only: Home, Digital Care ("Care"), Wellbeing, Benefits, Rewards</li>
+      <li>Home shows logo; other pages show page title (centered)</li>
+      <li>Profile menu contains: Profile, Settings, Devices, Notifications, Help, Sign out</li>
+      <li>Rewards bar inside body content, not in header (keeps header minimal)</li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 3: RESPONSIVE BREAKPOINTS
+       ============================================ -->
+
+  <h2>3. Responsive Breakpoints</h2>
+
+  <p class="section-intro">
+    Five breakpoints from mobile (320px) to desktop wide (1600px). Navigation transitions from bottom tabs to top nav at 769px.
+  </p>
+
+  <div class="responsive-diagram">
+    <div class="breakpoint-card">
+      <span class="breakpoint-label">XL — 1440px–1600px</span>
+      <div class="breakpoint-title">Desktop Wide</div>
+      <ul class="breakpoint-details">
+        <li>Top nav with full labels + More</li>
+        <li>2-column body (360px + fluid)</li>
+        <li>Max content width: 1440px centered</li>
+        <li>Generous whitespace (32px margins)</li>
+        <li>Discovery: 2-card grid</li>
+        <li>AI Insights card spans full width</li>
+      </ul>
+    </div>
+
+    <div class="breakpoint-card">
+      <span class="breakpoint-label">LG — 1025px–1439px</span>
+      <div class="breakpoint-title">Desktop Standard</div>
+      <ul class="breakpoint-details">
+        <li>Top nav with full labels + More</li>
+        <li>2-column body (340px + fluid)</li>
+        <li>Standard margins (24px)</li>
+        <li>Discovery: 2-card grid</li>
+        <li>Challenge card spans full width</li>
+      </ul>
+    </div>
+
+    <div class="breakpoint-card">
+      <span class="breakpoint-label">MD — 769px–1024px</span>
+      <div class="breakpoint-title">Laptop / Small Desktop</div>
+      <ul class="breakpoint-details">
+        <li>Top nav with condensed labels + More</li>
+        <li>2-column body (300px + fluid)</li>
+        <li>Tighter margins (20px)</li>
+        <li>Discovery: 1-card width (stacked)</li>
+        <li>Cards stack vertically in discovery</li>
+      </ul>
+    </div>
+
+    <div class="breakpoint-card">
+      <span class="breakpoint-label">SM — 481px–768px</span>
+      <div class="breakpoint-title">Tablet</div>
+      <ul class="breakpoint-details">
+        <li>Bottom 5-tab nav</li>
+        <li>1-column body</li>
+        <li>Cards full-width</li>
+        <li>Profile avatar in header (no hamburger)</li>
+        <li>Rewards bar in body, below welcome</li>
+        <li>Content cards: 2-up grid possible</li>
+      </ul>
+    </div>
+
+    <div class="breakpoint-card">
+      <span class="breakpoint-label">XS — 320px–480px</span>
+      <div class="breakpoint-title">Mobile</div>
+      <ul class="breakpoint-details">
+        <li>Bottom 5-tab nav</li>
+        <li>1-column body</li>
+        <li>Cards full-width (100%)</li>
+        <li>Profile avatar replaces hamburger</li>
+        <li>Compact card padding (16px)</li>
+        <li>Tab labels: shortened ("Care" not "Digital Care")</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Breakpoint Specifications Table -->
+  <h3 style="margin-top: 48px;">Breakpoint Specifications</h3>
+
+  <table class="specs-table">
+    <thead>
+      <tr>
+        <th>Breakpoint</th>
+        <th>Width Range</th>
+        <th>Navigation</th>
+        <th>Layout</th>
+        <th>Margins</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>XL</strong></td>
+        <td>1440px – 1600px</td>
+        <td>Top nav (full labels + More)</td>
+        <td>2-column (360px + fluid)</td>
+        <td>32px</td>
+      </tr>
+      <tr>
+        <td><strong>LG</strong></td>
+        <td>1025px – 1439px</td>
+        <td>Top nav (full labels + More)</td>
+        <td>2-column (340px + fluid)</td>
+        <td>24px</td>
+      </tr>
+      <tr>
+        <td><strong>MD</strong></td>
+        <td>769px – 1024px</td>
+        <td>Top nav (condensed + More)</td>
+        <td>2-column (300px + fluid)</td>
+        <td>20px</td>
+      </tr>
+      <tr style="background: #FFF8E1;">
+        <td><strong>SM</strong></td>
+        <td>481px – 768px</td>
+        <td>Bottom tabs (5)</td>
+        <td>1-column</td>
+        <td>16px</td>
+      </tr>
+      <tr style="background: #FFF8E1;">
+        <td><strong>XS</strong></td>
+        <td>320px – 480px</td>
+        <td>Bottom tabs (5)</td>
+        <td>1-column</td>
+        <td>16px</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="annotation" style="margin-top: 24px;">
+    <strong>Key transition at 769px:</strong> Navigation moves from bottom tabs to top nav bar.
+    Below 769px = bottom tabs + profile avatar. At/above 769px = top nav + More menu.
+    No hamburger menu at any breakpoint.
+  </div>
+
+  <div class="decision" style="margin-top: 16px;">
+    <strong>Design rationale:</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li><strong>769px transition</strong> — Aligns with common tablet breakpoint; gives enough room for 5 tabs + More in top nav</li>
+      <li><strong>2-column until 768px</strong> — Maintains action/discovery split on laptops; collapses to single column on tablets</li>
+      <li><strong>1600px max</strong> — Content doesn't stretch infinitely; centered with whitespace on ultra-wide displays</li>
+      <li><strong>320px min</strong> — Supports older/smaller devices; no content breaks below this width</li>
+    </ul>
+  </div>
+
+  <!-- ============================================
+       SECTION 4: NAVIGATION SPECIFICATIONS
+       ============================================ -->
+
+  <h2>4. Navigation Specifications</h2>
+
+  <h3>Tab Labels & Icons</h3>
+
+  <table class="specs-table">
+    <thead>
+      <tr>
+        <th>Tab</th>
+        <th>Icon</th>
+        <th>Web Label</th>
+        <th>Mobile Label</th>
+        <th>Maps to Feature</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Home</strong></td>
+        <td>🏠</td>
+        <td>Home</td>
+        <td>Home</td>
+        <td>Dashboard hub</td>
+      </tr>
+      <tr>
+        <td><strong>Digital Care</strong></td>
+        <td>💊 or ❤️‍🩹</td>
+        <td>Digital Care</td>
+        <td>Care</td>
+        <td>DCPs, clinical programs</td>
+      </tr>
+      <tr>
+        <td><strong>Wellbeing</strong></td>
+        <td>🌿</td>
+        <td>Wellbeing</td>
+        <td>Wellbeing</td>
+        <td>Tracking, habits, challenges</td>
+      </tr>
+      <tr>
+        <td><strong>Benefits</strong></td>
+        <td>🛡️</td>
+        <td>Benefits</td>
+        <td>Benefits</td>
+        <td>Employer benefits, EAP</td>
+      </tr>
+      <tr>
+        <td><strong>Rewards</strong></td>
+        <td>⭐</td>
+        <td>Rewards</td>
+        <td>Rewards</td>
+        <td>Points, store, history</td>
+      </tr>
+      <tr style="background: #FAFAFA;">
+        <td><strong>More</strong></td>
+        <td>•••</td>
+        <td>••• (icon only)</td>
+        <td>— (not in mobile nav)</td>
+        <td>Profile, Settings, Devices, Support</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="decision" style="margin-top: 24px;">
+    <strong>Label strategy:</strong>
+    <ul style="margin: 8px 0 0 16px; font-size: 13px;">
+      <li>"Digital Care" → "Care" on mobile to fit 5-tab width</li>
+      <li>"More" only appears on web (≥768px); on mobile, profile avatar handles overflow</li>
+      <li>Icons use emoji for wireframe; final design will use custom icon set</li>
+    </ul>
+  </div>
+
+  <h3 style="margin-top: 48px;">Header Specifications</h3>
+
+  <table class="specs-table">
+    <thead>
+      <tr>
+        <th>Element</th>
+        <th>Web (≥768px)</th>
+        <th>Mobile (&lt;768px)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Height</strong></td>
+        <td>64px</td>
+        <td>52px</td>
+      </tr>
+      <tr>
+        <td><strong>Logo</strong></td>
+        <td>Left-aligned, always visible</td>
+        <td>Left-aligned (Home), hidden (other pages)</td>
+      </tr>
+      <tr>
+        <td><strong>Page Title</strong></td>
+        <td>N/A (tabs indicate location)</td>
+        <td>Centered (non-Home pages)</td>
+      </tr>
+      <tr>
+        <td><strong>Avatar</strong></td>
+        <td>Right, opens profile popover</td>
+        <td>Right, opens profile sheet</td>
+      </tr>
+      <tr>
+        <td><strong>More Menu</strong></td>
+        <td>In nav bar (•••)</td>
+        <td>N/A (profile avatar handles)</td>
+      </tr>
+      <tr>
+        <td><strong>Rewards Bar</strong></td>
+        <td>Below header, full width</td>
+        <td>Inside body, below welcome</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================
+       SECTION 5: COMPONENT DIMENSIONS
+       ============================================ -->
+
+  <h2>5. Component Dimensions</h2>
+
+  <h3>Web Top Navigation</h3>
+  <div class="code-block">Header Height:     64px
+Logo Size:         32px icon + 20px text
+Nav Item Padding:  16px horizontal, 8px vertical
+Nav Item Font:     14px, 500 weight
+More Icon:         18px
+Avatar Size:       36px diameter
+Rewards Bar:       48px height, below nav</div>
+
+  <h3 style="margin-top: 32px;">Mobile Bottom Navigation</h3>
+  <div class="code-block">Tab Bar Height:    56px (+ safe area)
+Tab Item Width:    20% (5 tabs)
+Tab Icon Size:     24px
+Tab Label Font:    10px, 500 weight
+Active Indicator:  Tab icon + label color change</div>
+
+  <h3 style="margin-top: 32px;">Mobile Header</h3>
+  <div class="code-block">Header Height:     52px
+Logo Icon:         28px
+Page Title:        17px, 600 weight, centered
+Avatar Size:       32px diameter</div>
+
+  <h3 style="margin-top: 32px;">Body Layout by Breakpoint</h3>
+  <div class="code-block">XL (1440px–1600px):
+  - Action Column:     360px fixed
+  - Discovery Column:  fluid
+  - Gap:               24px
+  - Margins:           32px
+  - Max content:       1440px centered
+
+LG (1025px–1439px):
+  - Action Column:     340px fixed
+  - Discovery Column:  fluid
+  - Gap:               24px
+  - Margins:           24px
+
+MD (769px–1024px):
+  - Action Column:     300px fixed
+  - Discovery Column:  fluid
+  - Gap:               20px
+  - Margins:           20px
+
+SM (481px–768px) — Tablet:
+  - Single column, full width
+  - Cards: 100% width
+  - Margins:           16px
+  - Gap between cards: 12px
+
+XS (320px–480px) — Mobile:
+  - Single column, full width
+  - Cards: 100% width
+  - Margins:           16px
+  - Gap between cards: 12px
+  - Compact card padding: 16px</div>
+
+  <!-- ============================================
+       SECTION 6: NEXT STEPS
+       ============================================ -->
+
+  <h2>6. Next Steps</h2>
+
+  <table class="specs-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Task</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Finalize app frame structure (this document)</td>
+        <td>✅ Done</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Apply home modules to new frame</td>
+        <td>⏳ Next</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Update decision document with new nav model</td>
+        <td>⏳ Next</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Stakeholder review</td>
+        <td>⏳ Pending</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Figma wireframes</td>
+        <td>⏳ Week of April 21</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

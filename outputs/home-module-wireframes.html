@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MHC Home Page — Module Wireframes</title>
+  <style>
+    :root {
+      --bg-warm: #F9F7F4;
+      --bg-card: #FFFFFF;
+      --border: #E5E2DD;
+      --text-primary: #1A1A1A;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+      --accent-green: #2E7D32;
+      --accent-gold: #D4A853;
+      --accent-blue: #1976D2;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-warm);
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 48px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meta {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .wireframe-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .wireframe-col {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    /* Card base */
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ========================================
+       MODULE 1: REWARDS PROGRESS BAR
+       ======================================== */
+
+    .rewards-bar {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .rewards-bar-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .rewards-bar-track {
+      flex: 1;
+      height: 12px;
+      background: #E8E4DF;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .rewards-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-gold), #E8B86D);
+      border-radius: 6px;
+      width: 52%;
+    }
+
+    .rewards-bar-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .rewards-bar-link {
+      font-size: 12px;
+      color: var(--accent-blue);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       MODULE 2: STATS SUMMARY
+       ======================================== */
+
+    .stats-row {
+      display: flex;
+      justify-content: space-around;
+      gap: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-size: 20px;
+    }
+
+    .stat-icon.sleep {
+      background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    }
+
+    .stat-icon.active {
+      background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    }
+
+    .stat-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .stat-goal {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .stats-cta {
+      display: block;
+      text-align: center;
+      margin-top: 16px;
+      padding: 10px 16px;
+      background: var(--accent-green);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* ========================================
+       MODULE 3: MY ACTIONS
+       ======================================== */
+
+    .action-list {
+      list-style: none;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .action-item:last-child {
+      border-bottom: none;
+    }
+
+    .action-checkbox {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .action-checkbox.completed {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      position: relative;
+    }
+
+    .action-checkbox.completed::after {
+      content: "✓";
+      color: white;
+      font-size: 14px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .action-text {
+      flex: 1;
+      font-size: 14px;
+    }
+
+    .action-points {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-gold);
+      background: #FEF7E0;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .view-all {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      color: var(--accent-blue);
+      font-size: 14px;
+      text-decoration: none;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    /* ========================================
+       MODULE 4: HEALTH INSIGHTS (AI)
+       ======================================== */
+
+    .insights-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+      border: 1px solid #C8E6C9;
+    }
+
+    .insights-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-green);
+      background: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .insights-headline {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .insights-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .insights-action {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--accent-green);
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* ========================================
+       MODULE 5: DCP PROGRESS
+       ======================================== */
+
+    .dcp-card {
+      border-left: 4px solid var(--accent-blue);
+    }
+
+    .dcp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .dcp-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      background: #E3F2FD;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .dcp-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .dcp-week {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .dcp-progress {
+      margin: 16px 0;
+    }
+
+    .dcp-progress-bar {
+      height: 8px;
+      background: #E3F2FD;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .dcp-progress-fill {
+      height: 100%;
+      background: var(--accent-blue);
+      border-radius: 4px;
+      width: 37.5%;
+    }
+
+    .dcp-progress-text {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .dcp-next {
+      background: #F5F5F5;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .dcp-next-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* ========================================
+       MODULE 6: HEALTHY HABITS
+       ======================================== */
+
+    .habits-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .habits-date {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .habits-date button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .habits-progress {
+      font-size: 13px;
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .habit-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .habit-item:last-child {
+      border-bottom: none;
+    }
+
+    .habit-check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      margin-right: 12px;
+    }
+
+    .habit-check.pending {
+      background: none;
+      border: 2px solid var(--border);
+    }
+
+    .habit-text {
+      flex: 1;
+    }
+
+    .habit-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .habit-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .habit-toggle {
+      font-size: 13px;
+      color: var(--accent-green);
+      font-weight: 500;
+    }
+
+    /* ========================================
+       MODULE 7: CONTENT CARD
+       ======================================== */
+
+    .content-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .content-image {
+      height: 140px;
+      background: linear-gradient(135deg, #CFD8DC, #B0BEC5);
+      position: relative;
+    }
+
+    .content-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content-points {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--accent-gold);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .content-body {
+      padding: 16px;
+    }
+
+    .content-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .content-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .content-excerpt {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .content-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .content-completion {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .content-completion.pending {
+      background: none;
+      border: 2px solid var(--border);
+    }
+
+    /* ========================================
+       LAYOUT DEMOS
+       ======================================== */
+
+    .layout-demo {
+      border: 2px dashed var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 32px;
+      background: white;
+    }
+
+    .layout-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Desktop Layout */
+    .desktop-layout {
+      max-width: 1200px;
+    }
+
+    .desktop-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .desktop-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .desktop-nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .desktop-nav a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .desktop-nav a.active {
+      color: var(--accent-green);
+    }
+
+    .desktop-columns {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+    }
+
+    .desktop-discovery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      align-content: start;
+    }
+
+    .desktop-discovery .insights-card {
+      grid-column: span 2;
+    }
+
+    /* Mobile Layout */
+    .mobile-layout {
+      max-width: 375px;
+      margin: 0 auto;
+      border: 8px solid #333;
+      border-radius: 32px;
+      overflow: hidden;
+      background: var(--bg-warm);
+    }
+
+    .mobile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-hamburger {
+      font-size: 20px;
+      color: var(--text-primary);
+    }
+
+    .mobile-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+
+    .mobile-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #E0E0E0;
+    }
+
+    .mobile-content {
+      padding: 16px;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .mobile-welcome {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .mobile-tabs {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0;
+      background: white;
+      border-top: 1px solid var(--border);
+    }
+
+    .mobile-tab {
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .mobile-tab.active {
+      color: var(--accent-green);
+    }
+
+    .mobile-tab-icon {
+      font-size: 20px;
+      margin-bottom: 2px;
+    }
+
+    /* Annotations */
+    .annotation {
+      background: #FFF9C4;
+      border-left: 3px solid #FBC02D;
+      padding: 12px 16px;
+      font-size: 13px;
+      margin: 16px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .annotation strong {
+      color: #F57F17;
+    }
+
+    /* Module scale for mobile */
+    .mobile-content .card {
+      padding: 16px;
+    }
+
+    .mobile-content .stat-icon {
+      width: 48px;
+      height: 48px;
+      font-size: 16px;
+    }
+
+    .mobile-content .stat-value {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MHC Home Page — Module Wireframes</h1>
+  <p class="meta">Competitive alignment with Personify Health | April 2026 | Davinder Rehal</p>
+
+  <!-- ============================================
+       SECTION 1: INDIVIDUAL MODULES
+       ============================================ -->
+
+  <h2>1. Individual Module Designs</h2>
+
+  <div class="wireframe-row">
+    <div class="wireframe-col">
+      <h3>Rewards Progress Bar</h3>
+      <div class="rewards-bar">
+        <span class="rewards-bar-label">Rewards</span>
+        <div class="rewards-bar-track">
+          <div class="rewards-bar-fill"></div>
+        </div>
+        <span class="rewards-bar-value">5,200 / 10,000</span>
+        <a href="#" class="rewards-bar-link">View &rarr;</a>
+      </div>
+      <div class="annotation">
+        <strong>Personify parity:</strong> Always visible in header. Shows numeric ratio + visual progress. Links to rewards detail page.
+      </div>
+    </div>
+  </div>
+
+  <div class="wireframe-row">
+    <div class="wireframe-col">
+      <h3>Stats Summary</h3>
+      <div class="card">
+        <div class="card-title">Stats</div>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-icon">👟</div>
+            <div class="stat-value">5,218</div>
+            <div class="stat-label">Steps</div>
+            <div class="stat-goal">Goal: 10,000</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon sleep">😴</div>
+            <div class="stat-value">7.5 hr</div>
+            <div class="stat-label">Sleep</div>
+            <div class="stat-goal">Goal: 8 hr</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon active">⚡</div>
+            <div class="stat-value">32 min</div>
+            <div class="stat-label">Active</div>
+            <div class="stat-goal">Goal: 30 min</div>
+          </div>
+        </div>
+        <a href="#" class="stats-cta">Manage my Stats</a>
+      </div>
+      <div class="annotation">
+        <strong>Design note:</strong> Circular icons for glanceability. No charts on home — just today's numbers. CTA links to Health tab for detail.
+      </div>
+    </div>
+
+    <div class="wireframe-col">
+      <h3>My Actions</h3>
+      <div class="card">
+        <div class="card-title">
+          My Actions
+          <span class="card-subtitle">3 available</span>
+        </div>
+        <ul class="action-list">
+          <li class="action-item">
+            <div class="action-checkbox completed"></div>
+            <span class="action-text">Complete daily check-in</span>
+            <span class="action-points">+25 pts</span>
+          </li>
+          <li class="action-item">
+            <div class="action-checkbox"></div>
+            <span class="action-text">Log your breakfast</span>
+            <span class="action-points">+20 pts</span>
+          </li>
+          <li class="action-item">
+            <div class="action-checkbox"></div>
+            <span class="action-text">Complete Week 3 lesson</span>
+            <span class="action-points">+100 pts</span>
+          </li>
+        </ul>
+        <a href="#" class="view-all">View all actions &rarr;</a>
+      </div>
+      <div class="annotation">
+        <strong>Personify parity:</strong> Point values visible on each task. Completed items shown with checkmark. "View all" expands full list.
+      </div>
+    </div>
+  </div>
+
+  <div class="wireframe-row">
+    <div class="wireframe-col">
+      <h3>Health Insights (AI) — MHC Differentiator</h3>
+      <div class="card insights-card">
+        <div class="insights-badge">✨ AI Insight</div>
+        <div class="insights-headline">Your sleep improved 12% this week</div>
+        <div class="insights-body">
+          You've been consistent with your 10pm wind-down. Tonight, try adding 5 minutes of deep breathing to build on this momentum.
+        </div>
+        <a href="#" class="insights-action">Start wind-down routine</a>
+      </div>
+      <div class="annotation">
+        <strong>MHC differentiator:</strong> One takeaway + one action (not generic explanation). RAG-grounded, not generic LLM. This is what Personify's PercyIQ fails to deliver.
+      </div>
+    </div>
+
+    <div class="wireframe-col">
+      <h3>Active DCP Progress — MHC Differentiator</h3>
+      <div class="card dcp-card">
+        <div class="dcp-header">
+          <div>
+            <div class="dcp-title">Back Pain Program</div>
+            <div class="dcp-week">Week 3 of 8</div>
+          </div>
+          <span class="dcp-tag">Digital Care Path</span>
+        </div>
+        <div class="dcp-progress">
+          <div class="dcp-progress-bar">
+            <div class="dcp-progress-fill"></div>
+          </div>
+          <div class="dcp-progress-text">3 of 8 weeks complete</div>
+        </div>
+        <div class="dcp-next">
+          <div class="dcp-next-label">Up next</div>
+          <strong>Core strengthening exercises</strong>
+        </div>
+      </div>
+      <div class="annotation">
+        <strong>MHC differentiator:</strong> True clinical programs, not just content "Journeys." Shows week progress + next activity. This depth doesn't exist in Personify.
+      </div>
+    </div>
+  </div>
+
+  <div class="wireframe-row">
+    <div class="wireframe-col">
+      <h3>Healthy Habits</h3>
+      <div class="card">
+        <div class="habits-header">
+          <div class="habits-date">
+            <button>&larr;</button>
+            <span>April 15, 2026</span>
+            <button>&rarr;</button>
+          </div>
+          <span class="habits-progress">5/7 Complete</span>
+        </div>
+        <div class="habit-item">
+          <div class="habit-check">✓</div>
+          <div class="habit-text">
+            <div class="habit-name">Morning stretch</div>
+            <div class="habit-desc">5 minutes of gentle stretching</div>
+          </div>
+          <span class="habit-toggle">Yes</span>
+        </div>
+        <div class="habit-item">
+          <div class="habit-check">✓</div>
+          <div class="habit-text">
+            <div class="habit-name">Drink water</div>
+            <div class="habit-desc">8 glasses throughout the day</div>
+          </div>
+          <span class="habit-toggle">Yes</span>
+        </div>
+        <div class="habit-item">
+          <div class="habit-check pending"></div>
+          <div class="habit-text">
+            <div class="habit-name">Evening walk</div>
+            <div class="habit-desc">15 minute walk after dinner</div>
+          </div>
+          <span class="habit-toggle" style="color: var(--text-muted);">—</span>
+        </div>
+      </div>
+      <div class="annotation">
+        <strong>Personify parity:</strong> Date picker for history. Progress indicator. Toggle-style completion. This is a daily ritual anchor.
+      </div>
+    </div>
+
+    <div class="wireframe-col">
+      <h3>Content Card</h3>
+      <div class="card content-card">
+        <div class="content-image" style="background: linear-gradient(135deg, #A5D6A7, #81C784);">
+          <span class="content-points">+20 pts</span>
+        </div>
+        <div class="content-body">
+          <div class="content-tag">Daily Tip • Heart Health</div>
+          <div class="content-title">Watch Your Weight</div>
+          <div class="content-excerpt">
+            If you're overweight, it will increase your risk for heart attack. Even a small loss of 5-10 pounds can make a difference.
+          </div>
+          <div class="content-footer">
+            <span style="font-size: 12px; color: var(--text-muted);">3 min read</span>
+            <div class="content-completion pending"></div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <strong>Personify parity:</strong> Image header + point badge overlay. Category tag. Completion indicator. This is for discovery, not action.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 2: DESKTOP LAYOUT
+       ============================================ -->
+
+  <h2>2. Desktop Layout (1200px+)</h2>
+
+  <div class="layout-demo desktop-layout">
+    <div class="layout-label">2-Column Desktop — Action (Left) + Discovery (Right)</div>
+
+    <div class="desktop-header">
+      <div class="desktop-logo">Mobile Health</div>
+      <nav class="desktop-nav">
+        <a href="#" class="active">Home</a>
+        <a href="#">Health</a>
+        <a href="#">Social</a>
+        <a href="#">Programs</a>
+        <a href="#">More</a>
+      </nav>
+      <div class="rewards-bar" style="max-width: 320px; margin: 0;">
+        <span class="rewards-bar-label">Rewards</span>
+        <div class="rewards-bar-track">
+          <div class="rewards-bar-fill"></div>
+        </div>
+        <span class="rewards-bar-value">5,200</span>
+      </div>
+    </div>
+
+    <div class="desktop-columns">
+      <!-- LEFT: ACTION COLUMN -->
+      <div class="desktop-action">
+        <div class="card">
+          <div class="card-title">Stats</div>
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-icon">👟</div>
+              <div class="stat-value">5,218</div>
+              <div class="stat-label">Steps</div>
+              <div class="stat-goal">Goal: 10K</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon sleep">😴</div>
+              <div class="stat-value">7.5 hr</div>
+              <div class="stat-label">Sleep</div>
+              <div class="stat-goal">Goal: 8 hr</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon active">⚡</div>
+              <div class="stat-value">32 min</div>
+              <div class="stat-label">Active</div>
+              <div class="stat-goal">Goal: 30 min</div>
+            </div>
+          </div>
+          <a href="#" class="stats-cta">Manage my Stats</a>
+        </div>
+
+        <div class="card">
+          <div class="card-title">
+            My Actions
+            <span class="card-subtitle">3 available</span>
+          </div>
+          <ul class="action-list">
+            <li class="action-item">
+              <div class="action-checkbox completed"></div>
+              <span class="action-text">Complete daily check-in</span>
+              <span class="action-points">+25 pts</span>
+            </li>
+            <li class="action-item">
+              <div class="action-checkbox"></div>
+              <span class="action-text">Log your breakfast</span>
+              <span class="action-points">+20 pts</span>
+            </li>
+            <li class="action-item">
+              <div class="action-checkbox"></div>
+              <span class="action-text">Complete Week 3 lesson</span>
+              <span class="action-points">+100 pts</span>
+            </li>
+          </ul>
+          <a href="#" class="view-all">View all &rarr;</a>
+        </div>
+
+        <div class="card dcp-card">
+          <div class="dcp-header">
+            <div>
+              <div class="dcp-title">Back Pain Program</div>
+              <div class="dcp-week">Week 3 of 8</div>
+            </div>
+            <span class="dcp-tag">DCP</span>
+          </div>
+          <div class="dcp-progress">
+            <div class="dcp-progress-bar">
+              <div class="dcp-progress-fill"></div>
+            </div>
+            <div class="dcp-progress-text">3 of 8 weeks complete</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="habits-header">
+            <div class="habits-date">
+              <button>&larr;</button>
+              <span>Apr 15</span>
+              <button>&rarr;</button>
+            </div>
+            <span class="habits-progress">5/7</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-check">✓</div>
+            <div class="habit-text">
+              <div class="habit-name">Morning stretch</div>
+            </div>
+            <span class="habit-toggle">Yes</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-check pending"></div>
+            <div class="habit-text">
+              <div class="habit-name">Evening walk</div>
+            </div>
+            <span class="habit-toggle" style="color: var(--text-muted);">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: DISCOVERY COLUMN -->
+      <div class="desktop-discovery">
+        <div class="card insights-card">
+          <div class="insights-badge">✨ AI Insight</div>
+          <div class="insights-headline">Your sleep improved 12% this week</div>
+          <div class="insights-body">
+            You've been consistent with your 10pm wind-down. Tonight, try adding 5 minutes of deep breathing.
+          </div>
+          <a href="#" class="insights-action">Start wind-down routine</a>
+        </div>
+
+        <div class="card content-card">
+          <div class="content-image" style="background: linear-gradient(135deg, #A5D6A7, #81C784);">
+            <span class="content-points">+20 pts</span>
+          </div>
+          <div class="content-body">
+            <div class="content-tag">Daily Tip • Heart Health</div>
+            <div class="content-title">Watch Your Weight</div>
+            <div class="content-excerpt">
+              Even a small loss of 5-10 pounds can reduce risk.
+            </div>
+            <div class="content-footer">
+              <span style="font-size: 12px; color: var(--text-muted);">3 min</span>
+              <div class="content-completion pending"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card content-card">
+          <div class="content-image" style="background: linear-gradient(135deg, #BBDEFB, #90CAF9);">
+            <span class="content-points">+20 pts</span>
+          </div>
+          <div class="content-body">
+            <div class="content-tag">Daily Tip • Mental Health</div>
+            <div class="content-title">Be Kind to Yourself</div>
+            <div class="content-excerpt">
+              Self-compassion is linked to better mental health.
+            </div>
+            <div class="content-footer">
+              <span style="font-size: 12px; color: var(--text-muted);">4 min</span>
+              <div class="content-completion">✓</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 2; background: linear-gradient(135deg, #FFF8E1, #FFECB3); border: 1px solid #FFE082;">
+          <div class="card-title">🏔️ Pacific Crest Challenge</div>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">Your team is in 3rd place! 2,450 steps behind the leaders.</p>
+          <a href="#" style="color: var(--accent-gold); font-weight: 500; text-decoration: none;">View challenge &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 3: MOBILE LAYOUT
+       ============================================ -->
+
+  <h2>3. Mobile Layout (&lt;600px)</h2>
+
+  <div class="wireframe-row">
+    <div class="wireframe-col">
+      <div class="layout-label">Single Column + Bottom Tabs</div>
+
+      <div class="mobile-layout">
+        <div class="mobile-header">
+          <span class="mobile-hamburger">☰</span>
+          <span class="mobile-logo">Mobile Health</span>
+          <div class="mobile-avatar"></div>
+        </div>
+
+        <div class="mobile-content">
+          <div class="mobile-welcome">Welcome, Davinder</div>
+
+          <div class="rewards-bar" style="margin-bottom: 16px;">
+            <span class="rewards-bar-label">Rewards</span>
+            <div class="rewards-bar-track">
+              <div class="rewards-bar-fill"></div>
+            </div>
+            <span class="rewards-bar-value">5,200</span>
+          </div>
+
+          <div class="card">
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-icon">👟</div>
+                <div class="stat-value">5,218</div>
+                <div class="stat-label">Steps</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon sleep">😴</div>
+                <div class="stat-value">7.5 hr</div>
+                <div class="stat-label">Sleep</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon active">⚡</div>
+                <div class="stat-value">32 min</div>
+                <div class="stat-label">Active</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title" style="font-size: 14px;">
+              My Actions
+              <span class="card-subtitle">3 available</span>
+            </div>
+            <ul class="action-list">
+              <li class="action-item">
+                <div class="action-checkbox"></div>
+                <span class="action-text" style="font-size: 13px;">Log your breakfast</span>
+                <span class="action-points" style="font-size: 12px;">+20</span>
+              </li>
+              <li class="action-item">
+                <div class="action-checkbox"></div>
+                <span class="action-text" style="font-size: 13px;">Complete Week 3 lesson</span>
+                <span class="action-points" style="font-size: 12px;">+100</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card insights-card">
+            <div class="insights-badge">✨ AI Insight</div>
+            <div class="insights-headline" style="font-size: 16px;">Your sleep improved 12%</div>
+            <div class="insights-body" style="font-size: 13px;">
+              Try adding 5 minutes of deep breathing tonight.
+            </div>
+            <a href="#" class="insights-action" style="font-size: 13px; padding: 8px 16px;">Start routine</a>
+          </div>
+        </div>
+
+        <div class="mobile-tabs">
+          <div class="mobile-tab active">
+            <div class="mobile-tab-icon">🏠</div>
+            Home
+          </div>
+          <div class="mobile-tab">
+            <div class="mobile-tab-icon">❤️</div>
+            Health
+          </div>
+          <div class="mobile-tab">
+            <div class="mobile-tab-icon">👥</div>
+            Social
+          </div>
+          <div class="mobile-tab">
+            <div class="mobile-tab-icon">📋</div>
+            Programs
+          </div>
+          <div class="mobile-tab">
+            <div class="mobile-tab-icon">•••</div>
+            More
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wireframe-col">
+      <h3>Mobile Module Priority</h3>
+      <div class="annotation" style="margin-top: 0;">
+        <strong>Scroll order (top to bottom):</strong>
+        <ol style="margin: 12px 0 0 20px; font-size: 13px;">
+          <li>Welcome + Rewards Bar</li>
+          <li>Stats Summary</li>
+          <li>My Actions</li>
+          <li>Health Insights (AI)</li>
+          <li>DCP Progress Card</li>
+          <li>Healthy Habits</li>
+          <li>Content Cards (full-width)</li>
+          <li>Challenge Card</li>
+        </ol>
+      </div>
+
+      <h3 style="margin-top: 32px;">Responsive Collapse Behavior</h3>
+      <div class="card" style="font-size: 13px;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 8px 0; font-weight: 600;">≥1200px</td>
+            <td style="padding: 8px 0;">2-column grid</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 8px 0; font-weight: 600;">960-1199px</td>
+            <td style="padding: 8px 0;">2-column compressed</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 8px 0; font-weight: 600;">600-959px</td>
+            <td style="padding: 8px 0;">1-column, hamburger nav</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-weight: 600;">&lt;600px</td>
+            <td style="padding: 8px 0;">1-column, bottom tabs</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3 style="margin-top: 32px;">Navigation Behavior</h3>
+      <div class="card" style="font-size: 13px;">
+        <p><strong>Desktop (≥960px):</strong> Top horizontal nav with text labels</p>
+        <p style="margin-top: 8px;"><strong>Tablet (600-959px):</strong> Hamburger menu (top-left)</p>
+        <p style="margin-top: 8px;"><strong>Mobile (&lt;600px):</strong> Bottom tab bar (5 tabs)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       SECTION 4: COMPONENT STATES
+       ============================================ -->
+
+  <h2>4. Component States</h2>
+
+  <div class="wireframe-row">
+    <div class="wireframe-col">
+      <h3>Rewards Bar States</h3>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Empty (0%)</p>
+      <div class="rewards-bar">
+        <span class="rewards-bar-label">Rewards</span>
+        <div class="rewards-bar-track">
+          <div class="rewards-bar-fill" style="width: 0%;"></div>
+        </div>
+        <span class="rewards-bar-value">0 / 10,000</span>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Partial (52%)</p>
+      <div class="rewards-bar">
+        <span class="rewards-bar-label">Rewards</span>
+        <div class="rewards-bar-track">
+          <div class="rewards-bar-fill" style="width: 52%;"></div>
+        </div>
+        <span class="rewards-bar-value">5,200 / 10,000</span>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Near Complete (90%)</p>
+      <div class="rewards-bar" style="border: 2px solid var(--accent-gold);">
+        <span class="rewards-bar-label">Rewards</span>
+        <div class="rewards-bar-track">
+          <div class="rewards-bar-fill" style="width: 90%;"></div>
+        </div>
+        <span class="rewards-bar-value" style="color: var(--accent-gold);">9,000 / 10,000</span>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Complete (100%)</p>
+      <div class="rewards-bar" style="background: linear-gradient(90deg, #FEF7E0, #FFF8E1);">
+        <span class="rewards-bar-label">Rewards</span>
+        <div class="rewards-bar-track" style="background: var(--accent-gold);">
+          <div class="rewards-bar-fill" style="width: 100%; background: linear-gradient(90deg, #D4A853, #E8C878);"></div>
+        </div>
+        <span class="rewards-bar-value" style="color: var(--accent-gold);">🎉 10,000</span>
+      </div>
+    </div>
+
+    <div class="wireframe-col">
+      <h3>Health Insights States</h3>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">With Insight</p>
+      <div class="card insights-card" style="margin-bottom: 16px;">
+        <div class="insights-badge">✨ AI Insight</div>
+        <div class="insights-headline" style="font-size: 16px;">Your sleep improved 12%</div>
+        <div class="insights-body" style="font-size: 13px;">Try deep breathing tonight.</div>
+        <a href="#" class="insights-action" style="font-size: 13px;">Start routine</a>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">Loading</p>
+      <div class="card" style="background: #F5F5F5; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--accent-green); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <span style="color: var(--text-muted); font-size: 14px;">Generating your insight...</span>
+        </div>
+      </div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">No Data Available</p>
+      <div class="card" style="background: #FAFAFA; text-align: center; padding: 24px;">
+        <div style="font-size: 32px; margin-bottom: 8px;">📊</div>
+        <div style="font-size: 14px; color: var(--text-secondary);">Connect a device to get personalized insights</div>
+        <a href="#" style="display: inline-block; margin-top: 12px; color: var(--accent-blue); font-size: 13px;">Connect device</a>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+</body>
+</html>
