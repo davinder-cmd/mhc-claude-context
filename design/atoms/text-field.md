@@ -1,28 +1,32 @@
 # Text Field
 
-**Confluence:** No page yet
-**Status:** 🚧 Not created
+**Figma Page:** `A_Text Field` — https://www.figma.com/file/QGp66GqX7B1LDkjD82bvwC/Design-Building-Blocks
+**Notion:** https://www.notion.so/Text-Field-33e69fed903181cd8db5d343033dc88e
+**Status:** ✅ Ready
 
 ---
 
-## Purpose
+## Quick Reference
 
-A single-line text input for short, focused data entry — names, email addresses, search queries, codes, and similar compact inputs.
-
----
-
-## When to Use
-
-- Short, single-line input (name, email, phone, search, numeric entry)
-- When the expected response is one line or less
-
-## When NOT to Use
-
-- Multi-line responses — use Text Area
-- Selection from a list of options — use Dropdown, Radio Button, or Chip Group
+- **Variants:** Standard, Password (with toggle), Search (with icon + clear)
+- **Default:** Standard
+- **Height:** 44dp minimum (touch target)
+- **Label required** — never use placeholder as label
 
 ---
 
-## Note
+## Escalate If
 
-No Confluence page exists for Text Field yet. Reference Text Area documentation for shared patterns (labels, helper text, error states, placeholder guidance). Escalate to Davinder if a spec requires Text Field and no page exists.
+- New input type requested outside standard/password/search
+- Custom validation pattern needed
+- Inline editing behavior required
+
+---
+
+## Decision Log
+
+| Date | Decision | Rationale |
+|------|----------|-----------|
+| 2026-04-10 | Label always required | Accessibility: placeholders disappear on focus |
+| 2026-04-10 | 44dp minimum height | Touch target compliance |
+| 2026-04-10 | Validation on blur by default | Reduces cognitive load during typing |

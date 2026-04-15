@@ -1,8 +1,8 @@
 # Checkbox
 
-**Confluence:** https://mobilehealthc.atlassian.net/wiki/spaces/DF/pages/108069061
-**Figma:** https://www.figma.com/file/QGp66GqX7B1LDkjD82bvwC/Design-System-Master?node-id=53356%3A38166
-**Status:** ✅ Documented
+**Figma Page:** `A_Checkbox` — https://www.figma.com/file/QGp66GqX7B1LDkjD82bvwC/Design-Building-Blocks
+**Notion:** https://www.notion.so/Checkbox-33e69fed90318147886ed9ac3c0a058c
+**Status:** ✅ Ready
 
 ---
 
