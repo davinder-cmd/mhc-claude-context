@@ -112,3 +112,15 @@ This ensures reviews are grounded in principles, not just opinion.
 - Present a brief plan before executing anything significant
 - If the task is ambiguous, ask one clarifying question — not five
 - Do not reference `archive/` unless explicitly asked for historical context
+
+## Templates
+
+Use these templates as starting points for common deliverables. Located in `outputs/templates/`:
+
+| Template | Use For |
+|----------|---------|
+| `PRD-template.md` | Feature specs, product requirements |
+| `stakeholder-memo-template.md` | Recommendations, decisions, asks to stakeholders |
+| `design-spec-template.md` | Engineering handoff, component specs |
+
+Start from the template, fill in the content, save the final version to `outputs/` with a descriptive filename.
