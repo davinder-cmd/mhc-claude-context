@@ -32,6 +32,7 @@ Load additional context based on the task at hand:
 | `reference/` | Experts, principles, UX laws | Evaluating or reviewing work |
 | `competitive/` | Battlecards, profiles, analysis | Positioning, strategy, differentiation |
 | `outputs/` | All deliverables saved here | Writing deliverables |
+| `templates/` | Starting-point templates (PRDs, specs, memos, prompts) | Before drafting a new deliverable |
 | `archive/` | Cold storage (old explorations) | Rarely — historical reference only |
 
 ## Projects folder
@@ -115,7 +116,7 @@ This ensures reviews are grounded in principles, not just opinion.
 
 ## Templates
 
-Use these templates as starting points for common deliverables. Located in `outputs/templates/`:
+Use these templates as starting points for common deliverables. Located in `templates/`:
 
 | Template | Use For |
 |----------|---------|
