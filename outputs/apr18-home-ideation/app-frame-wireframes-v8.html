@@ -72,8 +72,38 @@
     }
     .device-frame.active { display: block; }
     .device-frame[data-breakpoint="desktop"] { width: 1280px; }
+    .device-frame[data-breakpoint="wide"] { width: 100%; border-radius: 0; }
     .device-frame[data-breakpoint="tablet"] { width: 768px; }
     .device-frame[data-breakpoint="mobile"] { width: 390px; }
+
+    /* ==================== WIDE FRAME (full-browser, 1200 content) ==================== */
+    .frame-container.wide-active { padding: 0; }
+    .device-frame[data-breakpoint="wide"] .top-nav { padding: 0; }
+    .device-frame[data-breakpoint="wide"] .rewards-bar { padding: 0; }
+    .device-frame[data-breakpoint="wide"] .card-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .wide-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+    }
+    .device-frame[data-breakpoint="wide"] .top-nav .wide-inner {
+      height: 56px;
+      justify-content: space-between;
+    }
+    .device-frame[data-breakpoint="wide"] .rewards-bar .wide-inner {
+      gap: 16px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
 
     /* ==================== APP SHELL ==================== */
     .app-shell {
@@ -396,7 +426,7 @@
 
     /* ==================== MOBILE OVERRIDES ==================== */
     .device-frame[data-breakpoint="mobile"] .nav-tabs { display: none; }
-    .device-frame[data-breakpoint="mobile"] .hamburger { display: flex; }
+    .device-frame[data-breakpoint="mobile"] .hamburger { display: none; }
     .device-frame[data-breakpoint="mobile"] .top-nav {
       padding: 0 16px;
       height: 50px;
@@ -445,7 +475,8 @@
     <p>Cool Blue/Indigo palette | Card grid layout with colored header accents</p>
     <div class="subtitle">Indigo primary, Violet secondary, Cyan tertiary | April 2026</div>
     <div class="breakpoint-tabs">
-      <div class="breakpoint-tab active" data-target="desktop">Desktop — 1200px+</div>
+      <div class="breakpoint-tab active" data-target="desktop">Desktop — 1280px</div>
+      <div class="breakpoint-tab" data-target="wide">Wide — Full browser (1200 content)</div>
       <div class="breakpoint-tab" data-target="tablet">Tablet — 768px</div>
       <div class="breakpoint-tab" data-target="mobile">Mobile — 390px</div>
     </div>
@@ -568,6 +599,126 @@
         </div><!-- /card-grid -->
       </div><!-- /app-shell -->
     </div><!-- /desktop frame -->
+
+    <!-- ============================================================ -->
+    <!-- WIDE FRAME — Full browser width, 1200px content              -->
+    <!-- ============================================================ -->
+    <div class="device-frame" data-breakpoint="wide" id="frame-wide">
+      <div class="app-shell">
+
+        <!-- Top Nav (full width, inner content capped at 1200) -->
+        <div class="top-nav">
+          <div class="wide-inner">
+            <div class="top-nav-left">
+              <div class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mobile Health</span>
+              </div>
+            </div>
+            <div class="nav-tabs">
+              <div class="nav-tab active">Home</div>
+              <div class="nav-tab">Digital Care</div>
+              <div class="nav-tab">Wellbeing</div>
+              <div class="nav-tab">Benefits</div>
+              <div class="nav-tab">Rewards</div>
+              <div class="nav-tab overflow">...</div>
+            </div>
+            <div class="top-nav-right">
+              <div class="user-avatar">DR</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rewards Progress Bar -->
+        <div class="rewards-bar">
+          <div class="wide-inner">
+            <span class="rewards-label">Rewards Progress</span>
+            <div class="rewards-track">
+              <div class="rewards-fill"></div>
+            </div>
+            <span class="rewards-pts">5,200 / 10,000 pts</span>
+            <span class="rewards-link">View details &rarr;</span>
+          </div>
+        </div>
+
+        <!-- Card Grid (capped at 1200) -->
+        <div class="card-grid">
+
+          <!-- Row 1: Stats (40%) + AI Health Insights (60%) -->
+          <div class="card-row row-1">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Stats</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Steps &middot; Sleep &middot; Active Minutes</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar primary">AI Health Insights</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Personalized insight + action</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: My Actions (40%) + Content (30%) + Content (30%) -->
+          <div class="card-row row-2">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">My Actions</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Point-earning tasks</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Active Program (40%) + Active Challenge (60%) -->
+          <div class="card-row row-3">
+            <div class="card left-accent">
+              <div class="card-body">
+                <div class="card-title">Active Program</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">DCP Progress — Week 3 of 8</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar secondary">Active Challenge</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Challenge progress + leaderboard teaser</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4: Healthy Habits (left-aligned / partial width) -->
+          <div class="card-row row-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Healthy Habits</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Daily habit checklist</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /card-grid -->
+      </div><!-- /app-shell -->
+    </div><!-- /wide frame -->
 
     <!-- ============================================================ -->
     <!-- TABLET FRAME — 768px                                         -->
@@ -836,6 +987,7 @@
     (function() {
       const tabs = document.querySelectorAll('.breakpoint-tab');
       const frames = document.querySelectorAll('.device-frame');
+      const frameContainer = document.querySelector('.frame-container');
 
       tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -852,6 +1004,9 @@
               f.classList.add('active');
             }
           });
+
+          // Remove container padding for wide (full-browser) view
+          frameContainer.classList.toggle('wide-active', target === 'wide');
         });
       });
     })();
