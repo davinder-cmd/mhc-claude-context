@@ -123,5 +123,6 @@ Use these templates as starting points for common deliverables. Located in `temp
 | `PRD-template.md` | Feature specs, product requirements |
 | `stakeholder-memo-template.md` | Recommendations, decisions, asks to stakeholders |
 | `design-spec-template.md` | Engineering handoff, component specs |
+| `design-expert-council.md` | Multi-perspective design review via a 20-expert panel prompt |
 
 Start from the template, fill in the content, save the final version to `outputs/` with a descriptive filename.
