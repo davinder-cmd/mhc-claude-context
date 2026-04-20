@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC Home Screen Wireframe — v11 Points-Based Rewards</title>
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #2E7D32;
+    --primary-light: #4CAF50;
+    --primary-dark: #1B5E20;
+    --accent-gold: #D4A853;
+    --accent-gold-light: #E8C97A;
+    --accent-gold-dark: #B8903E;
+    --bg: #F9F7F4;
+    --card-bg: #FFFFFF;
+    --card-border: #E5E2DD;
+    --outer-bg: #F0F0F0;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-muted: #9A9A9A;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #1a1a2e;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+
+  /* ── Device Switcher ── */
+  .switcher {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .switcher-label {
+    color: #a5d6a7;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .switcher button {
+    padding: 10px 22px;
+    border: 2px solid var(--primary);
+    background: transparent;
+    color: #c8e6c9;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .switcher button:hover { background: rgba(46,125,50,0.2); }
+  .switcher button.active {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* ── Version Badge ── */
+  .version-badge {
+    color: #a5d6a7;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── Device Frames ── */
+  .device-frame {
+    display: none;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .device-frame.active { display: flex; }
+  .device-frame.desktop {
+    width: 1600px;
+    background: var(--outer-bg);
+    min-height: 900px;
+  }
+  .device-frame.mobile {
+    width: 390px;
+    background: var(--bg);
+    min-height: 750px;
+  }
+
+  /* ── Centered Container ── */
+  .centered-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* ══════════════════════════════════════════
+     DESKTOP STYLES
+     ══════════════════════════════════════════ */
+
+  /* ── Top Nav Bar (full width) ── */
+  .desktop .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-bottom: 1px solid var(--card-border);
+    height: 56px;
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .desktop .top-nav-inner {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .logo-text {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 16px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    text-decoration: none;
+    position: relative;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-tab:hover {
+    color: var(--text-primary);
+  }
+  .nav-tab.active {
+    color: var(--primary);
+    font-weight: 600;
+    border-bottom-color: var(--primary);
+  }
+  .nav-avatar {
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* ── Hero Carousel (full viewport width) ── */
+  .desktop .hero-carousel {
+    width: 100%;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 40%, #fff 100%);
+    position: relative;
+    padding: 0;
+  }
+  .desktop .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    min-height: 280px;
+  }
+  .hero-content {
+    flex: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .hero-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .hero-cta:hover { background: var(--primary-dark); }
+  .hero-illustration {
+    width: 320px;
+    height: 200px;
+    background: rgba(46,125,50,0.08);
+    border-radius: 16px;
+    border: 2px dashed rgba(46,125,50,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .hero-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding-bottom: 20px;
+  }
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(46,125,50,0.2);
+  }
+  .hero-dot.active {
+    background: var(--primary);
+    width: 24px;
+    border-radius: 4px;
+  }
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .hero-arrow.left { left: 20px; }
+  .hero-arrow.right { right: 20px; }
+
+  /* ── Main Content Area ── */
+  .desktop .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  /* ── Rewards Module ── */
+  .rewards-module {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .rewards-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .rewards-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .rewards-header a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent-gold-dark);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .rewards-header a:hover { text-decoration: underline; }
+
+  .rewards-dashboard {
+    display: flex;
+    padding: 24px;
+    gap: 32px;
+  }
+  .rewards-left {
+    flex: 0 0 60%;
+  }
+  .rewards-right {
+    flex: 0 0 calc(40% - 32px);
+  }
+
+  /* Points Balance */
+  .points-balance {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .points-coin {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(212,168,83,0.3);
+    flex-shrink: 0;
+  }
+  .points-number {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--accent-gold-dark);
+    line-height: 1;
+  }
+  .points-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Tier Progress */
+  .tier-progress {
+    margin-bottom: 20px;
+  }
+  .tier-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #B0BEC5 0%, #CFD8DC 100%);
+    color: #37474F;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+  .tier-badge-icon {
+    font-size: 14px;
+  }
+  .tier-next {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .tier-next strong {
+    color: var(--accent-gold-dark);
+    font-weight: 700;
+  }
+  .tier-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: #ECEBE8;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .tier-progress-fill {
+    height: 100%;
+    width: 69%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+  }
+  .tier-progress-text {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .tier-benefits {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: #FFF8E7;
+    border-radius: 8px;
+    border: 1px solid #F5E6C8;
+  }
+  .tier-benefits-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-gold-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .tier-benefits-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  /* Monthly Earning Summary */
+  .earning-summary {
+    background: #F9F9F7;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid var(--card-border);
+  }
+  .earning-summary-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  .earning-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .earning-stat:last-of-type {
+    border-bottom: none;
+  }
+  .earning-stat-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .earning-stat-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-gold-dark);
+  }
+  .earning-stat-value.total {
+    font-size: 20px;
+    color: var(--primary);
+  }
+  .earning-comparison {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--card-border);
+  }
+  .earning-comparison-text {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .earning-up {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  /* Earning Opportunities */
+  .earning-opportunities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 0 24px 24px;
+  }
+  .opportunity-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .opportunity-card:hover {
+    box-shadow: var(--shadow-md);
+  }
+  .opportunity-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(46,125,50,0.08);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 20px;
+  }
+  .opportunity-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+  .opportunity-points {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent-gold-dark);
+    margin-bottom: 14px;
+  }
+  .opportunity-cta {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .opportunity-cta.filled {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+  }
+  .opportunity-cta.filled:hover { background: var(--primary-dark); }
+  .opportunity-cta.outlined {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+  }
+  .opportunity-cta.outlined:hover { background: rgba(46,125,50,0.06); }
+
+  /* ── Card Grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--card-border);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card-body {
+    padding: 20px;
+  }
+  .card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  /* Stats Card */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .stat-item {
+    text-align: center;
+    padding: 12px;
+    background: #F9F9F7;
+    border-radius: 8px;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .stat-unit {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* AI Insights Card */
+  .ai-header-bar {
+    background: var(--primary);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: none;
+  }
+  .ai-header-bar .ai-icon {
+    width: 28px;
+    height: 28px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #fff;
+  }
+  .ai-header-bar .ai-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .ai-insight-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .ai-insight-text strong {
+    color: var(--text-primary);
+  }
+
+  /* Actions Card */
+  .action-row {
+    display: flex;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--card-border);
+    gap: 12px;
+  }
+  .action-row:last-child { border-bottom: none; }
+  .action-checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--card-border);
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .action-checkbox.checked {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    font-size: 12px;
+  }
+  .action-name {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-primary);
+  }
+  .action-name.completed {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+  .action-points {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-gold-dark);
+    white-space: nowrap;
+  }
+
+  /* Active Program Card */
+  .program-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .program-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .program-week {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .program-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #ECEBE8;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .program-progress-fill {
+    height: 100%;
+    width: 37.5%;
+    background: var(--primary);
+    border-radius: 4px;
+  }
+  .program-progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Healthy Habits */
+  .habits-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  .habit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+  .habit-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #F9F9F7;
+    border: 3px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    position: relative;
+  }
+  .habit-circle.done {
+    border-color: var(--primary);
+    background: rgba(46,125,50,0.06);
+  }
+  .habit-circle.done::after {
+    content: '';
+    position: absolute;
+    top: -3px; left: -3px; right: -3px; bottom: -3px;
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .habit-circle.partial {
+    border-color: var(--accent-gold);
+    background: rgba(212,168,83,0.06);
+  }
+  .habit-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* ══════════════════════════════════════════
+     MOBILE STYLES
+     ══════════════════════════════════════════ */
+
+  /* Mobile Top Nav */
+  .mobile .mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 0 16px;
+    height: 52px;
+    border-bottom: 1px solid var(--card-border);
+    flex-shrink: 0;
+  }
+  .mobile-hamburger {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .mobile-hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 1px;
+  }
+  .mobile .nav-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  /* Mobile Hero */
+  .mobile .hero-carousel {
+    width: 100%;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 40%, #fff 100%);
+    padding: 24px 16px;
+    position: relative;
+  }
+  .mobile .hero-illustration {
+    display: none;
+  }
+  .mobile .hero-title {
+    font-size: 22px;
+  }
+  .mobile .hero-subtitle {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .mobile .hero-cta {
+    font-size: 14px;
+    padding: 10px 24px;
+  }
+  .mobile .hero-dots {
+    margin-top: 16px;
+  }
+
+  /* Mobile Main Content */
+  .mobile .main-content {
+    padding: 16px;
+  }
+
+  /* Mobile Rewards Module */
+  .mobile .rewards-module {
+    margin-bottom: 16px;
+  }
+  .mobile .rewards-header {
+    padding: 16px;
+  }
+  .mobile .rewards-header h2 {
+    font-size: 18px;
+  }
+  .mobile .rewards-dashboard {
+    flex-direction: column;
+    padding: 16px;
+    gap: 20px;
+  }
+  .mobile .rewards-left, .mobile .rewards-right {
+    flex: none;
+    width: 100%;
+  }
+  .mobile .points-balance {
+    margin-bottom: 20px;
+  }
+  .mobile .points-number {
+    font-size: 36px;
+  }
+  .mobile .points-coin {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+  .mobile .tier-benefits {
+    margin-top: 12px;
+  }
+
+  /* Mobile Earning Summary — compact 2x2 */
+  .mobile .earning-summary {
+    padding: 16px;
+  }
+  .mobile .earning-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .mobile .earning-stat-compact {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--card-border);
+  }
+  .mobile .earning-stat-compact .compact-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--accent-gold-dark);
+    margin-bottom: 2px;
+  }
+  .mobile .earning-stat-compact .compact-label {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .mobile .earning-stat-compact.total-stat {
+    grid-column: 1 / -1;
+    background: rgba(46,125,50,0.04);
+  }
+  .mobile .earning-stat-compact.total-stat .compact-value {
+    color: var(--primary);
+    font-size: 22px;
+  }
+
+  /* Mobile Earning Opportunities — horizontal scroll */
+  .mobile .earning-opportunities {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding: 0 16px 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .mobile .earning-opportunities::-webkit-scrollbar { display: none; }
+  .mobile .opportunity-card {
+    min-width: 180px;
+    flex-shrink: 0;
+  }
+
+  /* Mobile Card Grid */
+  .mobile .card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* Mobile Stats */
+  .mobile .stats-grid {
+    gap: 10px;
+  }
+  .mobile .stat-value {
+    font-size: 20px;
+  }
+
+  /* Mobile Habits */
+  .mobile .habits-row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px;
+    gap: 16px;
+    justify-content: flex-start;
+  }
+  .mobile .habits-row::-webkit-scrollbar { display: none; }
+  .mobile .habit-item {
+    flex: 0 0 auto;
+  }
+
+  /* Mobile Bottom Nav */
+  .mobile-bottom-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #fff;
+    border-top: 1px solid var(--card-border);
+    height: 56px;
+    padding: 0 8px;
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    padding: 4px 12px;
+  }
+  .bottom-nav-icon {
+    font-size: 20px;
+    color: var(--text-muted);
+  }
+  .bottom-nav-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .bottom-nav-item.active .bottom-nav-icon,
+  .bottom-nav-item.active .bottom-nav-label {
+    color: var(--primary);
+  }
+</style>
+</head>
+<body>
+
+<!-- Switcher -->
+<div class="switcher">
+  <span class="switcher-label">MHC Home Screen v11 -- Points-Based Rewards</span>
+  <button class="active" onclick="switchView('desktop')">Desktop</button>
+  <button onclick="switchView('mobile')">Mobile</button>
+</div>
+<div class="version-badge">v11 -- Points-based rewards economy: earn, tier up, redeem</div>
+
+<!-- ════════════════════════════════════════════════
+     DESKTOP VIEW
+     ════════════════════════════════════════════════ -->
+<div class="device-frame desktop active" id="desktop-view">
+
+  <!-- Top Nav Bar — full 1600px width -->
+  <div class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-left">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mobile Health</span>
+      </div>
+      <div class="nav-tabs">
+        <span class="nav-tab active">Home</span>
+        <span class="nav-tab">Digital Care</span>
+        <span class="nav-tab">Wellbeing</span>
+        <span class="nav-tab">Benefits</span>
+        <span class="nav-tab">Rewards</span>
+        <span class="nav-tab">...</span>
+      </div>
+      <div class="nav-avatar">DR</div>
+    </div>
+  </div>
+
+  <!-- Hero Carousel — full 1600px width -->
+  <div class="hero-carousel">
+    <div class="hero-arrow left">&lsaquo;</div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">NEW PROGRAM</div>
+        <h1 class="hero-title">Spring Into Wellness Challenge</h1>
+        <p class="hero-subtitle">Join 5,000+ members. Earn rewards for healthy habits.</p>
+        <span class="hero-cta">Join Now &rarr;</span>
+      </div>
+      <div class="hero-illustration">Illustration Placeholder</div>
+    </div>
+    <div class="hero-arrow right">&rsaquo;</div>
+    <div class="hero-dots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </div>
+
+  <!-- Main Content — 1200px centered -->
+  <div class="main-content">
+
+    <!-- Rewards Module -->
+    <div class="rewards-module">
+      <div class="rewards-header">
+        <h2>Rewards</h2>
+        <a href="#">Redeem Points &rarr;</a>
+      </div>
+
+      <!-- Points Dashboard: 2-column -->
+      <div class="rewards-dashboard">
+        <div class="rewards-left">
+          <!-- Points Balance -->
+          <div class="points-balance">
+            <div class="points-coin">&#9733;</div>
+            <div>
+              <div class="points-number">5,200 pts</div>
+              <div class="points-label">Available balance</div>
+            </div>
+          </div>
+
+          <!-- Tier Progress -->
+          <div class="tier-progress">
+            <div class="tier-badge-row">
+              <div class="tier-badge"><span class="tier-badge-icon">&#9670;</span> Silver Member</div>
+              <span class="tier-next">Next: <strong>Gold at 7,500 pts</strong></span>
+            </div>
+            <div class="tier-progress-bar">
+              <div class="tier-progress-fill"></div>
+            </div>
+            <div class="tier-progress-text">2,300 pts to Gold tier</div>
+          </div>
+
+          <!-- Tier Benefits Preview -->
+          <div class="tier-benefits">
+            <div class="tier-benefits-label">Gold Unlocks</div>
+            <div class="tier-benefits-text">2x earning rate &middot; Priority coaching &middot; Exclusive challenges</div>
+          </div>
+        </div>
+
+        <div class="rewards-right">
+          <!-- Monthly Earning Summary -->
+          <div class="earning-summary">
+            <div class="earning-summary-title">Monthly Earning Summary</div>
+            <div class="earning-stat">
+              <span class="earning-stat-label">This Month</span>
+              <span class="earning-stat-value total">+1,240 pts</span>
+            </div>
+            <div class="earning-stat">
+              <span class="earning-stat-label">Activities</span>
+              <span class="earning-stat-value">+620 pts</span>
+            </div>
+            <div class="earning-stat">
+              <span class="earning-stat-label">Programs</span>
+              <span class="earning-stat-value">+350 pts</span>
+            </div>
+            <div class="earning-stat">
+              <span class="earning-stat-label">Challenges</span>
+              <span class="earning-stat-value">+270 pts</span>
+            </div>
+            <div class="earning-comparison">
+              <span class="earning-comparison-text">Last Month: +980 pts</span>
+              <span class="earning-up">&#9650; +27%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earning Opportunities -->
+      <div class="earning-opportunities">
+        <div class="opportunity-card">
+          <div class="opportunity-icon">&#128203;</div>
+          <div class="opportunity-title">Complete HRA</div>
+          <div class="opportunity-points">200 pts</div>
+          <span class="opportunity-cta filled">Start Now</span>
+        </div>
+        <div class="opportunity-card">
+          <div class="opportunity-icon">&#128197;</div>
+          <div class="opportunity-title">Log 7 consecutive days</div>
+          <div class="opportunity-points">150 pts</div>
+          <span class="opportunity-cta outlined">View Details</span>
+        </div>
+        <div class="opportunity-card">
+          <div class="opportunity-icon">&#128101;</div>
+          <div class="opportunity-title">Join team challenge</div>
+          <div class="opportunity-points">100 pts</div>
+          <span class="opportunity-cta outlined">Explore</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1: Stats + AI Insights -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">Today's Stats</div>
+        <div class="card-body">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">4,230</div>
+              <div class="stat-unit">steps</div>
+              <div class="stat-label">Steps</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">7.2</div>
+              <div class="stat-unit">hr</div>
+              <div class="stat-label">Sleep</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">28</div>
+              <div class="stat-unit">min</div>
+              <div class="stat-label">Active</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ai-header-bar">
+          <div class="ai-icon">&#10024;</div>
+          <span class="ai-title">AI Health Insights</span>
+        </div>
+        <div class="card-body">
+          <p class="ai-insight-text">
+            <strong>Your sleep consistency improved 15% this week.</strong> Maintaining a regular bedtime is linked to better energy levels throughout the day. Consider keeping your current 10:30 PM routine going.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Actions + Active Program -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">
+          <span>My Actions</span>
+          <span style="font-size: 13px; font-weight: 500; color: var(--text-muted);">3 remaining</span>
+        </div>
+        <div class="card-body">
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-name">Complete Health Risk Assessment</span>
+            <span class="action-points">200 pts</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-name">Schedule annual biometric screening</span>
+            <span class="action-points">150 pts</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox checked">&#10003;</div>
+            <span class="action-name completed">Log daily water intake</span>
+            <span class="action-points" style="color: var(--text-muted); text-decoration: line-through;">50 pts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Active Program</div>
+        <div class="card-body">
+          <div class="program-meta">
+            <span class="program-name">Stress Management</span>
+            <span class="program-week">Week 3 of 8</span>
+          </div>
+          <div class="program-progress-bar">
+            <div class="program-progress-fill"></div>
+          </div>
+          <div class="program-progress-label">37% complete</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: Healthy Habits (full width) -->
+    <div class="card-grid">
+      <div class="card full-width">
+        <div class="card-header">Healthy Habits</div>
+        <div class="habits-row">
+          <div class="habit-item">
+            <div class="habit-circle done">&#128694;</div>
+            <span class="habit-label">Walk</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle done">&#128167;</div>
+            <span class="habit-label">Water</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle partial">&#129506;</div>
+            <span class="habit-label">Meditate</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle">&#127822;</div>
+            <span class="habit-label">Fruit</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle">&#128164;</div>
+            <span class="habit-label">Sleep</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle">&#128218;</div>
+            <span class="habit-label">Journal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /desktop-view -->
+
+
+<!-- ════════════════════════════════════════════════
+     MOBILE VIEW
+     ════════════════════════════════════════════════ -->
+<div class="device-frame mobile" id="mobile-view">
+
+  <!-- Mobile Top Nav -->
+  <div class="mobile-nav">
+    <div class="nav-left">
+      <div class="logo-icon" style="width:30px;height:30px;font-size:14px;">M</div>
+      <span class="logo-text" style="font-size:14px;">Mobile Health</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="mobile-hamburger">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-avatar">DR</div>
+    </div>
+  </div>
+
+  <!-- Mobile Hero -->
+  <div class="hero-carousel">
+    <div class="hero-content" style="padding:0;">
+      <div class="hero-badge">NEW PROGRAM</div>
+      <h1 class="hero-title">Spring Into Wellness Challenge</h1>
+      <p class="hero-subtitle">Join 5,000+ members. Earn rewards for healthy habits.</p>
+      <span class="hero-cta">Join Now &rarr;</span>
+    </div>
+    <div class="hero-dots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </div>
+
+  <!-- Mobile Main Content -->
+  <div class="main-content">
+
+    <!-- Rewards Module -->
+    <div class="rewards-module">
+      <div class="rewards-header">
+        <h2>Rewards</h2>
+        <a href="#" style="font-size:13px;">Redeem &rarr;</a>
+      </div>
+
+      <div class="rewards-dashboard">
+        <div class="rewards-left">
+          <!-- Points Balance -->
+          <div class="points-balance">
+            <div class="points-coin">&#9733;</div>
+            <div>
+              <div class="points-number">5,200 pts</div>
+              <div class="points-label">Available balance</div>
+            </div>
+          </div>
+
+          <!-- Tier Progress -->
+          <div class="tier-progress">
+            <div class="tier-badge-row">
+              <div class="tier-badge"><span class="tier-badge-icon">&#9670;</span> Silver</div>
+              <span class="tier-next" style="font-size:12px;">Next: <strong>Gold</strong></span>
+            </div>
+            <div class="tier-progress-bar">
+              <div class="tier-progress-fill"></div>
+            </div>
+            <div class="tier-progress-text">2,300 pts to Gold tier</div>
+          </div>
+
+          <!-- Tier Benefits -->
+          <div class="tier-benefits">
+            <div class="tier-benefits-label">Gold Unlocks</div>
+            <div class="tier-benefits-text">2x earning &middot; Priority coaching &middot; Exclusive challenges</div>
+          </div>
+        </div>
+
+        <div class="rewards-right">
+          <!-- Mobile Earning Summary — compact 2x2 grid -->
+          <div class="earning-summary">
+            <div class="earning-summary-title">This Month's Earnings</div>
+            <div class="earning-stats-grid">
+              <div class="earning-stat-compact total-stat">
+                <div class="compact-value">+1,240 pts</div>
+                <div class="compact-label">Total Earned</div>
+              </div>
+              <div class="earning-stat-compact">
+                <div class="compact-value">+620</div>
+                <div class="compact-label">Activities</div>
+              </div>
+              <div class="earning-stat-compact">
+                <div class="compact-value">+350</div>
+                <div class="compact-label">Programs</div>
+              </div>
+              <div class="earning-stat-compact">
+                <div class="compact-value">+270</div>
+                <div class="compact-label">Challenges</div>
+              </div>
+            </div>
+            <div class="earning-comparison" style="margin-top:10px;padding-top:10px;">
+              <span class="earning-comparison-text">Last Month: +980 pts</span>
+              <span class="earning-up">&#9650; +27%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earning Opportunities — horizontal scroll -->
+      <div class="earning-opportunities">
+        <div class="opportunity-card">
+          <div class="opportunity-icon">&#128203;</div>
+          <div class="opportunity-title">Complete HRA</div>
+          <div class="opportunity-points">200 pts</div>
+          <span class="opportunity-cta filled">Start Now</span>
+        </div>
+        <div class="opportunity-card">
+          <div class="opportunity-icon">&#128197;</div>
+          <div class="opportunity-title">Log 7 days</div>
+          <div class="opportunity-points">150 pts</div>
+          <span class="opportunity-cta outlined">Details</span>
+        </div>
+        <div class="opportunity-card">
+          <div class="opportunity-icon">&#128101;</div>
+          <div class="opportunity-title">Join challenge</div>
+          <div class="opportunity-points">100 pts</div>
+          <span class="opportunity-cta outlined">Explore</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Card -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">Today's Stats</div>
+        <div class="card-body">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">4,230</div>
+              <div class="stat-unit">steps</div>
+              <div class="stat-label">Steps</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">7.2</div>
+              <div class="stat-unit">hr</div>
+              <div class="stat-label">Sleep</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">28</div>
+              <div class="stat-unit">min</div>
+              <div class="stat-label">Active</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Insights -->
+      <div class="card">
+        <div class="ai-header-bar">
+          <div class="ai-icon">&#10024;</div>
+          <span class="ai-title">AI Health Insights</span>
+        </div>
+        <div class="card-body">
+          <p class="ai-insight-text">
+            <strong>Your sleep consistency improved 15% this week.</strong> Keep up your 10:30 PM routine for better energy levels.
+          </p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="card">
+        <div class="card-header">
+          <span>My Actions</span>
+          <span style="font-size:12px;font-weight:500;color:var(--text-muted);">3 remaining</span>
+        </div>
+        <div class="card-body">
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-name">Complete HRA</span>
+            <span class="action-points">200 pts</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-name">Schedule biometric screening</span>
+            <span class="action-points">150 pts</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox checked">&#10003;</div>
+            <span class="action-name completed">Log daily water intake</span>
+            <span class="action-points" style="color:var(--text-muted);text-decoration:line-through;">50 pts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Program -->
+      <div class="card">
+        <div class="card-header">Active Program</div>
+        <div class="card-body">
+          <div class="program-meta">
+            <span class="program-name" style="font-size:15px;">Stress Management</span>
+            <span class="program-week">Wk 3/8</span>
+          </div>
+          <div class="program-progress-bar">
+            <div class="program-progress-fill"></div>
+          </div>
+          <div class="program-progress-label">37% complete</div>
+        </div>
+      </div>
+
+      <!-- Healthy Habits -->
+      <div class="card">
+        <div class="card-header">Healthy Habits</div>
+        <div class="habits-row">
+          <div class="habit-item">
+            <div class="habit-circle done">&#128694;</div>
+            <span class="habit-label">Walk</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle done">&#128167;</div>
+            <span class="habit-label">Water</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle partial">&#129506;</div>
+            <span class="habit-label">Meditate</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle">&#127822;</div>
+            <span class="habit-label">Fruit</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle">&#128164;</div>
+            <span class="habit-label">Sleep</span>
+          </div>
+          <div class="habit-item">
+            <div class="habit-circle">&#128218;</div>
+            <span class="habit-label">Journal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+
+  <!-- Bottom Nav -->
+  <div class="mobile-bottom-nav">
+    <div class="bottom-nav-item active">
+      <span class="bottom-nav-icon">&#127968;</span>
+      <span class="bottom-nav-label">Home</span>
+    </div>
+    <div class="bottom-nav-item">
+      <span class="bottom-nav-icon">&#128147;</span>
+      <span class="bottom-nav-label">Care</span>
+    </div>
+    <div class="bottom-nav-item">
+      <span class="bottom-nav-icon">&#127942;</span>
+      <span class="bottom-nav-label">Rewards</span>
+    </div>
+    <div class="bottom-nav-item">
+      <span class="bottom-nav-icon">&#128202;</span>
+      <span class="bottom-nav-label">Data</span>
+    </div>
+    <div class="bottom-nav-item">
+      <span class="bottom-nav-icon">&#9881;</span>
+      <span class="bottom-nav-label">More</span>
+    </div>
+  </div>
+</div><!-- /mobile-view -->
+
+
+<script>
+  function switchView(view) {
+    // Update buttons
+    document.querySelectorAll('.switcher button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    // Update frames
+    document.querySelectorAll('.device-frame').forEach(frame => {
+      frame.classList.remove('active');
+    });
+    document.getElementById(view + '-view').classList.add('active');
+  }
+</script>
+
+</body>
+</html>

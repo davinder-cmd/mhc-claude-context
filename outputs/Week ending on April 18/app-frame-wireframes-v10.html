@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC Home Screen Wireframe — v10 Direct Rewards</title>
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #2E7D32;
+    --primary-light: #4CAF50;
+    --primary-dark: #1B5E20;
+    --accent-gold: #D4A853;
+    --accent-gold-light: #E8C97A;
+    --bg: #F9F7F4;
+    --card-bg: #FFFFFF;
+    --card-border: #E5E2DD;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6560;
+    --text-muted: #9E9A95;
+    --placeholder-bg: #F0EDE8;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+    --success: #2E7D32;
+    --gray-locked: #B0ADA8;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #2C2C2C;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+
+  /* ── Device Switcher ── */
+  .switcher {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .switcher-label {
+    color: #A5D6A7;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .switcher button {
+    padding: 10px 22px;
+    border: 2px solid var(--primary);
+    background: transparent;
+    color: #C8E6C9;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .switcher button:hover { background: rgba(46,125,50,0.2); }
+  .switcher button.active {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* ── Version Badge ── */
+  .version-badge {
+    color: #A5D6A7;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+  }
+  .version-badge strong { color: #E8C97A; }
+
+  /* ── Device Frame ── */
+  .device-frame {
+    background: #F0F0F0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: width 0.4s ease, min-height 0.3s ease;
+    position: relative;
+    display: none;
+    flex-direction: column;
+  }
+  .device-frame.active { display: flex; }
+  .device-frame.desktop { width: 1600px; min-height: 1200px; }
+  .device-frame.mobile  { width: 390px;  min-height: 800px; }
+
+  /* ── Top Nav Bar — Desktop (full 1600px width) ── */
+  .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-bottom: 1px solid var(--card-border);
+    height: 56px;
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .top-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1200px;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .logo-text {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-tab:hover {
+    color: var(--text-primary);
+    background: rgba(46,125,50,0.06);
+  }
+  .nav-tab.active {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 14px;
+    right: 14px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 1px;
+  }
+  .nav-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* ── Hero Carousel — full 1600px width ── */
+  .hero-carousel {
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 40%, #FFFFFF 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .hero-inner {
+    width: 1200px;
+    max-width: 100%;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .hero-content {
+    flex: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .hero-subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    text-decoration: none;
+  }
+  .hero-cta:hover { background: var(--primary-dark); }
+  .hero-illustration {
+    width: 320px;
+    height: 200px;
+    background: rgba(46,125,50,0.08);
+    border-radius: 16px;
+    border: 2px dashed rgba(46,125,50,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .hero-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(46,125,50,0.2);
+  }
+  .hero-dot.active {
+    background: var(--primary);
+    width: 20px;
+    border-radius: 4px;
+  }
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--card-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .hero-arrow.left { left: 16px; }
+  .hero-arrow.right { right: 16px; }
+
+  /* ── Content Container — 1200px centered ── */
+  .content-container {
+    width: 1200px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 24px 40px 40px;
+  }
+
+  /* ── Card Styles ── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  /* ── Rewards Module ── */
+  .rewards-module {
+    margin-bottom: 24px;
+  }
+  .rewards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .rewards-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .rewards-header a {
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .rewards-header a:hover { text-decoration: underline; }
+
+  .rewards-summary {
+    background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);
+    border: 1px solid #C8E6C9;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .rewards-summary-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-dark);
+  }
+  .rewards-summary-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .reward-card {
+    padding: 20px;
+  }
+  .reward-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .reward-card-icon.gift { background: #FFF3E0; color: #E65100; }
+  .reward-card-icon.cash { background: #E8F5E9; color: #2E7D32; }
+  .reward-card-icon.hsa  { background: #E3F2FD; color: #1565C0; }
+
+  .reward-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .reward-card-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .reward-progress-bar {
+    height: 6px;
+    background: #EDEBE8;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .reward-progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+  .reward-progress-fill.green { background: var(--primary); }
+  .reward-progress-fill.gray  { background: var(--gray-locked); }
+
+  .reward-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.2px;
+  }
+  .reward-badge.active {
+    background: #E8F5E9;
+    color: var(--primary);
+  }
+  .reward-badge.locked {
+    background: #F0EDEA;
+    color: var(--gray-locked);
+  }
+
+  .recently-earned {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+  }
+  .recently-earned-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .earned-items {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .earned-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .earned-check {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .earned-amount {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* ── Two-Column Grid ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* ── Stats Card ── */
+  .stats-card { padding: 20px; }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+  }
+  .stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #F0EDE8;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .stat-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .stat-bar {
+    width: 60px;
+    height: 4px;
+    background: #EDEBE8;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-left: 12px;
+  }
+  .stat-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  /* ── AI Insights Card ── */
+  .insights-card { overflow: hidden; }
+  .insights-header {
+    background: var(--primary);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .insights-header-icon {
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #fff;
+  }
+  .insights-header-text {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .insights-body {
+    padding: 16px 20px;
+  }
+  .insights-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── Actions Card ── */
+  .actions-card { padding: 20px; }
+  .action-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #F0EDE8;
+    gap: 10px;
+  }
+  .action-row:last-child { border-bottom: none; }
+  .action-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--card-border);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .action-name {
+    font-size: 13px;
+    color: var(--text-primary);
+    flex: 1;
+  }
+  .action-reward {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    background: #E8F5E9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── Program Card ── */
+  .program-card { padding: 20px; }
+  .program-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .program-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .program-week {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+  .program-bar {
+    height: 6px;
+    background: #EDEBE8;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .program-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 3px;
+    width: 37.5%;
+  }
+  .program-continue {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .program-continue:hover { text-decoration: underline; }
+
+  /* ── Healthy Habits ── */
+  .habits-row {
+    margin-bottom: 16px;
+  }
+  .habits-card {
+    padding: 20px;
+  }
+  .habits-circles {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .habit-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .habit-ring {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 3px solid #EDEBE8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    position: relative;
+  }
+  .habit-ring.done {
+    border-color: var(--primary);
+    background: #E8F5E9;
+  }
+  .habit-ring.done::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 16px;
+    height: 16px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+  .habit-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  /* ── Mobile Overrides ── */
+  .mobile .top-nav {
+    padding: 0 16px;
+    height: 52px;
+    justify-content: space-between;
+  }
+  .mobile .top-nav-inner {
+    width: 100%;
+    padding: 0;
+  }
+  .mobile .nav-tabs { display: none; }
+  .mobile .hamburger {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .mobile .hamburger span {
+    width: 18px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 1px;
+  }
+  .desktop .hamburger { display: none; }
+
+  .mobile .hero-carousel {
+    height: auto;
+    padding: 20px 0;
+  }
+  .mobile .hero-inner {
+    flex-direction: column-reverse;
+    padding: 0 16px;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .mobile .hero-illustration {
+    width: 100%;
+    height: 120px;
+  }
+  .mobile .hero-title { font-size: 22px; }
+  .mobile .hero-subtitle { font-size: 14px; }
+  .mobile .hero-arrow { display: none; }
+  .mobile .hero-dots { position: relative; bottom: auto; transform: none; margin-top: 12px; justify-content: center; width: 100%; left: 0; }
+
+  .mobile .content-container {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .mobile .rewards-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .mobile .rewards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile .earned-items {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile .habits-circles {
+    gap: 10px;
+  }
+  .mobile .habit-ring {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  /* ── Mobile Bottom Nav ── */
+  .bottom-nav {
+    display: none;
+    background: #fff;
+    border-top: 1px solid var(--card-border);
+    padding: 8px 0 4px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    flex-shrink: 0;
+  }
+  .mobile .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  .bottom-nav-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: #EDEBE8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .bottom-nav-item.active .bottom-nav-icon {
+    background: #E8F5E9;
+    color: var(--primary);
+  }
+  .bottom-nav-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .bottom-nav-item.active .bottom-nav-label {
+    color: var(--primary);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── View Switcher ── -->
+<div class="switcher">
+  <div class="switcher-label">Device Preview</div>
+  <button class="active" onclick="switchView('desktop')">Desktop 1600</button>
+  <button onclick="switchView('mobile')">Mobile 390</button>
+</div>
+<div class="version-badge">v10 — <strong>Direct Rewards</strong> (Cash Back, Gift Cards, HSA Contributions)</div>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- DESKTOP VIEW                                            -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="device-frame desktop active" id="desktop-view">
+
+  <!-- Top Nav Bar -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-left">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mobile Health</span>
+      </div>
+      <div class="nav-tabs">
+        <span class="nav-tab active">Home</span>
+        <span class="nav-tab">Digital Care</span>
+        <span class="nav-tab">Wellbeing</span>
+        <span class="nav-tab">Benefits</span>
+        <span class="nav-tab">Rewards</span>
+        <span class="nav-tab" style="color:var(--text-muted);">...</span>
+      </div>
+      <div class="nav-avatar">DR</div>
+    </div>
+  </nav>
+
+  <!-- Hero Carousel — full 1600px width -->
+  <div class="hero-carousel">
+    <div class="hero-arrow left">&lsaquo;</div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">NEW PROGRAM</div>
+        <div class="hero-title">Spring Into Wellness Challenge</div>
+        <div class="hero-subtitle">Join 5,000+ members. Earn rewards for healthy habits.</div>
+        <button class="hero-cta">Join Now &rarr;</button>
+      </div>
+      <div class="hero-illustration">Illustration placeholder</div>
+    </div>
+    <div class="hero-arrow right">&rsaquo;</div>
+    <div class="hero-dots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </div>
+
+  <!-- Content Container — 1200px centered -->
+  <div class="content-container">
+
+    <!-- Rewards Module -->
+    <div class="rewards-module">
+      <div class="rewards-header">
+        <h2>Your Rewards</h2>
+        <a href="#">View All Rewards &rarr;</a>
+      </div>
+
+      <!-- Summary Banner -->
+      <div class="rewards-summary">
+        <div>
+          <div class="rewards-summary-amount">$52.00 earned this month</div>
+          <div class="rewards-summary-label">Complete more activities to unlock additional rewards</div>
+        </div>
+      </div>
+
+      <!-- Reward Cards Grid -->
+      <div class="rewards-grid">
+
+        <!-- Card 1: Gift Card -->
+        <div class="card reward-card">
+          <div class="reward-card-icon gift">A</div>
+          <div class="reward-card-title">$25 Amazon Gift Card</div>
+          <div class="reward-card-desc">Complete HRA to unlock</div>
+          <div class="reward-progress-bar">
+            <div class="reward-progress-fill green" style="width: 60%;"></div>
+          </div>
+          <div class="reward-badge active">Almost there</div>
+        </div>
+
+        <!-- Card 2: Cash Back -->
+        <div class="card reward-card">
+          <div class="reward-card-icon cash">$</div>
+          <div class="reward-card-title">$10 Cash Back</div>
+          <div class="reward-card-desc">Log 30 days of activity</div>
+          <div class="reward-progress-bar">
+            <div class="reward-progress-fill green" style="width: 80%;"></div>
+          </div>
+          <div class="reward-badge active">4 days left</div>
+        </div>
+
+        <!-- Card 3: HSA Contribution -->
+        <div class="card reward-card">
+          <div class="reward-card-icon hsa">+</div>
+          <div class="reward-card-title">$50 HSA Deposit</div>
+          <div class="reward-card-desc">Complete biometric screening</div>
+          <div class="reward-progress-bar">
+            <div class="reward-progress-fill gray" style="width: 0%;"></div>
+          </div>
+          <div class="reward-badge locked">Not started</div>
+        </div>
+
+      </div>
+
+      <!-- Recently Earned -->
+      <div class="recently-earned">
+        <div class="recently-earned-title">Recently Earned</div>
+        <div class="earned-items">
+          <div class="earned-item">
+            <span class="earned-check">&#10003;</span>
+            <span class="earned-amount">$15 Starbucks Card</span>
+            <span>— Apr 10</span>
+          </div>
+          <div class="earned-item">
+            <span class="earned-check">&#10003;</span>
+            <span class="earned-amount">$10 Cash Back</span>
+            <span>— Mar 28</span>
+          </div>
+          <div class="earned-item">
+            <span class="earned-check">&#10003;</span>
+            <span class="earned-amount">$25 HSA Deposit</span>
+            <span>— Mar 15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 1: Stats + AI Insights -->
+    <div class="two-col">
+
+      <!-- Stats Card -->
+      <div class="card stats-card">
+        <div class="card-title">Today's Stats</div>
+        <div class="stat-row">
+          <span class="stat-label">Steps</span>
+          <div style="display:flex;align-items:center;">
+            <span class="stat-value">4,230</span>
+            <div class="stat-bar"><div class="stat-bar-fill" style="width:42%;"></div></div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Sleep</span>
+          <div style="display:flex;align-items:center;">
+            <span class="stat-value">7.2 hr</span>
+            <div class="stat-bar"><div class="stat-bar-fill" style="width:90%;"></div></div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Active</span>
+          <div style="display:flex;align-items:center;">
+            <span class="stat-value">28 min</span>
+            <div class="stat-bar"><div class="stat-bar-fill" style="width:47%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Health Insights Card -->
+      <div class="card insights-card">
+        <div class="insights-header">
+          <div class="insights-header-icon">AI</div>
+          <span class="insights-header-text">AI Health Insights</span>
+        </div>
+        <div class="insights-body">
+          <div class="insights-text">Your stress levels have been lower this week. Keep up your walking routine &mdash; it's making a measurable difference in your sleep quality and overall wellbeing.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Row 2: Actions + Active Program -->
+    <div class="two-col">
+
+      <!-- My Actions Card -->
+      <div class="card actions-card">
+        <div class="card-title">My Actions</div>
+        <div class="action-row">
+          <div class="action-checkbox"></div>
+          <span class="action-name">Complete daily step goal</span>
+          <span class="action-reward">$5</span>
+        </div>
+        <div class="action-row">
+          <div class="action-checkbox"></div>
+          <span class="action-name">Log a healthy meal</span>
+          <span class="action-reward">$10</span>
+        </div>
+        <div class="action-row">
+          <div class="action-checkbox"></div>
+          <span class="action-name">Complete mindfulness session</span>
+          <span class="action-reward">$25</span>
+        </div>
+      </div>
+
+      <!-- Active Program Card -->
+      <div class="card program-card">
+        <div class="program-meta">Active Program</div>
+        <div class="program-name">Stress Management</div>
+        <div class="program-week">Week 3 of 8</div>
+        <div class="program-bar">
+          <div class="program-bar-fill"></div>
+        </div>
+        <a class="program-continue" href="#">Continue &rarr;</a>
+      </div>
+
+    </div>
+
+    <!-- Row 3: Healthy Habits — full width -->
+    <div class="habits-row">
+      <div class="card habits-card">
+        <div class="card-title">Healthy Habits</div>
+        <div class="habits-circles">
+          <div class="habit-circle">
+            <div class="habit-ring done">&#128694;</div>
+            <span class="habit-label">Walk</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring done">&#128167;</div>
+            <span class="habit-label">Hydrate</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring done">&#129744;</div>
+            <span class="habit-label">Meditate</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring">&#127822;</div>
+            <span class="habit-label">Nutrition</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring">&#128564;</div>
+            <span class="habit-label">Sleep</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring">&#128218;</div>
+            <span class="habit-label">Learn</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content-container -->
+</div><!-- /desktop -->
+
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- MOBILE VIEW                                             -->
+<!-- ════════════════════════════════════════════════════════ -->
+<div class="device-frame mobile" id="mobile-view">
+
+  <!-- Top Nav Bar — Mobile -->
+  <nav class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-left">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mobile Health</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="nav-avatar">DR</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Carousel — Mobile -->
+  <div class="hero-carousel">
+    <div class="hero-inner">
+      <div class="hero-illustration">Illustration placeholder</div>
+      <div class="hero-content">
+        <div class="hero-badge">NEW PROGRAM</div>
+        <div class="hero-title">Spring Into Wellness Challenge</div>
+        <div class="hero-subtitle">Join 5,000+ members. Earn rewards for healthy habits.</div>
+        <button class="hero-cta">Join Now &rarr;</button>
+      </div>
+    </div>
+    <div class="hero-dots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </div>
+
+  <!-- Content Container — Mobile -->
+  <div class="content-container">
+
+    <!-- Rewards Module -->
+    <div class="rewards-module">
+      <div class="rewards-header">
+        <h2>Your Rewards</h2>
+        <a href="#">View All &rarr;</a>
+      </div>
+
+      <!-- Summary Banner -->
+      <div class="rewards-summary">
+        <div>
+          <div class="rewards-summary-amount">$52.00 earned this month</div>
+          <div class="rewards-summary-label">Complete more activities to unlock additional rewards</div>
+        </div>
+      </div>
+
+      <!-- Reward Cards — stacked -->
+      <div class="rewards-grid">
+        <div class="card reward-card">
+          <div class="reward-card-icon gift">A</div>
+          <div class="reward-card-title">$25 Amazon Gift Card</div>
+          <div class="reward-card-desc">Complete HRA to unlock</div>
+          <div class="reward-progress-bar">
+            <div class="reward-progress-fill green" style="width: 60%;"></div>
+          </div>
+          <div class="reward-badge active">Almost there</div>
+        </div>
+        <div class="card reward-card">
+          <div class="reward-card-icon cash">$</div>
+          <div class="reward-card-title">$10 Cash Back</div>
+          <div class="reward-card-desc">Log 30 days of activity</div>
+          <div class="reward-progress-bar">
+            <div class="reward-progress-fill green" style="width: 80%;"></div>
+          </div>
+          <div class="reward-badge active">4 days left</div>
+        </div>
+        <div class="card reward-card">
+          <div class="reward-card-icon hsa">+</div>
+          <div class="reward-card-title">$50 HSA Deposit</div>
+          <div class="reward-card-desc">Complete biometric screening</div>
+          <div class="reward-progress-bar">
+            <div class="reward-progress-fill gray" style="width: 0%;"></div>
+          </div>
+          <div class="reward-badge locked">Not started</div>
+        </div>
+      </div>
+
+      <!-- Recently Earned — compact list -->
+      <div class="recently-earned">
+        <div class="recently-earned-title">Recently Earned</div>
+        <div class="earned-items">
+          <div class="earned-item">
+            <span class="earned-check">&#10003;</span>
+            <span class="earned-amount">$15 Starbucks Card</span>
+            <span>— Apr 10</span>
+          </div>
+          <div class="earned-item">
+            <span class="earned-check">&#10003;</span>
+            <span class="earned-amount">$10 Cash Back</span>
+            <span>— Mar 28</span>
+          </div>
+          <div class="earned-item">
+            <span class="earned-check">&#10003;</span>
+            <span class="earned-amount">$25 HSA Deposit</span>
+            <span>— Mar 15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Card -->
+    <div class="two-col">
+      <div class="card stats-card">
+        <div class="card-title">Today's Stats</div>
+        <div class="stat-row">
+          <span class="stat-label">Steps</span>
+          <div style="display:flex;align-items:center;">
+            <span class="stat-value">4,230</span>
+            <div class="stat-bar"><div class="stat-bar-fill" style="width:42%;"></div></div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Sleep</span>
+          <div style="display:flex;align-items:center;">
+            <span class="stat-value">7.2 hr</span>
+            <div class="stat-bar"><div class="stat-bar-fill" style="width:90%;"></div></div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Active</span>
+          <div style="display:flex;align-items:center;">
+            <span class="stat-value">28 min</span>
+            <div class="stat-bar"><div class="stat-bar-fill" style="width:47%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Health Insights Card -->
+      <div class="card insights-card">
+        <div class="insights-header">
+          <div class="insights-header-icon">AI</div>
+          <span class="insights-header-text">AI Health Insights</span>
+        </div>
+        <div class="insights-body">
+          <div class="insights-text">Your stress levels have been lower this week. Keep up your walking routine &mdash; it's making a measurable difference.</div>
+        </div>
+      </div>
+
+      <!-- My Actions Card -->
+      <div class="card actions-card">
+        <div class="card-title">My Actions</div>
+        <div class="action-row">
+          <div class="action-checkbox"></div>
+          <span class="action-name">Complete daily step goal</span>
+          <span class="action-reward">$5</span>
+        </div>
+        <div class="action-row">
+          <div class="action-checkbox"></div>
+          <span class="action-name">Log a healthy meal</span>
+          <span class="action-reward">$10</span>
+        </div>
+        <div class="action-row">
+          <div class="action-checkbox"></div>
+          <span class="action-name">Complete mindfulness session</span>
+          <span class="action-reward">$25</span>
+        </div>
+      </div>
+
+      <!-- Active Program Card -->
+      <div class="card program-card">
+        <div class="program-meta">Active Program</div>
+        <div class="program-name">Stress Management</div>
+        <div class="program-week">Week 3 of 8</div>
+        <div class="program-bar">
+          <div class="program-bar-fill"></div>
+        </div>
+        <a class="program-continue" href="#">Continue &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Healthy Habits -->
+    <div class="habits-row">
+      <div class="card habits-card">
+        <div class="card-title">Healthy Habits</div>
+        <div class="habits-circles">
+          <div class="habit-circle">
+            <div class="habit-ring done">&#128694;</div>
+            <span class="habit-label">Walk</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring done">&#128167;</div>
+            <span class="habit-label">Hydrate</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring done">&#129744;</div>
+            <span class="habit-label">Meditate</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring">&#127822;</div>
+            <span class="habit-label">Nutrition</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring">&#128564;</div>
+            <span class="habit-label">Sleep</span>
+          </div>
+          <div class="habit-circle">
+            <div class="habit-ring">&#128218;</div>
+            <span class="habit-label">Learn</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content-container -->
+
+  <!-- Bottom Nav — Mobile -->
+  <div class="bottom-nav">
+    <div class="bottom-nav-item active">
+      <div class="bottom-nav-icon">H</div>
+      <span class="bottom-nav-label">Home</span>
+    </div>
+    <div class="bottom-nav-item">
+      <div class="bottom-nav-icon">D</div>
+      <span class="bottom-nav-label">Digital Care</span>
+    </div>
+    <div class="bottom-nav-item">
+      <div class="bottom-nav-icon">W</div>
+      <span class="bottom-nav-label">Wellbeing</span>
+    </div>
+    <div class="bottom-nav-item">
+      <div class="bottom-nav-icon">B</div>
+      <span class="bottom-nav-label">Benefits</span>
+    </div>
+    <div class="bottom-nav-item">
+      <div class="bottom-nav-icon">R</div>
+      <span class="bottom-nav-label">Rewards</span>
+    </div>
+  </div>
+
+</div><!-- /mobile -->
+
+<script>
+function switchView(view) {
+  // Update buttons
+  document.querySelectorAll('.switcher button').forEach(function(btn) {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+
+  // Toggle frames
+  document.querySelectorAll('.device-frame').forEach(function(frame) {
+    frame.classList.remove('active');
+  });
+  document.getElementById(view + '-view').classList.add('active');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MHC Home Wireframes — v6 Personify Reference Pattern</title>
+  <style>
+    /* Reset & Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #e8e8e8;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* Version Header */
+    .version-header {
+      background: #1a1a2e;
+      color: white;
+      padding: 24px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .version-header h1 { font-size: 20px; font-weight: 600; }
+    .version-header p { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+
+    /* Breakpoint Tabs */
+    .breakpoint-tabs {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .breakpoint-tab {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .breakpoint-tab:hover { background: rgba(255,255,255,0.2); }
+    .breakpoint-tab.active {
+      background: white;
+      color: #1a1a2e;
+      font-weight: 600;
+    }
+
+    /* Frame Container */
+    .frame-container {
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+      min-height: calc(100vh - 140px);
+    }
+
+    /* Device Frame */
+    .device-frame {
+      background: #f5f5f5;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      overflow: hidden;
+      transition: width 0.3s ease;
+    }
+    .device-frame[data-breakpoint="desktop"] { width: 1280px; }
+    .device-frame[data-breakpoint="tablet"] { width: 768px; }
+    .device-frame[data-breakpoint="mobile"] { width: 390px; }
+
+    /* Hide inactive frames */
+    .device-frame { display: none; }
+    .device-frame.active { display: block; }
+
+    /* ==================== APP SHELL ==================== */
+    .app-shell {
+      background: white;
+      min-height: 800px;
+    }
+    .device-frame[data-breakpoint="mobile"] .app-shell {
+      min-height: 700px;
+    }
+
+    /* ==================== TOP NAV BAR ==================== */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: white;
+      border-bottom: 1px solid #e5e5e5;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .device-frame[data-breakpoint="mobile"] .top-nav {
+      padding: 10px 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .device-frame[data-breakpoint="mobile"] .nav-left {
+      gap: 16px;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-inner {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 4px;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    }
+
+    /* Icon Nav Tabs */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+    }
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .nav-tab:hover { background: #f5f5f5; }
+    .nav-tab.active { background: #ecfdf5; }
+    .nav-tab-icon {
+      width: 24px;
+      height: 24px;
+      background: #9ca3af;
+      border-radius: 6px;
+    }
+    .nav-tab.active .nav-tab-icon { background: #10b981; }
+    .nav-tab-label {
+      font-size: 11px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    .nav-tab.active .nav-tab-label { color: #059669; font-weight: 600; }
+
+    .device-frame[data-breakpoint="tablet"] .nav-tab { padding: 8px 10px; }
+    .device-frame[data-breakpoint="tablet"] .nav-tab-label { font-size: 10px; }
+    .device-frame[data-breakpoint="mobile"] .nav-tabs { display: none; }
+
+    /* Nav Right */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .points-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 20px;
+    }
+    .points-icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      border-radius: 50%;
+    }
+    .points-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: #059669;
+    }
+    .device-frame[data-breakpoint="mobile"] .points-badge {
+      padding: 6px 10px;
+    }
+    .device-frame[data-breakpoint="mobile"] .points-value { font-size: 13px; }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #8b5cf6, #6366f1);
+      border-radius: 50%;
+      border: 2px solid #e5e7eb;
+    }
+    .device-frame[data-breakpoint="mobile"] .user-avatar {
+      width: 36px;
+      height: 36px;
+    }
+
+    /* ==================== MAIN CONTENT ==================== */
+    .main-content {
+      padding: 24px;
+      background: #fafafa;
+    }
+    .device-frame[data-breakpoint="mobile"] .main-content {
+      padding: 16px;
+    }
+
+    /* ==================== HERO CAROUSEL ==================== */
+    .hero-carousel {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .carousel-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e5e5e5;
+    }
+
+    .carousel-image {
+      height: 200px;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .carousel-illustration {
+      width: 180px;
+      height: 140px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .illustration-placeholder {
+      width: 80px;
+      height: 80px;
+      background: #10b981;
+      border-radius: 50%;
+      opacity: 0.4;
+    }
+    .device-frame[data-breakpoint="mobile"] .carousel-image {
+      height: 160px;
+    }
+
+    .carousel-content {
+      padding: 20px 24px;
+    }
+    .device-frame[data-breakpoint="mobile"] .carousel-content {
+      padding: 16px;
+    }
+
+    .carousel-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: #fef3c7;
+      color: #b45309;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .carousel-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .device-frame[data-breakpoint="mobile"] .carousel-title {
+      font-size: 18px;
+    }
+
+    .carousel-meta {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    .carousel-desc {
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .device-frame[data-breakpoint="mobile"] .carousel-desc {
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .carousel-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: #10b981;
+      color: white;
+    }
+    .btn-primary:hover { background: #059669; }
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #4b5563;
+    }
+    .btn-secondary:hover { background: #e5e7eb; }
+    .device-frame[data-breakpoint="mobile"] .btn {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    /* Carousel Dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d1d5db;
+    }
+    .carousel-dot.active { background: #10b981; width: 24px; border-radius: 4px; }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 12px;
+      pointer-events: none;
+    }
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: all;
+      font-size: 18px;
+      color: #6b7280;
+    }
+    .device-frame[data-breakpoint="mobile"] .carousel-nav { display: none; }
+
+    /* Carousel Counter */
+    .carousel-counter {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ==================== CONTENT GRID ==================== */
+    .content-grid {
+      display: grid;
+      gap: 20px;
+    }
+    .device-frame[data-breakpoint="desktop"] .content-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .device-frame[data-breakpoint="tablet"] .content-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .device-frame[data-breakpoint="mobile"] .content-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* ==================== MODULE CARD ==================== */
+    .module-card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e5e5e5;
+      overflow: hidden;
+    }
+
+    .module-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .module-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .module-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .module-icon.stats { background: #dbeafe; }
+    .module-icon.actions { background: #fef3c7; }
+    .module-icon.habits { background: #dcfce7; }
+    .module-icon.journeys { background: #fce7f3; }
+    .module-icon.programs { background: #e0e7ff; }
+    .module-icon.challenges { background: #fed7aa; }
+    .module-icon.coaching { background: #cffafe; }
+    .module-icon.discover { background: #f3e8ff; }
+
+    .module-icon-inner {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+    }
+    .module-icon.stats .module-icon-inner { background: #3b82f6; }
+    .module-icon.actions .module-icon-inner { background: #f59e0b; }
+    .module-icon.habits .module-icon-inner { background: #22c55e; }
+    .module-icon.journeys .module-icon-inner { background: #ec4899; }
+    .module-icon.programs .module-icon-inner { background: #6366f1; }
+    .module-icon.challenges .module-icon-inner { background: #f97316; }
+    .module-icon.coaching .module-icon-inner { background: #06b6d4; }
+    .module-icon.discover .module-icon-inner { background: #a855f7; }
+
+    .module-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .module-action {
+      font-size: 13px;
+      color: #10b981;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .module-action:hover { text-decoration: underline; }
+
+    .module-body {
+      padding: 16px 20px;
+    }
+
+    /* ==================== STATS MODULE ==================== */
+    .stats-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-ring {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 0deg, #10b981 calc(var(--progress) * 3.6deg), #e5e7eb calc(var(--progress) * 3.6deg));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .stat-ring-inner {
+      width: 38px;
+      height: 38px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stat-ring-icon {
+      width: 20px;
+      height: 20px;
+      background: #10b981;
+      border-radius: 4px;
+    }
+
+    .stat-info { flex: 1; }
+    .stat-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .stat-goal {
+      font-size: 11px;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .stat-goal-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .stat-goal-dot.success { background: #10b981; }
+    .stat-goal-dot.warning { background: #f59e0b; }
+
+    /* ==================== ACTIONS MODULE ==================== */
+    .action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .action-item:hover { background: #f3f4f6; }
+
+    .action-icon {
+      width: 40px;
+      height: 40px;
+      background: #fef3c7;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .action-icon-inner {
+      width: 20px;
+      height: 20px;
+      background: #f59e0b;
+      border-radius: 4px;
+    }
+
+    .action-content { flex: 1; }
+    .action-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1f2937;
+    }
+    .action-points {
+      font-size: 12px;
+      color: #10b981;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+    .action-points-icon {
+      width: 12px;
+      height: 12px;
+      background: #fbbf24;
+      border-radius: 50%;
+    }
+
+    .action-chevron {
+      color: #9ca3af;
+      font-size: 18px;
+    }
+
+    /* ==================== HABITS MODULE ==================== */
+    .habits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .device-frame[data-breakpoint="mobile"] .habits-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .habit-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 12px;
+      background: #f9fafb;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .habit-item:hover { background: #f0fdf4; }
+    .habit-item.completed { background: #dcfce7; }
+
+    .habit-icon {
+      width: 40px;
+      height: 40px;
+      background: #e5e7eb;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .habit-item.completed .habit-icon { background: #10b981; }
+    .habit-icon-inner {
+      width: 20px;
+      height: 20px;
+      background: #9ca3af;
+      border-radius: 4px;
+    }
+    .habit-item.completed .habit-icon-inner { background: white; }
+
+    .habit-label {
+      font-size: 12px;
+      color: #4b5563;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* ==================== JOURNEYS MODULE ==================== */
+    .journey-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .journey-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .journey-item:hover { background: #f3f4f6; }
+
+    .journey-thumb {
+      width: 80px;
+      height: 60px;
+      background: linear-gradient(135deg, #fecaca, #fca5a5);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .journey-thumb.blue { background: linear-gradient(135deg, #bfdbfe, #93c5fd); }
+    .journey-thumb.green { background: linear-gradient(135deg, #bbf7d0, #86efac); }
+
+    .journey-content { flex: 1; }
+    .journey-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1f2937;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .journey-meta {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .journey-cta {
+      padding: 6px 12px;
+      background: #10b981;
+      color: white;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    /* ==================== PROGRAMS MODULE ==================== */
+    .programs-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin: 0 -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .programs-scroll::-webkit-scrollbar { height: 4px; }
+    .programs-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 2px; }
+    .programs-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
+
+    .program-card {
+      flex: 0 0 160px;
+      background: #f9fafb;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .program-card:hover { transform: translateY(-2px); }
+
+    .program-thumb {
+      height: 100px;
+      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    }
+    .program-thumb.orange { background: linear-gradient(135deg, #fed7aa, #fdba74); }
+    .program-thumb.pink { background: linear-gradient(135deg, #fbcfe8, #f9a8d4); }
+
+    .program-info {
+      padding: 12px;
+    }
+    .program-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #1f2937;
+      margin-bottom: 4px;
+    }
+    .program-progress {
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    /* ==================== CHALLENGES MODULE ==================== */
+    .challenge-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .challenge-item {
+      padding: 16px;
+      background: #f9fafb;
+      border-radius: 12px;
+      border-left: 4px solid #f97316;
+    }
+
+    .challenge-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .challenge-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #fed7aa, #fdba74);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .challenge-icon-inner {
+      width: 24px;
+      height: 24px;
+      background: #f97316;
+      border-radius: 6px;
+    }
+
+    .challenge-info { flex: 1; }
+    .challenge-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 4px;
+    }
+    .challenge-dates {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .challenge-stats {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .challenge-stat {
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .challenge-stat strong {
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .challenge-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #f97316;
+      color: white;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    /* ==================== COACHING CTA MODULE ==================== */
+    .coaching-card {
+      background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%);
+      border: none;
+    }
+
+    .coaching-content {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
+    .device-frame[data-breakpoint="mobile"] .coaching-content {
+      flex-direction: column;
+    }
+
+    .coaching-image {
+      width: 140px;
+      height: 120px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .device-frame[data-breakpoint="mobile"] .coaching-image {
+      width: 100%;
+      height: 100px;
+    }
+
+    .coaching-info { flex: 1; }
+    .coaching-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #0e7490;
+      margin-bottom: 8px;
+    }
+    .coaching-desc {
+      font-size: 14px;
+      color: #155e75;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .coaching-btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #0891b2;
+      color: white;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* ==================== MOBILE BOTTOM NAV ==================== */
+    .mobile-bottom-nav {
+      display: none;
+      background: white;
+      border-top: 1px solid #e5e5e5;
+      padding: 8px 0 20px;
+      position: sticky;
+      bottom: 0;
+    }
+    .device-frame[data-breakpoint="mobile"] .mobile-bottom-nav {
+      display: flex;
+    }
+
+    .bottom-nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 4px;
+    }
+    .bottom-nav-icon {
+      width: 24px;
+      height: 24px;
+      background: #9ca3af;
+      border-radius: 6px;
+    }
+    .bottom-nav-label {
+      font-size: 10px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    .bottom-nav-item.active .bottom-nav-icon { background: #10b981; }
+    .bottom-nav-item.active .bottom-nav-label { color: #10b981; font-weight: 600; }
+
+    /* ==================== BREAKPOINT LABEL ==================== */
+    .breakpoint-label {
+      text-align: center;
+      padding: 10px 16px;
+      background: #1f2937;
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ==================== FULL WIDTH SPAN ==================== */
+    .full-width {
+      grid-column: 1 / -1;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="version-header">
+    <h1>v6 — Personify Health Reference Pattern</h1>
+    <p>Top icon nav + Points badge | Hero carousel | Split-view modular grid</p>
+    <div class="breakpoint-tabs">
+      <button class="breakpoint-tab active" data-target="desktop">Desktop 1280px</button>
+      <button class="breakpoint-tab" data-target="tablet">Tablet 768px</button>
+      <button class="breakpoint-tab" data-target="mobile">Mobile 390px</button>
+    </div>
+  </header>
+
+  <div class="frame-container">
+
+    <!-- ==================== DESKTOP ==================== -->
+    <div class="device-frame active" data-breakpoint="desktop">
+      <div class="breakpoint-label">Desktop — 1280px | Top icon nav with 7 tabs | 2-column grid</div>
+      <div class="app-shell">
+
+        <!-- Top Nav -->
+        <nav class="top-nav">
+          <div class="nav-left">
+            <div class="logo"><div class="logo-inner"></div></div>
+            <div class="nav-tabs">
+              <div class="nav-tab active">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Home</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Health</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Social</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Programs</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Challenges</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">More</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Support</span>
+              </div>
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="points-badge">
+              <div class="points-icon"></div>
+              <span class="points-value">1,250 Points</span>
+            </div>
+            <div class="user-avatar"></div>
+          </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+          <!-- Hero Carousel -->
+          <div class="hero-carousel">
+            <div class="carousel-counter">1 / 7</div>
+            <div class="carousel-card">
+              <div class="carousel-image">
+                <div class="carousel-illustration">
+                  <div class="illustration-placeholder"></div>
+                </div>
+              </div>
+              <div class="carousel-content">
+                <div class="carousel-badge">Webinar</div>
+                <h2 class="carousel-title">Money & Mental Health: Taking Control of Your Financial Wellbeing</h2>
+                <p class="carousel-meta">Wednesday, April 23, 2026 • 12:00 PM EST</p>
+                <p class="carousel-desc">Join us for an engaging session where we'll explore the connection between financial wellness and mental health. Learn practical strategies to reduce money stress.</p>
+                <div class="carousel-actions">
+                  <button class="btn btn-primary">Register Today</button>
+                  <button class="btn btn-secondary">Maybe Later</button>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-nav">
+              <div class="carousel-arrow">‹</div>
+              <div class="carousel-arrow">›</div>
+            </div>
+            <div class="carousel-dots">
+              <div class="carousel-dot active"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+            </div>
+          </div>
+
+          <!-- Content Grid -->
+          <div class="content-grid">
+
+            <!-- Stats Module -->
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon stats"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Stats</span>
+                </div>
+                <span class="module-action">View All</span>
+              </div>
+              <div class="module-body">
+                <div class="stats-list">
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 15;">
+                      <div class="stat-ring-inner"><div class="stat-ring-icon"></div></div>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value">862</div>
+                      <div class="stat-label">Steps</div>
+                      <div class="stat-goal"><span class="stat-goal-dot warning"></span> Daily goal: 5600 steps</div>
+                    </div>
+                  </div>
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 85;">
+                      <div class="stat-ring-inner"><div class="stat-ring-icon"></div></div>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value">6 hr</div>
+                      <div class="stat-label">Sleep</div>
+                      <div class="stat-goal"><span class="stat-goal-dot success"></span> Daily goal: 7 hours</div>
+                    </div>
+                  </div>
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 60;">
+                      <div class="stat-ring-inner"><div class="stat-ring-icon"></div></div>
+                    </div>
+                    <div class="stat-info">
+                      <div class="stat-value">18 min</div>
+                      <div class="stat-label">Active Minutes</div>
+                      <div class="stat-goal"><span class="stat-goal-dot warning"></span> Daily goal: 30 minutes</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- My Actions Module -->
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon actions"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">My Actions</span>
+                </div>
+                <span class="module-action">See All</span>
+              </div>
+              <div class="module-body">
+                <div class="action-list">
+                  <div class="action-item">
+                    <div class="action-icon"><div class="action-icon-inner"></div></div>
+                    <div class="action-content">
+                      <div class="action-title">Enter my measurements</div>
+                      <div class="action-points"><span class="action-points-icon"></span> 14 Points</div>
+                    </div>
+                    <span class="action-chevron">›</span>
+                  </div>
+                  <div class="action-item">
+                    <div class="action-icon"><div class="action-icon-inner"></div></div>
+                    <div class="action-content">
+                      <div class="action-title">Set my intentions</div>
+                      <div class="action-points"><span class="action-points-icon"></span> 145 Points</div>
+                    </div>
+                    <span class="action-chevron">›</span>
+                  </div>
+                  <div class="action-item">
+                    <div class="action-icon"><div class="action-icon-inner"></div></div>
+                    <div class="action-content">
+                      <div class="action-title">Complete health assessment</div>
+                      <div class="action-points"><span class="action-points-icon"></span> 200 Points</div>
+                    </div>
+                    <span class="action-chevron">›</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Healthy Habits Module -->
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon habits"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Healthy Habits</span>
+                </div>
+                <span class="module-action">Manage</span>
+              </div>
+              <div class="module-body">
+                <div class="habits-grid">
+                  <div class="habit-item completed">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Drink Water</span>
+                  </div>
+                  <div class="habit-item">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Meditate</span>
+                  </div>
+                  <div class="habit-item completed">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Walk</span>
+                  </div>
+                  <div class="habit-item">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Stretch</span>
+                  </div>
+                  <div class="habit-item">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Journal</span>
+                  </div>
+                  <div class="habit-item">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Sleep Early</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Journeys Module -->
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon journeys"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Journeys</span>
+                </div>
+                <span class="module-action">Browse</span>
+              </div>
+              <div class="module-body">
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Take the next step in your journey</p>
+                <div class="journey-list">
+                  <div class="journey-item">
+                    <div class="journey-thumb"></div>
+                    <div class="journey-content">
+                      <div class="journey-title">The Surprising Benefits of Sunlight</div>
+                      <div class="journey-meta">3 min read</div>
+                    </div>
+                    <div class="journey-cta">Read Now</div>
+                  </div>
+                  <div class="journey-item">
+                    <div class="journey-thumb blue"></div>
+                    <div class="journey-content">
+                      <div class="journey-title">Figuring Out the Cause of Your Fatigue</div>
+                      <div class="journey-meta">5 min read</div>
+                    </div>
+                    <div class="journey-cta">Read Now</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- My Programs Module (Full Width) -->
+            <div class="module-card full-width">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon programs"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">My Programs</span>
+                </div>
+                <span class="module-action">View All</span>
+              </div>
+              <div class="module-body">
+                <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">Recently viewed</p>
+                <div class="programs-scroll">
+                  <div class="program-card">
+                    <div class="program-thumb"></div>
+                    <div class="program-info">
+                      <div class="program-title">Active Lifestyle</div>
+                      <div class="program-progress">4 of 12 lessons</div>
+                    </div>
+                  </div>
+                  <div class="program-card">
+                    <div class="program-thumb orange"></div>
+                    <div class="program-info">
+                      <div class="program-title">Dealing with Distractions</div>
+                      <div class="program-progress">1 of 8 lessons</div>
+                    </div>
+                  </div>
+                  <div class="program-card">
+                    <div class="program-thumb pink"></div>
+                    <div class="program-info">
+                      <div class="program-title">Mindful Eating</div>
+                      <div class="program-progress">Not started</div>
+                    </div>
+                  </div>
+                  <div class="program-card">
+                    <div class="program-thumb"></div>
+                    <div class="program-info">
+                      <div class="program-title">Sleep Better</div>
+                      <div class="program-progress">6 of 10 lessons</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Challenges Module -->
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon challenges"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Challenges</span>
+                </div>
+                <span class="module-action">Browse</span>
+              </div>
+              <div class="module-body">
+                <div class="challenge-list">
+                  <div class="challenge-item">
+                    <div class="challenge-header">
+                      <div class="challenge-icon"><div class="challenge-icon-inner"></div></div>
+                      <div class="challenge-info">
+                        <div class="challenge-title">Pacific Coast Trail</div>
+                        <div class="challenge-dates">Apr 1 - Apr 30</div>
+                      </div>
+                    </div>
+                    <div class="challenge-stats">
+                      <span class="challenge-stat"><strong>12.5k</strong> steps today</span>
+                      <span class="challenge-stat"><strong>#23</strong> of 156</span>
+                    </div>
+                    <div class="challenge-btn">View Details</div>
+                  </div>
+                  <div class="challenge-item" style="border-left-color: #8b5cf6;">
+                    <div class="challenge-header">
+                      <div class="challenge-icon" style="background: linear-gradient(135deg, #e9d5ff, #c4b5fd);"><div class="challenge-icon-inner" style="background: #8b5cf6;"></div></div>
+                      <div class="challenge-info">
+                        <div class="challenge-title">Connect Through Empathy</div>
+                        <div class="challenge-dates">Starts Apr 21</div>
+                      </div>
+                    </div>
+                    <div class="challenge-btn" style="background: #8b5cf6;">Join</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coaching CTA Module -->
+            <div class="module-card coaching-card">
+              <div class="coaching-content">
+                <div class="coaching-image"></div>
+                <div class="coaching-info">
+                  <h3 class="coaching-title">Coaching</h3>
+                  <p class="coaching-desc">Partner with a coach for continuous support — wherever you are in your health journey. Find your focus, set your goals, and unlock the best in you.</p>
+                  <div class="coaching-btn">Connect With a Coach</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </main>
+
+      </div>
+    </div>
+
+    <!-- ==================== TABLET ==================== -->
+    <div class="device-frame" data-breakpoint="tablet">
+      <div class="breakpoint-label">Tablet — 768px | Compact top nav | 2-column grid</div>
+      <div class="app-shell">
+        <nav class="top-nav">
+          <div class="nav-left">
+            <div class="logo"><div class="logo-inner"></div></div>
+            <div class="nav-tabs">
+              <div class="nav-tab active">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Home</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Health</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Programs</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">Challenges</span>
+              </div>
+              <div class="nav-tab">
+                <div class="nav-tab-icon"></div>
+                <span class="nav-tab-label">More</span>
+              </div>
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="points-badge">
+              <div class="points-icon"></div>
+              <span class="points-value">1,250</span>
+            </div>
+            <div class="user-avatar"></div>
+          </div>
+        </nav>
+        <main class="main-content">
+          <div class="hero-carousel">
+            <div class="carousel-counter">1 / 7</div>
+            <div class="carousel-card">
+              <div class="carousel-image">
+                <div class="carousel-illustration">
+                  <div class="illustration-placeholder"></div>
+                </div>
+              </div>
+              <div class="carousel-content">
+                <div class="carousel-badge">Webinar</div>
+                <h2 class="carousel-title">Money & Mental Health: Financial Wellbeing</h2>
+                <p class="carousel-meta">Apr 23, 2026 • 12:00 PM EST</p>
+                <div class="carousel-actions">
+                  <button class="btn btn-primary">Register</button>
+                  <button class="btn btn-secondary">Later</button>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-dots">
+              <div class="carousel-dot active"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+            </div>
+          </div>
+          <div class="content-grid">
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon stats"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Stats</span>
+                </div>
+              </div>
+              <div class="module-body">
+                <div class="stats-list">
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 15;"><div class="stat-ring-inner"><div class="stat-ring-icon"></div></div></div>
+                    <div class="stat-info">
+                      <div class="stat-value">862</div>
+                      <div class="stat-label">Steps</div>
+                    </div>
+                  </div>
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 85;"><div class="stat-ring-inner"><div class="stat-ring-icon"></div></div></div>
+                    <div class="stat-info">
+                      <div class="stat-value">6 hr</div>
+                      <div class="stat-label">Sleep</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon actions"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">My Actions</span>
+                </div>
+                <span class="module-action">See All</span>
+              </div>
+              <div class="module-body">
+                <div class="action-list">
+                  <div class="action-item">
+                    <div class="action-icon"><div class="action-icon-inner"></div></div>
+                    <div class="action-content">
+                      <div class="action-title">Enter measurements</div>
+                      <div class="action-points"><span class="action-points-icon"></span> 14 pts</div>
+                    </div>
+                    <span class="action-chevron">›</span>
+                  </div>
+                  <div class="action-item">
+                    <div class="action-icon"><div class="action-icon-inner"></div></div>
+                    <div class="action-content">
+                      <div class="action-title">Set intentions</div>
+                      <div class="action-points"><span class="action-points-icon"></span> 145 pts</div>
+                    </div>
+                    <span class="action-chevron">›</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon habits"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Healthy Habits</span>
+                </div>
+              </div>
+              <div class="module-body">
+                <div class="habits-grid">
+                  <div class="habit-item completed">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Water</span>
+                  </div>
+                  <div class="habit-item">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Meditate</span>
+                  </div>
+                  <div class="habit-item completed">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Walk</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card coaching-card">
+              <div class="coaching-content" style="flex-direction: column;">
+                <div class="coaching-info">
+                  <h3 class="coaching-title">Coaching</h3>
+                  <p class="coaching-desc">Connect with a coach for support.</p>
+                  <div class="coaching-btn">Connect</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- ==================== MOBILE ==================== -->
+    <div class="device-frame" data-breakpoint="mobile">
+      <div class="breakpoint-label">Mobile — 390px | Bottom nav | Single column</div>
+      <div class="app-shell">
+        <nav class="top-nav">
+          <div class="nav-left">
+            <div class="logo"><div class="logo-inner"></div></div>
+          </div>
+          <div class="nav-right">
+            <div class="points-badge">
+              <div class="points-icon"></div>
+              <span class="points-value">1,250</span>
+            </div>
+            <div class="user-avatar"></div>
+          </div>
+        </nav>
+        <main class="main-content">
+          <div class="hero-carousel">
+            <div class="carousel-counter">1 / 7</div>
+            <div class="carousel-card">
+              <div class="carousel-image">
+                <div class="carousel-illustration">
+                  <div class="illustration-placeholder"></div>
+                </div>
+              </div>
+              <div class="carousel-content">
+                <div class="carousel-badge">Webinar</div>
+                <h2 class="carousel-title">Money & Mental Health</h2>
+                <p class="carousel-meta">Apr 23 • 12:00 PM</p>
+                <div class="carousel-actions">
+                  <button class="btn btn-primary">Register</button>
+                  <button class="btn btn-secondary">Later</button>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-dots">
+              <div class="carousel-dot active"></div>
+              <div class="carousel-dot"></div>
+              <div class="carousel-dot"></div>
+            </div>
+          </div>
+          <div class="content-grid">
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon stats"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Stats</span>
+                </div>
+              </div>
+              <div class="module-body">
+                <div class="stats-list">
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 15;"><div class="stat-ring-inner"><div class="stat-ring-icon"></div></div></div>
+                    <div class="stat-info">
+                      <div class="stat-value">862</div>
+                      <div class="stat-label">Steps</div>
+                      <div class="stat-goal"><span class="stat-goal-dot warning"></span> Goal: 5600</div>
+                    </div>
+                  </div>
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 85;"><div class="stat-ring-inner"><div class="stat-ring-icon"></div></div></div>
+                    <div class="stat-info">
+                      <div class="stat-value">6 hr</div>
+                      <div class="stat-label">Sleep</div>
+                      <div class="stat-goal"><span class="stat-goal-dot success"></span> Goal: 7 hr</div>
+                    </div>
+                  </div>
+                  <div class="stat-row">
+                    <div class="stat-ring" style="--progress: 60;"><div class="stat-ring-inner"><div class="stat-ring-icon"></div></div></div>
+                    <div class="stat-info">
+                      <div class="stat-value">18 min</div>
+                      <div class="stat-label">Active</div>
+                      <div class="stat-goal"><span class="stat-goal-dot warning"></span> Goal: 30 min</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon actions"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">My Actions</span>
+                </div>
+                <span class="module-action">All</span>
+              </div>
+              <div class="module-body">
+                <div class="action-list">
+                  <div class="action-item">
+                    <div class="action-icon"><div class="action-icon-inner"></div></div>
+                    <div class="action-content">
+                      <div class="action-title">Enter measurements</div>
+                      <div class="action-points"><span class="action-points-icon"></span> 14 pts</div>
+                    </div>
+                    <span class="action-chevron">›</span>
+                  </div>
+                  <div class="action-item">
+                    <div class="action-icon"><div class="action-icon-inner"></div></div>
+                    <div class="action-content">
+                      <div class="action-title">Set intentions</div>
+                      <div class="action-points"><span class="action-points-icon"></span> 145 pts</div>
+                    </div>
+                    <span class="action-chevron">›</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon habits"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Healthy Habits</span>
+                </div>
+              </div>
+              <div class="module-body">
+                <div class="habits-grid">
+                  <div class="habit-item completed">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Water</span>
+                  </div>
+                  <div class="habit-item">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Meditate</span>
+                  </div>
+                  <div class="habit-item completed">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Walk</span>
+                  </div>
+                  <div class="habit-item">
+                    <div class="habit-icon"><div class="habit-icon-inner"></div></div>
+                    <span class="habit-label">Stretch</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon journeys"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Journeys</span>
+                </div>
+              </div>
+              <div class="module-body">
+                <div class="journey-list">
+                  <div class="journey-item">
+                    <div class="journey-thumb"></div>
+                    <div class="journey-content">
+                      <div class="journey-title">Benefits of Sunlight</div>
+                      <div class="journey-meta">3 min</div>
+                    </div>
+                    <div class="journey-cta">Read</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon programs"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">My Programs</span>
+                </div>
+              </div>
+              <div class="module-body">
+                <div class="programs-scroll">
+                  <div class="program-card">
+                    <div class="program-thumb"></div>
+                    <div class="program-info">
+                      <div class="program-title">Active Lifestyle</div>
+                      <div class="program-progress">4 of 12</div>
+                    </div>
+                  </div>
+                  <div class="program-card">
+                    <div class="program-thumb orange"></div>
+                    <div class="program-info">
+                      <div class="program-title">Distractions</div>
+                      <div class="program-progress">1 of 8</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card">
+              <div class="module-header">
+                <div class="module-title-group">
+                  <div class="module-icon challenges"><div class="module-icon-inner"></div></div>
+                  <span class="module-title">Challenges</span>
+                </div>
+              </div>
+              <div class="module-body">
+                <div class="challenge-item">
+                  <div class="challenge-header">
+                    <div class="challenge-icon"><div class="challenge-icon-inner"></div></div>
+                    <div class="challenge-info">
+                      <div class="challenge-title">Pacific Coast Trail</div>
+                      <div class="challenge-dates">Apr 1 - 30</div>
+                    </div>
+                  </div>
+                  <div class="challenge-btn">View</div>
+                </div>
+              </div>
+            </div>
+            <div class="module-card coaching-card">
+              <div class="coaching-content">
+                <div class="coaching-info">
+                  <h3 class="coaching-title">Coaching</h3>
+                  <p class="coaching-desc">Connect with a coach for support.</p>
+                  <div class="coaching-btn">Connect</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <nav class="mobile-bottom-nav">
+          <div class="bottom-nav-item active">
+            <div class="bottom-nav-icon"></div>
+            <span class="bottom-nav-label">Home</span>
+          </div>
+          <div class="bottom-nav-item">
+            <div class="bottom-nav-icon"></div>
+            <span class="bottom-nav-label">Health</span>
+          </div>
+          <div class="bottom-nav-item">
+            <div class="bottom-nav-icon"></div>
+            <span class="bottom-nav-label">Programs</span>
+          </div>
+          <div class="bottom-nav-item">
+            <div class="bottom-nav-icon"></div>
+            <span class="bottom-nav-label">Challenges</span>
+          </div>
+          <div class="bottom-nav-item">
+            <div class="bottom-nav-icon"></div>
+            <span class="bottom-nav-label">More</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.breakpoint-tab');
+    const frames = document.querySelectorAll('.device-frame');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.target;
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        frames.forEach(frame => {
+          frame.classList.toggle('active', frame.dataset.breakpoint === target);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

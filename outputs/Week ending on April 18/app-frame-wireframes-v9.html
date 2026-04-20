@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC Home Screen Wireframe — v9 Deep Teal/Emerald</title>
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #0D9488;
+    --secondary: #065F46;
+    --reward-gold: #FBBF24;
+    --bg: #F0FDFA;
+    --card-bg: #FFFFFF;
+    --card-border: #CCFBF1;
+    --text-primary: #134E4A;
+    --text-secondary: #5F8F8A;
+    --placeholder-bg: #F0FDFA;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #1a1a2e;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+
+  /* ── Device Switcher ── */
+  .switcher {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .switcher-label {
+    color: #99f6e4;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .switcher button {
+    padding: 10px 22px;
+    border: 2px solid var(--primary);
+    background: transparent;
+    color: #F0FDFA;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .switcher button:hover { background: rgba(13,148,136,0.2); }
+  .switcher button.active {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* ── Device Frame ── */
+  .device-frame {
+    background: var(--bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: width 0.4s ease, min-height 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .device-frame.desktop { width: 1200px; min-height: 900px; }
+  .device-frame.tablet  { width: 768px;  min-height: 900px; }
+  .device-frame.mobile  { width: 390px;  min-height: 750px; }
+
+  /* ── Top Nav Bar ── */
+  .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-bottom: 1px solid var(--card-border);
+    padding: 0 20px;
+    height: 56px;
+    flex-shrink: 0;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .logo-text {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-tab:hover {
+    color: var(--text-primary);
+    background: rgba(13,148,136,0.06);
+  }
+  .nav-tab.active {
+    color: var(--primary);
+    background: rgba(13,148,136,0.1);
+    font-weight: 600;
+  }
+  .nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+  .nav-tab-overflow {
+    padding: 8px 10px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    letter-spacing: 2px;
+  }
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+  }
+
+  /* ── Rewards Progress Bar ── */
+  .rewards-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 24px;
+    background: #fff;
+    border-bottom: 1px solid var(--card-border);
+    flex-shrink: 0;
+  }
+  .rewards-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .rewards-track {
+    flex: 1;
+    height: 10px;
+    background: #E6FAF5;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .rewards-fill {
+    width: 52%;
+    height: 100%;
+    background: var(--reward-gold);
+    border-radius: 6px;
+    transition: width 0.4s ease;
+  }
+  .rewards-pts {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .rewards-link {
+    font-size: 12px;
+    color: var(--reward-gold);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .rewards-link:hover { text-decoration: underline; }
+
+  /* ── Card Grid ── */
+  .card-grid {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+  }
+  .row {
+    display: grid;
+    gap: 20px;
+  }
+  .row-1 { grid-template-columns: 40% 1fr; }
+  .row-2 { grid-template-columns: 40% 1fr 1fr; }
+  .row-3 { grid-template-columns: 40% 1fr; }
+  .row-4 { grid-template-columns: 1fr; }
+
+  /* ── Card Base ── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+  }
+  .card-body {
+    padding: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+  }
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 12px;
+  }
+  .placeholder {
+    background: var(--placeholder-bg);
+    border-radius: 8px;
+    width: 100%;
+    height: 80px;
+    border: 1px dashed var(--card-border);
+  }
+
+  /* ── Colored Header Card ── */
+  .card-header-bar {
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .card-header-bar.primary { background: var(--primary); }
+  .card-header-bar.secondary { background: var(--secondary); }
+
+  /* ── Active Program Card (left border) ── */
+  .card.active-program {
+    border-left: 4px solid var(--primary);
+  }
+
+  /* ── Bottom Nav (Mobile only) ── */
+  .bottom-nav {
+    display: none;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid var(--card-border);
+    padding: 6px 0 10px;
+    justify-content: space-around;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 10px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+  .bottom-nav-item.active {
+    color: var(--primary);
+  }
+  .bottom-nav-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .bottom-nav-item.active .bottom-nav-icon {
+    background: rgba(13,148,136,0.1);
+  }
+
+  /* ──────────────────────────────────────
+     RESPONSIVE: TABLET (768px frame)
+     ────────────────────────────────────── */
+  .device-frame.tablet .nav-tab.hide-tablet { display: none; }
+  .device-frame.tablet .row-1 { grid-template-columns: 1fr 1fr; }
+  .device-frame.tablet .row-2 { grid-template-columns: 1fr 1fr; }
+  .device-frame.tablet .row-2 .card:nth-child(3) { grid-column: 1 / -1; }
+  .device-frame.tablet .row-3 { grid-template-columns: 1fr 1fr; }
+  .device-frame.tablet .row-4 { grid-template-columns: 1fr; }
+
+  /* ──────────────────────────────────────
+     RESPONSIVE: MOBILE (390px frame)
+     ────────────────────────────────────── */
+  .device-frame.mobile .top-nav { padding: 0 14px; }
+  .device-frame.mobile .nav-tabs { display: none; }
+  .device-frame.mobile .nav-tab-overflow { display: none; }
+  .device-frame.mobile .hamburger { display: flex; }
+  .device-frame.mobile .logo-text { display: none; }
+
+  .device-frame.mobile .rewards-bar { padding: 10px 14px; gap: 10px; }
+  .device-frame.mobile .rewards-label { display: none; }
+  .device-frame.mobile .rewards-link { display: none; }
+  .device-frame.mobile .rewards-pts { font-size: 12px; }
+
+  .device-frame.mobile .card-grid { padding: 16px; gap: 14px; }
+  .device-frame.mobile .row-1,
+  .device-frame.mobile .row-2,
+  .device-frame.mobile .row-3,
+  .device-frame.mobile .row-4 {
+    grid-template-columns: 1fr;
+  }
+  .device-frame.mobile .row-2 .card:nth-child(3) { grid-column: auto; }
+
+  .device-frame.mobile .card-body { padding: 16px; }
+  .device-frame.mobile .placeholder { height: 64px; }
+
+  .device-frame.mobile .bottom-nav { display: flex; }
+</style>
+</head>
+<body>
+
+  <!-- Device Switcher -->
+  <div class="switcher">
+    <div class="switcher-label">Breakpoint Preview</div>
+    <button class="active" onclick="switchDevice('desktop')">Desktop 1200px</button>
+    <button onclick="switchDevice('tablet')">Tablet 768px</button>
+    <button onclick="switchDevice('mobile')">Mobile 390px</button>
+  </div>
+
+  <!-- Device Frame -->
+  <div class="device-frame desktop" id="device">
+
+    <!-- ── Top Nav Bar ── -->
+    <nav class="top-nav">
+      <div class="nav-left">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mobile Health</span>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="nav-tabs">
+        <a class="nav-tab active">Home</a>
+        <a class="nav-tab">Digital Care</a>
+        <a class="nav-tab">Wellbeing</a>
+        <a class="nav-tab hide-tablet">Benefits</a>
+        <a class="nav-tab hide-tablet">Rewards</a>
+        <span class="nav-tab-overflow">...</span>
+      </div>
+
+      <div class="avatar">DR</div>
+    </nav>
+
+    <!-- ── Rewards Progress Bar ── -->
+    <div class="rewards-bar">
+      <span class="rewards-label">Rewards Progress</span>
+      <div class="rewards-track">
+        <div class="rewards-fill"></div>
+      </div>
+      <span class="rewards-pts">5,200 / 10,000 pts</span>
+      <a class="rewards-link" href="#">View details &rarr;</a>
+    </div>
+
+    <!-- ── Card Grid ── -->
+    <div class="card-grid">
+
+      <!-- Row 1: Stats + AI Health Insights -->
+      <div class="row row-1">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">Stats</div>
+            <div class="placeholder"></div>
+            <div class="card-subtitle">Steps &middot; Sleep &middot; Active Minutes</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header-bar primary">AI Health Insights</div>
+          <div class="card-body">
+            <div class="placeholder"></div>
+            <div class="card-subtitle">Personalized insight + action</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: My Actions + Content + Content -->
+      <div class="row row-2">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">My Actions</div>
+            <div class="placeholder"></div>
+            <div class="card-subtitle">Point-earning tasks</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">Content</div>
+            <div class="placeholder"></div>
+            <div class="card-subtitle">Article card</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">Content</div>
+            <div class="placeholder"></div>
+            <div class="card-subtitle">Article card</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Active Program + Active Challenge -->
+      <div class="row row-3">
+        <div class="card active-program">
+          <div class="card-body">
+            <div class="card-title">Active Program</div>
+            <div class="placeholder"></div>
+            <div class="card-subtitle">DCP Progress &mdash; Week 3 of 8</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header-bar secondary">Active Challenge</div>
+          <div class="card-body">
+            <div class="placeholder"></div>
+            <div class="card-subtitle">Challenge progress + leaderboard teaser</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4: Healthy Habits -->
+      <div class="row row-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">Healthy Habits</div>
+            <div class="placeholder"></div>
+            <div class="card-subtitle">Daily habit checklist</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /card-grid -->
+
+    <!-- ── Bottom Nav (Mobile only) ── -->
+    <div class="bottom-nav">
+      <div class="bottom-nav-item active">
+        <div class="bottom-nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span>Home</span>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <span>Digital Care</span>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <span>Wellbeing</span>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <span>Benefits</span>
+      </div>
+      <div class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        </div>
+        <span>Rewards</span>
+      </div>
+    </div>
+
+  </div><!-- /device-frame -->
+
+  <script>
+    function switchDevice(size) {
+      const frame = document.getElementById('device');
+      frame.classList.remove('desktop', 'tablet', 'mobile');
+      frame.classList.add(size);
+
+      document.querySelectorAll('.switcher button').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(size)) {
+          btn.classList.add('active');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

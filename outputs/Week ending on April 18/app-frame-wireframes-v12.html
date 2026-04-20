@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC Home Screen Wireframe — v12 Store Credits</title>
+<style>
+  /* ── Reset ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #2E7D32;
+    --primary-light: #4CAF50;
+    --primary-dark: #1B5E20;
+    --accent-gold: #D4A853;
+    --accent-gold-light: #E8C97A;
+    --accent-gold-dark: #B8922E;
+    --bg: #F9F7F4;
+    --outer-bg: #F0F0F0;
+    --card-bg: #FFFFFF;
+    --card-border: #E5E2DD;
+    --text-primary: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-muted: #999;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #1a1a2e;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+  }
+
+  /* ── Device Switcher ── */
+  .switcher {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .switcher-label {
+    color: #A5D6A7;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .switcher button {
+    padding: 10px 22px;
+    border: 2px solid var(--primary);
+    background: transparent;
+    color: #E8F5E9;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .switcher button:hover { background: rgba(46,125,50,0.2); }
+  .switcher button.active {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* ── Device Frame ── */
+  .device-frame {
+    background: var(--outer-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: width 0.4s ease;
+    position: relative;
+    display: none;
+    flex-direction: column;
+  }
+  .device-frame.active { display: flex; }
+  .device-frame.desktop { width: 1600px; min-height: 900px; }
+  .device-frame.mobile  { width: 390px;  min-height: 800px; }
+
+  /* ── Top Nav Bar (full width) ── */
+  .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-bottom: 1px solid var(--card-border);
+    height: 56px;
+    flex-shrink: 0;
+    width: 100%;
+  }
+  .top-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 24px;
+  }
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .logo-text {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    text-decoration: none;
+    position: relative;
+  }
+  .nav-tab:hover {
+    color: var(--text-primary);
+    background: rgba(46,125,50,0.06);
+  }
+  .nav-tab.active {
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+  .nav-tab-overflow {
+    padding: 8px 10px;
+    font-size: 16px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    letter-spacing: 2px;
+  }
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+  }
+
+  /* ── Hero Carousel (full viewport width) ── */
+  .hero-carousel {
+    width: 100%;
+    position: relative;
+    background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 40%, #FFFDE7 100%);
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .hero-inner {
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 24px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .hero-content {
+    flex: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .hero-subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .hero-cta:hover { background: var(--primary-dark); }
+  .hero-illustration {
+    width: 280px;
+    height: 180px;
+    background: rgba(46,125,50,0.08);
+    border-radius: 12px;
+    border: 2px dashed rgba(46,125,50,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .hero-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(46,125,50,0.2);
+  }
+  .hero-dot.active {
+    background: var(--primary);
+    width: 20px;
+    border-radius: 4px;
+  }
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-secondary);
+  }
+  .hero-arrow.left { left: 16px; }
+  .hero-arrow.right { right: 16px; }
+
+  /* ── Content Container ── */
+  .content-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── Rewards Module: Wellness Wallet ── */
+  .wallet-module {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .wallet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px 0;
+  }
+  .wallet-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .wallet-icon {
+    font-size: 18px;
+  }
+  .wallet-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .wallet-link {
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .wallet-link:hover { text-decoration: underline; }
+
+  /* Wallet Balance Section */
+  .wallet-balance-section {
+    margin: 16px 20px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 60%, #FFF8E1 100%);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .wallet-balance-main {
+    flex-shrink: 0;
+  }
+  .wallet-balance-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .wallet-balance-amount {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent-gold-dark);
+    line-height: 1;
+  }
+  .wallet-pending {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .wallet-pending-icon {
+    width: 28px;
+    height: 28px;
+    background: rgba(46,125,50,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--primary);
+    font-weight: 700;
+  }
+  .wallet-pending-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .wallet-pending-sublabel {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .wallet-right {
+    margin-left: auto;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .wallet-total-earned {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .wallet-total-earned strong {
+    color: var(--text-primary);
+  }
+  .wallet-shop-btn {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff;
+    padding: 9px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+  .wallet-shop-btn:hover { background: var(--primary-dark); }
+
+  /* Marketplace Preview */
+  .marketplace-section {
+    padding: 0 20px 16px;
+  }
+  .marketplace-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .marketplace-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .product-card {
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: box-shadow 0.2s;
+  }
+  .product-card:hover { box-shadow: var(--shadow-hover); }
+  .product-image {
+    width: 100%;
+    height: 80px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .product-image.teal { background: #26A69A; }
+  .product-image.purple { background: #7E57C2; }
+  .product-image.blue { background: #42A5F5; }
+  .product-image.orange { background: #FFA726; }
+  .product-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .product-price {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .product-price .original {
+    text-decoration: line-through;
+    margin-right: 4px;
+  }
+  .product-credit-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(46,125,50,0.1);
+    color: var(--primary);
+  }
+  .product-credit-badge.free {
+    background: var(--primary);
+    color: #fff;
+  }
+  .product-final-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .product-final-price.free-price {
+    color: var(--primary);
+  }
+  .product-btn {
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: 1px solid var(--card-border);
+    background: #fff;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .product-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .product-btn.claim {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .product-btn.claim:hover {
+    background: var(--primary-dark);
+  }
+
+  /* Recent Credits */
+  .recent-credits {
+    padding: 0 20px 16px;
+  }
+  .recent-credits-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .recent-credits-list {
+    display: flex;
+    gap: 12px;
+  }
+  .recent-credit-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+  }
+  .recent-credit-amount {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .recent-credit-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.3;
+  }
+
+  /* ── Two-Column Grid ── */
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .full-width-row {
+    grid-column: 1 / -1;
+  }
+
+  /* ── Card Base ── */
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--card-border);
+  }
+  .card-header-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .card-header-link {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .card-body {
+    padding: 16px;
+  }
+
+  /* ── Stats Card ── */
+  .stats-row {
+    display: flex;
+    gap: 16px;
+  }
+  .stat-item {
+    flex: 1;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+  .stat-icon {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  /* ── AI Insights Card ── */
+  .ai-header-bar {
+    background: var(--primary);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ai-header-bar .ai-icon {
+    font-size: 14px;
+  }
+  .ai-header-bar .ai-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .ai-body {
+    padding: 16px;
+  }
+  .ai-insight-text {
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  .ai-insight-text strong {
+    color: var(--primary);
+  }
+  .ai-cta {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  /* ── Actions Card ── */
+  .action-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0ede8;
+  }
+  .action-row:last-child { border-bottom: none; }
+  .action-checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--card-border);
+    flex-shrink: 0;
+  }
+  .action-checkbox.done {
+    background: var(--primary);
+    border-color: var(--primary);
+    position: relative;
+  }
+  .action-checkbox.done::after {
+    content: '\2713';
+    color: #fff;
+    font-size: 11px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .action-text {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-primary);
+  }
+  .action-credit {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent-gold-dark);
+    background: rgba(212,168,83,0.12);
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── Program Card ── */
+  .program-info {
+    margin-bottom: 12px;
+  }
+  .program-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+  }
+  .program-progress-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .program-track {
+    width: 100%;
+    height: 8px;
+    background: #f0ede8;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .program-fill {
+    width: 37.5%;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 4px;
+  }
+  .program-weeks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .program-week-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #E5E2DD;
+  }
+  .program-week-dot.completed { background: var(--primary); }
+  .program-week-dot.current {
+    background: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(76,175,80,0.2);
+  }
+
+  /* ── Healthy Habits ── */
+  .habits-row {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+  }
+  .habit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .habit-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    position: relative;
+  }
+  .habit-circle.done {
+    background: rgba(46,125,50,0.1);
+    border: 2px solid var(--primary);
+  }
+  .habit-circle.pending {
+    background: var(--bg);
+    border: 2px solid var(--card-border);
+  }
+  .habit-circle.done::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid #fff;
+  }
+  .habit-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE STYLES
+     ═══════════════════════════════════════════ */
+
+  .mobile .top-nav { height: 52px; }
+  .mobile .top-nav-inner { padding: 0 16px; }
+  .mobile .nav-tabs { display: none; }
+  .mobile .hamburger { display: flex; }
+
+  .mobile .hero-carousel { min-height: 220px; }
+  .mobile .hero-inner {
+    flex-direction: column;
+    padding: 24px 16px;
+    gap: 16px;
+  }
+  .mobile .hero-illustration {
+    width: 100%;
+    height: 100px;
+    order: -1;
+  }
+  .mobile .hero-title { font-size: 22px; }
+  .mobile .hero-subtitle { font-size: 13px; }
+
+  /* Wallet mobile */
+  .mobile .wallet-balance-section {
+    margin: 12px 16px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .mobile .wallet-header { padding: 12px 16px 0; }
+  .mobile .wallet-right {
+    margin-left: 0;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Marketplace mobile */
+  .mobile .marketplace-section { padding: 0 16px 12px; }
+  .mobile .marketplace-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .mobile .marketplace-grid .product-card:nth-child(n+3) {
+    display: none;
+  }
+  .mobile .marketplace-scroll-hint {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* Recent credits mobile */
+  .mobile .recent-credits { padding: 0 16px 12px; }
+  .mobile .recent-credits-list {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile .content-container { padding: 16px; gap: 14px; }
+  .mobile .two-col-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Habits mobile */
+  .mobile .habits-row {
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .mobile .habits-row::-webkit-scrollbar { display: none; }
+  .mobile .habit-circle { width: 42px; height: 42px; font-size: 16px; }
+
+  /* ── Mobile Bottom Nav ── */
+  .bottom-nav {
+    display: none;
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid var(--card-border);
+    padding: 6px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+  }
+  .mobile .bottom-nav { display: flex; }
+  .bottom-nav-items {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+  .bottom-nav-icon {
+    font-size: 18px;
+    color: var(--text-muted);
+  }
+  .bottom-nav-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .bottom-nav-item.active .bottom-nav-icon,
+  .bottom-nav-item.active .bottom-nav-label {
+    color: var(--primary);
+  }
+
+  /* Scrollable hint hidden by default */
+  .marketplace-scroll-hint { display: none; }
+
+  /* ── Version Label ── */
+  .version-tag {
+    margin-top: 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Device Switcher ── -->
+<div class="switcher">
+  <span class="switcher-label">MHC Home v12 — Store Credits</span>
+  <button class="active" onclick="switchView('desktop')">Desktop</button>
+  <button onclick="switchView('mobile')">Mobile</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     DESKTOP VIEW
+     ══════════════════════════════════════════════ -->
+<div class="device-frame desktop active" id="desktop-view">
+
+  <!-- Top Nav -->
+  <div class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-left">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mobile Health</span>
+      </div>
+      <div class="nav-tabs">
+        <span class="nav-tab active">Home</span>
+        <span class="nav-tab">Digital Care</span>
+        <span class="nav-tab">Wellbeing</span>
+        <span class="nav-tab">Benefits</span>
+        <span class="nav-tab">Rewards</span>
+        <span class="nav-tab-overflow">...</span>
+      </div>
+      <div class="avatar">DR</div>
+    </div>
+  </div>
+
+  <!-- Hero Carousel -->
+  <div class="hero-carousel">
+    <div class="hero-arrow left">&lsaquo;</div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">NEW PROGRAM</div>
+        <div class="hero-title">Spring Into Wellness Challenge</div>
+        <div class="hero-subtitle">Join 5,000+ members. Earn rewards for healthy habits.</div>
+        <a class="hero-cta">Join Now &rarr;</a>
+      </div>
+      <div class="hero-illustration">Illustration Placeholder</div>
+    </div>
+    <div class="hero-arrow right">&rsaquo;</div>
+    <div class="hero-dots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="content-container">
+
+    <!-- ── Wellness Wallet Module ── -->
+    <div class="wallet-module">
+      <div class="wallet-header">
+        <div class="wallet-header-left">
+          <span class="wallet-icon">&#128179;</span>
+          <span class="wallet-title">Wellness Wallet</span>
+        </div>
+        <a class="wallet-link">Visit Store &rarr;</a>
+      </div>
+
+      <!-- Balance Section -->
+      <div class="wallet-balance-section">
+        <div class="wallet-balance-main">
+          <div class="wallet-balance-label">Available Credits</div>
+          <div class="wallet-balance-amount">$52.00</div>
+        </div>
+        <div class="wallet-pending">
+          <div class="wallet-pending-icon">+</div>
+          <div>
+            <div class="wallet-pending-text">$12.50 pending</div>
+            <div class="wallet-pending-sublabel">Activities in progress</div>
+          </div>
+        </div>
+        <div class="wallet-right">
+          <div class="wallet-total-earned">Total earned: <strong>$147.50</strong></div>
+          <button class="wallet-shop-btn">Shop Now</button>
+        </div>
+      </div>
+
+      <!-- Marketplace Preview -->
+      <div class="marketplace-section">
+        <div class="marketplace-label">Marketplace</div>
+        <div class="marketplace-grid">
+
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="product-image teal">Fitbit</div>
+            <div class="product-name">Fitbit Charge 6</div>
+            <div class="product-price"><span class="original">$99.95</span></div>
+            <div class="product-credit-badge">$52.00 credit applied</div>
+            <div class="product-final-price">$47.95</div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-image purple">Yoga</div>
+            <div class="product-name">Yoga Mat Premium</div>
+            <div class="product-price"><span class="original">$34.99</span></div>
+            <div class="product-credit-badge free">Free with Credits</div>
+            <div class="product-final-price free-price">$0.00</div>
+            <button class="product-btn claim">Claim Free</button>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="product-image blue">Meditation</div>
+            <div class="product-name">Meditation App &mdash; 1 Year</div>
+            <div class="product-price"><span class="original">$49.99</span></div>
+            <div class="product-credit-badge free">Free with Credits</div>
+            <div class="product-final-price free-price">$0.00</div>
+            <button class="product-btn claim">Claim Free</button>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="product-image orange">Meal Kit</div>
+            <div class="product-name">Healthy Meal Kit &mdash; Week</div>
+            <div class="product-price"><span class="original">$29.99</span></div>
+            <div class="product-credit-badge">$20.00 credit applied</div>
+            <div class="product-final-price">$9.99</div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Recent Credits -->
+      <div class="recent-credits">
+        <div class="recent-credits-label">Recent Activity</div>
+        <div class="recent-credits-list">
+          <div class="recent-credit-item">
+            <span class="recent-credit-amount">+$5.00</span>
+            <span class="recent-credit-desc">Completed daily walk streak &middot; Apr 14</span>
+          </div>
+          <div class="recent-credit-item">
+            <span class="recent-credit-amount">+$2.50</span>
+            <span class="recent-credit-desc">Logged breakfast &middot; Apr 13</span>
+          </div>
+          <div class="recent-credit-item">
+            <span class="recent-credit-amount">+$10.00</span>
+            <span class="recent-credit-desc">Finished stress module &middot; Apr 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Two-Column Grid ── -->
+    <div class="two-col-grid">
+
+      <!-- Row 1: Stats + AI Insights -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-title">Today's Stats</span>
+          <a class="card-header-link">View All</a>
+        </div>
+        <div class="card-body">
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-icon">&#128694;</div>
+              <div class="stat-value">4,230</div>
+              <div class="stat-label">Steps</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">&#128564;</div>
+              <div class="stat-value">7.2hr</div>
+              <div class="stat-label">Sleep</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">&#9889;</div>
+              <div class="stat-value">28min</div>
+              <div class="stat-label">Active</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ai-header-bar">
+          <span class="ai-icon">&#9733;</span>
+          <span class="ai-title">AI Health Insights</span>
+        </div>
+        <div class="ai-body">
+          <div class="ai-insight-text">
+            Your <strong>sleep quality improved 12%</strong> this week. Consistent bedtimes are paying off. Try adding a 10-min wind-down routine to push it further.
+          </div>
+          <div class="ai-cta">View Full Insights &rarr;</div>
+        </div>
+      </div>
+
+      <!-- Row 2: Actions + Active Program -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-title">My Actions</span>
+          <a class="card-header-link">See All</a>
+        </div>
+        <div class="card-body">
+          <div class="action-row">
+            <div class="action-checkbox done"></div>
+            <span class="action-text">Complete morning stretch</span>
+            <span class="action-credit">$5.00</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-text">Log lunch meal</span>
+            <span class="action-credit">$2.50</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-text">Complete mindfulness session</span>
+            <span class="action-credit">$10.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-title">Active Program</span>
+          <a class="card-header-link">Details</a>
+        </div>
+        <div class="card-body">
+          <div class="program-info">
+            <div class="program-name">Stress Management</div>
+            <div class="program-progress-label">Week 3 of 8</div>
+          </div>
+          <div class="program-track">
+            <div class="program-fill"></div>
+          </div>
+          <div class="program-weeks">
+            <div class="program-week-dot completed"></div>
+            <div class="program-week-dot completed"></div>
+            <div class="program-week-dot current"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Healthy Habits (full width) -->
+      <div class="card full-width-row">
+        <div class="card-header">
+          <span class="card-header-title">Healthy Habits</span>
+          <a class="card-header-link">Manage</a>
+        </div>
+        <div class="card-body">
+          <div class="habits-row">
+            <div class="habit-item">
+              <div class="habit-circle done">&#128167;</div>
+              <span class="habit-label">Water</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle done">&#127939;</div>
+              <span class="habit-label">Exercise</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle done">&#129361;</div>
+              <span class="habit-label">Breakfast</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle pending">&#128149;</div>
+              <span class="habit-label">Mindful</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle pending">&#128218;</div>
+              <span class="habit-label">Read</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle pending">&#128164;</div>
+              <span class="habit-label">Sleep</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /two-col-grid -->
+  </div><!-- /content-container -->
+</div><!-- /desktop-view -->
+
+<!-- ══════════════════════════════════════════════
+     MOBILE VIEW
+     ══════════════════════════════════════════════ -->
+<div class="device-frame mobile" id="mobile-view">
+
+  <!-- Top Nav -->
+  <div class="top-nav">
+    <div class="top-nav-inner">
+      <div class="nav-left">
+        <div class="logo-icon">M</div>
+        <span class="logo-text">Mobile Health</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="hamburger">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="avatar">DR</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Carousel -->
+  <div class="hero-carousel">
+    <div class="hero-inner">
+      <div class="hero-illustration">Illustration</div>
+      <div class="hero-content">
+        <div class="hero-badge">NEW PROGRAM</div>
+        <div class="hero-title">Spring Into Wellness Challenge</div>
+        <div class="hero-subtitle">Join 5,000+ members. Earn rewards for healthy habits.</div>
+        <a class="hero-cta">Join Now &rarr;</a>
+      </div>
+    </div>
+    <div class="hero-dots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="content-container">
+
+    <!-- ── Wellness Wallet Module ── -->
+    <div class="wallet-module">
+      <div class="wallet-header">
+        <div class="wallet-header-left">
+          <span class="wallet-icon">&#128179;</span>
+          <span class="wallet-title">Wellness Wallet</span>
+        </div>
+        <a class="wallet-link">Store &rarr;</a>
+      </div>
+
+      <div class="wallet-balance-section">
+        <div class="wallet-balance-main">
+          <div class="wallet-balance-label">Available Credits</div>
+          <div class="wallet-balance-amount">$52.00</div>
+        </div>
+        <div class="wallet-pending">
+          <div class="wallet-pending-icon">+</div>
+          <div>
+            <div class="wallet-pending-text">$12.50 pending</div>
+            <div class="wallet-pending-sublabel">Activities in progress</div>
+          </div>
+        </div>
+        <div class="wallet-right">
+          <div class="wallet-total-earned">Total: <strong>$147.50</strong></div>
+          <button class="wallet-shop-btn">Shop Now</button>
+        </div>
+      </div>
+
+      <div class="marketplace-section">
+        <div class="marketplace-label">Marketplace</div>
+        <div class="marketplace-grid">
+          <div class="product-card">
+            <div class="product-image teal">Fitbit</div>
+            <div class="product-name">Fitbit Charge 6</div>
+            <div class="product-price"><span class="original">$99.95</span></div>
+            <div class="product-credit-badge">$52 credit</div>
+            <div class="product-final-price">$47.95</div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+          <div class="product-card">
+            <div class="product-image purple">Yoga</div>
+            <div class="product-name">Yoga Mat Premium</div>
+            <div class="product-price"><span class="original">$34.99</span></div>
+            <div class="product-credit-badge free">Free</div>
+            <div class="product-final-price free-price">$0.00</div>
+            <button class="product-btn claim">Claim</button>
+          </div>
+          <!-- Hidden on mobile via CSS -->
+          <div class="product-card">
+            <div class="product-image blue">Meditation</div>
+            <div class="product-name">Meditation App</div>
+            <div class="product-price"><span class="original">$49.99</span></div>
+            <div class="product-credit-badge free">Free</div>
+            <div class="product-final-price free-price">$0.00</div>
+            <button class="product-btn claim">Claim</button>
+          </div>
+          <div class="product-card">
+            <div class="product-image orange">Meal Kit</div>
+            <div class="product-name">Meal Kit &mdash; Week</div>
+            <div class="product-price"><span class="original">$29.99</span></div>
+            <div class="product-credit-badge">$20 credit</div>
+            <div class="product-final-price">$9.99</div>
+            <button class="product-btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="marketplace-scroll-hint">Swipe for more items &rarr;</div>
+      </div>
+
+      <div class="recent-credits">
+        <div class="recent-credits-label">Recent Activity</div>
+        <div class="recent-credits-list">
+          <div class="recent-credit-item">
+            <span class="recent-credit-amount">+$5.00</span>
+            <span class="recent-credit-desc">Daily walk streak &middot; Apr 14</span>
+          </div>
+          <div class="recent-credit-item">
+            <span class="recent-credit-amount">+$2.50</span>
+            <span class="recent-credit-desc">Logged breakfast &middot; Apr 13</span>
+          </div>
+          <div class="recent-credit-item">
+            <span class="recent-credit-amount">+$10.00</span>
+            <span class="recent-credit-desc">Stress module &middot; Apr 10</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Cards (single column on mobile) ── -->
+    <div class="two-col-grid">
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-title">Today's Stats</span>
+          <a class="card-header-link">View All</a>
+        </div>
+        <div class="card-body">
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-icon">&#128694;</div>
+              <div class="stat-value">4,230</div>
+              <div class="stat-label">Steps</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">&#128564;</div>
+              <div class="stat-value">7.2hr</div>
+              <div class="stat-label">Sleep</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-icon">&#9889;</div>
+              <div class="stat-value">28min</div>
+              <div class="stat-label">Active</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ai-header-bar">
+          <span class="ai-icon">&#9733;</span>
+          <span class="ai-title">AI Health Insights</span>
+        </div>
+        <div class="ai-body">
+          <div class="ai-insight-text">
+            Your <strong>sleep quality improved 12%</strong> this week. Try a 10-min wind-down routine to push it further.
+          </div>
+          <div class="ai-cta">View Insights &rarr;</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-title">My Actions</span>
+          <a class="card-header-link">See All</a>
+        </div>
+        <div class="card-body">
+          <div class="action-row">
+            <div class="action-checkbox done"></div>
+            <span class="action-text">Complete morning stretch</span>
+            <span class="action-credit">$5.00</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-text">Log lunch meal</span>
+            <span class="action-credit">$2.50</span>
+          </div>
+          <div class="action-row">
+            <div class="action-checkbox"></div>
+            <span class="action-text">Mindfulness session</span>
+            <span class="action-credit">$10.00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-header-title">Active Program</span>
+          <a class="card-header-link">Details</a>
+        </div>
+        <div class="card-body">
+          <div class="program-info">
+            <div class="program-name">Stress Management</div>
+            <div class="program-progress-label">Week 3 of 8</div>
+          </div>
+          <div class="program-track">
+            <div class="program-fill"></div>
+          </div>
+          <div class="program-weeks">
+            <div class="program-week-dot completed"></div>
+            <div class="program-week-dot completed"></div>
+            <div class="program-week-dot current"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+            <div class="program-week-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full-width-row">
+        <div class="card-header">
+          <span class="card-header-title">Healthy Habits</span>
+          <a class="card-header-link">Manage</a>
+        </div>
+        <div class="card-body">
+          <div class="habits-row">
+            <div class="habit-item">
+              <div class="habit-circle done">&#128167;</div>
+              <span class="habit-label">Water</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle done">&#127939;</div>
+              <span class="habit-label">Exercise</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle done">&#129361;</div>
+              <span class="habit-label">Breakfast</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle pending">&#128149;</div>
+              <span class="habit-label">Mindful</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle pending">&#128218;</div>
+              <span class="habit-label">Read</span>
+            </div>
+            <div class="habit-item">
+              <div class="habit-circle pending">&#128164;</div>
+              <span class="habit-label">Sleep</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <div class="bottom-nav-items">
+      <div class="bottom-nav-item active">
+        <span class="bottom-nav-icon">&#127968;</span>
+        <span class="bottom-nav-label">Home</span>
+      </div>
+      <div class="bottom-nav-item">
+        <span class="bottom-nav-icon">&#128898;</span>
+        <span class="bottom-nav-label">Digital Care</span>
+      </div>
+      <div class="bottom-nav-item">
+        <span class="bottom-nav-icon">&#127807;</span>
+        <span class="bottom-nav-label">Wellbeing</span>
+      </div>
+      <div class="bottom-nav-item">
+        <span class="bottom-nav-icon">&#127873;</span>
+        <span class="bottom-nav-label">Benefits</span>
+      </div>
+      <div class="bottom-nav-item">
+        <span class="bottom-nav-icon">&#11088;</span>
+        <span class="bottom-nav-label">Rewards</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /mobile-view -->
+
+<div class="version-tag">v12 — Store Credits / Wellness Marketplace</div>
+
+<script>
+function switchView(view) {
+  // Update buttons
+  document.querySelectorAll('.switcher button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === view);
+  });
+  // Show/hide frames
+  document.querySelectorAll('.device-frame').forEach(frame => {
+    frame.classList.remove('active');
+  });
+  document.getElementById(view + '-view').classList.add('active');
+}
+</script>
+
+</body>
+</html>

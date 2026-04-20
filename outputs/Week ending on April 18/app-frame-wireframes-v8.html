@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MHC Home Wireframes — v8 Cool Blue/Indigo</title>
+  <style>
+    /* Reset & Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #e8e8e8;
+      color: #1E293B;
+      line-height: 1.5;
+    }
+
+    /* ==================== VERSION HEADER ==================== */
+    .version-header {
+      background: #1e1b4b;
+      color: white;
+      padding: 24px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .version-header h1 { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; }
+    .version-header p { font-size: 14px; opacity: 0.7; margin-top: 4px; }
+    .version-header .subtitle { font-size: 13px; opacity: 0.5; margin-top: 2px; }
+
+    /* ==================== BREAKPOINT TABS ==================== */
+    .breakpoint-tabs {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .breakpoint-tab {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .breakpoint-tab:hover { background: rgba(255,255,255,0.15); }
+    .breakpoint-tab.active {
+      background: #4F46E5;
+      color: white;
+      border-color: #4F46E5;
+      font-weight: 600;
+    }
+
+    /* ==================== FRAME CONTAINER ==================== */
+    .frame-container {
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+      min-height: calc(100vh - 140px);
+    }
+
+    /* ==================== DEVICE FRAME ==================== */
+    .device-frame {
+      background: #F8FAFC;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      overflow: hidden;
+      transition: width 0.3s ease;
+      display: none;
+    }
+    .device-frame.active { display: block; }
+    .device-frame[data-breakpoint="desktop"] { width: 1280px; }
+    .device-frame[data-breakpoint="tablet"] { width: 768px; }
+    .device-frame[data-breakpoint="mobile"] { width: 390px; }
+
+    /* ==================== APP SHELL ==================== */
+    .app-shell {
+      background: #F8FAFC;
+      min-height: 900px;
+      position: relative;
+    }
+
+    /* ==================== TOP NAV BAR ==================== */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #4F46E5, #7C3AED);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .logo-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1E293B;
+      white-space: nowrap;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+      margin: 0 auto;
+    }
+    .nav-tab {
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748B;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.15s;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .nav-tab:hover {
+      color: #1E293B;
+      background: #F1F5F9;
+    }
+    .nav-tab.active {
+      color: #FFFFFF;
+      background: #4F46E5;
+      font-weight: 600;
+    }
+    .nav-tab.overflow {
+      font-size: 16px;
+      letter-spacing: 2px;
+      padding: 6px 8px;
+    }
+    .top-nav-right {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4F46E5, #06B6D4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ==================== HAMBURGER (mobile) ==================== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 18px;
+      height: 2px;
+      background: #64748B;
+      border-radius: 1px;
+    }
+
+    /* ==================== REWARDS PROGRESS BAR ==================== */
+    .rewards-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 24px;
+      background: #F1F5F9;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .rewards-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1E293B;
+      white-space: nowrap;
+    }
+    .rewards-track {
+      flex: 1;
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .rewards-fill {
+      width: 52%;
+      height: 100%;
+      background: #7C3AED;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .rewards-pts {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1E293B;
+      white-space: nowrap;
+    }
+    .rewards-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: #06B6D4;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .rewards-link:hover { text-decoration: underline; }
+
+    /* ==================== CARD GRID ==================== */
+    .card-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .card-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Row column distributions */
+    .card-row.row-1 > :nth-child(1) { flex: 0 0 calc(40% - 10px); }
+    .card-row.row-1 > :nth-child(2) { flex: 0 0 calc(60% - 10px); }
+    .card-row.row-2 > :nth-child(1) { flex: 0 0 calc(40% - 14px); }
+    .card-row.row-2 > :nth-child(2) { flex: 0 0 calc(30% - 14px); }
+    .card-row.row-2 > :nth-child(3) { flex: 0 0 calc(30% - 14px); }
+    .card-row.row-3 > :nth-child(1) { flex: 0 0 calc(40% - 10px); }
+    .card-row.row-3 > :nth-child(2) { flex: 0 0 calc(60% - 10px); }
+    .card-row.row-4 > :nth-child(1) { flex: 1; max-width: calc(40% - 10px); }
+
+    /* ==================== CARD BASE ==================== */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 12px;
+    }
+    .card-subtitle {
+      font-size: 13px;
+      color: #64748B;
+      margin-top: 12px;
+    }
+
+    /* Placeholder rectangles */
+    .placeholder {
+      width: 100%;
+      height: 80px;
+      background: #F1F5F9;
+      border-radius: 8px;
+    }
+    .placeholder.tall {
+      height: 100px;
+    }
+
+    /* ==================== COLORED HEADER CARDS ==================== */
+    .card-header-bar {
+      padding: 14px 20px;
+      color: #FFFFFF;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .card-header-bar.primary {
+      background: #4F46E5;
+    }
+    .card-header-bar.secondary {
+      background: #7C3AED;
+    }
+
+    /* ==================== ACTIVE PROGRAM (left border) ==================== */
+    .card.left-accent {
+      border-left: 4px solid #4F46E5;
+    }
+    .card.left-accent .card-title {
+      font-weight: 700;
+    }
+
+    /* ==================== MOBILE BOTTOM NAV ==================== */
+    .bottom-nav {
+      display: none;
+      position: sticky;
+      bottom: 0;
+      background: #FFFFFF;
+      border-top: 1px solid #E2E8F0;
+      padding: 8px 0 12px;
+      z-index: 100;
+    }
+    .bottom-nav-inner {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .bottom-nav-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bottom-nav-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .bottom-nav-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #64748B;
+    }
+    .bottom-nav-item.active .bottom-nav-label {
+      color: #4F46E5;
+      font-weight: 600;
+    }
+    .bottom-nav-item.active .bottom-nav-icon svg {
+      color: #4F46E5;
+    }
+
+    /* ==================== TABLET OVERRIDES ==================== */
+    .device-frame[data-breakpoint="tablet"] .nav-tabs {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .device-frame[data-breakpoint="tablet"] .nav-tabs::-webkit-scrollbar { display: none; }
+    .device-frame[data-breakpoint="tablet"] .nav-tab.overflow-hidden { display: none; }
+    .device-frame[data-breakpoint="tablet"] .card-row {
+      flex-wrap: wrap;
+    }
+    .device-frame[data-breakpoint="tablet"] .card-row > * {
+      flex: 0 0 calc(50% - 10px) !important;
+      max-width: calc(50% - 10px) !important;
+    }
+    .device-frame[data-breakpoint="tablet"] .card-row.row-2 > :nth-child(3) {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    .device-frame[data-breakpoint="tablet"] .card-row.row-4 > :nth-child(1) {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    .device-frame[data-breakpoint="tablet"] .card-grid {
+      padding: 20px;
+    }
+    .device-frame[data-breakpoint="tablet"] .rewards-bar {
+      padding: 10px 20px;
+    }
+
+    /* ==================== MOBILE OVERRIDES ==================== */
+    .device-frame[data-breakpoint="mobile"] .nav-tabs { display: none; }
+    .device-frame[data-breakpoint="mobile"] .hamburger { display: flex; }
+    .device-frame[data-breakpoint="mobile"] .top-nav {
+      padding: 0 16px;
+      height: 50px;
+    }
+    .device-frame[data-breakpoint="mobile"] .rewards-bar {
+      padding: 10px 16px;
+      gap: 10px;
+    }
+    .device-frame[data-breakpoint="mobile"] .rewards-label { display: none; }
+    .device-frame[data-breakpoint="mobile"] .rewards-link { display: none; }
+    .device-frame[data-breakpoint="mobile"] .card-grid {
+      padding: 16px;
+      gap: 14px;
+    }
+    .device-frame[data-breakpoint="mobile"] .card-row {
+      flex-direction: column;
+      gap: 14px;
+    }
+    .device-frame[data-breakpoint="mobile"] .card-row > * {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    .device-frame[data-breakpoint="mobile"] .bottom-nav {
+      display: block;
+    }
+    .device-frame[data-breakpoint="mobile"] .card-body {
+      padding: 16px;
+    }
+    .device-frame[data-breakpoint="mobile"] .card-header-bar {
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+    .device-frame[data-breakpoint="mobile"] .placeholder {
+      height: 64px;
+    }
+    .device-frame[data-breakpoint="mobile"] .placeholder.tall {
+      height: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Version Header -->
+  <div class="version-header">
+    <h1>MHC Home Wireframes — v8</h1>
+    <p>Cool Blue/Indigo palette | Card grid layout with colored header accents</p>
+    <div class="subtitle">Indigo primary, Violet secondary, Cyan tertiary | April 2026</div>
+    <div class="breakpoint-tabs">
+      <div class="breakpoint-tab active" data-target="desktop">Desktop — 1200px+</div>
+      <div class="breakpoint-tab" data-target="tablet">Tablet — 768px</div>
+      <div class="breakpoint-tab" data-target="mobile">Mobile — 390px</div>
+    </div>
+  </div>
+
+  <div class="frame-container">
+
+    <!-- ============================================================ -->
+    <!-- DESKTOP FRAME — 1280px                                       -->
+    <!-- ============================================================ -->
+    <div class="device-frame active" data-breakpoint="desktop" id="frame-desktop">
+      <div class="app-shell">
+
+        <!-- Top Nav -->
+        <div class="top-nav">
+          <div class="top-nav-left">
+            <div class="logo">
+              <div class="logo-icon">M</div>
+              <span class="logo-text">Mobile Health</span>
+            </div>
+          </div>
+          <div class="nav-tabs">
+            <div class="nav-tab active">Home</div>
+            <div class="nav-tab">Digital Care</div>
+            <div class="nav-tab">Wellbeing</div>
+            <div class="nav-tab">Benefits</div>
+            <div class="nav-tab">Rewards</div>
+            <div class="nav-tab overflow">...</div>
+          </div>
+          <div class="top-nav-right">
+            <div class="user-avatar">DR</div>
+          </div>
+        </div>
+
+        <!-- Rewards Progress Bar -->
+        <div class="rewards-bar">
+          <span class="rewards-label">Rewards Progress</span>
+          <div class="rewards-track">
+            <div class="rewards-fill"></div>
+          </div>
+          <span class="rewards-pts">5,200 / 10,000 pts</span>
+          <span class="rewards-link">View details &rarr;</span>
+        </div>
+
+        <!-- Card Grid -->
+        <div class="card-grid">
+
+          <!-- Row 1: Stats (40%) + AI Health Insights (60%) -->
+          <div class="card-row row-1">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Stats</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Steps &middot; Sleep &middot; Active Minutes</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar primary">AI Health Insights</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Personalized insight + action</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: My Actions (40%) + Content (30%) + Content (30%) -->
+          <div class="card-row row-2">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">My Actions</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Point-earning tasks</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Active Program (40%) + Active Challenge (60%) -->
+          <div class="card-row row-3">
+            <div class="card left-accent">
+              <div class="card-body">
+                <div class="card-title">Active Program</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">DCP Progress — Week 3 of 8</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar secondary">Active Challenge</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Challenge progress + leaderboard teaser</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4: Healthy Habits (left-aligned / partial width) -->
+          <div class="card-row row-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Healthy Habits</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Daily habit checklist</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /card-grid -->
+      </div><!-- /app-shell -->
+    </div><!-- /desktop frame -->
+
+    <!-- ============================================================ -->
+    <!-- TABLET FRAME — 768px                                         -->
+    <!-- ============================================================ -->
+    <div class="device-frame" data-breakpoint="tablet" id="frame-tablet">
+      <div class="app-shell">
+
+        <!-- Top Nav -->
+        <div class="top-nav">
+          <div class="top-nav-left">
+            <div class="logo">
+              <div class="logo-icon">M</div>
+              <span class="logo-text">Mobile Health</span>
+            </div>
+          </div>
+          <div class="nav-tabs">
+            <div class="nav-tab active">Home</div>
+            <div class="nav-tab">Digital Care</div>
+            <div class="nav-tab">Wellbeing</div>
+            <div class="nav-tab">Benefits</div>
+            <div class="nav-tab overflow">...</div>
+          </div>
+          <div class="top-nav-right">
+            <div class="user-avatar">DR</div>
+          </div>
+        </div>
+
+        <!-- Rewards Progress Bar -->
+        <div class="rewards-bar">
+          <span class="rewards-label">Rewards Progress</span>
+          <div class="rewards-track">
+            <div class="rewards-fill"></div>
+          </div>
+          <span class="rewards-pts">5,200 / 10,000 pts</span>
+          <span class="rewards-link">View details &rarr;</span>
+        </div>
+
+        <!-- Card Grid -->
+        <div class="card-grid">
+
+          <!-- Row 1 -->
+          <div class="card-row row-1">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Stats</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Steps &middot; Sleep &middot; Active Minutes</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar primary">AI Health Insights</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Personalized insight + action</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="card-row row-2">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">My Actions</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Point-earning tasks</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="card-row row-3">
+            <div class="card left-accent">
+              <div class="card-body">
+                <div class="card-title">Active Program</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">DCP Progress — Week 3 of 8</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar secondary">Active Challenge</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Challenge progress + leaderboard teaser</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="card-row row-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Healthy Habits</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Daily habit checklist</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /card-grid -->
+      </div><!-- /app-shell -->
+    </div><!-- /tablet frame -->
+
+    <!-- ============================================================ -->
+    <!-- MOBILE FRAME — 390px                                         -->
+    <!-- ============================================================ -->
+    <div class="device-frame" data-breakpoint="mobile" id="frame-mobile">
+      <div class="app-shell">
+
+        <!-- Top Nav -->
+        <div class="top-nav">
+          <div class="top-nav-left">
+            <div class="logo">
+              <div class="logo-icon">M</div>
+            </div>
+          </div>
+          <div class="hamburger">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="top-nav-right">
+            <div class="user-avatar">DR</div>
+          </div>
+        </div>
+
+        <!-- Rewards Progress Bar (compressed) -->
+        <div class="rewards-bar">
+          <div class="rewards-track">
+            <div class="rewards-fill"></div>
+          </div>
+          <span class="rewards-pts">5,200 pts</span>
+        </div>
+
+        <!-- Card Grid (single column) -->
+        <div class="card-grid">
+
+          <!-- Row 1 -->
+          <div class="card-row row-1">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Stats</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Steps &middot; Sleep &middot; Active Minutes</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar primary">AI Health Insights</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Personalized insight + action</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="card-row row-2">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">My Actions</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Point-earning tasks</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Content</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Article card</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="card-row row-3">
+            <div class="card left-accent">
+              <div class="card-body">
+                <div class="card-title">Active Program</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">DCP Progress — Week 3 of 8</div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header-bar secondary">Active Challenge</div>
+              <div class="card-body">
+                <div class="placeholder tall"></div>
+                <div class="card-subtitle">Challenge progress + leaderboard teaser</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="card-row row-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">Healthy Habits</div>
+                <div class="placeholder"></div>
+                <div class="card-subtitle">Daily habit checklist</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /card-grid -->
+
+        <!-- Bottom Nav Bar (mobile only) -->
+        <div class="bottom-nav">
+          <div class="bottom-nav-inner">
+            <div class="bottom-nav-item active">
+              <div class="bottom-nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M5 10v9a1 1 0 001 1h3v-5h6v5h3a1 1 0 001-1v-9"/></svg>
+              </div>
+              <span class="bottom-nav-label">Home</span>
+            </div>
+            <div class="bottom-nav-item">
+              <div class="bottom-nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 100-18 9 9 0 000 18z"/><path d="M12 8v4l2 2"/></svg>
+              </div>
+              <span class="bottom-nav-label">Digital Care</span>
+            </div>
+            <div class="bottom-nav-item">
+              <div class="bottom-nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+              </div>
+              <span class="bottom-nav-label">Wellbeing</span>
+            </div>
+            <div class="bottom-nav-item">
+              <div class="bottom-nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+              </div>
+              <span class="bottom-nav-label">Benefits</span>
+            </div>
+            <div class="bottom-nav-item">
+              <div class="bottom-nav-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <span class="bottom-nav-label">Rewards</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /app-shell -->
+    </div><!-- /mobile frame -->
+
+  </div><!-- /frame-container -->
+
+  <!-- ==================== TAB SWITCHING ==================== -->
+  <script>
+    (function() {
+      const tabs = document.querySelectorAll('.breakpoint-tab');
+      const frames = document.querySelectorAll('.device-frame');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const target = tab.getAttribute('data-target');
+
+          // Update tab active state
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          // Show correct frame
+          frames.forEach(f => {
+            f.classList.remove('active');
+            if (f.getAttribute('data-breakpoint') === target) {
+              f.classList.add('active');
+            }
+          });
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
