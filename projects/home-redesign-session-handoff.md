@@ -32,8 +32,8 @@
 
 | File | Purpose |
 |------|---------|
-| `outputs/home-redesign-decision-doc.md` | Stakeholder decision document — circulate for sign-off |
-| `outputs/home-module-wireframes.html` | Visual wireframes — open in browser to review |
+| `outputs/apr18-home-ideation/home-redesign-decision-doc.md` | Stakeholder decision document — circulate for sign-off |
+| `outputs/apr18-home-ideation/home-module-wireframes.html` | Visual wireframes — open in browser to review |
 | `design/patterns/navigation-responsive.md` | MHC navigation IA (updated this session) |
 | `competitive/comparisons/navigation-mhc-vs-personify.md` | Navigation comparison document |
 
@@ -158,7 +158,7 @@
 
 | Step | Action | Owner | By When |
 |------|--------|-------|---------|
-| 1 | Review wireframes (`outputs/home-module-wireframes.html`) | Davinder | Done |
+| 1 | Review wireframes (`outputs/apr18-home-ideation/home-module-wireframes.html`) | Davinder | Done |
 | 2 | Circulate decision doc | Davinder | April 16 |
 | 3 | Stakeholder sign-off on 5 decisions | Leadership | April 18 |
 | 4 | Begin Figma wireframes | Design | Week of April 21 |
@@ -180,15 +180,15 @@ When starting a new session, load these files for full context:
 @competitive/comparisons/navigation-mhc-vs-personify.md
 
 # Competitive context
-@competitive/profiles/personify-health-ia-analysis.md
+@competitive/personify-health-ia-analysis.md
 @competitive/profiles/personify-health.md
 
 # Design system
 @design/_index.md
 
 # Deliverables created
-@outputs/home-redesign-decision-doc.md
-@outputs/home-module-wireframes.html
+@outputs/apr18-home-ideation/home-redesign-decision-doc.md
+@outputs/apr18-home-ideation/home-module-wireframes.html
 
 # Reference (if reviewing designs)
 @reference/ux-usability-experts.md
