@@ -13,6 +13,7 @@
 4. **Designed home page modules** — 7 modules with wireframes and states
 5. **Created decision document** — Ready for stakeholder circulation
 6. **Established responsive strategy** — Breakpoints at 1600, 1200, 960, 600px
+7. **Built Figma file** — 6 pages (cover, modules, 4 breakpoint layouts) with warm-palette wireframes
 
 ---
 
@@ -30,12 +31,44 @@
 
 ## Deliverables Created
 
+### Markdown / HTML
+
 | File | Purpose |
 |------|---------|
 | `outputs/apr18-home-ideation/home-redesign-decision-doc.md` | Stakeholder decision document — circulate for sign-off |
-| `outputs/apr18-home-ideation/home-module-wireframes.html` | Visual wireframes — open in browser to review |
+| `outputs/apr18-home-ideation/home-module-wireframes.html` | Visual wireframes (HTML) — open in browser to review |
 | `design/patterns/navigation-responsive.md` | MHC navigation IA (updated this session) |
 | `competitive/comparisons/navigation-mhc-vs-personify.md` | Navigation comparison document |
+
+### Figma File
+
+**Name:** `MHC Home Page Redesign — Apr 2026`
+**File key:** `uJBjjzRDUDoEZ8vVOgTHgc`
+**URL:** https://www.figma.com/design/uJBjjzRDUDoEZ8vVOgTHgc/MHC%20Home%20Page%20Redesign%20%E2%80%94%20Apr%202026
+
+**Pages:**
+| Page | Contents |
+|------|----------|
+| `01_Cover` | Title page with project overview |
+| `02_Modules` | All 7 reusable modules with labels (Rewards Bar, Stats, My Actions, Insights, DCP, Habits, Content Card) |
+| `03_Desktop 1600` | Full 2-column home page — generous spacing, 2-card content grid |
+| `04_Desktop 1200` | Full 2-column home page — tighter margins, 2-card content grid |
+| `05_Tablet 960` | Single-column layout — wide cards, 3-card content grid, hamburger nav |
+| `06_Mobile 375` | Single-column mobile — hamburger nav + bottom tabs |
+
+**Visual language applied:**
+- Warm cream background (`#F9F7F4`)
+- White cards with subtle shadows (0px 2px 8px rgba(0,0,0,0.08))
+- Gold accent for rewards/points (`#D4A853`)
+- Green for CTAs and completion (`#2E7D32`)
+- Blue for DCP clinical differentiator (`#1976D2`)
+- Light green gradient for AI Insights card
+- Color-coded stat icons (green/blue/orange circles)
+
+**Connecting to Figma in a new chat:**
+1. Open Figma Desktop → open the file
+2. Plugins → Development → Figma Desktop Bridge → Run
+3. Ask Claude to verify connection with `figma_get_status`
 
 ---
 
@@ -205,11 +238,23 @@ Use this prompt to start a new chat and continue the work:
 > I'm continuing work on the MHC home page redesign. Load `@projects/home-redesign-session-handoff.md` for full context.
 >
 > Last session we:
-> - Analyzed Personify Health screenshots
-> - Created decision doc + module wireframes
-> - Documented navigation IA comparison
+> - Analyzed Personify Health screenshots and documented competitive nav IA
+> - Created decision doc + HTML module wireframes
+> - Built a Figma file (`MHC Home Page Redesign — Apr 2026`) with 6 pages: cover, 7 modules, and 4 breakpoint layouts (1600, 1200, 960, 375)
+> - Applied warm-palette visual language (cream bg, gold rewards, green CTAs, blue DCP accent)
 >
-> Today I want to: [describe next step — e.g., "refine the mobile wireframes" or "update based on stakeholder feedback"]
+> Before we continue, please verify by reading the handoff doc and confirming what's in place.
+>
+> Today I want to: [describe next step — see options below]
+
+**Common next steps:**
+- "Review the Figma wireframes and suggest refinements" — I'll open Figma + critique
+- "Run a design-review pass on the Figma file" — formal design QA
+- "Build empty/loading/error states for the 7 modules" — additional module states
+- "Create engineering spec using `design-spec-template.md`" — dev handoff doc
+- "Export static PNGs of each breakpoint for the decision doc" — stakeholder visuals
+- "Incorporate stakeholder feedback on [specific decision]" — iterate based on input
+- "Add a new module: [description]" — expand the system
 
 ---
 
@@ -223,3 +268,4 @@ Use this prompt to start a new chat and continue the work:
 ---
 
 *Session handoff created: April 15, 2026*
+*Updated April 22, 2026 — added Figma file and build details*
