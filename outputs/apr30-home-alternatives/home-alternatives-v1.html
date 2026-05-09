@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MHC Home Page — 5 Alternatives Compare</title>
+  <style>
+    :root {
+      --bg-warm: #F9F7F4;
+      --bg-card: #FFFFFF;
+      --bg-soft: #F1EEE8;
+      --bg-hero: linear-gradient(135deg, #C9D4F0 0%, #B8C4E8 100%);
+      --bg-hero-warm: linear-gradient(135deg, #EEDDC9 0%, #E5CFB5 100%);
+      --bg-hero-green: linear-gradient(135deg, #C9DDC9 0%, #B5CFB5 100%);
+      --border: #E5E2DD;
+      --border-strong: #C9C5BD;
+      --text-primary: #1A1A1A;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+      --accent-green: #2E7D32;
+      --accent-gold: #D4A853;
+      --accent-blue: #1976D2;
+      --accent-coral: #C75A3A;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-soft);
+      color: var(--text-primary);
+      line-height: 1.5;
+      padding: 32px 24px 80px;
+    }
+
+    /* ============ Page header ============ */
+    .page-header {
+      max-width: 1280px;
+      margin: 0 auto 40px;
+    }
+    .page-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .page-header .subtitle {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .brief-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .brief-card .req-block {
+      border-left: 3px solid var(--accent-gold);
+      padding-left: 12px;
+    }
+    .brief-card .req-block .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .brief-card .req-block .desc {
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.45;
+    }
+
+    /* ============ Option block ============ */
+    .option {
+      max-width: 1280px;
+      margin: 0 auto 56px;
+      background: var(--bg-card);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .option-header {
+      padding: 20px 28px;
+      background: var(--bg-warm);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .option-header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .option-num {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent-coral);
+      text-transform: uppercase;
+    }
+    .option-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+    .option-tag {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    .req-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .req-chip {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .req-chip::before {
+      content: "●";
+      color: var(--accent-green);
+      font-size: 8px;
+    }
+
+    .canvas {
+      background: var(--bg-warm);
+      padding: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .annotation {
+      padding: 18px 28px;
+      background: #FFFBF1;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-top: 1px solid #F0E5C7;
+    }
+    .annotation strong { color: var(--text-primary); }
+
+    /* ============ Wireframe primitives ============ */
+    .frame {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .greeting { font-size: 22px; font-weight: 600; }
+    .topbar-right { display: flex; gap: 12px; align-items: center; }
+    .icon-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--bg-soft);
+      display: inline-block;
+    }
+    .reward-pill {
+      background: var(--accent-gold);
+      color: white;
+      font-size: 12px; font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--bg-hero);
+      border-radius: var(--radius);
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .hero.warm { background: var(--bg-hero-warm); }
+    .hero.green { background: var(--bg-hero-green); height: 180px; }
+    .hero-content {
+      background: rgba(255,255,255,0.92);
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      max-width: 50%;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .hero-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .hero-meta { font-size: 12px; color: var(--text-secondary); }
+    .hero-img-label {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: rgba(255,255,255,0.7);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Section header */
+    .section-h {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 24px 0 12px;
+    }
+    .section-h h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .section-h .source {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .section-h .link { font-size: 12px; color: var(--accent-blue); }
+
+    /* Card grids */
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3-stat { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 20px; }
+
+    .pcard {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pcard.continue { border-left: 3px solid var(--accent-blue); }
+    .pcard.client { border-left: 3px solid var(--accent-coral); }
+    .pcard.interest { border-left: 3px solid var(--accent-green); }
+    .pcard-thumb {
+      background: var(--bg-soft);
+      height: 60px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+    }
+    .pcard-thumb.tall { height: 90px; }
+    .pcard-title { font-size: 13px; font-weight: 600; line-height: 1.3; }
+    .pcard-meta { font-size: 11px; color: var(--text-muted); }
+    .pcard-progress {
+      height: 4px; background: var(--bg-soft); border-radius: 2px; overflow: hidden;
+      margin-top: 4px;
+    }
+    .pcard-progress > div {
+      height: 100%; background: var(--accent-blue);
+    }
+    .pcard-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--bg-soft);
+      color: var(--text-secondary);
+      align-self: flex-start;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .pcard-tag.continue { background: #E3EDFA; color: var(--accent-blue); }
+    .pcard-tag.client { background: #F8E6E0; color: var(--accent-coral); }
+    .pcard-tag.sleep { background: #E8E0F4; color: #6F4FB0; }
+    .pcard-tag.stress { background: #FCE5D5; color: #B05A1F; }
+    .pcard-tag.nutrition { background: #DDF0DD; color: var(--accent-green); }
+    .pcard-tag.points { background: #FBF2D9; color: #8B6B1A; }
+
+    /* Client banner */
+    .client-banner {
+      background: linear-gradient(90deg, #F8E6E0 0%, #FFFBF1 100%);
+      border: 1px solid #F0D0C2;
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .client-banner .logo {
+      width: 40px; height: 40px;
+      background: var(--accent-coral);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .client-banner .body { flex: 1; }
+    .client-banner .body .label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--accent-coral); font-weight: 700; margin-bottom: 2px;
+    }
+    .client-banner .body .title { font-size: 14px; font-weight: 600; }
+    .client-banner .body .meta { font-size: 12px; color: var(--text-secondary); }
+    .client-banner .cta {
+      background: var(--accent-coral); color: white;
+      padding: 8px 14px; border-radius: 6px;
+      font-size: 12px; font-weight: 600;
+    }
+
+    /* Stat cards */
+    .stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+    }
+    .stat .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 4px; }
+    .stat .value { font-size: 22px; font-weight: 700; }
+    .stat .sub { font-size: 11px; color: var(--text-muted); }
+
+    /* Lane scroll hint */
+    .lane {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      gap: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .lane.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    /* Two col layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .col-action h3 { margin-bottom: 8px; }
+
+    /* Filter chips */
+    .filter-row {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      padding: 16px 0 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .fchip {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .fchip.active {
+      background: var(--text-primary);
+      color: white;
+      border-color: var(--text-primary);
+    }
+
+    /* Today module */
+    .today-module {
+      background: linear-gradient(135deg, #F1EEE8 0%, #FFFBF1 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .today-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .today-cell {
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .today-cell .eyebrow {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text-muted); font-weight: 600;
+    }
+    .today-cell .title { font-size: 14px; font-weight: 600; line-height: 1.3; }
+    .today-cell .cta {
+      font-size: 12px; color: var(--accent-blue); font-weight: 600;
+      margin-top: auto;
+    }
+
+    /* Continue spotlight (Option 2) */
+    .spotlight {
+      background: linear-gradient(135deg, #E3EDFA 0%, #F4F8FE 100%);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .spotlight-main {
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .spotlight-main .label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px;
+      color: var(--accent-blue); font-weight: 700; margin-bottom: 6px;
+    }
+    .spotlight-main .title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .spotlight-main .meta { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
+    .spotlight-main .progress-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 11px; color: var(--text-muted); margin-bottom: 12px;
+    }
+    .spotlight-main .progress-row .bar {
+      flex: 1; height: 6px; background: var(--bg-soft); border-radius: 3px; overflow: hidden;
+    }
+    .spotlight-main .progress-row .bar > div { height: 100%; background: var(--accent-blue); }
+    .spotlight-main .btn {
+      align-self: flex-start;
+      background: var(--accent-blue); color: white;
+      padding: 8px 14px; border-radius: 6px;
+      font-size: 12px; font-weight: 600;
+    }
+
+    /* Comparison table */
+    .compare {
+      max-width: 1280px;
+      margin: 64px auto 0;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+    .compare h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      background: var(--bg-warm);
+    }
+    td.opt {
+      font-weight: 700;
+      color: var(--accent-coral);
+      white-space: nowrap;
+    }
+
+    .legend {
+      max-width: 1280px;
+      margin: 24px auto 0;
+      padding: 16px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .legend .swatch {
+      width: 14px; height: 14px; border-radius: 3px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ Page header ============ -->
+  <header class="page-header">
+    <h1>Home Page — 5 Alternatives</h1>
+    <p class="subtitle">Five architectural directions, each addressing the same four requirements. Desktop wireframes at ~1200px. April 30, 2026.</p>
+
+    <div class="brief-card">
+      <div class="req-block">
+        <div class="label">Personalization</div>
+        <div class="desc">Driven by the wellbeing interests survey — content tagged to the user's stated interests.</div>
+      </div>
+      <div class="req-block">
+        <div class="label">One hero image</div>
+        <div class="desc">Single full-width hero per page (John's request). No 5-card carousel.</div>
+      </div>
+      <div class="req-block">
+        <div class="label">Client items</div>
+        <div class="desc">A reserved place for employer/client features (health fair, OE, benefits selection).</div>
+      </div>
+      <div class="req-block">
+        <div class="label">Ongoing programs</div>
+        <div class="desc">Direct re-entry to in-flight DCPs, journeys, habits — not buried in discovery.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ OPTION 1 — Three Lanes ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 1</span>
+        <span class="option-title">Hero + Three Lanes</span>
+        <span class="option-tag">Most conventional. Three named lanes, source of every card is obvious.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Hi Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-pill">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Featured</div>
+            <div class="hero-title">Spring into better sleep</div>
+            <div class="hero-meta">A 4-week program tuned to your wellbeing interests</div>
+          </div>
+        </div>
+
+        <div class="section-h">
+          <h3>Continue your programs</h3>
+          <span class="source">From your activity</span>
+        </div>
+        <div class="lane three">
+          <div class="pcard continue">
+            <div class="pcard-tag continue">DCP</div>
+            <div class="pcard-title">Diabetes Prevention</div>
+            <div class="pcard-meta">Week 3 of 12</div>
+            <div class="pcard-progress"><div style="width:25%"></div></div>
+          </div>
+          <div class="pcard continue">
+            <div class="pcard-tag continue">Journey</div>
+            <div class="pcard-title">Better Sleep Foundations</div>
+            <div class="pcard-meta">2 of 5 sessions</div>
+            <div class="pcard-progress"><div style="width:40%"></div></div>
+          </div>
+          <div class="pcard continue">
+            <div class="pcard-tag continue">Habit</div>
+            <div class="pcard-title">10-min daily walk</div>
+            <div class="pcard-meta">5-day streak</div>
+            <div class="pcard-progress"><div style="width:71%"></div></div>
+          </div>
+        </div>
+
+        <div class="section-h">
+          <h3>From Umbrella Partners</h3>
+          <span class="source">Featured by your employer</span>
+        </div>
+        <div class="grid-2">
+          <div class="client-banner">
+            <div class="logo">UP</div>
+            <div class="body">
+              <div class="label">Health fair</div>
+              <div class="title">May 14 · Umbrella HQ</div>
+              <div class="meta">Free biometrics, flu shots, EAP info</div>
+            </div>
+            <div class="cta">RSVP</div>
+          </div>
+          <div class="client-banner">
+            <div class="logo">UP</div>
+            <div class="body">
+              <div class="label">Benefits</div>
+              <div class="title">Open enrollment is open</div>
+              <div class="meta">Make your selections by May 30</div>
+            </div>
+            <div class="cta">Start</div>
+          </div>
+        </div>
+
+        <div class="section-h">
+          <h3>For your interest in <em>Sleep, Stress, Nutrition</em></h3>
+          <span class="link">Update interests →</span>
+        </div>
+        <div class="grid-3">
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag sleep">Sleep</div>
+            <div class="pcard-title">Wind-down routines that actually work</div>
+            <div class="pcard-meta">5-min read · Earn 50 pts</div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag stress">Stress</div>
+            <div class="pcard-title">Box breathing for the workday</div>
+            <div class="pcard-meta">3-min audio · Earn 50 pts</div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag nutrition">Nutrition</div>
+            <div class="pcard-title">Anti-inflammatory pantry basics</div>
+            <div class="pcard-meta">7-min read · Earn 50 pts</div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Three named lanes, three sources — Miller's Law and Nielsen #2 (match real world). Every card explains where it came from. <strong>Tradeoff:</strong> Tall page on desktop unless lanes scroll horizontally on smaller widths.
+    </div>
+  </section>
+
+  <!-- ============ OPTION 2 — Continue First ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 2</span>
+        <span class="option-title">Continue First</span>
+        <span class="option-tag">Engagement-led. Ongoing programs get the dominant slot, not a hero card.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Welcome back, Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-pill">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero green">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">May focus</div>
+            <div class="hero-title">Move more, sleep better</div>
+          </div>
+        </div>
+
+        <div class="spotlight">
+          <div class="spotlight-main">
+            <div class="label">Continue · DCP</div>
+            <div class="title">Diabetes Prevention</div>
+            <div class="meta">Next: Week 4 — Carb tracking basics</div>
+            <div class="progress-row">
+              <span>Week 3 of 12</span>
+              <div class="bar"><div style="width:25%"></div></div>
+              <span>25%</span>
+            </div>
+            <div class="btn">Resume program</div>
+          </div>
+          <div class="spotlight-main">
+            <div class="label">Continue · Journey</div>
+            <div class="title">Better Sleep</div>
+            <div class="meta">2 of 5 sessions complete</div>
+            <div class="progress-row">
+              <div class="bar"><div style="width:40%"></div></div>
+            </div>
+            <div class="btn">Next session</div>
+          </div>
+          <div class="spotlight-main">
+            <div class="label">Continue · Habit</div>
+            <div class="title">10-min walk</div>
+            <div class="meta">5-day streak — log today</div>
+            <div class="progress-row">
+              <div class="bar"><div style="width:71%"></div></div>
+            </div>
+            <div class="btn">Mark done</div>
+          </div>
+        </div>
+
+        <div class="client-banner" style="margin-top:20px">
+          <div class="logo">UP</div>
+          <div class="body">
+            <div class="label">From Umbrella Partners</div>
+            <div class="title">Health fair · May 14 + Open enrollment</div>
+            <div class="meta">Two things from your employer this month</div>
+          </div>
+          <div class="cta">View both</div>
+        </div>
+
+        <div class="section-h">
+          <h3>For your interests</h3>
+          <span class="source">Sleep, Stress, Nutrition · Update →</span>
+        </div>
+        <div class="grid-2">
+          <div class="pcard interest">
+            <div class="pcard-thumb tall"></div>
+            <div class="pcard-tag sleep">Sleep</div>
+            <div class="pcard-title">Wind-down routines that actually work</div>
+            <div class="pcard-meta">5-min read · Earn 50 pts</div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb tall"></div>
+            <div class="pcard-tag stress">Stress</div>
+            <div class="pcard-title">Box breathing for the workday</div>
+            <div class="pcard-meta">3-min audio · Earn 50 pts</div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Zeigarnik effect — incomplete programs are what most users came back for. Goal-gradient ("week 3 of 12") drives motivation. <strong>Tradeoff:</strong> New users with nothing in flight see an empty primary slot — needs a strong empty state pointing to the wellbeing interests survey.
+    </div>
+  </section>
+
+  <!-- ============ OPTION 3 — Two-Column ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 3</span>
+        <span class="option-title">Two-Column Action / Discovery</span>
+        <span class="option-tag">Aligns with the Apr-15 decision doc. "What I'm doing" left, "what I might want" right.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Hi Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-pill">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero warm">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Spotlight</div>
+            <div class="hero-title">Your stress reset week</div>
+            <div class="hero-meta">Curated for your interests</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="col-action">
+            <div class="section-h" style="margin-top:0"><h3>Continue</h3></div>
+            <div class="pcard continue">
+              <div class="pcard-tag continue">DCP</div>
+              <div class="pcard-title">Diabetes Prevention</div>
+              <div class="pcard-meta">Week 3 of 12</div>
+              <div class="pcard-progress"><div style="width:25%"></div></div>
+            </div>
+            <div class="pcard continue" style="margin-top:8px">
+              <div class="pcard-tag continue">Journey</div>
+              <div class="pcard-title">Better Sleep</div>
+              <div class="pcard-meta">2 of 5 sessions</div>
+              <div class="pcard-progress"><div style="width:40%"></div></div>
+            </div>
+            <div class="pcard continue" style="margin-top:8px">
+              <div class="pcard-tag continue">Habit</div>
+              <div class="pcard-title">10-min walk</div>
+              <div class="pcard-meta">5-day streak</div>
+              <div class="pcard-progress"><div style="width:71%"></div></div>
+            </div>
+
+            <div class="section-h"><h3>From your employer</h3></div>
+            <div class="client-banner" style="flex-direction:column;align-items:flex-start;gap:8px;padding:12px">
+              <div class="body">
+                <div class="label">Umbrella Partners</div>
+                <div class="title">Health fair · May 14</div>
+              </div>
+              <div class="cta">RSVP</div>
+            </div>
+            <div class="client-banner" style="flex-direction:column;align-items:flex-start;gap:8px;padding:12px;margin-top:8px">
+              <div class="body">
+                <div class="label">Umbrella Partners</div>
+                <div class="title">Open enrollment</div>
+              </div>
+              <div class="cta">Start</div>
+            </div>
+          </div>
+
+          <div class="col-discovery">
+            <div class="section-h" style="margin-top:0">
+              <h3>For your interests</h3>
+              <span class="source">Sleep · Stress · Nutrition</span>
+            </div>
+            <div class="grid-2">
+              <div class="pcard interest">
+                <div class="pcard-thumb tall"></div>
+                <div class="pcard-tag sleep">Sleep</div>
+                <div class="pcard-title">Wind-down routines that work</div>
+                <div class="pcard-meta">5-min read · 50 pts</div>
+              </div>
+              <div class="pcard interest">
+                <div class="pcard-thumb tall"></div>
+                <div class="pcard-tag stress">Stress</div>
+                <div class="pcard-title">Box breathing for work</div>
+                <div class="pcard-meta">3-min audio · 50 pts</div>
+              </div>
+              <div class="pcard interest">
+                <div class="pcard-thumb tall"></div>
+                <div class="pcard-tag nutrition">Nutrition</div>
+                <div class="pcard-title">Anti-inflammatory pantry</div>
+                <div class="pcard-meta">7-min read · 50 pts</div>
+              </div>
+              <div class="pcard interest">
+                <div class="pcard-thumb tall"></div>
+                <div class="pcard-tag sleep">Sleep</div>
+                <div class="pcard-title">Caffeine cutoff calculator</div>
+                <div class="pcard-meta">Tool · 25 pts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Reuses the 2-column architecture already agreed in the Apr-15 decision doc — no relitigation. Clear mental model: left = your stuff, right = new stuff. <strong>Tradeoff:</strong> Collapses to a long single column on mobile; need an explicit stacking order (Continue → Client → Interests).
+    </div>
+  </section>
+
+  <!-- ============ OPTION 4 — Single Feed ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 4</span>
+        <span class="option-title">Single Personalized Feed</span>
+        <span class="option-tag">Radical simplification. One feed, typed cards, filterable. Mobile-first by construction.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Hi Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-pill">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Today</div>
+            <div class="hero-title">One small thing</div>
+            <div class="hero-meta">Box breathing — 3 minutes</div>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <span class="fchip active">All</span>
+          <span class="fchip">Continue (3)</span>
+          <span class="fchip">From Umbrella (2)</span>
+          <span class="fchip">Sleep</span>
+          <span class="fchip">Stress</span>
+          <span class="fchip">Nutrition</span>
+        </div>
+
+        <div class="grid-3">
+          <div class="pcard continue">
+            <div class="pcard-tag continue">Continue · DCP</div>
+            <div class="pcard-title">Diabetes Prevention — Week 3</div>
+            <div class="pcard-meta">Pinned · Resume now</div>
+            <div class="pcard-progress"><div style="width:25%"></div></div>
+          </div>
+          <div class="pcard client">
+            <div class="pcard-tag client">From Umbrella</div>
+            <div class="pcard-title">Health fair · May 14</div>
+            <div class="pcard-meta">Pinned · RSVP by May 7</div>
+          </div>
+          <div class="pcard continue">
+            <div class="pcard-tag continue">Continue · Habit</div>
+            <div class="pcard-title">10-min walk</div>
+            <div class="pcard-meta">Pinned · 5-day streak</div>
+            <div class="pcard-progress"><div style="width:71%"></div></div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag sleep">Sleep</div>
+            <div class="pcard-title">Wind-down routines</div>
+            <div class="pcard-meta">5-min read · 50 pts</div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag stress">Stress</div>
+            <div class="pcard-title">Box breathing for work</div>
+            <div class="pcard-meta">3-min audio · 50 pts</div>
+          </div>
+          <div class="pcard client">
+            <div class="pcard-tag client">From Umbrella</div>
+            <div class="pcard-title">Open enrollment is open</div>
+            <div class="pcard-meta">Make selections by May 30</div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag nutrition">Nutrition</div>
+            <div class="pcard-title">Anti-inflammatory pantry</div>
+            <div class="pcard-meta">7-min read · 50 pts</div>
+          </div>
+          <div class="pcard continue">
+            <div class="pcard-tag continue">Continue · Journey</div>
+            <div class="pcard-title">Better Sleep — session 3</div>
+            <div class="pcard-meta">2 of 5 done</div>
+            <div class="pcard-progress"><div style="width:40%"></div></div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag sleep">Sleep</div>
+            <div class="pcard-title">Caffeine cutoff calculator</div>
+            <div class="pcard-meta">Tool · 25 pts</div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Tesler's Law — system absorbs the "where does this go" complexity. One feed scales identically from mobile to desktop. <strong>Tradeoff:</strong> Risk that client items get scrolled past; mitigate by always pinning at least one above the fold. Depends on a real ranking model.
+    </div>
+  </section>
+
+  <!-- ============ OPTION 5 — Today View ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 5</span>
+        <span class="option-title">Today View</span>
+        <span class="option-tag">Focus-led. Above the fold = one decision: what to do right now.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Good morning, Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-pill">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero warm">
+          <span class="hero-img-label">Hero (contextual: morning)</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Today, Apr 30</div>
+            <div class="hero-title">A calm start</div>
+            <div class="hero-meta">3 things lined up for you</div>
+          </div>
+        </div>
+
+        <div class="today-module">
+          <div class="section-h" style="margin-top:0">
+            <h3>Today</h3>
+            <span class="source">Picked from your programs and interests</span>
+          </div>
+          <div class="today-row">
+            <div class="today-cell">
+              <span class="eyebrow">Continue · DCP</span>
+              <span class="title">Week 4 of Diabetes Prevention — Carb tracking basics</span>
+              <span class="cta">Resume →</span>
+            </div>
+            <div class="today-cell">
+              <span class="eyebrow">For your interest in Stress</span>
+              <span class="title">Box breathing — 3 minutes before your 10am meeting</span>
+              <span class="cta">Start →</span>
+            </div>
+            <div class="today-cell">
+              <span class="eyebrow">Stat highlight</span>
+              <span class="title">You're 1,400 steps from your daily goal</span>
+              <span class="cta">View activity →</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="client-banner" style="margin-top:20px">
+          <div class="logo">UP</div>
+          <div class="body">
+            <div class="label">From Umbrella Partners</div>
+            <div class="title">Health fair · May 14 at Umbrella HQ</div>
+            <div class="meta">Free biometrics, flu shots, EAP info</div>
+          </div>
+          <div class="cta">RSVP</div>
+        </div>
+
+        <div class="section-h">
+          <h3>Explore</h3>
+          <span class="source">More for your interests · See all →</span>
+        </div>
+        <div class="grid-3">
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag sleep">Sleep</div>
+            <div class="pcard-title">Wind-down routines that work</div>
+            <div class="pcard-meta">5-min read · 50 pts</div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag nutrition">Nutrition</div>
+            <div class="pcard-title">Anti-inflammatory pantry</div>
+            <div class="pcard-meta">7-min read · 50 pts</div>
+          </div>
+          <div class="pcard interest">
+            <div class="pcard-thumb"></div>
+            <div class="pcard-tag stress">Stress</div>
+            <div class="pcard-title">Walking meetings, done right</div>
+            <div class="pcard-meta">4-min read · 50 pts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Hick's Law — above the fold collapses to ~3 choices. Peak-End — the page ends with an explicit "what to do right now." <strong>Tradeoff:</strong> Most opinionated of the five; if the daily recommendation is wrong, the page feels wrong. Needs good ranking + a graceful "show me everything" escape.
+    </div>
+  </section>
+
+  <!-- ============ Comparison ============ -->
+  <section class="compare">
+    <h2>Side-by-side</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Personalization</th>
+          <th>Hero</th>
+          <th>Client slot</th>
+          <th>Ongoing programs</th>
+          <th>Best when…</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="opt">1. Three Lanes</td>
+          <td>Named lane "For your interest in X, Y, Z"</td>
+          <td>Single, full-width, above the fold</td>
+          <td>Named lane, two side-by-side cards</td>
+          <td>Named lane, three cards with progress</td>
+          <td>You want clarity over density</td>
+        </tr>
+        <tr>
+          <td class="opt">2. Continue First</td>
+          <td>2-up grid below the fold</td>
+          <td>Single, slimmer (180px)</td>
+          <td>Mid-page banner, combined</td>
+          <td><strong>Hero-adjacent spotlight</strong> (3 programs)</td>
+          <td>Engagement / retention is the priority</td>
+        </tr>
+        <tr>
+          <td class="opt">3. Two-Column</td>
+          <td>Right column (4-up grid)</td>
+          <td>Spans top of two columns</td>
+          <td>Left column, stacked</td>
+          <td>Left column, top of stack</td>
+          <td>You want to lock in the Apr-15 decision</td>
+        </tr>
+        <tr>
+          <td class="opt">4. Single Feed</td>
+          <td>Feed cards with interest chip</td>
+          <td>Single, contextual</td>
+          <td>Inline pinned cards</td>
+          <td>Pinned to top of feed</td>
+          <td>You want true mobile-first + ML ranking</td>
+        </tr>
+        <tr>
+          <td class="opt">5. Today View</td>
+          <td>One suggested action in "Today"</td>
+          <td>Contextual (morning/evening)</td>
+          <td>Pinned card mid-page</td>
+          <td>Next checkpoint surfaced in "Today"</td>
+          <td>You want a focused, opinionated home</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="legend">
+    <span><span class="swatch" style="background:#1976D2"></span>Continue (programs)</span>
+    <span><span class="swatch" style="background:#C75A3A"></span>From client</span>
+    <span><span class="swatch" style="background:#2E7D32"></span>Interest-based</span>
+    <span><span class="swatch" style="background:#D4A853"></span>Rewards</span>
+  </div>
+
+</body>
+</html>

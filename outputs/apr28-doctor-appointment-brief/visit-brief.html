@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Doctor Visit Brief — Davinder Rehal</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --rule: #d4d4d4;
+    --flag: #b34a2c;
+    --bg-soft: #faf7f1;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    line-height: 1.45;
+    background: #fff;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 40px;
+  }
+
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  header h1 {
+    font-size: 18pt;
+    margin: 0 0 4px 0;
+    letter-spacing: -0.01em;
+  }
+
+  header .meta {
+    color: var(--muted);
+    font-size: 10pt;
+  }
+
+  h2 {
+    font-size: 13pt;
+    margin: 22px 0 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--rule);
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 11pt;
+    margin: 14px 0 6px;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    page-break-after: avoid;
+  }
+
+  p { margin: 6px 0; }
+
+  ul {
+    margin: 6px 0 6px 20px;
+    padding: 0;
+  }
+
+  ul li {
+    margin: 2px 0;
+  }
+
+  .callout {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--ink);
+    padding: 8px 12px;
+    margin: 10px 0;
+    font-weight: 600;
+  }
+
+  .ask {
+    background: var(--bg-soft);
+    border-left: 3px solid var(--flag);
+    padding: 8px 12px;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+
+  .ask strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--flag);
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .doing {
+    background: #f4f7f2;
+    border-left: 3px solid #4a7c59;
+    padding: 8px 12px;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+
+  .doing strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #2f5d3f;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 12px;
+    page-break-inside: avoid;
+    font-size: 10.5pt;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--bg-soft);
+    font-weight: 600;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+  }
+
+  td.flag {
+    color: var(--flag);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  td.value {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .note {
+    color: var(--muted);
+    font-size: 10pt;
+    font-style: italic;
+    margin: 6px 0;
+  }
+
+  .section { page-break-inside: avoid; }
+
+  @media print {
+    .page {
+      padding: 0.5in;
+      max-width: none;
+    }
+    body { font-size: 10.5pt; }
+    h2 { page-break-after: avoid; }
+    table, .ask, .doing, .callout { page-break-inside: avoid; }
+    @page { margin: 0.5in; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>Doctor Visit Brief</h1>
+  <div class="meta">Davinder Rehal &nbsp;·&nbsp; April 28, 2026</div>
+</header>
+
+<!-- SECTION 1 -->
+<section>
+  <h2>1. Why I'm here today</h2>
+
+  <div class="callout">
+    Primary focus: ongoing debilitating dizziness and accompanying left frozen shoulder.
+  </div>
+  <p>Working diagnoses from prior workup: PPPD or cervicogenic dizziness (per last assessment) + frozen shoulder.</p>
+
+  <h3>History — symptoms ongoing 2–3 years</h3>
+  <ul>
+    <li>Pain and numbness in left arm/shoulder, ongoing for 2–3 years</li>
+    <li>Dizziness comes and goes — described as a "rocking on a boat" sensation</li>
+    <li>Pain radiates from shoulder down the arm and up into the neck and face</li>
+    <li>Tingling in arm, shoulder, and face</li>
+    <li>Currently not driving due to symptoms</li>
+  </ul>
+
+  <h3>Symptom triggers I've noticed</h3>
+  <ul>
+    <li>Lifting the left arm</li>
+    <li>Loud sounds</li>
+    <li>Busy rooms / multiple sound sources / chatter from different directions</li>
+    <li>Light sensitivity</li>
+  </ul>
+
+  <h3>Prior workup</h3>
+  <ul>
+    <li>Cervical MRI: minor cervical changes, consistent with age</li>
+    <li>Brain MRI: negative</li>
+    <li>Neurology consultation: negative</li>
+    <li>PT (initial round): inflamed symptoms — increased numbness, pain, and dizziness, even with simple exercises</li>
+    <li>Current direction: vestibular-focused workup; frozen shoulder confirmed</li>
+  </ul>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+  <h2>2. Lab results — thyroid and inflammation</h2>
+
+  <h3>Thyroid</h3>
+  <table>
+    <thead><tr><th>Marker</th><th>Value</th><th>Flag</th></tr></thead>
+    <tbody>
+      <tr><td>TPO Antibodies</td><td class="value">&gt;900 IU/mL</td><td class="flag">Above Range</td></tr>
+      <tr><td>TSH</td><td class="value">7.2 mIU/L</td><td class="flag">Above Range</td></tr>
+      <tr><td>Free T4</td><td class="value">In range (prior)</td><td>—</td></tr>
+      <tr><td>Free T3</td><td class="value">In range (prior)</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p class="note">TSH has fluctuated in the past — has gone up before and come back down. Holding off on thyroid medication for now. TPO antibody positivity is associated with higher frozen shoulder occurrence.</p>
+
+  <h3>Inflammation / Autoimmunity</h3>
+  <table>
+    <thead><tr><th>Marker</th><th>Value</th><th>Flag</th></tr></thead>
+    <tbody>
+      <tr><td>hs-CRP</td><td class="value">1.8 mg/L</td><td class="flag">Above Range</td></tr>
+      <tr><td>ANA Screen</td><td class="value">Positive</td><td class="flag">Out of Range</td></tr>
+      <tr><td>ANA Titer</td><td class="value">1:40</td><td class="flag">Out of Range</td></tr>
+      <tr><td>ANA Pattern</td><td class="value">Nuclear, Homogeneous</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p class="note">ANA has never been positive in prior Kaiser results — this is new.</p>
+
+  <div class="ask">
+    <strong>Ask</strong>
+    Is this low-grade inflammation? Should we run a broader autoimmune panel?
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+  <h2>3. Other results, current actions, follow-up</h2>
+
+  <h3>Heart / Lipids</h3>
+  <table>
+    <thead><tr><th>Marker</th><th>Value</th><th>Flag</th></tr></thead>
+    <tbody>
+      <tr><td>Total Cholesterol</td><td class="value">320 mg/dL</td><td class="flag">Above Range</td></tr>
+      <tr><td>LDL-C</td><td class="value">229 mg/dL</td><td class="flag">Above Range</td></tr>
+      <tr><td>ApoB</td><td class="value">188 mg/dL</td><td class="flag">Above Range</td></tr>
+      <tr><td>LDL Particle Number</td><td class="value">2048 nmol/L</td><td class="flag">Above Range</td></tr>
+      <tr><td>LDL Pattern</td><td class="value">B</td><td class="flag">Out of Range</td></tr>
+      <tr><td>LDL Peak Size</td><td class="value">212.2 Å</td><td class="flag">Below Range</td></tr>
+      <tr><td>LDL Small</td><td class="value">520 nmol/L</td><td class="flag">Above Range</td></tr>
+      <tr><td>LDL Medium</td><td class="value">400 nmol/L</td><td class="flag">Above Range</td></tr>
+      <tr><td>HDL Large</td><td class="value">5750 nmol/L</td><td class="flag">Below Range</td></tr>
+      <tr><td>Lipoprotein(a)</td><td class="value">162 nmol/L</td><td class="flag">Above Range</td></tr>
+      <tr><td>Non-HDL Cholesterol</td><td class="value">268 mg/dL</td><td class="flag">Above Range</td></tr>
+      <tr><td>Total Chol / HDL Ratio</td><td class="value">6.2</td><td class="flag">Above Range</td></tr>
+      <tr><td>Triglycerides</td><td class="value">209 mg/dL</td><td class="flag">Above Range</td></tr>
+    </tbody>
+  </table>
+
+  <div class="doing">
+    <strong>What I'm doing now</strong>
+    Oats daily + psyllium husk daily. Has worked well for me in the past — want to see how far diet alone gets me before considering medication.
+  </div>
+
+  <div class="ask">
+    <strong>Asks</strong>
+    <ul>
+      <li>Recommend imaging to assess plaque burden? (coronary artery calcium / CAC, or other?)</li>
+      <li>If we eventually go to a statin: thoughts on CoQ10 to help with potential muscle pain?</li>
+      <li>Re-test lipids in a few months to see diet impact</li>
+    </ul>
+  </div>
+
+  <h3>Electrolytes</h3>
+  <table>
+    <thead><tr><th>Marker</th><th>Value</th><th>Flag</th></tr></thead>
+    <tbody>
+      <tr><td>Sodium</td><td class="value">130 mmol/L</td><td class="flag">Below Range</td></tr>
+      <tr><td>Chloride</td><td class="value">95 mmol/L</td><td class="flag">Below Range</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Metabolic</h3>
+  <table>
+    <thead><tr><th>Marker</th><th>Value</th><th>Flag</th></tr></thead>
+    <tbody>
+      <tr><td>Uric Acid</td><td class="value">3.7 mg/dL</td><td class="flag">Below Range</td></tr>
+    </tbody>
+  </table>
+  <div class="ask">
+    <strong>Question</strong>
+    What does the low uric acid mean?
+  </div>
+
+  <h3>Male Health</h3>
+  <table>
+    <thead><tr><th>Marker</th><th>Value</th><th>Flag</th></tr></thead>
+    <tbody>
+      <tr><td>Free PSA %</td><td class="value">13% (calc)</td><td class="flag">Below Range</td></tr>
+    </tbody>
+  </table>
+  <div class="ask">
+    <strong>Question</strong>
+    What does this mean? What was my total PSA value?
+  </div>
+
+  <h3>Nutrients</h3>
+  <table>
+    <thead><tr><th>Marker</th><th>Value</th><th>Flag</th></tr></thead>
+    <tbody>
+      <tr><td>Vitamin D</td><td class="value">20 ng/mL</td><td class="flag">Below Range</td></tr>
+      <tr><td>Omega-3 Total</td><td class="value">4.0% by wt</td><td class="flag">Below Range</td></tr>
+      <tr><td>Omega-3 DPA</td><td class="value">0.7% by wt</td><td class="flag">Below Range</td></tr>
+      <tr><td>Omega-6 Linoleic Acid</td><td class="value">32.6% by wt</td><td class="flag">Above Range</td></tr>
+    </tbody>
+  </table>
+
+  <div class="doing">
+    <strong>What I'm doing now</strong>
+    Vitamin D 500 IU daily &nbsp;·&nbsp; Omega-3 supplement &nbsp;·&nbsp; Increased fish intake &nbsp;·&nbsp; Reduced omega-6 foods
+  </div>
+
+  <div class="ask">
+    <strong>Ask</strong>
+    Is 500 IU Vitamin D enough given the current level?
+  </div>
+</section>
+
+<!-- RE-TEST PLAN -->
+<section class="section">
+  <h2>Re-test plan</h2>
+  <p>Would like to re-check in a few months to see how diet/supplementation has moved the numbers:</p>
+  <ul>
+    <li>Lipid panel (full panel including ApoB, Lp(a), particle sizes)</li>
+    <li>Thyroid (TSH, Free T4, Free T3)</li>
+    <li>hs-CRP</li>
+    <li>Vitamin D</li>
+    <li>Omega panel</li>
+    <li>Sodium / electrolytes</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>

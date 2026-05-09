@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R1 / R2 / R3 — corrected candidates</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  background: #FAF6F0;
+  color: #2C2A26;
+  font-size: 15px;
+  line-height: 1.55;
+  padding: 48px 32px;
+}
+.container { max-width: 1280px; margin: 0 auto; }
+h1 {
+  font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.subtitle { font-size: 15px; color: #5C564E; margin-bottom: 32px; max-width: 70ch; }
+h2 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5C564E;
+  margin: 36px 0 12px;
+}
+.legacy-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.legacy-chip {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #E5DAC4;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 160px;
+}
+.legacy-chip .swatch { height: 60px; }
+.legacy-chip .meta { padding: 8px 10px; font-size: 12px; background: white; }
+.legacy-chip .name { font-weight: 600; }
+.legacy-chip .hex { color: #5C564E; font-size: 11px; }
+
+.candidate {
+  margin: 24px 0;
+  background: white;
+  border: 1px solid #E5DAC4;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.candidate-head {
+  padding: 14px 18px;
+  border-bottom: 1px solid #E5DAC4;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.candidate-name { font-size: 16px; font-weight: 600; }
+.candidate-meta { font-size: 12px; color: #5C564E; }
+.candidate-takeaway { padding: 10px 18px; background: #F2EBDF; font-size: 13px; color: #4A453E; }
+.swatches { display: grid; grid-template-columns: repeat(11, 1fr); }
+.sw {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 4px 6px 6px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.sw .stop { font-size: 9px; opacity: 0.65; }
+.sw.dark { color: rgba(255,255,255,0.92); }
+.sw.light { color: rgba(0,0,0,0.7); }
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 60px repeat(11, 1fr);
+  gap: 0;
+  background: white;
+  border: 1px solid #E5DAC4;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 24px 0;
+}
+.compare-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #F2EBDF;
+  color: #4A453E;
+  padding: 4px;
+  border-right: 1px solid #E5DAC4;
+}
+.compare-row .sw { height: 56px; }
+
+.note { font-size: 12px; color: #5C564E; font-style: italic; margin-top: 12px; }
+
+.cta-row { display: flex; gap: 16px; margin: 32px 0 12px; flex-wrap: wrap; }
+.cta-card {
+  flex: 1;
+  min-width: 240px;
+  background: white;
+  border: 1px solid #E5DAC4;
+  border-radius: 12px;
+  padding: 20px;
+}
+.cta-name { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #5C564E; margin-bottom: 12px; }
+.cta-button {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+}
+.cta-text { font-size: 13px; margin-top: 10px; color: #4A453E; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>R1 / R2 / R3 — corrected candidates</h1>
+<p class="subtitle">Re-anchored inside the legacy blue/teal family per feedback. All three descend recognizably from the existing corporate palette.</p>
+
+<h2>Legacy reference (for visual relationship check)</h2>
+<div class="legacy-row">
+  <div class="legacy-chip">
+    <div class="swatch" style="background:#0F497F;"></div>
+    <div class="meta"><div class="name">Brand Blue</div><div class="hex">#0F497F · ~211°</div></div>
+  </div>
+  <div class="legacy-chip">
+    <div class="swatch" style="background:#04A0B7;"></div>
+    <div class="meta"><div class="name">Aqua Blue</div><div class="hex">#04A0B7 · ~187°</div></div>
+  </div>
+  <div class="legacy-chip">
+    <div class="swatch" style="background:#062A42;"></div>
+    <div class="meta"><div class="name">Night Sky</div><div class="hex">#062A42 · ~209°</div></div>
+  </div>
+  <div class="legacy-chip">
+    <div class="swatch" style="background:#92D5DA;"></div>
+    <div class="meta"><div class="name">Sky Blue</div><div class="hex">#92D5DA · ~186°</div></div>
+  </div>
+  <div class="legacy-chip">
+    <div class="swatch" style="background:#D2E5E1;"></div>
+    <div class="meta"><div class="name">Glacier</div><div class="hex">#D2E5E1 · ~165°</div></div>
+  </div>
+</div>
+
+<h2>R1 — Soft teal · Aqua-descendant · ~190°</h2>
+<div class="candidate">
+  <div class="candidate-head">
+    <span class="candidate-name">R1 — Soft teal</span>
+    <span class="candidate-meta">Anchor 600 · #267284 · hue ~190°</span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#F0F7F9;"><span class="stop">50</span>#F0F7F9</div>
+    <div class="sw light" style="background:#DCEDF0;"><span class="stop">100</span>#DCEDF0</div>
+    <div class="sw light" style="background:#B6D8DE;"><span class="stop">200</span>#B6D8DE</div>
+    <div class="sw light" style="background:#82BCC6;"><span class="stop">300</span>#82BCC6</div>
+    <div class="sw dark" style="background:#4F9EAE;"><span class="stop">400</span>#4F9EAE</div>
+    <div class="sw dark" style="background:#2F8497;"><span class="stop">500</span>#2F8497</div>
+    <div class="sw dark" style="background:#267284;"><span class="stop">600</span>#267284</div>
+    <div class="sw dark" style="background:#1F5C6B;"><span class="stop">700</span>#1F5C6B</div>
+    <div class="sw dark" style="background:#1A4B57;"><span class="stop">800</span>#1A4B57</div>
+    <div class="sw dark" style="background:#143842;"><span class="stop">900</span>#143842</div>
+    <div class="sw dark" style="background:#0B2229;"><span class="stop">950</span>#0B2229</div>
+  </div>
+  <div class="candidate-takeaway">Closest to legacy Aqua Blue. Recognizably the same family, just less saturated and more sophisticated. Lowest visual jump for stakeholders. Risk: still adjacent to the Personify/Sharecare teal cluster.</div>
+</div>
+
+<h2>R2 — Sky-teal bridge · between Aqua + Brand Blue · ~200°</h2>
+<div class="candidate">
+  <div class="candidate-head">
+    <span class="candidate-name">R2 — Sky-teal bridge</span>
+    <span class="candidate-meta">Anchor 600 · #2A6489 · hue ~200°</span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#EFF5FA;"><span class="stop">50</span>#EFF5FA</div>
+    <div class="sw light" style="background:#DAE9F2;"><span class="stop">100</span>#DAE9F2</div>
+    <div class="sw light" style="background:#B5D2E5;"><span class="stop">200</span>#B5D2E5</div>
+    <div class="sw light" style="background:#82B0CE;"><span class="stop">300</span>#82B0CE</div>
+    <div class="sw dark" style="background:#5290B5;"><span class="stop">400</span>#5290B5</div>
+    <div class="sw dark" style="background:#34759E;"><span class="stop">500</span>#34759E</div>
+    <div class="sw dark" style="background:#2A6489;"><span class="stop">600</span>#2A6489</div>
+    <div class="sw dark" style="background:#235173;"><span class="stop">700</span>#235173</div>
+    <div class="sw dark" style="background:#1D425C;"><span class="stop">800</span>#1D425C</div>
+    <div class="sw dark" style="background:#163346;"><span class="stop">900</span>#163346</div>
+    <div class="sw dark" style="background:#0D2030;"><span class="stop">950</span>#0D2030</div>
+  </div>
+  <div class="candidate-takeaway">Bridges Aqua Blue (~187°) and Brand Blue (~211°). Both legacy anchors readable in it. Most modern of the three; the literal "soft sky blue." Recommended pick.</div>
+</div>
+
+<h2>R3 — Modern Brand Blue · navy-descendant · ~210°</h2>
+<div class="candidate">
+  <div class="candidate-head">
+    <span class="candidate-name">R3 — Modern Brand Blue</span>
+    <span class="candidate-meta">Anchor 600 · #355880 · hue ~210°</span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#EFF3F9;"><span class="stop">50</span>#EFF3F9</div>
+    <div class="sw light" style="background:#DBE3F0;"><span class="stop">100</span>#DBE3F0</div>
+    <div class="sw light" style="background:#B7C5DE;"><span class="stop">200</span>#B7C5DE</div>
+    <div class="sw light" style="background:#88A0C5;"><span class="stop">300</span>#88A0C5</div>
+    <div class="sw dark" style="background:#5B7FAB;"><span class="stop">400</span>#5B7FAB</div>
+    <div class="sw dark" style="background:#3F6594;"><span class="stop">500</span>#3F6594</div>
+    <div class="sw dark" style="background:#355880;"><span class="stop">600</span>#355880</div>
+    <div class="sw dark" style="background:#2C4869;"><span class="stop">700</span>#2C4869</div>
+    <div class="sw dark" style="background:#243B55;"><span class="stop">800</span>#243B55</div>
+    <div class="sw dark" style="background:#1B2D40;"><span class="stop">900</span>#1B2D40</div>
+    <div class="sw dark" style="background:#111B27;"><span class="stop">950</span>#111B27</div>
+  </div>
+  <div class="candidate-takeaway">Direct descendant of Brand Blue — keeps the deeper navy authority but softens the saturation. More clinical, less aqua. Risk: still reads "deep blue corporate" if the team isn't ready to soften that direction.</div>
+</div>
+
+<h2>Side-by-side at common stops</h2>
+<div class="compare-row">
+  <div class="compare-label">R1</div>
+  <div class="sw light" style="background:#F0F7F9;"><span class="stop">50</span></div>
+  <div class="sw light" style="background:#DCEDF0;"><span class="stop">100</span></div>
+  <div class="sw light" style="background:#B6D8DE;"><span class="stop">200</span></div>
+  <div class="sw light" style="background:#82BCC6;"><span class="stop">300</span></div>
+  <div class="sw dark" style="background:#4F9EAE;"><span class="stop">400</span></div>
+  <div class="sw dark" style="background:#2F8497;"><span class="stop">500</span></div>
+  <div class="sw dark" style="background:#267284;"><span class="stop">600</span></div>
+  <div class="sw dark" style="background:#1F5C6B;"><span class="stop">700</span></div>
+  <div class="sw dark" style="background:#1A4B57;"><span class="stop">800</span></div>
+  <div class="sw dark" style="background:#143842;"><span class="stop">900</span></div>
+  <div class="sw dark" style="background:#0B2229;"><span class="stop">950</span></div>
+</div>
+<div class="compare-row">
+  <div class="compare-label">R2</div>
+  <div class="sw light" style="background:#EFF5FA;"><span class="stop">50</span></div>
+  <div class="sw light" style="background:#DAE9F2;"><span class="stop">100</span></div>
+  <div class="sw light" style="background:#B5D2E5;"><span class="stop">200</span></div>
+  <div class="sw light" style="background:#82B0CE;"><span class="stop">300</span></div>
+  <div class="sw dark" style="background:#5290B5;"><span class="stop">400</span></div>
+  <div class="sw dark" style="background:#34759E;"><span class="stop">500</span></div>
+  <div class="sw dark" style="background:#2A6489;"><span class="stop">600</span></div>
+  <div class="sw dark" style="background:#235173;"><span class="stop">700</span></div>
+  <div class="sw dark" style="background:#1D425C;"><span class="stop">800</span></div>
+  <div class="sw dark" style="background:#163346;"><span class="stop">900</span></div>
+  <div class="sw dark" style="background:#0D2030;"><span class="stop">950</span></div>
+</div>
+<div class="compare-row">
+  <div class="compare-label">R3</div>
+  <div class="sw light" style="background:#EFF3F9;"><span class="stop">50</span></div>
+  <div class="sw light" style="background:#DBE3F0;"><span class="stop">100</span></div>
+  <div class="sw light" style="background:#B7C5DE;"><span class="stop">200</span></div>
+  <div class="sw light" style="background:#88A0C5;"><span class="stop">300</span></div>
+  <div class="sw dark" style="background:#5B7FAB;"><span class="stop">400</span></div>
+  <div class="sw dark" style="background:#3F6594;"><span class="stop">500</span></div>
+  <div class="sw dark" style="background:#355880;"><span class="stop">600</span></div>
+  <div class="sw dark" style="background:#2C4869;"><span class="stop">700</span></div>
+  <div class="sw dark" style="background:#243B55;"><span class="stop">800</span></div>
+  <div class="sw dark" style="background:#1B2D40;"><span class="stop">900</span></div>
+  <div class="sw dark" style="background:#111B27;"><span class="stop">950</span></div>
+</div>
+
+<h2>Quick CTA preview at the 600 stop on sand surface</h2>
+<div class="cta-row">
+  <div class="cta-card">
+    <div class="cta-name">R1 — Soft teal</div>
+    <a href="#" class="cta-button" style="background:#267284;">Continue today's session</a>
+    <div class="cta-text">Reads: legacy aqua, modernized.</div>
+  </div>
+  <div class="cta-card">
+    <div class="cta-name">R2 — Sky-teal bridge</div>
+    <a href="#" class="cta-button" style="background:#2A6489;">Continue today's session</a>
+    <div class="cta-text">Reads: soft sky blue, both legacy anchors visible.</div>
+  </div>
+  <div class="cta-card">
+    <div class="cta-name">R3 — Modern Brand Blue</div>
+    <a href="#" class="cta-button" style="background:#355880;">Continue today's session</a>
+    <div class="cta-text">Reads: descendant of Brand Blue, less corporate.</div>
+  </div>
+</div>
+
+<p class="note">No applied moments, no audit, no weighting viz. Just visuals to react to.</p>
+
+</div>
+</body>
+</html>

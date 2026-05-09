@@ -9,3 +9,4 @@
 # Skills and plugins (managed separately)
 .skills/
 .remote-plugins/
+.gstack/

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D2 v2 — Sky-teal bridge (R2) locked</title>
+<style>
+:root {
+  /* Sand surfaces (locked) */
+  --sand-50: #FAF6F0;
+  --sand-100: #F2EBDF;
+  --sand-200: #E5DAC4;
+  --sand-900: #2A2620;
+  /* Neutral ink (locked) */
+  --neutral-400: #8C857A;
+  --neutral-600: #5C564E;
+  --neutral-700: #4A453E;
+  --neutral-900: #2C2A26;
+  /* Warm accent (locked) */
+  --warm-300: #E5A57E;
+  --warm-500: #C8744A;
+  --warm-700: #8A4A26;
+  /* Semantic */
+  --success-500: #6B8E5A;
+  --warning-500: #D4A24A;
+  --error-500: #B85A4A;
+  /* R2 — Sky-teal bridge (DIRECTION LOCKED) */
+  --p-50:  #EFF5FA;
+  --p-100: #DAE9F2;
+  --p-200: #B5D2E5;
+  --p-300: #82B0CE;
+  --p-400: #5290B5;
+  --p-500: #34759E;
+  --p-600: #2A6489;
+  --p-700: #235173;
+  --p-800: #1D425C;
+  --p-900: #163346;
+  --p-950: #0D2030;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  background: var(--sand-50);
+  color: var(--neutral-900);
+  font-size: 16px;
+  line-height: 1.55;
+  padding: 48px 32px 96px;
+}
+
+.container { max-width: 1280px; margin: 0 auto; }
+
+h1 {
+  font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+h2 {
+  font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 64px 0 16px;
+  line-height: 1.2;
+  border-top: 1px solid var(--sand-200);
+  padding-top: 32px;
+}
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 28px 0 12px;
+  letter-spacing: -0.005em;
+}
+h4 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neutral-600); margin-bottom: 8px; }
+p { margin-bottom: 12px; max-width: 72ch; }
+small { color: var(--neutral-600); font-size: 13px; }
+.subtitle { font-size: 16px; color: var(--neutral-700); margin-bottom: 24px; max-width: 72ch; }
+
+/* Status pill */
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--p-700);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+/* Phase 0 anchor */
+.anchor {
+  background: var(--sand-100);
+  border: 1px solid var(--sand-200);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin: 24px 0;
+}
+.anchor .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px; }
+.anchor blockquote {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--neutral-700);
+  border-left: 2px solid var(--p-600);
+  padding-left: 12px;
+  margin: 6px 0;
+}
+.attr-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.attr-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  background: var(--sand-50);
+  color: var(--neutral-700);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--sand-200);
+}
+
+/* Heritage strip */
+.heritage {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.heritage-item {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid var(--sand-200);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 168px;
+}
+.heritage-item .swatch { height: 56px; }
+.heritage-item .meta { padding: 8px 12px; font-size: 12px; }
+.heritage-item .name { font-weight: 600; }
+.heritage-item .role { color: var(--neutral-600); font-size: 11px; }
+.heritage-arrow {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--neutral-400); padding: 0 4px;
+}
+
+/* Candidate strips */
+.candidate-strip {
+  background: white;
+  border: 1px solid var(--sand-200);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.candidate-strip.locked { border-color: var(--p-600); border-width: 2px; }
+.strip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--sand-200);
+}
+.strip-header .name { font-size: 15px; font-weight: 600; }
+.verdict { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; }
+.verdict-locked { background: var(--p-600); color: white; }
+.verdict-alt { background: var(--sand-200); color: var(--neutral-700); }
+.swatches { display: grid; grid-template-columns: repeat(11, 1fr); }
+.sw {
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 4px 6px 6px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.sw .stop { font-size: 9px; opacity: 0.65; }
+.sw.dark { color: rgba(255,255,255,0.92); }
+.sw.light { color: rgba(0,0,0,0.7); }
+.strip-takeaway { padding: 10px 18px; font-size: 13px; color: var(--neutral-700); background: var(--sand-50); }
+
+/* Palette table */
+.palette-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+.palette-table th { background: var(--sand-100); padding: 10px 12px; text-align: left; border: 1px solid var(--sand-200); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--neutral-700); }
+.palette-table td { padding: 10px 12px; border: 1px solid var(--sand-200); }
+.palette-table .cta-row { background: rgba(42, 100, 137, 0.06); }
+.palette-table .swatch-cell { width: 60px; padding: 0; }
+.palette-table .swatch-cell > div { width: 100%; height: 32px; }
+
+/* Audit grid */
+.audit {
+  display: grid;
+  grid-template-columns: 200px 1fr 100px 1fr;
+  gap: 1px;
+  background: var(--sand-200);
+  border: 1px solid var(--sand-200);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.audit > div { background: white; padding: 12px 14px; font-size: 13px; }
+.audit .head { background: var(--sand-100); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--neutral-700); }
+.audit .row-head { font-weight: 600; font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--neutral-900); background: var(--sand-50); }
+.score { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.score-high { background: rgba(107, 142, 90, 0.18); color: #4D6B3F; }
+.score-med { background: rgba(212, 162, 74, 0.20); color: #7A5A1F; }
+
+/* Applied samples */
+.samples-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 16px 0; }
+.sample-wrap { display: flex; flex-direction: column; }
+.sample-card {
+  border-radius: 16px;
+  padding: 24px 24px;
+  border: 1px solid var(--sand-200);
+  background: var(--sand-50);
+}
+.sample-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--p-700); margin-bottom: 10px; }
+.sample-title { font-family: "SF Pro Display", Georgia, serif; font-size: 22px; font-weight: 600; line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.01em; }
+.sample-promise { font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+.sample-cta {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+.sample-meta { font-size: 12px; opacity: 0.7; margin-top: 14px; }
+
+/* DCP card */
+.dcp-card {
+  border: 1px solid var(--p-100);
+  border-radius: 20px;
+  padding: 22px;
+  background: white;
+}
+.dcp-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.dcp-progress { background: var(--sand-100); border-radius: 999px; height: 8px; overflow: hidden; margin: 14px 0 8px; }
+.dcp-progress > div { height: 100%; background: var(--p-600); }
+.dcp-stat { display: flex; gap: 22px; margin-top: 16px; }
+.dcp-stat .stat-num { font-family: "SF Pro Display", serif; font-size: 26px; font-weight: 600; letter-spacing: -0.02em; }
+.dcp-stat .stat-label { font-size: 12px; color: var(--neutral-700); }
+.dcp-tag { background: var(--p-100); color: var(--p-700); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* Buyer hero */
+.buyer-hero {
+  background: linear-gradient(135deg, var(--p-900), var(--p-600));
+  border-radius: 16px;
+  padding: 36px 28px;
+  color: white;
+}
+.buyer-hero .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; font-weight: 600; margin-bottom: 12px; }
+.buyer-hero .title { font-family: "SF Pro Display", serif; font-size: 26px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; }
+.buyer-hero .body { color: rgba(255,255,255,0.85); margin-top: 12px; font-size: 15px; }
+.buyer-hero .cta { background: white; color: var(--p-900); display: inline-block; padding: 10px 20px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; margin-top: 16px; }
+.buyer-hero .footer { color: rgba(255,255,255,0.6); margin-top: 24px; font-size: 12px; }
+
+/* Weighting bar */
+.weight-block { margin-top: 14px; padding: 10px 12px; background: white; border: 1px solid var(--sand-200); border-radius: 10px; }
+.weight-label { font-size: 11px; color: var(--neutral-600); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; font-weight: 600; }
+.weight-bar { display: flex; height: 14px; border-radius: 8px; overflow: hidden; border: 1px solid var(--sand-200); }
+.weight-bar > div { display: block; }
+.weight-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; font-size: 11px; color: var(--neutral-700); }
+.weight-legend .item { display: flex; align-items: center; gap: 4px; }
+.weight-legend .swatch { width: 10px; height: 10px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.08); }
+
+/* Verdict callout */
+.verdict-card {
+  background: linear-gradient(135deg, var(--p-50), var(--sand-50));
+  border: 1px solid var(--p-200);
+  border-left: 3px solid var(--p-600);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 16px 0;
+}
+.verdict-card h4 { color: var(--p-700); }
+
+/* Two-col compare */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 16px 0; }
+.two-col .col { background: white; border: 1px solid var(--sand-200); border-radius: 12px; padding: 18px 20px; }
+
+/* Triangulation */
+.tri-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+.tri-card {
+  background: white;
+  border: 1px solid var(--sand-200);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+.tri-card h4 { color: var(--p-700); margin-bottom: 6px; }
+.tri-card .pull { font-size: 12px; font-weight: 600; color: var(--neutral-600); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 8px; }
+
+/* Verification */
+.gate {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  background: white;
+  border: 1px solid var(--sand-200);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.gate-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--p-100);
+  color: var(--p-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.gate-body { flex: 1; }
+.gate-body strong { font-size: 14px; }
+.gate-body p { font-size: 13px; color: var(--neutral-700); margin: 2px 0 0; }
+
+/* Util */
+.note { font-size: 12px; color: var(--neutral-600); font-style: italic; margin-top: 8px; }
+ul { margin-left: 20px; margin-bottom: 12px; }
+li { margin-bottom: 4px; font-size: 14px; }
+hr { border: none; border-top: 1px solid var(--sand-200); margin: 32px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="status-pill">Direction Locked · v2</span>
+  <h1>D2 — Sky-teal bridge (R2)</h1>
+  <p class="subtitle">v2, 2026-05-02 · primary color direction locked inside the legacy blue/teal family · Phase 0 chassis loaded</p>
+
+  <div class="anchor">
+    <h4>Phase 0 testing rubric</h4>
+    <div class="grid">
+      <div>
+        <strong style="font-size:13px;">Brand attributes (each must hold)</strong>
+        <div class="attr-list">
+          <span class="attr-pill">Credible</span>
+          <span class="attr-pill">Direct</span>
+          <span class="attr-pill">Outcome-obsessed</span>
+          <span class="attr-pill">Human</span>
+          <span class="attr-pill">AI-competent</span>
+        </div>
+      </div>
+      <div>
+        <strong style="font-size:13px;">Dual-audience test phrase</strong>
+        <p style="font-size:13px; margin-top:4px;">Would a CHRO put this on a board slide AND would a member screenshot it to a friend who's struggling?</p>
+      </div>
+    </div>
+    <div style="margin-top: 16px;">
+      <strong style="font-size:13px;">Member promise:</strong>
+      <blockquote>Measurable progress on every condition you're carrying — guaranteed, on your phone, without the wait or the bill.</blockquote>
+      <strong style="font-size:13px;">Buyer promise:</strong>
+      <blockquote>Real clinical outcomes across every condition your employees are managing — at the engagement rates that move your spend, guaranteed.</blockquote>
+    </div>
+  </div>
+</header>
+
+<!-- ===== SECTION 1: HERITAGE ===== -->
+<h2>1. Where R2 comes from — softly aligned to the corporate brand</h2>
+<p>R2 sits between the two legacy anchors. Both read in it. The product brand is a recognizable descendant, not a fresh start.</p>
+
+<div class="heritage">
+  <div class="heritage-item">
+    <div class="swatch" style="background:#0F497F;"></div>
+    <div class="meta"><div class="name">Brand Blue (legacy)</div><div class="role">#0F497F · ~211°</div></div>
+  </div>
+  <div class="heritage-arrow">→</div>
+  <div class="heritage-item" style="border-color: var(--p-600); border-width: 2px;">
+    <div class="swatch" style="background:#2A6489;"></div>
+    <div class="meta"><div class="name">R2 — Sky-teal bridge</div><div class="role">#2A6489 · ~200°</div></div>
+  </div>
+  <div class="heritage-arrow">←</div>
+  <div class="heritage-item">
+    <div class="swatch" style="background:#04A0B7;"></div>
+    <div class="meta"><div class="name">Aqua Blue (legacy)</div><div class="role">#04A0B7 · ~187°</div></div>
+  </div>
+</div>
+<p class="note">Hue ~200° is geometrically and perceptually between the two legacy anchors — it descends from both at once.</p>
+
+<!-- ===== SECTION 2: FULL PALETTE ===== -->
+<h2>2. R2 — full 11-stop palette + WCAG AA verification</h2>
+
+<div class="candidate-strip locked">
+  <div class="strip-header">
+    <span class="name">R2 — Sky-teal bridge <small>· primary.* · hue ~200°</small></span>
+    <span class="verdict verdict-locked">Direction Locked</span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#EFF5FA;"><span class="stop">50</span>#EFF5FA</div>
+    <div class="sw light" style="background:#DAE9F2;"><span class="stop">100</span>#DAE9F2</div>
+    <div class="sw light" style="background:#B5D2E5;"><span class="stop">200</span>#B5D2E5</div>
+    <div class="sw light" style="background:#82B0CE;"><span class="stop">300</span>#82B0CE</div>
+    <div class="sw dark" style="background:#5290B5;"><span class="stop">400</span>#5290B5</div>
+    <div class="sw dark" style="background:#34759E;"><span class="stop">500</span>#34759E</div>
+    <div class="sw dark" style="background:#2A6489;"><span class="stop">600</span>#2A6489</div>
+    <div class="sw dark" style="background:#235173;"><span class="stop">700</span>#235173</div>
+    <div class="sw dark" style="background:#1D425C;"><span class="stop">800</span>#1D425C</div>
+    <div class="sw dark" style="background:#163346;"><span class="stop">900</span>#163346</div>
+    <div class="sw dark" style="background:#0D2030;"><span class="stop">950</span>#0D2030</div>
+  </div>
+</div>
+
+<table class="palette-table">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Hex</th>
+      <th>Swatch</th>
+      <th>Text on white</th>
+      <th>Text on sand.50</th>
+      <th>UI on white (3:1)</th>
+      <th>Likely use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>primary.50</td><td>#EFF5FA</td><td class="swatch-cell"><div style="background:#EFF5FA;"></div></td><td>— (surface)</td><td>— (surface)</td><td>— (surface)</td><td>Selected state bg</td></tr>
+    <tr><td>primary.100</td><td>#DAE9F2</td><td class="swatch-cell"><div style="background:#DAE9F2;"></div></td><td>— (bg only)</td><td>— (bg only)</td><td>— (bg only)</td><td>Badge bg, hover surface</td></tr>
+    <tr><td>primary.200</td><td>#B5D2E5</td><td class="swatch-cell"><div style="background:#B5D2E5;"></div></td><td>✗ low</td><td>✗ low</td><td>— borderline</td><td>Subtle border, divider</td></tr>
+    <tr><td>primary.300</td><td>#82B0CE</td><td class="swatch-cell"><div style="background:#82B0CE;"></div></td><td>✗ ~3.0</td><td>✗ ~2.8</td><td>✓ 3:1</td><td>Illustration mid-tone</td></tr>
+    <tr><td>primary.400</td><td>#5290B5</td><td class="swatch-cell"><div style="background:#5290B5;"></div></td><td>— ~3.9 (UI only)</td><td>— ~3.7 (UI only)</td><td>✓</td><td>Icon stroke, secondary border</td></tr>
+    <tr><td>primary.500</td><td>#34759E</td><td class="swatch-cell"><div style="background:#34759E;"></div></td><td>✓ ~5.4</td><td>✓ ~5.0</td><td>✓</td><td>Data viz mid-stop, icon</td></tr>
+    <tr class="cta-row"><td><strong>primary.600</strong></td><td><strong>#2A6489</strong></td><td class="swatch-cell"><div style="background:#2A6489;"></div></td><td>✓ ~7.1 AAA</td><td>✓ ~6.6 AAA</td><td>✓</td><td><strong>Primary CTA bg</strong></td></tr>
+    <tr><td>primary.700</td><td>#235173</td><td class="swatch-cell"><div style="background:#235173;"></div></td><td>✓ ~9.2 AAA</td><td>✓ ~8.5 AAA</td><td>✓</td><td>Hover, focus ring, badge label</td></tr>
+    <tr><td>primary.800</td><td>#1D425C</td><td class="swatch-cell"><div style="background:#1D425C;"></div></td><td>✓ ~11.6 AAA</td><td>✓ ~10.7 AAA</td><td>✓</td><td>Pressed state, mid gradient</td></tr>
+    <tr><td>primary.900</td><td>#163346</td><td class="swatch-cell"><div style="background:#163346;"></div></td><td>✓ ~13.9 AAA</td><td>✓ ~12.8 AAA</td><td>✓</td><td>Inverse surface, deep gradient end</td></tr>
+    <tr><td>primary.950</td><td>#0D2030</td><td class="swatch-cell"><div style="background:#0D2030;"></div></td><td>✓ ~17.3 AAA</td><td>✓ ~16.1 AAA</td><td>✓</td><td>Reserved — extreme contrast</td></tr>
+  </tbody>
+</table>
+<p class="note">Contrast values estimated from sRGB luminance; verify with Stark or Colour Contrast Analyser before final lock. Stops 200–400 are intentionally non-text-passing — they're surface and decorative tokens.</p>
+
+<!-- ===== SECTION 3: APPLIED MOMENTS ===== -->
+<h2>3. Applied to the dual-audience moments</h2>
+<p>Two anchor moments: the member's DCP completion screen (warm, low-friction, dignity-preserving) and the buyer's website hero (credible, evidence-grounded, financially-fluent). Both must hold simultaneously.</p>
+
+<div class="samples-row">
+
+  <!-- Member moment -->
+  <div class="sample-wrap">
+    <div class="sample-card">
+      <div class="sample-label">Member · DCP completion moment</div>
+      <div class="dcp-card">
+        <div class="dcp-row">
+          <div>
+            <div style="font-size: 12px; color: var(--neutral-700); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;">Back Care · Week 4 of 8</div>
+            <div class="sample-title" style="margin-top: 6px; color: var(--neutral-900);">You're halfway. Pain down 1.4 points since you started.</div>
+          </div>
+          <div class="dcp-tag">On track</div>
+        </div>
+        <div class="dcp-progress">
+          <div style="width: 50%;"></div>
+        </div>
+        <small style="color: var(--neutral-700);">$50 reward unlocked at week 8.</small>
+        <div class="dcp-stat">
+          <div>
+            <div class="stat-num" style="color: var(--neutral-900);">1.4</div>
+            <div class="stat-label">Avg pain ↓ since start</div>
+          </div>
+          <div>
+            <div class="stat-num" style="color: var(--neutral-900);">12</div>
+            <div class="stat-label">Sessions logged</div>
+          </div>
+          <div>
+            <div class="stat-num" style="color: var(--p-600);">$50</div>
+            <div class="stat-label">Earned</div>
+          </div>
+        </div>
+        <a href="#" class="sample-cta" style="background: var(--p-600); color: white; margin-top: 18px;">Continue today's session</a>
+      </div>
+    </div>
+
+    <div class="weight-block">
+      <div class="weight-label">Color weighting · member moment</div>
+      <div class="weight-bar">
+        <div style="background: var(--sand-50); width: 38%;" title="sand.50 page"></div>
+        <div style="background: white; width: 24%;" title="white card"></div>
+        <div style="background: var(--neutral-900); width: 16%;" title="ink"></div>
+        <div style="background: var(--p-600); width: 12%;" title="primary CTA"></div>
+        <div style="background: var(--p-100); width: 6%;" title="primary tint"></div>
+        <div style="background: var(--sand-100); width: 4%;" title="sand step"></div>
+      </div>
+      <div class="weight-legend">
+        <span class="item"><span class="swatch" style="background: var(--sand-50);"></span>Surface (sand) ~38%</span>
+        <span class="item"><span class="swatch" style="background: white;"></span>Card ~24%</span>
+        <span class="item"><span class="swatch" style="background: var(--neutral-900);"></span>Ink ~16%</span>
+        <span class="item"><span class="swatch" style="background: var(--p-600);"></span>Primary CTA ~12%</span>
+        <span class="item"><span class="swatch" style="background: var(--p-100);"></span>Primary tint ~6%</span>
+        <span class="item"><span class="swatch" style="background: var(--sand-100);"></span>Sand step ~4%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buyer moment -->
+  <div class="sample-wrap">
+    <div class="sample-card">
+      <div class="sample-label">Buyer · website hero (CHRO landing)</div>
+      <div class="buyer-hero">
+        <div class="eyebrow">For Benefits Leaders</div>
+        <div class="title">Real clinical outcomes across every condition your employees are managing.</div>
+        <p class="body">At the engagement rates that move your spend. <strong>Guaranteed</strong> 3:1 ROI or 30% of fees back.</p>
+        <a href="#" class="cta">See the proof →</a>
+        <div class="footer">Distributed via Alight, Elevance, Lockton, WTW, Aon</div>
+      </div>
+    </div>
+
+    <div class="weight-block">
+      <div class="weight-label">Color weighting · buyer hero</div>
+      <div class="weight-bar">
+        <div style="background: var(--sand-50); width: 18%;" title="sand.50 page"></div>
+        <div style="background: var(--p-900); width: 36%;" title="primary.900 gradient end"></div>
+        <div style="background: var(--p-600); width: 30%;" title="primary.600 gradient start"></div>
+        <div style="background: white; width: 10%;" title="white CTA"></div>
+        <div style="background: rgba(255,255,255,0.85); width: 6%;" title="inverse text"></div>
+      </div>
+      <div class="weight-legend">
+        <span class="item"><span class="swatch" style="background: var(--p-900);"></span>Primary deep (gradient end) ~36%</span>
+        <span class="item"><span class="swatch" style="background: var(--p-600);"></span>Primary CTA (gradient start) ~30%</span>
+        <span class="item"><span class="swatch" style="background: var(--sand-50);"></span>Surface (page) ~18%</span>
+        <span class="item"><span class="swatch" style="background: white;"></span>Inverse CTA ~10%</span>
+        <span class="item"><span class="swatch" style="background: rgba(180,180,180,1);"></span>Inverse text ~6%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 4: ATTRIBUTE AUDIT ===== -->
+<h2>4. Attribute audit — does R2 hold all five?</h2>
+<div class="audit">
+  <div class="head">Attribute</div>
+  <div class="head">Reads as</div>
+  <div class="head">Score</div>
+  <div class="head">Why</div>
+
+  <div class="row-head">Credible</div>
+  <div>Mature, sophisticated, blue-family clinical</div>
+  <div><span class="score score-high">High</span></div>
+  <div>Sky-teal at 600–800 sits in the visual code for "trusted enterprise software" without going corporate-cold. Descends from Brand Blue (the legacy authority anchor) — buyer's first read is "credible."</div>
+
+  <div class="row-head">Direct</div>
+  <div>Confident, unhedged</div>
+  <div><span class="score score-high">High</span></div>
+  <div>Saturation is restrained but the depth at 600/700 lets a CTA land with one read. No fighting the eye, no decorative bloom.</div>
+
+  <div class="row-head">Outcome-obsessed</div>
+  <div>Color-neutral attribute; deep stops support legible data</div>
+  <div><span class="score score-med">Medium</span></div>
+  <div>Outcome legibility is mostly a typography + data viz question. R2's deep stops give numbers somewhere confident to land; the 500 stop is a reliable data-viz mid-tone.</div>
+
+  <div class="row-head">Human</div>
+  <div>Slightly cool on its own — warmth comes from sand surfaces + warm.500 accent</div>
+  <div><span class="score score-med">Medium</span></div>
+  <div>R2 reads cooler than R1 (which has more aqua warmth). The locked sand/warm architecture carries the human warmth at the surface level. Primary stays restrained on purpose; it's not the brand's job to be warm.</div>
+
+  <div class="row-head">AI-competent</div>
+  <div>Modern enough to host an AI surface treatment without dating</div>
+  <div><span class="score score-high">High</span></div>
+  <div>Sky-teal sits in the contemporary palette zone — not 2018-corporate-aqua, not 2010-deep-navy. The deep stops at 800–950 host an AI moment treatment (subtle gradient + label) cleanly.</div>
+</div>
+
+<h3>Dual-audience test — does R2 pass?</h3>
+<div class="two-col">
+  <div class="col">
+    <h4>CHRO board slide</h4>
+    <p style="font-size: 14px;">R2 + sand surfaces + the buyer-promise hero (above) reads as a credible enterprise health platform — clearly descended from Brand Blue (board recognizes the heritage), but modern enough to read 2026, not 2018. The deep gradient on the hero supports board-deck scale without going corporate-cold.</p>
+    <p style="font-size: 14px;"><strong>Verdict:</strong> Pass.</p>
+  </div>
+  <div class="col">
+    <h4>Member screenshot to a struggling friend</h4>
+    <p style="font-size: 14px;">Member moment is sand-led with a quiet primary-600 CTA. The actual emotional content of the screen is the pain-down number and the "you're halfway." The blue carries calm credibility without trying to feel-good. Warm.500 terracotta accent in adjacent moments (rewards, achievements) carries the brand-level warmth.</p>
+    <p style="font-size: 14px;"><strong>Verdict:</strong> Pass.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 5: REFERENCE TRIANGULATION ===== -->
+<h2>5. Reference brand triangulation — what does R2 inherit from each?</h2>
+<p>R2 doesn't copy any single reference brand. It carves its own slot inside the same neighborhood — which is how it earns ownability.</p>
+
+<div class="tri-grid">
+  <div class="tri-card">
+    <h4>Withings</h4>
+    <p style="font-size: 13px;">Warm-editorial craft, illustration economy, premium product feel.</p>
+    <div class="pull">R2 inherits</div>
+    <p style="font-size: 13px; margin-top: 4px;">Soft saturation discipline. The teal-aqua DNA gets to live in the categorical hues and surface tints, not the primary.</p>
+  </div>
+  <div class="tri-card">
+    <h4>Sword Health</h4>
+    <p style="font-size: 13px;">Premium clinical authority, scientific data, deep-blue confidence.</p>
+    <div class="pull">R2 inherits</div>
+    <p style="font-size: 13px; margin-top: 4px;">The deep-blue authority at 700–950. Buyer hero gradient (700 → 900) reads Sword-adjacent without the cold navy.</p>
+  </div>
+  <div class="tri-card">
+    <h4>Hinge Health</h4>
+    <p style="font-size: 13px;">Real-patient photography, B2B2C peer execution, clinical-warm balance.</p>
+    <div class="pull">R2 inherits</div>
+    <p style="font-size: 13px; margin-top: 4px;">The dual-audience discipline: same screen reads to both. Hinge uses coral; we use sand-led warmth + sky-teal primary. Different vehicle, same outcome.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 6: ALT BRANCHES ===== -->
+<h2>6. Documented alt branches — R1 + R3</h2>
+<p>Both stay alive in the audit trail. Use only if R2 fails a verification gate or stakeholder review.</p>
+
+<div class="candidate-strip">
+  <div class="strip-header">
+    <span class="name">R1 — Soft teal (Aqua-descendant) <small>· hue ~190°</small></span>
+    <span class="verdict verdict-alt">Alt — Withings-coded</span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#F0F7F9;"><span class="stop">50</span>#F0F7F9</div>
+    <div class="sw light" style="background:#DCEDF0;"><span class="stop">100</span>#DCEDF0</div>
+    <div class="sw light" style="background:#B6D8DE;"><span class="stop">200</span>#B6D8DE</div>
+    <div class="sw light" style="background:#82BCC6;"><span class="stop">300</span>#82BCC6</div>
+    <div class="sw dark" style="background:#4F9EAE;"><span class="stop">400</span>#4F9EAE</div>
+    <div class="sw dark" style="background:#2F8497;"><span class="stop">500</span>#2F8497</div>
+    <div class="sw dark" style="background:#267284;"><span class="stop">600</span>#267284</div>
+    <div class="sw dark" style="background:#1F5C6B;"><span class="stop">700</span>#1F5C6B</div>
+    <div class="sw dark" style="background:#1A4B57;"><span class="stop">800</span>#1A4B57</div>
+    <div class="sw dark" style="background:#143842;"><span class="stop">900</span>#143842</div>
+    <div class="sw dark" style="background:#0B2229;"><span class="stop">950</span>#0B2229</div>
+  </div>
+  <div class="strip-takeaway">If verification flags R2 as too cool, R1 brings more aqua warmth at the cost of sitting closer to the Personify/Sharecare cluster.</div>
+</div>
+
+<div class="candidate-strip">
+  <div class="strip-header">
+    <span class="name">R3 — Modern Brand Blue (navy-descendant) <small>· hue ~210°</small></span>
+    <span class="verdict verdict-alt">Alt — Sword-coded</span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#EFF3F9;"><span class="stop">50</span>#EFF3F9</div>
+    <div class="sw light" style="background:#DBE3F0;"><span class="stop">100</span>#DBE3F0</div>
+    <div class="sw light" style="background:#B7C5DE;"><span class="stop">200</span>#B7C5DE</div>
+    <div class="sw light" style="background:#88A0C5;"><span class="stop">300</span>#88A0C5</div>
+    <div class="sw dark" style="background:#5B7FAB;"><span class="stop">400</span>#5B7FAB</div>
+    <div class="sw dark" style="background:#3F6594;"><span class="stop">500</span>#3F6594</div>
+    <div class="sw dark" style="background:#355880;"><span class="stop">600</span>#355880</div>
+    <div class="sw dark" style="background:#2C4869;"><span class="stop">700</span>#2C4869</div>
+    <div class="sw dark" style="background:#243B55;"><span class="stop">800</span>#243B55</div>
+    <div class="sw dark" style="background:#1B2D40;"><span class="stop">900</span>#1B2D40</div>
+    <div class="sw dark" style="background:#111B27;"><span class="stop">950</span>#111B27</div>
+  </div>
+  <div class="strip-takeaway">If verification flags R2 as not authoritative enough for the buyer audience, R3 leans into deeper Brand Blue authority at the cost of more stakeholder education on the corporate-brand alignment.</div>
+</div>
+
+<!-- ===== SECTION 7: VERIFICATION ===== -->
+<h2>7. Verification gates — before D2 → fully LOCKED</h2>
+<p>Direction is locked. Full lock requires passing all five gates below. Any failure routes to R1 or R3 (whichever the failure mode points to).</p>
+
+<div class="gate">
+  <div class="gate-num">1</div>
+  <div class="gate-body"><strong>Render-test on physical device</strong><p>sRGB-calibrated phone, daylight, real ambient. Mineral-blue can shift up to 8% lightness on AMOLED vs. monitor. Verify 600/700 CTA still passes AA at device-render.</p></div>
+</div>
+<div class="gate">
+  <div class="gate-num">2</div>
+  <div class="gate-body"><strong>Low-light stress test (11pm member scenario)</strong><p>Open the DCP card with screen brightness 20–30%. Confirm primary.600 CTA still reads as "tap me" not "decorative." Confirm primary.900 doesn't go murky on warm-temperature ambient.</p></div>
+</div>
+<div class="gate">
+  <div class="gate-num">3</div>
+  <div class="gate-body"><strong>Tactical review with Isabel (Visual Designer)</strong><p>Get a tactical opinion before stakeholder review. Specifically: do the 200/300/400 stops feel useful for icons and illustrations, or do they need a chroma adjustment?</p></div>
+</div>
+<div class="gate">
+  <div class="gate-num">4</div>
+  <div class="gate-body"><strong>Buyer hero gradient at presentation scale</strong><p>Render the buyer hero at 1920×1080 (board deck full-bleed). Confirm the 700→900 gradient doesn't band, doesn't feel flat, and reads premium-clinical at scale.</p></div>
+</div>
+<div class="gate">
+  <div class="gate-num">5</div>
+  <div class="gate-body"><strong>Stakeholder reaction check (Darcy, Alex)</strong><p>One-line reaction: does R2 read as descended from the corporate brand, or does it still feel like a departure? If departure — pivot to R1 (more aqua DNA visible).</p></div>
+</div>
+
+<!-- ===== SECTION 8: NEXT STEPS ===== -->
+<h2>8. Recommendation summary + next iteration</h2>
+<div class="verdict-card">
+  <h4>Direction: R2 Sky-teal bridge — locked. Full lock pending verification.</h4>
+  <p style="font-size: 15px; margin-top: 8px;">R2 holds all five Phase 0 attributes, descends recognizably from both legacy anchors, sits in the least-occupied position in the B2B-health visual landscape, and is the most literal interpretation of the original D2 directive. R1 and R3 documented as alts for the verification-failure routes.</p>
+</div>
+
+<h3>What's still open after this lock</h3>
+<ul>
+  <li><strong>Categorical hues</strong> — 4–6 module-identity colors. R1 and R3's palettes can host two of these (e.g., Health Data → R1 teal; Wearables → R3 deep blue) if direction holds at full lock.</li>
+  <li><strong>Warm accent integration</strong> — confirm the warm.500 terracotta still reads as "warmth at the brand level" against R2 primary. Test in the rewards / achievement moment.</li>
+  <li><strong>Categorical scale construction</strong> — the v2 build doc requires non-overlapping categorical hues. With R2 occupying the 200° slot, categorical hues need to spread across the wheel without crowding.</li>
+  <li><strong>AI-surface treatment</strong> — Phase 0 §9 canonical AI moment treatment. R2's deep stops support it but the treatment itself is not yet designed.</li>
+  <li><strong>Typography lock</strong> — pending budget conversation.</li>
+</ul>
+
+<h3>Next iteration target</h3>
+<p>Once R2 passes verification gates, the next iteration extends Layer 1 (full core scales) and Layer 2 (semantic tokens + gradient utility tokens) per the v2 build doc, with R2 as the locked primary. Output: complete palette preview + 3 pilot screens (member moment, buyer moment, AI moment) with weighting visualization on each.</p>
+
+<hr>
+
+<p style="font-size: 12px; color: var(--neutral-600); text-align: center; margin-top: 32px;">Phase 0 chassis: <em>Mobile Health exists so that working adults managing chronic conditions don't have to wait, pay, or do it alone.</em></p>
+
+</div>
+</body>
+</html>

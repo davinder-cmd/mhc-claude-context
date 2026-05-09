@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC — Team challenge invites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#eef1f4; font-family:'Raleway', system-ui, sans-serif; color:#1f2a36; }
+  body { padding: 28px 22px 80px; }
+  .page { max-width: 1280px; margin: 0 auto; }
+  .pagehead { margin-bottom: 22px; }
+  .pagehead h1 { font-size: 22px; margin: 0 0 6px; color:#062a42; }
+  .pagehead p { font-size: 14px; color:#4a5b6a; margin: 0 0 8px; line-height: 1.55; max-width: 880px; }
+
+  .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; background:#fff; border:1px solid #e1e6ea; border-radius: 14px; overflow: hidden; margin-top: 22px; font-size: 13px; }
+  .compare-table th, .compare-table td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid #eef1f4; }
+  .compare-table thead th { background:#f6f8fa; font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color:#4a5b6a; border-bottom: 1px solid #e1e6ea; }
+  .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table .row-label { font-weight: 700; color:#062a42; min-width: 150px; }
+  .compare-table code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; background:#f3f6f8; padding: 1px 5px; border-radius: 4px; color:#062a42; }
+
+  .grid-mocks { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); margin-top: 22px; }
+  .frame { background:#fff; border-radius:14px; border:1px solid #e1e6ea; overflow:hidden; box-shadow: 0 4px 14px rgba(15,73,127,0.06); }
+  .frame-head { padding: 8px 14px; font-size: 10.5px; font-weight: 700; color:#6e7a7d; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e1e6ea; background:#f6f8fa; display:flex; justify-content:space-between; align-items:center; }
+  .frame-body { padding: 14px; background:#eef1f4; }
+
+  .home-mock { display: flex; flex-direction: column; gap: 12px; }
+  .home-mock-greet { font-size: 12px; color:#6e7a7d; padding: 4px 0; }
+  .home-mock-greet b { color:#062a42; font-size: 14px; }
+
+  .invites { background:#fff; border: 1px solid #e1e6ea; border-radius: 12px; overflow: hidden; }
+  .invites-head { padding: 10px 14px; background:#fff5e6; color:#7a5418; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; }
+  .invites-head.team { background:#eaf2fa; color:#0f497f; }
+  .invites-head a { color: inherit; text-decoration: none; font-weight: 700; }
+  .invite-row { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-top: 1px solid #eef1f4; }
+  .invite-avatar { width: 36px; height: 36px; border-radius: 999px; background:#0f497f; color:#fff; display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+  .invite-avatar.team { background:#9b3b00; border-radius: 8px; }
+  .invite-body { flex: 1; min-width: 0; }
+  .invite-name { font-size: 13.5px; font-weight: 700; color:#1f2a36; line-height: 1.3; }
+  .invite-detail { font-size: 11.5px; color:#6e7a7d; margin-top: 3px; line-height: 1.4; }
+  .invite-detail b { color:#9b3b00; }
+  .invite-actions { display: flex; gap: 6px; flex-shrink: 0; margin-top: 2px; }
+  .btn-accept, .btn-decline { font: inherit; font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 999px; cursor: pointer; border: 0; }
+  .btn-accept { background:#0f497f; color:#fff; }
+  .btn-decline { background:#f6f8fa; color:#4a5b6a; border: 1px solid #e1e6ea; }
+
+  .hero { border-radius: 14px; overflow: hidden; position: relative; height: 160px; color:#fff; }
+  .hero.standard { background: linear-gradient(135deg, #0f497f 0%, #062a42 100%); }
+  .hero-body { position: absolute; inset: 0; padding: 18px; display: flex; flex-direction: column; justify-content: flex-end; gap: 4px; }
+  .hero-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; opacity: 0.9; }
+  .hero-title { font-size: 18px; font-weight: 700; line-height: 1.2; margin: 0; }
+  .hero-meta { font-size: 12px; opacity: 0.92; }
+  .hero-cta { margin-top: 6px; display: inline-flex; align-self: flex-start; background: #fff; color:#062a42; border: 0; border-radius: 999px; padding: 6px 14px; font: inherit; font-weight: 700; font-size: 12.5px; align-items: center; gap: 6px; }
+
+  .pcard { position: relative; display: flex; align-items: stretch; background: #fff; border: 1px solid #e1e6ea; border-radius: 12px; overflow: hidden; min-width: 0; }
+  .pcard-rail { width: 64px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px 6px; background: #f6f4ef; color: #1f2a36; text-align: center; }
+  .pcard-body { flex: 1; min-width: 0; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+  .pcard-tagline { font-size: 10.5px; font-weight: 700; color:#6e7a7d; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pcard-title { font-size: 13.5px; font-weight: 700; color:#1f2a36; margin: 0; line-height: 1.25; }
+  .pcard-meta { font-size: 11.5px; color:#4a5b6a; line-height: 1.35; }
+  .pcard-rail .num { font-size: 22px; font-weight: 700; line-height: 1; }
+  .pcard-rail .lbl { font-size: 9.5px; opacity: 0.75; margin-top: 4px; text-transform:uppercase; letter-spacing: 0.5px; }
+
+  .annotate { background:#fff; border-radius: 14px; border:1px solid #e1e6ea; padding: 22px 24px; line-height: 1.55; font-size: 14px; color:#1f2a36; margin-top: 22px; }
+  .annotate h3 { margin: 0 0 8px; font-size: 16px; color:#062a42; }
+  .annotate h4 { margin: 18px 0 6px; font-size: 12.5px; color:#062a42; text-transform:uppercase; letter-spacing:0.5px; }
+  .annotate p { margin: 0 0 8px; }
+  .annotate ul { margin: 6px 0 0 18px; padding: 0; }
+  .annotate li { margin: 4px 0; }
+  .annotate code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; background:#f3f6f8; padding: 1px 5px; border-radius: 4px; color:#062a42; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pagehead">
+    <h1>Team challenge invites — same shape, different stakes</h1>
+    <p>Yes — same overall pattern as peer invites: a dedicated invites block at the top of home with accept/decline. But three things differ enough that it's worth being deliberate: <b>who's inviting</b>, <b>how late they're joining</b>, and <b>how the invite re-uses the active-challenge slim banner</b>.</p>
+  </div>
+
+  <!-- ============================================================
+       Comparison table
+       ============================================================ -->
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Peer invite</th>
+        <th>Team invite (active challenge)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="row-label">Inviter</td>
+        <td>One named person ("Jamie M. challenged you")</td>
+        <td>Team captain or auto-invite from team page ("Team Aurora invited you")</td>
+      </tr>
+      <tr>
+        <td class="row-label">Identity shown</td>
+        <td>Person avatar (initials)</td>
+        <td>Team logo / square — distinct from peer round avatar</td>
+      </tr>
+      <tr>
+        <td class="row-label">Time pressure</td>
+        <td>5–7 day challenge, starts on accept</td>
+        <td>Challenge already running — <b>days-elapsed disclosure matters</b></td>
+      </tr>
+      <tr>
+        <td class="row-label">Decision shape</td>
+        <td>Accept / Decline · binary</td>
+        <td>Accept / Decline · plus "joining late" context (rank, days remaining)</td>
+      </tr>
+      <tr>
+        <td class="row-label">Where it appears</td>
+        <td><i>Pending invites</i> block, top of home</td>
+        <td>Same block — but <b>collapses into the active-challenge slim banner</b> when one is already showing</td>
+      </tr>
+      <tr>
+        <td class="row-label">Inclusion gate</td>
+        <td><code>peerChallenge.state = invite_pending</code></td>
+        <td><code>teamChallenge.invitePending AND challenge.stage IN (join_window, active)</code></td>
+      </tr>
+      <tr>
+        <td class="row-label">TTL</td>
+        <td>7 days from send, or until challenge starts</td>
+        <td>Until challenge ends, or join cap hit, whichever first</td>
+      </tr>
+      <tr>
+        <td class="row-label">Post-accept</td>
+        <td>In-progress rail, "vs. Jamie" tagline</td>
+        <td>In-progress rail (active stage) <i>or</i> nothing visible until activity starts (join stage)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================
+       Mocks — three contexts
+       ============================================================ -->
+  <div class="grid-mocks">
+
+    <!-- Context 1: Invite during join window -->
+    <div class="frame">
+      <div class="frame-head"><span>Context A · Invite during join window</span><span style="background:#eaf2fa; color:#0f497f; padding:2px 8px; border-radius:999px; font-weight:700;">SAME AS PEER</span></div>
+      <div class="frame-body">
+        <div class="home-mock">
+          <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+          <div class="invites">
+            <div class="invites-head team">
+              <span>Team invites · 1</span>
+              <a href="#">See all →</a>
+            </div>
+            <div class="invite-row">
+              <div class="invite-avatar team">A</div>
+              <div class="invite-body">
+                <div class="invite-name">Team Aurora invited you to join</div>
+                <div class="invite-detail">Spring step challenge · 6 days to join · 3-week activity starts Apr 21</div>
+              </div>
+              <div class="invite-actions">
+                <button class="btn-accept">Join</button>
+                <button class="btn-decline">Pass</button>
+              </div>
+            </div>
+          </div>
+          <div class="hero standard">
+            <div class="hero-body">
+              <div class="hero-eyebrow">On focus · Sleep</div>
+              <h2 class="hero-title">Managing Insomnia</h2>
+              <div class="hero-meta">9 of 28 sessions · Wind-down up next</div>
+              <button class="hero-cta">Continue →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context 2: Invite during active period -->
+    <div class="frame">
+      <div class="frame-head"><span>Context B · Invite during active period</span><span style="background:#fde7d8; color:#9b3b00; padding:2px 8px; border-radius:999px; font-weight:700;">LATE-JOIN VARIANT</span></div>
+      <div class="frame-body">
+        <div class="home-mock">
+          <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+          <div class="invites">
+            <div class="invites-head team">
+              <span>Team invites · 1</span>
+              <a href="#">See all →</a>
+            </div>
+            <div class="invite-row">
+              <div class="invite-avatar team">A</div>
+              <div class="invite-body">
+                <div class="invite-name">Team Aurora invited you to join</div>
+                <div class="invite-detail">Spring step challenge · <b>5 days in, 16 days remaining</b> · Aurora is currently #4 of 38</div>
+              </div>
+              <div class="invite-actions">
+                <button class="btn-accept">Join</button>
+                <button class="btn-decline">Pass</button>
+              </div>
+            </div>
+          </div>
+          <div class="hero standard">
+            <div class="hero-body">
+              <div class="hero-eyebrow">On focus · Sleep</div>
+              <h2 class="hero-title">Managing Insomnia</h2>
+              <div class="hero-meta">9 of 28 sessions · Wind-down up next</div>
+              <button class="hero-cta">Continue →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context 3: Multiple invites, mixed -->
+    <div class="frame">
+      <div class="frame-head"><span>Context C · Mixed invites stack</span><span style="background:#f6f8fa; color:#4a5b6a; padding:2px 8px; border-radius:999px; font-weight:700;">UNIFIED BLOCK</span></div>
+      <div class="frame-body">
+        <div class="home-mock">
+          <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+          <div class="invites">
+            <div class="invites-head">
+              <span>Pending invites · 3</span>
+              <a href="#">See all →</a>
+            </div>
+            <div class="invite-row">
+              <div class="invite-avatar team">A</div>
+              <div class="invite-body">
+                <div class="invite-name">Team Aurora invited you</div>
+                <div class="invite-detail">Spring step challenge · 6 days left to join</div>
+              </div>
+              <div class="invite-actions">
+                <button class="btn-accept">Join</button>
+                <button class="btn-decline">Pass</button>
+              </div>
+            </div>
+            <div class="invite-row">
+              <div class="invite-avatar">JM</div>
+              <div class="invite-body">
+                <div class="invite-name">Jamie M. challenged you</div>
+                <div class="invite-detail">Most steps · 5 days · starts when accepted</div>
+              </div>
+              <div class="invite-actions">
+                <button class="btn-accept">Accept</button>
+                <button class="btn-decline">Decline</button>
+              </div>
+            </div>
+            <div class="invite-row">
+              <div class="invite-avatar">RT</div>
+              <div class="invite-body">
+                <div class="invite-name">Riley T. challenged you</div>
+                <div class="invite-detail">Mindful minutes · 7 days</div>
+              </div>
+              <div class="invite-actions">
+                <button class="btn-accept">Accept</button>
+                <button class="btn-decline">Decline</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       Recommendation
+       ============================================================ -->
+  <div class="annotate">
+    <h3>Recommendation · same block, with two refinements</h3>
+    <p><b>Use one unified <i>Pending invites</i> block</b> at the top of home for both invite types. Don't split into "Team invites" + "Peer invites" — the user just sees "things asking for my decision." Sort by urgency (closing soonest first), cap at 3 visible with "See all →" overflow.</p>
+
+    <h4>Refinement 1 · Visual differentiation in the avatar</h4>
+    <p>Team invites use a <b>square/rounded-rect avatar with the team mark</b>; peer invites use a <b>circular avatar with personal initials</b>. Same row layout, different shape signals different scope. No badges or labels needed — the shape carries the meaning.</p>
+
+    <h4>Refinement 2 · Late-join transparency</h4>
+    <p>When a team invite arrives during the <b>active</b> stage (challenge already running), the detail line surfaces two things peer invites never need:</p>
+    <ul>
+      <li><b>Days elapsed / remaining</b> — "5 days in, 16 days remaining" — so the user knows what they're walking into.</li>
+      <li><b>Current team position</b> — "Aurora is currently #4 of 38" — context for whether joining feels rewarding or doomed.</li>
+    </ul>
+    <p>Peer invites don't need this because the challenge starts <i>on accept</i>; team challenges start independently of the invitee.</p>
+
+    <h4>Edge case · Invite + active-challenge slim banner</h4>
+    <p>If the user is already <i>in</i> a team challenge and gets invited to <i>another</i> active team challenge (rare but possible — multi-team employer rollouts), the slim "you can still join" banner from the original challenge wins. The new invite still shows in the Pending invites block. We don't double-stack banners.</p>
+
+    <h4>Edge case · Auto-invite from team page browsing</h4>
+    <p>If joining is open (no captain approval needed), browsing the team page and selecting "Join Aurora" should bypass the invite flow entirely — that's a direct join, not an invitation. The Pending invites block is reserved for invites <i>sent to</i> the user.</p>
+
+    <h4>What changes vs. peer · summary</h4>
+    <ul>
+      <li>Block: <b>same</b> — Pending invites, top of home, above hero, max 3.</li>
+      <li>Avatar shape: <b>different</b> — square for team, circle for peer.</li>
+      <li>Inviter copy: <b>different</b> — "Team {name} invited you" vs. "{Person} challenged you".</li>
+      <li>Detail line: <b>different</b> — surfaces elapsed/remaining + team rank for active-stage team invites.</li>
+      <li>Decline copy: <b>different</b> — "Pass" feels right for team (you're saying no to a group); "Decline" for peer (you're saying no to a person). Subtle but the social weight is different.</li>
+      <li>Server contract: extend <code>invitePending</code> to cover both sources; client treats them uniformly except for the avatar mark and detail-line builder.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

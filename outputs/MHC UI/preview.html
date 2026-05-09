@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MHC Home — Production Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="mhc-home.css?v=12" />
+  <style>
+    /* Preview-only styles — NOT part of the production package */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #eef1f4; font-family: 'Raleway', system-ui, sans-serif; }
+    body { padding: 24px; }
+    .preview-toolbar {
+      max-width: 1320px; margin: 0 auto 18px; display: flex; gap: 8px;
+      align-items: center; flex-wrap: wrap;
+    }
+    .preview-toolbar h1 { font-size: 16px; margin: 0 12px 0 0; color: #1f2a36; }
+    .preview-toolbar .group-label { font-size: 10px; font-weight: 700; color: #6e7a7d; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 4px 0 8px; }
+    .preview-toolbar button {
+      font-family: inherit; font-size: 12px; font-weight: 600;
+      padding: 6px 12px; border-radius: 999px; border: 1px solid #d3dae0;
+      background: #fff; color: #1f2a36; cursor: pointer;
+    }
+    .preview-toolbar button.active { background: #0f497f; color: #fff; border-color: #0f497f; }
+    .preview-toolbar .sep { width: 1px; height: 20px; background: #d3dae0; margin: 0 8px; }
+    .preview-grid {
+      max-width: 1320px; margin: 0 auto;
+      display: grid; gap: 24px;
+      grid-template-columns: 380px 1fr;
+    }
+    @media (max-width: 1100px) { .preview-grid { grid-template-columns: 1fr; } }
+    .preview-frame {
+      background: #fff; border-radius: 18px; overflow: hidden;
+      box-shadow: 0 4px 14px rgba(15,73,127,0.08); border: 1px solid #e1e6ea;
+    }
+    .preview-frame-head {
+      padding: 8px 14px; font-size: 11px; font-weight: 700; color: #6e7a7d;
+      text-transform: uppercase; letter-spacing: .5px;
+      border-bottom: 1px solid #e1e6ea; background: #f6f8fa;
+    }
+    .preview-frame-mobile { width: 380px; }
+    .preview-frame-desktop { min-width: 0; }
+    .frame-body { padding: 0; }
+    .preview-blocklabel {
+      font-size: 10px; font-weight: 700; color: #b3b9bf;
+      text-transform: uppercase; letter-spacing: .5px;
+      padding: 6px 20px; background: #fafbfc;
+      border-top: 1px dashed #e1e6ea;
+    }
+    .preview-blocklabel:first-child { border-top: none; }
+    .action-btn-host {
+      padding: 0 16px 16px;
+      background: #fff;
+    }
+    .action-btn-host button {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 999px;
+      background: #0f497f; color: #fff; font-weight: 700; font-size: 14px;
+      border: none; cursor: pointer; font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-toolbar">
+    <h1>MHC Home — Production preview</h1>
+    <span class="group-label">Insights</span>
+    <button data-state="focused-ready" class="active">Ready</button>
+    <button data-state="focused-refresh">Refreshable</button>
+    <button data-state="focused-readonly">Read-only</button>
+    <button data-state="focused-hidden">Hidden</button>
+    <button data-state="nofocus-ready">No focus</button>
+    <span class="sep"></span>
+    <span class="group-label">In-progress rail · type fit</span>
+    <button data-state="progress-typefit">All 4 types</button>
+    <button data-state="progress-journey-focus">Journey (focus)</button>
+    <button data-state="progress-dcp">DCP only</button>
+    <button data-state="progress-assessment">Assessment only</button>
+    <button data-state="progress-mixed">Mixed (incl. challenge)</button>
+    <button data-state="progress-overflow">Overflow (4+)</button>
+    <button data-state="progress-empty">Empty</button>
+    <span class="sep"></span>
+    <span class="group-label">Today's habits</span>
+    <button data-state="habits-three">3 habits</button>
+    <button data-state="habits-mixed">Mixed (logged + auto)</button>
+    <button data-state="habits-one">Single (stripe)</button>
+    <button data-state="habits-empty">Empty</button>
+    <span class="sep"></span>
+    <span class="group-label">Challenges</span>
+    <button data-state="challenge-team-invite">Team invite (join)</button>
+    <button data-state="challenge-team-late">Team invite (late-join)</button>
+    <button data-state="challenge-mixed-invites">Mixed invites</button>
+    <button data-state="challenge-banner-join">Join-window banner</button>
+    <button data-state="challenge-banner-results">Results banner</button>
+    <button data-state="challenge-everything">Everything on</button>
+  </div>
+
+  <div class="preview-grid">
+
+    <!-- Mobile frame (380px wide) -->
+    <div class="preview-frame preview-frame-mobile">
+      <div class="preview-frame-head">Mobile · 380w</div>
+      <div class="frame-body" id="mobile-host"></div>
+    </div>
+
+    <!-- Desktop frame (full width) -->
+    <div class="preview-frame preview-frame-desktop">
+      <div class="preview-frame-head">Desktop · fluid (resize the window to test)</div>
+      <div class="frame-body" id="desktop-host"></div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       Tiny mustache renderer + preview wiring
+       (Production: your system handles all of this server-side.)
+       ============================================================ -->
+  <script>
+    function render(tpl, ctx) {
+      tpl = tpl.replace(/<!--[\s\S]*?-->/g, '');
+      let prev = null;
+      while (prev !== tpl) {
+        prev = tpl;
+        tpl = tpl.replace(/\{\{([#^])([\w.]+)\}\}([\s\S]*?)\{\{\/\2\}\}/g,
+          (m, op, key, body) => {
+            const v = get(ctx, key);
+            const truthy = Array.isArray(v) ? v.length > 0 : !!v;
+            if (op === '#') return truthy ? render(body, ctx) : '';
+            return truthy ? '' : render(body, ctx);
+          });
+      }
+      tpl = tpl.replace(/\{\{([\w.]+)\}\}/g, (m, key) => {
+        const v = get(ctx, key);
+        return v == null ? '' : String(v);
+      });
+      return tpl;
+    }
+    function get(ctx, path) {
+      return path.split('.').reduce((o, k) => (o == null ? o : o[k]), ctx);
+    }
+
+    /** Sample data for the preview. */
+    const baseData = {
+      user: { firstName: 'Sarah' },
+      formula: {
+        userInitial: 'S',
+        greeting_name: 'Hi, Sarah',
+        greeting_sub: 'Welcome back.',
+        focusAreaLabel: 'Sleep',
+        hasFocus: true,
+        hasUnreadNotifications: true,
+
+        // Hero (focus variant)
+        heroEyebrow: 'Personalized for you',
+        heroTitle: 'Managing Insomnia',
+        heroDescription: 'A 4-week program to rebuild your sleep, one night at a time. Pick up where you left off — Day 6 of 28.',
+        heroCtaLabel: 'Continue program',
+        heroImage: 'assets/portrait-woman-laughing.png',
+
+        // Hero (no-focus variant)
+        copy_pickFocusEyebrow: 'Personalize',
+        copy_pickFocusValue: 'Pick your focus',
+        copy_focusEyebrow: 'Your focus',
+        copy_noFocusEyebrow: 'Welcome to MobileHealth',
+        copy_noFocusTitle: 'Tell us what matters most.',
+        copy_noFocusBody: 'Pick a focus area and we’ll personalize your home — programs, content, and reminders.',
+        copy_noFocusCtaLabel: 'Pick your focus',
+        copy_noFocusCtaMeta: 'Takes about 30 seconds',
+        copy_focusChip_sleep: 'Sleep better',
+        copy_focusChip_move: 'Move more',
+        copy_focusChip_stress: 'Stress less',
+        copy_focusChip_eat: 'Eat well',
+
+        // ============== Block 1b: invites + banner ==============
+        copy_section_invites: 'Pending invites',
+        copy_link_invites_seeAll: 'See all',
+        copy_invite_accept_team: 'Join',
+        copy_invite_decline_team: 'Pass',
+        copy_invite_accept_peer: 'Accept',
+        copy_invite_decline_peer: 'Decline',
+        invites_seeAll_href: '#',
+        hasPendingInvites: false,
+        invitesOverflow: false,
+        hasInvite2: false,
+        hasInvite3: false,
+
+        invite1_isTeam: true,
+        invite1_isLateJoin: false,
+        invite1_avatar: 'A',
+        invite1_name: 'Team Aurora invited you to join',
+        invite1_detail: 'Spring step challenge · 6 days to join · 3-week activity starts Apr 21',
+        invite1_acceptHref: '#accept',
+        invite1_declineHref: '#decline',
+
+        invite2_isTeam: false,
+        invite2_isLateJoin: false,
+        invite2_avatar: 'JM',
+        invite2_name: 'Jamie M. challenged you',
+        invite2_detail: 'Most steps · 5 days · starts when accepted',
+        invite2_acceptHref: '#accept',
+        invite2_declineHref: '#decline',
+
+        invite3_isTeam: false,
+        invite3_isLateJoin: false,
+        invite3_avatar: 'RT',
+        invite3_name: 'Riley T. challenged you',
+        invite3_detail: 'Mindful minutes · 7 days',
+        invite3_acceptHref: '#accept',
+        invite3_declineHref: '#decline',
+
+        hasChallengeBanner: false,
+        challengeBanner_urgent: false,
+        challengeBanner_text: 'Spring step challenge · 6 days left to join. 240 colleagues already in.',
+        challengeBanner_ctaLabel: 'Join →',
+        challengeBanner_ctaHref: '#',
+        challengeBanner_dismissHref: '#dismiss',
+
+        // ============== Block 2c: today's habits ==============
+        copy_section_habits: "Today's habits",
+        copy_link_habits_seeAll: 'See all',
+        copy_link_habits_seeAllCount: 'See all (5)',
+        copy_loggedToday: 'Logged today',
+        copy_autoTracked: 'Auto-tracked',
+        habits_seeAll_href: '#',
+        hasHabits: false,
+        habits_oneOnly: false,
+        habitsOverflow: false,
+        hasHabit2: true,
+        hasHabit3: true,
+
+        // Habit defaults (overridden per state)
+        habit1_name: 'Drink water', habit1_target: '8 cups',
+        habit1_dot1: 'done', habit1_dot2: 'done', habit1_dot3: 'done', habit1_dot4: 'today', habit1_dot5: 'missed',
+        habit1_streak: true, habit1_streakLabel: '3-day streak', habit1_subline: 'Log to start a streak',
+        habit1_autoTracked: false, habit1_done: false,
+        habit1_logHref: '#log-1', habit1_logLabel: '+ 1 cup', habit1_href: '#',
+
+        habit2_name: 'Meditation', habit2_target: '5 min',
+        habit2_dot1: 'done', habit2_dot2: 'missed', habit2_dot3: 'done', habit2_dot4: 'today', habit2_dot5: 'missed',
+        habit2_streak: false, habit2_streakLabel: '', habit2_subline: '2 of last 4 days',
+        habit2_autoTracked: false, habit2_done: false,
+        habit2_logHref: '#log-2', habit2_logLabel: '+ Log 5 min', habit2_href: '#',
+
+        habit3_name: '10k steps', habit3_target: 'daily',
+        habit3_dot1: 'done', habit3_dot2: 'done', habit3_dot3: 'done', habit3_dot4: 'done', habit3_dot5: 'today',
+        habit3_streak: true, habit3_streakLabel: '4-day streak', habit3_subline: '',
+        habit3_autoTracked: true, habit3_done: false,
+        habit3_logHref: '#', habit3_logLabel: '', habit3_href: '#',
+
+        // ============== Block 2b: progress rail ==============
+        copy_section_progress: 'Pick up where you left off',
+        copy_onFocus: 'On focus',
+        copy_upNext: 'Up next',
+        copy_hide: 'Hide',
+        copy_link_seeAll: 'See all',
+        copy_link_seeAllCount: 'See all (4)',
+        progress_seeAll_href: '#',
+        hasInProgressPrograms: false,
+        programOverflow: false,
+        hasCard2: true,
+        hasCard3: true,
+
+        // ─── Card 1 default — Journey, focus-matched, primary treatment ───
+        card1_rail_step: true,
+        card1_rail_pct: false,
+        card1_rail_week: false,
+        card1_rail_days: false,
+        card1_isFocusMatch: true,
+        card1_isPrimary: true,
+        card1_title: 'Better sleep, better days',
+        card1_tagline: 'Journey · 4-week track',
+        card1_stepIn: '3', card1_stepTotal: '7', card1_stepUnit: 'of',
+        card1_pctValue: 43,
+        card1_nextDetail: 'Caffeine & sleep timing',
+        card1_href: '#',
+        card1_dismissHref: '#dismiss-1',
+
+        // ─── Card 2 default — DCP program (step rail) ───
+        card2_rail_step: true,
+        card2_rail_pct: false,
+        card2_rail_week: false,
+        card2_rail_days: false,
+        card2_isFocusMatch: false,
+        card2_isPrimary: false,
+        card2_title: 'Managing Insomnia',
+        card2_tagline: 'Big Health · DCP',
+        card2_stepIn: '9', card2_stepTotal: '28', card2_stepUnit: 'of',
+        card2_pctValue: 32,
+        card2_nextDetail: 'Wind-down session',
+        card2_href: '#',
+        card2_dismissHref: '#dismiss-2',
+
+        // ─── Card 3 default — Assessment (pct rail) ───
+        card3_rail_step: false,
+        card3_rail_pct: true,
+        card3_rail_week: false,
+        card3_rail_days: false,
+        card3_isFocusMatch: false,
+        card3_isPrimary: false,
+        card3_title: 'Health risk assessment',
+        card3_tagline: 'Assessment · 12 questions',
+        card3_pctValue: 62,
+        card3_pctSub: 'Done',
+        card3_metaText: '~5 min left',
+        card3_nextDetail: 'Resume to finish',
+        card3_href: '#',
+        card3_dismissHref: '#dismiss-3',
+
+        // Today — weekly totals (Option A reframe)
+        copy_section_thisWeek: 'This week',
+        copy_section_dateRange: 'Mon Apr 22 — Today',
+        copy_section_today: 'Today',
+        copy_link_seeAll: 'See all',
+        seeAll_href: '#',
+        hasLinkedTracker_steps: true,
+        hasLinkedTracker_sleep: true,
+        hasLinkedTracker_mindful: false,
+
+        weekly_steps_value: '52,840',
+        weekly_steps_label: 'Steps this week',
+        weekly_steps_sub: 'avg 8,807/day · ↑12% vs last',
+        weekly_steps_href: '#',
+        weekly_sleep_value: '48h 12m',
+        weekly_sleep_label: 'Sleep this week',
+        weekly_sleep_sub: 'avg 6h 53m/night',
+        weekly_sleep_href: '#',
+        weekly_active_value: '5 of 6',
+        weekly_active_label: 'Active days',
+        weekly_active_sub: '30+ min movement',
+        weekly_active_href: '#',
+
+        tracker_steps_value: '7,842', tracker_steps_unit: '',
+        copy_label_steps: 'Steps',
+        tracker_sleep_value: '7h 12m', tracker_sleep_unit: 'last night',
+        copy_label_sleep: 'Sleep',
+        copy_link_steps: 'Link steps',
+        copy_link_sleep: 'Log sleep',
+        copy_link_mindful: 'Add minutes',
+        copy_label_mindful: 'Mindful',
+        tracker_points_value: '1,250', tracker_points_unit: 'this month',
+        icon_steps_url: 'uploads/pasted-1777406516462-0.png',
+        icon_sleep_url: 'uploads/pasted-1777406516462-0.png',
+        icon_active_url: 'uploads/pasted-1777406516462-0.png',
+        icon_mindful_url: 'uploads/pasted-1777406516462-0.png',
+        icon_points_url: 'uploads/pasted-1777406516462-0.png',
+
+        // Insights
+        copy_eyebrow_insight: 'Insight for you',
+        copy_insightReadyTitle: 'Get a personal insight from your last week',
+        copy_insightReadyMeta: 'Powered by your recent activity. Updates daily.',
+        insightHeadline: 'Your sleep is most consistent on weeknights',
+        insightBody: 'You averaged 7h 18m Mon–Thu but only 6h 02m Fri–Sat. Try keeping your weekend bedtime within an hour of weeknights to feel sharper Monday morning.',
+        insightTopic: 'Sleep',
+        insightTimestamp: 'Generated 2h ago',
+        copy_insightCooldownLabel: 'Next refresh in 4h',
+        insightsState_ready: false,
+        insightsState_refreshable: true,
+        insightsState_readOnly: false,
+        insightsState_hidden: false,
+
+        // For you
+        copy_section_forFocus: 'For your Sleep focus',
+        copy_section_popular: 'Popular this week',
+        foryou_item1_tag: 'Program', foryou_item1_title: 'Wind-down routine', foryou_item1_sub: '5 days · 6 min/day', foryou_item1_img: 'assets/stretch-woman.jpg', foryou_item1_href: '#',
+        foryou_item2_tag: 'Article', foryou_item2_title: 'Why caffeine timing matters', foryou_item2_sub: '4 min read', foryou_item2_img: 'assets/yoga-laptop.png', foryou_item2_href: '#',
+        foryou_item3_tag: 'Audio', foryou_item3_title: 'Body scan for sleep', foryou_item3_sub: '12 min', foryou_item3_img: 'assets/marble-aqua.jpg', foryou_item3_href: '#',
+
+        copy_nudge_body: 'Pick a focus area to personalize your home.',
+        copy_nudge_link: 'Pick focus',
+
+        hasSecondaryBanners: true, hasBanner3: true, hasBanner4: true,
+        copy_section_more: 'More from Acme Health',
+        banner1_label: 'Annual checkup', banner1_img: 'assets/portrait-older-man.jpg', banner1_href: '#',
+        banner2_label: 'Mental health benefits', banner2_img: 'assets/portrait-man-smiling.png', banner2_href: '#',
+        banner3_label: 'Find a doctor', banner3_img: 'assets/runner-sunset.png', banner3_href: '#',
+        banner4_label: 'Wellness rewards', banner4_img: 'assets/marble-aqua.jpg', banner4_href: '#',
+      },
+    };
+
+    const actionByState = {
+      'focused-ready':    { label: 'Get insight', icon: '✦' },
+      'focused-refresh':  { label: 'Refresh', icon: '↻' },
+      'focused-readonly': null,
+      'focused-hidden':   null,
+      'nofocus-ready':    { label: 'Get insight', icon: '✦' },
+      'progress-typefit':       { label: 'Refresh', icon: '↻' },
+      'progress-journey-focus': { label: 'Refresh', icon: '↻' },
+      'progress-dcp':           { label: 'Refresh', icon: '↻' },
+      'progress-assessment':    { label: 'Refresh', icon: '↻' },
+      'progress-mixed':         { label: 'Refresh', icon: '↻' },
+      'progress-overflow':      { label: 'Refresh', icon: '↻' },
+      'progress-empty':         { label: 'Refresh', icon: '↻' },
+      'habits-three':           { label: 'Refresh', icon: '↻' },
+      'habits-mixed':           { label: 'Refresh', icon: '↻' },
+      'habits-one':             { label: 'Refresh', icon: '↻' },
+      'habits-empty':           { label: 'Refresh', icon: '↻' },
+      'challenge-team-invite': { label: 'Refresh', icon: '↻' },
+      'challenge-team-late': { label: 'Refresh', icon: '↻' },
+      'challenge-mixed-invites': { label: 'Refresh', icon: '↻' },
+      'challenge-banner-join': { label: 'Refresh', icon: '↻' },
+      'challenge-banner-results': { label: 'Refresh', icon: '↻' },
+      'challenge-everything': { label: 'Refresh', icon: '↻' },
+    };
+
+    /** Helpers — apply common feature combos */
+
+    function clearRails(f, n) {
+      f[`card${n}_rail_step`] = false;
+      f[`card${n}_rail_pct`]  = false;
+      f[`card${n}_rail_week`] = false;
+      f[`card${n}_rail_days`] = false;
+      f[`card${n}_isPrimary`] = false;
+      f[`card${n}_isFocusMatch`] = false;
+      f[`card${n}_urgent`] = false;
+    }
+
+    function setJourneyPrimary(f, n) {
+      clearRails(f, n);
+      f[`card${n}_rail_step`] = true;
+      f[`card${n}_isFocusMatch`] = true;
+      f[`card${n}_isPrimary`] = true;
+      f[`card${n}_title`] = 'Better sleep, better days';
+      f[`card${n}_tagline`] = 'Journey · 4-week track';
+      f[`card${n}_stepIn`] = '3'; f[`card${n}_stepTotal`] = '7'; f[`card${n}_stepUnit`] = 'of';
+      f[`card${n}_pctValue`] = 43;
+      f[`card${n}_nextDetail`] = 'Caffeine & sleep timing';
+    }
+    function setDCP(f, n) {
+      clearRails(f, n);
+      f[`card${n}_rail_step`] = true;
+      f[`card${n}_title`] = 'Managing Insomnia';
+      f[`card${n}_tagline`] = 'Big Health · DCP';
+      f[`card${n}_stepIn`] = '9'; f[`card${n}_stepTotal`] = '28'; f[`card${n}_stepUnit`] = 'of';
+      f[`card${n}_pctValue`] = 32;
+      f[`card${n}_nextDetail`] = 'Wind-down session';
+    }
+    function setAssessment(f, n) {
+      clearRails(f, n);
+      f[`card${n}_rail_pct`] = true;
+      f[`card${n}_title`] = 'Health risk assessment';
+      f[`card${n}_tagline`] = 'Assessment · 12 questions';
+      f[`card${n}_pctValue`] = 62;
+      f[`card${n}_pctSub`] = 'Done';
+      f[`card${n}_metaText`] = '~5 min left';
+      f[`card${n}_nextDetail`] = 'Resume to finish';
+    }
+    function setChallenge(f, n, opts) {
+      opts = opts || {};
+      clearRails(f, n);
+      f[`card${n}_rail_days`] = true;
+      f[`card${n}_urgent`] = !!opts.urgent;
+      f[`card${n}_daysLeft`] = opts.daysLeft || '12';
+      f[`card${n}_daysLeftLabel`] = opts.daysLeftLabel || 'Days left';
+      f[`card${n}_title`] = opts.title || 'Spring step challenge';
+      f[`card${n}_tagline`] = opts.tagline || 'Challenge · Team Aurora';
+      f[`card${n}_stat`] = opts.stat || 'Rank #4 of 38 · 12,400 steps';
+    }
+
+    function setTypeFit(f) {
+      f.hasInProgressPrograms = true; f.hasCard2 = true; f.hasCard3 = true;
+      setJourneyPrimary(f, 1);
+      setDCP(f, 2);
+      setAssessment(f, 3);
+    }
+    function setJourneyFocus(f) {
+      f.hasInProgressPrograms = true; f.hasCard2 = false; f.hasCard3 = false;
+      setJourneyPrimary(f, 1);
+    }
+    function setDCPOnly(f) {
+      f.hasInProgressPrograms = true; f.hasCard2 = false; f.hasCard3 = false;
+      setDCP(f, 1);
+    }
+    function setAssessmentOnly(f) {
+      f.hasInProgressPrograms = true; f.hasCard2 = false; f.hasCard3 = false;
+      setAssessment(f, 1);
+    }
+    function setProgressMixed(f) {
+      f.hasInProgressPrograms = true; f.hasCard2 = true; f.hasCard3 = true;
+      // Focus-matched journey leads (primary)
+      setJourneyPrimary(f, 1);
+      // Urgent peer challenge — daysLeft ≤ 3 wins second slot
+      setChallenge(f, 2, {
+        urgent: true, daysLeft: '1', daysLeftLabel: 'Day left',
+        title: 'Most steps in 5 days',
+        tagline: 'Challenge · vs. Jamie M.',
+        stat: 'You: 32,400 · Jamie: 28,900',
+      });
+      // DCP program in third slot
+      setDCP(f, 3);
+    }
+    function setOverflow(f) {
+      f.hasInProgressPrograms = true; f.hasCard2 = true; f.hasCard3 = true;
+      f.programOverflow = true;
+      f.copy_link_seeAllCount = 'See all (5)';
+      setJourneyPrimary(f, 1);
+      setDCP(f, 2);
+      setAssessment(f, 3);
+    }
+    function setHabitsThree(f) {
+      f.hasHabits = true; f.habits_oneOnly = false;
+      f.hasHabit2 = true; f.hasHabit3 = true;
+      // defaults already 3-habit; restore in case other states muted them
+      f.habit1_done = false; f.habit2_done = false; f.habit3_done = false;
+      f.habit3_autoTracked = true;
+    }
+    function setHabitsMixed(f) {
+      f.hasHabits = true; f.habits_oneOnly = false;
+      f.hasHabit2 = true; f.hasHabit3 = true;
+      // Habit 1 already logged today
+      f.habit1_done = true;
+      f.habit1_dot1 = 'done'; f.habit1_dot2 = 'done'; f.habit1_dot3 = 'done'; f.habit1_dot4 = 'done'; f.habit1_dot5 = 'done';
+      f.habit1_streak = true; f.habit1_streakLabel = '5-day streak';
+      // Habit 2 needs logging, no streak
+      f.habit2_done = false;
+      f.habit2_streak = false; f.habit2_subline = 'Log to start a streak';
+      // Habit 3 sensor-tracked
+      f.habit3_autoTracked = true; f.habit3_done = false;
+      f.habit3_streak = true; f.habit3_streakLabel = '4-day streak';
+    }
+    function setHabitsOne(f) {
+      f.hasHabits = true; f.habits_oneOnly = true;
+      f.hasHabit2 = false; f.hasHabit3 = false;
+      f.habit1_name = 'Drink water'; f.habit1_target = '3 of 8 today';
+      f.habit1_streak = true; f.habit1_streakLabel = '3-day streak';
+      f.habit1_done = false; f.habit1_autoTracked = false;
+      f.habit1_logLabel = '+ 1 cup';
+    }
+    function setTeamInvite(f) {
+      f.hasPendingInvites = true; f.hasInvite2 = false; f.hasInvite3 = false;
+      f.invite1_isTeam = true; f.invite1_isLateJoin = false;
+      f.invite1_avatar = 'A';
+      f.invite1_name = 'Team Aurora invited you to join';
+      f.invite1_detail = 'Spring step challenge · 6 days to join · 3-week activity starts Apr 21';
+    }
+    function setTeamLateInvite(f) {
+      f.hasPendingInvites = true; f.hasInvite2 = false; f.hasInvite3 = false;
+      f.invite1_isTeam = true; f.invite1_isLateJoin = true;
+      f.invite1_avatar = 'A';
+      f.invite1_name = 'Team Aurora invited you to join';
+      f.invite1_detail = 'Spring step challenge · 5 days in, 16 days remaining · Aurora is currently #4 of 38';
+    }
+    function setMixedInvites(f) {
+      f.hasPendingInvites = true; f.hasInvite2 = true; f.hasInvite3 = true;
+      f.invitesOverflow = false;
+      // Team first (closing soonest), then two peer
+      f.invite1_isTeam = true; f.invite1_isLateJoin = false;
+      f.invite1_avatar = 'A';
+      f.invite1_name = 'Team Aurora invited you';
+      f.invite1_detail = 'Spring step challenge · 6 days to join';
+      f.invite2_isTeam = false;
+      f.invite2_avatar = 'JM';
+      f.invite2_name = 'Jamie M. challenged you';
+      f.invite2_detail = 'Most steps · 5 days · starts when accepted';
+      f.invite3_isTeam = false;
+      f.invite3_avatar = 'RT';
+      f.invite3_name = 'Riley T. challenged you';
+      f.invite3_detail = 'Mindful minutes · 7 days';
+    }
+    function setBannerJoin(f) {
+      f.hasChallengeBanner = true; f.challengeBanner_urgent = false;
+      f.challengeBanner_text = 'Spring step challenge · 6 days left to join. 240 colleagues already in.';
+      f.challengeBanner_ctaLabel = 'Join →';
+    }
+    function setBannerResults(f) {
+      f.hasChallengeBanner = true; f.challengeBanner_urgent = false;
+      f.challengeBanner_text = 'Team Aurora finished 3rd · 1.2M steps. Your contribution: 87,400 steps.';
+      f.challengeBanner_ctaLabel = 'See results →';
+    }
+
+    function dataForState(state) {
+      const d = JSON.parse(JSON.stringify(baseData));
+      const f = d.formula;
+      // reset insights
+      f.insightsState_ready = false; f.insightsState_refreshable = false;
+      f.insightsState_readOnly = false; f.insightsState_hidden = false;
+
+      switch (state) {
+        case 'focused-ready':    f.insightsState_ready = true; break;
+        case 'focused-refresh':  f.insightsState_refreshable = true; break;
+        case 'focused-readonly': f.insightsState_readOnly = true; break;
+        case 'focused-hidden':   f.insightsState_hidden = true; break;
+        case 'nofocus-ready':
+          f.hasFocus = false;
+          f.greeting_name = 'Welcome, Sarah';
+          f.greeting_sub = "Let's get started.";
+          f.insightsState_ready = true; break;
+
+        case 'progress-typefit':
+          f.insightsState_refreshable = true; setTypeFit(f); break;
+        case 'progress-journey-focus':
+          f.insightsState_refreshable = true; setJourneyFocus(f); break;
+        case 'progress-dcp':
+          f.insightsState_refreshable = true; setDCPOnly(f); break;
+        case 'progress-assessment':
+          f.insightsState_refreshable = true; setAssessmentOnly(f); break;
+        case 'progress-mixed':
+          f.insightsState_refreshable = true; setProgressMixed(f); break;
+        case 'progress-overflow':
+          f.insightsState_refreshable = true; setOverflow(f); break;
+        case 'progress-empty':
+          f.insightsState_refreshable = true; break;
+
+        case 'habits-three':
+          f.insightsState_refreshable = true; setTypeFit(f); setHabitsThree(f); break;
+        case 'habits-mixed':
+          f.insightsState_refreshable = true; setTypeFit(f); setHabitsMixed(f); break;
+        case 'habits-one':
+          f.insightsState_refreshable = true; setTypeFit(f); setHabitsOne(f); break;
+        case 'habits-empty':
+          f.insightsState_refreshable = true; setTypeFit(f); break;
+
+        case 'challenge-team-invite':
+          f.insightsState_refreshable = true; setTeamInvite(f); break;
+        case 'challenge-team-late':
+          f.insightsState_refreshable = true; setTeamLateInvite(f); break;
+        case 'challenge-mixed-invites':
+          f.insightsState_refreshable = true; setMixedInvites(f); break;
+        case 'challenge-banner-join':
+          f.insightsState_refreshable = true; setBannerJoin(f); setTypeFit(f); break;
+        case 'challenge-banner-results':
+          f.insightsState_refreshable = true; setBannerResults(f); setTypeFit(f); break;
+        case 'challenge-everything':
+          f.insightsState_refreshable = true;
+          setMixedInvites(f); setBannerJoin(f); setProgressMixed(f); break;
+      }
+      return d;
+    }
+
+    async function fetchBlock(name) {
+      const r = await fetch(name);
+      return await r.text();
+    }
+
+    async function paint(host, state) {
+      const data = dataForState(state);
+      const [b1, b1b, b2b, b2, b2c, b3, b4] = await Promise.all([
+        fetchBlock('block-1-greeting-hero.html'),
+        fetchBlock('block-1b-invites.html'),
+        fetchBlock('block-2b-progress.html'),
+        fetchBlock('block-2-today.html'),
+        fetchBlock('block-2c-habits.html'),
+        fetchBlock('block-3-insights.html'),
+        fetchBlock('block-4-foryou.html'),
+      ]);
+      const action = actionByState[state];
+      const actionHTML = action
+        ? `<div class="action-btn-host"><button class="mhc-action-btn">${action.icon} ${action.label}</button></div>`
+        : '';
+
+      const showInvites = data.formula.hasPendingInvites;
+      const showBanner = data.formula.hasChallengeBanner;
+      const showB1b = showInvites || showBanner;
+
+      host.innerHTML = `
+        <div class="preview-blocklabel">block-1-greeting-hero.html</div>
+        ${render(b1, data)}
+        <div class="preview-blocklabel">block-1b-invites.html ${showB1b ? '' : '· (suppressed)'}</div>
+        ${render(b1b, data)}
+        <div class="preview-blocklabel">block-2b-progress.html ${data.formula.hasInProgressPrograms ? '' : '· (suppressed)'}</div>
+        ${render(b2b, data)}
+        <div class="preview-blocklabel">block-2-today.html · This week (weekly totals)</div>
+        ${render(b2, data)}
+        <div class="preview-blocklabel">block-2c-habits.html ${data.formula.hasHabits ? '' : '· (suppressed)'}</div>
+        ${render(b2c, data)}
+        <div class="preview-blocklabel">block-3-insights.html ${data.formula.insightsState_hidden ? '· (hidden)' : ''}</div>
+        ${render(b3, data)}
+        ${actionHTML}
+        <div class="preview-blocklabel">block-4-foryou.html</div>
+        ${render(b4, data)}
+      `;
+    }
+
+    let currentState = 'focused-ready';
+    async function repaint() {
+      await Promise.all([
+        paint(document.getElementById('mobile-host'), currentState),
+        paint(document.getElementById('desktop-host'), currentState),
+      ]);
+    }
+    document.querySelectorAll('.preview-toolbar button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.preview-toolbar button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentState = btn.dataset.state;
+        repaint();
+      });
+    });
+    repaint();
+  </script>
+</body>
+</html>

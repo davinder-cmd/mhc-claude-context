@@ -1,0 +1,135 @@
+<!--
+  ============================================================
+  BLOCK 2 — Today strip
+  ============================================================
+  Renders the "Today" trackers row — above the fold.
+
+  CKEditor-friendly link pattern
+  ------------------------------
+  Each tile is a plain <div class="today-card"> that contains
+  a single <a class="today-card-link"> at the END. CSS makes
+  that anchor stretch to cover the whole tile (position:absolute
+  + inset:0). The visible content stays as block elements —
+  CKEditor never has to put block children inside an anchor.
+
+  Conditionals:
+    {{#formula.hasLinkedTracker_steps}}…{{/…}}    user is linked for steps
+    {{^formula.hasLinkedTracker_steps}}…{{/…}}    inverse → zero-state CTA
+    (same pattern for sleep, mindful, points)
+
+  Tokens:
+    {{formula.copy_section_today}}      — "Today"
+    {{formula.copy_link_seeAll}}        — "See all"
+    {{formula.tracker_steps_value}}     — "7,842"
+    {{formula.tracker_steps_unit}}      — "steps"
+    {{formula.tracker_sleep_value}}     — "7h 12m"
+    {{formula.tracker_sleep_unit}}      — "last night"
+    {{formula.tracker_mindful_value}}   — "12"
+    {{formula.tracker_mindful_unit}}    — "mindful min"
+    {{formula.tracker_points_value}}    — "1,250"
+    {{formula.tracker_points_unit}}     — "this month"
+    {{formula.seeAll_href}}             — link target for "See all"
+    {{formula.tracker_steps_href}}      — drill-down for steps tile
+    {{formula.tracker_sleep_href}}      — drill-down for sleep tile
+    {{formula.tracker_mindful_href}}    — drill-down for mindful tile
+    {{formula.tracker_points_href}}     — drill-down for points tile
+    {{formula.linkSteps_href}}          — link target for "Link steps" zero-state
+    {{formula.linkSleep_href}}          — link target for "Log sleep" zero-state
+    {{formula.linkMindful_href}}        — link target for "Add minutes" zero-state
+    {{formula.copy_link_steps}}         — "Link steps"
+    {{formula.copy_link_sleep}}         — "Log sleep"
+    {{formula.icon_steps_url}}          — image URL for steps icon
+    {{formula.icon_sleep_url}}          — image URL for sleep icon
+    {{formula.icon_mindful_url}}        — image URL for mindful icon
+    {{formula.icon_points_url}}         — image URL for points icon
+
+  Note: this block is ABOVE the Insights action block.
+  ============================================================
+-->
+
+<div class="mhc-home">
+  <section class="today" aria-labelledby="mhc-today-title">
+    <div class="section-head">
+      <h2 id="mhc-today-title" class="section-title">{{formula.copy_section_today}}</h2>
+      <a class="section-link" href="{{formula.seeAll_href}}">{{formula.copy_link_seeAll}}</a>
+    </div>
+
+    <div class="today-grid">
+      <!-- Steps -->
+      {{#formula.hasLinkedTracker_steps}}
+      <div class="today-card">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_steps_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.tracker_steps_value}}<span class="today-card-value-unit"> {{formula.tracker_steps_unit}}</span></div>
+        <div class="today-card-label">{{formula.copy_label_steps}}</div>
+        <a class="today-card-link" href="{{formula.tracker_steps_href}}"><span class="mhc-visually-hidden">{{formula.copy_label_steps}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_steps}}
+      {{^formula.hasLinkedTracker_steps}}
+      <div class="today-card today-card-zero">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_steps_url}}" alt="" />
+        </div>
+        <div class="today-card-value">+ {{formula.copy_link_steps}}</div>
+        <div class="today-card-label">{{formula.copy_label_steps}}</div>
+        <a class="today-card-link" href="{{formula.linkSteps_href}}"><span class="mhc-visually-hidden">{{formula.copy_link_steps}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_steps}}
+
+      <!-- Sleep -->
+      {{#formula.hasLinkedTracker_sleep}}
+      <div class="today-card">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_sleep_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.tracker_sleep_value}}</div>
+        <div class="today-card-label">{{formula.tracker_sleep_unit}}</div>
+        <a class="today-card-link" href="{{formula.tracker_sleep_href}}"><span class="mhc-visually-hidden">{{formula.copy_label_sleep}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_sleep}}
+      {{^formula.hasLinkedTracker_sleep}}
+      <div class="today-card today-card-zero">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_sleep_url}}" alt="" />
+        </div>
+        <div class="today-card-value">+ {{formula.copy_link_sleep}}</div>
+        <div class="today-card-label">{{formula.copy_label_sleep}}</div>
+        <a class="today-card-link" href="{{formula.linkSleep_href}}"><span class="mhc-visually-hidden">{{formula.copy_link_sleep}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_sleep}}
+
+      <!-- Mindful minutes -->
+      {{#formula.hasLinkedTracker_mindful}}
+      <div class="today-card">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_mindful_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.tracker_mindful_value}}</div>
+        <div class="today-card-label">{{formula.tracker_mindful_unit}}</div>
+        <a class="today-card-link" href="{{formula.tracker_mindful_href}}"><span class="mhc-visually-hidden">{{formula.copy_label_mindful}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_mindful}}
+      {{^formula.hasLinkedTracker_mindful}}
+      <div class="today-card today-card-zero">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_mindful_url}}" alt="" />
+        </div>
+        <div class="today-card-value">+ {{formula.copy_link_mindful}}</div>
+        <div class="today-card-label">{{formula.copy_label_mindful}}</div>
+        <a class="today-card-link" href="{{formula.linkMindful_href}}"><span class="mhc-visually-hidden">{{formula.copy_link_mindful}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_mindful}}
+
+      <!-- Points -->
+      <div class="today-card">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_points_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.tracker_points_value}}</div>
+        <div class="today-card-label">{{formula.tracker_points_unit}}</div>
+        <a class="today-card-link" href="{{formula.tracker_points_href}}"><span class="mhc-visually-hidden">{{formula.copy_label_points}}</span></a>
+      </div>
+    </div>
+  </section>
+</div>

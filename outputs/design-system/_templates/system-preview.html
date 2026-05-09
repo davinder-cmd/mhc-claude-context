@@ -1,0 +1,306 @@
+<!--
+  TEMPLATE: system-preview.html
+  USE WHEN: You changed enough to want to see the full system in its current state.
+            Always covers all 5 layers + applied moments + accessibility + narrative.
+
+  HOW TO USE:
+    1. cp _templates/system-preview.html v<N>/system.html
+    2. Fill the Delta Panel below with your INTERVIEW.md output
+    3. Fill each layer section
+    4. After build: update MAP.md, append to decisions.md if a decision landed
+
+  ARCHITECTURAL RULES (locked program-wide, do not break):
+    - neutral.* (graphite ink) and sand.* (warm surface) are split scales — never one ladder for both
+    - One primary CTA color
+    - Gradients only on container surfaces and primary CTAs (never text, never borders)
+    - All component tokens reference semantic tokens (no raw hex in Layer 3+)
+    - All semantic tokens reference Layer 1 (no raw hex in Layer 2+)
+    - WCAG AA minimum (4.5:1 text, 3:1 UI components); flag any failure with corrected value
+    - Border radius default 16–20px for primary components
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Preview — v{N} · {slug}</title>
+<style>
+  /* Template chrome — independent of the system being designed */
+  :root {
+    --doc-bg: #FBFAF8;
+    --doc-ink: #1A1816;
+    --doc-ink-2: #423D38;
+    --doc-ink-3: #6F6963;
+    --doc-border: #E1DEDA;
+    --doc-accent: #08605A;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Source Serif 4", Charter, Georgia, serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 56px 40px 120px; }
+  h1 { font-family: var(--font-serif); font-size: 40px; font-weight: 600; line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+  h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.005em; }
+  h3 { font-size: 18px; font-weight: 600; margin: 32px 0 16px; }
+  section { margin-bottom: 80px; }
+  .lede { color: var(--doc-ink-2); margin: 0 0 32px; max-width: 720px; }
+  code { font-family: var(--font-mono); font-size: 13px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 4px; }
+
+  /* === Delta Panel — universal header, every artifact type uses this === */
+  .delta-panel { background: #F4F2EE; border-left: 4px solid var(--doc-accent); border-radius: 4px; padding: 24px 32px; margin: 0 0 56px; font-size: 14px; }
+  .delta-panel dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; }
+  .delta-panel dt { font-weight: 600; color: var(--doc-ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; padding-top: 2px; }
+  .delta-panel dd { margin: 0; color: var(--doc-ink); }
+  .delta-panel dd ul { margin: 0; padding-left: 18px; }
+  .delta-panel dd li { margin-bottom: 4px; }
+  .delta-panel .status { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-current    { background: #DCEAD3; color: #335326; }
+  .status-draft      { background: #FBE9BC; color: #74500D; }
+  .status-superseded { background: #E1DEDA; color: #6F6963; }
+  .status-archived   { background: #E1DEDA; color: #6F6963; }
+
+  /* === Scale display === */
+  .scale { margin-bottom: 32px; }
+  .scale-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .scale-label h4 { margin: 0; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  .scale-label .role { font-size: 12px; color: var(--doc-ink-3); }
+  .scale-row { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+  .swatch { aspect-ratio: 1 / 1.25; border-radius: 6px; padding: 8px; display: flex; flex-direction: column; justify-content: space-between; font-size: 10px; line-height: 1.3; border: 1px solid rgba(0,0,0,0.04); }
+  .swatch .stop { font-weight: 600; opacity: 0.85; }
+  .swatch .hex  { font-family: var(--font-mono); font-size: 9px; opacity: 0.7; }
+  .swatch.light { color: #1A1816; }
+  .swatch.dark  { color: #FBFAF8; }
+
+  /* === Tokens table === */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--doc-border); vertical-align: top; }
+  th { font-weight: 600; color: var(--doc-ink-2); background: #F4F2EE; text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+  td.token { font-family: var(--font-mono); font-size: 12px; }
+  td.swatch-cell { width: 80px; }
+  .chip { display: inline-block; width: 36px; height: 24px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); vertical-align: middle; }
+  .pass { color: #335326; font-weight: 600; }
+  .fail { color: #8C172E; font-weight: 600; }
+  .info { color: var(--doc-ink-3); }
+
+  /* Section TOC nav */
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 56px; padding: 16px 20px; background: #F4F2EE; border-radius: 8px; font-size: 13px; }
+  .toc a { color: var(--doc-accent); text-decoration: none; padding: 4px 10px; border-radius: 4px; }
+  .toc a:hover { background: #fff; }
+
+  /* Stakeholder narrative */
+  .narrative { background: #F4F2EE; border-radius: 16px; padding: 32px 40px; border-left: 4px solid var(--doc-accent); max-width: 880px; }
+  .narrative p { margin: 0 0 12px; line-height: 1.65; }
+  .narrative p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ============================================================
+     DELTA PANEL — universal header. Paste from INTERVIEW.md output.
+     ============================================================ -->
+<header>
+  <h1>{Title — e.g., "MHC Color System — v4 · editorial restraint reset"}</h1>
+  <div class="delta-panel">
+    <dl>
+      <dt>Iteration</dt>       <dd>v{N} · {slug}</dd>
+      <dt>Type</dt>            <dd>system-preview</dd>
+      <dt>Builds on</dt>       <dd>v{N-1} ({path})</dd>
+      <dt>Premise</dt>         <dd>{one sentence — what this iteration is testing or asserting}</dd>
+      <dt>Color register</dt> <dd><strong>{Earth / Neutral / Pastel / Jewel / Fluorescent / Shade-dominant / Tone-on-tone}</strong> — see INTERVIEW B1</dd>
+      <dt>Brand color role</dt><dd><strong>{Passive / Active}</strong> — see INTERVIEW B6</dd>
+      <dt>Changed</dt>         <dd><ul>
+        <li>{bullet} — what's different from prior</li>
+        <li>{bullet}</li>
+      </ul></dd>
+      <dt>Locked</dt>          <dd><ul>
+        <li>{bullet} — what carried forward unchanged</li>
+        <li>{bullet}</li>
+      </ul></dd>
+      <dt>Assumptions</dt>     <dd><ul>
+        <li>{what was inferred} — {cue / why}</li>
+        <li>{"none" if every answer was explicit}</li>
+      </ul></dd>
+      <dt>Decision touched</dt><dd>{D{ID} (gate / advance / reopen) — or "none"}</dd>
+      <dt>Status</dt>          <dd><span class="status status-draft">draft</span> · <span class="info">draft → current → superseded → archived</span></dd>
+      <dt>Date</dt>            <dd>YYYY-MM-DD</dd>
+    </dl>
+  </div>
+</header>
+
+<!-- Section quick-jump (optional, copy as-is) -->
+<nav class="toc">
+  <a href="#l1">Layer 1</a>
+  <a href="#l1ext">Layer 1 (extended)</a>
+  <a href="#l2">Layer 2</a>
+  <a href="#l3">Layer 3</a>
+  <a href="#l4">Layer 4</a>
+  <a href="#l5">Layer 5</a>
+  <a href="#applied">Applied moments</a>
+  <a href="#a11y">Accessibility</a>
+  <a href="#narrative">Stakeholder narrative</a>
+</nav>
+
+<!-- ============================================================
+     LAYER 1 — Core palette scales
+     FILL: render every scale in the system. 11 stops each.
+     Required scales: neutral, sand, primary, success, warning, error.
+     Add a category-grouping subhead if you want (Structural / Brand / Semantic).
+     ============================================================ -->
+<section id="l1">
+  <h2>Layer 1 — Core Palette Scales</h2>
+  <p class="lede">{1–2 sentence framing: what's distinctive about this iteration's palette logic.}</p>
+
+  <!-- repeat .scale block per scale -->
+  <div class="scale">
+    <div class="scale-label"><h4>color.{name}.* — {role}</h4><span class="role">{hue/chroma note}</span></div>
+    <div class="scale-row">
+      <!-- swatches: 11 stops, light/dark class based on contrast -->
+      <div class="swatch light" style="background:#______"><span class="stop">50</span><span class="hex">#______</span></div>
+      <!-- ... 100, 200, 300, 400, 500, 600, 700, 800, 900, 950 -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LAYER 1 (extended) — Categorical scales
+     FILL: module-identity hues. Each module gets one hue, non-overlapping with semantic scales.
+     ============================================================ -->
+<section id="l1ext">
+  <h2>Layer 1 (extended) — Categorical Scales</h2>
+  <p class="lede">{Module hue map — list which module owns which hue.}</p>
+
+  <!-- repeat .scale block per categorical -->
+</section>
+
+<!-- ============================================================
+     LAYER 2 — Semantic tokens (incl. gradients)
+     FILL: backgrounds, text, borders, interactive, gradient utilities.
+     Every token references a Layer 1 stop — no raw hex.
+     ============================================================ -->
+<section id="l2">
+  <h2>Layer 2 — Semantic Tokens</h2>
+
+  <h3>Backgrounds, text, borders</h3>
+  <table>
+    <thead><tr><th class="swatch-cell"></th><th>Token</th><th>References</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip" style="background:#______"></span></td><td class="token">background.default</td><td class="token">sand.50</td><td>Page background</td></tr>
+      <!-- background.subtle, background.inverse, text.primary/secondary/tertiary/disabled/inverse/onPrimary, border.default/strong/focus -->
+    </tbody>
+  </table>
+
+  <h3>Interactive</h3>
+  <table>
+    <!-- interactive.default/hover/pressed/selected/disabled -->
+  </table>
+
+  <h3>Gradient utilities</h3>
+  <table>
+    <thead><tr><th class="swatch-cell" style="width:140px"></th><th>Token</th><th>Recipe</th><th>Use</th></tr></thead>
+    <tbody>
+      <!-- gradient.warm-mist, peach, cool-mist, deep-primary, per-module — only on container surfaces and CTAs -->
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================================================
+     LAYER 3 — Components
+     FILL: buttons, badges, selection, focus, radius, data viz.
+     Every component token references a Layer 2 token.
+     ============================================================ -->
+<section id="l3">
+  <h2>Layer 3 — Components</h2>
+
+  <h3>Buttons</h3>
+  <!-- primary (incl. gradient variant if used), secondary outlined, ghost, disabled -->
+
+  <h3>Badges &amp; lozenges</h3>
+  <!-- semantic + categorical variants -->
+
+  <h3>Selection</h3>
+  <!-- default, selected, hover, disabled -->
+
+  <h3>Focus ring</h3>
+  <!-- 2px ring, 2px offset, primary.[stop with AAA on bg] -->
+
+  <h3>Border radius</h3>
+  <!-- sm 8 / md 12 / lg 16 / xl 20 / full 9999 -->
+
+  <h3>Data visualization</h3>
+  <!-- approved categorical hue subset at 500 stop; sequential gradients use 200→700 of any approved hue -->
+</section>
+
+<!-- ============================================================
+     LAYER 4 — Icons
+     FILL: sizing, fill rule, treatments, module-tinted variant, library recommendation.
+     ============================================================ -->
+<section id="l4">
+  <h2>Layer 4 — Icons</h2>
+  <!-- sm 20 / md 24 / micro 16; never 18 or 22 -->
+  <!-- stroked = default/informational/unselected; filled = selected/active/confirmation -->
+  <!-- treatment recipes (this iteration's count) demoed across categorical hues -->
+  <!-- module-tinted icon = module's [hue].700; within module other icons revert to icon.color.default -->
+  <!-- library: justify pick (Material Symbols Outlined/Rounded, Phosphor, etc.); rule out alternatives -->
+</section>
+
+<!-- ============================================================
+     LAYER 5 — Illustrations
+     FILL: color range rule, style direction, variant grid (one composition × N palette swaps).
+     ============================================================ -->
+<section id="l5">
+  <h2>Layer 5 — Illustrations</h2>
+  <!-- color range: illustrations live in 100–500; UI emphasis lives in 600+; off-limits: error.*, warning.*, neutral.800+ -->
+  <!-- two registers if applicable: anatomical/functional + expressive/empathic -->
+  <!-- variant grid: same composition rendered in 4 palette swaps (warm-led / module A / module B / module C) -->
+</section>
+
+<!-- ============================================================
+     APPLIED MOMENTS — three anchor screens
+     FILL: render the system in real product moments. Use the canonical three:
+       1. Member · DCP completion (or equivalent module-led moment)
+       2. Buyer · website hero / sales moment (gradient.deep-primary)
+       3. AI · Health Insight (canonical AI surface)
+     ============================================================ -->
+<section id="applied">
+  <h2>Applied moments</h2>
+  <p class="lede">{1 sentence: how the system feels in product. What did the iteration prove?}</p>
+
+  <!-- Three anchor screens, each with brief annotation -->
+</section>
+
+<!-- ============================================================
+     ACCESSIBILITY — at-a-glance table
+     FILL: every component pairing, ratio, AA, AAA. Resolve every failure with a corrected value.
+     ============================================================ -->
+<section id="a11y">
+  <h2>Accessibility — At a Glance</h2>
+  <table>
+    <thead><tr><th>Pairing</th><th>Foreground</th><th>Background</th><th>Ratio</th><th>AA</th><th>AAA</th><th>Notes</th></tr></thead>
+    <tbody>
+      <!-- body text, secondary, tertiary, disabled, primary CTA, badges (semantic + categorical), borders, focus ring -->
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--doc-ink-3);">Verify in Stark or Colour Contrast Analyser before locking the spec.</p>
+</section>
+
+<!-- ============================================================
+     STAKEHOLDER NARRATIVE
+     FILL: 4–6 sentences. What the existing brand contributed, what was left behind,
+           what this iteration is trying to achieve, how it positions us in the category.
+           Tone: clear, confident, non-designer.
+     ============================================================ -->
+<section id="narrative">
+  <h2>Stakeholder narrative</h2>
+  <div class="narrative">
+    <p>{Sentence 1 — what the existing brand contributed.}</p>
+    <p>{Sentence 2 — what was left behind and why.}</p>
+    <p>{Sentence 3–4 — what the new palette is trying to achieve.}</p>
+    <p>{Sentence 5–6 — how it positions us in the digital health landscape.}</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

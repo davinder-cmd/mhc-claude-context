@@ -1,0 +1,160 @@
+<!--
+  ============================================================
+  BLOCK 2 — This week (weekly totals, Option A reframe)
+  ============================================================
+  Replaces the daily "Today" tiles with running 7-day aggregates.
+  Rationale: a 5-hour sync delay disappears inside a weekly total,
+  so partial / lagging tracker syncs no longer read as "missed
+  goal" to the user.
+
+  Section title is "This week", subtitled with the date range
+  (e.g. "Mon Apr 22 — Today"). Tile labels NEVER use the word
+  "today" — that's the whole point of the reframe.
+
+  Three tiles (4 on tablet+):
+    1. Steps this week     — running total + avg/day + WoW comparison
+    2. Sleep this week     — running 7-night total + avg/night
+    3. Active days         — habit framing, e.g. "5 of 6"
+    4. Points this month   — unchanged (already non-daily)
+
+  CKEditor-friendly link pattern (same as before):
+  Each tile is a <div class="today-card"> with a single
+  absolutely-positioned <a class="today-card-link"> covering it.
+
+  Conditionals:
+    {{#formula.hasLinkedTracker_steps}}…{{/…}}    user is linked for steps
+    {{^formula.hasLinkedTracker_steps}}…{{/…}}    inverse → zero-state CTA
+    (same pattern for sleep, mindful)
+
+  Tokens:
+    {{formula.copy_section_thisWeek}}       — "This week"
+    {{formula.copy_section_dateRange}}      — "Mon Apr 22 — Today"
+    {{formula.copy_link_seeAll}}            — "See all"
+
+    {{formula.weekly_steps_value}}          — "52,840"
+    {{formula.weekly_steps_label}}          — "Steps this week"
+    {{formula.weekly_steps_sub}}            — "avg 8,807/day · ↑12% vs last"
+    {{formula.weekly_steps_href}}           — drill-down
+
+    {{formula.weekly_sleep_value}}          — "48h 12m"
+    {{formula.weekly_sleep_label}}          — "Sleep this week"
+    {{formula.weekly_sleep_sub}}            — "avg 6h 53m/night"
+    {{formula.weekly_sleep_href}}           — drill-down
+
+    {{formula.weekly_active_value}}         — "5 of 6"
+    {{formula.weekly_active_label}}         — "Active days"
+    {{formula.weekly_active_sub}}           — "30+ min movement"
+    {{formula.weekly_active_href}}          — drill-down
+
+    {{formula.tracker_points_value}}        — "1,250"
+    {{formula.tracker_points_unit}}         — "this month"
+    {{formula.tracker_points_href}}         — drill-down
+
+    {{formula.linkSteps_href}}              — link target for "Link steps" zero-state
+    {{formula.linkSleep_href}}              — link target for "Log sleep" zero-state
+    {{formula.linkMindful_href}}            — link target for "Add minutes" zero-state
+    {{formula.copy_link_steps}}             — "Link steps"
+    {{formula.copy_link_sleep}}             — "Log sleep"
+    {{formula.copy_link_mindful}}           — "Add minutes"
+
+    {{formula.icon_steps_url}}              — image URL for steps icon
+    {{formula.icon_sleep_url}}              — image URL for sleep icon
+    {{formula.icon_active_url}}             — image URL for active-days icon
+    {{formula.icon_points_url}}             — image URL for points icon
+
+    {{formula.seeAll_href}}                 — "See all" link target
+  ============================================================
+-->
+
+<div class="mhc-home">
+  <section class="today" aria-labelledby="mhc-thisweek-title">
+    <div class="section-head">
+      <div class="section-head-stack">
+        <h2 id="mhc-thisweek-title" class="section-title">{{formula.copy_section_thisWeek}}</h2>
+        <p class="section-subtitle">{{formula.copy_section_dateRange}}</p>
+      </div>
+      <a class="section-link" href="{{formula.seeAll_href}}">{{formula.copy_link_seeAll}}</a>
+    </div>
+
+    <div class="today-grid">
+      <!-- Steps this week -->
+      {{#formula.hasLinkedTracker_steps}}
+      <div class="today-card today-card--week">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_steps_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.weekly_steps_value}}</div>
+        <div class="today-card-label">{{formula.weekly_steps_label}}</div>
+        <div class="today-card-sub">{{formula.weekly_steps_sub}}</div>
+        <a class="today-card-link" href="{{formula.weekly_steps_href}}"><span class="mhc-visually-hidden">{{formula.weekly_steps_label}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_steps}}
+      {{^formula.hasLinkedTracker_steps}}
+      <div class="today-card today-card-zero">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_steps_url}}" alt="" />
+        </div>
+        <div class="today-card-value">+ {{formula.copy_link_steps}}</div>
+        <div class="today-card-label">{{formula.weekly_steps_label}}</div>
+        <a class="today-card-link" href="{{formula.linkSteps_href}}"><span class="mhc-visually-hidden">{{formula.copy_link_steps}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_steps}}
+
+      <!-- Sleep this week -->
+      {{#formula.hasLinkedTracker_sleep}}
+      <div class="today-card today-card--week">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_sleep_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.weekly_sleep_value}}</div>
+        <div class="today-card-label">{{formula.weekly_sleep_label}}</div>
+        <div class="today-card-sub">{{formula.weekly_sleep_sub}}</div>
+        <a class="today-card-link" href="{{formula.weekly_sleep_href}}"><span class="mhc-visually-hidden">{{formula.weekly_sleep_label}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_sleep}}
+      {{^formula.hasLinkedTracker_sleep}}
+      <div class="today-card today-card-zero">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_sleep_url}}" alt="" />
+        </div>
+        <div class="today-card-value">+ {{formula.copy_link_sleep}}</div>
+        <div class="today-card-label">{{formula.weekly_sleep_label}}</div>
+        <a class="today-card-link" href="{{formula.linkSleep_href}}"><span class="mhc-visually-hidden">{{formula.copy_link_sleep}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_sleep}}
+
+      <!-- Active days (habit framing) -->
+      {{#formula.hasLinkedTracker_steps}}
+      <div class="today-card today-card--week">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_active_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.weekly_active_value}}</div>
+        <div class="today-card-label">{{formula.weekly_active_label}}</div>
+        <div class="today-card-sub">{{formula.weekly_active_sub}}</div>
+        <a class="today-card-link" href="{{formula.weekly_active_href}}"><span class="mhc-visually-hidden">{{formula.weekly_active_label}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_steps}}
+      {{^formula.hasLinkedTracker_steps}}
+      <div class="today-card today-card-zero">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_active_url}}" alt="" />
+        </div>
+        <div class="today-card-value">+ {{formula.copy_link_steps}}</div>
+        <div class="today-card-label">{{formula.weekly_active_label}}</div>
+        <a class="today-card-link" href="{{formula.linkSteps_href}}"><span class="mhc-visually-hidden">{{formula.copy_link_steps}}</span></a>
+      </div>
+      {{/formula.hasLinkedTracker_steps}}
+
+      <!-- Points (already non-daily; unchanged) -->
+      <div class="today-card">
+        <div class="today-card-icon" aria-hidden="true">
+          <img src="{{formula.icon_points_url}}" alt="" />
+        </div>
+        <div class="today-card-value">{{formula.tracker_points_value}}</div>
+        <div class="today-card-label">{{formula.tracker_points_unit}}</div>
+        <a class="today-card-link" href="{{formula.tracker_points_href}}"><span class="mhc-visually-hidden">{{formula.tracker_points_unit}}</span></a>
+      </div>
+    </div>
+  </section>
+</div>

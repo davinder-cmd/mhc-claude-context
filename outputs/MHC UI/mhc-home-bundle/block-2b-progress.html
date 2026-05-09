@@ -1,0 +1,387 @@
+<!--
+  ============================================================
+  BLOCK 2b — Pick up where you left off (in-progress)
+  ============================================================
+  Renders a tight rail of items the user is in the middle of.
+  Per the program-type fit analysis, four rail variants are
+  driven by program type — one shared card body, one rail
+  partial chosen by `cardN_rail`:
+
+    cardN_rail = "step"   → Journeys, DCP — "9 / 28"
+    cardN_rail = "pct"    → Assessments — "62%"
+    cardN_rail = "week"   → Legacy week-based programs (image card)
+    cardN_rail = "days"   → Challenges — "3 days left"
+
+  Strategy
+  --------
+  - Hard cap of 3 cards. Server pre-sorts:
+      1. Focus-matched + ongoing program (DCP / Journey / Assessment)
+      2. Challenge with daysLeft ≤ 3 (urgency wins)
+      3. Other ongoing programs, most-recent-active first
+      4. Other challenges
+  - Health Habits do NOT belong in this rail (they don't end).
+  - Section is fully suppressed when nothing in progress.
+
+  Conditionals
+  ------------
+    {{#formula.hasInProgressPrograms}}…           any item in flight
+    {{#formula.programOverflow}}…                 more than 3 items
+    {{#formula.cardN_rail_step}}…                 Journey/DCP step rail
+    {{#formula.cardN_rail_pct}}…                  Assessment % rail
+    {{#formula.cardN_rail_week}}…                 legacy program (image)
+    {{#formula.cardN_rail_days}}…                 Challenge days-left rail
+    {{#formula.cardN_isFocusMatch}}…              "On focus" badge
+    {{#formula.cardN_isPrimary}}…                 hero treatment (focus + journey/DCP)
+    {{#formula.cardN_urgent}}…                    daysLeft ≤ 3 (orange rail)
+    {{#formula.hasCard2}} / hasCard3              present 2nd / 3rd cards
+
+  Tokens — common
+  ---------------
+    {{formula.cardN_title}}                "Better sleep, better days"
+    {{formula.cardN_tagline}}              "Big Health · Digital therapeutic"
+    {{formula.cardN_href}}                 drill-down link
+    {{formula.cardN_dismissHref}}          POST target for "hide" form
+    {{formula.cardN_nextDetail}}           "Up next: caffeine & sleep"
+    {{formula.cardN_ctaLabel}}             "Continue", "Resume", etc.
+
+  Tokens — step rail (Journey / DCP)
+  ----------------------------------
+    {{formula.cardN_stepIn}}               "9"
+    {{formula.cardN_stepTotal}}            "28"
+    {{formula.cardN_stepUnit}}             "of"  (or "Topic" / "Level" if needed)
+    {{formula.cardN_pctValue}}             "32"  (for inline bar fill)
+
+  Tokens — pct rail (Assessment)
+  ------------------------------
+    {{formula.cardN_pctValue}}             "62"
+    {{formula.cardN_pctSub}}               "Done"
+    {{formula.cardN_metaText}}             "~5 min left"
+
+  Tokens — week rail (legacy program image card)
+  ----------------------------------------------
+    {{formula.cardN_image}}                cover image URL
+    {{formula.cardN_weekIn}}                "2"
+    {{formula.cardN_weekTotal}}             "8"
+    {{formula.cardN_weekLabel}}             "Week 2 of 8"
+    {{formula.cardN_nextLabel}}             "Tonight · 12 min"
+
+  Tokens — days rail (Challenge)
+  ------------------------------
+    {{formula.cardN_daysLeft}}              "3"
+    {{formula.cardN_daysLeftLabel}}         "Days left"
+    {{formula.cardN_stat}}                  "Rank #4 of 38 · 12,400 steps"
+  ============================================================
+-->
+
+{{#formula.hasInProgressPrograms}}
+<div class="mhc-home">
+  <section class="progress" aria-labelledby="mhc-progress-title">
+    <div class="section-head">
+      <h2 id="mhc-progress-title" class="section-title">{{formula.copy_section_progress}}</h2>
+      <a class="section-link" href="{{formula.progress_seeAll_href}}">
+        {{#formula.programOverflow}}{{formula.copy_link_seeAllCount}}{{/formula.programOverflow}}
+        {{^formula.programOverflow}}{{formula.copy_link_seeAll}}{{/formula.programOverflow}}
+      </a>
+    </div>
+
+    <div class="progress-grid">
+
+      <!-- ============== Card 1 ============== -->
+      {{#formula.card1_rail_week}}
+      <div class="progress-card">
+        <div class="progress-card-img" style="background-image: url('{{formula.card1_image}}');" role="img" aria-label=""></div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            {{#formula.card1_isFocusMatch}}<span class="progress-card-badge">{{formula.copy_onFocus}}</span>{{/formula.card1_isFocusMatch}}
+            <span class="progress-card-tag">{{formula.card1_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card1_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: calc(({{formula.card1_weekIn}} / {{formula.card1_weekTotal}}) * 100%);"></div></div>
+            <span class="progress-card-week">{{formula.card1_weekLabel}}</span>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-label">{{formula.copy_upNext}}:</span>
+            <span class="progress-card-next-when">{{formula.card1_nextLabel}}</span>
+            <span class="progress-card-next-detail"> · {{formula.card1_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card1_href}}" aria-label="{{formula.card1_title}}"><span class="mhc-visually-hidden">{{formula.card1_title}}</span></a>
+        <form action="{{formula.card1_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card1_rail_week}}
+      {{#formula.card1_rail_step}}
+      <div class="progress-card progress-card--rail {{#formula.card1_isPrimary}}progress-card--primary{{/formula.card1_isPrimary}}">
+        <div class="progress-card-rail">
+          <span class="progress-card-rail-num">{{formula.card1_stepIn}}</span>
+          <span class="progress-card-rail-lbl">{{formula.card1_stepUnit}} {{formula.card1_stepTotal}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            {{#formula.card1_isFocusMatch}}<span class="progress-card-badge">{{formula.copy_onFocus}}</span>{{/formula.card1_isFocusMatch}}
+            <span class="progress-card-tag">{{formula.card1_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card1_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: {{formula.card1_pctValue}}%;"></div></div>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-label">{{formula.copy_upNext}}:</span>
+            <span class="progress-card-next-detail">{{formula.card1_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card1_href}}" aria-label="{{formula.card1_title}}"><span class="mhc-visually-hidden">{{formula.card1_title}}</span></a>
+        <form action="{{formula.card1_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card1_rail_step}}
+      {{#formula.card1_rail_pct}}
+      <div class="progress-card progress-card--rail">
+        <div class="progress-card-rail progress-card-rail--pct">
+          <span class="progress-card-rail-num">{{formula.card1_pctValue}}<span class="progress-card-rail-pct">%</span></span>
+          <span class="progress-card-rail-lbl">{{formula.card1_pctSub}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            <span class="progress-card-tag">{{formula.card1_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card1_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: {{formula.card1_pctValue}}%;"></div></div>
+            <span class="progress-card-week">{{formula.card1_metaText}}</span>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-detail">{{formula.card1_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card1_href}}" aria-label="{{formula.card1_title}}"><span class="mhc-visually-hidden">{{formula.card1_title}}</span></a>
+        <form action="{{formula.card1_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card1_rail_pct}}
+      {{#formula.card1_rail_days}}
+      <div class="progress-card progress-card--rail progress-card--challenge">
+        <div class="progress-card-rail {{#formula.card1_urgent}}progress-card-rail--urgent{{/formula.card1_urgent}}">
+          <span class="progress-card-rail-num">{{formula.card1_daysLeft}}</span>
+          <span class="progress-card-rail-lbl">{{formula.card1_daysLeftLabel}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            <span class="progress-card-tag">{{formula.card1_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card1_title}}</h3>
+          <p class="progress-card-stat">{{formula.card1_stat}}</p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card1_href}}" aria-label="{{formula.card1_title}}"><span class="mhc-visually-hidden">{{formula.card1_title}}</span></a>
+        <form action="{{formula.card1_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card1_rail_days}}
+
+      <!-- ============== Card 2 ============== -->
+      {{#formula.hasCard2}}
+      {{#formula.card2_rail_week}}
+      <div class="progress-card">
+        <div class="progress-card-img" style="background-image: url('{{formula.card2_image}}');" role="img" aria-label=""></div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            {{#formula.card2_isFocusMatch}}<span class="progress-card-badge">{{formula.copy_onFocus}}</span>{{/formula.card2_isFocusMatch}}
+            <span class="progress-card-tag">{{formula.card2_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card2_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: calc(({{formula.card2_weekIn}} / {{formula.card2_weekTotal}}) * 100%);"></div></div>
+            <span class="progress-card-week">{{formula.card2_weekLabel}}</span>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-label">{{formula.copy_upNext}}:</span>
+            <span class="progress-card-next-when">{{formula.card2_nextLabel}}</span>
+            <span class="progress-card-next-detail"> · {{formula.card2_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card2_href}}" aria-label="{{formula.card2_title}}"><span class="mhc-visually-hidden">{{formula.card2_title}}</span></a>
+        <form action="{{formula.card2_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card2_rail_week}}
+      {{#formula.card2_rail_step}}
+      <div class="progress-card progress-card--rail {{#formula.card2_isPrimary}}progress-card--primary{{/formula.card2_isPrimary}}">
+        <div class="progress-card-rail">
+          <span class="progress-card-rail-num">{{formula.card2_stepIn}}</span>
+          <span class="progress-card-rail-lbl">{{formula.card2_stepUnit}} {{formula.card2_stepTotal}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            {{#formula.card2_isFocusMatch}}<span class="progress-card-badge">{{formula.copy_onFocus}}</span>{{/formula.card2_isFocusMatch}}
+            <span class="progress-card-tag">{{formula.card2_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card2_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: {{formula.card2_pctValue}}%;"></div></div>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-label">{{formula.copy_upNext}}:</span>
+            <span class="progress-card-next-detail">{{formula.card2_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card2_href}}" aria-label="{{formula.card2_title}}"><span class="mhc-visually-hidden">{{formula.card2_title}}</span></a>
+        <form action="{{formula.card2_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card2_rail_step}}
+      {{#formula.card2_rail_pct}}
+      <div class="progress-card progress-card--rail">
+        <div class="progress-card-rail progress-card-rail--pct">
+          <span class="progress-card-rail-num">{{formula.card2_pctValue}}<span class="progress-card-rail-pct">%</span></span>
+          <span class="progress-card-rail-lbl">{{formula.card2_pctSub}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            <span class="progress-card-tag">{{formula.card2_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card2_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: {{formula.card2_pctValue}}%;"></div></div>
+            <span class="progress-card-week">{{formula.card2_metaText}}</span>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-detail">{{formula.card2_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card2_href}}" aria-label="{{formula.card2_title}}"><span class="mhc-visually-hidden">{{formula.card2_title}}</span></a>
+        <form action="{{formula.card2_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card2_rail_pct}}
+      {{#formula.card2_rail_days}}
+      <div class="progress-card progress-card--rail progress-card--challenge">
+        <div class="progress-card-rail {{#formula.card2_urgent}}progress-card-rail--urgent{{/formula.card2_urgent}}">
+          <span class="progress-card-rail-num">{{formula.card2_daysLeft}}</span>
+          <span class="progress-card-rail-lbl">{{formula.card2_daysLeftLabel}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            <span class="progress-card-tag">{{formula.card2_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card2_title}}</h3>
+          <p class="progress-card-stat">{{formula.card2_stat}}</p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card2_href}}" aria-label="{{formula.card2_title}}"><span class="mhc-visually-hidden">{{formula.card2_title}}</span></a>
+        <form action="{{formula.card2_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card2_rail_days}}
+      {{/formula.hasCard2}}
+
+      <!-- ============== Card 3 ============== -->
+      {{#formula.hasCard3}}
+      {{#formula.card3_rail_week}}
+      <div class="progress-card">
+        <div class="progress-card-img" style="background-image: url('{{formula.card3_image}}');" role="img" aria-label=""></div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            {{#formula.card3_isFocusMatch}}<span class="progress-card-badge">{{formula.copy_onFocus}}</span>{{/formula.card3_isFocusMatch}}
+            <span class="progress-card-tag">{{formula.card3_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card3_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: calc(({{formula.card3_weekIn}} / {{formula.card3_weekTotal}}) * 100%);"></div></div>
+            <span class="progress-card-week">{{formula.card3_weekLabel}}</span>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-label">{{formula.copy_upNext}}:</span>
+            <span class="progress-card-next-when">{{formula.card3_nextLabel}}</span>
+            <span class="progress-card-next-detail"> · {{formula.card3_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card3_href}}" aria-label="{{formula.card3_title}}"><span class="mhc-visually-hidden">{{formula.card3_title}}</span></a>
+        <form action="{{formula.card3_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card3_rail_week}}
+      {{#formula.card3_rail_step}}
+      <div class="progress-card progress-card--rail {{#formula.card3_isPrimary}}progress-card--primary{{/formula.card3_isPrimary}}">
+        <div class="progress-card-rail">
+          <span class="progress-card-rail-num">{{formula.card3_stepIn}}</span>
+          <span class="progress-card-rail-lbl">{{formula.card3_stepUnit}} {{formula.card3_stepTotal}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            {{#formula.card3_isFocusMatch}}<span class="progress-card-badge">{{formula.copy_onFocus}}</span>{{/formula.card3_isFocusMatch}}
+            <span class="progress-card-tag">{{formula.card3_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card3_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: {{formula.card3_pctValue}}%;"></div></div>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-label">{{formula.copy_upNext}}:</span>
+            <span class="progress-card-next-detail">{{formula.card3_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card3_href}}" aria-label="{{formula.card3_title}}"><span class="mhc-visually-hidden">{{formula.card3_title}}</span></a>
+        <form action="{{formula.card3_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card3_rail_step}}
+      {{#formula.card3_rail_pct}}
+      <div class="progress-card progress-card--rail">
+        <div class="progress-card-rail progress-card-rail--pct">
+          <span class="progress-card-rail-num">{{formula.card3_pctValue}}<span class="progress-card-rail-pct">%</span></span>
+          <span class="progress-card-rail-lbl">{{formula.card3_pctSub}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            <span class="progress-card-tag">{{formula.card3_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card3_title}}</h3>
+          <div class="progress-card-progress">
+            <div class="progress-bar" aria-hidden="true"><div class="progress-bar-fill" style="width: {{formula.card3_pctValue}}%;"></div></div>
+            <span class="progress-card-week">{{formula.card3_metaText}}</span>
+          </div>
+          <p class="progress-card-next">
+            <span class="progress-card-next-detail">{{formula.card3_nextDetail}}</span>
+          </p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card3_href}}" aria-label="{{formula.card3_title}}"><span class="mhc-visually-hidden">{{formula.card3_title}}</span></a>
+        <form action="{{formula.card3_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card3_rail_pct}}
+      {{#formula.card3_rail_days}}
+      <div class="progress-card progress-card--rail progress-card--challenge">
+        <div class="progress-card-rail {{#formula.card3_urgent}}progress-card-rail--urgent{{/formula.card3_urgent}}">
+          <span class="progress-card-rail-num">{{formula.card3_daysLeft}}</span>
+          <span class="progress-card-rail-lbl">{{formula.card3_daysLeftLabel}}</span>
+        </div>
+        <div class="progress-card-body">
+          <div class="progress-card-meta">
+            <span class="progress-card-tag">{{formula.card3_tagline}}</span>
+          </div>
+          <h3 class="progress-card-title">{{formula.card3_title}}</h3>
+          <p class="progress-card-stat">{{formula.card3_stat}}</p>
+        </div>
+        <a class="progress-card-link" href="{{formula.card3_href}}" aria-label="{{formula.card3_title}}"><span class="mhc-visually-hidden">{{formula.card3_title}}</span></a>
+        <form action="{{formula.card3_dismissHref}}" method="post" class="progress-card-dismiss-form">
+          <button type="submit" class="progress-card-dismiss" aria-label="{{formula.copy_hide}}">×</button>
+        </form>
+      </div>
+      {{/formula.card3_rail_days}}
+      {{/formula.hasCard3}}
+
+    </div>
+  </section>
+</div>
+{{/formula.hasInProgressPrograms}}

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MHC Home — Rewards Display · Top-Anchored Strips · v3 · Warm-Neutral · SF Pro</title>
+<style>
+/* =========================================================
+   v3 Rewards variations — full-width minimal strips anchored
+   to the top of the page (Personify-style persistent bar).
+   Each strip is rendered with a simulated top nav above so
+   you can see where it sits.
+   ========================================================= */
+:root {
+  --neutral-50:  #FAF8F5;
+  --neutral-100: #F0EBE3;
+  --neutral-200: #DDD5C7;
+  --neutral-300: #B5AC9C;
+  --neutral-400: #8C857A;
+  --neutral-500: #6B645A;
+  --neutral-600: #5C564E;
+  --neutral-700: #4A453E;
+  --neutral-800: #38332E;
+  --neutral-900: #2C2A26;
+
+  --sand-50:  #FAF6F0;
+  --sand-100: #F2EBDF;
+  --sand-200: #E5DAC4;
+
+  --primary-50:  #EFF5FA;
+  --primary-100: #DAE9F2;
+  --primary-200: #B5D2E5;
+  --primary-600: #2A6489;
+  --primary-700: #235173;
+
+  --moss-50:  #EFF4F0;
+  --moss-100: #D5E2D8;
+  --moss-200: #A8C4AE;
+  --moss-600: #2A573B;
+  --moss-700: #234630;
+
+  --warm-50:  #FDF5EE;
+  --warm-100: #FAE7D5;
+  --warm-200: #F4CDA9;
+  --warm-600: #A85C36;
+  --warm-700: #8A4A26;
+
+  --lavender-50:  #F4F2FB;
+  --lavender-100: #E5E1F4;
+  --lavender-200: #C7BFE8;
+  --lavender-600: #4F4391;
+  --lavender-700: #423775;
+
+  --bg-default: var(--sand-50);
+  --bg-subtle:  var(--sand-100);
+  --bg-card:    var(--sand-50);
+  --bg-tint:    var(--sand-200);
+
+  --text-primary:   var(--neutral-900);
+  --text-secondary: var(--neutral-700);
+  --text-tertiary:  var(--neutral-500);
+  --text-quiet:     var(--neutral-400);
+  --text-onPrimary: var(--sand-50);
+
+  --border-default: var(--neutral-200);
+  --border-strong:  var(--neutral-400);
+  --border-focus:   var(--primary-600);
+
+  --interactive:       var(--primary-600);
+  --interactive-hover: var(--primary-700);
+
+  --shadow-sm:  0 1px 2px rgba(20, 18, 16, 0.04), 0 1px 3px rgba(20, 18, 16, 0.03);
+  --shadow-md:  0 2px 6px rgba(20, 18, 16, 0.06), 0 4px 12px rgba(20, 18, 16, 0.04);
+
+  --s-01: 2px; --s-02: 4px; --s-03: 8px; --s-04: 16px;
+  --s-05: 24px; --s-06: 32px; --s-07: 40px; --s-08: 64px;
+  --s-09: 80px;
+
+  --t-display: 36px;
+  --t-h1: 28px;
+  --t-h2: 22px;
+  --t-h3: 18px;
+  --t-h4: 16px;
+  --t-body: 14px;
+  --t-cap: 12px;
+  --t-small: 11px;
+
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-pill: 999px;
+  --lh-tight: 1.12; --lh-snug: 1.3; --lh-normal: 1.55;
+
+  --body-max: 1200px;
+  --strip-pad-x: 32px;
+
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-text:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@media (max-width: 599px) {
+  :root { --strip-pad-x: 16px; }
+}
+
+* { box-sizing: border-box; }
+*::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg-default);
+  color: var(--text-primary);
+  font-family: var(--font-text);
+  font-size: var(--t-body);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button { font: inherit; }
+a { color: inherit; }
+
+.intro {
+  max-width: 1080px;
+  margin: 0 auto; padding: var(--s-08) var(--s-04) var(--s-05);
+}
+.intro h1 {
+  font-family: var(--font-display);
+  font-size: var(--t-h1); font-weight: 600;
+  letter-spacing: -0.022em; margin: 0 0 var(--s-03);
+  color: var(--text-primary);
+}
+.intro p {
+  font-family: var(--font-text); font-size: var(--t-body);
+  color: var(--text-secondary); margin: 0; max-width: 70ch;
+  line-height: var(--lh-normal);
+}
+
+/* === EACH VARIATION SECTION ===
+   Full-width strip area + a labeled centered intro */
+.variation { margin-bottom: var(--s-09); }
+.variation-meta {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--s-04) var(--s-04);
+}
+.variation-head {
+  display: flex; align-items: baseline; gap: var(--s-03);
+  margin-bottom: var(--s-03); padding-bottom: var(--s-03);
+  border-bottom: 1px dashed var(--border-default);
+}
+.variation-num {
+  font-family: var(--font-text);
+  font-size: var(--t-small); font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.variation-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--t-h2); font-weight: 600;
+  letter-spacing: -0.018em; margin: 0;
+  color: var(--text-primary); flex: 1;
+}
+.variation-thesis {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary); margin: 0; max-width: 70ch;
+  line-height: var(--lh-normal);
+}
+.placement-note {
+  font-family: var(--font-text); font-size: var(--t-small);
+  color: var(--text-quiet); font-style: italic;
+  text-align: center;
+  padding: var(--s-02) 0;
+  letter-spacing: 0.04em;
+}
+
+/* === SIMULATED TOP NAV — sits above the strip === */
+.sim-nav {
+  background: var(--bg-default);
+  border-bottom: 1px solid var(--border-default);
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--strip-pad-x);
+}
+@media (min-width: 600px) { .sim-nav { height: 64px; } }
+.sim-nav .nav-icon {
+  width: 32px; height: 32px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-default);
+  border-radius: 50%;
+}
+.sim-nav .nav-logo {
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 600;
+  letter-spacing: -0.01em; color: var(--text-primary);
+}
+.sim-nav .nav-right {
+  width: 80px; height: 32px;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-pill);
+}
+
+/* === SHARED STRIP CSS === */
+.strip {
+  width: 100%;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-default);
+  font-family: var(--font-text);
+}
+.strip-inner {
+  max-width: var(--body-max);
+  margin: 0 auto;
+  padding: var(--s-04) var(--strip-pad-x);
+  display: flex; align-items: center;
+  gap: var(--s-04);
+  flex-wrap: wrap;
+}
+.strip .eyebrow {
+  font-family: var(--font-text);
+  font-size: var(--t-small);
+  font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-tertiary);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+  white-space: nowrap;
+}
+.strip .eyebrow::before {
+  content: ''; display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--primary-600);
+}
+.strip .link {
+  font-family: var(--font-text);
+  font-size: var(--t-cap);
+  font-weight: 600;
+  color: var(--interactive);
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: -0.005em;
+  margin-left: auto;
+}
+.strip .link:hover { color: var(--interactive-hover); text-decoration: underline; }
+.strip .pip {
+  display: inline-block;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--text-quiet);
+  flex-shrink: 0;
+}
+
+/* placeholder content below the strip (so the "top-anchored" framing reads) */
+.below-content {
+  max-width: var(--body-max);
+  margin: 0 auto;
+  padding: var(--s-06) var(--strip-pad-x) var(--s-08);
+}
+.below-content .placeholder {
+  background: var(--bg-card);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--r-md);
+  padding: var(--s-05);
+  font-family: var(--font-text);
+  font-size: var(--t-cap);
+  color: var(--text-quiet);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ============================================================
+   S12 · POINTS-ONLY MINIMAL STRIP
+   Just the points number + tier + thin progress + dashboard link
+   ============================================================ */
+.s12 .strip-inner {
+  gap: var(--s-04);
+}
+.s12 .points-block {
+  display: inline-flex; align-items: baseline;
+  gap: var(--s-02);
+}
+.s12 .points-value {
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.022em; line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.s12 .points-tier {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-secondary);
+}
+.s12 .progress-block {
+  flex: 1; min-width: 160px;
+  display: flex; flex-direction: column; gap: var(--s-01);
+}
+.s12 .progress-bar {
+  height: 4px;
+  background: var(--bg-tint);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.s12 .progress-fill {
+  height: 100%; background: var(--primary-600);
+  border-radius: var(--r-pill);
+}
+.s12 .progress-meta {
+  font-family: var(--font-text);
+  font-size: var(--t-small);
+  color: var(--text-tertiary);
+  display: flex; justify-content: space-between;
+}
+
+/* ============================================================
+   S13 · MULTI-TYPE LOZENGE STRIP
+   4 compact pills inline, family-tinted
+   ============================================================ */
+.s13 .strip-inner {
+  gap: var(--s-04);
+}
+.s13 .pills-row {
+  display: flex; gap: var(--s-02);
+  flex-wrap: wrap; flex: 1;
+}
+.s13 .pill {
+  display: inline-flex; align-items: center;
+  gap: var(--s-02);
+  padding: var(--s-02) var(--s-03);
+  border-radius: var(--r-pill);
+  border: 1px solid;
+  font-family: var(--font-text);
+  font-size: var(--t-cap);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.s13 .pill .lbl {
+  font-weight: 600; letter-spacing: 0.04em;
+  font-size: var(--t-small);
+  text-transform: uppercase;
+}
+.s13 .pill .val {
+  font-family: var(--font-display);
+  font-weight: 600; font-variant-numeric: tabular-nums;
+  letter-spacing: -0.012em;
+}
+.s13 .pill.gift {
+  background: var(--warm-50); border-color: var(--warm-100); color: var(--warm-700);
+}
+.s13 .pill.gift .val { color: var(--warm-700); }
+.s13 .pill.points {
+  background: var(--primary-50); border-color: var(--primary-100); color: var(--primary-700);
+}
+.s13 .pill.points .val { color: var(--primary-700); }
+.s13 .pill.raffle {
+  background: var(--lavender-50); border-color: var(--lavender-100); color: var(--lavender-700);
+}
+.s13 .pill.raffle .val { color: var(--lavender-700); }
+.s13 .pill.store {
+  background: var(--moss-50); border-color: var(--moss-100); color: var(--moss-700);
+}
+.s13 .pill.store .val { color: var(--moss-700); }
+
+/* ============================================================
+   S14 · HERO POINTS + SECONDARY INLINE
+   Big points number on left, smaller "+ also: …" inline
+   ============================================================ */
+.s14 .strip {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-default);
+}
+.s14 .strip-inner {
+  padding-top: var(--s-05);
+  padding-bottom: var(--s-05);
+  align-items: center;
+  gap: var(--s-05);
+}
+.s14 .hero-block {
+  display: flex; flex-direction: column; gap: var(--s-02);
+  flex-shrink: 0;
+}
+.s14 .hero-eyebrow {
+  font-family: var(--font-text); font-size: var(--t-small);
+  font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--primary-700);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+}
+.s14 .hero-eyebrow::before {
+  content: ''; display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--primary-600);
+}
+.s14 .hero-row {
+  display: flex; align-items: baseline; gap: var(--s-03);
+  flex-wrap: wrap;
+}
+.s14 .hero-value {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.028em; line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 599px) { .s14 .hero-value { font-size: 28px; } }
+.s14 .hero-tier {
+  font-family: var(--font-text); font-size: var(--t-h4);
+  color: var(--text-secondary);
+}
+.s14 .hero-progress {
+  display: flex; flex-direction: column; gap: var(--s-01);
+  margin-top: var(--s-02);
+  max-width: 320px;
+}
+.s14 .hero-progress-bar {
+  height: 6px; background: var(--bg-tint);
+  border-radius: var(--r-pill); overflow: hidden;
+}
+.s14 .hero-progress-fill {
+  height: 100%; background: var(--primary-600); border-radius: var(--r-pill);
+}
+.s14 .hero-progress-meta {
+  font-family: var(--font-text); font-size: var(--t-small);
+  color: var(--text-tertiary);
+}
+.s14 .secondary {
+  flex: 1; min-width: 220px;
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-secondary);
+  display: flex; flex-direction: column; gap: var(--s-02);
+  padding-left: var(--s-04);
+  border-left: 1px solid var(--border-default);
+}
+@media (max-width: 599px) {
+  .s14 .secondary { padding-left: 0; border-left: 0; padding-top: var(--s-03); border-top: 1px solid var(--border-default); }
+}
+.s14 .secondary .label {
+  font-family: var(--font-text); font-size: var(--t-small);
+  font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--text-tertiary);
+}
+.s14 .secondary .list {
+  display: flex; flex-direction: column; gap: var(--s-01);
+}
+.s14 .secondary .list b {
+  font-weight: 600; font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+.s14 .secondary .link-cta {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  font-weight: 600; color: var(--interactive);
+  text-decoration: none; align-self: flex-start;
+  margin-top: var(--s-01);
+}
+.s14 .secondary .link-cta:hover { text-decoration: underline; }
+
+/* ============================================================
+   S15 · PROGRESS BAR EMPHASIS
+   Wide progress bar with tier markers + small lozenges aside
+   ============================================================ */
+.s15 .strip-inner {
+  gap: var(--s-05);
+  flex-wrap: wrap;
+}
+.s15 .ticker {
+  flex: 1; min-width: 280px;
+  display: flex; flex-direction: column; gap: var(--s-02);
+}
+.s15 .ticker-label-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-text); font-size: var(--t-small);
+  color: var(--text-tertiary);
+}
+.s15 .ticker-label-row .start, .s15 .ticker-label-row .end {
+  font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.s15 .ticker-label-row .end { color: var(--text-tertiary); }
+.s15 .ticker-label-row .current {
+  font-family: var(--font-display);
+  font-weight: 600; color: var(--text-primary);
+  font-size: var(--t-h4); letter-spacing: -0.012em;
+  font-variant-numeric: tabular-nums; text-transform: none; letter-spacing: -0.012em;
+}
+.s15 .ticker-bar {
+  height: 8px;
+  background: var(--bg-tint);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+  position: relative;
+}
+.s15 .ticker-fill {
+  height: 100%; background: var(--primary-600);
+  border-radius: var(--r-pill);
+}
+.s15 .ticker-marker {
+  position: absolute; top: -2px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--primary-600);
+}
+.s15 .ticker-marker.start { left: 0; }
+.s15 .ticker-marker.end { right: 0; border-color: var(--border-strong); background: var(--bg-tint); }
+.s15 .ticker-marker.current { background: var(--primary-600); border-color: var(--primary-600); }
+
+.s15 .micro-pills {
+  display: flex; gap: var(--s-02);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.s15 .micro-pills .micro {
+  font-family: var(--font-text); font-size: var(--t-small);
+  color: var(--text-secondary);
+  padding: var(--s-01) var(--s-03);
+  background: var(--bg-subtle);
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+.s15 .micro-pills .micro b {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-right: var(--s-01);
+}
+
+/* ============================================================
+   S16 · ACTION-PROMPT STRIP (habits-footer style)
+   Compact "earn more" line — habits-footer pattern, top-anchored
+   ============================================================ */
+.s16 .strip {
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-default);
+}
+.s16 .strip-inner {
+  padding-top: var(--s-03);
+  padding-bottom: var(--s-03);
+  gap: var(--s-04);
+}
+.s16 .available {
+  font-family: var(--font-text);
+  font-size: var(--t-cap);
+  color: var(--text-secondary);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+}
+.s16 .available .icon {
+  width: 14px; height: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--moss-700);
+}
+.s16 .available .icon svg { width: 14px; height: 14px; stroke-width: 2; }
+.s16 .available b {
+  font-family: var(--font-display);
+  font-weight: 600; color: var(--moss-700);
+  font-size: var(--t-h4); letter-spacing: -0.012em;
+  font-variant-numeric: tabular-nums;
+}
+.s16 .available .actions {
+  color: var(--text-tertiary);
+}
+.s16 .balance {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+}
+.s16 .balance b {
+  color: var(--text-primary); font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.s16 .streak {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+}
+.s16 .streak .star {
+  width: 12px; height: 12px;
+  color: var(--warm-700);
+}
+.s16 .streak b {
+  color: var(--text-primary); font-weight: 600;
+}
+
+/* notes */
+.notes {
+  max-width: 1080px; margin: 0 auto;
+  padding: var(--s-04) var(--s-04) 0;
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-secondary);
+  display: grid; grid-template-columns: 1fr; gap: var(--s-04);
+}
+@media (min-width: 600px) { .notes { grid-template-columns: 1fr 1fr; } }
+.notes h5 {
+  font-family: var(--font-text); font-size: var(--t-small);
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+  color: var(--text-tertiary); margin: 0 0 var(--s-02);
+}
+.notes p { margin: 0; line-height: var(--lh-normal); }
+</style>
+</head>
+<body>
+
+<header class="intro">
+  <h1>Rewards display · top-anchored strips · v3</h1>
+  <p>Five full-width minimal strips that sit at the top of the home page, immediately below the top nav (Personify-style persistent rewards bar). Each variation isolates one design move — points-only, multi-type lozenges, hero-points + secondary inline, progress-bar emphasis, action-prompt habits-footer style. Each is shown with a simulated nav above and a placeholder for what would sit below.</p>
+</header>
+
+<!-- ========== S12 · POINTS-ONLY MINIMAL STRIP ========== -->
+<section class="variation s12">
+  <div class="variation-meta">
+    <div class="variation-head">
+      <span class="variation-num">S12</span>
+      <h2>Points-only minimal strip</h2>
+    </div>
+    <p class="variation-thesis">The most minimal Personify-classic. Points balance + tier + thin progress bar to next tier + dashboard link. Other reward types are not shown — they live on the dashboard. Single-currency frame at strip scale.</p>
+  </div>
+  <p class="placement-note">↓ sits below top nav · sticky · full-width</p>
+
+  <div class="sim-nav">
+    <div class="nav-icon"></div>
+    <div class="nav-logo">Mobile Health</div>
+    <div class="nav-right"></div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="eyebrow">Rewards</span>
+      <div class="points-block">
+        <span class="points-value">1,250</span>
+        <span class="points-tier">pts · Silver</span>
+      </div>
+      <div class="progress-block">
+        <div class="progress-bar"><div class="progress-fill" style="width:62%"></div></div>
+        <div class="progress-meta">
+          <span>62% to Gold</span>
+          <span>750 pts to go</span>
+        </div>
+      </div>
+      <a class="link" href="#">View rewards →</a>
+    </div>
+  </div>
+
+  <div class="below-content">
+    <div class="placeholder">↓ rest of the page (greeting, hero, lanes, programs, etc.)</div>
+  </div>
+
+  <div class="notes">
+    <div>
+      <h5>What it adds</h5>
+      <p>Maximum compactness. Singular focus on the points engine + tier progress. Doesn't duplicate what the rewards section deeper in the page does — the strip is a wayfinding cue ("here's where you stand"), not the full summary.</p>
+    </div>
+    <div>
+      <h5>Risks</h5>
+      <p>Hides the multi-type configurability moat at strip scale. If the dashboard has all four types but the strip only mentions points, the moat is invisible until a member clicks through. Best paired with a deeper rewards section on home that does the multi-type work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== S13 · MULTI-TYPE LOZENGE STRIP ========== -->
+<section class="variation s13">
+  <div class="variation-meta">
+    <div class="variation-head">
+      <span class="variation-num">S13</span>
+      <h2>Multi-type lozenge strip</h2>
+    </div>
+    <p class="variation-thesis">All four reward types as inline lozenges in a single strip — gift card, points (with tier), raffle entries, store credit. Each pill is family-tinted (warm/primary/lavender/moss) and tappable into the dashboard for that type. Multi-type story stays visible at strip scale.</p>
+  </div>
+  <p class="placement-note">↓ sits below top nav · sticky · full-width</p>
+
+  <div class="sim-nav">
+    <div class="nav-icon"></div>
+    <div class="nav-logo">Mobile Health</div>
+    <div class="nav-right"></div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="eyebrow">Rewards</span>
+      <div class="pills-row">
+        <a class="pill gift" href="#"><span class="lbl">Gift</span><span class="val">$75</span></a>
+        <a class="pill points" href="#"><span class="lbl">Silver</span><span class="val">1,250</span></a>
+        <a class="pill raffle" href="#"><span class="lbl">Raffle</span><span class="val">12</span></a>
+        <a class="pill store" href="#"><span class="lbl">Store</span><span class="val">$25</span></a>
+      </div>
+      <a class="link" href="#">Dashboard →</a>
+    </div>
+  </div>
+
+  <div class="below-content">
+    <div class="placeholder">↓ rest of the page</div>
+  </div>
+
+  <div class="notes">
+    <div>
+      <h5>What it adds</h5>
+      <p>Multi-type story is visible immediately at the top of every page. Each pill is its own tap target. Configurability moat readable at a glance. Compact — same vertical footprint as a points-only strip.</p>
+    </div>
+    <div>
+      <h5>Risks</h5>
+      <p>Pushes chromatic budget — four families (warm + primary + lavender + moss) appear at the top of every page on every visit. v6 normally avoids that. Pills wrap to second line on narrow widths; tier progress isn't shown, only the count.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== S14 · HERO POINTS + SECONDARY INLINE ========== -->
+<section class="variation s14">
+  <div class="variation-meta">
+    <div class="variation-head">
+      <span class="variation-num">S14</span>
+      <h2>Hero points + secondary inline</h2>
+    </div>
+    <p class="variation-thesis">Big points number on the left with progress bar to next tier. To the right, a smaller block: "Also earned: $75 gift · 12 raffle · $25 store · See all rewards →". Honors the user's specific spec: <em>points hero + smaller link about other reward types</em>. Multi-type acknowledged but quieter than the points hero.</p>
+  </div>
+  <p class="placement-note">↓ sits below top nav · sticky · full-width</p>
+
+  <div class="sim-nav">
+    <div class="nav-icon"></div>
+    <div class="nav-logo">Mobile Health</div>
+    <div class="nav-right"></div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <div class="hero-block">
+        <span class="hero-eyebrow">Points · Silver tier</span>
+        <div class="hero-row">
+          <span class="hero-value">1,250</span>
+          <span class="hero-tier">pts · 750 to Gold</span>
+        </div>
+        <div class="hero-progress">
+          <div class="hero-progress-bar"><div class="hero-progress-fill" style="width:62%"></div></div>
+          <div class="hero-progress-meta">62% to Gold tier</div>
+        </div>
+      </div>
+      <aside class="secondary">
+        <span class="label">Also earned</span>
+        <div class="list">
+          <span><b>$75</b> gift card</span>
+          <span><b>12</b> raffle entries</span>
+          <span><b>$25</b> store credit</span>
+        </div>
+        <a class="link-cta" href="#">See all rewards →</a>
+      </aside>
+    </div>
+  </div>
+
+  <div class="below-content">
+    <div class="placeholder">↓ rest of the page</div>
+  </div>
+
+  <div class="notes">
+    <div>
+      <h5>What it adds</h5>
+      <p>Hierarchy. Points + progress is the headline; multi-type is acknowledged but doesn't compete. Members who care about the points engine (most) get it big; members who care about the gift card or raffle get it inline + a link. Closest to the user's specific suggestion.</p>
+    </div>
+    <div>
+      <h5>Risks</h5>
+      <p>Tallest strip of the five — needs ~88px to fit the hero number + progress + secondary list. Sticky behavior would consume ~13% of a 1200×800 viewport. Could lose the hero treatment on scroll (collapse to S12 minimal) but that's eng cost.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== S15 · PROGRESS BAR EMPHASIS ========== -->
+<section class="variation s15">
+  <div class="variation-meta">
+    <div class="variation-head">
+      <span class="variation-num">S15</span>
+      <h2>Progress bar emphasis · tier ticker</h2>
+    </div>
+    <p class="variation-thesis">The strip is mostly the progress bar. Tier markers at start (Silver) and end (Gold), with the current points position as a moving dot. Goal-Gradient effect at strip scale — every page load reminds you how close you are. Other reward types as small grayscale micro-pills.</p>
+  </div>
+  <p class="placement-note">↓ sits below top nav · sticky · full-width</p>
+
+  <div class="sim-nav">
+    <div class="nav-icon"></div>
+    <div class="nav-logo">Mobile Health</div>
+    <div class="nav-right"></div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="eyebrow">Rewards</span>
+      <div class="ticker">
+        <div class="ticker-label-row">
+          <span class="start">Silver</span>
+          <span class="current">1,250 pts · 750 to Gold</span>
+          <span class="end">Gold</span>
+        </div>
+        <div class="ticker-bar">
+          <div class="ticker-fill" style="width:62%"></div>
+          <span class="ticker-marker start" style="left: 0%"></span>
+          <span class="ticker-marker current" style="left: calc(62% - 6px)"></span>
+          <span class="ticker-marker end"></span>
+        </div>
+      </div>
+      <div class="micro-pills">
+        <span class="micro"><b>$75</b>gift</span>
+        <span class="micro"><b>12</b>raffle</span>
+        <span class="micro"><b>$25</b>store</span>
+      </div>
+      <a class="link" href="#">Dashboard →</a>
+    </div>
+  </div>
+
+  <div class="below-content">
+    <div class="placeholder">↓ rest of the page</div>
+  </div>
+
+  <div class="notes">
+    <div>
+      <h5>What it adds</h5>
+      <p>Progress is the dominant visual. Goal-Gradient activated at the most prominent surface on the page. The dot creeping toward Gold is something members notice across visits. Other types stay in the conversation as micro-pills, not promoted but not hidden.</p>
+    </div>
+    <div>
+      <h5>Risks</h5>
+      <p>If the member is just below a tier threshold, the bar is constantly close-to-full and may feel gameplay-y rather than informative. For low-engagement members the bar barely moves week-to-week — could feel stagnant. Three-zone label (start/current/end) gets tight on narrow widths and may need to drop the start/end labels on mobile.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== S16 · ACTION-PROMPT STRIP ========== -->
+<section class="variation s16">
+  <div class="variation-meta">
+    <div class="variation-head">
+      <span class="variation-num">S16</span>
+      <h2>Action-prompt strip · habits-footer style</h2>
+    </div>
+    <p class="variation-thesis">Borrows the Healthy Habits footer line directly: "<b>+30 pts</b> available today · Streak: <b>12 days</b> · Current 1,250 pts · Earn more →". Subtle warm background (sand-100) so the strip differentiates from the main page surface (sand-50). Frames the rewards strip as <em>what you can do</em>, not <em>what you have</em>.</p>
+  </div>
+  <p class="placement-note">↓ sits below top nav · sticky · full-width</p>
+
+  <div class="sim-nav">
+    <div class="nav-icon"></div>
+    <div class="nav-logo">Mobile Health</div>
+    <div class="nav-right"></div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="available">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <b>+30 pts</b>
+        <span class="actions">available today · 3 actions</span>
+      </span>
+      <span class="pip" aria-hidden="true"></span>
+      <span class="streak">
+        <svg class="star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9"/></svg>
+        Streak: <b>12 days</b>
+      </span>
+      <span class="pip" aria-hidden="true"></span>
+      <span class="balance">Current: <b>1,250 pts</b> · Silver</span>
+      <a class="link" href="#">Earn more →</a>
+    </div>
+  </div>
+
+  <div class="below-content">
+    <div class="placeholder">↓ rest of the page</div>
+  </div>
+
+  <div class="notes">
+    <div>
+      <h5>What it adds</h5>
+      <p>Behavioral pull at strip scale. Frames every page load around what's available to earn TODAY, not what's already in the bank. The streak is a Goal-Gradient hook ("don't break it"). Subtle sand-100 wash differentiates the strip from the page without being loud.</p>
+    </div>
+    <div>
+      <h5>Risks</h5>
+      <p>If "available today" is not reliably populated (no data on what to do, no smart engine), the strip reads broken. Reads more like a notification banner than a balance — clients who lead with "you've earned $75" framing may feel the value gets buried. Streak logic must handle missed days gracefully (don't reset to 0 publicly).</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

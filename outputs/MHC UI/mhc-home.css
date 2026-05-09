@@ -1,0 +1,1654 @@
+/* ============================================================
+   MHC Home — Production CSS
+   ============================================================
+   Single shared stylesheet for all home-page HTML blocks.
+   Assumes a reset is already loaded on the host page.
+
+   Layout strategy
+   ---------------
+   - Mobile-first: base styles target ~320–599px viewports.
+   - Two responsive levers:
+     1. @media (min-width: …)  — viewport-driven layout shifts
+        (mobile → tablet → desktop sizing).
+     2. @container mhc-home (min-width: …) — container-driven
+        layout shifts so the page reflows correctly whether or
+        not a left-nav is rendered next to it. The host wraps
+        the page in a container; we don't need to know if a
+        left-nav is present.
+   - .mhc-home is the page wrapper that establishes the container.
+
+   Class naming
+   ------------
+   Flat single-class. Examples:
+     .hero, .hero-title, .hero--no-focus
+     .today, .today-card, .today-card-zero
+     .insights, .insights-meta
+     .foryou, .foryou-card
+
+   ============================================================ */
+
+
+/* -----------------------------------------------------------
+   Anchor reset — nav links inside .mhc-home that visually
+   behave as buttons or chips. Strips browser defaults so
+   classes (.hero-cta, .focus-pill, etc.) fully control style.
+   ----------------------------------------------------------- */
+.mhc-home a,
+.mhc-home a:link,
+.mhc-home a:visited,
+.mhc-home a:hover,
+.mhc-home a:active,
+.mhc-home a:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* -----------------------------------------------------------
+   Tokens — colors + type
+   ----------------------------------------------------------- */
+.mhc-home {
+  /* Brand palette */
+  --mhc-blue: #0f497f;
+  --mhc-blue-dark: #062a42;
+  --mhc-blue-tint: #eaf2fa;
+  --mhc-orange: #f8a88a;
+  --mhc-aqua: #5db5c4;
+  --mhc-green: #6fa86b;
+  --mhc-purple: #6e5dc6;
+
+  /* Neutrals */
+  --mhc-charcoal: #1f2a36;
+  --mhc-slate: #6e7a7d;
+  --mhc-divider: #e1e6ea;
+  --mhc-cloud: #f0f4f7;
+  --mhc-cream: #f6f4ef;
+  --mhc-page-bg: #ffffff;
+
+  /* States */
+  --mhc-success: #2e7d4f;
+  --mhc-warning: #c97c1d;
+  --mhc-error: #b3261e;
+
+  /* Type */
+  --mhc-font: 'Raleway', system-ui, -apple-system, sans-serif;
+
+  /* Radii + shadows */
+  --mhc-radius-sm: 8px;
+  --mhc-radius-md: 12px;
+  --mhc-radius-lg: 16px;
+  --mhc-radius-xl: 18px;
+  --mhc-radius-pill: 999px;
+  --mhc-shadow-card: 0 1px 2px rgba(15, 73, 127, 0.06);
+  --mhc-shadow-hero: 0 8px 24px rgba(15, 73, 127, 0.12);
+
+  /* Spacing scale */
+  --mhc-gap-xs: 4px;
+  --mhc-gap-sm: 8px;
+  --mhc-gap-md: 12px;
+  --mhc-gap-lg: 16px;
+  --mhc-gap-xl: 22px;
+  --mhc-gap-2xl: 32px;
+}
+
+
+/* -----------------------------------------------------------
+   Page wrapper — establishes the container query context
+   ----------------------------------------------------------- */
+.mhc-home {
+  container: mhc-home / inline-size;
+  font-family: var(--mhc-font);
+  color: var(--mhc-charcoal);
+  background: var(--mhc-page-bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mhc-gap-xl);
+  padding: 18px 20px 90px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Tablet+ horizontal padding */
+@container mhc-home (min-width: 720px) {
+  .mhc-home {
+    padding: 24px 32px 40px;
+    gap: var(--mhc-gap-xl);
+  }
+}
+/* Desktop padding (no-left-nav layouts get more breathing room) */
+@container mhc-home (min-width: 1024px) {
+  .mhc-home {
+    padding: 28px 40px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/* When MHC is rendered with a left rail, the host narrows the
+   container; we don't try to compete with it. The container
+   query above handles the gradient because the .mhc-home width
+   itself is what changes, not the viewport. */
+
+
+/* ===========================================================
+   BLOCK 1 — Greeting + Hero
+   =========================================================== */
+
+.greeting {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mhc-gap-sm);
+}
+.greeting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mhc-gap-md);
+}
+.greeting-name {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.15;
+  color: var(--mhc-charcoal);
+  margin: 0;
+}
+.greeting-sub {
+  font-size: 14px;
+  color: var(--mhc-slate);
+  margin: 0;
+  margin-top: 4px;
+}
+@container mhc-home (min-width: 720px) {
+  .greeting-name { font-size: 28px; }
+  .greeting-sub  { font-size: 14px; }
+}
+
+/* Utility chips — search + notifications (cloud-circle pattern) */
+.utility-chips {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mhc-gap-sm);
+}
+.utility-chip {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--mhc-cloud);
+  color: var(--mhc-blue);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  padding: 0;
+  flex-shrink: 0;
+}
+.utility-chip svg {
+  width: 16px;
+  height: 16px;
+}
+.utility-chip-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mhc-orange);
+  border: 1.5px solid var(--mhc-cloud);
+}
+@container mhc-home (min-width: 1024px) {
+  .utility-chip { width: 36px; height: 36px; }
+}
+
+/* Focus pill (strong variant — filled blue) */
+.focus-pill {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 10px;
+  background: var(--mhc-blue);
+  border-radius: var(--mhc-radius-pill);
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+}
+.focus-pill-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--mhc-blue);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+}
+.focus-pill-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-align: left;
+}
+.focus-pill-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.focus-pill-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Pick-focus CTA — replaces focus pill when user has no focus */
+.pick-focus-pill {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px 7px 10px;
+  background: #fff;
+  border: 1.5px dashed var(--mhc-blue);
+  border-radius: var(--mhc-radius-pill);
+  cursor: pointer;
+  font-family: inherit;
+}
+.pick-focus-plus {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--mhc-blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+}
+.pick-focus-label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  text-align: left;
+}
+.pick-focus-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--mhc-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.pick-focus-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--mhc-blue);
+}
+
+/* Greeting actions cluster — pick-focus / focus pill + utility chips */
+.greeting-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--mhc-gap-md);
+}
+
+/* Hero — base mobile (full-bleed photo with gradient overlay) */
+.hero {
+  position: relative;
+  border-radius: var(--mhc-radius-lg);
+  overflow: hidden;
+  height: 200px;
+  background-color: var(--mhc-blue);
+}
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,73,127,0.10) 0%, rgba(15,73,127,0.85) 100%);
+}
+.hero-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 16px 18px;
+  color: #fff;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--mhc-orange);
+  margin: 0;
+}
+.hero-title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 6px 0 0;
+}
+.hero-desc {
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 6px 0 0;
+  opacity: 0.95;
+}
+.hero-cta {
+  text-decoration: none;
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--mhc-radius-pill);
+  background: #fff;
+  color: var(--mhc-blue);
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Hero — desktop with-left-nav: full-bleed taller photo */
+@container mhc-home (min-width: 720px) {
+  .hero { height: 260px; border-radius: var(--mhc-radius-xl); }
+  .hero-body { padding: 24px 28px; }
+  .hero-title { font-size: 30px; }
+  .hero-desc { font-size: 14px; }
+  .hero-overlay {
+    background: linear-gradient(90deg, rgba(15,73,127,0.88) 0%, rgba(15,73,127,0.55) 50%, rgba(15,73,127,0) 85%);
+  }
+  .hero-body { inset: auto 40% 0 0; }
+}
+
+/* Hero — desktop no-left-nav (wide layouts ≥1024px container width):
+   50/50 split. Photo left, brand panel right with copy.
+   Subject's head stays in frame at any width. */
+@container mhc-home (min-width: 1024px) {
+  .hero {
+    height: 360px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: transparent;
+  }
+  .hero-photo {
+    position: relative;
+    inset: auto;
+  }
+  .hero-overlay { display: none; }
+  .hero-body {
+    position: relative;
+    inset: auto;
+    background: var(--mhc-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 36px 40px;
+  }
+  .hero-title { font-size: 36px; }
+}
+
+/* Hero — NO FOCUS state (onboarding hero with focus chips) */
+.hero--no-focus {
+  background: linear-gradient(135deg, var(--mhc-blue) 0%, #2e6bb0 60%, #4a8ec9 100%);
+  color: #fff;
+  padding: 20px 18px;
+  height: auto;
+}
+.hero--no-focus .hero-overlay,
+.hero--no-focus .hero-photo { display: none; }
+.hero--no-focus .hero-body {
+  position: static;
+  padding: 0;
+  background: transparent;
+}
+.focus-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mhc-gap-sm);
+  margin-top: 14px;
+}
+.focus-chip {
+  text-decoration: none;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: var(--mhc-radius-pill);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+}
+.focus-chip-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.focus-chip-dot img {
+  width: 11px;
+  height: 11px;
+  display: block;
+}
+.focus-chip-dot--sleep   { background: #e8d5f2; color: var(--mhc-purple); }
+.focus-chip-dot--move    { background: #d5edf4; color: var(--mhc-aqua); }
+.focus-chip-dot--stress  { background: #ffe3d9; color: var(--mhc-orange); }
+.focus-chip-dot--eat     { background: #d8ecd5; color: var(--mhc-green); }
+
+@container mhc-home (min-width: 720px) {
+  .hero--no-focus {
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .focus-chips {
+    margin-top: 0;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--mhc-gap-md);
+  }
+  .focus-chip {
+    border-radius: var(--mhc-radius-md);
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  .focus-chip-dot {
+    width: 36px;
+    height: 36px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .focus-chip-dot img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.hero-cta-block {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-cta-meta {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+
+/* ===========================================================
+   BLOCK 2 — Today strip (trackers above the fold)
+   =========================================================== */
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mhc-gap-sm);
+}
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  margin: 0;
+}
+.section-link {
+  text-decoration: none;
+  font-size: 12px;
+  color: var(--mhc-blue);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+@container mhc-home (min-width: 720px) {
+  .section-title { font-size: 20px; }
+  .section-link  { font-size: 13px; }
+}
+
+.today {
+  display: flex;
+  flex-direction: column;
+}
+.today-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--mhc-gap-sm);
+}
+.today-card {
+  position: relative;
+  text-decoration: none;
+  color: var(--mhc-charcoal);
+  background: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.today-card-icon {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+  color: var(--mhc-charcoal);
+}
+.today-card-icon svg { width: 16px; height: 16px; }
+.today-card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* CKEditor-friendly link cover — anchor stretches over the whole card.
+   Tile content stays as block-level siblings so CKEditor doesn't try
+   to wrap them individually. */
+.today-card-link {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  text-decoration: none;
+  z-index: 1;
+}
+.today-card-link:focus-visible {
+  outline: 2px solid var(--mhc-blue);
+  outline-offset: 2px;
+}
+/* Make sure inner content stays selectable & visible above the link. */
+.today-card > .today-card-icon,
+.today-card > .today-card-value,
+.today-card > .today-card-label {
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+.today-card-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  line-height: 1.1;
+}
+.today-card-value-unit {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mhc-slate);
+  margin-left: 2px;
+}
+.today-card-label {
+  font-size: 11px;
+  color: var(--mhc-slate);
+  font-weight: 500;
+}
+.today-card-sub {
+  font-size: 11px;
+  color: var(--mhc-slate);
+  margin: 4px 0 0;
+  line-height: 1.35;
+  font-weight: 500;
+}
+.today-card--week .today-card-value { font-size: 20px; letter-spacing: -0.01em; }
+.today-card--week .today-card-label {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 10.5px;
+  color: var(--mhc-charcoal);
+  font-weight: 700;
+}
+
+/* Zero state — un-linked tracker, prominent CTA */
+.today-card-zero {
+  background: var(--mhc-blue-tint);
+  border-color: rgba(15,73,127,0.18);
+  border-style: dashed;
+  align-items: stretch;
+  cursor: pointer;
+}
+.today-card-zero .today-card-value {
+  color: var(--mhc-blue);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Tablet/Desktop — 4 columns, larger cards */
+@container mhc-home (min-width: 720px) {
+  .today-grid { grid-template-columns: repeat(4, 1fr); gap: var(--mhc-gap-md); }
+  .today-card { padding: 16px; }
+  .today-card-icon { width: 38px; height: 38px; }
+  .today-card-icon svg { width: 18px; height: 18px; }
+  .today-card-value { font-size: 22px; }
+  .today-card-label { font-size: 12px; }
+}
+
+
+/* ===========================================================
+   BLOCK 1b — Pending invites + Challenge banner
+   =========================================================== */
+
+.invites {
+  background: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-md);
+  overflow: hidden;
+}
+.invites-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--mhc-blue-tint);
+  color: var(--mhc-blue);
+}
+.invites-title {
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.invites-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--mhc-blue);
+}
+.invite-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--mhc-divider);
+}
+.invite-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--mhc-blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.invite-avatar--team {
+  border-radius: 8px;
+  background: #9b3b00;
+}
+.invite-body {
+  flex: 1;
+  min-width: 0;
+}
+.invite-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  line-height: 1.3;
+}
+.invite-detail {
+  font-size: 11.5px;
+  color: var(--mhc-slate);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+.invite-row--late .invite-detail b { color: #9b3b00; }
+.invite-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+.invite-form { margin: 0; padding: 0; }
+.invite-btn {
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 0;
+}
+.invite-btn--accept {
+  background: var(--mhc-blue);
+  color: #fff;
+}
+.invite-btn--decline {
+  background: var(--mhc-cloud);
+  color: var(--mhc-slate);
+  border: 1px solid var(--mhc-divider);
+}
+
+@container mhc-home (min-width: 720px) {
+  .invite-row { padding: 14px 18px; gap: 14px; }
+  .invite-name { font-size: 14.5px; }
+  .invite-detail { font-size: 12.5px; }
+}
+
+/* Challenge banner */
+.cbanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #fff5e6;
+  border: 1px solid #f3d9a8;
+  border-radius: var(--mhc-radius-md);
+  font-size: 13px;
+  color: #7a5418;
+  line-height: 1.4;
+}
+.cbanner--urgent {
+  background: #fde7d8;
+  border-color: #f1bf95;
+  color: #7a221c;
+}
+.cbanner-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  color: #9b3b00;
+}
+.cbanner-icon svg { width: 16px; height: 16px; }
+.cbanner-text { flex: 1; min-width: 0; }
+.cbanner-cta {
+  flex-shrink: 0;
+  font: inherit;
+  font-weight: 700;
+  font-size: 12.5px;
+  color: #9b3b00;
+  text-decoration: none;
+}
+.cbanner-dismiss-form { margin: 0; padding: 0; }
+.cbanner-dismiss {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.7;
+}
+.cbanner-dismiss:hover { opacity: 1; }
+
+
+/* ===========================================================
+   BLOCK 2b — Pick up where you left off (in-progress programs)
+   =========================================================== */
+
+.progress {
+  display: flex;
+  flex-direction: column;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--mhc-gap-md);
+}
+@container mhc-home (min-width: 720px) {
+  .progress-grid { grid-template-columns: repeat(3, 1fr); gap: var(--mhc-gap-lg); }
+}
+
+.progress-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  color: var(--mhc-charcoal);
+  min-width: 0;
+}
+.progress-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.progress-card-img {
+  width: 96px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--mhc-cream);
+}
+.progress-card-body {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.progress-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+.progress-card-badge {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--mhc-blue);
+  background: var(--mhc-blue-tint);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.progress-card-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--mhc-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.progress-card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.progress-card-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--mhc-divider);
+  border-radius: 999px;
+  overflow: hidden;
+  min-width: 60px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--mhc-blue);
+  border-radius: inherit;
+}
+.progress-card-week {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--mhc-slate);
+  white-space: nowrap;
+}
+.progress-card-next {
+  font-size: 12px;
+  color: var(--mhc-charcoal);
+  margin: 0;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.progress-card-next-label {
+  font-weight: 700;
+  color: var(--mhc-slate);
+  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+}
+.progress-card-next-when {
+  font-weight: 700;
+  color: var(--mhc-blue);
+}
+.progress-card-next-detail {
+  color: var(--mhc-slate);
+}
+.progress-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-decoration: none;
+  color: inherit;
+  border-radius: inherit;
+}
+.progress-card-link:focus-visible {
+  outline: 2px solid var(--mhc-blue);
+  outline-offset: 2px;
+}
+
+/* Rail variant — replaces image with a numeric/percent/days rail.
+   Used by step (Journey/DCP), pct (Assessment), days (Challenge). */
+.progress-card--rail .progress-card-rail {
+  width: 96px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--mhc-cream);
+  color: var(--mhc-charcoal);
+  text-align: center;
+  padding: 10px 6px;
+}
+.progress-card--rail .progress-card-rail--urgent {
+  background: #fde7d8;
+  color: #9b3b00;
+}
+.progress-card--rail .progress-card-rail--pct {
+  background: var(--mhc-blue-tint);
+  color: var(--mhc-blue);
+}
+.progress-card-rail-num {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+.progress-card-rail-pct {
+  font-size: 14px;
+  font-weight: 700;
+  margin-left: 1px;
+  opacity: 0.7;
+}
+.progress-card-rail-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.78;
+}
+.progress-card-stat {
+  font-size: 12px;
+  color: var(--mhc-slate);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Primary card — focus-matched Journey/DCP gets a hero treatment.
+   Blue background on the body, bigger rail. Used at most once
+   per render (the top-of-rail focus-matched ongoing program). */
+.progress-card--primary {
+  background: var(--mhc-blue-tint);
+  border-color: #c7dcef;
+}
+.progress-card--primary .progress-card-rail {
+  background: var(--mhc-blue);
+  color: #fff;
+}
+.progress-card--primary .progress-card-rail-lbl { opacity: 0.85; }
+.progress-card--primary .progress-bar { background: rgba(15,73,127,0.18); }
+.progress-card--primary .progress-bar-fill { background: var(--mhc-blue); }
+
+/* Per-card dismiss — universal × in the corner, server-driven form */
+.progress-card-dismiss-form { margin: 0; padding: 0; }
+.progress-card-dismiss {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--mhc-divider);
+  border-radius: 999px;
+  color: var(--mhc-slate);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  z-index: 2;
+}
+.progress-card-dismiss:hover { color: var(--mhc-charcoal); background: #fff; }
+.progress-card--primary .progress-card-dismiss {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(15, 73, 127, 0.18);
+}
+
+/* Tablet/Desktop — vertical card with hero image on top */
+@container mhc-home (min-width: 720px) {
+  .progress-card { flex-direction: column; }
+  .progress-card-img { width: 100%; height: 130px; }
+  .progress-card-body { padding: 14px 16px; gap: 8px; }
+  .progress-card-title { font-size: 16px; }
+  .progress-card-tag { font-size: 11px; }
+  .progress-card-badge { font-size: 10px; padding: 3px 7px; }
+  .progress-card-next { font-size: 13px; }
+  .progress-card-next-label { font-size: 11px; }
+
+  .progress-card--rail .progress-card-rail,
+  .progress-card--challenge .progress-card-rail {
+    width: 100%;
+    height: 130px;
+    flex-direction: column;
+  }
+  .progress-card-rail-num { font-size: 44px; }
+  .progress-card-rail-pct { font-size: 22px; }
+  .progress-card-rail-lbl { font-size: 11px; }
+  .progress-card-stat { font-size: 13px; }
+}
+
+
+/* ===========================================================
+   BLOCK 2c — Today's habits (daily-rhythm block)
+   =========================================================== */
+
+.habits {
+  display: flex;
+  flex-direction: column;
+}
+.habits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--mhc-gap-md);
+}
+@container mhc-home (min-width: 720px) {
+  .habits-grid { grid-template-columns: repeat(3, 1fr); gap: var(--mhc-gap-lg); }
+}
+
+.habit {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.habit:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.habit--done {
+  background: #f0f7f1;
+  border-color: #cfe6d4;
+}
+
+.habit-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.habit-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.habit-target {
+  font-size: 11px;
+  color: var(--mhc-slate);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.habit-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.habit-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--mhc-divider);
+  flex-shrink: 0;
+  position: relative;
+}
+.habit-dot--done {
+  background: var(--mhc-success);
+}
+.habit-dot--done::after {
+  content: "";
+  position: absolute;
+  inset: 3px 3px 4px 3px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #fff 50%),
+    linear-gradient(-45deg, transparent 50%, #fff 50%);
+  background-size: 60% 60%, 60% 60%;
+  background-position: 50% 70%, 50% 70%;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+/* Simple checkmark via clip-path inside the dot */
+.habit-dot--done {
+  background: var(--mhc-success);
+}
+.habit-dot--today {
+  background: #fff;
+  border: 2px solid var(--mhc-blue);
+}
+.habit-dot--missed {
+  background: var(--mhc-cloud);
+  border: 1px solid var(--mhc-divider);
+}
+
+.habit-meta {
+  font-size: 11.5px;
+  color: var(--mhc-slate);
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.habit-streak {
+  color: #9b3b00;
+  font-weight: 700;
+}
+.habit-meta::before {
+  /* tiny flame for streaks — only when .habit-streak present */
+  content: "";
+}
+.habit-streak::before {
+  content: "🔥";
+  margin-right: 4px;
+  filter: grayscale(0);
+}
+
+.habit-log-form { margin: 0; padding: 0; }
+.habit-log-btn {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--mhc-blue);
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 2px;
+  position: relative;
+  z-index: 2;
+}
+.habit-log-btn:hover { background: var(--mhc-blue-dark); }
+
+.habit-done-pill {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--mhc-success);
+  background: rgba(46, 125, 79, 0.10);
+  padding: 4px 10px;
+  border-radius: 999px;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+.habit-auto {
+  font-size: 11px;
+  color: var(--mhc-slate);
+  font-weight: 600;
+  font-style: italic;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.habit-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-decoration: none;
+  color: inherit;
+  border-radius: inherit;
+}
+.habit-link:focus-visible {
+  outline: 2px solid var(--mhc-blue);
+  outline-offset: 2px;
+}
+
+/* Single-habit stripe variant — used when user has exactly 1 habit */
+.habit-stripe {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-md);
+  text-decoration: none;
+  color: var(--mhc-charcoal);
+  position: relative;
+}
+.habit-stripe--done {
+  background: #f0f7f1;
+  border-color: #cfe6d4;
+}
+.habit-stripe-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.habit-stripe-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.habit-stripe-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.habit-stripe-target {
+  font-weight: 600;
+  color: var(--mhc-slate);
+}
+.habit-stripe-meta {
+  font-size: 11.5px;
+  color: var(--mhc-slate);
+  line-height: 1.4;
+}
+.habit-stripe-meta b {
+  color: #9b3b00;
+}
+.habit-stripe-meta b::before {
+  content: "🔥 ";
+}
+
+@container mhc-home (min-width: 720px) {
+  .habit { padding: 14px 16px; }
+  .habit-name { font-size: 15px; }
+  .habit-target { font-size: 12px; }
+  .habit-dot { width: 16px; height: 16px; }
+  .habit-meta { font-size: 12.5px; }
+  .habit-stripe { padding: 14px 18px; }
+  .habit-stripe-name { font-size: 14.5px; }
+  .habit-stripe-meta { font-size: 12.5px; }
+}
+
+
+/* ===========================================================
+   BLOCK 3 — Insights (action block)
+   =========================================================== */
+
+.insights {
+  background: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mhc-gap-md);
+}
+.insights-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mhc-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+.insights-eyebrow svg { width: 14px; height: 14px; }
+
+/* State 1 — Ready (no insight yet) */
+.insights-ready-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--mhc-charcoal);
+  margin: 0;
+  line-height: 1.4;
+}
+.insights-ready-meta {
+  font-size: 12px;
+  color: var(--mhc-slate);
+  margin: 0;
+}
+
+/* State 2 + 3 — content (refreshable / read-only) */
+.insights-headline {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  margin: 0;
+  line-height: 1.3;
+}
+.insights-body {
+  font-size: 14px;
+  color: var(--mhc-charcoal);
+  line-height: 1.5;
+  margin: 0;
+}
+.insights-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mhc-gap-sm);
+  font-size: 12px;
+  color: var(--mhc-slate);
+}
+.insights-meta-tag {
+  background: var(--mhc-blue-tint);
+  color: var(--mhc-blue);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--mhc-radius-pill);
+  font-size: 11px;
+}
+
+@container mhc-home (min-width: 720px) {
+  .insights { padding: 20px; }
+  .insights-headline { font-size: 18px; }
+  .insights-body { font-size: 15px; }
+}
+
+
+/* ===========================================================
+   BLOCK 4 — For-you / Popular / Secondary banners
+   =========================================================== */
+
+.foryou {
+  display: flex;
+  flex-direction: column;
+}
+.foryou-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--mhc-gap-md);
+}
+@container mhc-home (min-width: 720px) {
+  .foryou-grid { grid-template-columns: repeat(3, 1fr); gap: var(--mhc-gap-lg); }
+}
+
+.foryou-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  color: var(--mhc-charcoal);
+}
+.foryou-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-decoration: none;
+  color: inherit;
+  border-radius: inherit;
+}
+.foryou-card-link:focus-visible {
+  outline: 2px solid var(--mhc-blue);
+  outline-offset: 2px;
+}
+.foryou-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.foryou-card-img {
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+}
+.foryou-card-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+}
+.foryou-card-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--mhc-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+.foryou-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mhc-charcoal);
+  margin: 0;
+  line-height: 1.25;
+}
+.foryou-card-sub {
+  font-size: 12px;
+  color: var(--mhc-slate);
+  margin: 0;
+}
+
+/* Tablet+ — vertical card layout */
+@container mhc-home (min-width: 720px) {
+  .foryou-card { flex-direction: column; }
+  .foryou-card-img { width: 100%; height: 140px; }
+  .foryou-card-body { padding: 14px 16px; gap: 4px; }
+  .foryou-card-title { font-size: 16px; }
+  .foryou-card-sub { font-size: 13px; }
+  .foryou-card-tag { font-size: 11px; }
+}
+
+/* Secondary banner row — "More from <client>" */
+.secondary {
+  display: flex;
+  flex-direction: column;
+}
+.secondary-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mhc-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0 0 var(--mhc-gap-sm);
+}
+.secondary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--mhc-gap-sm);
+}
+@container mhc-home (min-width: 720px) {
+  .secondary-grid { grid-template-columns: repeat(4, 1fr); gap: var(--mhc-gap-md); }
+}
+.secondary-card {
+  position: relative;
+  color: #fff;
+  border: 1px solid var(--mhc-divider);
+  border-radius: var(--mhc-radius-md);
+  overflow: hidden;
+  height: 80px;
+}
+.secondary-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  text-decoration: none;
+  color: inherit;
+  border-radius: inherit;
+}
+.secondary-card-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+}
+@container mhc-home (min-width: 720px) {
+  .secondary-card { height: 120px; }
+}
+.secondary-card-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.secondary-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6));
+}
+.secondary-card-label {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  right: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  margin: 0;
+}
+@container mhc-home (min-width: 720px) {
+  .secondary-card-label { font-size: 14px; left: 12px; bottom: 10px; }
+}
+
+/* Persistent nudge — slim banner shown only in no-focus state */
+.nudge {
+  display: flex;
+  align-items: center;
+  gap: var(--mhc-gap-md);
+  padding: 10px 14px;
+  background: #f5f9fc;
+  border: 1px dashed var(--mhc-blue);
+  border-radius: var(--mhc-radius-md);
+}
+.nudge-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid var(--mhc-blue);
+  color: var(--mhc-blue);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.nudge-body {
+  flex: 1;
+  font-size: 13px;
+  color: var(--mhc-charcoal);
+  line-height: 1.35;
+  margin: 0;
+}
+.nudge-link {
+  text-decoration: none;
+  font-size: 12px;
+  color: var(--mhc-blue);
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+@container mhc-home (min-width: 720px) {
+  .nudge { padding: 12px 16px; }
+  .nudge-body { font-size: 14px; }
+  .nudge-link { font-size: 13px; }
+}
+
+
+/* ===========================================================
+   "Not sure yet" / skip link — quiet centered link used in
+   onboarding-style flows (e.g. focus picker bottom).
+   =========================================================== */
+.fp-skip {
+  display: flex;
+  justify-content: center;
+  padding: 16px 22px 8px;
+}
+.fp-skip a,
+.fp-skip-link {
+  font-size: 12.5px;
+  color: var(--mhc-slate);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.fp-skip a:hover,
+.fp-skip-link:hover {
+  color: var(--mhc-charcoal);
+}
+
+
+/* ===========================================================
+   Action button — host system styles this; we only provide
+   a default class that matches the brand if it falls through.
+   =========================================================== */
+.mhc-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--mhc-radius-pill);
+  background: var(--mhc-blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+.mhc-action-btn--secondary {
+  background: #fff;
+  color: var(--mhc-blue);
+  border: 1.5px solid var(--mhc-blue);
+}
+.mhc-action-btn svg { width: 16px; height: 16px; }
+
+
+/* ===========================================================
+   Visually-hidden helper (a11y)
+   =========================================================== */
+.mhc-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

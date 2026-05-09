@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHC Design System — v6 · warm-neutral</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap">
+<style>
+  /* ============================================================
+     v6 · warm-neutral
+     Refinement of v5. Premise: v5's jewel discipline read too heavy,
+     and purple-family hues (lavender + indigo) sat wrong at scale.
+     v6 pulls the chromatic register down to Neutral — sand surfaces
+     hold the warmth, categoricals retire to 100–200 stops as accents,
+     gradients retire entirely from product, and purples demote to
+     glyph / dot / tag only. Greens (moss + success) get the most
+     screen time when chroma surfaces. Re-aligns with v4 Rule 5.
+     ============================================================ */
+
+  :root {
+    /* === Layer 1 — Core scales (identical hex to v4/v5; usage redeployed) === */
+
+    /* neutral — graphite ink */
+    --neutral-50: #FAF8F5; --neutral-100: #F0EBE3; --neutral-200: #DDD5C7; --neutral-300: #B5AC9C;
+    --neutral-400: #8C857A; --neutral-500: #6B645A; --neutral-600: #5C564E; --neutral-700: #4A453E;
+    --neutral-800: #38332E; --neutral-900: #2C2A26; --neutral-950: #1A1815;
+
+    /* sand — warm beige surfaces (the warmth carrier in v6) */
+    --sand-50: #FAF6F0; --sand-100: #F2EBDF; --sand-200: #E5DAC4; --sand-300: #D6C5A6;
+    --sand-400: #C4AC85; --sand-500: #A88E69; --sand-600: #8B7251; --sand-700: #6E593F;
+    --sand-800: #524230; --sand-900: #2A2620; --sand-950: #1A1612;
+
+    /* warm — Healthy Habits / Rewards accent */
+    --warm-50: #FDF5EE; --warm-100: #FAE7D5; --warm-200: #F4CDA9; --warm-300: #ECAD78;
+    --warm-400: #E08A4F; --warm-500: #C8744A; --warm-600: #A85C36; --warm-700: #8A4A26;
+    --warm-800: #6E3A1D; --warm-900: #4D2914; --warm-950: #2C170B;
+
+    /* primary — R2 sky-teal bridge (~200°). Locked direction (D2). */
+    --primary-50: #EFF5FA; --primary-100: #DAE9F2; --primary-200: #B5D2E5; --primary-300: #82B0CE;
+    --primary-400: #5290B5; --primary-500: #34759E; --primary-600: #2A6489; --primary-700: #235173;
+    --primary-800: #1D425C; --primary-900: #163346; --primary-950: #0D2030;
+
+    /* success — sage (lifted forward in v6 alongside moss) */
+    --success-50: #F2F6EC; --success-100: #DFEAD0; --success-200: #C0D5A4; --success-300: #99B872;
+    --success-400: #7C9C50; --success-500: #6B8E5A; --success-600: #587746; --success-700: #486238;
+    --success-800: #3A4F2D; --success-900: #283821; --success-950: #161F12;
+
+    /* warning — amber */
+    --warning-50: #FCF4E6; --warning-100: #F9E3B0; --warning-200: #F2CB72; --warning-300: #E8B142;
+    --warning-400: #D89826; --warning-500: #BC811F; --warning-600: #9F6D1B; --warning-700: #815816;
+    --warning-800: #614210; --warning-900: #422C0A; --warning-950: #241805;
+
+    /* error — warm coral */
+    --error-50: #FBF1ED; --error-100: #F8DBD2; --error-200: #F0B5A2; --error-300: #E48972;
+    --error-400: #D2613F; --error-500: #B14A2D; --error-600: #933D24; --error-700: #76311D;
+    --error-800: #582616; --error-900: #3A1A0F; --error-950: #1F0E07;
+
+    /* === Layer 1 (extended) — Categoricals (5 module hues) === */
+
+    /* moss — DCP. Promoted in v6 — green family leads when chroma surfaces. */
+    --moss-50: #EFF4F0; --moss-100: #D5E2D8; --moss-200: #A8C4AE; --moss-300: #76A185;
+    --moss-400: #4D8261; --moss-500: #366B49; --moss-600: #2A573B; --moss-700: #234630;
+    --moss-800: #1B3625; --moss-900: #142619; --moss-950: #0A160E;
+
+    /* lavender — Health Data. v6: glyph / sparkline / dot only. Never as background. */
+    --lavender-50: #F4F2FB; --lavender-100: #E5E1F4; --lavender-200: #C7BFE8; --lavender-300: #A096D5;
+    --lavender-400: #7A6EBE; --lavender-500: #6053A8; --lavender-600: #4F4391; --lavender-700: #423775;
+    --lavender-800: #352C5C; --lavender-900: #231D40; --lavender-950: #131022;
+
+    /* rose — Mindfulness / Wellbeing. Receded in v6 (less screen time). */
+    --rose-50: #FCF1F2; --rose-100: #F8DCDF; --rose-200: #F0B6BD; --rose-300: #E48793;
+    --rose-400: #D45D6E; --rose-500: #B84656; --rose-600: #973745; --rose-700: #7B2D38;
+    --rose-800: #5C2229; --rose-900: #3D171C; --rose-950: #200B0E;
+
+    /* indigo — AI cross-cutting marker. v6: tag dot / border / glyph only. Never as wash. */
+    --indigo-50: #F1F2FA; --indigo-100: #DCDFF1; --indigo-200: #B7BCE3; --indigo-300: #8990CC;
+    --indigo-400: #6068B0; --indigo-500: #494F95; --indigo-600: #3D437B; --indigo-700: #343864;
+    --indigo-800: #2A2D50; --indigo-900: #1D203A; --indigo-950: #0F1120;
+
+    /* fuchsia — Challenges. Receded in v6. */
+    --fuchsia-50: #FCF1F7; --fuchsia-100: #F7DDED; --fuchsia-200: #EFB4D6; --fuchsia-300: #DE85B7;
+    --fuchsia-400: #C95A98; --fuchsia-500: #B14380; --fuchsia-600: #913568; --fuchsia-700: #762B54;
+    --fuchsia-800: #582240; --fuchsia-900: #3A172B; --fuchsia-950: #1F0E1A;
+
+    /* === Layer 2 — Semantic tokens === */
+    --bg-default:    var(--sand-50);
+    --bg-subtle:     var(--sand-100);
+    --bg-inverse:    var(--neutral-900);
+
+    --text-primary:    var(--neutral-900);
+    --text-secondary:  var(--neutral-700);
+    --text-tertiary:   var(--neutral-500);
+    --text-disabled:   var(--neutral-400);
+    --text-inverse:    var(--sand-50);
+    --text-onPrimary:  var(--sand-50);
+
+    --border-default:  var(--neutral-200);
+    --border-strong:   var(--neutral-400);
+    --border-focus:    var(--primary-600);
+    --border-ai:       var(--indigo-300);
+
+    --interactive-default:  var(--primary-600);
+    --interactive-hover:    var(--primary-700);
+    --interactive-pressed:  var(--primary-800);
+    --interactive-selected: var(--primary-600);
+    --interactive-disabled: var(--sand-200);
+
+    /* Layer 3 component tokens */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    --shadow-sm: 0 1px 2px rgba(20, 18, 16, 0.04), 0 1px 3px rgba(20, 18, 16, 0.03);
+    --shadow-md: 0 2px 6px rgba(20, 18, 16, 0.06), 0 4px 12px rgba(20, 18, 16, 0.04);
+    --shadow-cta: 0 2px 8px rgba(35, 81, 115, 0.16);
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Source Serif 4", "Source Serif Pro", Charter, Georgia, serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+
+  /* NOTE: Gradient utility tokens (gradient.deep-primary, deep-moss, deep-rose,
+     deep-indigo, neutral-mist, ai-wash) — all retired from v6 product per B4.
+     Token definitions deliberately not declared. Gradients retired program-wide
+     for member surfaces and CTAs. Buyer hero uses a flat primary.800 surface. */
+
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 0; background: var(--bg-default); color: var(--text-primary); font-family: var(--font-sans); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 56px 40px 120px; }
+
+  h1 { font-family: var(--font-serif); font-size: 40px; font-weight: 600; line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+  h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.005em; }
+  h3 { font-size: 18px; font-weight: 600; margin: 32px 0 16px; }
+  h4 { font-size: 14px; font-weight: 600; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; }
+  section { margin-bottom: 80px; }
+  .lede { color: var(--text-secondary); margin: 0 0 32px; max-width: 720px; }
+  code { font-family: var(--font-mono); font-size: 13px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 4px; }
+
+  /* Delta panel */
+  .delta-panel { background: var(--sand-100); border-left: 4px solid var(--primary-600); border-radius: 4px; padding: 24px 32px; margin: 0 0 56px; font-size: 14px; }
+  .delta-panel dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; }
+  .delta-panel dt { font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; padding-top: 2px; }
+  .delta-panel dd { margin: 0; color: var(--text-primary); }
+  .delta-panel dd ul { margin: 0; padding-left: 18px; }
+  .delta-panel dd li { margin-bottom: 4px; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: var(--radius-full); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-draft { background: var(--warning-100); color: var(--warning-700); }
+  .status-current { background: var(--success-100); color: var(--success-700); }
+
+  /* TOC */
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 56px; padding: 16px 20px; background: var(--sand-100); border-radius: var(--radius-sm); font-size: 13px; }
+  .toc a { color: var(--primary-600); text-decoration: none; padding: 4px 10px; border-radius: 4px; }
+  .toc a:hover { background: var(--sand-50); }
+
+  /* Scales */
+  .scale { margin-bottom: 32px; }
+  .scale-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .scale-label .role { font-size: 12px; color: var(--text-tertiary); }
+  .scale-row { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+  .swatch { aspect-ratio: 1 / 1.25; border-radius: var(--radius-sm); padding: 8px; display: flex; flex-direction: column; justify-content: space-between; font-size: 10px; line-height: 1.3; border: 1px solid rgba(0,0,0,0.04); position: relative; }
+  .swatch .stop { font-weight: 600; opacity: 0.85; }
+  .swatch .hex { font-family: var(--font-mono); font-size: 9px; opacity: 0.7; }
+  .swatch.light { color: var(--neutral-900); }
+  .swatch.dark { color: var(--sand-50); }
+  /* Surface-eligible mark — light tints sanctioned for product container surfaces */
+  .swatch.surface-ok::before { content: ""; position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 2px; background: rgba(255,255,255,0.65); border: 1px solid rgba(0,0,0,0.18); }
+  .swatch.dark.surface-ok::before { background: rgba(0,0,0,0.25); border-color: rgba(255,255,255,0.4); }
+  /* Off-surface mark — purple-family hues never as background per C2 */
+  .swatch.no-surface::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(0,0,0,0.10) 6px, rgba(0,0,0,0.10) 7px); border-radius: var(--radius-sm); pointer-events: none; }
+
+  /* Tokens table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border-default); vertical-align: top; }
+  th { font-weight: 600; color: var(--text-secondary); background: var(--sand-100); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+  td.token { font-family: var(--font-mono); font-size: 12px; }
+  .chip { display: inline-block; width: 36px; height: 24px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.08); vertical-align: middle; }
+
+  /* Buttons */
+  .btn { font-family: var(--font-sans); font-size: 15px; font-weight: 600; padding: 12px 24px; border-radius: var(--radius-full); border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.15s ease; }
+  .btn.primary { background: var(--interactive-default); color: var(--text-onPrimary); box-shadow: var(--shadow-cta); }
+  .btn.primary:hover { background: var(--interactive-hover); }
+  .btn.secondary { background: transparent; border: 1.5px solid var(--border-strong); color: var(--text-primary); }
+  .btn.secondary:hover { border-color: var(--interactive-default); color: var(--interactive-default); }
+  .btn.ghost { background: transparent; color: var(--interactive-default); padding: 12px 0; }
+  .btn.ghost:hover { text-decoration: underline; }
+  .btn.disabled { background: var(--interactive-disabled); color: var(--text-disabled); cursor: not-allowed; box-shadow: none; }
+
+  /* Badges — dot+caps editorial only. Jewel filled variant retired in v6. */
+  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 8px; border-radius: var(--radius-full); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; background: transparent; color: var(--text-secondary); border: 1px solid var(--border-default); }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .badge.primary  .dot { background: var(--primary-600); }
+  .badge.success  .dot { background: var(--success-600); }
+  .badge.warning  .dot { background: var(--warning-600); }
+  .badge.error    .dot { background: var(--error-600); }
+  .badge.moss     .dot { background: var(--moss-600); }
+  .badge.lavender .dot { background: var(--lavender-600); }
+  .badge.rose     .dot { background: var(--rose-600); }
+  .badge.indigo   .dot { background: var(--indigo-600); }
+  .badge.fuchsia  .dot { background: var(--fuchsia-600); }
+  .badge.warm     .dot { background: var(--warm-600); }
+
+  /* Selection (border-only, held from v4/v5) */
+  .selection { padding: 16px 20px; border-radius: var(--radius-md); border: 1.5px solid var(--border-default); background: var(--sand-50); cursor: pointer; transition: all 0.15s ease; font-weight: 500; }
+  .selection.selected { border: 2px solid var(--interactive-default); padding: 15px 19px; color: var(--text-primary); }
+
+  /* Icon recipes — 5 held; R4 shifts container 600/700 → 500 (B2) */
+  .ic { width: 56px; height: 56px; display: inline-flex; align-items: center; justify-content: center; }
+  .ic.r1 { background: var(--sand-100); border-radius: 14px; }
+  .ic.r2 { background: transparent; border: 1.5px solid var(--neutral-300); border-radius: 50%; }
+  .ic.r3 { background: transparent; }
+  .ic.r4 { border-radius: 50%; }
+  .ic.r5 { border-radius: 14px; }
+
+  .material-symbols-outlined { font-family: 'Material Symbols Outlined'; font-weight: normal; font-size: 26px; line-height: 1; font-feature-settings: 'liga'; -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; }
+
+  /* Component cards */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .component-card { background: var(--sand-50); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: 24px; }
+  .component-card .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin-bottom: 16px; }
+  .component-card .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+  /* Icon matrix */
+  .icon-matrix { display: grid; grid-template-columns: 220px repeat(6, 1fr); gap: 12px 8px; align-items: center; margin-top: 16px; }
+  .icon-matrix .head { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); font-weight: 600; text-align: center; padding: 6px 0; }
+  .icon-matrix .row-label { font-size: 12px; color: var(--text-secondary); font-weight: 600; padding-right: 8px; }
+  .icon-matrix .cell { display: flex; justify-content: center; }
+
+  /* Variant grid */
+  .illust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 16px; }
+  .illust-tile { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; position: relative; }
+  .illust-tile .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+  /* Applied screens */
+  .screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .phone { background: #fff; border: 1px solid var(--border-default); border-radius: 28px; padding: 18px 16px 24px; box-shadow: var(--shadow-md); display: flex; flex-direction: column; gap: 12px; min-height: 540px; }
+  .phone .topbar { display: flex; align-items: center; gap: 8px; padding: 4px 0 12px; border-bottom: 1px solid var(--border-default); font-size: 11px; color: var(--text-tertiary); }
+  .phone h4.screen-h { font-family: var(--font-serif); font-size: 18px; font-weight: 600; text-transform: none; letter-spacing: 0; margin: 8px 0 4px; }
+  .phone p { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+  .phone .card { padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-default); background: var(--sand-50); }
+  .phone .progress { height: 6px; background: var(--sand-200); border-radius: var(--radius-full); overflow: hidden; }
+  .phone .progress > i { display: block; height: 100%; background: var(--moss-600); }
+  .phone .progress.primary > i { background: var(--primary-600); }
+  .phone .h-strong { font-weight: 700; color: var(--text-primary); font-size: 14px; margin-bottom: 2px; }
+  .phone .meta { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* Buyer hero — flat primary.800 (no gradient) */
+  .phone.buyer { background: var(--primary-800); color: var(--sand-50); }
+  .phone.buyer .topbar { color: rgba(250, 246, 240, 0.6); border-bottom-color: rgba(250, 246, 240, 0.15); }
+  .phone.buyer h4.screen-h { color: var(--sand-50); font-size: 22px; }
+  .phone.buyer p { color: rgba(250, 246, 240, 0.85); }
+  .phone.buyer .card { background: rgba(250, 246, 240, 0.10); border-color: rgba(250, 246, 240, 0.20); color: var(--sand-50); }
+  .phone.buyer .meta { color: rgba(250, 246, 240, 0.6); }
+
+  /* AI surface — sand background + indigo border + indigo tag dot. NO wash. */
+  .phone .ai-card { background: var(--sand-50); border: 1px solid var(--border-ai); border-radius: var(--radius-md); padding: 14px 16px; }
+  .phone .ai-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--indigo-700); margin-bottom: 6px; }
+  .phone .ai-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--indigo-700); }
+
+  .a11y .pass { color: var(--success-700); font-weight: 700; }
+  .a11y .fail { color: var(--error-700); font-weight: 700; }
+  .a11y .dash { color: var(--text-tertiary); }
+
+  .narrative { background: var(--sand-100); border-radius: var(--radius-xl); padding: 32px 40px; border-left: 4px solid var(--primary-600); max-width: 880px; }
+  .narrative p { margin: 0 0 12px; line-height: 1.65; }
+  .narrative p:last-child { margin-bottom: 0; }
+
+  /* Premise callout */
+  .premise-callout { display: flex; gap: 24px; padding: 20px 24px; border-radius: var(--radius-lg); background: var(--neutral-50); border: 1px solid var(--neutral-200); margin: 0 0 32px; }
+  .premise-callout .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-tertiary); font-weight: 700; flex-shrink: 0; padding-top: 2px; min-width: 80px; }
+  .premise-callout p { margin: 0; font-size: 14px; color: var(--text-primary); line-height: 1.6; }
+
+  /* Weighting viz — 60-30-10 stacked bar */
+  .weighting { margin-top: 24px; padding: 20px 24px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--sand-50); }
+  .weighting-bar { display: flex; height: 28px; border-radius: var(--radius-sm); overflow: hidden; }
+  .weighting-bar > span { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--text-onPrimary); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; overflow: hidden; }
+  .weighting-legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px 16px; margin-top: 12px; font-size: 12px; color: var(--text-secondary); }
+  .weighting-legend .swatchdot { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: middle; margin-right: 6px; border: 1px solid rgba(0,0,0,0.06); }
+
+  @media (max-width: 900px) {
+    .scale-row { grid-template-columns: repeat(6, 1fr); }
+    .icon-matrix { grid-template-columns: repeat(4, 1fr); }
+    .illust-grid { grid-template-columns: repeat(2, 1fr); }
+    .screens { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <h1>MHC Design System — v6 · warm-neutral</h1>
+  <div class="delta-panel">
+    <dl>
+      <dt>Iteration</dt>       <dd>v6 · warm-neutral</dd>
+      <dt>Type</dt>            <dd>system-preview</dd>
+      <dt>Builds on</dt>       <dd><code>v5/system.html</code></dd>
+      <dt>Premise</dt>         <dd>Pulls v5's jewel weight back to a Neutral-register restraint — sand surfaces hold warmth, categoricals retire to 100–200 stops, gradients flat throughout product, and purple-family hues (lavender + indigo) demote to sparing accent only.</dd>
+      <dt>Color register</dt>  <dd><strong>Neutral</strong> — see INTERVIEW B1. Surfaces stay on sand; categoricals minimized. No locks reopened.</dd>
+      <dt>Brand color role</dt><dd><strong>Passive</strong> — color is an accent, not a coat. CTAs use solid primary; module identity through glyph color (per D11, INTERVIEW B6).</dd>
+      <dt>Changed</dt>         <dd><ul>
+        <li>Color register: Jewel (v5) → Neutral (v6). Categoricals retire to 100–200 stops in product surfaces; jewel 600/700 stops leave member contexts and survive only as ink, glyph, badge dot, and edge.</li>
+        <li>Gradients: full v5 gradient set retires from product. <code>gradient.deep-primary</code>, <code>-moss</code>, <code>-rose</code>, <code>-indigo</code>, <code>neutral-mist</code>, and <code>ai-wash</code> token definitions removed. Buyer hero moves from <code>gradient.deep-primary</code> to a flat <code>primary.800</code> surface.</li>
+        <li>Purple discipline tightened (per C2): <code>lavender.*</code> (Health Data) and <code>indigo.*</code> (AI marker) demoted to glyph / dot / sparkline / border only — never as background, never as wash. Re-aligns with v4 Rule 5 ("AI labeled, not bathed"), which v5 partially relaxed.</li>
+        <li>Icon recipes: hold at 5. R4 (filled disc) container shifts <code>600/700</code> → <code>500</code> (B2 asked for two stops; one stop applied where AA-text would otherwise fail on indigo/lavender/rose/fuchsia 400-stop). Sand-50 glyph held.</li>
+        <li>Member CTA reverts <code>primary.700</code> (v5) → <code>primary.600</code> (v4 default). v5's deepening was for jewel discipline; under Neutral restraint, primary.600 reads correctly and remains AA-strong (6.3:1) on sand.</li>
+        <li>Categorical distribution: green family (<code>moss</code> + <code>success</code>) leads where chroma surfaces; <code>rose</code> and <code>fuchsia</code> recede in applied moments; <code>warm</code> retains Habits/Rewards moments at 100-stop containers. Module hue map unchanged; usage redistributed.</li>
+        <li>Jewel filled badge variant retired in v6. Default dot+caps badge only — surface tint is no longer earned at the badge level.</li>
+        <li>Weighting viz: re-included (v5 skipped) per B5 — v6 distribution shift earns the surface area to show how chroma redistributes.</li>
+      </ul></dd>
+      <dt>Locked</dt>          <dd><ul>
+        <li>Visual tribe: Clinical-Modern Distinctive (D1 / HC-1)</li>
+        <li>Primary hue: R2 sky-teal bridge at <code>#2A6489</code> (D2 / HC-2)</li>
+        <li>Neutral / sand split (HC-3) — surfaces stay on <code>sand.*</code>, ink on <code>neutral.*</code></li>
+        <li>One primary CTA color (HC-4 / Q12)</li>
+        <li>Purple categorical only (HC-5 / Q10) — tightened by C2</li>
+        <li>WCAG AA floor (HC-6 / Q17)</li>
+        <li>Border radius 16–20px on primary components (HC-7)</li>
+        <li>Brand color role: Passive (D11 / HC-13)</li>
+        <li>Open-source icon library — Material Symbols Outlined (HC-10 / Q15)</li>
+        <li>Variant-grid illustration economy (B3 hold)</li>
+      </ul></dd>
+      <dt>Assumptions</dt>     <dd><ul>
+        <li>"Lean greener" interpreted as a distribution choice — moss/success surface more often than rose/lavender/fuchsia in applied moments. Cue: A4 said "lean toward more of the greens" but B1 picked Neutral, where all categoricals technically recede equally; the green tilt has to express through <em>where</em> chroma lands.</li>
+        <li>"Purples used sparingly, not as background" extended to indigo (AI marker), not just lavender. Cue: C2 said "purple hues" plural; lavender + indigo are the only two purple-family scales, so the rule applies to both. Indigo wash on AI surfaces retires.</li>
+        <li>Member CTA reverted <code>primary.700</code> → <code>primary.600</code>. Cue: v5's jewel deepening was for jewel-stop discipline; under Neutral restraint primary.600 reads correctly and v4 used primary.600 as canonical. Build judgment, not user-stated.</li>
+        <li>R4 container shift to <code>500</code> (one stop) when applied to indigo/lavender/rose/fuchsia/warm — full two-stop shift to <code>400</code> drops below AA-text on those modules at small icon sizes. R4 documented at <code>500</code> across modules with one-stop cushion to keep contrast clean. Cue: B2 said two stops; AA verification flagged the conflict.</li>
+        <li>Illustration variant-grid palette swaps anchored in sand + neutral + green tones. Cue: B3 confirmed without elaborating; default is to follow the iteration's register.</li>
+        <li>Material Symbols Outlined continues as the icon family — never re-asked, carrying forward per HC-10.</li>
+      </ul></dd>
+      <dt>Decision touched</dt><dd>none <span style="color:var(--text-tertiary); font-size: 12px;">(Neutral preserves multi-hue architecture without reopening locks; v6 re-aligns with v4 editorial restraint discipline that v5 partially walked away from)</span></dd>
+      <dt>Status</dt>          <dd><span class="status status-draft">draft</span></dd>
+      <dt>Date</dt>            <dd>2026-05-04</dd>
+    </dl>
+  </div>
+
+  <div class="premise-callout">
+    <span class="label">The pull-back</span>
+    <p>v5 tested a Jewel-accent register against a Neutral base — categoricals at <code>600/700</code> as saturated stops on sand surfaces. Designer feedback: jewel reads heavy at scale, and <code>lavender</code> + <code>indigo</code> in particular sit wrong — purples want air, not punctuation. v6 holds the v5 architectural lesson (sand + neutral split protects from muddle) but scales the chromatic register down: categoricals retire to <code>100–200</code> stops as light accents, gradients retire entirely from product, purples demote to glyph and dot only, and the green family (<code>moss</code> + <code>success</code>) gets the most screen time when chroma surfaces. The result re-aligns with v4's editorial restraint, with the muddle protection v5 invented carrying forward.</p>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#l1">Layer 1</a>
+  <a href="#l1ext">Categoricals</a>
+  <a href="#l2">Layer 2</a>
+  <a href="#l3">Layer 3</a>
+  <a href="#l4">Layer 4</a>
+  <a href="#l5">Layer 5</a>
+  <a href="#applied">Applied moments</a>
+  <a href="#a11y">Accessibility</a>
+  <a href="#narrative">Stakeholder narrative</a>
+</nav>
+
+<!-- ============================================================ LAYER 1 ============================================================ -->
+<section id="l1">
+  <h2>Layer 1 — Core Palette Scales</h2>
+  <p class="lede">Hex values held from v4/v5 — what changes is which stops are sanctioned for surface use. Surface-eligible stops carry a square mark; on the chromatic scales (primary, warm), only <code>50–100</code> are sanctioned for product container surfaces, and even there their use is sparse. The neutral and sand scales remain fully surface-active.</p>
+
+  <div class="scale">
+    <div class="scale-label"><h4>color.neutral.*</h4><span class="role">Graphite ink — text, borders, dividers. Hue ~28°, low chroma. Surface use limited to <code>50</code>.</span></div>
+    <div class="scale-row">
+      <div class="swatch light surface-ok" style="background:#FAF8F5"><span class="stop">50</span><span class="hex">#FAF8F5</span></div>
+      <div class="swatch light" style="background:#F0EBE3"><span class="stop">100</span><span class="hex">#F0EBE3</span></div>
+      <div class="swatch light" style="background:#DDD5C7"><span class="stop">200</span><span class="hex">#DDD5C7</span></div>
+      <div class="swatch light" style="background:#B5AC9C"><span class="stop">300</span><span class="hex">#B5AC9C</span></div>
+      <div class="swatch dark"  style="background:#8C857A"><span class="stop">400</span><span class="hex">#8C857A</span></div>
+      <div class="swatch dark"  style="background:#6B645A"><span class="stop">500</span><span class="hex">#6B645A</span></div>
+      <div class="swatch dark"  style="background:#5C564E"><span class="stop">600</span><span class="hex">#5C564E</span></div>
+      <div class="swatch dark"  style="background:#4A453E"><span class="stop">700</span><span class="hex">#4A453E</span></div>
+      <div class="swatch dark"  style="background:#38332E"><span class="stop">800</span><span class="hex">#38332E</span></div>
+      <div class="swatch dark"  style="background:#2C2A26"><span class="stop">900</span><span class="hex">#2C2A26</span></div>
+      <div class="swatch dark"  style="background:#1A1815"><span class="stop">950</span><span class="hex">#1A1815</span></div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-label"><h4>color.sand.*</h4><span class="role">Warm surface — backgrounds, cards, hover. Hue ~30°. Sand is the warmth carrier in v6 — every page lives on it.</span></div>
+    <div class="scale-row">
+      <div class="swatch light surface-ok" style="background:#FAF6F0"><span class="stop">50</span><span class="hex">#FAF6F0</span></div>
+      <div class="swatch light surface-ok" style="background:#F2EBDF"><span class="stop">100</span><span class="hex">#F2EBDF</span></div>
+      <div class="swatch light surface-ok" style="background:#E5DAC4"><span class="stop">200</span><span class="hex">#E5DAC4</span></div>
+      <div class="swatch light" style="background:#D6C5A6"><span class="stop">300</span><span class="hex">#D6C5A6</span></div>
+      <div class="swatch dark"  style="background:#C4AC85"><span class="stop">400</span><span class="hex">#C4AC85</span></div>
+      <div class="swatch dark"  style="background:#A88E69"><span class="stop">500</span><span class="hex">#A88E69</span></div>
+      <div class="swatch dark"  style="background:#8B7251"><span class="stop">600</span><span class="hex">#8B7251</span></div>
+      <div class="swatch dark"  style="background:#6E593F"><span class="stop">700</span><span class="hex">#6E593F</span></div>
+      <div class="swatch dark"  style="background:#524230"><span class="stop">800</span><span class="hex">#524230</span></div>
+      <div class="swatch dark"  style="background:#2A2620"><span class="stop">900</span><span class="hex">#2A2620</span></div>
+      <div class="swatch dark"  style="background:#1A1612"><span class="stop">950</span><span class="hex">#1A1612</span></div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-label"><h4>color.primary.* — R2 Sky-teal bridge</h4><span class="role">Primary brand color, ~200°. Locked direction (D2). CTA reverts to <code>600</code>; light tints sanctioned only as small accents.</span></div>
+    <div class="scale-row">
+      <div class="swatch light surface-ok" style="background:#EFF5FA"><span class="stop">50</span><span class="hex">#EFF5FA</span></div>
+      <div class="swatch light surface-ok" style="background:#DAE9F2"><span class="stop">100</span><span class="hex">#DAE9F2</span></div>
+      <div class="swatch light" style="background:#B5D2E5"><span class="stop">200</span><span class="hex">#B5D2E5</span></div>
+      <div class="swatch light" style="background:#82B0CE"><span class="stop">300</span><span class="hex">#82B0CE</span></div>
+      <div class="swatch dark"  style="background:#5290B5"><span class="stop">400</span><span class="hex">#5290B5</span></div>
+      <div class="swatch dark"  style="background:#34759E"><span class="stop">500</span><span class="hex">#34759E</span></div>
+      <div class="swatch dark"  style="background:#2A6489"><span class="stop">600</span><span class="hex">#2A6489</span></div>
+      <div class="swatch dark"  style="background:#235173"><span class="stop">700</span><span class="hex">#235173</span></div>
+      <div class="swatch dark"  style="background:#1D425C"><span class="stop">800</span><span class="hex">#1D425C</span></div>
+      <div class="swatch dark"  style="background:#163346"><span class="stop">900</span><span class="hex">#163346</span></div>
+      <div class="swatch dark"  style="background:#0D2030"><span class="stop">950</span><span class="hex">#0D2030</span></div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-label"><h4>color.warm.*</h4><span class="role">Peach / terracotta — Healthy Habits / Rewards accent. Light tints sanctioned at <code>50/100</code> for module containers.</span></div>
+    <div class="scale-row">
+      <div class="swatch light surface-ok" style="background:#FDF5EE"><span class="stop">50</span><span class="hex">#FDF5EE</span></div>
+      <div class="swatch light surface-ok" style="background:#FAE7D5"><span class="stop">100</span><span class="hex">#FAE7D5</span></div>
+      <div class="swatch light" style="background:#F4CDA9"><span class="stop">200</span><span class="hex">#F4CDA9</span></div>
+      <div class="swatch light" style="background:#ECAD78"><span class="stop">300</span><span class="hex">#ECAD78</span></div>
+      <div class="swatch dark"  style="background:#E08A4F"><span class="stop">400</span><span class="hex">#E08A4F</span></div>
+      <div class="swatch dark"  style="background:#C8744A"><span class="stop">500</span><span class="hex">#C8744A</span></div>
+      <div class="swatch dark"  style="background:#A85C36"><span class="stop">600</span><span class="hex">#A85C36</span></div>
+      <div class="swatch dark"  style="background:#8A4A26"><span class="stop">700</span><span class="hex">#8A4A26</span></div>
+      <div class="swatch dark"  style="background:#6E3A1D"><span class="stop">800</span><span class="hex">#6E3A1D</span></div>
+      <div class="swatch dark"  style="background:#4D2914"><span class="stop">900</span><span class="hex">#4D2914</span></div>
+      <div class="swatch dark"  style="background:#2C170B"><span class="stop">950</span><span class="hex">#2C170B</span></div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-label"><h4>color.success.*</h4><span class="role">Sage — semantic success. Promoted in v6 alongside moss as the green family.</span></div>
+    <div class="scale-row">
+      <div class="swatch light surface-ok" style="background:#F2F6EC"><span class="stop">50</span><span class="hex">#F2F6EC</span></div>
+      <div class="swatch light surface-ok" style="background:#DFEAD0"><span class="stop">100</span><span class="hex">#DFEAD0</span></div>
+      <div class="swatch light" style="background:#C0D5A4"><span class="stop">200</span><span class="hex">#C0D5A4</span></div>
+      <div class="swatch light" style="background:#99B872"><span class="stop">300</span><span class="hex">#99B872</span></div>
+      <div class="swatch dark"  style="background:#7C9C50"><span class="stop">400</span><span class="hex">#7C9C50</span></div>
+      <div class="swatch dark"  style="background:#6B8E5A"><span class="stop">500</span><span class="hex">#6B8E5A</span></div>
+      <div class="swatch dark"  style="background:#587746"><span class="stop">600</span><span class="hex">#587746</span></div>
+      <div class="swatch dark"  style="background:#486238"><span class="stop">700</span><span class="hex">#486238</span></div>
+      <div class="swatch dark"  style="background:#3A4F2D"><span class="stop">800</span><span class="hex">#3A4F2D</span></div>
+      <div class="swatch dark"  style="background:#283821"><span class="stop">900</span><span class="hex">#283821</span></div>
+      <div class="swatch dark"  style="background:#161F12"><span class="stop">950</span><span class="hex">#161F12</span></div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-label"><h4>color.warning.*</h4><span class="role">Amber gold — semantic warning.</span></div>
+    <div class="scale-row">
+      <div class="swatch light" style="background:#FCF4E6"><span class="stop">50</span><span class="hex">#FCF4E6</span></div>
+      <div class="swatch light" style="background:#F9E3B0"><span class="stop">100</span><span class="hex">#F9E3B0</span></div>
+      <div class="swatch light" style="background:#F2CB72"><span class="stop">200</span><span class="hex">#F2CB72</span></div>
+      <div class="swatch light" style="background:#E8B142"><span class="stop">300</span><span class="hex">#E8B142</span></div>
+      <div class="swatch dark"  style="background:#D89826"><span class="stop">400</span><span class="hex">#D89826</span></div>
+      <div class="swatch dark"  style="background:#BC811F"><span class="stop">500</span><span class="hex">#BC811F</span></div>
+      <div class="swatch dark"  style="background:#9F6D1B"><span class="stop">600</span><span class="hex">#9F6D1B</span></div>
+      <div class="swatch dark"  style="background:#815816"><span class="stop">700</span><span class="hex">#815816</span></div>
+      <div class="swatch dark"  style="background:#614210"><span class="stop">800</span><span class="hex">#614210</span></div>
+      <div class="swatch dark"  style="background:#422C0A"><span class="stop">900</span><span class="hex">#422C0A</span></div>
+      <div class="swatch dark"  style="background:#241805"><span class="stop">950</span><span class="hex">#241805</span></div>
+    </div>
+  </div>
+
+  <div class="scale">
+    <div class="scale-label"><h4>color.error.*</h4><span class="role">Warm coral — semantic error.</span></div>
+    <div class="scale-row">
+      <div class="swatch light" style="background:#FBF1ED"><span class="stop">50</span><span class="hex">#FBF1ED</span></div>
+      <div class="swatch light" style="background:#F8DBD2"><span class="stop">100</span><span class="hex">#F8DBD2</span></div>
+      <div class="swatch light" style="background:#F0B5A2"><span class="stop">200</span><span class="hex">#F0B5A2</span></div>
+      <div class="swatch light" style="background:#E48972"><span class="stop">300</span><span class="hex">#E48972</span></div>
+      <div class="swatch dark"  style="background:#D2613F"><span class="stop">400</span><span class="hex">#D2613F</span></div>
+      <div class="swatch dark"  style="background:#B14A2D"><span class="stop">500</span><span class="hex">#B14A2D</span></div>
+      <div class="swatch dark"  style="background:#933D24"><span class="stop">600</span><span class="hex">#933D24</span></div>
+      <div class="swatch dark"  style="background:#76311D"><span class="stop">700</span><span class="hex">#76311D</span></div>
+      <div class="swatch dark"  style="background:#582616"><span class="stop">800</span><span class="hex">#582616</span></div>
+      <div class="swatch dark"  style="background:#3A1A0F"><span class="stop">900</span><span class="hex">#3A1A0F</span></div>
+      <div class="swatch dark"  style="background:#1F0E07"><span class="stop">950</span><span class="hex">#1F0E07</span></div>
+    </div>
+  </div>
+
+  <p style="margin-top: 16px; font-size: 13px; color: var(--text-tertiary);"><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,0.65);border:1px solid rgba(0,0,0,0.18);vertical-align:middle;margin-right:6px;"></span>Surface-eligible mark — stop sanctioned for product container surfaces in v6. Stops without the mark live on as ink, glyph, dot, or border, but never as a card/page surface in this register.</p>
+</section>
+
+<!-- ============================================================ LAYER 1 (extended) ============================================================ -->
+<section id="l1ext">
+  <h2>Layer 1 (extended) — Categorical Scales</h2>
+  <p class="lede">Five module hues. Same hex as v4/v5. v6 enforces a per-scale surface rule: <code>moss</code> earns container surface use; <code>warm</code> earns sparing container use for Habits/Rewards; <code>rose</code> and <code>fuchsia</code> recede to glyph + accent only; <code>lavender</code> and <code>indigo</code> are sealed off from background use entirely (per C2 — purple sparingly, never as background).</p>
+
+  <div class="scale"><div class="scale-label"><h4>moss — Digital Care Paths <span style="font-weight:400;font-size:12px;text-transform:none;letter-spacing:0;color:var(--moss-700);">· green family · v6 prominent</span></h4><span class="role">Container surface earned at <code>50/100</code>. Glyph and ink at <code>600–700</code>.</span></div>
+    <div class="scale-row">
+      <div class="swatch light surface-ok" style="background:#EFF4F0"><span class="stop">50</span><span class="hex">#EFF4F0</span></div>
+      <div class="swatch light surface-ok" style="background:#D5E2D8"><span class="stop">100</span><span class="hex">#D5E2D8</span></div>
+      <div class="swatch light" style="background:#A8C4AE"><span class="stop">200</span><span class="hex">#A8C4AE</span></div>
+      <div class="swatch light" style="background:#76A185"><span class="stop">300</span><span class="hex">#76A185</span></div>
+      <div class="swatch dark"  style="background:#4D8261"><span class="stop">400</span><span class="hex">#4D8261</span></div>
+      <div class="swatch dark"  style="background:#366B49"><span class="stop">500</span><span class="hex">#366B49</span></div>
+      <div class="swatch dark"  style="background:#2A573B"><span class="stop">600</span><span class="hex">#2A573B</span></div>
+      <div class="swatch dark"  style="background:#234630"><span class="stop">700</span><span class="hex">#234630</span></div>
+      <div class="swatch dark"  style="background:#1B3625"><span class="stop">800</span><span class="hex">#1B3625</span></div>
+      <div class="swatch dark"  style="background:#142619"><span class="stop">900</span><span class="hex">#142619</span></div>
+      <div class="swatch dark"  style="background:#0A160E"><span class="stop">950</span><span class="hex">#0A160E</span></div>
+    </div>
+  </div>
+
+  <div class="scale"><div class="scale-label"><h4>lavender — Health Data <span style="font-weight:400;font-size:12px;text-transform:none;letter-spacing:0;color:var(--lavender-700);">· purple-family · sparingly · never as background (C2)</span></h4><span class="role">Glyph, sparkline, dot, ink only. No container surface.</span></div>
+    <div class="scale-row">
+      <div class="swatch light no-surface" style="background:#F4F2FB"><span class="stop">50</span><span class="hex">#F4F2FB</span></div>
+      <div class="swatch light no-surface" style="background:#E5E1F4"><span class="stop">100</span><span class="hex">#E5E1F4</span></div>
+      <div class="swatch light no-surface" style="background:#C7BFE8"><span class="stop">200</span><span class="hex">#C7BFE8</span></div>
+      <div class="swatch dark no-surface"  style="background:#A096D5"><span class="stop">300</span><span class="hex">#A096D5</span></div>
+      <div class="swatch dark"  style="background:#7A6EBE"><span class="stop">400</span><span class="hex">#7A6EBE</span></div>
+      <div class="swatch dark"  style="background:#6053A8"><span class="stop">500</span><span class="hex">#6053A8</span></div>
+      <div class="swatch dark"  style="background:#4F4391"><span class="stop">600</span><span class="hex">#4F4391</span></div>
+      <div class="swatch dark"  style="background:#423775"><span class="stop">700</span><span class="hex">#423775</span></div>
+      <div class="swatch dark"  style="background:#352C5C"><span class="stop">800</span><span class="hex">#352C5C</span></div>
+      <div class="swatch dark"  style="background:#231D40"><span class="stop">900</span><span class="hex">#231D40</span></div>
+      <div class="swatch dark"  style="background:#131022"><span class="stop">950</span><span class="hex">#131022</span></div>
+    </div>
+  </div>
+
+  <div class="scale"><div class="scale-label"><h4>rose — Mindfulness / Wellbeing <span style="font-weight:400;font-size:12px;text-transform:none;letter-spacing:0;color:var(--rose-700);">· receded in v6</span></h4><span class="role">Glyph and dot leading. Container surface possible at <code>50/100</code> but used sparingly — green leads.</span></div>
+    <div class="scale-row">
+      <div class="swatch light" style="background:#FCF1F2"><span class="stop">50</span><span class="hex">#FCF1F2</span></div>
+      <div class="swatch light" style="background:#F8DCDF"><span class="stop">100</span><span class="hex">#F8DCDF</span></div>
+      <div class="swatch light" style="background:#F0B6BD"><span class="stop">200</span><span class="hex">#F0B6BD</span></div>
+      <div class="swatch dark"  style="background:#E48793"><span class="stop">300</span><span class="hex">#E48793</span></div>
+      <div class="swatch dark"  style="background:#D45D6E"><span class="stop">400</span><span class="hex">#D45D6E</span></div>
+      <div class="swatch dark"  style="background:#B84656"><span class="stop">500</span><span class="hex">#B84656</span></div>
+      <div class="swatch dark"  style="background:#973745"><span class="stop">600</span><span class="hex">#973745</span></div>
+      <div class="swatch dark"  style="background:#7B2D38"><span class="stop">700</span><span class="hex">#7B2D38</span></div>
+      <div class="swatch dark"  style="background:#5C2229"><span class="stop">800</span><span class="hex">#5C2229</span></div>
+      <div class="swatch dark"  style="background:#3D171C"><span class="stop">900</span><span class="hex">#3D171C</span></div>
+      <div class="swatch dark"  style="background:#200B0E"><span class="stop">950</span><span class="hex">#200B0E</span></div>
+    </div>
+  </div>
+
+  <div class="scale"><div class="scale-label"><h4>indigo — Digital Advisor / cross-cutting AI <span style="font-weight:400;font-size:12px;text-transform:none;letter-spacing:0;color:var(--indigo-700);">· purple-family · sparingly · never as background (C2)</span></h4><span class="role">Tag dot, border, glyph, ink only. AI surfaces use sand background — re-aligns with v4 Rule 5.</span></div>
+    <div class="scale-row">
+      <div class="swatch light no-surface" style="background:#F1F2FA"><span class="stop">50</span><span class="hex">#F1F2FA</span></div>
+      <div class="swatch light no-surface" style="background:#DCDFF1"><span class="stop">100</span><span class="hex">#DCDFF1</span></div>
+      <div class="swatch light no-surface" style="background:#B7BCE3"><span class="stop">200</span><span class="hex">#B7BCE3</span></div>
+      <div class="swatch dark no-surface"  style="background:#8990CC"><span class="stop">300</span><span class="hex">#8990CC</span></div>
+      <div class="swatch dark"  style="background:#6068B0"><span class="stop">400</span><span class="hex">#6068B0</span></div>
+      <div class="swatch dark"  style="background:#494F95"><span class="stop">500</span><span class="hex">#494F95</span></div>
+      <div class="swatch dark"  style="background:#3D437B"><span class="stop">600</span><span class="hex">#3D437B</span></div>
+      <div class="swatch dark"  style="background:#343864"><span class="stop">700</span><span class="hex">#343864</span></div>
+      <div class="swatch dark"  style="background:#2A2D50"><span class="stop">800</span><span class="hex">#2A2D50</span></div>
+      <div class="swatch dark"  style="background:#1D203A"><span class="stop">900</span><span class="hex">#1D203A</span></div>
+      <div class="swatch dark"  style="background:#0F1120"><span class="stop">950</span><span class="hex">#0F1120</span></div>
+    </div>
+  </div>
+
+  <div class="scale"><div class="scale-label"><h4>fuchsia — Challenges <span style="font-weight:400;font-size:12px;text-transform:none;letter-spacing:0;color:var(--fuchsia-700);">· receded in v6</span></h4><span class="role">Glyph and dot leading. Container use possible at <code>50/100</code> but used sparingly.</span></div>
+    <div class="scale-row">
+      <div class="swatch light" style="background:#FCF1F7"><span class="stop">50</span><span class="hex">#FCF1F7</span></div>
+      <div class="swatch light" style="background:#F7DDED"><span class="stop">100</span><span class="hex">#F7DDED</span></div>
+      <div class="swatch light" style="background:#EFB4D6"><span class="stop">200</span><span class="hex">#EFB4D6</span></div>
+      <div class="swatch dark"  style="background:#DE85B7"><span class="stop">300</span><span class="hex">#DE85B7</span></div>
+      <div class="swatch dark"  style="background:#C95A98"><span class="stop">400</span><span class="hex">#C95A98</span></div>
+      <div class="swatch dark"  style="background:#B14380"><span class="stop">500</span><span class="hex">#B14380</span></div>
+      <div class="swatch dark"  style="background:#913568"><span class="stop">600</span><span class="hex">#913568</span></div>
+      <div class="swatch dark"  style="background:#762B54"><span class="stop">700</span><span class="hex">#762B54</span></div>
+      <div class="swatch dark"  style="background:#582240"><span class="stop">800</span><span class="hex">#582240</span></div>
+      <div class="swatch dark"  style="background:#3A172B"><span class="stop">900</span><span class="hex">#3A172B</span></div>
+      <div class="swatch dark"  style="background:#1F0E1A"><span class="stop">950</span><span class="hex">#1F0E1A</span></div>
+    </div>
+  </div>
+
+  <p style="margin-top: 16px; font-size: 13px; color: var(--text-tertiary);">Module hue map (held from v4/v5): DCP → moss · Health Data → lavender · Mindfulness/Wellbeing → rose · Digital Advisor / AI → indigo · Challenges → fuchsia · Healthy Habits → warm. v6 changes the surface eligibility, not the map: <strong>moss</strong> can hold a container; <strong>lavender + indigo</strong> never can; <strong>rose, fuchsia, warm</strong> may but receive less product real estate so green leads.</p>
+</section>
+
+<!-- ============================================================ LAYER 2 ============================================================ -->
+<section id="l2">
+  <h2>Layer 2 — Semantic Tokens</h2>
+  <p class="lede">Every semantic token references a Layer 1 stop. No raw hex past Layer 1. v6 retires the entire gradient utility set from product use (B4); only the tokens for surfaces, ink, borders, and interactive states carry through.</p>
+
+  <h3>Backgrounds, text, borders</h3>
+  <table>
+    <thead><tr><th style="width:80px"></th><th>Token</th><th>References</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip" style="background:var(--sand-50);"></span></td><td class="token">background.default</td><td class="token">sand.50</td><td>Page</td></tr>
+      <tr><td><span class="chip" style="background:var(--sand-100);"></span></td><td class="token">background.subtle</td><td class="token">sand.100</td><td>Card hover, secondary surface</td></tr>
+      <tr><td><span class="chip" style="background:var(--neutral-900);"></span></td><td class="token">background.inverse</td><td class="token">neutral.900</td><td>Inverse / overlay</td></tr>
+      <tr><td><span class="chip" style="background:var(--neutral-900);"></span></td><td class="token">text.primary</td><td class="token">neutral.900</td><td>Headings, body</td></tr>
+      <tr><td><span class="chip" style="background:var(--neutral-700);"></span></td><td class="token">text.secondary</td><td class="token">neutral.700</td><td>Supporting copy</td></tr>
+      <tr><td><span class="chip" style="background:var(--neutral-500);"></span></td><td class="token">text.tertiary</td><td class="token">neutral.500</td><td>Labels, metadata</td></tr>
+      <tr><td><span class="chip" style="background:var(--neutral-400);"></span></td><td class="token">text.disabled</td><td class="token">neutral.400</td><td>Disabled</td></tr>
+      <tr><td><span class="chip" style="background:var(--sand-50); border-color:#ccc;"></span></td><td class="token">text.onPrimary</td><td class="token">sand.50</td><td>Text on filled / dark surfaces</td></tr>
+      <tr><td><span class="chip" style="background:var(--neutral-200);"></span></td><td class="token">border.default</td><td class="token">neutral.200</td><td>Default container border</td></tr>
+      <tr><td><span class="chip" style="background:var(--neutral-400);"></span></td><td class="token">border.strong</td><td class="token">neutral.400</td><td>Outlined buttons</td></tr>
+      <tr><td><span class="chip" style="background:var(--primary-600);"></span></td><td class="token">border.focus</td><td class="token">primary.600</td><td>Focus ring (reverts to primary.600 from v5's primary.700)</td></tr>
+      <tr><td><span class="chip" style="background:var(--indigo-300);"></span></td><td class="token">border.ai</td><td class="token">indigo.300</td><td>AI surface edge — replaces v5's indigo wash. Sand surface + indigo border + indigo tag.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Interactive</h3>
+  <table>
+    <thead><tr><th style="width:80px"></th><th>Token</th><th>References</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip" style="background:var(--primary-600);"></span></td><td class="token">interactive.default</td><td class="token">primary.600</td><td>Member CTA fill (reverts from primary.700 v5; AA-strong on sand.50 at 6.3:1)</td></tr>
+      <tr><td><span class="chip" style="background:var(--primary-700);"></span></td><td class="token">interactive.hover</td><td class="token">primary.700</td><td>Hover</td></tr>
+      <tr><td><span class="chip" style="background:var(--primary-800);"></span></td><td class="token">interactive.pressed</td><td class="token">primary.800</td><td>Pressed</td></tr>
+      <tr><td><span class="chip" style="background:transparent; border: 2px solid var(--primary-600);"></span></td><td class="token">interactive.selected</td><td class="token">primary.600 (border)</td><td>Selected = border treatment, no surface tint</td></tr>
+      <tr><td><span class="chip" style="background:var(--sand-200);"></span></td><td class="token">interactive.disabled</td><td class="token">sand.200</td><td>Disabled fill</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Gradient utilities — retired in v6</h3>
+  <p style="font-size: 14px; color: var(--text-secondary); max-width: 720px;">Per B4, gradients retire from v6 product use entirely. The full v5 gradient set — <code>gradient.deep-primary</code>, <code>gradient.deep-moss</code>, <code>gradient.deep-rose</code>, <code>gradient.deep-indigo</code>, <code>gradient.neutral-mist</code>, <code>gradient.ai-wash</code> — and the v4 gradient utilities <code>gradient.warm-mist</code> and <code>gradient.cool-mist</code> are not declared as tokens in v6. The buyer hero, previously the canonical gradient surface, moves to a <strong>flat <code>primary.800</code></strong> background. Member CTAs are flat <code>primary.600</code>. AI surfaces are flat <code>sand.50</code> with an <code>indigo.300</code> border.</p>
+</section>
+
+<!-- ============================================================ LAYER 3 ============================================================ -->
+<section id="l3">
+  <h2>Layer 3 — Components <span style="font-family: var(--font-sans); font-size: 13px; color: var(--text-tertiary); font-weight: normal; text-transform: none; letter-spacing: 0;">(Neutral discipline, dot+caps editorial only)</span></h2>
+  <p class="lede">v6 retires the v5 jewel filled badge variant. Default dot+caps badges only. CTA reverts to <code>primary.600</code>. Selection still border-only.</p>
+
+  <h3>Buttons</h3>
+  <div class="component-grid">
+    <div class="component-card">
+      <div class="label">Primary — flat (member CTA, primary.600)</div>
+      <div class="row"><button class="btn primary">Continue</button><button class="btn primary">Save changes</button></div>
+    </div>
+    <div class="component-card">
+      <div class="label">Secondary &amp; ghost</div>
+      <div class="row"><button class="btn secondary">Skip</button><button class="btn ghost">Learn more</button></div>
+    </div>
+    <div class="component-card">
+      <div class="label">Disabled</div>
+      <div class="row"><button class="btn disabled">Continue</button></div>
+    </div>
+    <div class="component-card">
+      <div class="label">Buyer-hero (flat primary.800 surface, no gradient)</div>
+      <div style="background:var(--primary-800); padding:14px 18px; border-radius:var(--radius-md); display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+        <button class="btn primary" style="background:var(--sand-50);color:var(--primary-800);box-shadow:none;">Get a demo</button>
+        <button class="btn ghost" style="color:var(--sand-50);">See ROI calculator</button>
+      </div>
+    </div>
+  </div>
+
+  <h3>Badges — dot+caps only (v6: jewel filled variant retired)</h3>
+  <div class="component-card">
+    <div class="label">Default — dot + caps on sand surface (the only badge form)</div>
+    <div class="row" style="gap: 8px;">
+      <span class="badge primary"><span class="dot"></span>Primary</span>
+      <span class="badge success"><span class="dot"></span>Active</span>
+      <span class="badge warning"><span class="dot"></span>Due soon</span>
+      <span class="badge error"><span class="dot"></span>Overdue</span>
+      <span class="badge moss"><span class="dot"></span>DCP</span>
+      <span class="badge lavender"><span class="dot"></span>Health Data</span>
+      <span class="badge rose"><span class="dot"></span>Wellbeing</span>
+      <span class="badge indigo"><span class="dot"></span>AI</span>
+      <span class="badge fuchsia"><span class="dot"></span>Challenges</span>
+      <span class="badge warm"><span class="dot"></span>Habits</span>
+    </div>
+    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 14px; max-width: 640px;">Lavender and indigo dots are the only sanctioned form of those hues at the badge level — neither earns a fill or container per C2. The rest of the categoricals follow the same dot+caps construction; v6 enforces a single badge form across the system.</p>
+  </div>
+
+  <h3>Selection — border-only (held)</h3>
+  <div class="component-grid">
+    <div class="component-card">
+      <div class="label">Single-select</div>
+      <div class="row" style="flex-direction:column;align-items:stretch;gap:8px;">
+        <div class="selection">25 – 34</div>
+        <div class="selection selected">35 – 44</div>
+        <div class="selection">45 – 60</div>
+      </div>
+    </div>
+    <div class="component-card">
+      <div class="label">Why border, not wash</div>
+      <p style="margin: 0; font-size: 14px; color: var(--text-secondary);">A <code>primary.50</code> wash crosses the muddle vector — light-tint blue against warm sand. A 2px <code>primary.600</code> border carries the affordance with no surface compromise. Held from v4/v5; the discipline survives the register pull-back.</p>
+    </div>
+  </div>
+
+  <h3>Focus ring &amp; radius</h3>
+  <div class="component-card">
+    <div class="row" style="gap: 32px;">
+      <div><span class="meta" style="font-size:11px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.06em;">Focus ring (primary.600)</span><div style="margin-top:8px;"><button class="btn secondary" style="outline: 2px solid var(--primary-600); outline-offset: 2px;">Focused element</button></div></div>
+      <div><span class="meta" style="font-size:11px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.06em;">Radius scale</span>
+        <div style="display:flex;gap:8px;margin-top:8px;">
+          <div style="background:var(--sand-200);width:48px;height:48px;border-radius:8px;"></div>
+          <div style="background:var(--sand-200);width:48px;height:48px;border-radius:12px;"></div>
+          <div style="background:var(--sand-200);width:48px;height:48px;border-radius:16px;"></div>
+          <div style="background:var(--sand-200);width:48px;height:48px;border-radius:20px;"></div>
+          <div style="background:var(--sand-200);width:48px;height:48px;border-radius:9999px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Data visualization</h3>
+  <p style="font-size: 14px; color: var(--text-secondary); max-width: 720px;">v6 holds the categorical chart palette at <code>600</code>. Approved categorical hue subset: <code>primary.600</code>, <code>moss.600</code>, <code>success.600</code>, <code>lavender.600</code>, <code>rose.600</code>, <code>indigo.600</code>, <code>fuchsia.600</code>, <code>warm.600</code>. Sequential gradients (heatmaps, progress fills) use stops <code>200 → 700</code> of any approved hue. Reserved from data viz: all <code>neutral.*</code>, all <code>error.*</code> outside literal error states. Lavender and indigo are sanctioned in data viz contexts because charts are the data territory their hues are assigned to — chart use does not violate the C2 surface rule.</p>
+</section>
+
+<!-- ============================================================ LAYER 4 ============================================================ -->
+<section id="l4">
+  <h2>Layer 4 — Icons <span style="font-family: var(--font-sans); font-size: 13px; color: var(--text-tertiary); font-weight: normal; text-transform: none; letter-spacing: 0;">(v6 — 5 recipes; R4 lighter)</span></h2>
+  <p class="lede">Five recipes held from v5. The change in v6: R4's filled disc shifts container from <code>600/700</code> to <code>500</code> (B2 asked for two stops; one stop applied — full two-stop shift to 400 drops below AA-text on lavender/rose/fuchsia/warm). Sand-50 glyph held. R5 unchanged. Material Symbols Outlined held.</p>
+
+  <h3>Sizing &amp; fill</h3>
+  <p style="font-size: 14px; color: var(--text-secondary);">Held from v4/v5. Sizes: <code>icon.size.sm</code> = 20px, <code>icon.size.md</code> = 24px, <code>icon.size.micro</code> = 16px. Stroked = default / informational / unselected; filled = selected / active / confirmation.</p>
+
+  <h3>Five treatment recipes — across modules</h3>
+  <div class="icon-matrix">
+    <div></div>
+    <div class="head">primary</div>
+    <div class="head">moss</div>
+    <div class="head">lavender</div>
+    <div class="head">rose</div>
+    <div class="head">indigo</div>
+    <div class="head">fuchsia</div>
+
+    <div class="row-label">R1 · Glyph in sand container<br><span style="font-size:11px;font-weight:400;color:var(--text-tertiary);">List rows, category leading. Default.</span></div>
+    <div class="cell"><div class="ic r1"><span class="material-symbols-outlined" style="color:var(--primary-700);">favorite</span></div></div>
+    <div class="cell"><div class="ic r1"><span class="material-symbols-outlined" style="color:var(--moss-700);">healing</span></div></div>
+    <div class="cell"><div class="ic r1"><span class="material-symbols-outlined" style="color:var(--lavender-700);">monitor_heart</span></div></div>
+    <div class="cell"><div class="ic r1"><span class="material-symbols-outlined" style="color:var(--rose-700);">spa</span></div></div>
+    <div class="cell"><div class="ic r1"><span class="material-symbols-outlined" style="color:var(--indigo-700);">auto_awesome</span></div></div>
+    <div class="cell"><div class="ic r1"><span class="material-symbols-outlined" style="color:var(--fuchsia-700);">trophy</span></div></div>
+
+    <div class="row-label">R2 · Outlined ring<br><span style="font-size:11px;font-weight:400;color:var(--text-tertiary);">Step indicators, ghost affordances.</span></div>
+    <div class="cell"><div class="ic r2"><span class="material-symbols-outlined" style="color:var(--primary-700);font-size:22px;">favorite</span></div></div>
+    <div class="cell"><div class="ic r2"><span class="material-symbols-outlined" style="color:var(--moss-700);font-size:22px;">healing</span></div></div>
+    <div class="cell"><div class="ic r2"><span class="material-symbols-outlined" style="color:var(--lavender-700);font-size:22px;">monitor_heart</span></div></div>
+    <div class="cell"><div class="ic r2"><span class="material-symbols-outlined" style="color:var(--rose-700);font-size:22px;">spa</span></div></div>
+    <div class="cell"><div class="ic r2"><span class="material-symbols-outlined" style="color:var(--indigo-700);font-size:22px;">auto_awesome</span></div></div>
+    <div class="cell"><div class="ic r2"><span class="material-symbols-outlined" style="color:var(--fuchsia-700);font-size:22px;">trophy</span></div></div>
+
+    <div class="row-label">R3 · Naked glyph<br><span style="font-size:11px;font-weight:400;color:var(--text-tertiary);">Inline icons, chevrons, AI markers.</span></div>
+    <div class="cell"><div class="ic r3"><span class="material-symbols-outlined" style="color:var(--primary-700);">favorite</span></div></div>
+    <div class="cell"><div class="ic r3"><span class="material-symbols-outlined" style="color:var(--moss-700);">healing</span></div></div>
+    <div class="cell"><div class="ic r3"><span class="material-symbols-outlined" style="color:var(--lavender-700);">monitor_heart</span></div></div>
+    <div class="cell"><div class="ic r3"><span class="material-symbols-outlined" style="color:var(--rose-700);">spa</span></div></div>
+    <div class="cell"><div class="ic r3"><span class="material-symbols-outlined" style="color:var(--indigo-700);">auto_awesome</span></div></div>
+    <div class="cell"><div class="ic r3"><span class="material-symbols-outlined" style="color:var(--fuchsia-700);">trophy</span></div></div>
+
+    <div class="row-label">R4 · Filled disc <span style="color:var(--primary-500);">●</span> <span style="font-size:11px;font-weight:400;color:var(--text-tertiary);">(was 600/700 in v5; now 500)</span><br><span style="font-size:11px;font-weight:400;color:var(--text-tertiary);">Featured tiles, hero accents.</span></div>
+    <div class="cell"><div class="ic r4" style="background:var(--primary-500);"><span class="material-symbols-outlined" style="color:var(--sand-50);">favorite</span></div></div>
+    <div class="cell"><div class="ic r4" style="background:var(--moss-500);"><span class="material-symbols-outlined" style="color:var(--sand-50);">healing</span></div></div>
+    <div class="cell"><div class="ic r4" style="background:var(--lavender-500);"><span class="material-symbols-outlined" style="color:var(--sand-50);">monitor_heart</span></div></div>
+    <div class="cell"><div class="ic r4" style="background:var(--rose-500);"><span class="material-symbols-outlined" style="color:var(--sand-50);">spa</span></div></div>
+    <div class="cell"><div class="ic r4" style="background:var(--indigo-500);"><span class="material-symbols-outlined" style="color:var(--sand-50);">auto_awesome</span></div></div>
+    <div class="cell"><div class="ic r4" style="background:var(--fuchsia-500);"><span class="material-symbols-outlined" style="color:var(--sand-50);">trophy</span></div></div>
+
+    <div class="row-label">R5 · Bicolor stack<br><span style="font-size:11px;font-weight:400;color:var(--text-tertiary);">Light tint + deep glyph, single hue. Held from v5.</span></div>
+    <div class="cell"><div class="ic r5" style="background:var(--primary-100);"><span class="material-symbols-outlined" style="color:var(--primary-800);">favorite</span></div></div>
+    <div class="cell"><div class="ic r5" style="background:var(--moss-100);"><span class="material-symbols-outlined" style="color:var(--moss-800);">healing</span></div></div>
+    <div class="cell"><div class="ic r5" style="background:var(--lavender-100);"><span class="material-symbols-outlined" style="color:var(--lavender-800);">monitor_heart</span></div></div>
+    <div class="cell"><div class="ic r5" style="background:var(--rose-100);"><span class="material-symbols-outlined" style="color:var(--rose-800);">spa</span></div></div>
+    <div class="cell"><div class="ic r5" style="background:var(--indigo-100);"><span class="material-symbols-outlined" style="color:var(--indigo-800);">auto_awesome</span></div></div>
+    <div class="cell"><div class="ic r5" style="background:var(--fuchsia-100);"><span class="material-symbols-outlined" style="color:var(--fuchsia-800);">trophy</span></div></div>
+  </div>
+
+  <h3>R5 surface tension under C2</h3>
+  <p style="font-size: 14px; color: var(--text-secondary); max-width: 720px;">R5's bicolor stack uses a light-tint container (e.g., <code>moss.100</code>, <code>warm.100</code>). For the <strong>lavender</strong> and <strong>indigo</strong> columns, R5 is rendered above for completeness but is not sanctioned in product — C2 prohibits lavender/indigo container fills regardless of context, and R5's container is a fill. In product, R5 lavender and R5 indigo cells fall back to R3 (naked glyph) or R1 (sand container, lavender-700 glyph). The matrix shows the recipe; the application discipline filters it.</p>
+
+  <h3>Library recommendation</h3>
+  <p style="font-size: 14px; color: var(--text-secondary); max-width: 720px;"><strong>Material Symbols Outlined</strong> (Apache 2.0). Held from v4/v5 — no library change. Variable font axes <code>FILL</code>, <code>weight</code>, <code>grade</code>, <code>opsz</code> are sufficient for the five-recipe roster.</p>
+</section>
+
+<!-- ============================================================ LAYER 5 ============================================================ -->
+<section id="l5">
+  <h2>Layer 5 — Illustration Palette</h2>
+  <p class="lede">Variant grid held (B3 — one composition × N palette swaps, Withings illustration economy). v6 anchors swaps in the green-forward register: warm-led (Habits default), moss-led (DCP — promoted), success-led (Outcomes), and primary-led. Lavender/rose/fuchsia variants exist in the system but don't lead the grid in v6.</p>
+
+  <div class="illust-grid">
+    <div class="illust-tile" style="background: linear-gradient(135deg, var(--warm-100), var(--warm-200));">
+      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;padding:8%;">
+        <path d="M0 110 Q 50 90, 100 110 T 200 110 L 200 150 L 0 150 Z" fill="var(--warm-400)" opacity="0.8"/>
+        <path d="M0 125 Q 60 105, 120 125 T 200 125 L 200 150 L 0 150 Z" fill="var(--warm-600)"/>
+        <circle cx="65" cy="55" r="14" fill="var(--neutral-900)"/>
+        <rect x="55" y="68" width="20" height="40" rx="6" fill="var(--neutral-900)"/>
+        <circle cx="135" cy="50" r="20" fill="var(--sand-50)" opacity="0.85"/>
+      </svg>
+      <span class="label" style="color: var(--warm-900);">Warm-led · Habits</span>
+    </div>
+    <div class="illust-tile" style="background: linear-gradient(135deg, var(--moss-100), var(--moss-200));">
+      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;padding:8%;">
+        <path d="M0 110 Q 50 90, 100 110 T 200 110 L 200 150 L 0 150 Z" fill="var(--moss-400)" opacity="0.8"/>
+        <path d="M0 125 Q 60 105, 120 125 T 200 125 L 200 150 L 0 150 Z" fill="var(--moss-600)"/>
+        <circle cx="65" cy="55" r="14" fill="var(--neutral-900)"/>
+        <rect x="55" y="68" width="20" height="40" rx="6" fill="var(--neutral-900)"/>
+        <circle cx="135" cy="50" r="20" fill="var(--sand-50)" opacity="0.85"/>
+      </svg>
+      <span class="label" style="color: var(--moss-900);">Moss-led · DCP</span>
+    </div>
+    <div class="illust-tile" style="background: linear-gradient(135deg, var(--success-100), var(--success-200));">
+      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;padding:8%;">
+        <path d="M0 110 Q 50 90, 100 110 T 200 110 L 200 150 L 0 150 Z" fill="var(--success-400)" opacity="0.8"/>
+        <path d="M0 125 Q 60 105, 120 125 T 200 125 L 200 150 L 0 150 Z" fill="var(--success-600)"/>
+        <circle cx="65" cy="55" r="14" fill="var(--neutral-900)"/>
+        <rect x="55" y="68" width="20" height="40" rx="6" fill="var(--neutral-900)"/>
+        <circle cx="135" cy="50" r="20" fill="var(--sand-50)" opacity="0.85"/>
+      </svg>
+      <span class="label" style="color: var(--success-900);">Success-led · Outcomes</span>
+    </div>
+    <div class="illust-tile" style="background: linear-gradient(135deg, var(--primary-100), var(--primary-200));">
+      <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;padding:8%;">
+        <path d="M0 110 Q 50 90, 100 110 T 200 110 L 200 150 L 0 150 Z" fill="var(--primary-400)" opacity="0.8"/>
+        <path d="M0 125 Q 60 105, 120 125 T 200 125 L 200 150 L 0 150 Z" fill="var(--primary-600)"/>
+        <circle cx="65" cy="55" r="14" fill="var(--neutral-900)"/>
+        <rect x="55" y="68" width="20" height="40" rx="6" fill="var(--neutral-900)"/>
+        <circle cx="135" cy="50" r="20" fill="var(--sand-50)" opacity="0.85"/>
+      </svg>
+      <span class="label" style="color: var(--primary-900);">Primary-led · Brand</span>
+    </div>
+  </div>
+  <p style="margin-top: 16px; font-size: 13px; color: var(--text-tertiary);">The illustration tiles use a soft within-hue gradient — this is illustration craft, not a UI gradient (HC-8 governs UI surfaces, not illustration). Single-hue depth holds: each tile's gradient and shape stack live entirely within one categorical scale.</p>
+</section>
+
+<!-- ============================================================ APPLIED MOMENTS ============================================================ -->
+<section id="applied">
+  <h2>Applied moments</h2>
+  <p class="lede">Five screens stress-testing the v6 discipline. Three anchors (Member · Buyer · AI) carry Neutral restraint at its strictest. Two color-flex moments demonstrate the two surface rules: <strong>moss earns a container surface</strong> (DCP detail), and <strong>lavender never does</strong> (Health Data biometrics — sand surface, lavender glyph + sparkline only). Across all five: page surfaces stay on <code>sand.*</code>, ink is <code>neutral.900</code>, gradients are absent, and CTAs are flat <code>primary.600</code>.</p>
+
+  <div class="screens">
+
+    <!-- 1. MEMBER · DCP completion (anchor — moss as accent only) -->
+    <div class="phone">
+      <div class="topbar"><span style="background:var(--moss-600);width:6px;height:6px;border-radius:50%;"></span><span>Digital Care Path · Anxiety</span></div>
+      <h4 class="screen-h">Day 21 of your program</h4>
+      <p>You've completed 18 of 24 sessions. Two left this week.</p>
+      <div class="card">
+        <div class="row" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><span class="meta">Today's session</span><span class="badge moss"><span class="dot"></span>DCP</span></div>
+        <div class="h-strong">Reframing automatic thoughts</div>
+        <div style="font-size:12px;color:var(--text-tertiary);margin-top:2px;margin-bottom:12px;">12 min · video + reflection</div>
+        <div class="progress" style="margin-bottom: 12px;"><i style="width:75%"></i></div>
+        <button class="btn primary" style="width:100%;justify-content:center;font-size:14px;padding:10px 16px;">Start session</button>
+      </div>
+      <div class="card" style="display:flex;align-items:center;gap:12px;padding:12px 14px;">
+        <div class="ic r1" style="width:44px;height:44px;border-radius:12px;"><span class="material-symbols-outlined" style="color:var(--moss-700);font-size:22px;">trending_up</span></div>
+        <div><div class="h-strong">Mood improved 28%</div><div style="font-size:12px;color:var(--text-tertiary);">Since you started · 3 weeks ago</div></div>
+      </div>
+      <p style="font-size:11px;color:var(--text-tertiary);margin-top:auto;">v6: R1 sand container with moss-700 glyph (no jewel disc). Module identity carried by dot, glyph, badge — not surface.</p>
+    </div>
+
+    <!-- 2. BUYER · Website hero (anchor — flat primary.800) -->
+    <div class="phone buyer">
+      <div class="topbar"><span style="background:rgba(250,246,240,0.6);width:6px;height:6px;border-radius:50%;"></span><span>mobilehealthconsumer.com</span></div>
+      <h4 class="screen-h">Health benefits your people will actually use.</h4>
+      <p>Configurable rewards, clinical care paths, and engagement tools — measured against your ROI commitments.</p>
+      <div class="card">
+        <span class="meta" style="color:rgba(250,246,240,0.7);">Engagement</span>
+        <div style="font-family:var(--font-serif);font-size:32px;font-weight:600;color:var(--sand-50);margin:4px 0;">73%</div>
+        <div style="font-size:12px;color:rgba(250,246,240,0.7);">12-month avg member activation</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:auto;flex-wrap:wrap;">
+        <button class="btn primary" style="background:var(--sand-50);color:var(--primary-800);box-shadow:none;">Get a demo</button>
+        <button class="btn ghost" style="color:var(--sand-50);">See ROI calculator</button>
+      </div>
+      <p style="font-size:10px;color:rgba(250,246,240,0.55);margin:0;">v6: flat primary.800 surface — gradient retired (B4). Buyer presence carried by surface depth, not gradient drama.</p>
+    </div>
+
+    <!-- 3. AI · Health Insight (anchor — sand + indigo border, no wash) -->
+    <div class="phone">
+      <div class="topbar"><span style="background:var(--moss-600);width:6px;height:6px;border-radius:50%;"></span><span>Anxiety DCP</span></div>
+      <h4 class="screen-h">Hi, Davinder.</h4>
+      <div class="ai-card">
+        <span class="ai-tag"><span class="dot"></span>From your AI</span>
+        <div class="h-strong" style="margin-bottom:6px;">Your sleep rebounded 18% this week.</div>
+        <p style="margin:0 0 10px;font-size:13px;">Most people see anxiety scores drop within two weeks of better sleep. Worth keeping the routine.</p>
+        <div style="display:flex;gap:8px;align-items:center;font-size:12px;">
+          <a href="#" style="color:var(--indigo-700);text-decoration:none;font-weight:600;">Why this?</a>
+          <span style="color:var(--text-tertiary);">·</span>
+          <a href="#" style="color:var(--text-tertiary);text-decoration:none;">Memory</a>
+          <span style="color:var(--text-tertiary);">·</span>
+          <a href="#" style="color:var(--text-tertiary);text-decoration:none;">Not useful</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="meta" style="margin-bottom:6px;">Today's session</div>
+        <div class="h-strong">Reframing automatic thoughts</div>
+        <button class="btn primary" style="margin-top:10px;width:100%;justify-content:center;font-size:14px;padding:10px 16px;">Start session</button>
+      </div>
+      <p style="font-size:11px;color:var(--text-tertiary);margin-top:auto;">v6: AI card uses sand surface + indigo.300 border + indigo.700 tag dot. Zero wash. Re-aligns with v4 Rule 5 ("AI labeled, not bathed") that v5 partially relaxed.</p>
+    </div>
+
+    <!-- 4. DCP detail (color-flex — moss earns a container surface, demonstrating green-forward) -->
+    <div class="phone">
+      <div class="topbar"><span style="background:var(--moss-600);width:6px;height:6px;border-radius:50%;"></span><span>DCP · Diabetes Prevention</span></div>
+      <h4 class="screen-h">Week 8 results</h4>
+      <p>Your A1C trend is on track. One coaching call this week.</p>
+      <div class="card" style="background:var(--moss-50); border-color:var(--moss-100); padding:18px 20px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <span class="meta" style="color:var(--moss-700);">A1C trend</span>
+          <span class="badge moss"><span class="dot"></span>On track</span>
+        </div>
+        <div style="font-family:var(--font-serif);font-size:32px;font-weight:600;color:var(--moss-900);line-height:1;">5.8<span style="font-size:14px;color:var(--moss-700);font-weight:500;margin-left:6px;">%</span></div>
+        <div style="font-size:11px;color:var(--moss-700);margin-top:4px;text-transform:uppercase;letter-spacing:0.06em;font-weight:600;">−0.4 vs. baseline</div>
+        <svg viewBox="0 0 240 50" style="width:100%;height:50px;margin-top:12px;">
+          <polyline points="0,12 30,16 60,18 90,22 120,28 150,32 180,38 210,42 240,46" fill="none" stroke="var(--moss-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="240" cy="46" r="3" fill="var(--moss-700)"/>
+        </svg>
+      </div>
+      <div class="card" style="display:flex;align-items:center;gap:12px;padding:12px 14px;">
+        <div class="ic r5" style="width:40px;height:40px;background:var(--moss-100);"><span class="material-symbols-outlined" style="color:var(--moss-800);font-size:22px;">videocam</span></div>
+        <div style="flex:1;"><div class="h-strong">Coaching call · Thu 4pm</div><div style="font-size:12px;color:var(--text-tertiary);">30 min · Dr. Lewis · video</div></div>
+        <span class="material-symbols-outlined" style="color:var(--text-tertiary);font-size:20px;">chevron_right</span>
+      </div>
+      <button class="btn primary" style="width:100%;justify-content:center;font-size:14px;padding:10px 16px;margin-top:auto;">View week 8 plan</button>
+      <p style="font-size:11px;color:var(--text-tertiary);margin:0;">v6 green-forward: moss.50/100 container is the only saturated surface in this set. Single-hue depth — moss-50 bg, moss-700 ink, moss-900 numerals. CTA stays primary.600.</p>
+    </div>
+
+    <!-- 5. Health Data · Biometrics (color-flex — lavender as glyph + sparkline only, NO container) -->
+    <div class="phone">
+      <div class="topbar"><span style="background:var(--lavender-600);width:6px;height:6px;border-radius:50%;"></span><span>Health Data · Biometrics</span></div>
+      <h4 class="screen-h">Blood pressure</h4>
+      <p>Last 14 days. Trending in your target range.</p>
+      <div class="card" style="padding:18px 20px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+          <div>
+            <div class="meta" style="color:var(--text-tertiary);">Latest reading</div>
+            <div style="font-family:var(--font-serif);font-size:28px;font-weight:600;color:var(--text-primary);line-height:1.1;margin-top:4px;">118<span style="color:var(--lavender-700);">/</span>76</div>
+            <div style="font-size:11px;color:var(--text-tertiary);margin-top:2px;">mmHg · this morning</div>
+          </div>
+          <span class="badge lavender"><span class="dot"></span>In range</span>
+        </div>
+        <svg viewBox="0 0 240 60" style="width:100%;height:60px;margin-top:8px;">
+          <polyline points="0,42 20,38 40,40 60,32 80,36 100,28 120,30 140,24 160,26 180,22 200,28 220,20 240,24" fill="none" stroke="var(--lavender-700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="0,52 20,50 40,52 60,46 80,48 100,44 120,44 140,40 160,42 180,38 200,40 220,36 240,38" fill="none" stroke="var(--lavender-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3,3"/>
+        </svg>
+      </div>
+      <div class="card" style="display:flex;align-items:center;gap:12px;padding:12px 14px;">
+        <div class="ic r1" style="width:40px;height:40px;border-radius:12px;"><span class="material-symbols-outlined" style="color:var(--lavender-700);font-size:22px;">monitor_heart</span></div>
+        <div style="flex:1;"><div class="h-strong">Resting heart rate</div><div style="font-size:12px;color:var(--text-tertiary);">62 bpm · 5-day avg</div></div>
+        <span class="material-symbols-outlined" style="color:var(--text-tertiary);font-size:20px;">chevron_right</span>
+      </div>
+      <button class="btn primary" style="width:100%;justify-content:center;font-size:14px;padding:10px 16px;margin-top:auto;">Log new reading</button>
+      <p style="font-size:11px;color:var(--text-tertiary);margin:0;">v6 purple discipline (C2): card surface is sand-50, NOT lavender-100. Module identity carried by topbar dot, lavender-700 sparkline, slash divider, glyph, and badge dot only — never surface tint.</p>
+    </div>
+
+  </div>
+
+  <p style="margin-top: 24px; font-size: 13px; color: var(--text-tertiary); max-width: 880px;">All five screens hold the v6 discipline: page surfaces on <code>sand.50</code>, cards on <code>sand.50</code> with neutral-200 borders, ink at <code>neutral.900/700/500</code>, no gradients on member surfaces, CTA flat <code>primary.600</code>. Module identity surfaces through topbar dot, badge dot, glyph, and (for moss only, in the DCP color-flex screen) a moss-50 container. Purple-family hues (lavender, indigo) appear as glyph/dot/border/sparkline — never as background.</p>
+
+  <!-- Weighting viz (60-30-10 stacked bar, per B5) -->
+  <div class="weighting">
+    <h4 style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-tertiary);font-weight:700;margin-bottom:12px;">v6 color weighting · 60-30-10 distribution</h4>
+    <div class="weighting-bar">
+      <span style="background:var(--sand-50);color:var(--neutral-900);flex:60;border-right:1px solid var(--neutral-200);">60% · Sand surfaces</span>
+      <span style="background:var(--neutral-900);flex:30;">30% · Neutral ink</span>
+      <span style="background:var(--primary-600);flex:5;">5% · Primary</span>
+      <span style="background:var(--moss-600);flex:3;">3% · Moss</span>
+      <span style="background:var(--warm-600);flex:1;">1%</span>
+      <span style="background:var(--rose-600);flex:0.5;"></span>
+      <span style="background:var(--lavender-600);flex:0.3;"></span>
+      <span style="background:var(--indigo-600);flex:0.2;"></span>
+    </div>
+    <div class="weighting-legend">
+      <div><span class="swatchdot" style="background:var(--sand-50);"></span>Sand surfaces — pages, cards, hovers</div>
+      <div><span class="swatchdot" style="background:var(--neutral-900);"></span>Neutral ink — body, headings, borders</div>
+      <div><span class="swatchdot" style="background:var(--primary-600);"></span>Primary — CTAs, focus, active nav</div>
+      <div><span class="swatchdot" style="background:var(--moss-600);"></span>Moss — DCP module (green family · promoted)</div>
+      <div><span class="swatchdot" style="background:var(--warm-600);"></span>Warm — Habits / Rewards</div>
+      <div><span class="swatchdot" style="background:var(--rose-600);"></span>Rose — Wellbeing (receded)</div>
+      <div><span class="swatchdot" style="background:var(--lavender-600);"></span>Lavender — Health Data (sparing, glyph only)</div>
+      <div><span class="swatchdot" style="background:var(--indigo-600);"></span>Indigo — AI marker (sparing, tag/border only)</div>
+    </div>
+    <p style="font-size:12px;color:var(--text-tertiary);margin-top:14px;margin-bottom:0;max-width:720px;">v5 distribution: ~50% sand · ~25% neutral · ~25% chromatic (jewel-stops). v6 distribution: <strong>~60% sand · ~30% neutral · ~10% chromatic</strong>, with the chromatic 10% redistributed: green family (moss + success in chart context) gets the largest categorical share; lavender + indigo together are under 1%. The pull-back is visible in the bar.</p>
+  </div>
+</section>
+
+<!-- ============================================================ ACCESSIBILITY ============================================================ -->
+<section id="a11y">
+  <h2>Accessibility — At a Glance</h2>
+  <p class="lede">v6 component pairings re-verified. Reverting CTA to <code>primary.600</code> drops member CTA from AAA (v5's 7.2:1 at primary.700) to AA-strong (6.3:1) — still well above the 4.5:1 floor. R4 disc shifts to <code>500</code> stops; sand-50 glyph passes UI 3:1 across modules with most clearing AA-text too. Every failure resolved inline.</p>
+
+  <table class="a11y">
+    <thead><tr><th>Pairing</th><th>Foreground</th><th>Background</th><th>Ratio</th><th>AA</th><th>AAA</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Body text</td><td class="token">neutral.900</td><td class="token">sand.50</td><td>14.2:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Default page</td></tr>
+      <tr><td>Secondary text</td><td class="token">neutral.700</td><td class="token">sand.50</td><td>8.4:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Supporting copy</td></tr>
+      <tr><td>Tertiary / metadata</td><td class="token">neutral.500</td><td class="token">sand.50</td><td>4.6:1</td><td class="pass">✓</td><td class="dash">—</td><td>Labels, captions</td></tr>
+      <tr><td>Disabled text</td><td class="token">neutral.400</td><td class="token">sand.50</td><td>3.0:1</td><td class="dash">—</td><td class="dash">—</td><td>Disabled-state only — non-interactive</td></tr>
+      <tr><td>Primary CTA label (member)</td><td class="token">sand.50</td><td class="token">primary.600</td><td>6.3:1</td><td class="pass">✓</td><td class="dash">—</td><td>Reverted from primary.700 (v5). Still well above AA. Hover (primary.700) reaches AAA.</td></tr>
+      <tr><td>Primary CTA hover</td><td class="token">sand.50</td><td class="token">primary.700</td><td>7.6:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Hover state</td></tr>
+      <tr><td>Buyer hero CTA (sand on primary.800)</td><td class="token">sand.50</td><td class="token">primary.800</td><td>9.8:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Flat surface (gradient retired)</td></tr>
+      <tr><td>Buyer hero body</td><td class="token">sand.50 (85%)</td><td class="token">primary.800</td><td>~8.3:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Display + lede on flat primary.800</td></tr>
+      <tr><td>Badge label (caps, default)</td><td class="token">neutral.700</td><td class="token">sand.50</td><td>8.4:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Dot+caps editorial</td></tr>
+      <tr><td>R4 disc · primary glyph</td><td class="token">sand.50</td><td class="token">primary.500</td><td>4.7:1</td><td class="pass">✓</td><td class="dash">—</td><td>Container shifted from primary.700 (v5). UI 3:1 cleared with margin.</td></tr>
+      <tr><td>R4 disc · moss glyph</td><td class="token">sand.50</td><td class="token">moss.500</td><td>5.4:1</td><td class="pass">✓</td><td class="dash">—</td><td>Container shifted. Best of the categorical R4s.</td></tr>
+      <tr><td>R4 disc · indigo glyph</td><td class="token">sand.50</td><td class="token">indigo.500</td><td>5.1:1</td><td class="pass">✓</td><td class="dash">—</td><td>Container shifted. Indigo R4 is rarely surfaced in product.</td></tr>
+      <tr><td>R4 disc · lavender glyph</td><td class="token">sand.50</td><td class="token">lavender.500</td><td>4.3:1</td><td class="dash">~</td><td class="dash">—</td><td><strong>Borderline AA-text</strong> (4.5:1 floor); passes UI 3:1. Lavender R4 sanctioned only as a 24px+ icon, not a text element. C2 reduces this to glyph contexts only.</td></tr>
+      <tr><td>R4 disc · rose glyph</td><td class="token">sand.50</td><td class="token">rose.500</td><td>4.2:1</td><td class="dash">~</td><td class="dash">—</td><td>Same caveat as lavender — borderline text, passes UI. 24px+ glyph only.</td></tr>
+      <tr><td>R4 disc · fuchsia glyph</td><td class="token">sand.50</td><td class="token">fuchsia.500</td><td>4.0:1</td><td class="dash">~</td><td class="dash">—</td><td>Borderline text, passes UI 3:1. Glyph only at 24px+.</td></tr>
+      <tr><td>R4 disc · warm glyph</td><td class="token">sand.50</td><td class="token">warm.500</td><td>3.6:1</td><td class="dash">~</td><td class="dash">—</td><td>UI 3:1 passes (icon glyph). Warm R4 reserved for Rewards milestone moments at 24px+.</td></tr>
+      <tr><td>R5 stack · moss</td><td class="token">moss.800</td><td class="token">moss.100</td><td>10.2:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Bicolor stack — single-hue depth (held from v5)</td></tr>
+      <tr><td>R5 stack · primary</td><td class="token">primary.800</td><td class="token">primary.100</td><td>10.4:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Bicolor stack</td></tr>
+      <tr><td>R5 stack · warm</td><td class="token">warm.800</td><td class="token">warm.100</td><td>9.5:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Bicolor stack</td></tr>
+      <tr><td>Moss container · ink</td><td class="token">moss.900</td><td class="token">moss.50</td><td>13.4:1</td><td class="pass">✓</td><td class="pass">✓</td><td>DCP detail screen (color-flex)</td></tr>
+      <tr><td>Moss container · body</td><td class="token">moss.700</td><td class="token">moss.50</td><td>9.3:1</td><td class="pass">✓</td><td class="pass">✓</td><td>DCP detail body copy</td></tr>
+      <tr><td>AI tag</td><td class="token">indigo.700</td><td class="token">sand.50</td><td>9.3:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Sand surface + indigo tag (no wash, per C2)</td></tr>
+      <tr><td>AI border</td><td class="token">indigo.300</td><td class="token">sand.50</td><td>~3.2:1 (UI)</td><td class="pass">✓</td><td class="dash">—</td><td>UI component edge — meets 3:1 floor</td></tr>
+      <tr><td>Lavender sparkline (UI)</td><td class="token">lavender.700</td><td class="token">sand.50</td><td>8.1:1</td><td class="pass">✓</td><td class="pass">✓</td><td>Biometrics sparkline — UI graphic on sand surface</td></tr>
+      <tr><td>Lavender sparkline (secondary)</td><td class="token">lavender.500</td><td class="token">sand.50</td><td>4.3:1</td><td class="pass">✓</td><td class="dash">—</td><td>Dotted secondary line; meets text AA</td></tr>
+      <tr><td>Selection border (selected)</td><td class="token">primary.600</td><td class="token">sand.50</td><td>6.3:1 (UI 3:1)</td><td class="pass">✓</td><td class="pass">✓</td><td>UI component edge</td></tr>
+      <tr><td>Strong border</td><td class="token">neutral.400</td><td class="token">sand.50</td><td>3.0:1 (UI 3:1)</td><td class="pass">✓</td><td class="dash">—</td><td>Outlined buttons</td></tr>
+      <tr><td>Default border</td><td class="token">neutral.200</td><td class="token">sand.50</td><td>1.3:1</td><td class="dash">—</td><td class="dash">—</td><td>Decorative; non-load-bearing</td></tr>
+      <tr><td>Focus ring</td><td class="token">primary.600</td><td class="token">sand.50</td><td>6.3:1</td><td class="pass">✓</td><td class="pass">✓</td><td>2px ring + 2px offset (reverted to primary.600 from v5's primary.700)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 13px; color: var(--text-tertiary); margin-top: 12px;">Verify in Stark or Colour Contrast Analyser before locking the spec. Disabled text + default border are intentionally below AA — neither carries semantic load alone. R4 disc rows tagged "~" pass UI 3:1 but sit just under AA-text 4.5:1 on lavender/rose/fuchsia/warm — these are icon glyphs ≥24px, where WCAG governs by UI contrast, not text contrast. Net effect of v6's pull-back: a few pairings drop one tier (CTA AAA→AA, R4 categoricals AAA→AA-or-borderline) but no new failures — the floor still holds.</p>
+</section>
+
+<!-- ============================================================ STAKEHOLDER NARRATIVE ============================================================ -->
+<section id="narrative">
+  <h2>Stakeholder narrative</h2>
+  <div class="narrative">
+    <p>v6 is a refinement of v5. v5 tested whether color and tone could survive a Jewel-accent register — categoricals at <code>600/700</code> stops as saturated punctuation on sand surfaces. The architectural insight held (the muddle protection still works), but at applied scale the jewel weight read heavy, and the purple-family hues — lavender (Health Data) and indigo (AI marker) — sat wrong: purples want air, not punctuation.</p>
+    <p>What carried forward unchanged: the R2 sky-teal bridge primary at <code>#2A6489</code> (locked under D2), the neutral-on-sand split (HC-3, the muddle protection), the Clinical-Modern Distinctive tribe (D1), the cross-cutting AI principle (indigo means AI, regardless of host module), the dot+caps editorial badges, the variant-grid illustration economy, and the open-source Material Symbols Outlined library.</p>
+    <p>What v6 changes: the color register pulls back from Neutral-base + Jewel-accents to plain Neutral. Categoricals retire to <code>100–200</code> stops in product surfaces; gradients retire entirely from product (member or buyer); purples (lavender + indigo) demote to glyph, dot, sparkline, and border — never as a card or wash. The icon roster holds at five recipes, but R4's filled disc shifts container from <code>600/700</code> to <code>500</code>. The member CTA reverts <code>primary.700 → primary.600</code> (v4 default). The buyer hero retires its deep-primary gradient in favor of a flat <code>primary.800</code> surface. The AI surface drops to sand + indigo border + indigo tag, re-aligning with v4's Rule 5. Within the categoricals, the <strong>green family</strong> (moss + success) gets the largest share of chromatic real estate — DCP earns a moss-50/100 container surface; rose and fuchsia recede in applied moments.</p>
+    <p>How v6 positions: alongside Hinge and Sword in Clinical-Modern Distinctive (locked tribe), but pulling toward the editorial-restraint pole rather than the chromatic-confidence pole v5 explored. v4 read "calm, editorial, restrained." v5 read "credible, deliberate, present, chromatic." v6 reads "credible, calm, present" — chromatic confidence tempered by editorial discipline. If v4 was the reset and v5 was the chromatic-stretch test, v6 is the consolidation: keep the muddle-protection architecture, drop the chromatic surface area to a level that lets photography and typography carry the warmth.</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

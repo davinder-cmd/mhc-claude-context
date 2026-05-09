@@ -1,0 +1,168 @@
+<!--
+  ============================================================
+  BLOCK 1b — Pending invites + Challenge banner
+  ============================================================
+  Sits between greeting/hero (block 1) and the in-progress rail
+  (block 2b). Two surfaces, both suppressed when empty:
+
+  1. PENDING INVITES — unified block for team + peer invites
+     Server pre-sorts by closing-soonest. Cap 3 visible; show
+     "See all (N)" overflow link when >3.
+
+     Avatar shape carries scope:
+       - team:  square/rounded-rect mark
+       - peer:  circular initials
+
+  2. CHALLENGE BANNER — slim, dismissable, single-instance
+     Used for steady-state team-challenge nudges:
+       - join_window: "you can still join, X days left"
+       - wrap_up:     "team finished Nth, see results"
+
+     The hero takeover (announce + final_3 stages) is rendered
+     in block-1-greeting-hero.html as an alternate hero variant,
+     not here. This banner only handles the in-between stages.
+
+  Both surfaces hide when their conditional is false. Block
+  produces no markup at all when neither is present.
+
+  Conditionals
+  ------------
+    {{#formula.hasPendingInvites}}…             at least one invite pending
+    {{#formula.invitesOverflow}}…               more than 3 invites
+    {{#formula.invite1_isTeam}}…                team variant for invite N
+    {{^formula.invite1_isTeam}}…                peer variant
+    {{#formula.invite1_isLateJoin}}…            late-join variant (active stage)
+    {{#formula.hasInvite2}} / hasInvite3        present 2nd / 3rd row
+
+    {{#formula.hasChallengeBanner}}…            slim banner present
+    {{#formula.challengeBanner_urgent}}…        red/orange variant (≤3 days)
+
+  Tokens
+  ------
+    {{formula.copy_section_invites}}     — "Pending invites"
+    {{formula.copy_link_invites_seeAll}} — "See all (5)"
+    {{formula.copy_invite_accept_team}}  — "Join"
+    {{formula.copy_invite_decline_team}} — "Pass"
+    {{formula.copy_invite_accept_peer}}  — "Accept"
+    {{formula.copy_invite_decline_peer}} — "Decline"
+
+    {{formula.inviteN_avatar}}           — "A" (team mark) or "JM" (peer initials)
+    {{formula.inviteN_name}}             — "Team Aurora invited you"
+    {{formula.inviteN_detail}}           — "Spring step challenge · 6 days to join"
+    {{formula.inviteN_acceptHref}}       — POST target for accept
+    {{formula.inviteN_declineHref}}      — POST target for decline
+    {{formula.inviteN_isTeam}}           — bool, switches avatar shape & button copy
+    {{formula.inviteN_isLateJoin}}       — bool, decoration only
+
+    {{formula.challengeBanner_text}}     — "Spring challenge · 6 days left to join. 240 colleagues already in."
+    {{formula.challengeBanner_ctaLabel}} — "Join →" or "See results →"
+    {{formula.challengeBanner_ctaHref}}  — drill-down link
+    {{formula.challengeBanner_dismissHref}} — POST target for ×
+  ============================================================
+-->
+
+{{#formula.hasPendingInvites}}
+<div class="mhc-home">
+  <section class="invites" aria-labelledby="mhc-invites-title">
+    <div class="invites-head">
+      <h2 id="mhc-invites-title" class="invites-title">{{formula.copy_section_invites}}</h2>
+      {{#formula.invitesOverflow}}
+      <a class="invites-link" href="{{formula.invites_seeAll_href}}">{{formula.copy_link_invites_seeAll}}</a>
+      {{/formula.invitesOverflow}}
+    </div>
+
+    <!-- Invite 1 -->
+    <div class="invite-row {{#formula.invite1_isTeam}}invite-row--team{{/formula.invite1_isTeam}} {{#formula.invite1_isLateJoin}}invite-row--late{{/formula.invite1_isLateJoin}}">
+      <div class="invite-avatar {{#formula.invite1_isTeam}}invite-avatar--team{{/formula.invite1_isTeam}}">{{formula.invite1_avatar}}</div>
+      <div class="invite-body">
+        <div class="invite-name">{{formula.invite1_name}}</div>
+        <div class="invite-detail">{{formula.invite1_detail}}</div>
+      </div>
+      <div class="invite-actions">
+        <form method="post" action="{{formula.invite1_acceptHref}}" class="invite-form">
+          <button type="submit" class="invite-btn invite-btn--accept">
+            {{#formula.invite1_isTeam}}{{formula.copy_invite_accept_team}}{{/formula.invite1_isTeam}}
+            {{^formula.invite1_isTeam}}{{formula.copy_invite_accept_peer}}{{/formula.invite1_isTeam}}
+          </button>
+        </form>
+        <form method="post" action="{{formula.invite1_declineHref}}" class="invite-form">
+          <button type="submit" class="invite-btn invite-btn--decline">
+            {{#formula.invite1_isTeam}}{{formula.copy_invite_decline_team}}{{/formula.invite1_isTeam}}
+            {{^formula.invite1_isTeam}}{{formula.copy_invite_decline_peer}}{{/formula.invite1_isTeam}}
+          </button>
+        </form>
+      </div>
+    </div>
+
+    {{#formula.hasInvite2}}
+    <div class="invite-row {{#formula.invite2_isTeam}}invite-row--team{{/formula.invite2_isTeam}} {{#formula.invite2_isLateJoin}}invite-row--late{{/formula.invite2_isLateJoin}}">
+      <div class="invite-avatar {{#formula.invite2_isTeam}}invite-avatar--team{{/formula.invite2_isTeam}}">{{formula.invite2_avatar}}</div>
+      <div class="invite-body">
+        <div class="invite-name">{{formula.invite2_name}}</div>
+        <div class="invite-detail">{{formula.invite2_detail}}</div>
+      </div>
+      <div class="invite-actions">
+        <form method="post" action="{{formula.invite2_acceptHref}}" class="invite-form">
+          <button type="submit" class="invite-btn invite-btn--accept">
+            {{#formula.invite2_isTeam}}{{formula.copy_invite_accept_team}}{{/formula.invite2_isTeam}}
+            {{^formula.invite2_isTeam}}{{formula.copy_invite_accept_peer}}{{/formula.invite2_isTeam}}
+          </button>
+        </form>
+        <form method="post" action="{{formula.invite2_declineHref}}" class="invite-form">
+          <button type="submit" class="invite-btn invite-btn--decline">
+            {{#formula.invite2_isTeam}}{{formula.copy_invite_decline_team}}{{/formula.invite2_isTeam}}
+            {{^formula.invite2_isTeam}}{{formula.copy_invite_decline_peer}}{{/formula.invite2_isTeam}}
+          </button>
+        </form>
+      </div>
+    </div>
+    {{/formula.hasInvite2}}
+
+    {{#formula.hasInvite3}}
+    <div class="invite-row {{#formula.invite3_isTeam}}invite-row--team{{/formula.invite3_isTeam}} {{#formula.invite3_isLateJoin}}invite-row--late{{/formula.invite3_isLateJoin}}">
+      <div class="invite-avatar {{#formula.invite3_isTeam}}invite-avatar--team{{/formula.invite3_isTeam}}">{{formula.invite3_avatar}}</div>
+      <div class="invite-body">
+        <div class="invite-name">{{formula.invite3_name}}</div>
+        <div class="invite-detail">{{formula.invite3_detail}}</div>
+      </div>
+      <div class="invite-actions">
+        <form method="post" action="{{formula.invite3_acceptHref}}" class="invite-form">
+          <button type="submit" class="invite-btn invite-btn--accept">
+            {{#formula.invite3_isTeam}}{{formula.copy_invite_accept_team}}{{/formula.invite3_isTeam}}
+            {{^formula.invite3_isTeam}}{{formula.copy_invite_accept_peer}}{{/formula.invite3_isTeam}}
+          </button>
+        </form>
+        <form method="post" action="{{formula.invite3_declineHref}}" class="invite-form">
+          <button type="submit" class="invite-btn invite-btn--decline">
+            {{#formula.invite3_isTeam}}{{formula.copy_invite_decline_team}}{{/formula.invite3_isTeam}}
+            {{^formula.invite3_isTeam}}{{formula.copy_invite_decline_peer}}{{/formula.invite3_isTeam}}
+          </button>
+        </form>
+      </div>
+    </div>
+    {{/formula.hasInvite3}}
+  </section>
+</div>
+{{/formula.hasPendingInvites}}
+
+{{#formula.hasChallengeBanner}}
+<div class="mhc-home">
+  <section class="cbanner {{#formula.challengeBanner_urgent}}cbanner--urgent{{/formula.challengeBanner_urgent}}" aria-label="Challenge update">
+    <div class="cbanner-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+        <path d="M4 22h16"></path>
+        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+      </svg>
+    </div>
+    <div class="cbanner-text">{{formula.challengeBanner_text}}</div>
+    <a class="cbanner-cta" href="{{formula.challengeBanner_ctaHref}}">{{formula.challengeBanner_ctaLabel}}</a>
+    <form method="post" action="{{formula.challengeBanner_dismissHref}}" class="cbanner-dismiss-form">
+      <button type="submit" class="cbanner-dismiss" aria-label="Dismiss">×</button>
+    </form>
+  </section>
+</div>
+{{/formula.hasChallengeBanner}}

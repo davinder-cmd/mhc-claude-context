@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MHC Home — Density Comparison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="mhc-home.css?v=12" />
+
+  <!-- React + Babel -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: 'Raleway', system-ui, sans-serif; }
+
+    /* ---- Phone shell + stacked-section visualization for artboards ---- */
+    .phone {
+      width: 380px;
+      background: #ffffff;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 1px 0 rgba(15,73,127,0.06), 0 12px 30px rgba(15,73,127,0.10);
+      border: 1px solid #e1e6ea;
+    }
+    .phone .mhc-home {
+      padding-bottom: 24px;
+    }
+    .phone-statusbar {
+      height: 28px;
+      background: #fff;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 18px 0;
+      font-size: 11px; font-weight: 700; color: #1f2a36;
+      letter-spacing: 0.2px;
+    }
+    .phone-statusbar .right { display: inline-flex; gap: 6px; align-items: center; }
+    .phone-statusbar .dot { width: 4px; height: 4px; border-radius: 50%; background: #1f2a36; display: inline-block; }
+    .phone-statusbar .battery { width: 18px; height: 9px; border: 1px solid #1f2a36; border-radius: 2px; position: relative; }
+    .phone-statusbar .battery::after { content: ''; position: absolute; left: 1px; top: 1px; bottom: 1px; width: 70%; background: #1f2a36; border-radius: 1px; }
+
+    /* ---- Variant rationale callouts (fixed-position over phone) ---- */
+    .variant-header {
+      padding: 0 4px 14px;
+    }
+    .variant-eyebrow {
+      font-size: 10px; font-weight: 700; color: #6e7a7d;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      margin: 0 0 4px 0;
+    }
+    .variant-title {
+      font-size: 18px; font-weight: 700; color: #1f2a36;
+      margin: 0 0 6px 0; line-height: 1.2;
+    }
+    .variant-summary {
+      font-size: 13px; color: #4a5560; margin: 0; line-height: 1.5;
+    }
+    .variant-tally {
+      display: flex; gap: 14px; margin-top: 10px;
+      font-size: 11px; color: #6e7a7d;
+    }
+    .variant-tally b { color: #0f497f; font-weight: 700; }
+
+    /* ---- Block annotations on the side of the phone ---- */
+    .annotated-row {
+      display: grid;
+      grid-template-columns: 380px 220px;
+      gap: 16px;
+      align-items: start;
+    }
+    .annotations {
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .anno {
+      font-size: 11px; line-height: 1.4;
+      color: #4a5560;
+      padding: 6px 10px;
+      background: #f6f8fa;
+      border-left: 2px solid #0f497f;
+      border-radius: 0 6px 6px 0;
+    }
+    .anno b { color: #1f2a36; }
+    .anno.kept { border-left-color: #2e7d4f; }
+    .anno.removed { border-left-color: #b3261e; opacity: 0.85; }
+    .anno.collapsed { border-left-color: #c97c1d; }
+    .anno.new { border-left-color: #6e5dc6; }
+
+    /* ---- Bottom tab bar mock (so we can show "tracker tab" idea) ---- */
+    .tabbar {
+      display: flex; align-items: center; justify-content: space-around;
+      border-top: 1px solid #e1e6ea;
+      padding: 8px 0 14px;
+      background: #fff;
+    }
+    .tabbar-item {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 9px; font-weight: 600; color: #6e7a7d;
+      letter-spacing: 0.3px; text-transform: uppercase;
+    }
+    .tabbar-item.active { color: #0f497f; }
+    .tabbar-icon {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: #eef1f4;
+      display: grid; place-items: center;
+      color: #6e7a7d;
+    }
+    .tabbar-item.active .tabbar-icon { background: #eaf2fa; color: #0f497f; }
+    .tabbar-icon svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ---- Compact / Layered tweaks (variant-specific overrides) ---- */
+    /* Compact greeting strip — hero replaced by a slim "next action" card */
+    .next-action {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, #0f497f 0%, #2c6fa3 100%);
+      border-radius: 16px;
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(15,73,127,0.14);
+    }
+    .next-action-thumb {
+      width: 44px; height: 44px; border-radius: 12px;
+      background-image: url('assets/portrait-woman-laughing.png');
+      background-size: cover; background-position: center;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.25);
+    }
+    .next-action-body { flex: 1; min-width: 0; }
+    .next-action-eyebrow {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px;
+      color: rgba(255,255,255,0.8); text-transform: uppercase;
+      margin: 0 0 2px 0;
+    }
+    .next-action-title {
+      font-size: 14px; font-weight: 700;
+      color: #fff; margin: 0; line-height: 1.25;
+    }
+    .next-action-sub {
+      font-size: 11px; font-weight: 500;
+      color: rgba(255,255,255,0.85); margin: 2px 0 0 0;
+    }
+    .next-action-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 12px;
+      background: #fff; color: #0f497f;
+      border-radius: 999px;
+      font-size: 12px; font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Tracker summary — a single collapsible row in Layered variant */
+    .tracker-summary {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
+      background: #f6f8fa;
+      border-radius: 14px;
+      border: 1px solid #e1e6ea;
+    }
+    .tracker-summary-stats {
+      display: flex; gap: 14px; flex: 1;
+      font-size: 12px; color: #1f2a36; align-items: baseline;
+    }
+    .tracker-summary-stats > span { display: inline-flex; align-items: baseline; gap: 4px; }
+    .tracker-summary-stats b { font-size: 14px; font-weight: 700; }
+    .tracker-summary-stats em { font-style: normal; color: #6e7a7d; font-weight: 500; font-size: 11px; }
+    .tracker-summary-link {
+      font-size: 11px; font-weight: 700; color: #0f497f;
+      display: inline-flex; align-items: center; gap: 2px;
+    }
+    .tracker-summary-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #eaf2fa; color: #0f497f;
+      display: grid; place-items: center;
+      flex-shrink: 0;
+    }
+    .tracker-summary-icon svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Insight teaser — single line that drills into insight tab */
+    .insight-teaser {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
+      background: #faf7ee;
+      border-radius: 14px;
+      border: 1px solid #f0e7c5;
+    }
+    .insight-teaser-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #f8c97c; color: #6c4a0e;
+      display: grid; place-items: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .insight-teaser-body { flex: 1; min-width: 0; }
+    .insight-teaser-eyebrow {
+      font-size: 9px; font-weight: 700; letter-spacing: 1px;
+      color: #6c4a0e; text-transform: uppercase;
+      margin: 0 0 2px 0;
+    }
+    .insight-teaser-text {
+      font-size: 12px; font-weight: 500; line-height: 1.35;
+      color: #1f2a36; margin: 0;
+    }
+    .insight-teaser-cta {
+      font-size: 11px; font-weight: 700; color: #0f497f;
+      flex-shrink: 0;
+    }
+
+    /* Section-stub: shows where content was moved to */
+    .moved-to {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
+      background: transparent;
+      border: 1px dashed #cbd3da;
+      border-radius: 12px;
+      font-size: 11px; color: #6e7a7d;
+    }
+    .moved-to b { color: #1f2a36; font-weight: 700; }
+    .moved-to-icon {
+      width: 22px; height: 22px; border-radius: 6px;
+      background: #f6f8fa; display: grid; place-items: center;
+      color: #6e7a7d; flex-shrink: 0;
+    }
+    .moved-to-icon svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+  </style>
+</head>
+<body>
+  <div id="canvas-root"></div>
+
+  <!-- Variant artboards as inert templates so we can mount them into DCArtboards -->
+  <template id="tpl-baseline"></template>
+
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <script type="text/babel" src="density-variants.jsx"></script>
+  <script type="text/babel" src="density-comparison-app.jsx"></script>
+</body>
+</html>

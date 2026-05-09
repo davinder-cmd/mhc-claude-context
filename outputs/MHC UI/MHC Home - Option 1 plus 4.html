@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MHC Home — Option 1 + 4 (no nav change + deep-link)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="mhc-home.css?v=12" />
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: 'Raleway', system-ui, sans-serif; }
+
+    .phone { width: 380px; background: #fff; border-radius: 22px; overflow: hidden;
+      box-shadow: 0 1px 0 rgba(15,73,127,0.06), 0 12px 30px rgba(15,73,127,0.10);
+      border: 1px solid #e1e6ea; }
+    .phone .mhc-home { padding-bottom: 24px; }
+
+    .phone-statusbar { height: 28px; background: #fff; display: flex; align-items: center;
+      justify-content: space-between; padding: 6px 18px 0; font-size: 11px; font-weight: 700;
+      color: #1f2a36; letter-spacing: 0.2px; }
+    .phone-statusbar .right { display: inline-flex; gap: 6px; align-items: center; }
+    .phone-statusbar .dot { width: 4px; height: 4px; border-radius: 50%; background: #1f2a36; }
+    .phone-statusbar .battery { width: 18px; height: 9px; border: 1px solid #1f2a36; border-radius: 2px; position: relative; }
+    .phone-statusbar .battery::after { content: ''; position: absolute; left: 1px; top: 1px; bottom: 1px; width: 70%; background: #1f2a36; border-radius: 1px; }
+
+    .variant-header { padding: 0 4px 14px; }
+    .variant-eyebrow { font-size: 10px; font-weight: 700; color: #6e7a7d;
+      text-transform: uppercase; letter-spacing: 1.2px; margin: 0 0 4px 0; }
+    .variant-title { font-size: 18px; font-weight: 700; color: #1f2a36; margin: 0 0 6px 0; line-height: 1.2; }
+    .variant-summary { font-size: 13px; color: #4a5560; margin: 0; line-height: 1.5; }
+
+    /* ---- Five-item nav ---- */
+    .tabbar { display: flex; align-items: center; justify-content: space-around;
+      border-top: 1px solid #e1e6ea; padding: 8px 0 14px; background: #fff; }
+    .tabbar-item { display: flex; flex-direction: column; align-items: center; gap: 2px;
+      font-size: 9px; font-weight: 600; color: #6e7a7d; letter-spacing: 0.3px;
+      text-transform: uppercase; flex: 1; }
+    .tabbar-item.active { color: #0f497f; }
+    .tabbar-icon { width: 22px; height: 22px; border-radius: 6px; background: #eef1f4;
+      display: grid; place-items: center; color: #6e7a7d; }
+    .tabbar-item.active .tabbar-icon { background: #eaf2fa; color: #0f497f; }
+    .tabbar-icon svg { width: 14px; height: 14px; stroke: currentColor; fill: none;
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ---- Tracker chip in greeting (Option 4) ---- */
+    .tracker-chip { display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px; background: #f6f8fa; border: 1px solid #e1e6ea;
+      border-radius: 14px; cursor: pointer; margin-top: 12px;
+      width: 100%; text-align: left; font-family: inherit; }
+    .tracker-chip-icon { width: 30px; height: 30px; border-radius: 50%;
+      background: #eaf2fa; color: #0f497f; display: grid; place-items: center;
+      flex-shrink: 0; }
+    .tracker-chip-icon svg { width: 15px; height: 15px; }
+    .tracker-chip-stats { flex: 1; display: flex; gap: 10px; align-items: center;
+      font-size: 12px; color: #1f2a36; flex-wrap: nowrap; min-width: 0; }
+    .tracker-chip-stats > span { display: inline-flex; align-items: baseline; gap: 4px; }
+    .tracker-chip-stats b { font-size: 14px; font-weight: 700; }
+    .tracker-chip-stats em { font-style: normal; color: #6e7a7d; font-weight: 500; font-size: 11px; }
+    .tracker-chip-divider { width: 1px; height: 14px; background: #d3dae0; align-self: center; }
+    .tracker-chip-cta { color: #0f497f; flex-shrink: 0; display: grid; place-items: center; }
+    .tracker-chip-cta svg { width: 14px; height: 14px; }
+
+    /* ---- Insight collapsible card ---- */
+    .insight-card { background: #faf7ee; border: 1px solid #f0e7c5;
+      border-radius: 14px; overflow: hidden; }
+    .insight-card-row { display: flex; align-items: center; gap: 10px;
+      width: 100%; padding: 12px 14px; background: transparent; border: none;
+      cursor: pointer; font-family: inherit; text-align: left; }
+    .insight-card-icon { width: 28px; height: 28px; border-radius: 50%;
+      background: #f8c97c; color: #6c4a0e; display: grid; place-items: center;
+      font-size: 14px; flex-shrink: 0; }
+    .insight-card-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .insight-card-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 1px;
+      color: #6c4a0e; text-transform: uppercase; }
+    .insight-card-headline { font-size: 13px; font-weight: 600; color: #1f2a36;
+      line-height: 1.3; }
+    .insight-card-chevron { color: #6e7a7d; transition: transform 0.2s ease; flex-shrink: 0;
+      display: grid; place-items: center; }
+    .insight-card-chevron svg { width: 16px; height: 16px; }
+    .insight-card-chevron.is-open { transform: rotate(180deg); }
+    .insight-card-detail { padding: 0 14px 14px; border-top: 1px solid rgba(240, 231, 197, 0.7); }
+    .insight-card-detail p { font-size: 13px; line-height: 1.5; color: #1f2a36; margin: 12px 0 10px; }
+    .insight-card-detail p b { font-weight: 700; }
+    .insight-card-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      font-size: 11px; color: #6e7a7d; }
+    .insight-card-refresh { background: #fff; border: 1px solid #d3dae0;
+      border-radius: 999px; padding: 4px 10px; font-size: 11px; font-weight: 600;
+      color: #0f497f; cursor: pointer; font-family: inherit; margin-left: auto; }
+
+    /* ---- Tracker detail page ---- */
+    .detail-head { display: flex; align-items: flex-start; gap: 10px; padding-top: 4px; }
+    .detail-back { width: 36px; height: 36px; border-radius: 50%;
+      background: #f6f8fa; color: #1f2a36; display: grid; place-items: center;
+      flex-shrink: 0; }
+    .detail-back svg { width: 16px; height: 16px; }
+    .detail-eyebrow { font-size: 10px; font-weight: 700; color: #6e7a7d;
+      text-transform: uppercase; letter-spacing: 0.5px; margin: 0; }
+    .detail-title { font-size: 22px; font-weight: 700; color: #1f2a36;
+      margin: 4px 0 0; line-height: 1.2; }
+    .detail-sub { font-size: 13px; color: #6e7a7d; margin: 4px 0 8px; }
+
+    /* ---- Habits collapsed (one-line) ---- */
+    .habits-collapsed { margin: 0; }
+    .habits-collapsed-row { display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px; background: #fff; border: 1px solid #e1e6ea;
+      border-radius: 14px; text-decoration: none; color: inherit;
+      cursor: pointer; }
+    .habits-collapsed-icon { width: 30px; height: 30px; border-radius: 50%;
+      background: #eaf2fa; color: #0f497f; display: grid; place-items: center;
+      flex-shrink: 0; }
+    .habits-collapsed-icon svg { width: 14px; height: 14px; }
+    .habits-collapsed-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .habits-collapsed-eyebrow { font-size: 10px; font-weight: 700; color: #6e7a7d;
+      text-transform: uppercase; letter-spacing: 0.6px; }
+    .habits-collapsed-stat { font-size: 12px; color: #1f2a36; }
+    .habits-collapsed-stat b { font-weight: 700; }
+    .habits-collapsed-pips { display: inline-flex; gap: 4px; flex-shrink: 0; }
+    .habit-pip { width: 10px; height: 10px; border-radius: 50%;
+      background: #d3dae0; }
+    .habit-pip--done { background: #2e7d4f; }
+    .habit-pip--today { background: #f8c97c; }
+    .habit-pip--missed { background: transparent; border: 1.5px solid #d3dae0; }
+    .habits-collapsed-cta { color: #0f497f; flex-shrink: 0; display: grid; place-items: center; }
+    .habits-collapsed-cta svg { width: 14px; height: 14px; }
+
+    /* ---- Insight attached to tracker chip ---- */
+    .tracker-insight-attached { margin-top: 10px; }
+    .insight-line { display: flex; gap: 8px; align-items: flex-start;
+      margin: 0; padding: 0 4px; font-size: 12px; line-height: 1.45;
+      color: #4a5560; }
+    .insight-line-icon { color: #c97c1d; flex-shrink: 0; font-size: 13px; line-height: 1.4; }
+
+    /* ===== Desktop home ===== */
+    .dweb { background: #fafafa; min-height: 100%;
+      font-family: 'Raleway', system-ui, sans-serif; color: #1f2a36; }
+    .dweb-topbar { display: flex; align-items: center; justify-content: space-between;
+      height: 60px; padding: 0 32px; background: #fff;
+      border-bottom: 1px solid #e1e6ea; }
+    .dweb-brand { display: flex; align-items: center; gap: 8px; }
+    .dweb-brand-mark { width: 28px; height: 28px; border-radius: 8px;
+      background: #0f497f; color: #fff; display: grid; place-items: center;
+      font-weight: 700; font-size: 14px; }
+    .dweb-brand-name { font-weight: 700; font-size: 16px; letter-spacing: 0.5px; }
+    .dweb-nav { display: flex; gap: 24px; }
+    .dweb-nav-item { font-size: 13px; font-weight: 600; color: #6e7a7d;
+      text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+    .dweb-nav-item.active { color: #0f497f; border-bottom-color: #0f497f; }
+    .dweb-tools { display: flex; gap: 14px; align-items: center; }
+    .dweb-search { font-size: 12px; color: #6e7a7d; padding: 8px 14px;
+      background: #f6f8fa; border-radius: 999px; min-width: 200px; }
+    .dweb-avatar { width: 32px; height: 32px; border-radius: 50%;
+      background: #0f497f; color: #fff; display: grid; place-items: center;
+      font-weight: 700; font-size: 13px; }
+    .dweb-page { max-width: 1100px; margin: 0 auto; padding: 24px 32px 40px;
+      display: flex; flex-direction: column; gap: 20px; }
+    .dweb-headstrip { padding: 0; }
+    .dweb-hero { border-radius: 16px; overflow: hidden; }
+    .dweb-hero .hero { border-radius: 16px; }
+    .dweb-tracker { padding: 0; }
+    .dweb-twocol { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px;
+      align-items: flex-start; }
+    .dweb-twocol-main, .dweb-twocol-side { display: flex; flex-direction: column; gap: 16px; }
+
+    /* ---- Active practices: habits row inside section ---- */
+    .active-habits { margin-top: 14px; padding-top: 14px;
+      border-top: 1px dashed #d3dae0; }
+    .active-habits-head { display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 8px; }
+    .active-habits-eyebrow { font-size: 11px; font-weight: 600; color: #6e7a7d; }
+    .active-habits-link { font-size: 11px; font-weight: 600; color: #0f497f;
+      text-decoration: none; }
+    .active-habits-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .active-habit-pill { display: flex; flex-direction: column; gap: 4px;
+      padding: 10px 10px; background: #f6f8fa; border: 1px solid #e1e6ea;
+      border-radius: 12px; text-decoration: none; color: inherit; min-width: 0; }
+    .active-habit-pill .habit-pip { width: 8px; height: 8px; }
+    .active-habit-name { font-size: 12px; font-weight: 700; color: #1f2a36; }
+    .active-habit-sub { font-size: 10px; color: #6e7a7d; }
+  </style>
+</head>
+<body>
+  <div id="canvas-root"></div>
+
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <script type="text/babel" src="option1plus4-variants.jsx"></script>
+  <script type="text/babel" src="desktop-home.jsx"></script>
+  <script type="text/babel" src="option1plus4-app.jsx"></script>
+</body>
+</html>

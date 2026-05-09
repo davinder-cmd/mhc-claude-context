@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MHC Home Page — 5 Alternatives (Material 3, Azure/Blue)</title>
+  <style>
+    /* =========================================================
+       Material 3 Azure/Blue + Local token layer
+       Mirrors mh-material-experiment/src/styles.scss
+       ========================================================= */
+    :root {
+      /* Material 3 — Azure (primary) + Blue (tertiary), light scheme */
+      --mat-sys-primary: #415F91;
+      --mat-sys-on-primary: #FFFFFF;
+      --mat-sys-primary-container: #D6E3FF;
+      --mat-sys-on-primary-container: #001A41;
+
+      --mat-sys-secondary: #565F71;
+      --mat-sys-on-secondary: #FFFFFF;
+      --mat-sys-secondary-container: #DAE2F9;
+      --mat-sys-on-secondary-container: #131C2B;
+
+      --mat-sys-tertiary: #41618E;
+      --mat-sys-on-tertiary: #FFFFFF;
+      --mat-sys-tertiary-container: #D5E3FF;
+      --mat-sys-on-tertiary-container: #001C39;
+
+      --mat-sys-error: #BA1A1A;
+      --mat-sys-error-container: #FFDAD6;
+      --mat-sys-on-error-container: #410002;
+
+      --mat-sys-surface: #F9F9FF;
+      --mat-sys-surface-container-low: #F3F3FA;
+      --mat-sys-surface-container: #EDEDF4;
+      --mat-sys-surface-container-high: #E7E8EE;
+      --mat-sys-surface-container-highest: #E2E2E9;
+
+      --mat-sys-on-surface: #1A1B21;
+      --mat-sys-on-surface-variant: #44474E;
+      --mat-sys-outline: #74777F;
+      --mat-sys-outline-variant: #C4C6D0;
+
+      /* Local token layer — spacing (per WORKFLOW.md) */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+
+      /* Local token layer — aspect ratios */
+      --aspect-1-1: 1 / 1;
+      --aspect-2-3: 2 / 3;
+      --aspect-3-4: 3 / 4;
+      --aspect-16-9: 16 / 9;
+
+      /* Material 3 — shape (corner radius) */
+      --shape-sm: 8px;
+      --shape-md: 12px;
+      --shape-lg: 16px;
+      --shape-xl: 28px;
+
+      /* Material 3 type role tokens — bundled font shorthand-equivalents */
+      --type-display-small: 400 36px/44px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-headline-large: 400 32px/40px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-headline-medium: 400 28px/36px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-headline-small: 400 24px/32px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-title-large: 400 22px/28px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-title-medium: 500 16px/24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-title-small: 500 14px/20px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-body-large: 400 16px/24px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-body-medium: 400 14px/20px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-body-small: 400 12px/16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-label-large: 500 14px/20px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-label-medium: 500 12px/16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --type-label-small: 500 11px/16px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font: var(--type-body-large);
+      letter-spacing: 0.5px;
+      background: var(--mat-sys-surface-container);
+      color: var(--mat-sys-on-surface);
+      padding: var(--space-8) var(--space-6) var(--space-16);
+    }
+
+    /* ============ Page header ============ */
+    .page-header { max-width: 1280px; margin: 0 auto var(--space-12); }
+    .page-header h1 {
+      font: var(--type-display-small);
+      letter-spacing: 0;
+      margin-bottom: var(--space-2);
+    }
+    .page-header .subtitle {
+      font: var(--type-body-large);
+      color: var(--mat-sys-on-surface-variant);
+      margin-bottom: var(--space-6);
+    }
+    .stack-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-3);
+      background: var(--mat-sys-secondary-container);
+      color: var(--mat-sys-on-secondary-container);
+      border-radius: var(--shape-xl);
+      font: var(--type-label-medium);
+      margin-bottom: var(--space-6);
+    }
+    .brief-card {
+      background: var(--mat-sys-surface);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--shape-md);
+      padding: var(--space-6);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+    }
+    .req-block {
+      border-left: 3px solid var(--mat-sys-primary);
+      padding-left: var(--space-3);
+    }
+    .req-block .label {
+      font: var(--type-label-medium);
+      letter-spacing: 0.5px;
+      color: var(--mat-sys-on-surface-variant);
+      text-transform: uppercase;
+      margin-bottom: var(--space-1);
+    }
+    .req-block .desc {
+      font: var(--type-body-medium);
+      color: var(--mat-sys-on-surface);
+    }
+
+    /* ============ Option block ============ */
+    .option {
+      max-width: 1280px;
+      margin: 0 auto var(--space-12);
+      background: var(--mat-sys-surface);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--shape-lg);
+      overflow: hidden;
+    }
+
+    .option-header {
+      padding: var(--space-5) var(--space-6);
+      background: var(--mat-sys-surface-container-low);
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+    .option-header-left {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .option-num {
+      font: var(--type-label-medium);
+      letter-spacing: 1px;
+      color: var(--mat-sys-primary);
+      text-transform: uppercase;
+    }
+    .option-title {
+      font: var(--type-title-large);
+      font-weight: 500;
+      color: var(--mat-sys-on-surface);
+    }
+    .option-tag {
+      font: var(--type-body-medium);
+      color: var(--mat-sys-on-surface-variant);
+      font-style: italic;
+    }
+    .req-chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .req-chip {
+      font: var(--type-label-medium);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--shape-xl);
+      background: var(--mat-sys-secondary-container);
+      color: var(--mat-sys-on-secondary-container);
+      border: 1px solid var(--mat-sys-outline-variant);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+    .req-chip::before {
+      content: "✓";
+      font-size: 10px;
+      color: var(--mat-sys-primary);
+    }
+
+    .canvas {
+      background: var(--mat-sys-surface-container-low);
+      padding: var(--space-8);
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+    }
+
+    .annotation {
+      padding: var(--space-5) var(--space-6);
+      background: var(--mat-sys-secondary-container);
+      color: var(--mat-sys-on-secondary-container);
+      font: var(--type-body-medium);
+    }
+    .annotation strong { font-weight: 500; }
+
+    /* =========================================================
+       Wireframe primitives — emulate Material components
+       ========================================================= */
+
+    /* page frame (mat-card "elevated"-ish look but actually outlined per discipline) */
+    .frame {
+      background: var(--mat-sys-surface);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--shape-md);
+      padding: var(--space-6);
+    }
+
+    /* mat-toolbar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-5);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+    }
+    .greeting { font: var(--type-headline-small); font-weight: 500; }
+    .topbar-right { display: flex; gap: var(--space-3); align-items: center; }
+    .icon-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--mat-sys-surface-container-high);
+      display: inline-block;
+    }
+
+    /* mat-chip — assist style (filled) */
+    .reward-chip {
+      background: var(--mat-sys-primary-container);
+      color: var(--mat-sys-on-primary-container);
+      font: var(--type-label-large);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--shape-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    /* Hero — composed from styled section using primary-container per Bucket 1 */
+    .hero {
+      background: var(--mat-sys-primary-container);
+      color: var(--mat-sys-on-primary-container);
+      border-radius: var(--shape-md);
+      aspect-ratio: var(--aspect-16-9);
+      max-height: 240px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-6);
+    }
+    .hero.short { max-height: 180px; }
+    .hero.tertiary {
+      background: var(--mat-sys-tertiary-container);
+      color: var(--mat-sys-on-tertiary-container);
+    }
+    .hero-content {
+      background: var(--mat-sys-surface);
+      color: var(--mat-sys-on-surface);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--shape-sm);
+      max-width: 55%;
+    }
+    .hero-eyebrow {
+      font: var(--type-label-medium);
+      letter-spacing: 0.5px;
+      color: var(--mat-sys-on-surface-variant);
+      text-transform: uppercase;
+      margin-bottom: var(--space-1);
+    }
+    .hero-title { font: var(--type-title-large); font-weight: 500; margin-bottom: var(--space-1); }
+    .hero-meta { font: var(--type-body-medium); color: var(--mat-sys-on-surface-variant); }
+    .hero-img-label {
+      position: absolute;
+      top: var(--space-3); right: var(--space-3);
+      background: rgba(255,255,255,0.7);
+      font: var(--type-label-small);
+      padding: 2px var(--space-2);
+      border-radius: var(--space-1);
+      color: var(--mat-sys-on-surface-variant);
+      text-transform: uppercase;
+    }
+
+    /* section header */
+    .section-h {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: var(--space-6) 0 var(--space-3);
+    }
+    .section-h h3 {
+      font: var(--type-title-medium);
+      color: var(--mat-sys-on-surface);
+    }
+    .section-h h3 em { font-style: normal; font-weight: 500; color: var(--mat-sys-primary); }
+    .section-h .source {
+      font: var(--type-label-medium);
+      color: var(--mat-sys-on-surface-variant);
+      text-transform: uppercase;
+    }
+    .section-h .link {
+      font: var(--type-label-large);
+      color: var(--mat-sys-primary);
+    }
+
+    /* mat-card (outlined) */
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+    .grid-3-stat { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3); margin-top: var(--space-5); }
+
+    .pcard {
+      background: var(--mat-sys-surface);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--shape-md);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .pcard-thumb {
+      background: var(--mat-sys-secondary-container);
+      aspect-ratio: var(--aspect-16-9);
+      border-radius: var(--shape-sm);
+      margin-bottom: var(--space-1);
+    }
+    .pcard-thumb.square { aspect-ratio: var(--aspect-1-1); }
+    .pcard-title { font: var(--type-title-small); font-weight: 500; color: var(--mat-sys-on-surface); }
+    .pcard-meta { font: var(--type-body-small); color: var(--mat-sys-on-surface-variant); }
+
+    /* mat-progress-bar */
+    .pbar {
+      height: 4px;
+      background: var(--mat-sys-surface-container-highest);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: var(--space-1);
+    }
+    .pbar > div { height: 100%; background: var(--mat-sys-primary); }
+
+    /* mat-chip (assist) — eyebrow tags */
+    .chip {
+      display: inline-block;
+      font: var(--type-label-small);
+      padding: 2px var(--space-2);
+      border-radius: var(--shape-xl);
+      align-self: flex-start;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .chip.primary    { background: var(--mat-sys-primary-container);   color: var(--mat-sys-on-primary-container); }
+    .chip.tertiary   { background: var(--mat-sys-tertiary-container);  color: var(--mat-sys-on-tertiary-container); }
+    .chip.secondary  { background: var(--mat-sys-secondary-container); color: var(--mat-sys-on-secondary-container); }
+    .chip.error      { background: var(--mat-sys-error-container);     color: var(--mat-sys-on-error-container); }
+
+    /* "Continue" cards — primary-container left border to signal program ownership */
+    .pcard.continue { border-left: 4px solid var(--mat-sys-primary); }
+    .pcard.client   { border-left: 4px solid var(--mat-sys-tertiary); }
+
+    /* "From client" banner — uses tertiary-container per status badge pattern */
+    .client-banner {
+      background: var(--mat-sys-tertiary-container);
+      color: var(--mat-sys-on-tertiary-container);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--shape-md);
+      padding: var(--space-4) var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .client-banner .logo {
+      width: 40px; height: 40px;
+      background: var(--mat-sys-tertiary);
+      color: var(--mat-sys-on-tertiary);
+      border-radius: var(--shape-sm);
+      display: grid;
+      place-items: center;
+      font: var(--type-label-large);
+    }
+    .client-banner .body { flex: 1; }
+    .client-banner .body .label {
+      font: var(--type-label-small);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .client-banner .body .title { font: var(--type-title-small); font-weight: 500; }
+    .client-banner .body .meta { font: var(--type-body-small); }
+    .client-banner .cta {
+      background: var(--mat-sys-tertiary);
+      color: var(--mat-sys-on-tertiary);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--shape-sm);
+      font: var(--type-label-large);
+      letter-spacing: 0.1px;
+    }
+
+    /* mat-card stat tile — KV pattern from WORKFLOW */
+    .stat {
+      background: var(--mat-sys-surface);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--shape-md);
+      padding: var(--space-4);
+    }
+    .stat .label { font: var(--type-label-medium); color: var(--mat-sys-on-surface-variant); margin-bottom: var(--space-1); text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat .value { font: var(--type-headline-small); font-weight: 500; }
+    .stat .sub { font: var(--type-body-small); color: var(--mat-sys-on-surface-variant); }
+
+    /* Carousel lane — Bucket 3 native CSS scroll-snap */
+    .lane {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+
+    /* Two-column layout — CSS Grid per WORKFLOW discipline */
+    .two-col {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: var(--space-5);
+      margin-top: var(--space-5);
+    }
+
+    /* Filter chips row */
+    .filter-row {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      padding: var(--space-4) 0 var(--space-3);
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+      margin-bottom: var(--space-4);
+    }
+    .fchip {
+      font: var(--type-label-medium);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--shape-xl);
+      border: 1px solid var(--mat-sys-outline);
+      background: transparent;
+      color: var(--mat-sys-on-surface-variant);
+    }
+    .fchip.active {
+      background: var(--mat-sys-secondary-container);
+      color: var(--mat-sys-on-secondary-container);
+      border-color: var(--mat-sys-secondary-container);
+    }
+
+    /* Today module — uses secondary-container per "highlight surface" pattern */
+    .today-module {
+      background: var(--mat-sys-secondary-container);
+      color: var(--mat-sys-on-secondary-container);
+      border-radius: var(--shape-md);
+      padding: var(--space-5);
+      margin-top: var(--space-5);
+    }
+    .today-module .section-h h3 { color: var(--mat-sys-on-secondary-container); }
+    .today-module .section-h .source { color: var(--mat-sys-on-secondary-container); opacity: 0.75; }
+    .today-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-4);
+      margin-top: var(--space-3);
+    }
+    .today-cell {
+      background: var(--mat-sys-surface);
+      color: var(--mat-sys-on-surface);
+      border-radius: var(--shape-sm);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .today-cell .eyebrow { font: var(--type-label-medium); color: var(--mat-sys-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .today-cell .title { font: var(--type-title-small); font-weight: 500; }
+    .today-cell .cta { font: var(--type-label-large); color: var(--mat-sys-primary); margin-top: auto; }
+
+    /* Spotlight (Option 2) — primary-container highlight */
+    .spotlight {
+      background: var(--mat-sys-primary-container);
+      color: var(--mat-sys-on-primary-container);
+      border-radius: var(--shape-md);
+      padding: var(--space-5);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: var(--space-4);
+      margin-top: var(--space-5);
+    }
+    .spotlight-cell {
+      background: var(--mat-sys-surface);
+      color: var(--mat-sys-on-surface);
+      border-radius: var(--shape-sm);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+    .spotlight-cell .label { font: var(--type-label-medium); color: var(--mat-sys-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .spotlight-cell .title { font: var(--type-title-medium); font-weight: 500; }
+    .spotlight-cell .meta { font: var(--type-body-small); color: var(--mat-sys-on-surface-variant); }
+    .spotlight-cell .progress-row {
+      display: flex; align-items: center; gap: var(--space-2);
+      font: var(--type-body-small); color: var(--mat-sys-on-surface-variant);
+    }
+    .spotlight-cell .progress-row .pbar { flex: 1; margin-top: 0; }
+    .btn-elevated {
+      background: var(--mat-sys-primary);
+      color: var(--mat-sys-on-primary);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--shape-sm);
+      font: var(--type-label-large);
+      align-self: flex-start;
+      letter-spacing: 0.1px;
+    }
+
+    /* Comparison footer */
+    .compare {
+      max-width: 1280px;
+      margin: var(--space-16) auto 0;
+      background: var(--mat-sys-surface);
+      border: 1px solid var(--mat-sys-outline-variant);
+      border-radius: var(--shape-md);
+      padding: var(--space-6);
+    }
+    .compare h2 {
+      font: var(--type-headline-small);
+      font-weight: 500;
+      margin-bottom: var(--space-4);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font: var(--type-body-medium);
+    }
+    th, td {
+      text-align: left;
+      padding: var(--space-3);
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+      vertical-align: top;
+    }
+    th {
+      font: var(--type-label-medium);
+      color: var(--mat-sys-on-surface-variant);
+      background: var(--mat-sys-surface-container-low);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    td.opt {
+      font: var(--type-title-small);
+      font-weight: 500;
+      color: var(--mat-sys-primary);
+      white-space: nowrap;
+    }
+
+    .legend {
+      max-width: 1280px;
+      margin: var(--space-5) auto 0;
+      padding: var(--space-4);
+      font: var(--type-body-small);
+      color: var(--mat-sys-on-surface-variant);
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .legend .swatch {
+      width: 14px; height: 14px; border-radius: var(--space-1);
+      display: inline-block;
+      border: 1px solid var(--mat-sys-outline-variant);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ Page header ============ -->
+  <header class="page-header">
+    <h1>Home Page — 5 Alternatives</h1>
+    <p class="subtitle">Re-skinned in Material 3 (Azure / Blue palette) using the experiment's `--mat-sys-*` role tokens and local `--space-*` / `--aspect-*` token layer. Desktop wireframes at ~1200px. April 30, 2026.</p>
+    <span class="stack-meta">Material 3 · Azure primary · Blue tertiary · outlined cards · role-based type</span>
+
+    <div class="brief-card">
+      <div class="req-block">
+        <div class="label">Personalization</div>
+        <div class="desc">Driven by the wellbeing interests survey — content tagged to the user's stated interests.</div>
+      </div>
+      <div class="req-block">
+        <div class="label">One hero image</div>
+        <div class="desc">Single full-width hero per page (John's request). No 5-card carousel.</div>
+      </div>
+      <div class="req-block">
+        <div class="label">Client items</div>
+        <div class="desc">A reserved place for employer/client features (health fair, OE, benefits selection).</div>
+      </div>
+      <div class="req-block">
+        <div class="label">Ongoing programs</div>
+        <div class="desc">Direct re-entry to in-flight DCPs, journeys, habits — not buried in discovery.</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ OPTION 1 — Three Lanes ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 1</span>
+        <span class="option-title">Hero + Three Lanes</span>
+        <span class="option-tag">Most conventional. Three named lanes, source of every card is obvious.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Hi Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-chip">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Featured</div>
+            <div class="hero-title">Spring into better sleep</div>
+            <div class="hero-meta">A 4-week program tuned to your wellbeing interests</div>
+          </div>
+        </div>
+
+        <div class="section-h">
+          <h3>Continue your programs</h3>
+          <span class="source">From your activity</span>
+        </div>
+        <div class="lane">
+          <div class="pcard continue">
+            <span class="chip primary">DCP</span>
+            <div class="pcard-title">Diabetes Prevention</div>
+            <div class="pcard-meta">Week 3 of 12</div>
+            <div class="pbar"><div style="width:25%"></div></div>
+          </div>
+          <div class="pcard continue">
+            <span class="chip primary">Journey</span>
+            <div class="pcard-title">Better Sleep Foundations</div>
+            <div class="pcard-meta">2 of 5 sessions</div>
+            <div class="pbar"><div style="width:40%"></div></div>
+          </div>
+          <div class="pcard continue">
+            <span class="chip primary">Habit</span>
+            <div class="pcard-title">10-min daily walk</div>
+            <div class="pcard-meta">5-day streak</div>
+            <div class="pbar"><div style="width:71%"></div></div>
+          </div>
+        </div>
+
+        <div class="section-h">
+          <h3>From Umbrella Partners</h3>
+          <span class="source">Featured by your employer</span>
+        </div>
+        <div class="grid-2">
+          <div class="client-banner">
+            <div class="logo">UP</div>
+            <div class="body">
+              <div class="label">Health fair</div>
+              <div class="title">May 14 · Umbrella HQ</div>
+              <div class="meta">Free biometrics, flu shots, EAP info</div>
+            </div>
+            <div class="cta">RSVP</div>
+          </div>
+          <div class="client-banner">
+            <div class="logo">UP</div>
+            <div class="body">
+              <div class="label">Benefits</div>
+              <div class="title">Open enrollment is open</div>
+              <div class="meta">Make your selections by May 30</div>
+            </div>
+            <div class="cta">Start</div>
+          </div>
+        </div>
+
+        <div class="section-h">
+          <h3>For your interest in <em>Sleep, Stress, Nutrition</em></h3>
+          <span class="link">Update interests →</span>
+        </div>
+        <div class="grid-3">
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Sleep</span>
+            <div class="pcard-title">Wind-down routines that actually work</div>
+            <div class="pcard-meta">5-min read · Earn 50 pts</div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Stress</span>
+            <div class="pcard-title">Box breathing for the workday</div>
+            <div class="pcard-meta">3-min audio · Earn 50 pts</div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Nutrition</span>
+            <div class="pcard-title">Anti-inflammatory pantry basics</div>
+            <div class="pcard-meta">7-min read · Earn 50 pts</div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Three named lanes, three sources — Miller's Law and Nielsen #2 (match real world). <strong>Material fit:</strong> Pure composition inside `mat-card` (outlined). No primitives needed beyond cards + chips + progress-bar. <strong>Tradeoff:</strong> Tall page on desktop unless lanes scroll-snap on smaller widths (Bucket 3 native CSS).
+    </div>
+  </section>
+
+  <!-- ============ OPTION 2 — Continue First ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 2</span>
+        <span class="option-title">Continue First</span>
+        <span class="option-tag">Engagement-led. Ongoing programs get the dominant slot, not a hero card.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Welcome back, Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-chip">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero short">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">May focus</div>
+            <div class="hero-title">Move more, sleep better</div>
+          </div>
+        </div>
+
+        <div class="spotlight">
+          <div class="spotlight-cell">
+            <div class="label">Continue · DCP</div>
+            <div class="title">Diabetes Prevention</div>
+            <div class="meta">Next: Week 4 — Carb tracking basics</div>
+            <div class="progress-row">
+              <span>Week 3 of 12</span>
+              <div class="pbar"><div style="width:25%"></div></div>
+              <span>25%</span>
+            </div>
+            <div class="btn-elevated">Resume program</div>
+          </div>
+          <div class="spotlight-cell">
+            <div class="label">Continue · Journey</div>
+            <div class="title">Better Sleep</div>
+            <div class="meta">2 of 5 sessions complete</div>
+            <div class="progress-row">
+              <div class="pbar"><div style="width:40%"></div></div>
+            </div>
+            <div class="btn-elevated">Next session</div>
+          </div>
+          <div class="spotlight-cell">
+            <div class="label">Continue · Habit</div>
+            <div class="title">10-min walk</div>
+            <div class="meta">5-day streak — log today</div>
+            <div class="progress-row">
+              <div class="pbar"><div style="width:71%"></div></div>
+            </div>
+            <div class="btn-elevated">Mark done</div>
+          </div>
+        </div>
+
+        <div class="client-banner" style="margin-top: var(--space-5)">
+          <div class="logo">UP</div>
+          <div class="body">
+            <div class="label">From Umbrella Partners</div>
+            <div class="title">Health fair · May 14 + Open enrollment</div>
+            <div class="meta">Two things from your employer this month</div>
+          </div>
+          <div class="cta">View both</div>
+        </div>
+
+        <div class="section-h">
+          <h3>For your interests</h3>
+          <span class="source">Sleep, Stress, Nutrition · Update →</span>
+        </div>
+        <div class="grid-2">
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Sleep</span>
+            <div class="pcard-title">Wind-down routines that actually work</div>
+            <div class="pcard-meta">5-min read · Earn 50 pts</div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Stress</span>
+            <div class="pcard-title">Box breathing for the workday</div>
+            <div class="pcard-meta">3-min audio · Earn 50 pts</div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Zeigarnik effect — incomplete programs are what most users came back for. Goal-gradient ("week 3 of 12") drives motivation. <strong>Material fit:</strong> Spotlight uses `--mat-sys-primary-container` (Material's recommended highlight surface). All buttons use `matButton="elevated"`. <strong>Tradeoff:</strong> New users see an empty primary slot — needs a strong empty state pointing to the wellbeing interests survey.
+    </div>
+  </section>
+
+  <!-- ============ OPTION 3 — Two-Column ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 3</span>
+        <span class="option-title">Two-Column Action / Discovery</span>
+        <span class="option-tag">Aligns with the Apr-15 decision doc. "What I'm doing" left, "what I might want" right.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Hi Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-chip">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero tertiary">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Spotlight</div>
+            <div class="hero-title">Your stress reset week</div>
+            <div class="hero-meta">Curated for your interests</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="col-action">
+            <div class="section-h" style="margin-top:0"><h3>Continue</h3></div>
+            <div class="pcard continue">
+              <span class="chip primary">DCP</span>
+              <div class="pcard-title">Diabetes Prevention</div>
+              <div class="pcard-meta">Week 3 of 12</div>
+              <div class="pbar"><div style="width:25%"></div></div>
+            </div>
+            <div class="pcard continue" style="margin-top: var(--space-2)">
+              <span class="chip primary">Journey</span>
+              <div class="pcard-title">Better Sleep</div>
+              <div class="pcard-meta">2 of 5 sessions</div>
+              <div class="pbar"><div style="width:40%"></div></div>
+            </div>
+            <div class="pcard continue" style="margin-top: var(--space-2)">
+              <span class="chip primary">Habit</span>
+              <div class="pcard-title">10-min walk</div>
+              <div class="pcard-meta">5-day streak</div>
+              <div class="pbar"><div style="width:71%"></div></div>
+            </div>
+
+            <div class="section-h"><h3>From your employer</h3></div>
+            <div class="client-banner" style="flex-direction:column;align-items:flex-start;gap:var(--space-2);padding:var(--space-3)">
+              <div class="body">
+                <div class="label">Umbrella Partners</div>
+                <div class="title">Health fair · May 14</div>
+              </div>
+              <div class="cta">RSVP</div>
+            </div>
+            <div class="client-banner" style="flex-direction:column;align-items:flex-start;gap:var(--space-2);padding:var(--space-3);margin-top:var(--space-2)">
+              <div class="body">
+                <div class="label">Umbrella Partners</div>
+                <div class="title">Open enrollment</div>
+              </div>
+              <div class="cta">Start</div>
+            </div>
+          </div>
+
+          <div class="col-discovery">
+            <div class="section-h" style="margin-top:0">
+              <h3>For your interests</h3>
+              <span class="source">Sleep · Stress · Nutrition</span>
+            </div>
+            <div class="grid-2">
+              <div class="pcard">
+                <div class="pcard-thumb"></div>
+                <span class="chip secondary">Sleep</span>
+                <div class="pcard-title">Wind-down routines that work</div>
+                <div class="pcard-meta">5-min read · 50 pts</div>
+              </div>
+              <div class="pcard">
+                <div class="pcard-thumb"></div>
+                <span class="chip secondary">Stress</span>
+                <div class="pcard-title">Box breathing for work</div>
+                <div class="pcard-meta">3-min audio · 50 pts</div>
+              </div>
+              <div class="pcard">
+                <div class="pcard-thumb"></div>
+                <span class="chip secondary">Nutrition</span>
+                <div class="pcard-title">Anti-inflammatory pantry</div>
+                <div class="pcard-meta">7-min read · 50 pts</div>
+              </div>
+              <div class="pcard">
+                <div class="pcard-thumb"></div>
+                <span class="chip secondary">Sleep</span>
+                <div class="pcard-title">Caffeine cutoff calculator</div>
+                <div class="pcard-meta">Tool · 25 pts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Reuses the 2-column architecture already agreed in the Apr-15 decision doc. <strong>Material fit:</strong> CSS Grid 2-col (`320px 1fr`) is the explicit project discipline. Hero variant uses `--mat-sys-tertiary-container` (Blue palette) to differentiate from Option 1's primary hero. <strong>Tradeoff:</strong> Collapses to a long single column on mobile; need an explicit stacking order (Continue → Client → Interests).
+    </div>
+  </section>
+
+  <!-- ============ OPTION 4 — Single Feed ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 4</span>
+        <span class="option-title">Single Personalized Feed</span>
+        <span class="option-tag">Radical simplification. One feed, typed cards, filterable. Mobile-first by construction.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Hi Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-chip">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero">
+          <span class="hero-img-label">Hero image</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Today</div>
+            <div class="hero-title">One small thing</div>
+            <div class="hero-meta">Box breathing — 3 minutes</div>
+          </div>
+        </div>
+
+        <div class="filter-row">
+          <span class="fchip active">All</span>
+          <span class="fchip">Continue (3)</span>
+          <span class="fchip">From Umbrella (2)</span>
+          <span class="fchip">Sleep</span>
+          <span class="fchip">Stress</span>
+          <span class="fchip">Nutrition</span>
+        </div>
+
+        <div class="grid-3">
+          <div class="pcard continue">
+            <span class="chip primary">Continue · DCP</span>
+            <div class="pcard-title">Diabetes Prevention — Week 3</div>
+            <div class="pcard-meta">Pinned · Resume now</div>
+            <div class="pbar"><div style="width:25%"></div></div>
+          </div>
+          <div class="pcard client">
+            <span class="chip tertiary">From Umbrella</span>
+            <div class="pcard-title">Health fair · May 14</div>
+            <div class="pcard-meta">Pinned · RSVP by May 7</div>
+          </div>
+          <div class="pcard continue">
+            <span class="chip primary">Continue · Habit</span>
+            <div class="pcard-title">10-min walk</div>
+            <div class="pcard-meta">Pinned · 5-day streak</div>
+            <div class="pbar"><div style="width:71%"></div></div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Sleep</span>
+            <div class="pcard-title">Wind-down routines</div>
+            <div class="pcard-meta">5-min read · 50 pts</div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Stress</span>
+            <div class="pcard-title">Box breathing for work</div>
+            <div class="pcard-meta">3-min audio · 50 pts</div>
+          </div>
+          <div class="pcard client">
+            <span class="chip tertiary">From Umbrella</span>
+            <div class="pcard-title">Open enrollment is open</div>
+            <div class="pcard-meta">Make selections by May 30</div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Nutrition</span>
+            <div class="pcard-title">Anti-inflammatory pantry</div>
+            <div class="pcard-meta">7-min read · 50 pts</div>
+          </div>
+          <div class="pcard continue">
+            <span class="chip primary">Continue · Journey</span>
+            <div class="pcard-title">Better Sleep — session 3</div>
+            <div class="pcard-meta">2 of 5 done</div>
+            <div class="pbar"><div style="width:40%"></div></div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Sleep</span>
+            <div class="pcard-title">Caffeine cutoff calculator</div>
+            <div class="pcard-meta">Tool · 25 pts</div>
+          </div>
+        </div>
+
+        <div class="grid-3-stat">
+          <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+          <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+          <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Tesler's Law — system absorbs the "where does this go" complexity. <strong>Material fit:</strong> One outlined-card primitive does all the work. Filter chips are stock `mat-chip-set` (single-choice). Color encoding: primary-container = continue, tertiary-container = from-client, secondary-container = interest. <strong>Tradeoff:</strong> Risk that client items get scrolled past; mitigate by always pinning at least one above the fold.
+    </div>
+  </section>
+
+  <!-- ============ OPTION 5 — Today View ============ -->
+  <section class="option">
+    <div class="option-header">
+      <div class="option-header-left">
+        <span class="option-num">Option 5</span>
+        <span class="option-title">Today View</span>
+        <span class="option-tag">Focus-led. Above the fold = one decision: what to do right now.</span>
+      </div>
+      <div class="req-chips">
+        <span class="req-chip">Personalization</span>
+        <span class="req-chip">Hero</span>
+        <span class="req-chip">Client</span>
+        <span class="req-chip">Programs</span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <div class="frame">
+        <div class="topbar">
+          <div class="greeting">Good morning, Andrew</div>
+          <div class="topbar-right">
+            <span class="reward-chip">★ 1,240 pts</span>
+            <span class="icon-btn"></span>
+            <span class="icon-btn"></span>
+          </div>
+        </div>
+
+        <div class="hero tertiary">
+          <span class="hero-img-label">Hero (contextual: morning)</span>
+          <div class="hero-content">
+            <div class="hero-eyebrow">Today, Apr 30</div>
+            <div class="hero-title">A calm start</div>
+            <div class="hero-meta">3 things lined up for you</div>
+          </div>
+        </div>
+
+        <div class="today-module">
+          <div class="section-h" style="margin-top:0">
+            <h3>Today</h3>
+            <span class="source">Picked from your programs and interests</span>
+          </div>
+          <div class="today-row">
+            <div class="today-cell">
+              <span class="eyebrow">Continue · DCP</span>
+              <span class="title">Week 4 of Diabetes Prevention — Carb tracking basics</span>
+              <span class="cta">Resume →</span>
+            </div>
+            <div class="today-cell">
+              <span class="eyebrow">For your interest in Stress</span>
+              <span class="title">Box breathing — 3 minutes before your 10am meeting</span>
+              <span class="cta">Start →</span>
+            </div>
+            <div class="today-cell">
+              <span class="eyebrow">Stat highlight</span>
+              <span class="title">You're 1,400 steps from your daily goal</span>
+              <span class="cta">View activity →</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="client-banner" style="margin-top: var(--space-5)">
+          <div class="logo">UP</div>
+          <div class="body">
+            <div class="label">From Umbrella Partners</div>
+            <div class="title">Health fair · May 14 at Umbrella HQ</div>
+            <div class="meta">Free biometrics, flu shots, EAP info</div>
+          </div>
+          <div class="cta">RSVP</div>
+        </div>
+
+        <div class="section-h">
+          <h3>Explore</h3>
+          <span class="source">More for your interests · See all →</span>
+        </div>
+        <div class="grid-3">
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Sleep</span>
+            <div class="pcard-title">Wind-down routines that work</div>
+            <div class="pcard-meta">5-min read · 50 pts</div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Nutrition</span>
+            <div class="pcard-title">Anti-inflammatory pantry</div>
+            <div class="pcard-meta">7-min read · 50 pts</div>
+          </div>
+          <div class="pcard">
+            <div class="pcard-thumb"></div>
+            <span class="chip secondary">Stress</span>
+            <div class="pcard-title">Walking meetings, done right</div>
+            <div class="pcard-meta">4-min read · 50 pts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <strong>Why it works:</strong> Hick's Law — above the fold collapses to ~3 choices. Peak-End — the page ends with an explicit "what to do right now." <strong>Material fit:</strong> "Today" module uses `--mat-sys-secondary-container` as the highlight surface. <strong>Tradeoff:</strong> Most opinionated of the five; if the daily recommendation is wrong, the page feels wrong.
+    </div>
+  </section>
+
+  <!-- ============ Comparison ============ -->
+  <section class="compare">
+    <h2>Side-by-side</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Personalization</th>
+          <th>Hero surface</th>
+          <th>Client slot</th>
+          <th>Ongoing programs</th>
+          <th>Best when…</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="opt">1. Three Lanes</td>
+          <td>Named lane "For your interest in X, Y, Z"</td>
+          <td>primary-container, full-width</td>
+          <td>tertiary-container banner ×2</td>
+          <td>Lane of `mat-card` + progress-bar</td>
+          <td>You want clarity over density</td>
+        </tr>
+        <tr>
+          <td class="opt">2. Continue First</td>
+          <td>2-up grid below the fold</td>
+          <td>primary-container, slimmer</td>
+          <td>Mid-page tertiary-container banner</td>
+          <td><strong>primary-container spotlight</strong> (3 programs)</td>
+          <td>Engagement / retention is the priority</td>
+        </tr>
+        <tr>
+          <td class="opt">3. Two-Column</td>
+          <td>Right column 4-up grid</td>
+          <td>tertiary-container, spans top</td>
+          <td>Left column, stacked</td>
+          <td>Left column, top of stack</td>
+          <td>You want to lock in the Apr-15 decision</td>
+        </tr>
+        <tr>
+          <td class="opt">4. Single Feed</td>
+          <td>Card-level chip per interest</td>
+          <td>primary-container, contextual</td>
+          <td>Inline pinned cards</td>
+          <td>Pinned to top of feed</td>
+          <td>You want true mobile-first + ML ranking</td>
+        </tr>
+        <tr>
+          <td class="opt">5. Today View</td>
+          <td>One suggested action in "Today"</td>
+          <td>tertiary-container, contextual</td>
+          <td>Pinned card mid-page</td>
+          <td>Next checkpoint surfaced in "Today"</td>
+          <td>You want a focused, opinionated home</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="legend">
+    <span><span class="swatch" style="background:#D6E3FF"></span>primary-container — continue / programs</span>
+    <span><span class="swatch" style="background:#D5E3FF"></span>tertiary-container — from client</span>
+    <span><span class="swatch" style="background:#DAE2F9"></span>secondary-container — interest / today highlight</span>
+    <span><span class="swatch" style="background:#FFDAD6"></span>error-container — watch / alerts (unused on this view)</span>
+  </div>
+
+</body>
+</html>

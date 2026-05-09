@@ -1,0 +1,835 @@
+<!--
+  D11 — Active brand role · audit.html
+  Built 2026-05-04 from _templates/decision-probe.html
+  Builds on: v6/system.html (passive baseline) + 2021 brand guidelines + Verily reference
+  Triggered by: INTERVIEW.md D.1 #4 (B6 Active reopens D11 editorial restraint)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decision Probe — D11 · active brand role</title>
+<style>
+  :root {
+    /* Document chrome */
+    --doc-bg: #FBFAF8;
+    --doc-ink: #1A1816;
+    --doc-ink-2: #423D38;
+    --doc-ink-3: #6F6963;
+    --doc-border: #E1DEDA;
+    --doc-accent: #2A6489;          /* primary-600 from v6 — header rule */
+
+    /* === Shared anchors carried into every candidate (locked) === */
+
+    /* Sand — warm beige surface (Earth foundation) */
+    --sand-50:  #FBF7F0; --sand-100: #F4EFE6; --sand-200: #E8DECF; --sand-300: #D6C7B0;
+    --sand-400: #BCA888; --sand-500: #9F8B6A; --sand-600: #826F52; --sand-700: #66573F;
+    --sand-800: #4A3F2E; --sand-900: #2E271B; --sand-950: #1A1610;
+
+    /* Neutral — graphite ink (low chroma) */
+    --neutral-50:  #FAF7F4; --neutral-100: #F0EBE4; --neutral-200: #DDD5C7;
+    --neutral-300: #B5AC9C; --neutral-400: #8C857A; --neutral-500: #6B645A;
+    --neutral-600: #5C564E; --neutral-700: #4A453E; --neutral-800: #38332E;
+    --neutral-900: #2C2A26; --neutral-950: #1A1815;
+
+    /* Primary R2 — sky-teal bridge (D2 locked) */
+    --p-50:  #EFF5FA; --p-100: #DAE9F2; --p-200: #B5D2E5; --p-300: #82B0CE;
+    --p-400: #5290B5; --p-500: #34759E; --p-600: #2A6489; --p-700: #235173;
+    --p-800: #1D425C; --p-900: #163346; --p-950: #0D2030;
+
+    /* === Brand-DNA categoricals re-engaged for active candidates === */
+
+    /* Aqua — brand secondary (Aqua Blue #04A0B7 lineage, lightened) */
+    --aqua-50:  #ECF6F8; --aqua-100: #CDE8EC; --aqua-200: #9BD0D8; --aqua-300: #6CB6C2;
+    --aqua-400: #4A9CAA; --aqua-500: #36848F; --aqua-600: #2A6B74; --aqua-700: #21555C;
+    --aqua-800: #194045; --aqua-900: #122E32; --aqua-950: #08191B;
+
+    /* Sage — clinical green (Spring Green #52A045 lineage, muted, replaces moss in C2/C3) */
+    --sage-50:  #F2F6EF; --sage-100: #E0EBD8; --sage-200: #C2D8B3; --sage-300: #9CC284;
+    --sage-400: #79A85F; --sage-500: #5C8E45; --sage-600: #487437; --sage-700: #385C2C;
+    --sage-800: #2A4521; --sage-900: #1D2F17; --sage-950: #11180D;
+
+    /* Clay — warm-terracotta accent (Lava Orange #F15922 lineage, dialed back) */
+    --clay-50:  #FDF4ED; --clay-100: #FAE2CC; --clay-200: #F4C599; --clay-300: #ED9F60;
+    --clay-400: #DC7A38; --clay-500: #C45F25; --clay-600: #A24B1C; --clay-700: #813B17;
+    --clay-800: #602D11; --clay-900: #3F1E0B; --clay-950: #220F05;
+
+    /* Honey — soft warm yellow (Mango #F3B31E + Sky Blue from tertiary, used sparingly) */
+    --honey-100: #FBEBC9; --honey-200: #F5D391; --honey-300: #E8B254;
+
+    /* Mint — adjunct light tint for multi-hue gradients in C3 */
+    --mint-100: #DDEFE7; --mint-200: #B6DBC8;
+
+    /* Status colors (carried from v6) */
+    --success-600: #487437; --warning-600: #B07A1A; --error-600: #B14624;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Source Serif 4", "Source Serif Pro", Charter, Georgia, serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--doc-bg); color: var(--doc-ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 56px 40px 120px; }
+
+  h1 { font-family: var(--font-serif); font-size: 42px; font-weight: 600; line-height: 1.12; margin: 0 0 14px; letter-spacing: -0.012em; }
+  h2 { font-family: var(--font-serif); font-size: 30px; font-weight: 600; margin: 0 0 10px; letter-spacing: -0.005em; }
+  h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; }
+  h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--doc-ink-3); margin: 0 0 12px; }
+  section { margin-bottom: 80px; }
+  .lede { color: var(--doc-ink-2); margin: 0 0 32px; max-width: 820px; font-size: 16px; }
+  code { font-family: var(--font-mono); font-size: 13px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 4px; }
+  small { color: var(--doc-ink-3); font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--doc-border); vertical-align: top; }
+  th { font-weight: 600; color: var(--doc-ink-2); background: #F4F2EE; text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+
+  .delta-panel { background: #F4F2EE; border-left: 4px solid var(--doc-accent); border-radius: 4px; padding: 24px 32px; margin: 0 0 40px; font-size: 14px; }
+  .delta-panel dl { margin: 0; display: grid; grid-template-columns: 160px 1fr; gap: 8px 24px; }
+  .delta-panel dt { font-weight: 600; color: var(--doc-ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; padding-top: 2px; }
+  .delta-panel dd { margin: 0; }
+  .delta-panel dd ul { margin: 0; padding-left: 18px; }
+  .delta-panel dd li { margin-bottom: 3px; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-direction-locked { background: #FBE9BC; color: #74500D; }
+  .status-locked { background: #DCEAD3; color: #335326; }
+  .status-draft { background: #FBE9BC; color: #74500D; }
+  .status-open { background: #E1DEDA; color: #6F6963; }
+
+  .recommendation { background: #DCEAD3; border-left: 4px solid #335326; padding: 24px 32px; border-radius: 4px; margin: 32px 0; }
+  .recommendation strong { color: #335326; }
+  .recommendation .head { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .recommendation p { margin: 0 0 10px; }
+  .recommendation p:last-child { margin-bottom: 0; }
+
+  .premise-callout { display: flex; gap: 24px; padding: 20px 24px; border-radius: 12px; background: #F4F2EE; border: 1px solid var(--doc-border); margin: 0 0 40px; }
+  .premise-callout .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--doc-ink-3); font-weight: 700; flex-shrink: 0; padding-top: 2px; min-width: 100px; }
+  .premise-callout p { margin: 0; font-size: 14px; line-height: 1.6; }
+
+  /* Candidate cards */
+  .candidate { background: #FBF9F5; border: 1px solid var(--doc-border); border-radius: 12px; padding: 24px 28px; margin-bottom: 16px; }
+  .candidate header { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .candidate h3 { margin: 0; font-size: 20px; }
+  .candidate .meta-row { font-size: 12px; color: var(--doc-ink-3); font-family: var(--font-mono); }
+  .candidate .desc { color: var(--doc-ink-2); margin: 6px 0 16px; max-width: 820px; }
+  .candidate .role-grid { display: grid; grid-template-columns: 200px 1fr; gap: 8px 16px; font-size: 13px; margin: 14px 0 18px; }
+  .candidate .role-grid dt { font-weight: 600; color: var(--doc-ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; padding-top: 2px; }
+  .candidate .role-grid dd { margin: 0; color: var(--doc-ink-2); }
+
+  .ladder-block { margin-top: 14px; }
+  .ladder-block h5 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--doc-ink-3); margin: 12px 0 6px; font-weight: 700; }
+  .swatch-row { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+  .swatch { aspect-ratio: 1 / 1.1; border-radius: 6px; padding: 5px 6px; display: flex; flex-direction: column; justify-content: space-between; font-size: 9px; line-height: 1.2; border: 1px solid rgba(0,0,0,0.06); }
+  .swatch .stop { font-weight: 600; opacity: 0.85; }
+  .swatch .hex { font-family: var(--font-mono); font-size: 8px; opacity: 0.75; }
+  .swatch.light { color: #1A1816; }
+  .swatch.dark { color: #FAF6F0; }
+  .candidate .flag { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: #F8DBD2; color: #76311D; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .candidate .flag.ok { background: #DCEAD3; color: #335326; }
+  .candidate .flag.warn { background: #FBE9BC; color: #74500D; }
+
+  /* Pilot strips */
+  .pilot { margin-bottom: 56px; }
+  .pilot-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+  .pilot-head h3 { margin: 0; font-size: 20px; }
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .phone { border-radius: 22px; padding: 18px 16px 20px; min-height: 460px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: relative; overflow: hidden; }
+  .phone .topbar { font-size: 9px; opacity: 0.55; text-transform: uppercase; letter-spacing: 0.08em; padding-bottom: 8px; border-bottom: 1px solid currentColor; display: flex; justify-content: space-between; }
+  .phone .label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.65; font-weight: 700; }
+  .phone h5 { font-family: var(--font-serif); font-size: 18px; font-weight: 600; margin: 4px 0; line-height: 1.2; letter-spacing: -0.005em; }
+  .phone p { font-size: 11px; line-height: 1.45; margin: 0; opacity: 0.85; }
+  .phone .card { padding: 12px 14px; border-radius: 12px; font-size: 11px; }
+  .phone .card-title { font-weight: 600; font-size: 12px; margin-bottom: 4px; }
+  .phone .cta { display: inline-block; padding: 9px 16px; border-radius: 999px; font-size: 11px; font-weight: 600; text-align: center; align-self: flex-start; }
+  .phone .progress { height: 4px; border-radius: 999px; overflow: hidden; }
+  .phone .progress > i { display: block; height: 100%; }
+  .phone .ai-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .phone .ai-tag .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .phone .ai-tag svg { width: 10px; height: 10px; }
+  .phone .meta-line { font-size: 10px; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.06em; }
+  .phone .icon-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .phone .ic { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+  .phone-caption { text-align: center; font-size: 11px; color: var(--doc-ink-3); margin-top: 6px; font-family: var(--font-mono); }
+
+  /* === C1 — Passive baseline (v6) === */
+  .phone.c1 { background: var(--sand-50); color: var(--neutral-900); }
+  .phone.c1 .topbar { color: var(--neutral-700); }
+  .phone.c1 .card { background: #FFFFFF; border: 1px solid var(--sand-200); }
+  .phone.c1 .card.ai { background: #FFFFFF; border: 1px solid var(--sand-200); border-left: 3px solid var(--p-700); }
+  .phone.c1 .cta { background: var(--p-600); color: #FFFFFF; }
+  .phone.c1 .progress { background: var(--sand-200); }
+  .phone.c1 .progress > i { background: var(--p-600); }
+  .phone.c1 .ai-tag { color: var(--p-700); }
+  .phone.c1 .ai-tag .dot { background: var(--p-700); }
+  .phone.c1 .ic { background: var(--sand-100); color: var(--p-600); border: 1px solid var(--sand-200); }
+  .phone.c1 .ic.b { color: var(--sage-600); }
+  .phone.c1 .ic.c { color: var(--clay-600); }
+  .phone.c1.buyer { background: var(--p-800); color: var(--sand-50); }
+  .phone.c1.buyer .topbar { color: var(--sand-100); border-color: rgba(251,247,240,0.20); }
+  .phone.c1.buyer .card { background: rgba(251,247,240,0.10); border-color: rgba(251,247,240,0.20); color: var(--sand-50); }
+  .phone.c1.buyer .cta { background: var(--sand-50); color: var(--p-900); }
+
+  /* === C2 — Light Active (Earth, clay+sage co-lead, brand-DNA at light stops) === */
+  .phone.c2 { background: var(--sand-50); color: var(--neutral-900); }
+  .phone.c2 .topbar { color: var(--neutral-700); }
+  .phone.c2 .card { background: #FFFFFF; border: 1px solid var(--sand-200); }
+  .phone.c2 .card.hero { background: linear-gradient(135deg, var(--p-100), var(--aqua-100)); border: 1px solid var(--p-200); color: var(--p-900); }
+  .phone.c2 .card.dcp { background: var(--sage-100); border: 1px solid var(--sage-200); color: var(--sage-900); }
+  .phone.c2 .card.habits { background: var(--clay-100); border: 1px solid var(--clay-200); color: var(--clay-900); }
+  .phone.c2 .card.rewards { background: var(--honey-100); border: 1px solid var(--honey-200); color: var(--clay-900); }
+  .phone.c2 .card.ai { background: var(--p-50); border: 1px solid var(--p-200); }
+  .phone.c2 .cta { background: var(--p-600); color: #FFFFFF; }
+  .phone.c2 .progress { background: var(--sand-200); }
+  .phone.c2 .progress > i { background: var(--p-600); }
+  .phone.c2 .ai-tag { color: var(--p-700); }
+  .phone.c2 .ai-tag .dot { background: var(--p-700); }
+  .phone.c2 .ic { background: var(--sand-100); color: var(--p-600); border: 1px solid var(--sand-200); }
+  .phone.c2 .ic.b { background: var(--sage-100); color: var(--sage-700); border-color: var(--sage-200); }
+  .phone.c2 .ic.c { background: var(--clay-100); color: var(--clay-700); border-color: var(--clay-200); }
+  .phone.c2 .ic.d { background: var(--aqua-100); color: var(--aqua-700); border-color: var(--aqua-200); }
+  .phone.c2.buyer { background: linear-gradient(135deg, var(--p-700), var(--aqua-800) 60%, var(--sage-700)); color: var(--sand-50); }
+  .phone.c2.buyer .topbar { color: var(--sand-100); border-color: rgba(251,247,240,0.20); }
+  .phone.c2.buyer .card { background: rgba(251,247,240,0.12); border-color: rgba(251,247,240,0.20); color: var(--sand-50); }
+  .phone.c2.buyer .cta { background: var(--sand-50); color: var(--p-900); }
+
+  /* === C3 — Verily-coded Active (full chromatic surfaces + multi-hue gradients) === */
+  .phone.c3 { background: linear-gradient(180deg, var(--sand-50), var(--p-50)); color: var(--neutral-900); }
+  .phone.c3 .topbar { color: var(--neutral-700); }
+  .phone.c3 .card { background: #FFFFFF; border: 1px solid var(--sand-200); }
+  .phone.c3 .card.hero { background: linear-gradient(135deg, var(--p-200), var(--aqua-200) 50%, var(--sage-200)); border: 1px solid var(--p-300); color: var(--p-950); }
+  .phone.c3 .card.dcp { background: var(--sage-200); border: 1px solid var(--sage-300); color: var(--sage-950); }
+  .phone.c3 .card.habits { background: linear-gradient(135deg, var(--clay-200), var(--honey-200)); border: 1px solid var(--clay-300); color: var(--clay-950); }
+  .phone.c3 .card.rewards { background: linear-gradient(135deg, var(--honey-200), var(--clay-300)); border: 1px solid var(--clay-300); color: var(--clay-950); }
+  .phone.c3 .card.ai { background: linear-gradient(135deg, var(--p-100), var(--aqua-100) 60%, var(--mint-100)); border: 1px solid var(--p-200); }
+  .phone.c3 .cta { background: var(--p-700); color: #FFFFFF; }
+  .phone.c3 .progress { background: var(--sand-200); }
+  .phone.c3 .progress > i { background: var(--p-700); }
+  .phone.c3 .ai-tag { color: var(--aqua-700); }
+  .phone.c3 .ai-tag .dot { background: var(--aqua-700); }
+  .phone.c3 .ic { background: var(--p-200); color: var(--p-800); border: 1px solid var(--p-300); }
+  .phone.c3 .ic.b { background: var(--sage-200); color: var(--sage-800); border-color: var(--sage-300); }
+  .phone.c3 .ic.c { background: var(--clay-200); color: var(--clay-800); border-color: var(--clay-300); }
+  .phone.c3 .ic.d { background: var(--aqua-200); color: var(--aqua-800); border-color: var(--aqua-300); }
+  .phone.c3.buyer { background: linear-gradient(135deg, var(--p-600), var(--aqua-500) 50%, var(--sage-500)); color: var(--sand-50); }
+  .phone.c3.buyer .topbar { color: var(--sand-100); border-color: rgba(251,247,240,0.25); }
+  .phone.c3.buyer .card { background: rgba(251,247,240,0.18); border-color: rgba(251,247,240,0.30); color: var(--sand-50); }
+  .phone.c3.buyer .cta { background: var(--sand-50); color: var(--p-900); }
+
+  /* Comparison table */
+  .grid-table th:first-child, .grid-table td:first-child { background: #F4F2EE; font-weight: 600; }
+  .grid-table .pass    { color: #335326; font-weight: 700; }
+  .grid-table .partial { color: #74500D; font-weight: 700; }
+  .grid-table .fail    { color: #76311D; font-weight: 700; }
+  .grid-table small { display: block; font-weight: 400; color: var(--doc-ink-3); margin-top: 2px; line-height: 1.4; font-size: 11px; }
+
+  .alts { background: #F7F2FB; border-left: 4px solid #422973; padding: 20px 28px; border-radius: 4px; }
+  .alts .alt-item { padding: 12px 0; border-bottom: 1px dashed rgba(66,41,115,0.18); }
+  .alts .alt-item:last-child { border-bottom: none; }
+  .alts .alt-item strong { color: #422973; }
+
+  .gates { background: #FBE9BC22; border-left: 4px solid #DC9A1E; padding: 20px 28px; border-radius: 4px; }
+  .gates ol { margin: 0; padding-left: 20px; }
+  .gates li { margin-bottom: 10px; }
+
+  .footer-meta { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--doc-border); color: var(--doc-ink-3); font-size: 12px; font-family: var(--font-mono); }
+
+  /* AI sparkle SVG */
+  .sparkle { display: inline-block; width: 10px; height: 10px; vertical-align: -2px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ========================================================================
+     DELTA PANEL
+     ======================================================================== -->
+<header>
+  <h1>D11 — Active brand role</h1>
+  <p class="lede">Resolve whether v7 retains v4–v6 editorial restraint (Passive, color-as-accent) or pivots to a more chromatic application (Active, color-as-coat). The 2021 brand guidelines and Verily's pastel-active reference both argue for Active; the question is at what saturation it lands without dating fast or trading away clinical credibility.</p>
+
+  <div class="delta-panel">
+    <dl>
+      <dt>Iteration</dt>       <dd>D11 · v7 · brand-aligned-active</dd>
+      <dt>Type</dt>            <dd>decision-probe</dd>
+      <dt>Decision ID</dt>     <dd>D11 (passive editorial restraint vs. active chromatic application)</dd>
+      <dt>Recommendation</dt>  <dd><strong>C2 — Light Active · Earth (clay + sage co-lead) · brand-DNA categoricals at 100–200 stops</strong></dd>
+      <dt>Builds on</dt>       <dd>v6/system.html (passive baseline) · 2021 brand guidelines · Verily reference</dd>
+      <dt>Premise</dt>         <dd>Verify whether — and at what chromatic saturation — Active brand role lands without sacrificing Phase 0 Credible/Direct or D1 Clinical-Modern Distinctive.</dd>
+      <dt>Color register</dt>  <dd><strong>Earth</strong> — clay + sage co-lead, sand stepping back from lead role</dd>
+      <dt>Brand color role</dt><dd><strong>Active</strong> — the question being audited</dd>
+      <dt>Changed</dt>         <dd><ul>
+        <li>B6 Passive → Active (D11 trigger)</li>
+        <li>B4 flat → container surfaces + primary CTAs gradient</li>
+        <li>B1 sand-co-led Earth → clay+sage-co-led Earth</li>
+        <li>Brand DNA (Brand Blue #0F497F, Aqua #04A0B7, Spring Green #52A045, Lava Orange #F15922) re-engaged at low-saturation tints</li>
+        <li>Verily added as primary visual reference</li>
+        <li>Purple deemphasized — lavender + indigo pulled back</li>
+      </ul></dd>
+      <dt>Locked</dt>          <dd><ul>
+        <li>R2 sky-teal bridge primary (D2)</li>
+        <li>Clinical-Modern Distinctive tribe (D1)</li>
+        <li>Phase 0 attributes (HC-12)</li>
+        <li>HC-3 neutral/sand split — all candidates preserve it</li>
+        <li>HC-5 purple categorical only — and deemphasized further</li>
+        <li>HC-6 WCAG AA floor</li>
+        <li>Icon recipes hold at 5 (B2)</li>
+        <li>Variant grid illustration economy (B3)</li>
+      </ul></dd>
+      <dt>Assumptions</dt>     <dd><ul>
+        <li>A1 originally inferred as system-preview — rerouted to decision-probe at D.1 #4 (B6 Active triggered HC-13).</li>
+        <li>B1 "clay + sage co-lead" interpreted as Earth-register with sand demoted from lead role (sand stays available as backup surface; HC-3 preserved).</li>
+        <li>Candidate set inferred 3-way (C1 v6 baseline, C2 Light Active, C3 Verily-coded full Active) — cue: Verily named primary reference + "not heavy" + brand guide palette anchor.</li>
+        <li>Applied moments inferred as Member home + Buyer hero + AI surface — per default decision-probe template stress-test triad.</li>
+      </ul></dd>
+      <dt>Decision touched</dt><dd>D11 (reopen — full audit)</dd>
+      <dt>Status</dt>          <dd><span class="status status-direction-locked">direction-locked</span> · <span style="color:var(--doc-ink-3);font-size:13px;">open → direction-locked → locked</span></dd>
+      <dt>Date</dt>            <dd>2026-05-04</dd>
+      <dt>Target path</dt>     <dd><code>decisions/D11-active-brand-role/audit.html</code></dd>
+      <dt>Weighting viz</dt>   <dd>skip</dd>
+    </dl>
+  </div>
+
+  <div class="premise-callout">
+    <div class="label">Why now</div>
+    <p>v6 retired gradients from product entirely and pulled jewel weight back to 100–200 stops on categoricals (passive editorial restraint, color-as-accent). The user's brief — warmer surfaces, brand-DNA categoricals (blue/teal/green/orange) re-engaged, Verily as primary reference, "not heavy" — pushes consistently in one direction: Active brand role at low saturation. This audit tests whether Light Active beats both the v6 baseline (potentially too cold/restrained for Phase 0 Human) and a full Verily-coded Active (potentially too chromatic for Phase 0 Credible at our scale).</p>
+  </div>
+</header>
+
+<!-- ========================================================================
+     CANDIDATES
+     ======================================================================== -->
+<section>
+  <h2>Candidates</h2>
+  <p class="lede">Three candidates span the editorial-restraint ↔ active-chromatic axis. All preserve R2 primary (D2), Clinical-Modern Distinctive tribe (D1), HC-3 neutral/sand split, and WCAG AA. They differ in where chroma lives — glyph only, container fill at light stops, or container fill at medium stops with multi-hue gradients.</p>
+
+  <!-- ============================== C1 — Passive baseline ============================== -->
+  <div class="candidate">
+    <header>
+      <h3>C1 — Passive baseline <span class="flag ok">v6 canonical</span></h3>
+      <span class="meta-row">Earth · sand surfaces · color = glyph only</span>
+    </header>
+    <p class="desc">v4–v6 editorial restraint preserved verbatim. Sand surfaces hold the warmth; <code>neutral.*</code> ink does the contrast work; module identity comes from a 500-stop glyph color inside a uniform <code>sand.100</code> icon container. CTAs = solid <code>primary.600</code>. Hero cards = white-on-sand. AI = <code>primary.700</code> dot on a tag, no surface wash. Gradients = retired entirely from product. The reference state.</p>
+
+    <dl class="role-grid">
+      <dt>Surface lead</dt><dd><code>sand.50</code> page, <code>sand.100</code> + white cards</dd>
+      <dt>Module identity</dt><dd>500-stop glyph in <code>sand.100</code> uniform container</dd>
+      <dt>CTA</dt><dd>Solid <code>primary.600</code></dd>
+      <dt>Hero</dt><dd>White card on sand background — no chromatic fill</dd>
+      <dt>AI surface</dt><dd>White card with primary.700 dot on "From your AI" tag (no wash)</dd>
+      <dt>Gradient surface area</dt><dd>0% — retired</dd>
+      <dt>Brand-DNA usage</dt><dd>Primary R2 only; aqua/sage/clay/honey held in token system but unused at applied scale</dd>
+    </dl>
+
+    <div class="ladder-block">
+      <h5>Sand</h5>
+      <div class="swatch-row">
+        <div class="swatch light" style="background:#FBF7F0"><span class="stop">50</span><span class="hex">FBF7F0</span></div>
+        <div class="swatch light" style="background:#F4EFE6"><span class="stop">100</span><span class="hex">F4EFE6</span></div>
+        <div class="swatch light" style="background:#E8DECF"><span class="stop">200</span><span class="hex">E8DECF</span></div>
+        <div class="swatch light" style="background:#D6C7B0"><span class="stop">300</span><span class="hex">D6C7B0</span></div>
+        <div class="swatch light" style="background:#BCA888"><span class="stop">400</span><span class="hex">BCA888</span></div>
+        <div class="swatch dark" style="background:#9F8B6A"><span class="stop">500</span><span class="hex">9F8B6A</span></div>
+        <div class="swatch dark" style="background:#826F52"><span class="stop">600</span><span class="hex">826F52</span></div>
+        <div class="swatch dark" style="background:#66573F"><span class="stop">700</span><span class="hex">66573F</span></div>
+        <div class="swatch dark" style="background:#4A3F2E"><span class="stop">800</span><span class="hex">4A3F2E</span></div>
+        <div class="swatch dark" style="background:#2E271B"><span class="stop">900</span><span class="hex">2E271B</span></div>
+        <div class="swatch dark" style="background:#1A1610"><span class="stop">950</span><span class="hex">1A1610</span></div>
+      </div>
+      <h5>Primary R2 — the only chromatic scale that surfaces in product</h5>
+      <div class="swatch-row">
+        <div class="swatch light" style="background:#EFF5FA"><span class="stop">50</span><span class="hex">EFF5FA</span></div>
+        <div class="swatch light" style="background:#DAE9F2"><span class="stop">100</span><span class="hex">DAE9F2</span></div>
+        <div class="swatch light" style="background:#B5D2E5"><span class="stop">200</span><span class="hex">B5D2E5</span></div>
+        <div class="swatch light" style="background:#82B0CE"><span class="stop">300</span><span class="hex">82B0CE</span></div>
+        <div class="swatch dark" style="background:#5290B5"><span class="stop">400</span><span class="hex">5290B5</span></div>
+        <div class="swatch dark" style="background:#34759E"><span class="stop">500</span><span class="hex">34759E</span></div>
+        <div class="swatch dark" style="background:#2A6489"><span class="stop">600</span><span class="hex">2A6489</span></div>
+        <div class="swatch dark" style="background:#235173"><span class="stop">700</span><span class="hex">235173</span></div>
+        <div class="swatch dark" style="background:#1D425C"><span class="stop">800</span><span class="hex">1D425C</span></div>
+        <div class="swatch dark" style="background:#163346"><span class="stop">900</span><span class="hex">163346</span></div>
+        <div class="swatch dark" style="background:#0D2030"><span class="stop">950</span><span class="hex">0D2030</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== C2 — Light Active ============================== -->
+  <div class="candidate">
+    <header>
+      <h3>C2 — Light Active <span class="flag warn">recommended · direction-locked</span></h3>
+      <span class="meta-row">Earth · clay + sage co-lead · brand-DNA tints at 100–200</span>
+    </header>
+    <p class="desc">Earth register with clay and sage co-leading the surface character (sand recedes from co-lead, stays as backup). Brand-DNA hue families — Brand Blue (R2 primary), Aqua Blue, Spring Green (sage), Lava Orange (clay), Mango (honey) — all present, but only at 100–300 stops on container surfaces. Module identity through tinted icon containers (DCP = sage.100, Healthy Habits = clay.100, Health Data = aqua.100, Wellbeing = sand-tinted). One chromatic moment per screen (the hero card or a feature-tour card). CTAs hold at solid <code>primary.600</code>. AI surface gets a <code>primary.50</code> wash + sparkle glyph (indigo retired per C2 deemphasize-purple ask). Half the chromatic distance to Verily; full preservation of clinical credibility.</p>
+
+    <dl class="role-grid">
+      <dt>Surface lead</dt><dd><code>sand.50</code> page; clay/sage/aqua/primary at 100 for module containers</dd>
+      <dt>Module identity</dt><dd>Tinted container (100-stop) + 700-stop glyph</dd>
+      <dt>CTA</dt><dd>Solid <code>primary.600</code> (unchanged from v6)</dd>
+      <dt>Hero</dt><dd>One per screen — gradient <code>primary.100</code> → <code>aqua.100</code> wash</dd>
+      <dt>AI surface</dt><dd><code>primary.50</code> wash + sparkle glyph + "AI Insight" tag — no indigo</dd>
+      <dt>Gradient surface area</dt><dd>~12% — single hero card + CTA polish only</dd>
+      <dt>Brand-DNA usage</dt><dd>All 5 families (primary, aqua, sage, clay, honey) at 100–300 stops</dd>
+    </dl>
+
+    <div class="ladder-block">
+      <h5>Clay (warm-terracotta · Lava Orange lineage · Healthy Habits + Rewards)</h5>
+      <div class="swatch-row">
+        <div class="swatch light" style="background:#FDF4ED"><span class="stop">50</span><span class="hex">FDF4ED</span></div>
+        <div class="swatch light" style="background:#FAE2CC"><span class="stop">100</span><span class="hex">FAE2CC</span></div>
+        <div class="swatch light" style="background:#F4C599"><span class="stop">200</span><span class="hex">F4C599</span></div>
+        <div class="swatch light" style="background:#ED9F60"><span class="stop">300</span><span class="hex">ED9F60</span></div>
+        <div class="swatch dark" style="background:#DC7A38"><span class="stop">400</span><span class="hex">DC7A38</span></div>
+        <div class="swatch dark" style="background:#C45F25"><span class="stop">500</span><span class="hex">C45F25</span></div>
+        <div class="swatch dark" style="background:#A24B1C"><span class="stop">600</span><span class="hex">A24B1C</span></div>
+        <div class="swatch dark" style="background:#813B17"><span class="stop">700</span><span class="hex">813B17</span></div>
+        <div class="swatch dark" style="background:#602D11"><span class="stop">800</span><span class="hex">602D11</span></div>
+        <div class="swatch dark" style="background:#3F1E0B"><span class="stop">900</span><span class="hex">3F1E0B</span></div>
+        <div class="swatch dark" style="background:#220F05"><span class="stop">950</span><span class="hex">220F05</span></div>
+      </div>
+      <h5>Sage (clinical green · Spring Green lineage · DCP module)</h5>
+      <div class="swatch-row">
+        <div class="swatch light" style="background:#F2F6EF"><span class="stop">50</span><span class="hex">F2F6EF</span></div>
+        <div class="swatch light" style="background:#E0EBD8"><span class="stop">100</span><span class="hex">E0EBD8</span></div>
+        <div class="swatch light" style="background:#C2D8B3"><span class="stop">200</span><span class="hex">C2D8B3</span></div>
+        <div class="swatch light" style="background:#9CC284"><span class="stop">300</span><span class="hex">9CC284</span></div>
+        <div class="swatch dark" style="background:#79A85F"><span class="stop">400</span><span class="hex">79A85F</span></div>
+        <div class="swatch dark" style="background:#5C8E45"><span class="stop">500</span><span class="hex">5C8E45</span></div>
+        <div class="swatch dark" style="background:#487437"><span class="stop">600</span><span class="hex">487437</span></div>
+        <div class="swatch dark" style="background:#385C2C"><span class="stop">700</span><span class="hex">385C2C</span></div>
+        <div class="swatch dark" style="background:#2A4521"><span class="stop">800</span><span class="hex">2A4521</span></div>
+        <div class="swatch dark" style="background:#1D2F17"><span class="stop">900</span><span class="hex">1D2F17</span></div>
+        <div class="swatch dark" style="background:#11180D"><span class="stop">950</span><span class="hex">11180D</span></div>
+      </div>
+      <h5>Aqua (Aqua Blue lineage · Health Data module — replaces lavender per C2 deemphasize-purple)</h5>
+      <div class="swatch-row">
+        <div class="swatch light" style="background:#ECF6F8"><span class="stop">50</span><span class="hex">ECF6F8</span></div>
+        <div class="swatch light" style="background:#CDE8EC"><span class="stop">100</span><span class="hex">CDE8EC</span></div>
+        <div class="swatch light" style="background:#9BD0D8"><span class="stop">200</span><span class="hex">9BD0D8</span></div>
+        <div class="swatch light" style="background:#6CB6C2"><span class="stop">300</span><span class="hex">6CB6C2</span></div>
+        <div class="swatch dark" style="background:#4A9CAA"><span class="stop">400</span><span class="hex">4A9CAA</span></div>
+        <div class="swatch dark" style="background:#36848F"><span class="stop">500</span><span class="hex">36848F</span></div>
+        <div class="swatch dark" style="background:#2A6B74"><span class="stop">600</span><span class="hex">2A6B74</span></div>
+        <div class="swatch dark" style="background:#21555C"><span class="stop">700</span><span class="hex">21555C</span></div>
+        <div class="swatch dark" style="background:#194045"><span class="stop">800</span><span class="hex">194045</span></div>
+        <div class="swatch dark" style="background:#122E32"><span class="stop">900</span><span class="hex">122E32</span></div>
+        <div class="swatch dark" style="background:#08191B"><span class="stop">950</span><span class="hex">08191B</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== C3 — Verily-coded Active ============================== -->
+  <div class="candidate">
+    <header>
+      <h3>C3 — Verily-coded Active <span class="flag">stress test</span></h3>
+      <span class="meta-row">Earth · multi-hue gradients · container fills at 200–300</span>
+    </header>
+    <p class="desc">Verily's reference application carried into MHC, sans purple/violet. Every module category gets a chromatic container fill at 200-stop (heavier than C2's 100-stop). Hero cards run multi-hue gradients (e.g., <code>primary.200</code> → <code>aqua.200</code> → <code>sage.200</code>) inside a single card. AI surface = three-hue blend. Page background gets a soft chromatic gradient (sand.50 → primary.50). The most chromatic candidate. Tests the upper bound — does Phase 0 Credible survive when chroma is the dominant signal, or does the system tip into "consumer wellness" territory?</p>
+
+    <dl class="role-grid">
+      <dt>Surface lead</dt><dd>Page <code>sand.50 → primary.50</code> gradient; module containers at 200-stop</dd>
+      <dt>Module identity</dt><dd>Tinted container at 200 + 800-stop glyph</dd>
+      <dt>CTA</dt><dd><code>primary.700</code> (deeper than C2 to hold against chromatic surfaces)</dd>
+      <dt>Hero</dt><dd>Multi-hue gradient — <code>primary.200 → aqua.200 → sage.200</code></dd>
+      <dt>AI surface</dt><dd>Three-hue blend — <code>primary.100 → aqua.100 → mint.100</code> + sparkle glyph; aqua-coded tag (no indigo)</dd>
+      <dt>Gradient surface area</dt><dd>~35% — heroes + AI + page bg</dd>
+      <dt>Brand-DNA usage</dt><dd>All 5 families at 200–300 stops; mint added as adjunct gradient stop</dd>
+    </dl>
+
+    <div class="ladder-block">
+      <h5>Surfaces engaged at 200-stop (cards + heroes)</h5>
+      <div class="swatch-row" style="grid-template-columns: repeat(7, 1fr);">
+        <div class="swatch light" style="background:#B5D2E5"><span class="stop">primary.200</span><span class="hex">B5D2E5</span></div>
+        <div class="swatch light" style="background:#9BD0D8"><span class="stop">aqua.200</span><span class="hex">9BD0D8</span></div>
+        <div class="swatch light" style="background:#C2D8B3"><span class="stop">sage.200</span><span class="hex">C2D8B3</span></div>
+        <div class="swatch light" style="background:#F4C599"><span class="stop">clay.200</span><span class="hex">F4C599</span></div>
+        <div class="swatch light" style="background:#F5D391"><span class="stop">honey.200</span><span class="hex">F5D391</span></div>
+        <div class="swatch light" style="background:#B6DBC8"><span class="stop">mint.200</span><span class="hex">B6DBC8</span></div>
+        <div class="swatch light" style="background:#E8DECF"><span class="stop">sand.200</span><span class="hex">E8DECF</span></div>
+      </div>
+      <h5>Multi-hue gradient set engaged at applied scale</h5>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px;">
+        <div style="height:48px; border-radius:8px; background: linear-gradient(135deg, #B5D2E5, #9BD0D8 50%, #C2D8B3); display:flex; align-items:center; justify-content:center; font-size:10px; color:#0D2030; font-weight:600;">Hero · primary→aqua→sage</div>
+        <div style="height:48px; border-radius:8px; background: linear-gradient(135deg, #DAE9F2, #CDE8EC 60%, #DDEFE7); display:flex; align-items:center; justify-content:center; font-size:10px; color:#0D2030; font-weight:600;">AI · primary.100→aqua.100→mint.100</div>
+        <div style="height:48px; border-radius:8px; background: linear-gradient(135deg, #F4C599, #F5D391); display:flex; align-items:center; justify-content:center; font-size:10px; color:#220F05; font-weight:600;">Habits · clay→honey</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     SELECTION CRITERIA
+     ======================================================================== -->
+<section>
+  <h2>Selection criteria</h2>
+  <p class="lede">Phase 0's five attributes (Credible, Direct, Outcome-obsessed, Human, AI-competent) plus D1 Distinctive and HC-6 WCAG AA. Same criteria, every candidate. No moving the goalposts.</p>
+  <ol>
+    <li><strong>Credible (Phase 0)</strong> — does the candidate read clinical-credible at the buyer hero presentation scale? Would a CHRO put this on a board slide without it embarrassing the brand?</li>
+    <li><strong>Direct (Phase 0)</strong> — does it stay out of the way of the message? Chromatic noise that forces the reader to filter color before reading content is a Direct failure.</li>
+    <li><strong>Outcome-obsessed (Phase 0)</strong> — is data treatment legible? Numbers, charts, percentage deltas must read instantly at member-screen scale.</li>
+    <li><strong>Human (Phase 0)</strong> — does the system feel warm, approachable, not corporate-cold? This is the attribute v6's editorial restraint risks under-serving.</li>
+    <li><strong>AI-competent (Phase 0)</strong> — does the AI surface treatment signal AI without dating fast and without leaning on indigo (per C2 deemphasize-purple)?</li>
+    <li><strong>Distinctive (D1)</strong> — does it differentiate from the B2B-wellbeing cluster (Personify/Sharecare/Thrive/Navigate) without crossing into wellness-lifestyle (Calm/Headspace)?</li>
+    <li><strong>WCAG AA (HC-6)</strong> — every text-on-background pairing ≥ 4.5:1; every UI-component edge ≥ 3:1. Verified per pairing in §A11y.</li>
+  </ol>
+</section>
+
+<!-- ========================================================================
+     APPLIED AUDIT — 3 pilots × 3 candidates
+     ======================================================================== -->
+<section>
+  <h2>Applied audit</h2>
+  <p class="lede">Three stress-test moments rendered against each candidate. Member home tests warmth + content density. Buyer hero tests presentation scale + brand expression. AI surface tests Phase 0 §9 deliverable, post-purple-deemphasis.</p>
+
+  <!-- ============================== Pilot 1 — Member home ============================== -->
+  <div class="pilot">
+    <div class="pilot-head">
+      <h3>Pilot 1 — Member · Bonjour Andrew (Home)</h3>
+      <small>tests Human + Direct + Outcome-obsessed at member-phone scale</small>
+    </div>
+    <div class="strip">
+      <!-- C1 — Passive -->
+      <div>
+        <div class="phone c1">
+          <div class="topbar"><span>9:41</span><span>•••</span></div>
+          <div class="label">Bonjour, Andrew</div>
+          <h5>Today's check-in</h5>
+          <div class="card">
+            <div class="card-title" style="color: var(--p-700);">3 things to focus on</div>
+            <p style="color: var(--neutral-700);">Your sleep is trending up. Keep going on water — you're 2 days from a streak.</p>
+          </div>
+          <div class="label">Your modules</div>
+          <div class="icon-row">
+            <div class="ic">P</div>
+            <div class="ic b">D</div>
+            <div class="ic c">H</div>
+          </div>
+          <div class="card ai">
+            <div class="ai-tag"><span class="dot"></span> From your AI</div>
+            <p style="margin-top:6px; color: var(--neutral-700);">A short walk now would lift your afternoon energy.</p>
+          </div>
+          <span class="cta">Open today's plan</span>
+        </div>
+        <div class="phone-caption">C1 · Passive — color = glyph</div>
+      </div>
+
+      <!-- C2 — Light Active -->
+      <div>
+        <div class="phone c2">
+          <div class="topbar"><span>9:41</span><span>•••</span></div>
+          <div class="label">Bonjour, Andrew</div>
+          <h5>Today's check-in</h5>
+          <div class="card hero">
+            <div class="card-title">3 things to focus on</div>
+            <p>Your sleep is trending up. Keep going on water — you're 2 days from a streak.</p>
+          </div>
+          <div class="label">Your modules</div>
+          <div class="icon-row">
+            <div class="ic">P</div>
+            <div class="ic b">D</div>
+            <div class="ic c">H</div>
+            <div class="ic d">A</div>
+          </div>
+          <div class="card ai">
+            <div class="ai-tag">
+              <svg class="sparkle" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z"/></svg>
+              AI Insight
+            </div>
+            <p style="margin-top:6px;">A short walk now would lift your afternoon energy.</p>
+          </div>
+          <span class="cta">Open today's plan</span>
+        </div>
+        <div class="phone-caption">C2 · Light Active — hero + module tints</div>
+      </div>
+
+      <!-- C3 — Verily-coded -->
+      <div>
+        <div class="phone c3">
+          <div class="topbar"><span>9:41</span><span>•••</span></div>
+          <div class="label">Bonjour, Andrew</div>
+          <h5>Today's check-in</h5>
+          <div class="card hero">
+            <div class="card-title">3 things to focus on</div>
+            <p>Your sleep is trending up. Keep going on water — you're 2 days from a streak.</p>
+          </div>
+          <div class="card dcp" style="padding: 10px 12px;">
+            <div class="card-title">DCP — Sleep Reset</div>
+            <p style="font-size:10px;">Day 3 of 14 · 2.4 hrs back per night</p>
+          </div>
+          <div class="card habits" style="padding: 10px 12px;">
+            <div class="card-title">Habits — Hydration</div>
+            <p style="font-size:10px;">5 of 7 days · 2 to streak</p>
+          </div>
+          <div class="card ai">
+            <div class="ai-tag">
+              <svg class="sparkle" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z"/></svg>
+              AI Insight
+            </div>
+            <p style="margin-top:6px;">A short walk now would lift your afternoon energy.</p>
+          </div>
+          <span class="cta">Open today's plan</span>
+        </div>
+        <div class="phone-caption">C3 · Verily-coded — full chromatic surfaces</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== Pilot 2 — Buyer hero ============================== -->
+  <div class="pilot">
+    <div class="pilot-head">
+      <h3>Pilot 2 — Buyer · Website / RFP hero</h3>
+      <small>tests Credible + Distinctive at presentation scale (16:9 deck + 1280px+ marketing)</small>
+    </div>
+    <div class="strip">
+      <!-- C1 buyer -->
+      <div>
+        <div class="phone c1 buyer">
+          <div class="topbar"><span>mobilehealthconsumer.com</span><span>•</span></div>
+          <h5 style="font-size: 22px; line-height: 1.15;">Real clinical outcomes — guaranteed.</h5>
+          <p style="opacity: 0.92;">Across every condition your employees are managing, at engagement rates that move spend.</p>
+          <div class="card">
+            <div class="card-title">3:1 ROI guarantee</div>
+            <p>Or you don't pay. We mean it.</p>
+          </div>
+          <div style="margin-top: auto;">
+            <span class="cta">See the proof →</span>
+          </div>
+        </div>
+        <div class="phone-caption">C1 · Passive — flat primary.800</div>
+      </div>
+
+      <!-- C2 buyer -->
+      <div>
+        <div class="phone c2 buyer">
+          <div class="topbar"><span>mobilehealthconsumer.com</span><span>•</span></div>
+          <h5 style="font-size: 22px; line-height: 1.15;">Real clinical outcomes — guaranteed.</h5>
+          <p style="opacity: 0.94;">Across every condition your employees are managing, at engagement rates that move spend.</p>
+          <div class="card">
+            <div class="card-title">3:1 ROI guarantee</div>
+            <p>Or you don't pay. We mean it.</p>
+          </div>
+          <div style="margin-top: auto;">
+            <span class="cta">See the proof →</span>
+          </div>
+        </div>
+        <div class="phone-caption">C2 · Light Active — primary→aqua→sage hero gradient</div>
+      </div>
+
+      <!-- C3 buyer -->
+      <div>
+        <div class="phone c3 buyer">
+          <div class="topbar"><span>mobilehealthconsumer.com</span><span>•</span></div>
+          <h5 style="font-size: 22px; line-height: 1.15;">Real clinical outcomes — guaranteed.</h5>
+          <p style="opacity: 0.94;">Across every condition your employees are managing, at engagement rates that move spend.</p>
+          <div class="card">
+            <div class="card-title">3:1 ROI guarantee</div>
+            <p>Or you don't pay. We mean it.</p>
+          </div>
+          <div style="margin-top: auto;">
+            <span class="cta">See the proof →</span>
+          </div>
+        </div>
+        <div class="phone-caption">C3 · Verily-coded — saturated mid-stop multi-hue</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== Pilot 3 — AI surface ============================== -->
+  <div class="pilot">
+    <div class="pilot-head">
+      <h3>Pilot 3 — AI Insight surface (post-indigo)</h3>
+      <small>tests AI-competent without leaning on indigo · Phase 0 §9 deliverable</small>
+    </div>
+    <div class="strip">
+      <!-- C1 AI -->
+      <div>
+        <div class="phone c1">
+          <div class="topbar"><span>9:41</span><span>•••</span></div>
+          <div class="label">AI Insight</div>
+          <h5>You sleep better when…</h5>
+          <p style="color: var(--neutral-700);">Across the last 14 nights, your deep sleep is 23% higher on days you walked at least 7,000 steps before 6pm.</p>
+          <div class="card ai">
+            <div class="ai-tag"><span class="dot"></span> From your AI</div>
+            <div class="card-title" style="margin-top:6px; color: var(--p-700);">Confidence: high</div>
+            <p style="color: var(--neutral-700);">Based on 14 nights of paired sleep + steps data.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Manage what your AI remembers →</div>
+          </div>
+          <span class="cta">Try a 7,000-step day</span>
+        </div>
+        <div class="phone-caption">C1 · indigo dot only</div>
+      </div>
+
+      <!-- C2 AI -->
+      <div>
+        <div class="phone c2">
+          <div class="topbar"><span>9:41</span><span>•••</span></div>
+          <div class="label">AI Insight</div>
+          <h5>You sleep better when…</h5>
+          <p>Across the last 14 nights, your deep sleep is 23% higher on days you walked at least 7,000 steps before 6pm.</p>
+          <div class="card ai">
+            <div class="ai-tag">
+              <svg class="sparkle" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z"/></svg>
+              AI Insight · primary-coded
+            </div>
+            <div class="card-title" style="margin-top:6px; color: var(--p-700);">Confidence: high</div>
+            <p>Based on 14 nights of paired sleep + steps data.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Manage what your AI remembers →</div>
+          </div>
+          <span class="cta">Try a 7,000-step day</span>
+        </div>
+        <div class="phone-caption">C2 · primary.50 wash + sparkle (no indigo)</div>
+      </div>
+
+      <!-- C3 AI -->
+      <div>
+        <div class="phone c3">
+          <div class="topbar"><span>9:41</span><span>•••</span></div>
+          <div class="label">AI Insight</div>
+          <h5>You sleep better when…</h5>
+          <p>Across the last 14 nights, your deep sleep is 23% higher on days you walked at least 7,000 steps before 6pm.</p>
+          <div class="card ai">
+            <div class="ai-tag">
+              <svg class="sparkle" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0 L7 5 L12 6 L7 7 L6 12 L5 7 L0 6 L5 5 Z"/></svg>
+              AI Insight · aqua-coded
+            </div>
+            <div class="card-title" style="margin-top:6px; color: var(--aqua-800);">Confidence: high</div>
+            <p>Based on 14 nights of paired sleep + steps data.</p>
+          </div>
+          <div class="card dcp" style="padding: 10px 12px;">
+            <div class="card-title">Manage what your AI remembers →</div>
+          </div>
+          <span class="cta">Try a 7,000-step day</span>
+        </div>
+        <div class="phone-caption">C3 · multi-hue blend, aqua-coded marker</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     COMPARISON TABLE
+     ======================================================================== -->
+<section>
+  <h2>Comparison</h2>
+  <p class="lede">Same criteria, every candidate. Pass / partial / fail with one-line note per cell.</p>
+  <table class="grid-table">
+    <thead>
+      <tr>
+        <th>Criterion</th>
+        <th>C1 — Passive baseline</th>
+        <th>C2 — Light Active</th>
+        <th>C3 — Verily-coded</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1. Credible</td>
+        <td class="pass">✓ Pass <small>v6's discipline; CHRO-presentable; no chromatic noise on data.</small></td>
+        <td class="pass">✓ Pass <small>Hero gradient sits at 100-stop — primary.800 deep CTA still anchors authority.</small></td>
+        <td class="partial">~ Partial <small>Multi-hue 200-stop hero risks reading "consumer health-tech" at first glance; recovers on closer read.</small></td>
+      </tr>
+      <tr>
+        <td>2. Direct</td>
+        <td class="pass">✓ Pass <small>Color never competes with the message.</small></td>
+        <td class="pass">✓ Pass <small>One chromatic moment per screen; reader's eye lands on hero, not multiple containers.</small></td>
+        <td class="fail">✗ Fail <small>Member home: 3 chromatic cards + multi-hue hero + AI gradient = visual queue requires filtering before reading.</small></td>
+      </tr>
+      <tr>
+        <td>3. Outcome-obsessed</td>
+        <td class="pass">✓ Pass <small>Numbers in neutral.900 on white — instant legibility.</small></td>
+        <td class="pass">✓ Pass <small>Data still on white cards — chromatic moments don't carry numerals.</small></td>
+        <td class="partial">~ Partial <small>Numbers on chromatic surfaces (sage.200, clay.200) — legible, but contrast headroom thinner than C1/C2.</small></td>
+      </tr>
+      <tr>
+        <td>4. Human</td>
+        <td class="partial">~ Partial <small>"Color is an accent" can read corporate-cold without strong photography to compensate. Risk acknowledged in v6 §narrative.</small></td>
+        <td class="pass">✓ Pass <small>Clay + sage co-lead, hero gradient brings warmth — Earth + Active at low chroma is the sweet spot for Human.</small></td>
+        <td class="pass">✓ Pass <small>Most warmth of the three — chromatic surfaces feel alive. (At cost of Direct/Credible.)</small></td>
+      </tr>
+      <tr>
+        <td>5. AI-competent</td>
+        <td class="partial">~ Partial <small>Indigo dot reads "AI" but is now retired per deemphasize-purple. C1 needs an alternative treatment to remain valid.</small></td>
+        <td class="pass">✓ Pass <small>Primary.50 wash + sparkle glyph + "AI Insight" label — distinct, doesn't lean on dated AI conventions, holds up against ChatGPT/Claude visual canon.</small></td>
+        <td class="pass">✓ Pass <small>Three-hue blend signals AI distinctly; aqua-coded tag replaces indigo.</small></td>
+      </tr>
+      <tr>
+        <td>6. Distinctive (D1)</td>
+        <td class="partial">~ Partial <small>Editorial-restraint Earth is distinctive vs. Personify/Sharecare cluster, but visually quiet — risks blending with peer minimalist systems.</small></td>
+        <td class="pass">✓ Pass <small>Brand-DNA categoricals + hero gradient + Earth Earth surfaces = visually owned; distinct from both wellness-lifestyle and corporate-medical clusters.</small></td>
+        <td class="partial">~ Partial <small>Distinctive but converges toward the "Verily/Calm/Lovi" pastel-active aesthetic — owns less because the convention is shared.</small></td>
+      </tr>
+      <tr>
+        <td>7. WCAG AA</td>
+        <td class="pass">✓ Pass <small>Verified across v6 — no failures.</small></td>
+        <td class="pass">✓ Pass <small>Audited inline: ink stays on white/sand.50; chromatic surfaces only host neutral.900 text and 700-stop accents. Borders moved 200→300 where chromatic surface meets adjacent surface.</small></td>
+        <td class="partial">~ Partial <small>Multi-hue gradient on hero requires per-position contrast verification; lighter end may dip below 4.5:1 for white text; resolved with dark-end text-overlay rule.</small></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ========================================================================
+     RECOMMENDATION
+     ======================================================================== -->
+<section>
+  <h2>Recommendation</h2>
+  <div class="recommendation">
+    <div class="head">
+      <strong>C2 — Light Active</strong>
+      <span class="status status-direction-locked">direction-locked</span>
+    </div>
+    <p>C2 wins 6/7 criteria outright (Credible, Direct, Outcome-obsessed, Human, AI-competent, Distinctive, WCAG AA — all pass). It serves Human meaningfully better than C1 without sacrificing Credible or Direct, which is the exact trade the user's brief asks for ("warmer, brand-aligned, not heavy"). The hero gradient at 100-stop and the chromatic-tinted module containers bring brand DNA forward; the deep <code>primary.600</code> CTA and white-card data treatment hold the clinical-credibility floor.</p>
+    <p><strong>Tradeoff accepted:</strong> Phase 0 Distinctive is well served but not maximally — C2 sits between the editorial-restraint distinctive lane (C1) and the chromatic-pastel distinctive lane (C3 / Verily / Calm / Lovi). The middle path means we don't fully own either signal. We accept this because both flanking positions have larger downside risks: C1 risks reading corporate-cold (Human failure), and C3 risks reading consumer-wellness (Credible failure) at our scale.</p>
+    <p><strong>D11 status update:</strong> The locked principle "color is an accent, not a coat" amends to <strong>"color is an accent at light saturation; one chromatic moment per screen is permitted as a coat at 100-stop."</strong> Container fills at 100-stop on module identity and a single hero card per screen are the new permitted active applications. CTAs, ink, and surface backgrounds remain governed by passive editorial restraint.</p>
+  </div>
+</section>
+
+<!-- ========================================================================
+     ALTS RETAINED
+     ======================================================================== -->
+<section>
+  <h2>Alts retained</h2>
+  <div class="alts">
+    <div class="alt-item">
+      <strong>C1 — Passive baseline</strong> · kept as fallback. If verification gate G2 (member-warmth at applied scale with real photography) fails for C2, revert to C1 + commission warmer photography to compensate. C1 is the proven safe state — v6 shipped it; we know it holds Credible and Direct without question.
+    </div>
+    <div class="alt-item">
+      <strong>C3 — Verily-coded Active</strong> · dropped. Reason: chromatic saturation that high (200-stop containers + multi-hue gradients on every category) sits closer to consumer-wellness aesthetic than Clinical-Modern Distinctive (D1). Verily can absorb that aesthetic because their buyer is researchers/care orgs in long-cycle relationships; MHC's buyer (CHRO/benefits manager evaluating for ROI) needs the credibility floor heavier. The C3 strip on the buyer hero specifically reads "consumer-app marketing" rather than "clinical platform." Retire entirely.
+    </div>
+    <div class="alt-item">
+      <strong>C2 with sand-co-led variant (not built)</strong> · documented for future iteration. If the clay+sage co-lead at applied scale starts feeling too earthy for the AI surface specifically, revert sand to co-lead and hold clay+sage as accents only. Defer until G3 (AI surface re-audit) lands.
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     VERIFICATION GATES
+     ======================================================================== -->
+<section>
+  <h2>Verification gates</h2>
+  <p class="lede">C2 is direction-locked. Before D11 graduates from <code>direction-locked</code> to <code>locked</code>:</p>
+  <div class="gates">
+    <ol>
+      <li><strong>G1 — Tactical review with Isabel (Visual Designer).</strong> The "one chromatic moment per screen" rule needs a designer's eye on whether the hero gradient at 100-stop reads as intended at retina/sRGB-calibrated phone scale, or whether it dissolves into "almost white" and loses the active register entirely.</li>
+      <li><strong>G2 — Member-warmth test at member's actual phone scale with real photography.</strong> Render the Bonjour Andrew home with a real member portrait + the C2 hero gradient. Test against the Phase 0 Human test phrase: "would a member screenshot this to a friend who's struggling?" If it still reads corporate-cold despite warm photography, revert to C1.</li>
+      <li><strong>G3 — AI surface re-audit.</strong> The primary.50 wash + sparkle treatment is a first attempt. Test specifically against ChatGPT-Health and Claude-Health visual canon — does our AI surface read distinctly enough that members don't confuse it with a generic notification card? If not, iterate the AI marker before D11 locks.</li>
+      <li><strong>G4 — Buyer hero stress test at presentation scale (16:9 deck + 1280px+ marketing).</strong> The primary→aqua→sage gradient must hold credibility at conference scale, not just member-phone scale. Render the buyer hero in a deck slide and a marketing landing page; test with a CHRO-equivalent reviewer (Darcy or Alex) for "would you put this on a board slide" sniff test.</li>
+      <li><strong>G5 — v7 system-preview build verification.</strong> Once gates G1–G4 pass, build v7 system-preview against the C2 amendment. Verify that the layered token system holds the new "100-stop hero + 100-stop module container" rule without regressing on HC-3 (neutral/sand split), HC-6 (WCAG AA), or HC-8 (gradients on text/borders rejected).</li>
+      <li><strong>G6 — Stakeholder reaction check (Darcy, Alex).</strong> Does the brand-DNA reactivation land as "honoring 2021 brand without being beholden to it" or as "regression to corporate-medical"? The user's stated intent is the former — verify it reads that way to leadership before locking.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========================================================================
+     FOOTER
+     ======================================================================== -->
+<div class="footer-meta">
+  D11 · active brand role · v7 · brand-aligned-active · 2026-05-04 · direction-locked on C2 Light Active · 6 verification gates pending · Q13 status unchanged · D2 R2 primary direction unchanged · D12 T2 tone-on-tone direction unchanged
+</div>
+
+</div>
+</body>
+</html>

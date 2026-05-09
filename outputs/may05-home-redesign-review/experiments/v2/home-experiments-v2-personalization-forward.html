@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — Experiment v2 · Personalization Forward</title>
+<style>
+  :root {
+    --cream: #f5f2ec;
+    --paper: #fbf9f5;
+    --paper-2: #fffdf8;
+    --ink: #1f1f1f;
+    --ink-2: #4a4a4a;
+    --ink-3: #7a7a7a;
+    --ink-4: #a59f93;
+    --line: #cdc8bd;
+    --line-2: #e2ddd2;
+    --accent: #0f497f;
+    --accent-soft: #e6eef6;
+    --accent-mid: #c9d8e8;
+    --employer: #2a5d3f;
+    --employer-soft: #e8f0ea;
+    --employer-mid: #c7d8cc;
+    --interest: #0f497f;
+    --interest-soft: #e6eef6;
+    --interest-mid: #c9d8e8;
+    --sales: #6e3a8a;
+    --sales-soft: #efe5f5;
+    --sales-mid: #d8c5e0;
+    --challenge: #b35418;
+    --challenge-soft: #faecd7;
+    --challenge-mid: #ecd0a8;
+    --program: #5a4a2a;
+    --program-soft: #efeae2;
+    --program-mid: #d8cdb8;
+    --tracker: #4a6e8a;
+    --tracker-soft: #dde6ef;
+    --tracker-mid: #b9c9d8;
+    --insight: #3a6e6a;
+    --insight-soft: #d9e7e5;
+    --insight-mid: #abc4c1;
+    --rewards: #8a5a2a;
+    --rewards-soft: #efe2cf;
+    --rewards-mid: #d6bf9c;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .page { max-width: 1500px; margin: 0 auto; padding: 32px 28px 80px; }
+
+  h1, h2, h3, h4 { margin: 0; }
+
+  .doc-header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 28px; }
+  .doc-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .doc-header .meta { font-size: 12px; color: var(--ink-3); margin-bottom: 16px; }
+  .doc-header .lede { font-size: 13.5px; color: var(--ink-2); max-width: 1100px; line-height: 1.6; margin-bottom: 14px; }
+  .doc-header .lede + .lede { margin-top: 10px; }
+  .doc-header .lede b { color: var(--ink); }
+
+  /* the diff-vs-v1 callout */
+  .diff-callout {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin: 16px 0 8px;
+    max-width: 1200px;
+  }
+  .diff-callout h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-3); margin-bottom: 10px; }
+  .diff-callout table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .diff-callout th { text-align: left; padding: 6px 10px; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--ink-3); border-bottom: 1px solid var(--line-2); }
+  .diff-callout td { padding: 6px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  .diff-callout tr:last-child td { border-bottom: 0; }
+  .diff-callout .name { font-weight: 700; color: var(--ink); }
+  .diff-callout .up { color: var(--employer); font-weight: 700; }
+  .diff-callout .down { color: var(--challenge); font-weight: 700; }
+  .diff-callout .same { color: var(--ink-3); }
+
+  .legend { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; margin: 16px 0 12px; max-width: 1200px; }
+  .legend > section { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+  .legend h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-3); margin-bottom: 8px; }
+  .legend .row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-2); margin-bottom: 4px; }
+  .legend .swatch { width: 22px; height: 14px; border: 1px solid var(--line); border-radius: 2px; flex-shrink: 0; }
+  .legend .key { font-weight: 700; color: var(--ink); width: 96px; flex-shrink: 0; font-size: 11.5px; }
+
+  /* experiment block */
+  .exp { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 22px 22px 24px; margin-bottom: 28px; }
+  .exp-h { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+  .exp-h .num { font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 1.4px; text-transform: uppercase; }
+  .exp-h h2 { font-size: 18px; font-weight: 700; }
+  .exp-thesis { font-size: 13px; color: var(--ink-2); line-height: 1.55; max-width: 1200px; margin-bottom: 16px; }
+  .exp-thesis b { color: var(--ink); }
+
+  .frames { display: grid; grid-template-columns: 1fr 400px; gap: 24px; align-items: start; }
+  @media (max-width: 1100px) {
+    .frames { grid-template-columns: 1fr; }
+  }
+
+  .frame { background: var(--paper-2); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .frame-cap { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; color: var(--ink-3); padding: 8px 12px; border-bottom: 1px dashed var(--line); }
+  .frame-cap b { font-size: 12px; color: var(--ink); font-weight: 700; }
+
+  .frame-d .canvas { background: #fff; padding: 0; border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; }
+  .frame-m .canvas { background: #fff; padding: 0; border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; width: 320px; margin: 0 auto; }
+
+  .b {
+    border-bottom: 1px solid var(--line-2);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .b:last-child { border-bottom: 0; }
+  .b .num { font-size: 9.5px; font-weight: 700; color: var(--ink-4); width: 14px; flex-shrink: 0; letter-spacing: 0.4px; }
+  .b .name { font-size: 11.5px; font-weight: 700; color: var(--ink); flex: 1; }
+  .b .meta { font-size: 10px; color: var(--ink-3); white-space: nowrap; flex-shrink: 0; letter-spacing: 0.3px; }
+  .b .pip { font-size: 9.5px; font-weight: 700; color: var(--ink-3); padding: 1px 5px; background: rgba(255,255,255,0.6); border: 1px solid var(--line); border-radius: 3px; flex-shrink: 0; }
+
+  .frame-m .b .name { font-size: 10.5px; }
+  .frame-m .b .meta { font-size: 9px; }
+  .frame-m .b .pip { font-size: 8.5px; padding: 0 4px; }
+
+  .b.w5 { height: 88px; }
+  .b.w4 { height: 64px; }
+  .b.w3 { height: 48px; }
+  .b.w2 { height: 30px; }
+  .b.w1 { height: 22px; }
+  .frame-m .b.w5 { height: 96px; }
+  .frame-m .b.w4 { height: 70px; }
+  .frame-m .b.w3 { height: 52px; }
+  .frame-m .b.w2 { height: 34px; }
+  .frame-m .b.w1 { height: 24px; }
+
+  .b.i-frame { background: var(--cream); }
+  .b.i-greeting { background: var(--paper); }
+  .b.i-anchor { background: var(--ink); color: #fff; }
+  .b.i-anchor .name { color: #fff; }
+  .b.i-anchor .meta { color: #ddd; }
+  .b.i-anchor .num { color: #999; }
+  .b.i-momentum { background: var(--program-soft); border-left: 4px solid var(--program); }
+  .b.i-tracker { background: var(--tracker-soft); border-left: 4px solid var(--tracker); }
+  .b.i-insight { background: var(--insight-soft); border-left: 4px solid var(--insight); }
+  .b.i-employer { background: var(--employer-soft); border-left: 4px solid var(--employer); }
+  .b.i-interest { background: var(--interest-soft); border-left: 4px solid var(--interest); }
+  .b.i-challenge { background: var(--challenge-soft); border-left: 4px solid var(--challenge); }
+  .b.i-rewards { background: var(--rewards-soft); border-left: 4px solid var(--rewards); }
+
+  /* row of horizontal sub-blocks */
+  .b-row { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 1px solid var(--line-2); background: #fff; }
+  .b-row:last-child { border-bottom: 0; }
+  .b-row .sub {
+    flex: 1;
+    border-radius: 3px;
+    padding: 8px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-height: 56px;
+  }
+  .b-row.short .sub { min-height: 38px; }
+  .b-row.tall .sub { min-height: 74px; }
+  .sub .sub-name { font-size: 10.5px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .sub .sub-meta { font-size: 9.5px; color: var(--ink-3); }
+  .frame-m .sub .sub-name { font-size: 9.5px; }
+  .frame-m .sub .sub-meta { font-size: 8.5px; }
+  .sub.s-tracker { background: var(--tracker-soft); border: 1px solid var(--tracker-mid); }
+  .sub.s-program { background: var(--program-soft); border: 1px solid var(--program-mid); }
+  .sub.s-employer { background: var(--employer-soft); border: 1px solid var(--employer-mid); }
+  .sub.s-interest { background: var(--interest-soft); border: 1px solid var(--interest-mid); }
+  .sub.s-rewards { background: var(--rewards-soft); border: 1px solid var(--rewards-mid); }
+  .sub.s-challenge { background: var(--challenge-soft); border: 1px solid var(--challenge-mid); }
+
+  /* paired lanes side-by-side at desktop */
+  .b-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 8px 12px; background: #fff; border-bottom: 1px solid var(--line-2); }
+  .b-2col .col { display: flex; flex-direction: column; gap: 6px; }
+  .b-2col .b { border-bottom: 0; border-radius: 3px; padding: 0 10px; }
+
+  /* hero variant — 50/50 split */
+  .b-hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: 88px; border-bottom: 1px solid var(--line-2); }
+  .b-hero-split .photo {
+    background:
+      linear-gradient(45deg, transparent 49%, var(--ink-3) 49%, var(--ink-3) 51%, transparent 51%),
+      linear-gradient(-45deg, transparent 49%, var(--ink-3) 49%, var(--ink-3) 51%, transparent 51%),
+      var(--ink-2);
+    background-size: 24px 24px, 24px 24px, 100% 100%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 9px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 700;
+  }
+  .b-hero-split .copy { background: var(--ink); color: #fff; padding: 12px 14px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .b-hero-split .copy .h-name { font-size: 11.5px; font-weight: 700; }
+  .b-hero-split .copy .h-meta { font-size: 10px; color: #ccc; }
+  .b-hero-split .copy .h-cta { font-size: 9.5px; color: #ccc; padding: 3px 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; align-self: flex-start; margin-top: 2px; }
+  .frame-m .b-hero-split { grid-template-columns: 1fr; height: auto; }
+  .frame-m .b-hero-split .photo { height: 64px; }
+  .frame-m .b-hero-split .copy { padding: 10px 12px; }
+
+  /* combined tracker+insights module (paired, mid-page per v2 ranking) */
+  .b-combo { background: linear-gradient(to bottom, var(--tracker-soft), var(--insight-soft)); border-left: 4px solid var(--tracker); padding: 0; border-bottom: 1px solid var(--line-2); }
+  .b-combo .combo-h { padding: 8px 12px 4px; font-size: 11px; font-weight: 700; color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
+  .b-combo .combo-h .meta { font-size: 9.5px; color: var(--ink-3); font-weight: 400; }
+  .b-combo .combo-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 0 12px 6px; }
+  .b-combo .combo-tiles .t { background: rgba(255,255,255,0.6); border: 1px solid var(--tracker-mid); border-radius: 3px; padding: 4px 6px; font-size: 9px; color: var(--ink-2); }
+  .b-combo .combo-tiles .t b { display: block; color: var(--ink); font-size: 11px; font-weight: 700; }
+  .b-combo .combo-insight { padding: 6px 12px 8px; font-size: 10px; color: var(--ink-2); background: rgba(255,255,255,0.5); border-top: 1px dashed var(--insight-mid); display: flex; gap: 8px; align-items: center; }
+  .b-combo .combo-insight .lbl { background: var(--insight); color: #fff; padding: 1px 5px; font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px; border-radius: 2px; }
+  .b-combo .combo-insight .text { flex: 1; }
+  .b-combo .combo-insight .cta { font-size: 9px; color: var(--insight); font-weight: 700; padding: 2px 6px; border: 1px solid var(--insight); border-radius: 3px; }
+  .frame-m .b-combo .combo-tiles { grid-template-columns: repeat(2, 1fr); }
+
+  /* DCP-only treatment marker on programs section */
+  .dcp-tag {
+    background: var(--program); color: #fff;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 1px 5px; border-radius: 2px; margin-left: 6px;
+  }
+
+  /* notes */
+  .exp-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+  .exp-notes section { font-size: 12px; line-height: 1.55; }
+  .exp-notes h4 { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-3); margin-bottom: 6px; }
+  .exp-notes p, .exp-notes li { color: var(--ink-2); }
+  .exp-notes ul { margin: 0; padding-left: 16px; }
+  .exp-notes li { margin-bottom: 3px; }
+  .exp-notes b { color: var(--ink); }
+  .exp-notes .pro { color: var(--employer); }
+  .exp-notes .con { color: var(--challenge); }
+
+  .bp-marker { padding: 4px 8px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); background: var(--cream); border-bottom: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .bp-marker .w { font-weight: 700; color: var(--ink); }
+
+  /* color-weighting visualization (memory rule) */
+  .weight-bar {
+    display: flex;
+    height: 28px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 12px 0 6px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .weight-bar > div { display: flex; align-items: center; justify-content: center; color: #fff; padding: 0 6px; white-space: nowrap; overflow: hidden; }
+  .weight-bar .w-anchor { background: var(--ink); }
+  .weight-bar .w-interest { background: var(--interest); }
+  .weight-bar .w-employer { background: var(--employer); }
+  .weight-bar .w-program { background: var(--program); }
+  .weight-bar .w-tracker { background: var(--tracker); }
+  .weight-bar .w-other { background: var(--ink-3); }
+  .weight-legend { font-size: 11px; color: var(--ink-3); max-width: 1200px; line-height: 1.55; margin-bottom: 4px; }
+
+  .anchor-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .anchor-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ============ HEADER ============ -->
+<header class="doc-header">
+  <h1>MHC Home — Experiment v2 · Personalization Forward</h1>
+  <p class="meta">v2 · 2026-05-06 · Block fidelity · Desktop 1200 + Mobile 375 · One experiment</p>
+  <p class="lede">A second experiment applying a <b>new prominence ranking</b>: the two source-labeled lanes ("Things I care about" + "From your employer") are promoted to weight 4, immediately below the hero. Programs is demoted to weight 3 <b>and narrowed editorially to DCPs only</b> (no journeys, no habits, no challenges-in-progress). Tracker and Insights are paired into a single mid-page module. Tests: does putting personalization second on the page — visibly demonstrating the data we have — outperform putting member momentum (programs) second?</p>
+  <p class="lede">This v2 is a counter-bet to v1's "Programs anchors momentum." v1 says <b>members come back to continue their work</b> — so the second-most-prominent surface is what they're already doing. v2 says <b>personalization is the differentiator</b> — so the second-most-prominent surface visibly responds to who they told us they are and what their employer wants them to see. Pick by which signal you want the page to lead with after the hero.</p>
+
+  <div class="diff-callout">
+    <h3>Diff vs. v1 baseline (Calm Anchor)</h3>
+    <table>
+      <thead><tr><th>Section</th><th>v1 weight</th><th>v2 weight</th><th>Move</th><th>Why it changed</th></tr></thead>
+      <tbody>
+        <tr><td class="name">Hero</td><td>w5</td><td>w5</td><td class="same">—</td><td>Locked</td></tr>
+        <tr><td class="name">Things I care about</td><td>w3</td><td>w4</td><td class="up">↑ promoted</td><td>Personalization signal — visibly responds to onboarding interests</td></tr>
+        <tr><td class="name">From your employer</td><td>w3</td><td>w4</td><td class="up">↑ promoted</td><td>Permanent CS-named lane; no longer relies on winning hero allocation</td></tr>
+        <tr><td class="name">Ongoing programs</td><td>w4</td><td>w3</td><td class="down">↓ demoted</td><td>Narrowed to DCPs only; clinical-depth surface, not catch-all</td></tr>
+        <tr><td class="name">Tracker</td><td>w2</td><td colspan="2">paired w/ Insights → w3 combined</td><td>Single mid-page module (per v2 ranking 5 — "paired, mid-page")</td></tr>
+        <tr><td class="name">Tracker Insights</td><td>w3</td><td colspan="2">merged into combined module</td><td>Tied to data; rendered as one unit</td></tr>
+        <tr><td class="name">Programs scope</td><td>DCP / Journey / Challenge / Habit / Assessment</td><td colspan="2"><b>DCPs only</b></td><td>Editorial narrowing — clinical-program differentiator vs. Personify's lighter "Journeys"</td></tr>
+        <tr><td class="name">Challenges</td><td>w2</td><td>w2</td><td class="same">—</td><td>Conditional — own section, no overlap with Programs</td></tr>
+        <tr><td class="name">Rewards</td><td>w2</td><td>w2</td><td class="same">—</td><td>Optional / client-configurable; can scale to w3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-3);margin:18px 0 6px;">Weight distribution — desktop content area</h3>
+  <p class="weight-legend">Proportional vertical real estate by section type. v2 shifts ~12% of page weight from Programs into the two source-labeled lanes. Anchor (hero) stays dominant; personalization (interest+employer) becomes the visible second tier; DCPs and tracker share the third tier; everything else is supporting frame.</p>
+  <div class="weight-bar">
+    <div class="w-anchor" style="flex:5">Hero · 5</div>
+    <div class="w-interest" style="flex:4">Things I care about · 4</div>
+    <div class="w-employer" style="flex:4">From employer · 4</div>
+    <div class="w-program" style="flex:3">Programs · DCP · 3</div>
+    <div class="w-tracker" style="flex:3">Tracker + Insights · 3</div>
+    <div class="w-other" style="flex:6">Challenges · Rewards · Greeting · Frame</div>
+  </div>
+
+  <div class="legend">
+    <section>
+      <h3>Section intent (color)</h3>
+      <div class="row"><span class="swatch" style="background:#1f1f1f"></span><span class="key">Anchor</span> Hero — sets identity, value, primary CTA</div>
+      <div class="row"><span class="swatch" style="background:#e6eef6;border-left:4px solid #0f497f"></span><span class="key">Interest</span> Things I care about (promoted)</div>
+      <div class="row"><span class="swatch" style="background:#e8f0ea;border-left:4px solid #2a5d3f"></span><span class="key">Employer</span> Featured Client priority items (promoted)</div>
+      <div class="row"><span class="swatch" style="background:#efeae2;border-left:4px solid #5a4a2a"></span><span class="key">Programs</span> DCPs only — clinical depth (demoted, narrowed)</div>
+      <div class="row"><span class="swatch" style="background:#dde6ef;border-left:4px solid #4a6e8a"></span><span class="key">Tracker</span> 4 tiles, weekly</div>
+      <div class="row"><span class="swatch" style="background:#d9e7e5;border-left:4px solid #3a6e6a"></span><span class="key">Insight</span> Takeaway + action (paired with tracker)</div>
+      <div class="row"><span class="swatch" style="background:#faecd7;border-left:4px solid #b35418"></span><span class="key">Challenge</span> Conditional — invites, results, active</div>
+      <div class="row"><span class="swatch" style="background:#efe2cf;border-left:4px solid #8a5a2a"></span><span class="key">Rewards</span> Optional / client-configurable</div>
+    </section>
+    <section>
+      <h3>Weight (block height)</h3>
+      <div class="row"><span class="swatch" style="height:22px;background:#1f1f1f"></span><span class="key">w5 — anchor</span> Hero level</div>
+      <div class="row"><span class="swatch" style="height:18px;background:#cdc8bd"></span><span class="key">w4 — high</span> Promoted lanes (v2)</div>
+      <div class="row"><span class="swatch" style="height:13px;background:#e2ddd2"></span><span class="key">w3 — medium</span> Programs (DCP) · Tracker+Insights combined</div>
+      <div class="row"><span class="swatch" style="height:8px;background:#f5f2ec"></span><span class="key">w2 — low</span> Challenges · Rewards · Greeting</div>
+      <div class="row"><span class="swatch" style="height:5px;background:#fbf9f5;border:1px solid #cdc8bd"></span><span class="key">w1 — frame</span> Nav / chrome</div>
+      <h3 style="margin-top:14px">Editorial change in v2</h3>
+      <div class="row"><b style="color:#5a4a2a;width:96px">DCP only</b> Programs section narrows to clinical care paths; journeys, habits, in-progress challenges live elsewhere</div>
+    </section>
+  </div>
+</header>
+
+
+<!-- ============ V2 EXPERIMENT ============ -->
+<section class="exp" id="exp-v2">
+  <div class="exp-h">
+    <span class="num">EXP V2</span>
+    <h2>Personalization Forward</h2>
+  </div>
+  <p class="exp-thesis"><b>Sequence (top → bottom):</b> Top nav → Greeting → Hero (w5) → <b>Things I care about (w4)</b> → <b>From your employer (w4)</b> → Tracker + Insights combined module (w3) → Ongoing programs · DCPs only (w3) → Challenges (w2, conditional) → Rewards (w2 default, scalable to w3) → Footer. The two source-labeled lanes are paired side-by-side on desktop (50/50, both at w4) and stacked on mobile with Things I care about first.</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>lanes paired below hero · DCP-only programs</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">v2 prominence ranking</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span><span class="meta">frame · separate spec</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting — "Good morning, Davinder"</span><span class="meta">w2 · supporting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO 50%</div>
+          <div class="copy"><div class="h-name">3 · Hero · 50/50 split</div><div class="h-meta">source-tag · title · body · CTA</div><div class="h-cta">w5 · anchor</div></div>
+        </div>
+        <div class="b-2col">
+          <div class="col">
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span><span class="meta">w4 · promoted</span></div>
+            <div style="font-size:10px;color:var(--ink-3);padding:4px 10px 0;">Sub-header · Your interests: Sleep · Stress · Move more · [Edit]</div>
+            <div class="b-row" style="padding:6px 0 0;border:0;">
+              <div class="sub s-interest"><div class="sub-name">Article — Sleep hygiene</div><div class="sub-meta">Sleep · 3 min read · +5 pts</div></div>
+              <div class="sub s-interest"><div class="sub-name">DCP rec — Stress mgmt</div><div class="sub-meta">Stress · 8-session · $100 at completion</div></div>
+            </div>
+            <div class="b-row" style="padding:0;border:0;">
+              <div class="sub s-interest"><div class="sub-name">Library — Move more</div><div class="sub-meta">Move more · 12 videos</div></div>
+              <div class="sub s-interest"><div class="sub-name">Journey — Mindful breaks</div><div class="sub-meta">Stress · 14 days</div></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span><span class="meta">w4 · permanent</span></div>
+            <div style="font-size:10px;color:var(--ink-3);padding:4px 10px 0;">Featured Client priority items · CS-named</div>
+            <div class="b-row" style="padding:6px 0 0;border:0;">
+              <div class="sub s-employer"><div class="sub-name">Open enrollment opens 5/15</div><div class="sub-meta">Benefits · review by 5/30</div></div>
+              <div class="sub s-employer"><div class="sub-name">EAP · free counseling</div><div class="sub-meta">Mental health · always available</div></div>
+            </div>
+            <div class="b-row" style="padding:0;border:0;">
+              <div class="sub s-employer"><div class="sub-name">Wellness fair · May 22</div><div class="sub-meta">Event · onsite + virtual · +25 pts</div></div>
+              <div class="sub s-employer"><div class="sub-name">New benefit: pet insurance</div><div class="sub-meta">Benefits · learn more</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="b-combo">
+          <div class="combo-h">6 · Tracker + Insights · paired, mid-page<span class="meta">↻ 4 min ago · Apple Health · w3</span></div>
+          <div class="combo-tiles">
+            <div class="t">Steps<b>52,470</b></div>
+            <div class="t">Sleep<b>7h 10m</b></div>
+            <div class="t">Calories<b>14,200</b></div>
+            <div class="t">Active<b>240 min</b></div>
+          </div>
+          <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep is averaging 38 min less than your goal. Try a 30-min wind-down tonight.</div><div class="cta">Add to my evening</div></div>
+        </div>
+        <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Ongoing programs<span class="dcp-tag">DCP only</span></span><span class="meta">w3 · narrowed editorially</span></div>
+        <div class="b-row tall">
+          <div class="sub s-program"><div class="sub-name">Sleep DCP — session 3 of 8</div><div class="sub-meta">Continue · $100 at completion</div></div>
+          <div class="sub s-program"><div class="sub-name">Stress DCP — 60% complete</div><div class="sub-meta">Continue · $100 at completion</div></div>
+          <div class="sub s-program"><div class="sub-name">Diabetes Prevention DCP — week 6 of 16</div><div class="sub-meta">Continue · $100 at completion</div></div>
+        </div>
+        <div class="b w2 i-challenge"><span class="num">8</span><span class="name">Challenges · conditional</span><span class="meta">w2 · invites · results · active state</span></div>
+        <div class="b w2 i-rewards"><span class="num">9</span><span class="name">Rewards · optional aggregated · 1–4 types</span><span class="meta">w2 default · scalable to w3</span></div>
+        <div class="b w1 i-frame"><span class="num">10</span><span class="name">Footer / chrome</span><span class="meta">frame</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>lanes stack · Things first</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>collapse only</span><span class="w">no reorders</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span><span class="pip">center</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Good morning, Davinder</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO</div>
+          <div class="copy"><div class="h-name">Hero</div><div class="h-meta">tag · title · body · CTA</div></div>
+        </div>
+        <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span><span class="pip">w4</span></div>
+        <div style="font-size:9.5px;color:var(--ink-3);padding:4px 10px;background:var(--interest-soft);border-bottom:1px solid var(--line-2);">Sleep · Stress · Move more · [Edit]</div>
+        <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Article — Sleep hygiene</span><span class="pip">+5 pts</span></div>
+        <div class="b w3 i-interest"><span class="num">4b</span><span class="name">DCP rec — Stress mgmt</span><span class="pip">$100</span></div>
+        <div class="b w2 i-interest"><span class="num">4c</span><span class="name">+ See all (4)</span></div>
+
+        <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span><span class="pip">w4</span></div>
+        <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment opens 5/15</span></div>
+        <div class="b w3 i-employer"><span class="num">5b</span><span class="name">EAP · free counseling</span></div>
+        <div class="b w2 i-employer"><span class="num">5c</span><span class="name">+ See all (4)</span></div>
+
+        <div class="b-combo">
+          <div class="combo-h">6 · This week<span class="meta">↻ 4m</span></div>
+          <div class="combo-tiles">
+            <div class="t">Steps<b>52K</b></div>
+            <div class="t">Sleep<b>7h10</b></div>
+            <div class="t">Cal<b>14K</b></div>
+            <div class="t">Active<b>240m</b></div>
+          </div>
+          <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min · try a wind-down</div></div>
+        </div>
+
+        <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP</span></span><span class="pip">w3</span></div>
+        <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP — session 3 of 8</span><span class="pip">$100</span></div>
+        <div class="b w3 i-momentum"><span class="num">7b</span><span class="name">Stress DCP — 60%</span><span class="pip">$100</span></div>
+        <div class="b w2 i-momentum"><span class="num">7c</span><span class="name">+ See all DCPs (3)</span></div>
+
+        <div class="b w2 i-challenge"><span class="num">8</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">9</span><span class="name">Rewards · optional</span></div>
+        <div class="b w1 i-frame"><span class="num">10</span><span class="name">Bottom nav · 5 tabs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>Lanes (4 + 5):</b> 50/50 paired desktop → stacked mobile, Things first then Employer (collapse, no reorder)</li>
+        <li><b>Tracker + Insights:</b> single combined module both breakpoints; tiles 4-up desktop → 2×2 mobile</li>
+        <li><b>Programs (DCP only):</b> 3-up DCP cards desktop → 2 stacked + see-all mobile</li>
+        <li><b>No "+ New challenge available" tile inside Programs.</b> v1 had this; v2 removes it because Challenges is a separate section and Programs is now editorially DCP-only.</li>
+        <li><b>Habits and journeys do not appear on home in v2.</b> Live in their own tabs/pages. Surface on home would dilute the DCP clarity.</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> personalization is your competitive bet (visibly demonstrate "we listened to onboarding") · employer engagement metrics matter to client renewals · sales wants a permanent labeled employer surface that doesn't depend on hero allocation · the DCP catalog is rich and clinically credible (so the narrowed Programs section feels deep, not thin).</p>
+      <p><b class="con">Risks:</b> non-enrolled members (no DCPs) get a thin Programs section — needs strong empty state ("Find a care path matched to your goals") · journey + habit users may feel their work is hidden — flag for member feedback · two w4 sections side-by-side risk visual competition; UI must handle the lane separation cleanly · pushes tracker further down the page; members who came to log/check tracker data have to scroll past lanes.</p>
+    </section>
+  </div>
+
+  <div class="exp-notes" style="margin-top:8px;">
+    <section>
+      <h4>Editorial implications · DCP-only programs</h4>
+      <ul>
+        <li><b>What appears in Programs:</b> active DCPs only (Sleep, Stress, Diabetes Prevention, Diabetes Management, Anxiety, Depression, Back Pain — per the DCP catalog in <code>feature-dcp/</code>)</li>
+        <li><b>What doesn't:</b> journeys, habits, assessments-in-progress, active challenges</li>
+        <li><b>Where they live instead:</b> journeys → dedicated tab/profile · habits → Healthy Habits feature · challenges → section 8 (Challenges) · assessments → standalone HRA flow</li>
+        <li><b>Empty state for non-enrolled:</b> shift section title to "Care paths for you" + show 2–3 algorithmic DCP recommendations + CTA to take HRA. Don't render an empty programs band.</li>
+        <li><b>Sales / CS framing:</b> this narrowing makes the section the clinical-depth story (DCPs are MHC's clinical-program differentiator vs. Personify's lighter "Journeys"). Lean into it.</li>
+      </ul>
+    </section>
+    <section>
+      <h4>v1 → v2 recommendation</h4>
+      <p>Hold both as live candidates. Apply UI to <b>v1 Exp 1 (Calm Anchor)</b> as control and <b>v2 Personalization Forward</b> as the personalization-bet. They differ on a clear axis (programs vs. lanes as second-most-prominent surface) — when UI is applied, the choice will make itself obvious to stakeholders looking at side-by-side comps.</p>
+      <p>Don't try to merge the two. The whole point of v2 is the bet on personalization-as-second-tier. Hedge that and you get the v1 baseline back.</p>
+    </section>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

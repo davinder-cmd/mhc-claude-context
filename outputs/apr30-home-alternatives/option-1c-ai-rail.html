@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Option 1C — AI Right Rail (sticky companion column on desktop)</title>
+  <style>
+    /* =========================================================
+       Tokens — warm palette per Apr-15 home-redesign work
+       Spacing scale per mh-material-experiment WORKFLOW.md
+       ========================================================= */
+    :root {
+      --bg-warm: #F9F7F4;
+      --bg-card: #FFFFFF;
+      --bg-soft: #F1EEE8;
+      --bg-hero: linear-gradient(135deg, #C9D4F0 0%, #B8C4E8 100%);
+      --border: #E5E2DD;
+      --text-primary: #1A1A1A;
+      --text-secondary: #555555;
+      --text-muted: #999999;
+      --accent-green: #2E7D32;
+      --accent-gold: #D4A853;
+      --accent-blue: #1976D2;
+      --accent-coral: #C75A3A;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
+
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-pill: 999px;
+
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+
+      --aspect-16-9: 16 / 9;
+      --aspect-1-1: 1 / 1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-warm);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       Page shell
+       Desktop ≥1200: max-width 1200, centered, generous padding
+       Tablet  960-1199: padding scales down
+       Mobile  <600: padding 16px, bottom 80px for tab bar
+       ========================================================= */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-12);
+    }
+
+    /* =========================================================
+       Topbar
+       ========================================================= */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: var(--space-4);
+      margin-bottom: var(--space-6);
+      border-bottom: 1px solid var(--border);
+    }
+    .greeting {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .reward-pill {
+      background: var(--accent-gold);
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+    }
+    .icon-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg-soft);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Hamburger (mobile only) */
+    .hamburger {
+      display: none;
+      width: 36px; height: 36px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .hamburger span {
+      width: 18px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+    }
+
+    /* =========================================================
+       Hero — single image, contained title card
+       ========================================================= */
+    .hero {
+      background: var(--bg-hero);
+      border-radius: var(--radius);
+      height: 280px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-6);
+    }
+    .hero-content {
+      background: rgba(255,255,255,0.94);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-sm);
+      max-width: 50%;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+    .hero-title { font-size: 20px; font-weight: 700; margin-bottom: 2px; letter-spacing: -0.3px; }
+    .hero-meta { font-size: 13px; color: var(--text-secondary); }
+    .hero-img-label {
+      position: absolute;
+      top: var(--space-3); right: var(--space-3);
+      background: rgba(255,255,255,0.7);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* =========================================================
+       Section header
+       ========================================================= */
+    .section-h {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: var(--space-8) 0 var(--space-3);
+    }
+    .section-h h3 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+    .section-h h3 em { font-style: italic; color: var(--text-primary); }
+    .section-h .source {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .section-h .link {
+      font-size: 13px;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       Lanes (Continue + Interest)
+       Desktop: 3-col grid
+       Tablet:  3-col (Continue) / 2-col (Interest)
+       Mobile:  horizontal scroll-snap carousel (Bucket 3 pattern)
+       ========================================================= */
+    .lane {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+    }
+
+    .pcard {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      box-shadow: var(--shadow);
+    }
+    .pcard.continue { border-left: 3px solid var(--accent-blue); }
+    .pcard.interest { border-left: 3px solid var(--accent-green); }
+
+    .pcard-thumb {
+      background: var(--bg-soft);
+      aspect-ratio: var(--aspect-16-9);
+      border-radius: 6px;
+      margin-bottom: var(--space-1);
+    }
+    .pcard-title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: -0.1px;
+    }
+    .pcard-meta { font-size: 12px; color: var(--text-muted); }
+
+    .pcard-progress {
+      height: 4px;
+      background: var(--bg-soft);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: var(--space-1);
+    }
+    .pcard-progress > div { height: 100%; background: var(--accent-blue); }
+
+    .pcard-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--bg-soft);
+      color: var(--text-secondary);
+      align-self: flex-start;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .pcard-tag.continue  { background: #E3EDFA; color: var(--accent-blue); }
+    .pcard-tag.sleep     { background: #E8E0F4; color: #6F4FB0; }
+    .pcard-tag.stress    { background: #FCE5D5; color: #B05A1F; }
+    .pcard-tag.nutrition { background: #DDF0DD; color: var(--accent-green); }
+
+    /* =========================================================
+       Client banners
+       Desktop: 2-col grid, horizontal layout (logo | body | CTA)
+       Mobile:  1-col stack, vertical layout (logo+body, CTA below)
+       ========================================================= */
+    .client-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+    .client-banner {
+      background: linear-gradient(90deg, #F8E6E0 0%, #FFFBF1 100%);
+      border: 1px solid #F0D0C2;
+      border-radius: var(--radius-sm);
+      padding: var(--space-4) var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .client-banner .logo {
+      width: 40px; height: 40px;
+      background: var(--accent-coral);
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .client-banner .body { flex: 1; min-width: 0; }
+    .client-banner .body .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent-coral);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .client-banner .body .title { font-size: 14px; font-weight: 600; }
+    .client-banner .body .meta { font-size: 12px; color: var(--text-secondary); }
+    .client-banner .cta {
+      background: var(--accent-coral);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* =========================================================
+       Stats
+       Desktop / Tablet: 3-col
+       Mobile: 1-col stack
+       ========================================================= */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+    }
+    .stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4);
+      box-shadow: var(--shadow);
+    }
+    .stat .label { font-size: 12px; color: var(--text-secondary); margin-bottom: var(--space-1); }
+    .stat .value { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+    .stat .sub { font-size: 11px; color: var(--text-muted); }
+
+    /* =========================================================
+       Bottom tab nav (mobile only)
+       ========================================================= */
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 6px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+      z-index: 50;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
+    }
+    .bottom-nav ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .bottom-nav li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 6px 0;
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .bottom-nav li.active { color: var(--accent-blue); }
+    .bottom-nav .nav-icon {
+      width: 22px; height: 22px;
+      background: currentColor;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      opacity: 0.85;
+      border-radius: 4px;
+    }
+
+    /* =========================================================
+       BREAKPOINT: Tablet 600–1199
+       ========================================================= */
+    @media (max-width: 1199px) {
+      .page { padding: var(--space-6) var(--space-6); }
+      .hero { height: 240px; }
+    }
+
+    @media (max-width: 959px) {
+      .page { padding: var(--space-6) var(--space-5); }
+      .hero { height: 220px; }
+      .hero-content { max-width: 65%; }
+      .lane { grid-template-columns: repeat(3, 1fr); }
+      /* Interest grid drops to 2-col at tablet */
+      .lane.interest-lane { grid-template-columns: repeat(2, 1fr); }
+      .lane.interest-lane .pcard:nth-child(3) { display: none; }
+      /* Show all 3 by including a wrap row instead — switch back: */
+      .lane.interest-lane { grid-template-columns: repeat(2, 1fr); }
+      .lane.interest-lane .pcard:nth-child(3) { display: flex; grid-column: span 2; }
+    }
+
+    /* =========================================================
+       BREAKPOINT: Mobile <600
+       — hide hamburger? actually show one
+       — hero shorter, content card up to 80%
+       — Continue lane → horizontal scroll-snap carousel
+       — Client banners → 1-col stack, vertical layout
+       — Interest lane → horizontal scroll-snap carousel
+       — Stats → 1-col stack
+       — Bottom tab nav appears
+       ========================================================= */
+    @media (max-width: 599px) {
+      body { padding-bottom: 70px; }
+      .page { padding: var(--space-4) 0 var(--space-6); }
+
+      /* Topbar */
+      .topbar {
+        padding: var(--space-3) var(--space-4) var(--space-3);
+        margin-bottom: var(--space-4);
+      }
+      .greeting { font-size: 20px; }
+      .hamburger { display: inline-flex; }
+      .topbar-right .icon-btn:nth-of-type(2) { display: none; }
+      .reward-pill { font-size: 12px; padding: 5px 10px; }
+
+      /* Hero */
+      .hero {
+        height: 200px;
+        margin: 0 var(--space-4);
+        padding: var(--space-4);
+      }
+      .hero-content { max-width: 80%; padding: var(--space-3) var(--space-4); }
+      .hero-title { font-size: 17px; }
+      .hero-meta { font-size: 12px; }
+
+      /* Section headers — pad with page margin, hide right-side meta on mobile */
+      .section-h {
+        padding: 0 var(--space-4);
+        margin: var(--space-6) 0 var(--space-3);
+      }
+      .section-h h3 { font-size: 16px; }
+      .section-h .source { display: none; }
+      .section-h .link { font-size: 12px; }
+
+      /* Continue lane: scroll-snap carousel with peek */
+      .lane.continue-lane {
+        display: flex;
+        grid-template-columns: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--space-4);
+        padding: 0 var(--space-4) var(--space-2);
+        gap: var(--space-3);
+        scrollbar-width: none;
+      }
+      .lane.continue-lane::-webkit-scrollbar { display: none; }
+      .lane.continue-lane > .pcard {
+        flex: 0 0 78vw;
+        scroll-snap-align: start;
+      }
+
+      /* Interest lane: scroll-snap carousel with peek */
+      .lane.interest-lane {
+        display: flex;
+        grid-template-columns: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--space-4);
+        padding: 0 var(--space-4) var(--space-2);
+        gap: var(--space-3);
+        scrollbar-width: none;
+      }
+      .lane.interest-lane::-webkit-scrollbar { display: none; }
+      .lane.interest-lane > .pcard {
+        flex: 0 0 78vw;
+        scroll-snap-align: start;
+      }
+      .lane.interest-lane > .pcard:nth-child(3) {
+        display: flex; grid-column: auto;
+      }
+
+      /* Client banners: stack 1-col, vertical inner layout */
+      .client-grid {
+        grid-template-columns: 1fr;
+        padding: 0 var(--space-4);
+      }
+      .client-banner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-3);
+        padding: var(--space-4);
+      }
+      .client-banner .logo { width: 32px; height: 32px; font-size: 12px; }
+      .client-banner .body { display: flex; flex-direction: column; gap: 2px; }
+      .client-banner .cta {
+        align-self: flex-start;
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+
+      /* Stats: 1-col stack */
+      .stat-grid {
+        grid-template-columns: 1fr;
+        padding: 0 var(--space-4);
+        gap: var(--space-2);
+      }
+      .stat { padding: var(--space-3) var(--space-4); display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+      .stat .label { margin-bottom: 0; }
+      .stat .value { font-size: 20px; }
+      .stat .sub { display: none; }
+
+      /* Bottom tab nav */
+      .bottom-nav { display: block; }
+    }
+
+    /* =========================================================
+       Body grid — main content column + AI rail (desktop only)
+       Below 960px the rail collapses inline above the main content
+       (rail is the AI companion — keep it accessible on mobile, just
+       not as a side rail)
+       ========================================================= */
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: var(--space-8);
+      margin-top: var(--space-8);
+      align-items: start;
+    }
+    .body-main { min-width: 0; }
+    .body-main .section-h:first-of-type { margin-top: 0; }
+    .body-rail {
+      position: sticky;
+      top: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .body-rail .section-h { margin-top: 0; margin-bottom: var(--space-3); }
+    .body-rail .section-h h3 { font-size: 16px; }
+
+    /* =========================================================
+       Chat with Health Advisor — In rail: vertical 1-col stack
+       ========================================================= */
+    .ai-sparkle {
+      display: inline-block;
+      margin-left: var(--space-1);
+      color: var(--accent-blue);
+      font-size: 0.8em;
+      vertical-align: 0.05em;
+    }
+    .chat-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+    .chat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      box-shadow: var(--shadow);
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .chat-card:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+    .chat-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .chat-icon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .chat-icon.purple { background: #E8E0F4; color: #6F4FB0; }
+    .chat-icon.gold   { background: #FBF2D9; color: #8B6B1A; }
+    .chat-icon.blue   { background: #E3EDFA; color: var(--accent-blue); }
+
+    /* =========================================================
+       Insights — In rail: stacked card + Refresh below
+       ========================================================= */
+    .insight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-primary);
+    }
+    .insight-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: var(--space-3);
+    }
+    .insight-refresh {
+      background: var(--accent-blue);
+      color: white;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 22px;
+      border: none;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+    }
+    .insight-refresh:hover { filter: brightness(1.05); }
+
+    /* When the rail collapses to inline (≤959px) — chat goes back to 3-col */
+    @media (max-width: 959px) {
+      .body-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+      .body-rail { position: static; }
+      .body-rail .chat-grid { grid-template-columns: repeat(3, 1fr); }
+      .body-rail .insight-card { font-size: 14px; padding: var(--space-5); }
+    }
+    @media (max-width: 599px) {
+      .body-grid { padding: 0; }
+      .body-rail { padding: 0 var(--space-4); }
+      .body-rail .chat-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =========================================================
+       Responsive caption (helper text shown above the page so
+       reviewers can see which breakpoint is active)
+       ========================================================= */
+    .bp-banner {
+      position: fixed;
+      top: 12px; right: 12px;
+      background: var(--text-primary);
+      color: white;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      z-index: 100;
+      letter-spacing: 0.3px;
+      opacity: 0.85;
+    }
+    .bp-banner::before { content: "DESKTOP"; }
+    @media (max-width: 1199px) { .bp-banner::before { content: "TABLET (≤1199)"; } }
+    @media (max-width: 959px)  { .bp-banner::before { content: "TABLET (≤959)"; } }
+    @media (max-width: 599px)  { .bp-banner::before { content: "MOBILE (≤599)"; } }
+  </style>
+</head>
+<body>
+
+  <span class="bp-banner"></span>
+
+  <main class="page">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:var(--space-2)">
+        <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+        <div class="greeting">Hi Andrew</div>
+      </div>
+      <div class="topbar-right">
+        <span class="reward-pill">★ 1,240 pts</span>
+        <span class="icon-btn"></span>
+        <span class="icon-btn"></span>
+      </div>
+    </div>
+
+    <!-- Hero (full-width above the body grid) -->
+    <div class="hero">
+      <span class="hero-img-label">Hero image</span>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Featured</div>
+        <div class="hero-title">Spring into better sleep</div>
+        <div class="hero-meta">A 4-week program tuned to your wellbeing interests</div>
+      </div>
+    </div>
+
+    <!-- Body grid: main column + AI rail -->
+    <div class="body-grid">
+      <div class="body-main">
+
+    <!-- Continue your programs -->
+    <div class="section-h">
+      <h3>Continue your programs</h3>
+      <span class="source">From your activity</span>
+    </div>
+    <div class="lane continue-lane">
+      <div class="pcard continue">
+        <div class="pcard-tag continue">DCP</div>
+        <div class="pcard-title">Diabetes Prevention</div>
+        <div class="pcard-meta">Week 3 of 12</div>
+        <div class="pcard-progress"><div style="width:25%"></div></div>
+      </div>
+      <div class="pcard continue">
+        <div class="pcard-tag continue">Journey</div>
+        <div class="pcard-title">Better Sleep Foundations</div>
+        <div class="pcard-meta">2 of 5 sessions</div>
+        <div class="pcard-progress"><div style="width:40%"></div></div>
+      </div>
+      <div class="pcard continue">
+        <div class="pcard-tag continue">Habit</div>
+        <div class="pcard-title">10-min daily walk</div>
+        <div class="pcard-meta">5-day streak</div>
+        <div class="pcard-progress"><div style="width:71%"></div></div>
+      </div>
+    </div>
+
+    <!-- From Umbrella Partners -->
+    <div class="section-h">
+      <h3>From Umbrella Partners</h3>
+      <span class="source">Featured by your employer</span>
+    </div>
+    <div class="client-grid">
+      <div class="client-banner">
+        <div class="logo">UP</div>
+        <div class="body">
+          <div class="label">Health fair</div>
+          <div class="title">May 14 · Umbrella HQ</div>
+          <div class="meta">Free biometrics, flu shots, EAP info</div>
+        </div>
+        <div class="cta">RSVP</div>
+      </div>
+      <div class="client-banner">
+        <div class="logo">UP</div>
+        <div class="body">
+          <div class="label">Benefits</div>
+          <div class="title">Open enrollment is open</div>
+          <div class="meta">Make your selections by May 30</div>
+        </div>
+        <div class="cta">Start</div>
+      </div>
+    </div>
+
+    <!-- For your interests -->
+    <div class="section-h">
+      <h3>For your interest in <em>Sleep, Stress, Nutrition</em></h3>
+      <span class="link">Update interests →</span>
+    </div>
+    <div class="lane interest-lane">
+      <div class="pcard interest">
+        <div class="pcard-thumb"></div>
+        <div class="pcard-tag sleep">Sleep</div>
+        <div class="pcard-title">Wind-down routines that actually work</div>
+        <div class="pcard-meta">5-min read · Earn 50 pts</div>
+      </div>
+      <div class="pcard interest">
+        <div class="pcard-thumb"></div>
+        <div class="pcard-tag stress">Stress</div>
+        <div class="pcard-title">Box breathing for the workday</div>
+        <div class="pcard-meta">3-min audio · Earn 50 pts</div>
+      </div>
+      <div class="pcard interest">
+        <div class="pcard-thumb"></div>
+        <div class="pcard-tag nutrition">Nutrition</div>
+        <div class="pcard-title">Anti-inflammatory pantry basics</div>
+        <div class="pcard-meta">7-min read · Earn 50 pts</div>
+      </div>
+    </div>
+
+    <!-- Recent health data -->
+    <div class="section-h">
+      <h3>Recent health data</h3>
+      <span class="link">View all →</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat"><div class="label">Steps</div><div class="value">8,572</div><div class="sub">On target</div></div>
+      <div class="stat"><div class="label">Sleep</div><div class="value">7h 12m</div><div class="sub">In range</div></div>
+      <div class="stat"><div class="label">Active min</div><div class="value">45</div><div class="sub">+12% wk</div></div>
+    </div>
+
+      </div><!-- /.body-main -->
+
+      <aside class="body-rail">
+        <!-- Chat with Health Advisor -->
+        <div>
+          <div class="section-h">
+            <h3>Chat with Health Advisor <span class="ai-sparkle">✨</span></h3>
+          </div>
+          <div class="chat-grid">
+            <button class="chat-card">
+              <span class="chat-icon purple">
+                <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              </span>
+              <span>Treat Insomnia</span>
+            </button>
+            <button class="chat-card">
+              <span class="chat-icon gold">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </span>
+              <span>Diabetes Prevention</span>
+            </button>
+            <button class="chat-card">
+              <span class="chat-icon blue">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <span>Healthy Blood Pressure</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Insights -->
+        <div>
+          <div class="section-h">
+            <h3>Insights <span class="ai-sparkle">✨</span></h3>
+          </div>
+          <div class="insight-card">
+            Andrew, you logged 5,635 steps today — solid base to build from. Consider a relaxed 10-minute after-dinner walk for ~1,200 extra steps.
+          </div>
+          <div class="insight-actions">
+            <button class="insight-refresh">Refresh</button>
+          </div>
+        </div>
+      </aside>
+
+    </div><!-- /.body-grid -->
+  </main>
+
+  <!-- Bottom tab nav (mobile only via CSS) -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <ul>
+      <li class="active"><span class="nav-icon"></span>Home</li>
+      <li><span class="nav-icon"></span>Care</li>
+      <li><span class="nav-icon"></span>Wellbeing</li>
+      <li><span class="nav-icon"></span>Benefits</li>
+      <li><span class="nav-icon"></span>Rewards</li>
+    </ul>
+  </nav>
+
+</body>
+</html>

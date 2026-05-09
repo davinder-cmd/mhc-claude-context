@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — Wireframes v4 · 375 / 912 / 1200</title>
+<style>
+  :root {
+    --cream: #f5f2ec;
+    --paper: #fbf9f5;
+    --ink: #1f1f1f;
+    --ink-2: #4a4a4a;
+    --ink-3: #7a7a7a;
+    --line: #cdc8bd;
+    --line-2: #e2ddd2;
+    --accent: #0f497f;
+    --accent-soft: #e6eef6;
+    --employer: #2a5d3f;
+    --employer-soft: #e8f0ea;
+    --sales: #6e3a8a;
+    --sales-soft: #efe5f5;
+    --challenge: #b35418;
+    --challenge-soft: #faecd7;
+    --program: #5a4a2a;
+    --program-soft: #efeae2;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .page { max-width: 1500px; margin: 0 auto; padding: 32px 28px 80px; }
+
+  .header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; }
+  .header .meta { font-size: 12px; color: var(--ink-3); margin: 0 0 14px; }
+  .header .lede { font-size: 13.5px; color: var(--ink-2); max-width: 1100px; line-height: 1.55; margin: 0 0 16px; }
+
+  .colors { display: flex; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); max-width: 1100px; margin-bottom: 8px; }
+  .colors > div { display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 600; }
+  .c-cream { background: var(--cream); color: var(--ink-2); }
+  .c-paper { background: var(--paper); color: var(--ink-2); border-left: 1px solid var(--line-2); border-right: 1px solid var(--line-2); }
+  .c-ink { background: var(--ink); color: #fff; }
+  .c-accent { background: var(--accent); color: #fff; }
+  .c-employer { background: var(--employer); color: #fff; }
+  .colors-legend { font-size: 11px; color: var(--ink-3); max-width: 1100px; margin-bottom: 24px; line-height: 1.6; }
+
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ink-3); margin: 36px 0 12px; }
+  .section-label .num { color: var(--accent); margin-right: 8px; }
+  .section-label .pin-tag { background: var(--ink); color:#fff; padding: 2px 8px; border-radius: 999px; font-size: 9.5px; margin-left: 8px; }
+
+  .artboard { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 18px; position: relative; margin-bottom: 28px; }
+  .artboard-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); font-size: 11px; color: var(--ink-3); }
+  .artboard-label b { font-size: 13px; color: var(--ink); font-weight: 700; }
+
+  .wf-frame { background: #fff; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .wf-row { padding: 10px 14px; border-bottom: 1px solid var(--line-2); }
+  .wf-row:last-child { border-bottom: 0; }
+
+  .wf-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-3); margin-bottom: 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .wf-label .source { font-weight: 600; padding: 1px 6px; border-radius: 3px; text-transform: none; font-size: 9.5px; }
+  .source-emp { background: var(--employer-soft); color: var(--employer); border: 1px solid var(--employer); }
+  .source-int { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); }
+  .source-prog { background: var(--program-soft); color: var(--program); border: 1px solid var(--program); }
+  .source-chal { background: var(--challenge-soft); color: var(--challenge); border: 1px solid var(--challenge); }
+  .source-sales { background: var(--sales-soft); color: var(--sales); border: 1px solid var(--sales); }
+
+  .wf-h { font-size: 14px; font-weight: 700; margin: 2px 0; }
+  .wf-h.lg { font-size: 16px; }
+  .wf-h.xl { font-size: 19px; }
+  .wf-body { font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+  .wf-body.sm { font-size: 11.5px; }
+  .wf-meta { font-size: 11px; color: var(--ink-3); }
+  .reward-meta { font-size: 11px; color: var(--accent); font-weight: 600; }
+
+  .wf-img {
+    background:
+      linear-gradient(45deg, transparent 49%, var(--line) 49%, var(--line) 51%, transparent 51%),
+      linear-gradient(-45deg, transparent 49%, var(--line) 49%, var(--line) 51%, transparent 51%),
+      var(--line-2);
+    background-size: 24px 24px, 24px 24px, 100% 100%;
+    border: 1px dashed var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-3); font-size: 10.5px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700;
+  }
+
+  .wf-btn { display: inline-block; padding: 7px 12px; border: 1.5px solid var(--accent); color: var(--accent); border-radius: 4px; font-size: 12px; font-weight: 700; background: #fff; }
+  .wf-btn.solid { background: var(--accent); color: #fff; }
+  .wf-btn.ghost { border-color: var(--line); color: var(--ink-2); }
+  .wf-btn.sm { padding: 4px 8px; font-size: 11px; }
+  .wf-btn.tiny { padding: 2px 8px; font-size: 11px; font-weight: 700; border-width: 1px; }
+
+  .tile-grid { display: grid; gap: 8px; }
+  .tile { border: 1px solid var(--line); border-radius: 5px; padding: 10px; background: #fff; }
+  .tile .tile-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--ink-3); margin-bottom: 3px; }
+  .tile .tile-value { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .tile .tile-goal { font-size: 10.5px; color: var(--ink-3); }
+
+  .lane { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 12px; }
+  .lane-emp { border-left: 3px solid var(--employer); }
+  .lane-int { border-left: 3px solid var(--accent); }
+  .lane-prog { border-left: 3px solid var(--program); }
+  .lane-h { font-size: 13px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .annot { font-size: 11.5px; color: var(--ink-2); line-height: 1.55; }
+  .annot.callout { background: #fff8e1; border-left: 3px solid #c97a25; padding: 10px 12px; border-radius: 4px; margin-top: 12px; max-width: 1200px; }
+  .annot b { color: var(--ink); }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .threecol { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .stack { display: flex; flex-direction: column; gap: 8px; }
+  .hr { height: 1px; background: var(--line-2); margin: 8px 0; }
+
+  .topnav { display: flex; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--paper); gap: 12px; }
+  .topnav .icon-sq { width: 22px; height: 22px; border: 1px solid var(--line); border-radius: 3px; display: grid; place-items: center; font-size: 11px; color: var(--ink-3); }
+  .topnav .logo { flex: 1; text-align: center; font-weight: 700; letter-spacing: 1.5px; font-size: 12px; color: var(--ink); }
+  .topnav .nav-handled { font-size: 9.5px; color: var(--ink-3); font-style: italic; flex-shrink: 0; }
+
+  .bottomnav { display: flex; padding: 6px 0; border-top: 1px solid var(--line); background: var(--paper); justify-content: space-around; }
+  .bottomnav .item { width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 3px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12.5px; max-width: 1200px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  th { font-size: 11px; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
+
+  .annotations { margin-top: 32px; max-width: 1200px; }
+  .annotations h3 { font-size: 14px; margin: 24px 0 8px; }
+  .annotations p, .annotations li { font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+  .annotations strong { color: var(--ink); }
+  .annotations ul { padding-left: 18px; margin: 6px 0; }
+
+  .pin { position: absolute; top: -10px; left: 18px; background: var(--accent); color: #fff; padding: 3px 10px; border-radius: 999px; font-size: 10.5px; font-weight: 700; }
+
+  .scope-strip { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 4px; padding: 10px 14px; font-size: 12px; color: var(--accent); margin-bottom: 18px; max-width: 1200px; }
+  .scope-strip b { font-weight: 700; }
+
+  /* Interest sub-header treatment (per file 07) */
+  .interest-subhead {
+    font-size: 12px; color: var(--ink-2); margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .interest-subhead .label { color: var(--ink-3); }
+  .interest-subhead .name { font-weight: 700; color: var(--ink); }
+  .interest-subhead .edit { color: var(--accent); font-weight: 700; cursor: pointer; text-decoration: underline; }
+
+  /* Edit modal mock */
+  .edit-modal-mock {
+    background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    max-width: 360px;
+  }
+  .edit-modal-mock .modal-h { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .edit-modal-mock .modal-sub { font-size: 11px; color: var(--ink-3); margin-bottom: 12px; }
+  .interest-row { display: flex; align-items: center; gap: 10px; padding: 8px 4px; border-bottom: 1px solid var(--line-2); font-size: 13px; }
+  .interest-row:last-child { border-bottom: 0; }
+  .interest-row input[type=checkbox] { width: 16px; height: 16px; }
+  .modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line-2); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>MHC Home — Wireframes v4 <span style="font-weight:400;color:var(--ink-3);font-size:14px;">· Content widths 375 / 912 / 1200</span></h1>
+    <p class="meta">2026-05-06 · Iteration 4 · Supersedes <code>home-wireframes-v3-flexible-hero-no-picker.html</code> · Applies copy from <code>07-single-hero-talking-points-and-personalization.md</code></p>
+    <p class="lede">
+      Corrected breakpoints. v3 modeled 1600 px wide which assumed nav-on-top or a wider-than-current viewport — not real for V1. v4 designs the content area at <strong>three actual widths: mobile 375, current desktop 912 (with left nav still on), and 1200 max.</strong> Chrome (top nav vs. left rail) is handled separately by the nav spec — these wireframes only design the content area at each width. Also applies the May 6 personalization treatment: "Your interests: Sleep · Stress · Move more · [Edit]" with inline edit modal on home (not a profile detour).
+    </p>
+
+    <div class="colors">
+      <div class="c-cream" style="flex:60">60 · cream surface</div>
+      <div class="c-paper" style="flex:18">18 · paper surface</div>
+      <div class="c-ink" style="flex:14">14 · ink</div>
+      <div class="c-accent" style="flex:5">5 · accent</div>
+      <div class="c-employer" style="flex:3">3 · employer / programs / challenge sources</div>
+    </div>
+    <p class="colors-legend"><strong>Color weighting (60/18/14/5/3):</strong> warm cream and paper surfaces; near-neutral ink for type and borders; brand blue reserved for affordances and Interests; muted accents for content sources (employer / programs / challenges).</p>
+
+    <div class="scope-strip">
+      <b>v4 changes from v3:</b> Drops the 1600 wide artboard. Adds 912 (today's content area with left nav present). 1200 is now the max. Applies the "Your interests · [Edit]" sub-header treatment with inline edit modal. Hero variants section, carousel current-vs-future contrast, and source-labeled lanes carry forward from v3.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- HERO FLEXIBILITY (carries forward from v3, condensed)               -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">01</span>Hero is one slot · five content variants<span class="pin-tag">Carried from v3 §01</span></div>
+
+  <p style="font-size: 13px; max-width: 1200px; color: var(--ink-2); line-height: 1.55;">
+    Single hero slot, flexible content. Priority engine fills it (full logic in <code>07</code>). Five legitimate variants: <strong>Active challenge · Employer message · Sales/product promo · Interest-relevant content · DCP / program nudge.</strong> All use the 50/50 split layout (photo left, copy right) for 508 contrast safety.
+  </p>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 1200px;">
+    <div class="lane" style="padding: 12px; border-left: 3px solid var(--challenge);">
+      <div class="wf-meta" style="text-transform: uppercase; color: var(--challenge); font-weight: 700; font-size: 10px;">Variant 1 · Active challenge</div>
+      <div class="wf-h" style="margin-top: 4px;">Pacific Crest Trail · day 4 of 30</div>
+      <div class="wf-meta" style="margin-top: 4px;">Source-tag colored uppercase, content-type label above title</div>
+    </div>
+    <div class="lane" style="padding: 12px; border-left: 3px solid var(--employer);">
+      <div class="wf-meta" style="text-transform: uppercase; color: var(--employer); font-weight: 700; font-size: 10px;">Variant 2 · Employer message</div>
+      <div class="wf-h" style="margin-top: 4px;">Open enrollment — review by May 31</div>
+      <div class="wf-meta" style="margin-top: 4px;">Honored via must-show flag in priority engine</div>
+    </div>
+    <div class="lane" style="padding: 12px; border-left: 3px solid var(--sales);">
+      <div class="wf-meta" style="text-transform: uppercase; color: var(--sales); font-weight: 700; font-size: 10px;">Variant 3 · Sales / product promo</div>
+      <div class="wf-h" style="margin-top: 4px;">New on MHC: AI Health Coach</div>
+      <div class="wf-meta" style="margin-top: 4px;">Marketing surface for new features</div>
+    </div>
+    <div class="lane" style="padding: 12px; border-left: 3px solid var(--accent);">
+      <div class="wf-meta" style="text-transform: uppercase; color: var(--accent); font-weight: 700; font-size: 10px;">Variant 4 · Interest-relevant</div>
+      <div class="wf-h" style="margin-top: 4px;">Insomnia DCP — recommended for you</div>
+      <div class="wf-meta" style="margin-top: 4px;">Driven by user's onboarding interests</div>
+    </div>
+    <div class="lane" style="padding: 12px; border-left: 3px solid var(--program);">
+      <div class="wf-meta" style="text-transform: uppercase; color: var(--program); font-weight: 700; font-size: 10px;">Variant 5 · Program re-engagement</div>
+      <div class="wf-h" style="margin-top: 4px;">Sleep Better DCP · pick up at session 4</div>
+      <div class="wf-meta" style="margin-top: 4px;">Triggered when user enrolled but inactive</div>
+    </div>
+    <div class="lane" style="padding: 12px; background: var(--paper);">
+      <div class="wf-meta" style="text-transform: uppercase; color: var(--ink-3); font-weight: 700; font-size: 10px;">Open question for stakeholders</div>
+      <div class="wf-h" style="margin-top: 4px; font-size: 13px;">Hero allocation rules</div>
+      <div class="wf-meta" style="margin-top: 4px;">See <code>07</code> for talking points + employer must-show + floor allocation</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- THE EDIT-INTERESTS INTERACTION                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">02</span>"Things I care about" · sub-header + edit modal<span class="pin-tag">May 6 personalization treatment</span></div>
+
+  <div style="display: grid; grid-template-columns: 1fr 380px; gap: 24px; max-width: 1200px; align-items: start;">
+
+    <div>
+      <p style="font-size: 13px; color: var(--ink-2); line-height: 1.55;">
+        The personalization story is "we listened." The section sub-header lists the user's actual onboarding interests by name — proof of listening. <strong>[Edit]</strong> opens a modal sheet on home (not a detour to profile) where the user can adjust their interests. This is <em>edit, not pick</em> — the user already has values; we're letting them adjust.
+      </p>
+
+      <div class="lane lane-int" style="padding: 16px; margin-top: 14px;">
+        <div class="wf-h">Things I care about</div>
+        <div class="interest-subhead">
+          <span class="label">Your interests:</span>
+          <span class="name">Sleep</span> ·
+          <span class="name">Stress</span> ·
+          <span class="name">Move more</span>
+          <span style="margin-left: auto;"></span>
+          <span class="edit">Edit</span>
+        </div>
+        <div class="hr"></div>
+        <div class="wf-meta" style="text-align: center; padding: 14px;">↑ Section header treatment. Content list follows below in each artboard.</div>
+      </div>
+
+      <p style="font-size: 12px; color: var(--ink-3); margin-top: 12px; font-style: italic;">
+        The implicit causal phrase "Here are your interests, and because of that, here's what you're seeing" doesn't need to be written — the layout (interests above, content below) carries the meaning.
+      </p>
+    </div>
+
+    <div class="edit-modal-mock">
+      <div class="modal-h">Edit your interests</div>
+      <div class="modal-sub">Pick the things you want MHC to focus on. You can change this any time.</div>
+      <div class="interest-row"><input type="checkbox" checked /> <span><strong>Sleep</strong> · better recovery, mood</span></div>
+      <div class="interest-row"><input type="checkbox" checked /> <span><strong>Stress</strong> · daily wind-down</span></div>
+      <div class="interest-row"><input type="checkbox" checked /> <span><strong>Move more</strong> · daily activity habit</span></div>
+      <div class="interest-row"><input type="checkbox" /> <span>Eat better</span></div>
+      <div class="interest-row"><input type="checkbox" /> <span>Drink more water</span></div>
+      <div class="interest-row"><input type="checkbox" /> <span>Reduce drinking</span></div>
+      <div class="interest-row"><input type="checkbox" /> <span>Build savings</span></div>
+      <div class="interest-row" style="color: var(--accent); cursor: pointer;"><span>+ Show all 24 interests</span></div>
+      <div class="modal-footer">
+        <span class="wf-btn ghost sm">Cancel</span>
+        <span class="wf-btn solid sm">Save</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="annot callout">
+    <strong>Why this isn't a picker</strong> — Picker is mandatory, modal-on-load, page-reframing, "pick the one thing." Edit is voluntary, opened by tap, scopes one section's content, "adjust the things you said you care about." Reuses the existing interests-management UI from onboarding/profile — no new component, just a new entry point.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARTBOARD 1 — MOBILE 375                                             -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">03</span>Mobile · 375 px<span class="pin-tag">Required scenario</span></div>
+
+  <div style="display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;">
+
+    <div class="artboard" style="max-width: 420px;">
+      <span class="pin">Mobile · 375</span>
+      <div class="artboard-label">
+        <span><b>Mobile · 375 px content</b></span>
+        <span>Nav handled separately</span>
+      </div>
+
+      <div class="wf-frame" style="width: 375px;">
+
+        <div class="topnav">
+          <div style="flex:1;"><span class="nav-handled">[nav handled separately]</span></div>
+          <div class="logo">MHC</div>
+          <div style="flex:1;"></div>
+        </div>
+
+        <div class="wf-row">
+          <div class="wf-h lg">Good morning, Davinder</div>
+          <div class="wf-meta">Wednesday · May 6</div>
+        </div>
+
+        <div class="wf-row" style="background:var(--paper);">
+          <div class="wf-label">Hero · single card · flexible content</div>
+          <div class="wf-img" style="height: 140px; margin-bottom: 10px;">Hero photo · 50/50 cropped to top half</div>
+          <div class="wf-meta" style="text-transform: uppercase; color: var(--challenge); font-weight: 700; font-size: 10px;">Day 4 of 30 · Active challenge</div>
+          <div class="wf-h" style="margin-top: 3px;">Pacific Crest Trail Challenge</div>
+          <div class="wf-body sm" style="margin-top: 3px;">Your team is in 3rd place</div>
+          <div style="margin-top: 8px;"><span class="wf-btn solid sm">Log steps</span></div>
+          <div class="reward-meta" style="margin-top: 4px;">Earns $25 at challenge end</div>
+          <div class="wf-meta" style="margin-top: 12px; font-style: italic; padding-top: 8px; border-top: 1px dashed var(--line-2);">V1: single card. V2: dots-below carousel, single-visible, swipeable.</div>
+        </div>
+
+        <div class="wf-row">
+          <div class="wf-label">Today · live tracker data</div>
+          <div class="tile-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="tile"><div class="tile-label">Steps</div><div class="tile-value">8,572</div><div class="tile-goal">of 10k</div></div>
+            <div class="tile"><div class="tile-label">Sleep</div><div class="tile-value">7h 16m</div><div class="tile-goal">goal 8h</div></div>
+            <div class="tile"><div class="tile-label">Calories</div><div class="tile-value">1,840</div><div class="tile-goal">of 2,200</div></div>
+            <div class="tile"><div class="tile-label">Active Min</div><div class="tile-value">42</div><div class="tile-goal">goal 30 ✓</div></div>
+          </div>
+          <div class="wf-meta" style="margin-top: 6px;">↻ 4 min ago · Apple Health</div>
+        </div>
+
+        <div class="wf-row" style="background:var(--paper);">
+          <div class="wf-label">AI Insights</div>
+          <div class="wf-h">Sleep dropped 32 min last night.</div>
+          <div class="wf-body sm">Most likely: late screen time after 11pm.</div>
+          <div style="margin-top: 8px;"><span class="wf-btn sm">Add wind-down</span></div>
+        </div>
+
+        <div class="wf-row">
+          <div class="wf-label"><span class="source source-prog">Ongoing programs</span></div>
+          <div class="stack" style="margin-top: 4px;">
+            <div class="lane lane-prog" style="padding: 10px;">
+              <div class="row">
+                <div>
+                  <div class="wf-h" style="font-size: 13px;">Sleep Better DCP</div>
+                  <div class="wf-meta">Session 3 of 8 · 38%</div>
+                  <div class="reward-meta">$100 at completion</div>
+                </div>
+                <span class="wf-btn sm">Continue</span>
+              </div>
+            </div>
+            <div class="lane lane-prog" style="padding: 10px;">
+              <div class="row">
+                <div>
+                  <div class="wf-h" style="font-size: 13px;">21-Day Mindfulness</div>
+                  <div class="wf-meta">Day 9 of 21</div>
+                </div>
+                <span class="wf-btn sm">Continue</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-row" style="background: var(--employer-soft);">
+          <div class="wf-label"><span class="source source-emp">From your employer</span></div>
+          <div class="wf-h">$0 mental health visits</div>
+          <div class="wf-body sm">Through Lyra · 12 sessions/year, no copay</div>
+          <div style="margin-top: 6px;"><span class="wf-btn sm">See benefit</span></div>
+          <div class="hr"></div>
+          <div class="wf-h" style="font-size: 13px;">Q2 wellness fair · May 22</div>
+          <div class="wf-meta">12pm · cafeteria</div>
+          <div class="reward-meta">+50 pts to attend</div>
+        </div>
+
+        <div class="wf-row">
+          <div class="wf-label"><span class="source source-int">Things I care about</span></div>
+          <div class="interest-subhead">
+            <span class="label">Your interests:</span>
+            <span class="name">Sleep</span> ·
+            <span class="name">Stress</span> ·
+            <span class="name">Move more</span>
+            <span class="edit" style="margin-left: 4px;">Edit</span>
+          </div>
+          <div class="wf-h" style="font-size: 13px;">Why your sleep score lies <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+          <div class="wf-meta">5 min read · +5 pts</div>
+          <div class="hr"></div>
+          <div class="wf-h" style="font-size: 13px;">Insomnia DCP <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+          <div class="wf-meta">8 weeks</div>
+          <div class="reward-meta">$100 gift card on completion</div>
+          <div class="hr"></div>
+          <div class="wf-h" style="font-size: 13px;">5-min meditation library <span class="source source-int" style="font-size: 9.5px;">Stress</span></div>
+          <div class="wf-meta">12 sessions · +5 pts each</div>
+          <div class="hr"></div>
+          <div class="wf-h" style="font-size: 13px;">Strength for desk workers <span class="source source-int" style="font-size: 9.5px;">Move more</span></div>
+          <div class="wf-meta">15 min/day · no equipment</div>
+        </div>
+
+        <div class="bottomnav">
+          <div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div><div class="item"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: 1; min-width: 280px; max-width: 480px;">
+      <div class="annot">
+        <strong>Mobile annotations</strong>
+        <ul style="padding-left: 18px; line-height: 1.7;">
+          <li><strong>Single hero, flexible content.</strong> Source-tag label ("Day 4 of 30 · Active challenge") above the title tells the user what kind of moment this is.</li>
+          <li><strong>Tracker tiles 2×2:</strong> Steps · Sleep · Calories · Active Min.</li>
+          <li><strong>Insights right after tracker</strong> — bridges raw numbers to interpretation.</li>
+          <li><strong>"Things I care about" header</strong> uses the May 6 treatment: "Your interests: Sleep · Stress · Move more · Edit". Tap Edit → modal sheet (mocked in §02 above).</li>
+          <li><strong>Reward refs inline</strong> on items where applicable. No persistent rewards chip in chrome.</li>
+          <li><strong>508:</strong> hero copy never overlays the photo. Source labels color + text. Tap targets ≥ 44 px.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARTBOARD 2 — DESKTOP 912 (TODAY'S CONTENT WIDTH)                    -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">04</span>Desktop · 912 px content area<span class="pin-tag">Today's state — left nav still on</span></div>
+
+  <div class="artboard" style="max-width: 970px;">
+    <span class="pin">912 (current)</span>
+    <div class="artboard-label">
+      <span><b>Desktop · 912 px content area</b></span>
+      <span>Left nav handled separately · content area only</span>
+    </div>
+
+    <div class="wf-frame" style="width: 912px;">
+
+      <div class="topnav">
+        <div style="flex:1;"></div>
+        <div class="logo">MOBILE HEALTH</div>
+        <div style="flex:1; text-align:right;"><span class="nav-handled">[chrome handled separately]</span></div>
+      </div>
+
+      <div class="wf-row">
+        <div class="row">
+          <div>
+            <div class="wf-h xl">Good morning, Davinder</div>
+            <div class="wf-meta">Wednesday · May 6</div>
+          </div>
+          <div class="wf-meta" style="text-align: right;">↻ Trackers synced 4 min ago<br>Apple Health</div>
+        </div>
+      </div>
+
+      <!-- HERO — at 912, image+copy stay split but tighter -->
+      <div class="wf-row" style="background:var(--paper);">
+        <div class="wf-label">Hero · single card · flexible content (priority engine fills slot)</div>
+        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 16px; align-items: stretch; margin-top: 8px;">
+          <div class="wf-img" style="height: 180px;">Hero photo · 50/50 split</div>
+          <div style="padding: 8px 0; display: flex; flex-direction: column; justify-content: center;">
+            <div class="wf-meta" style="text-transform: uppercase; color: var(--challenge); font-weight: 700; font-size: 10px;">Active challenge · Day 4 of 30</div>
+            <div class="wf-h xl" style="font-size: 20px; margin-top: 4px;">Pacific Crest Trail Challenge</div>
+            <div class="wf-body" style="margin-top: 6px;">Your team "Trail Mix" is in 3rd. Walk 12,000 steps today to overtake "Roadrunners."</div>
+            <div style="margin-top: 12px;">
+              <span class="wf-btn solid">Log today's steps</span>
+              <span class="wf-btn ghost" style="margin-left: 6px;">Leaderboard</span>
+            </div>
+            <div class="reward-meta" style="margin-top: 6px;">Earns $25 at challenge end · +50 pts daily</div>
+          </div>
+        </div>
+        <div class="wf-meta" style="margin-top: 10px; font-style: italic; padding-top: 8px; border-top: 1px dashed var(--line-2);">V1: single card. V2: dots-below carousel.</div>
+      </div>
+
+      <!-- TRACKER (full width) -->
+      <div class="wf-row">
+        <div class="wf-label">Today · live tracker data</div>
+        <div class="tile-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+          <div class="tile"><div class="tile-label">Steps</div><div class="tile-value">8,572</div><div class="tile-goal">of 10k</div></div>
+          <div class="tile"><div class="tile-label">Sleep</div><div class="tile-value">7h 16m</div><div class="tile-goal">goal 8h</div></div>
+          <div class="tile"><div class="tile-label">Calories</div><div class="tile-value">1,840</div><div class="tile-goal">of 2,200</div></div>
+          <div class="tile"><div class="tile-label">Active Min</div><div class="tile-value">42</div><div class="tile-goal">goal 30 ✓</div></div>
+        </div>
+      </div>
+
+      <!-- INSIGHTS (full width below tracker — 912 doesn't have room for side-by-side cleanly) -->
+      <div class="wf-row" style="background: var(--paper);">
+        <div class="wf-label">🤖 AI Insights</div>
+        <div class="row" style="align-items: flex-start;">
+          <div style="flex: 1;">
+            <div class="wf-h">Sleep dropped 32 min last night.</div>
+            <div class="wf-body sm" style="margin-top: 4px;">Most likely: late screen time after 11pm. Sleep was 47 min better last week on nights you stopped screens by 10:30pm.</div>
+          </div>
+          <div style="flex-shrink: 0;"><span class="wf-btn sm">Add wind-down</span></div>
+        </div>
+      </div>
+
+      <!-- ONGOING PROGRAMS — 3-up at 912 (tight but OK) -->
+      <div class="wf-row">
+        <div class="wf-label"><span class="source source-prog">Ongoing programs · pick up where you left off</span></div>
+        <div class="threecol" style="margin-top: 6px;">
+          <div class="lane lane-prog" style="padding: 11px;">
+            <div class="wf-meta">DCP</div>
+            <div class="wf-h" style="font-size: 13px;">Sleep Better</div>
+            <div class="wf-meta">Sess. 3/8 · 38%</div>
+            <div class="reward-meta">$100 at end</div>
+            <div style="margin-top: 8px;"><span class="wf-btn sm">Continue</span></div>
+          </div>
+          <div class="lane lane-prog" style="padding: 11px;">
+            <div class="wf-meta">Journey</div>
+            <div class="wf-h" style="font-size: 13px;">21-Day Mindful</div>
+            <div class="wf-meta">Day 9/21 · 43%</div>
+            <div style="margin-top: 8px;"><span class="wf-btn sm">Today's lesson</span></div>
+          </div>
+          <div class="lane lane-prog" style="padding: 11px; border-left-color: var(--challenge);">
+            <div class="wf-meta" style="color: var(--challenge);">Challenge</div>
+            <div class="wf-h" style="font-size: 13px;">Pacific Crest</div>
+            <div class="wf-meta">Day 4/30 · 3rd</div>
+            <div style="margin-top: 8px;"><span class="wf-btn sm">View team</span></div>
+          </div>
+        </div>
+        <div class="hr"></div>
+        <div class="wf-meta" style="display: flex; justify-content: space-between; align-items: center;">
+          <span><span class="source source-chal" style="font-size: 9.5px;">New challenge</span> · "May Steps Sprint" starts May 12</span>
+          <span class="wf-btn ghost sm">See challenge</span>
+        </div>
+      </div>
+
+      <!-- LANES — 50/50 -->
+      <div class="twocol" style="padding: 14px; gap: 14px;">
+        <div class="lane lane-emp" style="padding: 14px;">
+          <div class="lane-h"><span class="source source-emp">From your employer</span></div>
+          <div class="stack">
+            <div>
+              <div class="wf-h">$0 mental health visits</div>
+              <div class="wf-body sm">Through Lyra · 12 sessions/year, no copay</div>
+              <div style="margin-top: 6px;"><span class="wf-btn sm">See benefit</span></div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Q2 wellness fair · May 22</div>
+              <div class="wf-body sm">12pm · cafeteria · biometric screening</div>
+              <div class="reward-meta">+50 pts to attend</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">EAP — confidential, free, 24/7</div>
+              <div class="wf-body sm">Counseling, legal, financial · 6 sessions/year</div>
+            </div>
+          </div>
+        </div>
+        <div class="lane lane-int" style="padding: 14px;">
+          <div class="lane-h">Things I care about</div>
+          <div class="interest-subhead">
+            <span class="label">Your interests:</span>
+            <span class="name">Sleep</span> ·
+            <span class="name">Stress</span> ·
+            <span class="name">Move more</span>
+            <span class="edit" style="margin-left: auto;">Edit</span>
+          </div>
+          <div class="stack">
+            <div>
+              <div class="wf-h">Why your sleep score lies <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+              <div class="wf-body sm">Your tracker measures movement, not REM.</div>
+              <div class="wf-meta">5 min · +5 pts</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Insomnia DCP <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+              <div class="wf-body sm">8-week clinical program</div>
+              <div class="reward-meta">$100 gift card on completion</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">5-min meditation library <span class="source source-int" style="font-size: 9.5px;">Stress</span></div>
+              <div class="wf-body sm">12 short sessions</div>
+              <div class="reward-meta">+5 pts per session</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="annot callout">
+      <strong>What's specific to 912</strong> — Tracker and Insights stack vertically (full-width tracker, Insights as a row below). At 912 trying to put them side-by-side would make Insights too narrow to read. Hero photo is 280 px wide (tighter than 1200's 360 px). Ongoing programs is 3-up but compact. Lanes still go 50/50. New challenge hint is a single line below the programs row.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- ARTBOARD 3 — DESKTOP 1200 (MAX)                                     -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">05</span>Desktop · 1200 px content area<span class="pin-tag">Max content width</span></div>
+
+  <div class="artboard" style="max-width: 1280px;">
+    <span class="pin">1200 (max)</span>
+    <div class="artboard-label">
+      <span><b>Desktop · 1200 px content area max</b></span>
+      <span>Whether nav is left-rail or top-bar, content caps here</span>
+    </div>
+
+    <div class="wf-frame" style="width: 1200px;">
+
+      <div class="topnav">
+        <div style="flex:1;"></div>
+        <div class="logo">MOBILE HEALTH</div>
+        <div style="flex:1; text-align:right;"><span class="nav-handled">[chrome handled separately]</span></div>
+      </div>
+
+      <div class="wf-row">
+        <div class="row">
+          <div>
+            <div class="wf-h xl" style="font-size: 22px;">Good morning, Davinder</div>
+            <div class="wf-meta">Wednesday · May 6 · Trackers synced 4 min ago via Apple Health</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO — bigger image at 1200 -->
+      <div class="wf-row" style="background:var(--paper); padding: 16px 14px;">
+        <div class="wf-label">Hero · single card · flexible content (priority engine fills slot)</div>
+        <div style="display: grid; grid-template-columns: 440px 1fr; gap: 22px; align-items: stretch; margin-top: 10px;">
+          <div class="wf-img" style="height: 240px;">Hero photo · 50/50 split · 508-safe</div>
+          <div style="padding: 10px 0; display: flex; flex-direction: column; justify-content: center;">
+            <div class="wf-meta" style="text-transform: uppercase; color: var(--challenge); font-weight: 700; font-size: 11px;">Active challenge · Day 4 of 30</div>
+            <div class="wf-h xl" style="font-size: 24px; margin-top: 6px;">Pacific Crest Trail Challenge</div>
+            <div class="wf-body" style="margin-top: 8px;">Your team "Trail Mix" is in 3rd. Walk 12,000 steps today to overtake "Roadrunners" — close enough to take it back this week.</div>
+            <div style="margin-top: 14px;">
+              <span class="wf-btn solid">Log today's steps</span>
+              <span class="wf-btn ghost" style="margin-left: 6px;">See leaderboard</span>
+            </div>
+            <div class="reward-meta" style="margin-top: 8px;">Earns $25 at challenge end · +50 pts daily</div>
+          </div>
+        </div>
+        <div class="wf-meta" style="margin-top: 12px; font-style: italic; padding-top: 8px; border-top: 1px dashed var(--line-2);">V1: single card. V2: dots-below carousel, single-visible, click-dot or swipe.</div>
+      </div>
+
+      <!-- TRACKER + INSIGHTS side-by-side at 1200 -->
+      <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; padding: 14px;">
+        <div class="lane">
+          <div class="lane-h">Today · live tracker data</div>
+          <div class="tile-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+            <div class="tile"><div class="tile-label">Steps</div><div class="tile-value">8,572</div><div class="tile-goal">of 10k · ↑12% vs avg</div></div>
+            <div class="tile"><div class="tile-label">Sleep</div><div class="tile-value">7h 16m</div><div class="tile-goal">goal 8h · ↓32 min</div></div>
+            <div class="tile"><div class="tile-label">Calories</div><div class="tile-value">1,840</div><div class="tile-goal">of 2,200</div></div>
+            <div class="tile"><div class="tile-label">Active Min</div><div class="tile-value">42</div><div class="tile-goal">goal 30 ✓</div></div>
+          </div>
+        </div>
+        <div class="lane" style="border-left: 3px solid var(--accent);">
+          <div class="lane-h">🤖 AI Insights</div>
+          <div class="wf-h">Sleep dropped 32 min last night</div>
+          <div class="wf-body sm" style="margin-top: 4px;">Most likely: late screen time after 11pm. Sleep was 47 min better last week on nights you stopped screens by 10:30pm.</div>
+          <div style="margin-top: 10px;"><span class="wf-btn sm">Add wind-down to my evening</span></div>
+        </div>
+      </div>
+
+      <!-- ONGOING PROGRAMS — 3-up + new challenge as 4th tile -->
+      <div class="wf-row">
+        <div class="wf-label"><span class="source source-prog">Ongoing programs · pick up where you left off</span></div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 6px;">
+          <div class="lane lane-prog" style="padding: 12px;">
+            <div class="wf-meta">DCP</div>
+            <div class="wf-h" style="font-size: 14px;">Sleep Better</div>
+            <div class="wf-meta">Session 3 of 8 · 38%</div>
+            <div class="reward-meta">$100 at completion</div>
+            <div style="margin-top: 8px;"><span class="wf-btn sm">Continue session 4</span></div>
+          </div>
+          <div class="lane lane-prog" style="padding: 12px;">
+            <div class="wf-meta">Journey</div>
+            <div class="wf-h" style="font-size: 14px;">21-Day Mindfulness</div>
+            <div class="wf-meta">Day 9 of 21 · 43%</div>
+            <div style="margin-top: 8px;"><span class="wf-btn sm">Today's lesson</span></div>
+          </div>
+          <div class="lane lane-prog" style="padding: 12px; border-left-color: var(--challenge);">
+            <div class="wf-meta" style="color: var(--challenge);">Challenge · ongoing</div>
+            <div class="wf-h" style="font-size: 14px;">Pacific Crest Trail</div>
+            <div class="wf-meta">Day 4 of 30 · 3rd</div>
+            <div style="margin-top: 8px;"><span class="wf-btn sm">View team</span></div>
+          </div>
+          <div class="lane" style="padding: 12px; border: 1px dashed var(--challenge); background: var(--challenge-soft);">
+            <div class="wf-meta" style="color: var(--challenge);">Challenge · new</div>
+            <div class="wf-h" style="font-size: 14px;">May Steps Sprint</div>
+            <div class="wf-meta">Starts May 12 · 30 days</div>
+            <div style="margin-top: 8px;"><span class="wf-btn sm">Invite team</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LANES — 50/50 with breathing room -->
+      <div class="twocol" style="padding: 14px; gap: 16px;">
+        <div class="lane lane-emp" style="padding: 16px;">
+          <div class="lane-h"><span class="source source-emp">From your employer</span></div>
+          <div class="stack">
+            <div>
+              <div class="wf-h">Your benefits include $0 mental health visits</div>
+              <div class="wf-body sm">Through Lyra · 12 sessions/year, no copay · most members never knew this was covered.</div>
+              <div style="margin-top: 6px;"><span class="wf-btn sm">See benefit</span></div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Q2 wellness fair · May 22</div>
+              <div class="wf-body sm">12pm · cafeteria · biometric screening, flu shots, free lunch</div>
+              <div class="reward-meta">+50 pts to attend</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">New: backup care benefit</div>
+              <div class="wf-body sm">10 days/year for child or elder care, employer-paid</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">EAP — confidential, free, 24/7</div>
+              <div class="wf-body sm">Counseling, legal, financial · 6 sessions/year</div>
+            </div>
+          </div>
+        </div>
+        <div class="lane lane-int" style="padding: 16px;">
+          <div class="lane-h">Things I care about</div>
+          <div class="interest-subhead">
+            <span class="label">Your interests:</span>
+            <span class="name">Sleep</span> ·
+            <span class="name">Stress</span> ·
+            <span class="name">Move more</span>
+            <span class="edit" style="margin-left: auto;">Edit</span>
+          </div>
+          <div class="stack">
+            <div>
+              <div class="wf-h">Why your sleep score lies <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+              <div class="wf-body sm">Your tracker measures movement, not REM. Here's what to actually trust.</div>
+              <div class="wf-meta">5 min read · +5 pts</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Insomnia DCP — recommended <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+              <div class="wf-body sm">8-week clinical program · weekly sessions, daily check-ins</div>
+              <div class="reward-meta">$100 gift card on completion</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">5-min meditation library <span class="source source-int" style="font-size: 9.5px;">Stress</span></div>
+              <div class="wf-body sm">12 short sessions · meets you wherever you are</div>
+              <div class="reward-meta">+5 pts per session</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Strength program for desk workers <span class="source source-int" style="font-size: 9.5px;">Move more</span></div>
+              <div class="wf-body sm">15 min/day · no equipment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="annot callout">
+      <strong>What's specific to 1200</strong> — Tracker and Insights run side-by-side (1.4 : 1 ratio). Hero photo 440 px wide, copy gets ~720 px to breathe. Ongoing programs becomes a 4-up row promoting the new challenge to its own tile (instead of a one-line hint). Lanes get more breathing room; Interests lane shows 4 items, Employer lane shows 4. This is the upper bound — content shouldn't stretch wider.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- CONTENT VARIATIONS                                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">06</span>Content variations across content widths</div>
+
+  <table>
+    <thead>
+      <tr><th>Module</th><th>375 mobile</th><th>912 (today)</th><th>1200 (max)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Hero</strong></td><td>Single card · ~140 px tall · cropped to top half · source-tag above title</td><td>Single card · ~180 px · 280 px image</td><td>Single card · ~240 px · 440 px image</td></tr>
+      <tr><td><strong>Tracker tiles</strong></td><td>2×2 grid · Steps/Sleep/Calories/Active</td><td>4-up inline · same metrics</td><td>4-up inline · trend deltas added</td></tr>
+      <tr><td><strong>AI Insights</strong></td><td>Full-width card</td><td>Full-width row below tracker (stacked — 912 too tight for side-by-side)</td><td>Side-by-side with tracker (1.4 : 1)</td></tr>
+      <tr><td><strong>Ongoing programs</strong></td><td>Stacked · 2 items</td><td>3-up · DCP/Journey/Challenge · new challenge as one-line hint below</td><td>4-up · adds new-challenge tile inline</td></tr>
+      <tr><td><strong>From your employer</strong></td><td>Stacked · 2 items</td><td>50% column · 3 items</td><td>50% column · 4 items</td></tr>
+      <tr><td><strong>Things I care about</strong></td><td>Stacked · 4 items · "Your interests · Edit" inline</td><td>50% column · 3 items · "Your interests · Edit" inline</td><td>50% column · 4 items · "Your interests · Edit" inline</td></tr>
+      <tr><td><strong>Reward references</strong></td><td>Inline on items where applicable</td><td>Inline on items</td><td>Inline on items</td></tr>
+    </tbody>
+  </table>
+
+  <div class="annotations">
+    <h3>What's deliberately not in v4</h3>
+    <ul>
+      <li>No 1600 wide artboard. v3's wide breakpoint was based on Jill's nav-on-top assumption that doesn't apply for V1. 1200 is the max content width.</li>
+      <li>No mandatory focus picker.</li>
+      <li>No persistent rewards chip in chrome.</li>
+      <li>No DCP-progress card with inline clinical metric (DCP-focused home is a future iteration).</li>
+      <li>No nav design — handled by separate spec.</li>
+    </ul>
+
+    <h3>Key open items still on the list</h3>
+    <ul>
+      <li><strong>Hero allocation rules</strong> — confirm priority engine logic + employer must-show + floor allocation with sales / client services. See <code>07</code> for talking points.</li>
+      <li><strong>Edit modal mechanics</strong> — confirm the existing interests-management UI (from onboarding/profile) can be invoked as a modal sheet from home.</li>
+      <li><strong>Ongoing programs cap</strong> — what if user has more than 4 programs? Need an "+N more" overflow.</li>
+      <li><strong>Hero photo brief at mobile crop</strong> — confirm photographers have a "subject in top-third" guideline.</li>
+    </ul>
+
+    <h3>Net engineering ask</h3>
+    <p>
+      <strong>Zero new Page Layout Elements for V1.</strong> Same as v2/v3. Edit modal reuses the existing interests-management UI from onboarding/profile — new entry point only.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — Current vs. Focused A/B</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; background:#f0eee9; font-family: 'Raleway', sans-serif; }
+  .ab-commentary { font-family: 'Raleway', sans-serif; font-size: 12.5px; line-height: 1.5; color:#3c3228; background:#fef4a8; padding:12px 14px; border-radius:6px; }
+  .ab-commentary b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; color:#5a4a2a; }
+  .label-red { color:#c1292e; font-weight: 700; }
+  .label-green { color:#52a045; font-weight: 700; }
+  .kpi { background:#fff; border:1px solid #e6ebec; border-radius: 14px; padding: 16px 18px; }
+  .kpi .k { font-size: 11px; font-weight: 700; color:#6e7a7d; letter-spacing: 0.6px; text-transform: uppercase; }
+  .kpi .v { font-size: 26px; font-weight: 700; color:#0f497f; margin-top: 6px; line-height: 1.1; }
+  .kpi .d { font-size: 12.5px; color:#373d3f; margin-top: 6px; line-height: 1.45; }
+  .hero-card { background: #0f497f; color:#fff; padding: 28px 32px; border-radius: 18px; font-family: 'Raleway', sans-serif; }
+  .hero-card h3 { margin:0 0 6px; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color:#f15922; }
+  .hero-card h2 { margin:0 0 14px; font-weight: 700; font-size: 26px; line-height: 1.2; }
+  .hero-card p { margin:0 0 8px; font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.9); }
+  .callout { background:#fff; border:1px solid #e6ebec; border-radius:12px; padding: 14px 16px; font-size: 12.5px; line-height: 1.55; color:#373d3f; }
+  .callout b { color:#0f497f; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="mhc-components.jsx"></script>
+<script type="text/babel" src="mhc-screens-desktop.jsx"></script>
+<script type="text/babel" src="mhc-screens-mobile.jsx"></script>
+<script type="text/babel" src="insights-component.jsx"></script>
+<script type="text/babel" src="search-notifications.jsx"></script>
+<script type="text/babel" src="ab-screens.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "density": "regular",
+  "focus": "Sleep",
+  "tracker": "linked",
+  "insights": "read-only",
+  "webShell": "topnav"
+}/*EDITMODE-END*/;
+
+function Phone({ children }) {
+  // Frameless phone — rounded white card without the iOS status bar / dynamic island,
+  // so the canvas / logo surface behind shows through cleanly.
+  return (
+    <div style={{
+      width: 402, borderRadius: 48, overflow:'hidden',
+      background:'#fff',
+      boxShadow:'0 40px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.12)',
+    }}>
+      {children}
+    </div>
+  );
+}
+
+function Callout({ children }) {
+  return <div className="callout">{children}</div>;
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const { density, focus, tracker, insights, webShell } = t;
+  const linked = tracker === 'linked';
+  const insightsState = insights;
+  const phoneH = 900;
+
+  return (
+    <div>
+      <DesignCanvas>
+
+        {/* ── Intro + hypothesis ── */}
+        <DCSection id="intro" title="Current vs. Focused — A/B Comparison" subtitle="The current home page against a proposed 'Focused' direction that replaces the personalization engine with user-declared intent, promotes trackers above the fold, and commits to one hero.">
+          <DCArtboard id="hypothesis" label="The hypothesis" width={560} height={540}>
+            <div style={{ padding: 28, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 16 }}>
+              <div className="hero-card">
+                <h3>Hypothesis</h3>
+                <h2>Ask users what they want. Stop assuming.</h2>
+                <p>The current home runs a weighted personalization engine over 5 banner slots, 3 action items, and trackers below the fold. It's complex to maintain and users don't trust the output.</p>
+                <p style={{marginTop: 12}}>The <b style={{color:'#fff'}}>Focused</b> direction swaps that for three moves:</p>
+                <p><b style={{color:'#fff'}}>1.</b> User picks 1–2 focus areas, once. We filter home around those.</p>
+                <p><b style={{color:'#fff'}}>2.</b> One hero, always. Secondary banners become a small strip only if the client has extras.</p>
+                <p><b style={{color:'#fff'}}>3.</b> Trackers promoted above the fold as a "Today" strip.</p>
+              </div>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12.5, color:'#6e7a7d', marginTop:'auto', lineHeight: 1.5 }}>
+                Toggle <b>focus</b> and <b>tracker</b> state in the Tweaks panel to see the Focused screens react. Pan right to compare mobile, then desktop, then KPIs.
+              </div>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Focus picker ── */}
+        <DCSection id="picker" title="The one-time focus picker" subtitle="Shown once on first visit (skippable). Answer becomes the basis for filtering — and we delete the weighting engine.">
+          <DCArtboard id="picker-1" label="Focus picker" width={420} height={phoneH}>
+            <Phone><M_FocusPicker/></Phone>
+          </DCArtboard>
+          <DCArtboard id="picker-notes" label="Why this works" width={340} height={phoneH}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Honest, not magic.</b> The current engine pretends to know the user. The picker trades that illusion for actual signal.
+              </Callout>
+              <Callout>
+                <b>Two-tap commitment.</b> Pick 1–2, hit Continue. No long forms, no required account work.
+              </Callout>
+              <Callout>
+                <b>Changeable.</b> Same sheet re-opens from the "Focus" pill on home. No settings-screen detour.
+              </Callout>
+              <Callout>
+                <b>Fuels the advisor.</b> The chosen focus areas become great prompts for the AI Chat Advisor ("How do I sleep better on travel nights?").
+              </Callout>
+              <Callout>
+                <b>What we delete.</b> Weighting logic, priority switches, content eligibility rules. Roughly half the content-ops overhead.
+              </Callout>
+              <Callout>
+                <b>Escape hatch.</b> "Something else" captures the long tail without forcing us to enumerate every possible goal.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Skipped picker — no-focus state ── */}
+        <DCSection id="no-focus" title="When the user skips the picker — no-focus state" subtitle="If a user dismisses the picker, the home gracefully degrades. We don't fall back to today's noisy 'everything-for-everyone' page — that would tell them the new design is worse. Instead, the page becomes a soft sell for picking a focus, while still being useful on its own.">
+          <DCArtboard id="no-focus-mobile" label="Mobile · skipped picker" width={420} height={phoneH + 400}>
+            <Phone><M_NoFocus density={density} linked={linked} insightsState={insightsState}/></Phone>
+          </DCArtboard>
+          <DCArtboard id="no-focus-desktop" label="Desktop · skipped picker" width={1280} height={1200}>
+            <D_NoFocus density={density} linked={linked} insightsState={insightsState}/>
+          </DCArtboard>
+
+          <DCArtboard id="no-focus-anatomy" label="What changes vs. Focused" width={340} height={1200}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Focus pill → "Pick your focus" CTA.</b> Same slot, same visual weight, dashed brand outline + "+" affordance. The slot is never empty — the missing focus is itself the call to action.
+              </Callout>
+              <Callout>
+                <b>Personal hero → onboarding hero.</b> Brand-colored card titled "Tell us what matters most" with 4 example focus chips. Tapping a chip sets the focus and reloads the page with a real hero. Primary button: "Pick your focus."
+              </Callout>
+              <Callout>
+                <b>"For your [focus] focus" → "Popular this week".</b> Generic, broad recommendations everyone sees. Honest framing — we're not pretending to personalize without a signal.
+              </Callout>
+              <Callout>
+                <b>Today strip + Insights stay.</b> They don't depend on focus — activity, points, AI insights are all useful day one. Removing them would punish the user for skipping.
+              </Callout>
+              <Callout>
+                <b>Persistent nudge between Insights and the rail.</b> Slim dashed banner: "Get a more personal home — Pick a focus →". Reminds without nagging; placed AFTER the value-bearing modules so the page proves itself first.
+              </Callout>
+              <Callout>
+                <b>Why not just show the current home?</b> The whole pitch of Focused is "less, but more relevant." If skipping returns you to the noisy old page, we've taught the user the new design is the lesser one. Better to make the empty state itself a quiet ad for the picker.
+              </Callout>
+              <Callout>
+                <b>Re-prompt cadence.</b> The chip CTA in the hero stays until a focus is picked. The persistent nudge can dismiss for the session and reappear after 7 days. No modal interruptions — pull, not push.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Three delivery modes — overview ── */}
+        <DCSection id="three-modes" title="Three delivery modes — at a glance" subtitle="Same Focused content, three shells. Mobile (native + bottom nav), web with left nav (today's MHC-hosted desktop), and web without left nav (SDK embed today, MHC top-nav tomorrow). All three run the same component tree underneath.">
+          <DCArtboard id="mode-mobile" label="① Mobile · native" width={420} height={phoneH + 200}>
+            <Phone><M_Focused density={density} focus={focus} linked={linked} insightsState={insightsState}/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mode-web-leftnav" label="② Web · with left nav (MHC-hosted)" width={1280} height={1200}>
+            <D_Focused density={density} focus={focus} linked={linked} insightsState={insightsState}/>
+          </DCArtboard>
+          <DCArtboard id="mode-web-nonav" label={`③ Web · no left nav (${webShell === 'sdk' ? 'SDK embed' : 'top-nav future'})`} width={1280} height={1200}>
+            <D_Focused_NoNav density={density} focus={focus} linked={linked} insightsState={insightsState} shell={webShell}/>
+          </DCArtboard>
+
+          <DCArtboard id="mode-rationale" label="Why three?" width={420} height={1200}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>① Mobile.</b> Native iOS/Android. Bottom tab bar handles primary nav. Status bar at top. Hero + Today strip + focused for-you stack vertically.
+              </Callout>
+              <Callout>
+                <b>② Web · with left nav.</b> The current MHC-hosted desktop. Persistent left rail with primary + account links. Top bar shows current section. The reference shell most internal teams design against today.
+              </Callout>
+              <Callout>
+                <b>③ Web · no left nav.</b> Two situations, one shell:<br/><br/>
+                <b>SDK embed today.</b> Partners host MHC inside their own portal. Their chrome is on top, their nav owns navigation, our module sits flush below — no competing left rail.<br/><br/>
+                <b>MHC top-nav tomorrow.</b> The planned MHC-hosted progression: kill the left rail, move primary nav to a top bar. Reads as a modern web app instead of a 2018 admin console.
+              </Callout>
+              <Callout>
+                <b>Component contract.</b> Same hero, Today strip, Insights block, focused for-you cards. Only the shell changes. Build once, render in any of the three.
+              </Callout>
+              <Callout>
+                <b>Use the Tweaks panel</b> to flip the third column between <b>top-nav (MHC future)</b> and <b>SDK embed (partner host)</b>.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Mobile side-by-side ── */}
+        <DCSection id="mobile-ab" title="Reference · Mobile — Current vs. Focused" subtitle="Everything from here down is supporting material — deeper A/B comparisons, design rationale, and component states. Side-by-side mobile on the same phone frame; the orange fold marker shows where a standard iPhone viewport cuts off.">
+          <DCArtboard id="m-cur" label="Current — today's behavior" width={420} height={phoneH + 400}>
+            <Phone><M_Current density={density}/></Phone>
+          </DCArtboard>
+          <DCArtboard id="m-foc" label="Focused — proposed" width={420} height={phoneH + 400}>
+            <Phone><M_Focused density={density} focus={focus} linked={linked} insightsState={insightsState}/></Phone>
+          </DCArtboard>
+
+          <DCArtboard id="m-deltas" label="Mobile deltas" width={340} height={phoneH + 400}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Hero.</b> <span className="label-red">Current:</span> 5-item carousel with pagination dots — users stop at dot 1, so dots 2-5 are dead weight.<br/><br/>
+                <span className="label-green">Focused:</span> one committed hero, tied to the user's focus. No swiping required to see the CTA.
+              </Callout>
+              <Callout>
+                <b>Trackers.</b> <span className="label-red">Current:</span> below the fold. Users must scroll past 3 action items to see their data.<br/><br/>
+                <span className="label-green">Focused:</span> 3-up "Today" strip immediately under hero. Zero-state CTA ("Link a tracker") is unavoidable for un-linked users.
+              </Callout>
+              <Callout>
+                <b>Action items.</b> <span className="label-red">Current:</span> 3 generic recommendations from the engine. Relevance feels coincidental.<br/><br/>
+                <span className="label-green">Focused:</span> 2 items filtered by the user's declared focus, with a clear "For your sleep focus" label so the filtering is legible.
+              </Callout>
+              <Callout>
+                <b>Focus pill.</b> New element. Tiny, honest, and changeable — the user always knows why they're seeing what they're seeing.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Old desktop AB section, kept as deep reference ── */}
+        <DCSection id="desktop-ab" title="Web · with left nav — Current vs. Focused" subtitle="The familiar MHC-hosted shell. Same A/B story as mobile, translated to desktop.">
+          <DCArtboard id="d-cur" label="Current — production screenshot" width={1280} height={960}>
+            <div style={{ width:'100%', height:'100%', background:'#fff' }}>
+              <img src="assets/current-desktop-screenshot.png" alt="Current MHC desktop home page" style={{ width:'100%', height:'100%', objectFit:'contain', display:'block' }}/>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="d-foc" label="Focused" width={1280} height={1200}>
+            <D_Focused density={density} focus={focus} linked={linked} insightsState={insightsState}/>
+          </DCArtboard>
+
+          <DCArtboard id="d-deltas" label="Desktop deltas" width={360} height={1200}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Hero row.</b> <span className="label-red">Current:</span> 5 banners fighting for attention, carousel dots below.<br/><br/>
+                <span className="label-green">Focused:</span> one cinematic 340px hero anchored to the user's focus. A clear, single CTA.
+              </Callout>
+              <Callout>
+                <b>Secondary content.</b> <span className="label-red">Current:</span> no distinction between primary and secondary.<br/><br/>
+                <span className="label-green">Focused:</span> "More from Umbrella" row at ~1/3 height — only rendered when the client has extra content. Max 4. No carousel.
+              </Callout>
+              <Callout>
+                <b>Today strip.</b> 4 tracker cards in the second viewport, not the third. This is the single biggest driver of tracker link-rate — making it unmissable.
+              </Callout>
+              <Callout>
+                <b>Welcome banner.</b> Deleted. It duplicates the greeting above it, which is now a typographic headline instead of a separate blue strip.
+              </Callout>
+              <Callout>
+                <b>Focus pill.</b> Sits next to the greeting. Muted but persistent — sets expectations for everything below.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Web without left nav — focused detail ── */}
+        <DCSection id="web-no-leftnav" title="Web · no left nav — both flavors detailed" subtitle="The third mode covers two real scenarios. Same MHC content; the chrome is what differs. Designing both up-front so we don't repaint the page when we flip the nav strategy.">
+          <DCArtboard id="nonav-topnav" label="MHC-hosted · top nav (future)" width={1280} height={1200}>
+            <D_Focused_NoNav density={density} focus={focus} linked={linked} insightsState={insightsState} shell="topnav"/>
+          </DCArtboard>
+          <DCArtboard id="nonav-sdk" label="SDK embed · partner-hosted" width={1280} height={1200}>
+            <D_Focused_NoNav density={density} focus={focus} linked={linked} insightsState={insightsState} shell="sdk"/>
+          </DCArtboard>
+
+          <DCArtboard id="nonav-deltas" label="What's different in this mode" width={420} height={1200}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Hero is 50/50 split.</b> Photo on the left, brand panel with copy on the right. Subject's head stays in frame at any width — no overlay contrast hacks. Selected from the hero options exploration below.
+              </Callout>
+              <Callout>
+                <b>Nav location.</b> Primary nav moves to a horizontal top bar. Account/notifications cluster top-right. No left rail at any breakpoint.
+              </Callout>
+              <Callout>
+                <b>Account menu.</b> Was a flat list under "My Account" on the left. Becomes a dropdown anchored to the avatar (Profile, Activity Tracker, Wellbeing Interests, Invite Dependents, Help, Sign Out).
+              </Callout>
+              <Callout>
+                <b>Page width.</b> Content max-width 1200px (vs 1280 with rail). Centered. Generous side gutters at &gt;1400px viewports — looks intentional, not stretched.
+              </Callout>
+              <Callout>
+                <b>SDK mode adds.</b> A muted "Powered by MobileHealth · Wellness module" tag below the partner's chrome. Light gray page background instead of off-white, so we sit inside the partner's surface, not on top of it.
+              </Callout>
+              <Callout>
+                <b>SDK mode subtracts.</b> No MHC top nav at all. Partner's nav is the only nav. Hero shrinks 340 → 300px to respect partner's vertical real-estate.
+              </Callout>
+              <Callout>
+                <b>Same content tree.</b> Greeting, Focus pill, hero, Today strip, Insights, focused for-you. <b>Don't fork the home view per shell</b> — pass a shell prop and let the layout adapt.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Hero treatment options for the no-left-nav (wide) layout ── */}
+        <DCSection id="hero-options" title="Hero treatment options — for wide / no-left-nav layouts" subtitle="When the page widens past ~1280px (no left rail), a full-bleed hero stretches the photo and crops the subject's head. Five options for keeping the hero readable and on-brand. Each artboard is rendered at 1400px to demonstrate the wide-viewport behavior.">
+
+          <DCArtboard id="hero-a" label="A · Capped width, centered" width={1400} height={420}>
+            <HeroOption variant="cap" width={1400}/>
+          </DCArtboard>
+          <DCArtboard id="hero-a-notes" label="A · notes" width={340} height={420}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it does.</b> Hero is capped at ~1100px and centered. Side gutters grow as the viewport widens. The photo never stretches.
+              </Callout>
+              <Callout>
+                <b>Why pick this.</b> Cheapest fix. Keeps the existing hero design intact. Reads as intentional whitespace at &gt;1400px. Matches the page-content max-width pattern most modern web apps use.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Hero feels less ambitious on huge monitors; the side margins can read as unused space if the rest of the page hugs the same cap.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="hero-b" label="B · Split layout (photo + content panels)" width={1400} height={420}>
+            <HeroOption variant="split" width={1400}/>
+          </DCArtboard>
+          <DCArtboard id="hero-b-notes" label="B · notes" width={340} height={420}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it does.</b> 50/50 split: photo on the left, solid brand panel with copy on the right. Photo crops to its half — head stays in frame. Copy lives on a controlled background, not over the image.
+              </Callout>
+              <Callout>
+                <b>Why pick this.</b> Best legibility in any width. Photo and text both feel deliberate. Easier on accessibility (no overlay contrast hacks). Scales gracefully.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Less cinematic than a full-bleed photo. Requires good photography that crops well to a vertical-ish frame — square crops are the safest brief.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="hero-c" label="C · Aspect-ratio locked (21:7)" width={1400} height={500}>
+            <HeroOption variant="aspect" width={1400}/>
+          </DCArtboard>
+          <DCArtboard id="hero-c-notes" label="C · notes" width={340} height={500}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it does.</b> Hero height grows in lock-step with width via <code>aspect-ratio: 21/7</code>. The image proportions stay constant — the woman's face stays in frame at any size.
+              </Callout>
+              <Callout>
+                <b>Why pick this.</b> Keeps the dramatic full-bleed hero. No fixed pixel height to fight. Photo subjects need a single safe-zone brief: head sits in the right third, eyes on a horizontal centerline.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Below the fold for short windows on tall content. Photo shop ops need to art-direct images with the safe-zone in mind — not a free swap-in.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="hero-d" label="D · Card-style (photo as inset)" width={1400} height={400}>
+            <HeroOption variant="card" width={1400}/>
+          </DCArtboard>
+          <DCArtboard id="hero-d-notes" label="D · notes" width={340} height={400}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it does.</b> Hero becomes a content card with a thumbnail-sized photo on the right (240×360-ish). White surface, MHC type, MHC button — no overlay required.
+              </Callout>
+              <Callout>
+                <b>Why pick this.</b> Most "applet"-friendly. Reads as a primary action card, not a marketing banner. Makes sense in SDK contexts where a partner's chrome already dominates the visual hierarchy.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Less emotional. Photo becomes a small accent, not the primary draw. Best when the focus area is action-driven (continue program) rather than aspirational (discover content).
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="hero-e" label="E · Editorial (photo above, content below)" width={1400} height={520}>
+            <HeroOption variant="editorial" width={1400}/>
+          </DCArtboard>
+          <DCArtboard id="hero-e-notes" label="E · notes" width={340} height={520}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it does.</b> Photo as a 220px-tall banner with a fixed aspect crop (image stays clean), content rendered below on a white surface. Title, body, CTA on a horizontal row.
+              </Callout>
+              <Callout>
+                <b>Why pick this.</b> Most accessible — copy contrast is a non-issue. Photos do not need a safe-zone brief; a wide horizontal crop is forgiving. Reads as magazine layout, calm.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Tallest of the five (~440px). Pushes Today strip further down. Less "hero," more "lead article."
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="hero-recommendation" label="Decision" width={580} height={460}>
+            <div style={{ padding: 22, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 14 }}>
+              <div className="hero-card" style={{ background: '#0f497f' }}>
+                <h3>Decision</h3>
+                <h2><span style={{color:'#fff'}}>B (50/50 split)</span> is the hero for no-left-nav layouts.</h2>
+              </div>
+              <Callout>
+                <b>Applied above.</b> The third desktop column (top-nav and SDK shells) and the "Web · no left nav — both flavors detailed" section now render the split hero. Pan up to see it in context.
+              </Callout>
+              <Callout>
+                <b>Why split.</b> Solves the cropping problem at any viewport. Photo and copy each get their own surface — no overlay contrast hacks. Reads as confident at 1280px and at 1920px.
+              </Callout>
+              <Callout>
+                <b>Photography brief.</b> Subjects centered horizontally in their crop, eyes on a horizontal line about 35–45% from the top. Square or near-square framing crops cleanly to the left half. Avoid wide horizontal compositions.
+              </Callout>
+              <Callout>
+                <b>Mobile is unchanged.</b> Mobile keeps the existing 200px stacked hero — narrow viewport already eliminates the stretching problem. With-left-nav desktop also unchanged (1280px content width is safe).
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+        {/* ── Focus control discoverability ── */}
+        <DCSection id="focus-control" title="Focus control — discoverability options" subtitle="The current pill is too quiet to read as a control. Best practice (NN/g, Material, Polaris, Primer): a control that drives page-wide content must (1) name the relationship, (2) look like a control, (3) echo downstream. Four options below — each shown with the greeting above and a peek at the section label below. Segmented control was ruled out (system requires hard-coded segments and we have >4 standard focus areas).">
+
+          <DCArtboard id="fc-current" label="Baseline · current pill" width={580} height={320}>
+            <div style={{ background:'#fafbfc', padding: 28, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', fontFamily: MHC_font }}>
+              <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                <div>
+                  <div style={{ fontFamily: MHC_font, fontWeight: 700, fontSize: 28, color: MHC.charcoal }}>Good morning, Davinder</div>
+                  <div style={{ fontFamily: MHC_font, fontSize: 14, color: MHC.slate, marginTop: 4 }}>Here's what's waiting for you today.</div>
+                </div>
+                <FocusPill focus={focus} variant="legacy"/>
+              </div>
+              <div style={{ marginTop:'auto', paddingTop: 24, borderTop: `1px dashed ${MHC.divider}` }}>
+                <div style={{ fontFamily: MHC_font, fontSize: 11, color: MHC.slate, letterSpacing: 0.6, textTransform:'uppercase', fontWeight: 700, marginBottom: 6 }}>↓ Echoed below the fold</div>
+                <div style={{ fontFamily: MHC_font, fontWeight: 700, fontSize: 20, color: MHC.charcoal }}>
+                  For your <span style={{ color: MHC.blue }}>{focus.toLowerCase()}</span> focus
+                </div>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="fc-current-notes" label="Current · what's wrong" width={340} height={320}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Reads as a status badge, not a control.</b> Same visual language as a "Verified" or "Beta" tag. The 50%-opacity "change" hint is the only affordance signal.
+              </Callout>
+              <Callout>
+                <b>Loses to the 28px greeting.</b> Visual mass is ~3:1 against it.
+              </Callout>
+              <Callout>
+                <b>Scores 1 of 3</b> on the standards rubric: names the relationship ✓ , echoes downstream ✓ , <span className="label-red">does not look like a control ✗</span>.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="fc-1" label="① Stronger pill" width={580} height={320}>
+            <FocusControlOption variant="pill-strong" focus={focus}/>
+          </DCArtboard>
+          <DCArtboard id="fc-1-notes" label="① notes" width={340} height={320}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What changes.</b> Light-blue fill, 1.5px brand-blue border, bolder type, explicit "Edit" label after a divider. The "Edit" word does the affordance work that a chevron would in a JS dropdown world.
+              </Callout>
+              <Callout>
+                <b>Interaction.</b> Tap opens a modal selector (or navigates to a focus-settings page).
+              </Callout>
+              <Callout>
+                <b>Pros.</b> Cheapest to ship. Doesn't shift page layout. Works in every shell. The labeled "Edit" reads as a button without needing JS-only patterns.
+              </Callout>
+              <Callout>
+                <b>Cons.</b> Still small relative to the headline. No explanation of <i>what</i> focus does for new users.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> Returning users post-onboarding, where we just need to fix the affordance gap.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="fc-2" label="② Banner row" width={580} height={320}>
+            <FocusControlOption variant="banner" focus={focus}/>
+          </DCArtboard>
+          <DCArtboard id="fc-2-notes" label="② notes" width={340} height={320}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What changes.</b> Full-width pale-blue row above the hero. Target icon, "Showing content for your <b>Sleep</b> focus", supporting line, and a "Change focus" button on the right (arrow indicates it leads somewhere — modal or page).
+              </Callout>
+              <Callout>
+                <b>Interaction.</b> "Change focus" opens a modal selector or navigates to a focus-settings page. The arrow signals navigation, not a dropdown.
+              </Callout>
+              <Callout>
+                <b>Pros.</b> Highest discoverability — impossible to miss. The "Change focus" button is unambiguously a control.
+              </Callout>
+              <Callout>
+                <b>Cons.</b> Eats vertical space (~80px). Pushes the hero down. Without dismiss, every user sees it forever — even after they've used it 50 times.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> Focus drives a lot of the page (3+ sections filtered) AND we accept the persistent space cost.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="fc-3" label="③ Inline editable heading" width={580} height={320}>
+            <FocusControlOption variant="inline-heading" focus={focus}/>
+          </DCArtboard>
+          <DCArtboard id="fc-3-notes" label="③ notes" width={340} height={320}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What changes.</b> Pill is gone. Replaced by an inline phrase under the greeting with a dotted underline + arrow marking it editable.
+              </Callout>
+              <Callout>
+                <b>Interaction.</b> Tap opens modal selector or navigates to focus-settings page.
+              </Callout>
+              <Callout>
+                <b>Pros.</b> Most natural language. Reads like a sentence, not a UI element. The section heading <i>is</i> the control.
+              </Callout>
+              <Callout>
+                <b>Cons.</b> Dotted underlines are a weak affordance for unfamiliar users. Two changeable instances on one page — risk of confusion.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> The page is otherwise calm and we want focus to feel like part of the prose.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="fc-recommendation" label="Recommendation" width={580} height={420}>
+            <div style={{ padding: 22, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 14 }}>
+              <div className="hero-card" style={{ background: '#0f497f' }}>
+                <h3>Recommendation</h3>
+                <h2>Ship <span style={{color:'#fff'}}>① Stronger pill</span> as the steady-state.</h2>
+              </div>
+              <Callout>
+                <b>Why ① for steady-state.</b> Solves the affordance gap with no layout cost. Brand-blue border + light fill + the explicit "Edit" label turns it from a badge into a button. No JS needed — tap goes to a modal or focus-settings page.
+              </Callout>
+              <Callout>
+                <b>Why not ② permanently.</b> Banner has no dismiss in your system, so it's a permanent ~80px tax on every visit forever. Worth it only if research shows users still struggle to find focus after we ship ①.
+              </Callout>
+              <Callout>
+                <b>Why not ③ alone.</b> Dotted-underline editable text is too subtle as the only affordance. But the <i>echo</i> in the section heading below the fold is great regardless of which control we ship up top.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+        {/* ── Focus pill — strong vs. legacy ── */}
+        <DCSection id="focus-pill" title="Focus pill — strong option" subtitle="The pill is the user's anchor on every Focused screen. It tells them why they're seeing what they're seeing, and gives them a one-tap way to change it. The legacy version reads as a footnote; the strong version reads as a primary control. Strong is applied across every Focused screen.">
+
+          <DCArtboard id="pill-strong" label="Strong (applied)" width={420} height={200}>
+            <div style={{ padding: 24, height:'100%', boxSizing:'border-box', background:'#f6f4ef', display:'flex', alignItems:'center', justifyContent:'center' }}>
+              <FocusPill focus="Manage stress" variant="strong"/>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="pill-legacy" label="Legacy (for comparison)" width={420} height={200}>
+            <div style={{ padding: 24, height:'100%', boxSizing:'border-box', background:'#f6f4ef', display:'flex', alignItems:'center', justifyContent:'center' }}>
+              <FocusPill focus="Manage stress" variant="legacy"/>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="pill-rationale" label="Why strong" width={380} height={400}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Filled brand background.</b> <code>#eaf2fa</code> with a 1.5px Brand Blue border. Reads as an active control, not a status badge.
+              </Callout>
+              <Callout>
+                <b>"Edit" not "change".</b> Affordance is unambiguous. Vertical divider before the action mirrors how iOS pickers and Apple Health metric chips signal "tap to modify".
+              </Callout>
+              <Callout>
+                <b>Bolder type, more padding.</b> 12.5px / 700 vs. 12px / 600. Same one-line height, but commits visually.
+              </Callout>
+              <Callout>
+                <b>Soft shadow.</b> 1×3 brand-tinted lift signals it's a tappable surface without competing with the hero's CTA.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="pill-in-context" label="In context — Focused mobile" width={420} height={420}>
+            <div style={{ padding: 18, height:'100%', boxSizing:'border-box', background:'#f6f4ef' }}>
+              <div style={{ background:'#fff', borderRadius: 16, padding: '18px 20px', border: `1px solid ${MHC.divider}` }}>
+                <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap: 12 }}>
+                  <div>
+                    <div style={{ fontFamily: MHC_font, fontWeight: 700, fontSize: 24, color: MHC.charcoal, lineHeight: 1.15 }}>Good morning, Davinder</div>
+                    <div style={{ fontFamily: MHC_font, fontSize: 13.5, color: MHC.slate, marginTop: 4 }}>Here's what's waiting for you today.</div>
+                  </div>
+                </div>
+                <div style={{ marginTop: 14 }}>
+                  <FocusPill focus="Manage stress" variant="strong"/>
+                </div>
+              </div>
+              <div style={{ marginTop: 12, fontFamily: MHC_font, fontSize: 11.5, color: MHC.slate, textAlign:'center' }}>
+                Pill anchored to the greeting block. Tap → opens the focus picker as a sheet.
+              </div>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Insights states ── */}
+        <DCSection id="insights" title="AI Insights — four display states" subtitle="The Insights block lives between 'Today' and 'For your focus' on home. Server decides which state to send; client just renders. Same width and position across states so the page rhythm doesn't shift.">
+          <DCArtboard id="ins-1" label="1 · Ready (data, no insight yet)" width={420} height={320}>
+            <div style={{ padding: 18, height:'100%', boxSizing:'border-box', background:'#f6f4ef', display:'flex', alignItems:'center' }}>
+              <div style={{ width:'100%' }}>
+                <InsightsBlock state="ready" density="regular"/>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="ins-2" label="2 · Refreshable (insight + new data)" width={420} height={320}>
+            <div style={{ padding: 18, height:'100%', boxSizing:'border-box', background:'#f6f4ef', display:'flex', alignItems:'center' }}>
+              <div style={{ width:'100%' }}>
+                <InsightsBlock state="refreshable" density="regular"/>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="ins-3" label="3 · Read-only (insight, no new data)" width={420} height={320}>
+            <div style={{ padding: 18, height:'100%', boxSizing:'border-box', background:'#f6f4ef', display:'flex', alignItems:'center' }}>
+              <div style={{ width:'100%' }}>
+                <InsightsBlock state="read-only" density="regular"/>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="ins-4" label="4 · Hidden (insufficient data)" width={420} height={320}>
+            <div style={{ padding: 18, height:'100%', boxSizing:'border-box', background:'#f6f4ef', display:'flex', alignItems:'center', justifyContent:'center' }}>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 13, color:'#6e7a7d', textAlign:'center', fontStyle:'italic' }}>
+                Section is not rendered.<br/>Sibling content closes the gap.
+              </div>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="ins-rationale" label="Placement & rationale" width={380} height={680}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Where it lives.</b> Between Today (raw numbers) and For-you (recommendations) — Insights is the bridge that says "here's what your data means."
+              </Callout>
+              <Callout>
+                <b>State 1 → 2 → 3.</b> A user's day flows through these states naturally: morning (state 1, sync data → tap Get insight), midday refresh (state 2), evening (state 3, no further action).
+              </Callout>
+              <Callout>
+                <b>State 4.</b> No floating empty slot — the section is omitted entirely. Page stays tight.
+              </Callout>
+              <Callout>
+                <b>Coupled to tracker linking.</b> Toggle "Tracker" to "not linked" and Insights hides automatically — no data, no insight.
+              </Callout>
+              <Callout>
+                <b>Action button is its own element.</b> Per system constraint: "Get insight" (state 1) and "Refresh insight" (state 2) sit <i>outside</i> the bordered card as standalone elements. The card holds only display + nav content; the button renders 10px below it. State 3 has no button (read-only). State 4 renders nothing.
+              </Callout>
+              <Callout>
+                <b>Tone.</b> Short sentences. Conversational. Names the user. The "AI" badge only appears once an insight has been generated, so users don't see the label until they've opted in.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="ins-live" label="Live preview on Focused mobile" width={420} height={840}>
+            <div style={{ padding: 18, height:'100%', boxSizing:'border-box', background:'#f6f4ef', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap: 12 }}>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color:'#6e7a7d', textAlign:'center', maxWidth: 320 }}>
+                Use the Tweaks panel <b>"Insights state"</b> control to flip between states on the mobile/desktop A/B above. Tracker toggle hides Insights.
+              </div>
+              <div style={{ width:'100%' }}>
+                <InsightsBlock state={insightsState === 'hidden' ? 'ready' : insightsState} density="regular"/>
+              </div>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color:'#6e7a7d', textAlign:'center' }}>
+                Currently showing: <b>{insightsState}</b>
+              </div>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── KPI panel ── */}
+        <DCSection id="kpis" title="What this should move" subtitle="Metrics the Focused direction is designed to improve, with the mechanism for each.">
+          <DCArtboard id="kpi-1" label="Tracker link-rate" width={320} height={240}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box' }}>
+              <div className="kpi" style={{ height:'100%', boxSizing:'border-box' }}>
+                <div className="k">Tracker link rate</div>
+                <div className="v">+25–40%</div>
+                <div className="d">Above-fold "Link a tracker" CTA + zero-state occupying the Today strip. Current placement buries it.</div>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="kpi-2" label="Action CTR" width={320} height={240}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box' }}>
+              <div className="kpi" style={{ height:'100%', boxSizing:'border-box' }}>
+                <div className="k">Action item CTR</div>
+                <div className="v">+15–30%</div>
+                <div className="d">Items filtered by declared focus are more likely to be relevant than engine-picked ones. Clear label explains why.</div>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="kpi-3" label="Hero engagement" width={320} height={240}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box' }}>
+              <div className="kpi" style={{ height:'100%', boxSizing:'border-box' }}>
+                <div className="k">Hero engagement</div>
+                <div className="v">+2–3×</div>
+                <div className="d">Committed hero vs. carousel dot 1. Carousel dots 2-5 historically get &lt;5% of dot-1 engagement.</div>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="kpi-4" label="Time-to-action" width={320} height={240}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box' }}>
+              <div className="kpi" style={{ height:'100%', boxSizing:'border-box' }}>
+                <div className="k">Time to first action</div>
+                <div className="v">−40%</div>
+                <div className="d">Single hero with single CTA removes choice paralysis. Focus filter cuts irrelevant items.</div>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="kpi-5" label="Content-ops lift" width={320} height={240}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box' }}>
+              <div className="kpi" style={{ height:'100%', boxSizing:'border-box' }}>
+                <div className="k">Content-ops burden</div>
+                <div className="v">−50%</div>
+                <div className="d">Deleting the weighting engine means fewer switches, fewer rules, simpler client onboarding. Content tagged by focus area only.</div>
+              </div>
+            </div>
+          </DCArtboard>
+          <DCArtboard id="kpi-6" label="Perceived relevance" width={320} height={240}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box' }}>
+              <div className="kpi" style={{ height:'100%', boxSizing:'border-box' }}>
+                <div className="k">Perceived relevance (survey)</div>
+                <div className="v">+2 pts</div>
+                <div className="d">"The app shows me things that are relevant to me" — expected NPS-style lift on 5-pt scale.</div>
+              </div>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="kpi-caveats" label="How to measure" width={540} height={240}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 10 }}>
+              <div className="ab-commentary" style={{ background:'#eaf2fa', color:'#0f497f' }}>
+                <b>Measurement plan</b>
+                <div>50/50 split on new users at onboarding. Existing users get phased rollout by client.</div>
+              </div>
+              <Callout>
+                <b>North-star:</b> 30-day tracker link-rate. Secondary: action-item CTR, hero CTR, time-to-first-action, 4-week retention. Guardrail: client NPS (don't break anything).
+              </Callout>
+              <Callout>
+                <b>Read window:</b> 6 weeks. Minimum sample: 2 clients or ~15k MAU.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Risks ── */}
+        <DCSection id="risks" title="Risks & what could go wrong" subtitle="Honest tradeoffs of the Focused direction.">
+          <DCArtboard id="r-1" label="Risks" width={520} height={360}>
+            <div style={{ padding: 16, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 10 }}>
+              <Callout>
+                <b>Picker skip rate.</b> If &gt;60% skip, focus is a minority feature. Mitigation: picker CAN be re-prompted on day 3 if skipped.
+              </Callout>
+              <Callout>
+                <b>Narrow focus feels empty.</b> 2 action items under "For your sleep focus" may feel thin. Mitigation: fall back to "More to explore" strip when the focus bucket runs dry.
+              </Callout>
+              <Callout>
+                <b>Client pushback on hero.</b> Sales teams may want their 5 banners back. Mitigation: "More from Umbrella" strip accommodates 4 more; anything beyond 5 was already cargo-culted.
+              </Callout>
+              <Callout>
+                <b>Tracker zero-state fatigue.</b> Users who don't want a tracker will see the CTA every visit. Mitigation: dismiss-for-now collapses it to a small chip for 14 days.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection label="View options"/>
+        <TweakRadio label="Density" value={density} options={['compact','regular']} onChange={(v)=>setTweak('density', v)}/>
+        <TweakSection label="Focused screens state"/>
+        <TweakRadio label="User focus" value={focus} options={['Sleep','Move more','Manage stress']} onChange={(v)=>setTweak('focus', v)}/>
+        <TweakRadio label="Tracker" value={tracker} options={['linked','not linked']} onChange={(v)=>setTweak('tracker', v)}/>
+        <TweakRadio label="Insights state" value={insights} options={['ready','refreshable','read-only','hidden']} onChange={(v)=>setTweak('insights', v)}/>
+        <TweakSection label="Web delivery mode"/>
+        <TweakRadio label="Web shell (col 3)" value={webShell} options={['topnav','sdk']} onChange={(v)=>setTweak('webShell', v)}/>
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

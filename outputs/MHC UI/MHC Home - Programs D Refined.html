@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC — In-Progress Programs · D refined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#eef1f4; font-family:'Raleway', system-ui, sans-serif; color:#1f2a36; }
+  body { padding: 28px 22px 80px; }
+  .page { max-width: 1240px; margin: 0 auto; }
+  .pagehead { margin-bottom: 22px; }
+  .pagehead h1 { font-size: 22px; margin: 0 0 6px; color:#062a42; }
+  .pagehead p { font-size: 14px; color:#4a5b6a; margin: 0; line-height: 1.5; max-width: 760px; }
+
+  .block { margin: 28px 0; }
+  .block-head { display:flex; align-items:baseline; justify-content:space-between; margin-bottom: 12px; gap: 12px; }
+  .block-head h2 { font-size: 14px; margin: 0; color:#062a42; text-transform:uppercase; letter-spacing:0.6px; }
+  .block-head .meta { font-size: 12px; color:#6e7a7d; }
+
+  .row { display: grid; grid-template-columns: 380px 1fr; gap: 22px; align-items:start; }
+  @media (max-width: 1000px) { .row { grid-template-columns: 1fr; } }
+
+  .frame { background:#fff; border-radius:16px; border:1px solid #e1e6ea; overflow:hidden; box-shadow: 0 4px 14px rgba(15,73,127,0.06); }
+  .frame-head { padding: 8px 14px; font-size: 10.5px; font-weight: 700; color:#6e7a7d; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e1e6ea; background:#f6f8fa; }
+  .frame-body { padding: 16px; background:#fff; }
+  .frame-mobile { width: 380px; max-width: 100%; }
+
+  .annotate { background:#fff; border-radius: 14px; border:1px solid #e1e6ea; padding: 20px 22px; line-height: 1.55; font-size: 14px; color:#1f2a36; }
+  .annotate h3 { margin: 0 0 8px; font-size: 15px; color:#062a42; }
+  .annotate h4 { margin: 18px 0 6px; font-size: 13px; color:#062a42; text-transform:uppercase; letter-spacing:0.5px; }
+  .annotate p { margin: 0 0 8px; }
+  .annotate ul { margin: 0 0 0 18px; padding: 0; }
+  .annotate li { margin: 4px 0; }
+  .annotate code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; background:#f3f6f8; padding: 1px 5px; border-radius: 4px; color:#062a42; }
+  .annotate .tag { display:inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; vertical-align: middle; margin-left: 6px; }
+  .tag.rec { background:#0f497f; color:#fff; }
+  .tag.alt { background:#e7eef5; color:#0f497f; }
+  .tag.con { background:#fde7d8; color:#9b3b00; }
+
+  /* ============================================================
+     Plan card — shared base
+     ============================================================ */
+  .plan { display:flex; flex-direction:column; gap: 10px; }
+  .plan-head { display:flex; align-items:baseline; justify-content:space-between; }
+  .plan-title { font-size: 15px; font-weight: 700; color:#062a42; margin: 0; }
+  .plan-link { font-size: 12px; color:#0f497f; font-weight: 600; text-decoration: none; }
+
+  .plan-list { display:grid; gap: 8px; }
+
+  .pcard {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background: #fff;
+    border: 1px solid #e1e6ea;
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 0;
+  }
+  .pcard.is-primary { background:#eaf2fa; border-color:#c7dcef; }
+
+  .pcard-rail {
+    width: 64px;
+    flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 10px 6px;
+    background: #f6f4ef;
+    color: #1f2a36;
+    text-align: center;
+  }
+  .pcard.is-primary .pcard-rail { background: #0f497f; color: #fff; }
+
+  .pcard-body {
+    flex: 1; min-width: 0;
+    padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .pcard-tagline {
+    font-size: 10.5px; font-weight: 700; color:#6e7a7d;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .pcard.is-primary .pcard-tagline { color:#0f497f; }
+  .pcard-title {
+    font-size: 14.5px; font-weight: 700; color:#1f2a36; margin: 0;
+    line-height: 1.25;
+    overflow: hidden;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  }
+  .pcard.is-primary .pcard-title { color:#062a42; }
+  .pcard-meta {
+    font-size: 12px; color:#4a5b6a; line-height: 1.35;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .pcard-bar {
+    flex: 1; max-width: 120px;
+    height: 4px; background:#e1e6ea; border-radius: 999px; overflow: hidden;
+  }
+  .pcard-bar-fill { height: 100%; background:#0f497f; border-radius: inherit; }
+  .pcard.is-primary .pcard-bar { background: rgba(255,255,255,0.55); }
+  .pcard.is-primary .pcard-bar-fill { background: #fff; }
+  .pcard.is-primary .pcard-meta { color:#3a4a59; }
+
+  .pcard-cta {
+    margin-top: 6px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background:#0f497f; color:#fff; border: 0; border-radius: 999px;
+    padding: 6px 14px; font-family: inherit; font-weight: 700; font-size: 12px; cursor: pointer;
+    align-self: flex-start;
+  }
+
+  /* Stretched link covering the whole card (CKEditor-friendly) */
+  .pcard-link {
+    position: absolute; inset: 0; z-index: 1;
+    text-decoration: none; color: inherit; border-radius: inherit;
+  }
+  .pcard-link:focus-visible { outline: 2px solid #0f497f; outline-offset: 2px; }
+  .pcard-cta, .pcard-dismiss { position: relative; z-index: 2; }
+
+  /* ============================================================
+     LEFT-RAIL VARIANTS (alternatives to "Tonight · 12 min")
+     ============================================================ */
+
+  /* V1 — Step number rail */
+  .rail-step .num { font-size: 22px; font-weight: 700; line-height: 1; }
+  .rail-step .of { font-size: 10px; opacity: 0.7; margin-top: 4px; text-transform:uppercase; letter-spacing: 0.5px; }
+
+  /* V2 — Progress ring rail */
+  .rail-ring svg { width: 44px; height: 44px; display:block; }
+  .rail-ring .ringtxt { font-size: 11px; font-weight: 700; margin-top: 6px; }
+
+  /* V3 — Status word rail */
+  .rail-status .word { font-size: 12.5px; font-weight: 700; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.4px; }
+  .rail-status .icon { width: 22px; height: 22px; margin-bottom: 6px; opacity: 0.85; }
+
+  /* V4 — Provider monogram rail */
+  .rail-mono .mono { font-size: 18px; font-weight: 700; letter-spacing: 0.5px; }
+  .rail-mono .role { font-size: 9.5px; opacity: 0.7; margin-top: 4px; text-transform:uppercase; letter-spacing: 0.5px; }
+
+  /* V5 — Week pill rail */
+  .rail-week .wk { font-size: 10px; font-weight: 700; opacity: 0.7; text-transform:uppercase; letter-spacing: 0.5px; }
+  .rail-week .num { font-size: 22px; font-weight: 700; line-height: 1; margin-top: 2px; }
+
+  /* ============================================================
+     DISMISS variants — all CSS, no JS
+     ============================================================ */
+
+  /* Dismiss A — Inline X button (form submit) */
+  .pcard-dismiss {
+    position: absolute; top: 6px; right: 6px;
+    width: 26px; height: 26px;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid #e1e6ea; border-radius: 999px;
+    color: #4a5b6a; cursor: pointer; font: inherit; font-size: 14px; line-height: 1;
+    padding: 0;
+  }
+  .pcard-dismiss:hover { color: #b22; background:#fff; }
+  .pcard.is-primary .pcard-dismiss { background: rgba(255,255,255,0.9); border-color: rgba(255,255,255,0.6); }
+
+  /* Dismiss B — Reveal on hover/focus via :focus-within using checkbox */
+  .pcard-actions { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .pcard-action {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: transparent; border: 1px solid #d3dae0; border-radius: 999px;
+    padding: 4px 10px; font: inherit; font-size: 11.5px; color:#4a5b6a; cursor: pointer;
+    text-decoration: none;
+  }
+  .pcard-action:hover { background:#fff; border-color:#0f497f; color:#0f497f; }
+
+  /* Dismiss C — Native <details> "Hide" affordance */
+  details.pcard-meta-menu { position: absolute; top: 8px; right: 8px; z-index: 2; }
+  details.pcard-meta-menu > summary {
+    list-style: none; cursor: pointer;
+    width: 28px; height: 28px; border-radius: 999px;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,0.85); border: 1px solid #e1e6ea;
+    color:#4a5b6a; font-size: 16px; font-weight: 700; line-height: 1;
+  }
+  details.pcard-meta-menu > summary::-webkit-details-marker { display: none; }
+  details.pcard-meta-menu[open] > summary { background:#fff; border-color:#0f497f; color:#0f497f; }
+  details.pcard-meta-menu .menu {
+    position: absolute; top: 34px; right: 0;
+    min-width: 180px;
+    background: #fff; border: 1px solid #e1e6ea; border-radius: 10px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    padding: 6px;
+    display: flex; flex-direction: column;
+  }
+  details.pcard-meta-menu .menu-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 6px;
+    font-size: 13px; color:#1f2a36; text-decoration: none; cursor: pointer;
+    background: transparent; border: 0; font: inherit; text-align: left;
+  }
+  details.pcard-meta-menu .menu-item:hover { background:#f6f8fa; }
+  details.pcard-meta-menu .menu-item.danger { color:#9b3b00; }
+
+  /* Dismiss D — "Snooze" button row instead of dismiss */
+  .pcard-snooze {
+    display: inline-flex; gap: 4px; align-items: center;
+    background:#fff; border: 1px solid #d3dae0; border-radius: 999px;
+    padding: 4px 12px 4px 10px; font: inherit; font-size: 11.5px; color:#4a5b6a;
+    text-decoration: none;
+  }
+  .pcard-snooze:hover { border-color:#0f497f; color:#0f497f; }
+
+  /* Dismiss E — Long-press / dedicated "Manage" page link */
+  .manage-row {
+    margin-top: 8px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 14px;
+    background:#fafbfc; border: 1px dashed #d3dae0; border-radius: 10px;
+    font-size: 12px; color:#4a5b6a;
+  }
+  .manage-row a { color:#0f497f; font-weight: 700; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pagehead">
+    <h1>Option D refined — "Pick up where you left off"</h1>
+    <p>Stripping the imagery (per request) and replacing the time-of-day rail (we don't have that data yet) with five concrete alternatives that use signals we <i>do</i> have. Plus five no-JS dismiss patterns so a user can hide a program they're done with.</p>
+  </div>
+
+  <!-- ============================================================
+       PART 1 — Left-rail alternatives
+       ============================================================ -->
+  <div class="block">
+    <div class="block-head">
+      <h2>Part 1 · Left-rail alternatives (no time-of-day, no images)</h2>
+      <span class="meta">5 options, ranked</span>
+    </div>
+
+    <!-- V1 — Step number ============================================ -->
+    <div class="row">
+      <div class="frame frame-mobile">
+        <div class="frame-head">V1 · Step number rail <span class="tag rec">Recommended</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-step">
+                  <div class="num">9</div>
+                  <div class="of">of 28</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>Wind-down session up next</span>
+                  </div>
+                  <button class="pcard-cta">Continue →</button>
+                </div>
+                <a href="#" class="pcard-link" aria-label="Managing Insomnia"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-step">
+                  <div class="num">3</div>
+                  <div class="of">of 6</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>Lower-body class queued</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link" aria-label="Strength foundations"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-step">
+                  <div class="num">5</div>
+                  <div class="of">of 16</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">Solera · Care program</div>
+                  <div class="pcard-title">Diabetes Prevention</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:31%"></div></div>
+                    <span>Lesson 5 — meal planning</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link" aria-label="Diabetes Prevention"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>V1 · Step number rail</h3>
+        <p>The rail shows <b>session N of total</b>. It's the same denominator the user sees on the program detail page, so it's recognizable, motivating, and uses data you already have.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Concrete progress without a time commitment we can't promise.</li>
+          <li>"Lesson 9 of 28" reads like a bookmark — exactly the metaphor "pick up where you left off" implies.</li>
+          <li>Big number on the rail keeps the visual rhythm of the time-of-day version you liked.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>Programs without sessions (open-ended habits) need a different rail. See V3.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- V2 — Progress ring ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">V2 · Progress ring rail <span class="tag alt">Alt</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="4"/>
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"
+                            stroke-dasharray="113.1" stroke-dashoffset="76.9"
+                            transform="rotate(-90 22 22)"/>
+                  </svg>
+                  <div class="ringtxt">32%</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta"><span>Wind-down session up next</span></div>
+                  <button class="pcard-cta">Continue →</button>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="#e1e6ea" stroke-width="4"/>
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="#0f497f" stroke-width="4" stroke-linecap="round"
+                            stroke-dasharray="113.1" stroke-dashoffset="56.5"
+                            transform="rotate(-90 22 22)"/>
+                  </svg>
+                  <div class="ringtxt" style="color:#0f497f;">50%</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta"><span>Lower-body class queued</span></div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-ring">
+                  <svg viewBox="0 0 44 44" aria-hidden="true">
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="#e1e6ea" stroke-width="4"/>
+                    <circle cx="22" cy="22" r="18" fill="none" stroke="#0f497f" stroke-width="4" stroke-linecap="round"
+                            stroke-dasharray="113.1" stroke-dashoffset="78.0"
+                            transform="rotate(-90 22 22)"/>
+                  </svg>
+                  <div class="ringtxt" style="color:#0f497f;">31%</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">Solera · Care program</div>
+                  <div class="pcard-title">Diabetes Prevention</div>
+                  <div class="pcard-meta"><span>Lesson 5 — meal planning</span></div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>V2 · Progress ring rail</h3>
+        <p>Replaces the rail with a small SVG ring. Same data as V1 (you already compute it for the inline bar) just rendered as the dominant rail glyph.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Most visual; reads instantly even when scanning fast.</li>
+          <li>Doesn't require a session count — works for any program with a measurable %.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>Duplicates the inline progress bar — pick one. If you go with V2, drop <code>.pcard-bar</code> from the body.</li>
+          <li>Three identical rings stacked vertically can feel repetitive.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- V3 — Status word ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">V3 · Status word rail <span class="tag alt">Alt</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-status">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <div class="word">Continue</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>9 of 28 sessions</span>
+                  </div>
+                  <button class="pcard-cta">Open →</button>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-status" style="color:#1f2a36;">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  <div class="word">Continue</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>3 of 6 weeks</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-status" style="color:#9b3b00;">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  <div class="word">Resume</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">Solera · Care program</div>
+                  <div class="pcard-title">Diabetes Prevention</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:31%"></div></div>
+                    <span>Last visit 12 days ago</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>V3 · Status word rail</h3>
+        <p>Rail is a verb the user can act on: <b>Continue</b>, <b>Resume</b>, <b>Start week 4</b>, <b>Wrap up</b>. Computed from "days since last interaction" + "next session type."</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Doesn't fake precision. If you only know "user hasn't opened this in 12 days," the rail says <i>Resume</i>, not "Tonight · 12 min."</li>
+          <li>Encodes urgency (Resume = orange, Continue = blue) without inventing time data.</li>
+          <li>Works for open-ended programs with no session count.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>The rail action words must stay short (≤9 chars) or they wrap awkwardly.</li>
+          <li>You'll need server logic to pick the right verb — easy, but not free.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- V4 — Provider monogram ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">V4 · Provider monogram rail <span class="tag alt">Alt</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-mono">
+                  <div class="mono">BH</div>
+                  <div class="role">Therapeutic</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>9 of 28 sessions</span>
+                  </div>
+                  <button class="pcard-cta">Continue →</button>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-mono">
+                  <div class="mono">BA</div>
+                  <div class="role">Movement</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>3 of 6 weeks</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-mono">
+                  <div class="mono">SO</div>
+                  <div class="role">Care</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">Solera</div>
+                  <div class="pcard-title">Diabetes Prevention</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:31%"></div></div>
+                    <span>Lesson 5 — meal planning</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>V4 · Provider monogram rail</h3>
+        <p>Replaces images with a typographic monogram of the provider name (BH, BA, SO) and a one-word program category.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Same visual rhythm as a logo, but it's just text — no asset pipeline.</li>
+          <li>Doubles as visual diversity (each rail is different) without being noisy.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>Provider monograms can collide (BH = Big Health <i>and</i> Beam Health). Falls down at scale.</li>
+          <li>Doesn't encode progress at all — that has to live in the body.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- V5 — Week-of rail ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">V5 · Week pill rail <span class="tag alt">Alt</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-week">
+                  <div class="wk">Week</div>
+                  <div class="num">2</div>
+                  <div class="wk" style="margin-top: 2px;">of 8</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta"><span>Wind-down session up next</span></div>
+                  <button class="pcard-cta">Continue →</button>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-week">
+                  <div class="wk">Week</div>
+                  <div class="num">3</div>
+                  <div class="wk" style="margin-top: 2px;">of 6</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta"><span>Lower-body class queued</span></div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-week">
+                  <div class="wk">Week</div>
+                  <div class="num">5</div>
+                  <div class="wk" style="margin-top: 2px;">of 16</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">Solera · Care program</div>
+                  <div class="pcard-title">Diabetes Prevention</div>
+                  <div class="pcard-meta"><span>Lesson 5 — meal planning</span></div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>V5 · Week pill rail</h3>
+        <p>Identical structure to your "Tonight · 12 min" original, but the rail says <b>Week 2 of 8</b>. Closest to the design you already have.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Smallest design delta — drop-in replacement for the time/duration tokens.</li>
+          <li>"Week N of M" is the most common cadence label in care programs (Big Health, Solera, Omada all expose it).</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>Doesn't reflect <i>where in the week</i> the user is — could read as static.</li>
+          <li>Slightly less motivating than V1's session count for fast-moving programs.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PART 2 — Dismiss patterns (no JS)
+       ============================================================ -->
+  <div class="block">
+    <div class="block-head">
+      <h2>Part 2 · Dismiss patterns without JavaScript</h2>
+      <span class="meta">5 patterns · all server-driven</span>
+    </div>
+
+    <!-- D1 — Form-button X ============================================ -->
+    <div class="row">
+      <div class="frame frame-mobile">
+        <div class="frame-head">D1 · Inline X button (form submit) <span class="tag rec">Recommended</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-step">
+                  <div class="num">9</div>
+                  <div class="of">of 28</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>Wind-down session up next</span>
+                  </div>
+                  <button class="pcard-cta">Continue →</button>
+                </div>
+                <a href="#" class="pcard-link" aria-label="Managing Insomnia"></a>
+                <form method="post" action="/programs/insomnia/dismiss" style="display:contents;">
+                  <button type="submit" class="pcard-dismiss" aria-label="Hide this program from home" title="Hide from home">×</button>
+                </form>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-step">
+                  <div class="num">3</div>
+                  <div class="of">of 6</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>Lower-body class queued</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+                <form method="post" action="/programs/burnalong/dismiss" style="display:contents;">
+                  <button type="submit" class="pcard-dismiss" aria-label="Hide from home">×</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>D1 · Inline X button (form submit) <span class="tag rec">Recommended</span></h3>
+        <p>A small <code>×</code> in the top-right corner of each card. It's wrapped in a <code>&lt;form method="post" action="/programs/:id/dismiss"&gt;</code> — clicking it submits and the page re-renders without that program. Pure HTML, no JS.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Universally understood pattern — it's the same affordance as iOS notifications, email, etc.</li>
+          <li>Works on touch (small target — make it ≥32×32 in production) and desktop with no special handling.</li>
+          <li>Server is in full control: dismissed = soft-hide for 30 days, then re-surface, or permanently — your call.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>One-tap-to-dismiss is destructive without confirmation. Pair with a "Show again" link in the empty state, or with D3's menu for an "Undo last dismiss" pattern.</li>
+          <li>Forms inside a card with a stretched <code>&lt;a&gt;</code> link is fine because the form button has higher <code>z-index</code> and stops the link from receiving the click.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- D2 — Action row ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">D2 · Persistent action row <span class="tag alt">Alt</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-step">
+                  <div class="num">9</div>
+                  <div class="of">of 28</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>Wind-down session up next</span>
+                  </div>
+                  <div class="pcard-actions">
+                    <button class="pcard-cta" style="margin-top:0;">Continue →</button>
+                    <form method="post" action="/programs/insomnia/snooze" style="display:contents;">
+                      <button type="submit" class="pcard-action">Remind me later</button>
+                    </form>
+                    <form method="post" action="/programs/insomnia/dismiss" style="display:contents;">
+                      <button type="submit" class="pcard-action">Hide</button>
+                    </form>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-step">
+                  <div class="num">3</div>
+                  <div class="of">of 6</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>Lower-body class queued</span>
+                  </div>
+                  <div class="pcard-actions">
+                    <form method="post" action="/programs/burnalong/snooze" style="display:contents;">
+                      <button type="submit" class="pcard-action">Remind me later</button>
+                    </form>
+                    <form method="post" action="/programs/burnalong/dismiss" style="display:contents;">
+                      <button type="submit" class="pcard-action">Hide</button>
+                    </form>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>D2 · Persistent action row</h3>
+        <p>"Hide" and "Remind me later" sit alongside the primary CTA as small chip-buttons. Always visible, always reachable.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>No hidden affordances — discoverable on first scan.</li>
+          <li>Distinguishes "I'm done" (Hide) from "not now" (Remind me later) — a more humane choice than a single dismiss.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>Adds vertical density. With 3 cards stacked, the page can feel button-heavy.</li>
+          <li>Visually competes with the primary CTA. Keep "Hide" tertiary.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- D3 — Details menu ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">D3 · ⋯ menu via &lt;details&gt; <span class="tag rec">Recommended pair w/ D1</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-step">
+                  <div class="num">9</div>
+                  <div class="of">of 28</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>Wind-down session up next</span>
+                  </div>
+                  <button class="pcard-cta">Continue →</button>
+                </div>
+                <a href="#" class="pcard-link"></a>
+                <details class="pcard-meta-menu">
+                  <summary aria-label="More options">⋯</summary>
+                  <div class="menu">
+                    <form method="post" action="/programs/insomnia/snooze" style="display:contents;">
+                      <button type="submit" class="menu-item">Remind me in 7 days</button>
+                    </form>
+                    <form method="post" action="/programs/insomnia/snooze?days=30" style="display:contents;">
+                      <button type="submit" class="menu-item">Remind me in 30 days</button>
+                    </form>
+                    <form method="post" action="/programs/insomnia/dismiss" style="display:contents;">
+                      <button type="submit" class="menu-item danger">Hide from home</button>
+                    </form>
+                  </div>
+                </details>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-step">
+                  <div class="num">3</div>
+                  <div class="of">of 6</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>Lower-body class queued</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+                <details class="pcard-meta-menu">
+                  <summary aria-label="More options">⋯</summary>
+                  <div class="menu">
+                    <form method="post" action="/programs/burnalong/snooze" style="display:contents;">
+                      <button type="submit" class="menu-item">Remind me in 7 days</button>
+                    </form>
+                    <form method="post" action="/programs/burnalong/dismiss" style="display:contents;">
+                      <button type="submit" class="menu-item danger">Hide from home</button>
+                    </form>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>D3 · ⋯ menu via native &lt;details&gt;</h3>
+        <p><code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code> gives you a click-to-open menu with zero JavaScript. Each menu item is a tiny <code>&lt;form&gt;</code> POST.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Holds <i>multiple</i> dismiss/snooze options without crowding the card.</li>
+          <li>Matches the "⋯" pattern users know from every native app.</li>
+          <li>Keyboard accessible by default; <code>summary</code> is focusable.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>Doesn't auto-close when you click outside (no JS!) — second click on the summary closes it. Acceptable for this volume of options.</li>
+          <li>Mobile tap target is the small ⋯; pad <code>summary</code> to ≥32×32.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- D4 — Snooze-only ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">D4 · "Not now" snooze (no destructive dismiss) <span class="tag alt">Alt</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-step">
+                  <div class="num">9</div>
+                  <div class="of">of 28</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>Wind-down session up next</span>
+                  </div>
+                  <div class="pcard-actions">
+                    <button class="pcard-cta" style="margin-top:0;">Continue →</button>
+                    <form method="post" action="/programs/insomnia/snooze" style="display:contents;">
+                      <button type="submit" class="pcard-snooze">Not now · hide for a week</button>
+                    </form>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-step">
+                  <div class="num">3</div>
+                  <div class="of">of 6</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>Lower-body class queued</span>
+                  </div>
+                  <div class="pcard-actions" style="margin-top: 6px;">
+                    <form method="post" action="/programs/burnalong/snooze" style="display:contents;">
+                      <button type="submit" class="pcard-snooze">Not now · hide for a week</button>
+                    </form>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>D4 · "Not now" snooze (no destructive option)</h3>
+        <p>Drop "Hide forever" entirely — every dismiss is a 7-day snooze. After the snooze window, the program re-surfaces.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>No regret. Users can never accidentally lose access to a program they paid for.</li>
+          <li>Maps to real behavior: most "I don't want to see this" decisions are situational, not final.</li>
+          <li>Requires no confirmation modal.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>Power users who quit a program want it <i>gone</i>, not snoozed. Provide a deeper "Manage programs" page (see D5) for them.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- D5 — Manage page link ============================================ -->
+    <div class="row" style="margin-top: 18px;">
+      <div class="frame frame-mobile">
+        <div class="frame-head">D5 · Footer "Manage" link <span class="tag con">Conservative</span></div>
+        <div class="frame-body">
+          <div class="plan">
+            <div class="plan-head">
+              <h3 class="plan-title">Pick up where you left off</h3>
+              <a href="#" class="plan-link">See all (4)</a>
+            </div>
+            <div class="plan-list">
+              <div class="pcard is-primary">
+                <div class="pcard-rail rail-step">
+                  <div class="num">9</div>
+                  <div class="of">of 28</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">On focus · Big Health</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+                    <span>Wind-down session up next</span>
+                  </div>
+                  <button class="pcard-cta">Continue →</button>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail rail-step">
+                  <div class="num">3</div>
+                  <div class="of">of 6</div>
+                </div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">
+                    <div class="pcard-bar"><div class="pcard-bar-fill" style="width:50%"></div></div>
+                    <span>Lower-body class queued</span>
+                  </div>
+                </div>
+                <a href="#" class="pcard-link"></a>
+              </div>
+            </div>
+            <div class="manage-row">
+              <span>Hiding or quitting a program?</span>
+              <a href="/programs/manage">Manage programs →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotate">
+        <h3>D5 · Footer "Manage" link</h3>
+        <p>No per-card dismiss at all. A small footer below the rail links to a dedicated <i>Manage programs</i> page where users can snooze, hide, or quit each program with full context.</p>
+        <h4>Why pick it</h4>
+        <ul>
+          <li>Cleanest cards. Zero affordance noise.</li>
+          <li>Forces a deliberate decision — fewer accidental hides, fewer "where did my program go?" support tickets.</li>
+          <li>Easiest to ship; no per-card form endpoints.</li>
+        </ul>
+        <h4>Watch out</h4>
+        <ul>
+          <li>High friction. Users who want one program out of their face have to navigate to another page.</li>
+          <li>Manage page becomes a required design — not a small undertaking.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       Recommendation
+       ============================================================ -->
+  <div class="block">
+    <div class="annotate" style="background:#0f497f; color:#fff; border-color:#062a42;">
+      <h3 style="color:#fff;">Recommendation</h3>
+      <p><b>Ship V1 (Step number rail) + D1 (inline × dismiss).</b> If you want to give users a softer landing, pair D1 with D3's <code>&lt;details&gt;</code> menu so the × is one of several options ("Remind me later", "Hide from home").</p>
+      <p style="margin-top: 10px;"><b>Falls back gracefully:</b> programs without a session count fall back to the V5 "Week N of M" rail. Programs without weeks (open-ended habits) fall back to V3 "Continue / Resume." One template, three rail variants, server picks.</p>
+      <p style="margin-top: 10px;"><b>Server contract:</b> the dismiss form POSTs to <code>/programs/:id/dismiss</code> and returns to the home page. Persist as <code>dismissedAt</code>, re-surface after 30 days unless user explicitly chose "Hide forever" from the ⋯ menu.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R1 / R2 / R3 — applied-UI comparison</title>
+<style>
+:root {
+  /* Shared structural tokens (identical across all candidates) */
+  --sand-50:  #FAF6F0;
+  --sand-100: #F2EBDF;
+  --sand-200: #E5DAC4;
+  --sand-900: #2A2620;
+  --neutral-200: #DDD5C7;
+  --neutral-300: #B5AC9C;
+  --neutral-500: #6B645A;
+  --neutral-700: #4A453E;
+  --neutral-900: #2C2A26;
+  --warm-100: #FAE7D5;
+  --warm-500: #C8744A;
+  --warm-700: #8A4A26;
+  --moss-100: #D5E2D8;
+  --moss-600: #2A573B;
+  --moss-700: #234630;
+}
+
+/* Per-candidate primary scopes — same component HTML, different primary tokens */
+.r1 {
+  --p-50:  #F0F7F9;
+  --p-100: #DCEDF0;
+  --p-200: #B6D8DE;
+  --p-300: #82BCC6;
+  --p-400: #4F9EAE;
+  --p-500: #2F8497;
+  --p-600: #267284;
+  --p-700: #1F5C6B;
+  --p-800: #1A4B57;
+  --p-900: #143842;
+  --p-950: #0B2229;
+  --p-name: 'R1 — Soft teal';
+}
+.r2 {
+  --p-50:  #EFF5FA;
+  --p-100: #DAE9F2;
+  --p-200: #B5D2E5;
+  --p-300: #82B0CE;
+  --p-400: #5290B5;
+  --p-500: #34759E;
+  --p-600: #2A6489;
+  --p-700: #235173;
+  --p-800: #1D425C;
+  --p-900: #163346;
+  --p-950: #0D2030;
+  --p-name: 'R2 — Sky-teal bridge';
+}
+.r3 {
+  --p-50:  #EFF3F9;
+  --p-100: #DBE3F0;
+  --p-200: #B7C5DE;
+  --p-300: #88A0C5;
+  --p-400: #5B7FAB;
+  --p-500: #3F6594;
+  --p-600: #355880;
+  --p-700: #2C4869;
+  --p-800: #243B55;
+  --p-900: #1B2D40;
+  --p-950: #111B27;
+  --p-name: 'R3 — Modern Brand Blue';
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  background: var(--sand-50);
+  color: var(--neutral-900);
+  font-size: 16px;
+  line-height: 1.55;
+  padding: 48px 32px 96px;
+}
+.container { max-width: 1400px; margin: 0 auto; }
+h1 {
+  font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif;
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+h2 {
+  font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 48px 0 12px;
+  border-top: 1px solid var(--sand-200);
+  padding-top: 24px;
+}
+h3 { font-size: 16px; font-weight: 600; margin: 24px 0 8px; }
+h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neutral-700); margin-bottom: 6px; }
+p { margin-bottom: 10px; max-width: 72ch; font-size: 14px; }
+small { color: var(--neutral-700); font-size: 12px; }
+.subtitle { font-size: 15px; color: var(--neutral-700); margin-bottom: 24px; max-width: 72ch; }
+
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--neutral-700);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+/* Primary scale strip */
+.primary-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0 8px;
+}
+.primary-card {
+  background: white;
+  border: 1px solid var(--sand-200);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.primary-card.locked { border: 2px solid var(--p-600); }
+.primary-card.locked.r2 { border-color: #2A6489; }
+.primary-card .head {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--sand-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.primary-card .name { font-size: 13px; font-weight: 600; }
+.primary-card .meta { font-size: 11px; color: var(--neutral-700); font-family: "SF Mono", Menlo, monospace; }
+.tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.tag-locked { background: #2A6489; color: white; }
+.tag-alt { background: var(--sand-100); color: var(--neutral-700); }
+.swatches { display: grid; grid-template-columns: repeat(11, 1fr); }
+.sw {
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3px 4px 4px;
+  font-size: 8px;
+  font-weight: 500;
+}
+.sw.dark { color: rgba(255,255,255,0.92); }
+.sw.light { color: rgba(0,0,0,0.6); }
+
+/* Pilot grid: 3 columns × R1/R2/R3 */
+.pilot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin: 12px 0 16px;
+}
+.pilot-cell {
+  display: flex;
+  flex-direction: column;
+}
+.pilot-cell-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--p-700);
+}
+.pilot-cell.r2 .pilot-cell-label::after {
+  content: " · LOCKED";
+  color: var(--neutral-700);
+  font-weight: 700;
+}
+
+/* DCP card (compact for comparison) */
+.dcp-card {
+  border: 1px solid var(--moss-100);
+  border-radius: 14px;
+  padding: 16px;
+  background: white;
+}
+.dcp-eyebrow { font-size: 10px; color: var(--moss-700); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.dcp-title { font-family: "SF Pro Display", Georgia, serif; font-size: 15px; font-weight: 600; line-height: 1.3; margin: 4px 0 10px; letter-spacing: -0.01em; }
+.dcp-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+.dcp-progress { background: var(--sand-100); border-radius: 999px; height: 5px; overflow: hidden; margin: 8px 0 4px; }
+.dcp-progress > div { height: 100%; background: var(--moss-600); }
+.dcp-stat { display: flex; gap: 14px; margin-top: 12px; }
+.dcp-stat .stat-num { font-family: "SF Pro Display", serif; font-size: 18px; font-weight: 600; letter-spacing: -0.02em; }
+.dcp-stat .stat-num.brand { color: var(--p-700); }
+.dcp-stat .stat-label { font-size: 10px; color: var(--neutral-700); }
+.dcp-tag { background: var(--moss-100); color: var(--moss-700); padding: 2px 8px; border-radius: 999px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; flex-shrink: 0; }
+.dcp-cta {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--moss-600);
+  color: white;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.dcp-cta-secondary {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid var(--p-300);
+  color: var(--p-700);
+  text-decoration: none;
+  margin-top: 10px;
+  margin-left: 8px;
+  background: transparent;
+}
+
+/* Buyer hero (compact) */
+.buyer-hero {
+  background: linear-gradient(135deg, var(--p-700), var(--p-900));
+  border-radius: 14px;
+  padding: 22px 18px;
+  color: white;
+  height: 100%;
+}
+.buyer-hero .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; font-weight: 700; margin-bottom: 8px; }
+.buyer-hero .title { font-family: "SF Pro Display", serif; font-size: 17px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; }
+.buyer-hero .body { color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 12px; }
+.buyer-hero .cta { background: white; color: var(--p-900); display: inline-block; padding: 7px 14px; border-radius: 999px; font-size: 12px; font-weight: 600; text-decoration: none; margin-top: 12px; }
+.buyer-hero .footer { color: rgba(255,255,255,0.6); margin-top: 14px; font-size: 10px; }
+
+/* AI card (compact) */
+.ai-card {
+  background: white;
+  border: 1px solid var(--p-200);
+  border-radius: 14px;
+  padding: 16px;
+  background-image: linear-gradient(135deg, var(--p-50) 0%, transparent 60%);
+}
+.ai-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--p-700);
+  background: var(--p-100);
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+.ai-tag::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--p-600);
+  box-shadow: 0 0 0 2px var(--p-200);
+}
+.ai-headline { font-family: "SF Pro Display", serif; font-size: 14px; line-height: 1.3; font-weight: 600; margin-bottom: 6px; }
+.ai-body { font-size: 12px; line-height: 1.45; color: var(--neutral-700); margin-bottom: 10px; }
+.ai-action { display: inline-block; padding: 7px 13px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--p-600); color: white; text-decoration: none; }
+.ai-controls { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--p-100); display: flex; gap: 12px; flex-wrap: wrap; }
+.ai-controls a { font-size: 11px; color: var(--p-700); text-decoration: none; font-weight: 500; }
+.ai-honesty { font-size: 10px; color: var(--neutral-500); font-style: italic; margin-top: 8px; }
+
+/* Weighting bar (compact) */
+.weight-block { margin-top: 10px; padding: 8px 10px; background: white; border: 1px solid var(--sand-200); border-radius: 8px; }
+.weight-label { font-size: 9px; color: var(--neutral-700); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 700; }
+.weight-bar { display: flex; height: 10px; border-radius: 6px; overflow: hidden; border: 1px solid var(--sand-200); }
+.weight-bar > div { display: block; }
+.weight-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; font-size: 9px; color: var(--neutral-700); }
+.weight-legend .item { display: flex; align-items: center; gap: 3px; }
+.weight-legend .swatch { width: 8px; height: 8px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.08); }
+
+/* Audit table */
+.audit-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+.audit-table th { background: var(--sand-100); padding: 10px 12px; text-align: left; border: 1px solid var(--sand-200); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--neutral-700); }
+.audit-table td { padding: 10px 12px; border: 1px solid var(--sand-200); background: white; vertical-align: top; }
+.audit-table .row-head { font-weight: 600; background: var(--sand-50); }
+.audit-table .winner { background: rgba(42, 100, 137, 0.08); font-weight: 600; }
+.score { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.score-h { background: rgba(107, 142, 90, 0.18); color: #4D6B3F; }
+.score-m { background: rgba(212, 162, 74, 0.20); color: #7A5A1F; }
+
+.verdict-card {
+  background: linear-gradient(135deg, #DAE9F2, #FAF6F0);
+  border: 1px solid #B5D2E5;
+  border-left: 3px solid #2A6489;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 16px 0;
+}
+.verdict-card h4 { color: #235173; }
+
+ul { margin-left: 20px; margin-bottom: 10px; }
+li { margin-bottom: 3px; font-size: 13px; }
+hr { border: none; border-top: 1px solid var(--sand-200); margin: 28px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="status-pill">Applied-UI Comparison</span>
+  <h1>R1 / R2 / R3 — three primaries, three pilot moments</h1>
+  <p class="subtitle">2026-05-02 · same component HTML rendered against three primary scales · evaluates whether R2's swatch-level lock holds at the applied-UI level vs. R1 (Withings-coded) and R3 (Sword-coded) alts</p>
+</header>
+
+<!-- ===== PRIMARY SCALES ===== -->
+<h2>The three primary scales</h2>
+<p>Same hue family (legacy blue/teal). Different positions inside it. R2 is DIRECTION LOCKED at the swatch level; R1 and R3 are documented alts for verification-failure routes.</p>
+
+<div class="primary-row">
+  <div class="primary-card">
+    <div class="head">
+      <span><span class="name">R1 — Soft teal</span> <span class="meta">~190° · #267284</span></span>
+      <span class="tag tag-alt">Alt — Withings-coded</span>
+    </div>
+    <div class="swatches">
+      <div class="sw light" style="background:#F0F7F9;">50</div>
+      <div class="sw light" style="background:#DCEDF0;">100</div>
+      <div class="sw light" style="background:#B6D8DE;">200</div>
+      <div class="sw light" style="background:#82BCC6;">300</div>
+      <div class="sw dark" style="background:#4F9EAE;">400</div>
+      <div class="sw dark" style="background:#2F8497;">500</div>
+      <div class="sw dark" style="background:#267284;">600</div>
+      <div class="sw dark" style="background:#1F5C6B;">700</div>
+      <div class="sw dark" style="background:#1A4B57;">800</div>
+      <div class="sw dark" style="background:#143842;">900</div>
+      <div class="sw dark" style="background:#0B2229;">950</div>
+    </div>
+  </div>
+  <div class="primary-card locked r2">
+    <div class="head">
+      <span><span class="name">R2 — Sky-teal bridge</span> <span class="meta">~200° · #2A6489</span></span>
+      <span class="tag tag-locked">Direction Locked</span>
+    </div>
+    <div class="swatches">
+      <div class="sw light" style="background:#EFF5FA;">50</div>
+      <div class="sw light" style="background:#DAE9F2;">100</div>
+      <div class="sw light" style="background:#B5D2E5;">200</div>
+      <div class="sw light" style="background:#82B0CE;">300</div>
+      <div class="sw dark" style="background:#5290B5;">400</div>
+      <div class="sw dark" style="background:#34759E;">500</div>
+      <div class="sw dark" style="background:#2A6489;">600</div>
+      <div class="sw dark" style="background:#235173;">700</div>
+      <div class="sw dark" style="background:#1D425C;">800</div>
+      <div class="sw dark" style="background:#163346;">900</div>
+      <div class="sw dark" style="background:#0D2030;">950</div>
+    </div>
+  </div>
+  <div class="primary-card">
+    <div class="head">
+      <span><span class="name">R3 — Modern Brand Blue</span> <span class="meta">~210° · #355880</span></span>
+      <span class="tag tag-alt">Alt — Sword-coded</span>
+    </div>
+    <div class="swatches">
+      <div class="sw light" style="background:#EFF3F9;">50</div>
+      <div class="sw light" style="background:#DBE3F0;">100</div>
+      <div class="sw light" style="background:#B7C5DE;">200</div>
+      <div class="sw light" style="background:#88A0C5;">300</div>
+      <div class="sw dark" style="background:#5B7FAB;">400</div>
+      <div class="sw dark" style="background:#3F6594;">500</div>
+      <div class="sw dark" style="background:#355880;">600</div>
+      <div class="sw dark" style="background:#2C4869;">700</div>
+      <div class="sw dark" style="background:#243B55;">800</div>
+      <div class="sw dark" style="background:#1B2D40;">900</div>
+      <div class="sw dark" style="background:#111B27;">950</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PILOT 1: MEMBER DCP ===== -->
+<h2>1. Member · DCP completion</h2>
+<p>Module-led screen (DCP uses moss). Primary appears subtly: the "Earned $50" stat color, the secondary action chip border. <strong>Most subtle comparison</strong> — primary differences register through accent moments.</p>
+
+<div class="pilot-grid">
+  <div class="pilot-cell r1">
+    <div class="pilot-cell-label">R1 — Soft teal</div>
+    <div class="dcp-card">
+      <div class="dcp-eyebrow">Back Care · Week 4 of 8</div>
+      <div class="dcp-row">
+        <div class="dcp-title">You're halfway. Pain down 1.4 since you started.</div>
+        <div class="dcp-tag">On track</div>
+      </div>
+      <div class="dcp-progress"><div style="width: 50%;"></div></div>
+      <small style="color: var(--neutral-700); font-size: 11px;">$50 reward unlocked at week 8.</small>
+      <div class="dcp-stat">
+        <div><div class="stat-num">1.4</div><div class="stat-label">Pain ↓</div></div>
+        <div><div class="stat-num">12</div><div class="stat-label">Sessions</div></div>
+        <div><div class="stat-num brand">$50</div><div class="stat-label">Earned</div></div>
+      </div>
+      <a href="#" class="dcp-cta">Continue session</a>
+      <a href="#" class="dcp-cta-secondary">View all programs</a>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:34%"></div><div style="background:white;width:26%"></div><div style="background:var(--neutral-900);width:14%"></div><div style="background:var(--moss-600);width:14%"></div><div style="background:var(--p-700);width:6%"></div><div style="background:var(--moss-100);width:6%"></div></div>
+    </div>
+  </div>
+
+  <div class="pilot-cell r2">
+    <div class="pilot-cell-label">R2 — Sky-teal bridge</div>
+    <div class="dcp-card">
+      <div class="dcp-eyebrow">Back Care · Week 4 of 8</div>
+      <div class="dcp-row">
+        <div class="dcp-title">You're halfway. Pain down 1.4 since you started.</div>
+        <div class="dcp-tag">On track</div>
+      </div>
+      <div class="dcp-progress"><div style="width: 50%;"></div></div>
+      <small style="color: var(--neutral-700); font-size: 11px;">$50 reward unlocked at week 8.</small>
+      <div class="dcp-stat">
+        <div><div class="stat-num">1.4</div><div class="stat-label">Pain ↓</div></div>
+        <div><div class="stat-num">12</div><div class="stat-label">Sessions</div></div>
+        <div><div class="stat-num brand">$50</div><div class="stat-label">Earned</div></div>
+      </div>
+      <a href="#" class="dcp-cta">Continue session</a>
+      <a href="#" class="dcp-cta-secondary">View all programs</a>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:34%"></div><div style="background:white;width:26%"></div><div style="background:var(--neutral-900);width:14%"></div><div style="background:var(--moss-600);width:14%"></div><div style="background:var(--p-700);width:6%"></div><div style="background:var(--moss-100);width:6%"></div></div>
+    </div>
+  </div>
+
+  <div class="pilot-cell r3">
+    <div class="pilot-cell-label">R3 — Modern Brand Blue</div>
+    <div class="dcp-card">
+      <div class="dcp-eyebrow">Back Care · Week 4 of 8</div>
+      <div class="dcp-row">
+        <div class="dcp-title">You're halfway. Pain down 1.4 since you started.</div>
+        <div class="dcp-tag">On track</div>
+      </div>
+      <div class="dcp-progress"><div style="width: 50%;"></div></div>
+      <small style="color: var(--neutral-700); font-size: 11px;">$50 reward unlocked at week 8.</small>
+      <div class="dcp-stat">
+        <div><div class="stat-num">1.4</div><div class="stat-label">Pain ↓</div></div>
+        <div><div class="stat-num">12</div><div class="stat-label">Sessions</div></div>
+        <div><div class="stat-num brand">$50</div><div class="stat-label">Earned</div></div>
+      </div>
+      <a href="#" class="dcp-cta">Continue session</a>
+      <a href="#" class="dcp-cta-secondary">View all programs</a>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:34%"></div><div style="background:white;width:26%"></div><div style="background:var(--neutral-900);width:14%"></div><div style="background:var(--moss-600);width:14%"></div><div style="background:var(--p-700);width:6%"></div><div style="background:var(--moss-100);width:6%"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PILOT 2: BUYER HERO ===== -->
+<h2>2. Buyer · website hero (gradient.deep-primary)</h2>
+<p>Primary-led screen using <code>gradient.deep-primary</code> (primary.700 → primary.900). <strong>Strongest comparison</strong> — the gradient is the dominant surface, so primary character is fully visible.</p>
+
+<div class="pilot-grid">
+  <div class="pilot-cell r1">
+    <div class="pilot-cell-label">R1 — Soft teal</div>
+    <div class="buyer-hero">
+      <div class="eyebrow">For Benefits Leaders</div>
+      <div class="title">Real clinical outcomes across every condition your employees are managing.</div>
+      <p class="body">At engagement rates that move your spend. <strong>Guaranteed</strong> 3:1 ROI.</p>
+      <a href="#" class="cta">See the proof →</a>
+      <div class="footer">Distributed via Alight, Elevance, Lockton, WTW, Aon</div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:14%"></div><div style="background:var(--p-900);width:38%"></div><div style="background:var(--p-700);width:32%"></div><div style="background:white;width:10%"></div><div style="background:rgba(255,255,255,0.85);width:6%"></div></div>
+    </div>
+  </div>
+
+  <div class="pilot-cell r2">
+    <div class="pilot-cell-label">R2 — Sky-teal bridge</div>
+    <div class="buyer-hero">
+      <div class="eyebrow">For Benefits Leaders</div>
+      <div class="title">Real clinical outcomes across every condition your employees are managing.</div>
+      <p class="body">At engagement rates that move your spend. <strong>Guaranteed</strong> 3:1 ROI.</p>
+      <a href="#" class="cta">See the proof →</a>
+      <div class="footer">Distributed via Alight, Elevance, Lockton, WTW, Aon</div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:14%"></div><div style="background:var(--p-900);width:38%"></div><div style="background:var(--p-700);width:32%"></div><div style="background:white;width:10%"></div><div style="background:rgba(255,255,255,0.85);width:6%"></div></div>
+    </div>
+  </div>
+
+  <div class="pilot-cell r3">
+    <div class="pilot-cell-label">R3 — Modern Brand Blue</div>
+    <div class="buyer-hero">
+      <div class="eyebrow">For Benefits Leaders</div>
+      <div class="title">Real clinical outcomes across every condition your employees are managing.</div>
+      <p class="body">At engagement rates that move your spend. <strong>Guaranteed</strong> 3:1 ROI.</p>
+      <a href="#" class="cta">See the proof →</a>
+      <div class="footer">Distributed via Alight, Elevance, Lockton, WTW, Aon</div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:14%"></div><div style="background:var(--p-900);width:38%"></div><div style="background:var(--p-700);width:32%"></div><div style="background:white;width:10%"></div><div style="background:rgba(255,255,255,0.85);width:6%"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PILOT 3: AI INSIGHT ===== -->
+<h2>3. AI · Health Insight (canonical AI surface)</h2>
+<p>Primary-led card with subtle <code>primary.50</code> gradient wash. <strong>Strong comparison</strong> — the AI moment depends entirely on primary for tagging, gradient, and CTA.</p>
+
+<div class="pilot-grid">
+  <div class="pilot-cell r1">
+    <div class="pilot-cell-label">R1 — Soft teal</div>
+    <div class="ai-card">
+      <span class="ai-tag">From your AI</span>
+      <div class="ai-headline">You averaged 6.2 hours of sleep last night — your second short night this week.</div>
+      <div class="ai-body">People managing back pain who average under 7 hours report <strong>22% more flare days</strong>. Worth protecting tonight.</div>
+      <a href="#" class="ai-action">Try a 10-minute wind-down</a>
+      <div class="ai-honesty">I'm working from your sleep + flare logs.</div>
+      <div class="ai-controls"><a href="#">Why this?</a><a href="#">Manage memory</a><a href="#">Not useful</a></div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:30%"></div><div style="background:white;width:20%"></div><div style="background:var(--p-50);width:16%"></div><div style="background:var(--neutral-900);width:14%"></div><div style="background:var(--p-600);width:12%"></div><div style="background:var(--p-100);width:8%"></div></div>
+    </div>
+  </div>
+
+  <div class="pilot-cell r2">
+    <div class="pilot-cell-label">R2 — Sky-teal bridge</div>
+    <div class="ai-card">
+      <span class="ai-tag">From your AI</span>
+      <div class="ai-headline">You averaged 6.2 hours of sleep last night — your second short night this week.</div>
+      <div class="ai-body">People managing back pain who average under 7 hours report <strong>22% more flare days</strong>. Worth protecting tonight.</div>
+      <a href="#" class="ai-action">Try a 10-minute wind-down</a>
+      <div class="ai-honesty">I'm working from your sleep + flare logs.</div>
+      <div class="ai-controls"><a href="#">Why this?</a><a href="#">Manage memory</a><a href="#">Not useful</a></div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:30%"></div><div style="background:white;width:20%"></div><div style="background:var(--p-50);width:16%"></div><div style="background:var(--neutral-900);width:14%"></div><div style="background:var(--p-600);width:12%"></div><div style="background:var(--p-100);width:8%"></div></div>
+    </div>
+  </div>
+
+  <div class="pilot-cell r3">
+    <div class="pilot-cell-label">R3 — Modern Brand Blue</div>
+    <div class="ai-card">
+      <span class="ai-tag">From your AI</span>
+      <div class="ai-headline">You averaged 6.2 hours of sleep last night — your second short night this week.</div>
+      <div class="ai-body">People managing back pain who average under 7 hours report <strong>22% more flare days</strong>. Worth protecting tonight.</div>
+      <a href="#" class="ai-action">Try a 10-minute wind-down</a>
+      <div class="ai-honesty">I'm working from your sleep + flare logs.</div>
+      <div class="ai-controls"><a href="#">Why this?</a><a href="#">Manage memory</a><a href="#">Not useful</a></div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar"><div style="background:var(--sand-50);width:30%"></div><div style="background:white;width:20%"></div><div style="background:var(--p-50);width:16%"></div><div style="background:var(--neutral-900);width:14%"></div><div style="background:var(--p-600);width:12%"></div><div style="background:var(--p-100);width:8%"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== AUDIT ===== -->
+<h2>Comparative attribute audit</h2>
+<p>Same five attributes from Phase 0, scored for each candidate at the applied-UI level.</p>
+
+<table class="audit-table">
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>R1 — Soft teal</th>
+      <th class="winner">R2 — Sky-teal bridge</th>
+      <th>R3 — Modern Brand Blue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-head">Credible</td>
+      <td><span class="score score-m">Med</span> Reads softer/wellness-coded; Withings-adjacent. Risk of Personify-cluster proximity.</td>
+      <td class="winner"><span class="score score-h">High</span> Bridge between Aqua + Brand Blue. Clinical-modern read; modern enough for 2026.</td>
+      <td><span class="score score-h">High</span> Deepest authority of the three. Most premium-clinical at the buyer hero.</td>
+    </tr>
+    <tr>
+      <td class="row-head">Direct</td>
+      <td><span class="score score-h">High</span></td>
+      <td class="winner"><span class="score score-h">High</span></td>
+      <td><span class="score score-h">High</span></td>
+    </tr>
+    <tr>
+      <td class="row-head">Outcome-obsessed</td>
+      <td><span class="score score-m">Med</span> Color-neutral; mid stops less differentiated.</td>
+      <td class="winner"><span class="score score-m">Med</span> Color-neutral; mid stops support data legibly.</td>
+      <td><span class="score score-m">Med</span> Color-neutral; deeper stops support data with most authority.</td>
+    </tr>
+    <tr>
+      <td class="row-head">Human</td>
+      <td><span class="score score-h">High</span> Warmest of the three; teal carries warmth at saturation.</td>
+      <td class="winner"><span class="score score-m">Med</span> Slightly cool; warmth carried by sand + warm.500 accent.</td>
+      <td><span class="score score-m">Med-Low</span> Coolest of the three; sand surfaces work hardest to warm.</td>
+    </tr>
+    <tr>
+      <td class="row-head">AI-competent</td>
+      <td><span class="score score-m">Med</span> Teal AI cluster (Calm, etc.) — sits in lifestyle-AI not enterprise-AI.</td>
+      <td class="winner"><span class="score score-h">High</span> Sky-teal sits in 2026-current palette zone — modern AI brand register.</td>
+      <td><span class="score score-h">High</span> Deep navy is the AI-brand-color trend (Anthropic, Linear, Notion AI).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>What you can see in the applied-UI that you couldn't see at the swatch level</h3>
+<ul>
+  <li><strong>R1 reads warmer than expected on the buyer hero.</strong> The teal-aqua heritage shows; some stakeholders may read it as "wellness vendor" rather than "clinical platform." Best for member-side moments; weakest for buyer-side.</li>
+  <li><strong>R2 lands quietly in all three.</strong> Doesn't dominate any single screen; doesn't fail any of the five attributes. Most rounded performance — which is exactly what a system primary should do.</li>
+  <li><strong>R3 dominates the buyer hero but cools the AI Insight.</strong> The deep navy gradient is the most premium-clinical of the three at scale. The AI tag in the AI Insight reads more "enterprise software" than "warm care." Best for buyer-side; weakest for member-side.</li>
+</ul>
+
+<!-- ===== RECOMMENDATION ===== -->
+<h2>Recommendation</h2>
+<div class="verdict-card">
+  <h4>R2 — Sky-teal bridge — direction stands.</h4>
+  <p style="font-size: 14px; margin-top: 8px;">The applied-UI comparison confirms the swatch-level lock. R2 is the only candidate that performs at parity across all three audiences — not the warmest (R1 wins Human), not the most authoritative (R3 ties on Credible/AI-competent), but the only one that holds all five attributes simultaneously without trading one for another.</p>
+  <p style="font-size: 14px; margin-top: 8px;"><strong>If verification fails on the warmth read</strong> (member finds R2 too cool): pivot to R1.<br><strong>If verification fails on the authority read</strong> (CHRO finds R2 not premium-clinical enough): pivot to R3.</p>
+</div>
+
+<h3>Direct comparison takeaway</h3>
+<ul>
+  <li>R1 wins the <strong>member moment in isolation</strong>; loses the <strong>buyer hero</strong>.</li>
+  <li>R3 wins the <strong>buyer hero in isolation</strong>; loses the <strong>member moment warmth</strong>.</li>
+  <li>R2 doesn't win any single moment, but doesn't lose any either. <strong>For a B2B2C platform that needs the same screen to read to both audiences</strong>, that's the right tradeoff.</li>
+</ul>
+
+<hr>
+
+<p style="font-size: 12px; color: var(--neutral-700); text-align: center; margin-top: 32px;">Same component HTML, three different primary scopes. Architecture demonstrated: a primary swap propagates through the system with no component edits.</p>
+
+</div>
+</body>
+</html>

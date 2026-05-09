@@ -1,0 +1,154 @@
+<!--
+  ============================================================
+  BLOCK 4 — For-you / Popular + Secondary banners
+  ============================================================
+  Renders below the Insights action block.
+
+  CKEditor compatibility:
+  Cards do NOT wrap their content in <a>. Instead each card is a
+  <div> with a single absolutely-positioned <a class="*-link">
+  that visually covers the whole card (stretched-link pattern).
+  CSS in mhc-home.css positions the card relative and stretches
+  the link to fill it.
+
+  Three things, each independently conditional:
+
+  1. Section title — "For your <focus> focus" when user has a
+     focus, else "Popular this week".
+
+  2. For-you grid — 3 cards.
+
+  3. Persistent nudge — only when user has NO focus.
+
+  4. Secondary banners ("More from <client>") — hidden when
+     formula.hasSecondaryBanners is false. Up to 4 cards.
+
+  Tokens (selected):
+    {{formula.copy_section_forFocus}}    — "For your {{formula.focusAreaLabel}} focus"
+    {{formula.copy_section_popular}}     — "Popular this week"
+    {{formula.copy_link_seeAll}}         — "See all"
+    {{formula.foryou_item1_tag}} … _title, _sub, _img, _href, _linkLabel
+    {{formula.copy_section_more}}        — "More from {{formula.clientName}}"
+    {{formula.copy_nudge_body}}          — "Pick a focus area to personalize…"
+    {{formula.copy_nudge_link}}          — "Pick focus"
+    {{formula.seeAll_href}}                — "See all" link target
+    {{formula.nudge_href}}                 — nudge "Pick focus" link target
+    {{formula.banner1_label}} / _img / _href / _linkLabel  (×4)
+  ============================================================
+-->
+
+<div class="mhc-home">
+
+  <!-- ============== Persistent nudge (no-focus only) ============== -->
+  {{^formula.hasFocus}}
+  <div class="nudge" role="note">
+    <span class="nudge-icon" aria-hidden="true">+</span>
+    <p class="nudge-body">{{formula.copy_nudge_body}}</p>
+    <a class="nudge-link" href="{{formula.nudge_href}}">{{formula.copy_nudge_link}}</a>
+  </div>
+  {{/formula.hasFocus}}
+
+  <!-- ============== For you / Popular ============== -->
+  <section class="foryou" aria-labelledby="mhc-foryou-title">
+    <div class="section-head">
+      {{#formula.hasFocus}}
+      <h2 id="mhc-foryou-title" class="section-title">{{formula.copy_section_forFocus}}</h2>
+      {{/formula.hasFocus}}
+      {{^formula.hasFocus}}
+      <h2 id="mhc-foryou-title" class="section-title">{{formula.copy_section_popular}}</h2>
+      {{/formula.hasFocus}}
+      <a class="section-link" href="{{formula.seeAll_href}}">{{formula.copy_link_seeAll}}</a>
+    </div>
+
+    <div class="foryou-grid">
+
+      <div class="foryou-card">
+        <div class="foryou-card-img" style="background-image: url('{{formula.foryou_item1_img}}');" role="img" aria-label=""></div>
+        <div class="foryou-card-body">
+          <p class="foryou-card-tag">{{formula.foryou_item1_tag}}</p>
+          <h3 class="foryou-card-title">{{formula.foryou_item1_title}}</h3>
+          <p class="foryou-card-sub">{{formula.foryou_item1_sub}}</p>
+        </div>
+        <a class="foryou-card-link" href="{{formula.foryou_item1_href}}" aria-label="{{formula.foryou_item1_title}}">
+          <span class="mhc-visually-hidden">{{formula.foryou_item1_title}}</span>
+        </a>
+      </div>
+
+      <div class="foryou-card">
+        <div class="foryou-card-img" style="background-image: url('{{formula.foryou_item2_img}}');" role="img" aria-label=""></div>
+        <div class="foryou-card-body">
+          <p class="foryou-card-tag">{{formula.foryou_item2_tag}}</p>
+          <h3 class="foryou-card-title">{{formula.foryou_item2_title}}</h3>
+          <p class="foryou-card-sub">{{formula.foryou_item2_sub}}</p>
+        </div>
+        <a class="foryou-card-link" href="{{formula.foryou_item2_href}}" aria-label="{{formula.foryou_item2_title}}">
+          <span class="mhc-visually-hidden">{{formula.foryou_item2_title}}</span>
+        </a>
+      </div>
+
+      <div class="foryou-card">
+        <div class="foryou-card-img" style="background-image: url('{{formula.foryou_item3_img}}');" role="img" aria-label=""></div>
+        <div class="foryou-card-body">
+          <p class="foryou-card-tag">{{formula.foryou_item3_tag}}</p>
+          <h3 class="foryou-card-title">{{formula.foryou_item3_title}}</h3>
+          <p class="foryou-card-sub">{{formula.foryou_item3_sub}}</p>
+        </div>
+        <a class="foryou-card-link" href="{{formula.foryou_item3_href}}" aria-label="{{formula.foryou_item3_title}}">
+          <span class="mhc-visually-hidden">{{formula.foryou_item3_title}}</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== Secondary banners ============== -->
+  {{#formula.hasSecondaryBanners}}
+  <section class="secondary" aria-labelledby="mhc-secondary-title">
+    <h2 id="mhc-secondary-title" class="secondary-eyebrow">{{formula.copy_section_more}}</h2>
+    <div class="secondary-grid">
+
+      <div class="secondary-card">
+        <div class="secondary-card-img" style="background-image: url('{{formula.banner1_img}}');"></div>
+        <div class="secondary-card-overlay" aria-hidden="true"></div>
+        <p class="secondary-card-label">{{formula.banner1_label}}</p>
+        <a class="secondary-card-link" href="{{formula.banner1_href}}" aria-label="{{formula.banner1_label}}">
+          <span class="mhc-visually-hidden">{{formula.banner1_label}}</span>
+        </a>
+      </div>
+
+      <div class="secondary-card">
+        <div class="secondary-card-img" style="background-image: url('{{formula.banner2_img}}');"></div>
+        <div class="secondary-card-overlay" aria-hidden="true"></div>
+        <p class="secondary-card-label">{{formula.banner2_label}}</p>
+        <a class="secondary-card-link" href="{{formula.banner2_href}}" aria-label="{{formula.banner2_label}}">
+          <span class="mhc-visually-hidden">{{formula.banner2_label}}</span>
+        </a>
+      </div>
+
+      {{#formula.hasBanner3}}
+      <div class="secondary-card">
+        <div class="secondary-card-img" style="background-image: url('{{formula.banner3_img}}');"></div>
+        <div class="secondary-card-overlay" aria-hidden="true"></div>
+        <p class="secondary-card-label">{{formula.banner3_label}}</p>
+        <a class="secondary-card-link" href="{{formula.banner3_href}}" aria-label="{{formula.banner3_label}}">
+          <span class="mhc-visually-hidden">{{formula.banner3_label}}</span>
+        </a>
+      </div>
+      {{/formula.hasBanner3}}
+
+      {{#formula.hasBanner4}}
+      <div class="secondary-card">
+        <div class="secondary-card-img" style="background-image: url('{{formula.banner4_img}}');"></div>
+        <div class="secondary-card-overlay" aria-hidden="true"></div>
+        <p class="secondary-card-label">{{formula.banner4_label}}</p>
+        <a class="secondary-card-link" href="{{formula.banner4_href}}" aria-label="{{formula.banner4_label}}">
+          <span class="mhc-visually-hidden">{{formula.banner4_label}}</span>
+        </a>
+      </div>
+      {{/formula.hasBanner4}}
+
+    </div>
+  </section>
+  {{/formula.hasSecondaryBanners}}
+
+</div>

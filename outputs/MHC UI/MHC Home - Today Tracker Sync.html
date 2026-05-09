@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — Today section & tracker sync</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; background:#f0eee9; font-family: 'Raleway', sans-serif; }
+  .callout { background:#fff; border:1px solid #e6ebec; border-radius:12px; padding: 14px 16px; font-size: 12.5px; line-height: 1.55; color:#373d3f; }
+  .callout b { color:#0f497f; }
+  .hero-card { background: #0f497f; color:#fff; padding: 28px 32px; border-radius: 18px; font-family: 'Raleway', sans-serif; }
+  .hero-card h3 { margin:0 0 6px; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color:#f15922; }
+  .hero-card h2 { margin:0 0 14px; font-weight: 700; font-size: 26px; line-height: 1.2; }
+  .hero-card p { margin:0 0 8px; font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.9); }
+  .pill-bad  { display:inline-block; background:#fde9e9; color:#c1292e; font-weight:700; font-size:11px; padding:3px 10px; border-radius:999px; letter-spacing:0.4px; text-transform:uppercase; }
+  .pill-warn { display:inline-block; background:#fff4e0; color:#a36400; font-weight:700; font-size:11px; padding:3px 10px; border-radius:999px; letter-spacing:0.4px; text-transform:uppercase; }
+  .pill-ok   { display:inline-block; background:#e6f3e8; color:#2f7f3a; font-weight:700; font-size:11px; padding:3px 10px; border-radius:999px; letter-spacing:0.4px; text-transform:uppercase; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="mhc-components.jsx"></script>
+
+<script type="text/babel">
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "syncState": "stale"
+}/*EDITMODE-END*/;
+
+// ─────────────────────────────────────────────────────────────
+// Sync state — single source of truth across all options.
+// 'fresh'   : last sync < 30 min ago (default healthy state)
+// 'recent'  : 30 min – 2h ago (within tolerance, faint cue)
+// 'stale'   : 2h – 24h ago (visible warning, this is where complaints live)
+// 'broken'  : > 24h or auth error (loud warning, recovery action)
+// ─────────────────────────────────────────────────────────────
+const SAMPLE_BY_STATE = {
+  fresh:  { ago: '4 min ago',  source: 'Apple Health', steps: '8,572', sleep: '7h 16m', heart: '68', confidence: 'fresh' },
+  recent: { ago: '47 min ago', source: 'Apple Health', steps: '8,210', sleep: '7h 16m', heart: '68', confidence: 'recent' },
+  stale:  { ago: '5h ago',     source: 'Apple Health', steps: '6,840', sleep: '7h 16m', heart: '—',  confidence: 'stale' },
+  broken: { ago: 'Yesterday, 8:42 AM', source: 'Apple Health', steps: '—', sleep: '—', heart: '—', confidence: 'broken' },
+};
+
+// ─────────────────────────────────────────────────────────────
+// Atoms
+// ─────────────────────────────────────────────────────────────
+function FreshnessDot({ confidence }) {
+  const map = {
+    fresh:  { color: '#2f7f3a', label: 'In sync' },
+    recent: { color: '#2f7f3a', label: 'In sync' },
+    stale:  { color: '#a36400', label: 'May be behind' },
+    broken: { color: '#c1292e', label: 'Not syncing' },
+  };
+  const m = map[confidence] || map.fresh;
+  return (
+    <div style={{ display:'inline-flex', alignItems:'center', gap: 6 }}>
+      <div style={{ width: 8, height: 8, borderRadius: '50%', background: m.color, boxShadow: confidence === 'fresh' ? `0 0 0 3px ${m.color}22` : 'none' }}/>
+      <span style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, fontWeight: 600, color: m.color, textTransform:'uppercase', letterSpacing: 0.4 }}>{m.label}</span>
+    </div>
+  );
+}
+
+function StatTile({ label, value, goal, icon, color, dim = false }) {
+  return (
+    <div style={{
+      background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px',
+      opacity: dim ? 0.55 : 1,
+    }}>
+      <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 4 }}>
+        <MHCIcon name={icon} size={13} color={color}/>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.5 }}>{label}</div>
+      </div>
+      <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 18, fontWeight: 700, color: MHC.charcoal, lineHeight: 1.1 }}>{value}</div>
+      <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, marginTop: 2 }}>{goal}</div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION 0 — Today as it ships now (baseline)
+// ─────────────────────────────────────────────────────────────
+function Today_Baseline({ syncState = 'stale' }) {
+  const d = SAMPLE_BY_STATE[syncState];
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Today</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        <StatTile label="Steps" value={d.steps} goal="of 10k" icon="footsteps" color={MHC.blue}/>
+        <StatTile label="Sleep" value={d.sleep} goal="goal 8h"  icon="bed"        color={MHC.aqua}/>
+        <StatTile label="Heart" value={d.heart} goal="resting"  icon="heart"      color={MHC.orange}/>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION A — Inline freshness chip (recommended)
+// Single line above the tiles: dot + label + "synced 5h ago" + Refresh.
+// Stale tiles dim slightly. Broken/missing values render as "—" not "0".
+// ─────────────────────────────────────────────────────────────
+function Today_Inline({ syncState = 'stale' }) {
+  const d = SAMPLE_BY_STATE[syncState];
+  const dim = syncState === 'stale' || syncState === 'broken';
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Today</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      {/* Freshness line */}
+      <div style={{
+        display:'flex', alignItems:'center', justifyContent:'space-between',
+        padding:'6px 2px 8px', gap: 10,
+      }}>
+        <div style={{ display:'flex', alignItems:'center', gap: 8, minWidth: 0 }}>
+          <FreshnessDot confidence={syncState}/>
+          <span style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11.5, color: MHC.slate, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>
+            · {d.source} · {d.ago}
+          </span>
+        </div>
+        <button style={{
+          background:'transparent', border:`1px solid ${MHC.divider}`, borderRadius: 999,
+          padding:'4px 10px', fontFamily:"'Raleway',sans-serif", fontSize: 11, fontWeight: 700,
+          color: MHC.blue, cursor:'pointer',
+        }}>↻ Refresh</button>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        <StatTile label="Steps" value={d.steps} goal="of 10k"  icon="footsteps" color={MHC.blue}   dim={dim}/>
+        <StatTile label="Sleep" value={d.sleep} goal="goal 8h" icon="bed"        color={MHC.aqua}   dim={dim}/>
+        <StatTile label="Heart" value={d.heart} goal="resting" icon="heart"      color={MHC.orange} dim={dim}/>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION B — Conditional banner above the tiles (only when stale/broken)
+// Quiet when fresh; assertive when there's a real problem.
+// Uses an MHC-blue banner with copy that names the issue and offers Refresh / Reconnect.
+// ─────────────────────────────────────────────────────────────
+function Today_Banner({ syncState = 'stale' }) {
+  const d = SAMPLE_BY_STATE[syncState];
+  const showBanner = syncState === 'stale' || syncState === 'broken';
+  const bannerCopy = syncState === 'broken'
+    ? { title: "We can't reach Apple Health", body: 'Your tracker disconnected yesterday. Reconnect to see today\u2019s data.', cta: 'Reconnect' }
+    : { title: 'Your numbers may be behind', body: `Last sync ${d.ago}. Tap refresh, or open ${d.source} to push fresh data.`, cta: 'Refresh now' };
+
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Today</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      {showBanner && (
+        <div style={{
+          background: syncState === 'broken' ? '#fde9e9' : '#fff4e0',
+          border: `1px solid ${syncState === 'broken' ? '#f0c0c0' : '#f0d9a0'}`,
+          borderRadius: 12, padding: '10px 12px', marginBottom: 8,
+          display:'flex', alignItems:'flex-start', gap: 10,
+        }}>
+          <div style={{
+            width: 22, height: 22, borderRadius: '50%',
+            background: syncState === 'broken' ? '#c1292e' : '#a36400',
+            color: '#fff', fontFamily:"'Raleway',sans-serif", fontSize: 13, fontWeight: 700,
+            display:'grid', placeItems:'center', flexShrink: 0,
+          }}>!</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 13, fontWeight: 700, color: syncState === 'broken' ? '#c1292e' : '#7a4d00' }}>
+              {bannerCopy.title}
+            </div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.charcoal, marginTop: 2, lineHeight: 1.4 }}>
+              {bannerCopy.body}
+            </div>
+          </div>
+          <button style={{
+            background: syncState === 'broken' ? '#c1292e' : MHC.blue, color:'#fff', border:0, borderRadius: 999,
+            padding:'6px 12px', fontFamily:"'Raleway',sans-serif", fontSize: 11.5, fontWeight: 700, cursor:'pointer', whiteSpace:'nowrap', flexShrink: 0,
+          }}>{bannerCopy.cta}</button>
+        </div>
+      )}
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        <StatTile label="Steps" value={d.steps} goal="of 10k"  icon="footsteps" color={MHC.blue}   dim={syncState === 'broken'}/>
+        <StatTile label="Sleep" value={d.sleep} goal="goal 8h" icon="bed"        color={MHC.aqua}   dim={syncState === 'broken'}/>
+        <StatTile label="Heart" value={d.heart} goal="resting" icon="heart"      color={MHC.orange} dim={syncState === 'broken'}/>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION C — Per-tile timestamps
+// Each tile shows its own last-updated. Different metrics often sync at
+// different cadences (heart rate is real-time on Apple Watch; steps is
+// batched). Most accurate, most visual noise.
+// ─────────────────────────────────────────────────────────────
+function Today_PerTile({ syncState = 'stale' }) {
+  const d = SAMPLE_BY_STATE[syncState];
+  // Per-tile freshness — heart often syncs more often than steps
+  const perTile = {
+    fresh:  { steps: '4 min ago', sleep: 'this morning', heart: 'just now' },
+    recent: { steps: '47 min ago', sleep: 'this morning', heart: '12 min ago' },
+    stale:  { steps: '5h ago', sleep: 'this morning', heart: 'no recent reading' },
+    broken: { steps: 'yesterday', sleep: 'yesterday', heart: 'yesterday' },
+  }[syncState];
+  const dimMap = {
+    fresh:  { steps:false, sleep:false, heart:false },
+    recent: { steps:false, sleep:false, heart:false },
+    stale:  { steps:true, sleep:false, heart:true },
+    broken: { steps:true, sleep:true, heart:true },
+  }[syncState];
+
+  function TileWithStamp({ label, value, icon, color, stamp, dim }) {
+    return (
+      <div style={{
+        background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px',
+        opacity: dim ? 0.6 : 1,
+      }}>
+        <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 4 }}>
+          <MHCIcon name={icon} size={13} color={color}/>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.5 }}>{label}</div>
+        </div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 18, fontWeight: 700, color: MHC.charcoal, lineHeight: 1.1 }}>{value}</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10.5, color: dim ? '#a36400' : MHC.slate, marginTop: 4, fontStyle: dim ? 'normal' : 'italic' }}>↻ {stamp}</div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Today</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        <TileWithStamp label="Steps" value={d.steps} icon="footsteps" color={MHC.blue}   stamp={perTile.steps} dim={dimMap.steps}/>
+        <TileWithStamp label="Sleep" value={d.sleep} icon="bed"        color={MHC.aqua}   stamp={perTile.sleep} dim={dimMap.sleep}/>
+        <TileWithStamp label="Heart" value={d.heart} icon="heart"      color={MHC.orange} stamp={perTile.heart} dim={dimMap.heart}/>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION D — Reframe the section header
+// "Today" → "Today, as of 5h ago" or "Yesterday's totals"
+// Honest framing. The header IS the freshness signal.
+// ─────────────────────────────────────────────────────────────
+function Today_Reframed({ syncState = 'stale' }) {
+  const d = SAMPLE_BY_STATE[syncState];
+  const headerCopy = {
+    fresh:  { title: 'Today',                    sub: `Updated ${d.ago}` },
+    recent: { title: 'Today',                    sub: `Updated ${d.ago}` },
+    stale:  { title: 'Today (as of 5h ago)',     sub: 'Pull-to-refresh for latest' },
+    broken: { title: "Yesterday's totals",       sub: 'Tracker offline since yesterday' },
+  }[syncState];
+  const dim = syncState === 'broken';
+  const headerColor = (syncState === 'stale' || syncState === 'broken') ? '#a36400' : MHC.charcoal;
+
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 8 }}>
+        <div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: headerColor }}>{headerCopy.title}</div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, marginTop: 1 }}>{headerCopy.sub}</div>
+        </div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        <StatTile label="Steps" value={d.steps} goal="of 10k"  icon="footsteps" color={MHC.blue}   dim={dim}/>
+        <StatTile label="Sleep" value={d.sleep} goal="goal 8h" icon="bed"        color={MHC.aqua}   dim={dim}/>
+        <StatTile label="Heart" value={d.heart} goal="resting" icon="heart"      color={MHC.orange} dim={dim}/>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION E — Demote the section to a single summary line when broken
+// When sync is broken, the whole 3-tile grid collapses into one row that
+// names the problem and offers reconnect. No fake numbers shown.
+// ─────────────────────────────────────────────────────────────
+function Today_Collapsed({ syncState = 'stale' }) {
+  const d = SAMPLE_BY_STATE[syncState];
+  if (syncState === 'broken') {
+    return (
+      <div>
+        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Today</div>
+        </div>
+        <div style={{
+          background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'14px 16px',
+          display:'flex', alignItems:'center', gap: 14,
+        }}>
+          <div style={{ width: 38, height: 38, borderRadius:'50%', background:'#fde9e9', display:'grid', placeItems:'center', flexShrink: 0 }}>
+            <MHCIcon name="activity" size={18} color="#c1292e"/>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 13.5, color: MHC.charcoal }}>Tracker disconnected</div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.slate, marginTop: 2 }}>Apple Health stopped syncing yesterday at 8:42 AM.</div>
+          </div>
+          <button style={{
+            background: MHC.blue, color:'#fff', border:0, borderRadius: 999,
+            padding:'7px 14px', fontFamily:"'Raleway',sans-serif", fontSize: 12, fontWeight: 700, cursor:'pointer', whiteSpace:'nowrap',
+          }}>Reconnect</button>
+        </div>
+      </div>
+    );
+  }
+  // For fresh/recent/stale, fall back to inline option
+  return <Today_Inline syncState={syncState}/>;
+}
+
+// ─────────────────────────────────────────────────────────────
+// FRAMES
+// ─────────────────────────────────────────────────────────────
+function PhoneFrame({ children }) {
+  return (
+    <div style={{
+      width: 358, padding: 18, background:'#fff', borderRadius: 22,
+      boxShadow:'0 12px 30px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06)',
+    }}>
+      <div style={{ borderBottom:`1px dashed ${MHC.divider}`, paddingBottom: 12, marginBottom: 14, fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, letterSpacing: 0.5, textTransform:'uppercase', fontWeight: 700 }}>
+        ↑ Greeting · Hero · Programs rail
+      </div>
+      {children}
+      <div style={{ borderTop:`1px dashed ${MHC.divider}`, paddingTop: 12, marginTop: 14, fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, letterSpacing: 0.5, textTransform:'uppercase', fontWeight: 700 }}>
+        ↓ Insights · For your focus
+      </div>
+    </div>
+  );
+}
+
+function StateLabel({ syncState }) {
+  const map = {
+    fresh:  { className: 'pill-ok',   label: 'Fresh · 4 min' },
+    recent: { className: 'pill-ok',   label: 'Recent · 47 min' },
+    stale:  { className: 'pill-warn', label: 'Stale · 5h' },
+    broken: { className: 'pill-bad',  label: 'Broken · yesterday' },
+  };
+  const m = map[syncState];
+  return <span className={m.className}>{m.label}</span>;
+}
+
+function Callout({ children }) { return <div className="callout">{children}</div>; }
+
+// ─────────────────────────────────────────────────────────────
+// APP
+// ─────────────────────────────────────────────────────────────
+function App() {
+  const [t, setTweak] = useTweaks(TWEAKS);
+  const syncState = t.syncState || 'stale';
+  return (
+    <div>
+      <DesignCanvas>
+
+        {/* ── INTRO ─────────────────────────────────────────── */}
+        <DCSection
+          id="intro"
+          title="Today section — handling tracker sync delays"
+          subtitle="Complaint: trackers don't sync to MHC quickly enough, and the home page shows yesterday-ish numbers as if they were today's. Five options for telling the truth, ranked by how loudly they say it.">
+
+          <DCArtboard id="problem" label="The problem" width={560} height={580}>
+            <div style={{ padding: 28, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 16 }}>
+              <div className="hero-card">
+                <h3>Problem</h3>
+                <h2>Stale numbers feel like broken numbers when nothing on the page admits the lag.</h2>
+                <p>"Today" implies <i>now</i>. When the value is actually 4–8 hours behind reality, users assume MHC is broken — even though the lag is in the partner tracker's sync schedule, not our system.</p>
+                <p>Today the section shows <b style={{color:'#fff'}}>no freshness signal at all</b>: bare numbers, no timestamp, no last-sync, no refresh affordance. Every state from "perfectly fresh" to "32 hours stale" looks identical.</p>
+                <p style={{marginTop:12}}>The fix isn't faster sync — that's a backend problem. The fix is <b style={{color:'#fff'}}>making the freshness state visible and recoverable</b>, so users trust the number they see and have a way out when it's wrong.</p>
+              </div>
+              <Callout>
+                <b>Four states to design for.</b> &nbsp;
+                <span className="pill-ok">Fresh · &lt;30 min</span>{' '}
+                <span className="pill-ok">Recent · 30 min – 2h</span>{' '}
+                <span className="pill-warn">Stale · 2 – 24h</span>{' '}
+                <span className="pill-bad">Broken · &gt;24h or auth error</span>
+                <br/><br/>
+                Most user complaints map to <b>Stale</b> (numbers exist but feel wrong) and <b>Broken</b> (numbers stop appearing or freeze). Fresh and Recent should be quiet.
+              </Callout>
+              <Callout>
+                <b>Design rules.</b> (1) Never show a fabricated zero — missing data renders as "—", not "0". (2) Stale states must be visually different from fresh, not just labelled differently. (3) Every problem state must offer a recovery action (Refresh or Reconnect) within one tap. (4) Fresh state stays calm — no permanent timestamps that train users to ignore.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── BASELINE ──────────────────────────────────────── */}
+        <DCSection
+          id="baseline"
+          title="Baseline — what ships today"
+          subtitle="No freshness signal. Numbers from 5h ago look the same as numbers from 5 minutes ago. This is the source of the complaints.">
+
+          <DCArtboard id="baseline-mob" label="Today (current)" width={400} height={260}>
+            <PhoneFrame>
+              <Today_Baseline syncState={syncState}/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="baseline-notes" label="Why this is bad" width={340} height={260}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Numbers without context.</b> 8,572 steps. Of when? Today? An hour ago? Six hours ago? The user has no way to tell.
+              </Callout>
+              <Callout>
+                <b>No recovery path.</b> Even when the user suspects something is wrong, there's no Refresh button, no last-sync timestamp, no "open Apple Health" prompt.
+              </Callout>
+              <Callout>
+                <b>Switch <i>Sync state</i> in the Tweaks panel</b> to see how the next four options handle Fresh, Recent, Stale, and Broken. The baseline (this card) is identical across all four.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── OPTIONS ───────────────────────────────────────── */}
+        <DCSection
+          id="options"
+          title="Four options"
+          subtitle="Each shown in mobile context. Switch sync state in the Tweaks panel to see Fresh / Recent / Stale / Broken behavior.">
+
+          {/* A */}
+          <DCArtboard id="opt-a" label={<span>A · Inline freshness chip <StateLabel syncState={syncState}/></span>} width={400} height={300}>
+            <PhoneFrame>
+              <Today_Inline syncState={syncState}/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="opt-a-notes" label="A · notes" width={340} height={300}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> A single line above the tiles: status dot + label + source + "synced 5h ago" + Refresh button. Tiles dim when stale or broken.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Always-on context. The line scales gracefully across all four states (color and label change, structure stays). One refresh button covers all metrics.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Adds 24px of vertical space even when fresh. Constant timestamp may train users to ignore it.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* B */}
+          <DCArtboard id="opt-b" label={<span>B · Conditional warning banner <StateLabel syncState={syncState}/></span>} width={400} height={340}>
+            <PhoneFrame>
+              <Today_Banner syncState={syncState}/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="opt-b-notes" label="B · notes" width={340} height={340}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Quiet when fresh — looks identical to baseline. When stale or broken, an amber/red banner appears above the tiles with explicit copy + a recovery action.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Zero visual noise on the happy path. Users in problem states get a clear, named explanation and one-tap recovery.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Banner pops in/out as state changes — can feel jumpy for users near the 2h boundary. Two distinct components to design (fresh tiles vs. with-banner tiles).
+              </Callout>
+              <Callout>
+                <b>This is the runner-up.</b> Pair it with A for the strongest combined treatment: A's chip is always visible, B's banner only appears when there's something to act on.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* C */}
+          <DCArtboard id="opt-c" label={<span>C · Per-tile timestamps <StateLabel syncState={syncState}/></span>} width={400} height={300}>
+            <PhoneFrame>
+              <Today_PerTile syncState={syncState}/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="opt-c-notes" label="C · notes" width={340} height={300}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Each tile gets its own last-updated stamp at the bottom. Heart and steps often sync at different cadences; this surfaces the per-metric truth.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Most accurate. Honors that "Heart: just now" and "Steps: 5h ago" can both be true at the same moment.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Heaviest visual treatment. Three timestamps to read. Tiles get taller. No section-level refresh affordance — the only recovery is going into each tracker setting.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> Users are sophisticated about their tracker sources and need to know which metric to trust right now.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* D */}
+          <DCArtboard id="opt-d" label={<span>D · Reframed section header <StateLabel syncState={syncState}/></span>} width={400} height={300}>
+            <PhoneFrame>
+              <Today_Reframed syncState={syncState}/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="opt-d-notes" label="D · notes" width={340} height={300}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> The section title carries the freshness. "Today" → "Today (as of 5h ago)" → "Yesterday's totals" depending on state. The header IS the disclosure.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Honest framing without adding components. Lightest weight option. Header color shifts to amber when behind, communicating problem state pre-attentively.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> No recovery action. Header copy can feel apologetic. Stale → "Today (as of 5h ago)" works; "Yesterday's totals" feels worse than the truth, even when accurate.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* E */}
+          <DCArtboard id="opt-e" label={<span>E · Collapse to summary when broken <StateLabel syncState={syncState}/></span>} width={400} height={300}>
+            <PhoneFrame>
+              <Today_Collapsed syncState={syncState}/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="opt-e-notes" label="E · notes" width={340} height={300}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Hybrid. For Fresh / Recent / Stale, behaves identically to Option A. For <i>Broken</i>, the entire 3-tile grid collapses into a single summary row: "Tracker disconnected · Reconnect."
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> The strongest stance for broken state — refuses to show "—" placeholders that users may misread as "0 steps today." Recovery action is the dominant element.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Two distinct layouts for the same section feels like a state machine. May confuse users who expect the tiles to always be there.
+              </Callout>
+              <Callout>
+                <b>Switch sync state to "broken"</b> to see this option's distinguishing behavior. Other states show the standard inline treatment.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── RECOMMENDATION ───────────────────────────────── */}
+        <DCSection id="rec" title="Recommendation" subtitle="Combine A + B's principles into one treatment, sized to the severity.">
+          <DCArtboard id="rec-card" label="Decision" width={580} height={620}>
+            <div style={{ padding: 22, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 14 }}>
+              <div className="hero-card">
+                <h3>Recommendation</h3>
+                <h2>Ship <span style={{color:'#fff'}}>Option A</span> as the always-on baseline, with <span style={{color:'#fff'}}>Option B's banner</span> layered on for Stale + Broken states.</h2>
+              </div>
+              <Callout>
+                <b>Why A as baseline.</b> Every Today section, every state, gets one truthful line: status dot + source + "synced N min/h ago" + Refresh. Users learn where to look once. The line scales with severity (color + label change), so we don't need new mental models per state.
+              </Callout>
+              <Callout>
+                <b>Why add B's banner for Stale & Broken.</b> A's chip is informative; it isn't loud enough on its own to satisfy a frustrated user. Adding the banner above the tiles when sync is &gt;2h or broken names the problem in plain English ("Your numbers may be behind") and surfaces the recovery action at a size that matches the user's frustration.
+              </Callout>
+              <Callout>
+                <b>Why not C alone.</b> Per-tile timestamps are accurate but add three timestamps the user must parse. Section-level freshness handles 95% of the truth at a fraction of the cost. Keep per-tile detail for the dedicated trackers screen, not home.
+              </Callout>
+              <Callout>
+                <b>Why not D alone.</b> Reframing the header is elegant but offers no recovery. Users who see "Yesterday's totals" need to be able to <i>do something</i> about it from the home page.
+              </Callout>
+              <Callout>
+                <b>Why not E.</b> Collapsing to a single row when broken is decisive, but introduces a second layout for the same section. Users with the default 3-tile mental model will be briefly confused. The Option B banner achieves the same outcome (loud problem-naming + recovery) without changing the underlying grid.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="rec-states" label="State-by-state behavior" width={420} height={620}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <span className="pill-ok">Fresh &lt;30 min</span><br/><br/>
+                <b>Chip:</b> green dot, "In sync · Apple Health · 4 min ago" + Refresh<br/>
+                <b>Banner:</b> hidden<br/>
+                <b>Tiles:</b> normal
+              </Callout>
+              <Callout>
+                <span className="pill-ok">Recent 30 min – 2h</span><br/><br/>
+                <b>Chip:</b> green dot, "In sync · Apple Health · 47 min ago" + Refresh<br/>
+                <b>Banner:</b> hidden<br/>
+                <b>Tiles:</b> normal
+              </Callout>
+              <Callout>
+                <span className="pill-warn">Stale 2 – 24h</span><br/><br/>
+                <b>Chip:</b> amber dot, "May be behind · Apple Health · 5h ago" + Refresh<br/>
+                <b>Banner:</b> amber, "Your numbers may be behind. Tap refresh, or open Apple Health to push fresh data." + Refresh button<br/>
+                <b>Tiles:</b> dimmed 55%
+              </Callout>
+              <Callout>
+                <span className="pill-bad">Broken &gt;24h or auth</span><br/><br/>
+                <b>Chip:</b> red dot, "Not syncing · Apple Health · Yesterday" + Reconnect<br/>
+                <b>Banner:</b> red, "We can't reach Apple Health. Reconnect to see today's data." + Reconnect button<br/>
+                <b>Tiles:</b> dimmed 55%, all values render as "—"
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="rec-followups" label="Follow-up considerations" width={400} height={620}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Refresh button must do real work.</b> If tapping Refresh just spins for 10s and returns the same numbers, this design fails. Confirm the partner sync APIs support an on-demand pull (Apple HealthKit and Fitbit do; older Garmin doesn't). For partners that can't, the button should open the partner app deep-link instead — labelled "Open Apple Health" rather than Refresh.
+              </Callout>
+              <Callout>
+                <b>Define "stale" per-metric.</b> 5h is reasonable for steps; 5h for heart-rate is broken. Make the threshold per-metric on the backend so the chip's "5h ago" reflects the worst-offending metric the user cares about.
+              </Callout>
+              <Callout>
+                <b>Telemetry to add.</b> Refresh-button taps per session, banner-CTA conversion, time-to-first-fresh-tile after Refresh, and reconnect completion rate. The metric that matters most: do users who saw the stale banner reduce next-day "tracker not working" support tickets?
+              </Callout>
+              <Callout>
+                <b>Don't auto-refresh on home open.</b> Tempting, but expensive in battery and partner-API quotas. Refresh on pull-to-refresh and explicit button taps only.
+              </Callout>
+              <Callout>
+                <b>Educate, gently.</b> First time a user sees the Stale banner, append "Why is this happening?" link → mini-explainer about partner sync schedules. Suppress after first dismissal.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection title="Sync state">
+          <TweakRadio
+            value={syncState}
+            options={[
+              { value: 'fresh',  label: 'Fresh' },
+              { value: 'recent', label: 'Recent' },
+              { value: 'stale',  label: 'Stale' },
+              { value: 'broken', label: 'Broken' },
+            ]}
+            onChange={(v) => setTweak('syncState', v)}
+          />
+          <div style={{ fontSize: 11.5, color:'#6e7a7d', marginTop: 6, lineHeight: 1.4 }}>
+            All five options share one sync state — switch to compare how each handles Fresh / Recent / Stale / Broken in lockstep.
+          </div>
+        </TweakSection>
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+</body>
+</html>

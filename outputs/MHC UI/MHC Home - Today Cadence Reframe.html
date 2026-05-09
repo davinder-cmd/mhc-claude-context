@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — Today section, cadence reframe</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; background:#f0eee9; font-family: 'Raleway', sans-serif; }
+  .callout { background:#fff; border:1px solid #e6ebec; border-radius:12px; padding: 14px 16px; font-size: 12.5px; line-height: 1.55; color:#373d3f; }
+  .callout b { color:#0f497f; }
+  .hero-card { background: #0f497f; color:#fff; padding: 28px 32px; border-radius: 18px; font-family: 'Raleway', sans-serif; }
+  .hero-card h3 { margin:0 0 6px; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color:#f15922; }
+  .hero-card h2 { margin:0 0 14px; font-weight: 700; font-size: 26px; line-height: 1.2; }
+  .hero-card p { margin:0 0 8px; font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.9); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="mhc-components.jsx"></script>
+
+<script type="text/babel">
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "cadence": "weekly"
+}/*EDITMODE-END*/;
+
+// ─────────────────────────────────────────────────────────────
+// Atoms
+// ─────────────────────────────────────────────────────────────
+function Sparkline({ values, color = MHC.blue, width = 100, height = 26, highlightLast = false }) {
+  const max = Math.max(...values);
+  const min = Math.min(...values);
+  const range = (max - min) || 1;
+  const stepX = width / (values.length - 1);
+  const points = values.map((v, i) => {
+    const x = i * stepX;
+    const y = height - ((v - min) / range) * (height - 4) - 2;
+    return [x, y];
+  });
+  const path = points.map(([x, y], i) => `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
+  return (
+    <svg width={width} height={height} style={{ display:'block' }}>
+      <path d={path} fill="none" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"/>
+      {highlightLast && (
+        <circle cx={points[points.length-1][0]} cy={points[points.length-1][1]} r={3} fill={color}/>
+      )}
+    </svg>
+  );
+}
+
+function MiniBars({ values, target, color = MHC.blue, width = 100, height = 26, todayIndex = -1 }) {
+  // 7 small bars; "today" rendered fainter or differently
+  const max = Math.max(target, ...values);
+  const barWidth = (width - (values.length - 1) * 2) / values.length;
+  return (
+    <svg width={width} height={height} style={{ display:'block' }}>
+      {values.map((v, i) => {
+        const h = (v / max) * (height - 2);
+        const x = i * (barWidth + 2);
+        const y = height - h;
+        const isToday = i === todayIndex;
+        return (
+          <rect
+            key={i}
+            x={x}
+            y={y}
+            width={barWidth}
+            height={Math.max(2, h)}
+            rx={1.5}
+            fill={color}
+            opacity={isToday ? 0.4 : 1}
+          />
+        );
+      })}
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION 0 — Baseline (today, daily)
+// ─────────────────────────────────────────────────────────────
+function Cadence_BaselineDaily() {
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Today</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        {[
+          { label:'Steps', value:'8,572', goal:'of 10k', icon:'footsteps', color: MHC.blue },
+          { label:'Sleep', value:'7h 16m', goal:'goal 8h', icon:'bed',   color: MHC.aqua },
+          { label:'Heart', value:'68',     goal:'resting',icon:'heart', color: MHC.orange },
+        ].map((s, i) => (
+          <div key={i} style={{ background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 4 }}>
+              <MHCIcon name={s.icon} size={13} color={s.color}/>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.5 }}>{s.label}</div>
+            </div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 18, fontWeight: 700, color: MHC.charcoal, lineHeight: 1.1 }}>{s.value}</div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, marginTop: 2 }}>{s.goal}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION A — This week, totals (Personify-style)
+// "This week" replaces "Today". Tiles show running 7-day totals.
+// ─────────────────────────────────────────────────────────────
+function Cadence_WeeklyTotals() {
+  // Tuesday 11am; through-yesterday data
+  const data = [
+    { label:'Steps this week',  value:'52,840', sub:'avg 8,807/day · ↑12% vs last',  icon:'footsteps', color: MHC.blue },
+    { label:'Sleep this week',  value:'48h 12m', sub:'avg 6h 53m/night',              icon:'bed',        color: MHC.aqua },
+    { label:'Active days',       value:'5 of 6', sub:'30+ min movement',               icon:'heart',     color: MHC.orange },
+  ];
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 8 }}>
+        <div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>This week</div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, marginTop: 1 }}>Mon Apr 22 — Today</div>
+        </div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View trends</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        {data.map((s, i) => (
+          <div key={i} style={{ background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 4 }}>
+              <MHCIcon name={s.icon} size={13} color={s.color}/>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.4 }}>{s.label}</div>
+            </div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 17, fontWeight: 700, color: MHC.charcoal, lineHeight: 1.1 }}>{s.value}</div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10.5, color: MHC.slate, marginTop: 3, lineHeight: 1.3 }}>{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION B — 7-day average ("Last 7 days")
+// Same tiles, but averaged. Today's partial number can't drag it.
+// ─────────────────────────────────────────────────────────────
+function Cadence_RollingAvg() {
+  const data = [
+    { label:'Daily steps avg', value:'8,807', sub:'last 7 days',  icon:'footsteps', color: MHC.blue,
+      spark:[7800,9200,8500,9100,8200,8900,9100] },
+    { label:'Sleep avg',        value:'6h 53m', sub:'last 7 nights', icon:'bed',     color: MHC.aqua,
+      spark:[420,440,400,460,410,430,420] },
+    { label:'Resting heart',     value:'67 bpm', sub:'last 7 days',   icon:'heart',  color: MHC.orange,
+      spark:[68,67,68,66,67,68,67] },
+  ];
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 8 }}>
+        <div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Your last 7 days</div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, marginTop: 1 }}>Rolling average</div>
+        </div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View trends</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        {data.map((s, i) => (
+          <div key={i} style={{ background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 4 }}>
+              <MHCIcon name={s.icon} size={13} color={s.color}/>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.4 }}>{s.label}</div>
+            </div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 17, fontWeight: 700, color: MHC.charcoal, lineHeight: 1.1 }}>{s.value}</div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10.5, color: MHC.slate, marginTop: 3 }}>{s.sub}</div>
+            <div style={{ marginTop: 6 }}>
+              <Sparkline values={s.spark} color={s.color} width={92} height={20}/>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION C — Week-at-a-glance bars
+// Bars for each of the past 7 days. Today's bar is rendered semi-transparent
+// so partial data reads as "in progress" rather than "low".
+// ─────────────────────────────────────────────────────────────
+function Cadence_WeekBars() {
+  const days = ['M','T','W','T','F','S','S'];
+  const stepBars  = [9200, 7800, 10500, 8200, 9100, 6500, 4200];
+  const sleepBars = [430, 410, 440, 460, 400, 420, 0]; // last 0 = haven't slept yet
+  const heartBars = [68, 67, 68, 66, 67, 68, 67];
+  const todayIdx = 6; // Sunday in this slice; faded
+  const data = [
+    { label:'Steps',  goal:'10k/day', icon:'footsteps', color: MHC.blue,    bars: stepBars,  target: 10000 },
+    { label:'Sleep',  goal:'8h/night',icon:'bed',        color: MHC.aqua,    bars: sleepBars, target: 480 },
+    { label:'Heart',  goal:'resting',  icon:'heart',     color: MHC.orange,  bars: heartBars, target: 80 },
+  ];
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom: 8 }}>
+        <div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Your week</div>
+          <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, marginTop: 1 }}>Past 7 days</div>
+        </div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View trends</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        {data.map((s, i) => (
+          <div key={i} style={{ background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 4 }}>
+              <MHCIcon name={s.icon} size={13} color={s.color}/>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.5 }}>{s.label}</div>
+            </div>
+            <div style={{ marginTop: 4, marginBottom: 4 }}>
+              <MiniBars values={s.bars} target={s.target} color={s.color} width={104} height={28} todayIndex={todayIdx}/>
+            </div>
+            <div style={{ display:'flex', justifyContent:'space-between', fontFamily:"'Raleway',sans-serif", fontSize: 9, color: MHC.slate }}>
+              {days.map((d, j) => (
+                <span key={j} style={{ opacity: j === todayIdx ? 0.5 : 1 }}>{d}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION D — "Recent activity" (no time label)
+// Drop the time framing entirely. Tiles say "Recent" or no header.
+// Numbers are the most-recent-known values, no implied currency.
+// ─────────────────────────────────────────────────────────────
+function Cadence_Recent() {
+  const data = [
+    { label:'Recent steps', value:'8,807', sub:'typical day',  icon:'footsteps', color: MHC.blue },
+    { label:'Recent sleep', value:'6h 53m', sub:'typical night',icon:'bed',       color: MHC.aqua },
+    { label:'Resting heart', value:'67',     sub:'recent reading',icon:'heart',  color: MHC.orange },
+  ];
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Your activity</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        {data.map((s, i) => (
+          <div key={i} style={{ background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 4 }}>
+              <MHCIcon name={s.icon} size={13} color={s.color}/>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.4 }}>{s.label}</div>
+            </div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 18, fontWeight: 700, color: MHC.charcoal, lineHeight: 1.1 }}>{s.value}</div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, marginTop: 2 }}>{s.sub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// OPTION E — Hybrid: "Today + this week"
+// Two-line per tile: today's number, smaller, on top. Week aggregate, larger, dominant.
+// Today still appears, but it's clearly subordinate to the weekly figure.
+// ─────────────────────────────────────────────────────────────
+function Cadence_TodayWithWeek() {
+  const data = [
+    { label:'Steps', today:'8,572', week:'52,840',  weekSub:'this week', icon:'footsteps', color: MHC.blue },
+    { label:'Sleep', today:'7h 16m', week:'48h 12m', weekSub:'7-night total', icon:'bed', color: MHC.aqua },
+    { label:'Heart', today:'68',    week:'67',       weekSub:'7-day avg',   icon:'heart', color: MHC.orange },
+  ];
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: 8 }}>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontWeight: 700, fontSize: 15, color: MHC.charcoal }}>Your week</div>
+        <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 12, color: MHC.blue, fontWeight: 600 }}>View all</div>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 8 }}>
+        {data.map((s, i) => (
+          <div key={i} style={{ background:'#fff', border:`1px solid ${MHC.divider}`, borderRadius: 14, padding:'12px 12px' }}>
+            <div style={{ display:'flex', alignItems:'center', gap: 6, marginBottom: 6 }}>
+              <MHCIcon name={s.icon} size={13} color={s.color}/>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 11, fontWeight: 600, color: MHC.slate, textTransform:'uppercase', letterSpacing: 0.5 }}>{s.label}</div>
+            </div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10, color: MHC.slate, lineHeight: 1.1 }}>Today: {s.today}</div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 17, fontWeight: 700, color: MHC.charcoal, marginTop: 4, lineHeight: 1.1 }}>{s.week}</div>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize: 10.5, color: MHC.slate, marginTop: 3 }}>{s.weekSub}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// FRAMES
+// ─────────────────────────────────────────────────────────────
+function PhoneFrame({ children }) {
+  return (
+    <div style={{
+      width: 358, padding: 18, background:'#fff', borderRadius: 22,
+      boxShadow:'0 12px 30px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06)',
+    }}>
+      <div style={{ borderBottom:`1px dashed ${MHC.divider}`, paddingBottom: 12, marginBottom: 14, fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, letterSpacing: 0.5, textTransform:'uppercase', fontWeight: 700 }}>
+        ↑ Greeting · Hero · Programs rail
+      </div>
+      {children}
+      <div style={{ borderTop:`1px dashed ${MHC.divider}`, paddingTop: 12, marginTop: 14, fontFamily:"'Raleway',sans-serif", fontSize: 11, color: MHC.slate, letterSpacing: 0.5, textTransform:'uppercase', fontWeight: 700 }}>
+        ↓ Insights · For your focus
+      </div>
+    </div>
+  );
+}
+function Callout({ children }) { return <div className="callout">{children}</div>; }
+
+// ─────────────────────────────────────────────────────────────
+// APP
+// ─────────────────────────────────────────────────────────────
+function App() {
+  return (
+    <div>
+      <DesignCanvas>
+
+        {/* ── INTRO ─────────────────────────────────────────── */}
+        <DCSection
+          id="intro"
+          title="Today section — reframe to weekly so partial sync is invisible"
+          subtitle="Stop telling users what 'today' looks like. Show data at a cadence where partial syncs and missing chunks don't read as gaps. Personify and similar vendors do this for the same reason — it makes their numbers durable.">
+
+          <DCArtboard id="problem" label="The reframe" width={580} height={580}>
+            <div style={{ padding: 28, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 16 }}>
+              <div className="hero-card">
+                <h3>Reframe</h3>
+                <h2>Hide the lag by changing what's being measured.</h2>
+                <p>"Today" implies <i>now</i>. When sync is delayed or partial, "now" exposes the seams: an 8,572-step day that's actually 11,400 looks like the user fell short. We can't fix the sync timing, but we can stop asking the page to show a value that depends on it.</p>
+                <p>Move the framing to a window where partial data is statistically invisible. Weekly totals smooth out missing hours. 7-day rolling averages absorb a 5-hour gap without the user noticing.</p>
+                <p style={{marginTop: 12}}>The user still sees their numbers — they're just <b style={{color:'#fff'}}>at a cadence we can support</b>.</p>
+              </div>
+              <Callout>
+                <b>What we get.</b> No "may be behind" copy. No freshness chip. No banner. The page never has to admit a sync issue because the displayed value isn't sensitive to one.
+              </Callout>
+              <Callout>
+                <b>What we lose.</b> The "did I hit my steps today?" moment. Power users who came for that signal will need to find it elsewhere — the standalone Trackers screen, the partner app, or a dedicated "Today" detail view.
+              </Callout>
+              <Callout>
+                <b>What still needs handling silently.</b> Total disconnect (auth broken &gt;48h). Even a weekly view can't hide a tracker that hasn't talked to us in days. We'll fall back to a quiet "Reconnect Apple Health" card in that one case — without ever using the word "stale" or "behind".
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── BASELINE ─────────────────────────────────────── */}
+        <DCSection
+          id="baseline"
+          title="Baseline — “Today”"
+          subtitle="What ships now. The implicit promise is dangerous: every value carries the word 'today'.">
+          <DCArtboard id="b" label="Baseline · Today" width={400} height={260}>
+            <PhoneFrame>
+              <Cadence_BaselineDaily/>
+            </PhoneFrame>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── OPTIONS ───────────────────────────────────────── */}
+        <DCSection
+          id="options"
+          title="Five reframes"
+          subtitle="All five remove 'today' from the implicit promise. They differ in how visible the change is and how much utility they preserve.">
+
+          {/* A */}
+          <DCArtboard id="a" label="A · This week, totals (Personify-style)" width={400} height={280}>
+            <PhoneFrame>
+              <Cadence_WeeklyTotals/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="a-notes" label="A · notes" width={340} height={280}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Tiles show running 7-day totals (e.g. 52,840 steps this week, 48h 12m sleep, 5 of 6 active days). Section is labeled <i>"This week"</i> with a Mon–today date range underneath.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Closest to Personify's approach. A 5-hour sync delay is statistically noise inside a weekly total. The numbers feel substantial — bigger numbers feel more durable than smaller ones.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> "Today" is gone. Users who relied on it will need to find it elsewhere.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* B */}
+          <DCArtboard id="b-opt" label="B · 7-day rolling average + sparkline" width={400} height={320}>
+            <PhoneFrame>
+              <Cadence_RollingAvg/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="b-notes" label="B · notes" width={340} height={320}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> "Daily steps avg: 8,807 · last 7 days." A sparkline trails the value to show the shape of the week.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Behavioral framing. Average daily steps is a measure of habit, not a daily score. It also handles the "today" question implicitly — today is one point in the trend, not THE point.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Averages can feel abstract. "8,807" is harder to celebrate than "10,000 — goal hit!". Loses the daily-goal mechanic.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* C */}
+          <DCArtboard id="c" label="C · Week-at-a-glance bars" width={400} height={300}>
+            <PhoneFrame>
+              <Cadence_WeekBars/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="c-notes" label="C · notes" width={340} height={300}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Each tile shows 7 small bars (one per day). Today's bar is rendered semi-transparent so a partial reading reads as <i>in progress</i>, not <i>low</i>.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Most visual. Communicates the week at a glance and lets the eye see "I had 4 strong days, 2 light days." Today being faded explains itself — users intuit "the day's not done yet" without copy.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Higher visual density. Bars are small at this width — users may not parse them on first scan.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* D */}
+          <DCArtboard id="d" label="D · “Recent activity” (no time label)" width={400} height={260}>
+            <PhoneFrame>
+              <Cadence_Recent/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="d-notes" label="D · notes" width={340} height={260}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Drop time framing entirely. "Your activity" + "Recent steps · typical day · 8,807." No window, no implication of currency.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Most defensive. No promise = no broken promise. Numbers are the most-recent-known, period.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Vague. Users may struggle to act on a number with no time anchor. Likely feels lower-effort than the others.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* E */}
+          <DCArtboard id="e" label="E · Hybrid (today + week)" width={400} height={300}>
+            <PhoneFrame>
+              <Cadence_TodayWithWeek/>
+            </PhoneFrame>
+          </DCArtboard>
+          <DCArtboard id="e-notes" label="E · notes" width={340} height={300}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Each tile shows "Today: 8,572" small, with the weekly figure dominant below. Today is preserved but visually subordinate.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Preserves the "did I hit it today" cue for users who want it, while shifting the dominant number to a stable weekly figure that hides sync gaps.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Two numbers per tile = visual density doubles. Today's number is still subject to the same sync issue — we just hope users read past it.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+        {/* ── RECOMMENDATION ───────────────────────────────── */}
+        <DCSection id="rec" title="Recommendation" subtitle="Pick one to ship; pick the next two as the structural backstop.">
+
+          <DCArtboard id="rec" label="Decision" width={580} height={620}>
+            <div style={{ padding: 22, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 14 }}>
+              <div className="hero-card">
+                <h3>Recommendation</h3>
+                <h2>Ship <span style={{color:'#fff'}}>Option A — “This week, totals.”</span> Adopt <span style={{color:'#fff'}}>C's bar treatment</span> in trackers detail, and reserve <span style={{color:'#fff'}}>E's hybrid</span> as a fallback if research shows users miss the daily cue.</h2>
+              </div>
+              <Callout>
+                <b>Why A.</b> It's the most decisive reframe and matches the precedent the user cited (Personify-style). The math works in our favor — partial sync of a few hours disappears inside a weekly total. The numbers feel like accomplishments, not a daily report card.
+              </Callout>
+              <Callout>
+                <b>Header copy matters.</b> Use "This week · Mon Apr 22 — Today" so users know what window the totals cover. Avoid "as of [time]" — that re-introduces the very sync framing we're trying to leave behind.
+              </Callout>
+              <Callout>
+                <b>Don't say 'today' anywhere on this card.</b> Not in tile labels, not in subcopy. The whole point is that today is one input to a weekly truth, not the value being measured.
+              </Callout>
+              <Callout>
+                <b>"Active days: 5 of 6" beats numeric totals where possible.</b> Habit framing dodges the magnitude question entirely. Whether you walked 7,500 or 9,500 steps Tuesday, it counts the same toward "active day."
+              </Callout>
+              <Callout>
+                <b>Compare-to-last-week is the new daily-goal.</b> "↑12% vs last week" gives users a directional signal that's resistant to a single bad sync. Replaces the "did I hit 10k today?" feedback loop.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="rec-fallback" label="What about total disconnect?" width={400} height={620}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Hard case: tracker hasn't synced in 48h+.</b> Even a weekly view can't hide this — last week's total drops the longer the gap goes on, and the user notices.
+              </Callout>
+              <Callout>
+                <b>Quiet recovery card.</b> When detected, the section becomes a single low-key row: "Connect Apple Health to see your week" + a button. No "stale" language, no error iconography. Frame it as missing input, not broken state.
+              </Callout>
+              <Callout>
+                <b>Don't trigger this lightly.</b> Threshold should be ≥48h since last successful sync, OR an explicit auth failure from the partner. A normal 4-8h delay should never produce this card.
+              </Callout>
+              <Callout>
+                <b>What never appears in this design.</b> "Stale," "behind," "may not be current," "as of," timestamps, refresh buttons. The whole vocabulary is gone.
+              </Callout>
+              <Callout>
+                <b>Trackers detail screen does the heavy lifting.</b> Users who want today's number get it there, with full transparency about partner sync status — but that's a deliberate "I want the truth" interaction, not the home page.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="rec-tradeoff" label="What we're giving up" width={400} height={620}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>The daily-goal moment.</b> "I hit 10,000 steps today!" — gone from home. Users can still see it in the partner app and on the trackers detail, but it's no longer the spine of our home page.
+              </Callout>
+              <Callout>
+                <b>Why we're OK losing it.</b> The complaint we received says users currently <i>don't</i> get a satisfying daily-goal moment — they get a number that often feels wrong. A weekly framing trades a broken daily moment for a defensible weekly one.
+              </Callout>
+              <Callout>
+                <b>Real-time use cases.</b> Some programs (e.g. step challenges) prescribe daily targets. Those should render their own progress widget independent of this section, sourced from the program's own data pipeline. Don't mix-mode this card.
+              </Callout>
+              <Callout>
+                <b>Validate.</b> A/B "Today" vs. "This week" against (a) tracker-not-working ticket volume, (b) home → trackers tap-through rate, (c) week-2 retention. We expect (a) to drop, (b) to stay flat, (c) to be neutral or up.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+      </DesignCanvas>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+</body>
+</html>

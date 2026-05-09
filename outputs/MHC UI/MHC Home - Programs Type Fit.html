@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC — Program type fit · D refined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#eef1f4; font-family:'Raleway', system-ui, sans-serif; color:#1f2a36; }
+  body { padding: 28px 22px 80px; }
+  .page { max-width: 1280px; margin: 0 auto; }
+  .pagehead { margin-bottom: 22px; }
+  .pagehead h1 { font-size: 22px; margin: 0 0 6px; color:#062a42; }
+  .pagehead p { font-size: 14px; color:#4a5b6a; margin: 0 0 6px; line-height: 1.55; max-width: 820px; }
+
+  .legend { display:flex; gap: 14px; flex-wrap: wrap; margin: 14px 0 0; font-size: 12px; color:#4a5b6a; }
+  .legend .dot { display:inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  .ok { background:#1c7a4a; }
+  .warn { background:#d59533; }
+  .bad { background:#b22; }
+
+  .matrix {
+    width: 100%;
+    border-collapse: separate; border-spacing: 0;
+    background: #fff;
+    border: 1px solid #e1e6ea;
+    border-radius: 14px; overflow: hidden;
+    margin-top: 22px;
+    font-size: 13px;
+  }
+  .matrix th, .matrix td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid #eef1f4; }
+  .matrix thead th {
+    background: #f6f8fa;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color:#4a5b6a;
+    border-bottom: 1px solid #e1e6ea;
+  }
+  .matrix tbody tr:last-child td { border-bottom: none; }
+  .matrix .type-cell { font-weight: 700; color:#062a42; min-width: 130px; }
+  .matrix .type-cell .sub { display:block; font-weight: 400; font-size: 11.5px; color:#6e7a7d; margin-top: 2px; }
+  .matrix .field-cell { color:#4a5b6a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; }
+  .matrix .verdict {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-weight: 700; font-size: 11.5px;
+    padding: 3px 10px; border-radius: 999px;
+    white-space: nowrap;
+  }
+  .verdict.ok   { background:#dff2e6; color:#1c5a36; }
+  .verdict.warn { background:#fbe9cc; color:#7a5418; }
+  .verdict.bad  { background:#fbdcd9; color:#7a221c; }
+  .matrix .rail { font-weight: 700; color:#062a42; }
+  .matrix .rail .small { display:block; font-weight: 400; color:#4a5b6a; font-size: 11.5px; margin-top: 2px; }
+
+  /* ============================================================
+     Mock cards (lifted from D-refined; trimmed to essentials)
+     ============================================================ */
+  .frame { background:#fff; border-radius:14px; border:1px solid #e1e6ea; overflow:hidden; box-shadow: 0 4px 14px rgba(15,73,127,0.06); }
+  .frame-head { padding: 8px 14px; font-size: 10.5px; font-weight: 700; color:#6e7a7d; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e1e6ea; background:#f6f8fa; display:flex; justify-content:space-between; align-items:center; }
+  .frame-body { padding: 14px; background:#fff; }
+
+  .grid-mocks {
+    display: grid; gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    margin-top: 22px;
+  }
+
+  .pcard {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background: #fff;
+    border: 1px solid #e1e6ea;
+    border-radius: 12px;
+    overflow: hidden;
+    min-width: 0;
+    margin-bottom: 8px;
+  }
+  .pcard.is-primary { background:#eaf2fa; border-color:#c7dcef; }
+  .pcard-rail {
+    width: 64px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 10px 6px; background: #f6f4ef; color: #1f2a36; text-align: center;
+  }
+  .pcard.is-primary .pcard-rail { background: #0f497f; color: #fff; }
+  .pcard-body { flex: 1; min-width: 0; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+  .pcard-tagline { font-size: 10.5px; font-weight: 700; color:#6e7a7d; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pcard.is-primary .pcard-tagline { color:#0f497f; }
+  .pcard-title { font-size: 14.5px; font-weight: 700; color:#1f2a36; margin: 0; line-height: 1.25; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .pcard-meta { font-size: 12px; color:#4a5b6a; line-height: 1.35; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .pcard-bar { flex: 1; max-width: 120px; height: 4px; background:#e1e6ea; border-radius: 999px; overflow: hidden; }
+  .pcard-bar-fill { height: 100%; background:#0f497f; border-radius: inherit; }
+  .pcard.is-primary .pcard-bar { background: rgba(255,255,255,0.55); }
+  .pcard.is-primary .pcard-bar-fill { background: #fff; }
+  .pcard-cta { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; background:#0f497f; color:#fff; border: 0; border-radius: 999px; padding: 6px 14px; font-family: inherit; font-weight: 700; font-size: 12px; cursor: pointer; align-self: flex-start; position: relative; z-index: 2; }
+  .pcard-link { position: absolute; inset: 0; z-index: 1; text-decoration: none; }
+  .pcard-dismiss { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; display: grid; place-items: center; background: rgba(255,255,255,0.85); border: 1px solid #e1e6ea; border-radius: 999px; color: #4a5b6a; cursor: pointer; font: inherit; font-size: 14px; line-height: 1; padding: 0; z-index: 2; }
+  .pcard.is-primary .pcard-dismiss { background: rgba(255,255,255,0.92); border-color: rgba(255,255,255,0.6); }
+
+  /* Rails */
+  .rail-step .num { font-size: 22px; font-weight: 700; line-height: 1; }
+  .rail-step .of { font-size: 10px; opacity: 0.7; margin-top: 4px; text-transform:uppercase; letter-spacing: 0.5px; }
+  .rail-pct .num { font-size: 20px; font-weight: 700; line-height: 1; }
+  .rail-pct .pctlbl { font-size: 9px; opacity: 0.7; margin-top: 4px; text-transform:uppercase; letter-spacing: 0.5px; }
+  .rail-streak svg { width: 24px; height: 24px; margin-bottom: 4px; opacity: 0.95; }
+  .rail-streak .big { font-size: 18px; font-weight: 700; line-height: 1; }
+  .rail-streak .lbl { font-size: 9.5px; opacity: 0.75; margin-top: 3px; text-transform:uppercase; letter-spacing: 0.5px; }
+  .rail-days .num { font-size: 22px; font-weight: 700; line-height: 1; }
+  .rail-days .lbl { font-size: 9.5px; opacity: 0.75; margin-top: 4px; text-transform:uppercase; letter-spacing: 0.5px; }
+  .rail-week .wk { font-size: 10px; font-weight: 700; opacity: 0.7; text-transform:uppercase; letter-spacing: 0.5px; }
+  .rail-week .num { font-size: 22px; font-weight: 700; line-height: 1; margin-top: 2px; }
+
+  .annotate { background:#fff; border-radius: 14px; border:1px solid #e1e6ea; padding: 22px 24px; line-height: 1.55; font-size: 14px; color:#1f2a36; margin-top: 22px; }
+  .annotate h3 { margin: 0 0 8px; font-size: 16px; color:#062a42; }
+  .annotate h4 { margin: 18px 0 6px; font-size: 13px; color:#062a42; text-transform:uppercase; letter-spacing:0.5px; }
+  .annotate p { margin: 0 0 8px; }
+  .annotate ul { margin: 6px 0 0 18px; padding: 0; }
+  .annotate li { margin: 4px 0; }
+  .annotate code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; background:#f3f6f8; padding: 1px 5px; border-radius: 4px; color:#062a42; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pagehead">
+    <h1>Program-type fit · "Pick up where you left off"</h1>
+    <p>Mapping each program type's available data fields against the recommended <b>V1 step-number rail</b> + <b>D1 dismiss</b>. Some types fit cleanly. Some need a different rail variant. One — Health Habits — probably shouldn't live in this section at all.</p>
+    <div class="legend">
+      <span><span class="dot ok"></span> Clean fit · ship as-is</span>
+      <span><span class="dot warn"></span> Fits with rail variant</span>
+      <span><span class="dot bad"></span> Doesn't belong in this section</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       Matrix
+       ============================================================ -->
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th>Program type</th>
+        <th>Available data</th>
+        <th>"Ongoing" trigger</th>
+        <th>Best rail</th>
+        <th>Body line</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="type-cell">Assessment <span class="sub">Health risk / readiness</span></td>
+        <td class="field-cell">% complete</td>
+        <td>0 &lt; pctComplete &lt; 100</td>
+        <td class="rail">V2 · Progress ring<span class="small">e.g. "62%"</span></td>
+        <td>"Resume assessment"</td>
+        <td><span class="verdict ok"><span class="dot ok"></span>Fit</span></td>
+      </tr>
+      <tr>
+        <td class="type-cell">Journeys <span class="sub">Education tracks</span></td>
+        <td class="field-cell">journeyStatus, pctComplete, levelsComplete</td>
+        <td>journeyStatus = "In progress"</td>
+        <td class="rail">V1 · Step number<span class="small">levelsComplete / totalLevels</span></td>
+        <td>"Level N of M · {nextLevelTitle}"</td>
+        <td><span class="verdict ok"><span class="dot ok"></span>Fit</span></td>
+      </tr>
+      <tr>
+        <td class="type-cell">DCP <span class="sub">Digital therapeutic</span></td>
+        <td class="field-cell">DTxTopicStatus, DTxTopicPctComplete</td>
+        <td>DTxTopicStatus = "Ongoing"</td>
+        <td class="rail">V1 · Step number<span class="small">topics complete / total</span></td>
+        <td>"Topic N of M · {nextTopicTitle}"</td>
+        <td><span class="verdict ok"><span class="dot ok"></span>Fit</span></td>
+      </tr>
+      <tr>
+        <td class="type-cell">Challenges <span class="sub">Time-boxed</span></td>
+        <td class="field-cell">daysLeft, totalActions, leaderboardRank</td>
+        <td>daysLeft &gt; 0 AND user enrolled</td>
+        <td class="rail">V-new · Days left<span class="small">red when ≤3</span></td>
+        <td>"Rank #4 of 38 · 12,400 steps"</td>
+        <td><span class="verdict warn"><span class="dot warn"></span>New rail</span></td>
+      </tr>
+      <tr>
+        <td class="type-cell">Health Habits <span class="sub">Daily check-ins</span></td>
+        <td class="field-cell">visibleToUser, totalCheckIns, totalPerfectDays, longestStreak</td>
+        <td>visibleToUser = true (always)</td>
+        <td class="rail">V-new · Streak flame<span class="small">longestStreak</span></td>
+        <td>"12 perfect days this month"</td>
+        <td><span class="verdict bad"><span class="dot bad"></span>Wrong section</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================
+       Mocks — one per type
+       ============================================================ -->
+  <div class="grid-mocks">
+
+    <!-- Assessment -->
+    <div class="frame">
+      <div class="frame-head"><span>Assessment · V2 ring</span><span style="background:#dff2e6; color:#1c5a36; padding:2px 8px; border-radius:999px; font-weight:700;">FIT</span></div>
+      <div class="frame-body">
+        <div class="pcard">
+          <div class="pcard-rail rail-pct">
+            <div class="num">62<span style="font-size: 12px; opacity:0.7;">%</span></div>
+            <div class="pctlbl">Done</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-tagline">Assessment</div>
+            <div class="pcard-title">Health risk assessment</div>
+            <div class="pcard-meta">
+              <div class="pcard-bar"><div class="pcard-bar-fill" style="width:62%"></div></div>
+              <span>~5 min left</span>
+            </div>
+            <button class="pcard-cta">Resume →</button>
+          </div>
+          <a href="#" class="pcard-link"></a>
+          <button class="pcard-dismiss" aria-label="Hide">×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Journeys -->
+    <div class="frame">
+      <div class="frame-head"><span>Journey · V1 step number</span><span style="background:#dff2e6; color:#1c5a36; padding:2px 8px; border-radius:999px; font-weight:700;">FIT</span></div>
+      <div class="frame-body">
+        <div class="pcard is-primary">
+          <div class="pcard-rail rail-step">
+            <div class="num">3</div>
+            <div class="of">of 7</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-tagline">On focus · Journey</div>
+            <div class="pcard-title">Better sleep, better days</div>
+            <div class="pcard-meta">
+              <div class="pcard-bar"><div class="pcard-bar-fill" style="width:43%"></div></div>
+              <span>Up next: caffeine &amp; sleep</span>
+            </div>
+            <button class="pcard-cta">Continue →</button>
+          </div>
+          <a href="#" class="pcard-link"></a>
+          <button class="pcard-dismiss" aria-label="Hide">×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DCP -->
+    <div class="frame">
+      <div class="frame-head"><span>DCP · V1 step number</span><span style="background:#dff2e6; color:#1c5a36; padding:2px 8px; border-radius:999px; font-weight:700;">FIT</span></div>
+      <div class="frame-body">
+        <div class="pcard">
+          <div class="pcard-rail rail-step">
+            <div class="num">9</div>
+            <div class="of">of 28</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-tagline">Big Health · DCP</div>
+            <div class="pcard-title">Managing Insomnia</div>
+            <div class="pcard-meta">
+              <div class="pcard-bar"><div class="pcard-bar-fill" style="width:32%"></div></div>
+              <span>Up next: wind-down session</span>
+            </div>
+          </div>
+          <a href="#" class="pcard-link"></a>
+          <button class="pcard-dismiss" aria-label="Hide">×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Challenge -->
+    <div class="frame">
+      <div class="frame-head"><span>Challenge · new rail (days left)</span><span style="background:#fbe9cc; color:#7a5418; padding:2px 8px; border-radius:999px; font-weight:700;">VARIANT</span></div>
+      <div class="frame-body">
+        <div class="pcard">
+          <div class="pcard-rail rail-days" style="background:#fde7d8; color:#9b3b00;">
+            <div class="num">3</div>
+            <div class="lbl">Days left</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-tagline">Challenge · ends Sat</div>
+            <div class="pcard-title">Spring step challenge</div>
+            <div class="pcard-meta">
+              <span>Rank #4 of 38</span>
+              <span>·</span>
+              <span>12,400 steps</span>
+            </div>
+            <button class="pcard-cta">Log activity →</button>
+          </div>
+          <a href="#" class="pcard-link"></a>
+          <button class="pcard-dismiss" aria-label="Hide">×</button>
+        </div>
+        <div class="pcard">
+          <div class="pcard-rail rail-days">
+            <div class="num">11</div>
+            <div class="lbl">Days left</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-tagline">Challenge · team</div>
+            <div class="pcard-title">April mindfulness streak</div>
+            <div class="pcard-meta">
+              <span>Rank #2 of 12</span>
+              <span>·</span>
+              <span>14 days logged</span>
+            </div>
+          </div>
+          <a href="#" class="pcard-link"></a>
+          <button class="pcard-dismiss" aria-label="Hide">×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Health Habits -->
+    <div class="frame">
+      <div class="frame-head"><span>Health Habit · streak rail</span><span style="background:#fbdcd9; color:#7a221c; padding:2px 8px; border-radius:999px; font-weight:700;">WRONG SECTION</span></div>
+      <div class="frame-body">
+        <div class="pcard" style="opacity: 0.7;">
+          <div class="pcard-rail rail-streak" style="background:#fff5e6; color:#9b3b00;">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2c1 4 4 5 4 9a4 4 0 1 1-8 0c0-1.5.5-2.7 1.5-3.7C9.2 7.7 9.5 7 9.5 5.5 9.5 4 10.5 3 12 2z"/>
+            </svg>
+            <div class="big">12</div>
+            <div class="lbl">Day streak</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-tagline">Daily habit</div>
+            <div class="pcard-title">Drink 8 glasses of water</div>
+            <div class="pcard-meta">
+              <span>3 of 4 today</span>
+              <span>·</span>
+              <span>longest 21 days</span>
+            </div>
+            <button class="pcard-cta">Check in →</button>
+          </div>
+          <a href="#" class="pcard-link"></a>
+          <button class="pcard-dismiss" aria-label="Hide">×</button>
+        </div>
+        <p style="margin: 12px 0 0; font-size: 12.5px; color:#9b3b00; line-height: 1.5;">
+          <b>This is the rendering — but I don't think habits belong here.</b> See analysis below.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============================================================
+       Analysis
+       ============================================================ -->
+  <div class="annotate">
+    <h3>Analysis · per program type</h3>
+
+    <h4>Assessment — clean fit, but use V2 ring (not V1)</h4>
+    <p>You only have <code>%</code>, not session counts. V1 won't work — there's no "9 of 28." V2's progress ring is exact. The body line should reinforce that resuming is fast: <i>"~5 min left"</i> if you can compute it from average completion time, otherwise just <i>"Resume assessment."</i></p>
+
+    <h4>Journeys — clean fit, V1</h4>
+    <p>Three signals (<code>journeyStatus</code>, <code>pctComplete</code>, <code>levelsComplete</code>) give you everything. Use <code>journeyStatus = "In progress"</code> as the inclusion gate, V1 step rail with <code>levelsComplete / totalLevels</code>, and the body line shows the next level title. Pct goes into the inline progress bar.</p>
+
+    <h4>DCP — clean fit, V1</h4>
+    <p>Same shape as Journeys. <code>DTxTopicStatus = "Ongoing"</code> is the inclusion gate. Topics complete / total goes on the rail. <code>DTxTopicPctComplete</code> is for the inline bar.</p>
+
+    <h4>Challenges — fits with a new rail variant</h4>
+    <p>Challenges aren't really "pick up where you left off" — they're <i>time-boxed</i>. The signal that matters is <b>"hurry, X days left."</b> Use a "days-left" rail (V-new) that flips to a warning color when <code>daysLeft ≤ 3</code>. Body line shows leaderboard rank + a quick activity stat. Drop the inline progress bar — it's not relevant.</p>
+    <p><b>Edge case:</b> "Always-on" challenges with no end date should probably go in a <i>different</i> section ("This week's competitions") rather than this rail. The rail's whole premise is that there's a thing to finish.</p>
+
+    <h4>Health Habits — wrong section</h4>
+    <p>Habits don't end. <code>visibleToUser = true</code> is true forever; there's no "completion" state. Putting them here is a category error: <i>"Pick up where you left off"</i> implies a destination. Habits don't have one.</p>
+    <p>Concretely:</p>
+    <ul>
+      <li><b>The streak is the whole point</b> — and a streak displayed in a "things to finish" list visually conflicts with "12 of 28 sessions" right next to it. The user reads "12" as comparable when it's not.</li>
+      <li><b>Re-engagement is differently shaped.</b> A habit user who hasn't checked in today doesn't need "resume" — they need <i>"check in for today"</i>, which is a TODAY action, not a long-running thread.</li>
+      <li><b>The dismiss model breaks.</b> "Hide for 30 days" makes sense for a program someone's drifting from. "Hide my hydration habit" doesn't — they signed up for it.</li>
+    </ul>
+    <p><b>Better home for habits:</b> a dedicated "Today's habits" tile (separate block, similar height to the Today strip) with the streak and a per-habit check-in button. Or, fold them into the Today / This-week section since they share a daily cadence.</p>
+
+    <h4>Inclusion priority within the rail</h4>
+    <p>Server should pre-sort cards in this order, then truncate to 3:</p>
+    <ol>
+      <li>Focus-matched + ongoing (DCP / Journey / Assessment)</li>
+      <li>Challenge with <code>daysLeft ≤ 3</code> (urgency wins)</li>
+      <li>Other ongoing programs (DCP / Journey / Assessment), most recently active first</li>
+      <li>Other challenges</li>
+    </ol>
+
+    <h4>One template, four rail variants</h4>
+    <p>The shared markup carries a <code>data-rail</code> attribute. The mustache template renders the right rail block server-side based on program type:</p>
+    <ul>
+      <li><code>data-rail="step"</code> — Journeys, DCP</li>
+      <li><code>data-rail="pct"</code> — Assessments</li>
+      <li><code>data-rail="days"</code> — Challenges</li>
+      <li>(<code>data-rail="streak"</code> — defined for habits but not used in this section)</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tokens v2 — 12 scales + AI register</title>
+<style>
+:root {
+  /* === LAYER 1 — 12 CORE PALETTE SCALES === */
+
+  /* neutral — graphite ink */
+  --neutral-50:  #FAF8F5; --neutral-100: #F0EBE3; --neutral-200: #DDD5C7; --neutral-300: #B5AC9C; --neutral-400: #8C857A; --neutral-500: #6B645A; --neutral-600: #5C564E; --neutral-700: #4A453E; --neutral-800: #38332E; --neutral-900: #2C2A26; --neutral-950: #1A1815;
+  /* sand — warm beige surface */
+  --sand-50:  #FAF6F0; --sand-100: #F2EBDF; --sand-200: #E5DAC4; --sand-300: #D6C5A6; --sand-400: #C4AC85; --sand-500: #A88E69; --sand-600: #8B7251; --sand-700: #6E593F; --sand-800: #524230; --sand-900: #2A2620; --sand-950: #1A1612;
+  /* warm — peach/terracotta + Healthy Habits + Rewards */
+  --warm-50:  #FDF5EE; --warm-100: #FAE7D5; --warm-200: #F4CDA9; --warm-300: #ECAD78; --warm-400: #E08A4F; --warm-500: #C8744A; --warm-600: #A85C36; --warm-700: #8A4A26; --warm-800: #6E3A1D; --warm-900: #4D2914; --warm-950: #2C170B;
+  /* primary — R2 Sky-teal bridge */
+  --primary-50:  #EFF5FA; --primary-100: #DAE9F2; --primary-200: #B5D2E5; --primary-300: #82B0CE; --primary-400: #5290B5; --primary-500: #34759E; --primary-600: #2A6489; --primary-700: #235173; --primary-800: #1D425C; --primary-900: #163346; --primary-950: #0D2030;
+  /* success — sage organic green */
+  --success-50:  #F2F6EC; --success-100: #DFEAD0; --success-200: #C0D5A4; --success-300: #99B872; --success-400: #7C9C50; --success-500: #6B8E5A; --success-600: #587746; --success-700: #486238; --success-800: #3A4F2D; --success-900: #283821; --success-950: #161F12;
+  /* warning — amber gold */
+  --warning-50:  #FCF4E6; --warning-100: #F9E3B0; --warning-200: #F2CB72; --warning-300: #E8B142; --warning-400: #D89826; --warning-500: #BC811F; --warning-600: #9F6D1B; --warning-700: #815816; --warning-800: #614210; --warning-900: #422C0A; --warning-950: #241805;
+  /* error — warm coral-clay red */
+  --error-50:  #FBF1ED; --error-100: #F8DBD2; --error-200: #F0B5A2; --error-300: #E48972; --error-400: #D2613F; --error-500: #B14A2D; --error-600: #933D24; --error-700: #76311D; --error-800: #582616; --error-900: #3A1A0F; --error-950: #1F0E07;
+  /* moss — DCP module */
+  --moss-50:  #EFF4F0; --moss-100: #D5E2D8; --moss-200: #A8C4AE; --moss-300: #76A185; --moss-400: #4D8261; --moss-500: #366B49; --moss-600: #2A573B; --moss-700: #234630; --moss-800: #1B3625; --moss-900: #142619; --moss-950: #0A160E;
+  /* lavender — Health Data / Biometrics module */
+  --lavender-50:  #F4F2FB; --lavender-100: #E5E1F4; --lavender-200: #C7BFE8; --lavender-300: #A096D5; --lavender-400: #7A6EBE; --lavender-500: #6053A8; --lavender-600: #4F4391; --lavender-700: #423775; --lavender-800: #352C5C; --lavender-900: #231D40; --lavender-950: #131022;
+  /* rose — Wellbeing module */
+  --rose-50:  #FCF1F2; --rose-100: #F8DCDF; --rose-200: #F0B6BD; --rose-300: #E48793; --rose-400: #D45D6E; --rose-500: #B84656; --rose-600: #973745; --rose-700: #7B2D38; --rose-800: #5C2229; --rose-900: #3D171C; --rose-950: #200B0E;
+  /* indigo — Digital Advisor / AI register (NEW in v2) */
+  --indigo-50:  #F1F2FA; --indigo-100: #DCDFF1; --indigo-200: #B7BCE3; --indigo-300: #8990CC; --indigo-400: #6068B0; --indigo-500: #494F95; --indigo-600: #3D437B; --indigo-700: #343864; --indigo-800: #2A2D50; --indigo-900: #1D203A; --indigo-950: #0F1120;
+  /* fuchsia — Challenges module (NEW in v2) */
+  --fuchsia-50:  #FCF1F7; --fuchsia-100: #F7DDED; --fuchsia-200: #EFB4D6; --fuchsia-300: #DE85B7; --fuchsia-400: #C95A98; --fuchsia-500: #B14380; --fuchsia-600: #913568; --fuchsia-700: #762B54; --fuchsia-800: #582240; --fuchsia-900: #3A172B; --fuchsia-950: #1F0E1A;
+
+  /* === LAYER 2 SEMANTIC === */
+  --bg-default: var(--sand-50);
+  --bg-subtle: var(--sand-100);
+  --bg-elevated: #FFFFFF;
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-700);
+  --text-tertiary: var(--neutral-500);
+  --border-subtle: var(--neutral-200);
+  --border-default: var(--neutral-300);
+  --border-strong: var(--neutral-500);
+  --interactive-default: var(--primary-600);
+  --interactive-hover: var(--primary-700);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  background: var(--bg-default);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.55;
+  padding: 48px 32px 96px;
+}
+.container { max-width: 1280px; margin: 0 auto; }
+h1 { font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif; font-size: 38px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.1; }
+h2 { font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: -0.015em; margin: 48px 0 12px; border-top: 1px solid var(--border-subtle); padding-top: 24px; }
+h3 { font-size: 17px; font-weight: 600; margin: 22px 0 8px; }
+h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 8px; }
+p { margin-bottom: 10px; max-width: 72ch; font-size: 14px; }
+small { color: var(--text-secondary); font-size: 12px; }
+.subtitle { font-size: 15px; color: var(--text-secondary); margin-bottom: 24px; max-width: 72ch; }
+code { font-family: "SF Mono", Menlo, monospace; font-size: 12px; background: var(--sand-100); padding: 1px 6px; border-radius: 4px; }
+.status-pill { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--indigo-700); color: white; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px; }
+
+.new-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; background: var(--indigo-100); color: var(--indigo-700); padding: 2px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
+
+/* Anchor */
+.anchor { background: var(--bg-subtle); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 16px 20px; margin: 14px 0; font-size: 13px; }
+
+/* Scale block */
+.scale-block { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+.scale-block.is-new { border: 2px solid var(--indigo-400); }
+.scale-block.is-new.fuchsia { border-color: var(--fuchsia-400); }
+.scale-head { padding: 10px 16px; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.scale-head .name { font-size: 14px; font-weight: 600; }
+.scale-head .role { font-size: 12px; color: var(--text-secondary); }
+.swatches { display: grid; grid-template-columns: repeat(11, 1fr); }
+.sw { height: 44px; display: flex; flex-direction: column; justify-content: flex-end; padding: 4px 5px 5px; font-size: 9px; font-weight: 500; }
+.sw .stop { font-size: 9px; opacity: 0.65; }
+.sw.dark { color: rgba(255,255,255,0.92); }
+.sw.light { color: rgba(0,0,0,0.7); }
+
+/* Token table */
+.token-table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 13px; }
+.token-table th { background: var(--bg-subtle); padding: 8px 12px; text-align: left; border: 1px solid var(--border-subtle); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
+.token-table td { padding: 8px 12px; border: 1px solid var(--border-subtle); background: var(--bg-elevated); font-size: 13px; }
+.token-table .swatch-cell { width: 40px; padding: 0; }
+.token-table .swatch-cell > div { width: 100%; height: 24px; }
+.token-table .group-row td { background: var(--sand-100); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); }
+.token-table .new-row td { background: rgba(67, 74, 134, 0.04); }
+
+/* Gradient grid */
+.gradient-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 12px 0; }
+.gradient-card { background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; overflow: hidden; }
+.gradient-card.is-new { border: 2px solid var(--indigo-400); }
+.gradient-card.is-new.fuchsia { border-color: var(--fuchsia-400); }
+.gradient-card .preview { height: 70px; }
+.gradient-card .label { padding: 8px 10px; font-size: 11px; }
+.gradient-card .label .name { font-weight: 600; }
+.gradient-card .label .ref { color: var(--text-secondary); font-size: 10px; font-family: "SF Mono", Menlo, monospace; margin-top: 2px; }
+
+/* Pilot frame */
+.pilot-frame { background: var(--bg-default); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; }
+.pilot-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 10px; }
+.pilot-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 14px 0; }
+@media (max-width: 1100px) { .pilot-row { grid-template-columns: 1fr; } }
+
+/* === AI Insight (uses indigo now) === */
+.ai-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--indigo-200);
+  border-radius: 18px;
+  padding: 20px;
+  position: relative;
+  background-image: linear-gradient(135deg, var(--indigo-50) 0%, transparent 60%);
+}
+.ai-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--indigo-700);
+  background: var(--indigo-100);
+  padding: 4px 10px; border-radius: 999px;
+  margin-bottom: 12px;
+}
+.ai-tag::before {
+  content: ""; display: inline-block; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--indigo-600);
+  box-shadow: 0 0 0 3px var(--indigo-200);
+}
+.ai-headline { font-family: "SF Pro Display", serif; font-size: 17px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+.ai-body { font-size: 13px; line-height: 1.5; color: var(--text-secondary); margin-bottom: 12px; }
+.ai-action { display: inline-block; padding: 9px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; color: white; text-decoration: none; }
+.ai-action.parent-primary { background: var(--primary-600); }
+.ai-action.parent-fuchsia { background: var(--fuchsia-600); }
+.ai-action.parent-moss { background: var(--moss-600); }
+.ai-controls { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--indigo-100); display: flex; gap: 14px; flex-wrap: wrap; }
+.ai-controls a { font-size: 11px; color: var(--indigo-700); text-decoration: none; font-weight: 500; }
+.ai-honesty { font-size: 11px; color: var(--text-tertiary); font-style: italic; margin-top: 8px; }
+
+/* === Challenges card (fuchsia-led) === */
+.challenges-card { background: var(--bg-elevated); border: 1px solid var(--fuchsia-100); border-radius: 18px; padding: 20px; }
+.challenges-eyebrow { font-size: 11px; color: var(--fuchsia-700); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.challenges-title { font-family: "SF Pro Display", Georgia, serif; font-size: 18px; font-weight: 600; line-height: 1.25; margin: 4px 0 12px; letter-spacing: -0.01em; }
+.challenges-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.challenges-tag { background: var(--fuchsia-100); color: var(--fuchsia-700); padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; flex-shrink: 0; }
+.leaderboard { background: var(--fuchsia-50); border-radius: 12px; padding: 12px 14px; margin: 12px 0; }
+.leaderboard-row { display: flex; align-items: center; padding: 6px 0; font-size: 13px; gap: 10px; }
+.leaderboard-row + .leaderboard-row { border-top: 1px solid var(--fuchsia-100); }
+.leaderboard-row.is-you { font-weight: 700; }
+.lb-rank { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid var(--fuchsia-200); border-radius: 50%; font-size: 11px; font-weight: 700; color: var(--fuchsia-700); }
+.lb-name { flex: 1; }
+.lb-score { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.challenges-cta { display: inline-block; padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--fuchsia-600); color: white; text-decoration: none; margin-top: 10px; }
+
+/* DCP card (unchanged from v1, condensed for reference) */
+.dcp-card { border: 1px solid var(--moss-100); border-radius: 18px; padding: 18px; background: var(--bg-elevated); }
+.dcp-eyebrow { font-size: 11px; color: var(--moss-700); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.dcp-title { font-family: "SF Pro Display", Georgia, serif; font-size: 17px; font-weight: 600; line-height: 1.25; margin: 4px 0 10px; letter-spacing: -0.01em; }
+.dcp-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.dcp-progress { background: var(--bg-subtle); border-radius: 999px; height: 6px; overflow: hidden; margin: 10px 0 6px; }
+.dcp-progress > div { height: 100%; background: var(--moss-600); }
+.dcp-tag { background: var(--moss-100); color: var(--moss-700); padding: 3px 10px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; flex-shrink: 0; }
+.dcp-cta { display: inline-block; padding: 9px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--moss-600); color: white; text-decoration: none; margin-top: 10px; }
+
+/* Buyer hero (unchanged from v1) */
+.buyer-hero { background: linear-gradient(135deg, var(--primary-700), var(--primary-900)); border-radius: 18px; padding: 26px 22px; color: white; height: 100%; }
+.buyer-hero .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; font-weight: 700; margin-bottom: 8px; }
+.buyer-hero .title { font-family: "SF Pro Display", serif; font-size: 19px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em; }
+.buyer-hero .body { color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 13px; }
+.buyer-hero .cta { background: white; color: var(--primary-900); display: inline-block; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; margin-top: 14px; }
+.buyer-hero .footer { color: rgba(255,255,255,0.6); margin-top: 18px; font-size: 11px; }
+
+/* Weighting bar */
+.weight-block { margin-top: 12px; padding: 10px 12px; background: var(--bg-elevated); border: 1px solid var(--border-subtle); border-radius: 10px; }
+.weight-label { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; font-weight: 700; }
+.weight-bar { display: flex; height: 12px; border-radius: 7px; overflow: hidden; border: 1px solid var(--border-subtle); }
+.weight-bar > div { display: block; }
+.weight-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; font-size: 10px; color: var(--text-secondary); }
+.weight-legend .item { display: flex; align-items: center; gap: 3px; }
+.weight-legend .swatch { width: 9px; height: 9px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.08); }
+
+/* Module hue map */
+.module-map { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+.module-card { background: white; border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; }
+.module-card .preview { height: 50px; display: flex; align-items: center; padding: 0 12px; color: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.module-card .label { padding: 8px 12px; font-size: 11px; }
+.module-card .label .module { font-weight: 600; }
+.module-card .label .scale { color: var(--text-secondary); font-family: "SF Mono", Menlo, monospace; font-size: 10px; }
+
+/* Util */
+.note { font-size: 12px; color: var(--text-secondary); font-style: italic; margin: 8px 0; }
+ul { margin-left: 20px; margin-bottom: 10px; }
+li { margin-bottom: 3px; font-size: 13px; }
+hr { border: none; border-top: 1px solid var(--border-subtle); margin: 28px 0; }
+.attr-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.attr-pill { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; background: var(--bg-elevated); color: var(--text-secondary); padding: 3px 9px; border-radius: 999px; border: 1px solid var(--border-subtle); text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="status-pill">Tokens v2 · 12 scales · AI register</span>
+  <h1>Color tokens v2 — extended categoricals</h1>
+  <p class="subtitle">v2, 2026-05-02 · adds <code>indigo</code> (Digital Advisor / AI register) and <code>fuchsia</code> (Challenges) to the categorical set · resolves Phase 0 §9 (canonical AI surface) · introduces cross-cutting AI architectural pattern</p>
+
+  <div class="anchor">
+    <h4>What's new in v2 vs. v1</h4>
+    <ul style="margin-top: 6px;">
+      <li><strong>2 new categoricals</strong> — <code>indigo</code> (~240°, AI register) and <code>fuchsia</code> (~320°, Challenges)</li>
+      <li><strong>Canonical AI surface treatment finalized</strong> — Phase 0 §9 deliverable. AI moments use indigo gradient wash + indigo "From your AI" tag, regardless of parent module.</li>
+      <li><strong>Cross-cutting AI pattern</strong> — AI marker = indigo always; module action = parent module's hue. Demonstrated in 2 new pilots.</li>
+      <li><strong>Module hue map locked at 6 categoricals</strong> — Rewards reuses warm.*, Journeys reuses primary.*, all 9 product modules now have a documented hue strategy.</li>
+    </ul>
+  </div>
+</header>
+
+<!-- ===== MODULE HUE MAP ===== -->
+<h2>Module hue map (locked at 6 categoricals)</h2>
+
+<div class="module-map">
+  <div class="module-card"><div class="preview" style="background:#2A573B;">DCP</div><div class="label"><div class="module">Digital Care Paths</div><div class="scale">moss.*</div></div></div>
+  <div class="module-card"><div class="preview" style="background:#A85C36;">Healthy Habits</div><div class="label"><div class="module">Healthy Habits + Rewards</div><div class="scale">warm.* (shared)</div></div></div>
+  <div class="module-card"><div class="preview" style="background:#4F4391;">Health Data</div><div class="label"><div class="module">Health Data + Biometrics</div><div class="scale">lavender.* (shared)</div></div></div>
+  <div class="module-card"><div class="preview" style="background:#973745;">Wellbeing</div><div class="label"><div class="module">Wellbeing</div><div class="scale">rose.*</div></div></div>
+  <div class="module-card"><div class="preview" style="background:#913568;">Challenges</div><div class="label"><div class="module">Challenges <span class="new-tag">new</span></div><div class="scale">fuchsia.*</div></div></div>
+  <div class="module-card"><div class="preview" style="background:#3D437B;">AI / Digital Advisor</div><div class="label"><div class="module">Digital Advisor <span class="new-tag">new</span></div><div class="scale">indigo.* (cross-cutting)</div></div></div>
+  <div class="module-card"><div class="preview" style="background:#2A6489;">Journeys</div><div class="label"><div class="module">Journeys</div><div class="scale">primary.* (brand-led)</div></div></div>
+  <div class="module-card"><div class="preview" style="background: linear-gradient(135deg, #F8DBD2, #FAE7D5);"><span style="color: var(--neutral-900);">Conditions</span></div><div class="label"><div class="module">Conditions (HRA / risk)</div><div class="scale">tinted by referred-to module</div></div></div>
+</div>
+
+<p class="note">Conditions module is a routing surface — it tints to whichever module the user's risk profile points them toward (e.g., back pain risk → moss tint; depression risk → rose tint). No standalone hue.</p>
+
+<!-- ===== LAYER 1 — TWO NEW SCALES ===== -->
+<h2>Layer 1 — two new scales</h2>
+
+<h3>indigo <span class="new-tag">new in v2</span> — Digital Advisor / AI register</h3>
+<p>Hue ~240°. Sits between primary (200°) and lavender (265°) — distinct from both, in the 2026 AI brand color register (Anthropic, Linear, Notion AI). Used as a <strong>cross-cutting marker</strong>: AI-generated content gets indigo gradient wash + indigo tag regardless of parent module.</p>
+
+<div class="scale-block is-new">
+  <div class="scale-head">
+    <span><span class="name">indigo</span> <span class="role">— Digital Advisor / AI · hue ~240°</span></span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#F1F2FA;"><span class="stop">50</span>F1F2FA</div>
+    <div class="sw light" style="background:#DCDFF1;"><span class="stop">100</span>DCDFF1</div>
+    <div class="sw light" style="background:#B7BCE3;"><span class="stop">200</span>B7BCE3</div>
+    <div class="sw light" style="background:#8990CC;"><span class="stop">300</span>8990CC</div>
+    <div class="sw dark" style="background:#6068B0;"><span class="stop">400</span>6068B0</div>
+    <div class="sw dark" style="background:#494F95;"><span class="stop">500</span>494F95</div>
+    <div class="sw dark" style="background:#3D437B;"><span class="stop">600</span>3D437B</div>
+    <div class="sw dark" style="background:#343864;"><span class="stop">700</span>343864</div>
+    <div class="sw dark" style="background:#2A2D50;"><span class="stop">800</span>2A2D50</div>
+    <div class="sw dark" style="background:#1D203A;"><span class="stop">900</span>1D203A</div>
+    <div class="sw dark" style="background:#0F1120;"><span class="stop">950</span>0F1120</div>
+  </div>
+</div>
+
+<h3>fuchsia <span class="new-tag">new in v2</span> — Challenges module</h3>
+<p>Hue ~320°. Social/competitive register. Distinct from rose (345°, more red/empathic) and lavender (265°, more violet/data). Used for team challenges, leaderboards, social engagement moments.</p>
+
+<div class="scale-block is-new fuchsia">
+  <div class="scale-head">
+    <span><span class="name">fuchsia</span> <span class="role">— Challenges · hue ~320°</span></span>
+  </div>
+  <div class="swatches">
+    <div class="sw light" style="background:#FCF1F7;"><span class="stop">50</span>FCF1F7</div>
+    <div class="sw light" style="background:#F7DDED;"><span class="stop">100</span>F7DDED</div>
+    <div class="sw light" style="background:#EFB4D6;"><span class="stop">200</span>EFB4D6</div>
+    <div class="sw light" style="background:#DE85B7;"><span class="stop">300</span>DE85B7</div>
+    <div class="sw dark" style="background:#C95A98;"><span class="stop">400</span>C95A98</div>
+    <div class="sw dark" style="background:#B14380;"><span class="stop">500</span>B14380</div>
+    <div class="sw dark" style="background:#913568;"><span class="stop">600</span>913568</div>
+    <div class="sw dark" style="background:#762B54;"><span class="stop">700</span>762B54</div>
+    <div class="sw dark" style="background:#582240;"><span class="stop">800</span>582240</div>
+    <div class="sw dark" style="background:#3A172B;"><span class="stop">900</span>3A172B</div>
+    <div class="sw dark" style="background:#1F0E1A;"><span class="stop">950</span>1F0E1A</div>
+  </div>
+</div>
+
+<!-- ===== LAYER 1 — UNCHANGED SCALES (CONDENSED) ===== -->
+<h2>Layer 1 — unchanged scales (full details in <a href="tokens-v1-layer1-2.html">v1</a>)</h2>
+
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">neutral</span> <span class="role">— graphite ink</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#FAF8F5;">50</div><div class="sw light" style="background:#F0EBE3;">100</div><div class="sw light" style="background:#DDD5C7;">200</div><div class="sw light" style="background:#B5AC9C;">300</div><div class="sw dark" style="background:#8C857A;">400</div><div class="sw dark" style="background:#6B645A;">500</div><div class="sw dark" style="background:#5C564E;">600</div><div class="sw dark" style="background:#4A453E;">700</div><div class="sw dark" style="background:#38332E;">800</div><div class="sw dark" style="background:#2C2A26;">900</div><div class="sw dark" style="background:#1A1815;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">sand</span> <span class="role">— warm beige surface</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#FAF6F0;">50</div><div class="sw light" style="background:#F2EBDF;">100</div><div class="sw light" style="background:#E5DAC4;">200</div><div class="sw light" style="background:#D6C5A6;">300</div><div class="sw light" style="background:#C4AC85;">400</div><div class="sw dark" style="background:#A88E69;">500</div><div class="sw dark" style="background:#8B7251;">600</div><div class="sw dark" style="background:#6E593F;">700</div><div class="sw dark" style="background:#524230;">800</div><div class="sw dark" style="background:#2A2620;">900</div><div class="sw dark" style="background:#1A1612;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">warm</span> <span class="role">— peach/terracotta + Healthy Habits + Rewards</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#FDF5EE;">50</div><div class="sw light" style="background:#FAE7D5;">100</div><div class="sw light" style="background:#F4CDA9;">200</div><div class="sw light" style="background:#ECAD78;">300</div><div class="sw dark" style="background:#E08A4F;">400</div><div class="sw dark" style="background:#C8744A;">500</div><div class="sw dark" style="background:#A85C36;">600</div><div class="sw dark" style="background:#8A4A26;">700</div><div class="sw dark" style="background:#6E3A1D;">800</div><div class="sw dark" style="background:#4D2914;">900</div><div class="sw dark" style="background:#2C170B;">950</div>
+  </div>
+</div>
+<div class="scale-block" style="border-color: var(--primary-600); border-width: 2px;">
+  <div class="scale-head"><span><span class="name">primary</span> <span class="role">— R2 Sky-teal bridge · LOCKED · Journeys + brand-default</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#EFF5FA;">50</div><div class="sw light" style="background:#DAE9F2;">100</div><div class="sw light" style="background:#B5D2E5;">200</div><div class="sw light" style="background:#82B0CE;">300</div><div class="sw dark" style="background:#5290B5;">400</div><div class="sw dark" style="background:#34759E;">500</div><div class="sw dark" style="background:#2A6489;">600</div><div class="sw dark" style="background:#235173;">700</div><div class="sw dark" style="background:#1D425C;">800</div><div class="sw dark" style="background:#163346;">900</div><div class="sw dark" style="background:#0D2030;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">success</span> <span class="role">— sage green</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#F2F6EC;">50</div><div class="sw light" style="background:#DFEAD0;">100</div><div class="sw light" style="background:#C0D5A4;">200</div><div class="sw light" style="background:#99B872;">300</div><div class="sw dark" style="background:#7C9C50;">400</div><div class="sw dark" style="background:#6B8E5A;">500</div><div class="sw dark" style="background:#587746;">600</div><div class="sw dark" style="background:#486238;">700</div><div class="sw dark" style="background:#3A4F2D;">800</div><div class="sw dark" style="background:#283821;">900</div><div class="sw dark" style="background:#161F12;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">warning</span> <span class="role">— amber gold</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#FCF4E6;">50</div><div class="sw light" style="background:#F9E3B0;">100</div><div class="sw light" style="background:#F2CB72;">200</div><div class="sw light" style="background:#E8B142;">300</div><div class="sw dark" style="background:#D89826;">400</div><div class="sw dark" style="background:#BC811F;">500</div><div class="sw dark" style="background:#9F6D1B;">600</div><div class="sw dark" style="background:#815816;">700</div><div class="sw dark" style="background:#614210;">800</div><div class="sw dark" style="background:#422C0A;">900</div><div class="sw dark" style="background:#241805;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">error</span> <span class="role">— warm coral-clay red</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#FBF1ED;">50</div><div class="sw light" style="background:#F8DBD2;">100</div><div class="sw light" style="background:#F0B5A2;">200</div><div class="sw dark" style="background:#E48972;">300</div><div class="sw dark" style="background:#D2613F;">400</div><div class="sw dark" style="background:#B14A2D;">500</div><div class="sw dark" style="background:#933D24;">600</div><div class="sw dark" style="background:#76311D;">700</div><div class="sw dark" style="background:#582616;">800</div><div class="sw dark" style="background:#3A1A0F;">900</div><div class="sw dark" style="background:#1F0E07;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">moss</span> <span class="role">— DCP module</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#EFF4F0;">50</div><div class="sw light" style="background:#D5E2D8;">100</div><div class="sw light" style="background:#A8C4AE;">200</div><div class="sw light" style="background:#76A185;">300</div><div class="sw dark" style="background:#4D8261;">400</div><div class="sw dark" style="background:#366B49;">500</div><div class="sw dark" style="background:#2A573B;">600</div><div class="sw dark" style="background:#234630;">700</div><div class="sw dark" style="background:#1B3625;">800</div><div class="sw dark" style="background:#142619;">900</div><div class="sw dark" style="background:#0A160E;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">lavender</span> <span class="role">— Health Data / Biometrics</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#F4F2FB;">50</div><div class="sw light" style="background:#E5E1F4;">100</div><div class="sw light" style="background:#C7BFE8;">200</div><div class="sw light" style="background:#A096D5;">300</div><div class="sw dark" style="background:#7A6EBE;">400</div><div class="sw dark" style="background:#6053A8;">500</div><div class="sw dark" style="background:#4F4391;">600</div><div class="sw dark" style="background:#423775;">700</div><div class="sw dark" style="background:#352C5C;">800</div><div class="sw dark" style="background:#231D40;">900</div><div class="sw dark" style="background:#131022;">950</div>
+  </div>
+</div>
+<div class="scale-block">
+  <div class="scale-head"><span><span class="name">rose</span> <span class="role">— Wellbeing module</span></span></div>
+  <div class="swatches">
+    <div class="sw light" style="background:#FCF1F2;">50</div><div class="sw light" style="background:#F8DCDF;">100</div><div class="sw light" style="background:#F0B6BD;">200</div><div class="sw light" style="background:#E48793;">300</div><div class="sw dark" style="background:#D45D6E;">400</div><div class="sw dark" style="background:#B84656;">500</div><div class="sw dark" style="background:#973745;">600</div><div class="sw dark" style="background:#7B2D38;">700</div><div class="sw dark" style="background:#5C2229;">800</div><div class="sw dark" style="background:#3D171C;">900</div><div class="sw dark" style="background:#200B0E;">950</div>
+  </div>
+</div>
+
+<!-- ===== LAYER 2 — DELTA ===== -->
+<h2>Layer 2 — what changed in semantic + gradient tokens</h2>
+
+<h3>New module identity tokens</h3>
+<table class="token-table">
+  <thead><tr><th>Token</th><th></th><th>References</th><th>Used for</th></tr></thead>
+  <tbody>
+    <tr class="new-row"><td><code>color.module.challenges.default</code></td><td class="swatch-cell"><div style="background:#913568;"></div></td><td><code>fuchsia.600</code></td><td>Challenges CTA, leaderboard accents, module-tinted icon</td></tr>
+    <tr class="new-row"><td><code>color.module.challenges.subtle</code></td><td class="swatch-cell"><div style="background:#F7DDED;"></div></td><td><code>fuchsia.100</code></td><td>Challenges badge bg, leaderboard surface</td></tr>
+    <tr class="new-row"><td><code>color.module.digital-advisor.default</code></td><td class="swatch-cell"><div style="background:#3D437B;"></div></td><td><code>indigo.600</code></td><td>AI tag dot, AI module CTA (when standalone), AI marker icon</td></tr>
+    <tr class="new-row"><td><code>color.module.digital-advisor.subtle</code></td><td class="swatch-cell"><div style="background:#DCDFF1;"></div></td><td><code>indigo.100</code></td><td>"From your AI" tag bg, AI surface gradient start</td></tr>
+    <tr class="new-row"><td><code>color.ai.surface.wash</code></td><td class="swatch-cell"><div style="background:#F1F2FA;"></div></td><td><code>indigo.50</code></td><td>AI card gradient wash (primary AI marker)</td></tr>
+    <tr class="new-row"><td><code>color.ai.tag.label</code></td><td class="swatch-cell"><div style="background:#343864;"></div></td><td><code>indigo.700</code></td><td>"From your AI" tag label color</td></tr>
+  </tbody>
+</table>
+
+<p class="note">The <code>color.ai.*</code> token group is the canonical AI surface treatment (Phase 0 §9). Used cross-cuttingly: any AI-generated content surfaces these tokens, regardless of parent module.</p>
+
+<h3>New gradient utility tokens</h3>
+<div class="gradient-grid">
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(180deg, #FAF6F0, #FDF5EE);"></div><div class="label"><div class="name">gradient.warm-mist</div><div class="ref">sand.50 → warm.50</div></div></div>
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(135deg, #FAE7D5, #F4CDA9);"></div><div class="label"><div class="name">gradient.peach</div><div class="ref">warm.100 → warm.200</div></div></div>
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(135deg, #EFF5FA, #FAF6F0);"></div><div class="label"><div class="name">gradient.cool-mist</div><div class="ref">primary.50 → sand.50</div></div></div>
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(135deg, #235173, #163346);"></div><div class="label"><div class="name">gradient.deep-primary</div><div class="ref">primary.700 → primary.900</div></div></div>
+  <div class="gradient-card is-new"><div class="preview" style="background:linear-gradient(135deg, #F1F2FA, transparent);"></div><div class="label"><div class="name">gradient.ai-wash <span class="new-tag">new</span></div><div class="ref">indigo.50 → transparent</div></div></div>
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(135deg, #D5E2D8, #A8C4AE);"></div><div class="label"><div class="name">gradient.dcp</div><div class="ref">moss.100 → moss.200</div></div></div>
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(135deg, #E5E1F4, #C7BFE8);"></div><div class="label"><div class="name">gradient.health-data</div><div class="ref">lavender.100 → lavender.200</div></div></div>
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(135deg, #F8DCDF, #F0B6BD);"></div><div class="label"><div class="name">gradient.wellbeing</div><div class="ref">rose.100 → rose.200</div></div></div>
+  <div class="gradient-card"><div class="preview" style="background:linear-gradient(135deg, #FAE7D5, #F4CDA9);"></div><div class="label"><div class="name">gradient.healthy-habits</div><div class="ref">warm.100 → warm.200</div></div></div>
+  <div class="gradient-card is-new fuchsia"><div class="preview" style="background:linear-gradient(135deg, #F7DDED, #EFB4D6);"></div><div class="label"><div class="name">gradient.challenges <span class="new-tag">new</span></div><div class="ref">fuchsia.100 → fuchsia.200</div></div></div>
+</div>
+
+<!-- ===== PILOTS — UPDATED + NEW ===== -->
+<h2>Pilots — updated AI Insight + 2 new module surfaces</h2>
+
+<div class="pilot-row">
+
+  <!-- AI Health Insight - UPDATED to use indigo -->
+  <div class="pilot-frame">
+    <div class="pilot-label" style="color: var(--indigo-700);">AI Health Insight (UPDATED — uses indigo) <span class="new-tag">v2</span></div>
+    <div class="ai-card">
+      <span class="ai-tag">From your AI</span>
+      <div class="ai-headline">You averaged 6.2 hours of sleep last night — your second short night this week.</div>
+      <div class="ai-body">People managing back pain who average under 7 hours report <strong>22% more flare days</strong>. Worth protecting tonight.</div>
+      <a href="#" class="ai-action parent-primary">Try a 10-minute wind-down</a>
+      <div class="ai-honesty">I'm working from your sleep + flare logs. I don't have your medication data yet.</div>
+      <div class="ai-controls"><a href="#">Why this?</a><a href="#">Manage what your AI remembers</a><a href="#">Not useful</a></div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar">
+        <div style="background: var(--sand-50); width: 28%;"></div>
+        <div style="background: white; width: 22%;"></div>
+        <div style="background: var(--indigo-50); width: 16%;"></div>
+        <div style="background: var(--neutral-900); width: 14%;"></div>
+        <div style="background: var(--primary-600); width: 10%;"></div>
+        <div style="background: var(--indigo-600); width: 6%;"></div>
+        <div style="background: var(--indigo-100); width: 4%;"></div>
+      </div>
+      <div class="weight-legend">
+        <span class="item"><span class="swatch" style="background: var(--sand-50);"></span>Sand 28%</span>
+        <span class="item"><span class="swatch" style="background: white;"></span>Card 22%</span>
+        <span class="item"><span class="swatch" style="background: var(--indigo-50);"></span>AI wash 16%</span>
+        <span class="item"><span class="swatch" style="background: var(--neutral-900);"></span>Ink 14%</span>
+        <span class="item"><span class="swatch" style="background: var(--primary-600);"></span>Primary CTA 10%</span>
+        <span class="item"><span class="swatch" style="background: var(--indigo-600);"></span>AI marker 6%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Challenges - NEW -->
+  <div class="pilot-frame">
+    <div class="pilot-label" style="color: var(--fuchsia-700);">Challenges — team step challenge <span class="new-tag fuchsia" style="background: var(--fuchsia-100); color: var(--fuchsia-700);">new</span></div>
+    <div class="challenges-card">
+      <div class="challenges-eyebrow">Steps Challenge · Week 2 of 4</div>
+      <div class="challenges-row">
+        <div class="challenges-title">Northeast Warehouse vs. Plant 7</div>
+        <div class="challenges-tag">3rd of 6</div>
+      </div>
+      <div class="leaderboard">
+        <div class="leaderboard-row">
+          <div class="lb-rank">1</div>
+          <div class="lb-name">Plant 7</div>
+          <div class="lb-score">182,420 steps</div>
+        </div>
+        <div class="leaderboard-row">
+          <div class="lb-rank">2</div>
+          <div class="lb-name">Distribution Center</div>
+          <div class="lb-score">175,890</div>
+        </div>
+        <div class="leaderboard-row is-you">
+          <div class="lb-rank" style="background: var(--fuchsia-600); color: white; border-color: var(--fuchsia-600);">3</div>
+          <div class="lb-name">Northeast Warehouse <small style="color: var(--fuchsia-700); font-weight: 700;">· you</small></div>
+          <div class="lb-score" style="color: var(--neutral-900);">168,330</div>
+        </div>
+        <div class="leaderboard-row" style="opacity: 0.6;">
+          <div class="lb-rank">4</div>
+          <div class="lb-name">HQ Office</div>
+          <div class="lb-score">152,100</div>
+        </div>
+      </div>
+      <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px;">7,560 steps behind 2nd place. Average 1,080 more per day this week to catch up.</p>
+      <a href="#" class="challenges-cta">Log today's steps</a>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting</div>
+      <div class="weight-bar">
+        <div style="background: var(--sand-50); width: 32%;"></div>
+        <div style="background: white; width: 22%;"></div>
+        <div style="background: var(--neutral-900); width: 14%;"></div>
+        <div style="background: var(--fuchsia-600); width: 12%;"></div>
+        <div style="background: var(--fuchsia-50); width: 10%;"></div>
+        <div style="background: var(--fuchsia-100); width: 6%;"></div>
+        <div style="background: var(--sand-100); width: 4%;"></div>
+      </div>
+      <div class="weight-legend">
+        <span class="item"><span class="swatch" style="background: var(--sand-50);"></span>Sand 32%</span>
+        <span class="item"><span class="swatch" style="background: white;"></span>Card 22%</span>
+        <span class="item"><span class="swatch" style="background: var(--neutral-900);"></span>Ink 14%</span>
+        <span class="item"><span class="swatch" style="background: var(--fuchsia-600);"></span>Module CTA 12%</span>
+        <span class="item"><span class="swatch" style="background: var(--fuchsia-50);"></span>Module surface 10%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Coach IN Challenges - NEW (cross-cutting demo) -->
+  <div class="pilot-frame">
+    <div class="pilot-label" style="color: var(--fuchsia-700);">AI Coach in Challenges (cross-cutting AI) <span class="new-tag fuchsia" style="background: var(--fuchsia-100); color: var(--fuchsia-700);">new</span></div>
+    <div class="ai-card" style="border-color: var(--indigo-200);">
+      <span class="ai-tag">From your Challenge AI Coach</span>
+      <div class="ai-headline">You're 7,560 steps behind 2nd. The team needs you.</div>
+      <div class="ai-body">Three of your teammates added a 15-min walk after lunch this week — averaged 1,400 extra steps each. Worth a try?</div>
+      <a href="#" class="ai-action parent-fuchsia">Add a lunch walk reminder</a>
+      <div class="ai-honesty">I'm working from your team's step logs and your calendar.</div>
+      <div class="ai-controls"><a href="#">Why this?</a><a href="#">Manage memory</a><a href="#">Not useful</a></div>
+    </div>
+    <div class="weight-block">
+      <div class="weight-label">Weighting · cross-cutting AI</div>
+      <div class="weight-bar">
+        <div style="background: var(--sand-50); width: 24%;"></div>
+        <div style="background: white; width: 20%;"></div>
+        <div style="background: var(--indigo-50); width: 18%;"></div>
+        <div style="background: var(--neutral-900); width: 12%;"></div>
+        <div style="background: var(--fuchsia-600); width: 12%;"></div>
+        <div style="background: var(--indigo-600); width: 8%;"></div>
+        <div style="background: var(--indigo-100); width: 6%;"></div>
+      </div>
+      <div class="weight-legend">
+        <span class="item"><span class="swatch" style="background: var(--indigo-50);"></span>AI wash 18%</span>
+        <span class="item"><span class="swatch" style="background: var(--fuchsia-600);"></span>Parent CTA (fuchsia) 12%</span>
+        <span class="item"><span class="swatch" style="background: var(--indigo-600);"></span>AI marker 8%</span>
+        <span class="item"><span class="swatch" style="background: var(--indigo-100);"></span>AI tag bg 6%</span>
+        <span class="item"><span class="swatch" style="background: white;"></span>Card 20%</span>
+        <span class="item"><span class="swatch" style="background: var(--sand-50);"></span>Sand 24%</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<h3>The cross-cutting AI pattern, decoded</h3>
+<p>The "AI Coach in Challenges" pilot demonstrates the architectural rule: AI presence is marked with indigo regardless of where it appears, but the action stays in the parent module's voice. Walk through what each color is doing:</p>
+
+<ul>
+  <li><strong>Indigo wash + indigo tag</strong> — the surface visibly leans AI without screaming it. A user inside Challenges immediately knows: "This isn't a teammate; this is my AI Coach."</li>
+  <li><strong>Fuchsia CTA</strong> — the action picks up the parent module. Tapping the button stays inside Challenges. Reduces context-shift confusion.</li>
+  <li><strong>Sand + neutral</strong> — the structural tokens carry the brand-level warmth and credibility regardless of which module or AI feature surfaces.</li>
+  <li><strong>Honesty line stays</strong> — "I'm working from your team's step logs and your calendar." AI says what it knows.</li>
+</ul>
+
+<h3>Existing pilots from v1 (unchanged in v2)</h3>
+<div class="pilot-row">
+  <div class="pilot-frame">
+    <div class="pilot-label" style="color: var(--moss-700);">Member · DCP completion (v1)</div>
+    <div class="dcp-card">
+      <div class="dcp-eyebrow">Back Care · Week 4 of 8</div>
+      <div class="dcp-row">
+        <div class="dcp-title">You're halfway. Pain down 1.4 since you started.</div>
+        <div class="dcp-tag">On track</div>
+      </div>
+      <div class="dcp-progress"><div style="width: 50%;"></div></div>
+      <small>$50 reward unlocked at week 8.</small>
+      <a href="#" class="dcp-cta">Continue session</a>
+    </div>
+  </div>
+  <div class="pilot-frame">
+    <div class="pilot-label" style="color: var(--primary-700);">Buyer · website hero (v1)</div>
+    <div class="buyer-hero">
+      <div class="eyebrow">For Benefits Leaders</div>
+      <div class="title">Real clinical outcomes across every condition your employees are managing.</div>
+      <p class="body">At engagement rates that move your spend. <strong>Guaranteed</strong> 3:1 ROI.</p>
+      <a href="#" class="cta">See the proof →</a>
+      <div class="footer">Distributed via Alight, Elevance, Lockton, WTW, Aon</div>
+    </div>
+  </div>
+  <div class="pilot-frame">
+    <div class="pilot-label">— space —</div>
+    <div style="display: flex; align-items: center; justify-content: center; height: 100%; padding: 40px; text-align: center;">
+      <small>v1 had 3 pilots; v2 keeps Member DCP and Buyer hero unchanged and updates the AI Insight (above).</small>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHAT'S OPEN ===== -->
+<h2>What's still open after v2</h2>
+<ul>
+  <li><strong>D2 verification gates</strong> — five gates from the D2 v2 deliverable still pending (render-test, low-light, Isabel review, presentation-scale, stakeholder reaction).</li>
+  <li><strong>Module categorical naming</strong> — moss/lavender/rose/fuchsia/indigo/warm-as-clay are all placeholder color-led names. Phase 0 §10 deferred the color-led vs role-led question. Names will refactor when that lands.</li>
+  <li><strong>Indigo at full saturation</strong> — needs a designer eye. Indigo.500 (#494F95) is currently fairly saturated. Compare against periwinkle from earlier rounds (which was ruled out as primary because it read too synthetic at saturation). The categorical use here is more forgiving but worth verifying.</li>
+  <li><strong>AI surface treatment further applied</strong> — the cross-cutting pattern is demonstrated for AI Insight (home) and Challenge AI Coach. Still need to apply to DCP AI Expert (chat surface inside DCP module) to confirm the pattern holds at the chat-thread layer, not just the card layer.</li>
+  <li><strong>Layer 3 (component tokens)</strong> — already in <a href="tokens-v1-layer3-components.html">tokens-v1-layer3-components.html</a>. Components reference Layer 2 semantic tokens, so the new <code>indigo.*</code> and <code>fuchsia.*</code> additions automatically work in components without a v2 of Layer 3.</li>
+  <li><strong>Layer 4 (icon system)</strong> — not yet built. With 6 categoricals now locked, icon module-tinting can be specified.</li>
+  <li><strong>Layer 5 (illustration palette)</strong> — variant grid (one composition × N palette swaps) not yet built.</li>
+</ul>
+
+<h3>Next iteration target</h3>
+<p>Highest-leverage next moves: (1) <strong>DCP AI Expert chat surface</strong> — apply the cross-cutting AI pattern to a chat thread, not just a card. Tests whether indigo wash + indigo tag + moss action holds in a multi-turn conversation. (2) <strong>Layer 4 icon system</strong> — module-tinted icons across all 6 categoricals + 5 treatment recipes.</p>
+
+<hr>
+
+<p style="font-size: 12px; color: var(--text-secondary); text-align: center; margin-top: 32px;">12 core scales · 6 module categoricals · canonical AI surface treatment via cross-cutting indigo · Phase 0 §9 resolved.</p>
+
+</div>
+</body>
+</html>

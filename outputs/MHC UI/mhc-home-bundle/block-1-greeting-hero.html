@@ -1,0 +1,185 @@
+<!--
+  ============================================================
+  BLOCK 1 — Greeting + Hero
+  ============================================================
+  Renders:
+    - Greeting line (name + sub-line)
+    - Utility chips (search, notifications)
+    - Focus pill (when user has a focus area)
+        OR pick-focus CTA (when they don't)
+    - Hero card — TWO variants in one block:
+        a) Personal program hero (user has a focus)
+        b) Onboarding hero with focus chips (no focus yet)
+
+  Conditionals:
+    {{#formula.hasFocus}}…{{/formula.hasFocus}}              user has picked a focus area
+    {{^formula.hasFocus}}…{{/formula.hasFocus}}              inverse (no focus)
+    {{#formula.hasUnreadNotifications}}…                     unread badge on bell
+    {{#formula.isFirstSession}}…                             optional first-session copy
+
+  Tokens used here (defaults shown for clarity):
+    {{user.firstName}}                       — "Sarah"
+    {{formula.greeting_name}}                — full greeting line. Default: "Hi, Sarah".
+                                              (Time-of-day variants are optional — your
+                                              system populates whatever string here.)
+    {{formula.greeting_sub}}                 — sub-line under greeting.
+                                              Context-aware:
+                                              · has focus       → "Welcome back."
+                                              · no focus / new  → "Let's get started."
+                                              · active program  → "Day {{formula.programDay}} of {{formula.programLength}}."
+                                              · streak          → "You're on a {{formula.streakDays}}-day streak."
+    {{formula.userInitial}}                  — "S"
+    {{formula.focusAreaLabel}}               — "Sleep"
+    {{formula.heroEyebrow}}                  — "Personalized for you"
+    {{formula.heroTitle}}                    — "Managing Insomnia"
+    {{formula.heroDescription}}              — body
+    {{formula.heroCtaLabel}}                 — "Continue program"
+    {{formula.heroImage}}                    — image URL
+    {{formula.focusPill_href}}             — link target for focus pill (e.g. /settings/focus)
+    {{formula.pickFocus_href}}             — link target for the picker page
+    {{formula.heroCta_href}}               — link target for hero CTA (program or picker)
+    {{formula.focusChip_sleep_href}}       — link to picker prefilled to Sleep
+    {{formula.focusChip_move_href}}        — link to picker prefilled to Move
+    {{formula.focusChip_stress_href}}      — link to picker prefilled to Stress
+    {{formula.focusChip_eat_href}}         — link to picker prefilled to Eat
+    {{formula.copy_pickFocusEyebrow}}        — "Personalize"
+    {{formula.copy_pickFocusValue}}          — "Pick your focus"
+    {{formula.copy_focusEyebrow}}            — "Your focus"
+    {{formula.copy_noFocusTitle}}            — "Tell us what matters most."
+    {{formula.copy_noFocusBody}}             — sub-copy
+    {{formula.copy_noFocusCtaLabel}}         — "Pick your focus"
+    {{formula.copy_noFocusCtaMeta}}          — "Takes about 30 seconds"
+    {{formula.copy_focusChip_sleep}}         — "Sleep better"
+    {{formula.copy_focusChip_move}}          — "Move more"
+    {{formula.copy_focusChip_stress}}        — "Stress less"
+    {{formula.copy_focusChip_eat}}           — "Eat well"
+  ============================================================
+-->
+
+<div class="mhc-home">
+  <!-- ============== Greeting row ============== -->
+  <div class="greeting">
+    <div class="greeting-row">
+      <div>
+        <h1 class="greeting-name">{{formula.greeting_name}}</h1>
+        <p class="greeting-sub">{{formula.greeting_sub}}</p>
+      </div>
+
+      <div class="greeting-actions">
+        {{#formula.hasFocus}}
+        <a class="focus-pill" href="{{formula.focusPill_href}}" aria-label="Your focus: {{formula.focusAreaLabel}}">
+          <span class="focus-pill-dot">{{formula.userInitial}}</span>
+          <span class="focus-pill-label">
+            <span class="focus-pill-eyebrow">{{formula.copy_focusEyebrow}}</span>
+            <span class="focus-pill-value">{{formula.focusAreaLabel}}</span>
+          </span>
+        </a>
+        {{/formula.hasFocus}}
+
+        {{^formula.hasFocus}}
+        <a class="pick-focus-pill" href="{{formula.pickFocus_href}}" aria-label="{{formula.copy_pickFocusValue}}">
+          <span class="pick-focus-plus" aria-hidden="true">+</span>
+          <span class="pick-focus-label">
+            <span class="pick-focus-eyebrow">{{formula.copy_pickFocusEyebrow}}</span>
+            <span class="pick-focus-value">{{formula.copy_pickFocusValue}}</span>
+          </span>
+        </a>
+        {{/formula.hasFocus}}
+
+        <div class="utility-chips">
+          <a class="utility-chip" href="{{formula.search_href}}" aria-label="Search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+          </a>
+          <a class="utility-chip" href="{{formula.notifications_href}}" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+              <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+            </svg>
+            {{#formula.hasUnreadNotifications}}
+            <span class="utility-chip-dot" aria-hidden="true">&nbsp;</span>
+            <span class="mhc-visually-hidden">Unread notifications</span>
+            {{/formula.hasUnreadNotifications}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== Hero ============== -->
+
+  {{#formula.hasFocus}}
+  <!-- Variant A: personal program hero (photo + gradient overlay) -->
+  <section class="hero" aria-labelledby="mhc-hero-title">
+    <div class="hero-photo" style="background-image: url('{{formula.heroImage}}');" role="img" aria-label="{{formula.heroTitle}}"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-body">
+      <p class="hero-eyebrow">{{formula.heroEyebrow}}</p>
+      <h2 id="mhc-hero-title" class="hero-title">{{formula.heroTitle}}</h2>
+      <p class="hero-desc">{{formula.heroDescription}}</p>
+      <a class="hero-cta" href="{{formula.heroCta_href}}">
+        {{formula.heroCtaLabel}}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14">
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+  {{/formula.hasFocus}}
+
+  {{^formula.hasFocus}}
+  <!-- Variant B: onboarding hero (no focus yet) -->
+  <section class="hero hero--no-focus" aria-labelledby="mhc-hero-title-nf">
+    <div class="hero-body">
+      <p class="hero-eyebrow">{{formula.copy_noFocusEyebrow}}</p>
+      <h2 id="mhc-hero-title-nf" class="hero-title">{{formula.copy_noFocusTitle}}</h2>
+      <p class="hero-desc">{{formula.copy_noFocusBody}}</p>
+      <div class="hero-cta-block">
+        <a class="hero-cta" href="{{formula.pickFocus_href}}">
+          {{formula.copy_noFocusCtaLabel}}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="14" height="14">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+        <span class="hero-cta-meta">{{formula.copy_noFocusCtaMeta}}</span>
+      </div>
+    </div>
+
+    <!--
+      Quick-pick chips. Icons are the same Iconify lucide icons used by the focus
+      selector (modal picker), colored to match the focus palette so the brand
+      identity of each focus stays consistent across surfaces.
+        sleep  → lucide/moon         (#6e5dc6 purple)
+        move   → lucide/footprints   (#04a0b7 aqua)
+        stress → lucide/brain        (#f15922 orange)
+        eat    → lucide/apple        (#52a045 green)
+    -->
+    <div class="focus-chips" role="group" aria-label="Quick pick a focus area">
+      <a class="focus-chip" href="{{formula.focusChip_sleep_href}}"><span class="focus-chip-dot focus-chip-dot--sleep" aria-hidden="true">
+          <img src="https://api.iconify.design/lucide/moon.svg?color=%236e5dc6&width=48" alt="" width="11" height="11">
+        </span>
+        {{formula.copy_focusChip_sleep}}
+      </a>
+      <a class="focus-chip" href="{{formula.focusChip_move_href}}"><span class="focus-chip-dot focus-chip-dot--move" aria-hidden="true">
+          <img src="https://api.iconify.design/lucide/footprints.svg?color=%2304a0b7&width=48" alt="" width="11" height="11">
+        </span>
+        {{formula.copy_focusChip_move}}
+      </a>
+      <a class="focus-chip" href="{{formula.focusChip_stress_href}}"><span class="focus-chip-dot focus-chip-dot--stress" aria-hidden="true">
+          <img src="https://api.iconify.design/lucide/brain.svg?color=%23f15922&width=48" alt="" width="11" height="11">
+        </span>
+        {{formula.copy_focusChip_stress}}
+      </a>
+      <a class="focus-chip" href="{{formula.focusChip_eat_href}}"><span class="focus-chip-dot focus-chip-dot--eat" aria-hidden="true">
+          <img src="https://api.iconify.design/lucide/apple.svg?color=%2352a045&width=48" alt="" width="11" height="11">
+        </span>
+        {{formula.copy_focusChip_eat}}
+      </a>
+    </div>
+  </section>
+  {{/formula.hasFocus}}
+</div>

@@ -1,0 +1,76 @@
+<!--
+  ============================================================
+  BLOCK 3 — Insights (action block)
+  ============================================================
+  Bordered "card" only — the Get insight / Refresh / View
+  buttons are configured by your system as the action button
+  attached to this block. They are NOT rendered in this HTML.
+
+  States (mutually exclusive, one will be true):
+    formula.insightsState_ready         — no insight generated yet
+                                           (action btn shows "Get insight")
+    formula.insightsState_refreshable   — insight visible AND user can
+                                           regenerate (action btn shows "Refresh")
+    formula.insightsState_readOnly      — insight visible but cannot be
+                                           refreshed yet (cooldown / quota / etc.)
+                                           (action btn typically hidden, or
+                                           shown disabled with cooldown copy)
+    formula.insightsState_hidden        — entire block is suppressed
+                                           (handled by your system's display
+                                           logic; this template renders nothing
+                                           if hidden)
+
+  Tokens:
+    {{formula.copy_eyebrow_insight}}        — "Insight for you"
+    {{formula.copy_insightReadyTitle}}      — "Get a personal insight"
+    {{formula.copy_insightReadyMeta}}       — "Powered by your recent activity"
+    {{formula.insightHeadline}}             — "Your sleep is most consistent on weeknights"
+    {{formula.insightBody}}                 — full body text
+    {{formula.insightTopic}}                — "Sleep" (small chip)
+    {{formula.insightTimestamp}}            — "Generated 2h ago"
+    {{formula.copy_insightCooldownLabel}}   — "Next refresh in 4h"
+  ============================================================
+-->
+
+{{^formula.insightsState_hidden}}
+<div class="mhc-home">
+  <section class="insights" aria-labelledby="mhc-insights-title">
+
+    <p class="insights-eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 2v3"></path><path d="M12 19v3"></path>
+        <path d="M4.93 4.93l2.12 2.12"></path><path d="M16.95 16.95l2.12 2.12"></path>
+        <path d="M2 12h3"></path><path d="M19 12h3"></path>
+        <path d="M4.93 19.07l2.12-2.12"></path><path d="M16.95 7.05l2.12-2.12"></path>
+        <circle cx="12" cy="12" r="4"></circle>
+      </svg>
+      {{formula.copy_eyebrow_insight}}
+    </p>
+
+    {{#formula.insightsState_ready}}
+    <h3 id="mhc-insights-title" class="insights-ready-title">{{formula.copy_insightReadyTitle}}</h3>
+    <p class="insights-ready-meta">{{formula.copy_insightReadyMeta}}</p>
+    {{/formula.insightsState_ready}}
+
+    {{#formula.insightsState_refreshable}}
+    <h3 id="mhc-insights-title" class="insights-headline">{{formula.insightHeadline}}</h3>
+    <p class="insights-body">{{formula.insightBody}}</p>
+    <div class="insights-meta">
+      <span class="insights-meta-tag">{{formula.insightTopic}}</span>
+      <span>{{formula.insightTimestamp}}</span>
+    </div>
+    {{/formula.insightsState_refreshable}}
+
+    {{#formula.insightsState_readOnly}}
+    <h3 id="mhc-insights-title" class="insights-headline">{{formula.insightHeadline}}</h3>
+    <p class="insights-body">{{formula.insightBody}}</p>
+    <div class="insights-meta">
+      <span class="insights-meta-tag">{{formula.insightTopic}}</span>
+      <span>{{formula.insightTimestamp}}</span>
+      <span>· {{formula.copy_insightCooldownLabel}}</span>
+    </div>
+    {{/formula.insightsState_readOnly}}
+
+  </section>
+</div>
+{{/formula.insightsState_hidden}}

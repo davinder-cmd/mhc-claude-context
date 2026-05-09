@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home Page — Design Review</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; height:100%; background:#f0eee9; font-family: 'Raleway', sans-serif; }
+  .commentary { font-family: 'Raleway', sans-serif; font-size: 12px; line-height: 1.5; color:#3c3228; background:#fef4a8; padding:10px 14px; border-radius:6px; max-width: 280px; }
+  .commentary b { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; color:#5a4a2a; }
+  .rec-card { background: #0f497f; color:#fff; padding: 28px 32px; border-radius: 18px; font-family: 'Raleway', sans-serif; max-width: 480px; }
+  .rec-card h3 { margin:0 0 4px; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color:#f15922; }
+  .rec-card h2 { margin:0 0 12px; font-weight: 700; font-size: 24px; line-height: 1.2; }
+  .rec-card p { margin:0 0 10px; font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.85); }
+  .rec-card ul { margin: 8px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.85); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="mhc-components.jsx"></script>
+<script type="text/babel" src="mhc-screens-desktop.jsx"></script>
+<script type="text/babel" src="mhc-screens-mobile.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "density": "regular"
+}/*EDITMODE-END*/;
+
+// Wrap mobile screens in an iOS frame
+function Phone({ children }) {
+  return (
+    <IOSDevice statusBarDark={false}>
+      <div style={{ background:'#fff', height:'100%', overflow:'hidden' }}>
+        {children}
+      </div>
+    </IOSDevice>
+  );
+}
+
+function Note({ title, pros = [], cons = [] }) {
+  return (
+    <div className="commentary">
+      <b>{title}</b>
+      {pros.length ? <div style={{marginBottom:4}}><span style={{color:'#52a045',fontWeight:700}}>+ </span>{pros.join(' · ')}</div> : null}
+      {cons.length ? <div><span style={{color:'#f15922',fontWeight:700}}>− </span>{cons.join(' · ')}</div> : null}
+    </div>
+  );
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const density = t.density;
+  const phoneH = 844;
+
+  return (
+    <div>
+      <DesignCanvas>
+
+        {/* ── Intro ── */}
+        <DCSection id="intro" title="MHC Home Page — Design Review" subtitle="Side-by-side comparison of every home-page direction in the Figma file, re-skinned in the MobileHealth brand system. Pan to explore; click any card's expand icon to focus.">
+          <DCArtboard id="rec" label="Final recommendation" width={540} height={520}>
+            <div style={{ padding:32, display:'flex', flexDirection:'column', gap:16, height:'100%', boxSizing:'border-box' }}>
+              <div className="rec-card">
+                <h3>Recommendation</h3>
+                <h2>Ship Desktop "3 banners" + Mobile "Chat Advisor cards"</h2>
+                <p>Three banners is the right density — two feels sparse, four cramps the images and flirts with ad-shelf. On mobile the card-style advisor reads as content (not chrome) and scales to longer titles without truncating.</p>
+                <p style={{marginTop:12,fontWeight:700,color:'#fff'}}>Open questions for leadership:</p>
+                <ul>
+                  <li>Do we keep the hero carousel or commit to a single focus card?</li>
+                  <li>Is the "Welcome Davinder" banner redundant with the greeting above it?</li>
+                  <li>Launch with chat advisor visible, or A/B it against the current design?</li>
+                </ul>
+              </div>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize:12, color:'#6e7a7d', marginTop:'auto' }}>
+                Tweak density in the panel to see every card react. Comments welcome on any artboard.
+              </div>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Desktop hero-banner count ── */}
+        <DCSection id="desktop-banners" title="Desktop — How many hero banners?" subtitle="The core variable in the Figma. All four use the same page scaffold; only the banner row changes.">
+          <DCArtboard id="d1" label="1 · One banner" width={1280} height={1200}>
+            <D_OneBanner density={density}/>
+          </DCArtboard>
+          <DCArtboard id="d2" label="2 · Two banners" width={1280} height={1200}>
+            <D_TwoBanners density={density}/>
+          </DCArtboard>
+          <DCArtboard id="d3" label="3 · Three banners  ⭐" width={1280} height={1200}>
+            <D_ThreeBanners density={density}/>
+          </DCArtboard>
+          <DCArtboard id="d4" label="4 · Four banners" width={1280} height={1200}>
+            <D_FourBanners density={density}/>
+          </DCArtboard>
+          <DCArtboard id="dn-1" label="Notes · 1" width={300} height={180}>
+            <Note title="1 banner" pros={['Clear focal point','Image reads at quality']} cons={['Wastes horizontal real estate','Feels like a placeholder row']}/>
+          </DCArtboard>
+          <DCArtboard id="dn-2" label="Notes · 2" width={300} height={180}>
+            <Note title="2 banners" pros={['Balanced pairing']} cons={['Asymmetric with 3-col action items below','Images are big but content is thin']}/>
+          </DCArtboard>
+          <DCArtboard id="dn-3" label="Notes · 3" width={300} height={180}>
+            <Note title="3 banners — recommended" pros={['Matches 3-col rhythm of page','Images still read clearly','Room for copy + CTA']} cons={['One more banner = one more editorial decision for content team']}/>
+          </DCArtboard>
+          <DCArtboard id="dn-4" label="Notes · 4" width={300} height={180}>
+            <Note title="4 banners" pros={['Maximum surface area']} cons={['Images get cramped / unreadable','Begins to feel like ad shelf','Caption cramped at this width']}/>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Desktop alternative ── */}
+        <DCSection id="desktop-alt" title="Desktop — Alternative approach" subtitle="Drops secondary banners in favor of the prominent 'Welcome' banner + hero carousel only.">
+          <DCArtboard id="alt" label="Alternative · welcome banner + hero" width={1280} height={1100}>
+            <D_Alternative density={density}/>
+          </DCArtboard>
+          <DCArtboard id="altn" label="Notes" width={300} height={220}>
+            <Note title="Alternative" pros={['Calmest composition','Focus lands on the hero challenge','Easier to maintain — fewer slots']} cons={['"Welcome" banner duplicates the greeting','Weaker secondary discovery','Missing a browse-forward moment above the fold']}/>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Desktop chat advisor ── */}
+        <DCSection id="desktop-chat" title="Desktop — With Chat Advisor" subtitle="Adds the AI Chat advisor surface between hero and content. Three treatments of the advisor itself.">
+          <DCArtboard id="dca-cards" label="Chat advisor · cards  ⭐" width={1280} height={1300}>
+            <D_ChatAdvisor variant="cards" density={density}/>
+          </DCArtboard>
+          <DCArtboard id="dca-pills" label="Chat advisor · pill buttons" width={1280} height={1300}>
+            <D_ChatAdvisor variant="pills" density={density}/>
+          </DCArtboard>
+          <DCArtboard id="dca-buttons" label="Chat advisor · 3 buttons" width={1280} height={1300}>
+            <D_ChatAdvisor variant="buttons" density={density}/>
+          </DCArtboard>
+          <DCArtboard id="dcan" label="Notes" width={300} height={260}>
+            <Note title="Chat advisor" pros={['Cards feel like content','Room for supporting label + chevron','Scales to 4–6 items']} cons={['Pill buttons risk being read as filter chips','3-button row truncates on medium titles','Buttons variant is tightest but most limited']}/>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Mobile first-pass (device states) ── */}
+        <DCSection id="mobile-first" title="Mobile — First-pass device states" subtitle="Three states of the health data block depending on whether the user has linked a tracker and has data.">
+          <DCArtboard id="mf-1" label="State 1 · No device, no data" width={420} height={phoneH}>
+            <Phone><M_FirstPass density={density} state="no-data"/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mf-2" label="State 2 · Data, no device linked" width={420} height={phoneH}>
+            <Phone><M_FirstPass density={density} state="data-nolink"/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mf-3" label="State 3 · Device linked" width={420} height={phoneH}>
+            <Phone><M_FirstPass density={density} state="data-linked"/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mfn" label="Notes" width={300} height={220}>
+            <Note title="Device state handling" pros={['Zero-state is tappable (Add data)','Link tracker only appears when needed','Data reads cleanly at all densities']} cons={['Zero-state cards could be more inviting (icon, suggestion)','"Link tracker" CTA is quiet given its importance']}/>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Mobile concepts ── */}
+        <DCSection id="mobile-concepts" title="Mobile — Demo concepts" subtitle="Exploring variations on the currently-in-demo home page.">
+          <DCArtboard id="mc-1" label="Currently in demo" width={420} height={phoneH + 400}>
+            <Phone><M_Concept density={density} kind="current"/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mc-2" label="Without trends" width={420} height={phoneH}>
+            <Phone><M_Concept density={density} kind="no-trends"/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mc-3" label="With search" width={420} height={phoneH}>
+            <Phone><M_Concept density={density} kind="with-search"/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mc-4" label="Above-fold only" width={420} height={phoneH}>
+            <Phone><M_Concept density={density} kind="above-fold"/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mcn" label="Notes" width={300} height={240}>
+            <Note title="Mobile home concepts" pros={['"Without trends" is the cleanest — trends belong on a detail screen','Search in header is a low-cost win','Above-fold test confirms the hero + actions earn their place']} cons={['Trends dots are ambiguous (what does yellow mean?)','Search icon adds clutter if search is lightly used']}/>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Mobile chat advisor ── */}
+        <DCSection id="mobile-chat" title="Mobile — Chat advisor variants" subtitle="Three treatments of the AI Chat advisor on mobile. Cards win for mobile.">
+          <DCArtboard id="mca-pills" label="Pills (long list)" width={420} height={phoneH + 300}>
+            <Phone><M_ChatAdvisor variant="pills" density={density}/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mca-buttons" label="3 buttons" width={420} height={phoneH + 300}>
+            <Phone><M_ChatAdvisor variant="buttons" density={density}/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mca-cards" label="Cards  ⭐" width={420} height={phoneH + 300}>
+            <Phone><M_ChatAdvisor variant="cards" density={density}/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mcan" label="Notes" width={300} height={240}>
+            <Note title="Chat advisor (mobile)" pros={['Cards scale best to long titles','Icon chips give visual hook + content hierarchy','Good tap targets (≥44px)']} cons={['Pills wrap awkwardly with 3+ items','3-button row truncates on small screens','Buttons variant caps content at 3 items forever']}/>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Mobile final ── */}
+        <DCSection id="mobile-final" title="Mobile — Proposed final direction" subtitle="Figma's final-design frame, faithfully re-skinned to MHC.">
+          <DCArtboard id="mfinal" label="Final design" width={420} height={phoneH + 500}>
+            <Phone><M_FinalDesign density={density}/></Phone>
+          </DCArtboard>
+          <DCArtboard id="mfinaln" label="Notes" width={300} height={220}>
+            <Note title="Final mobile" pros={['Hierarchy is clear: challenge → advisor → content → data','Chat advisor cards earn their place','Insight block adds value without feeling forced']} cons={['Long scroll — consider collapsing measurements behind a "View all"','Three CTAs (hero, refresh, View all) compete for attention']}/>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── Divergent direction ── */}
+        <DCSection id="divergent" title="Divergent direction — Brand-forward" subtitle="A more opinionated take that leans into the MHC brand's circle motif, orange accent on blue, and Guardian voice. Same information, different personality.">
+          <DCArtboard id="div-1" label="Divergent · whole-day home" width={420} height={phoneH + 200}>
+            <Phone><M_Divergent/></Phone>
+          </DCArtboard>
+          <DCArtboard id="divn" label="Why it matters" width={300} height={300}>
+            <Note title="Brand-forward direction"
+              pros={['Leans into MHC circle / half-circle motifs','Uses orange subhead on blue per brand book','Softer voice: "Good morning", "continue", lowercase CTA','Feels ownable vs. generic health-dashboard']}
+              cons={['Higher lift — new components (focus card, today trio)','Moves away from the shared scaffold the other options share','Requires buy-in from content team on voice']}
+            />
+          </DCArtboard>
+        </DCSection>
+
+      </DesignCanvas>
+
+      {/* Tweaks */}
+      <TweaksPanel>
+        <TweakSection label="Layout"/>
+        <TweakRadio label="Density" value={t.density} options={['compact','regular']} onChange={(v)=>setTweak('density', v)}/>
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

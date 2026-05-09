@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Health Color System v2 — Preview (neutral / sand split)</title>
+<style>
+  /* === System tokens (rendered as CSS custom properties) === */
+  :root {
+    /* neutral — barely-warm graphite ink (hue 28°, chroma 4–6%). Text, borders, dividers ONLY. */
+    --neutral-50:  #F8F7F5;
+    --neutral-100: #EEECE8;
+    --neutral-200: #E1DEDA;
+    --neutral-300: #BDB8B0;
+    --neutral-400: #948D84;
+    --neutral-500: #6F6963;
+    --neutral-600: #58524D;
+    --neutral-700: #423D38;
+    --neutral-800: #2C2925;
+    --neutral-900: #1A1816;
+    --neutral-950: #0D0C0B;
+
+    /* sand — warm beige-brown spine. Backgrounds & surfaces ONLY. */
+    --sand-50:  #FBF9F5;
+    --sand-100: #F4F0E8;
+    --sand-200: #E7E0D2;
+    --sand-300: #D5C8B2;
+    --sand-400: #B5A283;
+    --sand-500: #918072;
+    --sand-600: #71625A;
+    --sand-700: #574A45;
+    --sand-800: #3D342F;
+    --sand-900: #25201D;
+    --sand-950: #131110;
+
+    /* warm (peach/terracotta) */
+    --warm-50:  #FDF6F1;
+    --warm-100: #FBE9DC;
+    --warm-200: #F5D4BC;
+    --warm-300: #EDB995;
+    --warm-400: #DD9669;
+    --warm-500: #C77548;
+    --warm-600: #A95C36;
+    --warm-700: #87492C;
+    --warm-800: #623625;
+    --warm-900: #3D241A;
+    --warm-950: #21130E;
+
+    /* primary (warmed teal) */
+    --primary-50:  #EEF7F6;
+    --primary-100: #D5EDEB;
+    --primary-200: #ABDAD6;
+    --primary-300: #76C0BD;
+    --primary-400: #44A39F;
+    --primary-500: #267573;
+    --primary-600: #1E5C5B;
+    --primary-700: #184745;
+    --primary-800: #133534;
+    --primary-900: #0E2424;
+    --primary-950: #061313;
+
+    /* success (sage) */
+    --success-50:  #F1F6EE;
+    --success-100: #DCEAD3;
+    --success-200: #BCD5AB;
+    --success-300: #94BB7E;
+    --success-400: #6F9F58;
+    --success-500: #4D7B36;
+    --success-600: #416A30;
+    --success-700: #335326;
+    --success-800: #253E1D;
+    --success-900: #182913;
+    --success-950: #0C160A;
+
+    /* warning (amber) */
+    --warning-50:  #FDF6E5;
+    --warning-100: #FBE9BC;
+    --warning-200: #F7D484;
+    --warning-300: #F0B645;
+    --warning-400: #DC9A1E;
+    --warning-500: #B97D14;
+    --warning-600: #95630F;
+    --warning-700: #74500D;
+    --warning-800: #553A0A;
+    --warning-900: #362507;
+    --warning-950: #1C1303;
+
+    /* error (warm coral) */
+    --error-50:  #FCEDEA;
+    --error-100: #F8D5CE;
+    --error-200: #F1A99B;
+    --error-300: #E47D67;
+    --error-400: #D4583B;
+    --error-500: #B5421F;
+    --error-600: #913418;
+    --error-700: #6F2912;
+    --error-800: #4F1D0D;
+    --error-900: #321307;
+    --error-950: #1A0903;
+
+    /* categoricals — full scales */
+    --lavender-50:  #F7F2FB;
+    --lavender-100: #ECE3F4;
+    --lavender-200: #D2BFE4;
+    --lavender-300: #AE91CD;
+    --lavender-400: #8C66B5;
+    --lavender-500: #6F47A0;
+    --lavender-600: #57368B;
+    --lavender-700: #422973;
+    --lavender-800: #2F1D54;
+    --lavender-900: #1E1338;
+    --lavender-950: #100920;
+
+    --rose-50:  #FDF1F5;
+    --rose-100: #F8E2EA;
+    --rose-200: #EFC0D0;
+    --rose-300: #E090A8;
+    --rose-400: #CE5F80;
+    --rose-500: #B53D62;
+    --rose-600: #952C4D;
+    --rose-700: #74233D;
+    --rose-800: #531829;
+    --rose-900: #340E18;
+    --rose-950: #1B070C;
+
+    --sky-50:  #EEF7FB;
+    --sky-100: #DCEDF5;
+    --sky-200: #B7DAEC;
+    --sky-300: #82BDD9;
+    --sky-400: #4F9DC1;
+    --sky-500: #3081A6;
+    --sky-600: #266888;
+    --sky-700: #1F526C;
+    --sky-800: #163C50;
+    --sky-900: #102934;
+    --sky-950: #07161C;
+
+    --moss-50:  #EFF5F1;
+    --moss-100: #DCEAE2;
+    --moss-200: #B5D2C2;
+    --moss-300: #84B499;
+    --moss-400: #559478;
+    --moss-500: #3A7B5E;
+    --moss-600: #2B624A;
+    --moss-700: #214D3A;
+    --moss-800: #18382A;
+    --moss-900: #10261C;
+    --moss-950: #06140E;
+
+    /* semantic tokens */
+    --bg-default: var(--sand-50);          /* warm beige page surface */
+    --bg-subtle: var(--warm-50);           /* peach hero / accent surface */
+    --bg-inverse: var(--sand-900);         /* warm dark inverse surface */
+    --text-primary: var(--neutral-900);    /* graphite ink */
+    --text-secondary: var(--neutral-700);
+    --text-disabled: var(--neutral-400);
+    --text-inverse: var(--sand-50);        /* on dark / inverse / saturated bg */
+    --text-onPrimary: var(--sand-50);      /* on filled primary buttons */
+    --border-default: var(--neutral-200);  /* neutral, not beige */
+    --border-strong: var(--neutral-400);
+    --border-focus: var(--primary-600);
+    --interactive-default: var(--primary-600);
+    --interactive-hover: var(--primary-700);
+    --interactive-pressed: var(--primary-800);
+    --interactive-selected: var(--primary-100);
+    --interactive-disabled: var(--sand-200); /* soft warm disabled bg */
+    --interactive-secondary-default: var(--warm-700);
+    --interactive-secondary-hover: var(--warm-800);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg-default);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 48px 32px 96px;
+  }
+
+  /* Header */
+  header.masthead {
+    margin-bottom: 56px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border-default);
+  }
+  header.masthead h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  header.masthead .meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  header.masthead .meta span::after {
+    content: "·";
+    margin-left: 16px;
+    color: var(--neutral-400);
+  }
+  header.masthead .meta span:last-child::after { content: ""; }
+
+  /* Section */
+  section {
+    margin-bottom: 64px;
+  }
+  section > h2 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-default);
+  }
+  section > h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 32px 0 12px;
+    letter-spacing: -0.01em;
+  }
+  section > p {
+    color: var(--text-secondary);
+    margin: 0 0 16px;
+    max-width: 720px;
+  }
+
+  /* Scale rows */
+  .scale-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    margin-bottom: 20px;
+    align-items: start;
+  }
+  .scale-row .label {
+    padding-top: 12px;
+  }
+  .scale-row .label .name {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .scale-row .label .desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 4px;
+  }
+  .swatches.cat-3 {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 600px;
+  }
+  .swatch {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    aspect-ratio: 1 / 1.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8px;
+    font-size: 10px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  .swatch .stop {
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .swatch .hex {
+    opacity: 0.75;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .swatch.dark { color: rgba(255,255,255,0.92); }
+  .swatch.light { color: var(--neutral-900); }
+
+  /* Semantic tokens grid */
+  .tokens-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .token-card {
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 12px;
+    background: var(--bg-default);
+  }
+  .token-card .preview {
+    height: 56px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .token-card .name {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .token-card .ref {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background-color 120ms ease, border-color 120ms ease;
+    line-height: 1.2;
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+  }
+  .btn-primary {
+    background: var(--interactive-default);
+    color: var(--text-onPrimary);
+  }
+  .btn-primary:hover { background: var(--interactive-hover); }
+  .btn-primary:active { background: var(--interactive-pressed); }
+
+  .btn-secondaryAction {
+    background: var(--interactive-secondary-default);
+    color: var(--text-onPrimary);
+  }
+  .btn-secondaryAction:hover { background: var(--interactive-secondary-hover); }
+
+  .btn-outlined {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+  }
+  .btn-outlined:hover {
+    color: var(--interactive-default);
+    border-color: var(--interactive-default);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--interactive-default);
+  }
+  .btn-ghost:hover { color: var(--interactive-hover); }
+
+  .btn-disabled {
+    background: var(--interactive-disabled);
+    color: var(--text-disabled);
+    border-color: var(--border-default);
+    cursor: not-allowed;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .btn-row .label {
+    width: 140px;
+    font-size: 12px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    color: var(--text-secondary);
+  }
+
+  /* Badges */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    line-height: 1.4;
+  }
+  .badge.primary  { background: var(--primary-100);  color: var(--primary-800);  border-color: var(--primary-200); }
+  .badge.success  { background: var(--success-100);  color: var(--success-800);  border-color: var(--success-200); }
+  .badge.warning  { background: var(--warning-100);  color: var(--warning-800);  border-color: var(--warning-200); }
+  .badge.error    { background: var(--error-100);    color: var(--error-800);    border-color: var(--error-200); }
+  .badge.neutral  { background: var(--neutral-100);  color: var(--neutral-800);  border-color: var(--neutral-200); }
+  .badge.lavender { background: var(--lavender-100); color: var(--lavender-800); border-color: var(--lavender-200); }
+  .badge.rose     { background: var(--rose-100);     color: var(--rose-800);     border-color: var(--rose-200); }
+  .badge.sky      { background: var(--sky-100);      color: var(--sky-800);      border-color: var(--sky-200); }
+  .badge.moss     { background: var(--moss-100);     color: var(--moss-800);     border-color: var(--moss-200); }
+  .badge.clay     { background: var(--warm-100);     color: var(--warm-800);     border-color: var(--warm-200); }
+
+  .badge-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .badge-grid + .badge-grid-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: -16px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .group-title {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 24px 0 8px;
+    font-weight: 600;
+  }
+
+  /* Surfaces preview */
+  .surfaces {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .surface-card {
+    padding: 32px 24px;
+    border-radius: 16px;
+    border: 1px solid var(--border-default);
+    min-height: 180px;
+  }
+  .surface-card h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .surface-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .surface-default { background: var(--bg-default); color: var(--text-primary); }
+  .surface-default p { color: var(--text-secondary); }
+  .surface-subtle { background: var(--bg-subtle); color: var(--text-primary); }
+  .surface-subtle p { color: var(--text-secondary); }
+  .surface-inverse { background: var(--bg-inverse); color: var(--text-inverse); }
+  .surface-inverse p { color: var(--neutral-300); }
+
+  /* Selection */
+  .selection-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .selection-card {
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-default);
+    background: transparent;
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 140px;
+  }
+  .selection-card.selected {
+    background: var(--interactive-selected);
+    border-color: var(--interactive-default);
+    color: var(--interactive-default);
+  }
+  .selection-card.disabled {
+    background: var(--bg-subtle);
+    color: var(--text-disabled);
+    cursor: not-allowed;
+  }
+
+  /* Data viz row */
+  .dataviz-row {
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .dataviz-segment {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8px;
+    color: white;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+
+  /* Mock card */
+  .mock-stage {
+    background: var(--bg-subtle);
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid var(--border-default);
+  }
+  .mock-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .mock-card {
+    background: var(--bg-default);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border-default);
+  }
+  .mock-card .eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .mock-card h4 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .mock-card .meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .progress-track {
+    height: 8px;
+    background: var(--neutral-100);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--interactive-default);
+    border-radius: 9999px;
+  }
+
+  /* Illustration palette */
+  .illo-palette {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 6px;
+  }
+  .illo-chip {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 9px;
+  }
+  .illo-chip span { display: block; }
+  .illo-chip span.role { font-weight: 600; font-size: 10px; }
+
+  /* Notes */
+  .note {
+    background: var(--bg-subtle);
+    border-left: 3px solid var(--warm-400);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 16px 0;
+  }
+  .note strong { color: var(--text-primary); }
+
+  /* Mini illustration */
+  .illo-stage {
+    margin-top: 16px;
+    background: var(--warm-100);
+    border-radius: 16px;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--warm-200);
+  }
+  .illo-stage svg { width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="masthead">
+  <h1>Mobile Health Color System v2</h1>
+  <p style="color: var(--text-secondary); margin: 0; max-width: 720px;">
+    A warm, organic, accessible palette for a consumer-facing digital health product.
+    Built on a warm sand surface spine, structured by graphite-neutral ink, anchored by a muted teal, and softened by peach accents.
+  </p>
+  <div class="meta">
+    <span>Draft v2 — neutral / sand split</span>
+    <span>2026-05-01</span>
+    <span>Davinder Rehal</span>
+    <span>WCAG AA verified</span>
+  </div>
+</header>
+
+<!-- ============================================ -->
+<section>
+  <h2>Layer 1 — Core Palette Scales</h2>
+  <p>Seven core scales, eleven stops each (50–950). Architecture v2 — <strong>neutral</strong> (graphite ink for text/borders) and <strong>sand</strong> (warm beige for backgrounds) are now separate. Warm-leaning. No blue-grey. Every stop has been contrast-checked.</p>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">neutral</div>
+      <div class="desc">Graphite ink · text, borders, dividers</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--neutral-50)"><div class="stop">50</div><div class="hex">#F8F7F5</div></div>
+      <div class="swatch light" style="background: var(--neutral-100)"><div class="stop">100</div><div class="hex">#EEECE8</div></div>
+      <div class="swatch light" style="background: var(--neutral-200)"><div class="stop">200</div><div class="hex">#E1DEDA</div></div>
+      <div class="swatch light" style="background: var(--neutral-300)"><div class="stop">300</div><div class="hex">#BDB8B0</div></div>
+      <div class="swatch light" style="background: var(--neutral-400)"><div class="stop">400</div><div class="hex">#948D84</div></div>
+      <div class="swatch dark" style="background: var(--neutral-500)"><div class="stop">500</div><div class="hex">#6F6963</div></div>
+      <div class="swatch dark" style="background: var(--neutral-600)"><div class="stop">600</div><div class="hex">#58524D</div></div>
+      <div class="swatch dark" style="background: var(--neutral-700)"><div class="stop">700</div><div class="hex">#423D38</div></div>
+      <div class="swatch dark" style="background: var(--neutral-800)"><div class="stop">800</div><div class="hex">#2C2925</div></div>
+      <div class="swatch dark" style="background: var(--neutral-900)"><div class="stop">900</div><div class="hex">#1A1816</div></div>
+      <div class="swatch dark" style="background: var(--neutral-950)"><div class="stop">950</div><div class="hex">#0D0C0B</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">sand</div>
+      <div class="desc">Warm beige · backgrounds, surfaces</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--sand-50)"><div class="stop">50</div><div class="hex">#FBF9F5</div></div>
+      <div class="swatch light" style="background: var(--sand-100)"><div class="stop">100</div><div class="hex">#F4F0E8</div></div>
+      <div class="swatch light" style="background: var(--sand-200)"><div class="stop">200</div><div class="hex">#E7E0D2</div></div>
+      <div class="swatch light" style="background: var(--sand-300)"><div class="stop">300</div><div class="hex">#D5C8B2</div></div>
+      <div class="swatch light" style="background: var(--sand-400)"><div class="stop">400</div><div class="hex">#B5A283</div></div>
+      <div class="swatch dark" style="background: var(--sand-500)"><div class="stop">500</div><div class="hex">#918072</div></div>
+      <div class="swatch dark" style="background: var(--sand-600)"><div class="stop">600</div><div class="hex">#71625A</div></div>
+      <div class="swatch dark" style="background: var(--sand-700)"><div class="stop">700</div><div class="hex">#574A45</div></div>
+      <div class="swatch dark" style="background: var(--sand-800)"><div class="stop">800</div><div class="hex">#3D342F</div></div>
+      <div class="swatch dark" style="background: var(--sand-900)"><div class="stop">900</div><div class="hex">#25201D</div></div>
+      <div class="swatch dark" style="background: var(--sand-950)"><div class="stop">950</div><div class="hex">#131110</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">warm</div>
+      <div class="desc">Peach / terracotta accents</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--warm-50)"><div class="stop">50</div><div class="hex">#FDF6F1</div></div>
+      <div class="swatch light" style="background: var(--warm-100)"><div class="stop">100</div><div class="hex">#FBE9DC</div></div>
+      <div class="swatch light" style="background: var(--warm-200)"><div class="stop">200</div><div class="hex">#F5D4BC</div></div>
+      <div class="swatch light" style="background: var(--warm-300)"><div class="stop">300</div><div class="hex">#EDB995</div></div>
+      <div class="swatch light" style="background: var(--warm-400)"><div class="stop">400</div><div class="hex">#DD9669</div></div>
+      <div class="swatch dark" style="background: var(--warm-500)"><div class="stop">500</div><div class="hex">#C77548</div></div>
+      <div class="swatch dark" style="background: var(--warm-600)"><div class="stop">600</div><div class="hex">#A95C36</div></div>
+      <div class="swatch dark" style="background: var(--warm-700)"><div class="stop">700</div><div class="hex">#87492C</div></div>
+      <div class="swatch dark" style="background: var(--warm-800)"><div class="stop">800</div><div class="hex">#623625</div></div>
+      <div class="swatch dark" style="background: var(--warm-900)"><div class="stop">900</div><div class="hex">#3D241A</div></div>
+      <div class="swatch dark" style="background: var(--warm-950)"><div class="stop">950</div><div class="hex">#21130E</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">primary</div>
+      <div class="desc">Warmed teal · brand DNA</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--primary-50)"><div class="stop">50</div><div class="hex">#EEF7F6</div></div>
+      <div class="swatch light" style="background: var(--primary-100)"><div class="stop">100</div><div class="hex">#D5EDEB</div></div>
+      <div class="swatch light" style="background: var(--primary-200)"><div class="stop">200</div><div class="hex">#ABDAD6</div></div>
+      <div class="swatch light" style="background: var(--primary-300)"><div class="stop">300</div><div class="hex">#76C0BD</div></div>
+      <div class="swatch dark" style="background: var(--primary-400)"><div class="stop">400</div><div class="hex">#44A39F</div></div>
+      <div class="swatch dark" style="background: var(--primary-500)"><div class="stop">500</div><div class="hex">#267573</div></div>
+      <div class="swatch dark" style="background: var(--primary-600)"><div class="stop">600</div><div class="hex">#1E5C5B</div></div>
+      <div class="swatch dark" style="background: var(--primary-700)"><div class="stop">700</div><div class="hex">#184745</div></div>
+      <div class="swatch dark" style="background: var(--primary-800)"><div class="stop">800</div><div class="hex">#133534</div></div>
+      <div class="swatch dark" style="background: var(--primary-900)"><div class="stop">900</div><div class="hex">#0E2424</div></div>
+      <div class="swatch dark" style="background: var(--primary-950)"><div class="stop">950</div><div class="hex">#061313</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">success</div>
+      <div class="desc">Sage · organic green</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--success-50)"><div class="stop">50</div><div class="hex">#F1F6EE</div></div>
+      <div class="swatch light" style="background: var(--success-100)"><div class="stop">100</div><div class="hex">#DCEAD3</div></div>
+      <div class="swatch light" style="background: var(--success-200)"><div class="stop">200</div><div class="hex">#BCD5AB</div></div>
+      <div class="swatch light" style="background: var(--success-300)"><div class="stop">300</div><div class="hex">#94BB7E</div></div>
+      <div class="swatch dark" style="background: var(--success-400)"><div class="stop">400</div><div class="hex">#6F9F58</div></div>
+      <div class="swatch dark" style="background: var(--success-500)"><div class="stop">500</div><div class="hex">#4D7B36</div></div>
+      <div class="swatch dark" style="background: var(--success-600)"><div class="stop">600</div><div class="hex">#416A30</div></div>
+      <div class="swatch dark" style="background: var(--success-700)"><div class="stop">700</div><div class="hex">#335326</div></div>
+      <div class="swatch dark" style="background: var(--success-800)"><div class="stop">800</div><div class="hex">#253E1D</div></div>
+      <div class="swatch dark" style="background: var(--success-900)"><div class="stop">900</div><div class="hex">#182913</div></div>
+      <div class="swatch dark" style="background: var(--success-950)"><div class="stop">950</div><div class="hex">#0C160A</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">warning</div>
+      <div class="desc">Amber · warm gold</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--warning-50)"><div class="stop">50</div><div class="hex">#FDF6E5</div></div>
+      <div class="swatch light" style="background: var(--warning-100)"><div class="stop">100</div><div class="hex">#FBE9BC</div></div>
+      <div class="swatch light" style="background: var(--warning-200)"><div class="stop">200</div><div class="hex">#F7D484</div></div>
+      <div class="swatch light" style="background: var(--warning-300)"><div class="stop">300</div><div class="hex">#F0B645</div></div>
+      <div class="swatch dark" style="background: var(--warning-400)"><div class="stop">400</div><div class="hex">#DC9A1E</div></div>
+      <div class="swatch dark" style="background: var(--warning-500)"><div class="stop">500</div><div class="hex">#B97D14</div></div>
+      <div class="swatch dark" style="background: var(--warning-600)"><div class="stop">600</div><div class="hex">#95630F</div></div>
+      <div class="swatch dark" style="background: var(--warning-700)"><div class="stop">700</div><div class="hex">#74500D</div></div>
+      <div class="swatch dark" style="background: var(--warning-800)"><div class="stop">800</div><div class="hex">#553A0A</div></div>
+      <div class="swatch dark" style="background: var(--warning-900)"><div class="stop">900</div><div class="hex">#362507</div></div>
+      <div class="swatch dark" style="background: var(--warning-950)"><div class="stop">950</div><div class="hex">#1C1303</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">error</div>
+      <div class="desc">Coral / clay red</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--error-50)"><div class="stop">50</div><div class="hex">#FCEDEA</div></div>
+      <div class="swatch light" style="background: var(--error-100)"><div class="stop">100</div><div class="hex">#F8D5CE</div></div>
+      <div class="swatch light" style="background: var(--error-200)"><div class="stop">200</div><div class="hex">#F1A99B</div></div>
+      <div class="swatch dark" style="background: var(--error-300)"><div class="stop">300</div><div class="hex">#E47D67</div></div>
+      <div class="swatch dark" style="background: var(--error-400)"><div class="stop">400</div><div class="hex">#D4583B</div></div>
+      <div class="swatch dark" style="background: var(--error-500)"><div class="stop">500</div><div class="hex">#B5421F</div></div>
+      <div class="swatch dark" style="background: var(--error-600)"><div class="stop">600</div><div class="hex">#913418</div></div>
+      <div class="swatch dark" style="background: var(--error-700)"><div class="stop">700</div><div class="hex">#6F2912</div></div>
+      <div class="swatch dark" style="background: var(--error-800)"><div class="stop">800</div><div class="hex">#4F1D0D</div></div>
+      <div class="swatch dark" style="background: var(--error-900)"><div class="stop">900</div><div class="hex">#321307</div></div>
+      <div class="swatch dark" style="background: var(--error-950)"><div class="stop">950</div><div class="hex">#1A0903</div></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Contrast flags.</strong>
+    <code>neutral.500</code>, <code>warm.500</code>, <code>warning.500</code> fail AA for text on white — flagged as chip-bg / large-icon-only.
+    <code>primary.400</code> sits at the UI 3:1 threshold — accent only.
+    <code>success.500</code> was nudged from <code>#54843D</code> → <code>#4D7B36</code> to clear AA.
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section>
+  <h2>Layer 1 (extended) — Categorical Scales</h2>
+  <p>Five auxiliary scales for badges, module-tinted icons, and data viz. Hues chosen to be non-overlapping with the semantic set so they read as distinct categories, not as success/warning/error.</p>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">lavender</div>
+      <div class="desc">Health Data, Biometrics, Conditions</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--lavender-50)"><div class="stop">50</div><div class="hex">#F7F2FB</div></div>
+      <div class="swatch light" style="background: var(--lavender-100)"><div class="stop">100</div><div class="hex">#ECE3F4</div></div>
+      <div class="swatch light" style="background: var(--lavender-200)"><div class="stop">200</div><div class="hex">#D2BFE4</div></div>
+      <div class="swatch light" style="background: var(--lavender-300)"><div class="stop">300</div><div class="hex">#AE91CD</div></div>
+      <div class="swatch dark" style="background: var(--lavender-400)"><div class="stop">400</div><div class="hex">#8C66B5</div></div>
+      <div class="swatch dark" style="background: var(--lavender-500)"><div class="stop">500</div><div class="hex">#6F47A0</div></div>
+      <div class="swatch dark" style="background: var(--lavender-600)"><div class="stop">600</div><div class="hex">#57368B</div></div>
+      <div class="swatch dark" style="background: var(--lavender-700)"><div class="stop">700</div><div class="hex">#422973</div></div>
+      <div class="swatch dark" style="background: var(--lavender-800)"><div class="stop">800</div><div class="hex">#2F1D54</div></div>
+      <div class="swatch dark" style="background: var(--lavender-900)"><div class="stop">900</div><div class="hex">#1E1338</div></div>
+      <div class="swatch dark" style="background: var(--lavender-950)"><div class="stop">950</div><div class="hex">#100920</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">rose</div>
+      <div class="desc">Mental health, wellbeing</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--rose-50)"><div class="stop">50</div><div class="hex">#FDF1F5</div></div>
+      <div class="swatch light" style="background: var(--rose-100)"><div class="stop">100</div><div class="hex">#F8E2EA</div></div>
+      <div class="swatch light" style="background: var(--rose-200)"><div class="stop">200</div><div class="hex">#EFC0D0</div></div>
+      <div class="swatch light" style="background: var(--rose-300)"><div class="stop">300</div><div class="hex">#E090A8</div></div>
+      <div class="swatch dark" style="background: var(--rose-400)"><div class="stop">400</div><div class="hex">#CE5F80</div></div>
+      <div class="swatch dark" style="background: var(--rose-500)"><div class="stop">500</div><div class="hex">#B53D62</div></div>
+      <div class="swatch dark" style="background: var(--rose-600)"><div class="stop">600</div><div class="hex">#952C4D</div></div>
+      <div class="swatch dark" style="background: var(--rose-700)"><div class="stop">700</div><div class="hex">#74233D</div></div>
+      <div class="swatch dark" style="background: var(--rose-800)"><div class="stop">800</div><div class="hex">#531829</div></div>
+      <div class="swatch dark" style="background: var(--rose-900)"><div class="stop">900</div><div class="hex">#340E18</div></div>
+      <div class="swatch dark" style="background: var(--rose-950)"><div class="stop">950</div><div class="hex">#1B070C</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">sky</div>
+      <div class="desc">Journeys, onboarding</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--sky-50)"><div class="stop">50</div><div class="hex">#EEF7FB</div></div>
+      <div class="swatch light" style="background: var(--sky-100)"><div class="stop">100</div><div class="hex">#DCEDF5</div></div>
+      <div class="swatch light" style="background: var(--sky-200)"><div class="stop">200</div><div class="hex">#B7DAEC</div></div>
+      <div class="swatch light" style="background: var(--sky-300)"><div class="stop">300</div><div class="hex">#82BDD9</div></div>
+      <div class="swatch dark" style="background: var(--sky-400)"><div class="stop">400</div><div class="hex">#4F9DC1</div></div>
+      <div class="swatch dark" style="background: var(--sky-500)"><div class="stop">500</div><div class="hex">#3081A6</div></div>
+      <div class="swatch dark" style="background: var(--sky-600)"><div class="stop">600</div><div class="hex">#266888</div></div>
+      <div class="swatch dark" style="background: var(--sky-700)"><div class="stop">700</div><div class="hex">#1F526C</div></div>
+      <div class="swatch dark" style="background: var(--sky-800)"><div class="stop">800</div><div class="hex">#163C50</div></div>
+      <div class="swatch dark" style="background: var(--sky-900)"><div class="stop">900</div><div class="hex">#102934</div></div>
+      <div class="swatch dark" style="background: var(--sky-950)"><div class="stop">950</div><div class="hex">#07161C</div></div>
+    </div>
+  </div>
+
+  <div class="scale-row">
+    <div class="label">
+      <div class="name">moss</div>
+      <div class="desc">DCP, clinical care</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch light" style="background: var(--moss-50)"><div class="stop">50</div><div class="hex">#EFF5F1</div></div>
+      <div class="swatch light" style="background: var(--moss-100)"><div class="stop">100</div><div class="hex">#DCEAE2</div></div>
+      <div class="swatch light" style="background: var(--moss-200)"><div class="stop">200</div><div class="hex">#B5D2C2</div></div>
+      <div class="swatch light" style="background: var(--moss-300)"><div class="stop">300</div><div class="hex">#84B499</div></div>
+      <div class="swatch dark" style="background: var(--moss-400)"><div class="stop">400</div><div class="hex">#559478</div></div>
+      <div class="swatch dark" style="background: var(--moss-500)"><div class="stop">500</div><div class="hex">#3A7B5E</div></div>
+      <div class="swatch dark" style="background: var(--moss-600)"><div class="stop">600</div><div class="hex">#2B624A</div></div>
+      <div class="swatch dark" style="background: var(--moss-700)"><div class="stop">700</div><div class="hex">#214D3A</div></div>
+      <div class="swatch dark" style="background: var(--moss-800)"><div class="stop">800</div><div class="hex">#18382A</div></div>
+      <div class="swatch dark" style="background: var(--moss-900)"><div class="stop">900</div><div class="hex">#10261C</div></div>
+      <div class="swatch dark" style="background: var(--moss-950)"><div class="stop">950</div><div class="hex">#06140E</div></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>clay</strong> reuses the <code>warm.*</code> scale (no separate hex set). It maps to Healthy Habits, activity, challenges.
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section>
+  <h2>Layer 2 — Semantic Tokens</h2>
+  <p>Every token references a Layer 1 stop. UI consumes semantic tokens — never raw hex.</p>
+
+  <h3>Backgrounds & text</h3>
+  <div class="surfaces">
+    <div class="surface-card surface-default">
+      <h4>background.default</h4>
+      <p style="font-family: ui-monospace, monospace; font-size: 11px;">→ neutral.50</p>
+      <p>Primary page surface. Warm cream sets the tone — no flat white anywhere in the product.</p>
+    </div>
+    <div class="surface-card surface-subtle">
+      <h4>background.subtle</h4>
+      <p style="font-family: ui-monospace, monospace; font-size: 11px;">→ warm.50</p>
+      <p>Hero cards, empty states, celebratory moments. Almost imperceptibly peach.</p>
+    </div>
+    <div class="surface-card surface-inverse">
+      <h4>background.inverse</h4>
+      <p style="font-family: ui-monospace, monospace; font-size: 11px;">→ neutral.900</p>
+      <p>Dark surfaces. Modals on top of OS dark, contrast moments, dark mode hooks.</p>
+    </div>
+  </div>
+
+  <h3>Token cards</h3>
+  <div class="tokens-grid">
+    <div class="token-card">
+      <div class="preview" style="background: var(--text-primary)"></div>
+      <div class="name">text.primary</div>
+      <div class="ref">→ neutral.900 · 14.5:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--text-secondary)"></div>
+      <div class="name">text.secondary</div>
+      <div class="ref">→ neutral.700 · 8.10:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--text-disabled)"></div>
+      <div class="name">text.disabled</div>
+      <div class="ref">→ neutral.400 · intentionally muted</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--border-default)"></div>
+      <div class="name">border.default</div>
+      <div class="ref">→ neutral.200 · subtle dividers</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--border-strong)"></div>
+      <div class="name">border.strong</div>
+      <div class="ref">→ neutral.400 · input boundaries</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--border-focus)"></div>
+      <div class="name">border.focus</div>
+      <div class="ref">→ primary.600 · 7.7:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--interactive-default)"></div>
+      <div class="name">interactive.default</div>
+      <div class="ref">→ primary.600 · 7.7:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--interactive-hover)"></div>
+      <div class="name">interactive.hover</div>
+      <div class="ref">→ primary.700 · 10.4:1</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--interactive-pressed)"></div>
+      <div class="name">interactive.pressed</div>
+      <div class="ref">→ primary.800 · 13.6:1</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--interactive-secondary-default)"></div>
+      <div class="name">interactive.secondary.default</div>
+      <div class="ref">→ warm.700 · warm complement</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section>
+  <h2>Layer 3 — Components</h2>
+
+  <h3>Buttons</h3>
+  <div class="btn-row">
+    <div class="label">primary</div>
+    <button class="btn btn-primary">Get started</button>
+    <button class="btn btn-primary" style="background: var(--interactive-hover)">Get started <span style="opacity:0.7; font-weight: 400; font-size: 11px;">(hover)</span></button>
+    <button class="btn btn-primary" style="background: var(--interactive-pressed)">Get started <span style="opacity:0.7; font-weight: 400; font-size: 11px;">(pressed)</span></button>
+  </div>
+  <div class="btn-row">
+    <div class="label">secondary action</div>
+    <button class="btn btn-secondaryAction">Continue</button>
+    <button class="btn btn-secondaryAction" style="background: var(--interactive-secondary-hover)">Continue <span style="opacity:0.7; font-weight: 400; font-size: 11px;">(hover)</span></button>
+  </div>
+  <div class="btn-row">
+    <div class="label">outlined</div>
+    <button class="btn btn-outlined">Skip for now</button>
+    <button class="btn btn-outlined" style="color: var(--interactive-default); border-color: var(--interactive-default);">Skip for now <span style="opacity:0.7; font-weight: 400; font-size: 11px;">(hover)</span></button>
+  </div>
+  <div class="btn-row">
+    <div class="label">ghost</div>
+    <button class="btn btn-ghost">Learn more</button>
+    <button class="btn btn-ghost" style="color: var(--interactive-hover);">Learn more <span style="opacity:0.7; font-weight: 400; font-size: 11px;">(hover)</span></button>
+  </div>
+  <div class="btn-row">
+    <div class="label">disabled</div>
+    <button class="btn btn-disabled" disabled>Get started</button>
+  </div>
+
+  <h3>Badges & lozenges</h3>
+  <div class="group-title">Semantic</div>
+  <div class="badge-grid">
+    <span class="badge primary">Primary</span>
+    <span class="badge success">Connected</span>
+    <span class="badge warning">Action needed</span>
+    <span class="badge error">Error</span>
+    <span class="badge neutral">Neutral</span>
+  </div>
+  <div class="group-title">Categorical (per-module)</div>
+  <div class="badge-grid">
+    <span class="badge lavender">Health Data</span>
+    <span class="badge moss">DCP</span>
+    <span class="badge sky">Journey</span>
+    <span class="badge rose">Wellbeing</span>
+    <span class="badge clay">Healthy Habits</span>
+  </div>
+
+  <h3>Selection</h3>
+  <div class="selection-row">
+    <div class="selection-card">Default</div>
+    <div class="selection-card selected">Selected</div>
+    <div class="selection-card disabled">Disabled</div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section>
+  <h2>Data Visualization (shared with core palette)</h2>
+  <p>Approved categorical hues for charts, progress rings, segmented data. Use the <code>500</code> stops below.</p>
+  <div class="dataviz-row">
+    <div class="dataviz-segment" style="background: var(--primary-500)"><div>primary.500</div><div style="opacity: 0.85">#267573</div></div>
+    <div class="dataviz-segment" style="background: var(--warm-500)"><div>warm.500</div><div style="opacity: 0.85">#C77548</div></div>
+    <div class="dataviz-segment" style="background: var(--lavender-500)"><div>lavender.500</div><div style="opacity: 0.85">#6F47A0</div></div>
+    <div class="dataviz-segment" style="background: var(--rose-500)"><div>rose.500</div><div style="opacity: 0.85">#B53D62</div></div>
+    <div class="dataviz-segment" style="background: var(--sky-500)"><div>sky.500</div><div style="opacity: 0.85">#3081A6</div></div>
+    <div class="dataviz-segment" style="background: var(--moss-500)"><div>moss.500</div><div style="opacity: 0.85">#3A7B5E</div></div>
+    <div class="dataviz-segment" style="background: var(--warning-500)"><div>warning.500</div><div style="opacity: 0.85">#B97D14</div></div>
+  </div>
+  <p style="font-size: 13px;">Sequential single-hue gradients (heatmaps, progress fills) use stops <code>200 → 700</code> of any approved hue.</p>
+</section>
+
+<!-- ============================================ -->
+<section>
+  <h2>Sample Card Stage</h2>
+  <p>The system applied to a small UI surface — to sanity-check warm, organic feel.</p>
+  <div class="mock-stage">
+    <div class="mock-grid">
+      <div class="mock-card">
+        <div class="eyebrow">Healthy Habits</div>
+        <h4>Move 30 minutes today</h4>
+        <div class="meta">22 of 30 minutes · keep going</div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: 73%"></div>
+        </div>
+        <div style="margin-top: 16px; display: flex; gap: 8px;">
+          <span class="badge clay">Activity</span>
+          <span class="badge success">+12 streak</span>
+        </div>
+      </div>
+      <div class="mock-card">
+        <div class="eyebrow">Care · Back Pain</div>
+        <h4>Today's session is ready</h4>
+        <div class="meta">Six exercises · ~12 min</div>
+        <div style="display: flex; gap: 8px; margin-top: 16px;">
+          <button class="btn btn-primary">Start session</button>
+          <button class="btn btn-ghost">Skip</button>
+        </div>
+      </div>
+      <div class="mock-card">
+        <div class="eyebrow">Health Data</div>
+        <h4>Resting heart rate</h4>
+        <div class="meta">62 bpm · within range</div>
+        <div style="display: flex; align-items: end; gap: 4px; height: 56px; margin-top: 12px;">
+          <div style="background: var(--lavender-200); width: 14px; height: 40%; border-radius: 4px;"></div>
+          <div style="background: var(--lavender-300); width: 14px; height: 65%; border-radius: 4px;"></div>
+          <div style="background: var(--lavender-400); width: 14px; height: 50%; border-radius: 4px;"></div>
+          <div style="background: var(--lavender-500); width: 14px; height: 75%; border-radius: 4px;"></div>
+          <div style="background: var(--lavender-400); width: 14px; height: 60%; border-radius: 4px;"></div>
+          <div style="background: var(--lavender-300); width: 14px; height: 70%; border-radius: 4px;"></div>
+          <div style="background: var(--lavender-500); width: 14px; height: 90%; border-radius: 4px;"></div>
+        </div>
+      </div>
+      <div class="mock-card">
+        <div class="eyebrow">Journey · Onboarding</div>
+        <h4>Welcome, let's set you up</h4>
+        <div class="meta">Step 2 of 5</div>
+        <div style="display: flex; gap: 8px; margin-top: 16px;">
+          <button class="btn btn-secondaryAction">Continue</button>
+          <button class="btn btn-outlined">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section>
+  <h2>Layer 5 — Illustration Palette</h2>
+  <p>Illustrations live in the <code>100–500</code> range. The <code>600+</code> range belongs to UI emphasis and text.</p>
+
+  <div class="group-title">Surfaces</div>
+  <div class="illo-palette">
+    <div class="illo-chip" style="background: var(--neutral-50); color: var(--neutral-800);"><span class="role">surface</span><span>neutral.50</span></div>
+    <div class="illo-chip" style="background: var(--warm-100); color: var(--warm-800);"><span class="role">surface</span><span>warm.100</span></div>
+    <div class="illo-chip" style="background: var(--warm-200); color: var(--warm-800);"><span class="role">surface</span><span>warm.200</span></div>
+  </div>
+
+  <div class="group-title">Accents · primary</div>
+  <div class="illo-palette">
+    <div class="illo-chip" style="background: var(--primary-300); color: var(--primary-900);"><span class="role">accent</span><span>primary.300</span></div>
+    <div class="illo-chip" style="background: var(--primary-400); color: white;"><span class="role">accent</span><span>primary.400</span></div>
+  </div>
+
+  <div class="group-title">Organic tones · warm + nature</div>
+  <div class="illo-palette">
+    <div class="illo-chip" style="background: var(--warm-300); color: var(--warm-900);"><span class="role">organic</span><span>warm.300</span></div>
+    <div class="illo-chip" style="background: var(--warm-400); color: white;"><span class="role">organic</span><span>warm.400</span></div>
+    <div class="illo-chip" style="background: var(--success-300); color: var(--success-900);"><span class="role">nature</span><span>success.300</span></div>
+    <div class="illo-chip" style="background: var(--moss-400); color: white;"><span class="role">nature</span><span>moss.400</span></div>
+    <div class="illo-chip" style="background: var(--sky-200); color: var(--sky-900);"><span class="role">sky</span><span>sky.200</span></div>
+    <div class="illo-chip" style="background: var(--sky-300); color: var(--sky-900);"><span class="role">sky</span><span>sky.300</span></div>
+  </div>
+
+  <div class="group-title">Emphasis (one per illustration max)</div>
+  <div class="illo-palette">
+    <div class="illo-chip" style="background: var(--primary-500); color: white;"><span class="role">emphasis</span><span>primary.500</span></div>
+    <div class="illo-chip" style="background: var(--warm-500); color: white;"><span class="role">emphasis</span><span>warm.500</span></div>
+  </div>
+
+  <h3>Style demo — expressive register</h3>
+  <p>Approximate composition cues: warm peach field, organic wave line, soft figure, single emphasis spot.</p>
+  <div class="illo-stage">
+    <svg viewBox="0 0 800 240" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <!-- background fill (warm.100 already on parent) -->
+      <!-- soft cloud shape -->
+      <path d="M -50 60 Q 100 20 200 70 T 450 60 T 750 90 T 900 70 L 900 0 L -50 0 Z" fill="var(--warm-200)" opacity="0.7"/>
+      <!-- wave line -->
+      <path d="M -20 160 Q 150 100 300 160 T 600 160 T 900 140" stroke="var(--warm-300)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- decorative leaves -->
+      <ellipse cx="80" cy="200" rx="45" ry="22" fill="var(--moss-300)" transform="rotate(-25 80 200)"/>
+      <ellipse cx="120" cy="215" rx="35" ry="16" fill="var(--moss-400)" transform="rotate(-10 120 215)"/>
+      <ellipse cx="720" cy="205" rx="50" ry="22" fill="var(--success-300)" transform="rotate(20 720 205)"/>
+      <!-- figure -->
+      <g transform="translate(380 80)">
+        <!-- head -->
+        <circle cx="20" cy="0" r="22" fill="var(--warm-300)"/>
+        <!-- hair -->
+        <path d="M -2 -10 Q 20 -28 42 -10 Q 40 -22 20 -25 Q 0 -22 -2 -10 Z" fill="var(--neutral-900)"/>
+        <!-- body -->
+        <path d="M 0 22 Q -8 80 -4 130 L 44 130 Q 48 80 40 22 Q 30 18 20 18 Q 10 18 0 22 Z" fill="var(--primary-400)"/>
+        <!-- arms (one stretched up) -->
+        <path d="M 0 28 Q -25 50 -30 90" stroke="var(--warm-300)" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M 40 28 Q 60 0 50 -40" stroke="var(--warm-300)" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <!-- emphasis dot -->
+        <circle cx="50" cy="-44" r="6" fill="var(--primary-500)"/>
+      </g>
+      <!-- simple plant on right -->
+      <g transform="translate(620 130)">
+        <path d="M 0 50 Q 0 0 -20 -30" stroke="var(--moss-500)" stroke-width="3" fill="none"/>
+        <ellipse cx="-20" cy="-25" rx="12" ry="22" fill="var(--moss-300)" transform="rotate(-20 -20 -25)"/>
+        <ellipse cx="-5" cy="-15" rx="14" ry="22" fill="var(--moss-400)" transform="rotate(15 -5 -15)"/>
+        <circle cx="-20" cy="-30" r="6" fill="var(--warm-400)"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="note">
+    <strong>Off-limits in illustration:</strong> all <code>error.*</code>, all <code>warning.*</code>, <code>neutral.800+</code>, sharp geometric fills, cold blues, overtly medical imagery.
+  </div>
+</section>
+
+<!-- ============================================ -->
+<section>
+  <h2>Accessibility — At a Glance</h2>
+  <p>All component pairings clear WCAG AA. Primary button stack clears AAA.</p>
+  <div class="tokens-grid">
+    <div class="token-card">
+      <div class="preview" style="background: var(--interactive-default); display: flex; align-items: center; justify-content: center; color: var(--text-onPrimary); font-weight: 600;">Aa Button label</div>
+      <div class="name">primary button</div>
+      <div class="ref">7.6:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--bg-default); display: flex; align-items: center; justify-content: center; color: var(--text-primary); font-weight: 600; border: 1px solid var(--border-default);">Aa Body text</div>
+      <div class="name">body on default</div>
+      <div class="ref">14.5:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--bg-subtle); display: flex; align-items: center; justify-content: center; color: var(--text-primary); font-weight: 600; border: 1px solid var(--border-default);">Aa Body on warm</div>
+      <div class="name">body on subtle</div>
+      <div class="ref">14.0:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--primary-100); display: flex; align-items: center; justify-content: center; color: var(--primary-800); font-weight: 600;">Aa Badge text</div>
+      <div class="name">primary badge</div>
+      <div class="ref">10.4:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--warning-100); display: flex; align-items: center; justify-content: center; color: var(--warning-800); font-weight: 600;">Aa Warning</div>
+      <div class="name">warning badge</div>
+      <div class="ref">8.9:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--error-100); display: flex; align-items: center; justify-content: center; color: var(--error-800); font-weight: 600;">Aa Error</div>
+      <div class="name">error badge</div>
+      <div class="ref">10.2:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--lavender-100); display: flex; align-items: center; justify-content: center; color: var(--lavender-800); font-weight: 600;">Aa Lavender</div>
+      <div class="name">lavender badge</div>
+      <div class="ref">11.0:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--rose-100); display: flex; align-items: center; justify-content: center; color: var(--rose-800); font-weight: 600;">Aa Rose</div>
+      <div class="name">rose badge</div>
+      <div class="ref">11.5:1 ✓ AAA</div>
+    </div>
+    <div class="token-card">
+      <div class="preview" style="background: var(--moss-100); display: flex; align-items: center; justify-content: center; color: var(--moss-800); font-weight: 600;">Aa Moss</div>
+      <div class="name">moss badge</div>
+      <div class="ref">11.0:1 ✓ AAA</div>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

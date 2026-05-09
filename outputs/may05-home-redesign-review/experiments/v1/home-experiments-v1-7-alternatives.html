@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — 7 Wireframe Experiments · v1</title>
+<style>
+  :root {
+    --cream: #f5f2ec;
+    --paper: #fbf9f5;
+    --paper-2: #fffdf8;
+    --ink: #1f1f1f;
+    --ink-2: #4a4a4a;
+    --ink-3: #7a7a7a;
+    --ink-4: #a59f93;
+    --line: #cdc8bd;
+    --line-2: #e2ddd2;
+    --accent: #0f497f;
+    --accent-soft: #e6eef6;
+    --accent-mid: #c9d8e8;
+    --employer: #2a5d3f;
+    --employer-soft: #e8f0ea;
+    --employer-mid: #c7d8cc;
+    --interest: #0f497f;
+    --interest-soft: #e6eef6;
+    --interest-mid: #c9d8e8;
+    --sales: #6e3a8a;
+    --sales-soft: #efe5f5;
+    --sales-mid: #d8c5e0;
+    --challenge: #b35418;
+    --challenge-soft: #faecd7;
+    --challenge-mid: #ecd0a8;
+    --program: #5a4a2a;
+    --program-soft: #efeae2;
+    --program-mid: #d8cdb8;
+    --tracker: #4a6e8a;
+    --tracker-soft: #dde6ef;
+    --tracker-mid: #b9c9d8;
+    --insight: #3a6e6a;
+    --insight-soft: #d9e7e5;
+    --insight-mid: #abc4c1;
+    --rewards: #8a5a2a;
+    --rewards-soft: #efe2cf;
+    --rewards-mid: #d6bf9c;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .page { max-width: 1500px; margin: 0 auto; padding: 32px 28px 80px; }
+
+  h1, h2, h3, h4 { margin: 0; }
+
+  .doc-header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 28px; }
+  .doc-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .doc-header .meta { font-size: 12px; color: var(--ink-3); margin-bottom: 16px; }
+  .doc-header .lede { font-size: 13.5px; color: var(--ink-2); max-width: 1100px; line-height: 1.6; margin-bottom: 14px; }
+  .doc-header .lede + .lede { margin-top: 10px; }
+
+  .legend { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; margin-bottom: 12px; max-width: 1200px; }
+  .legend > section { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+  .legend h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-3); margin-bottom: 8px; }
+  .legend .row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-2); margin-bottom: 4px; }
+  .legend .swatch { width: 22px; height: 14px; border: 1px solid var(--line); border-radius: 2px; flex-shrink: 0; }
+  .legend .key { font-weight: 700; color: var(--ink); width: 96px; flex-shrink: 0; font-size: 11.5px; }
+
+  /* table of experiments */
+  .toc { width: 100%; border-collapse: collapse; margin: 18px 0 36px; font-size: 12.5px; max-width: 1300px; }
+  .toc th, .toc td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  .toc th { background: var(--paper); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); }
+  .toc td.num { font-weight: 700; width: 32px; color: var(--accent); }
+  .toc td.name { font-weight: 700; width: 200px; }
+  .toc td.thesis { color: var(--ink-2); }
+  .toc tr:hover td { background: #fffaf0; }
+
+  /* experiment block */
+  .exp { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 22px 22px 24px; margin-bottom: 28px; }
+  .exp-h { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+  .exp-h .num { font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 1.4px; text-transform: uppercase; }
+  .exp-h h2 { font-size: 18px; font-weight: 700; }
+  .exp-thesis { font-size: 13px; color: var(--ink-2); line-height: 1.55; max-width: 1200px; margin-bottom: 16px; }
+  .exp-thesis b { color: var(--ink); }
+
+  /* frames row: desktop left, mobile right */
+  .frames { display: grid; grid-template-columns: 1fr 400px; gap: 24px; align-items: start; }
+  @media (max-width: 1100px) {
+    .frames { grid-template-columns: 1fr; }
+  }
+
+  .frame { background: var(--paper-2); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .frame-cap { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; color: var(--ink-3); padding: 8px 12px; border-bottom: 1px dashed var(--line); }
+  .frame-cap b { font-size: 12px; color: var(--ink); font-weight: 700; }
+  .frame-body { padding: 12px; background: #fff; }
+
+  /* desktop — wider artboard */
+  .frame-d .canvas { background: #fff; padding: 0; border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; }
+
+  /* mobile — fixed width to suggest 375px */
+  .frame-m .canvas { background: #fff; padding: 0; border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; width: 320px; margin: 0 auto; }
+
+  /* blocks — the wireframe primitives */
+  .b {
+    border-bottom: 1px solid var(--line-2);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .b:last-child { border-bottom: 0; }
+  .b .num { font-size: 9.5px; font-weight: 700; color: var(--ink-4); width: 14px; flex-shrink: 0; letter-spacing: 0.4px; }
+  .b .name { font-size: 11.5px; font-weight: 700; color: var(--ink); flex: 1; }
+  .b .meta { font-size: 10px; color: var(--ink-3); white-space: nowrap; flex-shrink: 0; letter-spacing: 0.3px; }
+  .b .pip { font-size: 9.5px; font-weight: 700; color: var(--ink-3); padding: 1px 5px; background: rgba(255,255,255,0.6); border: 1px solid var(--line); border-radius: 3px; flex-shrink: 0; }
+
+  /* mobile blocks — smaller text */
+  .frame-m .b .name { font-size: 10.5px; }
+  .frame-m .b .meta { font-size: 9px; }
+  .frame-m .b .pip { font-size: 8.5px; padding: 0 4px; }
+
+  /* weight → height (desktop / mobile) */
+  .b.w5 { height: 88px; }
+  .b.w4 { height: 64px; }
+  .b.w3 { height: 48px; }
+  .b.w2 { height: 30px; }
+  .b.w1 { height: 22px; }
+  .frame-m .b.w5 { height: 96px; }
+  .frame-m .b.w4 { height: 70px; }
+  .frame-m .b.w3 { height: 52px; }
+  .frame-m .b.w2 { height: 34px; }
+  .frame-m .b.w1 { height: 24px; }
+
+  /* intent → fill */
+  .b.i-frame { background: var(--cream); }
+  .b.i-greeting { background: var(--paper); }
+  .b.i-anchor { background: var(--ink); color: #fff; }
+  .b.i-anchor .name { color: #fff; }
+  .b.i-anchor .meta { color: #ddd; }
+  .b.i-anchor .num { color: #999; }
+  .b.i-momentum { background: var(--program-soft); border-left: 4px solid var(--program); }
+  .b.i-tracker { background: var(--tracker-soft); border-left: 4px solid var(--tracker); }
+  .b.i-insight { background: var(--insight-soft); border-left: 4px solid var(--insight); }
+  .b.i-employer { background: var(--employer-soft); border-left: 4px solid var(--employer); }
+  .b.i-interest { background: var(--interest-soft); border-left: 4px solid var(--interest); }
+  .b.i-challenge { background: var(--challenge-soft); border-left: 4px solid var(--challenge); }
+  .b.i-rewards { background: var(--rewards-soft); border-left: 4px solid var(--rewards); }
+  .b.i-action { background: var(--sales-soft); border-left: 4px solid var(--sales); }
+  .b.i-strip { background: linear-gradient(to right, var(--paper-2), var(--cream)); border-bottom: 1px solid var(--line); }
+
+  /* row of horizontal sub-blocks (3-up, 2-up, 4-up) */
+  .b-row { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 1px solid var(--line-2); background: #fff; }
+  .b-row:last-child { border-bottom: 0; }
+  .b-row .sub {
+    flex: 1;
+    border-radius: 3px;
+    padding: 8px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-height: 56px;
+  }
+  .b-row.short .sub { min-height: 38px; }
+  .b-row.tall .sub { min-height: 74px; }
+  .sub .sub-name { font-size: 10.5px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .sub .sub-meta { font-size: 9.5px; color: var(--ink-3); }
+  .frame-m .sub .sub-name { font-size: 9.5px; }
+  .frame-m .sub .sub-meta { font-size: 8.5px; }
+  .sub.s-tracker { background: var(--tracker-soft); border: 1px solid var(--tracker-mid); }
+  .sub.s-program { background: var(--program-soft); border: 1px solid var(--program-mid); }
+  .sub.s-employer { background: var(--employer-soft); border: 1px solid var(--employer-mid); }
+  .sub.s-interest { background: var(--interest-soft); border: 1px solid var(--interest-mid); }
+  .sub.s-rewards { background: var(--rewards-soft); border: 1px solid var(--rewards-mid); }
+  .sub.s-challenge { background: var(--challenge-soft); border: 1px solid var(--challenge-mid); }
+  .sub.s-action { background: var(--sales-soft); border: 1px solid var(--sales-mid); }
+  .sub.s-insight { background: var(--insight-soft); border: 1px solid var(--insight-mid); }
+
+  /* two-column band (for experiment 5) */
+  .b-2col { display: grid; grid-template-columns: 1.5fr 1fr; gap: 8px; padding: 8px 12px; background: #fff; border-bottom: 1px solid var(--line-2); }
+  .b-2col .col { display: flex; flex-direction: column; gap: 6px; }
+  .b-2col .b { border-bottom: 0; border-radius: 3px; padding: 0 10px; }
+
+  /* hero variants used in some experiments */
+  .b-hero-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; height: 88px; border-bottom: 1px solid var(--line-2); }
+  .b-hero-split .photo {
+    background:
+      linear-gradient(45deg, transparent 49%, var(--ink-3) 49%, var(--ink-3) 51%, transparent 51%),
+      linear-gradient(-45deg, transparent 49%, var(--ink-3) 49%, var(--ink-3) 51%, transparent 51%),
+      var(--ink-2);
+    background-size: 24px 24px, 24px 24px, 100% 100%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 9px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 700;
+  }
+  .b-hero-split .copy { background: var(--ink); color: #fff; padding: 12px 14px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+  .b-hero-split .copy .h-name { font-size: 11.5px; font-weight: 700; }
+  .b-hero-split .copy .h-meta { font-size: 10px; color: #ccc; }
+  .b-hero-split .copy .h-cta { font-size: 9.5px; color: #ccc; padding: 3px 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); border-radius: 3px; align-self: flex-start; margin-top: 2px; }
+  .frame-m .b-hero-split { grid-template-columns: 1fr; height: auto; }
+  .frame-m .b-hero-split .photo { height: 64px; }
+  .frame-m .b-hero-split .copy { padding: 10px 12px; }
+
+  /* compressed hero (experiment 3) */
+  .b-hero-compressed {
+    background: var(--ink); color: #fff; padding: 12px 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--line-2);
+    height: 64px;
+  }
+  .b-hero-compressed .photo { width: 80px; height: 40px; background: var(--ink-2); border: 1px dashed #555; flex-shrink: 0; display: grid; place-items: center; font-size: 8px; color: #999; }
+  .b-hero-compressed .name { font-size: 11.5px; font-weight: 700; flex: 1; }
+  .b-hero-compressed .meta { font-size: 10px; color: #bbb; }
+
+  /* combined tracker+insights module (experiment 6) */
+  .b-combo { background: linear-gradient(to bottom, var(--tracker-soft), var(--insight-soft)); border-left: 4px solid var(--tracker); padding: 0; }
+  .b-combo .combo-h { padding: 8px 12px 4px; font-size: 11px; font-weight: 700; color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
+  .b-combo .combo-h .meta { font-size: 9.5px; color: var(--ink-3); font-weight: 400; }
+  .b-combo .combo-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 0 12px 6px; }
+  .b-combo .combo-tiles .t { background: rgba(255,255,255,0.6); border: 1px solid var(--tracker-mid); border-radius: 3px; padding: 4px 6px; font-size: 9px; color: var(--ink-2); }
+  .b-combo .combo-tiles .t b { display: block; color: var(--ink); font-size: 11px; font-weight: 700; }
+  .b-combo .combo-insight { padding: 6px 12px 8px; font-size: 10px; color: var(--ink-2); background: rgba(255,255,255,0.5); border-top: 1px dashed var(--insight-mid); display: flex; gap: 8px; align-items: center; }
+  .b-combo .combo-insight .lbl { background: var(--insight); color: #fff; padding: 1px 5px; font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px; border-radius: 2px; }
+  .b-combo .combo-insight .text { flex: 1; }
+  .b-combo .combo-insight .cta { font-size: 9px; color: var(--insight); font-weight: 700; padding: 2px 6px; border: 1px solid var(--insight); border-radius: 3px; }
+  .frame-m .b-combo .combo-tiles { grid-template-columns: repeat(2, 1fr); }
+
+  /* "Today strip" (experiment 4) */
+  .b-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    padding: 8px 12px; background: linear-gradient(to right, var(--paper), var(--paper-2));
+    border-bottom: 1px solid var(--line);
+  }
+  .b-strip .s {
+    border-radius: 3px;
+    padding: 6px 8px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 2px; min-height: 42px;
+  }
+  .b-strip .s .lbl { font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); font-weight: 700; }
+  .b-strip .s .val { font-size: 10.5px; font-weight: 700; color: var(--ink); }
+  .frame-m .b-strip { grid-template-columns: repeat(2, 1fr); }
+
+  /* notes below frames */
+  .exp-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+  .exp-notes section { font-size: 12px; line-height: 1.55; }
+  .exp-notes h4 { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-3); margin-bottom: 6px; }
+  .exp-notes p, .exp-notes li { color: var(--ink-2); }
+  .exp-notes ul { margin: 0; padding-left: 16px; }
+  .exp-notes li { margin-bottom: 3px; }
+  .exp-notes b { color: var(--ink); }
+  .exp-notes .pro { color: var(--employer); }
+  .exp-notes .con { color: var(--challenge); }
+
+  /* recommendation matrix */
+  .matrix { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 22px; margin-top: 18px; }
+  .matrix h2 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .matrix .lede { font-size: 12.5px; color: var(--ink-2); margin-bottom: 16px; max-width: 1100px; }
+  .matrix table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .matrix th, .matrix td { padding: 8px 10px; border-bottom: 1px solid var(--line-2); text-align: left; vertical-align: top; }
+  .matrix th { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); background: var(--paper-2); }
+  .matrix td.num { font-weight: 700; color: var(--accent); width: 28px; }
+  .matrix td.name { font-weight: 700; width: 170px; }
+  .matrix .grade { font-weight: 700; padding: 1px 6px; border-radius: 3px; font-size: 11px; }
+  .matrix .grade.high { background: var(--employer-soft); color: var(--employer); }
+  .matrix .grade.med { background: var(--rewards-soft); color: var(--rewards); }
+  .matrix .grade.low { background: var(--cream); color: var(--ink-3); }
+
+  .recommend { background: #fffaf0; border: 1px solid var(--challenge-mid); border-left: 4px solid var(--challenge); padding: 14px 16px; border-radius: 6px; margin-top: 18px; font-size: 13px; line-height: 1.55; }
+  .recommend b { color: var(--ink); }
+
+  .anchor-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .anchor-link:hover { text-decoration: underline; }
+
+  /* breakpoint marker on top of canvas */
+  .bp-marker { padding: 4px 8px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); background: var(--cream); border-bottom: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .bp-marker .w { font-weight: 700; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ============ HEADER ============ -->
+<header class="doc-header">
+  <h1>MHC Home — 7 Wireframe Experiments</h1>
+  <p class="meta">v1 · 2026-05-06 · Block fidelity · Desktop 1200 + Mobile 375</p>
+  <p class="lede">Seven structurally distinct takes on the home page, each built from the same locked spine (single hero, 4 tracker tiles, source-labeled lanes, etc. per <a class="anchor-link" href="../../10-home-page-section-inventory.md">section inventory</a>). Variables tested are <b>sequence, weight, and topology</b> — not the section vocabulary. UI applies in a later pass.</p>
+  <p class="lede">Each experiment leads with a thesis ("what's it testing"), shows desktop and mobile blocks side-by-side at proportional weights, and notes reflow + when-it-wins. Block fidelity is intentional — the reference doc says match fidelity to the decision; this stage is about sequencing and visual weight, not content polish.</p>
+
+  <div class="legend">
+    <section>
+      <h3>Section intent (color)</h3>
+      <div class="row"><span class="swatch" style="background:#1f1f1f"></span><span class="key">Anchor</span> Hero — sets identity, value, primary CTA</div>
+      <div class="row"><span class="swatch" style="background:#efeae2;border-left:4px solid #5a4a2a"></span><span class="key">Momentum</span> Programs — pick up where you left off</div>
+      <div class="row"><span class="swatch" style="background:#dde6ef;border-left:4px solid #4a6e8a"></span><span class="key">Tracker</span> Steps · Sleep · Calories · Active Min</div>
+      <div class="row"><span class="swatch" style="background:#d9e7e5;border-left:4px solid #3a6e6a"></span><span class="key">Insight</span> Takeaway + action (AI Insights)</div>
+      <div class="row"><span class="swatch" style="background:#e8f0ea;border-left:4px solid #2a5d3f"></span><span class="key">Employer</span> Featured Client priority items</div>
+      <div class="row"><span class="swatch" style="background:#e6eef6;border-left:4px solid #0f497f"></span><span class="key">Interest</span> Things I care about</div>
+      <div class="row"><span class="swatch" style="background:#faecd7;border-left:4px solid #b35418"></span><span class="key">Challenge</span> Conditional — invites, results, active</div>
+      <div class="row"><span class="swatch" style="background:#efe2cf;border-left:4px solid #8a5a2a"></span><span class="key">Rewards</span> Optional aggregated (1–4 types)</div>
+      <div class="row"><span class="swatch" style="background:#efe5f5;border-left:4px solid #6e3a8a"></span><span class="key">Action</span> Quick-do chip (Exp. 3 only)</div>
+    </section>
+    <section>
+      <h3>Weight (block height)</h3>
+      <div class="row"><span class="swatch" style="height:22px;background:#1f1f1f"></span><span class="key">w5 — anchor</span> Hero level</div>
+      <div class="row"><span class="swatch" style="height:18px;background:#cdc8bd"></span><span class="key">w4 — high</span> Promoted sections</div>
+      <div class="row"><span class="swatch" style="height:13px;background:#e2ddd2"></span><span class="key">w3 — medium</span> Standard surfaces</div>
+      <div class="row"><span class="swatch" style="height:8px;background:#f5f2ec"></span><span class="key">w2 — low</span> Conditional / supporting</div>
+      <div class="row"><span class="swatch" style="height:5px;background:#fbf9f5;border:1px solid #cdc8bd"></span><span class="key">w1 — frame</span> Nav / chrome</div>
+      <h3 style="margin-top:14px">Reflow legend (notes)</h3>
+      <div class="row"><b style="color:#2a5d3f;width:96px">collapse</b> Stacks; preferred default</div>
+      <div class="row"><b style="color:#b35418;width:96px">reorder</b> Mobile order ≠ desktop order</div>
+      <div class="row"><b style="color:#7a7a7a;width:96px">hide</b> Last resort (NN/g caution)</div>
+    </section>
+  </div>
+</header>
+
+<!-- ============ TABLE OF EXPERIMENTS ============ -->
+<table class="toc">
+  <thead><tr><th>#</th><th>Name</th><th>Thesis (what it's testing)</th><th>Best for</th></tr></thead>
+  <tbody>
+    <tr><td class="num">1</td><td class="name"><a class="anchor-link" href="#exp-1">Calm Anchor</a></td><td class="thesis">Classic layer-cake. Single hero anchors fold; calm reduced tracker; lanes paired below; programs after. Conservative.</td><td>Default / V1 ship</td></tr>
+    <tr><td class="num">2</td><td class="name"><a class="anchor-link" href="#exp-2">Programs First</a></td><td class="thesis">CS named "easier access to ongoing programs" as a top priority. Promote programs to weight 5 — second band after hero.</td><td>Member-heavy clients with active enrollments</td></tr>
+    <tr><td class="num">3</td><td class="name"><a class="anchor-link" href="#exp-3">Hero + 3 Things</a></td><td class="thesis">The offsite alternative for item #3. Hero compresses; 3 quick-action chips sit immediately below within fold. Open decision on the table.</td><td>Action-oriented clients; demos that lead with "what can I do"</td></tr>
+    <tr><td class="num">4</td><td class="name"><a class="anchor-link" href="#exp-4">Today Strip + Hero</a></td><td class="thesis">Pre-hero "Today strip" — 4-cell glance band (greeting, next step, tracker delta, reward). Hero sits below. Inverts fold strategy.</td><td>Returning daily users; informational density bias</td></tr>
+    <tr><td class="num">5</td><td class="name"><a class="anchor-link" href="#exp-5">Two-Column Desktop</a></td><td class="thesis">Below hero, desktop splits into Momentum (left) + Discovery (right). Mobile collapses to single stack with momentum first.</td><td>Wide-browser desktop users; reduces "long flat middle"</td></tr>
+    <tr><td class="num">6</td><td class="name"><a class="anchor-link" href="#exp-6">Combined Tracker + Insights</a></td><td class="thesis">Tracker and Insights merge into one module — "your data and what to do about it." Frees vertical real estate for programs and lanes.</td><td>Compactness target; clients who want home shorter</td></tr>
+    <tr><td class="num">7</td><td class="name"><a class="anchor-link" href="#exp-7">Rewards Forward</a></td><td class="thesis">Engagement-heavy client variant. Multi-type rewards row (gift cards · points · raffles · store) lifts above lanes. Demonstrates the configurability moat.</td><td>Clients with rich reward economies; sales demos</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ============ EXPERIMENT 1: CALM ANCHOR ============ -->
+<section class="exp" id="exp-1">
+  <div class="exp-h">
+    <span class="num">EXP 01</span>
+    <h2>Calm Anchor</h2>
+  </div>
+  <p class="exp-thesis"><b>Thesis:</b> Pure layer-cake. Single hero earns the fold; reduced tracker row keeps data glanceable; the two source-labeled lanes pair side-by-side below; programs and conditional sections follow. Closest to the v4 wireframe baseline. <b>This is the control.</b> Tests: does the calmest, most predictable sequencing outperform more ambitious alternatives once UI is applied?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>shell with or without left nav</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">10 sections</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span><span class="meta">frame · separate spec</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting — "Good morning, Davinder"</span><span class="meta">w2 · supporting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO 50%</div>
+          <div class="copy"><div class="h-name">3 · Hero · 50/50 split</div><div class="h-meta">source-tag · title · body · CTA</div><div class="h-cta">w5 · anchor</div></div>
+        </div>
+        <div class="b-row short">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">weekly</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Tracker Insights — takeaway + action</span><span class="meta">w3 · ↻ 4 min ago</span></div>
+        <div class="b-row tall">
+          <div class="sub s-program"><div class="sub-name">Sleep DCP — session 3 of 8</div><div class="sub-meta">Continue · $100 at completion</div></div>
+          <div class="sub s-program"><div class="sub-name">Stress Journey — 60%</div><div class="sub-meta">Continue · +50 pts</div></div>
+          <div class="sub s-program"><div class="sub-name">Hydration habit</div><div class="sub-meta">Track today</div></div>
+          <div class="sub s-program"><div class="sub-name">+ New challenge available</div><div class="sub-meta">Spring Steps · Join</div></div>
+        </div>
+        <div class="b-2col">
+          <div class="col">
+            <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about · Sleep · Stress · Move more</span><span class="meta">3 items · Edit</span></div>
+          </div>
+          <div class="col">
+            <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span><span class="meta">2 items</span></div>
+          </div>
+        </div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span><span class="meta">w2 · only when state applies</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards summary · optional</span><span class="meta">w2 · client-config</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Footer / chrome</span><span class="meta">frame</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>single column stack</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>collapse-only reflow</span><span class="w">no reorders</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span><span class="pip">center</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Good morning, Davinder</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO</div>
+          <div class="copy"><div class="h-name">Hero</div><div class="h-meta">tag · title · body · CTA</div></div>
+        </div>
+        <div class="b-row short" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">wk</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights — takeaway + action</span></div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Ongoing programs</span><span class="pip">2 + see all</span></div>
+        <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span><span class="pip">4</span></div>
+        <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span><span class="pip">2</span></div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Bottom nav · 5 tabs</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>Lanes (7+8):</b> 50/50 desktop → stacked mobile (employer first per spine ranking, but here interest beats employer because the personalization signal is the bigger differentiator)</li>
+        <li><b>Tracker:</b> 4-tile row desktop → 2×2 grid mobile</li>
+        <li><b>Programs:</b> 4-up grid desktop → 2 items + see-all link mobile</li>
+        <li><b>No reorders, no hides.</b> Pure collapse pattern.</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> first ship · low risk · users learn page once and it stays predictable · easy CMS · easy A/B baseline.</p>
+      <p><b class="con">Risks:</b> long flat middle (sections 5–10 all read at similar weight) · hero does most of the work; if hero allocation is weak the rest of the page won't compensate · "spotted-pattern" users (came for a specific item) have to scroll past everything.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ EXPERIMENT 2: PROGRAMS FIRST ============ -->
+<section class="exp" id="exp-2">
+  <div class="exp-h">
+    <span class="num">EXP 02</span>
+    <h2>Programs First</h2>
+  </div>
+  <p class="exp-thesis"><b>Thesis:</b> CS explicitly named "easier access to ongoing programs" as a primary need. What if programs is the second band — strong enough to share weight with the hero (w5 + w5)? Tracker compresses to a thin reference row. Programs is image-rich, 3-up on desktop, with prominent "Continue" CTAs. Tests: does promoting programs satisfy the CS ask without diluting the hero?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>programs share fold weight with hero</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">programs promoted to w5</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO 50%</div>
+          <div class="copy"><div class="h-name">3 · Hero · 50/50</div><div class="h-meta">w5 · anchor</div></div>
+        </div>
+        <div class="b-row tall" style="background:var(--program-soft);border-left:4px solid var(--program);padding-left:8px;">
+          <div class="sub s-program"><div class="sub-name">Sleep DCP</div><div class="sub-meta">Session 3 of 8 · $100 at completion · Continue</div></div>
+          <div class="sub s-program"><div class="sub-name">Stress Journey</div><div class="sub-meta">60% complete · +50 pts · Continue</div></div>
+          <div class="sub s-program"><div class="sub-name">Hydration habit</div><div class="sub-meta">Day 12 streak · Track today</div></div>
+        </div>
+        <div class="b w2 i-momentum" style="background:var(--paper);"><span class="num">6b</span><span class="name">+ See all programs (4) · See all challenges (2 invites)</span><span class="meta">overflow link</span></div>
+        <div class="b-row short">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">weekly</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Tracker Insights — takeaway + action</span></div>
+        <div class="b-2col">
+          <div class="col"><div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span><span class="meta">interests</span></div></div>
+          <div class="col"><div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span><span class="meta">CS-named</span></div></div>
+        </div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Footer</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>programs anchor second viewport</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>programs above tracker</span><span class="w">w5 → w5</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Good morning</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO</div>
+          <div class="copy"><div class="h-name">Hero</div><div class="h-meta">w5</div></div>
+        </div>
+        <div class="b w5 i-momentum"><span class="num">6a</span><span class="name">Sleep DCP — Session 3 of 8</span><span class="pip">$100</span></div>
+        <div class="b w4 i-momentum"><span class="num">6b</span><span class="name">Stress Journey — 60%</span><span class="pip">+50 pts</span></div>
+        <div class="b w2 i-momentum" style="background:var(--paper)"><span class="num">6c</span><span class="name">+ See all (4)</span></div>
+        <div class="b-row short" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">wk</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights</span></div>
+        <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div>
+        <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Bottom nav</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>Programs:</b> 3-up image cards desktop → 2 stacked + see-all mobile (collapse)</li>
+        <li><b>Tracker:</b> demoted to thin reference row both breakpoints</li>
+        <li><b>Insights:</b> below tracker (preserves data → action sequence)</li>
+        <li><b>No reorders.</b> Mobile = desktop sequence.</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> client population is enrollment-heavy · CS escalations are about "I can't find my journey" · sales pitches lead with the depth of MHC's clinical/program content · Zeigarnik effect (incomplete tasks remembered better) is the design lever.</p>
+      <p><b class="con">Risks:</b> non-enrolled users (no programs) get a hollow second band — needs a strong empty state · pushes employer + interest content lower; CS may push back if employer messaging frequency drops · two w5 sections back-to-back may dilute hero impact.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ EXPERIMENT 3: HERO + 3 THINGS ============ -->
+<section class="exp" id="exp-3">
+  <div class="exp-h">
+    <span class="num">EXP 03</span>
+    <h2>Hero + 3 Things to Do</h2>
+  </div>
+  <p class="exp-thesis"><b>Thesis:</b> The offsite memo (item #3) explicitly left "hero + 3 things to do at top" as an alternative to single-hero. Davinder's recommendation lands on single, but this is on the table. Hero compresses to ~70% of normal vertical; 3 priority-engine action chips sit immediately below within the fold. Both fold elements answer "where am I" + "what is this for" + "what can I do" without scroll. Tests: does a fold with action shortcuts outperform a hero-only fold for users who came with intent?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>compressed hero + 3 chips in fold</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">hero + 3 chips</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-compressed">
+          <div class="photo">PHOTO</div>
+          <div class="name">Hero · compressed (70% of normal vertical)</div>
+          <div class="meta">source · title · CTA</div>
+        </div>
+        <div class="b-row tall" style="background:var(--sales-soft);border-left:4px solid var(--sales);">
+          <div class="sub s-action"><div class="sub-name">Continue: Sleep DCP</div><div class="sub-meta">Session 3 · $100 · 5 min</div></div>
+          <div class="sub s-action"><div class="sub-name">Log workout</div><div class="sub-meta">+10 pts · 30 sec</div></div>
+          <div class="sub s-action"><div class="sub-name">Read: Stress tip</div><div class="sub-meta">Interest match · 2 min</div></div>
+        </div>
+        <div class="b-row short">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">weekly</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights — takeaway + action</span></div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Ongoing programs · 4-up · "+N more"</span><span class="meta">w4 · CS-named</span></div>
+        <div class="b-2col">
+          <div class="col"><div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div></div>
+          <div class="col"><div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div></div>
+        </div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Footer</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>chips stack vertically (order matters)</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>chips: stack, not h-scroll</span><span class="w">priority order</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-compressed">
+          <div class="photo">PHOTO</div>
+          <div class="name">Hero compressed</div>
+          <div class="meta">CTA</div>
+        </div>
+        <div class="b w3 i-action"><span class="num">3a</span><span class="name">Continue: Sleep DCP</span><span class="pip">$100</span></div>
+        <div class="b w3 i-action"><span class="num">3b</span><span class="name">Log workout</span><span class="pip">+10 pts</span></div>
+        <div class="b w3 i-action"><span class="num">3c</span><span class="name">Read: Stress tip</span><span class="pip">2 min</span></div>
+        <div class="b-row short" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">wk</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights</span></div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Programs</span><span class="pip">2+see all</span></div>
+        <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div>
+        <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Bottom nav</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>3 chips:</b> 3-up desktop → 1-col stacked mobile (NOT horizontal scroll — order is priority-meaningful)</li>
+        <li><b>Hero:</b> compressed to ~64px both breakpoints (vs. 88px standard)</li>
+        <li><b>Insights stays w3:</b> chips pull some "next-action" energy off insights but Insights still has the data-derived takeaway role</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> users come with intent (Hick's: 3 choices is sweet spot) · "spotted-pattern" scanning is the dominant behavior · the priority engine has high-confidence next-best-actions · executive sponsor (John) is invested in this alternative.</p>
+      <p><b class="con">Risks:</b> contradicts Davinder's recommendation for single-hero V1 · doubles the hero-allocation problem (now you allocate hero AND 3 chip slots) · employer/sales lose the prominent slot if chips eat fold attention · adds editorial overhead.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ EXPERIMENT 4: TODAY STRIP + HERO ============ -->
+<section class="exp" id="exp-4">
+  <div class="exp-h">
+    <span class="num">EXP 04</span>
+    <h2>Today Strip + Hero</h2>
+  </div>
+  <p class="exp-thesis"><b>Thesis:</b> A 4-cell glance band sits <i>above</i> the hero — greeting, next program step, tracker delta vs goal, reward earned today. The user gets a 4-second status read before any scroll. Hero earns the rest of the fold but no longer carries the entire fold burden. Inverts the conventional "hero anchors the page" model. Tests: do daily returning users prefer information-density at the very top to a single editorial moment?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>4-cell strip → hero → standard</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">strip + hero</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span></div>
+        <div class="b-strip">
+          <div class="s"><div class="lbl">Hi Davinder</div><div class="val">Good morning · Tue May 6</div></div>
+          <div class="s"><div class="lbl">Next step</div><div class="val">Sleep DCP · session 3 of 8</div></div>
+          <div class="s"><div class="lbl">This week</div><div class="val">7,840 steps · 78% of goal</div></div>
+          <div class="s"><div class="lbl">Earned today</div><div class="val">+10 pts</div></div>
+        </div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO 50%</div>
+          <div class="copy"><div class="h-name">3 · Hero · 50/50</div><div class="h-meta">w5 · anchor</div><div class="h-cta">below the strip</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights — takeaway + action</span></div>
+        <div class="b w2 i-tracker"><span class="num">4</span><span class="name">Tracker detail · 4-tile · expandable</span><span class="meta">w2 · summary lives in strip</span></div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Ongoing programs · 4-up</span></div>
+        <div class="b-2col">
+          <div class="col"><div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div></div>
+          <div class="col"><div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div></div>
+        </div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional aggregated</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Footer</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>strip → 2×2 grid</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>tracker may hide on mobile</span><span class="w">strip carries summary</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span></div>
+        <div class="b-strip">
+          <div class="s"><div class="lbl">Hi</div><div class="val">Davinder</div></div>
+          <div class="s"><div class="lbl">Next step</div><div class="val">Sleep DCP</div></div>
+          <div class="s"><div class="lbl">Steps wk</div><div class="val">7,840 · 78%</div></div>
+          <div class="s"><div class="lbl">Earned</div><div class="val">+10 pts</div></div>
+        </div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO</div>
+          <div class="copy"><div class="h-name">Hero</div><div class="h-meta">below strip</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights</span></div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Programs</span></div>
+        <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div>
+        <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Bottom nav</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>Strip:</b> 4 cells desktop → 2×2 grid mobile (collapse)</li>
+        <li><b>Tracker detail:</b> can be hidden on mobile because summary lives in strip — flagged as <b style="color:#b35418">hide</b>; investigate first whether members want detail.</li>
+        <li><b>Greeting (sec 2):</b> absorbed into strip cell — no longer a standalone section</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> daily-returning members are dominant · users are looking for status more than discovery · the strip data is reliably populated for most members (else it looks broken) · differentiates from competitors who lead with a hero only.</p>
+      <p><b class="con">Risks:</b> visual density at the very top conflicts with the "personal and light" tone Darcy/Jill flagged · 4 cells × 4 mini-data-points is a lot for an unauthenticated load · skeleton state has to look intentional (5 simultaneous skeletons stacked feels noisy) · pushes hero down — Sales loses the absolute-top spot.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ EXPERIMENT 5: TWO-COLUMN DESKTOP ============ -->
+<section class="exp" id="exp-5">
+  <div class="exp-h">
+    <span class="num">EXP 05</span>
+    <h2>Two-Column Desktop · Momentum / Discovery</h2>
+  </div>
+  <p class="exp-thesis"><b>Thesis:</b> Below the hero, desktop splits into two columns. <b>Left (~60%) = Momentum</b> — your programs, your tracker, your insights, your challenge state. <b>Right (~40%) = Discovery</b> — what your employer wants you to see, content matched to your interests, optional rewards. Mobile collapses to a single stack with momentum first. Tests: does a topology change reduce the "long flat middle" the reference flagged, and does it satisfy both CS (employer prominence) and member (programs prominence) needs simultaneously?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>2-column band below hero</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">topology change</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO 50%</div>
+          <div class="copy"><div class="h-name">3 · Hero · full-width</div><div class="h-meta">w5 · anchor</div></div>
+        </div>
+        <div class="b-2col" style="grid-template-columns:1.5fr 1fr;gap:10px;">
+          <div class="col">
+            <div class="b w3 i-tracker" style="margin-bottom:6px"><span class="num">4</span><span class="name">MOMENTUM · Tracker — 4 tiles weekly</span><span class="meta">w3</span></div>
+            <div class="b w3 i-insight" style="margin-bottom:6px"><span class="num">5</span><span class="name">Insights — takeaway + action</span><span class="meta">w3</span></div>
+            <div class="b w4 i-momentum" style="margin-bottom:6px"><span class="num">6</span><span class="name">Ongoing programs — 2-up grid</span><span class="meta">w4</span></div>
+            <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span><span class="meta">w2</span></div>
+          </div>
+          <div class="col">
+            <div class="b w3 i-employer" style="margin-bottom:6px"><span class="num">8</span><span class="name">DISCOVERY · From your employer</span><span class="meta">w3 · permanent</span></div>
+            <div class="b w3 i-interest" style="margin-bottom:6px"><span class="num">7</span><span class="name">Things I care about</span><span class="meta">w3</span></div>
+            <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional</span><span class="meta">w2</span></div>
+          </div>
+        </div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Footer</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>collapse: momentum first, then discovery</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>reorder · momentum 1st</span><span class="w">collapse 2-col</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO</div>
+          <div class="copy"><div class="h-name">Hero</div><div class="h-meta">w5</div></div>
+        </div>
+        <div class="b w3 i-tracker"><span class="num">4</span><span class="name">Tracker · 2×2</span></div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights</span></div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Ongoing programs</span></div>
+        <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div>
+        <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Bottom nav</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>2-col band:</b> 60/40 desktop → single column mobile (<b class="pro">collapse</b>)</li>
+        <li><b>Section order on mobile:</b> momentum (4, 5, 6) → discovery (8, 7) → conditional (9, 10). <b style="color:#b35418">reorder</b> from desktop right-column position — but justified: vertical mobile beats by relevance, not by horizontal column.</li>
+        <li><b>Note on lane order:</b> employer (8) before interest (7) on mobile — flips the v4 baseline because employer needs the higher-momentum slot when interest content is sparse.</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> desktop is the dominant breakpoint (admin/HR users) · clients want employer messaging visible <i>at the same time</i> as the member's own content · you want to satisfy both CS ("employer permanence") and members ("my stuff is here") with one design move.</p>
+      <p><b class="con">Risks:</b> 2-col layouts are heavier engineering · the 60/40 split may feel uneven at narrow desktop (912 with left nav present); could fall back to single-column at that breakpoint · users scan top-to-bottom by default — right column may be under-scanned (NN/g F-pattern caveat) · doubles the design surface to maintain.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ EXPERIMENT 6: COMBINED TRACKER + INSIGHTS ============ -->
+<section class="exp" id="exp-6">
+  <div class="exp-h">
+    <span class="num">EXP 06</span>
+    <h2>Combined Tracker + Insights Module</h2>
+  </div>
+  <p class="exp-thesis"><b>Thesis:</b> Tracker and Insights answer one question — "your data and what to do about it." Why render them as two adjacent sections when they could be one card? 4 tiles on top, AI takeaway sentence below, action CTA inline. Single visual unit. Frees ~80px of vertical real estate for programs and the lanes. Tests: does merging two sections reduce the "long flat middle" without losing the AI Insights differentiator?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>tracker + insights as one block</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">2 sections → 1 module</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO 50%</div>
+          <div class="copy"><div class="h-name">3 · Hero · 50/50</div><div class="h-meta">w5 · anchor</div></div>
+        </div>
+        <div class="b-combo">
+          <div class="combo-h">4+5 · This week<span class="meta">↻ 4 min ago · Apple Health</span></div>
+          <div class="combo-tiles">
+            <div class="t">Steps<b>52,470</b></div>
+            <div class="t">Sleep<b>7h 10m</b></div>
+            <div class="t">Calories<b>14,200</b></div>
+            <div class="t">Active<b>240 min</b></div>
+          </div>
+          <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep is averaging 38 min less than your goal. Try a 30-min wind-down tonight.</div><div class="cta">Add to my evening</div></div>
+        </div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Ongoing programs · 4-up grid</span><span class="meta">w4</span></div>
+        <div class="b-2col">
+          <div class="col"><div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div></div>
+          <div class="col"><div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div></div>
+        </div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards · optional</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Footer</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>combined module compresses gracefully</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>tiles 2×2 + insight below</span><span class="w">single card</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO</div>
+          <div class="copy"><div class="h-name">Hero</div><div class="h-meta">w5</div></div>
+        </div>
+        <div class="b-combo">
+          <div class="combo-h">This week<span class="meta">↻ 4m</span></div>
+          <div class="combo-tiles">
+            <div class="t">Steps<b>52K</b></div>
+            <div class="t">Sleep<b>7h10</b></div>
+            <div class="t">Cal<b>14K</b></div>
+            <div class="t">Active<b>240m</b></div>
+          </div>
+          <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min · try a wind-down</div></div>
+        </div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Programs</span><span class="pip">2+see all</span></div>
+        <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div>
+        <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges</span></div>
+        <div class="b w2 i-rewards"><span class="num">10</span><span class="name">Rewards</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Bottom nav</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>Combined module:</b> 4 tiles in a row + insight beneath desktop → tiles 2×2 + insight beneath mobile (collapse)</li>
+        <li><b>Insight states:</b> when no insight (Hidden state from inventory), the module renders as a tracker-only card — no awkward empty insight area</li>
+        <li><b>Sync state:</b> per-tile sync state (fresh/recent/stale/broken) still applies; module-level reconnect CTA covers the broken case</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> compactness is a goal (mobile-first thinking) · teams want to ship fewer surfaces · the AI Insights pattern works best <i>tied to</i> the data, not separated · home page length is a known complaint.</p>
+      <p><b class="con">Risks:</b> the AI Insights differentiator becomes less prominent visually (vs. its own band) · the Hidden insight state feels like dead vertical space inside the module unless treated carefully · couples two different teams' data (tracker + AI server) into one render — sync edge cases compound.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ EXPERIMENT 7: REWARDS FORWARD ============ -->
+<section class="exp" id="exp-7">
+  <div class="exp-h">
+    <span class="num">EXP 07</span>
+    <h2>Rewards Forward · Engagement-Heavy Client Variant</h2>
+  </div>
+  <p class="exp-thesis"><b>Thesis:</b> For clients with multi-type reward configurations (gift cards + points + raffles + store credit), rewards is a primary engagement lever — not a footer afterthought. This variant lifts the rewards summary above the lanes, in the slot right after tracker/insights. The 4-metric row demonstrates MHC's <b>configurability moat</b> — competitors only do points; we accommodate up to four reward types in one client setup. Tests: does promoting rewards to weight 3 with elevated placement work for engagement-heavy clients without overwhelming the rest of the page? <i>Note:</i> this is a per-client variant, not the default — Framing 1 (points-only) and zero-rewards clients still default to Experiment 1.</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>rewards row sits between tracker and lanes</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>section flow</span><span class="w">multi-type config</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo center</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO 50%</div>
+          <div class="copy"><div class="h-name">3 · Hero · 50/50</div><div class="h-meta">w5 · anchor</div></div>
+        </div>
+        <div class="b-row short">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">weekly</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">weekly</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights — takeaway + action</span></div>
+        <div class="b-row tall" style="background:var(--rewards-soft);border-left:4px solid var(--rewards);">
+          <div class="sub s-rewards"><div class="sub-name">Gift card balance</div><div class="sub-meta">$75 earned · $25 to next</div></div>
+          <div class="sub s-rewards"><div class="sub-name">Points · Silver</div><div class="sub-meta">1,250 pts · 750 to Gold</div></div>
+          <div class="sub s-rewards"><div class="sub-name">Raffle entries</div><div class="sub-meta">12 · draw May 15</div></div>
+          <div class="sub s-rewards"><div class="sub-name">Store credit</div><div class="sub-meta">$25 · Spend in store</div></div>
+        </div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Ongoing programs · 4-up</span></div>
+        <div class="b-2col">
+          <div class="col"><div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div></div>
+          <div class="col"><div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div></div>
+        </div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges · conditional</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Footer</span></div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>rewards row → 2×2 grid</span></div>
+      <div class="canvas">
+        <div class="bp-marker"><span>4 metrics → 2×2</span><span class="w">order doesn't matter</span></div>
+        <div class="b w1 i-frame"><span class="num">1</span><span class="name">Top nav · logo</span></div>
+        <div class="b w2 i-greeting"><span class="num">2</span><span class="name">Greeting</span></div>
+        <div class="b-hero-split">
+          <div class="photo">PHOTO</div>
+          <div class="copy"><div class="h-name">Hero</div><div class="h-meta">w5</div></div>
+        </div>
+        <div class="b-row short" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <div class="sub s-tracker"><div class="sub-name">Steps</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Sleep</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Calories</div><div class="sub-meta">wk</div></div>
+          <div class="sub s-tracker"><div class="sub-name">Active Min</div><div class="sub-meta">wk</div></div>
+        </div>
+        <div class="b w3 i-insight"><span class="num">5</span><span class="name">Insights</span></div>
+        <div class="b-row tall" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--rewards-soft);border-left:4px solid var(--rewards);">
+          <div class="sub s-rewards"><div class="sub-name">Gift card</div><div class="sub-meta">$75</div></div>
+          <div class="sub s-rewards"><div class="sub-name">Points</div><div class="sub-meta">1,250 · Silver</div></div>
+          <div class="sub s-rewards"><div class="sub-name">Raffle</div><div class="sub-meta">12 entries</div></div>
+          <div class="sub s-rewards"><div class="sub-name">Store</div><div class="sub-meta">$25</div></div>
+        </div>
+        <div class="b w4 i-momentum"><span class="num">6</span><span class="name">Programs</span></div>
+        <div class="b w3 i-interest"><span class="num">7</span><span class="name">Things I care about</span></div>
+        <div class="b w3 i-employer"><span class="num">8</span><span class="name">From your employer</span></div>
+        <div class="b w2 i-challenge"><span class="num">9</span><span class="name">Challenges</span></div>
+        <div class="b w1 i-frame"><span class="num">11</span><span class="name">Bottom nav</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Reflow decisions</h4>
+      <ul>
+        <li><b>Rewards row:</b> 4 metrics horizontal desktop → 2×2 grid mobile (collapse — order doesn't matter, so 2×2 beats horizontal scroll)</li>
+        <li><b>Scaling:</b> the same row gracefully renders as 1, 2, 3, or 4 metrics depending on what's configured — sales can demo any client setup with one component</li>
+        <li><b>For points-only or zero-rewards clients:</b> this experiment falls back to Experiment 1 (Calm Anchor) — rewards row hides or collapses to single line at original w2 placement</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> client has Framing 2 configured (multi-type) · sales is demoing the configurability moat · client engagement metrics suggest rewards is the lever pulling member behavior · CS Tech Leads want elevated placement as a per-client toggle.</p>
+      <p><b class="con">Risks:</b> for clients with weak reward configs, the empty 4-metric row is a tell — needs strict gating · risks looking transactional vs. wellbeing-focused · two horizontal data rows in close proximity (tracker + rewards) may be visually noisy without strong UI separation · placement-as-config adds CMS complexity.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ COMPARISON MATRIX ============ -->
+<section class="matrix">
+  <h2>Comparison matrix · how each experiment scores against the brief</h2>
+  <p class="lede">Each experiment scored against the requirements that drove this redesign. <b>HIGH</b> = meets strongly · <b>MED</b> = meets adequately · <b>LOW</b> = doesn't meet or actively trades against. Use to triangulate which 2–3 experiments deserve UI investment first.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Name</th>
+        <th>Single hero<br>(JH #3)</th>
+        <th>Logo top center<br>(JH #1)</th>
+        <th>Tracker reduce<br>(Darcy)</th>
+        <th>CS · easy access<br>to programs</th>
+        <th>CS · employer<br>visibility</th>
+        <th>Personalization<br>visible</th>
+        <th>Rewards<br>moat</th>
+        <th>Eng cost</th>
+        <th>Risk</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">1</td><td class="name">Calm Anchor</td>
+        <td><span class="grade high">high</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade med">med</span></td><td><span class="grade med">med</span></td>
+        <td><span class="grade low">low</span></td><td><span class="grade high">low</span></td><td><span class="grade high">low</span></td>
+      </tr>
+      <tr>
+        <td class="num">2</td><td class="name">Programs First</td>
+        <td><span class="grade high">high</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade high">high</span></td><td><span class="grade low">low</span></td><td><span class="grade med">med</span></td>
+        <td><span class="grade low">low</span></td><td><span class="grade high">low</span></td><td><span class="grade med">med</span></td>
+      </tr>
+      <tr>
+        <td class="num">3</td><td class="name">Hero + 3 Things</td>
+        <td><span class="grade low">low</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade high">high</span></td><td><span class="grade med">med</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade low">low</span></td><td><span class="grade med">med</span></td><td><span class="grade med">med</span></td>
+      </tr>
+      <tr>
+        <td class="num">4</td><td class="name">Today Strip + Hero</td>
+        <td><span class="grade high">high</span></td><td><span class="grade high">high</span></td><td><span class="grade med">med</span></td>
+        <td><span class="grade high">high</span></td><td><span class="grade med">med</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade med">med</span></td><td><span class="grade med">med</span></td>
+      </tr>
+      <tr>
+        <td class="num">5</td><td class="name">Two-Column Desktop</td>
+        <td><span class="grade high">high</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade high">high</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade low">high</span></td><td><span class="grade med">med</span></td>
+      </tr>
+      <tr>
+        <td class="num">6</td><td class="name">Combined T+I</td>
+        <td><span class="grade high">high</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade med">med</span></td><td><span class="grade med">med</span></td>
+        <td><span class="grade low">low</span></td><td><span class="grade high">low</span></td><td><span class="grade med">med</span></td>
+      </tr>
+      <tr>
+        <td class="num">7</td><td class="name">Rewards Forward</td>
+        <td><span class="grade high">high</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade med">med</span></td><td><span class="grade med">med</span></td>
+        <td><span class="grade high">high</span></td><td><span class="grade med">med</span></td><td><span class="grade med">med</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="recommend">
+    <b>Recommendation for UI investment (apply UI to these 3, not all 7):</b>
+    <ol style="margin: 8px 0 0 0; padding-left: 18px;">
+      <li><b>Experiment 1 (Calm Anchor)</b> — the V1 ship candidate. Lowest risk, lowest eng cost, hits all required JH/Darcy items. Use as the control.</li>
+      <li><b>Experiment 5 (Two-Column Desktop)</b> — the most ambitious option that scores HIGH on every brief item including the two CS asks simultaneously. Highest eng cost; deserves the UI pass to validate whether it earns the cost.</li>
+      <li><b>Experiment 7 (Rewards Forward)</b> — the per-client variant that demonstrates the configurability moat. Apply UI to validate that the multi-type row reads as differentiator, not clutter, in a sales demo.</li>
+    </ol>
+    <p style="margin: 10px 0 0 0;">Hold Experiments 2, 3, 4, 6 at block fidelity until 1/5/7 have been pressure-tested. Experiment 3 only advances if there's executive (John) appetite to revisit the single-hero decision; otherwise it's documented and parked.</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

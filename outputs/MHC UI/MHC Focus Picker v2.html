@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC — Focus Picker · v2</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#eef1f4; font-family: var(--mh-font-brand); color: var(--mh-fg-1); }
+  body { padding: 28px 22px 80px; }
+  .page { max-width: 1280px; margin: 0 auto; }
+  .pagehead { margin-bottom: 22px; }
+  .pagehead h1 { font-size: 22px; margin: 0 0 6px; color: var(--mh-night-sky); }
+  .pagehead p { font-size: 14px; color: var(--mh-slate); margin: 0; line-height: 1.5; max-width: 760px; }
+
+  .row { display:grid; grid-template-columns: 400px 1fr; gap: 24px; align-items:start; margin-top: 28px; }
+  @media (max-width: 1000px){ .row { grid-template-columns: 1fr; } }
+
+  .annotate { background:#fff; border-radius:14px; border:1px solid #e1e6ea; padding:20px 22px; line-height:1.55; font-size:14px; color: var(--mh-fg-1); }
+  .annotate h3 { margin:0 0 8px; font-size:15px; color: var(--mh-night-sky); }
+  .annotate h4 { margin:18px 0 6px; font-size:12px; color: var(--mh-night-sky); text-transform:uppercase; letter-spacing:0.5px; }
+  .annotate ul { margin:0 0 0 18px; padding:0; }
+  .annotate li { margin: 4px 0; }
+  .annotate code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12.5px; background:#f3f6f8; padding:1px 5px; border-radius:4px; color: var(--mh-brand-blue); }
+  .tag-rec { background:var(--mh-brand-blue); color:#fff; padding:2px 8px; border-radius:999px; font-size:11px; margin-left:6px; font-weight:700; letter-spacing:0.04em; }
+
+  .device {
+    width: 390px; height: 800px;
+    background:#000; border-radius: 44px; padding: 12px;
+    box-shadow: 0 18px 40px rgba(6,42,66,0.18); position: relative;
+  }
+  .device .screen { width:100%; height:100%; background:#fff; border-radius:32px; overflow:hidden; position:relative; }
+  .statusbar { height: 44px; display:flex; align-items:center; justify-content:space-between; padding: 0 24px; font-size: 14px; font-weight: 600; color: var(--mh-night-sky); }
+  .statusbar .dots { display:flex; gap: 4px; align-items:center; }
+  .statusbar .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--mh-night-sky); }
+
+  .fp-header { padding: 8px 24px 14px; }
+  .fp-step { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mh-aqua-blue); margin-bottom: 10px; }
+  .fp-title { font-family: var(--mh-font-brand); font-weight: 700; font-size: 24px; line-height: 1.2; color: var(--mh-night-sky); margin: 0 0 6px; }
+  .fp-sub { font-size: 13.5px; line-height: 1.45; color: var(--mh-slate); margin: 0; }
+  .fp-progress { height: 3px; background: #e6ebec; border-radius: 999px; margin: 14px 0 0; overflow: hidden; }
+  .fp-progress > i { display:block; height: 100%; width: 60%; background: var(--mh-aqua-blue); border-radius: inherit; }
+
+  .fp-scroll { height: calc(100% - 44px); overflow-y: auto; padding-bottom: 110px; }
+  .fp-footer {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 14px 22px 28px;
+    background: linear-gradient(to top, #fff 65%, rgba(255,255,255,0));
+    display: flex; gap: 10px;
+  }
+  .fp-btn { flex:1; border-radius:999px; padding:14px 18px; font-family:inherit; font-weight:700; font-size:15px; border:0; cursor:pointer; }
+  .fp-btn.primary { background: var(--mh-brand-blue); color: #fff; }
+  .fp-btn.ghost   { background: transparent; color: var(--mh-slate); flex: 0 0 auto; padding: 14px 4px; }
+
+  /* Flat 2-col grid, no section headers */
+  .grid-wrap { padding: 0 18px; }
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+
+  .focus-tile {
+    position: relative;
+    padding: 14px 12px 12px;
+    background: #fff;
+    border: 1.5px solid #e6ebec;
+    border-radius: 16px;
+    cursor: pointer; text-align: left;
+    transition: border-color 140ms var(--mh-ease), background 140ms var(--mh-ease), transform 140ms var(--mh-ease);
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 130px;
+    font-family: inherit;
+  }
+  .focus-tile:active { transform: scale(0.98); }
+  .focus-tile .ico {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: #f3f6f8; color: var(--mh-night-sky);
+  }
+  .focus-tile .ico svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .focus-tile .name { font-size: 14px; font-weight: 700; color: var(--mh-night-sky); line-height: 1.25; }
+  .focus-tile .pillar {
+    display:inline-flex; align-items:center; gap: 6px;
+    margin-top: auto;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--mh-slate);
+  }
+  .focus-tile .pillar .pdot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  .focus-tile.is-selected { border-color: var(--mh-brand-blue); background: #eaf2fa; }
+  .focus-tile.is-selected .ico { background: var(--mh-brand-blue); color: #fff; }
+  .focus-tile.is-selected .pillar { color: var(--mh-brand-blue); }
+  .focus-tile .check {
+    position: absolute; top: 10px; right: 10px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--mh-brand-blue); color: #fff;
+    display: none; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .focus-tile.is-selected .check { display: flex; }
+
+  /* Pillar dot colors */
+  .dot-physical  { background: var(--mh-spring-green); }
+  .dot-emotional { background: var(--mh-aqua-blue); }
+  .dot-career    { background: var(--mh-mango); }
+  .dot-financial { background: var(--mh-zesty-green); }
+  .dot-social    { background: var(--mh-lava-orange); }
+
+  .fp-skip { display:flex; justify-content:center; padding: 14px 22px 8px; }
+  .fp-skip a { font-size: 12.5px; color: var(--mh-slate); text-decoration: underline; text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="pagehead">
+    <h1>Focus Picker · v2 — flat grid, pillar tag per tile</h1>
+    <p>Updated to fit your data model: no sub-headers, no nested groups. The pillar each focus belongs to is shown as a small colored chip on the tile itself, so users still get the categorization without needing a list-level header.</p>
+  </div>
+
+  <div class="row">
+    <div>
+      <div class="device"><div class="screen">
+        <div class="statusbar"><span>9:41</span><span class="dots"><i class="dot"></i><i class="dot"></i><i class="dot"></i></span></div>
+        <div class="fp-scroll">
+          <div class="fp-header">
+            <div class="fp-step">Step 3 of 5</div>
+            <h2 class="fp-title">Pick your starting focus</h2>
+            <p class="fp-sub">Choose one to begin. We'll shape your home around it — and you can switch any time.</p>
+            <div class="fp-progress"><i></i></div>
+          </div>
+
+          <div class="grid-wrap">
+            <div class="grid" id="grid"></div>
+            <div class="fp-skip"><a href="#">Not sure yet — skip for now</a></div>
+          </div>
+        </div>
+
+        <div class="fp-footer">
+          <button class="fp-btn ghost" type="button">Back</button>
+          <button class="fp-btn primary" type="button">Set focus →</button>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="annotate">
+      <h3>Why this layout <span class="tag-rec">RECOMMENDED</span></h3>
+      <p>Flat 2-column tile grid. Each tile carries an icon, a focus name, and a small pillar chip at the bottom (color-coded dot + pillar name in your secondary palette). No section headers needed — the chip does the categorization work inline.</p>
+      <h4>Why it works</h4>
+      <ul>
+        <li><b>System-friendly.</b> Just an array of <code>{name, icon, pillar}</code> — render order can be anything (alphabetical, recommended, mixed).</li>
+        <li><b>Pillar legibility.</b> Color dot + pillar label gives users the same taxonomy signal without grouping rows.</li>
+        <li><b>Mixable order.</b> You can interleave categories so users see breadth in the first scroll, instead of "all physical first."</li>
+        <li><b>Single-select feels obvious</b> from the blue-fill + check pip on the active tile.</li>
+      </ul>
+      <h4>Notes</h4>
+      <ul>
+        <li>Pillar palette: Physical = spring green, Emotional = aqua blue, Career = mango, Financial = zesty green, Social = lava orange. All from your secondary/tertiary tokens.</li>
+        <li>Tile height is fixed (130px) so a missing pillar chip never collapses the row.</li>
+        <li>Order shown is suggested-first, then alphabetical within. Easy to swap for a true recommendation rank.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  const FOCUSES = [
+    // Physical
+    { name: 'Sleep 7+ hours',         pillar: 'Physical',  dot: 'dot-physical',  icon: 'sleep' },
+    { name: 'Move every day',         pillar: 'Physical',  dot: 'dot-physical',  icon: 'move' },
+    { name: 'Build strength',         pillar: 'Physical',  dot: 'dot-physical',  icon: 'strength' },
+    { name: 'Eat more whole foods',   pillar: 'Physical',  dot: 'dot-physical',  icon: 'food' },
+    { name: 'Drink more water',       pillar: 'Physical',  dot: 'dot-physical',  icon: 'water' },
+    { name: 'Manage a condition',     pillar: 'Physical',  dot: 'dot-physical',  icon: 'pulse' },
+    // Emotional
+    { name: 'Reduce stress',          pillar: 'Emotional', dot: 'dot-emotional', icon: 'wind' },
+    { name: 'Practice gratitude',     pillar: 'Emotional', dot: 'dot-emotional', icon: 'spark' },
+    { name: 'Daily mindfulness',      pillar: 'Emotional', dot: 'dot-emotional', icon: 'brain' },
+    // Career
+    { name: 'Grow in my role',        pillar: 'Career',    dot: 'dot-career',    icon: 'trend' },
+    { name: 'Learn a new skill',      pillar: 'Career',    dot: 'dot-career',    icon: 'cap' },
+    { name: 'Better work-life balance', pillar: 'Career',  dot: 'dot-career',    icon: 'balance' },
+    // Financial
+    { name: 'Build emergency savings', pillar: 'Financial',dot: 'dot-financial', icon: 'piggy' },
+    { name: 'Stick to a budget',      pillar: 'Financial', dot: 'dot-financial', icon: 'wallet' },
+    { name: 'Pay down debt',          pillar: 'Financial', dot: 'dot-financial', icon: 'card' },
+    // Social
+    { name: 'Strengthen friendships', pillar: 'Social',    dot: 'dot-social',    icon: 'friends' },
+    { name: 'More family time',       pillar: 'Social',    dot: 'dot-social',    icon: 'home' },
+    { name: 'Give back / volunteer',  pillar: 'Social',    dot: 'dot-social',    icon: 'hand' },
+  ];
+
+  const ICONS = {
+    sleep:   '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+    move:    '<circle cx="13" cy="4" r="2"/><path d="M4 21l4-7 4 3 4-6 4 4M9 11l3-2 4 1"/>',
+    strength:'<path d="M14.5 6.5l-9 9M9.5 4l-2 2 12.5 12.5 2-2zM4 9.5l-2 2L14.5 24l2-2z"/>',
+    food:    '<path d="M12 20a7 7 0 0 0 7-7c0-3-2-5-4-7-1 2-3 3-3 5 0-2-2-3-3-5-2 2-4 4-4 7a7 7 0 0 0 7 7z"/>',
+    water:   '<path d="M12 3c2 4 4 6 4 10a4 4 0 0 1-8 0c0-4 2-6 4-10z"/>',
+    pulse:   '<path d="M3 12h4l2-6 4 12 2-6h6"/>',
+    wind:    '<path d="M3 8h11a3 3 0 1 0-3-3M3 12h17a3 3 0 1 1-3 3M3 16h9a3 3 0 1 1-3 3"/>',
+    spark:   '<path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2zM19 14l1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/>',
+    brain:   '<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3M12 4v16"/>',
+    trend:   '<path d="M3 17l6-6 4 4 8-8M14 7h7v7"/>',
+    cap:     '<path d="M2 10l10-6 10 6-10 6L2 10zM6 12v4c2 1.5 4 2 6 2s4-.5 6-2v-4"/>',
+    balance: '<path d="M12 3v18M5 8h14M5 8l-3 6c0 2 1.5 3 3 3s3-1 3-3zM19 8l-3 6c0 2 1.5 3 3 3s3-1 3-3z"/>',
+    piggy:   '<path d="M19 11a4 4 0 0 0-4-4H9a5 5 0 0 0-5 5c0 2 1 3 2 4v3h3v-2h4v2h3v-3c1-1 2-2 2-3M16 10h.01M3 10c0-1 .5-2 1-3"/>',
+    wallet:  '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14h2"/>',
+    card:    '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 11h18M7 16h4"/>',
+    friends: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5M14 19c0-2 2-3 4-3s3 1 3 3"/>',
+    home:    '<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1zM12 14c1-1.5 3-1.5 3 0s-3 3-3 3-3-1.5-3-3 2-1.5 3 0z"/>',
+    hand:    '<path d="M9 11V5a2 2 0 1 1 4 0v6M13 11V4a2 2 0 1 1 4 0v9M17 11V6a2 2 0 1 1 4 0v9a6 6 0 0 1-6 6h-2c-3 0-4-1-6-3l-4-5c-1-1 0-3 2-2l3 2V8a2 2 0 1 1 4 0v3"/>',
+  };
+
+  const grid = document.getElementById('grid');
+  FOCUSES.forEach((f, i) => {
+    const tile = document.createElement('button');
+    tile.type = 'button';
+    tile.className = 'focus-tile' + (i === 0 ? ' is-selected' : '');
+    tile.innerHTML = `
+      <div class="ico"><svg viewBox="0 0 24 24">${ICONS[f.icon] || ''}</svg></div>
+      <div class="name">${f.name}</div>
+      <div class="pillar"><span class="pdot ${f.dot}"></span>${f.pillar}</div>
+      <div class="check">✓</div>
+    `;
+    tile.addEventListener('click', () => {
+      grid.querySelectorAll('.focus-tile').forEach(x => x.classList.remove('is-selected'));
+      tile.classList.add('is-selected');
+    });
+    grid.appendChild(tile);
+  });
+</script>
+</body>
+</html>

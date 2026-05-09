@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tokens v1 — Layer 3 Components</title>
+<style>
+:root {
+  /* Layer 1 (R2 displayed) */
+  --neutral-50:  #FAF8F5;
+  --neutral-100: #F0EBE3;
+  --neutral-200: #DDD5C7;
+  --neutral-300: #B5AC9C;
+  --neutral-400: #8C857A;
+  --neutral-500: #6B645A;
+  --neutral-600: #5C564E;
+  --neutral-700: #4A453E;
+  --neutral-800: #38332E;
+  --neutral-900: #2C2A26;
+  --sand-50:  #FAF6F0;
+  --sand-100: #F2EBDF;
+  --sand-200: #E5DAC4;
+  --warm-50:  #FDF5EE;
+  --warm-100: #FAE7D5;
+  --warm-200: #F4CDA9;
+  --warm-500: #C8744A;
+  --warm-600: #A85C36;
+  --warm-700: #8A4A26;
+  --primary-50:  #EFF5FA;
+  --primary-100: #DAE9F2;
+  --primary-200: #B5D2E5;
+  --primary-300: #82B0CE;
+  --primary-400: #5290B5;
+  --primary-500: #34759E;
+  --primary-600: #2A6489;
+  --primary-700: #235173;
+  --primary-800: #1D425C;
+  --primary-900: #163346;
+  --success-100: #DFEAD0;
+  --success-500: #6B8E5A;
+  --success-600: #587746;
+  --success-700: #486238;
+  --warning-100: #F9E3B0;
+  --warning-500: #BC811F;
+  --warning-700: #815816;
+  --error-100: #F8DBD2;
+  --error-500: #B14A2D;
+  --error-700: #76311D;
+  --moss-100: #D5E2D8;
+  --moss-500: #366B49;
+  --moss-600: #2A573B;
+  --moss-700: #234630;
+  --lavender-100: #E5E1F4;
+  --lavender-500: #6053A8;
+  --lavender-600: #4F4391;
+  --lavender-700: #423775;
+  --rose-100: #F8DCDF;
+  --rose-500: #B84656;
+  --rose-600: #973745;
+  --rose-700: #7B2D38;
+
+  /* Layer 2 semantic */
+  --bg-default: var(--sand-50);
+  --bg-elevated: #FFFFFF;
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-700);
+  --text-disabled: var(--neutral-300);
+  --border-subtle: var(--neutral-200);
+  --border-default: var(--neutral-300);
+  --border-strong: var(--neutral-500);
+  --interactive-default: var(--primary-600);
+  --interactive-hover: var(--primary-700);
+  --interactive-pressed: var(--primary-800);
+  --interactive-disabled: var(--sand-200);
+
+  /* Layer 3 — radius scale (locked) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  background: var(--bg-default);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.55;
+  padding: 48px 32px 96px;
+}
+.container { max-width: 1280px; margin: 0 auto; }
+
+h1 {
+  font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif;
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+h2 {
+  font-family: "SF Pro Display", "Iowan Old Style", Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 56px 0 12px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 28px;
+}
+h3 { font-size: 17px; font-weight: 600; margin: 24px 0 8px; }
+h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin-bottom: 8px; }
+p { margin-bottom: 10px; max-width: 72ch; font-size: 14px; }
+small { color: var(--text-secondary); font-size: 12px; }
+.subtitle { font-size: 15px; color: var(--text-secondary); margin-bottom: 24px; max-width: 72ch; }
+code { font-family: "SF Mono", Menlo, monospace; font-size: 12px; background: var(--sand-100); padding: 1px 6px; border-radius: 4px; }
+
+.status-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--primary-700);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+}
+
+/* Component sample frame */
+.spec-block {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  margin: 12px 0;
+}
+.spec-block .examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+}
+.spec-block .examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 12px 0;
+}
+.spec-block .row-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+.spec-block .row-label:first-child { margin-top: 0; }
+.spec-block .surface-bg {
+  background: var(--bg-default);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin: 8px 0;
+}
+
+/* === BUTTONS === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border 0.12s;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.btn-sm { padding: 8px 14px; font-size: 13px; min-height: 36px; }
+.btn-md { padding: 10px 20px; font-size: 14px; min-height: 44px; }
+.btn-lg { padding: 12px 26px; font-size: 15px; min-height: 52px; }
+
+.btn-primary { background: var(--interactive-default); color: white; }
+.btn-primary:hover { background: var(--interactive-hover); }
+.btn-primary:active { background: var(--interactive-pressed); }
+.btn-primary[disabled], .btn-primary.is-disabled { background: var(--interactive-disabled); color: var(--text-disabled); cursor: not-allowed; }
+
+.btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-strong); }
+.btn-secondary:hover { color: var(--interactive-default); border-color: var(--interactive-default); }
+.btn-secondary[disabled], .btn-secondary.is-disabled { color: var(--text-disabled); border-color: var(--border-default); cursor: not-allowed; }
+
+.btn-ghost { background: transparent; color: var(--interactive-default); }
+.btn-ghost:hover { background: var(--primary-50); color: var(--interactive-hover); }
+
+.btn-deep-primary { background: linear-gradient(135deg, var(--primary-700), var(--primary-900)); color: white; box-shadow: 0 4px 12px rgba(35, 81, 115, 0.25); }
+.btn-deep-primary:hover { box-shadow: 0 6px 16px rgba(35, 81, 115, 0.35); }
+
+/* === BADGES === */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+}
+.badge-primary { background: var(--primary-100); color: var(--primary-700); border-color: var(--primary-200); }
+.badge-success { background: var(--success-100); color: var(--success-700); }
+.badge-warning { background: var(--warning-100); color: var(--warning-700); }
+.badge-error { background: var(--error-100); color: var(--error-700); }
+.badge-neutral { background: var(--sand-100); color: var(--neutral-700); }
+.badge-dcp { background: var(--moss-100); color: var(--moss-700); }
+.badge-health-data { background: var(--lavender-100); color: var(--lavender-700); }
+.badge-wellbeing { background: var(--rose-100); color: var(--rose-700); }
+.badge-healthy-habits { background: var(--warm-100); color: var(--warm-700); }
+
+/* === SELECTION === */
+.selection-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.12s, border 0.12s;
+}
+.selection-row:hover { border-color: var(--border-strong); background: var(--sand-100); }
+.selection-row.is-selected { border-color: var(--interactive-default); background: var(--primary-50); border-width: 2px; padding: 15px 17px; }
+.selection-row.is-disabled { background: var(--sand-100); border-color: var(--border-default); color: var(--text-disabled); cursor: not-allowed; }
+
+.radio {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--border-default);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.radio.is-selected { border-color: var(--interactive-default); }
+.radio.is-selected::after {
+  content: "";
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--interactive-default);
+}
+
+.checkbox {
+  width: 20px; height: 20px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-default);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.checkbox.is-selected { background: var(--interactive-default); border-color: var(--interactive-default); }
+.checkbox.is-selected::after {
+  content: "";
+  width: 10px; height: 6px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg);
+  margin-top: -2px;
+}
+
+.selection-content { flex: 1; }
+.selection-title { font-size: 14px; font-weight: 600; line-height: 1.3; margin-bottom: 2px; }
+.selection-desc { font-size: 12px; color: var(--text-secondary); }
+.selection-meta { font-size: 11px; color: var(--text-secondary); flex-shrink: 0; }
+
+/* === FOCUS RING === */
+.focus-demo { outline: none; }
+.focus-demo:focus-visible,
+.focus-demo.is-focused {
+  outline: 2px solid var(--primary-600);
+  outline-offset: 2px;
+}
+
+/* === INPUT === */
+.input {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  min-height: 44px;
+  width: 100%;
+  outline: none;
+}
+.input:focus, .input.is-focused {
+  border-color: var(--interactive-default);
+  outline: 2px solid var(--primary-600);
+  outline-offset: 2px;
+}
+.input::placeholder { color: var(--text-disabled); }
+
+/* === RADIUS DEMO === */
+.radius-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin: 12px 0;
+}
+.radius-card {
+  background: var(--primary-100);
+  border: 1px solid var(--primary-200);
+  padding: 28px 16px;
+  text-align: center;
+}
+.radius-card .name { font-size: 12px; font-weight: 700; color: var(--primary-700); margin-bottom: 4px; }
+.radius-card .px { font-size: 11px; color: var(--neutral-700); font-family: "SF Mono", Menlo, monospace; }
+
+/* === DATA VIZ === */
+.dataviz-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+.dataviz-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  text-align: center;
+}
+.dataviz-card .swatch { width: 100%; height: 36px; border-radius: var(--radius-sm); margin-bottom: 8px; }
+.dataviz-card .name { font-size: 11px; font-weight: 600; }
+.dataviz-card .ref { font-size: 10px; color: var(--text-secondary); font-family: "SF Mono", Menlo, monospace; }
+
+.gradient-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 8px 0;
+}
+.gradient-strip {
+  height: 28px;
+  border-radius: var(--radius-sm);
+}
+
+/* Token table */
+.token-table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 13px; }
+.token-table th { background: var(--sand-100); padding: 8px 12px; text-align: left; border: 1px solid var(--border-subtle); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); }
+.token-table td { padding: 8px 12px; border: 1px solid var(--border-subtle); background: var(--bg-elevated); font-size: 13px; }
+
+/* Pilot screen */
+.pilot-shell {
+  background: var(--bg-default);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  margin: 16px 0;
+  max-width: 480px;
+}
+.pilot-progress-row { display: flex; gap: 6px; margin-bottom: 24px; }
+.pilot-progress-step { flex: 1; height: 4px; border-radius: var(--radius-full); background: var(--sand-200); }
+.pilot-progress-step.is-done { background: var(--moss-500); }
+.pilot-progress-step.is-current { background: var(--primary-600); }
+.pilot-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--moss-700); font-weight: 700; margin-bottom: 6px; }
+.pilot-headline { font-family: "SF Pro Display", serif; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 8px; }
+.pilot-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 18px; }
+.pilot-actions { display: flex; gap: 10px; margin-top: 20px; align-items: center; flex-wrap: wrap; }
+
+/* Util */
+.note { font-size: 12px; color: var(--text-secondary); font-style: italic; margin: 8px 0; }
+ul { margin-left: 20px; margin-bottom: 10px; }
+li { margin-bottom: 3px; font-size: 13px; }
+hr { border: none; border-top: 1px solid var(--border-subtle); margin: 28px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="status-pill">Tokens v1 · Layer 3 Components</span>
+  <h1>Component tokens — buttons, badges, selection, focus, radius, data viz</h1>
+  <p class="subtitle">v1, 2026-05-02 · Layer 3 of the v2 build doc · primary-agnostic (component tokens reference Layer 2 semantic tokens) · displayed against R2 primary · pilot screen: DCP onboarding step 3</p>
+</header>
+
+<!-- ===== BUTTONS ===== -->
+<h2>Buttons</h2>
+<p>Three variants × three sizes × four states. <strong>44×44 minimum touch target</strong> (per ICP accessibility floor). Default radius is <code>radius.full</code> (pill).</p>
+
+<div class="spec-block">
+  <div class="row-label">Primary — filled</div>
+  <div class="examples">
+    <a href="#" class="btn btn-primary btn-sm">Continue session</a>
+    <a href="#" class="btn btn-primary btn-md">Continue session</a>
+    <a href="#" class="btn btn-primary btn-lg">Continue session</a>
+    <span class="btn btn-primary btn-md is-disabled">Disabled</span>
+  </div>
+
+  <div class="row-label">Primary deep-gradient — emphasized</div>
+  <div class="examples">
+    <a href="#" class="btn btn-deep-primary btn-md">Save and continue</a>
+    <a href="#" class="btn btn-deep-primary btn-lg">Get started</a>
+  </div>
+  <p class="note">Use <code>gradient.deep-primary</code> only for emphasized commit moments (Save, Submit, Get started). Pair with soft drop shadow tinted to <code>primary.700</code>.</p>
+
+  <div class="row-label">Secondary — outlined</div>
+  <div class="examples">
+    <a href="#" class="btn btn-secondary btn-sm">View details</a>
+    <a href="#" class="btn btn-secondary btn-md">View details</a>
+    <a href="#" class="btn btn-secondary btn-lg">View details</a>
+    <span class="btn btn-secondary btn-md is-disabled">Disabled</span>
+  </div>
+
+  <div class="row-label">Ghost — text-only</div>
+  <div class="examples">
+    <a href="#" class="btn btn-ghost btn-sm">Skip for now</a>
+    <a href="#" class="btn btn-ghost btn-md">Skip for now</a>
+    <a href="#" class="btn btn-ghost btn-lg">Skip for now</a>
+  </div>
+</div>
+
+<table class="token-table">
+  <thead><tr><th>Token</th><th>References</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><code>button.primary.background</code></td><td><code>interactive.default</code></td><td>Default CTA</td></tr>
+    <tr><td><code>button.primary.background.hover</code></td><td><code>interactive.hover</code></td><td>—</td></tr>
+    <tr><td><code>button.primary.background.pressed</code></td><td><code>interactive.pressed</code></td><td>—</td></tr>
+    <tr><td><code>button.primary.label</code></td><td><code>text.onPrimary</code></td><td>—</td></tr>
+    <tr><td><code>button.primary.deep.background</code></td><td><code>gradient.deep-primary</code></td><td>Emphasized commit only</td></tr>
+    <tr><td><code>button.primary.deep.shadow</code></td><td><code>0 4px 12px rgba(primary.700, 0.25)</code></td><td>Pair with deep-primary background</td></tr>
+    <tr><td><code>button.secondary.background</code></td><td>transparent</td><td>—</td></tr>
+    <tr><td><code>button.secondary.border</code></td><td><code>border.strong</code></td><td>—</td></tr>
+    <tr><td><code>button.secondary.label</code></td><td><code>text.primary</code></td><td>—</td></tr>
+    <tr><td><code>button.secondary.border.hover</code></td><td><code>interactive.default</code></td><td>—</td></tr>
+    <tr><td><code>button.ghost.label</code></td><td><code>interactive.default</code></td><td>—</td></tr>
+    <tr><td><code>button.ghost.label.hover</code></td><td><code>interactive.hover</code></td><td>—</td></tr>
+    <tr><td><code>button.disabled.background</code></td><td><code>interactive.disabled</code></td><td>—</td></tr>
+    <tr><td><code>button.disabled.label</code></td><td><code>text.disabled</code></td><td>—</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== BADGES ===== -->
+<h2>Badges & lozenges</h2>
+<p>Background at 100, label at 700–800. Five semantic variants + four module variants. AA verified for every pairing on sand surface.</p>
+
+<div class="spec-block">
+  <div class="row-label">Semantic variants</div>
+  <div class="examples">
+    <span class="badge badge-success">On track</span>
+    <span class="badge badge-warning">Action needed</span>
+    <span class="badge badge-error">Missed window</span>
+    <span class="badge badge-neutral">Draft</span>
+    <span class="badge badge-primary">New</span>
+  </div>
+
+  <div class="row-label">Module variants</div>
+  <div class="examples">
+    <span class="badge badge-dcp">Care path</span>
+    <span class="badge badge-health-data">Health data</span>
+    <span class="badge badge-wellbeing">Wellbeing</span>
+    <span class="badge badge-healthy-habits">Healthy habits</span>
+  </div>
+
+  <div class="row-label">In-context (sand surface)</div>
+  <div class="surface-bg">
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <span class="badge badge-success">On track</span>
+      <span class="badge badge-dcp">Back care · DCP</span>
+      <span class="badge badge-primary">Recommended</span>
+      <span class="badge badge-warning">Sleep dipped</span>
+    </div>
+  </div>
+</div>
+
+<table class="token-table">
+  <thead><tr><th>Token pattern</th><th>References</th></tr></thead>
+  <tbody>
+    <tr><td><code>badge.[variant].background</code></td><td><code>[variant].100</code></td></tr>
+    <tr><td><code>badge.[variant].label</code></td><td><code>[variant].700</code> (or .800 for richer contrast)</td></tr>
+    <tr><td><code>badge.[variant].border</code> (optional)</td><td><code>[variant].200</code></td></tr>
+  </tbody>
+</table>
+
+<!-- ===== SELECTION ===== -->
+<h2>Selection containers</h2>
+<p>Cards, list rows, radio, and checkbox. Selected state uses <code>primary.50</code> background + <code>primary.600</code> 2px border. AA verified.</p>
+
+<div class="spec-block">
+  <div class="row-label">Single-select cards (radio behavior)</div>
+  <div class="surface-bg">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div class="selection-row">
+        <div class="radio"></div>
+        <div class="selection-content">
+          <div class="selection-title">2 sessions per week</div>
+          <div class="selection-desc">Light start. Recommended if you're new to back care.</div>
+        </div>
+        <div class="selection-meta">~15 min each</div>
+      </div>
+      <div class="selection-row is-selected">
+        <div class="radio is-selected"></div>
+        <div class="selection-content">
+          <div class="selection-title">3 sessions per week</div>
+          <div class="selection-desc">Standard pace. Most members see results by week 4.</div>
+        </div>
+        <div class="selection-meta">~15 min each</div>
+      </div>
+      <div class="selection-row">
+        <div class="radio"></div>
+        <div class="selection-content">
+          <div class="selection-title">5 sessions per week</div>
+          <div class="selection-desc">Faster results. Choose if you have flexibility.</div>
+        </div>
+        <div class="selection-meta">~15 min each</div>
+      </div>
+      <div class="selection-row is-disabled">
+        <div class="radio"></div>
+        <div class="selection-content">
+          <div class="selection-title">Daily — coming soon</div>
+          <div class="selection-desc">Not available for Back Care yet.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-label">Multi-select rows (checkbox behavior)</div>
+  <div class="surface-bg">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <div class="selection-row">
+        <div class="checkbox"></div>
+        <div class="selection-content">
+          <div class="selection-title">Sleep tracking</div>
+          <div class="selection-desc">Sync from Apple Health.</div>
+        </div>
+      </div>
+      <div class="selection-row is-selected">
+        <div class="checkbox is-selected"></div>
+        <div class="selection-content">
+          <div class="selection-title">Steps + active minutes</div>
+          <div class="selection-desc">Already syncing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="token-table">
+  <thead><tr><th>Token</th><th>References</th></tr></thead>
+  <tbody>
+    <tr><td><code>selection.default.background</code></td><td>transparent / <code>background.elevated</code></td></tr>
+    <tr><td><code>selection.default.border</code></td><td><code>border.subtle</code></td></tr>
+    <tr><td><code>selection.default.label</code></td><td><code>text.primary</code></td></tr>
+    <tr><td><code>selection.hover.background</code></td><td><code>background.subtle</code> (sand.100)</td></tr>
+    <tr><td><code>selection.hover.border</code></td><td><code>border.strong</code></td></tr>
+    <tr><td><code>selection.selected.background</code></td><td><code>interactive.selected</code> (primary.100)</td></tr>
+    <tr><td><code>selection.selected.border</code></td><td><code>interactive.default</code> (2px)</td></tr>
+    <tr><td><code>selection.disabled.background</code></td><td><code>background.subtle</code></td></tr>
+    <tr><td><code>selection.disabled.label</code></td><td><code>text.disabled</code></td></tr>
+  </tbody>
+</table>
+
+<!-- ===== FOCUS RING ===== -->
+<h2>Focus ring</h2>
+<p>2px ring, 2px offset, <code>primary.600</code>. AAA on white, AA on sand.50. Applied via <code>:focus-visible</code> only — never on mouse-click hover, only on keyboard focus.</p>
+
+<div class="spec-block">
+  <div class="row-label">Focused button</div>
+  <div class="examples"><span class="btn btn-primary btn-md is-focused focus-demo">Focused CTA</span></div>
+
+  <div class="row-label">Focused input</div>
+  <div style="max-width: 300px;"><input type="text" class="input is-focused" value="Focused input" /></div>
+
+  <div class="row-label">Focused selection</div>
+  <div class="surface-bg">
+    <div class="selection-row is-selected is-focused focus-demo">
+      <div class="radio is-selected"></div>
+      <div class="selection-content">
+        <div class="selection-title">3 sessions per week</div>
+        <div class="selection-desc">Focused via keyboard navigation.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="token-table">
+  <thead><tr><th>Token</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td><code>focus.ring.color</code></td><td><code>border.focus</code> (primary.600)</td></tr>
+    <tr><td><code>focus.ring.width</code></td><td>2px</td></tr>
+    <tr><td><code>focus.ring.offset</code></td><td>2px</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== RADIUS ===== -->
+<h2>Border radius scale</h2>
+<p>Five tokens. Use <code>radius.full</code> for pills, badges, avatar containers; <code>radius.md</code> as default for cards; <code>radius.xl</code> for hero/feature surfaces.</p>
+
+<div class="spec-block">
+  <div class="radius-grid">
+    <div class="radius-card" style="border-radius: var(--radius-sm);">
+      <div class="name">radius.sm</div>
+      <div class="px">8px</div>
+    </div>
+    <div class="radius-card" style="border-radius: var(--radius-md);">
+      <div class="name">radius.md</div>
+      <div class="px">12px</div>
+    </div>
+    <div class="radius-card" style="border-radius: var(--radius-lg);">
+      <div class="name">radius.lg</div>
+      <div class="px">16px</div>
+    </div>
+    <div class="radius-card" style="border-radius: var(--radius-xl);">
+      <div class="name">radius.xl</div>
+      <div class="px">20px</div>
+    </div>
+    <div class="radius-card" style="border-radius: var(--radius-full); padding: 16px;">
+      <div class="name">radius.full</div>
+      <div class="px">9999px</div>
+    </div>
+  </div>
+</div>
+
+<table class="token-table">
+  <thead><tr><th>Token</th><th>Value</th><th>Use for</th></tr></thead>
+  <tbody>
+    <tr><td><code>radius.sm</code></td><td>8px</td><td>Inputs, tags, small chips</td></tr>
+    <tr><td><code>radius.md</code></td><td>12px</td><td>Cards, panels (default)</td></tr>
+    <tr><td><code>radius.lg</code></td><td>16px</td><td>Modals, bottom sheets</td></tr>
+    <tr><td><code>radius.xl</code></td><td>20px</td><td>Feature cards, hero containers</td></tr>
+    <tr><td><code>radius.full</code></td><td>9999px</td><td>Badges, pills, avatar containers, CTAs</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== DATA VIZ ===== -->
+<h2>Data visualization palette</h2>
+<p>Approved categorical hue subset at the <strong>500 stop</strong>. Use these and only these for data viz; reserve all <code>neutral.*</code>, <code>error.*</code> outside literal error states, and <code>100/200/400/900+</code> stops for non-data-viz UI.</p>
+
+<div class="spec-block">
+  <div class="row-label">Categorical (7 values, ordered)</div>
+  <div class="dataviz-row">
+    <div class="dataviz-card"><div class="swatch" style="background:#34759E;"></div><div class="name">dataviz.1</div><div class="ref">primary.500</div></div>
+    <div class="dataviz-card"><div class="swatch" style="background:#C8744A;"></div><div class="name">dataviz.2</div><div class="ref">warm.500</div></div>
+    <div class="dataviz-card"><div class="swatch" style="background:#366B49;"></div><div class="name">dataviz.3</div><div class="ref">moss.500</div></div>
+    <div class="dataviz-card"><div class="swatch" style="background:#6053A8;"></div><div class="name">dataviz.4</div><div class="ref">lavender.500</div></div>
+    <div class="dataviz-card"><div class="swatch" style="background:#B84656;"></div><div class="name">dataviz.5</div><div class="ref">rose.500</div></div>
+    <div class="dataviz-card"><div class="swatch" style="background:#6B8E5A;"></div><div class="name">dataviz.6</div><div class="ref">success.500</div></div>
+    <div class="dataviz-card"><div class="swatch" style="background:#BC811F;"></div><div class="name">dataviz.7</div><div class="ref">warning.500</div></div>
+  </div>
+
+  <div class="row-label">Sequential single-hue gradients (heatmaps, progress fills) — stops 200 → 700</div>
+  <div class="gradient-row">
+    <div>
+      <div class="gradient-strip" style="background: linear-gradient(90deg, var(--primary-200), var(--primary-700));"></div>
+      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">primary.200 → primary.700</div>
+    </div>
+    <div>
+      <div class="gradient-strip" style="background: linear-gradient(90deg, var(--moss-100), var(--moss-700));"></div>
+      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">moss.100 → moss.700</div>
+    </div>
+    <div>
+      <div class="gradient-strip" style="background: linear-gradient(90deg, var(--warm-100), var(--warm-700));"></div>
+      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">warm.100 → warm.700</div>
+    </div>
+    <div>
+      <div class="gradient-strip" style="background: linear-gradient(90deg, var(--lavender-100), var(--lavender-700));"></div>
+      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">lavender.100 → lavender.700</div>
+    </div>
+  </div>
+  <p class="note">Approved categorical subset uses the 500 stop because it lands AA on white and the <code>2 → 7</code> sequence stays perceptually distinguishable for color-blind users when paired with a non-color encoding (icon, label, position).</p>
+</div>
+
+<!-- ===== PILOT SCREEN ===== -->
+<h2>Pilot screen — DCP onboarding step 3 (sessions per week)</h2>
+<p>Real moment from the ICP — onboarding step 4 currently has 31% drop-off. Components in real layout: progress steps, selection cards, primary CTA, ghost CTA, focus ring.</p>
+
+<div class="pilot-shell">
+  <div class="pilot-progress-row">
+    <div class="pilot-progress-step is-done"></div>
+    <div class="pilot-progress-step is-done"></div>
+    <div class="pilot-progress-step is-current"></div>
+    <div class="pilot-progress-step"></div>
+    <div class="pilot-progress-step"></div>
+  </div>
+
+  <div class="pilot-eyebrow">Back Care · Step 3 of 5</div>
+  <div class="pilot-headline">How many sessions per week works for you?</div>
+  <p class="pilot-sub">You can change this anytime. We'll send reminders so you never have to think about scheduling.</p>
+
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div class="selection-row">
+      <div class="radio"></div>
+      <div class="selection-content">
+        <div class="selection-title">2 sessions per week</div>
+        <div class="selection-desc">Light start. Recommended if you're new to back care.</div>
+      </div>
+      <div class="selection-meta">~15 min each</div>
+    </div>
+    <div class="selection-row is-selected">
+      <div class="radio is-selected"></div>
+      <div class="selection-content">
+        <div class="selection-title">3 sessions per week</div>
+        <div class="selection-desc">Standard pace. Most members see results by week 4.</div>
+        <div style="margin-top: 6px;"><span class="badge badge-primary">Recommended</span></div>
+      </div>
+      <div class="selection-meta">~15 min each</div>
+    </div>
+    <div class="selection-row">
+      <div class="radio"></div>
+      <div class="selection-content">
+        <div class="selection-title">5 sessions per week</div>
+        <div class="selection-desc">Faster results. Choose if you have flexibility.</div>
+      </div>
+      <div class="selection-meta">~15 min each</div>
+    </div>
+  </div>
+
+  <div class="pilot-actions">
+    <a href="#" class="btn btn-primary btn-md">Continue</a>
+    <a href="#" class="btn btn-ghost btn-md">Back</a>
+    <a href="#" class="btn btn-ghost btn-md" style="margin-left: auto;">Skip for now</a>
+  </div>
+</div>
+
+<p class="note">Components used: progress steps (custom — could become its own component token), selection rows (radio variant), primary CTA, ghost CTAs, "Recommended" badge (primary variant), focus ring on the selected state, radius scale (sm for selection, full for buttons).</p>
+
+<!-- ===== WHAT'S OPEN ===== -->
+<h2>What's still open after Layer 3 v1</h2>
+<ul>
+  <li><strong>Progress steps component</strong> — used in pilot but not yet a token-spec'd component. Promote in v2.</li>
+  <li><strong>Tooltip / popover</strong> — not yet specified. Required for "Why this?" reasoning surface (Phase 0 §9).</li>
+  <li><strong>Inline alerts</strong> — semantic banner using status tokens. Required before DCP completion screens ship.</li>
+  <li><strong>Toast / snackbar</strong> — not yet specified.</li>
+  <li><strong>Modals + bottom sheets</strong> — radius.lg specified, full component pattern not yet.</li>
+  <li><strong>Form fields</strong> — input field shown in focus demo but full spec (label, helper text, error state) deferred.</li>
+  <li><strong>Avatars</strong> — not yet specified.</li>
+  <li><strong>Tabs / segmented control</strong> — not yet specified.</li>
+  <li><strong>Empty states</strong> — not yet specified.</li>
+  <li><strong>Layer 4 — icon system</strong> — 5 treatment recipes, module-tinted icons, Material Symbols Rounded recommendation.</li>
+  <li><strong>Layer 5 — illustration palette</strong> — color range, style direction, variant grid.</li>
+</ul>
+
+<h3>Next iteration target</h3>
+<p>Highest-leverage next moves: (1) <strong>Layer 4 icon system</strong> — needed for any further pilot screen to feel system-coherent. (2) <strong>Form field full spec</strong> — required for DCP onboarding completion. (3) <strong>Inline alert + toast</strong> — required for safety/error patterns.</p>
+
+<hr>
+
+<p style="font-size: 12px; color: var(--text-secondary); text-align: center; margin-top: 32px;">Components shown against R2 primary. Architecture: a primary swap (R2 → R1 or R3) propagates through all components automatically because they reference Layer 2 semantic tokens.</p>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MHC Home — v2.F Calm &amp; Scannable · v5 · Lane Container Variants</title>
+<style>
+/* =========================================================
+   v2.F · Calm & Scannable · v5
+   Builds on v4 (warm-neutral · SF Pro · tight type/spacing).
+   Tracker (Withings-style ring tiles) and Programs / Challenges /
+   Rewards (3-column grid) stay locked from v4.
+
+   Three new LANE variants — all share two new principles:
+   1. Each lane sits in its own bordered container (two distinct
+      cards rather than a flat dual-column band).
+   2. Items show eyebrow tag + title only — no meta line below.
+
+   What varies between D · E · F:
+   - D · Image LEFT  · 96×72 thumbnail
+   - E · Image RIGHT · 96×72 thumbnail (mirrored)
+   - F · Rounded ICON (56px circle) instead of photo container
+   ========================================================= */
+:root {
+  --neutral-50:  #FAF8F5;  --neutral-100: #F0EBE3; --neutral-200: #DDD5C7; --neutral-300: #B5AC9C;
+  --neutral-400: #8C857A;  --neutral-500: #6B645A; --neutral-600: #5C564E; --neutral-700: #4A453E;
+  --neutral-800: #38332E;  --neutral-900: #2C2A26; --neutral-950: #1A1815;
+  --sand-50:  #FAF6F0; --sand-100: #F2EBDF; --sand-200: #E5DAC4; --sand-300: #D6C5A6;
+  --sand-800: #524230; --sand-900: #2A2620;
+  --primary-50:  #EFF5FA; --primary-100: #DAE9F2; --primary-300: #82B0CE;
+  --primary-600: #2A6489; --primary-700: #235173; --primary-800: #1D425C;
+  --moss-50:  #EFF4F0; --moss-100: #D5E2D8; --moss-500: #366B49;
+  --moss-600: #2A573B; --moss-700: #234630;
+  --indigo-200: #B7BCE3; --indigo-300: #8990CC; --indigo-700: #343864;
+  --warm-50: #FDF5EE; --warm-100: #FAE7D5; --warm-700: #8A4A26;
+  --warning-100: #F9E3B0; --warning-700: #815816;
+
+  --bg-default: var(--sand-50);   --bg-subtle:  var(--sand-100);
+  --bg-card:    var(--sand-50);   --bg-tint:    var(--sand-200);
+
+  --text-primary:    var(--neutral-900); --text-secondary:  var(--neutral-700);
+  --text-tertiary:   var(--neutral-500); --text-quiet:      var(--neutral-400);
+  --text-onPrimary:  var(--sand-50);
+
+  --border-default:  var(--neutral-200); --border-strong:   var(--neutral-400);
+  --border-focus:    var(--primary-600); --border-ai:       var(--indigo-300);
+
+  --interactive: var(--primary-600); --interactive-hover: var(--primary-700);
+  --interactive-pressed: var(--primary-800);
+
+  --shadow-sm:  0 1px 2px rgba(20,18,16,0.04), 0 1px 3px rgba(20,18,16,0.03);
+  --shadow-md:  0 2px 6px rgba(20,18,16,0.06), 0 4px 12px rgba(20,18,16,0.04);
+  --shadow-cta: 0 2px 8px rgba(35,81,115,0.16);
+
+  --s-01: 2px;  --s-02: 4px;  --s-03: 8px;  --s-04: 16px;
+  --s-05: 24px; --s-06: 32px; --s-07: 40px; --s-08: 64px;
+  --s-09: 80px; --s-10: 96px;
+
+  --t-display: 36px; --t-h1: 28px; --t-h2: 22px; --t-h3: 18px;
+  --t-h4: 16px; --t-body: 14px; --t-cap: 12px; --t-small: 11px;
+
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 20px;
+
+  --lh-tight: 1.12; --lh-snug: 1.3; --lh-normal: 1.55;
+
+  --body-max: 1040px;
+
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-text:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@media (max-width: 599px) {
+  :root { --t-display: 28px; --t-h1: 22px; --t-h2: 19px; --t-h3: 17px; --t-h4: 15px; }
+}
+
+* { box-sizing: border-box; }
+*::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg-default);
+  color: var(--text-primary);
+  font-family: var(--font-text);
+  font-size: var(--t-body);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+button { font: inherit; }
+
+a.skip {
+  position: absolute; left: -9999px; top: -9999px;
+  background: var(--text-primary); color: var(--text-onPrimary);
+  padding: var(--s-03) var(--s-04); border-radius: var(--r-sm); z-index: 100;
+}
+a.skip:focus { left: var(--s-04); top: var(--s-04); }
+
+/* APP FRAME */
+.app-frame {
+  background: var(--bg-default); border-bottom: 1px solid var(--border-default);
+  position: sticky; top: 0; z-index: 50;
+}
+.app-frame .nav {
+  max-width: var(--body-max); margin: 0 auto;
+  padding: var(--s-04); height: 56px;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: var(--s-04);
+}
+.app-frame .nav-left, .app-frame .nav-right { display: flex; align-items: center; gap: var(--s-04); }
+.app-frame .nav-right { justify-content: flex-end; }
+.app-frame .logo {
+  font-family: var(--font-display); font-weight: 600;
+  letter-spacing: -0.01em; font-size: 16px;
+  color: var(--text-primary); text-align: center;
+}
+.app-frame .nav-icon {
+  width: 32px; height: 32px; border: none; background: transparent;
+  border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center;
+  color: var(--text-secondary);
+}
+.app-frame .nav-icon:hover { background: var(--bg-subtle); color: var(--text-primary); }
+.app-frame .nav-icon svg { width: 18px; height: 18px; }
+.app-frame .avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--neutral-900); color: var(--sand-50);
+  display: grid; place-items: center;
+  font-family: var(--font-text); font-size: 12px; font-weight: 600;
+  cursor: pointer;
+}
+@media (min-width: 600px) {
+  .app-frame .nav { padding: var(--s-04) var(--s-06); height: 64px; }
+}
+@media (min-width: 1240px) { .app-frame .nav { padding: var(--s-04) 0; } }
+
+/* PAGE LAYOUT */
+.page {
+  max-width: var(--body-max); margin: 0 auto;
+  padding: 0 var(--s-04);
+}
+@media (min-width: 600px) { .page { padding: 0 var(--s-06); } }
+@media (min-width: 1240px) { .page { padding: 0; } }
+
+/* SECTION SPACING — 24/32/40 */
+.section { padding: var(--s-05) 0; }
+@media (min-width: 600px) { .section { padding: var(--s-06) 0; } }
+@media (min-width: 1240px) { .section { padding: var(--s-07) 0; } }
+.section + .section { border-top: 1px solid var(--border-default); }
+
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--s-04); margin-bottom: var(--s-04); flex-wrap: wrap;
+}
+.section-head h2 {
+  font-family: var(--font-display); font-size: var(--t-h2);
+  line-height: var(--lh-snug); font-weight: 600; margin: 0;
+  letter-spacing: -0.018em; color: var(--text-primary);
+}
+.section-head .sub {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary); margin-top: var(--s-02);
+}
+.section-head .head-left { flex: 1; min-width: 0; }
+
+.text-link {
+  font-family: var(--font-text); color: var(--interactive);
+  font-size: var(--t-cap); font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+  letter-spacing: -0.005em;
+}
+.text-link:hover { color: var(--interactive-hover); text-decoration: underline; }
+
+/* GREETING */
+.greeting { padding: var(--s-05) 0 var(--s-03); }
+@media (min-width: 600px) { .greeting { padding: var(--s-07) 0 var(--s-04); } }
+.greeting h1 {
+  font-family: var(--font-display); font-size: var(--t-h1);
+  font-weight: 600; line-height: var(--lh-tight);
+  margin: 0 0 var(--s-03); letter-spacing: -0.022em;
+  color: var(--text-primary);
+}
+.greeting .interests {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary);
+  display: flex; flex-wrap: wrap; gap: var(--s-03);
+  align-items: center; margin: 0;
+}
+.greeting .interests .dot { color: var(--text-quiet); }
+.greeting .interests .edit-link {
+  color: var(--interactive); text-decoration: underline;
+  text-underline-offset: 3px; font-weight: 500;
+}
+
+/* HERO */
+.hero { padding-top: 0; padding-bottom: var(--s-06); }
+@media (min-width: 600px) { .hero { padding-bottom: var(--s-07); } }
+.hero-card {
+  display: grid; grid-template-columns: 1fr;
+  gap: var(--s-04); align-items: stretch;
+}
+@media (min-width: 905px) {
+  .hero-card { grid-template-columns: 1.1fr 1fr; gap: var(--s-06); }
+}
+.hero-media {
+  border-radius: var(--r-lg); aspect-ratio: 16/9;
+  background:
+    radial-gradient(ellipse at 28% 22%, rgba(255,250,240,0.08) 0%, transparent 45%),
+    radial-gradient(circle at 76% 30%, rgba(250,246,240,0.85) 0 0.4%, transparent 0.9%),
+    radial-gradient(circle at 70% 38%, rgba(250,246,240,0.6) 0 0.18%, transparent 0.4%),
+    linear-gradient(168deg, var(--neutral-800) 0%, var(--sand-900) 55%, var(--neutral-950) 100%);
+  position: relative; overflow: hidden;
+}
+@media (min-width: 905px) { .hero-media { aspect-ratio: auto; min-height: 200px; } }
+.hero-copy {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: var(--s-03); padding: var(--s-03) 0;
+}
+.hero-tag {
+  font-family: var(--font-text); font-size: var(--t-small);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  font-weight: 600; color: var(--text-tertiary);
+}
+.hero-title {
+  font-family: var(--font-display); font-size: var(--t-display);
+  font-weight: 600; line-height: var(--lh-tight); margin: 0;
+  letter-spacing: -0.028em; color: var(--text-primary);
+}
+.hero-body {
+  font-family: var(--font-text); font-size: var(--t-body);
+  line-height: var(--lh-normal); color: var(--text-secondary);
+  margin: 0; max-width: 50ch;
+}
+.hero-meta {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary);
+  display: flex; align-items: center; gap: var(--s-03);
+  margin-top: var(--s-02); flex-wrap: wrap;
+}
+.hero-meta .pip {
+  display: inline-block; width: 4px; height: 4px;
+  border-radius: 50%; background: var(--text-quiet);
+}
+.hero-actions {
+  margin-top: var(--s-03);
+  display: flex; align-items: center; gap: var(--s-04); flex-wrap: wrap;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--s-03); font-family: var(--font-text);
+  font-weight: 600; font-size: var(--t-body);
+  height: 44px; padding: 0 22px; border-radius: 999px;
+  border: 1.5px solid transparent; cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+  white-space: nowrap; letter-spacing: -0.01em;
+}
+.btn-primary {
+  background: var(--interactive); color: var(--text-onPrimary);
+  border-color: var(--interactive); box-shadow: var(--shadow-cta);
+}
+.btn-primary:hover { background: var(--interactive-hover); border-color: var(--interactive-hover); }
+.btn-secondary {
+  background: transparent; color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+.btn-secondary:hover { color: var(--interactive); border-color: var(--interactive); }
+.btn-ghost {
+  background: transparent; color: var(--interactive);
+  border-color: transparent; padding: 0 var(--s-03); height: 36px;
+}
+.btn-ghost:hover { text-decoration: underline; }
+.btn-md { height: 36px; padding: 0 16px; font-size: var(--t-cap); }
+
+/* VARIANT EXPLORATION HEADER */
+.variant-divider {
+  margin: var(--s-08) 0 var(--s-05);
+  padding: var(--s-04) var(--s-05);
+  background: var(--neutral-50);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--r-md);
+}
+.variant-divider .row {
+  display: flex; align-items: baseline; gap: var(--s-03);
+  flex-wrap: wrap;
+}
+.variant-divider .num {
+  font-family: var(--font-display);
+  font-size: 13px; font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-onPrimary);
+  background: var(--primary-600);
+  padding: 2px 10px; border-radius: 999px;
+  text-transform: uppercase;
+}
+.variant-divider h2 {
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 600; margin: 0;
+  letter-spacing: -0.012em;
+  color: var(--text-primary);
+}
+.variant-divider .desc {
+  font-family: var(--font-text);
+  font-size: var(--t-cap); margin: var(--s-02) 0 0;
+  color: var(--text-secondary); flex-basis: 100%;
+}
+.variant-block { margin-bottom: var(--s-05); }
+
+/* =========================================================
+   LANES — shared layout (two distinct containers)
+   ========================================================= */
+.lanes-grid {
+  display: grid; grid-template-columns: 1fr; gap: var(--s-05);
+}
+@media (min-width: 905px) {
+  .lanes-grid { grid-template-columns: 1fr 1fr; gap: var(--s-05); }
+}
+
+/* The new container per lane — its own bordered card */
+.lane {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  padding: var(--s-05);
+  display: flex; flex-direction: column;
+  gap: var(--s-04);
+}
+.lane-head {
+  display: flex; flex-direction: column; gap: var(--s-02);
+}
+.lane-head h3 {
+  font-family: var(--font-display); font-size: var(--t-h3);
+  font-weight: 600; margin: 0;
+  letter-spacing: -0.018em; color: var(--text-primary);
+}
+.lane-head .sub {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary);
+}
+.lane-list {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column;
+  gap: var(--s-03);
+}
+.lane-foot { margin-top: var(--s-01); }
+
+/* Item primitive — title-only treatment (eyebrow + title) */
+.item {
+  display: grid;
+  grid-template-columns: var(--media-col, 96px) 1fr auto;
+  align-items: center;
+  gap: var(--s-04);
+  padding: var(--s-03);
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-md);
+  text-decoration: none; color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.item:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+.item:focus-visible { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+.item .body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.item .tag {
+  font-family: var(--font-text); font-size: var(--t-small);
+  font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-tertiary);
+}
+.item .title {
+  font-family: var(--font-display); font-size: var(--t-h4);
+  font-weight: 600; color: var(--text-primary);
+  letter-spacing: -0.012em; line-height: var(--lh-snug);
+  margin: 0;
+}
+.item .arrow {
+  color: var(--text-tertiary); font-size: 18px; line-height: 1;
+}
+.item:hover .arrow { color: var(--interactive); }
+
+/* media-thumb — rectangular 96×72 photo */
+.thumb {
+  width: 96px; height: 72px;
+  border-radius: var(--r-sm);
+  background: var(--bg-tint);
+  flex-shrink: 0;
+}
+.thumb.sleep {
+  background:
+    radial-gradient(circle at 70% 25%, rgba(250,246,240,0.85) 0 4%, transparent 6%),
+    linear-gradient(168deg, var(--neutral-800) 0%, var(--sand-900) 100%);
+}
+.thumb.stress {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(250,246,240,0.2) 0 30%, transparent 32%),
+    linear-gradient(135deg, var(--neutral-600) 0%, var(--sand-800) 100%);
+}
+.thumb.move {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 14px, rgba(250,246,240,0.08) 14px 15px),
+    linear-gradient(180deg, var(--neutral-300) 0%, var(--neutral-600) 100%);
+}
+.thumb.benefits {
+  background:
+    radial-gradient(circle at 30% 70%, rgba(250,246,240,0.22) 0 22%, transparent 24%),
+    linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
+}
+.thumb.eap {
+  background:
+    radial-gradient(circle at 50% 60%, rgba(250,246,240,0.2) 0 22%, transparent 24%),
+    linear-gradient(135deg, var(--moss-600) 0%, var(--moss-700) 100%);
+}
+.thumb.event {
+  background:
+    radial-gradient(circle at 70% 40%, rgba(250,246,240,0.2) 0 25%, transparent 27%),
+    linear-gradient(135deg, var(--sand-800) 0%, var(--warm-700) 100%);
+}
+
+/* VARIANT D · image LEFT (default item layout) — already covered above */
+.lanes-d .item { /* default */ }
+
+/* VARIANT E · image RIGHT — flip via order */
+.lanes-e .item {
+  grid-template-columns: 1fr auto var(--media-col, 96px);
+}
+.lanes-e .item .thumb { order: 3; }
+.lanes-e .item .body  { order: 1; }
+.lanes-e .item .arrow { order: 2; }
+
+/* VARIANT F · rounded ICON (56px circle) — replaces photo container */
+.lanes-f { --media-col: 56px; }
+.lanes-f .icon-circle {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--sand-100);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+.lanes-f .icon-circle svg {
+  width: 26px; height: 26px;
+}
+.lanes-f .icon-circle.primary { background: var(--primary-100); color: var(--primary-700); }
+.lanes-f .icon-circle.moss    { background: var(--moss-100);    color: var(--moss-700); }
+.lanes-f .icon-circle.warm    { background: var(--warm-100);    color: var(--warm-700); }
+.lanes-f .icon-circle.indigo  { background: var(--indigo-200);  color: var(--indigo-700); }
+.lanes-f .icon-circle.sand    { background: var(--sand-200);    color: var(--text-secondary); }
+
+/* =========================================================
+   TRACKER — Withings-style ring tiles (kept from v4)
+   ========================================================= */
+.tracker-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-04);
+}
+@media (min-width: 600px) {
+  .tracker-grid { grid-template-columns: repeat(4, 1fr); gap: var(--s-04); }
+}
+.metric-ring {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-md);
+  padding: var(--s-05) var(--s-04) var(--s-04);
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-03);
+}
+.metric-ring .ring-wrap {
+  position: relative; width: 64px; height: 64px;
+  display: grid; place-items: center;
+}
+.metric-ring .ring-svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.metric-ring .ring-bg { fill: none; stroke: var(--bg-tint); stroke-width: 4; }
+.metric-ring .ring-fg { fill: none; stroke-width: 4; stroke-linecap: round; }
+.metric-ring .ring-fg.moss    { stroke: var(--moss-600); }
+.metric-ring .ring-fg.primary { stroke: var(--primary-600); }
+.metric-ring .ring-fg.warm    { stroke: var(--warm-700); }
+
+.metric-ring .glyph {
+  display: grid; place-items: center;
+  position: relative; z-index: 1;
+  width: 32px; height: 32px;
+  color: var(--text-primary);
+}
+.metric-ring .glyph svg { width: 22px; height: 22px; }
+.metric-ring .glyph.moss    { color: var(--moss-700); }
+.metric-ring .glyph.primary { color: var(--primary-700); }
+.metric-ring .glyph.warm    { color: var(--warm-700); }
+
+.metric-ring .label {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-top: var(--s-01);
+}
+.metric-ring .value-row {
+  display: inline-flex; align-items: baseline; gap: var(--s-02);
+}
+.metric-ring .arrow-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--bg-tint);
+  color: var(--text-secondary);
+  font-size: 11px; line-height: 1;
+  align-self: center; flex-shrink: 0;
+}
+.metric-ring .arrow-pill.up   { background: var(--moss-100);    color: var(--moss-700); }
+.metric-ring .arrow-pill.down { background: var(--warning-100); color: var(--warning-700); }
+.metric-ring .value {
+  font-family: var(--font-display); font-size: 22px;
+  font-weight: 700; color: var(--text-primary);
+  letter-spacing: -0.022em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.metric-ring .unit {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary); font-weight: 500;
+}
+
+.insight {
+  margin-top: var(--s-04);
+  background: var(--bg-card);
+  border: 1px solid var(--border-ai);
+  border-radius: var(--r-md);
+  padding: var(--s-05);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--s-04); align-items: center;
+}
+@media (max-width: 599px) { .insight { grid-template-columns: 1fr; } }
+.insight-badge {
+  font-family: var(--font-text);
+  display: inline-flex; align-items: center;
+  gap: var(--s-02);
+  font-size: var(--t-small); font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--indigo-700);
+  text-transform: uppercase; white-space: nowrap;
+}
+.insight-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--indigo-700); }
+.insight-text {
+  font-family: var(--font-text); font-size: var(--t-body);
+  color: var(--text-primary); line-height: var(--lh-snug);
+}
+.insight-text b { font-weight: 600; }
+.insight-text .insight-action {
+  display: block; margin-top: var(--s-02);
+  color: var(--text-secondary); font-size: var(--t-cap);
+}
+
+/* =========================================================
+   PROGRAMS / CHALLENGES / REWARDS — 3-col grid (locked from v4)
+   ========================================================= */
+.tile {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.tile:hover { border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+.tile .tile-media {
+  aspect-ratio: 16/9; background: var(--bg-tint);
+}
+.tile .tile-media.sleep    { background: linear-gradient(168deg, var(--neutral-800), var(--sand-900)); }
+.tile .tile-media.stress   { background: linear-gradient(135deg, var(--neutral-600), var(--sand-800)); }
+.tile .tile-media.diabetes { background: linear-gradient(135deg, var(--moss-600), var(--moss-700)); }
+.tile .tile-media.team     { background: linear-gradient(135deg, var(--primary-600), var(--primary-800)); }
+.tile .tile-media.streak   { background: linear-gradient(135deg, var(--warm-700), var(--sand-800)); }
+.tile .tile-media.fair     { background: linear-gradient(135deg, var(--indigo-700), var(--neutral-800)); }
+.tile .tile-media.giftcard { background: linear-gradient(135deg, var(--sand-300), var(--warm-100)); }
+.tile .tile-media.points   { background: linear-gradient(135deg, var(--primary-100), var(--primary-300)); }
+.tile .tile-media.raffle   { background: linear-gradient(135deg, var(--warm-100), var(--sand-200)); }
+.tile .tile-body {
+  padding: var(--s-04); display: flex; flex-direction: column;
+  gap: var(--s-02); flex: 1;
+}
+.tile .tile-tag {
+  font-family: var(--font-text); font-size: var(--t-small);
+  font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-tertiary);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+}
+.tile .tile-tag.dcp { color: var(--moss-700); }
+.tile .tile-tag.dcp::before {
+  content: ''; display: inline-block;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--moss-600);
+}
+.tile .tile-tag.challenge { color: var(--primary-700); }
+.tile .tile-tag.challenge::before {
+  content: ''; display: inline-block;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--primary-600);
+}
+.tile .tile-tag.reward { color: var(--warm-700); }
+.tile .tile-tag.reward::before {
+  content: ''; display: inline-block;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--warm-700);
+}
+.tile .tile-title {
+  font-family: var(--font-display); font-size: var(--t-h4);
+  font-weight: 600; color: var(--text-primary);
+  letter-spacing: -0.012em; line-height: var(--lh-snug);
+  margin: 0;
+}
+.tile .tile-meta {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-tertiary);
+  display: flex; gap: var(--s-02);
+  align-items: center; flex-wrap: wrap;
+  margin-top: var(--s-01);
+}
+.tile .tile-meta .pip { color: var(--text-quiet); }
+.tile .tile-progress { margin-top: var(--s-03); }
+.tile .tile-progress-bar {
+  height: 4px; background: var(--bg-tint);
+  border-radius: 999px; overflow: hidden;
+  margin-bottom: var(--s-02);
+}
+.tile .tile-progress-fill { height: 100%; background: var(--moss-600); border-radius: 999px; }
+.tile .tile-progress-fill.primary { background: var(--primary-600); }
+.tile .tile-progress-fill.warm    { background: var(--warm-700); }
+.tile .tile-progress-text {
+  font-family: var(--font-text); font-size: var(--t-cap);
+  color: var(--text-secondary);
+  display: flex; justify-content: space-between; gap: var(--s-04);
+}
+.tile .tile-progress-text .reward {
+  color: var(--text-primary); font-weight: 600;
+}
+.tile .tile-cta {
+  margin-top: var(--s-03);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+  font-family: var(--font-text); font-size: var(--t-cap);
+  font-weight: 600; color: var(--interactive);
+}
+.tile:hover .tile-cta { color: var(--interactive-hover); }
+
+.grid-3col {
+  display: grid; grid-template-columns: 1fr; gap: var(--s-04);
+}
+@media (min-width: 600px) { .grid-3col { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 905px) { .grid-3col { grid-template-columns: repeat(3, 1fr); gap: var(--s-05); } }
+
+/* FOOTER */
+.app-foot {
+  border-top: 1px solid var(--border-default);
+  margin-top: var(--s-07);
+  padding: var(--s-06) 0;
+  background: var(--bg-subtle);
+}
+.app-foot .foot-inner {
+  max-width: var(--body-max); margin: 0 auto;
+  padding: 0 var(--s-04);
+  display: grid; gap: var(--s-04);
+}
+@media (min-width: 600px) {
+  .app-foot .foot-inner { padding: 0 var(--s-06); grid-template-columns: 1fr auto; align-items: end; }
+}
+.foot-links {
+  display: flex; gap: var(--s-05); flex-wrap: wrap;
+  font-family: var(--font-text);
+  font-size: var(--t-cap); color: var(--text-secondary);
+}
+.foot-links a { color: inherit; text-decoration: none; }
+.foot-meta {
+  font-family: var(--font-text); font-size: var(--t-small);
+  color: var(--text-tertiary);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="app-frame" role="banner">
+  <div class="nav">
+    <div class="nav-left">
+      <button class="nav-icon" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="logo">Mobile Health</div>
+    <div class="nav-right">
+      <button class="nav-icon" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      </button>
+      <div class="avatar" tabindex="0" aria-label="Profile · Davinder">D</div>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="page" role="main">
+
+  <section class="greeting">
+    <h1>Good morning, Davinder.</h1>
+    <p class="interests">
+      Your interests
+      <span class="dot">·</span> Sleep
+      <span class="dot">·</span> Stress
+      <span class="dot">·</span> Move more
+      <span class="dot">·</span> <a class="edit-link" href="#">Edit</a>
+    </p>
+  </section>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <article class="hero-card">
+      <div class="hero-media" role="img" aria-label="Quiet evening sky"></div>
+      <div class="hero-copy">
+        <div class="hero-tag">From things you care about</div>
+        <h2 id="hero-title" class="hero-title">Sleep better, in 4 weeks.</h2>
+        <p class="hero-body">An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change.</p>
+        <p class="hero-meta">
+          <span>Sleep DCP</span><span class="pip"></span>
+          <span>8 sessions · ~12 min each</span><span class="pip"></span>
+          <span>$100 reward at completion</span>
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary">Start the program</button>
+          <button class="btn btn-ghost">Learn more</button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- TRACKER (kept from v4) -->
+  <section class="section tracker" aria-labelledby="tracker-title">
+    <div class="section-head">
+      <div class="head-left">
+        <h2 id="tracker-title">This week</h2>
+        <p class="sub">↻ Synced 4 minutes ago · Source: Apple Health</p>
+      </div>
+      <a class="text-link" href="#">View trends</a>
+    </div>
+    <div class="tracker-grid">
+      <div class="metric-ring">
+        <div class="ring-wrap">
+          <svg class="ring-svg" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="ring-bg" cx="32" cy="32" r="28"/>
+            <circle class="ring-fg moss" cx="32" cy="32" r="28" pathLength="100" stroke-dasharray="100" stroke-dashoffset="22"/>
+          </svg>
+          <span class="glyph moss" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 16v-2.4C4 11.5 3 10.5 3 8c.03-2.7 1.5-6 4.5-6C9.4 2 10 3.8 10 5.5c0 3.1-2 5.7-2 8.7V16a2 2 0 1 1-4 0Z"/>
+              <path d="M20 20v-2.4c0-2.1 1-3.1 1-5.6-.03-2.7-1.5-6-4.5-6C14.6 6 14 7.8 14 9.5c0 3.1 2 5.7 2 8.7V20a2 2 0 1 0 4 0Z"/>
+              <path d="M16 17h4"/><path d="M4 13h4"/>
+            </svg>
+          </span>
+        </div>
+        <span class="label">Steps</span>
+        <div class="value-row"><span class="arrow-pill up">↗</span><span class="value">52,470</span></div>
+        <span class="unit">78% of weekly goal · ▲ 4% vs last week</span>
+      </div>
+
+      <div class="metric-ring">
+        <div class="ring-wrap">
+          <svg class="ring-svg" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="ring-bg" cx="32" cy="32" r="28"/>
+            <circle class="ring-fg primary" cx="32" cy="32" r="28" pathLength="100" stroke-dasharray="100" stroke-dashoffset="38"/>
+          </svg>
+          <span class="glyph primary" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </span>
+        </div>
+        <span class="label">Sleep</span>
+        <div class="value-row"><span class="arrow-pill down">↘</span><span class="value">7h 10m</span></div>
+        <span class="unit">62% of nightly goal · ▼ 12 min vs goal</span>
+      </div>
+
+      <div class="metric-ring">
+        <div class="ring-wrap">
+          <svg class="ring-svg" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="ring-bg" cx="32" cy="32" r="28"/>
+            <circle class="ring-fg warm" cx="32" cy="32" r="28" pathLength="100" stroke-dasharray="100" stroke-dashoffset="50"/>
+          </svg>
+          <span class="glyph warm" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+            </svg>
+          </span>
+        </div>
+        <span class="label">Calories</span>
+        <div class="value-row"><span class="arrow-pill">→</span><span class="value">14,200</span></div>
+        <span class="unit">50% of weekly goal · On pace</span>
+      </div>
+
+      <div class="metric-ring">
+        <div class="ring-wrap">
+          <svg class="ring-svg" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="ring-bg" cx="32" cy="32" r="28"/>
+            <circle class="ring-fg moss" cx="32" cy="32" r="28" pathLength="100" stroke-dasharray="100" stroke-dashoffset="20"/>
+          </svg>
+          <span class="glyph moss" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </span>
+        </div>
+        <span class="label">Active min</span>
+        <div class="value-row"><span class="arrow-pill up">↗</span><span class="value">240</span></div>
+        <span class="unit">80% of weekly goal · ▲ 8% vs last week</span>
+      </div>
+    </div>
+
+    <div class="insight" role="region" aria-label="AI insight">
+      <div class="insight-badge"><span class="dot"></span>AI Insight</div>
+      <div class="insight-text">
+        Sleep is averaging <b>38 minutes less</b> than your goal this week.
+        <span class="insight-action">Try a 30-minute wind-down tonight at 9:30pm.</span>
+      </div>
+      <button class="btn btn-secondary btn-md">Add wind-down</button>
+    </div>
+  </section>
+
+
+  <!-- ╔════════════════════════════════════════════════════════════
+       NEW LANE VARIANTS — D · E · F
+       Each lane in its own bordered container · title-only items
+       ════════════════════════════════════════════════════════════╗ -->
+
+  <!-- VARIANT D · IMAGE LEFT, IN CONTAINERS, TITLE-ONLY -->
+  <div class="variant-divider" id="lanes-d">
+    <div class="row">
+      <span class="num">D</span>
+      <h2>Lanes — Two containers · Image left · Title-only</h2>
+    </div>
+    <p class="desc">Each lane sits in its own bordered card. Items show eyebrow tag + title only — no meta line. Photo thumb (96 × 72) anchored on the left. Calmest of the three; reads like a short editorial table of contents.</p>
+  </div>
+  <section class="variant-block">
+    <div class="lanes-grid lanes-d">
+      <article class="lane">
+        <div class="lane-head">
+          <h3>Things I care about</h3>
+          <p class="sub">Matched to your interests · 4 items total</p>
+        </div>
+        <ul class="lane-list">
+          <li><a href="#" class="item">
+            <div class="thumb sleep" role="img" aria-label="Night sky"></div>
+            <div class="body"><span class="tag">Article · Sleep</span><h4 class="title">How to wind down before bed</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="thumb stress" role="img" aria-label="Calm circles"></div>
+            <div class="body"><span class="tag">Recommended · Stress</span><h4 class="title">Manage Stress program</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="thumb move" role="img" aria-label="Movement"></div>
+            <div class="body"><span class="tag">Library · Move more</span><h4 class="title">Quick movement breaks</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+        </ul>
+        <div class="lane-foot"><a class="text-link" href="#">See 1 more matched to your interests</a></div>
+      </article>
+
+      <article class="lane">
+        <div class="lane-head">
+          <h3>From your employer</h3>
+          <p class="sub">Acme Corporation · 4 items total</p>
+        </div>
+        <ul class="lane-list">
+          <li><a href="#" class="item">
+            <div class="thumb benefits" role="img" aria-label="Benefits"></div>
+            <div class="body"><span class="tag">Benefits · Deadline</span><h4 class="title">Open enrollment opens May 15</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="thumb eap" role="img" aria-label="Mental health support"></div>
+            <div class="body"><span class="tag">Mental health</span><h4 class="title">EAP · free counseling</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="thumb event" role="img" aria-label="Wellness fair"></div>
+            <div class="body"><span class="tag">Event · May 22</span><h4 class="title">Wellness fair · onsite + virtual</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+        </ul>
+        <div class="lane-foot"><a class="text-link" href="#">See 1 more from Acme</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- VARIANT E · IMAGE RIGHT, IN CONTAINERS, TITLE-ONLY -->
+  <div class="variant-divider" id="lanes-e">
+    <div class="row">
+      <span class="num">E</span>
+      <h2>Lanes — Two containers · Image right · Title-only</h2>
+    </div>
+    <p class="desc">Same composition as D, mirrored. Image anchored to the right; eyebrow + title sit flush-left. Reads more like a news index — title leads the eye, image confirms category. Often feels less "templated" than image-left rows.</p>
+  </div>
+  <section class="variant-block">
+    <div class="lanes-grid lanes-e">
+      <article class="lane">
+        <div class="lane-head">
+          <h3>Things I care about</h3>
+          <p class="sub">Matched to your interests · 4 items total</p>
+        </div>
+        <ul class="lane-list">
+          <li><a href="#" class="item">
+            <div class="body"><span class="tag">Article · Sleep</span><h4 class="title">How to wind down before bed</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+            <div class="thumb sleep" role="img" aria-label="Night sky"></div>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="body"><span class="tag">Recommended · Stress</span><h4 class="title">Manage Stress program</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+            <div class="thumb stress" role="img" aria-label="Calm circles"></div>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="body"><span class="tag">Library · Move more</span><h4 class="title">Quick movement breaks</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+            <div class="thumb move" role="img" aria-label="Movement"></div>
+          </a></li>
+        </ul>
+        <div class="lane-foot"><a class="text-link" href="#">See 1 more matched to your interests</a></div>
+      </article>
+
+      <article class="lane">
+        <div class="lane-head">
+          <h3>From your employer</h3>
+          <p class="sub">Acme Corporation · 4 items total</p>
+        </div>
+        <ul class="lane-list">
+          <li><a href="#" class="item">
+            <div class="body"><span class="tag">Benefits · Deadline</span><h4 class="title">Open enrollment opens May 15</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+            <div class="thumb benefits" role="img" aria-label="Benefits"></div>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="body"><span class="tag">Mental health</span><h4 class="title">EAP · free counseling</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+            <div class="thumb eap" role="img" aria-label="Mental health support"></div>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="body"><span class="tag">Event · May 22</span><h4 class="title">Wellness fair · onsite + virtual</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+            <div class="thumb event" role="img" aria-label="Wellness fair"></div>
+          </a></li>
+        </ul>
+        <div class="lane-foot"><a class="text-link" href="#">See 1 more from Acme</a></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- VARIANT F · ROUNDED ICON (56px), IN CONTAINERS, TITLE-ONLY -->
+  <div class="variant-divider" id="lanes-f">
+    <div class="row">
+      <span class="num">F</span>
+      <h2>Lanes — Two containers · Rounded icon (56px) · Title-only</h2>
+    </div>
+    <p class="desc">No photography. Each item leads with a 56 px circular icon tile in a soft category color (sand-100 default, or moss-100 / primary-100 / warm-100 / indigo-200 for category accents). System-driven, fast to ship, no editorial imagery to maintain. Iconography per item: Article = book; Stress = heart; Move more = play; Benefits = file; Mental health = chat; Event = calendar.</p>
+  </div>
+  <section class="variant-block">
+    <div class="lanes-grid lanes-f">
+      <article class="lane">
+        <div class="lane-head">
+          <h3>Things I care about</h3>
+          <p class="sub">Matched to your interests · 4 items total</p>
+        </div>
+        <ul class="lane-list">
+          <li><a href="#" class="item">
+            <div class="icon-circle primary" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+            </div>
+            <div class="body"><span class="tag">Article · Sleep</span><h4 class="title">How to wind down before bed</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="icon-circle moss" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+            </div>
+            <div class="body"><span class="tag">Recommended · Stress</span><h4 class="title">Manage Stress program</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="icon-circle moss" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="6 3 20 12 6 21 6 3"/>
+              </svg>
+            </div>
+            <div class="body"><span class="tag">Library · Move more</span><h4 class="title">Quick movement breaks</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+        </ul>
+        <div class="lane-foot"><a class="text-link" href="#">See 1 more matched to your interests</a></div>
+      </article>
+
+      <article class="lane">
+        <div class="lane-head">
+          <h3>From your employer</h3>
+          <p class="sub">Acme Corporation · 4 items total</p>
+        </div>
+        <ul class="lane-list">
+          <li><a href="#" class="item">
+            <div class="icon-circle primary" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="13" y2="17"/>
+              </svg>
+            </div>
+            <div class="body"><span class="tag">Benefits · Deadline</span><h4 class="title">Open enrollment opens May 15</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="icon-circle moss" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <div class="body"><span class="tag">Mental health</span><h4 class="title">EAP · free counseling</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+          <li><a href="#" class="item">
+            <div class="icon-circle warm" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <div class="body"><span class="tag">Event · May 22</span><h4 class="title">Wellness fair · onsite + virtual</h4></div>
+            <span class="arrow" aria-hidden="true">›</span>
+          </a></li>
+        </ul>
+        <div class="lane-foot"><a class="text-link" href="#">See 1 more from Acme</a></div>
+      </article>
+    </div>
+  </section>
+
+
+  <!-- PROGRAMS / CHALLENGES / REWARDS — 3-col grid (locked from v4) -->
+  <section class="section">
+    <div class="section-head">
+      <div class="head-left">
+        <h2>Continue your programs</h2>
+        <p class="sub">Pick up where you left off · 3 active</p>
+      </div>
+      <a class="text-link" href="#">View all programs</a>
+    </div>
+    <div class="grid-3col">
+      <a href="#" class="tile">
+        <div class="tile-media sleep"></div>
+        <div class="tile-body">
+          <span class="tile-tag dcp">DCP · Sleep</span>
+          <h3 class="tile-title">Better Sleep</h3>
+          <div class="tile-progress">
+            <div class="tile-progress-bar"><div class="tile-progress-fill" style="width:38%"></div></div>
+            <div class="tile-progress-text"><span>Session 3 of 8</span><span class="reward">$100</span></div>
+          </div>
+          <span class="tile-cta">Continue ›</span>
+        </div>
+      </a>
+      <a href="#" class="tile">
+        <div class="tile-media stress"></div>
+        <div class="tile-body">
+          <span class="tile-tag dcp">DCP · Stress</span>
+          <h3 class="tile-title">Manage Stress</h3>
+          <div class="tile-progress">
+            <div class="tile-progress-bar"><div class="tile-progress-fill" style="width:60%"></div></div>
+            <div class="tile-progress-text"><span>Session 5 of 8</span><span class="reward">$100</span></div>
+          </div>
+          <span class="tile-cta">Continue ›</span>
+        </div>
+      </a>
+      <a href="#" class="tile">
+        <div class="tile-media diabetes"></div>
+        <div class="tile-body">
+          <span class="tile-tag dcp">DCP · Metabolic</span>
+          <h3 class="tile-title">Diabetes Prevention</h3>
+          <div class="tile-progress">
+            <div class="tile-progress-bar"><div class="tile-progress-fill" style="width:38%"></div></div>
+            <div class="tile-progress-text"><span>Week 6 of 16</span><span class="reward">$100</span></div>
+          </div>
+          <span class="tile-cta">Continue ›</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div class="head-left">
+        <h2>Your challenges</h2>
+        <p class="sub">3 active</p>
+      </div>
+      <a class="text-link" href="#">View all challenges</a>
+    </div>
+    <div class="grid-3col">
+      <a href="#" class="tile">
+        <div class="tile-media team"></div>
+        <div class="tile-body">
+          <span class="tile-tag challenge">Team</span>
+          <h3 class="tile-title">Spring Steps Challenge</h3>
+          <div class="tile-progress">
+            <div class="tile-progress-bar"><div class="tile-progress-fill primary" style="width:73%"></div></div>
+            <div class="tile-progress-text"><span>Day 22 of 30</span><span class="reward">+250 pts</span></div>
+          </div>
+          <span class="tile-cta">View team ›</span>
+        </div>
+      </a>
+      <a href="#" class="tile">
+        <div class="tile-media streak"></div>
+        <div class="tile-body">
+          <span class="tile-tag challenge">Personal streak</span>
+          <h3 class="tile-title">Lunchtime Walk</h3>
+          <div class="tile-progress">
+            <div class="tile-progress-bar"><div class="tile-progress-fill warm" style="width:60%"></div></div>
+            <div class="tile-progress-text"><span>3 of 5 this week</span><span class="reward">+10 pts</span></div>
+          </div>
+          <span class="tile-cta">Log walk ›</span>
+        </div>
+      </a>
+      <a href="#" class="tile">
+        <div class="tile-media fair"></div>
+        <div class="tile-body">
+          <span class="tile-tag challenge">Destination · May 22</span>
+          <h3 class="tile-title">Wellness Fair Sign-up</h3>
+          <span class="tile-meta"><span>Onsite + virtual</span><span class="pip">·</span><span>+25 pts</span></span>
+          <span class="tile-cta">RSVP ›</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <div class="head-left">
+        <h2>Your rewards</h2>
+        <p class="sub">Earned through programs, challenges, and activity</p>
+      </div>
+      <a class="text-link" href="#">Reward details</a>
+    </div>
+    <div class="grid-3col">
+      <a href="#" class="tile">
+        <div class="tile-media giftcard"></div>
+        <div class="tile-body">
+          <span class="tile-tag reward">Gift card</span>
+          <h3 class="tile-title">Amazon · $75 ready</h3>
+          <span class="tile-meta"><span>$25 to next $25 card</span></span>
+        </div>
+      </a>
+      <a href="#" class="tile">
+        <div class="tile-media points"></div>
+        <div class="tile-body">
+          <span class="tile-tag reward">Points · Silver</span>
+          <h3 class="tile-title">1,250 pts</h3>
+          <span class="tile-meta"><span>750 to Gold tier</span></span>
+        </div>
+      </a>
+      <a href="#" class="tile">
+        <div class="tile-media raffle"></div>
+        <div class="tile-body">
+          <span class="tile-tag reward">Raffle entries</span>
+          <h3 class="tile-title">12 entries</h3>
+          <span class="tile-meta"><span>Draw on May 31</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-foot" role="contentinfo">
+  <div class="foot-inner">
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#">Help</a>
+      <a href="#">Privacy</a>
+      <a href="#">Accessibility</a>
+      <a href="#">Contact</a>
+    </nav>
+    <p class="foot-meta">© 2026 Mobile Health · Built for your employer</p>
+  </div>
+</footer>
+
+</body>
+</html>

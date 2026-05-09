@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC — Healthy habits placement</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  body { background:#eef1f4; margin:0; font-family:'Raleway',system-ui,sans-serif; color:#1f2a36; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .lede { font-size: 15px; color:#6e7a7d; line-height: 1.55; margin: 0 0 28px; max-width: 760px; }
+  .lede b { color:#1f2a36; }
+  h2 { font-size: 20px; margin: 36px 0 14px; }
+  h3 { font-size: 14.5px; margin: 0 0 4px; font-weight:700; }
+  .grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .card { background:#fff; border:1px solid #e1e6ea; border-radius: 14px; padding: 18px; }
+  .card-eyebrow { font-size: 11px; font-weight:700; color:#0f497f; text-transform:uppercase; letter-spacing:.5px; margin: 0 0 6px; }
+  .card-sub { font-size: 13px; color:#6e7a7d; line-height: 1.5; margin: 0 0 12px; }
+  .verdict { display:inline-block; padding: 2px 8px; border-radius: 999px; font-size:10.5px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-left: 8px; vertical-align: 2px; }
+  .v-yes { background:#dcefe2; color:#2e7d4f; }
+  .v-no { background:#fbe4e1; color:#9b1d16; }
+  .v-maybe { background:#fff1d9; color:#7a5418; }
+
+  /* Habit-strip mock */
+  .habits {
+    background:#fff; border:1px solid #e1e6ea; border-radius: 12px; padding: 14px; display:flex; flex-direction:column; gap: 12px;
+  }
+  .habits-head { display:flex; align-items:center; justify-content:space-between; }
+  .habits-title { margin:0; font-size:15px; font-weight:700; }
+  .habits-link { font-size:12px; color:#0f497f; font-weight:700; text-decoration:none; }
+  .habits-row { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .habit {
+    border:1px solid #e1e6ea; border-radius: 10px; padding: 12px; display:flex; flex-direction:column; gap:6px;
+    background:#fff;
+  }
+  .habit-name { font-size: 12.5px; font-weight: 700; }
+  .habit-row { display:flex; align-items:center; gap: 6px; }
+  .habit-dot {
+    width: 16px; height: 16px; border-radius: 50%; background:#e1e6ea; flex-shrink:0;
+    display:grid; place-items:center; font-size: 9.5px; color:#fff; font-weight:700;
+  }
+  .habit-dot.done { background:#2e7d4f; }
+  .habit-dot.today { background:#fff; border:2px solid #0f497f; }
+  .habit-streak { font-size: 11px; color:#6e7a7d; }
+  .habit-streak b { color:#9b3b00; }
+  .habit-cta { background:#0f497f; color:#fff; border-radius: 999px; font-size: 11.5px; font-weight:700; padding: 6px 12px; border:0; cursor:pointer; align-self:flex-start; margin-top:2px; }
+
+  /* Single-row stripe variant */
+  .habit-stripe {
+    display:flex; align-items:center; gap: 14px; padding: 12px 16px; background:#f6f9fc; border:1px solid #e1e6ea; border-radius: 12px;
+  }
+  .habit-stripe-icon { width: 32px; height: 32px; border-radius: 8px; background:#0f497f; color:#fff; display:grid; place-items:center; font-size: 16px; font-weight:700; flex-shrink:0; }
+  .habit-stripe-body { flex:1; min-width:0; }
+  .habit-stripe-name { font-size: 13.5px; font-weight: 700; }
+  .habit-stripe-meta { font-size: 11.5px; color:#6e7a7d; margin-top: 1px; }
+  .habit-stripe-cta { background:#0f497f; color:#fff; border-radius: 999px; font-size: 12px; font-weight:700; padding: 6px 14px; border:0; cursor:pointer; flex-shrink:0; }
+
+  /* Today-tile variant */
+  .today-mock {
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
+  .today-tile {
+    background:#fff; border: 1px solid #e1e6ea; border-radius: 12px; padding: 12px; display:flex; flex-direction:column; gap: 4px;
+  }
+  .today-tile.habit { background:#f0f7f1; border-color:#cfe6d4; }
+  .today-tile-icon { width: 28px; height: 28px; border-radius: 6px; background:#fff; display:grid; place-items:center; font-size:13px; }
+  .today-tile-val { font-size: 17px; font-weight:700; margin-top: 4px; }
+  .today-tile-lbl { font-size: 10.5px; color:#6e7a7d; font-weight:600; text-transform:uppercase; letter-spacing:.4px; }
+
+  .rec { background:#0f497f; color:#fff; padding: 22px 24px; border-radius: 14px; margin-top: 32px; }
+  .rec h2 { color:#fff; margin: 0 0 8px; font-size: 20px; }
+  .rec p { font-size: 14px; line-height: 1.55; margin: 0 0 8px; opacity:.94; }
+  .rec ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.7; }
+  .rec ul b { color:#f8a88a; }
+
+  .footnote { font-size: 12.5px; color:#6e7a7d; margin-top: 8px; line-height: 1.5; }
+  .why { font-size: 12.5px; color:#6e7a7d; line-height: 1.5; margin: 4px 0 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Where do healthy habits live?</h1>
+  <p class="lede">
+    Healthy habits don't belong in <b>Pick up where you left off</b> because they don't have a finish line.
+    A program/journey/assessment has a "9 of 28" or "62%" or "1 day left" — a habit just has a streak and a checkmark.
+    The rail's whole grammar is <i>completion progress</i>, and habits don't have any.
+  </p>
+  <p class="lede">
+    Below: 4 places they could live, with verdicts.
+  </p>
+
+  <div class="grid">
+
+    <!-- Option 1: own habit strip -->
+    <div class="card">
+      <p class="card-eyebrow">Option 1 · Dedicated daily habit strip <span class="verdict v-yes">Recommended</span></p>
+      <h3>"Today's habits"</h3>
+      <p class="card-sub">A new block sitting between Today (trackers) and the in-progress rail. Built for daily check-ins, streaks, and quick tap-to-complete — its own grammar.</p>
+      <div class="habits">
+        <div class="habits-head">
+          <h3 class="habits-title" style="font-size:13.5px">Today's habits</h3>
+          <a class="habits-link" href="#">See all</a>
+        </div>
+        <div class="habits-row">
+          <div class="habit">
+            <div class="habit-name">Drink water</div>
+            <div class="habit-row">
+              <span class="habit-dot done">✓</span><span class="habit-dot done">✓</span><span class="habit-dot done">✓</span><span class="habit-dot today"></span><span class="habit-dot"></span>
+            </div>
+            <div class="habit-streak"><b>3-day streak</b> · log today</div>
+            <button class="habit-cta">+ Log</button>
+          </div>
+          <div class="habit">
+            <div class="habit-name">Meditation</div>
+            <div class="habit-row">
+              <span class="habit-dot done">✓</span><span class="habit-dot"></span><span class="habit-dot done">✓</span><span class="habit-dot today"></span><span class="habit-dot"></span>
+            </div>
+            <div class="habit-streak">2 of last 4 days</div>
+            <button class="habit-cta">+ Log 5 min</button>
+          </div>
+          <div class="habit">
+            <div class="habit-name">10k steps</div>
+            <div class="habit-row">
+              <span class="habit-dot done">✓</span><span class="habit-dot done">✓</span><span class="habit-dot done">✓</span><span class="habit-dot done">✓</span><span class="habit-dot today"></span>
+            </div>
+            <div class="habit-streak"><b>4-day streak</b> · auto-tracked</div>
+          </div>
+        </div>
+      </div>
+      <p class="why"><b>Why this works:</b> grammar matches the data — small dots = days, streak = habit's reward. Tap-to-log is the primary action, not "continue program." Hides cleanly when the user has zero habits.</p>
+    </div>
+
+    <!-- Option 2: as today tiles -->
+    <div class="card">
+      <p class="card-eyebrow">Option 2 · Inside the Today strip <span class="verdict v-maybe">Possible</span></p>
+      <h3>Habits as Today tiles</h3>
+      <p class="card-sub">Slot tap-to-log habits next to tracker tiles. Same grid, different action — the habit tile tints green when logged.</p>
+      <div class="today-mock">
+        <div class="today-tile">
+          <div class="today-tile-icon">🚶</div>
+          <div class="today-tile-val">8,807</div>
+          <div class="today-tile-lbl">Steps</div>
+        </div>
+        <div class="today-tile">
+          <div class="today-tile-icon">😴</div>
+          <div class="today-tile-val">7h 12m</div>
+          <div class="today-tile-lbl">Sleep</div>
+        </div>
+        <div class="today-tile habit">
+          <div class="today-tile-icon">💧</div>
+          <div class="today-tile-val">3 / 8</div>
+          <div class="today-tile-lbl">Water · tap +</div>
+        </div>
+        <div class="today-tile habit">
+          <div class="today-tile-icon">🧘</div>
+          <div class="today-tile-val">Today</div>
+          <div class="today-tile-lbl">Meditate · 5 min</div>
+        </div>
+      </div>
+      <p class="why"><b>Pros:</b> dense, no new section. <b>Cons:</b> mixes "thing my watch reports" with "thing I have to do" — different intent. Streak data has nowhere to live. If users have 4+ habits this gets crowded fast.</p>
+    </div>
+
+    <!-- Option 3: persistent stripe -->
+    <div class="card">
+      <p class="card-eyebrow">Option 3 · Single persistent stripe <span class="verdict v-maybe">For the user with one habit</span></p>
+      <h3>"Today's habit" stripe</h3>
+      <p class="card-sub">When the user has exactly 1 active habit, show it as a slim stripe above the in-progress rail. Drops to nothing when there are zero, expands to Option 1 when there are 2+.</p>
+      <div class="habit-stripe">
+        <div class="habit-stripe-icon">💧</div>
+        <div class="habit-stripe-body">
+          <div class="habit-stripe-name">Drink water · 3 of 8 today</div>
+          <div class="habit-stripe-meta"><b style="color:#9b3b00">3-day streak</b> — keep it going</div>
+        </div>
+        <button class="habit-stripe-cta">+ Log</button>
+      </div>
+      <p class="why"><b>Why this works:</b> single-habit users (most users early on) get one bright nudge instead of a half-empty grid. Pairs naturally with Option 1 — same component, expanded.</p>
+    </div>
+
+    <!-- Option 4: in-progress rail -->
+    <div class="card" style="opacity:.95">
+      <p class="card-eyebrow">Option 4 · Inside the in-progress rail <span class="verdict v-no">No</span></p>
+      <h3>Habits as a rail card</h3>
+      <p class="card-sub">Same place as programs/challenges. Considered for completeness — fails for the reasons stated up top.</p>
+      <p class="why"><b>Why not:</b> rail cards promise "X of Y" or "N days left." A habit has neither. The dismiss "×" makes no sense (you'd be dismissing a goal you set). And the focus-matched "On focus" treatment doesn't apply — a habit isn't an installed product, it's a self-imposed rhythm.</p>
+    </div>
+
+  </div>
+
+  <div class="rec">
+    <h2>Recommendation</h2>
+    <p>Add a new block — <b>"Today's habits"</b> — as <b>Option 1</b>. Place it directly under the Today (trackers) strip and above the in-progress rail. Use Option 3's single-stripe collapse when there's exactly one habit. Suppress entirely when there are zero.</p>
+    <ul>
+      <li><b>Order on home:</b> Greeting → Hero → Today (trackers) → <b>Today's habits</b> → Pick up where you left off → Insights → For You</li>
+      <li><b>Cap at 3 visible</b>; "See all" overflow link.</li>
+      <li><b>Sort:</b> not-yet-logged today first, then by longest streak.</li>
+      <li><b>Tap target:</b> primary action is "+ Log" inline (no drilldown for one-tap habits like water).</li>
+      <li><b>For sensor-tracked habits</b> (10k steps, sleep ≥7h): no button — they auto-fill from the existing tracker block.</li>
+    </ul>
+    <p class="footnote" style="color:#cfe0ee">This keeps the in-progress rail honest (only items with completion progress) and gives habits the daily-rhythm component they actually need.</p>
+  </div>
+
+</div>
+</body>
+</html>

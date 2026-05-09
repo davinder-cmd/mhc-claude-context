@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — Wireframes v2 · Iteration 1 Scope</title>
+<style>
+  :root {
+    --cream: #f5f2ec;
+    --paper: #fbf9f5;
+    --ink: #1f1f1f;
+    --ink-2: #4a4a4a;
+    --ink-3: #7a7a7a;
+    --line: #cdc8bd;
+    --line-2: #e2ddd2;
+    --accent: #0f497f;
+    --accent-soft: #e6eef6;
+    --employer: #2a5d3f;
+    --employer-soft: #e8f0ea;
+    --conditional: #b35418;
+    --conditional-soft: #faecd7;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .page { max-width: 1820px; margin: 0 auto; padding: 32px 28px 80px; }
+
+  .header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 28px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.2px; }
+  .header .meta { font-size: 12px; color: var(--ink-3); margin: 0 0 14px; }
+  .header .lede { font-size: 13.5px; color: var(--ink-2); max-width: 920px; line-height: 1.55; margin: 0 0 16px; }
+
+  .colors { display: flex; gap: 0; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid var(--line); max-width: 920px; margin-bottom: 8px; }
+  .colors > div { display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 600; letter-spacing: 0.4px; }
+  .c-cream { background: var(--cream); color: var(--ink-2); }
+  .c-paper { background: var(--paper); color: var(--ink-2); border-left: 1px solid var(--line-2); border-right: 1px solid var(--line-2); }
+  .c-ink { background: var(--ink); color: #fff; }
+  .c-accent { background: var(--accent); color: #fff; }
+  .c-employer { background: var(--employer); color: #fff; }
+  .c-cond { background: var(--conditional); color: #fff; }
+  .colors-legend { font-size: 11px; color: var(--ink-3); max-width: 920px; margin-bottom: 24px; line-height: 1.6; }
+
+  .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--ink-3); margin: 36px 0 12px; }
+  .section-label .num { color: var(--accent); margin-right: 8px; }
+  .section-label .pin-tag { background: var(--ink); color:#fff; padding: 2px 8px; border-radius: 999px; font-size: 9.5px; margin-left: 8px; letter-spacing: 0.4px; }
+
+  .artboard { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 18px; position: relative; margin-bottom: 28px; }
+  .artboard-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed var(--line); font-size: 11px; color: var(--ink-3); letter-spacing: 0.4px; }
+  .artboard-label b { font-size: 13px; color: var(--ink); letter-spacing: 0; font-weight: 700; }
+
+  .wf-frame { background: #fff; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .wf-row { padding: 10px 14px; border-bottom: 1px solid var(--line-2); }
+  .wf-row:last-child { border-bottom: 0; }
+  .wf-row.tight { padding: 8px 14px; }
+  .wf-row.cond {
+    border-left: 3px dashed var(--conditional); background: repeating-linear-gradient(135deg, transparent 0 12px, var(--conditional-soft) 12px 13px);
+  }
+
+  .wf-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--ink-3); margin-bottom: 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .wf-label .source { font-weight: 600; letter-spacing: 0.3px; padding: 1px 6px; border-radius: 3px; text-transform: none; font-size: 9.5px; }
+  .source-emp { background: var(--employer-soft); color: var(--employer); border: 1px solid var(--employer); }
+  .source-int { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); }
+  .source-prog { background: #efeae2; color: #5a4a2a; border: 1px solid #8a704a; }
+  .source-cond { background: var(--conditional-soft); color: var(--conditional); border: 1px solid var(--conditional); font-style: italic; }
+
+  .wf-h { font-size: 14px; font-weight: 700; margin: 2px 0; }
+  .wf-h.lg { font-size: 16px; }
+  .wf-h.xl { font-size: 19px; }
+  .wf-body { font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+  .wf-body.sm { font-size: 11.5px; }
+  .wf-meta { font-size: 11px; color: var(--ink-3); }
+
+  .wf-img {
+    background:
+      linear-gradient(45deg, transparent 49%, var(--line) 49%, var(--line) 51%, transparent 51%),
+      linear-gradient(-45deg, transparent 49%, var(--line) 49%, var(--line) 51%, transparent 51%),
+      var(--line-2);
+    background-size: 24px 24px, 24px 24px, 100% 100%;
+    border: 1px dashed var(--line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-3); font-size: 10.5px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700;
+  }
+
+  .wf-btn { display: inline-block; padding: 7px 12px; border: 1.5px solid var(--accent); color: var(--accent); border-radius: 4px; font-size: 12px; font-weight: 700; background: #fff; }
+  .wf-btn.solid { background: var(--accent); color: #fff; }
+  .wf-btn.ghost { border-color: var(--line); color: var(--ink-2); }
+  .wf-btn.sm { padding: 4px 8px; font-size: 11px; }
+
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; color: var(--ink-2); background: #fff; }
+  .chip.accent { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 700; }
+  .chip.interest { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); font-weight: 700; cursor: pointer; }
+  .chip.interest.muted { background: #fff; color: var(--ink-2); border-color: var(--line); font-weight: 500; }
+  .chip.interest.active::before { content: "✓ "; }
+
+  .tile-grid { display: grid; gap: 8px; }
+  .tile { border: 1px solid var(--line); border-radius: 5px; padding: 10px; background: #fff; }
+  .tile .tile-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--ink-3); margin-bottom: 3px; }
+  .tile .tile-value { font-size: 16px; font-weight: 700; color: var(--ink); }
+  .tile .tile-goal { font-size: 10.5px; color: var(--ink-3); }
+
+  .lane { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 12px; }
+  .lane-emp { border-left: 3px solid var(--employer); }
+  .lane-int { border-left: 3px solid var(--accent); }
+  .lane-prog { border-left: 3px solid #8a704a; }
+  .lane-h { font-size: 13px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .annot { font-size: 11.5px; color: var(--ink-2); line-height: 1.55; }
+  .annot.callout { background: #fff8e1; border-left: 3px solid #c97a25; padding: 10px 12px; border-radius: 4px; margin-top: 12px; }
+  .annot b { color: var(--ink); }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .threecol { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .stack { display: flex; flex-direction: column; gap: 8px; }
+  .hr { height: 1px; background: var(--line-2); margin: 8px 0; }
+
+  .topnav { display: flex; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--paper); gap: 12px; }
+  .topnav .icon-sq { width: 22px; height: 22px; border: 1px solid var(--line); border-radius: 3px; display: grid; place-items: center; font-size: 11px; color: var(--ink-3); }
+  .topnav .logo { flex: 1; text-align: center; font-weight: 700; letter-spacing: 1.5px; font-size: 12px; color: var(--ink); }
+  .topnav .logo.left { flex: 0 0 auto; text-align: left; }
+  .topnav .nav-items { flex: 1; display: flex; gap: 18px; padding: 0 24px; font-size: 12px; color: var(--ink-2); }
+  .topnav .nav-items b { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+  .topnav .right { display: flex; gap: 8px; align-items: center; }
+
+  .leftrail { width: 200px; border-right: 1px solid var(--line); background: var(--paper); padding: 16px 12px; flex-shrink: 0; display: flex; flex-direction: column; gap: 4px; }
+  .leftrail .nav-link { padding: 8px 10px; border-radius: 4px; font-size: 12.5px; color: var(--ink-2); display: flex; align-items: center; gap: 8px; }
+  .leftrail .nav-link.active { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+  .leftrail .nav-link::before { content: ''; width: 14px; height: 14px; border: 1px solid var(--line); border-radius: 2px; flex-shrink: 0; }
+  .leftrail .nav-link.active::before { background: var(--accent); border-color: var(--accent); }
+
+  .bottomnav { display: flex; padding: 6px 0; border-top: 1px solid var(--line); background: var(--paper); justify-content: space-around; }
+  .bottomnav .item { width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 3px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12.5px; max-width: 1180px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); font-weight: 700; }
+
+  .annotations { margin-top: 32px; max-width: 1180px; }
+  .annotations h3 { font-size: 14px; margin: 24px 0 8px; }
+  .annotations p, .annotations li { font-size: 12.5px; line-height: 1.6; color: var(--ink-2); }
+  .annotations strong { color: var(--ink); }
+  .annotations ul { padding-left: 18px; margin: 6px 0; }
+
+  .pin { position: absolute; top: -10px; left: 18px; background: var(--accent); color: #fff; padding: 3px 10px; border-radius: 999px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; }
+  .pin.scenario-a { background: var(--accent); }
+  .pin.scenario-b { background: var(--employer); }
+  .pin.scenario-c { background: #6e3a8a; }
+
+  .key { display: flex; gap: 16px; flex-wrap: wrap; margin: 14px 0 24px; max-width: 1100px; padding: 12px; background: #fff; border: 1px solid var(--line-2); border-radius: 6px; }
+  .key-item { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--ink-2); }
+  .key-swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid transparent; }
+
+  .scope-strip { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 4px; padding: 10px 14px; font-size: 12px; color: var(--accent); margin-bottom: 18px; max-width: 1100px; }
+  .scope-strip b { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>MHC Home — Wireframes v2 <span style="font-weight:400;color:var(--ink-3);font-size:14px;">· Iteration 1 Scope · Aligned to PD/Innov requirements</span></h1>
+    <p class="meta">2026-05-06 · Iteration 2 · Supersedes <code>home-wireframes-v1-three-lane-spine.html</code></p>
+    <p class="lede">
+      Aligned to the canonical PD/Innov requirements doc captured as <code>00-requirements-from-pd-innov.md</code>. <strong>Out of iteration 1:</strong> persistent rewards chip, DCP progress card with clinical metric, dots-carousel hero. <strong>In:</strong> single hero only (JH), wellbeing-interest filter as personalization mechanism (existing data, not a new picker), Featured Client priority items (CS), Ongoing programs continuity surface (CS). <strong>Conditional / open:</strong> Tracker data, Tracker Insights, DCP AI Coach entry. Three breakpoints map to the doc's three explicit scenarios.
+    </p>
+
+    <div class="colors">
+      <div class="c-cream" style="flex:60">60 · cream surface</div>
+      <div class="c-paper" style="flex:18">18 · paper surface</div>
+      <div class="c-ink" style="flex:14">14 · ink</div>
+      <div class="c-accent" style="flex:5">5 · accent (interests)</div>
+      <div class="c-employer" style="flex:2">2 · employer</div>
+      <div class="c-cond" style="flex:1">1 · conditional</div>
+    </div>
+    <p class="colors-legend">
+      <strong>Color weighting (60/18/14/5/2/1):</strong> warm cream and paper carry surface; near-neutral graphite carries ink; brand blue is reserved for affordances and the wellbeing-interests lane; green tags employer content; orange marks <em>conditional / open-question</em> modules so reviewers can see at a glance what hasn't been decided yet.
+    </p>
+
+    <div class="key">
+      <div class="key-item"><span class="key-swatch" style="background:var(--accent-soft); border-color:var(--accent);"></span> Required · spine</div>
+      <div class="key-item"><span class="key-swatch" style="background:var(--employer-soft); border-color:var(--employer);"></span> Employer / Client priority</div>
+      <div class="key-item"><span class="key-swatch" style="background:#efeae2; border-color:#8a704a;"></span> Ongoing programs (continuity)</div>
+      <div class="key-item"><span class="key-swatch" style="background: repeating-linear-gradient(135deg, #fff 0 4px, var(--conditional-soft) 4px 5px); border-color: var(--conditional);"></span> Conditional · open question</div>
+    </div>
+
+    <div class="scope-strip">
+      <b>Iteration 1 scope (per canonical doc):</b> One hero · Logo top nav · Simplified personalization via wellbeing interests · Featured Client priority · Ongoing programs · 3 shell scenarios · 508 a11y · fast page load. Rewards-focused / Today-focused / DCP-focused homes are explicitly listed as <em>future</em> iterations and are not in this wireframe.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SCENARIO C — SMALL FORM FACTOR                                      -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">01</span>Scenario C · Small form factor (mobile · 375 px)<span class="pin-tag">Required scenario</span></div>
+
+  <div style="display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap;">
+
+    <div class="artboard" style="max-width: 420px;">
+      <span class="pin scenario-c">Mobile · 375</span>
+      <div class="artboard-label">
+        <span><b>Mobile · 375 px</b></span>
+        <span>Bottom nav · centered logo</span>
+      </div>
+
+      <div class="wf-frame" style="width: 375px;">
+
+        <div class="topnav">
+          <div class="icon-sq">≡</div>
+          <div class="logo">MHC</div>
+          <div class="icon-sq">DR</div>
+        </div>
+
+        <div class="wf-row">
+          <div class="wf-h lg">Good morning, Davinder</div>
+          <div class="wf-meta">Wednesday · May 6</div>
+        </div>
+
+        <!-- HERO — single, no carousel -->
+        <div class="wf-row" style="background:var(--paper);">
+          <div class="wf-label">Hero · single image (one only)</div>
+          <div class="wf-img" style="height: 140px; margin-bottom: 10px;">Hero photo · 50/50 split crops to top half on mobile</div>
+          <div class="wf-h">Pacific Crest Trail Challenge</div>
+          <div class="wf-body sm">Day 4 of 30 · log today's steps to keep your team in 3rd</div>
+          <div style="margin-top: 8px;"><span class="wf-btn solid sm">Log steps</span></div>
+        </div>
+
+        <!-- ONGOING PROGRAMS -->
+        <div class="wf-row">
+          <div class="wf-label"><span class="source source-prog">Ongoing programs</span> CS goal #6</div>
+          <div class="stack" style="margin-top: 4px;">
+            <div class="lane lane-prog" style="padding: 10px;">
+              <div class="row">
+                <div>
+                  <div class="wf-h" style="font-size: 13px;">Sleep Better DCP</div>
+                  <div class="wf-meta">Session 3 of 8</div>
+                </div>
+                <span class="wf-btn sm">Continue</span>
+              </div>
+            </div>
+            <div class="lane lane-prog" style="padding: 10px;">
+              <div class="row">
+                <div>
+                  <div class="wf-h" style="font-size: 13px;">21-Day Mindfulness</div>
+                  <div class="wf-meta">Day 9</div>
+                </div>
+                <span class="wf-btn sm">Continue</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLIENT PRIORITY (FROM YOUR EMPLOYER) -->
+        <div class="wf-row" style="background:var(--employer-soft);">
+          <div class="wf-label"><span class="source source-emp">From your employer</span> CS goal #5</div>
+          <div class="wf-h">Your benefits include $0 mental health visits</div>
+          <div class="wf-body sm">Through Lyra · 12 sessions/year, no copay</div>
+          <div style="margin-top: 6px;"><span class="wf-btn sm">See benefit</span></div>
+          <div class="hr"></div>
+          <div class="wf-h" style="font-size: 13px;">Q2 wellness fair · May 22</div>
+          <div class="wf-meta">12pm · cafeteria</div>
+        </div>
+
+        <!-- WELLBEING INTERESTS FILTER + CONTENT -->
+        <div class="wf-row">
+          <div class="wf-label"><span class="source source-int">Based on your interests</span> CS goal #3 · concept #4</div>
+          <div style="display: flex; gap: 5px; flex-wrap: wrap; margin: 4px 0 10px;">
+            <span class="chip interest active">Sleep</span>
+            <span class="chip interest active">Stress</span>
+            <span class="chip interest active">Move more</span>
+            <span class="chip interest muted">Edit</span>
+          </div>
+          <div class="wf-h" style="font-size: 13px;">Why your sleep score lies <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+          <div class="wf-meta">5 min read</div>
+          <div class="hr"></div>
+          <div class="wf-h" style="font-size: 13px;">Insomnia DCP — recommended <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+          <div class="wf-meta">8 weeks</div>
+          <div class="hr"></div>
+          <div class="wf-h" style="font-size: 13px;">5-min meditation library <span class="source source-int" style="font-size: 9.5px;">Stress</span></div>
+          <div class="wf-meta">12 sessions</div>
+        </div>
+
+        <!-- CONDITIONAL: TRACKER DATA -->
+        <div class="wf-row cond">
+          <div class="wf-label"><span class="source source-cond">Conditional</span> Tracker data — open question</div>
+          <div class="tile-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="tile"><div class="tile-label">Steps</div><div class="tile-value">8,572</div><div class="tile-goal">of 10k</div></div>
+            <div class="tile"><div class="tile-label">Sleep</div><div class="tile-value">7h 16m</div><div class="tile-goal">goal 8h</div></div>
+            <div class="tile"><div class="tile-label">Heart</div><div class="tile-value">68</div><div class="tile-goal">resting</div></div>
+          </div>
+          <div class="wf-meta" style="margin-top: 6px; font-style: italic;">Currently in production — keep, remove, or relocate?</div>
+        </div>
+
+        <!-- CONDITIONAL: TRACKER INSIGHTS -->
+        <div class="wf-row cond">
+          <div class="wf-label"><span class="source source-cond">Conditional</span> Tracker Insights — open question</div>
+          <div class="wf-h">Your sleep dropped 32 min last night.</div>
+          <div class="wf-body sm">Most likely: late screen time after 11pm.</div>
+          <div style="margin-top: 8px;"><span class="wf-btn sm">Add wind-down</span></div>
+        </div>
+
+        <!-- CONDITIONAL: DCP AI COACH -->
+        <div class="wf-row cond">
+          <div class="wf-label"><span class="source source-cond">Conditional</span> DCP AI Coach — open question</div>
+          <div class="wf-h" style="font-size: 13px;">Ask your sleep coach</div>
+          <div class="wf-body sm">"How do I sleep better on travel nights?"</div>
+        </div>
+
+        <div class="bottomnav">
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+          <div class="item"></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: 1; min-width: 280px; max-width: 460px;">
+      <div class="annot">
+        <strong>Mobile annotations</strong>
+        <ul style="padding-left: 18px; line-height: 1.7;">
+          <li><strong>One hero only — no carousel, no peek-card.</strong> JH explicit. The single hero gets one priority moment per session.</li>
+          <li><strong>Ongoing programs sit above the personalized lane</strong>, not buried at the bottom. CS asked for "easier access" — that means high in the stack.</li>
+          <li><strong>Wellbeing-interest chips are existing data</strong>, surfaced as a filter mechanism on this lane only (not page-level). Tap "Edit" to adjust interests; chip taps filter which items show. The pill anchors only the Interests section, never the whole page (per direction update 03).</li>
+          <li><strong>Per-item interest tags inline</strong> (e.g. "Sleep" tag on each card) make the filter audit-able — user can see which interest drove which item.</li>
+          <li><strong>Conditional modules are visually striped</strong> with a dashed orange left border and italic "Conditional" label. They are intentionally distinguishable so reviewers can decide inclusion without confusing them with required modules.</li>
+          <li><strong>No rewards module in iteration 1.</strong> Rewards-focused home is a future iteration. v1 had a persistent chip + slim-row — both removed.</li>
+          <li><strong>No DCP progress card with clinical metric.</strong> DCP-focused home is a future iteration. The "Continue session 3 of 8" continuity is preserved inside the Ongoing Programs module — that's a CS-required surface, separate from the DCP-progress-with-metric card I had in v1.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SCENARIO A — LARGE FORM, LEFT NAV ENABLED                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">02</span>Scenario A · Large form factor with left nav enabled (~1280 px)<span class="pin-tag">Required scenario</span></div>
+
+  <div class="artboard" style="max-width: 1380px;">
+    <span class="pin scenario-a">Scenario A · 1280</span>
+    <div class="artboard-label">
+      <span><b>Large form · left nav enabled · 1080 px content area inside 1280 viewport</b></span>
+      <span>Today's MHC-hosted desktop</span>
+    </div>
+
+    <div style="display: flex; width: 1280px;">
+
+      <div class="leftrail">
+        <div class="nav-link active">Home</div>
+        <div class="nav-link">Digital Care</div>
+        <div class="nav-link">Wellbeing</div>
+        <div class="nav-link">Benefits</div>
+        <div class="nav-link">Rewards</div>
+        <div class="hr"></div>
+        <div class="nav-link" style="opacity: 0.7;">My account</div>
+        <div class="nav-link" style="opacity: 0.7;">Settings</div>
+      </div>
+
+      <div class="wf-frame" style="border-radius: 0; border-left: 0; flex: 1; background: #fff;">
+
+        <div class="topnav">
+          <div style="flex: 1;"></div>
+          <div class="logo">MOBILE HEALTH</div>
+          <div style="flex: 1; display: flex; justify-content: flex-end; gap: 8px;">
+            <span class="chip">🔔</span>
+            <span class="chip">DR</span>
+          </div>
+        </div>
+
+        <div class="wf-row">
+          <div class="row">
+            <div>
+              <div class="wf-h xl">Good morning, Davinder</div>
+              <div class="wf-meta">Wednesday · May 6</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO -->
+        <div class="wf-row" style="background:var(--paper);">
+          <div class="wf-label">Hero · single image (one only)</div>
+          <div style="display: grid; grid-template-columns: 320px 1fr; gap: 16px; margin-top: 8px;">
+            <div class="wf-img" style="height: 200px;">Hero · 50/50 split (Jill option B)</div>
+            <div style="padding: 8px 0; display: flex; flex-direction: column; justify-content: center;">
+              <div class="wf-h xl" style="font-size: 21px;">Pacific Crest Trail Challenge</div>
+              <div class="wf-body" style="margin-top: 6px;">Day 4 of 30 · Your team "Trail Mix" is in 3rd. Walk 12,000 steps today to overtake "Roadrunners."</div>
+              <div style="margin-top: 14px;">
+                <span class="wf-btn solid">Log today's steps</span>
+                <span class="wf-btn ghost" style="margin-left: 6px;">See leaderboard</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ONGOING PROGRAMS — 3-up -->
+        <div class="wf-row">
+          <div class="wf-label"><span class="source source-prog">Ongoing programs · pick up where you left off</span> CS goal #6</div>
+          <div class="threecol" style="margin-top: 6px;">
+            <div class="lane lane-prog" style="padding: 12px;">
+              <div class="wf-meta">DCP</div>
+              <div class="wf-h" style="font-size: 14px;">Sleep Better</div>
+              <div class="wf-meta">Session 3 of 8 · ▰▰▰▱▱▱▱▱ 38%</div>
+              <div style="margin-top: 8px;"><span class="wf-btn sm">Continue</span></div>
+            </div>
+            <div class="lane lane-prog" style="padding: 12px;">
+              <div class="wf-meta">Journey</div>
+              <div class="wf-h" style="font-size: 14px;">21-Day Mindfulness</div>
+              <div class="wf-meta">Day 9 of 21 · ▰▰▰▰▱▱▱▱▱▱ 43%</div>
+              <div style="margin-top: 8px;"><span class="wf-btn sm">Continue</span></div>
+            </div>
+            <div class="lane lane-prog" style="padding: 12px;">
+              <div class="wf-meta">Challenge</div>
+              <div class="wf-h" style="font-size: 14px;">Pacific Crest Trail</div>
+              <div class="wf-meta">Day 4 of 30 · 3rd place</div>
+              <div style="margin-top: 8px;"><span class="wf-btn sm">View team</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TWO-LANE: EMPLOYER + INTERESTS -->
+        <div class="twocol" style="padding: 14px;">
+          <div class="lane lane-emp">
+            <div class="lane-h"><span class="source source-emp">From your employer</span> · Featured Client priority</div>
+            <div class="stack">
+              <div>
+                <div class="wf-h" style="font-size: 14px;">Your benefits include $0 mental health visits</div>
+                <div class="wf-body sm">Through Lyra · 12 sessions/year, no copay</div>
+                <div style="margin-top: 4px;"><span class="wf-btn sm">See benefit</span></div>
+              </div>
+              <div class="hr"></div>
+              <div>
+                <div class="wf-h" style="font-size: 14px;">Q2 wellness fair · May 22</div>
+                <div class="wf-body sm">12pm · cafeteria · biometric screening + flu shots</div>
+              </div>
+              <div class="hr"></div>
+              <div>
+                <div class="wf-h" style="font-size: 14px;">EAP — confidential, free, 24/7</div>
+                <div class="wf-body sm">Counseling, legal, financial · 6 sessions/year</div>
+              </div>
+            </div>
+          </div>
+          <div class="lane lane-int">
+            <div class="lane-h">
+              <span class="source source-int">Based on your interests</span> · Wellbeing-interest filter
+            </div>
+            <div style="display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px;">
+              <span class="chip interest active">Sleep</span>
+              <span class="chip interest active">Stress</span>
+              <span class="chip interest active">Move more</span>
+              <span class="chip interest muted">+ Edit interests</span>
+            </div>
+            <div class="stack">
+              <div>
+                <div class="wf-h" style="font-size: 14px;">Why your sleep score lies <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+                <div class="wf-body sm">Your tracker measures movement, not REM. Here's what to actually trust.</div>
+                <div class="wf-meta">5 min read</div>
+              </div>
+              <div class="hr"></div>
+              <div>
+                <div class="wf-h" style="font-size: 14px;">Insomnia DCP — recommended <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+                <div class="wf-body sm">8-week clinical program · weekly sessions, daily check-ins</div>
+              </div>
+              <div class="hr"></div>
+              <div>
+                <div class="wf-h" style="font-size: 14px;">5-min meditation library <span class="source source-int" style="font-size: 9.5px;">Stress</span></div>
+                <div class="wf-body sm">12 short sessions · meets you wherever you are in the day</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONDITIONAL ROW -->
+        <div class="wf-row cond">
+          <div class="wf-label"><span class="source source-cond">Conditional · open question</span> Tracker data + Insights + DCP AI Coach</div>
+          <div class="threecol" style="margin-top: 6px;">
+            <div class="lane" style="padding: 10px;">
+              <div class="wf-meta">Tracker data</div>
+              <div class="tile-grid" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 6px;">
+                <div class="tile"><div class="tile-label">Steps</div><div class="tile-value">8,572</div></div>
+                <div class="tile"><div class="tile-label">Sleep</div><div class="tile-value">7h 16m</div></div>
+                <div class="tile"><div class="tile-label">Heart</div><div class="tile-value">68</div></div>
+              </div>
+            </div>
+            <div class="lane" style="padding: 10px;">
+              <div class="wf-meta">Tracker Insights</div>
+              <div class="wf-h" style="font-size: 14px; margin-top: 4px;">Sleep dropped 32 min last night</div>
+              <div class="wf-body sm">Most likely: late screen time after 11pm.</div>
+              <div style="margin-top: 8px;"><span class="wf-btn sm">Add wind-down</span></div>
+            </div>
+            <div class="lane" style="padding: 10px;">
+              <div class="wf-meta">DCP AI Coach</div>
+              <div class="wf-h" style="font-size: 14px; margin-top: 4px;">Ask your sleep coach</div>
+              <div class="wf-body sm">Text questions like you would an expert.</div>
+              <div style="margin-top: 8px;"><span class="wf-btn sm">Open chat</span></div>
+            </div>
+          </div>
+          <div class="wf-meta" style="margin-top: 8px; font-style: italic;">All three are open questions in the canonical doc. Designed for inclusion; can be removed individually without breaking the spine above.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="annot callout">
+      <strong>What changes from mobile</strong> — Left nav rail visible at full width (5 primary tabs + account + settings). Hero gets the proper 50/50 split treatment with photo on the left, copy panel on the right. Ongoing programs go from a vertical stack of 2 to a 3-up row of 3 (DCP / Journey / Challenge — exposing program-type variety). Two lanes go side-by-side, each with 3 items. Conditional row appears at the bottom with all three open-question modules visible for review purposes; in production, each can be included or removed individually.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SCENARIO B — LARGE FORM, NO LEFT NAV (FULL BROWSER)                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">03</span>Scenario B · Large form factor without left nav (full browser · 1600+ px)<span class="pin-tag">Required scenario · "ability to use full browser page"</span></div>
+
+  <div class="artboard" style="max-width: 1700px;">
+    <span class="pin scenario-b">Scenario B · 1600 (no left nav)</span>
+    <div class="artboard-label">
+      <span><b>Large form · no left nav · 1600 px content area · uses full browser</b></span>
+      <span>SDK partner host today · MHC top-nav future</span>
+    </div>
+
+    <div class="wf-frame" style="width: 1600px;">
+
+      <div class="topnav" style="padding: 12px 24px;">
+        <div class="logo left" style="font-size: 14px; letter-spacing: 2px;">MOBILE HEALTH</div>
+        <div class="nav-items">
+          <span><b>Home</b></span>
+          <span>Digital Care</span>
+          <span>Wellbeing</span>
+          <span>Benefits</span>
+          <span>Rewards</span>
+        </div>
+        <div class="right">
+          <span class="chip">🔔 3</span>
+          <span class="chip">DR ▾</span>
+        </div>
+      </div>
+
+      <div class="wf-row" style="padding: 18px 24px;">
+        <div class="row">
+          <div>
+            <div class="wf-h xl" style="font-size: 24px;">Good morning, Davinder</div>
+            <div class="wf-meta">Wednesday · May 6</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <div class="wf-row" style="background:var(--paper); padding: 20px 24px;">
+        <div class="wf-label">Hero · single image (one only — no carousel, no peek-card)</div>
+        <div style="display: grid; grid-template-columns: 600px 1fr; gap: 28px; margin-top: 10px; min-height: 320px;">
+          <div class="wf-img" style="height: 320px;">Hero photo · 50/50 split (Jill option B) · 508-safe (no overlay text)</div>
+          <div style="display: flex; flex-direction: column; justify-content: center; padding: 10px 0;">
+            <div class="wf-h xl" style="font-size: 28px; line-height: 1.15;">Pacific Crest Trail Challenge</div>
+            <div class="wf-body" style="margin-top: 12px; font-size: 14px;">Day 4 of 30. Your team "Trail Mix" is in 3rd place. Walk 12,000 steps today to overtake "Roadrunners" — close enough to take it back this week.</div>
+            <div style="margin-top: 18px;">
+              <span class="wf-btn solid">Log today's steps</span>
+              <span class="wf-btn ghost" style="margin-left: 8px;">See leaderboard</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ONGOING PROGRAMS -->
+      <div class="wf-row" style="padding: 18px 24px;">
+        <div class="wf-label"><span class="source source-prog">Ongoing programs · pick up where you left off</span> CS goal #6</div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px;">
+          <div class="lane lane-prog" style="padding: 14px;">
+            <div class="wf-meta">DCP</div>
+            <div class="wf-h">Sleep Better</div>
+            <div class="wf-meta">Session 3 of 8 · ▰▰▰▱▱▱▱▱ 38%</div>
+            <div style="margin-top: 10px;"><span class="wf-btn sm">Continue session 4</span></div>
+          </div>
+          <div class="lane lane-prog" style="padding: 14px;">
+            <div class="wf-meta">Journey</div>
+            <div class="wf-h">21-Day Mindfulness</div>
+            <div class="wf-meta">Day 9 of 21 · ▰▰▰▰▱▱▱▱▱▱ 43%</div>
+            <div style="margin-top: 10px;"><span class="wf-btn sm">Today's lesson</span></div>
+          </div>
+          <div class="lane lane-prog" style="padding: 14px;">
+            <div class="wf-meta">Challenge</div>
+            <div class="wf-h">Pacific Crest Trail</div>
+            <div class="wf-meta">Day 4 of 30 · "Trail Mix" 3rd</div>
+            <div style="margin-top: 10px;"><span class="wf-btn sm">View team</span></div>
+          </div>
+          <div class="lane lane-prog" style="padding: 14px;">
+            <div class="wf-meta">Healthy habit</div>
+            <div class="wf-h">Daily 10-min walk</div>
+            <div class="wf-meta">Streak: 6 days</div>
+            <div style="margin-top: 10px;"><span class="wf-btn sm">Log today</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TWO-LANE — wider with breathing room -->
+      <div class="twocol" style="padding: 18px 24px; gap: 20px;">
+        <div class="lane lane-emp" style="padding: 18px;">
+          <div class="lane-h"><span class="source source-emp">From your employer</span> · Featured Client priority items</div>
+          <div class="stack">
+            <div>
+              <div class="wf-h">Your benefits include $0 mental health visits</div>
+              <div class="wf-body sm">Through Lyra · 12 sessions/year, no copay · most members never knew this was covered.</div>
+              <div style="margin-top: 6px;"><span class="wf-btn sm">See benefit</span></div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Q2 wellness fair · May 22</div>
+              <div class="wf-body sm">12pm · cafeteria · biometric screening, flu shots, free lunch.</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">New: backup care benefit</div>
+              <div class="wf-body sm">10 days/year for child or elder care, employer-paid through Bright Horizons.</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">EAP — confidential, free, 24/7</div>
+              <div class="wf-body sm">Counseling, legal, financial · 6 sessions/year.</div>
+            </div>
+          </div>
+        </div>
+        <div class="lane lane-int" style="padding: 18px;">
+          <div class="lane-h"><span class="source source-int">Based on your interests</span> · Wellbeing-interest filter</div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;">
+            <span class="chip interest active">Sleep</span>
+            <span class="chip interest active">Stress</span>
+            <span class="chip interest active">Move more</span>
+            <span class="chip interest muted">+ Edit interests</span>
+          </div>
+          <div class="stack">
+            <div>
+              <div class="wf-h">Why your sleep score lies <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+              <div class="wf-body sm">Your tracker measures movement, not REM. Here's what to actually trust.</div>
+              <div class="wf-meta">5 min read</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Insomnia DCP — recommended <span class="source source-int" style="font-size: 9.5px;">Sleep</span></div>
+              <div class="wf-body sm">8-week clinical program · weekly sessions, daily check-ins.</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">5-min meditation library <span class="source source-int" style="font-size: 9.5px;">Stress</span></div>
+              <div class="wf-body sm">12 short sessions · meets you wherever you are in the day.</div>
+            </div>
+            <div class="hr"></div>
+            <div>
+              <div class="wf-h">Strength program for desk workers <span class="source source-int" style="font-size: 9.5px;">Move more</span></div>
+              <div class="wf-body sm">15 min/day · no equipment · designed for back-pain risk.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONDITIONAL ROW -->
+      <div class="wf-row cond" style="padding: 18px 24px;">
+        <div class="wf-label"><span class="source source-cond">Conditional · open questions in canonical doc</span> Tracker data · Tracker Insights · DCP AI Coach</div>
+        <div class="threecol" style="margin-top: 8px; gap: 14px;">
+          <div class="lane" style="padding: 14px;">
+            <div class="wf-label" style="margin-bottom: 6px;">Tracker data — currently in production</div>
+            <div class="tile-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
+              <div class="tile"><div class="tile-label">Steps</div><div class="tile-value">8,572</div><div class="tile-goal">of 10k</div></div>
+              <div class="tile"><div class="tile-label">Sleep</div><div class="tile-value">7h 16m</div><div class="tile-goal">goal 8h</div></div>
+              <div class="tile"><div class="tile-label">Active</div><div class="tile-value">42</div><div class="tile-goal">min</div></div>
+              <div class="tile"><div class="tile-label">Heart</div><div class="tile-value">68</div><div class="tile-goal">resting</div></div>
+            </div>
+          </div>
+          <div class="lane" style="padding: 14px;">
+            <div class="wf-label" style="margin-bottom: 6px;">Tracker Insights — currently in production</div>
+            <div class="wf-h">Your sleep dropped 32 min last night.</div>
+            <div class="wf-body sm" style="margin-top: 4px;">Most likely: late screen time after 11pm. Sleep was 47 min better last week on nights you stopped screens by 10:30pm.</div>
+            <div style="margin-top: 10px;"><span class="wf-btn sm">Add wind-down to my evening</span></div>
+          </div>
+          <div class="lane" style="padding: 14px;">
+            <div class="wf-label" style="margin-bottom: 6px;">DCP AI Coach — recently drafted</div>
+            <div class="wf-h">Ask your sleep coach</div>
+            <div class="wf-body sm" style="margin-top: 4px;">"How do I sleep better on travel nights?" Text questions like you would an expert.</div>
+            <div style="margin-top: 10px;"><span class="wf-btn sm">Open chat</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="annot callout">
+      <strong>What's specific to Scenario B</strong> — Top nav replaces left rail entirely (resolves JH #2 fully and meets Eng's "use the full browser page" requirement). Content can stretch wider — hero photo grows to 600 px, ongoing programs go from 3-up to 4-up (adding a healthy-habit continuity card), lanes get more breathing room. Same component tree as Scenario A — only the chrome changes. Per Jill's three-shell architecture: build once, render in any of the three.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SCENARIO MAPPING TABLE                                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">04</span>Three scenarios · content variations</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th>C · Mobile 375</th>
+        <th>A · Large + left nav · 1280</th>
+        <th>B · Large no left nav · 1600+</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Top nav</strong></td>
+        <td>Hamburger · centered logo · avatar</td>
+        <td>Centered logo · bell + avatar (left rail handles primary nav)</td>
+        <td>Logo left · 5 primary nav items · bell + avatar dropdown</td>
+      </tr>
+      <tr>
+        <td><strong>Left nav</strong></td>
+        <td>n/a (bottom-tab)</td>
+        <td>200 px rail · 5 primary tabs + account links</td>
+        <td>n/a (top nav handles)</td>
+      </tr>
+      <tr>
+        <td><strong>Hero</strong></td>
+        <td>Single · 50/50 cropped to top half · ~140 px</td>
+        <td>Single · 50/50 split · ~200 px · 320 px image</td>
+        <td>Single · 50/50 split · ~320 px · 600 px image · subject in frame at full browser width</td>
+      </tr>
+      <tr>
+        <td><strong>Ongoing programs</strong></td>
+        <td>Vertical list · 2 items</td>
+        <td>3-up row · DCP / Journey / Challenge</td>
+        <td>4-up row · adds healthy-habit continuity</td>
+      </tr>
+      <tr>
+        <td><strong>Lane: Featured Client priority</strong></td>
+        <td>Stacked vertically · 2 items</td>
+        <td>50% column · 3 items</td>
+        <td>50% column · 4 items · breathing room</td>
+      </tr>
+      <tr>
+        <td><strong>Lane: Wellbeing-interest filter</strong></td>
+        <td>Below employer lane · 3 items · interest chips inline</td>
+        <td>50% column · 3 items · interest chips above</td>
+        <td>50% column · 4 items · per-item interest tags</td>
+      </tr>
+      <tr>
+        <td><strong>Tracker data (conditional)</strong></td>
+        <td>3-tile horizontal</td>
+        <td>33% of conditional row · 3 tiles</td>
+        <td>33% of conditional row · 4 tiles</td>
+      </tr>
+      <tr>
+        <td><strong>Tracker Insights (conditional)</strong></td>
+        <td>Full-width card</td>
+        <td>33% of conditional row</td>
+        <td>33% of conditional row · longer body copy</td>
+      </tr>
+      <tr>
+        <td><strong>DCP AI Coach (conditional)</strong></td>
+        <td>Full-width card</td>
+        <td>33% of conditional row</td>
+        <td>33% of conditional row</td>
+      </tr>
+      <tr>
+        <td><strong>Bottom nav</strong></td>
+        <td>5-tab</td>
+        <td>n/a</td>
+        <td>n/a</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- HOW EACH REQUIREMENT IS ADDRESSED                                   -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="section-label"><span class="num">05</span>How the wireframes address each requirement</div>
+
+  <table>
+    <thead>
+      <tr><th>Req</th><th>Owner</th><th>How addressed</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>One hero image</td><td>JH</td><td>Single hero in every scenario. No carousel. No peek-card. Hero option B (50/50) for 508 contrast safety.</td></tr>
+      <tr><td>Logo in top nav</td><td>JH</td><td>Centered in mobile and Scenario A (above left rail). Left in Scenario B (with primary nav items to the right).</td></tr>
+      <tr><td>Simplified personalization</td><td>CS</td><td>Wellbeing-interest chips on the personalized lane only. Existing data, surfaced as filter — no new picker, no onboarding step. Per-item interest tags make filtering legible.</td></tr>
+      <tr><td>Concept: wellbeing interests as filter</td><td>(concept)</td><td>Active interest chips at top of personalized lane; tap to toggle filter. "Edit interests" chip routes to existing interests management. Items each carry their interest tag.</td></tr>
+      <tr><td>Featured Client priority items</td><td>CS</td><td>Distinct "From your employer" lane with green accent border. 2–4 items per scenario. Source-labeled at lane and item level.</td></tr>
+      <tr><td>Easier access to ongoing programs</td><td>CS</td><td>Dedicated "Ongoing programs" module placed above the lanes. Shows DCPs, journeys, challenges, and habit streaks with one-tap "Continue" CTAs. High in stack so users don't scroll past it.</td></tr>
+      <tr><td>3 shell scenarios</td><td>cross-cutting</td><td>One artboard per scenario. Same component tree, different chrome. Mobile uses bottom-tab; large+leftnav uses 200 px rail; large-no-leftnav uses top nav.</td></tr>
+      <tr><td>Use full browser page</td><td>Eng</td><td>Scenario B demonstrates content stretching to 1600 px, hero photo 600 px wide, 4-up programs row, generous lane breathing room. Production should run wider; this is the demonstration breakpoint.</td></tr>
+      <tr><td>508 accessibility</td><td>non-negotiable</td><td>Hero option B avoids overlay text on imagery (no contrast hacks). Source labels are color + text (not color alone). Interest chips have ✓ glyph + color + text-weight to indicate active state. All touch targets respect 44×44 minimum (per ICP accessibility baseline). Production needs full a11y audit beyond wireframe.</td></tr>
+      <tr><td>Performance</td><td>non-negotiable</td><td>Wireframe contract: skeleton tiles render in &lt;100 ms; ongoing-programs and lanes lazy-load if needed; tracker data deferred behind initial render. Maps to JH #5 audit and the doc's "fast page load" goal. Production work, not wireframe.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- WHAT'S DELIBERATELY NOT IN ITERATION 1                              -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+  <div class="annotations">
+    <h3>What's deliberately not in iteration 1</h3>
+    <ul>
+      <li><strong>No persistent rewards header chip.</strong> Was in v1; out now. "Rewards focused home screen" is a future iteration per the canonical doc.</li>
+      <li><strong>No rewards slim-row module.</strong> Same reason.</li>
+      <li><strong>No DCP Progress card with inline clinical metric.</strong> "DCP focused home screen" is a future iteration. Continuity is preserved inside the Ongoing Programs module — that's the CS-required surface, not a clinical-metric proof card.</li>
+      <li><strong>No dots-carousel hero.</strong> JH explicit: one hero image. Closed.</li>
+      <li><strong>No new mandatory focus picker.</strong> Wellbeing interests is existing data, not a new onboarding step.</li>
+      <li><strong>No Chat Advisor card pattern</strong> (separate from the conditional DCP AI Coach module). Out of doc scope.</li>
+      <li><strong>No Welcome banner.</strong> Greeting headline does the same job.</li>
+      <li><strong>No biometrics on home.</strong> Clinical screening data is detail-screen only.</li>
+      <li><strong>No Trophy Case / achievements gallery.</strong> Future small follow-up.</li>
+    </ul>
+
+    <h3>Open questions still to resolve</h3>
+    <ul>
+      <li><strong>DCP AI Coach entry — in or out for iteration 1?</strong> Doc flags as open. Wireframe shows it in the conditional row; remove if leadership says future-iteration.</li>
+      <li><strong>Tracker data + Tracker Insights — keep, remove, or relocate?</strong> Both currently in production. Wireframe keeps them in the conditional row to make the design easy to ship as-is or strip down. Recommend keeping both — removal would be a regression.</li>
+      <li><strong>Wellbeing interests data state — populated for all members?</strong> If not, the muted "+ Edit interests" chip becomes the lane's empty state instead of just an action affordance. Confirm with CS.</li>
+      <li><strong>Hero source — what fills it on a typical day?</strong> Doc says "one hero image." Doesn't say what populates it. Recommendation: priority engine (active challenge → client priority → interest-related content) — same logic the lanes use, applied to one slot.</li>
+      <li><strong>Ongoing programs — what's the cap?</strong> Wireframe shows 2 (mobile) / 3 (Scenario A) / 4 (Scenario B). What if a user has 6 ongoing things? Recommend "+ N more" chip after the cap, routing to a dedicated screen.</li>
+    </ul>
+
+    <h3>Net engineering ask</h3>
+    <p>
+      <strong>Zero new Page Layout Elements required for iteration 1.</strong> All seven required modules (top nav, greeting, hero, ongoing programs, employer lane, interests lane with filter chips, bottom-nav/chrome) assemble from existing HTML containers, Lists, Buttons, and User Inputs. The eng-named "full browser page" requirement is a layout/CSS concern — Innovations / Eng confirm CSS scaffold supports unbounded width.
+    </p>
+    <p>
+      Net effect: this iteration ships without queuing a new building block. If we keep the conditional modules in too (Tracker data, Tracker Insights, DCP AI Coach), all of those exist in production today.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

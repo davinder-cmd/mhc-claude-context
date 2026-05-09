@@ -1,0 +1,140 @@
+<!--
+  TEMPLATE: layer-probe.html
+  USE WHEN: You're iterating on ONE layer (icons, components, tokens, illustrations) in detail.
+            Other layers are referenced as locked-from-prior, not redrawn.
+
+  HOW TO USE:
+    1. cp _templates/layer-probe.html v<N>/layer-<N>-<slug>.html
+    2. Fill the Delta Panel
+    3. Fill Lock context (which version's lock this builds on)
+    4. Fill the Layer body
+    5. One pilot screen showing this layer in real context
+    6. After build: update MAP.md
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layer Probe — Layer {N} · v{V} · {slug}</title>
+<style>
+  :root {
+    --doc-bg: #FBFAF8; --doc-ink: #1A1816; --doc-ink-2: #423D38; --doc-ink-3: #6F6963;
+    --doc-border: #E1DEDA; --doc-accent: #08605A;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Source Serif 4", Charter, Georgia, serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.55; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 56px 40px 120px; }
+  h1 { font-family: var(--font-serif); font-size: 36px; font-weight: 600; margin: 0 0 12px; }
+  h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; margin: 0 0 8px; }
+  h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; }
+  section { margin-bottom: 64px; }
+  .lede { color: var(--doc-ink-2); margin: 0 0 24px; max-width: 720px; }
+  code { font-family: var(--font-mono); font-size: 13px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--doc-border); vertical-align: top; }
+  th { font-weight: 600; color: var(--doc-ink-2); background: #F4F2EE; text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+  td.token { font-family: var(--font-mono); font-size: 12px; }
+
+  .delta-panel { background: #F4F2EE; border-left: 4px solid var(--doc-accent); border-radius: 4px; padding: 24px 32px; margin: 0 0 40px; font-size: 14px; }
+  .delta-panel dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; }
+  .delta-panel dt { font-weight: 600; color: var(--doc-ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; padding-top: 2px; }
+  .delta-panel dd { margin: 0; }
+  .delta-panel dd ul { margin: 0; padding-left: 18px; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-current { background: #DCEAD3; color: #335326; }
+  .status-draft { background: #FBE9BC; color: #74500D; }
+  .status-superseded { background: #E1DEDA; color: #6F6963; }
+
+  .lock-context { background: #FBF9F5; border: 1px dashed var(--doc-border); border-radius: 8px; padding: 20px 24px; margin-bottom: 40px; font-size: 14px; }
+  .lock-context h3 { margin-top: 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--doc-ink-3); }
+  .lock-context ul { margin: 0; padding-left: 20px; }
+
+  .open-followups { background: #FBE9BC22; border-left: 4px solid #DC9A1E; padding: 20px 24px; margin-top: 32px; font-size: 14px; border-radius: 4px; }
+  .open-followups h3 { margin-top: 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #74500D; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- DELTA PANEL — paste from INTERVIEW.md output -->
+<header>
+  <h1>{Layer {N} — what changed in this iteration}</h1>
+  <div class="delta-panel">
+    <dl>
+      <dt>Iteration</dt>       <dd>v{V} · {slug}</dd>
+      <dt>Type</dt>            <dd>layer-probe (Layer {N})</dd>
+      <dt>Builds on</dt>       <dd>v{V-1} ({path})</dd>
+      <dt>Premise</dt>         <dd>{one sentence}</dd>
+      <dt>Color register</dt> <dd><strong>{Earth / Neutral / Pastel / Jewel / Fluorescent / Shade-dominant / Tone-on-tone}</strong> — inherits from version unless override</dd>
+      <dt>Brand color role</dt><dd><strong>{Passive / Active}</strong> — inherits from version unless override</dd>
+      <dt>Changed</dt>         <dd><ul><li>{bullet}</li></ul></dd>
+      <dt>Locked</dt>          <dd><ul><li>{bullet}</li></ul></dd>
+      <dt>Assumptions</dt>     <dd><ul><li>{what was inferred} — {cue}</li><li>{"none" if every answer was explicit}</li></ul></dd>
+      <dt>Decision touched</dt><dd>{D{ID} — or "none"}</dd>
+      <dt>Status</dt>          <dd><span class="status status-draft">draft</span></dd>
+      <dt>Date</dt>            <dd>YYYY-MM-DD</dd>
+    </dl>
+  </div>
+</header>
+
+<!-- LOCK CONTEXT — what's assumed locked from the version this builds on -->
+<section>
+  <div class="lock-context">
+    <h3>Lock context</h3>
+    <p>This probe modifies <strong>Layer {N}</strong> only. The following are assumed locked from <code>v{V-1}/system.html</code>:</p>
+    <ul>
+      <li>Layer 1 — palette scales (unchanged)</li>
+      <li>Layer 2 — semantic tokens (unchanged)</li>
+      <!-- list every other layer that is NOT being modified -->
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     LAYER BODY — the actual deep work for this layer
+     FILL: layer-specific content. The shape varies by layer:
+       Layer 1+2 → scales + semantic tokens table
+       Layer 3 → buttons, badges, selection, focus, radius, dataviz
+       Layer 4 → sizing, fill rule, treatments, module-tinted, library
+       Layer 5 → color range, style direction, variant grid
+     ============================================================ -->
+<section>
+  <h2>Layer {N} — {layer name}</h2>
+  <p class="lede">{1–2 sentences framing what changed in this layer.}</p>
+
+  <!-- LAYER-SPECIFIC SECTIONS GO HERE -->
+</section>
+
+<!-- ============================================================
+     PILOT — one applied screen showing this layer in real context
+     FILL: a real product moment. Choose one of the three anchor pilots:
+       Member · Buyer · AI — whichever best stress-tests this layer.
+     ============================================================ -->
+<section>
+  <h2>Pilot — {Member / Buyer / AI · {moment}}</h2>
+  <p class="lede">{Why this pilot. What it stress-tests about this layer.}</p>
+
+  <!-- pilot screen render here -->
+</section>
+
+<!-- ============================================================
+     OPEN FOLLOWUPS — what the next iteration should pick up
+     ============================================================ -->
+<section>
+  <div class="open-followups">
+    <h3>What's still open after this layer probe</h3>
+    <ul>
+      <li>{open question}</li>
+      <li>{decision deferred}</li>
+    </ul>
+    <p><strong>Next iteration target:</strong> {what to build next, in which template type}</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

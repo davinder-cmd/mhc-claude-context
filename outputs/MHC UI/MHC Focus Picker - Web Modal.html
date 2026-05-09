@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC — Focus Picker · Web Modal</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #1f2a36;
+    font-family: var(--mh-font-brand);
+    color: var(--mh-fg-1);
+    min-height: 100vh;
+  }
+  .page { padding: 32px 28px 80px; max-width: 1840px; margin: 0 auto; }
+  .pagehead { color: #fff; margin: 0 0 28px; max-width: 980px; }
+  .pagehead h1 { font-size: 22px; margin: 0 0 6px; font-weight: 700; }
+  .pagehead p { font-size: 14px; color: #b9c4cb; margin: 0; line-height: 1.5; }
+
+  .stage { display: flex; flex-direction: column; gap: 36px; align-items: center; }
+  .stage-row { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .stage-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #8fa0ad; }
+  .stage-label b { color: #fff; font-weight: 700; }
+
+  .scrim {
+    width: 100%;
+    max-width: 1280px;
+    background: rgba(6, 42, 66, 0.55);
+    border-radius: 14px;
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---------- Modal shell ---------- */
+  .modal {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 24px 56px rgba(6, 42, 66, 0.35), 0 2px 6px rgba(6,42,66,0.15);
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 92vh;
+  }
+  .modal--sm { max-width: 400px; }
+  .modal--md { max-width: 720px; }
+  .modal--lg { max-width: 980px; }
+
+  .modal-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px; padding: 22px 22px 16px;
+    border-bottom: 1px solid var(--mh-divider);
+  }
+  .modal-head-text { min-width: 0; }
+  .modal-step {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--mh-aqua-blue);
+    margin: 0 0 8px;
+  }
+  .modal-title { font-size: 20px; font-weight: 700; color: var(--mh-night-sky); margin: 0 0 6px; line-height: 1.2; }
+  .modal-sub { font-size: 13.5px; color: var(--mh-slate); margin: 0; line-height: 1.5; max-width: 60ch; }
+  .modal-close {
+    flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+    border: 0; background: var(--mh-cloud); color: var(--mh-slate);
+    display: grid; place-items: center; cursor: pointer; font-size: 14px; line-height: 1;
+  }
+  .modal-close:hover { background: var(--mh-silver); color: var(--mh-charcoal); }
+
+  .modal-progress { height: 3px; background: var(--mh-cloud); margin: 0 22px 14px; border-radius: 999px; overflow: hidden; }
+  .modal-progress > i { display: block; height: 100%; width: 60%; background: var(--mh-aqua-blue); border-radius: inherit; }
+
+  .modal-body { padding: 4px 22px 18px; overflow-y: auto; flex: 1; }
+
+  .modal-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 14px 22px 18px;
+    border-top: 1px solid var(--mh-divider);
+    background: #fafbfc;
+    flex-wrap: wrap;
+  }
+  .modal-foot-skip {
+    font-size: 13px; color: var(--mh-slate);
+    text-decoration: underline; text-underline-offset: 3px;
+    cursor: pointer; background: none; border: 0; padding: 6px 4px;
+    font-family: inherit;
+  }
+  .modal-foot-skip:hover { color: var(--mh-charcoal); }
+  .modal-foot-actions { display: flex; gap: 8px; align-items: center; margin-left: auto; }
+  .btn {
+    font-family: inherit; font-weight: 700; font-size: 14px;
+    padding: 10px 18px; border-radius: 999px; border: 0; cursor: pointer;
+    transition: background 140ms var(--mh-ease);
+  }
+  .btn-ghost { background: transparent; color: var(--mh-slate); padding: 10px 12px; }
+  .btn-ghost:hover { color: var(--mh-charcoal); }
+  .btn-primary { background: var(--mh-brand-blue); color: #fff; }
+  .btn-primary:hover { background: #0d3e6c; }
+
+  /* Small modal: stack the footer */
+  .modal--sm .modal-foot-skip { flex-basis: 100%; text-align: center; order: 2; }
+  .modal--sm .modal-foot-actions { flex-basis: 100%; }
+  .modal--sm .modal-foot-actions .btn-primary { flex: 1; }
+
+  /* ---------- Tile grid ---------- */
+  .grid { display: grid; gap: 10px; padding: 12px 0 4px; }
+  .modal--sm .grid { grid-template-columns: repeat(2, 1fr); }
+  .modal--md .grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .modal--lg .grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  .focus-tile {
+    position: relative;
+    padding: 14px 12px 12px;
+    background: #fff;
+    border: 1.5px solid var(--mh-cloud);
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 140ms var(--mh-ease), background 140ms var(--mh-ease), transform 140ms var(--mh-ease), box-shadow 140ms var(--mh-ease);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 130px;
+    font-family: inherit;
+  }
+  .focus-tile:hover { border-color: var(--mh-silver); }
+  .focus-tile:active { transform: scale(0.985); }
+
+  /* Icon container — color identity is PERMANENT (does not change on selection).
+     Same image URL is used in every state. */
+  .focus-tile .ico {
+    width: 44px; height: 44px;
+    border-radius: 11px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .focus-tile .ico img {
+    width: 24px; height: 24px;
+    display: block;
+  }
+  .focus-tile .name {
+    font-size: 15px; font-weight: 700;
+    color: var(--mh-night-sky); line-height: 1.2;
+    margin: 0;
+  }
+  .focus-tile .micro {
+    font-size: 12px; color: var(--mh-slate);
+    line-height: 1.35; margin-top: -4px;
+  }
+
+  /* Per-focus permanent icon colors — match the home page focus chips */
+  .focus-tile[data-focus="sleep"]    .ico { background: #e8d5f2; }
+  .focus-tile[data-focus="move"]     .ico { background: #d5edf4; }
+  .focus-tile[data-focus="food"]     .ico { background: #d8ecd5; }
+  .focus-tile[data-focus="stress"]   .ico { background: #ffe3d9; }
+  .focus-tile[data-focus="weight"]   .ico { background: #fce8c2; }
+  .focus-tile[data-focus="heart"]    .ico { background: #fbd9d2; }
+  .focus-tile[data-focus="flex"]     .ico { background: #d2e5e1; }
+  .focus-tile[data-focus="money"]    .ico { background: #dfe6f5; }
+  .focus-tile[data-focus="none"]     .ico { background: #e5e7eb; }
+
+  /* "No focus" tile — visually de-emphasized: dashed border, muted text */
+  .focus-tile[data-focus="none"] {
+    border-style: dashed;
+  }
+  .focus-tile[data-focus="none"] .name { color: var(--mh-slate); }
+
+  /* Selection — communicated only by tile chrome (border + tint + check) */
+  .focus-tile.is-selected {
+    border-color: var(--mh-brand-blue);
+    background: #eaf2fa;
+    box-shadow: 0 0 0 1.5px var(--mh-brand-blue) inset;
+  }
+  .focus-tile .check {
+    position: absolute; top: 10px; right: 10px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--mh-brand-blue); color: #fff;
+    display: none;
+    align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .focus-tile.is-selected .check { display: flex; }
+
+  /* Larger tiles in the wide modal */
+  .modal--lg .focus-tile { min-height: 148px; padding: 18px 16px 16px; }
+  .modal--lg .focus-tile .ico { width: 48px; height: 48px; border-radius: 12px; }
+  .modal--lg .focus-tile .ico img { width: 26px; height: 26px; }
+  .modal--lg .focus-tile .name { font-size: 16px; }
+  .modal--lg .focus-tile .micro { font-size: 12.5px; }
+  .modal--lg .modal-title { font-size: 24px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="pagehead">
+    <h1>Focus Picker — Web modal · color-coded</h1>
+    <p>Icons now match the home page focus palette (purple sleep, aqua move, green nutrition, etc.). Each icon is a single static URL that stays identical in every state — selection is communicated by the tile's border, tint, and corner check, not by swapping the icon. Three modal widths: small (400px), medium (720px), large (980px).</p>
+  </div>
+
+  <div class="stage">
+    <div class="stage-row">
+      <div class="stage-label">Small · <b>400px</b></div>
+      <div class="scrim"><div class="modal modal--sm" data-grid></div></div>
+    </div>
+    <div class="stage-row">
+      <div class="stage-label">Medium · <b>720px</b></div>
+      <div class="scrim"><div class="modal modal--md" data-grid></div></div>
+    </div>
+    <div class="stage-row">
+      <div class="stage-label">Large · <b>980px</b></div>
+      <div class="scrim"><div class="modal modal--lg" data-grid></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Each focus has ONE static icon URL. Color is baked into the SVG via Iconify's
+  // ?color= param. The URL never changes based on selection.
+  const FOCUSES = [
+    { key: 'sleep',  name: 'Sleep',       micro: 'Rest better',
+      icon: 'https://api.iconify.design/lucide/moon.svg?color=%236e5dc6&width=48' },
+    { key: 'move',   name: 'Move',        micro: 'Get active',
+      icon: 'https://api.iconify.design/lucide/footprints.svg?color=%2304a0b7&width=48' },
+    { key: 'food',   name: 'Nutrition',   micro: 'Eat well',
+      icon: 'https://api.iconify.design/lucide/apple.svg?color=%2352a045&width=48' },
+    { key: 'stress', name: 'Stress',      micro: 'Find calm',
+      icon: 'https://api.iconify.design/lucide/brain.svg?color=%23f15922&width=48' },
+    { key: 'weight', name: 'Weight',      micro: 'Reach a healthy weight',
+      icon: 'https://api.iconify.design/lucide/scale.svg?color=%23c97c1d&width=48' },
+    { key: 'heart',  name: 'Heart',       micro: 'Cardiovascular health',
+      icon: 'https://api.iconify.design/lucide/heart-pulse.svg?color=%23c8442a&width=48' },
+    { key: 'flex',   name: 'Flexibility', micro: 'Move without pain',
+      icon: 'https://api.iconify.design/lucide/stretch-horizontal.svg?color=%233a8b7e&width=48' },
+    { key: 'money',  name: 'Money',       micro: 'Financial wellbeing',
+      icon: 'https://api.iconify.design/lucide/wallet.svg?color=%230f497f&width=48' },
+    // "No focus" — clears the user's current selection. Visually de-emphasized
+    // (neutral slate dot) so it reads as an opt-out, not a focus area.
+    { key: 'none',   name: 'No focus',    micro: 'Browse without one',
+      icon: 'https://api.iconify.design/lucide/circle-slash.svg?color=%2364748b&width=48' },
+  ];
+
+  function buildModal(host) {
+    host.innerHTML = `
+      <div class="modal-head">
+        <div class="modal-head-text">
+          <p class="modal-step">Step 3 of 5</p>
+          <h2 class="modal-title">Pick your starting focus</h2>
+          <p class="modal-sub">Choose one to begin. We'll shape your home around it — and you can switch any time.</p>
+        </div>
+        <button class="modal-close" type="button" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-progress"><i></i></div>
+      <div class="modal-body"><div class="grid"></div></div>
+      <div class="modal-foot">
+        <button class="modal-foot-skip" type="button">Not sure yet — skip for now</button>
+        <div class="modal-foot-actions">
+          <button class="btn btn-ghost" type="button">Back</button>
+          <button class="btn btn-primary" type="button">Set focus →</button>
+        </div>
+      </div>
+    `;
+    const grid = host.querySelector('.grid');
+    FOCUSES.forEach((f, i) => {
+      const tile = document.createElement('button');
+      tile.type = 'button';
+      tile.dataset.focus = f.key;
+      tile.className = 'focus-tile' + (i === 0 ? ' is-selected' : '');
+      tile.innerHTML = `
+        <span class="ico"><img src="${f.icon}" alt="" width="24" height="24"></span>
+        <span class="name">${f.name}</span>
+        <span class="micro">${f.micro}</span>
+        <span class="check" aria-hidden="true">✓</span>
+      `;
+      tile.addEventListener('click', () => {
+        grid.querySelectorAll('.focus-tile').forEach(x => x.classList.remove('is-selected'));
+        tile.classList.add('is-selected');
+      });
+      grid.appendChild(tile);
+    });
+  }
+  document.querySelectorAll('[data-grid]').forEach(buildModal);
+</script>
+</body>
+</html>

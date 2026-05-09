@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Home - Responsive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Design system tokens */
+    :root {
+      /* Spacing scale (4dp base unit = 0.25rem at 16px) */
+      --spacing-01: 0.125rem;
+      --spacing-02: 0.25rem;
+      --spacing-03: 0.5rem;
+      --spacing-04: 1rem;
+      --spacing-05: 1.5rem;
+      --spacing-06: 2rem;
+      --spacing-07: 2.5rem;
+      --spacing-08: 4rem;
+      --spacing-09: 5rem;
+      --spacing-10: 6rem;
+
+      /* Typography */
+      --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-size-display: 2.5rem;
+      --font-size-heading-1: 2rem;
+      --font-size-heading-2: 1.5rem;
+      --font-size-subtitle: 1.25rem;
+      --font-size-body: 1rem;
+      --font-size-caption: 0.875rem;
+
+      /* Colors */
+      --color-background: #ffffff;
+      --color-surface: #f5f5f5;
+      --color-text-primary: #212121;
+      --color-text-secondary: #757575;
+      --color-text-placeholder: #bdbdbd;
+      --color-border: #e0e0e0;
+      --color-primary: #2196F3;
+      --color-primary-dark: #1976D2;
+      --color-success: #4CAF50;
+      --color-info: #2196F3;
+
+      /* Line heights */
+      --line-height-display: 1.125;
+      --line-height-body: 1.5;
+      --line-height-caption: 1.25;
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body);
+      color: var(--color-text-primary);
+      background-color: var(--color-background);
+      line-height: var(--line-height-body);
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 100%;
+      padding: var(--spacing-04);
+      margin: 0 auto;
+    }
+
+    @media (min-width: 600px) {
+      .container {
+        padding: var(--spacing-06);
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1400px;
+        padding: var(--spacing-06);
+      }
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-07);
+      gap: var(--spacing-04);
+    }
+
+    .header__title {
+      font-size: var(--font-size-heading-1);
+      font-weight: 600;
+      line-height: var(--line-height-display);
+    }
+
+    .header__actions {
+      display: flex;
+      gap: var(--spacing-04);
+      align-items: center;
+    }
+
+    .icon-button {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      color: var(--color-text-primary);
+      font-size: 1.25rem;
+      transition: background-color 0.2s;
+    }
+
+    .icon-button:hover {
+      background-color: var(--color-surface);
+    }
+
+    /* Card Carousel Section */
+    .carousel-section {
+      margin-bottom: var(--spacing-09);
+    }
+
+    .carousel-grid {
+      display: grid;
+      gap: var(--spacing-05);
+      grid-template-columns: 1fr;
+    }
+
+    /* Mobile: 1 column */
+    @media (min-width: 600px) {
+      .carousel-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Tablet/Desktop: 3 columns */
+    @media (min-width: 1200px) {
+      .carousel-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .carousel-card {
+      background: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .carousel-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .carousel-card__image {
+      width: 100%;
+      height: 12rem;
+      object-fit: cover;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: var(--font-size-caption);
+    }
+
+    .carousel-card__content {
+      padding: var(--spacing-05);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .carousel-card__title {
+      font-size: var(--font-size-body);
+      font-weight: 600;
+      margin-bottom: var(--spacing-02);
+      line-height: 1.4;
+    }
+
+    .carousel-card__subtitle {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-secondary);
+    }
+
+    /* Main content grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-08);
+      margin-bottom: var(--spacing-09);
+    }
+
+    @media (min-width: 1200px) {
+      .main-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-07);
+      }
+    }
+
+    /* Section */
+    .section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section__title {
+      font-size: var(--font-size-heading-2);
+      font-weight: 600;
+      margin-bottom: var(--spacing-05);
+      line-height: var(--line-height-display);
+    }
+
+    .section__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-05);
+    }
+
+    /* Action Items */
+    .action-item {
+      display: flex;
+      gap: var(--spacing-04);
+      align-items: flex-start;
+      padding: var(--spacing-05);
+      border: 1px solid var(--color-border);
+      border-radius: 0.75rem;
+      background: var(--color-background);
+      transition: box-shadow 0.2s;
+    }
+
+    .action-item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .action-item__avatar {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 0.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: var(--font-size-heading-2);
+    }
+
+    .action-item__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-03);
+      justify-content: center;
+    }
+
+    .action-item__title {
+      font-size: var(--font-size-body);
+      font-weight: 600;
+    }
+
+    .action-item__description {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-secondary);
+    }
+
+    /* Data Cards */
+    .data-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: var(--spacing-05);
+      border: 1px solid var(--color-border);
+      border-radius: 0.75rem;
+      background: var(--color-background);
+      transition: box-shadow 0.2s;
+      gap: var(--spacing-04);
+    }
+
+    .data-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .data-card__left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-03);
+      flex: 1;
+    }
+
+    .data-card__icon {
+      width: 1.75rem;
+      height: 1.75rem;
+      background: var(--color-primary);
+      border-radius: 0.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .data-card__label {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-02);
+      font-size: var(--font-size-caption);
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+
+    .data-card__value {
+      font-size: var(--font-size-heading-1);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .data-card__subtitle {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-secondary);
+    }
+
+    .data-card__right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--spacing-03);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .data-card__date {
+      font-size: var(--font-size-caption);
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+
+    .data-card__chart {
+      width: 5rem;
+      height: 2.5rem;
+      background: linear-gradient(to right,
+        var(--color-primary) 0%,
+        var(--color-primary) 8%,
+        transparent 8%,
+        transparent 16%,
+        var(--color-primary) 16%,
+        var(--color-primary) 28%,
+        transparent 28%,
+        transparent 40%,
+        var(--color-primary) 40%,
+        var(--color-primary) 65%,
+        transparent 65%,
+        transparent 75%,
+        var(--color-primary) 75%,
+        var(--color-primary) 100%);
+      background-size: 100% 100%;
+      border-radius: 0.35rem;
+    }
+
+    /* Button */
+    .button {
+      align-self: center;
+      padding: var(--spacing-03) var(--spacing-05);
+      border: 1.5px solid var(--color-primary);
+      border-radius: 1.5rem;
+      background: transparent;
+      color: var(--color-primary);
+      font-size: var(--font-size-body);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: var(--color-primary);
+      color: white;
+    }
+
+    .button--secondary {
+      border-color: var(--color-text-secondary);
+      color: var(--color-text-secondary);
+    }
+
+    .button--secondary:hover {
+      background-color: var(--color-surface);
+    }
+
+    /* View all button */
+    .view-all {
+      align-self: center;
+      margin-top: var(--spacing-05);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 599px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header__title {
+        font-size: var(--font-size-heading-2);
+      }
+
+      .section__title {
+        font-size: var(--font-size-subtitle);
+      }
+
+      .carousel-card__image {
+        height: 10rem;
+      }
+    }
+
+    @media (min-width: 600px) and (max-width: 1199px) {
+      .carousel-card__image {
+        height: 11rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">Welcome Davinder</h1>
+      <div class="header__actions">
+        <button class="icon-button" aria-label="Search">🔍</button>
+        <button class="icon-button" aria-label="Notifications">📧</button>
+      </div>
+    </header>
+
+    <!-- Carousel Section -->
+    <section class="carousel-section">
+      <div class="carousel-grid">
+        <div class="carousel-card">
+          <div class="carousel-card__image">Health Image 1</div>
+          <div class="carousel-card__content">
+            <h3 class="carousel-card__title">Get your A1C Checked</h3>
+            <p class="carousel-card__subtitle">Earn 100 points</p>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-card__image">Health Image 2</div>
+          <div class="carousel-card__content">
+            <h3 class="carousel-card__title">Get your A1C Checked</h3>
+            <p class="carousel-card__subtitle">Earn 100 points</p>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-card__image">Health Image 3</div>
+          <div class="carousel-card__content">
+            <h3 class="carousel-card__title">Get your A1C Checked</h3>
+            <p class="carousel-card__subtitle">Earn 100 points</p>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-card__image">Health Image 4</div>
+          <div class="carousel-card__content">
+            <h3 class="carousel-card__title">Get your A1C Checked</h3>
+            <p class="carousel-card__subtitle">Earn 100 points</p>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-card__image">Health Image 5</div>
+          <div class="carousel-card__content">
+            <h3 class="carousel-card__title">Get your A1C Checked</h3>
+            <p class="carousel-card__subtitle">Earn 100 points</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content grid: Action items + Health data -->
+    <div class="main-grid">
+      <!-- Action Items Section -->
+      <section class="section">
+        <h2 class="section__title">Just for you</h2>
+        <div class="section__content">
+          <div class="action-item">
+            <div class="action-item__avatar">👤</div>
+            <div class="action-item__content">
+              <h3 class="action-item__title">Wellbeing Champion</h3>
+              <p class="action-item__description">Access Your Training</p>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-item__avatar">6</div>
+            <div class="action-item__content">
+              <h3 class="action-item__title">Join BurnAlong</h3>
+              <p class="action-item__description">Join your first class</p>
+            </div>
+          </div>
+          <div class="action-item">
+            <div class="action-item__avatar">👤</div>
+            <div class="action-item__content">
+              <h3 class="action-item__title">Start a new daily habit</h3>
+              <p class="action-item__description">Level up your points</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Health Data Section -->
+      <section class="section">
+        <h2 class="section__title">Latest Health Data</h2>
+        <div class="section__content">
+          <div class="data-card">
+            <div class="data-card__left">
+              <div class="data-card__label">
+                <div class="data-card__icon">⚡</div>
+                <span>Steps</span>
+              </div>
+              <div class="data-card__value">9,344</div>
+            </div>
+            <div class="data-card__right">
+              <span class="data-card__date">July 12 ➜</span>
+              <div class="data-card__chart"></div>
+            </div>
+          </div>
+          <div class="data-card">
+            <div class="data-card__left">
+              <div class="data-card__label">
+                <div class="data-card__icon">📊</div>
+                <span>Steps</span>
+              </div>
+              <div class="data-card__value">7 h <span style="font-size: 0.875rem; color: var(--color-text-secondary);">16 m</span></div>
+            </div>
+            <div class="data-card__right">
+              <span class="data-card__date">July 12 ➜</span>
+              <div class="data-card__chart"></div>
+            </div>
+          </div>
+          <div class="data-card">
+            <div class="data-card__left">
+              <div class="data-card__label">
+                <div class="data-card__icon">❤️</div>
+                <span>Active Minutes</span>
+              </div>
+              <div class="data-card__value">45 <span style="font-size: 0.875rem; color: var(--color-text-secondary);">min</span></div>
+            </div>
+            <div class="data-card__right">
+              <span class="data-card__date">July 12 ➜</span>
+              <div class="data-card__chart"></div>
+            </div>
+          </div>
+        </div>
+        <button class="button view-all">Link Tracker</button>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

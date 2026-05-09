@@ -1,0 +1,202 @@
+<!--
+  ============================================================
+  BLOCK 2c — Today's habits
+  ============================================================
+  A daily-rhythm block for tap-to-log healthy habits and streaks.
+  Sits between Today (trackers) and Pick up where you left off.
+
+  Why a separate block, not a rail card?
+  --------------------------------------
+  Habits don't have a finish line. The progress rail's grammar
+  is "X of Y" / "% done" / "N days left" — none apply to a habit.
+  Habits use a different grammar: a 5-day dot strip + streak
+  count. They also have a different primary action: tap-to-log,
+  not "continue program."
+
+  Cap + suppress
+  --------------
+  - Render up to 3 habits in the visible row; "See all" overflow
+    link surfaces the rest.
+  - Section is fully suppressed when the user has zero habits.
+  - When the user has exactly 1 habit, the host should render a
+    slim single-stripe variant (handled by `formula.habits_oneOnly`).
+
+  Sort order (server-side)
+  ------------------------
+  1. Not-yet-logged today, longest current streak first
+  2. Already logged today, longest streak
+
+  Conditionals
+  ------------
+    {{#formula.hasHabits}}…              any habit configured
+    {{#formula.habits_oneOnly}}…         single-stripe variant
+    {{#formula.habitsOverflow}}…         more than 3 active habits
+    {{#formula.hasHabit2}} / hasHabit3   present 2nd / 3rd habit
+    {{#formula.habitN_done}}…            already logged today
+    {{#formula.habitN_streak}}…          has an active streak ≥2
+    {{#formula.habitN_autoTracked}}…     pulled from sensors (no log button)
+
+  Tokens
+  ------
+    {{formula.habitN_name}}              "Drink water"
+    {{formula.habitN_target}}            "8 cups", "5 min", "10k steps"
+    {{formula.habitN_streakLabel}}       "3-day streak"
+    {{formula.habitN_subline}}           "auto-tracked", "logged 12 min ago"
+    {{formula.habitN_logHref}}           POST target for tap-to-log
+    {{formula.habitN_logLabel}}          "+ Log", "+ Log 5 min", "+ 1 cup"
+    {{formula.habitN_href}}              drilldown link
+
+    {{formula.habitN_dot1}}…dot5         "done" | "today" | ""  (last 5 days)
+  ============================================================
+-->
+
+{{#formula.hasHabits}}
+<div class="mhc-home">
+  <section class="habits {{#formula.habits_oneOnly}}habits--single{{/formula.habits_oneOnly}}" aria-labelledby="mhc-habits-title">
+    <div class="section-head">
+      <h2 id="mhc-habits-title" class="section-title">{{formula.copy_section_habits}}</h2>
+      <a class="section-link" href="{{formula.habits_seeAll_href}}">
+        {{#formula.habitsOverflow}}{{formula.copy_link_habits_seeAllCount}}{{/formula.habitsOverflow}}
+        {{^formula.habitsOverflow}}{{formula.copy_link_habits_seeAll}}{{/formula.habitsOverflow}}
+      </a>
+    </div>
+
+    {{#formula.habits_oneOnly}}
+    <!-- Single-habit stripe variant -->
+    <a class="habit-stripe {{#formula.habit1_done}}habit-stripe--done{{/formula.habit1_done}}" href="{{formula.habit1_href}}">
+      <span class="habit-stripe-dots" aria-hidden="true">
+        <span class="habit-dot habit-dot--{{formula.habit1_dot1}}"></span>
+        <span class="habit-dot habit-dot--{{formula.habit1_dot2}}"></span>
+        <span class="habit-dot habit-dot--{{formula.habit1_dot3}}"></span>
+        <span class="habit-dot habit-dot--{{formula.habit1_dot4}}"></span>
+        <span class="habit-dot habit-dot--{{formula.habit1_dot5}}"></span>
+      </span>
+      <span class="habit-stripe-body">
+        <span class="habit-stripe-name">{{formula.habit1_name}} · <span class="habit-stripe-target">{{formula.habit1_target}}</span></span>
+        <span class="habit-stripe-meta">
+          {{#formula.habit1_streak}}<b>{{formula.habit1_streakLabel}}</b>{{/formula.habit1_streak}}
+          {{^formula.habit1_streak}}{{formula.habit1_subline}}{{/formula.habit1_streak}}
+        </span>
+      </span>
+      {{^formula.habit1_autoTracked}}
+      <form action="{{formula.habit1_logHref}}" method="post" class="habit-log-form">
+        <button type="submit" class="habit-log-btn">{{formula.habit1_logLabel}}</button>
+      </form>
+      {{/formula.habit1_autoTracked}}
+      {{#formula.habit1_done}}<span class="habit-done-pill" aria-label="{{formula.copy_loggedToday}}">✓ {{formula.copy_loggedToday}}</span>{{/formula.habit1_done}}
+    </a>
+    {{/formula.habits_oneOnly}}
+
+    {{^formula.habits_oneOnly}}
+    <!-- Multi-habit grid -->
+    <div class="habits-grid">
+
+      <!-- Habit 1 -->
+      <div class="habit {{#formula.habit1_done}}habit--done{{/formula.habit1_done}}">
+        <div class="habit-head">
+          <h3 class="habit-name">{{formula.habit1_name}}</h3>
+          <span class="habit-target">{{formula.habit1_target}}</span>
+        </div>
+        <div class="habit-dots" aria-hidden="true">
+          <span class="habit-dot habit-dot--{{formula.habit1_dot1}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit1_dot2}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit1_dot3}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit1_dot4}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit1_dot5}}"></span>
+        </div>
+        <div class="habit-meta">
+          {{#formula.habit1_streak}}<b class="habit-streak">{{formula.habit1_streakLabel}}</b>{{/formula.habit1_streak}}
+          {{^formula.habit1_streak}}<span>{{formula.habit1_subline}}</span>{{/formula.habit1_streak}}
+        </div>
+        {{^formula.habit1_autoTracked}}
+          {{^formula.habit1_done}}
+          <form action="{{formula.habit1_logHref}}" method="post" class="habit-log-form">
+            <button type="submit" class="habit-log-btn">{{formula.habit1_logLabel}}</button>
+          </form>
+          {{/formula.habit1_done}}
+          {{#formula.habit1_done}}
+          <span class="habit-done-pill">✓ {{formula.copy_loggedToday}}</span>
+          {{/formula.habit1_done}}
+        {{/formula.habit1_autoTracked}}
+        {{#formula.habit1_autoTracked}}
+        <span class="habit-auto">{{formula.copy_autoTracked}}</span>
+        {{/formula.habit1_autoTracked}}
+        <a class="habit-link" href="{{formula.habit1_href}}" aria-label="{{formula.habit1_name}}"><span class="mhc-visually-hidden">{{formula.habit1_name}}</span></a>
+      </div>
+
+      <!-- Habit 2 -->
+      {{#formula.hasHabit2}}
+      <div class="habit {{#formula.habit2_done}}habit--done{{/formula.habit2_done}}">
+        <div class="habit-head">
+          <h3 class="habit-name">{{formula.habit2_name}}</h3>
+          <span class="habit-target">{{formula.habit2_target}}</span>
+        </div>
+        <div class="habit-dots" aria-hidden="true">
+          <span class="habit-dot habit-dot--{{formula.habit2_dot1}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit2_dot2}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit2_dot3}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit2_dot4}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit2_dot5}}"></span>
+        </div>
+        <div class="habit-meta">
+          {{#formula.habit2_streak}}<b class="habit-streak">{{formula.habit2_streakLabel}}</b>{{/formula.habit2_streak}}
+          {{^formula.habit2_streak}}<span>{{formula.habit2_subline}}</span>{{/formula.habit2_streak}}
+        </div>
+        {{^formula.habit2_autoTracked}}
+          {{^formula.habit2_done}}
+          <form action="{{formula.habit2_logHref}}" method="post" class="habit-log-form">
+            <button type="submit" class="habit-log-btn">{{formula.habit2_logLabel}}</button>
+          </form>
+          {{/formula.habit2_done}}
+          {{#formula.habit2_done}}
+          <span class="habit-done-pill">✓ {{formula.copy_loggedToday}}</span>
+          {{/formula.habit2_done}}
+        {{/formula.habit2_autoTracked}}
+        {{#formula.habit2_autoTracked}}
+        <span class="habit-auto">{{formula.copy_autoTracked}}</span>
+        {{/formula.habit2_autoTracked}}
+        <a class="habit-link" href="{{formula.habit2_href}}" aria-label="{{formula.habit2_name}}"><span class="mhc-visually-hidden">{{formula.habit2_name}}</span></a>
+      </div>
+      {{/formula.hasHabit2}}
+
+      <!-- Habit 3 -->
+      {{#formula.hasHabit3}}
+      <div class="habit {{#formula.habit3_done}}habit--done{{/formula.habit3_done}}">
+        <div class="habit-head">
+          <h3 class="habit-name">{{formula.habit3_name}}</h3>
+          <span class="habit-target">{{formula.habit3_target}}</span>
+        </div>
+        <div class="habit-dots" aria-hidden="true">
+          <span class="habit-dot habit-dot--{{formula.habit3_dot1}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit3_dot2}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit3_dot3}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit3_dot4}}"></span>
+          <span class="habit-dot habit-dot--{{formula.habit3_dot5}}"></span>
+        </div>
+        <div class="habit-meta">
+          {{#formula.habit3_streak}}<b class="habit-streak">{{formula.habit3_streakLabel}}</b>{{/formula.habit3_streak}}
+          {{^formula.habit3_streak}}<span>{{formula.habit3_subline}}</span>{{/formula.habit3_streak}}
+        </div>
+        {{^formula.habit3_autoTracked}}
+          {{^formula.habit3_done}}
+          <form action="{{formula.habit3_logHref}}" method="post" class="habit-log-form">
+            <button type="submit" class="habit-log-btn">{{formula.habit3_logLabel}}</button>
+          </form>
+          {{/formula.habit3_done}}
+          {{#formula.habit3_done}}
+          <span class="habit-done-pill">✓ {{formula.copy_loggedToday}}</span>
+          {{/formula.habit3_done}}
+        {{/formula.habit3_autoTracked}}
+        {{#formula.habit3_autoTracked}}
+        <span class="habit-auto">{{formula.copy_autoTracked}}</span>
+        {{/formula.habit3_autoTracked}}
+        <a class="habit-link" href="{{formula.habit3_href}}" aria-label="{{formula.habit3_name}}"><span class="mhc-visually-hidden">{{formula.habit3_name}}</span></a>
+      </div>
+      {{/formula.hasHabit3}}
+
+    </div>
+    {{/formula.habits_oneOnly}}
+
+  </section>
+</div>
+{{/formula.hasHabits}}

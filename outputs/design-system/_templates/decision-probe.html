@@ -1,0 +1,206 @@
+<!--
+  TEMPLATE: decision-probe.html
+  USE WHEN: You're choosing between candidates to resolve a decision (D1, D2, D3...).
+            Output is a recommendation backed by audit + criteria + applied test.
+
+  HOW TO USE:
+    1. cp _templates/decision-probe.html decisions/D<ID>-<slug>/audit.html
+    2. Fill the Delta Panel — surface the Decision ID and Recommendation up top
+    3. Fill candidates, criteria, applied audit, comparison, recommendation, retained alts
+    4. After build: append the decision to decisions.md with the resolution
+    5. Update MAP.md if this lock has downstream implications
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decision Probe — D{ID} · {slug}</title>
+<style>
+  :root {
+    --doc-bg: #FBFAF8; --doc-ink: #1A1816; --doc-ink-2: #423D38; --doc-ink-3: #6F6963;
+    --doc-border: #E1DEDA; --doc-accent: #08605A;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Source Serif 4", Charter, Georgia, serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--doc-bg); color: var(--doc-ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.55; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 56px 40px 120px; }
+  h1 { font-family: var(--font-serif); font-size: 36px; font-weight: 600; margin: 0 0 12px; }
+  h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; margin: 0 0 8px; }
+  h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; }
+  section { margin-bottom: 64px; }
+  .lede { color: var(--doc-ink-2); margin: 0 0 24px; max-width: 720px; }
+  code { font-family: var(--font-mono); font-size: 13px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--doc-border); vertical-align: top; }
+  th { font-weight: 600; color: var(--doc-ink-2); background: #F4F2EE; text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; }
+
+  .delta-panel { background: #F4F2EE; border-left: 4px solid var(--doc-accent); border-radius: 4px; padding: 24px 32px; margin: 0 0 40px; font-size: 14px; }
+  .delta-panel dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; }
+  .delta-panel dt { font-weight: 600; color: var(--doc-ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; padding-top: 2px; }
+  .delta-panel dd { margin: 0; }
+  .delta-panel dd ul { margin: 0; padding-left: 18px; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-direction-locked { background: #FBE9BC; color: #74500D; }
+  .status-locked { background: #DCEAD3; color: #335326; }
+  .status-open { background: #E1DEDA; color: #6F6963; }
+
+  .recommendation { background: #DCEAD3; border-left: 4px solid #335326; padding: 20px 28px; border-radius: 4px; margin: 32px 0; font-size: 16px; }
+  .recommendation strong { color: #335326; }
+
+  .candidate { background: #FBF9F5; border: 1px solid var(--doc-border); border-radius: 12px; padding: 24px 28px; margin-bottom: 16px; }
+  .candidate h3 { margin-top: 0; }
+  .candidate .swatch-row { display: flex; gap: 4px; margin-top: 12px; }
+  .candidate .swatch-row .sw { width: 40px; height: 40px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.04); }
+
+  .gates { background: #FBE9BC22; border-left: 4px solid #DC9A1E; padding: 20px 24px; border-radius: 4px; }
+  .gates ol { margin: 0; padding-left: 20px; }
+
+  .alts { background: #F7F2FB; border-left: 4px solid #422973; padding: 20px 24px; border-radius: 4px; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- DELTA PANEL — Decision ID and Recommendation surfaced -->
+<header>
+  <h1>D{ID} — {decision title}</h1>
+  <div class="delta-panel">
+    <dl>
+      <dt>Iteration</dt>       <dd>D{ID} · v{N} · {slug}</dd>
+      <dt>Type</dt>            <dd>decision-probe</dd>
+      <dt>Decision ID</dt>     <dd>D{ID} ({question being resolved in 5–10 words})</dd>
+      <dt>Recommendation</dt>  <dd><strong>{candidate name} — {one-line summary}</strong></dd>
+      <dt>Builds on</dt>       <dd>{prior version of this decision, or "first iteration"}</dd>
+      <dt>Premise</dt>         <dd>{one sentence}</dd>
+      <dt>Color register</dt> <dd><strong>{Earth / Neutral / Pastel / Jewel / Fluorescent / Shade-dominant / Tone-on-tone}</strong> — context for the decision</dd>
+      <dt>Brand color role</dt><dd><strong>{Passive / Active}</strong> — context for the decision</dd>
+      <dt>Changed</dt>         <dd><ul><li>{what changed since last iteration of this decision}</li></ul></dd>
+      <dt>Locked</dt>          <dd><ul><li>{criteria carried forward unchanged}</li></ul></dd>
+      <dt>Assumptions</dt>     <dd><ul><li>{what was inferred} — {cue}</li><li>{"none" if every answer was explicit}</li></ul></dd>
+      <dt>Status</dt>          <dd><span class="status status-direction-locked">direction-locked</span> · <span style="color:var(--doc-ink-3);font-size:13px;">open → direction-locked → locked</span></dd>
+      <dt>Date</dt>            <dd>YYYY-MM-DD</dd>
+    </dl>
+  </div>
+</header>
+
+<!-- ============================================================
+     CANDIDATES — list every option being evaluated
+     FILL: each candidate gets a card with name, hue/role/value, swatch row, premise.
+     ============================================================ -->
+<section>
+  <h2>Candidates</h2>
+  <p class="lede">{1 sentence — the field of options being evaluated and how it was generated.}</p>
+
+  <div class="candidate">
+    <h3>{Candidate 1 — name · descriptor}</h3>
+    <p>{Where this candidate comes from. Hue/role/value note.}</p>
+    <div class="swatch-row">
+      <!-- 11 swatches at the candidate's stops -->
+    </div>
+  </div>
+
+  <!-- repeat per candidate (typically 3–5 max) -->
+</section>
+
+<!-- ============================================================
+     SELECTION CRITERIA — declared up front
+     FILL: every criterion the candidates must hold simultaneously.
+           Same criteria applied to every candidate. No moving the goalposts.
+     ============================================================ -->
+<section>
+  <h2>Selection criteria</h2>
+  <p class="lede">{Why these criteria. Tie back to strategy / Phase 0 attributes if applicable.}</p>
+  <ol>
+    <li><strong>{Criterion 1}</strong> — {what passing looks like}</li>
+    <li><strong>{Criterion 2}</strong> — {what passing looks like}</li>
+    <!-- typically 4–6 criteria -->
+  </ol>
+</section>
+
+<!-- ============================================================
+     APPLIED AUDIT — each candidate × each criterion (or pilot moment)
+     FILL: render each candidate against each criterion or against shared pilot moments.
+           Same moments rendered against each candidate = applied-UI comparison.
+     ============================================================ -->
+<section>
+  <h2>Applied audit</h2>
+  <p class="lede">{1–2 sentences explaining what's being applied — usually 2–3 anchor pilot moments.}</p>
+
+  <h3>Pilot 1 — {moment, e.g., Member · DCP completion}</h3>
+  <!-- render each candidate against this moment -->
+
+  <h3>Pilot 2 — {moment, e.g., Buyer · website hero}</h3>
+  <!-- render each candidate -->
+
+  <h3>Pilot 3 — {moment, e.g., AI · Health Insight}</h3>
+  <!-- render each candidate -->
+</section>
+
+<!-- ============================================================
+     COMPARISON TABLE — rolls up the audit into a single grid
+     FILL: candidate × criterion. Pass / fail / partial. Notes per cell.
+     ============================================================ -->
+<section>
+  <h2>Comparison</h2>
+  <table>
+    <thead><tr>
+      <th>Criterion</th>
+      <th>Candidate 1</th>
+      <th>Candidate 2</th>
+      <th>Candidate 3</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>Criterion 1</td><td>✓ note</td><td>✗ note</td><td>~ note</td></tr>
+      <!-- one row per criterion -->
+    </tbody>
+  </table>
+</section>
+
+<!-- ============================================================
+     RECOMMENDATION — directly state the chosen candidate
+     FILL: which candidate, why, what tradeoffs were accepted.
+     ============================================================ -->
+<section>
+  <h2>Recommendation</h2>
+  <div class="recommendation">
+    <p><strong>{Candidate name} — {direction-locked / locked}</strong></p>
+    <p>{Why this one wins. What tradeoffs were accepted.}</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     ALTS RETAINED — fallback options
+     FILL: which candidates are kept on the shelf and why (verification-failure routes,
+           stakeholder pushback, etc.). Which are dropped entirely.
+     ============================================================ -->
+<section>
+  <h2>Alts retained</h2>
+  <div class="alts">
+    <p><strong>{Candidate}</strong> — kept as fallback for {scenario}.</p>
+    <p><strong>{Candidate}</strong> — dropped. Reason: {why}.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     VERIFICATION GATES — if recommendation isn't fully locked yet
+     FILL: list the gates that must pass before status moves from
+           direction-locked → fully locked.
+     ============================================================ -->
+<section>
+  <h2>Verification gates</h2>
+  <p class="lede">Before this lock graduates from <code>direction-locked</code> to <code>locked</code>:</p>
+  <div class="gates">
+    <ol>
+      <li>{Gate 1 — what must be tested / shown}</li>
+      <li>{Gate 2}</li>
+      <!-- typically 3–5 gates -->
+    </ol>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

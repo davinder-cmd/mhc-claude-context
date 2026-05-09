@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC — Challenge placement: team vs. peer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin:0; padding:0; background:#eef1f4; font-family:'Raleway', system-ui, sans-serif; color:#1f2a36; }
+  body { padding: 28px 22px 80px; }
+  .page { max-width: 1280px; margin: 0 auto; }
+  .pagehead { margin-bottom: 22px; }
+  .pagehead h1 { font-size: 22px; margin: 0 0 6px; color:#062a42; }
+  .pagehead p { font-size: 14px; color:#4a5b6a; margin: 0 0 8px; line-height: 1.55; max-width: 880px; }
+
+  .block { margin: 32px 0; }
+  .block-head { display:flex; align-items:baseline; justify-content:space-between; gap: 14px; margin-bottom: 14px; }
+  .block-head h2 { font-size: 14px; margin: 0; color:#062a42; text-transform:uppercase; letter-spacing:0.6px; }
+  .block-head .meta { font-size: 12px; color:#6e7a7d; }
+
+  /* Lifecycle timeline */
+  .lifecycle { background:#fff; border:1px solid #e1e6ea; border-radius: 14px; padding: 22px; }
+  .lifecycle h3 { margin: 0 0 14px; font-size: 16px; color:#062a42; }
+
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; align-items: stretch; }
+  .stage { padding: 14px 14px 16px; border-right: 1px solid #eef1f4; min-height: 168px; display: flex; flex-direction: column; gap: 8px; position: relative; }
+  .stage:last-child { border-right: none; }
+  .stage-num { font-size: 10px; font-weight: 700; color:#6e7a7d; letter-spacing: 0.6px; text-transform: uppercase; }
+  .stage-name { font-size: 13.5px; font-weight: 700; color:#062a42; line-height: 1.25; }
+  .stage-when { font-size: 11.5px; color:#6e7a7d; }
+  .stage-where {
+    margin-top: auto;
+    font-size: 11.5px; padding: 6px 10px; border-radius: 8px;
+    background: #f6f8fa; color:#1f2a36; line-height: 1.35;
+  }
+  .stage-where b { color:#0f497f; }
+  .stage-where.hero { background:#0f497f; color:#fff; }
+  .stage-where.hero b { color:#fff; }
+  .stage-where.rail { background:#eaf2fa; color:#062a42; }
+  .stage-where.banner { background:#fff5e6; color:#7a5418; }
+  .stage-where.gone { background:#f3f6f8; color:#6e7a7d; font-style: italic; }
+
+  /* Mock frames */
+  .frame { background:#fff; border-radius:14px; border:1px solid #e1e6ea; overflow:hidden; box-shadow: 0 4px 14px rgba(15,73,127,0.06); }
+  .frame-head { padding: 8px 14px; font-size: 10.5px; font-weight: 700; color:#6e7a7d; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e1e6ea; background:#f6f8fa; display:flex; justify-content:space-between; align-items:center; }
+  .frame-body { padding: 14px; background:#eef1f4; }
+
+  .grid-stages {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    margin-top: 16px;
+  }
+
+  /* ============================================================
+     Mock home elements
+     ============================================================ */
+  .home-mock { display: flex; flex-direction: column; gap: 12px; }
+  .home-mock-greet { font-size: 12px; color:#6e7a7d; padding: 4px 0; }
+  .home-mock-greet b { color:#062a42; font-size: 14px; }
+
+  /* Hero */
+  .hero {
+    border-radius: 14px; overflow: hidden; position: relative;
+    height: 180px; color:#fff;
+  }
+  .hero.standard { background: linear-gradient(135deg, #0f497f 0%, #062a42 100%); }
+  .hero.takeover { background: linear-gradient(135deg, #d97500 0%, #9b3b00 100%); }
+  .hero-body { position: absolute; inset: 0; padding: 18px; display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; }
+  .hero-eyebrow { font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; opacity: 0.9; }
+  .hero-title { font-size: 20px; font-weight: 700; line-height: 1.2; margin: 0; }
+  .hero-meta { font-size: 12px; opacity: 0.92; }
+  .hero-cta {
+    margin-top: 8px; display: inline-flex; align-self: flex-start;
+    background: #fff; color:#062a42; border: 0; border-radius: 999px;
+    padding: 6px 14px; font: inherit; font-weight: 700; font-size: 12.5px;
+    align-items: center; gap: 6px;
+  }
+  .hero.takeover .hero-cta { color:#9b3b00; }
+  .hero-countdown {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(0,0,0,0.25); color:#fff;
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    backdrop-filter: blur(2px);
+  }
+
+  /* Slim banner (announcement / late-stage) */
+  .banner {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    background: #fff5e6; border: 1px solid #f3d9a8; border-radius: 10px;
+    font-size: 13px; color:#7a5418; line-height: 1.4;
+  }
+  .banner.urgent { background:#fde7d8; border-color:#f1bf95; color:#7a221c; }
+  .banner-icon {
+    width: 28px; height: 28px; flex-shrink: 0;
+    border-radius: 999px; background: #fff;
+    display: grid; place-items: center;
+    color:#9b3b00;
+  }
+  .banner-icon svg { width: 16px; height: 16px; }
+  .banner b { color: inherit; }
+  .banner-cta {
+    margin-left: auto; flex-shrink: 0;
+    background: transparent; border: 0; font: inherit; font-weight: 700; font-size: 12.5px; color:#9b3b00;
+    text-decoration: none; cursor: pointer;
+  }
+
+  /* In-progress rail card (lifted from D-refined) */
+  .pcard {
+    position: relative; display: flex; align-items: stretch;
+    background: #fff; border: 1px solid #e1e6ea; border-radius: 12px;
+    overflow: hidden; min-width: 0;
+  }
+  .pcard-rail {
+    width: 64px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 10px 6px; background: #f6f4ef; color: #1f2a36; text-align: center;
+  }
+  .pcard-rail.urgent { background:#fde7d8; color:#9b3b00; }
+  .pcard-body { flex: 1; min-width: 0; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; }
+  .pcard-tagline { font-size: 10.5px; font-weight: 700; color:#6e7a7d; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pcard-title { font-size: 13.5px; font-weight: 700; color:#1f2a36; margin: 0; line-height: 1.25; }
+  .pcard-meta { font-size: 11.5px; color:#4a5b6a; line-height: 1.35; }
+  .pcard-rail .num { font-size: 22px; font-weight: 700; line-height: 1; }
+  .pcard-rail .lbl { font-size: 9.5px; opacity: 0.75; margin-top: 4px; text-transform:uppercase; letter-spacing: 0.5px; }
+  .pcard-cta {
+    margin-top: 4px; display: inline-flex; align-items: center; gap: 6px;
+    background:#0f497f; color:#fff; border: 0; border-radius: 999px;
+    padding: 4px 12px; font-family: inherit; font-weight: 700; font-size: 11.5px;
+    align-self: flex-start;
+  }
+
+  /* Inline section in invite drawer */
+  .invites { background:#fff; border: 1px solid #e1e6ea; border-radius: 12px; overflow: hidden; }
+  .invites-head { padding: 10px 14px; background:#fff5e6; color:#7a5418; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; }
+  .invite-row { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-top: 1px solid #eef1f4; }
+  .invite-avatar { width: 32px; height: 32px; border-radius: 999px; background:#0f497f; color:#fff; display: grid; place-items: center; font-weight: 700; font-size: 12.5px; flex-shrink: 0; }
+  .invite-body { flex: 1; min-width: 0; }
+  .invite-name { font-size: 13px; font-weight: 700; color:#1f2a36; }
+  .invite-detail { font-size: 11.5px; color:#6e7a7d; }
+  .invite-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .btn-accept, .btn-decline { font: inherit; font-size: 11.5px; font-weight: 700; padding: 5px 10px; border-radius: 999px; cursor: pointer; border: 0; }
+  .btn-accept { background:#0f497f; color:#fff; }
+  .btn-decline { background:#f6f8fa; color:#4a5b6a; border: 1px solid #e1e6ea; }
+
+  /* Annotate */
+  .annotate { background:#fff; border-radius: 14px; border:1px solid #e1e6ea; padding: 22px 24px; line-height: 1.55; font-size: 14px; color:#1f2a36; }
+  .annotate h3 { margin: 0 0 8px; font-size: 16px; color:#062a42; }
+  .annotate h4 { margin: 18px 0 6px; font-size: 12.5px; color:#062a42; text-transform:uppercase; letter-spacing:0.5px; }
+  .annotate p { margin: 0 0 8px; }
+  .annotate ul { margin: 6px 0 0 18px; padding: 0; }
+  .annotate li { margin: 4px 0; }
+  .annotate code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; background:#f3f6f8; padding: 1px 5px; border-radius: 4px; color:#062a42; }
+
+  .twocol { display: grid; grid-template-columns: 1.05fr 1fr; gap: 22px; align-items: start; }
+  @media (max-width: 1000px) { .twocol { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="pagehead">
+    <h1>Challenge placement — team vs. peer</h1>
+    <p>The two challenge types have completely different rhythms. Team is a major company event with a fixed run; peer is a user-to-user dare measured in days. Each gets its own placement strategy across its lifecycle so the home page never feels stuck on a banner.</p>
+  </div>
+
+  <!-- ============================================================
+       TEAM CHALLENGE — Lifecycle
+       ============================================================ -->
+  <div class="block">
+    <div class="block-head">
+      <h2>Team challenges · 5-stage lifecycle</h2>
+      <span class="meta">Hero takeover only at the moments that matter</span>
+    </div>
+
+    <div class="lifecycle">
+      <h3>Where the challenge lives at each stage</h3>
+      <div class="timeline">
+        <div class="stage">
+          <div class="stage-num">Stage 1</div>
+          <div class="stage-name">Announcement</div>
+          <div class="stage-when">Join opens · 2 weeks before activity</div>
+          <div class="stage-where hero"><b>Hero takeover</b> — full hero, branded, "Join your team"</div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">Stage 2</div>
+          <div class="stage-name">Join window</div>
+          <div class="stage-when">Days 3–14 of join period</div>
+          <div class="stage-where banner"><b>Slim banner</b> — above hero, hero returns to focus program</div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">Stage 3</div>
+          <div class="stage-name">Activity period</div>
+          <div class="stage-when">3-week run, normal days</div>
+          <div class="stage-where rail"><b>In-progress rail</b> — alongside other ongoing programs, "days left" rail variant</div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">Stage 4</div>
+          <div class="stage-name">Final stretch</div>
+          <div class="stage-when">Last 3 days</div>
+          <div class="stage-where hero"><b>Hero takeover (return)</b> — urgency-toned, "3 days left"</div>
+        </div>
+        <div class="stage">
+          <div class="stage-num">Stage 5</div>
+          <div class="stage-name">Wrap-up</div>
+          <div class="stage-when">Day after end · 7 days</div>
+          <div class="stage-where banner"><b>Results banner</b> — "Your team finished 3rd · See results"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage mocks -->
+    <div class="grid-stages">
+
+      <!-- Stage 1 — Announcement -->
+      <div class="frame">
+        <div class="frame-head"><span>Stage 1 · Announcement</span><span style="background:#0f497f; color:#fff; padding:2px 8px; border-radius:999px; font-weight:700;">HERO</span></div>
+        <div class="frame-body">
+          <div class="home-mock">
+            <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+            <div class="hero takeover">
+              <div class="hero-countdown">Join by Apr 14</div>
+              <div class="hero-body">
+                <div class="hero-eyebrow">Spring step challenge · Just announced</div>
+                <h2 class="hero-title">Walk together. 3 weeks. Real prizes.</h2>
+                <div class="hero-meta">Pick a team and rack up steps with your colleagues.</div>
+                <button class="hero-cta">Join a team →</button>
+              </div>
+            </div>
+            <div class="pcard" style="opacity: 0.6;">
+              <div class="pcard-rail"><div class="num">9</div><div class="lbl">of 28</div></div>
+              <div class="pcard-body">
+                <div class="pcard-tagline">Big Health · DCP</div>
+                <div class="pcard-title">Managing Insomnia</div>
+                <div class="pcard-meta">Up next: wind-down session</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 2 — Join window -->
+      <div class="frame">
+        <div class="frame-head"><span>Stage 2 · Join window</span><span style="background:#fff5e6; color:#7a5418; padding:2px 8px; border-radius:999px; font-weight:700;">BANNER</span></div>
+        <div class="frame-body">
+          <div class="home-mock">
+            <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+            <div class="banner">
+              <div class="banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <div><b>Spring step challenge</b> · 6 days left to join. 240 colleagues already in.</div>
+              <a href="#" class="banner-cta">Join →</a>
+            </div>
+            <div class="hero standard">
+              <div class="hero-body">
+                <div class="hero-eyebrow">On focus · Sleep</div>
+                <h2 class="hero-title">Managing Insomnia</h2>
+                <div class="hero-meta">9 of 28 sessions · Wind-down up next</div>
+                <button class="hero-cta">Continue →</button>
+              </div>
+            </div>
+            <div class="pcard">
+              <div class="pcard-rail"><div class="num">3</div><div class="lbl">of 6</div></div>
+              <div class="pcard-body">
+                <div class="pcard-tagline">BurnAlong · Movement</div>
+                <div class="pcard-title">Strength foundations</div>
+                <div class="pcard-meta">Lower-body class queued</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 — Activity period -->
+      <div class="frame">
+        <div class="frame-head"><span>Stage 3 · Activity period</span><span style="background:#eaf2fa; color:#062a42; padding:2px 8px; border-radius:999px; font-weight:700;">IN-PROGRESS RAIL</span></div>
+        <div class="frame-body">
+          <div class="home-mock">
+            <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+            <div class="hero standard">
+              <div class="hero-body">
+                <div class="hero-eyebrow">On focus · Sleep</div>
+                <h2 class="hero-title">Managing Insomnia</h2>
+                <div class="hero-meta">9 of 28 sessions · Wind-down up next</div>
+                <button class="hero-cta">Continue →</button>
+              </div>
+            </div>
+            <div style="font-size: 12.5px; color:#062a42; font-weight: 700; padding: 2px 0;">Pick up where you left off</div>
+            <div class="pcard">
+              <div class="pcard-rail"><div class="num">12</div><div class="lbl">days left</div></div>
+              <div class="pcard-body">
+                <div class="pcard-tagline">Spring challenge · Team Aurora</div>
+                <div class="pcard-title">Step it up</div>
+                <div class="pcard-meta">Rank #4 of 38 · 12,400 steps logged</div>
+              </div>
+            </div>
+            <div class="pcard">
+              <div class="pcard-rail"><div class="num">3</div><div class="lbl">of 6</div></div>
+              <div class="pcard-body">
+                <div class="pcard-tagline">BurnAlong · Movement</div>
+                <div class="pcard-title">Strength foundations</div>
+                <div class="pcard-meta">Lower-body class queued</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 4 — Final stretch -->
+      <div class="frame">
+        <div class="frame-head"><span>Stage 4 · Final stretch</span><span style="background:#0f497f; color:#fff; padding:2px 8px; border-radius:999px; font-weight:700;">HERO RETURN</span></div>
+        <div class="frame-body">
+          <div class="home-mock">
+            <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+            <div class="hero takeover">
+              <div class="hero-countdown">Ends Saturday</div>
+              <div class="hero-body">
+                <div class="hero-eyebrow">Spring step challenge · Final 3 days</div>
+                <h2 class="hero-title">Team Aurora is in 4th. Let's finish strong.</h2>
+                <div class="hero-meta">800 steps from 3rd place. Today's a perfect day for a walking meeting.</div>
+                <button class="hero-cta">Log activity →</button>
+              </div>
+            </div>
+            <div class="pcard" style="opacity: 0.6;">
+              <div class="pcard-rail"><div class="num">9</div><div class="lbl">of 28</div></div>
+              <div class="pcard-body">
+                <div class="pcard-tagline">Big Health · DCP</div>
+                <div class="pcard-title">Managing Insomnia</div>
+                <div class="pcard-meta">Wind-down session up next</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 5 — Wrap-up -->
+      <div class="frame">
+        <div class="frame-head"><span>Stage 5 · Wrap-up</span><span style="background:#fff5e6; color:#7a5418; padding:2px 8px; border-radius:999px; font-weight:700;">RESULTS BANNER</span></div>
+        <div class="frame-body">
+          <div class="home-mock">
+            <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+            <div class="banner">
+              <div class="banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                  <path d="M4 22h16"></path>
+                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+              </div>
+              <div><b>Team Aurora finished 3rd</b> · 1.2M steps. Your contribution: 87,400 steps.</div>
+              <a href="#" class="banner-cta">See results →</a>
+            </div>
+            <div class="hero standard">
+              <div class="hero-body">
+                <div class="hero-eyebrow">On focus · Sleep</div>
+                <h2 class="hero-title">Managing Insomnia</h2>
+                <div class="hero-meta">9 of 28 sessions · Wind-down up next</div>
+                <button class="hero-cta">Continue →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="annotate" style="margin-top: 22px;">
+      <h3>Why a 5-stage lifecycle, not "always in hero"</h3>
+      <p>The challenge runs ~5 weeks end-to-end. Owning the hero for that whole stretch trains users to ignore it. Treating it like a campaign with deliberate <i>moments of attention</i> keeps each surface earned.</p>
+      <h4>The pattern</h4>
+      <ul>
+        <li><b>Hero takes over</b> only at the two beats that need a decision: <i>announcement</i> ("join now") and <i>final stretch</i> ("finish it"). 2 days + 3 days = 5 hero days out of ~35.</li>
+        <li><b>Slim banner</b> handles the steady-state nudges: "you can still join" during the join window, "see your results" after it ends. Banner is dismissable per user (D1 ×) so it doesn't become wallpaper.</li>
+        <li><b>In-progress rail</b> handles the activity period — same pattern as DCP/Journey, with the days-left rail variant. The challenge becomes one item among the user's ongoing work.</li>
+      </ul>
+      <h4>Server contract</h4>
+      <ul>
+        <li><code>challenge.stage</code> ∈ <code>announce</code> | <code>join_window</code> | <code>active</code> | <code>final_3</code> | <code>wrap_up</code></li>
+        <li>Hero placement is decided server-side: <code>announce</code> &amp; <code>final_3</code> push to hero; everything else lets the focus program keep the hero.</li>
+        <li>User can dismiss the slim banner; banner respects dismiss for the remainder of that stage.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PEER CHALLENGE
+       ============================================================ -->
+  <div class="block">
+    <div class="block-head">
+      <h2>Peer challenges · invite-driven, 3–7 day window</h2>
+      <span class="meta">Never owns the hero. Lives in two places.</span>
+    </div>
+
+    <div class="twocol">
+
+      <!-- Mocks side-by-side -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <!-- Pending invite -->
+        <div class="frame">
+          <div class="frame-head"><span>Pending invite · Top of home</span><span style="background:#fff5e6; color:#7a5418; padding:2px 8px; border-radius:999px; font-weight:700;">INVITES BLOCK</span></div>
+          <div class="frame-body">
+            <div class="home-mock">
+              <div class="home-mock-greet"><b>Hi, Sarah</b><br/>Welcome back.</div>
+              <div class="invites">
+                <div class="invites-head">
+                  <span>Pending invites · 2</span>
+                  <a href="#" style="color:#7a5418; text-decoration:none; font-weight: 700;">See all →</a>
+                </div>
+                <div class="invite-row">
+                  <div class="invite-avatar">JM</div>
+                  <div class="invite-body">
+                    <div class="invite-name">Jamie Marlow challenged you</div>
+                    <div class="invite-detail">Most steps · 5 days · starts when accepted</div>
+                  </div>
+                  <div class="invite-actions">
+                    <button class="btn-accept">Accept</button>
+                    <button class="btn-decline">Decline</button>
+                  </div>
+                </div>
+                <div class="invite-row">
+                  <div class="invite-avatar" style="background:#9b3b00;">RT</div>
+                  <div class="invite-body">
+                    <div class="invite-name">Riley Tan challenged you</div>
+                    <div class="invite-detail">Mindful minutes · 7 days</div>
+                  </div>
+                  <div class="invite-actions">
+                    <button class="btn-accept">Accept</button>
+                    <button class="btn-decline">Decline</button>
+                  </div>
+                </div>
+              </div>
+              <div class="hero standard">
+                <div class="hero-body">
+                  <div class="hero-eyebrow">On focus · Sleep</div>
+                  <h2 class="hero-title">Managing Insomnia</h2>
+                  <div class="hero-meta">9 of 28 sessions · Wind-down up next</div>
+                  <button class="hero-cta">Continue →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active peer challenge -->
+        <div class="frame">
+          <div class="frame-head"><span>Accepted · in the in-progress rail</span><span style="background:#eaf2fa; color:#062a42; padding:2px 8px; border-radius:999px; font-weight:700;">IN-PROGRESS RAIL</span></div>
+          <div class="frame-body">
+            <div class="home-mock">
+              <div style="font-size: 12.5px; color:#062a42; font-weight: 700; padding: 2px 0;">Pick up where you left off</div>
+              <div class="pcard">
+                <div class="pcard-rail urgent"><div class="num">2</div><div class="lbl">days left</div></div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">Peer · vs. Jamie M.</div>
+                  <div class="pcard-title">Most steps in 5 days</div>
+                  <div class="pcard-meta">You: 32,400 · Jamie: 28,900. You're ahead by 3,500.</div>
+                  <button class="pcard-cta">Log activity →</button>
+                </div>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail"><div class="num">9</div><div class="lbl">of 28</div></div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">Big Health · DCP</div>
+                  <div class="pcard-title">Managing Insomnia</div>
+                  <div class="pcard-meta">Wind-down session up next</div>
+                </div>
+              </div>
+              <div class="pcard">
+                <div class="pcard-rail"><div class="num">3</div><div class="lbl">of 6</div></div>
+                <div class="pcard-body">
+                  <div class="pcard-tagline">BurnAlong · Movement</div>
+                  <div class="pcard-title">Strength foundations</div>
+                  <div class="pcard-meta">Lower-body class queued</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="annotate">
+        <h3>Why peer challenges live in two places</h3>
+        <p>Peer challenges have a <b>before</b> and an <b>after</b>:</p>
+        <ul>
+          <li><b>Before accepting:</b> the invite is the action. It needs to read like a notification — sender's name, what they're asking, accept / decline. That's the <i>Pending invites</i> block at the top of home (above the hero, below the greeting).</li>
+          <li><b>After accepting:</b> it's just another time-boxed thing the user is in the middle of. Slot it into the in-progress rail with the days-left variant and a "vs. {opponent}" tagline. It competes with DCPs, Journeys, and team challenges for one of the three rail slots.</li>
+        </ul>
+
+        <h4>Why <i>not</i> the hero — even at invite</h4>
+        <p>Hero is for <i>your</i> commitments. A peer invite is someone else's commitment to you. Putting it in the hero is jarring and pre-empts the focus the user actually opted into. The Invites block is high in the page hierarchy without taking the marquee.</p>
+
+        <h4>Inclusion priority within the rail</h4>
+        <p>When the rail fills up, peer challenges with <code>daysLeft ≤ 1</code> outrank focus-matched DCP. Otherwise, default ordering wins. The user accepted this — they want to know how it's going.</p>
+
+        <h4>Auto-handling end states</h4>
+        <ul>
+          <li><b>Won / lost / tied:</b> when the challenge ends, replace the rail card with a one-off result card for 24h ("You won! +50 pts"), then drop it.</li>
+          <li><b>Expired invite:</b> 7-day TTL on pending invites; system silently removes from the Invites block after.</li>
+          <li><b>Opponent dropped out:</b> show in rail with "{Opponent} stepped out" tagline + a "challenge someone else" link.</li>
+        </ul>
+
+        <h4>Server contract</h4>
+        <ul>
+          <li><code>peerChallenge.state</code> ∈ <code>invite_pending</code> | <code>active</code> | <code>finished</code> | <code>expired</code></li>
+          <li><code>invite_pending</code> renders into the Invites block; <code>active</code> renders into the in-progress rail; <code>finished</code> renders for 24h then drops; <code>expired</code> never renders.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       Recommendation
+       ============================================================ -->
+  <div class="block">
+    <div class="annotate" style="background:#0f497f; color:#fff; border-color:#062a42;">
+      <h3 style="color:#fff;">Summary</h3>
+      <p><b>Team challenges</b> get the hero only at announcement and final 3 days. Everything else (join window, activity period, wrap-up) lives in slim banners or the in-progress rail. Hero never owns more than 5 days of a 35-day campaign.</p>
+      <p style="margin-top: 8px;"><b>Peer challenges</b> never own the hero. Pending invites get a dedicated <i>Invites</i> block at the top of home. Active peer challenges drop into the in-progress rail with a "vs. {name}" tagline and the days-left variant.</p>
+      <p style="margin-top: 8px;"><b>One template, three placements:</b> hero · banner · rail card. Server flips the placement based on <code>stage</code> (team) or <code>state</code> (peer). The home page never feels stuck because the placement <i>moves</i> as the challenge ages.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

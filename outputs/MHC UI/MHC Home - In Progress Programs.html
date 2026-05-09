@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — In-Progress Programs</title>
+<link rel="stylesheet" href="colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; background:#f0eee9; font-family: 'Raleway', sans-serif; }
+  .callout { background:#fff; border:1px solid #e6ebec; border-radius:12px; padding: 14px 16px; font-size: 12.5px; line-height: 1.55; color:#373d3f; }
+  .callout b { color:#0f497f; }
+  .label-red { color:#c1292e; font-weight: 700; }
+  .label-green { color:#52a045; font-weight: 700; }
+  .hero-card { background: #0f497f; color:#fff; padding: 28px 32px; border-radius: 18px; font-family: 'Raleway', sans-serif; }
+  .hero-card h3 { margin:0 0 6px; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color:#f15922; }
+  .hero-card h2 { margin:0 0 14px; font-weight: 700; font-size: 26px; line-height: 1.2; }
+  .hero-card p { margin:0 0 8px; font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,0.9); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="mhc-components.jsx"></script>
+<script type="text/babel" src="mhc-screens-desktop.jsx"></script>
+<script type="text/babel" src="mhc-screens-mobile.jsx"></script>
+<script type="text/babel" src="insights-component.jsx"></script>
+<script type="text/babel" src="search-notifications.jsx"></script>
+<script type="text/babel" src="ab-screens.jsx"></script>
+<script type="text/babel" src="in-progress-programs.jsx"></script>
+
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "focus": "Sleep",
+  "programCount": 3
+}/*EDITMODE-END*/;
+
+function Phone({ children }) {
+  return (
+    <div style={{
+      width: 402, borderRadius: 48, overflow:'hidden',
+      background:'#fff',
+      boxShadow:'0 40px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.12)',
+    }}>
+      {children}
+    </div>
+  );
+}
+function Callout({ children }) { return <div className="callout">{children}</div>; }
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const focus = t.focus || 'Sleep';
+
+  return (
+    <div>
+      <DesignCanvas>
+
+        {/* ── INTRO ─────────────────────────────────────────── */}
+        <DCSection
+          id="intro"
+          title="In-progress programs on home — alongside the user's focus"
+          subtitle="The Focused home assumes one hero tied to the user's declared focus area. But many users already have one or more programs in flight when they land here — Insomnia, Diabetes Prevention, BurnAlong, etc. Those commitments deserve a home-page slot, but not all of them, and not loudly. This explores how to seat them next to the focus without flooding the page.">
+
+          <DCArtboard id="problem" label="The problem" width={560} height={520}>
+            <div style={{ padding: 28, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 16 }}>
+              <div className="hero-card">
+                <h3>Problem</h3>
+                <h2>Focus says intent. Programs say commitment. Both belong on home.</h2>
+                <p>The Focused page commits to <b style={{color:'#fff'}}>one hero</b>. That works when the user has just declared a focus — we suggest a program <i>for</i> that focus.</p>
+                <p>But a user who has already started one or more programs has done the harder thing: signed up. The cost of <i>not</i> surfacing those is missed sessions and silent churn.</p>
+                <p style={{marginTop:12}}>The constraint: <b style={{color:'#fff'}}>show enough to drive resumption, not so much that it competes with the focus.</b></p>
+              </div>
+              <Callout>
+                <b>Design rules.</b> (1) Cap visible programs at 3. (2) Always link to a "See all" target — the home is a digest, not the directory. (3) Programs that match the declared focus get priority placement. (4) Off-focus programs are still shown — we don't punish users for past commitments by hiding them.
+              </Callout>
+              <Callout>
+                <b>What we're NOT doing.</b> Long lists. Carousels of programs (already burned on the hero). Putting programs <i>before</i> the greeting/focus pill. Mixing programs with content recommendations.
+              </Callout>
+            </div>
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── OPTIONS ───────────────────────────────────────── */}
+        <DCSection
+          id="options"
+          title="Four options"
+          subtitle="Each option shown in its mobile context — greeting + focus pill above, the rest of the page hinted below. Switch focus in the Tweaks panel to see how each option treats the focus-matched program differently.">
+
+          {/* Option A */}
+          <DCArtboard id="opt-a" label="A · Single hero + “other programs” footer" width={420} height={620}>
+            <Phone>
+              <ProgramOptionFrame focus={focus}>
+                <OptA_Hero focus={focus}/>
+              </ProgramOptionFrame>
+            </Phone>
+          </DCArtboard>
+          <DCArtboard id="opt-a-notes" label="A · notes" width={340} height={620}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> The focus-matched program owns the hero. Other in-progress programs collapse into a single line: stacked avatars + "<i>2 other programs in progress · Diabetes Prevention, BurnAlong</i>" → See all.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Maximum restraint. One headline message. The "+N more" footer treats secondary programs like an inbox count — present, scannable, never dominant.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Off-focus programs are easy to ignore. A user with two equally important programs may feel one is "more real" than the other.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> Most users have 0–1 program. Power-users (3+) are the exception, and we accept that they tap "See all".
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* Option B */}
+          <DCArtboard id="opt-b" label="B · Dedicated “Pick up where you left off” rail" width={420} height={780}>
+            <Phone>
+              <ProgramOptionFrame focus={focus}>
+                <OptB_Rail focus={focus}/>
+              </ProgramOptionFrame>
+            </Phone>
+          </DCArtboard>
+          <DCArtboard id="opt-b-notes" label="B · notes" width={340} height={780}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> A separate section labeled <i>"Pick up where you left off"</i>. Up to 3 program rows: image, tag, title, progress dots, "next up" line. Focus-matched program gets an "On focus" badge and sorts first.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Honors the equal-weight reality of multiple commitments. Each program gets identical treatment so users compare like with like. The label is the framing — programs are jobs to resume, not content to discover.
+              </Callout>
+              <Callout>
+                <b>Where it lives.</b> Between the Focused hero and the Today strip. Hero stays the focus pitch (continue OR start, depending on whether the focus-matched program is in progress).
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Adds a section. Pushes Today and Insights down by ~280px on mobile. We pay the cost because resumption beats discovery for retention.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> The 30-day cohort averages 2+ active programs (which the data we have suggests).
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* Option C */}
+          <DCArtboard id="opt-c" label="C · Hero + ribbon of mini-cards" width={420} height={680}>
+            <Phone>
+              <ProgramOptionFrame focus={focus}>
+                <OptC_HeroPlusRibbon focus={focus}/>
+              </ProgramOptionFrame>
+            </Phone>
+          </DCArtboard>
+          <DCArtboard id="opt-c-notes" label="C · notes" width={340} height={680}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Compromise between A and B. Focus-matched program owns the hero. Two mini-cards (thumb + title + progress dots) sit immediately under it, plus a "See all" tile.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Hero keeps its emotional weight. Other programs are visible enough to recognize, small enough to stay subordinate. The ribbon never exceeds 3 tiles — overflow goes to "See all".
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Mini-cards are a new component. They only have room for title + dots — no "next up" cue, so the program's urgency is implicit, not explicit.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> The hero must remain the page's emotional anchor (e.g. the focus is brand-new and we want to reinforce the choice).
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          {/* Option D */}
+          <DCArtboard id="opt-d" label="D · Today's plan (chronological)" width={420} height={760}>
+            <Phone>
+              <ProgramOptionFrame focus={focus}>
+                <OptD_TodayPlan focus={focus}/>
+              </ProgramOptionFrame>
+            </Phone>
+          </DCArtboard>
+          <DCArtboard id="opt-d-notes" label="D · notes" width={340} height={760}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>What it is.</b> Programs presented as a <i>schedule</i>, not a list. Each row has a time-of-day label (Tonight, Today, Wed). The most-imminent item is primary (filled background, "Continue" button); the rest are secondary.
+              </Callout>
+              <Callout>
+                <b>Why pick it.</b> Reframes the user's relationship to programs. Instead of "what should I work on?", the question becomes "what's next?". Calendar-shaped UI ties programs to the rhythm of the week.
+              </Callout>
+              <Callout>
+                <b>Tradeoff.</b> Highest information density. Replaces the hero entirely — there's no glamour shot of the focus program, just rows. Probably feels too utilitarian for a marketing-flavored home page.
+              </Callout>
+              <Callout>
+                <b>Best when.</b> Users with multiple time-anchored programs (DTX with prescribed cadence) are the majority of the audience.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+        {/* ── RECOMMENDATION ───────────────────────────────── */}
+        <DCSection id="rec" title="Recommendation" subtitle="Pick one to ship, with the runner-up as a fallback if research changes the priority.">
+
+          <DCArtboard id="rec-card" label="Decision" width={580} height={520}>
+            <div style={{ padding: 22, height:'100%', boxSizing:'border-box', display:'flex', flexDirection:'column', gap: 14 }}>
+              <div className="hero-card">
+                <h3>Recommendation</h3>
+                <h2>Ship <span style={{color:'#fff'}}>Option B — “Pick up where you left off” rail.</span></h2>
+              </div>
+              <Callout>
+                <b>Why B.</b> Resumption is the higher-value action. Every program in flight has weeks of sunk cost behind it; a missed session is a churn risk. A dedicated section, capped at 3, treats each program seriously without flooding the page.
+              </Callout>
+              <Callout>
+                <b>The cap matters.</b> 3 visible, "See all" for the rest. Server returns up to 3 already; client never lengthens. Power-users with 5+ programs see "See all (5)" and tap into a programs index.
+              </Callout>
+              <Callout>
+                <b>Hero stays the focus pitch.</b> If the focus-matched program is one of the in-progress 3, it appears in the rail with an "On focus" badge — and the hero pitches a different focus-aligned step (a habit, an article, the AI advisor). We don't double-feature the same program.
+              </Callout>
+              <Callout>
+                <b>Order rule.</b> Focus-matched first. Then by next-due date (soonest first). Stable across page loads — surprise hurts trust.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="rec-cases" label="Edge cases" width={420} height={520}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>0 programs.</b> Section omitted entirely. Page collapses cleanly. Hero recommends starting one — focus-aligned.
+              </Callout>
+              <Callout>
+                <b>1 program (focus-matched).</b> Section omitted; hero takes that single program as its subject (today's behavior). No need for a list of one.
+              </Callout>
+              <Callout>
+                <b>1 program (off-focus).</b> Section shown with one card. Hero recommends a focus-matched starter program. User sees both: their commitment, and a path that matches their stated intent.
+              </Callout>
+              <Callout>
+                <b>2–3 programs.</b> Default state. Section shown. Hero pitches a focus-aligned habit or article (not another program — too many "starts" feels pushy).
+              </Callout>
+              <Callout>
+                <b>4+ programs.</b> Top 3 shown. "See all (N)" link. Sorted by focus-match → next-due.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="rec-runnerup" label="Runner-up" width={380} height={520}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Runner-up: Option A.</b> If user research shows most users have 0–1 programs and the rail feels heavy, fall back to A — single hero with a quiet "+N more" footer.
+              </Callout>
+              <Callout>
+                <b>Why not C.</b> Mini-cards add a new component for marginal benefit; the ribbon's lack of a "next up" cue weakens the resumption argument.
+              </Callout>
+              <Callout>
+                <b>Why not D.</b> Calendar framing is interesting but presupposes prescribed cadence. Many MHC programs are flexible self-paced — "Tonight" is a label we can't reliably populate.
+              </Callout>
+              <Callout>
+                <b>What to validate.</b> 4-week resumption rate on home-page taps for the rail vs. today's hero-only behavior. Guardrail: time-to-Today (does pushing Today below the rail hurt tracker engagement?).
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+        {/* ── FULL PAGE INTEGRATION ─────────────────────────── */}
+        <DCSection id="integration" title="Option B in context — the full Focused home" subtitle="Showing how the rail slots into the existing Focused page, mobile and desktop. With current focus = Move more, the focus-matched program (BurnAlong) lives in the rail with an 'On focus' badge — so the hero pitches a focus-aligned habit instead, avoiding double-feature.">
+
+          <DCArtboard id="full-mobile" label={`Mobile · Focused home + Programs rail (focus: ${focus})`} width={420} height={1740}>
+            <Phone>
+              <M_Focused_WithPrograms focus={focus}/>
+            </Phone>
+          </DCArtboard>
+
+          <DCArtboard id="full-mobile-notes" label="Mobile · what changed" width={340} height={1740}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Hero swap.</b> The hero is no longer "your {focus.toLowerCase()} program." With a focus-matched program already in the rail, the hero now pitches a focus-aligned <i>habit</i> — same focus area, different commitment level. Variety, not repetition.
+              </Callout>
+              <Callout>
+                <b>Rail position.</b> Sits directly under the hero, before Today. The visual rhythm becomes: aspiration (hero) → commitment (rail) → execution (today) → reflection (insights) → discovery (for-you).
+              </Callout>
+              <Callout>
+                <b>"For your focus" trims to 2 cards.</b> Since the hero now occupies the focus-aligned slot, the For-You section drops the "Treat Insomnia" / starter-program tile — fewer items, less repetition.
+              </Callout>
+              <Callout>
+                <b>Page length cost.</b> ~280px taller than today's Focused. Acceptable: the rail is high-value real estate. Today and Insights are still above the second fold.
+              </Callout>
+              <Callout>
+                <b>Bottom-nav unchanged.</b> Programs do not get their own tab. They are surfaced contextually on Home and discoverable from Wellbeing.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="full-desktop" label={`Desktop · Focused home + Programs rail (focus: ${focus})`} width={1320} height={1900}>
+            <D_Focused_WithPrograms focus={focus}/>
+          </DCArtboard>
+
+          <DCArtboard id="full-desktop-notes" label="Desktop · what changed" width={400} height={1900}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>Hero gets the habit.</b> Same logic as mobile: the focus-matched program (BurnAlong) is in the rail with the "On focus" badge, so the hero pivots to a focus-aligned habit. Hero stays the page's emotional anchor; rail does the resumption work.
+              </Callout>
+              <Callout>
+                <b>3-up grid is fixed.</b> Always 3 columns at desktop, never 4. The "See all programs →" link in the section header carries any overflow.
+              </Callout>
+              <Callout>
+                <b>Wider hero copy.</b> The hero gets a left-anchored gradient at desktop, with a body paragraph and a primary action button. Habit pitches need more reading room than program pitches because they're less intuitive.
+              </Callout>
+              <Callout>
+                <b>For-you grows to 3 cards.</b> Desktop has the horizontal real estate; the focus-filtered row balances the rail above it visually.
+              </Callout>
+              <Callout>
+                <b>Section spacing is consistent.</b> 26px between sections, matching today's Focused desktop. The new rail does not introduce new vertical rhythm — it just consumes one of the existing slots.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+        {/* ── DESKTOP RAIL ALONE ────────────────────────────── */}
+        <DCSection id="desktop" title="Desktop rail in detail" subtitle="Option B at desktop scale: 3 cards across, each with image, on-focus badge (if applicable), tag, title, progress dots, and an inset 'Up next' panel with a Continue button.">
+
+          <DCArtboard id="desktop-rail" label="Desktop · Pick up where you left off (close-up)" width={1200} height={460}>
+            <div style={{ padding: '24px 32px', background:'#fafbfc', height:'100%', boxSizing:'border-box' }}>
+              <OptB_Rail_Desktop focus={focus}/>
+            </div>
+          </DCArtboard>
+
+          <DCArtboard id="desktop-notes" label="Desktop notes" width={400} height={460}>
+            <div style={{ padding: 18, display:'flex', flexDirection:'column', gap: 12, height:'100%', boxSizing:'border-box' }}>
+              <Callout>
+                <b>3-up grid, fixed.</b> Never carousels, never 4-up. If the user has more, the "See all" link does the work.
+              </Callout>
+              <Callout>
+                <b>Up-next panel is the action.</b> A small inset card-within-a-card holds the next session info and the Continue button. Visually subordinate to the title, but unambiguously a control.
+              </Callout>
+              <Callout>
+                <b>"On focus" badge is overlaid on the image.</b> Visible at a glance without needing to read the tag line.
+              </Callout>
+              <Callout>
+                <b>Placement on the page.</b> Between the Focused hero and the Today strip. The flow becomes: greeting → focus pill → hero → <b>resume programs</b> → today → insights → for-you.
+              </Callout>
+            </div>
+          </DCArtboard>
+
+        </DCSection>
+
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection title="Focus area">
+          <TweakRadio
+            value={focus}
+            options={[
+              { value:'Sleep', label:'Sleep' },
+              { value:'Move more', label:'Move more' },
+              { value:'Manage stress', label:'Stress' },
+            ]}
+            onChange={(v) => setTweak('focus', v)}
+          />
+          <div style={{ fontSize: 11.5, color:'#6e7a7d', marginTop: 6, lineHeight: 1.4 }}>
+            Switching reveals how each option treats the focus-matched program (the badge, the hero placement, the sort order).
+          </div>
+        </TweakSection>
+      </TweaksPanel>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+
+</body>
+</html>

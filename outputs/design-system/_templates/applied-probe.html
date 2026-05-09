@@ -1,0 +1,159 @@
+<!--
+  TEMPLATE: applied-probe.html
+  USE WHEN: You're testing how a system version's tokens land in real product screens.
+            Output: faithful product moments, annotated, with token-by-token explanation.
+
+  HOW TO USE:
+    1. cp _templates/applied-probe.html v<N>/applied.html
+    2. Fill the Delta Panel — surface which tokens version is being applied
+    3. Render each anchor screen at fidelity
+    4. Annotate each screen — what tokens were used, why, what landed, what didn't
+    5. After build: update MAP.md
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applied Probe — v{V} · {slug}</title>
+<style>
+  :root {
+    --doc-bg: #FBFAF8; --doc-ink: #1A1816; --doc-ink-2: #423D38; --doc-ink-3: #6F6963;
+    --doc-border: #E1DEDA; --doc-accent: #08605A;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-serif: "Source Serif 4", Charter, Georgia, serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--doc-bg); color: var(--doc-ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.55; }
+  .page { max-width: 1240px; margin: 0 auto; padding: 56px 40px 120px; }
+  h1 { font-family: var(--font-serif); font-size: 36px; font-weight: 600; margin: 0 0 12px; }
+  h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 600; margin: 0 0 8px; }
+  h3 { font-size: 18px; font-weight: 600; margin: 28px 0 12px; }
+  section { margin-bottom: 64px; }
+  .lede { color: var(--doc-ink-2); margin: 0 0 24px; max-width: 720px; }
+  code { font-family: var(--font-mono); font-size: 13px; background: rgba(0,0,0,0.04); padding: 1px 5px; border-radius: 4px; }
+
+  .delta-panel { background: #F4F2EE; border-left: 4px solid var(--doc-accent); border-radius: 4px; padding: 24px 32px; margin: 0 0 40px; font-size: 14px; }
+  .delta-panel dl { margin: 0; display: grid; grid-template-columns: 140px 1fr; gap: 8px 24px; }
+  .delta-panel dt { font-weight: 600; color: var(--doc-ink-3); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11px; padding-top: 2px; }
+  .delta-panel dd { margin: 0; }
+  .delta-panel dd ul { margin: 0; padding-left: 18px; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .status-current { background: #DCEAD3; color: #335326; }
+  .status-draft { background: #FBE9BC; color: #74500D; }
+
+  .screen-card { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; padding: 32px 0; border-top: 1px solid var(--doc-border); }
+  .screen-card .render { background: #fff; border: 1px solid var(--doc-border); border-radius: 16px; padding: 16px; aspect-ratio: 9/19; min-height: 480px; display: flex; align-items: center; justify-content: center; color: var(--doc-ink-3); font-size: 12px; text-align: center; }
+  .screen-card .annotation h3 { margin-top: 0; }
+  .screen-card table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+  .screen-card th, .screen-card td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--doc-border); vertical-align: top; }
+  .screen-card th { font-weight: 600; color: var(--doc-ink-2); background: #F4F2EE; text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; }
+  .screen-card td.token { font-family: var(--font-mono); font-size: 12px; }
+
+  .verdict { background: #DCEAD3; border-left: 4px solid #335326; padding: 16px 24px; border-radius: 4px; margin-top: 16px; font-size: 14px; }
+  .issue { background: #FDDADD; border-left: 4px solid #8C172E; padding: 16px 24px; border-radius: 4px; margin-top: 16px; font-size: 14px; }
+
+  .open-followups { background: #FBE9BC22; border-left: 4px solid #DC9A1E; padding: 20px 24px; margin-top: 32px; font-size: 14px; border-radius: 4px; }
+  .open-followups h3 { margin-top: 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: #74500D; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- DELTA PANEL — surfaces tokens version being applied -->
+<header>
+  <h1>{Title — e.g., "v4 applied — three canonical screens"}</h1>
+  <div class="delta-panel">
+    <dl>
+      <dt>Iteration</dt>       <dd>v{V} applied · {slug}</dd>
+      <dt>Type</dt>            <dd>applied-probe</dd>
+      <dt>Tokens version</dt>  <dd><strong>v{V}</strong> ({path to system.html})</dd>
+      <dt>Builds on</dt>       <dd>{prior applied probe, if any}</dd>
+      <dt>Premise</dt>         <dd>{one sentence — what this is testing about the system in real product}</dd>
+      <dt>Color register</dt> <dd><strong>{Earth / Neutral / Pastel / Jewel / Fluorescent / Shade-dominant / Tone-on-tone}</strong> — inherited from tokens version</dd>
+      <dt>Brand color role</dt><dd><strong>{Passive / Active}</strong> — inherited from tokens version</dd>
+      <dt>Changed</dt>         <dd><ul><li>{bullet}</li></ul></dd>
+      <dt>Locked</dt>          <dd><ul><li>{bullet}</li></ul></dd>
+      <dt>Assumptions</dt>     <dd><ul><li>{what was inferred} — {cue}</li><li>{"none" if every answer was explicit}</li></ul></dd>
+      <dt>Decision touched</dt><dd>{D{ID} — or "none"}</dd>
+      <dt>Status</dt>          <dd><span class="status status-draft">draft</span></dd>
+      <dt>Date</dt>            <dd>YYYY-MM-DD</dd>
+    </dl>
+  </div>
+</header>
+
+<!-- ============================================================
+     SCREENS — render each anchor moment at fidelity
+     FILL: typically 3 screens (Member · Buyer · AI). Each has:
+       - Faithful render
+       - Token annotation table (what tokens were used, why)
+       - Verdict (what landed) and Issues (what didn't)
+     ============================================================ -->
+<section>
+  <h2>Screens</h2>
+  <p class="lede">{1 sentence: which screens, why these. What's being stress-tested.}</p>
+
+  <!-- SCREEN 1 -->
+  <div class="screen-card">
+    <div class="render">[Render of Screen 1 here — Member · DCP completion (or chosen module-led moment)]</div>
+    <div class="annotation">
+      <h3>Screen 1 — {name}</h3>
+      <p>{Why this screen. What's being stress-tested. What the user is doing here.}</p>
+
+      <table>
+        <thead><tr><th>Element</th><th>Token</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Page background</td><td class="token">background.default</td><td>{rationale}</td></tr>
+          <tr><td>Body text</td><td class="token">text.primary</td><td>{rationale}</td></tr>
+          <!-- key elements with their tokens -->
+        </tbody>
+      </table>
+
+      <div class="verdict">
+        <strong>Lands well:</strong> {what's working in this screen}
+      </div>
+      <div class="issue">
+        <strong>Issue / open pass:</strong> {what's not working, what next pass should fix}
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen-card">
+    <div class="render">[Render of Screen 2 here — Buyer · sales / website hero (gradient.deep-primary)]</div>
+    <div class="annotation">
+      <h3>Screen 2 — {name}</h3>
+      <!-- same structure -->
+    </div>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen-card">
+    <div class="render">[Render of Screen 3 here — AI · Health Insight (canonical AI surface)]</div>
+    <div class="annotation">
+      <h3>Screen 3 — {name}</h3>
+      <!-- same structure -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OPEN ISSUES + DECISION ASKS for next iteration
+     ============================================================ -->
+<section>
+  <div class="open-followups">
+    <h3>Open issues / next pass</h3>
+    <ul>
+      <li>{issue}</li>
+    </ul>
+    <h3 style="margin-top: 16px;">Decision asks for the next iteration</h3>
+    <ul>
+      <li>{ask}</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

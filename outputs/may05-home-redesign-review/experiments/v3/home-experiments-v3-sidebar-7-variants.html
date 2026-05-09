@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>MHC Home — v3 · 7 Sidebar Variants · Boxed Hero</title>
+<style>
+  :root {
+    --cream: #f5f2ec;
+    --paper: #fbf9f5;
+    --paper-2: #fffdf8;
+    --ink: #1f1f1f;
+    --ink-2: #4a4a4a;
+    --ink-3: #7a7a7a;
+    --ink-4: #a59f93;
+    --line: #cdc8bd;
+    --line-2: #e2ddd2;
+    --accent: #0f497f;
+    --accent-soft: #e6eef6;
+    --accent-mid: #c9d8e8;
+    --employer: #2a5d3f;
+    --employer-soft: #e8f0ea;
+    --employer-mid: #c7d8cc;
+    --interest: #0f497f;
+    --interest-soft: #e6eef6;
+    --interest-mid: #c9d8e8;
+    --sales: #6e3a8a;
+    --sales-soft: #efe5f5;
+    --sales-mid: #d8c5e0;
+    --challenge: #b35418;
+    --challenge-soft: #faecd7;
+    --challenge-mid: #ecd0a8;
+    --program: #5a4a2a;
+    --program-soft: #efeae2;
+    --program-mid: #d8cdb8;
+    --tracker: #4a6e8a;
+    --tracker-soft: #dde6ef;
+    --tracker-mid: #b9c9d8;
+    --insight: #3a6e6a;
+    --insight-soft: #d9e7e5;
+    --insight-mid: #abc4c1;
+    --rewards: #8a5a2a;
+    --rewards-soft: #efe2cf;
+    --rewards-mid: #d6bf9c;
+    --sidebar-bg: #f0ece2;
+    --sidebar-line: #d8d2c4;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .page { max-width: 1500px; margin: 0 auto; padding: 32px 28px 80px; }
+  h1, h2, h3, h4 { margin: 0; }
+
+  .doc-header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 28px; }
+  .doc-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .doc-header .meta { font-size: 12px; color: var(--ink-3); margin-bottom: 16px; }
+  .doc-header .lede { font-size: 13.5px; color: var(--ink-2); max-width: 1100px; line-height: 1.6; margin-bottom: 14px; }
+  .doc-header .lede b { color: var(--ink); }
+  .doc-header .lede + .lede { margin-top: 10px; }
+
+  .principles {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--employer);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin: 14px 0 8px;
+    max-width: 1200px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  .principles b { color: var(--ink); }
+  .principles ul { margin: 6px 0 0; padding-left: 18px; }
+  .principles li { margin-bottom: 2px; }
+
+  .toc { width: 100%; border-collapse: collapse; margin: 18px 0 36px; font-size: 12.5px; max-width: 1300px; }
+  .toc th, .toc td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line-2); vertical-align: top; }
+  .toc th { background: var(--paper); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); }
+  .toc td.num { font-weight: 700; width: 40px; color: var(--accent); }
+  .toc td.name { font-weight: 700; width: 240px; }
+  .toc td.thesis { color: var(--ink-2); }
+
+  .exp { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 22px 22px 24px; margin-bottom: 28px; }
+  .exp-h { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+  .exp-h .num { font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 1.4px; text-transform: uppercase; }
+  .exp-h h2 { font-size: 18px; font-weight: 700; }
+  .exp-thesis { font-size: 13px; color: var(--ink-2); line-height: 1.55; max-width: 1200px; margin-bottom: 16px; }
+  .exp-thesis b { color: var(--ink); }
+
+  .frames { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
+  @media (max-width: 1100px) { .frames { grid-template-columns: 1fr; } }
+
+  .frame { background: var(--paper-2); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .frame-cap { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; color: var(--ink-3); padding: 8px 12px; border-bottom: 1px dashed var(--line); }
+  .frame-cap b { font-size: 12px; color: var(--ink); font-weight: 700; }
+
+  .frame-d .canvas { background: #fff; padding: 0; border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; }
+  .frame-m .canvas { background: #fff; padding: 0; border: 1px solid var(--line-2); border-radius: 4px; overflow: hidden; width: 300px; margin: 0 auto; }
+
+  /* SHELL — sidebar(s) + content column */
+  .shell { display: grid; min-height: 200px; background: #fff; }
+  .shell-left { grid-template-columns: 180px 1fr; }
+  .shell-left-narrow { grid-template-columns: 56px 1fr; }
+  .shell-right { grid-template-columns: 1fr 180px; }
+  .shell-both { grid-template-columns: 160px 1fr 180px; }
+
+  .topbar {
+    grid-column: 1 / -1;
+    height: 32px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--ink-3); text-transform: uppercase;
+  }
+  .topbar .logo-center { color: var(--ink); letter-spacing: 1.5px; }
+  .topbar .topbar-meta { font-size: 9px; font-weight: 400; letter-spacing: 0.6px; color: var(--ink-4); position: absolute; right: 12px; }
+  .topbar { position: relative; }
+
+  /* SIDEBAR */
+  .sidebar { background: var(--sidebar-bg); border-right: 1px solid var(--sidebar-line); padding: 12px 10px; display: flex; flex-direction: column; gap: 6px; }
+  .shell-right .sidebar { border-right: 0; border-left: 1px solid var(--sidebar-line); }
+  .shell-both > .sidebar:nth-child(2) { border-right: 1px solid var(--sidebar-line); border-left: 0; }
+  .shell-both > .sidebar:nth-child(4) { border-right: 0; border-left: 1px solid var(--sidebar-line); }
+
+  .sb-h {
+    font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-3); font-weight: 700;
+    margin: 4px 0 2px;
+  }
+  .sb-link {
+    background: rgba(255,255,255,0.6);
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-2);
+    border: 1px solid transparent;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sb-link.active { background: #fff; border-color: var(--accent); color: var(--accent); }
+  .sb-link .ico { width: 14px; height: 14px; background: var(--ink-3); opacity: 0.4; border-radius: 2px; flex-shrink: 0; }
+  .sb-link.active .ico { background: var(--accent); opacity: 1; }
+  .sb-card {
+    background: #fff;
+    border: 1px solid var(--sidebar-line);
+    border-radius: 6px;
+    padding: 10px 11px;
+    font-size: 10.5px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .sb-card b { color: var(--ink); display: block; margin-bottom: 2px; font-size: 11px; }
+  .sb-card .meta { font-size: 9.5px; color: var(--ink-3); margin-top: 4px; }
+  .sb-card.identity .avatar { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; margin-bottom: 8px; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; }
+  .sb-card.engagement { background: var(--rewards-soft); border-color: var(--rewards-mid); }
+  .sb-card.engagement .row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 10px; }
+  .sb-card.engagement .row b { font-size: 10.5px; display: inline; margin: 0; }
+  .sb-card.program { background: var(--program-soft); border-color: var(--program-mid); }
+  .sb-card.activity { background: var(--insight-soft); border-color: var(--insight-mid); }
+  .sb-card.action { background: var(--sales-soft); border-color: var(--sales-mid); }
+
+  .sb-divider { height: 1px; background: var(--sidebar-line); margin: 6px 0; }
+
+  /* compact icon rail */
+  .sidebar.icon-rail { padding: 12px 6px; align-items: center; }
+  .sidebar.icon-rail .sb-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.6); border-radius: 6px;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700; color: var(--ink-2);
+  }
+  .sidebar.icon-rail .sb-icon.active { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+
+  /* content area */
+  .content-area { padding: 14px 14px; display: flex; flex-direction: column; gap: 10px; background: #fff; }
+
+  /* boxed hero (no longer full-bleed) */
+  .hero-card {
+    background: var(--ink); color: #fff;
+    border-radius: 8px;
+    padding: 14px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    min-height: 88px;
+    overflow: hidden;
+  }
+  .hero-card .photo {
+    background:
+      linear-gradient(45deg, transparent 49%, var(--ink-3) 49%, var(--ink-3) 51%, transparent 51%),
+      linear-gradient(-45deg, transparent 49%, var(--ink-3) 49%, var(--ink-3) 51%, transparent 51%),
+      var(--ink-2);
+    background-size: 18px 18px, 18px 18px, 100% 100%;
+    border-radius: 5px;
+    min-height: 70px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8.5px; letter-spacing: 0.6px; text-transform: uppercase; font-weight: 700; color: #fff;
+  }
+  .hero-card .copy { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+  .hero-card .copy .h-tag { font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent-mid); font-weight: 700; }
+  .hero-card .copy .h-name { font-size: 12.5px; font-weight: 700; line-height: 1.25; }
+  .hero-card .copy .h-meta { font-size: 10.5px; color: #ccc; line-height: 1.4; }
+  .hero-card .copy .h-cta { font-size: 10px; color: #fff; padding: 4px 10px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 4px; align-self: flex-start; margin-top: 4px; font-weight: 600; }
+  .frame-m .hero-card { grid-template-columns: 1fr; }
+  .frame-m .hero-card .photo { min-height: 56px; }
+
+  /* hero variant: source-tied (variant 3.G has lane continuity tie-in if needed) */
+  .hero-card.tie-int { box-shadow: inset 0 -3px 0 0 var(--interest); }
+  .hero-card.tie-emp { box-shadow: inset 0 -3px 0 0 var(--employer); }
+
+  /* content blocks (calm rendering, carrying forward 2.F principles) */
+  .b {
+    border-radius: 6px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--line-2);
+    overflow: hidden;
+  }
+  .b .num { font-size: 9.5px; font-weight: 700; color: var(--ink-4); width: 14px; flex-shrink: 0; letter-spacing: 0.4px; }
+  .b .name { font-size: 11.5px; font-weight: 700; color: var(--ink); flex: 1; }
+  .b .meta { font-size: 10px; color: var(--ink-3); white-space: nowrap; flex-shrink: 0; letter-spacing: 0.3px; }
+  .b .pip { font-size: 9.5px; font-weight: 700; color: var(--ink-3); padding: 1px 5px; background: rgba(255,255,255,0.6); border: 1px solid var(--line); border-radius: 3px; flex-shrink: 0; }
+
+  .frame-m .b .name { font-size: 10.5px; }
+  .frame-m .b .meta { font-size: 9px; }
+  .frame-m .b .pip { font-size: 8.5px; padding: 0 4px; }
+
+  .b.w5 { height: 92px; }
+  .b.w4 { height: 70px; }
+  .b.w3 { height: 52px; }
+  .b.w2 { height: 34px; }
+  .b.w1 { height: 24px; }
+  .frame-m .b.w5 { height: 96px; }
+  .frame-m .b.w4 { height: 72px; }
+  .frame-m .b.w3 { height: 54px; }
+  .frame-m .b.w2 { height: 36px; }
+  .frame-m .b.w1 { height: 26px; }
+
+  .b.i-frame { background: var(--cream); border-color: var(--line-2); }
+  .b.i-greeting { background: var(--paper); border-color: var(--line-2); }
+  .b.i-momentum { background: var(--program-soft); border-color: var(--program-mid); border-left: 3px solid var(--program-mid); }
+  .b.i-tracker { background: var(--tracker-soft); border-color: var(--tracker-mid); border-left: 3px solid var(--tracker-mid); }
+  .b.i-insight { background: var(--insight-soft); border-color: var(--insight-mid); border-left: 3px solid var(--insight-mid); }
+  .b.i-employer { background: var(--employer-soft); border-color: var(--employer-mid); border-left: 3px solid var(--employer-mid); }
+  .b.i-interest { background: var(--interest-soft); border-color: var(--interest-mid); border-left: 3px solid var(--interest-mid); }
+  .b.i-challenge { background: var(--challenge-soft); border-color: var(--challenge-mid); border-left: 3px solid var(--challenge-mid); }
+  .b.i-rewards { background: var(--rewards-soft); border-color: var(--rewards-mid); border-left: 3px solid var(--rewards-mid); }
+
+  /* paired lanes inside content area */
+  .lanes-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .lanes-2 .lane { display: flex; flex-direction: column; gap: 6px; }
+
+  /* combined tracker+insights module */
+  .b-combo {
+    background: var(--tracker-soft);
+    border: 1px solid var(--tracker-mid);
+    border-left: 3px solid var(--tracker-mid);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .b-combo .combo-h { padding: 9px 12px 4px; font-size: 11px; font-weight: 700; color: var(--ink); display: flex; justify-content: space-between; align-items: center; }
+  .b-combo .combo-h .meta { font-size: 9.5px; color: var(--ink-3); font-weight: 400; }
+  .b-combo .combo-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 0 12px 8px; }
+  .b-combo .combo-tiles .t { background: rgba(255,255,255,0.7); border: 1px solid var(--tracker-mid); border-radius: 4px; padding: 6px 8px; font-size: 9px; color: var(--ink-2); }
+  .b-combo .combo-tiles .t b { display: block; color: var(--ink); font-size: 12px; font-weight: 700; margin-top: 1px; }
+  .b-combo .combo-insight { padding: 8px 12px 10px; font-size: 10px; color: var(--ink-2); background: rgba(255,255,255,0.5); border-top: 1px dashed var(--insight-mid); display: flex; gap: 8px; align-items: center; line-height: 1.4; }
+  .b-combo .combo-insight .lbl { background: var(--insight); color: #fff; padding: 1px 5px; font-size: 8.5px; font-weight: 700; letter-spacing: 0.5px; border-radius: 2px; }
+  .b-combo .combo-insight .text { flex: 1; }
+  .b-combo .combo-insight .cta { font-size: 9px; color: var(--insight); font-weight: 700; padding: 2px 6px; border: 1px solid var(--insight); border-radius: 3px; }
+  .frame-m .b-combo .combo-tiles { grid-template-columns: repeat(2, 1fr); }
+
+  .dcp-tag {
+    background: var(--program); color: #fff;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 1px 5px; border-radius: 2px; margin-left: 6px;
+  }
+
+  /* dismissible affordance marker */
+  .dismiss-marker {
+    background: rgba(255,255,255,0.8);
+    border: 1px dashed var(--ink-3);
+    color: var(--ink-3);
+    border-radius: 4px;
+    padding: 5px 7px;
+    font-size: 9.5px;
+    font-style: italic;
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  /* mobile rendering: sidebar collapses to top hamburger; show mobile shell */
+  .mobile-shell { display: flex; flex-direction: column; }
+  .mobile-shell .topbar { background: var(--cream); padding: 0 10px; }
+  .mobile-shell .topbar .ham { position: absolute; left: 10px; font-size: 14px; color: var(--ink-2); }
+  .mobile-shell .content-area { padding: 12px 12px; gap: 8px; }
+
+  /* notes */
+  .exp-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+  .exp-notes section { font-size: 12px; line-height: 1.55; }
+  .exp-notes h4 { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--ink-3); margin-bottom: 6px; }
+  .exp-notes p, .exp-notes li { color: var(--ink-2); }
+  .exp-notes ul { margin: 0; padding-left: 16px; }
+  .exp-notes li { margin-bottom: 3px; }
+  .exp-notes b { color: var(--ink); }
+  .exp-notes .pro { color: var(--employer); }
+  .exp-notes .con { color: var(--challenge); }
+
+  /* matrix */
+  .matrix { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 22px; margin-top: 18px; }
+  .matrix h2 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .matrix .lede { font-size: 12.5px; color: var(--ink-2); margin-bottom: 16px; max-width: 1100px; }
+  .matrix table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .matrix th, .matrix td { padding: 8px 10px; border-bottom: 1px solid var(--line-2); text-align: left; vertical-align: top; }
+  .matrix th { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--ink-3); background: var(--paper-2); }
+  .matrix td.num { font-weight: 700; color: var(--accent); width: 40px; }
+  .matrix td.name { font-weight: 700; width: 220px; }
+  .matrix .grade { font-weight: 700; padding: 1px 6px; border-radius: 3px; font-size: 11px; }
+  .matrix .grade.high { background: var(--employer-soft); color: var(--employer); }
+  .matrix .grade.med { background: var(--rewards-soft); color: var(--rewards); }
+  .matrix .grade.low { background: var(--cream); color: var(--ink-3); }
+
+  .recommend { background: #fffaf0; border: 1px solid var(--challenge-mid); border-left: 4px solid var(--challenge); padding: 14px 16px; border-radius: 6px; margin-top: 18px; font-size: 13px; line-height: 1.55; }
+  .recommend b { color: var(--ink); }
+
+  .anchor-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .anchor-link:hover { text-decoration: underline; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; margin-left: 8px; }
+  .pill.calm { background: var(--employer-soft); color: var(--employer); border: 1px solid var(--employer-mid); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ============ HEADER ============ -->
+<header class="doc-header">
+  <h1>MHC Home — v3 · 7 Sidebar Variants <span class="pill calm">calm + scannable</span></h1>
+  <p class="meta">v3 · 2026-05-07 · Block fidelity · Desktop 1200 + Mobile 375</p>
+  <p class="lede">Seven variants exploring <b>two structural changes from v2</b>: (1) a <b>sidebar</b> on desktop (left, right, or both), and (2) a <b>boxed hero</b> that no longer extends full-width — it sits as a card within the content column, with the sidebar(s) consuming the rest of the horizontal space.</p>
+  <p class="lede">All seven carry forward the calm/scannable principle from <a class="anchor-link" href="../v2/home-experiments-v2-variants-A-E.html">v2.F</a>: fewer items per section, generous whitespace, soft color treatment, single CTA per section. The v2 prominence ranking still applies (Hero w5 · Things I care about w4 · From your employer w4 · Programs DCP-only w3 · Tracker+Insights paired w3).</p>
+
+  <div class="principles">
+    <b>What's locked across all 7 variants:</b>
+    <ul>
+      <li>Boxed hero — never full-bleed; always a card within the content column on desktop</li>
+      <li>v2 ranking — hero w5, lanes w4 (paired), DCP-only programs w3, Tracker+Insights paired w3</li>
+      <li>Calm rendering — 1–2 items per section, soft fills, generous gaps, single CTA per section</li>
+      <li>Mobile reflow — sidebar collapses to top hamburger or drawer; content goes single-column</li>
+      <li>508 a11y, skeleton render for data-dependent sections, source labeling</li>
+    </ul>
+    <b style="margin-top:8px;display:block">What varies:</b>
+    <ul>
+      <li>Sidebar position (left, right, both, none)</li>
+      <li>Sidebar content (nav only · nav + identity · nav + featured DCP · status rail · engagement rail · icon-only · dismissible)</li>
+      <li>Sidebar width (56px icon-rail · 180px standard · 240px wide)</li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============ TABLE OF VERSIONS ============ -->
+<table class="toc">
+  <thead><tr><th>#</th><th>Name</th><th>Sidebar concept</th><th>One-line thesis</th></tr></thead>
+  <tbody>
+    <tr><td class="num">3.A</td><td class="name"><a class="anchor-link" href="#var-A">Left Nav + Member Identity</a></td><td>Left, 180px, nav + identity card</td><td>Standard left nav with the member's identity at bottom — week stats, name, avatar. Anchor for "this is your home."</td></tr>
+    <tr><td class="num">3.B</td><td class="name"><a class="anchor-link" href="#var-B">Right Status Rail</a></td><td>Right, 180px, today's status</td><td>Top nav handles wayfinding; right rail surfaces "Today" — next program step, sync state, quick continue. Glance value without scroll.</td></tr>
+    <tr><td class="num">3.C</td><td class="name"><a class="anchor-link" href="#var-C">Compact Icon Sidebar</a></td><td>Left, 56px, icons only</td><td>Minimum sidebar footprint. Icon-only nav. Maximum content width for the boxed hero and lanes.</td></tr>
+    <tr><td class="num">3.D</td><td class="name"><a class="anchor-link" href="#var-D">Left Nav + Featured Program Rail</a></td><td>Left, 200px, nav + featured DCP</td><td>Combines nav with a persistent "Pick up where you left off" featured DCP card pinned to the bottom of the rail. Always-visible momentum cue.</td></tr>
+    <tr><td class="num">3.E</td><td class="name"><a class="anchor-link" href="#var-E">Right Engagement Rail</a></td><td>Right, 200px, rewards + DCPs</td><td>Top nav + right rail surfacing engagement levers — rewards summary (multi-type), active DCPs at-a-glance. The configurability moat made visible.</td></tr>
+    <tr><td class="num">3.F</td><td class="name"><a class="anchor-link" href="#var-F">Dismissible Left Nav</a></td><td>Left, toggleable 56px ↔ 200px</td><td>Member controls density. Default = collapsed icons (56px). Click → expands to full nav (200px) with labels. Honors John's "make dismissible" alternative directly.</td></tr>
+    <tr><td class="num">3.G</td><td class="name"><a class="anchor-link" href="#var-G">Triple Column · Wide Desktop</a></td><td>Left + Right, both rails</td><td>Wide-desktop only. Left = nav. Right = today/status. Center = boxed hero + lanes + tracker. Collapses to single column gracefully on narrower widths.</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ============ VARIANT 3.A: LEFT NAV + MEMBER IDENTITY ============ -->
+<section class="exp" id="var-A">
+  <div class="exp-h"><span class="num">VAR 3.A</span><h2>Left Nav + Member Identity</h2></div>
+  <p class="exp-thesis"><b>Thesis:</b> Standard left nav at 180px with the member's identity card pinned to the bottom — avatar, first name, week-summary stat. The sidebar isn't just navigation; it's a wayfinding column that includes a small "this is you" card. The boxed hero sits in the content column with calm padding around it. Tests: does anchoring the page with a member-identity sidebar deepen the felt-sense of "this is my home" beyond what the greeting line alone can do?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>180px left nav · identity card · boxed hero</span></div>
+      <div class="canvas">
+        <div class="shell shell-left">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">w1 · top nav · logo center</span></div>
+          <aside class="sidebar">
+            <div class="sb-h">Navigate</div>
+            <div class="sb-link active"><span class="ico"></span>Home</div>
+            <div class="sb-link"><span class="ico"></span>Programs</div>
+            <div class="sb-link"><span class="ico"></span>Trackers</div>
+            <div class="sb-link"><span class="ico"></span>Rewards</div>
+            <div class="sb-link"><span class="ico"></span>Library</div>
+            <div class="sb-link"><span class="ico"></span>Profile</div>
+            <div style="flex:1"></div>
+            <div class="sb-divider"></div>
+            <div class="sb-card identity">
+              <div class="avatar">D</div>
+              <b>Davinder R.</b>
+              52K steps this week<br>
+              <span class="meta">Sleep · Stress · Move more</span>
+            </div>
+          </aside>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy">
+                <div class="h-tag">From things you care about</div>
+                <div class="h-name">Better sleep, in 4 weeks</div>
+                <div class="h-meta">Sleep DCP · 8 sessions · $100 at completion</div>
+                <div class="h-cta">Start the program</div>
+              </div>
+            </div>
+            <div class="lanes-2">
+              <div class="lane">
+                <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span><span class="meta">Sleep · Stress · Move · [Edit]</span></div>
+                <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min read</span><span class="pip">+5 pts</span></div>
+                <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ See 3 more matched</span></div>
+              </div>
+              <div class="lane">
+                <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span><span class="meta">3 active items</span></div>
+                <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment opens 5/15</span></div>
+                <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ See 2 more</span></div>
+              </div>
+            </div>
+            <div class="b-combo">
+              <div class="combo-h">6 · This week<span class="meta">↻ 4 min ago · Apple Health</span></div>
+              <div class="combo-tiles">
+                <div class="t">Steps<b>52,470</b></div>
+                <div class="t">Sleep<b>7h 10m</b></div>
+                <div class="t">Calories<b>14,200</b></div>
+                <div class="t">Active<b>240 min</b></div>
+              </div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep is averaging 38 min less than your goal.</div><div class="cta">Add wind-down</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP only</span></span><span class="meta">3 active</span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · session 3 of 8</span><span class="pip">$100</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">+ See 2 more DCPs</span></div>
+            <div class="b w2 i-challenge"><span class="num">8</span><span class="name">Challenges · conditional</span></div>
+            <div class="b w2 i-rewards"><span class="num">9</span><span class="name">Rewards · optional</span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>sidebar → hamburger</span></div>
+      <div class="canvas">
+        <div class="mobile-shell">
+          <div class="topbar"><span class="ham">☰</span><span class="logo-center">MHC</span></div>
+          <main class="content-area">
+            <div class="hero-card"><div class="photo">PHOTO</div><div class="copy"><div class="h-tag">Things you care about</div><div class="h-name">Better sleep, 4 weeks</div><div class="h-cta">Start</div></div></div>
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+            <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span><span class="pip">+5</span></div>
+            <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ See 3 more</span></div>
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+            <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+            <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ See 2 more</span></div>
+            <div class="b-combo">
+              <div class="combo-h">This week<span class="meta">↻ 4m</span></div>
+              <div class="combo-tiles"><div class="t">Steps<b>52K</b></div><div class="t">Sleep<b>7h10</b></div><div class="t">Cal<b>14K</b></div><div class="t">Act<b>240m</b></div></div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · 3 of 8</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">+ See 2 more</span></div>
+            <div class="b w2 i-challenge"><span class="num">8</span><span class="name">Challenges</span></div>
+            <div class="b w2 i-rewards"><span class="num">9</span><span class="name">Rewards</span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Sidebar contents</h4>
+      <ul>
+        <li><b>Top:</b> 6 nav links — Home (active), Programs, Trackers, Rewards, Library, Profile</li>
+        <li><b>Bottom:</b> Member identity card — avatar, first name, week-summary stat ("52K steps this week"), interest list ("Sleep · Stress · Move more")</li>
+        <li><b>Width:</b> 180px (standard left-nav width — tighter than the legacy MHC 220–240px)</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> the page should feel like a personal workspace, not a publication · the member identity card carries trust-building work (you're known here) · the sidebar provides a reliable wayfinding column that doesn't compete with content for attention.</p>
+      <p><b class="con">Risks:</b> the identity card adds another personalization signal that can compete with the lanes (concern #4 from the meeting prep doc — "personalization signal is weak" — could become "too many personalization signals") · sidebar at 180px takes ~15% of horizontal real estate at 1200 width · doesn't address John's "eliminate side nav" goal directly.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ VARIANT 3.B: RIGHT STATUS RAIL ============ -->
+<section class="exp" id="var-B">
+  <div class="exp-h"><span class="num">VAR 3.B</span><h2>Right Status Rail</h2></div>
+  <p class="exp-thesis"><b>Thesis:</b> The top nav handles wayfinding; the right rail surfaces "Today" — next program step, tracker sync state, recent reward, quick continue action. The rail is glance-value, not navigation. Boxed hero in the main content column. Tests: does a small persistent right rail give returning members a 4-second status read without forcing them to scroll, while keeping the main content column calm?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>top nav + 180px right status rail</span></div>
+      <div class="canvas">
+        <div class="shell shell-right">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">top nav · w1 · home · programs · trackers · rewards</span></div>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy">
+                <div class="h-tag">From things you care about</div>
+                <div class="h-name">Better sleep, in 4 weeks</div>
+                <div class="h-meta">Sleep DCP · 8 sessions</div>
+                <div class="h-cta">Start the program</div>
+              </div>
+            </div>
+            <div class="lanes-2">
+              <div class="lane">
+                <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+                <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span></div>
+                <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ 3 more</span></div>
+              </div>
+              <div class="lane">
+                <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+                <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+                <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ 2 more</span></div>
+              </div>
+            </div>
+            <div class="b-combo">
+              <div class="combo-h">6 · This week<span class="meta">↻ 4 min · Apple Health</span></div>
+              <div class="combo-tiles">
+                <div class="t">Steps<b>52,470</b></div>
+                <div class="t">Sleep<b>7h 10m</b></div>
+                <div class="t">Calories<b>14,200</b></div>
+                <div class="t">Active<b>240 min</b></div>
+              </div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min vs goal</div><div class="cta">Add</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP only</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · 3 of 8</span><span class="pip">$100</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">+ See 2 more</span></div>
+          </main>
+          <aside class="sidebar">
+            <div class="sb-h">Today</div>
+            <div class="sb-card activity">
+              <b>Pick up where you left off</b>
+              Sleep DCP · session 3 of 8
+              <div class="meta">5 min · Continue</div>
+            </div>
+            <div class="sb-card">
+              <b>↻ Synced 4 min ago</b>
+              Apple Health · all 4 metrics fresh
+              <div class="meta">Steps 7,840 today</div>
+            </div>
+            <div class="sb-card engagement">
+              <b>Earned today</b>
+              <div class="row"><span>Points</span><b>+10</b></div>
+              <div class="row"><span>Toward gift card</span><b>$25</b></div>
+            </div>
+            <div class="sb-card">
+              <b>Next reminder</b>
+              Sleep wind-down · 9:30pm
+              <div class="meta">From AI insight</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>rail content reflows to top of content area</span></div>
+      <div class="canvas">
+        <div class="mobile-shell">
+          <div class="topbar"><span class="ham">☰</span><span class="logo-center">MHC</span></div>
+          <main class="content-area">
+            <div class="sb-card activity" style="border-radius:6px;border:1px solid var(--insight-mid);"><b>Pick up · Sleep DCP · 3 of 8</b><span class="meta">5 min · Continue</span></div>
+            <div class="hero-card"><div class="photo">PHOTO</div><div class="copy"><div class="h-tag">Things you care about</div><div class="h-name">Better sleep, 4 weeks</div></div></div>
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+            <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span></div>
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+            <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+            <div class="b-combo"><div class="combo-h">This week<span class="meta">↻ 4m</span></div><div class="combo-tiles"><div class="t">Steps<b>52K</b></div><div class="t">Sleep<b>7h10</b></div><div class="t">Cal<b>14K</b></div><div class="t">Act<b>240m</b></div></div></div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · 3 of 8</span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Right rail contents (4 cards)</h4>
+      <ul>
+        <li><b>Pick up where you left off</b> — next program step (Sleep DCP · session 3 of 8 · Continue)</li>
+        <li><b>Sync state</b> — "↻ Synced 4 min ago · Apple Health · all 4 metrics fresh"</li>
+        <li><b>Earned today</b> — points + dollar progress (engagement-light)</li>
+        <li><b>Next reminder</b> — from AI insight (Sleep wind-down · 9:30pm)</li>
+      </ul>
+      <p>Mobile: rail collapses to a single "Pick up where you left off" card pinned to the top of content (the strongest of the four).</p>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> daily-returning members get glance value · sync state visibility addresses the device-troubleshooting concern (G2 reviewers flag tracker sync issues) · separates wayfinding (top) from status (right) cleanly.</p>
+      <p><b class="con">Risks:</b> 4 cards in a small rail can feel cluttered — needs strict editorial discipline · pulls attention from the lanes · users on narrower desktop (912 with left-nav legacy) won't see the rail · adds a new pattern that engineering must build.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ VARIANT 3.C: COMPACT ICON SIDEBAR ============ -->
+<section class="exp" id="var-C">
+  <div class="exp-h"><span class="num">VAR 3.C</span><h2>Compact Icon Sidebar</h2></div>
+  <p class="exp-thesis"><b>Thesis:</b> Sidebar present but minimal — a 56px icon-only nav rail. Honors John's "keep + clean up the side nav" alternative while reclaiming maximum content width. Boxed hero gets 90% of the horizontal real estate. Labels appear on hover/tap (tooltip). Tests: is the sidebar's wayfinding value preserved when it's reduced to icons, while content reads at near-full-width?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>56px icon rail · maximum content width</span></div>
+      <div class="canvas">
+        <div class="shell shell-left-narrow">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">icon-only nav · 56px</span></div>
+          <aside class="sidebar icon-rail">
+            <div class="sb-icon active">⌂</div>
+            <div class="sb-icon">▣</div>
+            <div class="sb-icon">◔</div>
+            <div class="sb-icon">$</div>
+            <div class="sb-icon">▤</div>
+            <div style="flex:1"></div>
+            <div class="sb-icon">D</div>
+          </aside>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy">
+                <div class="h-tag">From things you care about</div>
+                <div class="h-name">Better sleep, in 4 weeks</div>
+                <div class="h-meta">Sleep DCP · 8 sessions · $100 at completion</div>
+                <div class="h-cta">Start the program</div>
+              </div>
+            </div>
+            <div class="lanes-2">
+              <div class="lane">
+                <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span><span class="meta">Sleep · Stress · Move · Edit</span></div>
+                <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min read</span><span class="pip">+5 pts</span></div>
+                <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ See 3 more</span></div>
+              </div>
+              <div class="lane">
+                <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span><span class="meta">3 active</span></div>
+                <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment opens 5/15</span></div>
+                <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ See 2 more</span></div>
+              </div>
+            </div>
+            <div class="b-combo">
+              <div class="combo-h">6 · This week<span class="meta">↻ 4 min ago</span></div>
+              <div class="combo-tiles">
+                <div class="t">Steps<b>52,470</b></div>
+                <div class="t">Sleep<b>7h 10m</b></div>
+                <div class="t">Calories<b>14,200</b></div>
+                <div class="t">Active<b>240 min</b></div>
+              </div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min · try a wind-down tonight</div><div class="cta">Add</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP only</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · session 3 of 8</span><span class="pip">$100</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">+ See 2 more DCPs</span></div>
+            <div class="b w2 i-challenge"><span class="num">8</span><span class="name">Challenges · conditional</span></div>
+            <div class="b w2 i-rewards"><span class="num">9</span><span class="name">Rewards · optional</span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>icon rail → hamburger</span></div>
+      <div class="canvas">
+        <div class="mobile-shell">
+          <div class="topbar"><span class="ham">☰</span><span class="logo-center">MHC</span></div>
+          <main class="content-area">
+            <div class="hero-card"><div class="photo">PHOTO</div><div class="copy"><div class="h-tag">Things you care about</div><div class="h-name">Better sleep, 4 weeks</div></div></div>
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+            <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span></div>
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+            <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+            <div class="b-combo"><div class="combo-h">This week<span class="meta">↻ 4m</span></div><div class="combo-tiles"><div class="t">Steps<b>52K</b></div><div class="t">Sleep<b>7h10</b></div><div class="t">Cal<b>14K</b></div><div class="t">Act<b>240m</b></div></div></div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP</span></span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Sidebar contents</h4>
+      <ul>
+        <li><b>56px icon-only rail.</b> Six icons — Home (active), Programs, Trackers, Rewards, Library, Profile (avatar at bottom)</li>
+        <li><b>Tooltip on hover/tap</b> — labels appear so users learn the icons over time</li>
+        <li><b>No identity card</b> — that signal lives elsewhere (greeting, lanes)</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> content readability is the top goal (calm/scannable lives here naturally) · sidebar icons are well-chosen and become familiar fast · solves John's tension between "eliminate side nav" and "keep clean side nav" — keeps the affordance, hides the bulk.</p>
+      <p><b class="con">Risks:</b> icon-only nav is harder to learn for new users — needs labels-first onboarding or a default-expanded first session · accessibility consideration: screen-reader users need icon labels regardless · loses the identity-anchoring of variant 3.A.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ VARIANT 3.D: LEFT NAV + FEATURED PROGRAM RAIL ============ -->
+<section class="exp" id="var-D">
+  <div class="exp-h"><span class="num">VAR 3.D</span><h2>Left Nav + Featured Program Rail</h2></div>
+  <p class="exp-thesis"><b>Thesis:</b> Left sidebar combines nav (top) with a <b>featured DCP card pinned at the bottom</b> — always-visible "pick up where you left off" momentum. The featured DCP is the one with most recent engagement; replaces the in-content programs section's primary slot. Tests: does pinning the most engaged DCP to the sidebar deepen returnable engagement (Zeigarnik effect — incomplete tasks stay top-of-mind)?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>200px nav + featured DCP card · boxed hero</span></div>
+      <div class="canvas">
+        <div class="shell" style="grid-template-columns: 200px 1fr;">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">nav + featured DCP rail</span></div>
+          <aside class="sidebar">
+            <div class="sb-h">Navigate</div>
+            <div class="sb-link active"><span class="ico"></span>Home</div>
+            <div class="sb-link"><span class="ico"></span>Programs</div>
+            <div class="sb-link"><span class="ico"></span>Trackers</div>
+            <div class="sb-link"><span class="ico"></span>Rewards</div>
+            <div class="sb-link"><span class="ico"></span>Library</div>
+            <div class="sb-link"><span class="ico"></span>Profile</div>
+            <div style="flex:1"></div>
+            <div class="sb-divider"></div>
+            <div class="sb-h">Pick up where you left off</div>
+            <div class="sb-card program">
+              <b>Sleep DCP</b>
+              Session 3 of 8 · 5 min
+              <div style="margin-top:6px;background:rgba(255,255,255,0.6);height:5px;border-radius:3px;overflow:hidden;">
+                <div style="background:var(--program);width:38%;height:100%;"></div>
+              </div>
+              <div class="meta">$100 at completion · Continue</div>
+            </div>
+          </aside>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy">
+                <div class="h-tag">From things you care about</div>
+                <div class="h-name">Better sleep, in 4 weeks</div>
+                <div class="h-meta">Sleep DCP · 8 sessions</div>
+                <div class="h-cta">Start the program</div>
+              </div>
+            </div>
+            <div class="lanes-2">
+              <div class="lane">
+                <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+                <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span><span class="pip">+5 pts</span></div>
+                <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ 3 more</span></div>
+              </div>
+              <div class="lane">
+                <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+                <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+                <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ 2 more</span></div>
+              </div>
+            </div>
+            <div class="b-combo">
+              <div class="combo-h">6 · This week<span class="meta">↻ 4m</span></div>
+              <div class="combo-tiles">
+                <div class="t">Steps<b>52,470</b></div>
+                <div class="t">Sleep<b>7h 10m</b></div>
+                <div class="t">Calories<b>14,200</b></div>
+                <div class="t">Active<b>240 min</b></div>
+              </div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min · try a wind-down</div><div class="cta">Add</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Other programs<span class="dcp-tag">DCP</span></span><span class="meta">2 more (featured in rail)</span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Stress DCP · 60% complete</span><span class="pip">$100</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">Diabetes Prev. · week 6 of 16</span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>featured DCP card promotes to top of content</span></div>
+      <div class="canvas">
+        <div class="mobile-shell">
+          <div class="topbar"><span class="ham">☰</span><span class="logo-center">MHC</span></div>
+          <main class="content-area">
+            <div class="sb-card program" style="border-radius:6px;border:1px solid var(--program-mid);"><b>Pick up · Sleep DCP</b>Session 3 of 8 · 5 min<div class="meta">$100 · Continue</div></div>
+            <div class="hero-card"><div class="photo">PHOTO</div><div class="copy"><div class="h-tag">Things you care about</div><div class="h-name">Better sleep, 4 weeks</div></div></div>
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+            <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene</span></div>
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+            <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment</span></div>
+            <div class="b-combo"><div class="combo-h">This week<span class="meta">↻ 4m</span></div><div class="combo-tiles"><div class="t">Steps<b>52K</b></div><div class="t">Sleep<b>7h10</b></div><div class="t">Cal<b>14K</b></div><div class="t">Act<b>240m</b></div></div></div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Other DCPs<span class="dcp-tag">DCP</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Stress DCP · 60%</span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Sidebar contents</h4>
+      <ul>
+        <li><b>Top:</b> 6 nav links (same as 3.A)</li>
+        <li><b>Bottom:</b> "Pick up where you left off" featured DCP card with name, session, progress bar, reward, Continue CTA</li>
+        <li><b>Featured DCP rules:</b> most recently engaged active DCP wins the slot; ties broken by closest-to-completion</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> incomplete-DCP completion rates are a primary metric · members forget where they were and need a persistent reminder · the in-content Programs section can deprioritize the "primary" DCP because it's already in the sidebar.</p>
+      <p><b class="con">Risks:</b> the featured DCP card is high-stakes — if logic picks the wrong DCP, it's wrong on every page load · pinning it to the sidebar means it always renders, even when the member just completed a session (consider state-aware hide/dim) · members without active DCPs see an empty rail bottom — needs an empty-state.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ VARIANT 3.E: RIGHT ENGAGEMENT RAIL ============ -->
+<section class="exp" id="var-E">
+  <div class="exp-h"><span class="num">VAR 3.E</span><h2>Right Engagement Rail</h2></div>
+  <p class="exp-thesis"><b>Thesis:</b> Top nav + a right rail surfacing engagement levers — multi-type rewards summary (gift cards · points · raffles · store), active DCPs at-a-glance, recent activity. The rail is the home for the "configurability moat" — clients with rich reward economies see all four types in one place. Tests: does the right rail give us a permanent home for the rewards moat without making it dominate the main content column?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200</b><span>top nav + 200px right engagement rail</span></div>
+      <div class="canvas">
+        <div class="shell" style="grid-template-columns: 1fr 200px;">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">top nav · engagement rail right</span></div>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy">
+                <div class="h-tag">From things you care about</div>
+                <div class="h-name">Better sleep, in 4 weeks</div>
+                <div class="h-meta">Sleep DCP · 8 sessions · $100 at completion</div>
+                <div class="h-cta">Start the program</div>
+              </div>
+            </div>
+            <div class="lanes-2">
+              <div class="lane">
+                <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+                <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span></div>
+                <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ 3 more</span></div>
+              </div>
+              <div class="lane">
+                <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+                <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+                <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ 2 more</span></div>
+              </div>
+            </div>
+            <div class="b-combo">
+              <div class="combo-h">6 · This week<span class="meta">↻ 4m</span></div>
+              <div class="combo-tiles">
+                <div class="t">Steps<b>52,470</b></div>
+                <div class="t">Sleep<b>7h 10m</b></div>
+                <div class="t">Calories<b>14,200</b></div>
+                <div class="t">Active<b>240 min</b></div>
+              </div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min · try a wind-down</div><div class="cta">Add</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP only</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · 3 of 8</span><span class="pip">$100</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">+ See 2 more</span></div>
+          </main>
+          <aside class="sidebar">
+            <div class="sb-h">Your rewards</div>
+            <div class="sb-card engagement">
+              <div class="row"><span>Gift card</span><b>$75</b></div>
+              <div class="row"><span>Points · Silver</span><b>1,250</b></div>
+              <div class="row"><span>Raffle</span><b>12 entries</b></div>
+              <div class="row"><span>Store credit</span><b>$25</b></div>
+              <div class="meta" style="margin-top:6px">Sales moat — multi-type config</div>
+            </div>
+            <div class="sb-h">Active DCPs</div>
+            <div class="sb-card program">
+              <b>Sleep DCP</b>3 of 8<div class="meta">$100 · Continue</div>
+            </div>
+            <div class="sb-card program">
+              <b>Stress DCP</b>60%<div class="meta">$100 · Continue</div>
+            </div>
+            <div class="sb-card program">
+              <b>Diabetes Prev.</b>week 6 of 16<div class="meta">$100 · Continue</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>rail content folds into bottom of content</span></div>
+      <div class="canvas">
+        <div class="mobile-shell">
+          <div class="topbar"><span class="ham">☰</span><span class="logo-center">MHC</span></div>
+          <main class="content-area">
+            <div class="hero-card"><div class="photo">PHOTO</div><div class="copy"><div class="h-tag">Things you care about</div><div class="h-name">Better sleep, 4 weeks</div></div></div>
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+            <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene</span></div>
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+            <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment</span></div>
+            <div class="b-combo"><div class="combo-h">This week<span class="meta">↻ 4m</span></div><div class="combo-tiles"><div class="t">Steps<b>52K</b></div><div class="t">Sleep<b>7h10</b></div><div class="t">Cal<b>14K</b></div><div class="t">Act<b>240m</b></div></div></div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · 3 of 8</span></div>
+            <div class="sb-card engagement" style="border-radius:6px;border:1px solid var(--rewards-mid);"><b>Your rewards</b><div class="row"><span>Gift card</span><b>$75</b></div><div class="row"><span>Points</span><b>1,250</b></div><div class="row"><span>Raffle</span><b>12</b></div><div class="row"><span>Store</span><b>$25</b></div></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Right rail contents</h4>
+      <ul>
+        <li><b>Your rewards</b> — multi-type summary (1–4 types depending on client config). Showcase for the configurability moat.</li>
+        <li><b>Active DCPs</b> — 1–3 cards, name + progress + reward + Continue. Replaces the in-content Programs primary slot.</li>
+      </ul>
+      <p>For points-only or zero-rewards clients, the rewards card collapses or hides — falls back to a single "DCPs" rail.</p>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> client has Framing 2 (multi-type rewards) configured · sales wants to demo the moat in a permanent surface · engagement-heavy clients want rewards visible without dominating content · DCP-engagement is a primary metric (rail keeps active DCPs always one click away).</p>
+      <p><b class="con">Risks:</b> for low-engagement clients (no rewards, no active DCPs), the rail empties out — needs a graceful empty state · feels marketing-y if not handled with restraint · doesn't address John's "eliminate side nav" goal (adds a different sidebar entirely).</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ VARIANT 3.F: DISMISSIBLE LEFT NAV ============ -->
+<section class="exp" id="var-F">
+  <div class="exp-h"><span class="num">VAR 3.F</span><h2>Dismissible Left Nav <span class="pill calm">honors John's "make dismissible" alternative</span></h2></div>
+  <p class="exp-thesis"><b>Thesis:</b> Honors John's offsite alternative #2 directly — "keep + clean up the side nav, AND/OR make dismissible." The sidebar defaults to <b>collapsed (56px icons)</b>; the member can expand to <b>200px (full labels)</b> with a single click. Their preference persists. Boxed hero adapts width to whichever sidebar state is active. Tests: when the page handles both modes well, do members settle on one or use both depending on context?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1200 · DEFAULT (collapsed)</b><span>56px icon rail</span></div>
+      <div class="canvas">
+        <div class="shell shell-left-narrow">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">collapsed default · click → expand</span></div>
+          <aside class="sidebar icon-rail">
+            <div class="sb-icon active">⌂</div>
+            <div class="sb-icon">▣</div>
+            <div class="sb-icon">◔</div>
+            <div class="sb-icon">$</div>
+            <div class="sb-icon">▤</div>
+            <div style="flex:1"></div>
+            <div class="sb-icon" style="background:var(--accent);color:#fff;font-size:10px;">↔</div>
+          </aside>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy">
+                <div class="h-tag">From things you care about</div>
+                <div class="h-name">Better sleep, in 4 weeks</div>
+                <div class="h-meta">Sleep DCP · 8 sessions</div>
+                <div class="h-cta">Start the program</div>
+              </div>
+            </div>
+            <div class="lanes-2">
+              <div class="lane">
+                <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span><span class="meta">Sleep · Stress · Move</span></div>
+                <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span><span class="pip">+5</span></div>
+                <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ 3 more</span></div>
+              </div>
+              <div class="lane">
+                <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span><span class="meta">3 active</span></div>
+                <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+                <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ 2 more</span></div>
+              </div>
+            </div>
+            <div class="b-combo">
+              <div class="combo-h">6 · This week<span class="meta">↻ 4m</span></div>
+              <div class="combo-tiles">
+                <div class="t">Steps<b>52,470</b></div>
+                <div class="t">Sleep<b>7h 10m</b></div>
+                <div class="t">Calories<b>14,200</b></div>
+                <div class="t">Active<b>240 min</b></div>
+              </div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min</div><div class="cta">Add</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP only</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · 3 of 8</span><span class="pip">$100</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">+ See 2 more</span></div>
+          </main>
+        </div>
+        <div class="dismiss-marker">↔ Toggle button: click to expand sidebar to 200px (with labels). Member preference persists.</div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Desktop · 1200 · EXPANDED</b><span>200px full labels</span></div>
+      <div class="canvas">
+        <div class="shell" style="grid-template-columns: 200px 1fr;">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">expanded · click → collapse</span></div>
+          <aside class="sidebar">
+            <div class="sb-h">Navigate</div>
+            <div class="sb-link active"><span class="ico"></span>Home</div>
+            <div class="sb-link"><span class="ico"></span>Programs</div>
+            <div class="sb-link"><span class="ico"></span>Trackers</div>
+            <div class="sb-link"><span class="ico"></span>Rewards</div>
+            <div class="sb-link"><span class="ico"></span>Library</div>
+            <div class="sb-link"><span class="ico"></span>Profile</div>
+            <div style="flex:1"></div>
+            <div class="sb-divider"></div>
+            <div class="sb-link" style="background:var(--accent);color:#fff;border-color:var(--accent);"><span class="ico" style="background:#fff"></span>↔ Collapse</div>
+          </aside>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy"><div class="h-tag">Things you care about</div><div class="h-name">Better sleep, 4 weeks</div><div class="h-cta">Start</div></div>
+            </div>
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+            <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene</span></div>
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+            <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment</span></div>
+            <div class="b-combo">
+              <div class="combo-h">This week<span class="meta">↻ 4m</span></div>
+              <div class="combo-tiles"><div class="t">Steps<b>52K</b></div><div class="t">Sleep<b>7h10</b></div><div class="t">Cal<b>14K</b></div><div class="t">Act<b>240m</b></div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP</span></span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Behavior</h4>
+      <ul>
+        <li><b>Default state:</b> collapsed 56px icon rail (matches 3.C visual)</li>
+        <li><b>Toggle:</b> button at bottom of rail. Click → expands to 200px with labels (matches 3.A visual minus the identity card)</li>
+        <li><b>Persistence:</b> preference saved per device per member · sticky across sessions</li>
+        <li><b>Mobile:</b> always collapsed; expansion replaced by hamburger drawer</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> the team can't decide between collapsed and expanded · honors John's offsite directive directly · gives members agency over density · solves the "eliminate side nav" debate by giving the user the eliminate button.</p>
+      <p><b class="con">Risks:</b> two layouts to design and maintain · hero/lanes need to handle both widths (200px content shift between states) · members may not discover the toggle · adds eng cost (state management, persistence).</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ VARIANT 3.G: TRIPLE COLUMN ============ -->
+<section class="exp" id="var-G">
+  <div class="exp-h"><span class="num">VAR 3.G</span><h2>Triple Column · Wide Desktop Only</h2></div>
+  <p class="exp-thesis"><b>Thesis:</b> The most ambitious sidebar treatment. Wide desktop only (≥1280px or so): left nav (160px) + content (variable) + right status rail (180px). Below the wide breakpoint, gracefully collapses — first dropping the right rail, then the left nav. Tests: on truly wide displays, does giving wayfinding and status their own permanent columns let the content area focus exclusively on the lanes/programs/insights?</p>
+
+  <div class="frames">
+    <div class="frame frame-d">
+      <div class="frame-cap"><b>Desktop · 1400+ · TRIPLE</b><span>nav + content + status rail</span></div>
+      <div class="canvas">
+        <div class="shell shell-both">
+          <div class="topbar"><span class="logo-center">MHC</span><span class="topbar-meta">triple · 1400+ only</span></div>
+          <aside class="sidebar">
+            <div class="sb-h">Navigate</div>
+            <div class="sb-link active"><span class="ico"></span>Home</div>
+            <div class="sb-link"><span class="ico"></span>Programs</div>
+            <div class="sb-link"><span class="ico"></span>Trackers</div>
+            <div class="sb-link"><span class="ico"></span>Rewards</div>
+            <div class="sb-link"><span class="ico"></span>Library</div>
+            <div class="sb-link"><span class="ico"></span>Profile</div>
+          </aside>
+          <main class="content-area">
+            <div class="hero-card">
+              <div class="photo">PHOTO</div>
+              <div class="copy">
+                <div class="h-tag">Things you care about</div>
+                <div class="h-name">Better sleep, in 4 weeks</div>
+                <div class="h-meta">Sleep DCP · 8 sessions</div>
+                <div class="h-cta">Start the program</div>
+              </div>
+            </div>
+            <div class="lanes-2">
+              <div class="lane">
+                <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+                <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene · 3 min</span></div>
+                <div class="b w2 i-interest"><span class="num">4b</span><span class="name">+ 3 more</span></div>
+              </div>
+              <div class="lane">
+                <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+                <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment 5/15</span></div>
+                <div class="b w2 i-employer"><span class="num">5b</span><span class="name">+ 2 more</span></div>
+              </div>
+            </div>
+            <div class="b-combo">
+              <div class="combo-h">6 · This week<span class="meta">↻ 4m</span></div>
+              <div class="combo-tiles">
+                <div class="t">Steps<b>52,470</b></div>
+                <div class="t">Sleep<b>7h 10m</b></div>
+                <div class="t">Calories<b>14,200</b></div>
+                <div class="t">Active<b>240 min</b></div>
+              </div>
+              <div class="combo-insight"><span class="lbl">AI</span><div class="text">Sleep -38 min</div><div class="cta">Add</div></div>
+            </div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP only</span></span></div>
+            <div class="b w3 i-momentum"><span class="num">7a</span><span class="name">Sleep DCP · 3 of 8</span><span class="pip">$100</span></div>
+            <div class="b w2 i-momentum"><span class="num">7b</span><span class="name">+ See 2 more</span></div>
+          </main>
+          <aside class="sidebar">
+            <div class="sb-h">Today</div>
+            <div class="sb-card activity"><b>Pick up</b>Sleep DCP · 3 of 8<div class="meta">5 min · Continue</div></div>
+            <div class="sb-card"><b>↻ 4 min ago</b>Apple Health · fresh</div>
+            <div class="sb-card engagement"><b>Earned today</b><div class="row"><span>Pts</span><b>+10</b></div><div class="row"><span>Toward gift</span><b>$25</b></div></div>
+          </aside>
+        </div>
+        <div class="dismiss-marker">At &lt; 1280px width: drops the right rail. At &lt; 1024px: drops both rails. Single column at mobile.</div>
+      </div>
+    </div>
+
+    <div class="frame frame-m">
+      <div class="frame-cap"><b>Mobile · 375</b><span>both rails fold to top</span></div>
+      <div class="canvas">
+        <div class="mobile-shell">
+          <div class="topbar"><span class="ham">☰</span><span class="logo-center">MHC</span></div>
+          <main class="content-area">
+            <div class="sb-card activity" style="border-radius:6px;border:1px solid var(--insight-mid);"><b>Pick up · Sleep DCP · 3 of 8</b><span class="meta">5 min · Continue</span></div>
+            <div class="hero-card"><div class="photo">PHOTO</div><div class="copy"><div class="h-tag">Things you care about</div><div class="h-name">Better sleep, 4 weeks</div></div></div>
+            <div class="b w4 i-interest"><span class="num">4</span><span class="name">Things I care about</span></div>
+            <div class="b w3 i-interest"><span class="num">4a</span><span class="name">Sleep hygiene</span></div>
+            <div class="b w4 i-employer"><span class="num">5</span><span class="name">From your employer</span></div>
+            <div class="b w3 i-employer"><span class="num">5a</span><span class="name">Open enrollment</span></div>
+            <div class="b-combo"><div class="combo-h">This week<span class="meta">↻ 4m</span></div><div class="combo-tiles"><div class="t">Steps<b>52K</b></div><div class="t">Sleep<b>7h10</b></div><div class="t">Cal<b>14K</b></div><div class="t">Act<b>240m</b></div></div></div>
+            <div class="b w3 i-momentum"><span class="num">7</span><span class="name">Programs<span class="dcp-tag">DCP</span></span></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-notes">
+    <section>
+      <h4>Breakpoint behavior</h4>
+      <ul>
+        <li><b>≥ 1280px:</b> full triple column · nav left + content + status right</li>
+        <li><b>1024–1279px:</b> drop right rail · nav left + content (matches 3.A footprint)</li>
+        <li><b>768–1023px:</b> drop left nav too · single column (matches mobile composition)</li>
+        <li><b>&lt; 768px:</b> hamburger drawer for nav · single column · status card promotes to top of content</li>
+      </ul>
+    </section>
+    <section>
+      <h4>When this wins · risks</h4>
+      <p><b class="pro">Wins when:</b> wide-desktop is a meaningful share of usage · admin/HR users on big monitors benefit from permanent wayfinding + status without scroll · most ambitious treatment if "use the full browser page" eng need is interpreted as "use it for permanent UI" rather than "stretch content."</p>
+      <p><b class="con">Risks:</b> highest eng cost of all 7 variants · 4 distinct breakpoints to design and test · members on narrower screens never see the right rail · a "wide-desktop-only feature" raises the question of whether it's worth building if a minority of users see it.</p>
+    </section>
+  </div>
+</section>
+
+
+<!-- ============ COMPARISON MATRIX ============ -->
+<section class="matrix">
+  <h2>Comparison matrix · v3 sidebar variants</h2>
+  <p class="lede">Each variant scored against the brief's design goals + the inherited v2 ranking + the calm/scannable principle. <b>HIGH</b> = meets strongly · <b>MED</b> = meets adequately · <b>LOW</b> = doesn't meet or actively trades against.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th><th>Variant</th>
+        <th>Hero<br>not full-width</th>
+        <th>Calm /<br>scannable</th>
+        <th>Personalization<br>signal</th>
+        <th>Eng cost</th>
+        <th>Mobile<br>simplicity</th>
+        <th>Honors John's<br>"side nav" item</th>
+        <th>Demo-ability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="num">3.A</td><td class="name">Left Nav + Identity</td>
+        <td><span class="grade high">yes</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade high">low</span></td><td><span class="grade high">simple</span></td><td><span class="grade med">keeps clean</span></td><td><span class="grade high">high</span></td>
+      </tr>
+      <tr><td class="num">3.B</td><td class="name">Right Status Rail</td>
+        <td><span class="grade high">yes</span></td><td><span class="grade med">med</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade high">simple</span></td><td><span class="grade high">eliminates left nav</span></td><td><span class="grade high">high</span></td>
+      </tr>
+      <tr><td class="num">3.C</td><td class="name">Compact Icon Sidebar</td>
+        <td><span class="grade high">yes</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade high">low</span></td><td><span class="grade high">simple</span></td><td><span class="grade high">cleans up</span></td><td><span class="grade med">med</span></td>
+      </tr>
+      <tr><td class="num">3.D</td><td class="name">Left Nav + Featured DCP</td>
+        <td><span class="grade high">yes</span></td><td><span class="grade med">med</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade high">simple</span></td><td><span class="grade med">keeps + adds</span></td><td><span class="grade high">high</span></td>
+      </tr>
+      <tr><td class="num">3.E</td><td class="name">Right Engagement Rail</td>
+        <td><span class="grade high">yes</span></td><td><span class="grade med">med</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade high">simple</span></td><td><span class="grade high">no left nav</span></td><td><span class="grade high">high · moat</span></td>
+      </tr>
+      <tr style="background:#fffaf0"><td class="num">3.F</td><td class="name">Dismissible Left Nav</td>
+        <td><span class="grade high">yes</span></td><td><span class="grade high">high</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade med">med</span></td><td><span class="grade high">simple</span></td><td><span class="grade high">honors directly</span></td><td><span class="grade high">high</span></td>
+      </tr>
+      <tr><td class="num">3.G</td><td class="name">Triple Column</td>
+        <td><span class="grade high">yes</span></td><td><span class="grade med">med</span></td><td><span class="grade high">high</span></td>
+        <td><span class="grade low">high</span></td><td><span class="grade med">complex bp</span></td><td><span class="grade med">keeps + adds</span></td><td><span class="grade high">high · ambitious</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="recommend">
+    <b>Recommendation (apply UI to these 3, not all 7):</b>
+    <ol style="margin: 8px 0 0 0; padding-left: 18px;">
+      <li><b>3.F (Dismissible Left Nav)</b> — honors John's offsite directive #2 directly ("eliminate, OR keep + clean up, OR make dismissible" → make dismissible). Member controls density. Apply UI to validate the toggle is discoverable and the two states feel intentional.</li>
+      <li><b>3.C (Compact Icon Sidebar)</b> — the calm/scannable bet for the sidebar layer. Cleanest content-width-to-sidebar ratio. UI pass needed for icon legibility + tooltip behavior.</li>
+      <li><b>3.E (Right Engagement Rail)</b> — gives the rewards moat a permanent demo-able home without dominating content. UI required to validate the multi-type rewards card reads as differentiator at the rail's narrow width.</li>
+    </ol>
+    <p style="margin: 10px 0 0 0;">Hold <b>3.A (Identity)</b> at block fidelity — viable but the identity-card signal may compete with the personalization lanes. Hold <b>3.B (Status Rail)</b> — viable but adds a new pattern; revisit if member-engagement metrics show daily-return need. Hold <b>3.D (Featured DCP)</b> — good idea but logic-fragile (wrong DCP picked = wrong on every page load). Hold <b>3.G (Triple Column)</b> — only advances if a wide-desktop strategy emerges.</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
