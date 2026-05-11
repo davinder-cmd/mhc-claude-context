@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>MHC Home — v5 Three-Lane Spine · 2-col Trello (Personify-style)</title>
+<style>
+/* =========================================================
+   v5 Three-Lane Spine — Trello-model 2-column layout
+   · Rewards strip on top, hero full-width below
+   · Middle stack uses TWO independent flowing columns
+   · Each column stacks naturally; columns can have different
+     heights (a la Personify/Trello)
+   · Color split is a new full-width section underneath
+   ========================================================= */
+:root {
+  --neutral-50:  #FAF8F5;
+  --neutral-200: #DDD5C7;
+  --neutral-300: #B5AC9C;
+  --neutral-400: #8C857A;
+  --neutral-500: #6B645A;
+  --neutral-700: #4A453E;
+  --neutral-800: #38332E;
+  --neutral-900: #2C2A26;
+
+  --sand-50:  #FAF6F0;
+  --sand-100: #F2EBDF;
+  --sand-200: #E5DAC4;
+
+  --primary-50:  #EFF5FA;
+  --primary-100: #DAE9F2;
+  --primary-200: #B5D2E5;
+  --primary-600: #2A6489;
+  --primary-700: #235173;
+  --primary-800: #1D425C;
+
+  --moss-50:  #EFF4F0;
+  --moss-100: #D5E2D8;
+  --moss-200: #A8C4AE;
+  --moss-500: #366B49;
+  --moss-600: #2A573B;
+  --moss-700: #234630;
+
+  --warm-700: #8A4A26;
+  --indigo-100: #E2E4F1;
+  --indigo-300: #8990CC;
+  --indigo-700: #343864;
+
+  --bg-default:    var(--sand-50);
+  --bg-subtle:     var(--sand-100);
+  --bg-card:       #FFFFFF;
+
+  --text-primary:    var(--neutral-900);
+  --text-secondary:  var(--neutral-700);
+  --text-tertiary:   var(--neutral-500);
+  --text-quiet:      var(--neutral-400);
+  --text-onPrimary:  var(--sand-50);
+
+  --border-default:  var(--neutral-200);
+  --border-strong:   var(--neutral-400);
+  --border-focus:    var(--primary-600);
+
+  --interactive:         var(--primary-600);
+  --interactive-hover:   var(--primary-700);
+  --interactive-pressed: var(--primary-800);
+
+  --shadow-sm:  0 1px 2px rgba(20,18,16,0.04), 0 1px 3px rgba(20,18,16,0.03);
+  --shadow-md:  0 2px 6px rgba(20,18,16,0.06), 0 4px 12px rgba(20,18,16,0.04);
+  --shadow-cta: 0 2px 8px rgba(35,81,115,0.16);
+  --shadow-chip: 0 1px 3px rgba(20,18,16,0.06);
+
+  --s-01: 2px;  --s-02: 4px;  --s-03: 8px;  --s-04: 16px;
+  --s-05: 24px; --s-06: 32px; --s-07: 40px; --s-08: 64px;
+
+  --t-display: 36px;
+  --t-h1: 28px;
+  --t-h2: 22px;
+  --t-h3: 18px;
+  --t-h4: 16px;
+  --t-body: 14px;
+  --t-cap: 12px;
+  --t-small: 11px;
+
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 20px;
+
+  --lh-tight: 1.15;
+  --lh-snug: 1.3;
+  --lh-normal: 1.55;
+
+  --body-max: 1200px;
+
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-text:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+@media (max-width: 599px) {
+  :root { --t-display: 28px; --t-h1: 22px; --t-h2: 19px; --t-h3: 17px; --t-h4: 15px; }
+}
+
+* { box-sizing: border-box; }
+*::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg-default);
+  color: var(--text-primary);
+  font-family: var(--font-text);
+  font-size: var(--t-body);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img { max-width: 100%; display: block; }
+button { font: inherit; }
+
+a.skip {
+  position: absolute; left: -9999px; top: -9999px;
+  background: var(--text-primary); color: var(--text-onPrimary);
+  padding: var(--s-03) var(--s-04); border-radius: var(--r-sm); z-index: 100;
+}
+a.skip:focus { left: var(--s-04); top: var(--s-04); }
+
+.app-frame {
+  background: var(--bg-default);
+  border-bottom: 1px solid var(--border-default);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav {
+  max-width: var(--body-max); margin: 0 auto;
+  padding: var(--s-04);
+  height: 60px;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center; gap: var(--s-04);
+}
+.nav-left { display: flex; align-items: center; gap: var(--s-03); }
+.nav-right { display: flex; align-items: center; gap: var(--s-03); justify-content: flex-end; }
+.logo {
+  font-family: var(--font-display);
+  font-weight: 600; letter-spacing: -0.01em;
+  font-size: 16px; color: var(--text-primary); text-align: center;
+}
+.nav-icon {
+  width: 36px; height: 36px; border: none; background: transparent;
+  border-radius: 50%; cursor: pointer;
+  display: grid; place-items: center; color: var(--text-secondary);
+  transition: background 0.15s, color 0.15s;
+}
+.nav-icon:hover { background: var(--bg-subtle); color: var(--text-primary); }
+.nav-icon svg { width: 18px; height: 18px; }
+.rewards-chip {
+  display: inline-flex; align-items: center; gap: var(--s-02);
+  padding: var(--s-02) var(--s-03);
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  font-size: var(--t-cap);
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-shadow: var(--shadow-chip);
+}
+.rewards-chip:hover { border-color: var(--moss-500); box-shadow: var(--shadow-sm); }
+.rewards-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--moss-500); }
+.rewards-chip .next { color: var(--text-tertiary); font-weight: 500; }
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-200), var(--primary-600));
+  color: white;
+  display: grid; place-items: center;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer;
+}
+@media (max-width: 599px) {
+  .nav { grid-template-columns: 40px 1fr auto; padding: var(--s-03) var(--s-04); height: 52px; }
+  .rewards-chip .next { display: none; }
+}
+
+main {
+  max-width: var(--body-max);
+  margin: 0 auto;
+  padding: var(--s-05) var(--s-04) var(--s-08);
+}
+.section + .section { margin-top: var(--s-05); }
+@media (min-width: 900px) {
+  main { padding: var(--s-06) var(--s-05) var(--s-08); }
+  .section + .section { margin-top: var(--s-06); }
+}
+
+.greeting { display: grid; grid-template-columns: 1fr; gap: var(--s-02); }
+.greeting h1 {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.sync-pill {
+  display: inline-flex; align-items: center; gap: var(--s-02);
+  font-size: var(--t-cap);
+  color: var(--text-tertiary);
+}
+.sync-pill::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--moss-500); display: inline-block;
+}
+@media (min-width: 900px) {
+  .greeting { grid-template-columns: 1fr auto; align-items: end; gap: var(--s-04); }
+}
+
+.source-label {
+  display: inline-flex; align-items: center; gap: var(--s-02);
+  font-size: var(--t-cap);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.source-label::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--neutral-400);
+}
+.source-chal::before { background: var(--warm-700); }
+.source-emp::before  { background: var(--moss-600); }
+.source-int::before  { background: var(--primary-600); }
+.source-ai::before   { background: var(--indigo-700); }
+
+/* Rewards strip — top */
+.rewards-row {
+  background: var(--primary-50);
+  border: 1px solid var(--primary-100);
+  border-left: 3px solid var(--primary-600);
+  border-radius: var(--r-md);
+  padding: var(--s-04) var(--s-05);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-04);
+  align-items: center;
+}
+.rewards-row .label {
+  font-size: var(--t-small);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary-700);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+}
+.rewards-row .label::before { content: '★'; font-size: 11px; }
+.rewards-row .amount {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-top: 2px;
+}
+.rewards-row .sub { font-size: var(--t-cap); color: var(--text-secondary); margin-top: 2px; }
+@media (max-width: 599px) { .rewards-row { grid-template-columns: 1fr; } }
+
+/* Hero full-width */
+.hero {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.hero .hero-head { padding: var(--s-04) var(--s-05) 0; }
+.hero .hero-body {
+  padding: var(--s-04) var(--s-05) var(--s-05);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-04);
+  align-items: center;
+}
+.hero-media {
+  background: linear-gradient(135deg, var(--neutral-800) 0%, var(--neutral-700) 60%, var(--moss-700) 100%);
+  border-radius: var(--r-md);
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+}
+.hero-media::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.08), transparent 60%);
+}
+.hero-media .photo-tag {
+  position: absolute; bottom: var(--s-03); right: var(--s-03);
+  font-size: var(--t-small);
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hero-text h2 {
+  font-family: var(--font-display);
+  font-size: var(--t-h1);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+  margin: var(--s-02) 0 var(--s-03);
+}
+.hero-text p { margin: 0 0 var(--s-04); color: var(--text-secondary); line-height: var(--lh-snug); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-03); align-items: center; }
+.hero-pts { font-size: var(--t-cap); color: var(--text-tertiary); margin-top: var(--s-03); }
+@media (min-width: 760px) {
+  .hero .hero-body { grid-template-columns: 380px 1fr; gap: var(--s-05); }
+  .hero-media { aspect-ratio: 4/3; min-height: 220px; }
+}
+@media (min-width: 1100px) {
+  .hero .hero-body { grid-template-columns: 440px 1fr; padding: var(--s-04) var(--s-06) var(--s-06); }
+  .hero-text h2 { font-size: var(--t-display); }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--s-02);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: var(--t-body);
+  font-weight: 600;
+  cursor: pointer; text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--interactive); color: white; box-shadow: var(--shadow-cta); }
+.btn-primary:hover { background: var(--interactive-hover); }
+.btn-ghost { background: transparent; color: var(--interactive); border-color: transparent; }
+.btn-ghost:hover { background: var(--primary-50); color: var(--interactive-hover); }
+.btn-sm { padding: 6px 12px; font-size: var(--t-cap); }
+.btn-outline {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+.btn-outline:hover { border-color: var(--border-strong); }
+
+/* === TRELLO-style 2 independent columns === */
+.trello {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-05);
+}
+@media (min-width: 900px) {
+  .trello { grid-template-columns: 1fr 1fr; }
+}
+.trello-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-05);
+}
+
+/* === Card primitives === */
+.tracker {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  padding: var(--s-04) var(--s-05);
+}
+.tracker-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: var(--s-04); flex-wrap: wrap; gap: var(--s-02);
+}
+.tracker-head h3 {
+  margin: 0;
+  font-size: var(--t-h3); font-weight: 600;
+  font-family: var(--font-display);
+}
+.tracker-head .head-meta { font-size: var(--t-cap); color: var(--text-tertiary); }
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--s-03);
+}
+.tile {
+  padding: var(--s-03) var(--s-04);
+  border-radius: var(--r-md);
+  background: var(--bg-default);
+  border: 1px solid var(--border-default);
+  display: grid; gap: 2px;
+}
+.tile-label {
+  font-size: var(--t-small); font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.tile-value {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.tile-goal { font-size: var(--t-cap); color: var(--text-tertiary); }
+.tile-trend.up { color: var(--moss-600); }
+.tile-trend.down { color: var(--warm-700); }
+
+.ai-insight {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-left: 3px solid var(--indigo-300);
+  border-radius: var(--r-md);
+  padding: var(--s-04) var(--s-05);
+  display: flex; flex-direction: column; gap: var(--s-03);
+}
+.ai-insight h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--t-h3); font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.ai-insight .text { color: var(--text-secondary); margin: 0; }
+.ai-insight .row { display: flex; flex-wrap: wrap; gap: var(--s-03); align-items: center; }
+
+.dcp {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  padding: var(--s-04) var(--s-05);
+  display: flex; flex-direction: column; gap: var(--s-03);
+}
+.dcp-media {
+  background: linear-gradient(135deg, var(--neutral-900) 0%, var(--indigo-700) 100%);
+  border-radius: var(--r-md);
+  aspect-ratio: 16/9;
+  position: relative; overflow: hidden;
+}
+.dcp-media::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);
+}
+.dcp h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--t-h2); font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+.dcp p { margin: var(--s-02) 0 var(--s-03); color: var(--text-secondary); line-height: var(--lh-snug); }
+.progress-row { display: flex; flex-direction: column; gap: var(--s-02); }
+.progress-meta {
+  display: flex; justify-content: space-between;
+  font-size: var(--t-cap);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+.progress-bar {
+  height: 6px; background: var(--bg-default);
+  border-radius: 999px; overflow: hidden;
+  border: 1px solid var(--border-default);
+}
+.progress-fill { height: 100%; background: var(--moss-600); border-radius: 999px; }
+.progress-fill.session-3 { width: 38%; }
+
+.habits {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  padding: var(--s-04) var(--s-05);
+}
+.habits h3 {
+  margin: 0 0 var(--s-04);
+  font-family: var(--font-display);
+  font-size: var(--t-h3); font-weight: 600;
+  letter-spacing: -0.005em;
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.habits h3 .meta {
+  font-family: var(--font-text);
+  font-weight: 400; font-size: var(--t-cap);
+  color: var(--text-tertiary);
+}
+.habit {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: var(--s-03);
+  align-items: center;
+  padding: var(--s-03) 0;
+  border-top: 1px solid var(--border-default);
+}
+.habit:first-of-type { border-top: 0; padding-top: 0; }
+.habit-check {
+  width: 22px; height: 22px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 50%;
+  cursor: pointer; background: transparent;
+  display: grid; place-items: center; color: white;
+}
+.habit-check.done { background: var(--moss-600); border-color: var(--moss-600); }
+.habit-check.done::after { content: '✓'; font-size: 12px; font-weight: 700; color: white; line-height: 1; }
+.habit.done .habit-name { color: var(--text-tertiary); text-decoration: line-through; text-decoration-color: var(--neutral-300); }
+.habit-pts { font-size: var(--t-cap); color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+.habit.done .habit-pts { color: var(--moss-600); font-weight: 600; }
+
+.lane {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.lane-employer { border-left: 3px solid var(--moss-500); }
+.lane-interests { border-left: 3px solid var(--primary-600); }
+.lane-head {
+  padding: var(--s-04) var(--s-05) var(--s-03);
+  display: flex; flex-wrap: wrap; gap: var(--s-03);
+  align-items: center; justify-content: space-between;
+}
+.focus-pill {
+  display: inline-flex; align-items: center; gap: var(--s-02);
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  color: var(--primary-700);
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.lane-items { display: flex; flex-direction: column; padding: 0 var(--s-05); }
+.lane-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--s-03);
+  padding: var(--s-04) 0;
+  border-top: 1px solid var(--border-default);
+  align-items: start;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+  cursor: pointer;
+  margin: 0 calc(var(--s-04) * -1);
+  padding-left: var(--s-04); padding-right: var(--s-04);
+}
+.lane-item:first-of-type { border-top: 0; }
+.lane-item:hover { background: var(--bg-subtle); }
+.lane-item-text { display: grid; gap: 2px; min-width: 0; }
+.lane-item-kicker {
+  font-size: var(--t-small); font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+.lane-item-title {
+  font-size: 15px; font-weight: 600;
+  color: var(--text-primary);
+  line-height: var(--lh-snug);
+  letter-spacing: -0.005em;
+}
+.lane-item-meta { font-size: var(--t-cap); color: var(--text-tertiary); }
+.lane-item-arrow { color: var(--text-tertiary); font-size: 18px; line-height: 1; align-self: center; }
+.lane-foot { padding: var(--s-03) var(--s-05) var(--s-04); border-top: 1px solid var(--border-default); }
+.text-link { color: var(--interactive); text-decoration: none; font-size: var(--t-cap); font-weight: 600; }
+.text-link:hover { text-decoration: underline; }
+.benefit-value {
+  display: inline-flex;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--moss-700);
+  background: var(--moss-50);
+  border: 1px solid var(--moss-100);
+  border-radius: var(--r-sm);
+  padding: 2px 10px;
+  margin-bottom: var(--s-02);
+}
+
+.weighting-section { margin-top: var(--s-08); }
+.weighting {
+  border: 1px solid var(--border-default);
+  border-radius: var(--r-md);
+  padding: var(--s-04) var(--s-05);
+  background: var(--bg-card);
+}
+.weighting-label {
+  font-size: var(--t-cap); font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: var(--s-03);
+}
+.weighting-bar {
+  display: flex; height: 28px;
+  border-radius: var(--r-sm);
+  overflow: hidden; border: 1px solid var(--border-default);
+}
+.weighting-bar span {
+  display: grid; place-items: center;
+  font-size: var(--t-small); font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.weighting-legend {
+  display: flex; flex-wrap: wrap; gap: var(--s-04);
+  margin-top: var(--s-03);
+  font-size: var(--t-cap); color: var(--text-tertiary);
+}
+.weighting-legend .swatchdot {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--border-default);
+  margin-right: var(--s-02);
+  vertical-align: -1px;
+}
+
+.app-foot {
+  border-top: 1px solid var(--border-default);
+  margin-top: var(--s-07);
+  padding: var(--s-05) 0;
+  background: var(--bg-subtle);
+}
+.foot-inner {
+  max-width: var(--body-max);
+  margin: 0 auto;
+  padding: 0 var(--s-04);
+  display: grid; gap: var(--s-03);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) {
+  .foot-inner { padding: 0 var(--s-05); grid-template-columns: 1fr auto; align-items: end; }
+}
+.foot-links { display: flex; gap: var(--s-05); flex-wrap: wrap; font-size: var(--t-cap); }
+.foot-links a { color: var(--text-secondary); text-decoration: none; }
+.foot-links a:hover { color: var(--text-primary); text-decoration: underline; }
+.foot-meta { font-size: var(--t-cap); color: var(--text-tertiary); margin: 0; }
+
+.layout-pill {
+  position: fixed;
+  bottom: var(--s-04);
+  right: var(--s-04);
+  background: var(--moss-700);
+  color: white;
+  font-size: var(--t-small);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: var(--s-02) var(--s-03);
+  border-radius: 999px;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 40;
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
+
+<header class="app-frame" role="banner">
+  <div class="nav">
+    <div class="nav-left">
+      <button class="nav-icon" aria-label="Menu" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+    <div class="logo">Mobile Health</div>
+    <div class="nav-right">
+      <a href="#rewards" class="rewards-chip">
+        <span class="dot"></span><span>$75</span><span class="next">· $25 to next →</span>
+      </a>
+      <button class="nav-icon" aria-label="Notifications" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+      </button>
+      <button class="avatar">DR</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Greeting -->
+  <section class="section greeting">
+    <div><h1>Good morning, Davinder.</h1></div>
+    <div class="meta"><span class="sync-pill">Trackers synced 4 min ago · Apple Health</span></div>
+  </section>
+
+  <!-- Rewards strip on top -->
+  <section class="section rewards-row" id="rewards">
+    <div>
+      <span class="label">Rewards</span>
+      <div class="amount">$75 earned · $25 to next gift card</div>
+      <div class="sub">2 actions on this page earn $25 more</div>
+    </div>
+    <a href="#" class="btn btn-outline btn-sm">View all rewards →</a>
+  </section>
+
+  <!-- Hero full-width -->
+  <section class="section hero">
+    <div class="hero-head">
+      <span class="source-label source-chal">Active challenge · priority slot 1 of 1</span>
+    </div>
+    <div class="hero-body">
+      <div class="hero-media" role="img" aria-label="Pacific Crest Trail challenge artwork">
+        <span class="photo-tag">Trail mix · 3rd place</span>
+      </div>
+      <div class="hero-text">
+        <h2>Pacific Crest Trail Challenge</h2>
+        <p>Day 4 of 30 · Your team "Trail Mix" is in 3rd place. Walk 12,000 steps today to overtake "Roadrunners."</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" type="button">Log today's steps</button>
+          <button class="btn btn-ghost" type="button">See leaderboard</button>
+        </div>
+        <div class="hero-pts">+50 pts daily · earns $25 at challenge end</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⭐ Trello-style 2 independent columns — heights flow naturally -->
+  <section class="section trello">
+
+    <!-- LEFT column — visual / progress-led -->
+    <div class="trello-col">
+
+      <article class="tracker">
+        <div class="tracker-head">
+          <h3>This week</h3>
+          <span class="head-meta">Live · Apple Health</span>
+        </div>
+        <div class="tile-grid">
+          <div class="tile">
+            <span class="tile-label">Steps</span>
+            <span class="tile-value">52,470</span>
+            <span class="tile-goal">of 70k · <span class="tile-trend up">↑8%</span></span>
+          </div>
+          <div class="tile">
+            <span class="tile-label">Sleep</span>
+            <span class="tile-value">7h 10m</span>
+            <span class="tile-goal">avg · <span class="tile-trend down">↓12 min</span></span>
+          </div>
+          <div class="tile">
+            <span class="tile-label">Calories</span>
+            <span class="tile-value">14,200</span>
+            <span class="tile-goal">on pace</span>
+          </div>
+          <div class="tile">
+            <span class="tile-label">Active min</span>
+            <span class="tile-value">240</span>
+            <span class="tile-goal">of 150 · <span class="tile-trend up">↑40%</span></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="dcp">
+        <span class="source-label">Digital care path · sleep</span>
+        <div class="dcp-media" role="img" aria-label="Sleep Better DCP cover"></div>
+        <h3>Sleep Better DCP — session 3 of 8</h3>
+        <p>Eight short sessions on sleep hygiene, wind-down rituals, and consistency. <strong style="color:var(--moss-700)">Pain score down 22%</strong> since you started · earns <strong>$100 gift card</strong> at completion.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" type="button">Continue session 4</button>
+          <button class="btn btn-ghost btn-sm" type="button">Program details</button>
+        </div>
+        <div class="progress-row">
+          <div class="progress-bar"><div class="progress-fill session-3"></div></div>
+          <div class="progress-meta"><span>3 of 8 sessions</span><span>$100 at completion</span></div>
+        </div>
+      </article>
+
+      <article class="lane lane-employer">
+        <header class="lane-head">
+          <span class="source-label source-emp">From your employer · Acme Corp</span>
+          <span class="text-link">3 items</span>
+        </header>
+        <div class="lane-items">
+          <a class="lane-item" href="#">
+            <span class="lane-item-text">
+              <span class="lane-item-kicker">Benefit · mental health</span>
+              <span class="lane-item-title">$0 mental health visits through Lyra</span>
+              <span class="benefit-value">$0 copay</span>
+              <span class="lane-item-meta">Up to 12 sessions per year · no copay</span>
+            </span>
+            <span class="lane-item-arrow">›</span>
+          </a>
+          <a class="lane-item" href="#">
+            <span class="lane-item-text">
+              <span class="lane-item-kicker">Open enrollment · May 15</span>
+              <span class="lane-item-title">Pick your 2026 plan — review by 5/30</span>
+              <span class="lane-item-meta">Source: Acme HR · earns 100 pts on completion</span>
+            </span>
+            <span class="lane-item-arrow">›</span>
+          </a>
+          <a class="lane-item" href="#">
+            <span class="lane-item-text">
+              <span class="lane-item-kicker">Wellness fair · May 22</span>
+              <span class="lane-item-title">Q2 wellness fair in the cafeteria</span>
+              <span class="lane-item-meta">12 pm · earn 50 pts to attend</span>
+            </span>
+            <span class="lane-item-arrow">›</span>
+          </a>
+        </div>
+        <footer class="lane-foot">
+          <a href="#" class="text-link">See all from Acme →</a>
+        </footer>
+      </article>
+
+    </div>
+
+    <!-- RIGHT column — text / action-led -->
+    <div class="trello-col">
+
+      <article class="ai-insight">
+        <span class="source-label source-ai">AI insight · refreshable</span>
+        <h3>Davinder, your sleep dropped 38 min last night.</h3>
+        <p class="text">Most likely culprit: late screen time after 11&thinsp;pm. Try a 9:30&thinsp;pm wind-down tonight — five minutes of breathing, no devices, lights to amber.</p>
+        <div class="row">
+          <button class="btn btn-primary btn-sm" type="button">Add wind-down to my evening</button>
+          <button class="btn btn-ghost btn-sm" type="button">Why this insight?</button>
+        </div>
+      </article>
+
+      <article class="habits">
+        <h3>Healthy habits <span class="meta">Today · 1 of 3 done</span></h3>
+        <div class="habit done">
+          <button class="habit-check done" aria-label="Mark Drink 8 glasses water incomplete" type="button"></button>
+          <span class="habit-name">Drink 8 glasses of water</span>
+          <span class="habit-pts">+10 pts</span>
+        </div>
+        <div class="habit">
+          <button class="habit-check" aria-label="Complete 10-minute walk" type="button"></button>
+          <span class="habit-name">10-minute walk</span>
+          <span class="habit-pts">earns 10 pts</span>
+        </div>
+        <div class="habit">
+          <button class="habit-check" aria-label="Complete 5-minute stretch" type="button"></button>
+          <span class="habit-name">5-minute stretch</span>
+          <span class="habit-pts">earns 10 pts</span>
+        </div>
+      </article>
+
+      <article class="lane lane-interests">
+        <header class="lane-head">
+          <span class="source-label source-int">Based on your interests</span>
+          <span class="focus-pill">Sleep</span>
+        </header>
+        <div class="lane-items">
+          <a class="lane-item" href="#">
+            <span class="lane-item-text">
+              <span class="lane-item-kicker">Article · 5 min read</span>
+              <span class="lane-item-title">Why your sleep score lies</span>
+              <span class="lane-item-meta">MHC Library · earns 5 pts on completion</span>
+            </span>
+            <span class="lane-item-arrow">›</span>
+          </a>
+          <a class="lane-item" href="#">
+            <span class="lane-item-text">
+              <span class="lane-item-kicker">Recommended · DCP</span>
+              <span class="lane-item-title">Insomnia DCP — recommended for you</span>
+              <span class="lane-item-meta">8 weeks · earns $100 gift card at completion</span>
+            </span>
+            <span class="lane-item-arrow">›</span>
+          </a>
+          <a class="lane-item" href="#">
+            <span class="lane-item-text">
+              <span class="lane-item-kicker">Library · stress</span>
+              <span class="lane-item-title">5-min meditation library</span>
+              <span class="lane-item-meta">12 sessions · 5 pts each</span>
+            </span>
+            <span class="lane-item-arrow">›</span>
+          </a>
+        </div>
+        <footer class="lane-foot">
+          <a href="#" class="text-link">See all matched →</a>
+        </footer>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- Color split — full-width new section back at the top -->
+  <section class="section weighting-section">
+    <div class="weighting">
+      <div class="weighting-label">Color split · 60 / 18 / 14 / 5 / 3</div>
+      <div class="weighting-bar">
+        <span style="background: var(--sand-50); color: var(--text-primary); flex: 60;">60 · Cream surface</span>
+        <span style="background: var(--bg-card); color: var(--text-primary); flex: 18; border-left: 1px solid var(--border-default);">18 · Paper</span>
+        <span style="background: var(--neutral-900); color: var(--sand-50); flex: 14;">14 · Ink</span>
+        <span style="background: var(--primary-600); color: var(--sand-50); flex: 5;">5 · Accent</span>
+        <span style="background: var(--moss-600); color: var(--sand-50); flex: 3;">3 · Employer</span>
+      </div>
+      <div class="weighting-legend">
+        <span><span class="swatchdot" style="background: var(--sand-50)"></span>Cream — page bg, soft fills</span>
+        <span><span class="swatchdot" style="background: var(--bg-card)"></span>Paper — cards</span>
+        <span><span class="swatchdot" style="background: var(--neutral-900)"></span>Ink — text + borders</span>
+        <span><span class="swatchdot" style="background: var(--primary-600)"></span>Accent — CTAs + Interests edge</span>
+        <span><span class="swatchdot" style="background: var(--moss-600)"></span>Employer — moss edge + benefit chip</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="app-foot">
+  <div class="foot-inner">
+    <nav class="foot-links">
+      <a href="#">Help</a><a href="#">Privacy</a><a href="#">Accessibility</a><a href="#">Contact</a>
+    </nav>
+    <p class="foot-meta">© 2026 Mobile Health · Built for your employer</p>
+  </div>
+</footer>
+
+<div class="layout-pill">v5 · 2-col · trello flow</div>
+
+<script>
+document.querySelectorAll('.habit-check').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const habit = btn.closest('.habit');
+    const done = btn.classList.toggle('done');
+    habit.classList.toggle('done', done);
+    const pts = habit.querySelector('.habit-pts');
+    if (pts) pts.textContent = done ? '+10 pts' : 'earns 10 pts';
+    const total = document.querySelectorAll('.habit').length;
+    const doneCount = document.querySelectorAll('.habit.done').length;
+    const counter = document.querySelector('.habits h3 .meta');
+    if (counter) counter.textContent = `Today · ${doneCount} of ${total} done`;
+  });
+});
+</script>
+
+</body>
+</html>

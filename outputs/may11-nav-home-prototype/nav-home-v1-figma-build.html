@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home — Acme · MHC prototype (v1, Figma build)</title>
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    /* surfaces (warm beige only on backgrounds/placeholders) */
+    --surface:        #ffffff;
+    --surface-tint:   #f6f1e8;   /* hero/program/article image placeholder */
+    --surface-tint-2: #faf6ee;
+    --advisor-bg:     #eaf2fb;   /* AI insight banner */
+    --reward-bg:      #f4f5f7;   /* reward tiles */
+
+    /* near-neutral graphite ink (no brown) */
+    --ink:            #14181d;
+    --ink-2:          #3a4047;
+    --ink-3:          #6a727b;
+    --hairline:       #e7e6e3;
+
+    /* brand */
+    --brand:          #1a3e72;   /* primary cta navy */
+    --brand-hover:    #14315a;
+    --link:           #1f6fd1;
+    --acme-red:       #c8202a;   /* reward dot + acme logo border */
+    --teal:           #1f8a7a;   /* dial accents */
+
+    /* type */
+    --f-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
+              "Helvetica Neue", Arial, sans-serif;
+
+    /* spacing (4dp) */
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px;
+    --s5: 20px; --s6: 24px; --s7: 32px; --s8: 40px; --s9: 56px;
+
+    /* radius */
+    --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 20px;
+
+    /* layout */
+    --max-w: 1200px;
+    --gutter: 24px;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family: var(--f-sans);
+    color: var(--ink);
+    background: var(--surface);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.45;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color: var(--link); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  button{ font-family: inherit; cursor: pointer; }
+
+  /* ---------- layout shell ---------- */
+  .shell{ max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter); }
+
+  /* ---------- header (desktop default) ---------- */
+  .topbar{
+    border-bottom: 1px solid var(--hairline);
+    background: #fff;
+    position: sticky; top:0; z-index: 20;
+  }
+  .topbar__inner{
+    display: flex; align-items: center; gap: var(--s4);
+    height: 72px;
+  }
+  .iconbtn{
+    width: 40px; height: 40px; border-radius: 10px;
+    background: transparent; border: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink);
+  }
+  .iconbtn:hover{ background: #f3f3f1; }
+  .iconbtn svg{ width: 22px; height: 22px; }
+  .acme-logo{
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 64px; height: 40px; border: 2px solid var(--acme-red);
+    border-radius: 6px; background: #fff;
+    font-weight: 800; letter-spacing: 1px; color: var(--acme-red);
+    font-size: 15px;
+  }
+  .topbar__spacer{ flex: 1; }
+  .topbar__msg{ /* desktop hides explicit msg icon — keep slot empty */ display: none; }
+
+  /* mobile status bar — only renders at < 768 */
+  .statusbar{ display: none; }
+
+  /* ---------- typography ---------- */
+  h1,h2,h3,h4{ margin: 0; color: var(--ink); letter-spacing: -0.01em; }
+  h1{ font-size: 32px; line-height: 1.15; font-weight: 700; }
+  h2{ font-size: 22px; line-height: 1.2; font-weight: 700; }
+  h3{ font-size: 16px; line-height: 1.3; font-weight: 600; }
+  .eyebrow{
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-2); font-weight: 600;
+  }
+  .muted{ color: var(--ink-3); }
+  .meta{ font-size: 13px; color: var(--ink-3); }
+  .link{ color: var(--link); font-weight: 600; font-size: 14px; }
+
+  /* ---------- greeting ---------- */
+  .greeting{ padding: var(--s7) 0 var(--s5); display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s6); }
+  .greeting h1{ font-size: 28px; }
+  .greeting__interests{ color: var(--ink-3); font-size: 14px; margin-top: 6px; }
+  .greeting__interests a{ color: var(--link); }
+
+  /* ---------- hero card ---------- */
+  .hero{
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    background: #fff;
+  }
+  .hero__media{
+    background: var(--surface-tint);
+    min-height: 320px;
+  }
+  .hero__body{
+    padding: var(--s7) var(--s7) var(--s7);
+    display: flex; flex-direction: column; gap: var(--s4);
+    justify-content: center;
+  }
+  .hero__body h2{ font-size: 28px; }
+  .hero__desc{ color: var(--ink-2); font-size: 15px; max-width: 44ch; }
+  .hero__meta{ color: var(--ink-3); font-size: 13px; }
+  .btn{
+    align-self: flex-start;
+    background: var(--brand); color:#fff; border:0;
+    border-radius: 999px;
+    padding: 12px 22px; font-size: 14px; font-weight: 600;
+  }
+  .btn:hover{ background: var(--brand-hover); }
+  .btn--ghost{
+    background:#fff; color: var(--ink);
+    border: 1px solid var(--hairline); border-radius: 999px;
+    padding: 10px 18px; font-size: 13px; font-weight: 600;
+  }
+  .btn--ghost:hover{ background:#f6f5f2; }
+
+  /* ---------- section frame ---------- */
+  section{ padding: var(--s9) 0 0; }
+  .section-head{
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--s4);
+    margin-bottom: var(--s5);
+  }
+  .section-head h2{ font-size: 22px; }
+  .section-head__sub{ color: var(--ink-3); font-size: 13px; margin-top: 4px; }
+  .section-foot{
+    display: flex; justify-content: space-between;
+    padding-top: var(--s4); font-size: 14px;
+  }
+  .divider{ border:0; border-top:1px solid var(--hairline); margin: var(--s9) 0 0; }
+
+  /* ---------- "things i care about" (paired columns desktop) ---------- */
+  .care-grid{
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--s7);
+  }
+  .care-col h2{ font-size: 18px; margin-bottom: var(--s4); }
+  .article-card{
+    display: flex; gap: var(--s4); align-items: stretch;
+    background: #fff; border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+    padding: var(--s4);
+    text-decoration: none; color: inherit;
+  }
+  .article-card:hover{ border-color:#d8d6d1; }
+  .article-card__media{
+    width: 96px; height: 80px; flex: 0 0 96px;
+    background: var(--surface-tint); border-radius: 8px;
+  }
+  .article-card__body{ display: flex; flex-direction: column; gap: 6px; justify-content: center; flex:1; }
+  .article-card__title{ font-size: 15px; font-weight: 600; color: var(--ink); }
+  .article-card__chev{ align-self: center; color: var(--ink-3); }
+  .care-foot{
+    display: flex; justify-content: space-between;
+    padding-top: var(--s3); font-size: 13px;
+  }
+  /* "based on your interests" (mobile-only structure) */
+  .based{ display: none; }
+
+  /* ---------- weekly tracker ---------- */
+  .week-grid{
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s4);
+  }
+  .tile{
+    background: #fff; border: 1px solid var(--hairline);
+    border-radius: var(--r-md); padding: var(--s4);
+    display: flex; flex-direction: column; gap: var(--s3);
+    min-height: 132px;
+  }
+  .dial{
+    width: 44px; height: 44px; border-radius: 50%;
+    background:
+      conic-gradient(var(--teal) 0 78%, #e9e7e3 78% 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink); position: relative;
+  }
+  .dial::after{
+    content:""; position:absolute; inset: 6px; background:#fff; border-radius:50%;
+  }
+  .dial svg{ position: relative; z-index: 1; width: 18px; height: 18px; color: var(--ink); }
+  .tile__label{ font-size: 11px; letter-spacing: 0.1em; color: var(--ink-3); text-transform: uppercase; font-weight: 600; }
+  .tile__value{ font-size: 24px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+  .tile__value .trend{ color: var(--teal); font-size: 14px; font-weight: 600; }
+  .tile__meta{ font-size: 12px; color: var(--ink-3); }
+
+  /* ---------- advisor banner ---------- */
+  .advisor{
+    margin-top: var(--s5);
+    background: var(--advisor-bg);
+    border-radius: var(--r-lg);
+    padding: var(--s5) var(--s6);
+    display: flex; align-items: center; gap: var(--s5);
+    border: 1px solid #d5e2f3;
+  }
+  .advisor__icon{
+    width: 8px; height: 8px; border-radius: 50%; background: var(--link);
+    display: inline-block; margin-right: 8px;
+  }
+  .advisor__body{ flex: 1; }
+  .advisor__eyebrow{ font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--link); font-weight: 700; display: inline-flex; align-items: center; }
+  .advisor__title{ font-size: 16px; margin-top: 4px; color: var(--ink); }
+  .advisor__title strong{ font-weight: 700; }
+  .advisor__sub{ font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+
+  /* ---------- programs ---------- */
+  .programs-grid{
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5);
+  }
+  .program-card{
+    background:#fff; border: 1px solid var(--hairline);
+    border-radius: var(--r-md); overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .program-card__media{ background: var(--surface-tint); aspect-ratio: 16/9; }
+  .program-card__body{ padding: var(--s4) var(--s5) var(--s5); display: flex; flex-direction: column; gap: var(--s3); }
+  .tag{
+    font-size: 11px; letter-spacing: 0.1em; color: var(--ink-2);
+    text-transform: uppercase; font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .tag::before{
+    content:""; width: 6px; height: 6px; border-radius:50%;
+    background: var(--ink-2);
+  }
+  .program-card__title{ font-size: 18px; font-weight: 700; }
+  .progress{ height: 4px; background:#ece9e3; border-radius: 999px; overflow: hidden; }
+  .progress > i{ display:block; height: 100%; background: #4f3470; }
+  .program-card__foot{ display:flex; justify-content: space-between; font-size: 13px; color: var(--ink-3); }
+  .program-card__foot strong{ color: var(--ink); font-weight: 700; }
+
+  /* ---------- challenge ---------- */
+  .challenge-card{
+    background: #fff; border: 1px solid var(--hairline);
+    border-radius: var(--r-md); padding: var(--s5) var(--s6);
+    display: flex; justify-content: space-between; align-items: center; gap: var(--s5);
+  }
+  .challenge-card h3{ font-size: 18px; font-weight: 700; margin-top: 2px; }
+  .challenge-card .meta{ margin-top: 4px; }
+  .challenge__sub{ color: var(--ink-3); font-size: 13px; margin-top: 4px; }
+
+  /* ---------- rewards ---------- */
+  .rewards-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s4); }
+  .reward-tile{
+    background: var(--reward-bg);
+    border-radius: var(--r-md);
+    padding: var(--s5);
+    display: flex; flex-direction: column; gap: 6px;
+    min-height: 132px;
+  }
+  .reward-tile .tag::before{ background: var(--acme-red); }
+  .reward-tile .tag{ color: var(--ink-2); }
+  .reward-tile__value{ font-size: 28px; font-weight: 700; line-height: 1.1; }
+  .reward-tile__title{ font-size: 13px; color: var(--ink); }
+  .reward-tile__meta{ font-size: 12px; color: var(--ink-3); }
+
+  /* ---------- bottom nav (mobile only) ---------- */
+  .tabnav{ display: none; }
+
+  /* ---------- footer spacer ---------- */
+  .page-end{ height: var(--s9); }
+
+  /* ===================================================== */
+  /* ------------------ MOBILE: <768px ------------------- */
+  /* ===================================================== */
+  @media (max-width: 767.98px){
+    :root{ --gutter: 16px; }
+
+    /* mobile-only status bar */
+    .statusbar{
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px var(--gutter) 0; font-size: 13px; font-weight: 600;
+      color: var(--ink);
+    }
+    .statusbar__icons{ display: inline-flex; gap: 6px; }
+
+    /* top bar: hamburger left · logo center · message right */
+    .topbar__inner{ height: 56px; }
+    .topbar__spacer{ display: none; }
+    .topbar__inner{ display: grid; grid-template-columns: 40px 1fr 40px; align-items: center; }
+    .topbar__msg{ display: inline-flex; justify-content: flex-end; }
+    .topbar__logo{ display: flex; justify-content: center; }
+
+    /* greeting */
+    .greeting{ padding: var(--s5) 0 var(--s4); flex-direction: column; align-items: stretch; gap: var(--s3); }
+    .greeting h1{ font-size: 24px; }
+    .greeting__interests, .greeting .link{ display: none; }
+
+    /* hero: stacked */
+    .hero{ grid-template-columns: 1fr; }
+    .hero__media{ min-height: 180px; aspect-ratio: 16/9; }
+    .hero__body{ padding: var(--s5); }
+    .hero__body h2{ font-size: 22px; }
+
+    /* "things i care about" → "based on your interests" stacked stream */
+    .care-grid{ display: none; }
+    .based{ display: block; }
+    .based__list{ display: flex; flex-direction: column; gap: var(--s3); }
+    .based__head{ margin-bottom: var(--s4); }
+    .care-foot{ font-size: 13px; padding-top: var(--s4); }
+
+    /* weekly tracker: 2x2 */
+    .week-grid{ grid-template-columns: 1fr 1fr; }
+
+    /* advisor: stacked */
+    .advisor{ flex-direction: column; align-items: flex-start; gap: var(--s4); padding: var(--s4); }
+
+    /* programs: horizontal scroll with peek */
+    .programs-grid{
+      grid-template-columns: none;
+      display: flex; gap: var(--s4);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin: 0 calc(var(--gutter) * -1);
+      padding: 4px var(--gutter) var(--s3);
+    }
+    .program-card{ flex: 0 0 78%; scroll-snap-align: start; }
+
+    /* challenge: stacked */
+    .challenge-card{ flex-direction: column; align-items: flex-start; }
+    .challenge-card .btn--ghost{ align-self: stretch; text-align: center; }
+
+    /* rewards: 2x2 */
+    .rewards-grid{ grid-template-columns: 1fr 1fr; }
+
+    /* bottom tab nav */
+    body{ padding-bottom: 72px; }
+    .tabnav{
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      position: fixed; left:0; right:0; bottom:0;
+      background:#fff; border-top: 1px solid var(--hairline);
+      height: 64px; z-index: 25;
+    }
+    .tabnav a{
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; font-size: 11px; color: var(--ink-3);
+      text-decoration: none;
+    }
+    .tabnav a.is-active{ color: var(--brand); font-weight: 700; }
+    .tabnav svg{ width: 22px; height: 22px; }
+    .tabnav a.is-active::after{
+      content:""; position:absolute; bottom: 0; width: 28%; height: 3px;
+      background: var(--brand); border-radius: 2px 2px 0 0;
+    }
+    .tabnav a{ position: relative; }
+  }
+
+  /* ===================================================== */
+  /* ------------------ MID: 768–1023 -------------------- */
+  /* ===================================================== */
+  @media (min-width: 768px) and (max-width: 1023.98px){
+    .programs-grid{ grid-template-columns: repeat(2, 1fr); }
+    .rewards-grid{ grid-template-columns: repeat(2, 1fr); }
+    .week-grid{ grid-template-columns: repeat(4, 1fr); }
+    .hero{ grid-template-columns: 1fr; }
+    .hero__media{ aspect-ratio: 16/7; min-height: 220px; }
+  }
+
+  /* ===================================================== */
+  /* ------------------ WIDE-FLEX 1200+ ------------------ */
+  /* ===================================================== */
+  @media (min-width: 1200px){
+    :root{ --max-w: 1200px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ------- mobile status bar (only renders < 768) ------- -->
+  <div class="statusbar" aria-hidden="true">
+    <span>09:41</span>
+    <span class="statusbar__icons">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M2 17h3v4H2zm5-3h3v7H7zm5-4h3v11h-3zm5-4h3v15h-3z"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C7 4 2.7 6.7.4 11l1.6 1.1C4 8.6 7.7 6.3 12 6.3s8 2.3 10 5.8l1.6-1.1C21.3 6.7 17 4 12 4zm0 4c-3.3 0-6.2 1.7-7.9 4.3l1.6 1.1C7 11.6 9.3 10.3 12 10.3s5 1.3 6.3 3.1l1.6-1.1C18.2 9.7 15.3 8 12 8zm0 4c-1.7 0-3.2.8-4 2.1l1.6 1.1c.5-.8 1.4-1.2 2.4-1.2s1.9.4 2.4 1.2l1.6-1.1c-.8-1.3-2.3-2.1-4-2.1zm0 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg>
+      <svg width="22" height="14" viewBox="0 0 24 12" aria-hidden="true"><rect x="0.5" y="0.5" width="21" height="11" rx="3" fill="none" stroke="currentColor"/><rect x="2" y="2" width="16" height="8" rx="1.5" fill="currentColor"/><rect x="22.5" y="4" width="1.5" height="4" rx=".5" fill="currentColor"/></svg>
+    </span>
+  </div>
+
+  <!-- ------- top bar ------- -->
+  <header class="topbar">
+    <div class="shell topbar__inner">
+      <button class="iconbtn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <div class="topbar__logo">
+        <span class="acme-logo" aria-label="Acme">ACME</span>
+      </div>
+      <div class="topbar__spacer"></div>
+      <div class="topbar__msg">
+        <button class="iconbtn" aria-label="Messages">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <!-- ------- greeting ------- -->
+    <div class="greeting">
+      <div>
+        <h1>Afternoon Davinder</h1>
+        <div class="greeting__interests">
+          Your interests · Sleep · Stress · Move more · <a href="#">Edit</a>
+        </div>
+      </div>
+      <a class="link" href="#">View Trends</a>
+    </div>
+
+    <!-- ------- hero ------- -->
+    <article class="hero" aria-labelledby="heroTitle">
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="hero__body">
+        <span class="eyebrow">From things you care about</span>
+        <h2 id="heroTitle">Sleep better, in 4 weeks.</h2>
+        <p class="hero__desc">An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change.</p>
+        <div class="hero__meta">Sleep DCP · $100 reward at completion</div>
+        <button class="btn">Start the program</button>
+      </div>
+    </article>
+
+    <!-- ------- things i care about (desktop paired) ------- -->
+    <section aria-labelledby="careHead">
+      <div class="care-grid">
+        <div class="care-col">
+          <h2>Things I care about</h2>
+          <a class="article-card" href="#">
+            <div class="article-card__media" aria-hidden="true"></div>
+            <div class="article-card__body">
+              <span class="eyebrow">Article · Sleep</span>
+              <div class="article-card__title">How to wind down before bed</div>
+              <div class="meta">3 min read</div>
+            </div>
+            <span class="article-card__chev" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+          <div class="care-foot">
+            <a class="link" href="#">See 3 more matched to your interests</a>
+            <a class="link" href="#">Edit Interests</a>
+          </div>
+        </div>
+        <div class="care-col">
+          <h2>Things I care about</h2>
+          <a class="article-card" href="#">
+            <div class="article-card__media" aria-hidden="true"></div>
+            <div class="article-card__body">
+              <span class="eyebrow">Article · Sleep</span>
+              <div class="article-card__title">Healthy Habit Title</div>
+              <div class="meta">Review by 5/30</div>
+            </div>
+            <span class="article-card__chev" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+            </span>
+          </a>
+          <div class="care-foot">
+            <a class="link" href="#">See one more from Acme</a>
+            <a class="link" href="#">Edit Interests</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- mobile collapses both columns into a single stream -->
+      <div class="based">
+        <div class="based__head">
+          <h2>Based on your interests</h2>
+        </div>
+        <div class="based__list">
+          <a class="article-card" href="#">
+            <div class="article-card__media" aria-hidden="true"></div>
+            <div class="article-card__body">
+              <div class="article-card__title">Wind down before bed</div>
+              <div class="meta">Access Your Training</div>
+            </div>
+            <span class="article-card__chev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="article-card" href="#">
+            <div class="article-card__media" aria-hidden="true"></div>
+            <div class="article-card__body">
+              <div class="article-card__title">Wind down before bed</div>
+              <div class="meta">Access Your Training</div>
+            </div>
+            <span class="article-card__chev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="article-card" href="#">
+            <div class="article-card__media" aria-hidden="true"></div>
+            <div class="article-card__body">
+              <div class="article-card__title">Wind down before bed</div>
+              <div class="meta">Access Your Training</div>
+            </div>
+            <span class="article-card__chev" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+        <div class="care-foot">
+          <a class="link" href="#">See 6 more</a>
+          <a class="link" href="#">Edit Interests</a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ------- this week ------- -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>This week</h2>
+          <div class="section-head__sub">↻ Synced 4 minutes ago · Source: Apple Health</div>
+        </div>
+        <a class="link" href="#">View Trends</a>
+      </div>
+
+      <div class="week-grid">
+        <div class="tile">
+          <div class="dial" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2-2 5-2 7 0s5 2 7 0M14 8l3-3 3 3M17 5v6"/></svg>
+          </div>
+          <div>
+            <div class="tile__label">Steps</div>
+            <div class="tile__value">
+              <span class="trend">↗</span>6h 43m
+            </div>
+            <div class="tile__meta">78% of weekly goal</div>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="dial" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+          </div>
+          <div>
+            <div class="tile__label">Sleep</div>
+            <div class="tile__value">
+              <span class="trend">↗</span>6h 43m
+            </div>
+            <div class="tile__meta">78% of weekly goal</div>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="dial" aria-hidden="true" style="background: conic-gradient(#b8642a 0 65%, #e9e7e3 65% 100%);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3C9 7 7 9 7 13a5 5 0 0010 0c0-3-2-5-4-7l-.5-.5z"/></svg>
+          </div>
+          <div>
+            <div class="tile__label">Calories</div>
+            <div class="tile__value">
+              <span class="trend">↗</span>645
+            </div>
+            <div class="tile__meta">78% of weekly goal</div>
+          </div>
+        </div>
+        <div class="tile">
+          <div class="dial" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg>
+          </div>
+          <div>
+            <div class="tile__label">Active min</div>
+            <div class="tile__value">
+              <span class="trend">↗</span>52,470
+            </div>
+            <div class="tile__meta">78% of weekly goal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- advisor insight banner -->
+      <aside class="advisor" role="note">
+        <div class="advisor__body">
+          <span class="advisor__eyebrow"><span class="advisor__icon" aria-hidden="true"></span>Advisor</span>
+          <div class="advisor__title">Sleep is averaging <strong>38 minutes less</strong> than your goal this week.</div>
+          <div class="advisor__sub">Try a 30-minute wind-down tonight at 9:30pm.</div>
+        </div>
+        <button class="btn--ghost">Add wind-down</button>
+      </aside>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ------- continue your programs ------- -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Continue your programs</h2>
+          <div class="section-head__sub">Most engaged · 3 active in total</div>
+        </div>
+        <a class="link" href="#">View all programs</a>
+      </div>
+
+      <div class="programs-grid">
+        <article class="program-card">
+          <div class="program-card__media" aria-hidden="true"></div>
+          <div class="program-card__body">
+            <span class="tag">DCP · Sleep</span>
+            <div class="program-card__title">Better Sleep</div>
+            <div class="progress" aria-hidden="true"><i style="width:38%"></i></div>
+            <div class="program-card__foot"><span>Session 3 of 8</span><strong>$100</strong></div>
+          </div>
+        </article>
+        <article class="program-card">
+          <div class="program-card__media" aria-hidden="true"></div>
+          <div class="program-card__body">
+            <span class="tag">DCP · Stress</span>
+            <div class="program-card__title">Manage Stress</div>
+            <div class="progress" aria-hidden="true"><i style="width:62%"></i></div>
+            <div class="program-card__foot"><span>Session 5 of 8</span><strong>$100</strong></div>
+          </div>
+        </article>
+        <article class="program-card">
+          <div class="program-card__media" aria-hidden="true"></div>
+          <div class="program-card__body">
+            <span class="tag">DCP · Metabolic</span>
+            <div class="program-card__title">Diabetes Prevention</div>
+            <div class="progress" aria-hidden="true"><i style="width:37%"></i></div>
+            <div class="program-card__foot"><span>Week 6 of 16</span><strong>$100</strong></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ------- your challenge ------- -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Your challenge</h2>
+          <div class="section-head__sub">Active · ends Sun, May 31</div>
+        </div>
+      </div>
+
+      <div class="challenge-card">
+        <div>
+          <span class="tag">Team challenge</span>
+          <h3>Spring Steps Challenge</h3>
+          <div class="challenge__sub">Day 22 of 30 · Currently 4th of 8 teammates</div>
+        </div>
+        <button class="btn--ghost">Details</button>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ------- your rewards ------- -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Your rewards</h2>
+          <div class="section-head__sub">Earned through programs, challenges, and activity</div>
+        </div>
+        <a class="link" href="#">Reward Details</a>
+      </div>
+
+      <div class="rewards-grid">
+        <div class="reward-tile">
+          <span class="tag">Gift card</span>
+          <div class="reward-tile__value">$75</div>
+          <div class="reward-tile__title">Amazon · ready to redeem</div>
+          <div class="reward-tile__meta">$25 to next $25 card</div>
+        </div>
+        <div class="reward-tile">
+          <span class="tag">Points · Silver</span>
+          <div class="reward-tile__value">1,250</div>
+          <div class="reward-tile__title">Tier progress</div>
+          <div class="reward-tile__meta">750 to Gold tier</div>
+        </div>
+        <div class="reward-tile">
+          <span class="tag">Raffle</span>
+          <div class="reward-tile__value">12</div>
+          <div class="reward-tile__title">Active entries</div>
+          <div class="reward-tile__meta">Draw on May 31</div>
+        </div>
+        <div class="reward-tile">
+          <span class="tag">Store credit</span>
+          <div class="reward-tile__value">$25</div>
+          <div class="reward-tile__title">Spend in store</div>
+          <div class="reward-tile__meta">No expiry</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="page-end"></div>
+  </main>
+
+  <!-- ------- mobile bottom tab nav ------- -->
+  <nav class="tabnav" aria-label="Primary">
+    <a href="#" class="is-active" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v10a1 1 0 01-1 1h-5v-7H9v7H4a1 1 0 01-1-1V11z"/></svg>
+      Home
+    </a>
+    <a href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a5 5 0 019-3 5 5 0 019 3c0 6.5-7 11-7 11h-4z" opacity=".2"/><path d="M20.8 11.5a5 5 0 00-8.8-3 5 5 0 00-8.8 3"/></svg>
+      Digital Care
+    </a>
+    <a href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 014 4c0 2-1 3-2 4-1 1-2 2-2 4M12 17h.01"/></svg>
+      Wellbeing
+    </a>
+    <a href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v6c0 5-4 8-8 8s-8-3-8-8V7l8-4z"/></svg>
+      Benefits
+    </a>
+    <a href="#">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8 6.8 19l1-5.8L3.6 9.1l5.8-.8L12 3z"/></svg>
+      Rewards
+    </a>
+  </nav>
+
+</body>
+</html>
