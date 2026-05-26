@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breakpoint views — Google / Material 3 take, v1</title>
+<style>
+  :root{
+    --bg: #f4fbf8;
+    --ink: #161d1c;
+    --muted: #3f4947;
+    --line: #bec9c7;
+    --container: #eef5f2;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0; padding: 24px 24px 64px;
+    background: var(--bg); color: var(--ink);
+    font-family: "Google Sans","Roboto Flex","Roboto",system-ui,sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .head{
+    max-width: 1480px; margin: 0 auto 16px;
+    display: flex; align-items: end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  h1{
+    margin: 0; font-weight: 500; font-size: 28px; letter-spacing: -.01em;
+  }
+  .lead{ color: var(--muted); margin: 4px 0 0; max-width: 70ch; }
+  .grid{
+    max-width: 1480px; margin: 24px auto 0;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1000px){
+    .grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1480px){
+    .grid{ grid-template-columns: 375px 1fr 1fr; }
+  }
+  .vp{
+    background: var(--container);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .vp .label{
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .vp .name{ font-weight: 600; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+  .vp .size{ color: var(--muted); font-size: 13px; }
+  .frame-wrap{
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 720px;
+    position: relative;
+  }
+  iframe{
+    border: 0;
+    background: white;
+    transform-origin: top left;
+  }
+  .legend{
+    max-width: 1480px; margin: 32px auto 0;
+    display: grid; gap: 12px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 800px){ .legend{ grid-template-columns: repeat(3,1fr); } }
+  .l{
+    background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px;
+  }
+  .l h3{ margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+  .l p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div>
+      <h1>If Google built this page — three breakpoints</h1>
+      <p class="lead">Same HTML, three viewports. Material 3 adapts the chrome (bottom nav + FAB → navigation rail), the search bar (icon-only → expanded), and the section grids (1-col → 4-col / 3-up carousel).</p>
+    </div>
+    <a href="home-google-material-v1.html" style="font-size:14px;color:#006a60;text-decoration:none;font-weight:500;">Open full prototype →</a>
+  </div>
+
+  <div class="grid">
+    <div class="vp">
+      <div class="label">
+        <span class="name">Compact</span>
+        <span class="size">375 × 720 · &lt; 600</span>
+      </div>
+      <div class="frame-wrap" style="height: 740px;">
+        <iframe src="home-google-material-v1.html" width="375" height="740" style="width:375px; height:740px;"></iframe>
+      </div>
+    </div>
+
+    <div class="vp">
+      <div class="label">
+        <span class="name">Expanded</span>
+        <span class="size">1100 · navigation rail appears</span>
+      </div>
+      <div class="frame-wrap" style="height: 720px;">
+        <iframe src="home-google-material-v1.html" width="1100" height="900"
+                style="width:1100px; height:900px; transform: scale(.5); transform-origin: top left;"></iframe>
+      </div>
+    </div>
+
+    <div class="vp">
+      <div class="label">
+        <span class="name">Large</span>
+        <span class="size">1440 · max-width 1280, 3-up programs</span>
+      </div>
+      <div class="frame-wrap" style="height: 720px;">
+        <iframe src="home-google-material-v1.html" width="1440" height="1100"
+                style="width:1440px; height:1100px; transform: scale(.42); transform-origin: top left;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="l">
+      <h3>Compact &lt; 600</h3>
+      <p>Bottom navigation bar (5 destinations), Extended FAB pinned bottom-right, search collapses to icon in the top app bar. Trackers go 2×2, rewards 2×2, programs horizontal-scroll carousel with snap.</p>
+    </div>
+    <div class="l">
+      <h3>Medium → Expanded 600–1199</h3>
+      <p>At ≥600 the search bar in the top app bar expands and trackers/rewards become 4-up. At ≥840 the bottom nav is replaced by an 80px navigation rail with icon+label destinations; FAB moves into the rail (small FAB) and onto the canvas.</p>
+    </div>
+    <div class="l">
+      <h3>Large 1200+</h3>
+      <p>Content caps at 1280, gutter 40. Programs carousel becomes a 3-up grid (no scroll). The hero card splits image/content 1.1 : 1. Nav rail persists; top app bar shows the brand name beside the mark.</p>
+    </div>
+  </div>
+</body>
+</html>

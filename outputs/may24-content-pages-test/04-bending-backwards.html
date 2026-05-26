@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bending Backwards — content page with inline body illustrations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  :root {
+    --bg:              #FAF7F0;
+    --surface:         #FFFFFF;
+    --surface-tinted:  #EFE7D6;
+    --illustration-bg: #F2F2F0;   /* neutral gray for illustration placeholders */
+    --ink:             #1A1D21;
+    --ink-soft:        #5C5F66;
+    --ink-placeholder: #9A9EA6;
+    --hairline:        #E6E3DC;
+    --link:            #2E60A4;
+    --brand:           #1B355C;
+    --on-brand:        #FFFFFF;
+    --accent:          #3A7AC1;   /* numbered-marker blue (matches Figma summary circles) */
+    --red:             #C8272E;
+
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+
+    --r-xs:   2px;  --r-s:    4px;  --r-m:    8px;
+    --r-l:   12px;  --r-xl:  16px;  --r-full: 999px;
+
+    --s-01: 0.25rem; --s-02: 0.5rem; --s-03: 0.75rem; --s-04: 1rem;
+    --s-05: 1.5rem;  --s-06: 2rem;   --s-07: 2.5rem;  --s-08: 3rem;  --s-09: 4rem;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, dl, dd, dt, figure, hr { margin: 0; }
+  body {
+    background: var(--bg); color: var(--ink); font-family: var(--f-text);
+    font-size: 1rem; line-height: 1.25; font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 96px;   /* keep room for sticky CTA on Compact */
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  button { font: inherit; cursor: pointer; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; user-select: none; }
+
+  /* TYPE SCALE */
+  .heading-3 { font-family: var(--f-display); font-weight: 500; font-size: 2rem;    line-height: 2.25rem; letter-spacing: -0.01em; }
+  .heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem; line-height: 2rem; letter-spacing: -0.01em; }
+  .heading-6 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem; line-height: 1.5rem; letter-spacing: -0.008em; }
+  .body-2    { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: 1.25rem; letter-spacing: -0.008em; }
+  .caption   { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem; line-height: 1rem; letter-spacing: 0; }
+  .paragraph-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem; line-height: 1.5rem; letter-spacing: -0.003em; }
+  @media (min-width: 600px) {
+    .heading-3 { font-size: 2.25rem;   line-height: 2.5rem;   }
+    .heading-4 { font-size: 2rem;      line-height: 2.25rem;  }
+    .heading-6 { font-size: 1.4375rem; line-height: 1.625rem; }
+    .body-2    { font-size: 1.125rem;  line-height: 1.5rem;   }
+    .caption   { font-size: 0.875rem;  line-height: 1.25rem;  }
+    .paragraph-2 { font-size: 1.125rem; line-height: 1.6875rem; }
+  }
+
+  /* TOP BAR — back arrow + ACME left */
+  .top-bar { background: var(--surface); border-bottom: 1px solid var(--hairline); position: sticky; top: 0; z-index: 30; }
+  .top-bar__inner {
+    max-width: 1280px; margin: 0 auto; height: 64px;
+    padding: 0 var(--s-04);
+    display: flex; align-items: center; gap: var(--s-03);
+  }
+  .icon-btn {
+    width: 48px; height: 48px; border-radius: var(--r-full); border: 0; background: transparent;
+    display: inline-flex; align-items: center; justify-content: center; color: var(--ink); cursor: pointer;
+  }
+  .icon-btn:hover { background: var(--hairline); }
+  .acme-logo {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 2px solid var(--red); padding: 2px 8px; border-radius: var(--r-s);
+    color: var(--red); font-family: var(--f-display); font-weight: 800;
+    font-size: 14px; letter-spacing: 0.04em; background: var(--surface);
+  }
+  @media (min-width: 600px) {
+    .top-bar__inner { padding: 0 var(--s-05); }
+  }
+
+  /* PAGE outer container */
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--s-05) var(--s-04) var(--s-09);
+  }
+  @media (min-width: 600px) {
+    .page { padding: var(--s-06) var(--s-05) var(--s-09); }
+  }
+
+  /* ARTICLE — narrow readable column. No hero on this page — content starts immediately. */
+  .article {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex; flex-direction: column;
+    gap: var(--s-04);
+  }
+  @media (min-width: 600px) {
+    .article { gap: var(--s-05); }
+  }
+  .article__intro  { color: var(--ink-soft); }
+  .article__body   { color: var(--ink-soft); }
+
+  /* SECTIONS within article */
+  .section { margin-top: var(--s-06); display: flex; flex-direction: column; gap: var(--s-04); }
+  .section__head { display: flex; flex-direction: column; gap: var(--s-01); }
+  @media (min-width: 600px) {
+    .section { margin-top: var(--s-07); gap: var(--s-05); }
+  }
+
+  /* INLINE BODY ILLUSTRATIONS — preserved aspect, centered in body column.
+     Different from hero images: illustrations don't cover-crop; their composition
+     is intentional. Fixed width that fits comfortably inside the body column. */
+  .body-illustration {
+    align-self: center;
+    width: 240px;
+    aspect-ratio: 3 / 4;   /* portrait, matches the illustrated figure proportion */
+    background: var(--illustration-bg);
+    border-radius: var(--r-l);
+    overflow: hidden;
+    margin: var(--s-03) 0;
+  }
+  @media (min-width: 600px) {
+    .body-illustration {
+      width: 280px;
+      margin: var(--s-04) 0;
+    }
+  }
+  /* If you want the illustration to feel more present at Large+, bump one more step */
+  @media (min-width: 1024px) {
+    .body-illustration { width: 320px; }
+  }
+
+  /* DIVIDER before Summary section */
+  .article-divider {
+    height: 1px; background: var(--hairline);
+    border: 0; margin: var(--s-05) 0 0;
+  }
+
+  /* SUMMARY — numbered steps with circled markers */
+  .summary-list {
+    list-style: none; padding: 0;
+    display: flex; flex-direction: column; gap: var(--s-04);
+  }
+  .summary-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: var(--s-03);
+    align-items: start;
+  }
+  .summary-marker {
+    width: 28px; height: 28px; border-radius: var(--r-full);
+    background: var(--accent); color: var(--on-brand);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--f-text); font-weight: 500; font-size: 0.875rem; line-height: 1;
+  }
+  .summary-text { color: var(--ink-soft); padding-top: 2px; }
+
+  /* BUTTONS — M3 scale, sticky on Compact, inline at Medium+ */
+  .btn {
+    height: 40px; padding: 0 var(--s-04); border-radius: var(--r-full); border: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-02);
+    font-family: var(--f-text); font-weight: 500; font-size: 0.875rem; line-height: 1rem; letter-spacing: 0;
+    transition: background-color .15s, border-color .15s, color .15s;
+  }
+  .btn-m { height: 56px; padding: 0 var(--s-05); font-size: 1rem; line-height: 1.25rem; }
+  .btn-block { width: 100%; }
+  .btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  .btn-filled                  { background: var(--brand); color: var(--on-brand); }
+  .btn-filled:hover            { background: #14264A; }
+  .btn-filled:active           { background: #0E1C36; }
+  .btn-filled:focus-visible    { background: #14264A; }
+
+  /* CTA — sticky bottom bar on Compact (mobile-native feel),
+     inline at end of article on Medium+ */
+  .cta-bar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--surface); border-top: 1px solid var(--hairline);
+    padding: var(--s-03) var(--s-04) var(--s-05);
+    z-index: 20;
+  }
+  .cta-bar__inner {
+    max-width: 720px; margin: 0 auto;
+  }
+  @media (min-width: 600px) {
+    body { padding-bottom: 0; }
+    .cta-bar {
+      position: static;
+      background: transparent; border-top: 0;
+      padding: 0;
+      margin-top: var(--s-06);
+    }
+    .cta-bar__inner { display: flex; justify-content: center; }
+    .btn-block { width: auto; min-width: 240px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <button class="icon-btn" aria-label="Back">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <div class="acme-logo" aria-label="Acme">ACME</div>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <article class="article">
+
+      <h1 class="heading-4">Bending backwards</h1>
+
+      <p class="article__intro paragraph-2">
+        Bending backward exercises can correct the soft tissues in your lower back that have
+        moved out of position or that have distorted in shape.
+      </p>
+
+      <div class="section">
+        <div class="section__head">
+          <h2 class="heading-6">Assess your range of motion</h2>
+        </div>
+        <p class="article__body paragraph-2">
+          First assess your back's range of motion. Look at yourself in the mirror and stand
+          with the correct posture. Slide your hands slowly down the front of your legs and
+          see how far back you can bend comfortably.
+        </p>
+
+        <figure class="body-illustration" aria-label="Illustration: person bending forward at the waist"></figure>
+
+        <p class="article__body paragraph-2">
+          Next, place your hands in the arch in your lower back and slowly bend backwards,
+          also gauging how far you can bend.
+        </p>
+
+        <figure class="body-illustration" aria-label="Illustration: person standing with hands on lower back, bending backward"></figure>
+      </div>
+
+      <hr class="article-divider" />
+
+      <div class="section">
+        <div class="section__head">
+          <h2 class="heading-6">Summary</h2>
+        </div>
+        <ol class="summary-list">
+          <li class="summary-item">
+            <span class="summary-marker">1</span>
+            <p class="summary-text paragraph-2">
+              Backward bending exercises can correct changes in soft tissues in your back
+              that can cause pain and discomfort.
+            </p>
+          </li>
+          <li class="summary-item">
+            <span class="summary-marker">2</span>
+            <p class="summary-text paragraph-2">
+              First assess your back's range of motion to see if you feel restricted and to
+              be able to gauge improvements.
+            </p>
+          </li>
+        </ol>
+      </div>
+
+    </article>
+
+    <div class="cta-bar">
+      <div class="cta-bar__inner">
+        <button class="btn btn-m btn-filled btn-block">Mark as done</button>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

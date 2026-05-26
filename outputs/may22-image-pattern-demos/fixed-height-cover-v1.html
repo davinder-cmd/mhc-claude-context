@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pattern 2 · Fixed-Height Cover-Crop — MHC Image Pattern Demo</title>
+<style>
+  :root {
+    --bg: #FAF9F7;
+    --surface: #FFFFFF;
+    --ink: #1A1D21;
+    --ink-soft: #5C5F66;
+    --line: #E6E3DC;
+    --accent-bg: #FFF8E6;
+    --accent-line: #F0DDA0;
+    --warn-bg: #FDEEEA;
+    --warn-line: #F5BBA8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 120px;
+  }
+  @media (max-width: 768px) {
+    .container { padding: 32px 16px 120px; }
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 64px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    color: var(--ink-soft);
+    font-size: 17px;
+    max-width: 680px;
+    margin: 0;
+  }
+  .sub-lede {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+  .prompt {
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 28px 0 0;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .prompt strong { font-weight: 600; }
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.92em;
+    background: #F0EEE7;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  /* Hero banner — fixed 480px */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0C0C0C;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%);
+  }
+  .hero__content {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    color: #fff;
+  }
+  .hero__eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+  .hero__title {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .hero__sub {
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0;
+    max-width: 560px;
+  }
+
+  /* Page header — fixed 240px */
+  .page-header {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #0C0C0C;
+  }
+  .page-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .page-header__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.55) 100%);
+  }
+  .page-header__content {
+    position: absolute;
+    bottom: 24px;
+    left: 28px;
+    color: #fff;
+  }
+  .page-header__eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    margin-bottom: 6px;
+  }
+  .page-header__title {
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  /* Annotation block */
+  .annotation {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .annotation strong { color: var(--ink); font-weight: 600; }
+  .annotation.warn {
+    background: var(--warn-bg);
+    border-color: var(--warn-line);
+    color: var(--ink);
+  }
+
+  /* Live readout */
+  .readout {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    z-index: 100;
+    min-width: 260px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  }
+  .readout strong { color: #7BD8A8; font-weight: 500; }
+  .readout strong.locked { color: #F0DDA0; }
+  .readout-row { display: flex; justify-content: space-between; gap: 16px; }
+  .readout-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin: 6px 0;
+  }
+  .readout-label {
+    color: rgba(255,255,255,0.6);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="eyebrow">Pattern 2 of 3</div>
+  <h1>Fixed-Height Cover-Crop</h1>
+  <p class="lede">Container has a fixed pixel height regardless of viewport. Width flexes, height stays put. Photo fills via <code>object-fit: cover</code> — and crops differently at every width.</p>
+  <div class="prompt"><strong>Try it:</strong> drag the browser narrower. The hero stays 480px tall no matter what. Watch the readout (bottom right) — the effective ratio changes from a wide 2.5:1 letterbox on desktop to taller-than-wide on mobile. The image "zooms in" as the container becomes more square.</div>
+
+  <h2>Hero banner · fixed 480px height</h2>
+  <p class="sub-lede">For: marquee/feature heroes where the layout needs to feel anchored above the fold. Vertical rhythm matters more than showing the full image.</p>
+  <div class="hero" id="hero">
+    <img src="https://picsum.photos/id/1015/2400/1600" alt="">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__eyebrow">Based on your interests</div>
+      <h2 class="hero__title">Sleep better in 4 weeks</h2>
+      <p class="hero__sub">An evidence-based program built around your sleep habits.</p>
+    </div>
+  </div>
+  <div class="annotation">
+    <strong>What's happening:</strong> at 1440px wide, this container is roughly 1200×480 — a 2.5:1 letterbox. At 375px wide, it's 343×480 — taller than wide. The photo's framing shifts dramatically because the container's <em>shape</em> is changing, not just its size. Notice the landscape's horizon position moves as you resize.
+  </div>
+
+  <h2>Page header · fixed 240px height</h2>
+  <p class="sub-lede">For: section / detail-page headers where you want a consistent vertical anchor below the nav.</p>
+  <div class="page-header" id="page-header">
+    <img src="https://picsum.photos/id/1018/2400/1200" alt="">
+    <div class="page-header__overlay"></div>
+    <div class="page-header__content">
+      <div class="page-header__eyebrow">Section header</div>
+      <h2 class="page-header__title">Healthy Habits</h2>
+    </div>
+  </div>
+  <div class="annotation">
+    <strong>Why this works for page headers:</strong> the title and any controls below land at a predictable Y position regardless of viewport. Engineering can rely on the header being exactly 240px tall. The trade-off: aggressive cropping on mobile, so pick photos with the focal point near center.
+  </div>
+
+  <h2>When NOT to use this pattern</h2>
+  <div class="annotation warn">
+    <strong>Avoid fixed-height for:</strong> editorial cards, content tiles, anything in a grid. The shape-changing crop behavior makes images feel inconsistent across breakpoints — what looked balanced on desktop looks awkwardly tight on mobile. Fixed-height is only safe when the container is full-width AND the photo's focal point is centered/predictable. For most other cases, use Pattern 1 (aspect-ratio locked) or Pattern 3 (hybrid).
+  </div>
+</div>
+
+<div class="readout">
+  <div class="readout-label">Pattern</div>
+  <div class="readout-row"><span>Type:</span> <strong>fixed-height + cover</strong></div>
+  <div class="readout-divider"></div>
+  <div class="readout-label">Live measurements · 480px hero</div>
+  <div class="readout-row"><span>Viewport:</span> <strong id="vw">—</strong></div>
+  <div class="readout-row"><span>Container width:</span> <strong id="hw">—</strong></div>
+  <div class="readout-row"><span>Container height:</span> <strong class="locked">480px (locked)</strong></div>
+  <div class="readout-row"><span>Effective ratio:</span> <strong id="er">—</strong></div>
+  <div class="readout-row"><span>Orientation:</span> <strong id="ori">—</strong></div>
+</div>
+
+<script>
+  const vw = document.getElementById('vw');
+  const hw = document.getElementById('hw');
+  const er = document.getElementById('er');
+  const ori = document.getElementById('ori');
+  const hero = document.getElementById('hero');
+  function update() {
+    vw.textContent = window.innerWidth + 'px';
+    const rect = hero.getBoundingClientRect();
+    const w = Math.round(rect.width);
+    const h = Math.round(rect.height);
+    hw.textContent = w + 'px';
+    er.textContent = (w / h).toFixed(2) + ':1';
+    ori.textContent = w > h ? 'landscape' : (w === h ? 'square' : 'portrait');
+  }
+  update();
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+</script>
+</body>
+</html>

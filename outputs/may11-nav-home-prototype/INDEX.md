@@ -10,7 +10,9 @@ https://www.figma.com/design/8KnqJZHw475F2dpsHaubKY/Navigation-Design-Updates--C
 | File | Purpose |
 |---|---|
 | [pitch-talking-points.md](pitch-talking-points.md) | **Long speaking script.** First-person, options-framed. Carousel/real-estate counter-argument, the page-level-filter pushback grounded in Norman's mapping + Gestalt grouping. Includes the form-and-function vs. visuals scoping line and the zero-states/component-variations caveat. Use as reference doc / preparation. |
+| [pitch-talking-points-print.html](pitch-talking-points-print.html) | **Print-ready version of the long script.** Letter, SF Pro, page-break-aware, callout boxes for the two up-front caveats, individual cards for each "If pressed" line. Print or save-as-PDF with ⌘P. |
 | [pitch-talking-points-short.md](pitch-talking-points-short.md) | **Short conversational version.** Same beats, ~1/3 the length. Use as the in-meeting script. |
+| [pitch-talking-points-short-print.html](pitch-talking-points-short-print.html) | **Print-ready version of the short script.** Letter, SF Pro, ~2–3 pages. The one to actually take into the room. |
 
 ## Iterations
 

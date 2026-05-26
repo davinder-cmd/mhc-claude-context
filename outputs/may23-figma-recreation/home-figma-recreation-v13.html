@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home — Figma recreation · MHC system applied</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  :root {
+    /* ── Colors — warm beige + graphite + navy ──────────── */
+    --bg:              #FAF7F0;   /* warm beige page */
+    --surface:         #FFFFFF;   /* white cards */
+    --surface-tinted:  #EFE7D6;   /* warmer beige placeholder */
+    --ink:             #1A1D21;   /* near-black */
+    --ink-soft:        #5C5F66;   /* graphite */
+    --ink-placeholder: #9A9EA6;
+    --hairline:        #E6E3DC;
+    --link:            #2E60A4;   /* navy link */
+    --brand:           #1B355C;   /* primary button navy */
+    --on-brand:        #FFFFFF;
+    --insight-bg:      #E8F0FA;
+    --insight-border:  #B5C8E0;
+    --insight-dot:     #2E60A4;
+    --red:             #C8272E;   /* ACME / reward dot */
+    --green:           #4FA858;   /* steps */
+    --blue-icon:       #3A6FA8;   /* sleep */
+    --orange:          #B5571E;   /* calories */
+    --teal-dark:       #1E5A6B;   /* active min */
+    --progress-bg:     #DDD7C8;
+    --progress-fill:   #4A4A60;   /* progress dark line */
+
+    /* ── Type families ──────────────────────────────────── */
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+
+    /* ── LH (simplified 3-ratio rule from v3/v4) ────────── */
+    --lh-display: 1.125;
+    --lh-tight:   1.25;
+    --lh-body:    1.5;
+
+    /* ── Shape ──────────────────────────────────────────── */
+    --r-sm:   8px;
+    --r-md:  12px;
+    --r-lg:  16px;
+    --r-full: 999px;
+
+    /* ── Spacing (matches design/foundation/spacing.md) ─── */
+    --s-01: 0.25rem;  /* 4 */
+    --s-02: 0.5rem;   /* 8 */
+    --s-03: 0.75rem;  /* 12 */
+    --s-04: 1rem;     /* 16 */
+    --s-05: 1.5rem;   /* 24 */
+    --s-06: 2rem;     /* 32 */
+    --s-07: 2.5rem;   /* 40 */
+    --s-08: 3rem;     /* 48 */
+    --s-09: 4rem;     /* 64 */
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: var(--lh-tight);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  button { font: inherit; cursor: pointer; }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    user-select: none;
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     MHC TYPE SCALE (from v4) — rem-based, Material weights,
+     simplified 3-ratio LH, caption & small static across viewports
+     ────────────────────────────────────────────────────────── */
+  .heading-2 { font-family: var(--f-display); font-weight: 500; font-size: 2.25rem;   line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }  /* 36 */
+  .heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem;   line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }  /* 28 */
+  .heading-5 { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: var(--lh-display); letter-spacing: -0.008em; margin: 0; }  /* 25 */
+  .heading-6 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem;   line-height: var(--lh-display); letter-spacing: -0.008em; margin: 0; }  /* 20 */
+
+  .body-1    { font-family: var(--f-text); font-weight: 400; font-size: 1.125rem; line-height: var(--lh-tight); letter-spacing: -0.008em; margin: 0; }  /* 18 */
+  .body-2    { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: var(--lh-tight); letter-spacing: -0.008em; margin: 0; }  /* 16 */
+  .body-3    { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem; line-height: var(--lh-tight); letter-spacing: -0.008em; margin: 0; }  /* 14 */
+
+  .caption   { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem;   line-height: var(--lh-tight); letter-spacing: 0.04em; text-transform: uppercase; margin: 0; }  /* 12 — static */
+  .small     { font-family: var(--f-text); font-weight: 600; font-size: 0.6875rem; line-height: var(--lh-tight); letter-spacing: 0; margin: 0; }  /* 11 — static */
+
+  .paragraph-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: var(--lh-body); letter-spacing: -0.003em; margin: 0; }  /* 16 */
+  .paragraph-3 { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem; line-height: var(--lh-body); letter-spacing: -0.003em; margin: 0; }  /* 14 */
+
+  /* Medium Form bumps (≥600). Caption & small intentionally NOT included. */
+  @media (min-width: 600px) {
+    .heading-2   { font-size: 2.5625rem; }  /* 41 */
+    .heading-4   { font-size: 2rem;      }  /* 32 */
+    .heading-5   { font-size: 1.8125rem; }  /* 29 */
+    .heading-6   { font-size: 1.4375rem; }  /* 23 */
+    .body-1      { font-size: 1.25rem;   }
+    .body-2      { font-size: 1.125rem;  }
+    .body-3      { font-size: 1rem;      }
+    .paragraph-2 { font-size: 1.125rem;  }
+    .paragraph-3 { font-size: 1rem;      }
+  }
+
+  /* ── Top bar (current side-nav state: hamburger + brand + actions) ── */
+  .top-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
+    position: sticky; top: 0; z-index: 30;
+  }
+  .top-bar__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 64px;
+    padding: 0 var(--s-04);
+    display: flex;
+    align-items: center;
+    gap: var(--s-03);
+  }
+  .icon-btn {
+    width: 40px; height: 40px;
+    border-radius: var(--r-full);
+    border: 0; background: transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink);
+  }
+  .icon-btn:hover { background: var(--hairline); }
+  .acme-logo {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 2px solid var(--red);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--red);
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    background: var(--surface);
+  }
+  .top-bar__spacer { flex: 1; }
+
+  /* ── Shell ──────────────────────────────────────────── */
+  .shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--s-04) var(--s-04) calc(var(--s-09) + 80px);
+  }
+  @media (min-width: 600px) {
+    .top-bar__inner { padding: 0 var(--s-05); }
+    .shell { padding: var(--s-06) var(--s-05) var(--s-09); }
+  }
+  @media (min-width: 1600px) {
+    .top-bar__inner, .shell { max-width: 1440px; }
+  }
+
+  /* ── Greeting ──────────────────────────────────────── */
+  .greeting {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: var(--s-04);
+    margin-bottom: var(--s-05);
+  }
+  .greeting__actions { display: flex; gap: var(--s-02); }
+
+  /* Greeting copy differs at Compact ("Hi Davinder") vs Medium+ ("Afternoon Davinder") */
+  .greet-compact { display: inline; }
+  .greet-medium { display: none; }
+  @media (min-width: 600px) {
+    .greet-compact { display: none; }
+    .greet-medium { display: inline; }
+  }
+
+  /* ── Sections ──────────────────────────────────────── */
+  .section { margin-top: var(--s-07); }  /* 40dp between every section */
+  /* .section--hairline retired — dividers removed, spacing unified at 40dp */
+  .section-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--s-03);
+    margin-bottom: var(--s-04);
+  }
+  .section-head__title { display: flex; flex-direction: column; gap: var(--s-01); }
+  .section-head .meta {
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.75rem;   /* 12 — one step down from body-3 (14) */
+  }
+
+  /* ── Hero — split image / content, capped 360dp at Medium+ ── */
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .hero__media {
+    aspect-ratio: 3 / 2;
+    background: var(--surface-tinted);
+  }
+  .hero__content {
+    padding: var(--s-05);
+    display: flex; flex-direction: column; gap: var(--s-03);
+  }
+  .hero__meta {
+    color: var(--ink-soft);
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  }
+  .hero__meta .dot { width: 3px; height: 3px; border-radius: 999px; background: currentColor; }
+  @media (min-width: 600px) {
+    .hero { grid-template-columns: 5fr 7fr; max-height: 360px; }
+    .hero__media { aspect-ratio: auto; height: 100%; }
+    .hero__content { padding: var(--s-06); overflow: hidden; justify-content: center; gap: var(--s-04); }
+  }
+
+  /* ── Buttons ───────────────────────────────────────── */
+  .btn {
+    height: 44px;
+    padding: 0 var(--s-05);
+    border-radius: var(--r-full);
+    border: 0;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--f-text); font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1;
+    transition: background-color .15s, border-color .15s;
+  }
+  .btn-filled { background: var(--brand); color: var(--on-brand); }
+  .btn-filled:hover { background: #14264A; }
+  .btn-outlined {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+  }
+  .btn-outlined:hover { border-color: var(--ink-placeholder); }
+  .btn-text { background: transparent; color: var(--link); padding: 0 var(--s-02); height: auto; }
+  .btn-sm { height: 36px; padding: 0 var(--s-04); }
+
+  /* ── Pair (interest + employer) ────────────────────── */
+  .pair {
+    display: grid;
+    gap: var(--s-04);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 600px) {
+    .pair { grid-template-columns: 1fr 1fr; gap: var(--s-05); }
+  }
+  .pair-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: var(--s-04);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  .pair-card__title { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-03); }
+  .pair-card__row {
+    display: flex; align-items: center; gap: var(--s-04);
+    padding: var(--s-02) 0;
+  }
+  .pair-card__thumb {
+    width: 64px; height: 64px;
+    border-radius: var(--r-md);
+    background: var(--surface-tinted);
+    flex: 0 0 auto;
+  }
+  .pair-card__row-body { flex: 1; min-width: 0; }
+  .pair-card__footer {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: var(--s-03);
+    border-top: 1px solid var(--hairline);
+    padding-top: var(--s-03);
+    margin-top: var(--s-02);
+  }
+  .pair-card__footer a {
+    font-family: var(--f-text);
+    font-weight: 500;
+    font-size: 0.75rem;          /* 12 — one step down from body-3 (14) */
+    line-height: var(--lh-tight);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* ── This week stat tiles ──────────────────────────── */
+  .trackers {
+    display: grid;
+    gap: var(--s-03);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 600px) {
+    .trackers { grid-template-columns: repeat(4, 1fr); gap: var(--s-04); }
+  }
+  .tracker {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: var(--s-04);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  .tracker__icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    display: grid; place-items: center;
+    color: var(--green);
+    background: var(--surface);
+  }
+  .tracker--sleep    .tracker__icon { border-color: var(--blue-icon);  color: var(--blue-icon);  }
+  .tracker--calories .tracker__icon { border-color: var(--orange);     color: var(--orange);     }
+  .tracker--active   .tracker__icon { border-color: var(--teal-dark);  color: var(--teal-dark);  }
+  .tracker__icon .material-symbols-outlined { font-size: 28px; }
+
+  .tracker__label { color: var(--ink-soft); margin-top: var(--s-02); }
+  .tracker__value {
+    display: inline-flex; align-items: baseline; gap: 4px;
+  }
+  .tracker__value .arrow {
+    color: var(--green); font-size: 16px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
+  .tracker__meta { color: var(--ink-soft); }
+
+  /* ── Insight (tinted callout — icon left, body right; button moves OUTSIDE) ── */
+  .insight {
+    background: var(--insight-bg);
+    border: 1px solid var(--insight-border);
+    border-radius: var(--r-lg);
+    padding: var(--s-05);
+    display: flex; align-items: center;
+    gap: var(--s-04);
+  }
+  .insight__label {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--insight-dot);
+  }
+  .insight__label .dot {
+    width: 8px; height: 8px; border-radius: 999px;
+    background: var(--insight-dot);
+  }
+  .insight__body { flex: 1; min-width: 0; }
+  .insight__body strong { font-weight: 600; }
+  .insight__sub { color: var(--ink-soft); margin-top: var(--s-01); }
+  /* Button container — sits outside the .insight, centered */
+  .insight__action {
+    display: flex; justify-content: center;
+    margin-top: var(--s-04);
+  }
+
+  /* ── Banner icon (used by Insight and Challenge) ───── */
+  .banner-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    flex: 0 0 auto;
+  }
+  .banner-icon--challenge {
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--ink);
+  }
+  .banner-icon--insight {
+    background: rgba(46, 96, 164, 0.14);
+    color: var(--insight-dot);
+  }
+  .banner-icon .material-symbols-outlined { font-size: 24px; }
+
+  /* ── Programs ──────────────────────────────────────── */
+  .programs {
+    display: grid;
+    gap: var(--s-04);
+    grid-template-columns: 1fr;
+  }
+  /* Mobile: horizontal scroll */
+  @media (max-width: 599px) {
+    .programs {
+      grid-auto-flow: column;
+      grid-auto-columns: 78%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: var(--s-03);
+      margin: 0 calc(var(--s-04) * -1);
+      padding-left: var(--s-04);
+      padding-right: var(--s-04);
+    }
+    .program { scroll-snap-align: start; }
+  }
+  @media (min-width: 600px) {
+    .programs { grid-template-columns: repeat(3, 1fr); gap: var(--s-04); }
+  }
+  .program {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .program__media {
+    aspect-ratio: 16 / 9;
+    background: var(--surface-tinted);
+  }
+  .program__body {
+    padding: var(--s-05);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  .program__tag {
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .program__tag .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--ink-soft); }
+  .program__footer {
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--ink-soft);
+  }
+  .program__footer .price { color: var(--ink); font-weight: 500; }
+  .progress {
+    height: 3px;
+    background: var(--progress-bg);
+    border-radius: var(--r-full);
+    overflow: hidden;
+  }
+  .progress__fill {
+    height: 100%;
+    background: var(--progress-fill);
+    border-radius: inherit;
+  }
+
+  /* ── Challenge ─────────────────────────────────────── */
+  .challenge {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: var(--s-05);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: var(--s-04);
+  }
+  .challenge__body { display: flex; flex-direction: column; gap: var(--s-02); flex: 1; min-width: 0; }
+  .challenge__meta { color: var(--ink-soft); }
+
+  /* ── Rewards ───────────────────────────────────────── */
+  .rewards {
+    display: grid;
+    gap: var(--s-03);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 600px) {
+    .rewards { grid-template-columns: repeat(4, 1fr); gap: var(--s-04); }
+  }
+  .reward {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: var(--s-04);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  .reward-chip {
+    align-self: flex-start;
+    display: inline-flex; align-items: center;
+    padding: 4px 8px;
+    border-radius: 8px;            /* per object-styles `m` token (8dp) */
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-weight: 600;
+    font-size: 0.6875rem;          /* 11 — matches .small class */
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .reward-chip--gift   { background: #CFE9DB; }  /* pale mint */
+  .reward-chip--points { background: #DBE0F2; }  /* pale lavender */
+  .reward-chip--raffle { background: #DCEACE; }  /* pale green */
+  .reward-chip--store  { background: #FAE3D3; }  /* pale peach */
+  .reward__meta { color: var(--ink-soft); }
+  .reward__sub  { color: var(--ink-placeholder); margin-top: var(--s-01); }
+
+  /* ── Bottom nav (Compact only) ─────────────────────── */
+  .bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 80px;
+    background: var(--surface);
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px 0 12px;
+    z-index: 15;
+  }
+  .bn-item {
+    background: transparent; border: 0;
+    color: var(--ink-soft);
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+  }
+  .bn-item.active { color: var(--ink); }
+  .bn-item .material-symbols-outlined { font-size: 22px; }
+  @media (min-width: 600px) {
+    .bottom-nav { display: none; }
+  }
+
+  /* ── Utility ───────────────────────────────────────── */
+  .ink-soft { color: var(--ink-soft); }
+  .ink-placeholder { color: var(--ink-placeholder); }
+</style>
+</head>
+<body>
+
+  <!-- ──────────── TOP BAR ──────────── -->
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <button class="icon-btn" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="acme-logo" aria-label="Acme">ACME</div>
+      <div class="top-bar__spacer"></div>
+      <button class="icon-btn" aria-label="Messages">
+        <span class="material-symbols-outlined">mail_outline</span>
+      </button>
+      <button class="icon-btn" aria-label="Search">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <!-- ──────────── GREETING ──────────── -->
+    <div class="greeting">
+      <h1 class="heading-2">
+        <span class="greet-compact">Hi Davinder</span>
+        <span class="greet-medium">Afternoon Davinder</span>
+      </h1>
+    </div>
+
+    <!-- ──────────── HERO ──────────── -->
+    <section class="hero">
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="hero__content">
+        <div class="caption ink-soft">Based on your interests</div>
+        <h2 class="heading-4">Sleep better in 4 weeks</h2>
+        <p class="paragraph-2 ink-soft" style="margin: 0;">
+          An evidence-based program built around your sleep habits.
+          Eight short sessions, a quiet routine, real change.
+        </p>
+        <div class="hero__meta body-3">
+          <span>Sleep DCP</span>
+          <span class="dot"></span>
+          <span>$100 reward at completion</span>
+        </div>
+        <div>
+          <button class="btn btn-filled">Start the program</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── PAIR ──────────── -->
+    <section class="section section--hairline pair">
+      <div class="pair-card">
+        <div class="pair-card__title">
+          <h3 class="body-2" style="font-weight: 500;">Based on your interest</h3>
+        </div>
+        <div class="pair-card__row">
+          <div class="pair-card__thumb" aria-hidden="true"></div>
+          <div class="pair-card__row-body">
+            <div class="caption ink-soft">Article · Sleep</div>
+            <div class="body-2" style="margin-top: 2px;">How to wind down before bed</div>
+            <div class="body-3 ink-soft" style="margin-top: 2px;">3 min read</div>
+          </div>
+          <span class="material-symbols-outlined ink-soft" aria-hidden="true">chevron_right</span>
+        </div>
+        <div class="pair-card__footer">
+          <a href="#">See 7 more matched to your interests</a>
+          <a href="#">Edit Interests</a>
+        </div>
+      </div>
+
+      <div class="pair-card">
+        <div class="pair-card__title">
+          <h3 class="body-2" style="font-weight: 500;">From your employer</h3>
+        </div>
+        <div class="pair-card__row">
+          <div class="pair-card__thumb" aria-hidden="true"></div>
+          <div class="pair-card__row-body">
+            <div class="caption ink-soft">Wellbeing</div>
+            <div class="body-2" style="margin-top: 2px;">Complete your health assessment</div>
+            <div class="body-3 ink-soft" style="margin-top: 2px;">Earn $300</div>
+          </div>
+          <span class="material-symbols-outlined ink-soft" aria-hidden="true">chevron_right</span>
+        </div>
+        <div class="pair-card__footer">
+          <a href="#">See 3 more from Acme</a>
+          <span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── THIS WEEK ──────────── -->
+    <section class="section section--hairline">
+      <div class="section-head">
+        <div class="section-head__title">
+          <h2 class="heading-6">This week</h2>
+          <div class="body-3 meta">
+            <span class="material-symbols-outlined" style="font-size: 13px; vertical-align: -2px;">sync</span>
+            Synced 4 minutes ago · Source: Apple Health
+          </div>
+        </div>
+        <a class="body-3" href="#">View All Data</a>
+      </div>
+
+      <div class="trackers">
+        <div class="tracker">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">directions_walk</span>
+          </div>
+          <div class="caption tracker__label">Steps</div>
+          <div class="heading-5 tracker__value">
+            <span class="arrow material-symbols-outlined">north_east</span>
+            6h 43m
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+
+        <div class="tracker tracker--sleep">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">bedtime</span>
+          </div>
+          <div class="caption tracker__label">Sleep</div>
+          <div class="heading-5 tracker__value">
+            <span class="arrow material-symbols-outlined" style="color: var(--blue-icon);">north_east</span>
+            6h 43m
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+
+        <div class="tracker tracker--calories">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">local_fire_department</span>
+          </div>
+          <div class="caption tracker__label">Calories</div>
+          <div class="heading-5 tracker__value">
+            <span class="arrow material-symbols-outlined" style="color: var(--orange);">north_east</span>
+            645
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+
+        <div class="tracker tracker--active">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">timer</span>
+          </div>
+          <div class="caption tracker__label">Active Min</div>
+          <div class="heading-5 tracker__value">
+            <span class="arrow material-symbols-outlined" style="color: var(--teal-dark);">north_east</span>
+            52,470
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── INSIGHT (icon inside, button OUTSIDE below center) ──────────── -->
+    <section class="section">
+      <div class="insight">
+        <div class="banner-icon banner-icon--insight">
+          <span class="material-symbols-outlined">auto_awesome</span>
+        </div>
+        <div class="insight__body">
+          <div class="caption insight__label">
+            <span class="dot"></span>
+            Insight
+          </div>
+          <p class="body-2" style="margin: 6px 0 0;">
+            Sleep is averaging <strong>38 minutes less</strong> than your goal this week.
+          </p>
+          <p class="body-3 insight__sub" style="margin: 0;">
+            Try a 30-minute wind-down tonight at 9:30pm.
+          </p>
+        </div>
+      </div>
+      <div class="insight__action">
+        <button class="btn btn-outlined">Refresh Insight</button>
+      </div>
+    </section>
+
+    <!-- ──────────── CONTINUE YOUR PROGRAMS ──────────── -->
+    <section class="section section--hairline">
+      <div class="section-head">
+        <div class="section-head__title">
+          <h2 class="heading-6">Continue your programs</h2>
+          <div class="body-3 meta">Most engaged · 3 active in total</div>
+        </div>
+        <a class="body-3" href="#">View all programs</a>
+      </div>
+
+      <div class="programs">
+        <article class="program">
+          <div class="program__media" aria-hidden="true"></div>
+          <div class="program__body">
+            <div class="caption program__tag">
+              <span class="dot"></span>
+              DCP · Sleep
+            </div>
+            <h3 class="heading-6">Better Sleep</h3>
+            <div class="program__footer body-3">
+              <span>Session 3 of 8</span>
+              <span class="price">$100</span>
+            </div>
+            <div class="progress"><div class="progress__fill" style="width: 37.5%"></div></div>
+          </div>
+        </article>
+
+        <article class="program">
+          <div class="program__media" aria-hidden="true"></div>
+          <div class="program__body">
+            <div class="caption program__tag">
+              <span class="dot"></span>
+              DCP · Stress
+            </div>
+            <h3 class="heading-6">Manage Stress</h3>
+            <div class="program__footer body-3">
+              <span>Session 5 of 8</span>
+              <span class="price">$100</span>
+            </div>
+            <div class="progress"><div class="progress__fill" style="width: 62.5%"></div></div>
+          </div>
+        </article>
+
+        <article class="program">
+          <div class="program__media" aria-hidden="true"></div>
+          <div class="program__body">
+            <div class="caption program__tag">
+              <span class="dot"></span>
+              DCP · Diabetes
+            </div>
+            <h3 class="heading-6">Diabetes Prevention</h3>
+            <div class="program__footer body-3">
+              <span>Week 6 of 16</span>
+              <span class="price">$100</span>
+            </div>
+            <div class="progress"><div class="progress__fill" style="width: 37.5%"></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ──────────── YOUR CHALLENGE ──────────── -->
+    <section class="section section--hairline">
+      <h2 class="heading-6" style="margin-bottom: var(--s-04);">Your challenge</h2>
+      <div class="challenge">
+        <div class="banner-icon banner-icon--challenge">
+          <span class="material-symbols-outlined">emoji_events</span>
+        </div>
+        <div class="challenge__body">
+          <div class="caption ink-soft">Team Challenge</div>
+          <div class="heading-6">Spring Steps Challenge</div>
+          <div class="body-3 challenge__meta">Day 22 of 30 · Currently 4th of 8 teammates</div>
+        </div>
+        <button class="btn btn-outlined">Details</button>
+      </div>
+    </section>
+
+    <!-- ──────────── YOUR REWARDS ──────────── -->
+    <section class="section section--hairline">
+      <div class="section-head">
+        <h2 class="heading-6">Your rewards</h2>
+        <a class="body-3" href="#">Reward Details</a>
+      </div>
+
+      <div class="rewards">
+        <div class="reward">
+          <span class="reward-chip reward-chip--gift">Gift Card</span>
+          <div class="heading-5">$75</div>
+          <div class="body-3 reward__meta">Amazon · ready to redeem</div>
+          <div class="body-3 reward__sub">$25 to next $25 card</div>
+        </div>
+        <div class="reward">
+          <span class="reward-chip reward-chip--points">Points · Silver</span>
+          <div class="heading-5">1,250</div>
+          <div class="body-3 reward__meta">Tier progress</div>
+          <div class="body-3 reward__sub">750 to Gold tier</div>
+        </div>
+        <div class="reward">
+          <span class="reward-chip reward-chip--raffle">Raffle</span>
+          <div class="heading-5">12</div>
+          <div class="body-3 reward__meta">Active entries</div>
+          <div class="body-3 reward__sub">Draw on May 31</div>
+        </div>
+        <div class="reward">
+          <span class="reward-chip reward-chip--store">Store Credit</span>
+          <div class="heading-5">$25</div>
+          <div class="body-3 reward__meta">Spend in store</div>
+          <div class="body-3 reward__sub">No expiry</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ──────────── BOTTOM NAV (Compact only) ──────────── -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <button class="bn-item active">
+      <span class="material-symbols-outlined">home</span>
+      <span class="small">Home</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">medical_services</span>
+      <span class="small">Digital Care</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">favorite</span>
+      <span class="small">Wellbeing</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">workspace_premium</span>
+      <span class="small">Benefits</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">card_giftcard</span>
+      <span class="small">Rewards</span>
+    </button>
+  </nav>
+
+</body>
+</html>

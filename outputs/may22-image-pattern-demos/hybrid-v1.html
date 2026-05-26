@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pattern 3 · Hybrid — MHC Image Pattern Demo</title>
+<style>
+  :root {
+    --bg: #FAF9F7;
+    --surface: #FFFFFF;
+    --ink: #1A1D21;
+    --ink-soft: #5C5F66;
+    --line: #E6E3DC;
+    --accent-bg: #FFF8E6;
+    --accent-line: #F0DDA0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 120px;
+  }
+  @media (max-width: 768px) {
+    .container { padding: 32px 16px 120px; }
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 64px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    color: var(--ink-soft);
+    font-size: 17px;
+    max-width: 680px;
+    margin: 0;
+  }
+  .sub-lede {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+  .prompt {
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 28px 0 0;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .prompt strong { font-weight: 600; }
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.92em;
+    background: #F0EEE7;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  /* Hero — hybrid: 16:9 with 480px max-height */
+  .hero {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    max-height: 480px;
+    overflow: hidden;
+    border-radius: 14px;
+    position: relative;
+    background: #0C0C0C;
+  }
+  .hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%);
+  }
+  .hero__content {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    right: 32px;
+    color: #fff;
+  }
+  .hero__eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+  .hero__title {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .hero__sub {
+    font-size: 16px;
+    opacity: 0.9;
+    margin: 0;
+    max-width: 560px;
+  }
+
+  /* Annotation block */
+  .annotation {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .annotation strong { color: var(--ink); font-weight: 600; }
+
+  /* Crossover table */
+  .crossover-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    font-variant-numeric: tabular-nums;
+  }
+  .crossover-table th, .crossover-table td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  .crossover-table th {
+    background: #F4F2EC;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+  .crossover-table tr:last-child td { border-bottom: none; }
+  .crossover-table .crossover-row {
+    background: var(--accent-bg);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #ECEAE2;
+    color: var(--ink);
+  }
+  .pill--cap { background: #FFE9C2; }
+  .pill--ratio { background: #D7EFE0; }
+
+  /* Code block */
+  .code-block {
+    background: #1A1D21;
+    color: #E8E6E0;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 16px 0;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    overflow-x: auto;
+  }
+  .code-block .k { color: #7BD8A8; }
+  .code-block .p { color: #F0DDA0; }
+  .code-block .v { color: #B8C5D6; }
+  .code-block .c { color: #6B7280; }
+
+  /* Live readout */
+  .readout {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    z-index: 100;
+    min-width: 280px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  }
+  .readout strong { color: #7BD8A8; font-weight: 500; }
+  .readout strong.cap { color: #F0DDA0; }
+  .readout-row { display: flex; justify-content: space-between; gap: 16px; }
+  .readout-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin: 6px 0;
+  }
+  .readout-label {
+    color: rgba(255,255,255,0.6);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .crossover-callout {
+    margin-top: 6px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    text-align: center;
+    background: rgba(123,216,168,0.16);
+    color: #7BD8A8;
+  }
+  .crossover-callout.cap {
+    background: rgba(240,221,160,0.16);
+    color: #F0DDA0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="eyebrow">Pattern 3 of 3</div>
+  <h1>Hybrid · aspect-ratio + max-height</h1>
+  <p class="lede">Aspect-ratio locked below the crossover width. Height-capped above it. Reasonable on mobile, controlled on desktop — the best of both. This is what Material does on its larger heroes.</p>
+  <div class="prompt"><strong>Try it:</strong> drag the browser narrower and wider. Watch the readout (bottom right) switch between <em>aspect-ratio (16:9)</em> and <em>max-height (480px)</em>. The crossover happens around <strong>853px</strong> — below that, height shrinks with width; above it, height locks at 480px and only width keeps growing.</p>
+
+  <h2>Hero marquee · 16:9 capped at 480px</h2>
+  <p class="sub-lede">For: marketing heroes, program announcements, any large-feature imagery that needs to behave well across every viewport.</p>
+  <div class="hero" id="hero">
+    <img src="https://picsum.photos/id/1015/2400/1600" alt="">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__eyebrow">Based on your interests</div>
+      <h2 class="hero__title">Sleep better in 4 weeks</h2>
+      <p class="hero__sub">An evidence-based program built around your sleep habits.</p>
+    </div>
+  </div>
+
+  <h2>The crossover math</h2>
+  <p class="sub-lede">With <code>aspect-ratio: 16/9</code> and <code>max-height: 480px</code>, the crossover sits at <strong>853px wide</strong> (because 853 × 9/16 ≈ 480). Below 853, the ratio rule wins. Above 853, the cap rule wins.</p>
+  <table class="crossover-table">
+    <thead>
+      <tr>
+        <th>Container width</th>
+        <th>Natural 16:9 height</th>
+        <th>Actual height</th>
+        <th>Active rule</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1440px</td><td>810px</td><td>480px</td><td><span class="pill pill--cap">max-height</span></td></tr>
+      <tr><td>1200px</td><td>675px</td><td>480px</td><td><span class="pill pill--cap">max-height</span></td></tr>
+      <tr><td>1000px</td><td>562px</td><td>480px</td><td><span class="pill pill--cap">max-height</span></td></tr>
+      <tr class="crossover-row"><td>853px (crossover)</td><td>480px</td><td>480px</td><td>both meet</td></tr>
+      <tr><td>768px</td><td>432px</td><td>432px</td><td><span class="pill pill--ratio">aspect-ratio</span></td></tr>
+      <tr><td>500px</td><td>281px</td><td>281px</td><td><span class="pill pill--ratio">aspect-ratio</span></td></tr>
+      <tr><td>375px</td><td>211px</td><td>211px</td><td><span class="pill pill--ratio">aspect-ratio</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>The CSS</h2>
+  <div class="code-block"><span class="k">.hero</span> {
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">aspect-ratio</span>: <span class="v">16 / 9</span>;     <span class="c">/* governs at small widths */</span>
+  <span class="p">max-height</span>: <span class="v">480px</span>;     <span class="c">/* governs at large widths */</span>
+  <span class="p">overflow</span>: <span class="v">hidden</span>;
+}
+<span class="k">.hero img</span> {
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">height</span>: <span class="v">100%</span>;
+  <span class="p">object-fit</span>: <span class="v">cover</span>;     <span class="c">/* photo fills, crops as needed */</span>
+}</div>
+
+  <div class="annotation">
+    <strong>This is what you noticed in Material.</strong> Height grows with width up to a point, then locks. Above the cap, the image crops more on top/bottom as the container gets wider. Below the cap, the image stays in pure 16:9. One container, two behaviors, no media queries needed — the browser does the switching automatically.
+  </div>
+
+  <div class="annotation">
+    <strong>When to use this over pure aspect-ratio:</strong> any time a 16:9 image would become uncomfortably tall at large widths. A 16:9 hero at 1440px wide is 810px tall — that pushes everything else below the fold. The cap stops that. Use this for full-bleed heroes; use Pattern 1 (pure ratio) for column-constrained cards.
+  </div>
+</div>
+
+<div class="readout">
+  <div class="readout-label">Pattern</div>
+  <div class="readout-row"><span>Type:</span> <strong>hybrid (ratio + cap)</strong></div>
+  <div class="readout-divider"></div>
+  <div class="readout-label">Live measurements · hero</div>
+  <div class="readout-row"><span>Viewport:</span> <strong id="vw">—</strong></div>
+  <div class="readout-row"><span>Container width:</span> <strong id="hw">—</strong></div>
+  <div class="readout-row"><span>Container height:</span> <strong id="hh">—</strong></div>
+  <div class="readout-row"><span>If pure 16:9:</span> <strong id="hp">—</strong></div>
+  <div class="readout-row"><span>Effective ratio:</span> <strong id="er">—</strong></div>
+  <div id="callout" class="crossover-callout">aspect-ratio (16:9)</div>
+</div>
+
+<script>
+  const vw = document.getElementById('vw');
+  const hw = document.getElementById('hw');
+  const hh = document.getElementById('hh');
+  const hp = document.getElementById('hp');
+  const er = document.getElementById('er');
+  const callout = document.getElementById('callout');
+  const hero = document.getElementById('hero');
+  function update() {
+    vw.textContent = window.innerWidth + 'px';
+    const rect = hero.getBoundingClientRect();
+    const w = Math.round(rect.width);
+    const h = Math.round(rect.height);
+    hw.textContent = w + 'px';
+    hh.textContent = h + 'px';
+    const projected = Math.round(w * 9 / 16);
+    hp.textContent = projected + 'px';
+    er.textContent = (w / h).toFixed(2) + ':1';
+    if (projected > 480) {
+      callout.textContent = 'active rule: max-height (480px)';
+      callout.className = 'crossover-callout cap';
+    } else {
+      callout.textContent = 'active rule: aspect-ratio (16:9)';
+      callout.className = 'crossover-callout';
+    }
+  }
+  update();
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+</script>
+</body>
+</html>

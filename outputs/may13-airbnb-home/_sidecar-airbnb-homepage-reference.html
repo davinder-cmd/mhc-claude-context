@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Airbnb — Home (design-system prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AIRBNB DESIGN SYSTEM TOKENS
+   Source: airbnb-DESIGN.md (alpha v1)
+   ============================================================ */
+:root {
+  /* Color — Brand & Accent */
+  --rausch: #ff385c;
+  --rausch-active: #e00b41;
+  --rausch-disabled: #ffd1da;
+  --luxe: #460479;
+  --plus: #92174d;
+
+  /* Color — Surface */
+  --canvas: #ffffff;
+  --surface-soft: #f7f7f7;
+  --surface-strong: #f2f2f2;
+
+  /* Color — Hairlines */
+  --hairline: #dddddd;
+  --hairline-soft: #ebebeb;
+  --border-strong: #c1c1c1;
+
+  /* Color — Text */
+  --ink: #222222;
+  --body: #3f3f3f;
+  --muted: #6a6a6a;
+  --muted-soft: #929292;
+  --on-primary: #ffffff;
+
+  /* Color — Semantic */
+  --error: #c13515;
+  --error-hover: #b32505;
+  --legal-link: #428bff;
+
+  /* Color — Scrim */
+  --scrim: rgba(0, 0, 0, 0.5);
+
+  /* Spacing */
+  --xxs: 2px;
+  --xs: 4px;
+  --sm: 8px;
+  --md: 12px;
+  --base: 16px;
+  --lg: 24px;
+  --xl: 32px;
+  --xxl: 48px;
+  --section: 64px;
+
+  /* Radius */
+  --rounded-sm: 8px;
+  --rounded-md: 14px;
+  --rounded-xl: 32px;
+  --rounded-full: 9999px;
+
+  /* Elevation — the single shadow tier */
+  --shadow-float:
+    rgba(0, 0, 0, 0.02) 0 0 0 1px,
+    rgba(0, 0, 0, 0.04) 0 2px 6px 0,
+    rgba(0, 0, 0, 0.10) 0 4px 8px 0;
+
+  /* Type families. Cereal VF is the real face — Inter is the open substitute the MD documents. */
+  --font-display: "Airbnb Cereal VF", "Inter", "Circular", -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
+  --font-body: "Airbnb Cereal VF", "Inter", "Circular", -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--canvas);
+}
+img { display: block; max-width: 100%; height: auto; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ============================================================
+   TOP NAV — 80px white surface, hairline bottom
+   ============================================================ */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  height: 80px;
+}
+.top-nav__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--lg);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--rausch);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+.brand svg { width: 30px; height: 30px; display: block; }
+.brand__wordmark { display: inline-block; }
+
+/* Three product tabs — Homes / Experiences / Services */
+.product-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 36px;
+  justify-content: center;
+}
+.tab {
+  position: relative;
+  padding: 8px 0 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.tab__icon {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+.tab--active {
+  color: var(--ink);
+}
+.tab--active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--ink);
+}
+.tab__inner {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.new-tag {
+  position: absolute;
+  top: -8px;
+  right: -22px;
+  background: var(--ink);
+  color: var(--on-primary);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  padding: 4px 6px;
+  border-radius: var(--rounded-full);
+  line-height: 1.25;
+}
+
+/* Right-side utility cluster */
+.utility {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.utility__link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 12px 14px;
+  border-radius: var(--rounded-full);
+}
+.utility__link:hover { background: var(--surface-soft); }
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--rounded-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+.icon-btn:hover { background: var(--surface-soft); }
+.account-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 5px 5px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--rounded-full);
+  margin-left: 4px;
+  box-shadow: var(--shadow-float);
+}
+.account-pill:hover { box-shadow: 0 2px 4px rgba(0,0,0,0.18); }
+.account-pill__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--rounded-full);
+  background: var(--ink);
+  color: var(--on-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   SEARCH BAR — pill, white, 1px hairline, single shadow tier
+   ============================================================ */
+.search-band {
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  padding: 12px 40px 24px;
+}
+.search-bar {
+  max-width: 850px;
+  margin: 0 auto;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--rounded-full);
+  height: 66px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
+  align-items: stretch;
+  box-shadow: var(--shadow-float);
+}
+.search-seg {
+  position: relative;
+  padding: 14px 32px;
+  border-radius: var(--rounded-full);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.search-seg + .search-seg::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: var(--hairline);
+}
+.search-seg:hover { background: var(--surface-strong); }
+.search-seg:hover + .search-seg::before,
+.search-seg:hover::before { background: transparent; }
+.search-seg__label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.search-seg__value {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.search-seg--orb {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 8px;
+}
+.search-orb {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--rounded-full);
+  background: var(--rausch);
+  color: var(--on-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  transition: background .15s ease;
+}
+.search-orb:hover { background: var(--rausch-active); }
+.search-orb__expand {
+  display: none;
+  padding-right: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--on-primary);
+}
+.search-orb--expanded {
+  width: auto;
+  padding: 0 18px 0 14px;
+  gap: 8px;
+}
+.search-orb--expanded .search-orb__expand { display: inline; }
+
+/* ============================================================
+   SECTION HEAD
+   ============================================================ */
+.section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--xl) 40px var(--section);
+}
+.section--first { padding-top: var(--xl); }
+.section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--base);
+}
+.section__title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.44px;
+  line-height: 1.18;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.section__title svg { width: 16px; height: 16px; color: var(--muted); }
+.carousel-controls { display: flex; align-items: center; gap: 8px; }
+.carousel-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--rounded-full);
+  border: 1px solid var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  background: var(--canvas);
+}
+.carousel-btn:hover { background: var(--surface-soft); }
+
+/* ============================================================
+   PROPERTY CARD GRID
+   ============================================================ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--base);
+}
+.card { display: block; }
+.card__photo-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--rounded-md);
+  overflow: hidden;
+  background: var(--surface-strong);
+}
+.card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+.card:hover .card__photo { transform: scale(1.02); }
+
+.gf-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: var(--rounded-full);
+  box-shadow: var(--shadow-float);
+}
+.new-badge-card {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: var(--rounded-full);
+  box-shadow: var(--shadow-float);
+}
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--canvas);
+}
+.heart svg { width: 24px; height: 24px; }
+.heart svg path {
+  fill: rgba(0,0,0,0.5);
+  stroke: var(--canvas);
+  stroke-width: 2;
+}
+.heart--saved svg path {
+  fill: var(--rausch);
+  stroke: var(--canvas);
+}
+
+.dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--rounded-full);
+  background: rgba(255,255,255,0.6);
+}
+.dot--active { background: var(--canvas); width: 7px; height: 7px; }
+
+.card__meta {
+  padding-top: var(--md);
+}
+.card__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+.card__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.card__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.card__rating svg { width: 12px; height: 12px; color: var(--ink); }
+.card__sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.card__price {
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 6px;
+}
+.card__price strong {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* ============================================================
+   "INSPIRATION FOR FUTURE GETAWAYS" — h1 + city grid
+   ============================================================ */
+.inspiration {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--section) 40px var(--section);
+  border-top: 1px solid var(--hairline-soft);
+}
+.inspiration__h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.43;
+  color: var(--ink);
+  margin-bottom: var(--lg);
+}
+.inspo-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 32px;
+  margin-bottom: var(--xl);
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: var(--base);
+}
+.inspo-tab {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 400;
+  padding-bottom: 6px;
+  cursor: pointer;
+}
+.inspo-tab--active {
+  color: var(--ink);
+  font-weight: 600;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: -17px;
+  padding-bottom: 14px;
+}
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--lg) var(--base);
+}
+.city-cell .city-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.city-cell .city-sub {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.show-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: var(--xl);
+}
+.show-more svg { width: 12px; height: 12px; transition: transform .15s ease; }
+
+/* ============================================================
+   FOOTER — white surface, 3 link columns + legal band
+   ============================================================ */
+.footer {
+  background: var(--surface-soft);
+  border-top: 1px solid var(--hairline-soft);
+}
+.footer__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--xxl) 40px var(--xl);
+}
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--lg);
+  padding-bottom: var(--xl);
+  border-bottom: 1px solid var(--hairline);
+}
+.footer__col h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: var(--md);
+}
+.footer__col a {
+  display: block;
+  font-size: 14px;
+  color: var(--ink);
+  padding: 6px 0;
+}
+.footer__col a:hover { text-decoration: underline; }
+.legal-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--lg);
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.legal-band__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.legal-band__left a:hover { text-decoration: underline; }
+.legal-band__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-weight: 600;
+}
+.legal-band__right a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legal-band__right a:hover { text-decoration: underline; }
+.legal-band__social {
+  display: inline-flex;
+  gap: 16px;
+}
+.legal-band__social a {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1128px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+  .city-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+  .top-nav__inner { padding: 0 24px; grid-template-columns: 1fr auto; }
+  .product-tabs { display: none; }
+  .utility__link { display: none; }
+  .search-band { padding: 12px 16px 16px; }
+  .search-bar {
+    grid-template-columns: 1fr auto;
+    height: 56px;
+    padding: 0 8px;
+  }
+  .search-seg + .search-seg::before { display: none; }
+  .search-seg { padding: 10px 16px; }
+  .search-seg:not(:first-child):not(.search-seg--orb) { display: none; }
+  .search-seg__label { font-size: 14px; font-weight: 600; }
+  .search-seg__value { font-size: 13px; }
+  .search-seg--orb { padding: 8px; }
+  .section { padding: var(--lg) 24px var(--xl); }
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .city-grid { grid-template-columns: repeat(2, 1fr); }
+  .inspiration { padding: var(--xl) 24px var(--xl); }
+  .inspiration__h1 { font-size: 22px; line-height: 1.18; }
+  .footer__inner { padding: var(--xl) 24px var(--xl); }
+  .footer__cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .cards { grid-template-columns: 1fr; }
+  .city-grid { grid-template-columns: 1fr 1fr; }
+  .legal-band { flex-direction: column; align-items: flex-start; }
+}
+
+/* ============================================================
+   1200px wide-flex sweet spot — content fills viewport
+   ============================================================ */
+@media (min-width: 1200px) {
+  .section, .inspiration, .footer__inner, .top-nav__inner { max-width: 1280px; }
+}
+@media (min-width: 1440px) {
+  .section, .inspiration, .footer__inner, .top-nav__inner { max-width: 1440px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     TOP NAV
+     ============================================================ -->
+<header class="top-nav">
+  <div class="top-nav__inner">
+    <a class="brand" href="#" aria-label="Airbnb home">
+      <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+        <path d="M16 1c4.5 0 7.5 3 9 5.5 1.6 2.6 2.5 5.6 2.5 8.7 0 4.5-3 8.3-7.8 8.3-2.2 0-4.3-1-5.5-2.6-.6.7-1.4 1.4-2.2 2-2.5 1.9-5.4 2.3-7.5 1-2-1.3-3.3-3.5-3.3-6.7 0-3 1-6 2.5-8.7C5.2 4 8.2 1 16 1zm0 2C9.4 3 7 5.5 5.7 7.5c-1.4 2.4-2.2 5-2.2 7.7 0 2.5 1 4.2 2.4 5.1 1.4.8 3.4.5 5.4-.9.7-.5 1.4-1.1 2-1.7-2-2.8-3.4-6-3.4-8.8 0-2 1-4 2.4-5 1.4-1 3-1 4.4 0 1.4 1 2.4 3 2.4 5 0 2.8-1.4 6-3.4 8.8 1 1.4 2.6 2.2 4.4 2.2 3.8 0 5.8-2.9 5.8-6.3 0-2.7-.8-5.3-2.2-7.7C25 5.5 22.6 3 16 3zm0 6.5c-.7 0-1.4.4-1.8 1.2-.3.6-.5 1.4-.5 2.3 0 2.2 1.1 4.7 2.3 6.5 1.2-1.8 2.3-4.3 2.3-6.5 0-.9-.2-1.7-.5-2.3-.4-.8-1.1-1.2-1.8-1.2z"/>
+      </svg>
+      <span class="brand__wordmark">airbnb</span>
+    </a>
+
+    <nav class="product-tabs" aria-label="Product categories">
+      <a href="#" class="tab tab--active">
+        <span class="tab__inner">
+          <svg class="tab__icon" viewBox="0 0 64 64" aria-hidden="true">
+            <!-- Stylized house illustration -->
+            <path d="M32 8 L8 28 L8 56 L24 56 L24 40 L40 40 L40 56 L56 56 L56 28 Z" fill="#FF8FA3" stroke="#2C2727" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="28" y="16" width="8" height="8" fill="#FFC7CE" stroke="#2C2727" stroke-width="1.5"/>
+            <path d="M6 28 L32 6 L58 28" fill="none" stroke="#2C2727" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span>Homes</span>
+        </span>
+      </a>
+      <a href="#" class="tab">
+        <span class="tab__inner">
+          <span class="new-tag">NEW</span>
+          <svg class="tab__icon" viewBox="0 0 64 64" aria-hidden="true">
+            <!-- Stylized hot-air balloon -->
+            <ellipse cx="32" cy="24" rx="18" ry="20" fill="#FFB347" stroke="#2C2727" stroke-width="2"/>
+            <path d="M14 24 Q32 30 50 24" stroke="#2C2727" stroke-width="1.5" fill="none"/>
+            <path d="M32 4 Q32 44 32 44" stroke="#2C2727" stroke-width="1.5" fill="none"/>
+            <path d="M24 42 L26 52 L38 52 L40 42 Z" fill="#9B6B3F" stroke="#2C2727" stroke-width="2"/>
+            <line x1="20" y1="40" x2="26" y2="50" stroke="#2C2727" stroke-width="1.2"/>
+            <line x1="44" y1="40" x2="38" y2="50" stroke="#2C2727" stroke-width="1.2"/>
+          </svg>
+          <span>Experiences</span>
+        </span>
+      </a>
+      <a href="#" class="tab">
+        <span class="tab__inner">
+          <span class="new-tag">NEW</span>
+          <svg class="tab__icon" viewBox="0 0 64 64" aria-hidden="true">
+            <!-- Stylized service bell -->
+            <path d="M14 44 L50 44 L50 38 Q50 22 32 22 Q14 22 14 38 Z" fill="#C8B6FF" stroke="#2C2727" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="10" y="44" width="44" height="4" rx="1" fill="#9B7EE0" stroke="#2C2727" stroke-width="2"/>
+            <circle cx="32" cy="18" r="3" fill="#2C2727"/>
+            <line x1="32" y1="48" x2="32" y2="54" stroke="#2C2727" stroke-width="2"/>
+          </svg>
+          <span>Services</span>
+        </span>
+      </a>
+    </nav>
+
+    <div class="utility">
+      <a href="#" class="utility__link">Become a host</a>
+      <button class="icon-btn" aria-label="Language">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/>
+        </svg>
+      </button>
+      <button class="account-pill" aria-label="Account">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
+          <rect x="0" y="3" width="16" height="2"/>
+          <rect x="0" y="7" width="16" height="2"/>
+          <rect x="0" y="11" width="16" height="2"/>
+        </svg>
+        <span class="account-pill__avatar">
+          <svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor"><path d="M16 0a16 16 0 1 0 0 32 16 16 0 0 0 0-32zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 26a12 12 0 0 1-9-4c.1-3.1 6-4.8 9-4.8s8.9 1.7 9 4.8a12 12 0 0 1-9 4z"/></svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     SEARCH BAND
+     ============================================================ -->
+<section class="search-band">
+  <div class="search-bar" role="search">
+    <div class="search-seg">
+      <div class="search-seg__label">Where</div>
+      <div class="search-seg__value">Search destinations</div>
+    </div>
+    <div class="search-seg">
+      <div class="search-seg__label">Check in</div>
+      <div class="search-seg__value">Add dates</div>
+    </div>
+    <div class="search-seg">
+      <div class="search-seg__label">Check out</div>
+      <div class="search-seg__value">Add dates</div>
+    </div>
+    <div class="search-seg search-seg--orb">
+      <div>
+        <div class="search-seg__label">Who</div>
+        <div class="search-seg__value">Add guests</div>
+      </div>
+      <button class="search-orb" aria-label="Search">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     POPULAR HOMES IN LISBON
+     ============================================================ -->
+<section class="section section--first" aria-label="Popular homes in Lisbon">
+  <div class="section__head">
+    <h2 class="section__title">
+      Popular homes in Lisbon
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+    </h2>
+    <div class="carousel-controls">
+      <button class="carousel-btn" aria-label="Previous"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 6 9 12 15 18"/></svg></button>
+      <button class="carousel-btn" aria-label="Next"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 6 15 12 9 18"/></svg></button>
+    </div>
+  </div>
+  <div class="cards">
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&auto=format&fit=crop" alt="Modern white villa with pool" loading="lazy"/>
+        <span class="gf-badge">Guest favorite</span>
+        <button class="heart" aria-label="Save"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Apartment in Alfama</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.94
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Sofia</div>
+        <div class="card__sub">Jun 4 – 9</div>
+        <div class="card__price"><strong>$182 night</strong></div>
+      </div>
+    </a>
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&auto=format&fit=crop" alt="Sunlit minimalist interior" loading="lazy"/>
+        <span class="gf-badge">Guest favorite</span>
+        <button class="heart heart--saved" aria-label="Saved"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Loft in Príncipe Real</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.89
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Diogo</div>
+        <div class="card__sub">May 22 – 27</div>
+        <div class="card__price"><strong>$214 night</strong></div>
+      </div>
+    </a>
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&auto=format&fit=crop" alt="Modern villa with curves" loading="lazy"/>
+        <span class="new-badge-card">New</span>
+        <button class="heart" aria-label="Save"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Townhouse in Bairro Alto</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.97
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Maria</div>
+        <div class="card__sub">Jun 11 – 16</div>
+        <div class="card__price"><strong>$246 night</strong></div>
+      </div>
+    </a>
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&auto=format&fit=crop" alt="Luxury minimalist exterior at dusk" loading="lazy"/>
+        <span class="gf-badge">Guest favorite</span>
+        <button class="heart" aria-label="Save"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Suite with river view</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.92
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Tiago</div>
+        <div class="card__sub">May 18 – 25</div>
+        <div class="card__price"><strong>$310 night</strong></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     AVAILABLE NEXT MONTH IN PARIS
+     ============================================================ -->
+<section class="section" aria-label="Available next month in Paris">
+  <div class="section__head">
+    <h2 class="section__title">
+      Available next month in Paris
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+    </h2>
+    <div class="carousel-controls">
+      <button class="carousel-btn" aria-label="Previous"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 6 9 12 15 18"/></svg></button>
+      <button class="carousel-btn" aria-label="Next"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 6 15 12 9 18"/></svg></button>
+    </div>
+  </div>
+  <div class="cards">
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=600&auto=format&fit=crop" alt="Modern Parisian interior" loading="lazy"/>
+        <span class="gf-badge">Guest favorite</span>
+        <button class="heart" aria-label="Save"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Apartment in Le Marais</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.96
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Camille</div>
+        <div class="card__sub">Jun 2 – 9</div>
+        <div class="card__price"><strong>$264 night</strong></div>
+      </div>
+    </a>
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop" alt="Modern home with greenery" loading="lazy"/>
+        <span class="gf-badge">Guest favorite</span>
+        <button class="heart heart--saved" aria-label="Saved"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Loft near Canal Saint-Martin</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.88
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Léa</div>
+        <div class="card__sub">Jun 5 – 12</div>
+        <div class="card__price"><strong>$198 night</strong></div>
+      </div>
+    </a>
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&auto=format&fit=crop" alt="Small white modern house" loading="lazy"/>
+        <span class="new-badge-card">New</span>
+        <button class="heart" aria-label="Save"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Studio in Montmartre</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.91
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Antoine</div>
+        <div class="card__sub">Jun 14 – 19</div>
+        <div class="card__price"><strong>$152 night</strong></div>
+      </div>
+    </a>
+
+    <a class="card" href="#">
+      <div class="card__photo-wrap">
+        <img class="card__photo" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&auto=format&fit=crop" alt="Luxury home exterior" loading="lazy"/>
+        <span class="gf-badge">Guest favorite</span>
+        <button class="heart" aria-label="Save"><svg viewBox="0 0 32 32"><path d="M16 28s-12-6.6-12-15a7 7 0 0 1 13-3 7 7 0 0 1 13 3c0 8.4-12 15-12 15z"/></svg></button>
+        <div class="dots"><span class="dot dot--active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      </div>
+      <div class="card__meta">
+        <div class="card__row">
+          <div class="card__title">Townhouse in Saint-Germain</div>
+          <div class="card__rating">
+            <svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3.4L11 5l-2.5 2.5L9 11 6 9.3 3 11l.5-3.5L1 5l3.5-.6z"/></svg>
+            4.95
+          </div>
+        </div>
+        <div class="card__sub">Hosted by Sophie</div>
+        <div class="card__sub">Jun 21 – 28</div>
+        <div class="card__price"><strong>$385 night</strong></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     INSPIRATION FOR FUTURE GETAWAYS — h1 + city grid
+     ============================================================ -->
+<section class="inspiration">
+  <h1 class="inspiration__h1">Inspiration for future getaways</h1>
+
+  <div class="inspo-tabs" role="tablist">
+    <span class="inspo-tab inspo-tab--active">Popular</span>
+    <span class="inspo-tab">Arts &amp; culture</span>
+    <span class="inspo-tab">Outdoors</span>
+    <span class="inspo-tab">Mountains</span>
+    <span class="inspo-tab">Beach</span>
+    <span class="inspo-tab">Unique stays</span>
+    <span class="inspo-tab">Categories</span>
+    <span class="inspo-tab">Things to do</span>
+    <span class="inspo-tab">Travel tips &amp; inspiration</span>
+    <span class="inspo-tab">Airbnb-friendly apartments</span>
+  </div>
+
+  <div class="city-grid">
+    <div class="city-cell"><div class="city-name">Canmore</div><div class="city-sub">Cottage rentals</div></div>
+    <div class="city-cell"><div class="city-name">Benalmádena</div><div class="city-sub">Beach house rentals</div></div>
+    <div class="city-cell"><div class="city-name">Marbella</div><div class="city-sub">Beach house rentals</div></div>
+    <div class="city-cell"><div class="city-name">Mijas</div><div class="city-sub">Villa rentals</div></div>
+    <div class="city-cell"><div class="city-name">Prescott</div><div class="city-sub">Cabin rentals</div></div>
+    <div class="city-cell"><div class="city-name">Scottsdale</div><div class="city-sub">Apartment rentals</div></div>
+
+    <div class="city-cell"><div class="city-name">Tucson</div><div class="city-sub">Apartment rentals</div></div>
+    <div class="city-cell"><div class="city-name">Jasper</div><div class="city-sub">Cabin rentals</div></div>
+    <div class="city-cell"><div class="city-name">Mountain View</div><div class="city-sub">House rentals</div></div>
+    <div class="city-cell"><div class="city-name">Devonport</div><div class="city-sub">Cottage rentals</div></div>
+    <div class="city-cell"><div class="city-name">Anaheim</div><div class="city-sub">House rentals</div></div>
+    <div class="city-cell"><div class="city-name">Monterey</div><div class="city-sub">House rentals</div></div>
+
+    <div class="city-cell"><div class="city-name">Paso Robles</div><div class="city-sub">House rentals</div></div>
+    <div class="city-cell"><div class="city-name">Santa Barbara</div><div class="city-sub">House rentals</div></div>
+    <div class="city-cell"><div class="city-name">Sonoma</div><div class="city-sub">Cottage rentals</div></div>
+    <div class="city-cell"><div class="city-name">Keswick</div><div class="city-sub">Cottage rentals</div></div>
+    <div class="city-cell"><div class="city-name">Tenby</div><div class="city-sub">Cottage rentals</div></div>
+    <div class="city-cell"><div class="city-name">Devon</div><div class="city-sub">Cottage rentals</div></div>
+  </div>
+
+  <a class="show-more" href="#">
+    Show more
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>
+  </a>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__cols">
+
+      <div class="footer__col">
+        <h4>Support</h4>
+        <a href="#">Help Center</a>
+        <a href="#">Get help with a safety issue</a>
+        <a href="#">AirCover</a>
+        <a href="#">Anti-discrimination</a>
+        <a href="#">Disability support</a>
+        <a href="#">Cancellation options</a>
+        <a href="#">Report neighborhood concern</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Hosting</h4>
+        <a href="#">Airbnb your home</a>
+        <a href="#">Airbnb your experience</a>
+        <a href="#">Airbnb your service</a>
+        <a href="#">AirCover for Hosts</a>
+        <a href="#">Hosting resources</a>
+        <a href="#">Community forum</a>
+        <a href="#">Hosting responsibly</a>
+        <a href="#">Airbnb-friendly apartments</a>
+      </div>
+
+      <div class="footer__col">
+        <h4>Airbnb</h4>
+        <a href="#">2026 Summer Release</a>
+        <a href="#">Newsroom</a>
+        <a href="#">Careers</a>
+        <a href="#">Investors</a>
+        <a href="#">Gift cards</a>
+        <a href="#">Airbnb.org emergency stays</a>
+      </div>
+
+    </div>
+
+    <div class="legal-band">
+      <div class="legal-band__left">
+        <span>© 2026 Airbnb, Inc.</span>
+        <span>·</span>
+        <a href="#">Terms</a>
+        <span>·</span>
+        <a href="#">Sitemap</a>
+        <span>·</span>
+        <a href="#">Privacy</a>
+        <span>·</span>
+        <a href="#">Your Privacy Choices</a>
+      </div>
+      <div class="legal-band__right">
+        <a href="#">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M3 12h18M12 3a13 13 0 0 1 0 18M12 3a13 13 0 0 0 0 18"/>
+          </svg>
+          English (US)
+        </a>
+        <a href="#">$ USD</a>
+        <span class="legal-band__social">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M9 16V9h2.5l.5-3H9V4.5c0-.8.2-1.5 1.5-1.5H12V0h-2.5C7 0 6 1.5 6 4v2H4v3h2v7h3z"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M12 0h2.5l-5.5 6.3 6.5 8.7H10l-4-5.4-4.6 5.4H0L6 8.3 0 0h5.6l3.6 4.9zM11.2 13.8h1.4L4.9 1.3H3.4z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="14" height="14" rx="4"/><circle cx="8" cy="8" r="3"/><circle cx="12" cy="4" r=".8" fill="currentColor"/></svg></a>
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

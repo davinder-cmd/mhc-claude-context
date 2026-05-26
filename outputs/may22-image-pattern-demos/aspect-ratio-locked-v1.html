@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pattern 1 · Aspect-Ratio Locked — MHC Image Pattern Demo</title>
+<style>
+  :root {
+    --bg: #FAF9F7;
+    --surface: #FFFFFF;
+    --ink: #1A1D21;
+    --ink-soft: #5C5F66;
+    --line: #E6E3DC;
+    --accent-bg: #FFF8E6;
+    --accent-line: #F0DDA0;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 32px 120px;
+  }
+  @media (max-width: 768px) {
+    .container { padding: 32px 16px 120px; }
+  }
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 64px 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    color: var(--ink-soft);
+    font-size: 17px;
+    max-width: 680px;
+    margin: 0;
+  }
+  .sub-lede {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin: 0 0 16px;
+  }
+  .prompt {
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-line);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 28px 0 0;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .prompt strong { font-weight: 600; }
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 0.92em;
+    background: #F0EEE7;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  /* Section 1 — Editorial card (16:9) */
+  .editorial-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .editorial-card__media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #0C0C0C;
+  }
+  .editorial-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .editorial-card__body {
+    padding: 24px 28px 28px;
+  }
+  .editorial-card__eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .editorial-card__title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .editorial-card__desc {
+    color: var(--ink-soft);
+    margin: 0;
+    font-size: 15px;
+  }
+
+  /* Section 2 — Program tiles (3:2 grid) */
+  .program-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .program-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .program-grid { grid-template-columns: 1fr; }
+  }
+  .program-tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .program-tile__media {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    background: #0C0C0C;
+  }
+  .program-tile__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .program-tile__body { padding: 16px 20px 20px; }
+  .program-tile__eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .program-tile__title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    letter-spacing: -0.005em;
+  }
+  .program-tile__meta {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* Section 3 — Content previews (1:1 thumbs) */
+  .preview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .preview-item {
+    display: flex;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    align-items: center;
+  }
+  .preview-item__media {
+    flex: 0 0 80px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #0C0C0C;
+  }
+  .preview-item__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .preview-item__body { flex: 1; min-width: 0; }
+  .preview-item__eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 2px;
+  }
+  .preview-item__title {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 2px;
+    letter-spacing: -0.005em;
+  }
+  .preview-item__meta {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* Live readout */
+  .readout {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--ink);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    z-index: 100;
+    min-width: 240px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  }
+  .readout strong { color: #7BD8A8; font-weight: 500; }
+  .readout-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .readout-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+    margin: 6px 0;
+  }
+  .readout-label {
+    color: rgba(255,255,255,0.6);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="eyebrow">Pattern 1 of 3</div>
+  <h1>Aspect-Ratio Locked</h1>
+  <p class="lede">Width flexes with the grid. Height = width × ratio. Both shrink together. The shape never changes — only the scale does.</p>
+  <div class="prompt"><strong>Try it:</strong> drag the browser window narrower and wider. Watch the live readout (bottom right). Every image scales uniformly — the 16:9 editorial hero stays exactly 16:9 at every width.</div>
+
+  <h2>Editorial card · 16:9</h2>
+  <p class="sub-lede">For: hero programs, feature spotlights, content with a strong photo as the lead.</p>
+  <div class="editorial-card">
+    <div class="editorial-card__media" id="editorial-media">
+      <img src="https://picsum.photos/id/1015/1600/900" alt="">
+    </div>
+    <div class="editorial-card__body">
+      <div class="editorial-card__eyebrow">Based on your interests</div>
+      <h3 class="editorial-card__title">Sleep better in 4 weeks</h3>
+      <p class="editorial-card__desc">An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change.</p>
+    </div>
+  </div>
+
+  <h2>Program tiles · 3:2 grid</h2>
+  <p class="sub-lede">For: card grids where every tile needs equal visual weight. The grid drives column width; the ratio drives height.</p>
+  <div class="program-grid">
+    <div class="program-tile">
+      <div class="program-tile__media"><img src="https://picsum.photos/id/1025/900/600" alt=""></div>
+      <div class="program-tile__body">
+        <div class="program-tile__eyebrow">DCP · Sleep</div>
+        <h3 class="program-tile__title">Better Sleep</h3>
+        <p class="program-tile__meta">Session 3 of 8</p>
+      </div>
+    </div>
+    <div class="program-tile">
+      <div class="program-tile__media"><img src="https://picsum.photos/id/1062/900/600" alt=""></div>
+      <div class="program-tile__body">
+        <div class="program-tile__eyebrow">DCP · Stress</div>
+        <h3 class="program-tile__title">Manage Stress</h3>
+        <p class="program-tile__meta">Session 5 of 8</p>
+      </div>
+    </div>
+    <div class="program-tile">
+      <div class="program-tile__media"><img src="https://picsum.photos/id/292/900/600" alt=""></div>
+      <div class="program-tile__body">
+        <div class="program-tile__eyebrow">DCP · Diabetes</div>
+        <h3 class="program-tile__title">Diabetes Prevention</h3>
+        <p class="program-tile__meta">Week 6 of 16</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Content previews · 1:1 thumbnails</h2>
+  <p class="sub-lede">For: lists where the photo is supporting, not lead. Thumbnails are fixed size — responsiveness doesn't apply at this scale.</p>
+  <div class="preview-list">
+    <div class="preview-item">
+      <div class="preview-item__media"><img src="https://picsum.photos/id/237/200/200" alt=""></div>
+      <div class="preview-item__body">
+        <div class="preview-item__eyebrow">Healthy Habits</div>
+        <h3 class="preview-item__title">Wind down before bed</h3>
+        <p class="preview-item__meta">Active Your Training · 4 min read</p>
+      </div>
+    </div>
+    <div class="preview-item">
+      <div class="preview-item__media"><img src="https://picsum.photos/id/1084/200/200" alt=""></div>
+      <div class="preview-item__body">
+        <div class="preview-item__eyebrow">Assessment</div>
+        <h3 class="preview-item__title">Complete your health assessment</h3>
+        <p class="preview-item__meta">Across Your Training · 6 min</p>
+      </div>
+    </div>
+    <div class="preview-item">
+      <div class="preview-item__media"><img src="https://picsum.photos/id/177/200/200" alt=""></div>
+      <div class="preview-item__body">
+        <div class="preview-item__eyebrow">Daily Practice</div>
+        <h3 class="preview-item__title">Breathwork for stress relief</h3>
+        <p class="preview-item__meta">Mindfulness · 8 min</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="readout">
+  <div class="readout-label">Pattern</div>
+  <div class="readout-row"><span>Type:</span> <strong>aspect-ratio locked</strong></div>
+  <div class="readout-divider"></div>
+  <div class="readout-label">Live measurements · 16:9 editorial</div>
+  <div class="readout-row"><span>Viewport:</span> <strong id="vw">—</strong></div>
+  <div class="readout-row"><span>Container width:</span> <strong id="hw">—</strong></div>
+  <div class="readout-row"><span>Container height:</span> <strong id="hh">—</strong></div>
+  <div class="readout-row"><span>Effective ratio:</span> <strong id="er">—</strong></div>
+</div>
+
+<script>
+  const vw = document.getElementById('vw');
+  const hw = document.getElementById('hw');
+  const hh = document.getElementById('hh');
+  const er = document.getElementById('er');
+  const media = document.getElementById('editorial-media');
+  function update() {
+    vw.textContent = window.innerWidth + 'px';
+    const rect = media.getBoundingClientRect();
+    const w = Math.round(rect.width);
+    const h = Math.round(rect.height);
+    hw.textContent = w + 'px';
+    hh.textContent = h + 'px';
+    er.textContent = (w / h).toFixed(2) + ':1';
+  }
+  update();
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+</script>
+</body>
+</html>

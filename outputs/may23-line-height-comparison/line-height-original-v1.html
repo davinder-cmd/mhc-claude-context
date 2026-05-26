@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Type LH Comparison — Original (per-class line heights)</title>
+<style>
+  :root {
+    --bg: #FAF9F7;
+    --surface: #FFFFFF;
+    --ink: #1A1D21;
+    --ink-soft: #5C5F66;
+    --line: #E6E3DC;
+    --banner-bg: #FFF0DD;
+    --banner-line: #F0C788;
+
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-mono:    ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── version banner ─────────────────────────────────────── */
+  .banner {
+    background: var(--banner-bg);
+    border-bottom: 1px solid var(--banner-line);
+    padding: 14px 24px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .banner strong { font-weight: 600; }
+
+  /* ── container ──────────────────────────────────────────── */
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  /* ── section ────────────────────────────────────────────── */
+  .section { margin: 64px 0; }
+  .section-eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  /* ── annotated row ──────────────────────────────────────── */
+  .row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    margin: 16px 0;
+    align-items: baseline;
+  }
+  .row-label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-align: right;
+    line-height: 1.4;
+    padding-top: 2px;
+  }
+  .row-label .class-name {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .row-label .lh-value {
+    display: block;
+    color: var(--ink-soft);
+  }
+  .row-text { min-width: 0; }
+  @media (max-width: 600px) {
+    .row { grid-template-columns: 1fr; gap: 4px; }
+    .row-label { text-align: left; padding-top: 0; }
+    .row-label .class-name { display: inline; }
+    .row-label .lh-value { display: inline; margin-left: 8px; }
+  }
+
+  /* ── card grid ──────────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  @media (min-width: 600px) {
+    .card-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  /* ── stat tile ──────────────────────────────────────────── */
+  .stat-tile {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 28px;
+    margin-top: 16px;
+    max-width: 360px;
+  }
+
+  /* ── footer legend ──────────────────────────────────────── */
+  .legend {
+    margin-top: 96px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .legend table { border-collapse: collapse; width: 100%; }
+  .legend th, .legend td {
+    text-align: left;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .legend th {
+    font-weight: 600;
+    color: var(--ink);
+    background: #F4F2EC;
+  }
+  .legend tr:last-child td { border-bottom: none; }
+
+  /* ──────────────────────────────────────────────────────────
+     TYPE CLASSES — ORIGINAL (per-class line heights from Confluence)
+     Small Form sizes shown below; Medium Form bumps at ≥600.
+     ────────────────────────────────────────────────────────── */
+
+  /* Display */
+  .display-1 { font-family: var(--f-display); font-weight: 400; font-size: 3.625rem;  line-height: 1.103; letter-spacing: -0.01em; margin: 0; }  /* 58/64 */
+  .display-2 { font-family: var(--f-display); font-weight: 400; font-size: 3.1875rem; line-height: 1.098; letter-spacing: -0.01em; margin: 0; }  /* 51/56 */
+  .display-3 { font-family: var(--f-display); font-weight: 500; font-size: 2.8125rem; line-height: 1.156; letter-spacing: -0.01em; margin: 0; }  /* 45/52 */
+
+  /* Heading */
+  .heading-1 { font-family: var(--f-display); font-weight: 500; font-size: 2.5rem;    line-height: 1.1;   letter-spacing: -0.01em;  margin: 0; }  /* 40/44 */
+  .heading-2 { font-family: var(--f-display); font-weight: 500; font-size: 2.25rem;   line-height: 1.111; letter-spacing: -0.01em;  margin: 0; }  /* 36/40 */
+  .heading-3 { font-family: var(--f-display); font-weight: 600; font-size: 2rem;      line-height: 1.125; letter-spacing: -0.01em;  margin: 0; }  /* 32/36 */
+  .heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem;   line-height: 1.143; letter-spacing: -0.01em;  margin: 0; }  /* 28/32 */
+  .heading-5 { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: 1.12;  letter-spacing: -0.008em; margin: 0; }  /* 25/28 */
+  .heading-6 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem;   line-height: 1.2;   letter-spacing: -0.008em; margin: 0; }  /* 20/24 */
+
+  /* Body */
+  .body-1    { font-family: var(--f-text); font-weight: 500; font-size: 1.125rem;  line-height: 1.333; letter-spacing: -0.008em; }  /* 18/24 */
+  .body-2    { font-family: var(--f-text); font-weight: 500; font-size: 1rem;      line-height: 1.25;  letter-spacing: -0.008em; }  /* 16/20 */
+  .body-3    { font-family: var(--f-text); font-weight: 500; font-size: 0.875rem;  line-height: 1.286; letter-spacing: -0.008em; }  /* 14/18 */
+
+  /* Caption / Small */
+  .caption   { font-family: var(--f-text); font-weight: 600; font-size: 0.75rem;   line-height: 1.333; letter-spacing: 0; text-transform: uppercase; }  /* 12/16 */
+  .small     { font-family: var(--f-text); font-weight: 700; font-size: 0.6875rem; line-height: 1.273; letter-spacing: 0; }  /* 11/14 */
+
+  /* Paragraph */
+  .paragraph-1 { font-family: var(--f-text); font-weight: 600; font-size: 1.125rem; line-height: 1.5;   letter-spacing: -0.006em; }  /* 18/27 */
+  .paragraph-2 { font-family: var(--f-text); font-weight: 600; font-size: 1rem;     line-height: 1.5;   letter-spacing: -0.003em; }  /* 16/24 */
+  .paragraph-3 { font-family: var(--f-text); font-weight: 600; font-size: 0.875rem; line-height: 1.428; letter-spacing: -0.003em; }  /* 14/20 */
+
+  /* Color helpers */
+  .ink-soft { color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div><strong>ORIGINAL · per-class line heights</strong> · sizes match Confluence Small Form spec exactly</div>
+  <div>Open <a href="line-height-simplified-v1.html">line-height-simplified-v1.html</a> in another tab to compare</div>
+</div>
+
+<div class="container">
+
+  <!-- ============================================== -->
+  <!--   SECTION 1 — ARTICLE / CONTENT PAGE             -->
+  <!--   Most LH-sensitive context: prose + headings    -->
+  <!-- ============================================== -->
+  <section class="section">
+    <div class="section-eyebrow">Section 1 · Content page</div>
+
+    <div class="row">
+      <div class="row-label"><span class="class-name">.caption</span><span class="lh-value">LH 1.333</span></div>
+      <div class="row-text"><div class="caption ink-soft">Based on your interests</div></div>
+    </div>
+
+    <div class="row">
+      <div class="row-label"><span class="class-name">.display-3</span><span class="lh-value">LH 1.156</span></div>
+      <div class="row-text"><h1 class="display-3">Sleep better in 4 weeks</h1></div>
+    </div>
+
+    <div class="row">
+      <div class="row-label"><span class="class-name">.body-1</span><span class="lh-value">LH 1.333</span></div>
+      <div class="row-text"><p class="body-1">An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change you can feel by the second week.</p></div>
+    </div>
+
+    <div class="row" style="margin-top: 40px;">
+      <div class="row-label"><span class="class-name">.heading-4</span><span class="lh-value">LH 1.143</span></div>
+      <div class="row-text"><h2 class="heading-4">How the program works</h2></div>
+    </div>
+
+    <div class="row">
+      <div class="row-label"><span class="class-name">.paragraph-2</span><span class="lh-value">LH 1.5</span></div>
+      <div class="row-text"><p class="paragraph-2">Each evening you'll get a short session — about ten minutes — that you can do anywhere. Some focus on breathing exercises, others on what to do (and not do) before bed. Over four weeks, your sleep tracker shows the change.</p></div>
+    </div>
+
+    <div class="row" style="margin-top: 32px;">
+      <div class="row-label"><span class="class-name">.heading-5</span><span class="lh-value">LH 1.12</span></div>
+      <div class="row-text"><h3 class="heading-5">Week 1: The wind-down routine</h3></div>
+    </div>
+
+    <div class="row">
+      <div class="row-label"><span class="class-name">.paragraph-3</span><span class="lh-value">LH 1.428</span></div>
+      <div class="row-text"><p class="paragraph-3">You'll learn why your brain needs an hour to transition into sleep mode, and the four small actions that signal "sleep is coming" to your body. None of them require special equipment or a perfect bedroom.</p></div>
+    </div>
+
+    <div class="row" style="margin-top: 32px;">
+      <div class="row-label"><span class="class-name">.heading-6</span><span class="lh-value">LH 1.2</span></div>
+      <div class="row-text"><h4 class="heading-6">What you'll need to get the most out of this program</h4></div>
+    </div>
+
+    <div class="row">
+      <div class="row-label"><span class="class-name">.body-2</span><span class="lh-value">LH 1.25</span></div>
+      <div class="row-text"><p class="body-2">A bedside spot for the program. Headphones for the audio sessions. The Acme app installed on your phone. About ten minutes each evening for the first month.</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!--   SECTION 2 — CARD GRID                          -->
+  <!--   Multi-class repetition; visual rhythm test    -->
+  <!-- ============================================== -->
+  <section class="section">
+    <div class="section-eyebrow">Section 2 · Card grid (3 across at ≥600)</div>
+
+    <div class="card-grid">
+      <article class="card">
+        <div class="caption ink-soft">DCP · Sleep</div>
+        <h3 class="heading-6" style="margin: 8px 0;">Better Sleep Program for restless nights</h3>
+        <p class="body-3 ink-soft" style="margin: 0;">Eight short evening sessions designed to retrain your wind-down routine.</p>
+        <div class="small ink-soft" style="margin-top: 12px;">Session 3 of 8 · $100 reward</div>
+      </article>
+
+      <article class="card">
+        <div class="caption ink-soft">DCP · Stress</div>
+        <h3 class="heading-6" style="margin: 8px 0;">Manage Stress through cognitive behavioral techniques</h3>
+        <p class="body-3 ink-soft" style="margin: 0;">Daily five-minute practices that lower the baseline of your nervous system.</p>
+        <div class="small ink-soft" style="margin-top: 12px;">Session 5 of 8 · $100 reward</div>
+      </article>
+
+      <article class="card">
+        <div class="caption ink-soft">DCP · Diabetes</div>
+        <h3 class="heading-6" style="margin: 8px 0;">Diabetes Prevention through nutrition and movement</h3>
+        <p class="body-3 ink-soft" style="margin: 0;">A sixteen-week clinical program shown to reduce risk by 58%.</p>
+        <div class="small ink-soft" style="margin-top: 12px;">Week 6 of 16 · $100 reward</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!--   SECTION 3 — STAT TILE                          -->
+  <!-- ============================================== -->
+  <section class="section">
+    <div class="section-eyebrow">Section 3 · Dashboard stat tile</div>
+
+    <div class="stat-tile">
+      <div class="caption ink-soft">Active minutes this week</div>
+      <div class="display-2" style="margin: 12px 0 4px;">347</div>
+      <div class="body-3 ink-soft">Up 14% over the previous week. You're on track to hit your target by Sunday evening.</div>
+      <div class="small ink-soft" style="margin-top: 16px;">Synced 4 minutes ago · Apple Health</div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!--   LEGEND — list of all LH values used            -->
+  <!-- ============================================== -->
+  <div class="legend">
+    <strong style="color: var(--ink); font-size: 13px; display: block; margin-bottom: 12px;">Line heights used in this document</strong>
+    <table>
+      <thead>
+        <tr><th>Class</th><th>Size</th><th>Line height</th><th>Ratio</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>display-1</td><td>58</td><td>64</td><td>1.103</td></tr>
+        <tr><td>display-2</td><td>51</td><td>56</td><td>1.098</td></tr>
+        <tr><td>display-3</td><td>45</td><td>52</td><td>1.156</td></tr>
+        <tr><td>heading-1</td><td>40</td><td>44</td><td>1.1</td></tr>
+        <tr><td>heading-2</td><td>36</td><td>40</td><td>1.111</td></tr>
+        <tr><td>heading-3</td><td>32</td><td>36</td><td>1.125</td></tr>
+        <tr><td>heading-4</td><td>28</td><td>32</td><td>1.143</td></tr>
+        <tr><td>heading-5</td><td>25</td><td>28</td><td>1.12</td></tr>
+        <tr><td>heading-6</td><td>20</td><td>24</td><td>1.2</td></tr>
+        <tr><td>body-1</td><td>18</td><td>24</td><td>1.333</td></tr>
+        <tr><td>body-2</td><td>16</td><td>20</td><td>1.25</td></tr>
+        <tr><td>body-3</td><td>14</td><td>18</td><td>1.286</td></tr>
+        <tr><td>caption</td><td>12</td><td>16</td><td>1.333</td></tr>
+        <tr><td>small</td><td>11</td><td>14</td><td>1.273</td></tr>
+        <tr><td>paragraph-1</td><td>18</td><td>27</td><td>1.5</td></tr>
+        <tr><td>paragraph-2</td><td>16</td><td>24</td><td>1.5</td></tr>
+        <tr><td>paragraph-3</td><td>14</td><td>20</td><td>1.428</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Onboarding — "Grow your health and wealth"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  :root {
+    --bg:              #FFFFFF;
+    --surface:         #FFFFFF;
+    --surface-tinted:  #EFE7D6;
+    --ink:             #1A1D21;
+    --ink-soft:        #5C5F66;
+    --ink-placeholder: #9A9EA6;
+    --hairline:        #E6E3DC;
+    --link:            #2E60A4;
+    --brand:           #1B355C;
+    --on-brand:        #FFFFFF;
+    --red:             #C8272E;
+
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+
+    --r-xs:   2px;  --r-s:    4px;  --r-m:    8px;
+    --r-l:   12px;  --r-xl:  16px;  --r-full: 999px;
+
+    --s-01: 0.25rem; --s-02: 0.5rem; --s-03: 0.75rem; --s-04: 1rem;
+    --s-05: 1.5rem;  --s-06: 2rem;   --s-07: 2.5rem;  --s-08: 3rem;  --s-09: 4rem;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, dl, dd, dt, figure, hr { margin: 0; }
+  body {
+    background: var(--bg); color: var(--ink); font-family: var(--f-text);
+    font-size: 1rem; line-height: 1.25; font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh; display: flex; flex-direction: column;
+  }
+  button { font: inherit; cursor: pointer; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; user-select: none; }
+
+  /* MHC TYPE SCALE v3 (subset) */
+  .heading-3 { font-family: var(--f-display); font-weight: 500; font-size: 2rem;    line-height: 2.25rem; letter-spacing: -0.01em; }
+  .heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem; line-height: 2rem; letter-spacing: -0.01em; }
+  .heading-5 { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: 1.75rem; letter-spacing: -0.008em; }
+  .paragraph-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem; line-height: 1.5rem; letter-spacing: -0.003em; }
+  @media (min-width: 600px) {
+    .heading-3 { font-size: 2.25rem;   line-height: 2.5rem;   }
+    .heading-4 { font-size: 2rem;      line-height: 2.25rem;  }
+    .heading-5 { font-size: 1.8125rem; line-height: 2rem;     }
+    .paragraph-2 { font-size: 1.125rem; line-height: 1.6875rem; }
+  }
+
+  /* TOP BAR — onboarding has hamburger LEFT, AAA logo CENTERED, nothing right */
+  .top-bar { background: var(--surface); border-bottom: 1px solid var(--hairline); }
+  .top-bar__inner {
+    height: 64px;
+    padding: 0 var(--s-04);
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  }
+  .top-bar__left  { display: flex; justify-content: flex-start; }
+  .top-bar__brand { display: flex; justify-content: center; }
+  .top-bar__right { display: flex; justify-content: flex-end; }
+  .icon-btn {
+    width: 48px; height: 48px; border-radius: var(--r-full); border: 0; background: transparent;
+    display: inline-flex; align-items: center; justify-content: center; color: var(--ink); cursor: pointer;
+  }
+  .icon-btn:hover { background: var(--hairline); }
+  .aaa-logo {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 2px solid var(--red); padding: 4px 10px; border-radius: var(--r-s);
+    color: var(--red); font-family: var(--f-display); font-weight: 800;
+    font-size: 14px; letter-spacing: 0.04em; background: var(--surface);
+  }
+  @media (min-width: 600px) { .top-bar__inner { padding: 0 var(--s-05); } }
+
+  /* MAIN — fills viewport. Stacked on Compact, split on Medium+ */
+  .main {
+    flex: 1;
+    display: flex; flex-direction: column;
+  }
+  .ob-hero {
+    width: 100%;
+    height: 320px;             /* Compact — tall photo, matches Figma proportion */
+    background: var(--surface-tinted);
+    background-size: cover; background-position: center;
+  }
+  .ob-content {
+    flex: 1;
+    padding: var(--s-06) var(--s-05) var(--s-05);
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    gap: var(--s-05);
+  }
+  .ob-text { display: flex; flex-direction: column; gap: var(--s-03); max-width: 480px; }
+  .ob-text__body { color: var(--ink-soft); }
+  .ob-spacer { flex: 1; }   /* pushes dots + button to the bottom */
+  .ob-dots { display: flex; gap: var(--s-02); align-items: center; }
+  .ob-dot { width: 8px; height: 8px; border-radius: var(--r-full); background: var(--hairline); }
+  .ob-dot.active { background: var(--brand); }
+  .ob-actions { width: 100%; max-width: 480px; }
+
+  /* BUTTONS — Material 3 scale, full-width on Compact */
+  .btn {
+    height: 40px; padding: 0 var(--s-04); border-radius: var(--r-full); border: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-02);
+    font-family: var(--f-text); font-weight: 500; font-size: 0.875rem; line-height: 1rem; letter-spacing: 0;
+    transition: background-color .15s, border-color .15s, color .15s;
+  }
+  .btn-m { height: 56px; padding: 0 var(--s-05); font-size: 1rem; line-height: 1.25rem; }
+  .btn-block { width: 100%; }
+  .btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+  .btn-filled               { background: var(--brand); color: var(--on-brand); }
+  .btn-filled:hover         { background: #14264A; }
+  .btn-filled:active        { background: #0E1C36; }
+  .btn-filled:focus-visible { background: #14264A; }
+
+  /* DESKTOP LAYOUT — split screen at Medium+. Image fills left half, content fills right. */
+  @media (min-width: 600px) {
+    .main {
+      flex-direction: row;
+      min-height: calc(100vh - 64px);  /* viewport minus top bar */
+    }
+    .ob-hero {
+      flex: 1;
+      height: auto;                /* fills column height */
+      min-height: 480px;
+    }
+    .ob-content {
+      flex: 1;
+      padding: var(--s-08) var(--s-07);
+      justify-content: center;
+      gap: var(--s-06);
+    }
+    .ob-spacer { display: none; }  /* no need to push to bottom — content centers */
+    .ob-actions { width: auto; }   /* button no longer full-width */
+    .btn-block { width: auto; min-width: 240px; }
+  }
+
+  @media (min-width: 1024px) {
+    .ob-content { padding: var(--s-09) var(--s-09); gap: var(--s-07); }
+    .ob-text { max-width: 520px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <div class="top-bar__left">
+        <button class="icon-btn" aria-label="Open menu">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+      <div class="top-bar__brand">
+        <div class="aaa-logo" aria-label="AAA">AAA</div>
+      </div>
+      <div class="top-bar__right"></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section class="ob-hero" aria-hidden="true"></section>
+
+    <section class="ob-content">
+      <div class="ob-text">
+        <h1 class="heading-3">Grow your health and wealth</h1>
+        <p class="paragraph-2 ob-text__body">
+          Practice healthy habits and get help with your everyday wellbeing.
+        </p>
+      </div>
+
+      <div class="ob-spacer"></div>
+
+      <div class="ob-dots" role="tablist" aria-label="Onboarding progress">
+        <span class="ob-dot" aria-label="Slide 1"></span>
+        <span class="ob-dot" aria-label="Slide 2"></span>
+        <span class="ob-dot active" aria-label="Slide 3, current"></span>
+      </div>
+
+      <div class="ob-actions">
+        <button class="btn btn-m btn-filled btn-block">Next</button>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home — MHC type system · simplified LH (3-ratio)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  :root {
+    /* M3 light scheme, teal seed (from v2) */
+    --m3-primary:                  #006a60;
+    --m3-on-primary:               #ffffff;
+    --m3-primary-container:        #a3f2e3;
+    --m3-on-primary-container:     #00201c;
+    --m3-secondary-container:      #cce8e2;
+    --m3-on-secondary-container:   #051f1b;
+    --m3-tertiary:                 #446179;
+    --m3-tertiary-container:       #cbe6ff;
+    --m3-on-tertiary-container:    #001e30;
+    --m3-background:               #f4fbf8;
+    --m3-on-surface:               #161d1c;
+    --m3-on-surface-variant:       #3f4947;
+    --m3-outline:                  #6f7977;
+    --m3-outline-variant:          #bec9c7;
+    --m3-surface:                  #f4fbf8;
+    --m3-surface-container-lowest: #ffffff;
+    --m3-surface-container-low:    #eef5f2;
+    --m3-surface-container:        #e8efec;
+    --m3-surface-container-high:   #e2e9e6;
+
+    --el-1: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
+    --el-2: 0 1px 2px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);
+
+    --shape-sm:  8px;
+    --shape-md:  12px;
+    --shape-lg:  16px;
+    --shape-xl:  28px;
+    --shape-full: 999px;
+
+    /* Type families */
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+
+    /* SIMPLIFIED LH — 3 ratios */
+    --lh-display: 1.125;
+    --lh-tight:   1.25;
+    --lh-body:    1.5;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--m3-background);
+    color: var(--m3-on-surface);
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: var(--lh-tight);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--m3-primary); text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    user-select: none;
+  }
+  .material-symbols-outlined.filled { font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24; }
+
+  /* ── version banner ─────────────────────────────────────── */
+  .lh-banner {
+    background: #DBEFE0;
+    border-bottom: 1px solid #95C9A6;
+    padding: 10px 24px;
+    font-family: ui-monospace, "SF Mono", monospace;
+    font-size: 12px;
+    color: var(--m3-on-surface);
+    text-align: center;
+  }
+  .lh-banner strong { font-weight: 600; }
+
+  /* ──────────────────────────────────────────────────────────
+     MHC TYPE SCALE — simplified line heights + MATERIAL-ALIGNED WEIGHTS
+     Display / Heading / Title : 400 regular or 500 medium
+     Body / Paragraph          : 400 regular (was 500)
+     Caption                   : 500 medium  (was 600 semibold)
+     Small                     : 600 semibold (was 700 bold)
+     ────────────────────────────────────────────────────────── */
+  .heading-2 { font-family: var(--f-display); font-weight: 500; font-size: 2.25rem;   line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }
+  .heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem;   line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }
+  .heading-5 { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: var(--lh-display); letter-spacing: -0.008em; margin: 0; }
+  .heading-6 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem;   line-height: var(--lh-display); letter-spacing: -0.008em; margin: 0; }
+
+  .body-1    { font-family: var(--f-text); font-weight: 400; font-size: 1.125rem;  line-height: var(--lh-tight); letter-spacing: -0.008em; }
+  .body-2    { font-family: var(--f-text); font-weight: 400; font-size: 1rem;      line-height: var(--lh-tight); letter-spacing: -0.008em; }
+  .body-3    { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem;  line-height: var(--lh-tight); letter-spacing: -0.008em; }
+
+  .caption   { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem;   line-height: var(--lh-tight); letter-spacing: 0; text-transform: uppercase; }
+  .small     { font-family: var(--f-text); font-weight: 600; font-size: 0.6875rem; line-height: var(--lh-tight); letter-spacing: 0; }
+
+  .paragraph-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: var(--lh-body); letter-spacing: -0.003em; }
+  .paragraph-3 { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem; line-height: var(--lh-body); letter-spacing: -0.003em; }
+
+  /* Medium Form bumps */
+  @media (min-width: 600px) {
+    .heading-2   { font-size: 2.5625rem; }  /* 41 */
+    .heading-4   { font-size: 2rem;      }  /* 32 */
+    .heading-5   { font-size: 1.8125rem; }  /* 29 */
+    .heading-6   { font-size: 1.4375rem; }  /* 23 */
+    .body-1      { font-size: 1.25rem;   }
+    .body-2      { font-size: 1.125rem;  }
+    .body-3      { font-size: 1rem;      }
+    .caption     { font-size: 0.875rem;  }
+    .small       { font-size: 0.8125rem; }
+    .paragraph-2 { font-size: 1.125rem;  }
+    .paragraph-3 { font-size: 1rem;      }
+  }
+
+  /* ── Top app bar ───────────────────────────────────────── */
+  .top-app-bar {
+    position: sticky; top: 0; z-index: 30;
+    height: 64px;
+    background: var(--m3-surface);
+    display: flex; align-items: center; gap: 4px;
+    padding: 0 12px;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .top-app-bar.scrolled { border-bottom-color: var(--m3-outline-variant); }
+  .brand {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0 8px;
+  }
+  .brand-mark {
+    inline-size: 36px; block-size: 36px;
+    border-radius: var(--shape-sm);
+    background: var(--m3-primary-container);
+    color: var(--m3-on-primary-container);
+    display: grid; place-items: center;
+    font-family: var(--f-display); font-weight: 700;
+    font-size: 14px; letter-spacing: .04em;
+  }
+  .brand-name {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.125;
+  }
+  .top-nav-items {
+    display: none;
+    gap: 4px;
+    align-items: center;
+    margin-left: 8px;
+  }
+  .top-nav-item {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: var(--shape-full);
+    background: transparent; border: 0;
+    color: var(--m3-on-surface-variant);
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--f-text); font-weight: 500;
+    font-size: 0.875rem;
+    transition: background-color .15s, color .15s;
+  }
+  .top-nav-item:hover { background: color-mix(in oklab, var(--m3-on-surface) 8%, transparent); }
+  .top-nav-item.active {
+    background: var(--m3-secondary-container);
+    color: var(--m3-on-secondary-container);
+  }
+  .top-nav-item.active .material-symbols-outlined {
+    font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 24;
+  }
+  .top-nav-item .nav-label { display: none; }
+  .top-bar-spacer { flex: 1; }
+  .icon-btn {
+    inline-size: 40px; block-size: 40px;
+    display: grid; place-items: center;
+    border: 0; background: transparent;
+    border-radius: var(--shape-full);
+    color: var(--m3-on-surface);
+  }
+  .icon-btn:hover { background: color-mix(in oklab, var(--m3-on-surface) 8%, transparent); }
+  .avatar {
+    inline-size: 36px; block-size: 36px;
+    border-radius: var(--shape-full);
+    background: var(--m3-tertiary-container);
+    color: var(--m3-on-tertiary-container);
+    display: grid; place-items: center;
+    font-family: var(--f-display); font-weight: 600;
+    font-size: 14px;
+    margin: 0 8px;
+  }
+
+  /* ── Content ───────────────────────────────────────────── */
+  .content {
+    padding: 16px 16px 96px;
+  }
+  .page {
+    margin: 0 auto;
+    max-width: 1280px;
+  }
+  .greeting {
+    margin: 16px 0 12px;
+    display: flex; align-items: end; justify-content: space-between; gap: 16px;
+  }
+  .greeting .meta { color: var(--m3-on-surface-variant); margin-top: 6px; }
+
+  .chips {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin: 12px 0 24px;
+  }
+  .chip {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: var(--shape-sm);
+    border: 1px solid var(--m3-outline);
+    background: transparent;
+    color: var(--m3-on-surface);
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--f-text); font-weight: 500; font-size: 0.875rem;
+  }
+  .chip.selected {
+    background: var(--m3-secondary-container);
+    color: var(--m3-on-secondary-container);
+    border-color: transparent;
+  }
+  .chip .material-symbols-outlined { font-size: 18px; }
+
+  /* Section */
+  .section { margin: 32px 0; }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .section-head .meta { color: var(--m3-on-surface-variant); margin-top: 4px; }
+
+  /* Cards */
+  .card {
+    border-radius: var(--shape-lg);
+    background: var(--m3-surface-container-low);
+    padding: 20px;
+  }
+  .card.outlined {
+    background: var(--m3-surface);
+    border: 1px solid var(--m3-outline-variant);
+  }
+  .card.filled-tertiary {
+    background: var(--m3-tertiary-container);
+    color: var(--m3-on-tertiary-container);
+  }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    overflow: hidden;
+    padding: 0;
+    box-shadow: var(--el-2);
+    background: var(--m3-surface-container-lowest);
+  }
+  .hero-media {
+    aspect-ratio: 3 / 2;
+    background:
+      radial-gradient(120% 80% at 80% 20%, color-mix(in oklab, var(--m3-primary-container) 70%, white) 0%, var(--m3-primary-container) 60%, color-mix(in oklab, var(--m3-primary-container) 60%, var(--m3-tertiary-container)) 100%);
+    position: relative;
+  }
+  .hero-media::after {
+    content:"";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 70%, color-mix(in oklab, var(--m3-tertiary-container) 80%, white) 0 12%, transparent 13%),
+      radial-gradient(circle at 65% 35%, color-mix(in oklab, var(--m3-primary) 18%, transparent) 0 18%, transparent 19%);
+    opacity: .9;
+  }
+  .hero-content {
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .hero-content .meta-row {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    color: var(--m3-on-surface-variant);
+  }
+  .hero-content .dot { width: 4px; height: 4px; border-radius: 999px; background: currentColor; }
+  .hero-content .actions {
+    display: flex; gap: 12px; margin-top: 4px; flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn {
+    height: 40px;
+    padding: 0 20px;
+    border-radius: var(--shape-full);
+    border: 0;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--f-text); font-weight: 500;
+    font-size: 0.875rem;
+  }
+  .btn-filled { background: var(--m3-primary); color: var(--m3-on-primary); }
+  .btn-text   { background: transparent; color: var(--m3-primary); padding: 0 12px; }
+  .btn-outlined { background: transparent; color: var(--m3-primary); border: 1px solid var(--m3-outline); }
+  .btn-tonal  { background: var(--m3-secondary-container); color: var(--m3-on-secondary-container); }
+  .btn .material-symbols-outlined { font-size: 18px; }
+
+  /* Pair */
+  .pair {
+    display: grid; gap: 16px;
+    grid-template-columns: 1fr;
+  }
+  .list-card .between { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 8px; }
+  .list-card .row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 0;
+  }
+  .list-card .thumb {
+    width: 56px; height: 56px;
+    border-radius: var(--shape-md);
+    background: var(--m3-primary-container);
+    color: var(--m3-on-primary-container);
+    display: grid; place-items: center;
+    flex: 0 0 auto;
+  }
+  .list-card .thumb.tertiary { background: var(--m3-tertiary-container); color: var(--m3-on-tertiary-container); }
+  .list-card .grow { min-width: 0; flex: 1 1 auto; }
+  .list-card .footer { display: flex; justify-content: space-between; margin-top: 8px; }
+
+  /* Trackers */
+  .trackers {
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tracker {
+    padding: 16px;
+    background: var(--m3-surface-container-lowest);
+    border-radius: var(--shape-lg);
+    border: 1px solid var(--m3-outline-variant);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .tracker .head { display: flex; align-items: center; gap: 12px; }
+  .tracker .icon-pill {
+    width: 36px; height: 36px;
+    border-radius: var(--shape-full);
+    background: var(--m3-secondary-container);
+    color: var(--m3-on-secondary-container);
+    display: grid; place-items: center;
+  }
+  .tracker.tone-primary  .icon-pill { background: var(--m3-primary-container);  color: var(--m3-on-primary-container); }
+  .tracker.tone-tertiary .icon-pill { background: var(--m3-tertiary-container); color: var(--m3-on-tertiary-container); }
+  .tracker .progress-row { display: flex; align-items: center; gap: 8px; }
+  .progress-track {
+    flex: 1; height: 6px; border-radius: var(--shape-full);
+    background: var(--m3-surface-container-high);
+    overflow: hidden;
+  }
+  .progress-fill { height: 100%; background: var(--m3-primary); border-radius: inherit; }
+  .tracker.tone-tertiary .progress-fill { background: var(--m3-tertiary); }
+
+  /* Insight */
+  .insight {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px;
+    background: var(--m3-tertiary-container);
+    color: var(--m3-on-tertiary-container);
+    border-radius: var(--shape-lg);
+  }
+  .insight .insight-icon {
+    width: 40px; height: 40px;
+    border-radius: var(--shape-full);
+    background: color-mix(in oklab, var(--m3-tertiary) 18%, transparent);
+    color: var(--m3-on-tertiary-container);
+    display: grid; place-items: center;
+    flex: 0 0 auto;
+  }
+  .insight .grow { flex: 1; min-width: 0; }
+  .insight .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+  /* Programs */
+  .programs {
+    display: grid; gap: 12px;
+    grid-template-columns: 1fr;
+  }
+  .program-card {
+    background: var(--m3-surface-container-lowest);
+    border-radius: var(--shape-lg);
+    overflow: hidden;
+    box-shadow: var(--el-1);
+    display: flex; flex-direction: column;
+  }
+  .program-card .media {
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, var(--m3-primary-container), color-mix(in oklab, var(--m3-primary-container) 60%, var(--m3-tertiary-container)));
+  }
+  .program-card .body {
+    padding: 16px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .reward-chip {
+    align-self: flex-start;
+    padding: 2px 8px;
+    border-radius: var(--shape-sm);
+    background: var(--m3-secondary-container);
+    color: var(--m3-on-secondary-container);
+  }
+
+  /* Challenge */
+  .challenge {
+    display: flex; gap: 16px; align-items: center;
+    padding: 20px;
+    background: var(--m3-secondary-container);
+    color: var(--m3-on-secondary-container);
+    border-radius: var(--shape-xl);
+  }
+  .challenge .badge {
+    width: 56px; height: 56px;
+    border-radius: var(--shape-full);
+    background: color-mix(in oklab, #4a6360 18%, transparent);
+    display: grid; place-items: center;
+    flex: 0 0 auto;
+  }
+
+  /* Rewards */
+  .rewards {
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reward {
+    padding: 16px;
+    background: var(--m3-surface-container-lowest);
+    border-radius: var(--shape-lg);
+    box-shadow: var(--el-1);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+
+  /* Bottom nav — Compact only */
+  .bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 80px;
+    background: var(--m3-surface-container);
+    border-top: 1px solid var(--m3-outline-variant);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px 0 12px;
+    z-index: 15;
+  }
+  .bn-item {
+    background: transparent; border: 0;
+    color: var(--m3-on-surface-variant);
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    font-family: var(--f-text); font-weight: 500;
+    font-size: 0.75rem;
+  }
+  .bn-item .pill {
+    width: 64px; height: 32px; border-radius: var(--shape-full);
+    display: grid; place-items: center;
+  }
+  .bn-item.active { color: var(--m3-on-surface); }
+  .bn-item.active .pill {
+    background: var(--m3-secondary-container);
+    color: var(--m3-on-secondary-container);
+  }
+
+  /* Breakpoints */
+  @media (min-width: 600px) {
+    .content { padding: 24px 24px 96px; }
+    .top-nav-items { display: inline-flex; }
+    .bottom-nav { display: none; }
+    .hero { grid-template-columns: 5fr 7fr; max-height: 360px; }
+    .hero-media { aspect-ratio: auto; height: 100%; }
+    .hero-content { padding: 32px; overflow: hidden; }
+    .pair { grid-template-columns: 1fr 1fr; gap: 20px; }
+    .trackers { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .programs { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .rewards { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .greeting { margin: 24px 0 16px; }
+    .section { margin: 40px 0; }
+  }
+  @media (min-width: 840px) {
+    .top-nav-item .nav-label { display: inline; }
+    .top-nav-item { padding: 0 16px; }
+  }
+  @media (min-width: 1600px) {
+    .page { max-width: 1440px; }
+  }
+
+  .ink-soft { color: var(--m3-on-surface-variant); }
+</style>
+</head>
+<body>
+
+<div class="lh-banner"><strong>v3 · MATERIAL WEIGHTS</strong> · simplified LH · Display/Heading 500 · Body/Paragraph 400 · Caption 500 · Small 600 · no &lt;strong&gt; wrappers</div>
+
+<div class="app">
+
+  <!-- Top app bar -->
+  <header class="top-app-bar" id="topbar">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <span class="brand-name">Acme Health</span>
+    </div>
+
+    <nav class="top-nav-items" aria-label="Primary">
+      <button class="top-nav-item active">
+        <span class="material-symbols-outlined">home</span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="top-nav-item">
+        <span class="material-symbols-outlined">medical_services</span>
+        <span class="nav-label">Care</span>
+      </button>
+      <button class="top-nav-item">
+        <span class="material-symbols-outlined">favorite</span>
+        <span class="nav-label">Wellbeing</span>
+      </button>
+      <button class="top-nav-item">
+        <span class="material-symbols-outlined">card_giftcard</span>
+        <span class="nav-label">Rewards</span>
+      </button>
+      <button class="top-nav-item">
+        <span class="material-symbols-outlined">workspace_premium</span>
+        <span class="nav-label">Benefits</span>
+      </button>
+    </nav>
+
+    <div class="top-bar-spacer"></div>
+
+    <button class="icon-btn"><span class="material-symbols-outlined">search</span></button>
+    <button class="icon-btn"><span class="material-symbols-outlined">notifications</span></button>
+    <div class="avatar">D</div>
+  </header>
+
+  <!-- Content -->
+  <main class="content">
+    <div class="page">
+
+      <!-- Greeting -->
+      <div class="greeting">
+        <div>
+          <h1 class="heading-2">Good afternoon, Davinder</h1>
+          <div class="body-3 meta">Your week is on track · 4 of 5 habits hit yesterday</div>
+        </div>
+        <button class="btn btn-text">
+          <span class="material-symbols-outlined">tune</span>
+          Personalize
+        </button>
+      </div>
+
+      <!-- Chips -->
+      <div class="chips">
+        <button class="chip selected"><span class="material-symbols-outlined">auto_awesome</span> For you</button>
+        <button class="chip"><span class="material-symbols-outlined">add</span> Log activity</button>
+        <button class="chip"><span class="material-symbols-outlined">restaurant</span> Log meal</button>
+        <button class="chip"><span class="material-symbols-outlined">monitor_weight</span> Check in</button>
+        <button class="chip"><span class="material-symbols-outlined">explore</span> Browse programs</button>
+      </div>
+
+      <!-- HERO -->
+      <section class="section">
+        <div class="card hero">
+          <div class="hero-media" aria-hidden="true"></div>
+          <div class="hero-content">
+            <div class="caption ink-soft">
+              <span class="material-symbols-outlined" style="font-size:14px; vertical-align:-2px;">auto_awesome</span>
+              SUGGESTED FOR YOU
+            </div>
+            <h2 class="heading-4">Sleep better in 4 weeks</h2>
+            <p class="paragraph-2 ink-soft" style="margin:0; max-width: 52ch;">
+              An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change you can feel by the second week.
+            </p>
+            <div class="meta-row body-3">
+              <span><span class="material-symbols-outlined" style="font-size:16px; vertical-align:-2px;">spa</span> Sleep DCP</span>
+              <span class="dot"></span>
+              <span><span class="material-symbols-outlined" style="font-size:16px; vertical-align:-2px;">redeem</span> $100 reward</span>
+              <span class="dot"></span>
+              <span>4 weeks</span>
+            </div>
+            <div class="actions">
+              <button class="btn btn-filled">
+                <span class="material-symbols-outlined">play_arrow</span>
+                Start the program
+              </button>
+              <button class="btn btn-text">Learn more</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pair: Interests + Employer -->
+      <section class="section pair">
+        <div class="card outlined list-card">
+          <div class="between">
+            <div>
+              <h3 class="heading-6" style="margin: 0;">Based on your interests</h3>
+              <div class="caption ink-soft" style="margin-top: 4px;">SLEEP · STRESS · NUTRITION</div>
+            </div>
+            <button class="btn btn-text">
+              <span class="material-symbols-outlined">tune</span>
+              Edit
+            </button>
+          </div>
+          <div class="row">
+            <div class="thumb">
+              <span class="material-symbols-outlined">bedtime</span>
+            </div>
+            <div class="grow">
+              <div class="caption ink-soft">ARTICLE · SLEEP · 3 MIN READ</div>
+              <div class="body-2" style="margin-top: 2px;">How to wind down before bed</div>
+            </div>
+            <span class="material-symbols-outlined ink-soft">chevron_right</span>
+          </div>
+          <div class="footer">
+            <a href="#" class="body-3" style="color: var(--m3-primary); font-weight: 500;">See 7 more matched to you</a>
+          </div>
+        </div>
+
+        <div class="card filled-tertiary list-card">
+          <div class="between">
+            <div>
+              <h3 class="heading-6" style="margin: 0;">From your employer</h3>
+              <div class="caption" style="opacity: .85; margin-top: 4px;">ACME · BENEFITS TEAM</div>
+            </div>
+            <span class="material-symbols-outlined">apartment</span>
+          </div>
+          <div class="row">
+            <div class="thumb tertiary" style="background: color-mix(in oklab, var(--m3-tertiary) 22%, transparent);">
+              <span class="material-symbols-outlined">assignment</span>
+            </div>
+            <div class="grow">
+              <div class="caption" style="opacity: .85;">WELLBEING · EARN $300</div>
+              <div class="body-2" style="margin-top: 2px;">Complete your health assessment</div>
+            </div>
+            <span class="material-symbols-outlined">chevron_right</span>
+          </div>
+          <div class="footer">
+            <a href="#" class="body-3" style="color: inherit; text-decoration: underline;">See 3 more from Acme</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- This week -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="heading-6">This week</h2>
+            <div class="body-3 meta">
+              <span class="material-symbols-outlined" style="font-size:13px; vertical-align:-2px;">sync</span>
+              Synced 4 minutes ago · Apple Health
+            </div>
+          </div>
+          <button class="btn btn-text">View all data</button>
+        </div>
+
+        <div class="trackers">
+          <div class="tracker tone-primary">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">directions_walk</span></div>
+              <div>
+                <div class="caption ink-soft">STEPS</div>
+                <div class="heading-5">8,420</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:78%"></div></div>
+              <div class="body-3 ink-soft">78%</div>
+            </div>
+          </div>
+
+          <div class="tracker">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">bedtime</span></div>
+              <div>
+                <div class="caption ink-soft">SLEEP</div>
+                <div class="heading-5">6h 43m</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
+              <div class="body-3 ink-soft">65%</div>
+            </div>
+          </div>
+
+          <div class="tracker tone-tertiary">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">local_fire_department</span></div>
+              <div>
+                <div class="caption ink-soft">CALORIES</div>
+                <div class="heading-5">645</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:42%"></div></div>
+              <div class="body-3 ink-soft">42%</div>
+            </div>
+          </div>
+
+          <div class="tracker">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">timer</span></div>
+              <div>
+                <div class="caption ink-soft">ACTIVE MIN</div>
+                <div class="heading-5">52</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:86%"></div></div>
+              <div class="body-3 ink-soft">86%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Insight -->
+      <section class="section">
+        <div class="insight">
+          <div class="insight-icon">
+            <span class="material-symbols-outlined filled">auto_awesome</span>
+          </div>
+          <div class="grow">
+            <div class="caption">INSIGHT</div>
+            <div class="heading-6" style="margin-top: 4px;">
+              Sleep is averaging <strong>38 minutes less</strong> than your goal this week.
+            </div>
+            <div class="body-3" style="margin-top: 6px;">Try a 30-minute wind-down tonight at 9:30pm.</div>
+            <div class="actions">
+              <button class="btn btn-tonal" style="background: color-mix(in oklab, var(--m3-tertiary) 18%, transparent); color: var(--m3-on-tertiary-container);">
+                <span class="material-symbols-outlined">notifications_active</span>
+                Set reminder
+              </button>
+              <button class="btn btn-text" style="color: var(--m3-on-tertiary-container);">Refresh</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Continue your programs -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="heading-6">Continue your programs</h2>
+            <div class="body-3 meta">3 active · most engaged first</div>
+          </div>
+          <button class="btn btn-text">View all programs</button>
+        </div>
+
+        <div class="programs">
+          <article class="program-card">
+            <div class="media" aria-hidden="true"></div>
+            <div class="body">
+              <span class="reward-chip caption">DCP · SLEEP</span>
+              <div class="heading-6">Better Sleep</div>
+              <div class="caption ink-soft">SESSION 3 OF 8 · $100</div>
+            </div>
+          </article>
+          <article class="program-card">
+            <div class="media" style="background: linear-gradient(135deg, var(--m3-tertiary-container), color-mix(in oklab, var(--m3-tertiary-container) 60%, var(--m3-secondary-container)));" aria-hidden="true"></div>
+            <div class="body">
+              <span class="reward-chip caption" style="background: var(--m3-tertiary-container); color: var(--m3-on-tertiary-container);">DCP · STRESS</span>
+              <div class="heading-6">Manage Stress</div>
+              <div class="caption ink-soft">SESSION 5 OF 8 · $100</div>
+            </div>
+          </article>
+          <article class="program-card">
+            <div class="media" style="background: linear-gradient(135deg, var(--m3-secondary-container), color-mix(in oklab, var(--m3-primary-container) 80%, white));" aria-hidden="true"></div>
+            <div class="body">
+              <span class="reward-chip caption">DCP · DIABETES</span>
+              <div class="heading-6">Diabetes Prevention</div>
+              <div class="caption ink-soft">WEEK 6 OF 16 · $100</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Challenge -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="heading-6">Your challenge</h2>
+            <div class="body-3 meta">Team event</div>
+          </div>
+        </div>
+        <div class="challenge">
+          <div class="badge"><span class="material-symbols-outlined filled">emoji_events</span></div>
+          <div style="flex: 1; min-width: 0;">
+            <div class="caption">TEAM CHALLENGE</div>
+            <div class="heading-6" style="margin-top: 2px;">Spring Steps Challenge</div>
+            <div class="body-3">Day 22 of 30 · Currently 4th of 8 teammates</div>
+          </div>
+          <button class="btn btn-outlined" style="border-color: color-mix(in oklab, var(--m3-on-secondary-container) 35%, transparent); color: var(--m3-on-secondary-container);">Details</button>
+        </div>
+      </section>
+
+      <!-- Rewards -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="heading-6">Your rewards</h2>
+            <div class="body-3 meta">Earn more with healthy actions</div>
+          </div>
+          <button class="btn btn-text">Reward details</button>
+        </div>
+        <div class="rewards">
+          <div class="reward">
+            <span class="reward-chip caption">GIFT CARD</span>
+            <div class="heading-5">$75</div>
+            <div class="body-3 ink-soft">Amazon · ready to redeem</div>
+            <div class="caption ink-soft">$25 TO NEXT CARD</div>
+          </div>
+          <div class="reward">
+            <span class="reward-chip caption" style="background: var(--m3-tertiary-container); color: var(--m3-on-tertiary-container);">POINTS · SILVER</span>
+            <div class="heading-5">1,250</div>
+            <div class="body-3 ink-soft">Tier progress</div>
+            <div class="caption ink-soft">750 TO GOLD TIER</div>
+          </div>
+          <div class="reward">
+            <span class="reward-chip caption" style="background: var(--m3-secondary-container); color: var(--m3-on-secondary-container);">RAFFLE</span>
+            <div class="heading-5">12</div>
+            <div class="body-3 ink-soft">Active entries</div>
+            <div class="caption ink-soft">DRAW ON MAY 31</div>
+          </div>
+          <div class="reward">
+            <span class="reward-chip caption">STORE CREDIT</span>
+            <div class="heading-5">$25</div>
+            <div class="body-3 ink-soft">Spend in store</div>
+            <div class="caption ink-soft">NO EXPIRY</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Bottom nav -->
+<nav class="bottom-nav">
+  <button class="bn-item active"><span class="pill"><span class="material-symbols-outlined">home</span></span><span>Home</span></button>
+  <button class="bn-item"><span class="pill"><span class="material-symbols-outlined">medical_services</span></span><span>Care</span></button>
+  <button class="bn-item"><span class="pill"><span class="material-symbols-outlined">favorite</span></span><span>Wellbeing</span></button>
+  <button class="bn-item"><span class="pill"><span class="material-symbols-outlined">card_giftcard</span></span><span>Rewards</span></button>
+  <button class="bn-item"><span class="pill"><span class="material-symbols-outlined">workspace_premium</span></span><span>Benefits</span></button>
+</nav>
+
+<script>
+  const bar = document.getElementById('topbar');
+  const onScroll = () => bar.classList.toggle('scrolled', window.scrollY > 4);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
+</body>
+</html>

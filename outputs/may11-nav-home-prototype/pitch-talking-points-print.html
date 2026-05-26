@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pitch Talking Points — Home v1 (long)</title>
+<style>
+  /* ---------- print page ---------- */
+  @page {
+    size: Letter;
+    margin: 0.7in 0.75in 0.85in 0.75in;
+    @bottom-center {
+      content: "Pitch Talking Points — Home v1 · " counter(page) " of " counter(pages);
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9pt;
+      color: #666;
+    }
+  }
+
+  :root{
+    --ink:        #111418;
+    --ink-2:      #34393f;
+    --ink-3:      #5e646b;
+    --rule:       #d8d6d2;
+    --callout-bg: #f6f4ee;
+    --callout-br: #d8d3c5;
+    --link:       #1f3f72;
+    --f-display:  "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Inter", Arial, sans-serif;
+    --f-text:     "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Inter", Arial, sans-serif;
+  }
+
+  html, body{ margin: 0; padding: 0; background: #fff; color: var(--ink); }
+  body{
+    font-family: var(--f-text);
+    font-size: 11pt;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* on-screen container so the page still reads nicely in a browser */
+  .page{
+    max-width: 7.0in;
+    margin: 0.5in auto;
+    padding: 0;
+  }
+  @media print{
+    .page{ max-width: none; margin: 0; }
+    .no-print{ display: none !important; }
+  }
+
+  h1, h2, h3 {
+    font-family: var(--f-display);
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  h1{
+    font-size: 22pt;
+    font-weight: 700;
+    margin-bottom: 4pt;
+  }
+  h2{
+    font-size: 14pt;
+    font-weight: 700;
+    margin: 22pt 0 6pt;
+    padding-top: 6pt;
+    border-top: 0.5pt solid var(--rule);
+    page-break-after: avoid;
+  }
+  h3{
+    font-size: 11.5pt;
+    font-weight: 700;
+    margin: 14pt 0 4pt;
+    page-break-after: avoid;
+  }
+  h2:first-of-type{ border-top: 0; padding-top: 0; }
+
+  p, ul, ol, table{
+    margin: 0 0 8pt;
+  }
+  ul, ol{ padding-left: 18pt; }
+  li{ margin-bottom: 3pt; }
+  li > p{ margin: 0; }
+
+  strong{ font-weight: 700; color: var(--ink); }
+  em{ font-style: italic; }
+  a{ color: var(--link); text-decoration: none; }
+
+  /* meta block under title */
+  .meta{
+    font-family: var(--f-text);
+    font-size: 9.5pt;
+    color: var(--ink-3);
+    line-height: 1.4;
+    margin: 4pt 0 14pt;
+    padding-bottom: 10pt;
+    border-bottom: 0.5pt solid var(--rule);
+  }
+  .meta strong{ color: var(--ink-2); font-weight: 600; }
+
+  /* callout boxes */
+  .callout{
+    background: var(--callout-bg);
+    border: 0.5pt solid var(--callout-br);
+    border-left-width: 2pt;
+    padding: 9pt 12pt;
+    margin: 10pt 0;
+    page-break-inside: avoid;
+  }
+  .callout p:last-child{ margin-bottom: 0; }
+  .callout .label{
+    font-family: var(--f-text);
+    font-size: 8.5pt;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-2);
+    margin-bottom: 4pt;
+    display: block;
+  }
+
+  /* tables */
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10pt;
+    page-break-inside: avoid;
+  }
+  th, td{
+    text-align: left;
+    vertical-align: top;
+    padding: 5pt 8pt;
+    border-bottom: 0.5pt solid var(--rule);
+  }
+  th{
+    font-weight: 700;
+    color: var(--ink-2);
+    border-bottom: 0.75pt solid var(--ink-3);
+    background: #faf7f0;
+  }
+
+  /* rules-of-thumb / pressed cards */
+  .pressed{
+    border: 0.5pt solid var(--rule);
+    border-radius: 4pt;
+    padding: 8pt 12pt;
+    margin: 6pt 0;
+    page-break-inside: avoid;
+  }
+  .pressed em{
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  /* utility */
+  hr{
+    border: 0;
+    border-top: 0.5pt solid var(--rule);
+    margin: 18pt 0;
+  }
+
+  .break-before{ page-break-before: always; }
+  .keep{ page-break-inside: avoid; }
+
+  /* on-screen helper banner */
+  .print-hint{
+    max-width: 7.0in;
+    margin: 12pt auto;
+    padding: 8pt 12pt;
+    background: #eef3fb;
+    border: 0.5pt solid #c8d8ee;
+    border-radius: 4pt;
+    font-size: 10pt;
+    color: var(--ink-2);
+  }
+</style>
+</head>
+<body>
+
+<div class="print-hint no-print">
+  <strong>To print:</strong> ⌘P (Mac) or Ctrl-P (Win). Set <em>Destination</em> to “Save as PDF” for a PDF, or pick a printer. Margins are baked in.
+</div>
+
+<article class="page">
+  <h1>Pitch Talking Points — Home v1</h1>
+  <div class="meta">
+    <strong>For:</strong> Davinder · meeting with Jill and Darcy · 2026-05-11<br>
+    <strong>Companion to:</strong> <em>nav-home-v4-listened.html</em> (the v1 prototype)<br>
+    <strong>Format:</strong> First person, conversational. Speak it, don’t read it.
+  </div>
+
+  <h2>Opening — frame what I did</h2>
+  <p>Thanks for the time. I want to walk you through where I’ve landed for a v1 of the home redesign. I’m not coming in with a finished spec — this is one version. I have a few more I’m working on. But this one is far enough along that I want to put it in front of both of you and get reactions.</p>
+  <p>The frame I used: John’s offsite list is the anchor. Darcy’s brief gives the interpretation layer. Jill’s exploration provided most of the building blocks. My job, the way I read it, was to take all of that and land something that hits the personalization mark John asked for without overwhelming the page. I tried not to boil the ocean. There’s a lot we <em>could</em> do here. This isn’t that.</p>
+
+  <div class="callout">
+    <span class="label">Set up front</span>
+    <p>I optimized this version for <strong>form and function</strong>, not for visual treatment. What I worked on was <em>what’s on the page, in what order, with what affordances, with what labels.</em> Type, color, photography, spacing polish, motion — all downstream. If you push on a visual choice in this rendering, my honest answer is “I haven’t optimized for that yet.” Form and function first, then we tune the rest.</p>
+  </div>
+
+  <div class="callout">
+    <span class="label">Also worth flagging</span>
+    <p>This prototype shows the <strong>default populated state.</strong> It does not yet reflect zero states or component variations — empty interest content, no active programs, no active challenge, single-reward-type clients, broken tracker sync, no employer items, disconnected device, skeleton loading. Those all need to be designed before we ship. v1 is the populated case so we can agree on the shape of the populated case first.</p>
+  </div>
+
+  <h2>The three calls I made on form and function</h2>
+  <p>Before I walk through the design, three calls I was holding in my head the whole time. These are structural decisions, not visual ones:</p>
+  <p><strong>One — the user has to feel we listened.</strong> Onboarding already collected their interests. The old home didn’t show that signal anywhere. The “Just For You” section wasn’t actually for you — a generic mix labeled as personal. That’s the trust break we have to close, and we close it through <em>labeling and structure,</em> not type or color.</p>
+  <p><strong>Two — the user has to be able to change their mind.</strong> They selected interests at onboarding. They should be able to adjust without leaving home. The affordance has to sit <em>next to the content that responds to it</em> — that’s an information-architecture call, not a styling call.</p>
+  <p><strong>Three — fewer things per section, in priority order.</strong> This isn’t about whitespace or density treatment. It’s about <em>what’s on the page</em> and <em>how many items each section carries.</em> One hero, one insight, three programs, one challenge, four reward tiles. Each section earns its slot by surfacing the highest-priority item of its kind and pointing to the rest. Count and order, not spacing.</p>
+  <p>Everything in this version traces back to one of those three.</p>
+
+  <h2>What’s in v1 — mapped to John and Darcy</h2>
+  <p>Top to bottom:</p>
+  <p><strong>Greeting.</strong> Time-of-day plus first name. Two words, generous spacing. Nothing else competing.</p>
+  <p><strong>One hero, flexible content.</strong> This is John’s directive #3. One slot. The eyebrow tag above the title — <em>Based on your interests</em> in this rendering — is the source label. The same slot also carries <em>From your employer</em>, <em>Active challenge</em>, <em>From Acme</em> depending on what the priority engine surfaces. The hero is mixed-purpose, and the tag is how we make that obvious without making it look like a UI badge.</p>
+  <p>This matters for two reasons. One, sales doesn’t lose the hero. They had four or five carousel slots before; now there’s one, but the hero is still in their rotation. Two, the eyebrow makes it readable to the user — they can tell at a glance whether the thing on top is a recommendation, a benefits message, or a sales push.</p>
+  <p><strong>Based on your interest · From your employer.</strong> Two paired sections immediately below the hero. Distinct titles. The left lane is the personalization payoff — “we used the interests you gave us at onboarding, here’s what we surfaced.” The footer makes that explicit — <em>See 7 more matched to your interests</em> and <em>Edit Interests</em> right there. Right lane is <em>From your employer,</em> with its own <em>See three more from Acme</em> link.</p>
+  <p>That right lane is how employers don’t lose real estate. The carousel used to give them four or five slots. They still get a permanent, labeled section on every render — and <em>More from Acme</em> carries the long tail. That’s a structural win for them, not a loss.</p>
+  <p><strong>This week.</strong> Tracker — four metrics, weekly view, single row. This is the Darcy direction to reduce tracker footprint. Steps, sleep, calories, active minutes. Source line directly under the title says when it last synced and what device — <em>Synced 4 minutes ago · Source: Apple Health.</em> That sync state is the trust signal that the data is live and the device is connected. It’s small, but it’s the thing users complain about losing visibility on.</p>
+  <p><strong>Insight.</strong> AI Insight band right under the tracker. One takeaway, one action, refresh button. Per Darcy, this stays — and it’s our differentiator vs. Personify, where their AI explains without acting.</p>
+  <p><strong>Continue your programs.</strong> This is the “easier access to ongoing programs” line in Darcy’s brief — and one of the things John specifically asked for. Three DCP cards, progress bar, dollar-at-completion inline. Pick-up-where-you-left-off, made visible.</p>
+  <p><strong>Your challenge.</strong> Single conditional card. Active team challenge with day count and team rank. Renders only when there’s actually something to surface.</p>
+  <p><strong>Your rewards.</strong> Four-up tiles at the bottom — gift card, points, raffle, store credit. I want to flag this one separately. (See below.)</p>
+  <p><strong>Bottom tab nav.</strong> Five tabs on mobile. Frame, not content. The nav design is being addressed in another document, so I’m not litigating placement here.</p>
+
+  <h2>On the carousel removal — nobody loses real estate</h2>
+  <p>This is the line I want to be ready with for both sales and the employer team. The carousel used to surface four or five items. v1 collapses that to one hero. On the surface, that looks like a loss. It isn’t, and here’s why:</p>
+  <ul>
+    <li><strong>Sales</strong> still owns the hero rotation. The priority engine puts sales/announcement content in that slot when it’s the highest-priority thing to show.</li>
+    <li><strong>Employers</strong> now have a permanent, labeled lane that renders every visit. They don’t have to <em>win</em> the hero to be seen — <em>From your employer</em> is always there, with three+ items via <em>More from Acme.</em></li>
+    <li><strong>Interest content</strong> has the same — permanent left lane with <em>See 7 more</em> to expand.</li>
+  </ul>
+  <p>The net is: one slot for the highest-priority hero moment, plus two permanent sections that scale to whatever the client has loaded. The real-estate math is the same or better. The cognitive load is lower because the user sees one thing at a time instead of a swiping carousel.</p>
+
+  <h2>On rewards and challenges — flagging this one as open</h2>
+  <p>Rewards is at the bottom of v1. That’s a deliberate choice, but I don’t think it’s settled.</p>
+  <p>Two reasons it’s worth a conversation:</p>
+  <p><strong>One — rewards is one of MHC’s competitive moats.</strong> Configurability across gift cards, points, raffles, store credit is something Personify can’t do and Sharecare can’t do. Most platforms only do points. The home should make that flexibility visible, not bury it.</p>
+  <p><strong>Two — Personify and Virgin Pulse promote points-as-progress to the top.</strong> It works for them because they only have one currency. We have up to four reward types. A points-only chip at the top would misrepresent the economy. A four-type strip at the top is a lot of weight on a section that’s, for many users, secondary information.</p>
+  <p>For v1 I left it as a four-up summary at the bottom — calm, comprehensive, doesn’t crowd what’s above it. But I’d want to discuss whether some clients should see rewards promoted higher when their reward economy is rich. That’s a “weight scales with configuration” call we can defer past v1.</p>
+  <p><strong>Challenges</strong> is conditional — single card, only renders when there’s an active engagement. That’s the right scope, and there’s no real conversation needed there.</p>
+
+  <h2>On personalization — where I want to land the conversation</h2>
+  <p>This is the part I want to put a fine point on, because I think it’s the place where Jill and I might be looking at the same problem differently and I want to make sure we’re aligned.</p>
+  <p>John’s offsite item #6 says: “simplified personalization that works — add filters to pages so the user can declare in session what they want to work on, and simultaneously shut down the current personalization engine.”</p>
+  <p>I read the <em>intent</em> of that line as: give the user real control over what they see, and stop pretending the algorithm knows them better than they know themselves. I agree with that intent completely. The thing I’d push back on, gently, is the <em>mechanism</em> — a page-level filter.</p>
+  <p>Here’s why I don’t think the filter works as a home-page-level control. Two reasons:</p>
+  <p><strong>One — most of the home isn’t personalized.</strong> Tracker shows device data. Continue-your-programs shows whatever DCPs the user is enrolled in. Employer lane shows what the employer pushed. Challenge shows the active challenge. Rewards show the reward configuration. Even the hero is mixed-source — sometimes interest, sometimes employer, sometimes sales. The only sections that genuinely respond to an interest filter are the <em>Based on your interest</em> lane and, <em>sometimes,</em> the hero. So if I’m a user and I click a <em>Sleep</em> filter at the top of the page, almost nothing changes. That’s a worse experience than no filter at all — the page promised a change it couldn’t deliver. That’s the Norman mapping principle — a control should map cleanly to what it changes.</p>
+  <p><strong>Two — grouping.</strong> Gestalt’s common region tells us that controls sit <em>within</em> the thing they affect, not above it. A page-level filter implies page-level scope. If the filter only really controls one lane, the right place for the filter is <em>inside that lane.</em> That’s what <em>Edit Interests</em> is in v1 — it lives next to the lane it actually controls. Same intent as John’s filter idea. Different scope. The user gets the control they want, in the place where the control will actually do something.</p>
+  <p>So my recommendation — and I want to put this as a recommendation, not a directive — is that the response to John’s #6 looks like this:</p>
+
+  <table>
+    <thead>
+      <tr><th>What John asked for</th><th>How v1 delivers it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>User can declare in-session what they want to work on</td><td><em>Edit Interests</em> adjacent to the interest lane — modal sheet, reuses onboarding UI</td></tr>
+      <tr><td>Simplified personalization</td><td>Source-labeled sections + source-tagged hero — the user can <em>see</em> what’s personalized and what isn’t</td></tr>
+      <tr><td>Shut down the current engine</td><td>Same — the algorithmic “Just For You” mix goes away. What’s left is explicit provenance per section</td></tr>
+    </tbody>
+  </table>
+
+  <p>That gives John what he wanted at the level of <em>user outcome.</em> It just doesn’t deliver it as a page-level filter, because a page-level filter would be a mechanism that doesn’t fit the page.</p>
+  <p>I’d like to land this with the team rather than have it come up later. If Jill or anyone else has a strong reason the page-level filter is still the right shape, I want to hear it before we move forward.</p>
+
+  <h2>What this version is <em>not</em></h2>
+  <p>A few things I deliberately didn’t put in v1, and I want to call them out so we don’t think they were missed:</p>
+  <ul>
+    <li><strong>Not a visual pass.</strong> Type sizes, color register, photography, spacing rhythm, motion — none of that has been optimized. This is form and function first.</li>
+    <li><strong>Not all the states.</strong> Zero states and component variations aren’t here. The default-populated case is what I’m showing. Empty interest content, no active programs, no active challenge, broken tracker sync, single-reward-type clients, no employer items, disconnected device, skeleton loading — those still need design before ship. v1 nails down the populated shape so we can agree on the spine first.</li>
+    <li><strong>No filter chip at the top of the page.</strong> Per above.</li>
+    <li><strong>No <em>Just For You</em> mixed surface.</strong> Replaced by the source-labeled lanes.</li>
+    <li><strong>No carousel.</strong> Per John’s directive #3.</li>
+    <li><strong>No left nav</strong> in this rendering. That’s being handled in another document.</li>
+    <li><strong>No skeleton screens shown.</strong> That’s eng remediation, not visible design. Hooks are ready.</li>
+    <li><strong>Rewards stays at weight 2 (bottom).</strong> Open for discussion per above.</li>
+  </ul>
+
+  <h2>Wrap — what I’d like to leave with</h2>
+  <p>Three things, ideally:</p>
+  <p><strong>One — agreement that source labeling plus scoped Edit Interests is our answer to John’s #6.</strong> Not a page filter. Source tags on hero, lane-titled section, edit affordance next to the lane.</p>
+  <p><strong>Two — alignment that employers and sales aren’t losing real estate.</strong> Hero rotation plus permanent lane plus <em>More from Acme</em> = the same or more surface area, presented more calmly.</p>
+  <p><strong>Three — a parking lot for rewards placement.</strong> I’m fine with it at the bottom for v1. But I want it on the list to revisit when we have client config data to look at.</p>
+  <p>If there are objections, I want them now. This is one version — there are others coming — and I’d rather know what’s wrong with this one before I refine or branch.</p>
+
+  <h2 class="break-before">If pressed on specific points</h2>
+  <p>Quick reminders for moments where I might wobble:</p>
+
+  <div class="pressed"><em>Why not a page-level filter?</em> Because most of the home doesn’t respond to it. Filter affordances should match the scope of what they control — Norman’s mapping. A whole-page filter that only changes one lane is a contract the page can’t keep.</div>
+  <div class="pressed"><em>Why is the personalization signal in eyebrows and section titles?</em> So the user can see, at a glance, <em>which</em> content is personalized and <em>what signal</em> drove it. The eyebrow on the hero says “this slot used your interests.” The lane title says “this whole section is shaped by what you told us.” That’s the listening signal.</div>
+  <div class="pressed"><em>Why one hero?</em> John’s call. The eyebrow tag preserves the carousel’s source-distinction without preserving the swipe.</div>
+  <div class="pressed"><em>Why does Acme not lose real estate?</em> Permanent <em>From your employer</em> lane on every render, plus <em>More from Acme</em> for the long tail. They no longer rely on winning the hero to be seen.</div>
+  <div class="pressed"><em>Why is Continue Your Programs above Things I Care About?</em> John named “easier access to ongoing programs” specifically. CS named it. Second-highest-weighted module after the hero.</div>
+  <div class="pressed"><em>Why rewards at the bottom?</em> Optional/client-configurable; not every client has it; for clients with multiple reward types a top-of-page strip would be heavy. Open to revisit when we have config data.</div>
+  <div class="pressed"><em>Why no “Just For You”?</em> Generic mix presented as personal. That’s the trust break we’re fixing. Source-labeled sections solve the same problem without lying about what’s personalized.</div>
+  <div class="pressed"><em>What if Jill pushes the filter idea hard?</em> Two moves. One: validate the intent — <em>the user should be able to control what they see, agreed.</em> Two: redirect the mechanism — <em>the right place for that control is inside the section it actually controls, which is what Edit Interests does.</em> Not “no filter,” it’s “filter scoped to where the filter can deliver.”</div>
+  <div class="pressed"><em>On visuals?</em> I haven’t optimized for visuals yet. Form and function first.</div>
+  <div class="pressed"><em>On the missing states?</em> This is the populated case. Empty/broken/single-config states are next.</div>
+
+</article>
+</body>
+</html>

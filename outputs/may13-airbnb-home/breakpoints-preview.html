@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breakpoint views — Airbnb take, v1</title>
+<style>
+  :root{
+    --bg: #f7f7f7;
+    --ink: #222222;
+    --muted: #6a6a6a;
+    --line: #dddddd;
+    --container: #ebebeb;
+    --primary: #ff385c;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0; padding: 24px 24px 64px;
+    background: var(--bg); color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .head{
+    max-width: 1480px; margin: 0 auto 16px;
+    display: flex; align-items: end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  h1{
+    margin: 0; font-weight: 700; font-size: 28px; letter-spacing: -.01em;
+  }
+  .lead{ color: var(--muted); margin: 4px 0 0; max-width: 70ch; line-height: 1.5; }
+  .grid{
+    max-width: 1480px; margin: 24px auto 0;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1000px){
+    .grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1480px){
+    .grid{ grid-template-columns: 375px 1fr 1fr; }
+  }
+  .vp{
+    background: var(--container);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .vp .label{
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .vp .name{ font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+  .vp .size{ color: var(--muted); font-size: 12px; }
+  .frame-wrap{
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    height: 740px;
+    position: relative;
+  }
+  iframe{
+    border: 0;
+    background: white;
+    transform-origin: top left;
+  }
+  .legend{
+    max-width: 1480px; margin: 32px auto 0;
+    display: grid; gap: 12px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 800px){ .legend{ grid-template-columns: repeat(3,1fr); } }
+  .l{
+    background: white; border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+  }
+  .l h3{ margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
+  .l p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .openlink{
+    font-size: 14px; color: var(--primary); text-decoration: none; font-weight: 600;
+  }
+  .openlink:hover{ text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div>
+      <h1>If Airbnb built MHC's home — three breakpoints</h1>
+      <p class="lead">Same MHC home content as the may12 Material 3 take, restyled in Airbnb's visual language. Three viewports. Property-card grid reduces column count cleanly at each step (3 → 2 → 1). Product tabs and search-bar segments collapse below 900px.</p>
+    </div>
+    <a href="home-airbnb-v1-mhc-restyled.html" class="openlink">Open full prototype →</a>
+  </div>
+
+  <div class="grid">
+    <div class="vp">
+      <div class="label">
+        <span class="name">Mobile</span>
+        <span class="size">375 · cards 1-up · trackers 2 × 2</span>
+      </div>
+      <div class="frame-wrap" style="height: 740px;">
+        <iframe src="home-airbnb-v1-mhc-restyled.html" width="375" height="740" style="width:375px; height:740px;"></iframe>
+      </div>
+    </div>
+
+    <div class="vp">
+      <div class="label">
+        <span class="name">Desktop</span>
+        <span class="size">1100 · cards 3-up · trackers 2 × 2</span>
+      </div>
+      <div class="frame-wrap" style="height: 720px;">
+        <iframe src="home-airbnb-v1-mhc-restyled.html" width="1100" height="900"
+                style="width:1100px; height:900px; transform: scale(.5); transform-origin: top left;"></iframe>
+      </div>
+    </div>
+
+    <div class="vp">
+      <div class="label">
+        <span class="name">Wide-flex</span>
+        <span class="size">1440 · max 1280 · trackers 4-up · rewards 4-up</span>
+      </div>
+      <div class="frame-wrap" style="height: 720px;">
+        <iframe src="home-airbnb-v1-mhc-restyled.html" width="1440" height="1100"
+                style="width:1440px; height:1100px; transform: scale(.42); transform-origin: top left;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="l">
+      <h3>Mobile &lt; 744</h3>
+      <p>Top product tabs hide entirely; brand + account pill only. "Your benefits" link hides. Search bar collapses to a 2-segment pill (Find + orb). Programs stack 1-up. Trackers and rewards reflow to 2-column. Insight band stacks. Footer columns collapse to a single stack.</p>
+    </div>
+    <div class="l">
+      <h3>Desktop ~1100</h3>
+      <p>Product tabs re-appear centered (Today / Care / Rewards), with the NEW badge on Rewards. Programs 3-up. Trackers and rewards 2-up. The hero collapses content beside photo into a stacked content-above arrangement.</p>
+    </div>
+    <div class="l">
+      <h3>Wide-flex 1200+</h3>
+      <p>Content caps at 1280px. Hero splits 1.1 / 0.9 (photo / content). Programs 3-up. Trackers 4-up. Rewards 4-up with rating-display-style 40px / 700 ink values. Pill search bar centers at 900px max-width.</p>
+    </div>
+  </div>
+</body>
+</html>

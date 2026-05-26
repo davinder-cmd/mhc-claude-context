@@ -16,16 +16,18 @@ Defines the visual treatment tokens — corner radius, drop shadow, and border w
 
 Almost all components are rounded. Only specific exceptions (e.g., tooltip tips) are square.
 
-| Token | Size | Use |
-|-------|------|-----|
-| xs | 2dp | |
-| s | 4dp | Default rounding — used by the majority of components. Scales with component proportions. |
-| m | 8dp | |
-| l | 12dp | |
-| xl | 16dp | |
-| Round | 999dp | Full rounding — used for buttons and CTAs to draw attention. Use sparingly. |
+| Token | CSS variable | Size | Use |
+|-------|--------------|------|-----|
+| xs | `--r-xs` | 2dp | Borders / micro-rounded elements (rare) |
+| s | `--r-s` | 4dp | **Default rounding** — used by the majority of components. Scales with component proportions. |
+| m | `--r-m` | 8dp | Chips, tags, badges, small interactive elements |
+| l | `--r-l` | 12dp | Thumbnails, smaller cards |
+| xl | `--r-xl` | 16dp | Standard card / surface rounding |
+| Full | `--r-full` | 999dp | Full rounding — buttons, CTAs, pills, circular icons. Use sparingly. |
 
 **Special case:** Checkboxes use a smaller corner radius tied to their border width, so the interior remains visually square while the exterior is rounded.
+
+**Rule:** all `border-radius` values in code must use one of these tokens. No literal px values.
 
 ---
 
@@ -55,11 +57,20 @@ Almost all components are rounded. Only specific exceptions (e.g., tooltip tips)
 
 ## Rules
 
-- Default corner radius: 4dp (s) for most components
-- Full rounding (999dp): buttons and CTAs only — use sparingly
+- Default corner radius: **4dp (`--r-s`)** for most components
+- Full rounding (`--r-full`): buttons, CTAs, pills, dots, circular icons only — use sparingly
 - Keyboard focus ring: always 2dp border — never suppress
 - Shadow depth communicates elevation — use consistently to avoid visual hierarchy confusion
+- All `border-radius` values must reference a token — no literal px
 
 ## Escalate if
 
 A component needs a corner radius, shadow, or border width outside this scale.
+
+---
+
+## Revision Log
+
+| Date | Change |
+|------|--------|
+| 2026-05-23 | Added CSS variable column to corner radius table. Renamed "Round" token to "Full" (`--r-full`) to match CSS variable convention. Added explicit use descriptions for each token. Added the "no literal px" rule. |

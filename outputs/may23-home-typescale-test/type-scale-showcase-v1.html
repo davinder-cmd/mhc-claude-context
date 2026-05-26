@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MHC Type Scale — Responsive Showcase</title>
+<style>
+  :root {
+    --bg: #FAF9F7;
+    --surface: #FFFFFF;
+    --ink: #1A1D21;
+    --ink-soft: #5C5F66;
+    --line: #E6E3DC;
+    --banner-bg: #DBEFE0;
+    --banner-line: #95C9A6;
+
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-mono:    ui-monospace, "SF Mono", Menlo, monospace;
+
+    /* Simplified line-heights */
+    --lh-display: 1.125;
+    --lh-tight:   1.25;
+    --lh-body:    1.5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .banner {
+    background: var(--banner-bg);
+    border-bottom: 1px solid var(--banner-line);
+    padding: 14px 24px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 24px 120px;
+  }
+
+  .lede {
+    margin-bottom: 56px;
+  }
+  .lede h1 {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.125;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .lede p {
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 64ch;
+  }
+  .lede .viewport {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    background: #1A1D21;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-left: 4px;
+  }
+
+  /* Each scale row */
+  .row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 32px;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .row-meta {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .row-meta .role {
+    display: block;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .row-meta .class { display: block; color: var(--ink-soft); margin-bottom: 8px; }
+  .row-meta .size-compact { display: block; }
+  .row-meta .size-medium  { display: block; }
+  .row-meta .lh           { display: block; margin-top: 6px; color: var(--ink-soft); }
+
+  .row-meta strong { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .row { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  /* Section divider */
+  .scale-section {
+    margin-top: 56px;
+  }
+  .scale-section-title {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     MHC TYPE SCALE — sizes from Confluence Small/Medium Form
+     Line-heights: simplified 3-ratio rule
+     ────────────────────────────────────────────────────────── */
+
+  .display-1 { font-family: var(--f-display); font-weight: 400; font-size: 3.625rem;  line-height: var(--lh-display); letter-spacing: -0.01em; margin: 0; }
+  .display-2 { font-family: var(--f-display); font-weight: 400; font-size: 3.1875rem; line-height: var(--lh-display); letter-spacing: -0.01em; margin: 0; }
+  .display-3 { font-family: var(--f-display); font-weight: 500; font-size: 2.8125rem; line-height: var(--lh-display); letter-spacing: -0.01em; margin: 0; }
+
+  .heading-1 { font-family: var(--f-display); font-weight: 500; font-size: 2.5rem;    line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }
+  .heading-2 { font-family: var(--f-display); font-weight: 500; font-size: 2.25rem;   line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }
+  .heading-3 { font-family: var(--f-display); font-weight: 600; font-size: 2rem;      line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }
+  .heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem;   line-height: var(--lh-display); letter-spacing: -0.01em;  margin: 0; }
+  .heading-5 { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: var(--lh-display); letter-spacing: -0.008em; margin: 0; }
+  .heading-6 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem;   line-height: var(--lh-display); letter-spacing: -0.008em; margin: 0; }
+
+  .body-1    { font-family: var(--f-text); font-weight: 500; font-size: 1.125rem;  line-height: var(--lh-tight); letter-spacing: -0.008em; }
+  .body-2    { font-family: var(--f-text); font-weight: 500; font-size: 1rem;      line-height: var(--lh-tight); letter-spacing: -0.008em; }
+  .body-3    { font-family: var(--f-text); font-weight: 500; font-size: 0.875rem;  line-height: var(--lh-tight); letter-spacing: -0.008em; }
+
+  .caption   { font-family: var(--f-text); font-weight: 600; font-size: 0.75rem;   line-height: var(--lh-tight); letter-spacing: 0; text-transform: uppercase; }
+  .small     { font-family: var(--f-text); font-weight: 700; font-size: 0.6875rem; line-height: var(--lh-tight); letter-spacing: 0; }
+
+  .paragraph-1 { font-family: var(--f-text); font-weight: 600; font-size: 1.125rem; line-height: var(--lh-body); letter-spacing: -0.006em; }
+  .paragraph-2 { font-family: var(--f-text); font-weight: 600; font-size: 1rem;     line-height: var(--lh-body); letter-spacing: -0.003em; }
+  .paragraph-3 { font-family: var(--f-text); font-weight: 600; font-size: 0.875rem; line-height: var(--lh-body); letter-spacing: -0.003em; }
+
+  /* Medium Form (≥600dp) — sizes bump */
+  @media (min-width: 600px) {
+    .display-1   { font-size: 4.125rem;  }  /* 66 */
+    .display-2   { font-size: 3.625rem;  }  /* 58 */
+    .display-3   { font-size: 3.25rem;   }  /* 52 */
+    .heading-1   { font-size: 2.875rem;  }  /* 46 */
+    .heading-2   { font-size: 2.5625rem; }  /* 41 */
+    .heading-3   { font-size: 2.25rem;   }  /* 36 */
+    .heading-4   { font-size: 2rem;      }  /* 32 */
+    .heading-5   { font-size: 1.8125rem; }  /* 29 */
+    .heading-6   { font-size: 1.4375rem; }  /* 23 */
+    .body-1      { font-size: 1.25rem;   }  /* 20 */
+    .body-2      { font-size: 1.125rem;  }  /* 18 */
+    .body-3      { font-size: 1rem;      }  /* 16 */
+    .caption     { font-size: 0.875rem;  }  /* 14 */
+    .small       { font-size: 0.8125rem; }  /* 13 */
+    .paragraph-1 { font-size: 1.25rem;   }  /* 20 */
+    .paragraph-2 { font-size: 1.125rem;  }  /* 18 */
+    .paragraph-3 { font-size: 1rem;      }  /* 16 */
+  }
+
+  /* Live viewport indicator */
+  .viewport-indicator {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    line-height: 1.5;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  }
+  .viewport-indicator strong { color: #7BD8A8; font-weight: 600; }
+  .viewport-indicator .form-label { color: rgba(255,255,255,0.6); display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div><strong>MHC Type Scale</strong> — responsive showcase · all 17 classes · simplified 3-ratio line heights</div>
+  <div>Resize the browser to see Compact ↔ Medium switching at 600px</div>
+</div>
+
+<div class="container">
+
+  <div class="lede">
+    <h1>How the MHC type scale renders at both form factors</h1>
+    <p>Each row below shows one class, rendered at the current viewport. The annotation on the left lists the size for both Small Form (Compact, &lt;600) and Medium Form (≥600), plus the simplified line-height. Resize the browser window — every class steps up at the 600dp breakpoint. Current viewport: <span class="viewport"><span id="vw">—</span></span></p>
+  </div>
+
+  <!-- DISPLAY -->
+  <div class="scale-section">
+    <div class="scale-section-title">Display · large numbers, dashboard values</div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Display 1</span>
+        <span class="class">.display-1</span>
+        <span class="size-compact">Compact: <strong>58</strong></span>
+        <span class="size-medium">Medium: <strong>66</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="display-1">347</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Display 2</span>
+        <span class="class">.display-2</span>
+        <span class="size-compact">Compact: <strong>51</strong></span>
+        <span class="size-medium">Medium: <strong>58</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="display-2">8,420</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Display 3</span>
+        <span class="class">.display-3</span>
+        <span class="size-compact">Compact: <strong>45</strong></span>
+        <span class="size-medium">Medium: <strong>52</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="display-3">Sleep better in 4 weeks</div>
+    </div>
+  </div>
+
+  <!-- HEADING -->
+  <div class="scale-section">
+    <div class="scale-section-title">Heading · titles, section heads</div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Heading 1</span>
+        <span class="class">.heading-1</span>
+        <span class="size-compact">Compact: <strong>40</strong></span>
+        <span class="size-medium">Medium: <strong>46</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="heading-1">Oversized screen title</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Heading 2</span>
+        <span class="class">.heading-2</span>
+        <span class="size-compact">Compact: <strong>36</strong></span>
+        <span class="size-medium">Medium: <strong>41</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="heading-2">Good afternoon, Davinder</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Heading 3</span>
+        <span class="class">.heading-3</span>
+        <span class="size-compact">Compact: <strong>32</strong></span>
+        <span class="size-medium">Medium: <strong>36</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="heading-3">Sleep better in 4 weeks</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Heading 4</span>
+        <span class="class">.heading-4</span>
+        <span class="size-compact">Compact: <strong>28</strong></span>
+        <span class="size-medium">Medium: <strong>32</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="heading-4">How the program works</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Heading 5</span>
+        <span class="class">.heading-5</span>
+        <span class="size-compact">Compact: <strong>25</strong></span>
+        <span class="size-medium">Medium: <strong>29</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="heading-5">Continue your programs</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Heading 6</span>
+        <span class="class">.heading-6</span>
+        <span class="size-compact">Compact: <strong>20</strong></span>
+        <span class="size-medium">Medium: <strong>23</strong></span>
+        <span class="lh">LH 1.125</span>
+      </div>
+      <div class="heading-6">Based on your interests</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="scale-section">
+    <div class="scale-section-title">Body · interface text, prominent body</div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Body 1</span>
+        <span class="class">.body-1</span>
+        <span class="size-compact">Compact: <strong>18</strong></span>
+        <span class="size-medium">Medium: <strong>20</strong></span>
+        <span class="lh">LH 1.25</span>
+      </div>
+      <div class="body-1">An evidence-based program for your sleep habits.</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Body 2</span>
+        <span class="class">.body-2</span>
+        <span class="size-compact">Compact: <strong>16</strong></span>
+        <span class="size-medium">Medium: <strong>18</strong></span>
+        <span class="lh">LH 1.25</span>
+      </div>
+      <div class="body-2">Eight short sessions, real change.</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Body 3</span>
+        <span class="class">.body-3</span>
+        <span class="size-compact">Compact: <strong>14</strong></span>
+        <span class="size-medium">Medium: <strong>16</strong></span>
+        <span class="lh">LH 1.25</span>
+      </div>
+      <div class="body-3">Session 3 of 8 · $100 reward</div>
+    </div>
+  </div>
+
+  <!-- CAPTION / SMALL -->
+  <div class="scale-section">
+    <div class="scale-section-title">Caption · labels, metadata</div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Caption</span>
+        <span class="class">.caption</span>
+        <span class="size-compact">Compact: <strong>12</strong></span>
+        <span class="size-medium">Medium: <strong>14</strong></span>
+        <span class="lh">LH 1.25</span>
+      </div>
+      <div class="caption" style="color: var(--ink-soft);">Based on your interests</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Small</span>
+        <span class="class">.small</span>
+        <span class="size-compact">Compact: <strong>11</strong></span>
+        <span class="size-medium">Medium: <strong>13</strong></span>
+        <span class="lh">LH 1.25</span>
+      </div>
+      <div class="small" style="color: var(--ink-soft);">SYNCED 4 MINUTES AGO</div>
+    </div>
+  </div>
+
+  <!-- PARAGRAPH -->
+  <div class="scale-section">
+    <div class="scale-section-title">Paragraph · long-form reading (LH 1.5)</div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Paragraph 1</span>
+        <span class="class">.paragraph-1</span>
+        <span class="size-compact">Compact: <strong>18</strong></span>
+        <span class="size-medium">Medium: <strong>20</strong></span>
+        <span class="lh">LH 1.5</span>
+      </div>
+      <div class="paragraph-1">Each evening you'll get a short session — about ten minutes — that you can do anywhere. Some focus on breathing exercises, others on what to do before bed. Over four weeks, your sleep tracker shows the change.</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Paragraph 2</span>
+        <span class="class">.paragraph-2</span>
+        <span class="size-compact">Compact: <strong>16</strong></span>
+        <span class="size-medium">Medium: <strong>18</strong></span>
+        <span class="lh">LH 1.5</span>
+      </div>
+      <div class="paragraph-2">An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change you can feel by the second week.</div>
+    </div>
+
+    <div class="row">
+      <div class="row-meta">
+        <span class="role">Paragraph 3</span>
+        <span class="class">.paragraph-3</span>
+        <span class="size-compact">Compact: <strong>14</strong></span>
+        <span class="size-medium">Medium: <strong>16</strong></span>
+        <span class="lh">LH 1.5</span>
+      </div>
+      <div class="paragraph-3">You'll learn why your brain needs an hour to transition into sleep mode, and the four small actions that signal "sleep is coming" to your body.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="viewport-indicator">
+  <span class="form-label">Viewport / Form</span>
+  <strong id="vw2">—</strong> · <span id="form">—</span>
+</div>
+
+<script>
+  const vw = document.getElementById('vw');
+  const vw2 = document.getElementById('vw2');
+  const form = document.getElementById('form');
+  function update() {
+    const w = window.innerWidth;
+    vw.textContent = w + 'px';
+    vw2.textContent = w + 'px';
+    form.textContent = w < 600 ? 'Small Form (Compact)' : 'Medium Form (≥600)';
+  }
+  update();
+  window.addEventListener('resize', update);
+</script>
+</body>
+</html>

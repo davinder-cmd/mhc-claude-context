@@ -1,0 +1,1140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home — Acme · If Uber built it (Pill duet, v1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Inter is the documented open-source substitute for UberMove / UberMoveText -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  /* =====================================================
+     If Uber built MHC Home — black/white duet, pill geometry.
+     Tokens taken directly from DESIGN.md (Uber-inspired alpha).
+     Two faces: UberMove (display, 700) + UberMoveText (text, 400/500).
+     Substitute: Inter 700 / 500 / 400.
+     One conversion colour: #000000.
+     One signature shape: pill (999px) on every interactive.
+     Cards: rounded.xl (16px). Tab toggle: pill-tab (36px).
+     ===================================================== */
+
+  :root{
+    /* ── Brand & Accent ─────────────────────────────── */
+    --c-primary:           #000000;     /* the only conversion colour */
+    --c-on-primary:        #ffffff;
+    --c-surface-pressed:   #e2e2e2;     /* pressed state for white pills */
+    --c-black-elevated:    #282828;     /* hover for translucent tab toggle */
+
+    /* ── Surface ────────────────────────────────────── */
+    --c-canvas:            #ffffff;
+    --c-canvas-soft:       #efefef;
+    --c-canvas-softer:     #f3f3f3;
+
+    /* ── Text ───────────────────────────────────────── */
+    --c-ink:               #000000;
+    --c-body:              #5e5e5e;
+    --c-hairline-mid:      #4b4b4b;
+    --c-mute:              #afafaf;
+    --c-on-dark:           #ffffff;
+    --c-link:              #0000ee;
+
+    /* ── Shape scale (DESIGN.md `rounded`) ─────────── */
+    --r-none:   0px;
+    --r-md:     8px;
+    --r-lg:     12px;
+    --r-xl:     16px;       /* canonical card radius */
+    --r-pill:   999px;      /* signature interactive shape */
+    --r-pill-tab: 36px;     /* off-shape, tighter pill */
+    --r-full:   9999px;
+
+    /* ── Spacing scale (DESIGN.md `spacing`) ───────── */
+    --s-xxs:    4px;
+    --s-xs:     6px;
+    --s-sm:     8px;
+    --s-md:     12px;
+    --s-lg:     16px;
+    --s-xl:     20px;
+    --s-2xl:    24px;
+    --s-3xl:    32px;
+
+    /* ── Type families (substitutes) ────────────────── */
+    --f-display: "Inter", "UberMove", system-ui, "Helvetica Neue", Arial, sans-serif;
+    --f-text:    "Inter", "UberMoveText", system-ui, "Helvetica Neue", Arial, sans-serif;
+
+    /* ── Elevation (DESIGN.md levels) ───────────────── */
+    --el-1: 0 4px 16px rgba(0,0,0,.12);   /* subtle drop */
+    --el-2: 0 4px 16px rgba(0,0,0,.16);   /* card drop  */
+    --el-3: 0 2px 8px  rgba(0,0,0,.16);   /* pill float */
+  }
+
+  /* ── reset / base ─────────────────────────────────────── */
+  *,*::before,*::after { box-sizing:border-box; }
+  html,body { margin:0; padding:0; }
+  body{
+    background: var(--c-canvas);
+    color: var(--c-ink);
+    font-family: var(--f-text);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--c-ink); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  button { font: inherit; cursor: pointer; }
+  .material-symbols-outlined{
+    font-variation-settings: 'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
+    user-select: none;
+  }
+  .material-symbols-outlined.filled{ font-variation-settings:'FILL' 1,'wght' 600,'GRAD' 0,'opsz' 24; }
+
+  /* ── Type roles (DESIGN.md `typography`) ──────────────── */
+  .display-xxl { font-family: var(--f-display); font-weight: 700; font-size: 52px; line-height: 64px; letter-spacing: -.02em; }
+  .display-xl  { font-family: var(--f-display); font-weight: 700; font-size: 36px; line-height: 44px; letter-spacing: -.015em; }
+  .display-lg  { font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: 40px; letter-spacing: -.01em; }
+  .display-md  { font-family: var(--f-display); font-weight: 700; font-size: 24px; line-height: 32px; }
+  .display-sm  { font-family: var(--f-display); font-weight: 700; font-size: 20px; line-height: 28px; }
+  .body-lg     { font-family: var(--f-text);    font-weight: 500; font-size: 18px; line-height: 24px; }
+  .body-md     { font-family: var(--f-text);    font-weight: 400; font-size: 16px; line-height: 24px; }
+  .body-md-s   { font-family: var(--f-text);    font-weight: 500; font-size: 16px; line-height: 20px; }
+  .body-sm     { font-family: var(--f-text);    font-weight: 400; font-size: 14px; line-height: 20px; }
+  .body-sm-s   { font-family: var(--f-text);    font-weight: 500; font-size: 14px; line-height: 16px; }
+  .caption     { font-family: var(--f-text);    font-weight: 400; font-size: 12px; line-height: 20px; }
+  .btn-lg-lbl  { font-family: var(--f-text);    font-weight: 500; font-size: 18px; line-height: 24px; }
+  .btn-md-lbl  { font-family: var(--f-text);    font-weight: 500; font-size: 16px; line-height: 20px; }
+
+  /* ── App shell ────────────────────────────────────────── */
+  .app{ min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ── nav-bar (top sticky) ────────────────────────────── */
+  .nav-bar{
+    position: sticky; top: 0; z-index: 30;
+    background: var(--c-canvas);
+    padding: var(--s-lg) var(--s-3xl);
+    display: flex; align-items: center; gap: var(--s-md);
+    transition: box-shadow .2s ease, border-color .2s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav-bar.scrolled{ border-bottom-color: var(--c-canvas-soft); }
+  .brand{
+    font-family: var(--f-display);
+    font-weight: 700; font-size: 22px; line-height: 24px;
+    color: var(--c-ink);
+    letter-spacing: -.01em;
+    margin-right: var(--s-md);
+  }
+  .nav-links{
+    display: none;
+    align-items: center; gap: var(--s-xl);
+    margin-left: var(--s-md);
+  }
+  .nav-link{
+    font-family: var(--f-text); font-weight: 500; font-size: 16px;
+    color: var(--c-ink);
+    text-decoration: none;
+    padding: var(--s-sm) 0;
+  }
+  .nav-link:hover{ text-decoration: none; opacity: .7; }
+  .nav-spacer{ flex: 1; }
+  .nav-actions{ display: flex; align-items: center; gap: var(--s-sm); }
+
+  /* ── Pills (the single signature interactive shape) ─── */
+  .pill{
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: var(--s-sm);
+    border-radius: var(--r-pill);
+    border: 0; cursor: pointer;
+    font-family: var(--f-text); font-weight: 500; font-size: 16px; line-height: 20px;
+    padding: var(--s-md) var(--s-lg);
+    transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
+    white-space: nowrap;
+  }
+  .pill .material-symbols-outlined{ font-size: 18px; }
+  .pill-primary{ background: var(--c-primary); color: var(--c-on-primary); }
+  .pill-primary:hover{ background: #1a1a1a; }
+  .pill-primary:active{ background: #333333; }
+  .pill-secondary{ background: var(--c-canvas); color: var(--c-ink); }
+  .pill-secondary:hover{ background: var(--c-canvas-soft); }
+  .pill-secondary:active{ background: var(--c-surface-pressed); }
+  .pill-subtle{ background: var(--c-canvas-soft); color: var(--c-ink); padding: var(--s-md) var(--s-lg); }
+  .pill-subtle:hover{ background: var(--c-surface-pressed); }
+  .pill-floating{
+    background: var(--c-canvas); color: var(--c-ink);
+    padding: var(--s-md);
+    box-shadow: var(--el-3);
+  }
+  /* large rounded — DESIGN.md notes this is the documented exception (xl, not pill) */
+  .pill-lg-rounded{
+    border-radius: var(--r-xl);
+    padding: var(--s-lg) var(--s-xl);
+    font-size: 18px; line-height: 24px;
+    background: var(--c-primary); color: var(--c-on-primary);
+    height: 56px;
+  }
+  .pill-lg-rounded:hover{ background: #1a1a1a; }
+  /* tab toggle — pill-tab 36px */
+  .pill-tab{
+    background: var(--c-canvas); color: var(--c-ink);
+    border-radius: var(--r-pill-tab);
+    padding: var(--s-sm) var(--s-lg);
+    font-weight: 500; font-size: 16px; line-height: 20px;
+  }
+  .pill-tab.active{ background: var(--c-ink); color: var(--c-on-dark); }
+
+  /* icon button — circular */
+  .icon-btn{
+    width: 44px; height: 44px;
+    border-radius: var(--r-full);
+    background: var(--c-canvas-soft); color: var(--c-ink);
+    border: 0; cursor: pointer;
+    display: grid; place-items: center;
+    transition: background-color .15s ease;
+  }
+  .icon-btn:hover{ background: var(--c-surface-pressed); }
+
+  /* avatar */
+  .avatar{
+    width: 40px; height: 40px;
+    border-radius: var(--r-full);
+    background: var(--c-ink); color: var(--c-on-dark);
+    display: grid; place-items: center;
+    font-family: var(--f-text); font-weight: 700; font-size: 14px;
+  }
+
+  /* ── Content area ─────────────────────────────────────── */
+  .content{ padding: var(--s-2xl) var(--s-lg) 96px; }
+  .page{ margin: 0 auto; max-width: 1200px; }
+
+  /* ── Greeting / hero band (light) ─────────────────────── */
+  .hero{
+    padding: var(--s-3xl) 0;
+    display: grid; grid-template-columns: 1fr; gap: var(--s-2xl);
+  }
+  .hero h1{
+    margin: 0 0 var(--s-md);
+  }
+  .hero .lede{
+    color: var(--c-body);
+    max-width: 56ch;
+    margin: 0 0 var(--s-xl);
+  }
+
+  /* ── Quick-action category chip row ───────────────────── */
+  .chips{
+    display: flex; gap: var(--s-md); flex-wrap: wrap;
+    margin: var(--s-xl) 0 var(--s-3xl);
+  }
+  .chip{
+    display: inline-flex; align-items: center; gap: var(--s-sm);
+    background: var(--c-canvas-soft);
+    color: var(--c-ink);
+    border: 0;
+    border-radius: var(--r-pill);
+    padding: var(--s-sm) var(--s-lg);
+    font-family: var(--f-text); font-weight: 500; font-size: 14px; line-height: 16px;
+    cursor: pointer;
+    transition: background-color .15s ease;
+    min-height: 36px;
+  }
+  .chip:hover{ background: var(--c-surface-pressed); }
+  .chip.selected{ background: var(--c-ink); color: var(--c-on-dark); }
+  .chip .material-symbols-outlined{ font-size: 18px; }
+
+  /* ── Section heading ──────────────────────────────────── */
+  .section{ margin: var(--s-3xl) 0; }
+  .section-head{
+    display: flex; align-items: end; justify-content: space-between;
+    gap: var(--s-lg);
+    margin-bottom: var(--s-lg);
+  }
+  .section-head .meta{ color: var(--c-body); margin-top: var(--s-xxs); }
+
+  /* ── Card primitives ──────────────────────────────────── */
+  .card{
+    background: var(--c-canvas);
+    border-radius: var(--r-xl);
+    padding: var(--s-2xl);
+    color: var(--c-ink);
+  }
+  .card-elevated{ box-shadow: var(--el-1); }
+  .card-soft{ background: var(--c-canvas-soft); }
+  .card-on-dark{
+    background: var(--c-ink);
+    color: var(--c-on-dark);
+  }
+  .card-on-dark .lede{ color: rgba(255,255,255,.78); }
+
+  /* ── Suggested-program promo card (illustrated, 2-col) ─ */
+  .promo{
+    display: grid; grid-template-columns: 1fr;
+    background: var(--c-canvas);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    box-shadow: var(--el-1);
+  }
+  .promo .promo-media{
+    aspect-ratio: 4 / 3;
+    background: var(--c-canvas-soft);
+    position: relative;
+    overflow: hidden;
+  }
+  .promo .promo-content{
+    padding: var(--s-2xl);
+    display: flex; flex-direction: column; gap: var(--s-md);
+  }
+  .promo .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-family: var(--f-text); font-weight: 500; font-size: 12px; line-height: 20px;
+    color: var(--c-body);
+    display: inline-flex; align-items: center; gap: var(--s-xs);
+  }
+  .promo h2{ margin: 0; }
+  .promo .meta-row{
+    display: flex; gap: var(--s-md); align-items: center; flex-wrap: wrap;
+    color: var(--c-body);
+    font-size: 14px; line-height: 20px;
+  }
+  .promo .meta-row .dot{ width: 3px; height: 3px; border-radius: var(--r-full); background: currentColor; }
+  .promo .actions{
+    display: flex; gap: var(--s-sm); margin-top: var(--s-md); flex-wrap: wrap;
+  }
+
+  /* Editorial 4:3 SVG illustration backdrop — riders + skyline silhouette */
+  .illus-sleep{
+    background: #efefef;
+    background-image:
+      radial-gradient(circle at 22% 78%, #1a1a1a 0 6%, transparent 7%),     /* head */
+      radial-gradient(ellipse 14% 6% at 22% 90%, #1a1a1a 0 100%, transparent 101%), /* body */
+      radial-gradient(circle at 78% 28%, #ffffff 0 14%, transparent 15%),   /* moon */
+      radial-gradient(circle at 78% 28%, #1a1a1a 0 16%, transparent 17%),   /* moon ring */
+      linear-gradient(180deg, #efefef 0%, #efefef 65%, #e2e2e2 65%, #e2e2e2 100%);
+  }
+  .illus-stress{
+    background: #efefef;
+    background-image:
+      radial-gradient(circle at 30% 50%, #1a1a1a 0 7%, transparent 8%),
+      radial-gradient(ellipse 18% 9% at 30% 70%, #1a1a1a 0 100%, transparent 101%),
+      radial-gradient(circle at 70% 35%, #afafaf 0 12%, transparent 13%),
+      linear-gradient(180deg, #f3f3f3 0%, #f3f3f3 60%, #e2e2e2 60%, #e2e2e2 100%);
+  }
+  .illus-diabetes{
+    background: #efefef;
+    background-image:
+      radial-gradient(circle at 65% 55%, #1a1a1a 0 7%, transparent 8%),
+      radial-gradient(ellipse 18% 9% at 65% 75%, #1a1a1a 0 100%, transparent 101%),
+      radial-gradient(circle at 25% 35%, #afafaf 0 10%, transparent 11%),
+      linear-gradient(180deg, #efefef 0%, #efefef 62%, #e2e2e2 62%, #e2e2e2 100%);
+  }
+  .illus-employer{
+    background: #efefef;
+    background-image:
+      linear-gradient(180deg, #efefef 0%, #efefef 50%, #e2e2e2 50%, #e2e2e2 100%),
+      repeating-linear-gradient(90deg, transparent 0 18%, #1a1a1a 18% 20%);
+    background-blend-mode: normal, multiply;
+  }
+  .illus-interests{
+    background: #efefef;
+    background-image:
+      radial-gradient(circle at 50% 55%, #1a1a1a 0 8%, transparent 9%),
+      radial-gradient(circle at 30% 30%, #afafaf 0 6%, transparent 7%),
+      radial-gradient(circle at 70% 30%, #afafaf 0 6%, transparent 7%);
+  }
+  .illus-challenge{
+    background: #1a1a1a;
+    background-image:
+      radial-gradient(circle at 25% 55%, #ffffff 0 5%, transparent 6%),
+      radial-gradient(circle at 45% 55%, #ffffff 0 5%, transparent 6%),
+      radial-gradient(circle at 65% 55%, #ffffff 0 5%, transparent 6%),
+      radial-gradient(circle at 85% 55%, #ffffff 0 5%, transparent 6%);
+  }
+
+  /* ── Pair: interests + employer ───────────────────────── */
+  .pair{
+    display: grid; gap: var(--s-lg);
+    grid-template-columns: 1fr;
+  }
+
+  /* ── Trackers (this week) ─────────────────────────────── */
+  .trackers{
+    display: grid; gap: var(--s-md);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tracker{
+    background: var(--c-canvas);
+    border-radius: var(--r-xl);
+    padding: var(--s-xl);
+    border: 1px solid var(--c-canvas-soft);
+    display: flex; flex-direction: column; gap: var(--s-md);
+  }
+  .tracker .head{
+    display: flex; align-items: center; gap: var(--s-md);
+  }
+  .tracker .icon-pill{
+    width: 40px; height: 40px;
+    border-radius: var(--r-full);
+    background: var(--c-canvas-soft);
+    color: var(--c-ink);
+    display: grid; place-items: center;
+  }
+  .tracker .label{ color: var(--c-body); font-size: 14px; line-height: 20px; }
+  .tracker .value{
+    font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: 40px;
+    letter-spacing: -.01em;
+  }
+  .progress-row{ display: flex; align-items: center; gap: var(--s-sm); }
+  .progress-track{
+    flex: 1; height: 4px;
+    background: var(--c-canvas-soft);
+    border-radius: var(--r-full);
+    overflow: hidden;
+  }
+  .progress-fill{
+    height: 100%;
+    background: var(--c-ink);
+    border-radius: inherit;
+  }
+
+  /* ── Insight = polarity-flipped black promo band ───────── */
+  .insight{
+    background: var(--c-ink);
+    color: var(--c-on-dark);
+    border-radius: var(--r-xl);
+    padding: var(--s-3xl);
+    display: grid; grid-template-columns: 1fr; gap: var(--s-lg);
+    align-items: start;
+  }
+  .insight .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-family: var(--f-text); font-weight: 500; font-size: 12px; line-height: 20px;
+    color: rgba(255,255,255,.7);
+  }
+  .insight h2{ margin: 0; }
+  .insight .copy{ color: rgba(255,255,255,.78); margin: 0; }
+  .insight .actions{ display: flex; gap: var(--s-sm); flex-wrap: wrap; margin-top: var(--s-sm); }
+  .insight .pill-on-dark-primary{
+    background: var(--c-on-dark); color: var(--c-ink);
+  }
+  .insight .pill-on-dark-primary:hover{ background: var(--c-canvas-soft); }
+  .insight .pill-text{
+    background: transparent; color: var(--c-on-dark);
+    padding: var(--s-md) var(--s-lg);
+    border-radius: var(--r-pill);
+    font-weight: 500; font-size: 16px;
+    border: 1px solid rgba(255,255,255,.3);
+  }
+
+  /* ── Programs row (3-up at desktop, scroll-snap at mobile) ─ */
+  .carousel-wrap{ position: relative; margin: 0 calc(-1 * var(--s-lg)); padding: 0 var(--s-lg); }
+  .carousel{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 80%;
+    gap: var(--s-lg);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--s-sm);
+  }
+  .program{
+    scroll-snap-align: start;
+    background: var(--c-canvas);
+    border-radius: var(--r-xl);
+    box-shadow: var(--el-1);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    min-width: 0;
+  }
+  .program .media{
+    aspect-ratio: 4 / 3;
+    background: var(--c-canvas-soft);
+  }
+  .program .body{
+    padding: var(--s-xl);
+    display: flex; flex-direction: column; gap: var(--s-md);
+  }
+  .program .eyebrow{
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-family: var(--f-text); font-weight: 500; font-size: 12px; line-height: 20px;
+    color: var(--c-body);
+  }
+  .program .row-foot{
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--c-body); font-size: 14px;
+  }
+  .program .row-foot strong{ color: var(--c-ink); font-weight: 700; }
+
+  /* ── Challenge band (illustrated promo, dark) ─────────── */
+  .challenge{
+    display: grid; grid-template-columns: 1fr;
+    background: var(--c-ink); color: var(--c-on-dark);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+  .challenge .challenge-media{
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+  }
+  .challenge .challenge-content{
+    padding: var(--s-3xl);
+    display: flex; flex-direction: column; gap: var(--s-md);
+    justify-content: center;
+  }
+  .challenge .eyebrow{
+    text-transform: uppercase; letter-spacing: .08em;
+    font-family: var(--f-text); font-weight: 500; font-size: 12px; line-height: 20px;
+    color: rgba(255,255,255,.7);
+  }
+  .challenge .meta{ color: rgba(255,255,255,.78); }
+  .challenge .actions{ display: flex; gap: var(--s-sm); margin-top: var(--s-sm); }
+
+  /* ── Rewards (small cards) ────────────────────────────── */
+  .rewards{
+    display: grid; gap: var(--s-md);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reward{
+    background: var(--c-canvas);
+    border-radius: var(--r-xl);
+    padding: var(--s-xl);
+    border: 1px solid var(--c-canvas-soft);
+    display: flex; flex-direction: column; gap: var(--s-sm);
+  }
+  .reward .eyebrow{
+    text-transform: uppercase; letter-spacing: .08em;
+    font-family: var(--f-text); font-weight: 500; font-size: 12px; line-height: 20px;
+    color: var(--c-body);
+  }
+  .reward .value{
+    font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: 40px;
+    letter-spacing: -.01em;
+  }
+  .reward .sub{ color: var(--c-body); font-size: 14px; line-height: 20px; }
+
+  /* ── App download (Rider/Driver pills equivalent) ─────── */
+  .download-row{
+    display: grid; grid-template-columns: 1fr; gap: var(--s-md);
+    margin-top: var(--s-2xl);
+  }
+  .download-pill{
+    background: var(--c-ink); color: var(--c-on-dark);
+    border-radius: var(--r-pill);
+    padding: var(--s-lg) var(--s-2xl);
+    display: flex; align-items: center; gap: var(--s-md);
+    font-family: var(--f-text); font-weight: 500; font-size: 16px; line-height: 20px;
+    text-decoration: none;
+  }
+  .download-pill .material-symbols-outlined{ font-size: 24px; }
+  .download-pill:hover{ background: #1a1a1a; text-decoration: none; }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  .footer{
+    background: var(--c-primary);
+    color: var(--c-on-dark);
+    padding: var(--s-3xl) var(--s-3xl);
+    margin-top: var(--s-3xl);
+  }
+  .footer .footer-grid{
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-2xl);
+  }
+  .footer h3{
+    font-family: var(--f-text); font-weight: 500; font-size: 16px; line-height: 20px;
+    margin: 0 0 var(--s-md);
+    color: var(--c-on-dark);
+  }
+  .footer ul{ list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-sm); }
+  .footer a{ color: var(--c-mute); font-size: 14px; line-height: 20px; text-decoration: none; }
+  .footer a:hover{ color: var(--c-on-dark); }
+  .footer .brand-foot{
+    grid-column: 1 / -1;
+    padding-top: var(--s-2xl);
+    border-top: 1px solid #282828;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--s-lg); flex-wrap: wrap;
+    color: var(--c-mute); font-size: 12px;
+  }
+  .footer .brand-foot .brand-strong{
+    font-family: var(--f-display); font-weight: 700; font-size: 20px; color: var(--c-on-dark);
+    letter-spacing: -.01em;
+  }
+
+  /* ── Helpers ──────────────────────────────────────────── */
+  .row{ display: flex; align-items: center; gap: var(--s-sm); }
+  .between{ display: flex; align-items: center; justify-content: space-between; gap: var(--s-md); }
+  .hide-mobile{ display: none; }
+  @media (min-width: 600px){ .hide-mobile{ display: initial; } }
+  .show-mobile{ display: initial; }
+  @media (min-width: 600px){ .show-mobile{ display: none; } }
+
+  /* ── Color-weighting strip (60/30/10) ─────────────────── */
+  .cw-strip{
+    margin: var(--s-2xl) auto 0;
+    max-width: 1200px;
+    padding: 0 var(--s-3xl);
+  }
+  .cw-bar{
+    display: flex; height: 12px; border-radius: var(--r-full); overflow: hidden;
+    border: 1px solid var(--c-canvas-soft);
+  }
+  .cw-bar > span{ display: block; height: 100%; }
+  .cw-w{ background: var(--c-canvas); }
+  .cw-g{ background: var(--c-canvas-soft); }
+  .cw-k{ background: var(--c-ink); }
+  .cw-legend{
+    display: flex; gap: var(--s-lg); margin-top: var(--s-sm);
+    color: var(--c-body); font-size: 12px;
+  }
+  .cw-legend .swatch{
+    display: inline-block; width: 10px; height: 10px; border-radius: var(--r-full);
+    margin-right: var(--s-xxs); vertical-align: -1px;
+    border: 1px solid var(--c-canvas-soft);
+  }
+
+  /* ──────────────────────────────────────────────────────
+     BREAKPOINTS (DESIGN.md responsive strategy)
+       Mobile         <600   nav collapses, 1-col
+       Mobile-Large   600–767
+       Tablet         768–1119  2-up promo grid, nav horizontal
+       Desktop        1120–1135 full nav row, 2-up promo
+       Desktop-Large  ≥1136   content caps at ~1200
+     ────────────────────────────────────────────────────── */
+
+  @media (min-width: 600px){
+    .content{ padding: var(--s-3xl) var(--s-3xl) 96px; }
+    .promo{ grid-template-columns: 5fr 7fr; }
+    .promo .promo-media{ aspect-ratio: auto; min-height: 100%; }
+    .pair{ grid-template-columns: 1fr 1fr; }
+    .trackers{ grid-template-columns: repeat(4, 1fr); }
+    .rewards{ grid-template-columns: repeat(4, 1fr); }
+    .carousel{ grid-auto-columns: 48%; }
+    .challenge{ grid-template-columns: 5fr 7fr; }
+    .challenge .challenge-media{ aspect-ratio: auto; min-height: 100%; }
+    .download-row{ grid-template-columns: 1fr 1fr; }
+    .footer .footer-grid{ grid-template-columns: repeat(4, 1fr); }
+    .nav-links{ display: inline-flex; }
+  }
+
+  @media (min-width: 768px){
+    .carousel{ grid-auto-columns: 32%; }
+    .hero{ grid-template-columns: 7fr 5fr; align-items: end; }
+    .hero .request-card{ justify-self: end; max-width: 460px; width: 100%; }
+  }
+
+  @media (min-width: 1120px){
+    .carousel{ grid-auto-columns: minmax(0, 1fr); grid-template-columns: repeat(3, 1fr); grid-auto-flow: row; }
+    .carousel-wrap{ margin: 0; padding: 0; }
+  }
+
+  /* ── Hero ride-request-card analogue (right-side card) ─ */
+  .request-card{
+    background: var(--c-canvas);
+    border-radius: var(--r-xl);
+    padding: var(--s-lg);
+    box-shadow: var(--el-2);
+    display: flex; flex-direction: column; gap: var(--s-md);
+  }
+  .request-tabs{
+    display: flex; gap: var(--s-sm); margin-bottom: var(--s-sm);
+  }
+  .request-row{
+    background: var(--c-canvas-soft);
+    border-radius: var(--r-md);
+    padding: var(--s-lg);
+    display: flex; align-items: center; gap: var(--s-md);
+  }
+  .request-row .material-symbols-outlined{ font-size: 20px; color: var(--c-ink); }
+  .request-row .label{ color: var(--c-body); font-size: 12px; line-height: 16px; }
+  .request-row .value{
+    font-family: var(--f-text); font-weight: 500; font-size: 16px; line-height: 20px;
+    color: var(--c-ink);
+  }
+  .request-row .grow{ flex: 1; min-width: 0; }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============================================== -->
+  <!--             NAV-BAR (top, sticky)               -->
+  <!-- ============================================== -->
+  <header class="nav-bar" id="topbar">
+    <span class="brand">Acme Health</span>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="nav-link" href="#">Care</a>
+      <a class="nav-link" href="#">Wellbeing</a>
+      <a class="nav-link" href="#">Programs</a>
+      <a class="nav-link" href="#">Rewards</a>
+      <a class="nav-link" href="#">Benefits</a>
+    </nav>
+    <span class="nav-spacer"></span>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+      <button class="icon-btn hide-mobile" aria-label="Notifications">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button class="pill pill-secondary hide-mobile">Help</button>
+      <button class="pill pill-primary hide-mobile">Log in</button>
+      <div class="avatar show-mobile" title="Davinder">D</div>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!--                 CONTENT                          -->
+  <!-- ============================================== -->
+  <main class="content">
+    <div class="page">
+
+      <!-- ─── HERO BAND (light) ─── -->
+      <section class="hero">
+        <div class="hero-left">
+          <h1 class="display-xxl">Good afternoon, Davinder</h1>
+          <p class="lede body-lg">Your week is on track — 4 of 5 habits hit yesterday. Here's what to focus on next.</p>
+          <div style="display:flex; gap: var(--s-sm); flex-wrap: wrap;">
+            <button class="pill pill-primary">
+              <span class="material-symbols-outlined">add</span>
+              Log activity
+            </button>
+            <button class="pill pill-secondary" style="border:1px solid var(--c-canvas-soft);">
+              <span class="material-symbols-outlined">tune</span>
+              Personalize
+            </button>
+          </div>
+        </div>
+
+        <!-- right-side card analogue of the ride-request card -->
+        <aside class="request-card hide-mobile" aria-label="Today's focus">
+          <div class="request-tabs" role="tablist">
+            <button class="pill-tab active" role="tab" aria-selected="true">Today</button>
+            <button class="pill-tab" role="tab">This week</button>
+          </div>
+          <div class="request-row">
+            <span class="material-symbols-outlined">spa</span>
+            <div class="grow">
+              <div class="label">Next session</div>
+              <div class="value">Sleep DCP · Session 3</div>
+            </div>
+            <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          </div>
+          <div class="request-row">
+            <span class="material-symbols-outlined">directions_walk</span>
+            <div class="grow">
+              <div class="label">Today's goal</div>
+              <div class="value">8,420 / 10,000 steps</div>
+            </div>
+            <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          </div>
+          <button class="pill-lg-rounded" style="width: 100%; justify-content: center;">See today's plan</button>
+        </aside>
+      </section>
+
+      <!-- ─── Quick-action chip row ─── -->
+      <div class="chips" role="toolbar" aria-label="Quick actions">
+        <button class="chip selected">
+          <span class="material-symbols-outlined">auto_awesome</span>
+          For you
+        </button>
+        <button class="chip">
+          <span class="material-symbols-outlined">add</span>
+          Log activity
+        </button>
+        <button class="chip">
+          <span class="material-symbols-outlined">restaurant</span>
+          Log meal
+        </button>
+        <button class="chip">
+          <span class="material-symbols-outlined">monitor_weight</span>
+          Check in
+        </button>
+        <button class="chip">
+          <span class="material-symbols-outlined">explore</span>
+          Browse programs
+        </button>
+      </div>
+
+      <!-- ============================================ -->
+      <!--      SUGGESTED PROGRAM (illustrated promo)    -->
+      <!-- ============================================ -->
+      <section class="section">
+        <div class="promo">
+          <div class="promo-media illus-sleep" aria-hidden="true"></div>
+          <div class="promo-content">
+            <span class="eyebrow">
+              <span class="material-symbols-outlined" style="font-size:14px;">auto_awesome</span>
+              Suggested for you
+            </span>
+            <h2 class="display-lg">Sleep better in 4 weeks</h2>
+            <p class="body-md" style="color: var(--c-body); margin: 0; max-width: 48ch;">
+              An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change.
+            </p>
+            <div class="meta-row">
+              <span class="row"><span class="material-symbols-outlined" style="font-size:16px;">spa</span> Sleep DCP</span>
+              <span class="dot"></span>
+              <span class="row"><span class="material-symbols-outlined" style="font-size:16px;">redeem</span> $100 reward</span>
+              <span class="dot"></span>
+              <span>4 weeks</span>
+            </div>
+            <div class="actions">
+              <button class="pill pill-primary">
+                <span class="material-symbols-outlined">play_arrow</span>
+                Start the program
+              </button>
+              <button class="pill pill-subtle">Learn more</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!--   PAIR: For you + From employer (illustrated) -->
+      <!-- ============================================ -->
+      <section class="section pair">
+        <div class="promo">
+          <div class="promo-media illus-interests" aria-hidden="true"></div>
+          <div class="promo-content">
+            <span class="eyebrow">Based on your interests</span>
+            <h3 class="display-md">How to wind down before bed</h3>
+            <p class="body-md" style="color: var(--c-body); margin: 0;">Article · Sleep · 3 min read</p>
+            <div class="actions">
+              <button class="pill pill-primary">Read article</button>
+              <button class="pill pill-subtle">See 7 more</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="promo">
+          <div class="promo-media illus-employer" aria-hidden="true"></div>
+          <div class="promo-content">
+            <span class="eyebrow">From your employer · Acme</span>
+            <h3 class="display-md">Complete your health assessment</h3>
+            <p class="body-md" style="color: var(--c-body); margin: 0;">Wellbeing · Earn $300 toward your incentive cap.</p>
+            <div class="actions">
+              <button class="pill pill-primary">Start assessment</button>
+              <button class="pill pill-subtle">See 3 more</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!--                THIS WEEK trackers              -->
+      <!-- ============================================ -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="display-md" style="margin:0;">This week</h2>
+            <div class="body-sm meta">
+              <span class="material-symbols-outlined" style="font-size:14px; vertical-align:-2px;">sync</span>
+              Synced 4 minutes ago · Apple Health
+            </div>
+          </div>
+          <button class="pill pill-subtle">View all data</button>
+        </div>
+
+        <div class="trackers">
+          <div class="tracker">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">directions_walk</span></div>
+              <div>
+                <div class="label">Steps</div>
+                <div class="value">8,420</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:78%"></div></div>
+              <div class="body-sm" style="color:var(--c-body)">78%</div>
+            </div>
+          </div>
+
+          <div class="tracker">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">bedtime</span></div>
+              <div>
+                <div class="label">Sleep</div>
+                <div class="value">6h 43m</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:65%"></div></div>
+              <div class="body-sm" style="color:var(--c-body)">65%</div>
+            </div>
+          </div>
+
+          <div class="tracker">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">local_fire_department</span></div>
+              <div>
+                <div class="label">Calories</div>
+                <div class="value">645</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:42%"></div></div>
+              <div class="body-sm" style="color:var(--c-body)">42%</div>
+            </div>
+          </div>
+
+          <div class="tracker">
+            <div class="head">
+              <div class="icon-pill"><span class="material-symbols-outlined">timer</span></div>
+              <div>
+                <div class="label">Active min</div>
+                <div class="value">52</div>
+              </div>
+            </div>
+            <div class="progress-row">
+              <div class="progress-track"><div class="progress-fill" style="width:86%"></div></div>
+              <div class="body-sm" style="color:var(--c-body)">86%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!--     INSIGHT — polarity-flipped black band      -->
+      <!-- ============================================ -->
+      <section class="section">
+        <div class="insight">
+          <div>
+            <div class="eyebrow">INSIGHT</div>
+            <h2 class="display-lg" style="margin-top: var(--s-sm);">Sleep is averaging 38 minutes less than your goal this week.</h2>
+            <p class="copy body-lg" style="margin-top: var(--s-md);">Try a 30-minute wind-down tonight at 9:30pm.</p>
+            <div class="actions">
+              <button class="pill pill-on-dark-primary">
+                <span class="material-symbols-outlined">notifications_active</span>
+                Set reminder
+              </button>
+              <button class="pill-text">Refresh insight</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!--          CONTINUE YOUR PROGRAMS                -->
+      <!-- ============================================ -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="display-md" style="margin:0;">Continue your programs</h2>
+            <div class="body-sm meta">3 active · most engaged first</div>
+          </div>
+          <button class="pill pill-subtle">View all programs</button>
+        </div>
+
+        <div class="carousel-wrap">
+          <div class="carousel">
+            <article class="program">
+              <div class="media illus-sleep" aria-hidden="true"></div>
+              <div class="body">
+                <span class="eyebrow">DCP · Sleep</span>
+                <h3 class="display-sm" style="margin:0;">Better Sleep</h3>
+                <div class="progress-row">
+                  <div class="progress-track"><div class="progress-fill" style="width:37%"></div></div>
+                </div>
+                <div class="row-foot">
+                  <span>Session 3 of 8</span>
+                  <strong>$100</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="program">
+              <div class="media illus-stress" aria-hidden="true"></div>
+              <div class="body">
+                <span class="eyebrow">DCP · Stress</span>
+                <h3 class="display-sm" style="margin:0;">Manage Stress</h3>
+                <div class="progress-row">
+                  <div class="progress-track"><div class="progress-fill" style="width:62%"></div></div>
+                </div>
+                <div class="row-foot">
+                  <span>Session 5 of 8</span>
+                  <strong>$100</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="program">
+              <div class="media illus-diabetes" aria-hidden="true"></div>
+              <div class="body">
+                <span class="eyebrow">DCP · Diabetes</span>
+                <h3 class="display-sm" style="margin:0;">Diabetes Prevention</h3>
+                <div class="progress-row">
+                  <div class="progress-track"><div class="progress-fill" style="width:37%"></div></div>
+                </div>
+                <div class="row-foot">
+                  <span>Week 6 of 16</span>
+                  <strong>$100</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!--           CHALLENGE — illustrated dark         -->
+      <!-- ============================================ -->
+      <section class="section">
+        <div class="challenge">
+          <div class="challenge-media illus-challenge" aria-hidden="true"></div>
+          <div class="challenge-content">
+            <span class="eyebrow">TEAM CHALLENGE</span>
+            <h2 class="display-lg" style="margin:0;">Spring Steps Challenge</h2>
+            <p class="meta body-md" style="margin:0;">Day 22 of 30 · Currently 4th of 8 teammates.</p>
+            <div class="actions">
+              <button class="pill pill-on-dark-primary" style="background: var(--c-on-dark); color: var(--c-ink);">View details</button>
+              <button class="pill pill-text" style="border:1px solid rgba(255,255,255,.3); background: transparent; color: var(--c-on-dark);">Invite a teammate</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!--               YOUR REWARDS                     -->
+      <!-- ============================================ -->
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2 class="display-md" style="margin:0;">Your rewards</h2>
+            <div class="body-sm meta">Earn more with healthy actions</div>
+          </div>
+          <button class="pill pill-subtle">Reward details</button>
+        </div>
+
+        <div class="rewards">
+          <div class="reward">
+            <span class="eyebrow">Gift card</span>
+            <div class="value">$75</div>
+            <div class="sub">Amazon · ready to redeem</div>
+            <div class="sub" style="color: var(--c-mute);">$25 to next $25 card</div>
+          </div>
+          <div class="reward">
+            <span class="eyebrow">Points · Silver</span>
+            <div class="value">1,250</div>
+            <div class="sub">Tier progress</div>
+            <div class="sub" style="color: var(--c-mute);">750 to Gold tier</div>
+          </div>
+          <div class="reward">
+            <span class="eyebrow">Raffle</span>
+            <div class="value">12</div>
+            <div class="sub">Active entries</div>
+            <div class="sub" style="color: var(--c-mute);">Draw on May 31</div>
+          </div>
+          <div class="reward">
+            <span class="eyebrow">Store credit</span>
+            <div class="value">$25</div>
+            <div class="sub">Spend in store</div>
+            <div class="sub" style="color: var(--c-mute);">No expiry</div>
+          </div>
+        </div>
+
+        <!-- App download pills (Rider / Driver analogue) -->
+        <div class="download-row">
+          <a href="#" class="download-pill">
+            <span class="material-symbols-outlined">phone_iphone</span>
+            Download the Acme Health app
+          </a>
+          <a href="#" class="download-pill">
+            <span class="material-symbols-outlined">monitor_heart</span>
+            Connect a wearable
+          </a>
+        </div>
+      </section>
+
+      <div style="height: var(--s-3xl);"></div>
+    </div>
+
+    <!-- ─── Color-weighting strip (60/30/10) ─── -->
+    <div class="cw-strip" aria-label="Color weighting 60/30/10">
+      <div class="cw-bar" role="img" aria-label="White 60%, Soft gray 30%, Ink black 10%">
+        <span class="cw-w" style="flex: 60;"></span>
+        <span class="cw-g" style="flex: 30;"></span>
+        <span class="cw-k" style="flex: 10;"></span>
+      </div>
+      <div class="cw-legend">
+        <span><span class="swatch" style="background: var(--c-canvas);"></span>Canvas white · 60%</span>
+        <span><span class="swatch" style="background: var(--c-canvas-soft);"></span>Soft gray · 30%</span>
+        <span><span class="swatch" style="background: var(--c-ink); border-color: var(--c-ink);"></span>Ink black · 10%</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============================================== -->
+  <!--                FOOTER (deep black)               -->
+  <!-- ============================================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3>Care</h3>
+        <ul>
+          <li><a href="#">Find a doctor</a></li>
+          <li><a href="#">Conditions</a></li>
+          <li><a href="#">Programs</a></li>
+          <li><a href="#">Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Wellbeing</h3>
+        <ul>
+          <li><a href="#">Healthy habits</a></li>
+          <li><a href="#">Sleep</a></li>
+          <li><a href="#">Stress</a></li>
+          <li><a href="#">Nutrition</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Rewards</h3>
+        <ul>
+          <li><a href="#">How rewards work</a></li>
+          <li><a href="#">Tier progress</a></li>
+          <li><a href="#">Gift cards</a></li>
+          <li><a href="#">Raffles</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About Acme</a></li>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="brand-foot">
+        <span class="brand-strong">Acme Health</span>
+        <span>© 2026 Acme Health Consumer, Inc.</span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Subtle scrolled-state for the nav bar
+  const bar = document.getElementById('topbar');
+  const onScroll = () => bar.classList.toggle('scrolled', window.scrollY > 4);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Tab toggle on hero focus card
+  document.querySelectorAll('.request-tabs').forEach(tabs => {
+    tabs.addEventListener('click', e => {
+      const t = e.target.closest('.pill-tab');
+      if (!t) return;
+      tabs.querySelectorAll('.pill-tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

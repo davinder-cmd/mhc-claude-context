@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home — Figma recreation · MHC system applied (v37)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  :root {
+    /* ── Colors — warm beige + graphite + navy ──────────── */
+    --bg:              #FAF7F0;
+    --surface:         #FFFFFF;
+    --surface-tinted:  #EFE7D6;
+    --ink:             #1A1D21;
+    --ink-soft:        #5C5F66;
+    --ink-placeholder: #9A9EA6;
+    --hairline:        #E6E3DC;
+    --link:            #2E60A4;
+    --brand:           #1B355C;
+    --on-brand:        #FFFFFF;
+    --insight-bg:      #E8F0FA;
+    --insight-border:  #B5C8E0;
+    --insight-dot:     #2E60A4;
+    --red:             #C8272E;
+    --green:           #4FA858;
+    --blue-icon:       #3A6FA8;
+    --orange:          #B5571E;
+    --teal-dark:       #1E5A6B;
+    --progress-bg:     #DDD7C8;
+    --progress-fill:   #4A4A60;
+
+    /* ── Type families ──────────────────────────────────── */
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+
+    /* ── Shape (matches design/foundation/object-styles.md) ── */
+    --r-xs:   2px;
+    --r-s:    4px;
+    --r-m:    8px;
+    --r-l:   12px;
+    --r-xl:  16px;
+    --r-full: 999px;
+
+    /* ── Spacing (matches design/foundation/spacing.md) ─── */
+    --s-01: 0.25rem; --s-02: 0.5rem; --s-03: 0.75rem; --s-04: 1rem;
+    --s-05: 1.5rem;  --s-06: 2rem;   --s-07: 2.5rem;  --s-08: 3rem;  --s-09: 4rem;
+  }
+
+  /* ── Base reset (universal margin reset per typography.md) ── */
+  *,*::before,*::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, dl, dd, dt, figure, hr { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: 1.25;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  button { font: inherit; cursor: pointer; }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+    user-select: none;
+  }
+
+  /* ──────────────────────────────────────────────────────────
+     MHC TYPE SCALE v3 (latest — 24 atomic classes)
+     Absolute rem LH per typography.md (grid-aligned).
+     Caption + Small bump at ≥600 (12dp desktop floor).
+     Eyebrow + Label 1/2 are static. Label 3 is Compact-only.
+     ────────────────────────────────────────────────────────── */
+
+  /* Display (not used here — defined for completeness) */
+  .display-1 { font-family: var(--f-display); font-weight: 400; font-size: 3.625rem;  line-height: 4rem;    letter-spacing: -0.01em;  }
+  .display-2 { font-family: var(--f-display); font-weight: 400; font-size: 3.1875rem; line-height: 3.5rem;  letter-spacing: -0.01em;  }
+  .display-3 { font-family: var(--f-display); font-weight: 400; font-size: 2.8125rem; line-height: 3.25rem; letter-spacing: -0.01em;  }
+
+  /* Heading */
+  .heading-1 { font-family: var(--f-display); font-weight: 500; font-size: 2.5rem;    line-height: 2.75rem;  letter-spacing: -0.01em;  }
+  .heading-2 { font-family: var(--f-display); font-weight: 500; font-size: 2.25rem;   line-height: 2.5rem;   letter-spacing: -0.01em;  }
+  .heading-3 { font-family: var(--f-display); font-weight: 500; font-size: 2rem;      line-height: 2.25rem;  letter-spacing: -0.01em;  }
+  .heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem;   line-height: 2rem;     letter-spacing: -0.01em;  }
+  .heading-5 { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: 1.75rem;  letter-spacing: -0.008em; }
+  .heading-6 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem;   line-height: 1.5rem;   letter-spacing: -0.008em; }
+
+  /* Title (body-sized titles with display character) */
+  .title-1 { font-family: var(--f-display); font-weight: 500; font-size: 1.125rem; line-height: 1.5rem;   letter-spacing: -0.008em; }
+  .title-2 { font-family: var(--f-display); font-weight: 500; font-size: 1rem;     line-height: 1.25rem;  letter-spacing: -0.008em; }
+  .title-3 { font-family: var(--f-display); font-weight: 500; font-size: 0.875rem; line-height: 1.125rem; letter-spacing: -0.008em; }
+
+  /* Body */
+  .body-1 { font-family: var(--f-text); font-weight: 400; font-size: 1.125rem; line-height: 1.5rem;   letter-spacing: -0.008em; }
+  .body-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: 1.25rem;  letter-spacing: -0.008em; }
+  .body-3 { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem; line-height: 1.125rem; letter-spacing: -0.008em; }
+
+  /* Label (interactive UI labels — buttons, chips, tabs, nav. All static.) */
+  .label-1 { font-family: var(--f-text); font-weight: 500; font-size: 0.875rem;  line-height: 1rem;     letter-spacing: 0; }
+  .label-2 { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem;   line-height: 1rem;     letter-spacing: 0; }
+  .label-3 { font-family: var(--f-text); font-weight: 500; font-size: 0.6875rem; line-height: 0.875rem; letter-spacing: 0; }
+
+  /* Caption / Eyebrow / Small */
+  .caption { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem;   line-height: 1rem;     letter-spacing: 0; }       /* 12/16 mixed-case — bumps at ≥600 */
+  .eyebrow { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem;   line-height: 1rem;     letter-spacing: 0.04em; text-transform: uppercase; }  /* 12/16 static */
+  .small   { font-family: var(--f-text); font-weight: 600; font-size: 0.6875rem; line-height: 0.875rem; letter-spacing: 0; }       /* 11/14 — bumps at ≥600 */
+
+  /* Paragraph (LH ~1.5 for long-form reading) */
+  .paragraph-1 { font-family: var(--f-text); font-weight: 400; font-size: 1.125rem; line-height: 1.6875rem; letter-spacing: -0.003em; }
+  .paragraph-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: 1.5rem;    letter-spacing: -0.003em; }
+  .paragraph-3 { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem; line-height: 1.25rem;   letter-spacing: -0.003em; }
+
+  /* Medium-form bumps (≥600). Eyebrow + Label 1/2/3 stay static. */
+  @media (min-width: 600px) {
+    .display-1   { font-size: 4.125rem;  line-height: 4.625rem;  }
+    .display-2   { font-size: 3.625rem;  line-height: 4rem;      }
+    .display-3   { font-size: 3.25rem;   line-height: 3.75rem;   }
+    .heading-1   { font-size: 2.875rem;  line-height: 3.25rem;   }
+    .heading-2   { font-size: 2.5625rem; line-height: 2.875rem;  }
+    .heading-3   { font-size: 2.25rem;   line-height: 2.5rem;    }
+    .heading-4   { font-size: 2rem;      line-height: 2.25rem;   }
+    .heading-5   { font-size: 1.8125rem; line-height: 2rem;      }
+    .heading-6   { font-size: 1.4375rem; line-height: 1.625rem;  }
+    .title-1     { font-size: 1.25rem;   line-height: 1.5rem;    }
+    .title-2     { font-size: 1.125rem;  line-height: 1.5rem;    }
+    .title-3     { font-size: 1rem;      line-height: 1.25rem;   }
+    .body-1      { font-size: 1.25rem;   line-height: 1.5rem;    }
+    .body-2      { font-size: 1.125rem;  line-height: 1.5rem;    }
+    .body-3      { font-size: 1rem;      line-height: 1.25rem;   }
+    .caption     { font-size: 0.875rem;  line-height: 1.25rem;   }  /* NEW: 14 / 20 */
+    .small       { font-size: 0.75rem;   line-height: 1rem;      }  /* NEW: 12 / 16 */
+    .paragraph-1 { font-size: 1.25rem;   line-height: 1.875rem;  }
+    .paragraph-2 { font-size: 1.125rem;  line-height: 1.6875rem; }
+    .paragraph-3 { font-size: 1rem;      line-height: 1.5rem;    }
+  }
+
+  /* ── Top bar (current side-nav state: hamburger + brand only) ── */
+  .top-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
+    position: sticky; top: 0; z-index: 30;
+  }
+  .top-bar__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 64px;
+    padding: 0 var(--s-04);
+    display: flex; align-items: center; gap: var(--s-03);
+  }
+  .icon-btn {
+    width: 40px; height: 40px;
+    border-radius: var(--r-full);
+    border: 0; background: transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .icon-btn:hover { background: var(--hairline); }
+  .icon-btn--filled { background: var(--surface-tinted); }
+  .icon-btn--filled:hover { background: var(--hairline); }
+  .acme-logo {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 2px solid var(--red);
+    padding: 2px 8px;
+    border-radius: var(--r-s);
+    color: var(--red);
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    background: var(--surface);
+  }
+  .top-bar__spacer { flex: 1; }
+
+  /* ── Shell ──────────────────────────────────────────── */
+  .shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--s-04) var(--s-04) calc(var(--s-09) + 80px);
+  }
+  @media (min-width: 600px) {
+    .top-bar__inner { padding: 0 var(--s-05); }
+    .shell { padding: var(--s-06) var(--s-05) var(--s-09); }
+  }
+  @media (min-width: 1600px) {
+    .top-bar__inner, .shell { max-width: 1440px; }
+  }
+
+  /* ── Greeting ──────────────────────────────────────── */
+  .greeting {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: var(--s-04);
+    margin-bottom: var(--s-05);
+  }
+  .greeting__actions { display: flex; gap: var(--s-02); }
+  .greet-compact { display: inline; }
+  .greet-medium { display: none; }
+  @media (min-width: 600px) {
+    .greet-compact { display: none; }
+    .greet-medium { display: inline; }
+  }
+
+  /* ── Sections ──────────────────────────────────────── */
+  .section { margin-top: var(--s-07); }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--s-03);
+    margin-bottom: var(--s-04);
+  }
+  .section-head__title { display: flex; flex-direction: column; gap: var(--s-01); }
+  .section-head .meta {
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: var(--s-02);
+  }
+  .section-head .meta .icon-inline { font-size: 1.1em; vertical-align: -2px; }
+
+  /* ── Hero — image-driven shape on both forms (3:2 locked) ── */
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;  /* anchor for .hero__stretched-link on Compact */
+  }
+  /* Stretched-link pattern (Bootstrap-style overlay anchor).
+     On Compact: covers the whole card, captures clicks. On Medium+: hidden — the
+     explicit button in .hero__actions is the CTA. Prototype-grade implementation;
+     production would also need keyboard focus styling on the link and aria-hidden
+     on content inside the card to avoid duplicate announcement. */
+  .hero__stretched-link {
+    display: none;
+  }
+  @media (max-width: 599px) {
+    .hero__stretched-link {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: var(--r-xl);
+      text-indent: -9999px;
+      overflow: hidden;
+      /* Subtle press feedback on touch */
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0.04);
+    }
+    .hero__actions { display: none; }
+    .hero { cursor: pointer; }
+  }
+  .hero__media { aspect-ratio: 3 / 2; background: var(--surface-tinted); }
+  .hero__content {
+    padding: var(--s-05);
+    display: flex; flex-direction: column; gap: var(--s-04);  /* 16dp — bumped from 12dp */
+  }
+  /* Three discrete groups per Material 3 card structure:
+       .hero__title-group  — eyebrow + title (tight 4dp internal)
+       .hero__copy-group   — paragraph + meta (8dp internal, supporting text)
+       .hero__actions      — button(s) anchored, 24dp gap from copy
+     Parent's gap (12dp Compact / 16dp Medium+) governs spacing BETWEEN groups. */
+  .hero__title-group {
+    display: flex; flex-direction: column;
+    gap: var(--s-01);  /* 4dp */
+  }
+  .hero__copy-group {
+    display: flex; flex-direction: column;
+    gap: var(--s-03);  /* 12dp — paragraph + meta read as related lede content (bumped from 8dp) */
+  }
+  .hero__actions {
+    /* Total spacing above the button = parent's gap (12dp Compact / 16dp Medium+)
+       PLUS this margin-top. With 8dp added, total = 20-24dp — discernibly more
+       than the copy group's internal gap, but not the 40dp the v28 24dp margin produced
+       (gap and margin stack in flex layouts; they're additive, not the max). */
+    margin-top: var(--s-02);  /* 8dp */
+  }
+  .hero__meta {
+    color: var(--ink-soft);
+    display: flex; gap: var(--s-02); align-items: center; flex-wrap: wrap;
+  }
+  .hero__meta .dot { width: 3px; height: 3px; border-radius: var(--r-full); background: currentColor; }
+  @media (min-width: 600px) {
+    /* Hero shape is image-driven on Medium+ — image stays at aspect-ratio: 3/2
+       (base rule, not overridden here). Image width = 5/12 of container → image
+       height = (5/12 × container) × 2/3. Hero row height = image height. Content
+       centers vertically in the 7/12 column; clips via overflow: hidden if it
+       overflows (rare at 1280+; can happen at narrow Medium+ widths 600-1000 where
+       the image is shorter than the content needs). Editorial constraint on copy
+       length keeps content-overflow contained. */
+    .hero { grid-template-columns: 5fr 7fr; }
+    .hero__content { padding: var(--s-06); overflow: hidden; justify-content: center; gap: var(--s-05); }  /* 24dp — bumped from 16dp */
+  }
+
+  /* ── Buttons — aligned to button.md (Small 32 / Medium 36 / Large 40 / Jumbo 48) ──
+     .btn = Medium default, applies Label 1 (14/16 medium) styling
+     .btn-sm = Small, applies Label 2 (12/16 medium)
+     .btn-lg = Large, keeps Label 1
+     .btn-jumbo = Jumbo, applies Body 1 (18/24 regular — only button size that bumps at ≥600) */
+  .btn {
+    height: 36px;
+    padding: 0 var(--s-04);
+    border-radius: var(--r-full);
+    border: 0;
+    display: inline-flex; align-items: center; gap: var(--s-02);
+    font-family: var(--f-text); font-weight: 500;
+    font-size: 0.875rem; line-height: 1rem; letter-spacing: 0;
+    transition: background-color .15s, border-color .15s;
+  }
+  .btn-sm    { height: 32px; padding: 0 var(--s-03); font-size: 0.75rem; }  /* Small + Label 2 */
+  .btn-lg    { height: 40px; padding: 0 var(--s-05); }                       /* Large + Label 1 (inherits .btn defaults) */
+  .btn-jumbo { height: 48px; padding: 0 var(--s-05); }                       /* Jumbo + Label 1 (inherits .btn defaults — Material precedent: don't bump label size for bigger buttons; prominence comes from height + padding) */
+  .btn-filled { background: var(--brand); color: var(--on-brand); }
+  .btn-filled:hover { background: #14264A; }
+  .btn-outlined { background: var(--surface); color: var(--ink); border: 1px solid var(--hairline); }
+  .btn-outlined:hover { border-color: var(--ink-placeholder); }
+  .btn-text { background: transparent; color: var(--link); padding: 0 var(--s-02); height: auto; }
+
+  /* ── Pair (interest + employer) ──────────────────────
+     v37 pattern: title + card + footer-links all live in a .pair-section.
+     Title sits ABOVE the card (heading-6, matches page section-head convention).
+     Footer links sit BELOW the card. Card itself is just the row. */
+  .pair {
+    display: grid;
+    gap: var(--s-04);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 600px) {
+    .pair { grid-template-columns: 1fr 1fr; gap: var(--s-05); }
+  }
+  .pair-section {
+    display: flex; flex-direction: column;
+    gap: var(--s-04);  /* 16dp between title → card → footer links */
+  }
+  .pair-section__footer {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: var(--s-03);
+  }
+  .pair-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-04);
+  }
+  .pair-card__row {
+    display: flex; align-items: center; gap: var(--s-04);
+  }
+  .pair-card__thumb {
+    width: 64px; height: 64px;
+    border-radius: var(--r-l);
+    background: var(--surface-tinted);
+    flex: 0 0 auto;
+  }
+  .pair-card__row-body {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    gap: var(--s-01);
+  }
+
+  /* ── This week stat tiles ──────────────────────────── */
+  .trackers {
+    display: grid;
+    gap: var(--s-03);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 600px) {
+    .trackers { grid-template-columns: repeat(4, 1fr); gap: var(--s-04); }
+  }
+  .tracker {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-04);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  .tracker__icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    display: grid; place-items: center;
+    color: var(--green);
+    background: var(--surface);
+  }
+  .tracker--sleep    .tracker__icon { border-color: var(--blue-icon);  color: var(--blue-icon);  }
+  .tracker--calories .tracker__icon { border-color: var(--orange);     color: var(--orange);     }
+  .tracker--active   .tracker__icon { border-color: var(--teal-dark);  color: var(--teal-dark);  }
+  .tracker__icon .material-symbols-outlined { font-size: 28px; }
+
+  .tracker__label { color: var(--ink-soft); margin-top: var(--s-02); }
+  .tracker__value {
+    display: inline-flex; align-items: baseline; gap: var(--s-01);
+  }
+  .tracker__value .arrow {
+    color: var(--green); font-size: 16px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
+  .tracker--sleep    .tracker__value .arrow { color: var(--blue-icon); }
+  .tracker--calories .tracker__value .arrow { color: var(--orange);    }
+  .tracker--active   .tracker__value .arrow { color: var(--teal-dark); }
+  .tracker__meta { color: var(--ink-soft); }
+
+  /* ── Insight ───────────────────────────────────────── */
+  .insight {
+    background: var(--insight-bg);
+    border: 1px solid var(--insight-border);
+    border-radius: var(--r-xl);
+    padding: var(--s-05);
+    display: flex; align-items: center;
+    gap: var(--s-04);
+  }
+  .insight__label {
+    display: inline-flex; align-items: center; gap: var(--s-02);
+    color: var(--insight-dot);
+  }
+  .insight__label .dot {
+    width: 8px; height: 8px; border-radius: var(--r-full);
+    background: var(--insight-dot);
+  }
+  .insight__body {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    gap: var(--s-02);
+  }
+  .insight__action {
+    display: flex; justify-content: center;
+    margin-top: var(--s-04);
+  }
+
+  /* ── Banner icon (used by Insight and Challenge) ───── */
+  .banner-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    flex: 0 0 auto;
+  }
+  .banner-icon--challenge { background: rgba(0, 0, 0, 0.06); color: var(--ink); }
+  .banner-icon--insight   { background: rgba(46, 96, 164, 0.14); color: var(--insight-dot); }
+  .banner-icon .material-symbols-outlined { font-size: 24px; }
+
+  /* ── Programs ──────────────────────────────────────── */
+  .programs {
+    display: grid;
+    gap: var(--s-04);
+    grid-template-columns: 1fr;
+  }
+  @media (max-width: 599px) {
+    .programs {
+      grid-auto-flow: column;
+      grid-auto-columns: 78%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: var(--s-03);
+      margin: 0 calc(var(--s-04) * -1);
+      padding-left: var(--s-04);
+      padding-right: var(--s-04);
+    }
+    .program { scroll-snap-align: start; }
+  }
+  @media (min-width: 600px) {
+    .programs { grid-template-columns: repeat(3, 1fr); gap: var(--s-04); }
+  }
+  .program {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .program__media { aspect-ratio: 16 / 9; background: var(--surface-tinted); }
+  .program__body {
+    padding: var(--s-05);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  .program__tag {
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: var(--s-02);
+  }
+  .program__tag .dot { width: 6px; height: 6px; border-radius: var(--r-full); background: var(--ink-soft); }
+  .program__footer {
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--ink-soft);
+  }
+  .program__footer .price { color: var(--ink); font-weight: 500; }
+  .progress {
+    height: 3px;
+    background: var(--progress-bg);
+    border-radius: var(--r-full);
+    overflow: hidden;
+  }
+  .progress__fill { height: 100%; background: var(--progress-fill); border-radius: inherit; }
+
+  /* ── Challenge ─────────────────────────────────────── */
+  .challenge {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-05);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: var(--s-04);
+  }
+  .challenge__body { display: flex; flex-direction: column; gap: var(--s-02); flex: 1; min-width: 0; }
+  .challenge__meta { color: var(--ink-soft); }
+
+  @media (max-width: 599px) {
+    .insight .banner-icon,
+    .challenge .banner-icon { display: none; }
+
+    .challenge {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      row-gap: var(--s-04);
+    }
+    .challenge__body  { grid-row: 1; grid-column: 1; }
+    .challenge > .btn { grid-row: 2; grid-column: 1; justify-self: start; }
+  }
+
+  /* ── Rewards ───────────────────────────────────────── */
+  .rewards {
+    display: grid;
+    gap: var(--s-03);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 600px) {
+    .rewards { grid-template-columns: repeat(4, 1fr); gap: var(--s-04); }
+  }
+  .reward {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-04);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  /* Reward chip — component-specific styling (11sp uppercase semibold + tracking).
+     Does not map to a single atomic type class — uppercase chips are a component pattern,
+     not a Label-tier role. */
+  .reward-chip {
+    align-self: flex-start;
+    display: inline-flex; align-items: center;
+    padding: var(--s-01) var(--s-02);
+    border-radius: var(--r-m);
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .reward-chip--gift   { background: #CFE9DB; }
+  .reward-chip--points { background: #DBE0F2; }
+  .reward-chip--raffle { background: #DCEACE; }
+  .reward-chip--store  { background: #FAE3D3; }
+  .reward__meta { color: var(--ink-soft); }
+  .reward__sub  { color: var(--ink-placeholder); margin-top: var(--s-01); }
+
+  /* ── Bottom nav (Compact only) — uses .label-3 (11sp) ── */
+  .bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 80px;
+    background: var(--surface);
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: var(--s-02) 0 var(--s-03);
+    z-index: 15;
+  }
+  .bn-item {
+    background: transparent; border: 0;
+    color: var(--ink-soft);
+    display: flex; flex-direction: column; align-items: center; gap: var(--s-01);
+  }
+  .bn-item.active { color: var(--ink); }
+  .bn-item .material-symbols-outlined { font-size: 22px; }
+  @media (min-width: 600px) {
+    .bottom-nav { display: none; }
+  }
+
+  /* ── Utility ───────────────────────────────────────── */
+  .ink-soft { color: var(--ink-soft); }
+  .ink-placeholder { color: var(--ink-placeholder); }
+</style>
+</head>
+<body>
+
+  <!-- ──────────── TOP BAR ──────────── -->
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <button class="icon-btn" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="acme-logo" aria-label="Acme">ACME</div>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <!-- ──────────── GREETING + ACTIONS ──────────── -->
+    <div class="greeting">
+      <h1 class="heading-4">
+        <span class="greet-compact">Hi Davinder</span>
+        <span class="greet-medium">Afternoon Davinder</span>
+      </h1>
+      <div class="greeting__actions">
+        <button class="icon-btn icon-btn--filled" aria-label="Messages">
+          <span class="material-symbols-outlined">mail_outline</span>
+        </button>
+        <button class="icon-btn icon-btn--filled" aria-label="Search">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ──────────── HERO ──────────── -->
+    <section class="hero">
+      <!-- Compact-only: stretched link makes the whole card tappable. Hidden on Medium+. -->
+      <a class="hero__stretched-link" href="#" aria-label="Sleep better in 4 weeks — start the program">Start the program</a>
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="hero__content">
+        <div class="hero__title-group">
+          <div class="eyebrow ink-soft">Based on your interests</div>
+          <h2 class="heading-4">Sleep better in 4 weeks</h2>
+        </div>
+        <div class="hero__copy-group">
+          <p class="paragraph-2 ink-soft">
+            An evidence-based program built around your sleep habits.
+            Eight short sessions, a quiet routine, real change.
+          </p>
+          <div class="hero__meta body-3">
+            <span>Sleep DCP</span>
+            <span class="dot"></span>
+            <span>$100 reward at completion</span>
+          </div>
+        </div>
+        <div class="hero__actions">
+          <button class="btn btn-jumbo btn-filled">Start the program</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── PAIR ──────────── -->
+    <section class="section pair">
+      <div class="pair-section">
+        <h3 class="heading-6">Based on your interest</h3>
+        <div class="pair-card">
+          <div class="pair-card__row">
+            <div class="pair-card__thumb" aria-hidden="true"></div>
+            <div class="pair-card__row-body">
+              <div class="eyebrow ink-soft">Article · Sleep</div>
+              <div class="body-2">How to wind down before bed</div>
+              <div class="body-3 ink-soft">3 min read</div>
+            </div>
+            <span class="material-symbols-outlined ink-soft" aria-hidden="true">chevron_right</span>
+          </div>
+        </div>
+        <div class="pair-section__footer">
+          <a class="caption" href="#">See 7 more matched to your interests</a>
+          <a class="caption" href="#">Edit Interests</a>
+        </div>
+      </div>
+
+      <div class="pair-section">
+        <h3 class="heading-6">From your employer</h3>
+        <div class="pair-card">
+          <div class="pair-card__row">
+            <div class="pair-card__thumb" aria-hidden="true"></div>
+            <div class="pair-card__row-body">
+              <div class="eyebrow ink-soft">Wellbeing</div>
+              <div class="body-2">Complete your health assessment</div>
+              <div class="body-3 ink-soft">Earn $300</div>
+            </div>
+            <span class="material-symbols-outlined ink-soft" aria-hidden="true">chevron_right</span>
+          </div>
+        </div>
+        <div class="pair-section__footer">
+          <a class="caption" href="#">See 3 more from Acme</a>
+          <span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── THIS WEEK ──────────── -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-head__title">
+          <h2 class="heading-6">This week</h2>
+          <div class="caption meta">
+            <span class="material-symbols-outlined icon-inline">sync</span>
+            Synced 4 minutes ago · Source: Apple Health
+          </div>
+        </div>
+        <a class="body-3" href="#">View All Data</a>
+      </div>
+
+      <div class="trackers">
+        <div class="tracker">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">directions_walk</span>
+          </div>
+          <div class="eyebrow tracker__label">Steps</div>
+          <div class="heading-6 tracker__value">
+            <span class="arrow material-symbols-outlined">north_east</span>
+            6h 43m
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+
+        <div class="tracker tracker--sleep">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">bedtime</span>
+          </div>
+          <div class="eyebrow tracker__label">Sleep</div>
+          <div class="heading-6 tracker__value">
+            <span class="arrow material-symbols-outlined">north_east</span>
+            6h 43m
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+
+        <div class="tracker tracker--calories">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">local_fire_department</span>
+          </div>
+          <div class="eyebrow tracker__label">Calories</div>
+          <div class="heading-6 tracker__value">
+            <span class="arrow material-symbols-outlined">north_east</span>
+            645
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+
+        <div class="tracker tracker--active">
+          <div class="tracker__icon">
+            <span class="material-symbols-outlined">timer</span>
+          </div>
+          <div class="eyebrow tracker__label">Active Min</div>
+          <div class="heading-6 tracker__value">
+            <span class="arrow material-symbols-outlined">north_east</span>
+            52,470
+          </div>
+          <div class="body-3 tracker__meta">78% of weekly goal</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────── INSIGHT ──────────── -->
+    <section class="section">
+      <div class="insight">
+        <div class="banner-icon banner-icon--insight">
+          <span class="material-symbols-outlined">auto_awesome</span>
+        </div>
+        <div class="insight__body">
+          <div class="eyebrow insight__label">
+            <span class="dot"></span>
+            Insight
+          </div>
+          <p class="paragraph-2">
+            Sleep is averaging 38 minutes less than your goal this week. Try a 30-minute wind-down tonight at 9:30pm.
+          </p>
+        </div>
+      </div>
+      <div class="insight__action">
+        <button class="btn btn-lg btn-outlined">Refresh Insight</button>
+      </div>
+    </section>
+
+    <!-- ──────────── CONTINUE YOUR PROGRAMS ──────────── -->
+    <section class="section">
+      <div class="section-head">
+        <div class="section-head__title">
+          <h2 class="heading-6">Continue your programs</h2>
+          <div class="caption meta">Most engaged · 3 active in total</div>
+        </div>
+        <a class="body-3" href="#">View all programs</a>
+      </div>
+
+      <div class="programs">
+        <article class="program">
+          <div class="program__media" aria-hidden="true"></div>
+          <div class="program__body">
+            <div class="eyebrow program__tag">
+              <span class="dot"></span>
+              DCP · Sleep
+            </div>
+            <h3 class="title-1">Better Sleep</h3>
+            <div class="program__footer body-3">
+              <span>Session 3 of 8</span>
+              <span class="price">$100</span>
+            </div>
+            <div class="progress"><div class="progress__fill" style="width: 37.5%"></div></div>
+          </div>
+        </article>
+
+        <article class="program">
+          <div class="program__media" aria-hidden="true"></div>
+          <div class="program__body">
+            <div class="eyebrow program__tag">
+              <span class="dot"></span>
+              DCP · Stress
+            </div>
+            <h3 class="title-1">Manage Stress</h3>
+            <div class="program__footer body-3">
+              <span>Session 5 of 8</span>
+              <span class="price">$100</span>
+            </div>
+            <div class="progress"><div class="progress__fill" style="width: 62.5%"></div></div>
+          </div>
+        </article>
+
+        <article class="program">
+          <div class="program__media" aria-hidden="true"></div>
+          <div class="program__body">
+            <div class="eyebrow program__tag">
+              <span class="dot"></span>
+              DCP · Diabetes
+            </div>
+            <h3 class="title-1">Diabetes Prevention</h3>
+            <div class="program__footer body-3">
+              <span>Week 6 of 16</span>
+              <span class="price">$100</span>
+            </div>
+            <div class="progress"><div class="progress__fill" style="width: 37.5%"></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ──────────── YOUR CHALLENGE ──────────── -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="heading-6">Your challenge</h2>
+      </div>
+      <div class="challenge">
+        <div class="banner-icon banner-icon--challenge">
+          <span class="material-symbols-outlined">emoji_events</span>
+        </div>
+        <div class="challenge__body">
+          <div class="eyebrow ink-soft">Team Challenge</div>
+          <div class="heading-6">Spring Steps Challenge</div>
+          <div class="body-3 challenge__meta">Day 22 of 30 · Currently 4th of 8 teammates</div>
+        </div>
+        <button class="btn btn-lg btn-outlined">Details</button>
+      </div>
+    </section>
+
+    <!-- ──────────── YOUR REWARDS ──────────── -->
+    <section class="section">
+      <div class="section-head">
+        <h2 class="heading-6">Your rewards</h2>
+        <a class="body-3" href="#">Reward Details</a>
+      </div>
+
+      <div class="rewards">
+        <div class="reward">
+          <span class="reward-chip reward-chip--gift">Gift Card</span>
+          <div class="heading-5">$75</div>
+          <div class="body-3 reward__meta">Amazon · ready to redeem</div>
+          <div class="body-3 reward__sub">$25 to next $25 card</div>
+        </div>
+        <div class="reward">
+          <span class="reward-chip reward-chip--points">Points · Silver</span>
+          <div class="heading-5">1,250</div>
+          <div class="body-3 reward__meta">Tier progress</div>
+          <div class="body-3 reward__sub">750 to Gold tier</div>
+        </div>
+        <div class="reward">
+          <span class="reward-chip reward-chip--raffle">Raffle</span>
+          <div class="heading-5">12</div>
+          <div class="body-3 reward__meta">Active entries</div>
+          <div class="body-3 reward__sub">Draw on May 31</div>
+        </div>
+        <div class="reward">
+          <span class="reward-chip reward-chip--store">Store Credit</span>
+          <div class="heading-5">$25</div>
+          <div class="body-3 reward__meta">Spend in store</div>
+          <div class="body-3 reward__sub">No expiry</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ──────────── BOTTOM NAV (Compact only) — uses .label-3 ──────────── -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <button class="bn-item active">
+      <span class="material-symbols-outlined">home</span>
+      <span class="label-3">Home</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">medical_services</span>
+      <span class="label-3">Digital Care</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">favorite</span>
+      <span class="label-3">Wellbeing</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">workspace_premium</span>
+      <span class="label-3">Benefits</span>
+    </button>
+    <button class="bn-item">
+      <span class="material-symbols-outlined">card_giftcard</span>
+      <span class="label-3">Rewards</span>
+    </button>
+  </nav>
+
+</body>
+</html>

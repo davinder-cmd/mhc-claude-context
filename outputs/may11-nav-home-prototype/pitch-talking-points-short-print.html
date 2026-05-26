@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Pitch Talking Points — Home v1 (short)</title>
+<style>
+  @page {
+    size: Letter;
+    margin: 0.65in 0.7in 0.8in 0.7in;
+    @bottom-center {
+      content: "Pitch Talking Points — Home v1 (short) · " counter(page) " of " counter(pages);
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      font-size: 9pt;
+      color: #666;
+    }
+  }
+
+  :root{
+    --ink:        #111418;
+    --ink-2:      #34393f;
+    --ink-3:      #5e646b;
+    --rule:       #d8d6d2;
+    --callout-bg: #f6f4ee;
+    --callout-br: #d8d3c5;
+    --f-display:  "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Inter", Arial, sans-serif;
+    --f-text:     "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Inter", Arial, sans-serif;
+  }
+
+  html, body{ margin: 0; padding: 0; background: #fff; color: var(--ink); }
+  body{
+    font-family: var(--f-text);
+    font-size: 11.5pt;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page{ max-width: 7.0in; margin: 0.5in auto; }
+  @media print{
+    .page{ max-width: none; margin: 0; }
+    .no-print{ display: none !important; }
+  }
+
+  h1, h2, h3 {
+    font-family: var(--f-display);
+    margin: 0; line-height: 1.2; letter-spacing: -0.01em; color: var(--ink);
+  }
+  h1{ font-size: 22pt; font-weight: 700; margin-bottom: 4pt; }
+  h2{
+    font-size: 13.5pt; font-weight: 700;
+    margin: 18pt 0 6pt; padding-top: 5pt;
+    border-top: 0.5pt solid var(--rule);
+    page-break-after: avoid;
+  }
+  h2:first-of-type{ border-top: 0; padding-top: 0; }
+  h3{ font-size: 11.5pt; font-weight: 700; margin: 10pt 0 3pt; }
+
+  p, ul, ol{ margin: 0 0 7pt; }
+  ul, ol{ padding-left: 18pt; }
+  li{ margin-bottom: 3pt; }
+
+  strong{ font-weight: 700; }
+  em{ font-style: italic; color: var(--ink-2); }
+
+  .meta{
+    font-size: 9.5pt; color: var(--ink-3); line-height: 1.4;
+    margin: 4pt 0 12pt; padding-bottom: 8pt;
+    border-bottom: 0.5pt solid var(--rule);
+  }
+  .meta strong{ color: var(--ink-2); font-weight: 600; }
+
+  .callout{
+    background: var(--callout-bg);
+    border: 0.5pt solid var(--callout-br);
+    border-left-width: 2pt;
+    padding: 8pt 11pt;
+    margin: 8pt 0;
+    page-break-inside: avoid;
+  }
+  .callout p:last-child{ margin-bottom: 0; }
+
+  .pressed{
+    border: 0.5pt solid var(--rule);
+    border-radius: 4pt;
+    padding: 6pt 10pt;
+    margin: 5pt 0;
+    font-size: 10.5pt;
+    page-break-inside: avoid;
+  }
+  .pressed em{ font-style: italic; color: var(--ink-2); font-weight: 600; }
+
+  /* on-screen helper banner */
+  .print-hint{
+    max-width: 7.0in;
+    margin: 12pt auto;
+    padding: 8pt 12pt;
+    background: #eef3fb;
+    border: 0.5pt solid #c8d8ee;
+    border-radius: 4pt;
+    font-size: 10pt;
+    color: var(--ink-2);
+  }
+</style>
+</head>
+<body>
+
+<div class="print-hint no-print">
+  <strong>To print:</strong> ⌘P (Mac) or Ctrl-P (Win). Set <em>Destination</em> to “Save as PDF” for a PDF, or pick a printer. Margins are baked in.
+</div>
+
+<article class="page">
+  <h1>Pitch Talking Points — Home v1 (short)</h1>
+  <div class="meta">
+    <strong>For:</strong> Davinder · meeting with Jill and Darcy · 2026-05-11<br>
+    <strong>Companion to:</strong> <em>nav-home-v4-listened.html</em><br>
+    <strong>Format:</strong> Conversational. Speak it like you’d say it.
+  </div>
+
+  <h2>Set up</h2>
+  <p>Thanks for the time. Quick walk-through of one version of the home — I have others in flight, this one’s far enough along to put in front of you.</p>
+  <p>Two things up front so we don’t trip on them:</p>
+  <ul>
+    <li>I optimized for <strong>form and function</strong> here, not visuals. What’s on the page, what order it’s in, what affordances it has, what it’s labeled. Type, color, photography, polish — downstream.</li>
+    <li>This is the <strong>default populated state.</strong> Zero states and variations aren’t here yet — empty content, broken sync, no programs, single-reward clients, all of that. We need to design those too, but I wanted to lock the shape of the populated case first.</li>
+  </ul>
+
+  <h2>What I went for</h2>
+  <p>Three structural calls:</p>
+  <ol>
+    <li><strong>The user should feel we listened.</strong> Onboarding already captured their interests. The old home didn’t show that signal anywhere — “Just For You” was a generic mix labeled as personal. That’s the trust break.</li>
+    <li><strong>The user should be able to change their mind, in place.</strong> Edit next to the section that responds to it. Not at the top of the page.</li>
+    <li><strong>Fewer things per section, in priority order.</strong> One hero, one insight, three programs, one challenge, four reward tiles. Count and order — not whitespace.</li>
+  </ol>
+
+  <h2>The walk-through, fast</h2>
+  <ul>
+    <li><strong>Hero</strong> — one slot, mixed-purpose. Eyebrow tag tells you the source — <em>Based on your interests</em>, <em>From your employer</em>, <em>From Acme</em>, <em>Active challenge</em>. Same slot, different tag.</li>
+    <li><strong>Based on your interest / From your employer</strong> — two paired sections under the hero. Each is labeled. Each has its own “see more” and the interest one has <em>Edit Interests</em> right there.</li>
+    <li><strong>This week</strong> — tracker, weekly, 4 metrics, one row. Sync line under the title so the user knows the device is connected.</li>
+    <li><strong>Insight</strong> — one AI takeaway, one action, refresh button.</li>
+    <li><strong>Continue your programs</strong> — three DCPs, progress, dollar value inline.</li>
+    <li><strong>Your challenge</strong> — single card, conditional.</li>
+    <li><strong>Your rewards</strong> — four tiles at the bottom. Open conversation, see below.</li>
+    <li><strong>Bottom nav</strong> — frame, handled in another doc.</li>
+  </ul>
+
+  <h2>Nobody loses real estate</h2>
+  <p>This is the line for sales and the employer team. The carousel had 4–5 slots. Now there’s one hero. Looks like a loss, isn’t:</p>
+  <ul>
+    <li>Sales still rotates through the hero via the priority engine.</li>
+    <li>Employers get a <em>permanent</em> labeled section every render, plus <em>More from Acme</em> for the long tail.</li>
+    <li>Interest content gets the same — permanent left lane, <em>See 7 more.</em></li>
+  </ul>
+  <p>One slot for the highest-priority moment + two permanent sections that scale. Same surface area, calmer presentation, one thing at a time.</p>
+
+  <h2>Personalization — the part I want us to land on</h2>
+  <p>John’s offsite #6 says: add filters so the user can declare in-session what they want to work on, and shut down the existing engine.</p>
+  <p>I want to land the <strong>intent</strong> — give the user real control, stop pretending the algorithm knows them better than they do. Totally agree.</p>
+  <p>I’d push back on the <strong>mechanism</strong> — a page-level filter. Two reasons:</p>
+  <ol>
+    <li><strong>Most of the page doesn’t respond to it.</strong> Tracker, programs, employer, challenge, rewards aren’t interest-driven. Only one lane and sometimes the hero. So a <em>Sleep</em> filter at the top changes almost nothing. That’s Norman’s mapping — a control should map to what it actually changes. Otherwise the page promises a change it can’t deliver.</li>
+    <li><strong>Grouping.</strong> Controls live inside the thing they control. If the control only affects one lane, it belongs <em>inside that lane.</em> That’s what <em>Edit Interests</em> is.</li>
+  </ol>
+  <p>So my read: source labels on the hero + section-titled lanes + Edit Interests next to the interest lane = John’s intent, scoped to where it can actually deliver. Not “no filter” — filter scoped to where the filter works.</p>
+  <p>If anyone has a strong reason to keep the page-level filter, I want to hear it now, not after.</p>
+
+  <h2>Rewards — flagging it</h2>
+  <p>Rewards is at the bottom in v1. That’s a call, not a settled answer.</p>
+  <p>Two reasons it’s worth a real conversation:</p>
+  <ul>
+    <li>It’s one of our <strong>competitive moats</strong> — multi-type configurability. Most platforms only do points. The home should make that flexibility visible.</li>
+    <li>But Personify and Virgin Pulse promote points to the top because they only have one currency. We have up to four types. A top-of-page strip is a lot of weight for what’s, for many users, secondary.</li>
+  </ul>
+  <p>For v1: four-up summary, bottom of page. Worth revisiting when we have client config data.</p>
+
+  <h2>What I’d like to walk out with</h2>
+  <ol>
+    <li><strong>Agreement on the personalization answer</strong> — source labels + scoped Edit Interests, not page-level filter.</li>
+    <li><strong>Alignment that sales and employers aren’t losing real estate</strong> — hero rotation + permanent lane + more-from-Acme.</li>
+    <li><strong>Parking the rewards placement</strong> — fine at bottom for v1, on the list to revisit.</li>
+  </ol>
+  <p>This is one version. There are others coming. I’d rather know what’s wrong with this one before I refine or branch.</p>
+
+  <h2>If pressed</h2>
+  <div class="pressed"><em>Why not a page-level filter?</em> Most of the page doesn’t respond to interests. A filter that only changes one section is a contract the page can’t keep.</div>
+  <div class="pressed"><em>Why is the personalization in eyebrows and titles?</em> So the user can see, at a glance, <em>which</em> content is personalized and what signal drove it.</div>
+  <div class="pressed"><em>Why one hero?</em> John’s call. Eyebrow tag preserves the carousel’s source-distinction without the swipe.</div>
+  <div class="pressed"><em>Why is Acme okay?</em> Permanent lane every render. They don’t have to win the hero to be seen.</div>
+  <div class="pressed"><em>Why is Continue Programs above the interest lane?</em> John named easier access to ongoing programs. CS named it. Second-highest weight after the hero.</div>
+  <div class="pressed"><em>Why no “Just For You”?</em> It lied about being personal. Source-labeled sections fix that without lying.</div>
+  <div class="pressed"><em>If Jill pushes the filter hard?</em> Validate the intent (yes, real user control), redirect the mechanism (scope it to where it works).</div>
+  <div class="pressed"><em>On visuals?</em> I haven’t optimized for visuals yet. Form and function first.</div>
+  <div class="pressed"><em>On the missing states?</em> This is the populated case. Empty/broken/single-config states are next.</div>
+
+</article>
+</body>
+</html>
