@@ -1,0 +1,106 @@
+<!--
+  ============================================================
+  BLOCK 7 — Your rewards
+  ============================================================
+  Renders:
+    - Section heading "Your rewards"
+    - "Reward Details" link (NAVIGATION → <a href>, was <button>)
+    - Up to 4 reward cards: Gift Card, Points, Raffle, Store Credit — UNROLLED
+
+  v81 had:
+    - <button class="btn btn-text">Reward Details</button>  → reclassified to <a href>
+    - 4 static reward cards with no click affordance      → each gets a stretched-link
+
+  Reward cards click through to the reward detail / redeem page. If redeeming
+  is a MUTATING ACTION (e.g. converts points into a gift card on tap), each
+  card must become its own User Input block. See action-button-audit.md.
+
+  Currently expressed as nav (stretched-link). If the platform team confirms
+  redemption is mutating, swap to User Input blocks — the row markup below
+  carries over unchanged; only the trailing anchor gets removed in favor of
+  an MHC action attached by the host.
+
+  Conditionals:
+    {{#formula.hasRewards}}…{{/}}                — block-level suppress
+    {{#formula.hasReward1}}…{{/}}                — gift card card
+    {{#formula.hasReward2}}…{{/}}                — points / tier card
+    {{#formula.hasReward3}}…{{/}}                — raffle entries card
+    {{#formula.hasReward4}}…{{/}}                — store credit card
+
+  Tokens (per rewardN, N = 1..4):
+    {{formula.copy_section_rewards}}             — "Your rewards"
+    {{formula.copy_link_rewardDetails}}          — "Reward Details"
+    {{formula.rewards_details_href}}             — link to rewards page
+
+    {{formula.copy_rewardN_chip}}                — "Gift Card" / "Points · Silver" / "Raffle" / "Store Credit"
+    {{formula.rewardN_chip_modifier}}            — "gift" / "points" / "raffle" / "store" (drives chip color)
+    {{formula.copy_rewardN_value}}               — "$75" / "1,250" / "12" / "$25"
+    {{formula.copy_rewardN_meta}}                — "Amazon · ready to redeem" etc.
+    {{formula.copy_rewardN_sub}}                 — "$25 to next $25 card" etc.
+    {{formula.rewardN_href}}                     — link to reward detail
+    {{formula.copy_rewardN_linkLabel}}           — accessible label for the stretched anchor
+  ============================================================
+-->
+
+{{#formula.hasRewards}}
+<div class="mhc-home">
+  <section class="section" aria-labelledby="mhc-rewards-title">
+    <div class="section-head">
+      <h2 id="mhc-rewards-title" class="heading-6">{{formula.copy_section_rewards}}</h2>
+      <a class="btn btn-text" href="{{formula.rewards_details_href}}">{{formula.copy_link_rewardDetails}}</a>
+    </div>
+
+    <div class="rewards">
+
+      {{#formula.hasReward1}}
+      <div class="reward">
+        <span class="reward-chip reward-chip--{{formula.reward1_chip_modifier}}">{{formula.copy_reward1_chip}}</span>
+        <div class="heading-5">{{formula.copy_reward1_value}}</div>
+        <div class="body-3 reward__meta">{{formula.copy_reward1_meta}}</div>
+        <div class="body-3 reward__sub">{{formula.copy_reward1_sub}}</div>
+        <a class="reward__link" href="{{formula.reward1_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_reward1_linkLabel}}</span>
+        </a>
+      </div>
+      {{/formula.hasReward1}}
+
+      {{#formula.hasReward2}}
+      <div class="reward">
+        <span class="reward-chip reward-chip--{{formula.reward2_chip_modifier}}">{{formula.copy_reward2_chip}}</span>
+        <div class="heading-5">{{formula.copy_reward2_value}}</div>
+        <div class="body-3 reward__meta">{{formula.copy_reward2_meta}}</div>
+        <div class="body-3 reward__sub">{{formula.copy_reward2_sub}}</div>
+        <a class="reward__link" href="{{formula.reward2_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_reward2_linkLabel}}</span>
+        </a>
+      </div>
+      {{/formula.hasReward2}}
+
+      {{#formula.hasReward3}}
+      <div class="reward">
+        <span class="reward-chip reward-chip--{{formula.reward3_chip_modifier}}">{{formula.copy_reward3_chip}}</span>
+        <div class="heading-5">{{formula.copy_reward3_value}}</div>
+        <div class="body-3 reward__meta">{{formula.copy_reward3_meta}}</div>
+        <div class="body-3 reward__sub">{{formula.copy_reward3_sub}}</div>
+        <a class="reward__link" href="{{formula.reward3_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_reward3_linkLabel}}</span>
+        </a>
+      </div>
+      {{/formula.hasReward3}}
+
+      {{#formula.hasReward4}}
+      <div class="reward">
+        <span class="reward-chip reward-chip--{{formula.reward4_chip_modifier}}">{{formula.copy_reward4_chip}}</span>
+        <div class="heading-5">{{formula.copy_reward4_value}}</div>
+        <div class="body-3 reward__meta">{{formula.copy_reward4_meta}}</div>
+        <div class="body-3 reward__sub">{{formula.copy_reward4_sub}}</div>
+        <a class="reward__link" href="{{formula.reward4_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_reward4_linkLabel}}</span>
+        </a>
+      </div>
+      {{/formula.hasReward4}}
+
+    </div>
+  </section>
+</div>
+{{/formula.hasRewards}}

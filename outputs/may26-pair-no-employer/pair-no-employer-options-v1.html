@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pair block — no-employer state · grouping options (v1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  :root {
+    --bg:              #FAF7F0;
+    --surface:         #FFFFFF;
+    --surface-tinted:  #EFE7D6;
+    --surface-tint-2:  #F4EEE2;   /* lighter beige for subtle insets */
+    --ink:             #1A1D21;
+    --ink-soft:        #5C5F66;
+    --ink-placeholder: #9A9EA6;
+    --hairline:        #E6E3DC;
+    --hairline-2:      #DAD4C7;   /* slightly stronger divider */
+    --link:            #2E60A4;
+    --r-m: 8px; --r-l: 12px; --r-xl: 16px; --r-full: 999px;
+    --s-01:.25rem; --s-02:.5rem; --s-03:.75rem; --s-04:1rem; --s-05:1.5rem; --s-06:2rem; --s-07:2.5rem;
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+  }
+  * , *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--f-text); line-height: 1.3; -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,p { margin: 0; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; user-select: none; }
+
+  .page { max-width: 1240px; margin: 0 auto; padding: var(--s-06) var(--s-05) var(--s-07); }
+  .page__title { font-family: var(--f-display); font-weight: 600; font-size: 1.75rem; letter-spacing: -0.01em; }
+  .page__sub { color: var(--ink-soft); font-size: 0.875rem; margin-top: var(--s-02); max-width: 760px; }
+
+  .option { margin-top: var(--s-07); padding-top: var(--s-06); border-top: 1px solid var(--hairline); }
+  .option__label h2 { font-family: var(--f-display); font-weight: 600; font-size: 1.125rem; letter-spacing: -0.008em; }
+  .option__label p  { color: var(--ink-soft); font-size: 0.8125rem; margin-top: var(--s-01); max-width: 760px; }
+
+  .renders { display: flex; gap: var(--s-06); align-items: flex-start; margin-top: var(--s-05); flex-wrap: wrap; }
+  .render__cap { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-placeholder); margin-bottom: var(--s-02); }
+  .frame { container-type: inline-size; background: var(--bg); }
+  .frame--desktop { flex: 1 1 760px; min-width: 600px; }
+  .frame--mobile  { flex: 0 0 375px; }
+  .frame--mobile .pad { padding: var(--s-04); border: 1px dashed var(--hairline-2); border-radius: var(--r-l); }
+  .frame--desktop .pad { padding: var(--s-04); border: 1px dashed var(--hairline-2); border-radius: var(--r-l); }
+
+  /* ─────────── Shared item + atoms ─────────── */
+  .head__title { font-family: var(--f-text); font-weight: 500; font-size: 1rem; letter-spacing: -0.008em; }
+  .lnk { color: var(--link); font-weight: 500; font-size: 0.875rem; text-decoration: none; cursor: pointer; }
+  .lnk:hover { text-decoration: underline; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); background: var(--surface-tinted); padding: 2px 8px; border-radius: var(--r-m); }
+
+  .item { display: flex; align-items: center; gap: var(--s-04); min-width: 0; }
+  .item__thumb { width: 64px; height: 64px; border-radius: var(--r-l); flex: 0 0 auto;
+    background: linear-gradient(135deg, #DCE7FA 0%, #EAF0FB 60%, #F0E9DD 100%); position: relative; overflow: hidden; }
+  .item__thumb--green { background: linear-gradient(135deg, #DCEFE0 0%, #E6F0E4 55%, #EFE9DD 100%); }
+  .item__thumb::after { content:""; position:absolute; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.55); left: 10px; bottom: 8px; }
+  .item__body { flex: 1; min-width: 0; }
+  .item__title { font-family: var(--f-text); font-weight: 500; font-size: 0.9375rem; letter-spacing: -0.008em; }
+  .item__meta { color: var(--ink-soft); font-size: 0.8125rem; margin-top: 3px; }
+  .item__chev { color: var(--ink-placeholder); font-size: 22px; flex: 0 0 auto; }
+
+  /* Two-up grid that collapses to stacked under 600 (container query) */
+  .pairgrid { display: grid; grid-template-columns: 1fr; gap: var(--s-04); }
+  @container (min-width: 600px) { .pairgrid { grid-template-columns: 1fr 1fr; gap: var(--s-05); } }
+
+  /* =====================================================================
+     OPTION A — One fully-contained card; rows split by a divider
+     ===================================================================== */
+  .a-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-xl); overflow: hidden; }
+  .a-head { padding: var(--s-04) var(--s-05) var(--s-03); }
+  .a-items { display: grid; grid-template-columns: 1fr; }
+  .a-item { padding: var(--s-04) var(--s-05); }
+  .a-item + .a-item { border-top: 1px solid var(--hairline); }
+  @container (min-width: 600px) {
+    .a-items { grid-template-columns: 1fr 1fr; }
+    .a-item + .a-item { border-top: 0; border-left: 1px solid var(--hairline); }
+  }
+  .a-foot { display: flex; justify-content: space-between; align-items: center; gap: var(--s-03);
+    padding: var(--s-03) var(--s-05); border-top: 1px solid var(--hairline); }
+
+  /* =====================================================================
+     OPTION B — Warm-beige tray holding two white sub-cards
+     ===================================================================== */
+  .b-tray { background: var(--surface-tinted); border-radius: var(--r-xl); padding: var(--s-05); }
+  .b-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-04); }
+  .b-card { background: var(--surface); border-radius: var(--r-l); padding: var(--s-04); }
+  .b-foot { display: flex; gap: var(--s-05); align-items: center; margin-top: var(--s-04); }
+
+  /* =====================================================================
+     OPTION C — White outer card holding two tinted inset cards
+     ===================================================================== */
+  .c-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-xl); padding: var(--s-05); }
+  .c-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--s-04); }
+  .c-item { background: var(--surface-tint-2); border-radius: var(--r-l); padding: var(--s-04); }
+  .c-foot { display: flex; gap: var(--s-05); align-items: center; margin-top: var(--s-04); padding-top: var(--s-04); border-top: 1px solid var(--hairline); }
+
+  /* =====================================================================
+     OPTION D — Bracketed by full-width header + footer rules; cards float on page bg
+     ===================================================================== */
+  .d-head { padding-bottom: var(--s-03); border-bottom: 1px solid var(--hairline-2); margin-bottom: var(--s-04);
+    display: flex; justify-content: space-between; align-items: baseline; }
+  .d-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-l); padding: var(--s-04); }
+  .d-foot { margin-top: var(--s-04); padding-top: var(--s-03); border-top: 1px solid var(--hairline-2);
+    display: flex; gap: var(--s-05); align-items: center; }
+
+  /* =====================================================================
+     OPTION E — Segmented joined cards (shared edge, no gap); header + footer outside
+     ===================================================================== */
+  .e-head { margin-bottom: var(--s-03); display: flex; justify-content: space-between; align-items: baseline; }
+  .e-seg { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-xl); overflow: hidden;
+    display: grid; grid-template-columns: 1fr; }
+  .e-cell { padding: var(--s-04) var(--s-05); }
+  .e-cell + .e-cell { border-top: 1px solid var(--hairline); }
+  @container (min-width: 600px) {
+    .e-seg { grid-template-columns: 1fr 1fr; }
+    .e-cell + .e-cell { border-top: 0; border-left: 1px solid var(--hairline); }
+  }
+  .e-foot { margin-top: var(--s-03); display: flex; gap: var(--s-05); align-items: center; }
+
+  /* =====================================================================
+     OPTION F — White outer card; header with count chip; faint-tint inset cards
+     ===================================================================== */
+  .f-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: var(--r-xl); padding: var(--s-05); }
+  .f-head { display: flex; align-items: center; gap: var(--s-03); margin-bottom: var(--s-04); }
+  .f-head .grow { flex: 1; }
+  .f-item { background: var(--surface-tint-2); border: 1px solid var(--hairline); border-radius: var(--r-l); padding: var(--s-04); }
+  .f-foot { display: flex; gap: var(--s-05); align-items: center; margin-top: var(--s-04); }
+
+  .foot-actions { display: flex; gap: var(--s-05); align-items: center; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1 class="page__title">Pair block — no-employer state · grouping options</h1>
+  <p class="page__sub">
+    When there is no employer message, both cards are interest-based. Same two-card layout, but
+    <strong>one header</strong> (“Based on your interests”) and <strong>one footer</strong> (“See more like this”).
+    Six treatments for binding the two cards into one cohesive group. Each is shown at desktop
+    (side-by-side) and mobile 375 (stacked) via container queries — the transition you care about.
+    Footer actions: “See more like this” + “Edit interests”.
+  </p>
+
+  <!-- ============================ OPTION A ============================ -->
+  <section class="option">
+    <div class="option__label">
+      <h2>A · One contained card, rows split by a divider</h2>
+      <p>The whole thing is a single card. On desktop the two items sit side-by-side with a vertical hairline between them; on mobile they stack with a horizontal hairline. Header inside the top, footer inside the bottom. Maximum containment — it reads as one object.</p>
+    </div>
+    <div class="renders">
+      <div class="render">
+        <div class="render__cap">Desktop</div>
+        <div class="frame frame--desktop"><div class="pad">
+          <div class="a-card">
+            <div class="a-head"><h3 class="head__title">Based on your interests</h3></div>
+            <div class="a-items">
+              <div class="a-item"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="a-item"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="a-foot"><a class="lnk">See more like this</a><a class="lnk">Edit interests</a></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="render">
+        <div class="render__cap">Mobile 375</div>
+        <div class="frame frame--mobile"><div class="pad">
+          <div class="a-card">
+            <div class="a-head"><h3 class="head__title">Based on your interests</h3></div>
+            <div class="a-items">
+              <div class="a-item"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="a-item"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="a-foot"><a class="lnk">See more like this</a><a class="lnk">Edit interests</a></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION B ============================ -->
+  <section class="option">
+    <div class="option__label">
+      <h2>B · Warm-beige tray holding two white sub-cards</h2>
+      <p>A beige “tray” surrounds the group. Header and footer sit on the tint; the two content cards are white and float inside. The shared background is what binds them — the cards don’t need their own borders.</p>
+    </div>
+    <div class="renders">
+      <div class="render">
+        <div class="render__cap">Desktop</div>
+        <div class="frame frame--desktop"><div class="pad">
+          <div class="b-tray">
+            <div class="b-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="pairgrid">
+              <div class="b-card"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="b-card"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="b-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="render">
+        <div class="render__cap">Mobile 375</div>
+        <div class="frame frame--mobile"><div class="pad">
+          <div class="b-tray">
+            <div class="b-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="pairgrid">
+              <div class="b-card"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="b-card"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="b-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION C ============================ -->
+  <section class="option">
+    <div class="option__label">
+      <h2>C · White outer card, tinted inset cards</h2>
+      <p>Inverse of B. The outer container is a white bordered card; the two items are beige insets. The outer card does the containment; the inset tint gives each item a tactile, tappable feel. Footer separated by a hairline.</p>
+    </div>
+    <div class="renders">
+      <div class="render">
+        <div class="render__cap">Desktop</div>
+        <div class="frame frame--desktop"><div class="pad">
+          <div class="c-card">
+            <div class="c-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="pairgrid">
+              <div class="c-item"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="c-item"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="c-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="render">
+        <div class="render__cap">Mobile 375</div>
+        <div class="frame frame--mobile"><div class="pad">
+          <div class="c-card">
+            <div class="c-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="pairgrid">
+              <div class="c-item"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="c-item"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="c-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION D ============================ -->
+  <section class="option">
+    <div class="option__label">
+      <h2>D · Bracketed by full-width rules</h2>
+      <p>No outer container. A header rule and a footer rule span the full width, “bracketing” the two cards as one group. The cards keep their own borders and float on the page background. Lightest visual weight; the rules do the grouping.</p>
+    </div>
+    <div class="renders">
+      <div class="render">
+        <div class="render__cap">Desktop</div>
+        <div class="frame frame--desktop"><div class="pad">
+          <div>
+            <div class="d-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="pairgrid">
+              <div class="d-card"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="d-card"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="d-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="render">
+        <div class="render__cap">Mobile 375</div>
+        <div class="frame frame--mobile"><div class="pad">
+          <div>
+            <div class="d-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="pairgrid">
+              <div class="d-card"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="d-card"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="d-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION E ============================ -->
+  <section class="option">
+    <div class="option__label">
+      <h2>E · Segmented joined cards (shared edge)</h2>
+      <p>The two items butt together as one rounded unit with a single divider — like a segmented control. Header and footer live outside the unit. Strongest “these two belong together” signal; the join is literal. Collapses to a stacked single unit on mobile.</p>
+    </div>
+    <div class="renders">
+      <div class="render">
+        <div class="render__cap">Desktop</div>
+        <div class="frame frame--desktop"><div class="pad">
+          <div>
+            <div class="e-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="e-seg">
+              <div class="e-cell"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="e-cell"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="e-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="render">
+        <div class="render__cap">Mobile 375</div>
+        <div class="frame frame--mobile"><div class="pad">
+          <div>
+            <div class="e-head"><h3 class="head__title">Based on your interests</h3><a class="lnk">Edit interests</a></div>
+            <div class="e-seg">
+              <div class="e-cell"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="e-cell"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="e-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ OPTION F ============================ -->
+  <section class="option">
+    <div class="option__label">
+      <h2>F · White card + count chip + faint-tint inset cards</h2>
+      <p>White outer card with a small count chip in the header (“2 picks”) that explicitly frames the pair as a set. Inset cards carry a faint tint and a hairline so they stay legible as individual targets. Chip + containment together make the grouping unambiguous.</p>
+    </div>
+    <div class="renders">
+      <div class="render">
+        <div class="render__cap">Desktop</div>
+        <div class="frame frame--desktop"><div class="pad">
+          <div class="f-card">
+            <div class="f-head"><h3 class="head__title">Based on your interests</h3><span class="chip">2 picks</span><span class="grow"></span><a class="lnk">Edit interests</a></div>
+            <div class="pairgrid">
+              <div class="f-item"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="f-item"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="f-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="render">
+        <div class="render__cap">Mobile 375</div>
+        <div class="frame frame--mobile"><div class="pad">
+          <div class="f-card">
+            <div class="f-head"><h3 class="head__title">Based on your interests</h3><span class="chip">2 picks</span></div>
+            <div class="pairgrid">
+              <div class="f-item"><div class="item"><div class="item__thumb"></div><div class="item__body"><div class="item__title">Wind down before bed</div><div class="item__meta">3 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+              <div class="f-item"><div class="item"><div class="item__thumb item__thumb--green"></div><div class="item__body"><div class="item__title">Move more in your day</div><div class="item__meta">4 min read · Earn $25</div></div><span class="item__chev material-symbols-outlined">chevron_right</span></div></div>
+            </div>
+            <div class="f-foot"><a class="lnk">See more like this</a></div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!--
+  ============================================================
+  BLOCK 2 — Pair (Based on your interest + From your employer)
+  ============================================================
+  Emits ONE <div class="mhc-home"> wrapper containing one <section class="pair">.
+  The .pair section is a grid container — splitting the two cards into separate
+  mhc-home wrappers would break the side-by-side layout at Medium+. Each card
+  is gated INSIDE the .pair section by its own conditional, so when only one is
+  present the grid degrades to a single column gracefully.
+
+  v81 used <button class="btn btn-text"> for both footer affordances
+  ("See N more", "Edit Interests"). All are NAVIGATIONS — they drill down to
+  a list page or settings page — so each becomes a plain <a class="btn btn-text">.
+
+  The card body itself is a stretched-link to the content item.
+
+  Conditionals:
+    {{#formula.hasAnyPair}}…{{/}}              — block-level suppress
+                                                  (true if either pair card is present)
+    {{#formula.hasInterestPair}}…{{/}}         — show interest card
+    {{#formula.hasEmployerPair}}…{{/}}         — show employer card
+    {{#formula.hasInterestOverflow}}…{{/}}     — "See N more" link visible (N>0)
+    {{#formula.hasEmployerOverflow}}…{{/}}     — same for employer
+
+  Tokens — see file body. Naming follows the guide: copy_*, *_href, snake_case.
+  ============================================================
+-->
+
+{{#formula.hasAnyPair}}
+<div class="mhc-home">
+  <section class="pair" aria-labelledby="mhc-pair-title">
+    <h2 id="mhc-pair-title" class="mhc-visually-hidden">Recommendations</h2>
+
+    {{#formula.hasInterestPair}}
+    <div class="pair-card">
+      <div class="pair-card__title">
+        <h3 class="title-1">{{formula.copy_pair_interest_eyebrow}}</h3>
+      </div>
+      <div class="pair-card__row">
+        <div class="pair-card__thumb" style="background-image: url('{{formula.pair_interest_thumb_url}}')" aria-hidden="true"></div>
+        <div class="pair-card__row-body">
+          <div class="title-1">{{formula.copy_pair_interest_title}}</div>
+          <div class="body-3 ink-soft">{{formula.copy_pair_interest_meta}}</div>
+        </div>
+      </div>
+      <div class="pair-card__footer">
+        {{#formula.hasInterestOverflow}}
+        <a class="btn btn-text" href="{{formula.pair_interest_seeMore_href}}">{{formula.copy_pair_interest_seeMore}}<span class="medium-up-inline">&nbsp;{{formula.copy_pair_interest_seeMoreSuffix}}</span></a>
+        {{/formula.hasInterestOverflow}}
+        <a class="btn btn-text" href="{{formula.pair_interest_edit_href}}">{{formula.copy_pair_interest_editLabel}}</a>
+      </div>
+      <a class="pair-card__link" href="{{formula.pair_interest_href}}">
+        <span class="mhc-visually-hidden">{{formula.copy_pair_interest_title}}</span>
+      </a>
+    </div>
+    {{/formula.hasInterestPair}}
+
+    {{#formula.hasEmployerPair}}
+    <div class="pair-card">
+      <div class="pair-card__title">
+        <h3 class="title-1">{{formula.copy_pair_employer_eyebrow}}</h3>
+      </div>
+      <div class="pair-card__row">
+        <div class="pair-card__thumb" style="background-image: url('{{formula.pair_employer_thumb_url}}')" aria-hidden="true"></div>
+        <div class="pair-card__row-body">
+          <div class="title-1">{{formula.copy_pair_employer_title}}</div>
+          <div class="body-3 ink-soft">{{formula.copy_pair_employer_meta}}</div>
+        </div>
+      </div>
+      <div class="pair-card__footer">
+        {{#formula.hasEmployerOverflow}}
+        <a class="btn btn-text" href="{{formula.pair_employer_seeMore_href}}">{{formula.copy_pair_employer_seeMore}}<span class="medium-up-inline">&nbsp;{{formula.copy_pair_employer_seeMoreSuffix}}</span></a>
+        {{/formula.hasEmployerOverflow}}
+      </div>
+      <a class="pair-card__link" href="{{formula.pair_employer_href}}">
+        <span class="mhc-visually-hidden">{{formula.copy_pair_employer_title}}</span>
+      </a>
+    </div>
+    {{/formula.hasEmployerPair}}
+
+  </section>
+</div>
+{{/formula.hasAnyPair}}

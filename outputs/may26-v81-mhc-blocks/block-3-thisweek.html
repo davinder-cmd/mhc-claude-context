@@ -1,0 +1,177 @@
+<!--
+  ============================================================
+  BLOCK 3 — This week (tracker tiles)
+  ============================================================
+  Renders:
+    - Section heading "This week"
+    - Sync freshness label
+    - 4 tracker tiles: Steps, Sleep, Calories, Active Minutes
+
+  v81 had:
+    - <button class="btn btn-text">All data</button>  — reclassified to <a href>
+    - Tracker tiles were static <div> with no click affordance
+
+  Per the MHC blocks guide:
+    - Each tracker tile is clickable to its detail page → stretched-link
+    - Per-tile zero state (no linked tracker) is gated by `hasLinkedTracker_X`
+      with a parallel inverse that shows a "+ Link" zero-state card. Zero
+      state uses `.tracker--zero` modifier — add to mhc-home.css when wiring
+      this up. v81 only showed the positive state; the inverse is sketched
+      below as a comment for the platform team.
+
+  Suppression: this block self-suppresses when no trackers are linked.
+  At least one of {Steps, Sleep, Calories, Active} has data.
+
+  Conditionals:
+    {{#formula.hasAnyTracker}}…{{/}}              — block-level suppress
+    {{#formula.hasLinkedTracker_steps}}…{{/}}     — Steps tile shows real data
+    {{^formula.hasLinkedTracker_steps}}…{{/}}     — Steps tile shows "Link" zero state
+    {{#formula.hasLinkedTracker_sleep}}…{{/}}     — Sleep tile shows real data
+    {{^formula.hasLinkedTracker_sleep}}…{{/}}     — Sleep tile shows zero state
+    {{#formula.hasLinkedTracker_calories}}…{{/}}  — Calories
+    {{^formula.hasLinkedTracker_calories}}…{{/}}
+    {{#formula.hasLinkedTracker_active}}…{{/}}    — Active Minutes
+    {{^formula.hasLinkedTracker_active}}…{{/}}
+
+  Tokens:
+    {{formula.copy_section_thisweek}}                — "This week"
+    {{formula.copy_sync_freshness}}                  — "Synced 4 minutes ago · Apple Health"
+    {{formula.copy_link_seeAllData}}                 — "All data"
+    {{formula.thisweek_allData_href}}                — link to All Data page
+
+    For each tracker (steps | sleep | calories | active):
+      {{formula.copy_tracker_X_label}}               — "Steps" / "Sleep" / etc.
+      {{formula.tracker_X_value}}                    — "6h 43m" / "645" / etc.
+      {{formula.copy_tracker_X_meta}}                — "78% of weekly goal"
+      {{formula.tracker_X_href}}                     — link to tracker detail page
+      {{formula.copy_tracker_X_linkCta}}             — "+ Link steps" (zero state)
+      {{formula.tracker_X_link_href}}                — link-tracker page
+
+  Direction arrow: v81 always rendered ↗ as a fixed glyph. If trend should
+  vary (up/down/flat), add a state flag `formula.tracker_X_trend` and gate the
+  arrow glyph accordingly. For this conversion the arrow is left static.
+  ============================================================
+-->
+
+{{#formula.hasAnyTracker}}
+<div class="mhc-home">
+  <section class="section" aria-labelledby="mhc-thisweek-title">
+    <div class="section-head">
+      <div class="section-head__title">
+        <h2 id="mhc-thisweek-title" class="heading-6">{{formula.copy_section_thisweek}}</h2>
+        <div class="caption meta">{{formula.copy_sync_freshness}}</div>
+      </div>
+      <a class="btn btn-text" href="{{formula.thisweek_allData_href}}">{{formula.copy_link_seeAllData}}</a>
+    </div>
+
+    <div class="trackers">
+
+      <!-- Steps -->
+      <div class="tracker">
+        {{#formula.hasLinkedTracker_steps}}
+        <div class="tracker__icon">
+          <span class="material-symbols-outlined" aria-hidden="true">directions_walk</span>
+        </div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_steps_label}}</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>
+          {{formula.tracker_steps_value}}
+        </div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_steps_meta}}</div>
+        <a class="program__link" href="{{formula.tracker_steps_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_steps_label}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_steps}}
+        {{^formula.hasLinkedTracker_steps}}
+        <!-- Zero state: link the tracker. Stretched-link goes to the link-flow. -->
+        <div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">add</span></div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_steps_label}}</div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_steps_linkCta}}</div>
+        <a class="program__link" href="{{formula.tracker_steps_link_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_steps_linkCta}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_steps}}
+      </div>
+
+      <!-- Sleep -->
+      <div class="tracker tracker--sleep">
+        {{#formula.hasLinkedTracker_sleep}}
+        <div class="tracker__icon">
+          <span class="material-symbols-outlined" aria-hidden="true">bedtime</span>
+        </div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_sleep_label}}</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>
+          {{formula.tracker_sleep_value}}
+        </div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_sleep_meta}}</div>
+        <a class="program__link" href="{{formula.tracker_sleep_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_sleep_label}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_sleep}}
+        {{^formula.hasLinkedTracker_sleep}}
+        <div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">add</span></div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_sleep_label}}</div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_sleep_linkCta}}</div>
+        <a class="program__link" href="{{formula.tracker_sleep_link_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_sleep_linkCta}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_sleep}}
+      </div>
+
+      <!-- Calories -->
+      <div class="tracker tracker--calories">
+        {{#formula.hasLinkedTracker_calories}}
+        <div class="tracker__icon">
+          <span class="material-symbols-outlined" aria-hidden="true">local_fire_department</span>
+        </div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_calories_label}}</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>
+          {{formula.tracker_calories_value}}
+        </div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_calories_meta}}</div>
+        <a class="program__link" href="{{formula.tracker_calories_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_calories_label}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_calories}}
+        {{^formula.hasLinkedTracker_calories}}
+        <div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">add</span></div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_calories_label}}</div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_calories_linkCta}}</div>
+        <a class="program__link" href="{{formula.tracker_calories_link_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_calories_linkCta}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_calories}}
+      </div>
+
+      <!-- Active minutes -->
+      <div class="tracker tracker--active">
+        {{#formula.hasLinkedTracker_active}}
+        <div class="tracker__icon">
+          <span class="material-symbols-outlined" aria-hidden="true">timer</span>
+        </div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_active_label}}</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>
+          {{formula.tracker_active_value}}
+        </div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_active_meta}}</div>
+        <a class="program__link" href="{{formula.tracker_active_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_active_label}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_active}}
+        {{^formula.hasLinkedTracker_active}}
+        <div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">add</span></div>
+        <div class="eyebrow tracker__label">{{formula.copy_tracker_active_label}}</div>
+        <div class="body-3 tracker__meta">{{formula.copy_tracker_active_linkCta}}</div>
+        <a class="program__link" href="{{formula.tracker_active_link_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_tracker_active_linkCta}}</span>
+        </a>
+        {{/formula.hasLinkedTracker_active}}
+      </div>
+
+    </div>
+  </section>
+</div>
+{{/formula.hasAnyTracker}}
