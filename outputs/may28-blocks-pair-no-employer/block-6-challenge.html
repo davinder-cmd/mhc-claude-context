@@ -1,0 +1,54 @@
+<!--
+  ============================================================
+  BLOCK 6 — Your challenge
+  ============================================================
+  Renders:
+    - Section heading "Your challenge"
+    - One challenge banner: icon + body + stretched-link to detail page
+
+  v81 had:
+    <button class="btn btn-outlined">Details</button>
+  Reclassified: "Details" is a NAVIGATION → the whole challenge card becomes a
+  stretched-link, and the visible "Details" affordance is removed (the card
+  itself is the affordance). This matches every other "see detail" card in
+  the system (programs, rewards) and keeps the markup CKEditor-safe.
+
+  If the challenge needs *two* affordances (e.g. "Details" + "Cheer team"),
+  split into a User Input block where the cheer action is the MHC action
+  and Details remains a card-link.
+
+  Conditionals:
+    {{#formula.hasChallenge}}…{{/}}     — top-level suppress
+
+  Tokens:
+    {{formula.copy_section_challenge}}            — "Your challenge"
+    {{formula.copy_challenge_eyebrow}}            — "Team Challenge" / "Peer Challenge"
+    {{formula.copy_challenge_title}}              — "Spring Steps Challenge"
+    {{formula.copy_challenge_meta}}               — "Day 22 of 30 · Currently 4th of 8 teammates"
+    {{formula.challenge_href}}                    — link to challenge detail
+    {{formula.copy_challenge_linkLabel}}          — accessible label for stretched anchor
+  ============================================================
+-->
+
+{{#formula.hasChallenge}}
+<div class="mhc-home">
+  <section class="section" aria-labelledby="mhc-challenge-title">
+    <div class="section-head">
+      <h2 id="mhc-challenge-title" class="heading-6">{{formula.copy_section_challenge}}</h2>
+    </div>
+    <div class="challenge">
+      <div class="banner-icon banner-icon--challenge">
+        <span class="material-symbols-outlined" aria-hidden="true">emoji_events</span>
+      </div>
+      <div class="challenge__body">
+        <div class="eyebrow ink-soft">{{formula.copy_challenge_eyebrow}}</div>
+        <div class="heading-6">{{formula.copy_challenge_title}}</div>
+        <div class="body-3 challenge__meta">{{formula.copy_challenge_meta}}</div>
+      </div>
+      <a class="challenge__link" href="{{formula.challenge_href}}">
+        <span class="mhc-visually-hidden">{{formula.copy_challenge_linkLabel}}</span>
+      </a>
+    </div>
+  </section>
+</div>
+{{/formula.hasChallenge}}

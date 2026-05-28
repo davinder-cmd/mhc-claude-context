@@ -1,0 +1,102 @@
+<!--
+  ============================================================
+  BLOCK 2 — Pair (v82 · WITH-EMPLOYER scenario)
+  ============================================================
+  Two columns side-by-side on desktop. Each column is a pair-section with
+  its own header (title + optional Edit pill) + one rec-card + footer link.
+  Section is borderless on desktop; the rec-card carries the visual frame.
+  Mobile (< 600) reverts to a bordered-section / borderless-card treatment
+  via mhc-home.css media query — no markup change required for that switch.
+
+  This file is the WITH-EMPLOYER variant. For the no-employer variant,
+  see the sibling bundle: outputs/may28-blocks-pair-no-employer/.
+
+  The two pair-sections are gated independently. If `hasEmployerPair` is
+  false but this block is rendered anyway, the employer column self-
+  suppresses and the interest column renders alone in a 2-up grid (one cell
+  left, gap right). Cleaner to use the no-employer bundle's block-2 when
+  the employer column is known to be absent.
+
+  Conditionals:
+    {{#formula.hasAnyPair}}…{{/}}                 — block-level suppress
+    {{#formula.hasInterestPair}}…{{/}}            — interest column
+    {{#formula.hasEmployerPair}}…{{/}}            — employer column
+    {{#formula.hasInterestOverflow}}…{{/}}        — "See N more matched…" link
+    {{#formula.hasEmployerOverflow}}…{{/}}        — "See N more from {employer}" link
+
+  Tokens:
+    INTEREST COLUMN
+      {{formula.copy_pair_interest_heading}}      — "Based on your interests"
+      {{formula.copy_pair_interest_editLabel}}    — "Edit" (pill)
+      {{formula.pair_interest_edit_href}}         — link to interests editor
+      {{formula.copy_pair_interest_title}}        — "Wind down before bed"
+      {{formula.copy_pair_interest_meta}}         — "Journey · 3 min read"
+      {{formula.pair_interest_thumb_url}}         — thumbnail image
+      {{formula.pair_interest_href}}              — link target for the card
+      {{formula.copy_pair_interest_seeMore}}      — "See 3 more"
+      {{formula.copy_pair_interest_seeMoreSuffix}} — "matched to your interests"
+      {{formula.pair_interest_seeMore_href}}      — link to interests list
+
+    EMPLOYER COLUMN
+      {{formula.copy_pair_employer_heading}}      — "From your employer"
+      {{formula.copy_pair_employer_title}}        — "Health Assessment"
+      {{formula.copy_pair_employer_meta}}         — "Earn $300"
+      {{formula.pair_employer_thumb_url}}         — thumbnail image
+      {{formula.pair_employer_href}}              — link target for the card
+      {{formula.copy_pair_employer_seeMore}}      — "See 2 more"
+      {{formula.copy_pair_employer_seeMoreSuffix}} — "from {employer}"
+      {{formula.pair_employer_seeMore_href}}      — link to employer-content list
+  ============================================================
+-->
+
+{{#formula.hasAnyPair}}
+<div class="mhc-home">
+  <section class="pair pair--cols-2" aria-labelledby="mhc-pair-title">
+    <h2 id="mhc-pair-title" class="mhc-visually-hidden">Recommendations</h2>
+
+    {{#formula.hasInterestPair}}
+    <div class="pair-section">
+      <div class="pair-section__header">
+        <h3 class="title-1">{{formula.copy_pair_interest_heading}}</h3>
+        <a class="pill-edit" href="{{formula.pair_interest_edit_href}}">{{formula.copy_pair_interest_editLabel}}</a>
+      </div>
+      <a class="rec-card" href="{{formula.pair_interest_href}}">
+        <div class="rec-card__thumb" style="background-image: url('{{formula.pair_interest_thumb_url}}')" aria-hidden="true"></div>
+        <div class="rec-card__body">
+          <div class="title-1">{{formula.copy_pair_interest_title}}</div>
+          <div class="body-3 ink-soft">{{formula.copy_pair_interest_meta}}</div>
+        </div>
+        <span class="rec-card__chev material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </a>
+      {{#formula.hasInterestOverflow}}
+      <div class="pair-section__footer">
+        <a class="btn btn-text" href="{{formula.pair_interest_seeMore_href}}">{{formula.copy_pair_interest_seeMore}}<span class="medium-up-inline">&nbsp;{{formula.copy_pair_interest_seeMoreSuffix}}</span></a>
+      </div>
+      {{/formula.hasInterestOverflow}}
+    </div>
+    {{/formula.hasInterestPair}}
+
+    {{#formula.hasEmployerPair}}
+    <div class="pair-section">
+      <div class="pair-section__header">
+        <h3 class="title-1">{{formula.copy_pair_employer_heading}}</h3>
+      </div>
+      <a class="rec-card" href="{{formula.pair_employer_href}}">
+        <div class="rec-card__thumb" style="background-image: url('{{formula.pair_employer_thumb_url}}')" aria-hidden="true"></div>
+        <div class="rec-card__body">
+          <div class="title-1">{{formula.copy_pair_employer_title}}</div>
+          <div class="body-3 ink-soft">{{formula.copy_pair_employer_meta}}</div>
+        </div>
+        <span class="rec-card__chev material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </a>
+      {{#formula.hasEmployerOverflow}}
+      <div class="pair-section__footer">
+        <a class="btn btn-text" href="{{formula.pair_employer_seeMore_href}}">{{formula.copy_pair_employer_seeMore}}<span class="medium-up-inline">&nbsp;{{formula.copy_pair_employer_seeMoreSuffix}}</span></a>
+      </div>
+      {{/formula.hasEmployerOverflow}}
+    </div>
+    {{/formula.hasEmployerPair}}
+
+  </section>
+</div>
+{{/formula.hasAnyPair}}
