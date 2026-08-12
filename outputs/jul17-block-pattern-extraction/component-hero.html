@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hero · MHC Component Sheet</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<div class="g-top">
+  <div class="g-top__inner">
+    <a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Sheet</a>
+    <div class="g-top__spacer"></div>
+    <div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div>
+  </div>
+</div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+
+  <header class="g-head">
+    <div class="g-eyebrow">Component · Hero</div>
+    <h1 class="g-title">Hero</h1>
+    <p class="g-lede">The lead recommendation card — image plus content. Stacks on phones with the image at a fixed 216px band; splits into a 5/7 image-and-content layout at a locked 360px height from tablet up. The image cell recrops as its shape changes across breakpoints.</p>
+    <div class="g-tags">
+      <span class="g-tag">.hero</span>
+      <span class="g-tag g-tag--flag">Single-instance — one source page</span>
+      <span class="g-tag g-tag--ok">Authorable block (CTA host-injected)</span>
+      <span class="g-tag g-tag--flag">Media shell needs background-size in locked CSS</span>
+    </div>
+  </header>
+
+  <!-- 1 · LIVE PLAYGROUND ------------------------------------------------ -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Live playground</h2></div>
+    <p class="g-section__note">Drag to resize. Watch the crossover at 600px: the stacked card (image band + content + stretched-link) becomes a fixed-height 5/7 split, and the photo recrops from a wide band to a tall column.</p>
+    <div class="g-pg" style="height:592px">
+      <div class="g-pg__hint">↔ Drag the bottom-right corner to resize · live <code>mhc-home.css</code></div>
+      <iframe src="frame-hero.html" title="Hero — resizable"></iframe>
+    </div>
+  </section>
+
+  <!-- 2 · BREAKPOINTS ---------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Responsive breakpoints</h2></div>
+    <p class="g-section__note">True-width frames, scaled to fit. Note how the same photo is cropped differently at each width — wide-and-short when stacked, tall-and-narrow when split — while the card height stays deterministic.</p>
+    <div class="g-bp-row">
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px · stacked, 216px band</span></div>
+        <div class="g-bp__vp" style="--w:375;--s:1;--h:592"><iframe src="frame-hero.html" title="Hero Compact"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px · 5/7 split, 360px</span></div>
+        <div class="g-bp__vp" style="--w:1024;--s:.62;--h:400"><iframe src="frame-hero.html" title="Hero Medium"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px · split, large type</span></div>
+        <div class="g-bp__vp" style="--w:1440;--s:.5;--h:400"><iframe src="frame-hero.html" title="Hero Large"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · IMAGE HANDLING ------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Image crop &amp; scale (the locked behaviour)</h2></div>
+    <p class="g-section__note">The geometry is the win: the media cell has a deterministic shape at every breakpoint, so any photo drops in and crops-to-cover predictably. Compact locks a 216px-tall band; Medium+ fills a 360px-tall column at 5/12 of the card width. No layout shift from image dimensions.</p>
+    <div class="g-tags">
+      <span class="g-tag">Compact media: <code>height:216px</code>, full width</span>
+      <span class="g-tag">Medium+ media: <code>height:100%</code> of 360px cell</span>
+      <span class="g-tag">Sibling patterns: program <code>16:9</code> · pair thumb <code>4:3</code> @≥1200</span>
+    </div>
+  </section>
+
+  <!-- 4 · MARKUP --------------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Markup</h2></div>
+    <p class="g-section__note">The dynamic image URL is the one inline style allowed in a block. The Medium+ CTA is <strong>not</strong> in the block — the host injects it from the state flags below; Compact relies on the stretched-link.</p>
+    <div class="g-code">
+      <div class="g-code__bar">block-1-greeting-hero.html <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>&lt;section class="hero" aria-labelledby="mhc-hero-title"&gt;
+  &lt;div class="hero__media" style="background-image: url('{{formula.hero_image_url}}')" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;div class="hero__content"&gt;
+    &lt;div class="hero__title-group"&gt;
+      &lt;div class="eyebrow ink-soft"&gt;{{formula.copy_hero_eyebrow}}&lt;/div&gt;
+      &lt;h2 id="mhc-hero-title" class="heading-4"&gt;{{formula.copy_hero_title}}&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class="hero__copy-group"&gt;
+      &lt;p class="paragraph-2 ink-soft"&gt;{{formula.copy_hero_paragraph}}&lt;/p&gt;
+      &lt;div class="hero__meta body-3"&gt;
+        &lt;span&gt;{{formula.copy_hero_metaProgram}}&lt;/span&gt;
+        &lt;span class="dot" aria-hidden="true"&gt;&lt;/span&gt;
+        &lt;span&gt;{{formula.copy_hero_metaReward}}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- HOST INJECTS the Medium+ CTA here: formula.copy_hero_ctaLabel, formula.hero_href --&gt;
+  &lt;/div&gt;
+  &lt;a class="hero__stretched-link" href="{{formula.hero_href}}"&gt;
+    &lt;span class="mhc-visually-hidden"&gt;{{formula.copy_hero_stretchedLinkLabel}}&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/section&gt;</pre>
+    </div>
+  </section>
+
+  <!-- 5 · NOTES ---------------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">05</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Media background-size:</strong> the locked CSS sets no <code>background-size</code> on <code>.hero__media</code> (v81 used flat tint placeholders). To display real photos, add <code>background-size:cover; background-position:center</code> to the media shells — recommended addition, applied demo-only here.<br>
+      • <strong>CTA is host-injected</strong> on Medium+ (MHC action, mutating "Start"). The demo button is illustrative; the block never emits it.<br>
+      • <strong>Stretched-link is prototype-grade</strong> — production needs keyboard focus styling on the link and <code>aria-hidden</code> on the card content it duplicates.<br>
+      • <strong>Single-instance:</strong> documented from one source page. Variant behaviour (no-image, longer copy, different CTA states) is inferred, not sourced — needs more pages to confirm.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page behavior · MHC Component Kit</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<div class="g-top"><div class="g-top__inner"><a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Kit</a><div class="g-top__spacer"></div><div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div></div></div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+  <header class="g-head">
+    <div class="g-eyebrow">Page behavior · Layout system</div>
+    <h1 class="g-title">Page behavior</h1>
+    <p class="g-lede">The container, rhythm, and breakpoint system every page sits inside. Get these three right and pages compose themselves — the shell sets width and gutters, the section rhythm sets vertical spacing, and the breakpoint engine handles every reflow.</p>
+    <div class="g-tags"><span class="g-tag">.shell · .shell__rail</span><span class="g-tag">.section</span><span class="g-tag">.recommendations</span><span class="g-tag">599 · 600 · 1200 · 1600</span></div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Shell, rail &amp; rhythm — live</h2></div>
+    <p class="g-section__note">A full page inside the shell. Drag to resize: the rail caps width and centres; sections keep a consistent 40dp rhythm; the hero+pair supergroup clusters at a tighter gap. Everything below flows from these containers.</p>
+    <div class="g-pg" style="height:640px"><div class="g-pg__hint">↔ Drag to resize · live <code>mhc-home.css</code></div><iframe src="frame-page.html" title="Page shell — resizable"></iframe></div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">The container</h2></div>
+    <div class="g-code">
+      <div class="g-code__bar">shell + rail <span class="g-code__where">→ CodeMirror · mhc-home.css</span></div>
+      <pre>.shell        padding: 16 → 32/24 @600 (gutter outside the rail)
+.shell__rail  max-width: 1280 → 1440 @1600; margin: 0 auto
+
+/* every block sits inside the rail, in order */
+&lt;div class="shell"&gt;&lt;div class="shell__rail"&gt;
+  &lt;!-- greeting → hero+pair → this-week → insight → programs → challenge → rewards --&gt;
+&lt;/div&gt;&lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Rhythm &amp; grouping</h2></div>
+    <p class="g-section__note">
+      • <strong>.section</strong> — 40dp (<code>--s-07</code>) top margin between top-level sections. Every listy block wraps in one.<br>
+      • <strong>.recommendations</strong> — the supergroup that clusters hero + pair at a tighter 16→24dp gap, then still takes the 40dp section gap to whatever sits below.<br>
+      • <strong>.section-head</strong> — the title + trailing-link row inside a section (see Rows).
+    </p>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Breakpoint engine</h2></div>
+    <p class="g-section__note">Viewport media queries, four Material 3 window classes. Full per-component behavior in <code>BREAKPOINTS.md</code>.</p>
+    <div class="g-code">
+      <div class="g-code__bar">thresholds</div>
+      <pre>Compact       &lt; 600px      base (mobile-first) + a few max-width:599 teardowns
+Medium        ≥ 600px      grids expand, hero splits, greeting copy swaps
+Large         ≥ 1200px     type scale jumps to large tier; pair thumb → 4:3
+Extra-large   ≥ 1600px     rail max-width 1280 → 1440</pre>
+    </div>
+  </section>
+</div>
+</body>
+</html>

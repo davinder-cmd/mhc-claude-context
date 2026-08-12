@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progress card — ring placement variations</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.14);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--green:#3F7A46;--green-tint:#E4EFE0;--track:#E7E2D6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1200px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:800px;margin:0 0 8px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;margin-top:16px}
+.opt{width:340px}
+.olabel{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.onum{font-size:13px;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:2px 8px}
+.oname{font-size:15px;font-weight:700}
+.rec{font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-tint);border-radius:5px;padding:2px 7px;margin-left:6px}
+.onote{font-size:12px;color:var(--ink-2);margin-top:11px}.onote b{color:var(--ink)}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:16px}
+.row{display:flex;align-items:center;gap:16px}
+.pt{font-size:14.5px;font-weight:680}
+.cad{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.rew{font-size:12px;color:var(--amber);font-weight:700;margin-top:4px}
+.ring{display:block}
+.moneychip{display:inline-flex;align-items:center;gap:5px;background:var(--amber-tint);color:var(--amber);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:8px}
+.ref{opacity:.9}
+</style></head><body>
+<div class="page">
+<h1>Progress card — ring placement (no halfway)</h1>
+<p class="sub">Five variations, halfway concept removed entirely (it's an internal eligibility rule, not user-facing). The ring gets a bit more size/presence, and placement varies — several put the wheel above the text. Reward + cadence stay.</p>
+
+<div class="grid">
+
+<!-- 1 ring on top, centered -->
+<div class="opt">
+<div class="olabel"><span class="onum">1</span><span class="oname">Ring on top · centered</span><span class="rec">lean</span></div>
+<div class="card" style="text-align:center">
+<svg class="ring" style="margin:0 auto" width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r="31" fill="none" stroke="#E7E2D6" stroke-width="7"/><circle cx="38" cy="38" r="31" fill="none" stroke="#0E4A56" stroke-width="7" stroke-linecap="round" stroke-dasharray="194.8" stroke-dashoffset="155.8" transform="rotate(-90 38 38)"/><text x="38" y="36" text-anchor="middle" font-size="19" font-weight="750" fill="#22262A">2</text><text x="38" y="50" text-anchor="middle" font-size="10" fill="#838890">of 10</text></svg>
+<div class="pt" style="margin-top:12px">Your progress</div>
+<div class="cad">2 weeks in · a steady pace</div>
+<div class="rew">$100 when you complete</div>
+</div>
+<div class="onote"><b>Wheel above, centered.</b> More presence, balanced. The ring reads first, then the cadence and reward centered under it.</div>
+</div>
+
+<!-- 2 ring on top, left -->
+<div class="opt">
+<div class="olabel"><span class="onum">2</span><span class="oname">Ring on top · left</span></div>
+<div class="card">
+<svg class="ring" width="72" height="72" viewBox="0 0 72 72"><circle cx="36" cy="36" r="29" fill="none" stroke="#E7E2D6" stroke-width="7"/><circle cx="36" cy="36" r="29" fill="none" stroke="#0E4A56" stroke-width="7" stroke-linecap="round" stroke-dasharray="182.2" stroke-dashoffset="145.8" transform="rotate(-90 36 36)"/><text x="36" y="34" text-anchor="middle" font-size="18" font-weight="750" fill="#22262A">2</text><text x="36" y="48" text-anchor="middle" font-size="9.5" fill="#838890">of 10</text></svg>
+<div class="pt" style="margin-top:12px">Your progress</div>
+<div class="cad">2 weeks in · a steady pace</div>
+<div class="rew">$100 when you complete</div>
+</div>
+<div class="onote"><b>Wheel above, left-aligned.</b> Same stack but left-aligned text — reads more naturally, keeps a strong left edge.</div>
+</div>
+
+<!-- 3 ring left, bigger -->
+<div class="opt">
+<div class="olabel"><span class="onum">3</span><span class="oname">Ring left · bigger</span></div>
+<div class="card"><div class="row">
+<svg class="ring" width="76" height="76" viewBox="0 0 76 76"><circle cx="38" cy="38" r="31" fill="none" stroke="#E7E2D6" stroke-width="7"/><circle cx="38" cy="38" r="31" fill="none" stroke="#0E4A56" stroke-width="7" stroke-linecap="round" stroke-dasharray="194.8" stroke-dashoffset="155.8" transform="rotate(-90 38 38)"/><text x="38" y="36" text-anchor="middle" font-size="19" font-weight="750" fill="#22262A">2</text><text x="38" y="50" text-anchor="middle" font-size="10" fill="#838890">of 10</text></svg>
+<div><div class="pt">Your progress</div><div class="cad">2 weeks in · a steady pace</div><div class="rew">$100 when you complete</div></div>
+</div></div>
+<div class="onote"><b>Your picked layout, bigger ring.</b> Same side-by-side, just a larger wheel for more presence. Smallest change from what you chose.</div>
+</div>
+
+<!-- 4 ring on top + reward chip -->
+<div class="opt">
+<div class="olabel"><span class="onum">4</span><span class="oname">Ring on top · reward chip</span></div>
+<div class="card" style="text-align:center">
+<svg class="ring" style="margin:0 auto" width="74" height="74" viewBox="0 0 74 74"><circle cx="37" cy="37" r="30" fill="none" stroke="#E7E2D6" stroke-width="7"/><circle cx="37" cy="37" r="30" fill="none" stroke="#0E4A56" stroke-width="7" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="150.8" transform="rotate(-90 37 37)"/><text x="37" y="35" text-anchor="middle" font-size="18" font-weight="750" fill="#22262A">2</text><text x="37" y="49" text-anchor="middle" font-size="9.5" fill="#838890">of 10</text></svg>
+<div class="pt" style="margin-top:12px">Your progress</div>
+<div class="cad">2 weeks in · a steady pace</div>
+<span class="moneychip">🎁 $100 at finish</span>
+</div>
+<div class="onote"><b>Wheel above + reward chip.</b> Stacked, with the $100 as a distinct chip rather than a text line — pops, swaps to "earned" cleanly.</div>
+</div>
+
+<!-- 5 ring hero, centered big -->
+<div class="opt">
+<div class="olabel"><span class="onum">5</span><span class="oname">Wheel hero · centered</span></div>
+<div class="card" style="text-align:center">
+<svg class="ring" style="margin:0 auto" width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="37" fill="none" stroke="#E7E2D6" stroke-width="8"/><circle cx="45" cy="45" r="37" fill="none" stroke="#0E4A56" stroke-width="8" stroke-linecap="round" stroke-dasharray="232.5" stroke-dashoffset="186" transform="rotate(-90 45 45)"/><text x="45" y="42" text-anchor="middle" font-size="23" font-weight="750" fill="#22262A">2</text><text x="45" y="58" text-anchor="middle" font-size="11" fill="#838890">of 10</text></svg>
+<div class="cad" style="margin-top:12px;font-size:13px">2 weeks in · a steady pace</div>
+<div class="rew">$100 when you complete</div>
+</div>
+<div class="onote"><b>Wheel is the hero.</b> Bigger ring carries the card; "Your progress" label dropped (the ring says it). One cadence line + reward. Most presence.</div>
+</div>
+
+<!-- reference -->
+<div class="opt">
+<div class="olabel"><span class="onum" style="background:#838890">·</span><span class="oname" style="color:var(--ink-3)">Picked (reference)</span></div>
+<div class="card ref"><div class="row">
+<svg class="ring" width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="21" fill="none" stroke="#E7E2D6" stroke-width="6"/><circle cx="26" cy="26" r="21" fill="none" stroke="#0E4A56" stroke-width="6" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="106" transform="rotate(-90 26 26)"/><text x="26" y="24" text-anchor="middle" font-size="13" font-weight="750" fill="#22262A">2</text><text x="26" y="35" text-anchor="middle" font-size="8.5" fill="#838890">of 10</text></svg>
+<div><div class="pt">Your progress</div><div class="cad">2 weeks in · a steady pace</div><div class="rew">$100 when you complete</div></div>
+</div></div>
+<div class="onote">Your earlier pick — smaller ring, side-by-side.</div>
+</div>
+
+</div>
+<div style="margin-top:26px;max-width:800px;background:#fff;border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>My read:</b> <b>Option 1 (ring on top, centered)</b> gives the wheel the presence you want while staying calm. <b>Option 3</b> if you'd rather keep your side-by-side layout with just a bigger ring. <b>Option 5</b> if you want the wheel to really lead. All drop the halfway/50% concept — that stays internal-only.
+</div>
+</div>
+</body></html>

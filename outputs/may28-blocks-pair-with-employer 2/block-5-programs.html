@@ -1,0 +1,129 @@
+<!--
+  ============================================================
+  BLOCK 5 — Continue your programs
+  ============================================================
+  Renders:
+    - Section heading "Continue your programs"
+    - "All programs" link (NAVIGATION → <a href>)
+    - Up to 3 in-progress program cards, UNROLLED (no loops per guide §2.3)
+
+  v81 had:
+    - <button class="btn btn-text">All programs</button>  → reclassified to <a href>
+    - Inline style="width: 37.5%" on .progress__fill      → CSS custom property --p
+
+  Each program card is a navigation target — clicking takes the user to the
+  program detail / next session. That's a NAVIGATION, so it's a stretched-link
+  card, not a <button>. If "Resume" becomes a mutating action (creates a new
+  session record server-side on tap), each card MUST be split into its own
+  User Input block. See action-button-audit.md row "Continue your programs".
+
+  Progress percentage is delivered as an integer-percent token. The CSS uses
+  `width: var(--p, 0%)` from mhc-home.css §progress__fill.
+
+  Conditionals:
+    {{#formula.hasInProgressPrograms}}…{{/}}    — block-level suppress
+    {{#formula.hasProgram1}}…{{/}}              — render program card 1
+    {{#formula.hasProgram2}}…{{/}}              — render program card 2
+    {{#formula.hasProgram3}}…{{/}}              — render program card 3
+    {{#formula.hasProgramsOverflow}}…{{/}}      — show "All programs" link
+
+  Tokens (for each programN, N = 1..3):
+    {{formula.copy_section_programs}}           — "Continue your programs"
+    {{formula.copy_link_allPrograms}}           — "All programs"
+    {{formula.programs_all_href}}               — link to programs page
+
+    {{formula.copy_programN_eyebrow}}           — "DCP · Sleep" / "DCP · Stress" / "DCP · Diabetes"
+    {{formula.copy_programN_title}}             — "Better Sleep" / "Manage Stress" / "Diabetes Prevention"
+    {{formula.copy_programN_progress}}          — "Session 3 of 8" / "Week 6 of 16"
+    {{formula.copy_programN_price}}             — "$100"
+    {{formula.programN_progress_pct}}           — 37.5 / 62.5 / etc. (integer or decimal, no % sign)
+    {{formula.programN_media_url}}              — image URL
+    {{formula.programN_href}}                   — link to program detail
+  ============================================================
+-->
+
+{{#formula.hasInProgressPrograms}}
+<div class="mhc-home">
+  <section class="section" aria-labelledby="mhc-progress-title">
+    <div class="section-head">
+      <h2 id="mhc-progress-title" class="heading-6">{{formula.copy_section_programs}}</h2>
+      {{#formula.hasProgramsOverflow}}
+      <a class="btn btn-text" href="{{formula.programs_all_href}}">{{formula.copy_link_allPrograms}}</a>
+      {{/formula.hasProgramsOverflow}}
+    </div>
+
+    <div class="programs">
+
+      {{#formula.hasProgram1}}
+      <article class="program">
+        <div class="program__media" style="background-image: url('{{formula.program1_media_url}}')" aria-hidden="true"></div>
+        <div class="program__body">
+          <div class="eyebrow program__tag">
+            <span class="dot" aria-hidden="true"></span>
+            {{formula.copy_program1_eyebrow}}
+          </div>
+          <h3 class="title-1">{{formula.copy_program1_title}}</h3>
+          <div class="program__footer body-3">
+            <span>{{formula.copy_program1_progress}}</span>
+            <span class="price">{{formula.copy_program1_price}}</span>
+          </div>
+          <div class="progress">
+            <div class="progress__fill" style="--p:{{formula.program1_progress_pct}}%"></div>
+          </div>
+        </div>
+        <a class="program__link" href="{{formula.program1_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_program1_title}}</span>
+        </a>
+      </article>
+      {{/formula.hasProgram1}}
+
+      {{#formula.hasProgram2}}
+      <article class="program">
+        <div class="program__media" style="background-image: url('{{formula.program2_media_url}}')" aria-hidden="true"></div>
+        <div class="program__body">
+          <div class="eyebrow program__tag">
+            <span class="dot" aria-hidden="true"></span>
+            {{formula.copy_program2_eyebrow}}
+          </div>
+          <h3 class="title-1">{{formula.copy_program2_title}}</h3>
+          <div class="program__footer body-3">
+            <span>{{formula.copy_program2_progress}}</span>
+            <span class="price">{{formula.copy_program2_price}}</span>
+          </div>
+          <div class="progress">
+            <div class="progress__fill" style="--p:{{formula.program2_progress_pct}}%"></div>
+          </div>
+        </div>
+        <a class="program__link" href="{{formula.program2_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_program2_title}}</span>
+        </a>
+      </article>
+      {{/formula.hasProgram2}}
+
+      {{#formula.hasProgram3}}
+      <article class="program">
+        <div class="program__media" style="background-image: url('{{formula.program3_media_url}}')" aria-hidden="true"></div>
+        <div class="program__body">
+          <div class="eyebrow program__tag">
+            <span class="dot" aria-hidden="true"></span>
+            {{formula.copy_program3_eyebrow}}
+          </div>
+          <h3 class="title-1">{{formula.copy_program3_title}}</h3>
+          <div class="program__footer body-3">
+            <span>{{formula.copy_program3_progress}}</span>
+            <span class="price">{{formula.copy_program3_price}}</span>
+          </div>
+          <div class="progress">
+            <div class="progress__fill" style="--p:{{formula.program3_progress_pct}}%"></div>
+          </div>
+        </div>
+        <a class="program__link" href="{{formula.program3_href}}">
+          <span class="mhc-visually-hidden">{{formula.copy_program3_title}}</span>
+        </a>
+      </article>
+      {{/formula.hasProgram3}}
+
+    </div>
+  </section>
+</div>
+{{/formula.hasInProgressPrograms}}

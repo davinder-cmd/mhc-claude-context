@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LifeForce — Screen Fixes & Redesign Alternatives</title>
+<style>
+:root{
+  /* measured from lifeforce (FINAL) */
+  --navy:#195188; --navy-deep:#16314d; --navy-btn:#1a4a7a;
+  --ink:#1c1b1f; --ink-2:#545454; --ink-3:#717171;
+  --line:#e4e4e6;
+  --green:#57882e; --red:#d44333; --amber:#8a5a00;
+  --tint-blue:#eaf2fa; --tint-alert:#fff6f0;
+  /* proposed: one recessed surface tone. warm on surfaces only, ink stays graphite */
+  --page:#f7f6f4; --raised:#ffffff; --recessed:#efece7;
+  --f:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);background:#fafaf9;color:var(--ink);line-height:1.5;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1500px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:30px;line-height:1.2;letter-spacing:-.02em;margin:0 0 8px;font-weight:600}
+.sub{color:var(--ink-2);font-size:15px;max-width:70ch;margin:0 0 8px}
+.meta{color:var(--ink-3);font-size:13px;margin:0 0 28px}
+.callout{background:#fff;border:1px solid var(--line);border-left:3px solid var(--navy);
+  border-radius:4px;padding:14px 16px;font-size:14px;color:var(--ink-2);margin:0 0 40px;max-width:80ch}
+.callout b{color:var(--ink)}
+
+/* ---- screen section ---- */
+section{margin:0 0 72px;padding:0 0 8px}
+.shead{border-top:2px solid var(--ink);padding-top:14px;margin-bottom:22px}
+.shead .eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:6px}
+.shead h2{font-size:22px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+.shead p{margin:0;color:var(--ink-2);font-size:14px;max-width:85ch}
+
+.cols{display:grid;grid-template-columns:375px minmax(280px,1fr) 375px;gap:32px;align-items:start}
+@media(max-width:1180px){.cols{grid-template-columns:1fr;max-width:520px}}
+.colhead{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.colhead .dot{width:7px;height:7px;border-radius:99px;background:var(--ink-3)}
+.colhead.now .dot{background:var(--red)}
+.colhead.next .dot{background:var(--green)}
+
+/* ---- phone ---- */
+.phone{width:375px;background:#fff;border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.04)}
+.phone.alt{background:var(--page)}
+.nav{display:flex;align-items:center;justify-content:center;position:relative;
+  padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
+.nav .t{font-size:17px;font-weight:500;letter-spacing:-.01em}
+.nav .back{position:absolute;left:16px;color:var(--ink);font-size:17px}
+.tabs{display:flex;gap:4px;padding:12px 16px;background:#fff}
+.phone.alt .tabs{background:var(--page)}
+.tab{flex:1;text-align:center;font-size:13px;padding:8px;border-radius:6px;color:var(--ink-2)}
+.tab.on{background:#fff;font-weight:600;color:var(--navy);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.phone.alt .tab{background:transparent;border-radius:0;padding:8px 4px 10px}
+.phone.alt .tab.on{background:transparent;box-shadow:none;border-bottom:2px solid var(--navy)}
+.body{padding:4px 16px 16px}
+.phone.alt .body{padding:4px 16px 16px}
+.bottomnav{display:flex;border-top:1px solid var(--line);background:#fff;padding:8px 4px 10px}
+.bottomnav div{flex:1;text-align:center;font-size:10px;color:var(--ink-3)}
+.bottomnav div.on{color:var(--navy);font-weight:600}
+.bottomnav .ic{display:block;font-size:15px;margin-bottom:2px}
+
+/* current-state card vocabulary (all one weight — that's the point) */
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px}
+.card.hero{border:1.5px solid var(--navy);background:#f7f9fd;border-radius:14px}
+.eyeb{font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--navy);margin-bottom:8px}
+.eyeb.grey{color:var(--ink-2)}
+.h20{font-size:20px;font-weight:600;letter-spacing:-.01em;margin:0 0 6px;line-height:1.25}
+.h16{font-size:16px;font-weight:600;margin:0 0 6px}
+.b14{font-size:14px;color:var(--ink-2);margin:0}
+.c12{font-size:12px;color:var(--ink-3);margin:0}
+.btn{display:block;width:100%;text-align:center;background:var(--navy-btn);color:#fff;
+  font-size:15px;font-weight:500;padding:13px;border-radius:99px;margin-top:14px;border:0}
+.btn.sec{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.btn.ghost{background:transparent;color:var(--navy);border:1px solid var(--line)}
+.link{color:var(--navy);font-size:14px;font-weight:600;text-decoration:none}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row .ic{width:36px;height:36px;border-radius:8px;background:var(--tint-blue);
+  display:grid;place-items:center;font-size:15px;flex:none}
+.row .tx{flex:1;min-width:0}
+.row .tx .k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3)}
+.row .tx .v{font-size:14px;font-weight:600}
+.chev{color:#b9b9bd;font-size:16px}
+.bar{height:6px;border-radius:99px;background:#e8e8ea;overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--navy);border-radius:99px}
+.dots{display:flex;gap:5px}.dots i{width:6px;height:6px;border-radius:99px;background:#d4d4d8}
+.dots i.on{background:var(--navy)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--tint-blue);border-radius:12px;padding:12px}
+.tile .k{font-size:12px;color:var(--ink-2)}
+.tile .v{font-size:20px;font-weight:500;margin:2px 0}
+.tile .g{font-size:12px;color:var(--ink-3)}
+.chk{width:18px;height:18px;border-radius:99px;background:#e8f0e0;color:var(--green);
+  display:grid;place-items:center;font-size:11px;flex:none;font-weight:700}
+
+/* proposed-state additions */
+.alt .card{border-color:#e6e2db}
+.alt .sunk{background:var(--recessed);border:0}
+.alt .lift{background:#fff;border:1px solid #e6e2db;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.alt .lift.primary{box-shadow:0 2px 10px rgba(22,49,77,.10);border-color:#d9d4cb}
+.stepper{list-style:none;margin:0;padding:0}
+.stepper li{display:flex;gap:11px;align-items:flex-start;padding:9px 0}
+.stepper .n{width:20px;height:20px;border-radius:99px;background:#e8e8ea;color:var(--ink-3);
+  font-size:11px;font-weight:700;display:grid;place-items:center;flex:none;margin-top:1px}
+.stepper li.done .n{background:#e8f0e0;color:var(--green)}
+.stepper li.now .n{background:var(--navy);color:#fff}
+.stepper li.done .lb{color:var(--ink-3);text-decoration:line-through;text-decoration-color:#c9c9cc}
+.stepper .lb{font-size:14px}
+.stepper li.now .lb{font-weight:600}
+.scale{display:flex;gap:3px;margin:10px 0 6px}
+.scale i{flex:1;height:8px;border-radius:2px;background:#e0ddd7}
+.scale i.on{background:var(--navy)}
+.scale i.here{background:var(--navy);box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(25,81,136,.28)}
+.bigstat{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:0}
+.money{font-size:15px;font-weight:600;color:var(--navy-deep)}
+.flag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;
+  letter-spacing:.03em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.flag.over{background:#fdece7;color:#9a3412}
+.flag.ok{background:#e9f1e2;color:#3f6420}
+.tile.over{background:#fff;border:1px solid #f0cfc4}
+.tile.ok{background:#fff;border:1px solid #e6e2db}
+.because{font-size:12px;color:#9a3412;background:#fdece7;border-radius:6px;
+  padding:6px 9px;margin:0 0 8px;display:flex;gap:6px;align-items:flex-start}
+.timeline{list-style:none;margin:6px 0 0;padding:0;position:relative}
+.timeline li{display:flex;gap:11px;padding:0 0 14px;position:relative}
+.timeline li:before{content:"";position:absolute;left:8px;top:18px;bottom:0;width:2px;background:#e0ddd7}
+.timeline li:last-child:before{display:none}
+.timeline .d{width:18px;height:18px;border-radius:99px;background:#e8f0e0;color:var(--green);
+  display:grid;place-items:center;font-size:10px;font-weight:700;flex:none;z-index:1}
+.timeline li.now .d{background:var(--navy);color:#fff}
+.timeline li.next .d{background:#e0ddd7;color:#8b8b8f}
+.timeline .tl{font-size:13px}
+.timeline .tl b{display:block;font-size:14px}
+.timeline li.next .tl{color:var(--ink-3)}
+
+/* notes */
+.notes{position:sticky;top:24px}
+.note{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.note h4{margin:0 0 6px;font-size:14px;font-weight:600;display:flex;gap:8px;align-items:baseline}
+.note h4 .num{font-size:11px;font-weight:700;color:#fff;background:var(--ink);
+  min-width:18px;height:18px;border-radius:4px;display:inline-grid;place-items:center;flex:none}
+.note p{margin:0 0 8px;font-size:13.5px;color:var(--ink-2)}
+.note p:last-child{margin-bottom:0}
+.note .fix{font-size:13.5px;color:var(--ink);background:#f4f7fb;border-radius:6px;padding:9px 11px;
+  border-left:2px solid var(--navy)}
+.note .fix b{color:var(--navy-deep)}
+.note.block{border-left:3px solid var(--red)}
+.note.block h4 .num{background:var(--red)}
+.alts{background:#fff;border:1px dashed #c9c5bd;border-radius:8px;padding:14px 16px;margin-top:14px}
+.alts h4{margin:0 0 10px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.alts .a{font-size:13.5px;margin-bottom:9px}
+.alts .a:last-child{margin-bottom:0}
+.alts .a b{display:block;font-size:13.5px}
+.alts .a span{color:var(--ink-2)}
+.pick{font-size:12px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:2px 6px;border-radius:3px;background:#eee;color:#555;vertical-align:1px}
+.tag.rm{background:#fdece7;color:#9a3412}
+.tag.new{background:#e9f1e2;color:#3f6420}
+.tag.mv{background:#eaf0f8;color:#1d4a76}
+hr.soft{border:0;border-top:1px solid var(--line);margin:14px 0}
+.small{font-size:12px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>LifeForce — screen fixes</h1>
+<p class="sub">Four screens: enrollment, waiting, post-enrollment score, and the results tab. Left column is the current design; right column is the proposed redesign. No scores — fixes only.</p>
+<p class="meta">Source: Figma <b>lifeforce (FINAL)</b> → page “art directgion” → frames 01, 03, 04, 05, 07, Progress&nbsp;·&nbsp;populated · 6 Aug 2026</p>
+
+<div class="callout">
+<b>On the left column:</b> an HTML reconstruction, not a screenshot — built from the exact copy, type sizes, weights and hex values measured out of the Figma frames, so the before/after comparison is like-for-like in the same renderer. It is faithful to structure and hierarchy, not to the pixel.
+</div>
+
+<!-- ============================= 1. ENROLLMENT ============================= -->
+<section>
+<div class="shead">
+  <div class="eyebrow">Screen 1 · Before &amp; during enrollment</div>
+  <h2>Enrollment reads as three lists of the same four things</h2>
+  <p>Frames 01–03. The member has one job — finish four steps — and the screen represents that job three separate times: a progress bar, a “Next steps” list, and a “Completed” list. As they progress, the screen gets <em>longer</em>, because completed work accumulates as full cards while remaining work shrinks.</p>
+</div>
+
+<div class="cols">
+  <!-- CURRENT -->
+  <div>
+    <div class="colhead now"><span class="dot"></span>Current · 03 Enroll — 1 left</div>
+    <div class="phone">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab on">Status</div><div class="tab">My Progress</div></div>
+      <div class="body">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <div class="eyeb grey" style="margin:0">Getting set up</div>
+            <div class="c12">3 of 4 done</div>
+          </div>
+          <div class="bar"><i style="width:75%"></i></div>
+          <p class="c12">Then you start earning your credit</p>
+        </div>
+
+        <div class="card hero">
+          <div class="eyeb">Recommended · do this next</div>
+          <h3 class="h20">Health Assessment</h3>
+          <p class="b14">Take the in-app Health Assessment — a few questions about your health and history.</p>
+          <button class="btn">Start</button>
+        </div>
+
+        <div class="eyeb grey" style="margin:18px 0 8px">Completed</div>
+        <div class="card">
+          <div class="row"><span class="chk">✓</span><div class="tx"><div class="v">Set up your CarePlus account</div><div class="c12">Completed Jan 4</div></div></div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="chk">✓</span><div class="tx"><div class="v">Program Acknowledgment</div><div class="c12">Completed Jan 12</div></div></div>
+        </div>
+        <div class="card">
+          <div class="row"><span class="chk">✓</span><div class="tx"><div class="v">Complete lab work</div><div class="c12">Completed Jan 12</div></div></div>
+        </div>
+
+        <div class="card">
+          <div class="eyeb">Peak Health support</div>
+          <p class="b14">Phone:&nbsp; 1-888-385-4583</p>
+          <p class="b14">Email:&nbsp; appointment@peak-health.net</p>
+          <button class="btn sec" style="width:auto;padding:9px 16px">Peak Health portal</button>
+        </div>
+        <div class="card"><div class="row"><div class="tx"><div class="v">About LifeForce</div></div><span class="chev">›</span></div></div>
+        <div class="card"><div class="row"><div class="tx"><div class="v">Calculate premiums &amp; credit</div></div><span class="chev">›</span></div></div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes">
+    <div class="colhead"><span class="dot"></span>Notes</div>
+
+    <div class="note">
+      <h4><span class="num">1</span>Three representations of one four-step job</h4>
+      <p>“3 of 4 done” in the bar, then the remaining step as a hero, then three completed cards. The member has to reconcile all three to answer “what’s left?”</p>
+      <div class="fix"><b>Fix:</b> one stepper. Four numbered rows, the current one open with its action, the finished ones struck through on a single line each. Delete the progress bar and the “Completed” section entirely — the stepper already says both.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">2</span>The screen grows as the member progresses</h4>
+      <p>At 1-of-4 done, completed work is one card. At 3-of-4 it’s three cards with dates, and the screen is mostly history. Effort and screen length move in opposite directions to progress.</p>
+      <div class="fix"><b>Fix:</b> completed steps collapse to one line, on the recessed surface tone. Dates move behind a disclosure — nobody needs “Completed Jan 12” on the primary screen.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">3</span>The largest text on screen is a task name, not an outcome</h4>
+      <p>“Health Assessment” at 20/Semibold is the visual headline. It tells the member <em>what to click</em>, not <em>why</em> or <em>what happens after</em>. The reason — “Then you start earning your credit” — is a 12px caption three blocks up.</p>
+      <div class="fix"><b>Fix:</b> headline the outcome (“One step left before Peak Health books your visit”), demote the task name to the button. Move the credit line up beside progress where it earns its keep.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">4</span>“Recommended · do this next” is two labels, and one is wrong</h4>
+      <p>These steps are required to earn the credit, not recommended. And the eyebrow spends its whole budget on a fact the card’s position already communicates.</p>
+      <div class="fix"><b>Fix:</b> <span class="tag rm">remove</span> → <code>STEP 4 OF 4</code>. Says something the layout doesn’t.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">5</span>Internal vocabulary in a member-facing checklist</h4>
+      <p>“Program Acknowledgment” is what the legal team calls it. The member is being asked to read and accept two documents.</p>
+      <div class="fix"><b>Fix:</b> “Accept program terms”, with the Company Release and Wellness Program Notice named in the body.</div>
+    </div>
+
+    <div class="alts">
+      <h4>Redesign alternatives</h4>
+      <div class="a"><b>A · Single stepper card <span class="pick">shown right</span></b><span>All four steps live in one card; the current step expands inline with its action. One object, one mental model, shrinks as you go.</span></div>
+      <div class="a"><b>B · Hero + collapsed history</b><span>Keep a distinct hero for the active step, collapse all completed work into one summary row. Closer to today’s structure, less rework, but keeps two objects describing one process.</span></div>
+      <p class="small" style="margin:10px 0 0">A is the recommendation — it removes the duplication rather than tidying it. Choose B if the hero card is shared with the deadline states (frames 08–11) and can’t be refactored independently.</p>
+    </div>
+  </div>
+
+  <!-- PROPOSED -->
+  <div>
+    <div class="colhead next"><span class="dot"></span>Proposed · A, single stepper</div>
+    <div class="phone alt">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab on">Status</div><div class="tab">My Progress</div></div>
+      <div class="body">
+        <div class="card lift primary" style="border-radius:14px">
+          <div class="eyeb">Step 4 of 4</div>
+          <h3 class="h20">One step left before Peak Health books your visit</h3>
+          <p class="b14" style="margin-bottom:2px">A few questions about your health and history. Takes about 10 minutes.</p>
+          <p class="money" style="display:block;margin-top:10px">Finishing this starts your medical credit</p>
+          <button class="btn">Start Health Assessment</button>
+        </div>
+
+        <div class="card lift">
+          <ol class="stepper">
+            <li class="done"><span class="n">✓</span><span class="lb">Set up your CarePlus account</span></li>
+            <li class="done"><span class="n">✓</span><span class="lb">Accept program terms</span></li>
+            <li class="done"><span class="n">✓</span><span class="lb">Complete lab work</span></li>
+            <li class="now"><span class="n">4</span><span class="lb">Health Assessment</span></li>
+          </ol>
+          <hr class="soft">
+          <a href="#" class="link" style="font-size:13px">Show completion dates ›</a>
+        </div>
+
+        <div class="card sunk">
+          <div class="row" style="padding-top:4px"><div class="tx"><div class="v">Calculate premiums &amp; credit</div></div><span class="chev">›</span></div>
+          <div class="row"><div class="tx"><div class="v">About LifeForce</div></div><span class="chev">›</span></div>
+          <div class="row" style="padding-bottom:4px"><div class="tx"><div class="v">Peak Health support</div><div class="c12">1-888-385-4583 · appointment@peak-health.net</div></div><span class="chev">›</span></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px">Three utility rows collapse onto one recessed block — support, About and the calculator stop competing with the task. Screen height drops ~40%.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============================= 2. WAITING ============================= -->
+<section>
+<div class="shead">
+  <div class="eyebrow">Screen 2 · Waiting</div>
+  <h2>The member has finished everything and the screen gives them no date</h2>
+  <p>Frames 04–05. Frame 04 is the highest-anxiety state in the product: all four steps are done, nothing is actionable, and the only timing information is “typically within 20 business days” buried in body copy. This is where support calls are generated.</p>
+</div>
+
+<div class="cols">
+  <!-- CURRENT -->
+  <div>
+    <div class="colhead now"><span class="dot"></span>Current · 04 Schedule</div>
+    <div class="phone">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab on">Status</div><div class="tab">My Progress</div></div>
+      <div class="body">
+        <div class="card hero">
+          <div class="eyeb">Being scheduled</div>
+          <h3 class="h20">You’ve finished all 4 steps</h3>
+          <p class="b14">Peak Health is scheduling your first nurse visit — watch for a confirmation email, typically within 20 business days.</p>
+        </div>
+
+        <div class="card">
+          <div class="eyeb">Maximize your credit</div>
+          <p class="b14">Invite your Spouse or Domestic Partner to register and complete the Health Assessment — it can increase your medical credit each pay period.</p>
+          <button class="btn sec" style="width:auto;padding:9px 16px">Invite dependent</button>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+            <div class="eyeb grey" style="margin:0">Enrollment</div>
+            <div class="c12" style="color:var(--green);font-weight:600">Complete · 4/4 ›</div>
+          </div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Set up your CarePlus account</div></div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Program Acknowledgment</div></div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Complete lab work</div></div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Health Assessment</div></div>
+        </div>
+
+        <div class="card">
+          <div class="eyeb">Peak Health support</div>
+          <p class="b14">Phone:&nbsp; 1-888-385-4583</p>
+          <p class="b14">Email:&nbsp; appointment@peak-health.net</p>
+          <button class="btn sec" style="width:auto;padding:9px 16px">Peak Health portal</button>
+        </div>
+        <div class="card"><div class="row"><div class="tx"><div class="v">About LifeForce</div></div><span class="chev">›</span></div></div>
+        <div class="card"><div class="row"><div class="tx"><div class="v">Calculate premiums &amp; credit</div></div><span class="chev">›</span></div></div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes">
+    <div class="colhead"><span class="dot"></span>Notes</div>
+
+    <div class="note">
+      <h4><span class="num">1</span>A waiting screen with no date</h4>
+      <p>“Typically within 20 business days” is the only timing signal, it’s inside a paragraph, and it’s relative. A member who finished on 12 June cannot tell you when to start worrying — so they call.</p>
+      <div class="fix"><b>Fix:</b> compute and show the date. <b>“Booked by ~10 July”</b> as a stated expectation, plus what to do if it passes. A waiting state’s primary job is to define the end of the wait.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">2</span>The one available action is labelled like an upsell</h4>
+      <p>On the single screen where the member can do nothing else, the dependent invite is buried under “MAXIMIZE YOUR CREDIT” — the register of a promo, not of the next useful step.</p>
+      <div class="fix"><b>Fix:</b> promote it. It becomes the primary action while they wait; the credit framing moves into body copy where it’s a reason rather than a barker.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">3</span>“You’ve finished all 4 steps” is restated three times</h4>
+      <p>The headline says it, the “Complete · 4/4” badge says it, and four checked rows say it again. Roughly a third of the screen is dedicated to confirming completed work.</p>
+      <div class="fix"><b>Fix:</b> one line, recessed. The four-item checklist collapses to “Enrollment complete · 4/4 ›”.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">4</span>Nothing prepares the member for the visit</h4>
+      <p>One sentence says a nurse will “take your health measurements.” No duration, no location, no fasting guidance, nothing to bring.</p>
+      <div class="fix"><b>Fix:</b> add “What to expect” — three lines. Cheapest available reduction in no-shows and in the support calls that follow them.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">5</span>On frame 05, reschedule is caption text</h4>
+      <p>Once a date exists, “Add to calendar” is a 16/Medium button while “Need to reschedule? Call…” is 12px grey. If the date is wrong, rescheduling is the more urgent need — and it requires a phone call, which deserves a real target.</p>
+      <div class="fix"><b>Fix:</b> two buttons of equal weight — <b>Add to calendar</b> and <b>Call to reschedule</b> as a tel: link.</div>
+    </div>
+
+    <div class="alts">
+      <h4>Redesign alternatives</h4>
+      <div class="a"><b>A · Timeline <span class="pick">shown right</span></b><span>Show the whole arc — enrolled, being scheduled, visit, results — with the member’s position and a projected date. Turns dead air into a sequence with a visible end.</span></div>
+      <div class="a"><b>B · “You’re all set” + prep checklist</b><span>Single confirmation card plus what to do before the visit. Simpler and cheaper, but doesn’t answer <em>when</em>, which is the actual question.</span></div>
+      <p class="small" style="margin:10px 0 0">A is the recommendation, because the missing information is temporal. Do B only if a projected date can’t be computed from Peak Health’s SLA — in which case state the SLA as a date range rather than a duration.</p>
+    </div>
+  </div>
+
+  <!-- PROPOSED -->
+  <div>
+    <div class="colhead next"><span class="dot"></span>Proposed · A, timeline</div>
+    <div class="phone alt">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab on">Status</div><div class="tab">My Progress</div></div>
+      <div class="body">
+        <div class="card lift primary" style="border-radius:14px">
+          <div class="eyeb">Being scheduled</div>
+          <h3 class="h20" style="margin-bottom:2px">Peak Health is booking your visit</h3>
+          <p class="bigstat" style="margin:10px 0 2px">Booked by<br>~10 July</p>
+          <p class="c12" style="margin-top:6px">You’ll get a confirmation email. If nothing arrives by 10 July, call Peak Health.</p>
+          <ol class="timeline" style="margin-top:14px">
+            <li class="done"><span class="d">✓</span><span class="tl"><b>Enrollment complete</b>All 4 steps · 12 June</span></li>
+            <li class="now"><span class="d">2</span><span class="tl"><b>Being scheduled</b>Now — by ~10 July</span></li>
+            <li class="next"><span class="d">3</span><span class="tl"><b>Nurse visit</b>Measurements taken</span></li>
+            <li class="next"><span class="d">4</span><span class="tl"><b>Your phase &amp; credit</b>Set after the visit</span></li>
+          </ol>
+        </div>
+
+        <div class="card lift">
+          <h4 class="h16">While you wait</h4>
+          <p class="b14">Invite your spouse or domestic partner. If they register and complete the Health Assessment, your medical credit each pay period goes up.</p>
+          <button class="btn">Invite dependent</button>
+        </div>
+
+        <div class="card lift">
+          <h4 class="h16">What to expect at the visit</h4>
+          <ul style="margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--ink-2)">
+            <li style="margin-bottom:4px">About 30 minutes, in person</li>
+            <li style="margin-bottom:4px">Height, weight, blood pressure and a blood draw</li>
+            <li>Bring your ID and insurance card</li>
+          </ul>
+        </div>
+
+        <div class="card sunk">
+          <div class="row" style="padding-top:4px"><span class="chk">✓</span><div class="tx"><div class="v" style="font-weight:500;color:var(--ink-2)">Enrollment complete · 4/4</div></div><span class="chev">›</span></div>
+          <div class="row"><div class="tx"><div class="v">Calculate premiums &amp; credit</div></div><span class="chev">›</span></div>
+          <div class="row" style="padding-bottom:4px"><div class="tx"><div class="v">Peak Health support</div><div class="c12">1-888-385-4583</div></div><span class="chev">›</span></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px">The date is now the largest element. Completed enrollment drops to one recessed line, freeing room for prep content that didn’t exist.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============================= 3. SCORE ============================= -->
+<section>
+<div class="shead">
+  <div class="eyebrow">Screen 3 · Post-enrollment — the score</div>
+  <h2>The phase is the product outcome, and it’s the third thing on the screen</h2>
+  <p>Frame 07. Phase sets the member’s medical credit — it is the number the whole program exists to produce. It appears below a status banner, at 16/Semibold against the banner’s 20/Semibold, with the money it controls one tap away behind “See your amount in the calculator”.</p>
+</div>
+
+<div class="cols">
+  <!-- CURRENT -->
+  <div>
+    <div class="colhead now"><span class="dot"></span>Current · 07 Active — steady</div>
+    <div class="phone">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab on">Status</div><div class="tab">My Progress</div></div>
+      <div class="body">
+        <div class="card hero">
+          <div class="eyeb">✓&nbsp; Active</div>
+          <h3 class="h20">You’re active in LifeForce</h3>
+          <p class="b14">Follow your nurse’s guidance under My Progress and keep working your goals.</p>
+          <button class="btn sec">Go to My Progress</button>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h4 class="h16" style="margin:0">Phase 2 of 5</h4>
+            <div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+          </div>
+          <p class="c12" style="margin:6px 0 10px">This reflects where your health is today. Your phase sets your medical credit each pay period.</p>
+          <a href="#" class="link">See your amount in the calculator&nbsp; →</a>
+        </div>
+
+        <div class="card">
+          <div class="eyeb">Maximize your credit</div>
+          <p class="b14">Invite your Spouse or Domestic Partner to register and complete the Health Assessment — it can increase your medical credit each pay period.</p>
+          <button class="btn sec" style="width:auto;padding:9px 16px">Invite dependent</button>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+            <div class="eyeb grey" style="margin:0">Enrollment</div>
+            <div class="c12" style="color:var(--green);font-weight:600">Complete · 4/4 ›</div>
+          </div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Set up your CarePlus account</div></div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Program Acknowledgment</div></div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Complete lab work</div></div>
+          <div class="row" style="border:0;padding:5px 0"><span class="chk">✓</span><div class="tx" style="font-size:14px;color:var(--ink-2)">Health Assessment</div></div>
+        </div>
+
+        <div class="card">
+          <div class="eyeb">Peak Health support</div>
+          <p class="b14">Phone:&nbsp; 1-888-385-4583</p>
+          <p class="b14">Email:&nbsp; appointment@peak-health.net</p>
+          <button class="btn sec" style="width:auto;padding:9px 16px">Peak Health portal</button>
+        </div>
+        <div class="card"><div class="row"><div class="tx"><div class="v">About LifeForce</div></div><span class="chev">›</span></div></div>
+        <div class="card"><div class="row"><div class="tx"><div class="v">Calculate premiums &amp; credit</div></div><span class="chev">›</span></div></div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes">
+    <div class="colhead"><span class="dot"></span>Notes</div>
+
+    <div class="note">
+      <h4><span class="num">1</span>The score is outranked by a status confirmation</h4>
+      <p>“You’re active in LifeForce” is useful once, on the day it becomes true. It permanently holds the hero at 20/Semibold, while Phase 2 of 5 — the thing that sets the member’s money — sits below it at 16.</p>
+      <div class="fix"><b>Fix:</b> swap them. Phase becomes the hero at display size; “active” becomes a one-line eyebrow, or disappears after first view.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">2</span>Five dots don’t say which direction is good</h4>
+      <p>One filled dot of five communicates position and nothing else. Is 5 the goal or the warning? Is 2 progress or a problem? The copy doesn’t resolve it either — “where your health is today” is deliberately neutral.</p>
+      <div class="fix"><b>Fix:</b> a segmented scale with a labelled direction and the member’s position marked. Name what the ends mean.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">3</span>The money is one tap away and never shown</h4>
+      <p>Phase is only meaningful as dollars per pay period, and that number lives behind a link to a calculator. The product’s entire payoff is off-screen.</p>
+      <div class="fix"><b>Fix:</b> show the amount inline next to the phase. The calculator becomes a secondary link for modelling other scenarios, not the only route to the number.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">4</span>A score with no lever</h4>
+      <p>Nothing on the screen says what moves the phase. Without that, the member can read their rank but can’t act on it — the definition of a vanity metric.</p>
+      <div class="fix"><b>Fix:</b> one line — “What moves your phase” — linking to the biometrics that determine it. That also connects this tab to the results tab, which currently has no relationship to it.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">5</span>Completed enrollment still occupies a third of the screen</h4>
+      <p>Four checked rows plus a badge, months after enrollment ended. This block is identical on frames 04, 05, 07 and 12 — it never earns its space again after the wait state.</p>
+      <div class="fix"><b>Fix:</b> collapse to one recessed line once the member is active.</div>
+    </div>
+
+    <div class="alts">
+      <h4>Redesign alternatives</h4>
+      <div class="a"><b>A · Phase as hero, credit inline <span class="pick">shown right</span></b><span>One dominant stat with the scale beneath it and the dollar amount attached. Single focal point; the money is a supporting fact.</span></div>
+      <div class="a"><b>B · Two-stat hero</b><span>Phase and credit side by side at equal weight. Answers both questions at once, but splits the focal point and reads as a dashboard rather than a result.</span></div>
+      <p class="small" style="margin:10px 0 0">A is the recommendation — one hero, one number, everything else supporting. Choose B if research shows members come to this screen primarily to check the dollar amount rather than their health standing, in which case lead with money and demote phase.</p>
+    </div>
+  </div>
+
+  <!-- PROPOSED -->
+  <div>
+    <div class="colhead next"><span class="dot"></span>Proposed · A, phase as hero</div>
+    <div class="phone alt">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab on">Status</div><div class="tab">My Progress</div></div>
+      <div class="body">
+        <div class="card lift primary" style="border-radius:14px">
+          <div class="eyeb">Your phase · active</div>
+          <p class="bigstat">Phase 2 <span style="font-size:19px;font-weight:500;color:var(--ink-3)">of 5</span></p>
+          <div class="scale"><i class="on"></i><i class="here"></i><i></i><i></i><i></i></div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-bottom:12px">
+            <span>Phase 1 · lowest credit</span><span>Phase 5 · highest</span>
+          </div>
+          <p class="money" style="font-size:17px">$48 toward your premium, every pay period</p>
+          <p class="c12" style="margin-top:4px">Set from your last nurse visit on 28 April. Reviewed annually.</p>
+          <hr class="soft">
+          <a href="#" class="link" style="font-size:13px">What moves your phase ›</a>
+        </div>
+
+        <div class="card lift">
+          <h4 class="h16">Increase your credit</h4>
+          <p class="b14">If your spouse or domestic partner registers and completes the Health Assessment, your credit each pay period goes up.</p>
+          <button class="btn">Invite dependent</button>
+        </div>
+
+        <div class="card lift">
+          <div class="row" style="border:0;padding:2px 0"><div class="tx"><div class="v">Your nurse’s guidance</div><div class="c12">Goals and recommendations</div></div><span class="chev">›</span></div>
+        </div>
+
+        <div class="card sunk">
+          <div class="row" style="padding-top:4px"><div class="tx"><div class="v">Model other scenarios</div><div class="c12">Premium &amp; credit calculator</div></div><span class="chev">›</span></div>
+          <div class="row"><span class="chk">✓</span><div class="tx"><div class="v" style="font-weight:500;color:var(--ink-2)">Enrollment complete · 4/4</div></div><span class="chev">›</span></div>
+          <div class="row" style="padding-bottom:4px"><div class="tx"><div class="v">Peak Health support</div><div class="c12">1-888-385-4583</div></div><span class="chev">›</span></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px">$48 is a placeholder — the point is that the number appears at all. The scale now states which end is good, and the phase has a lever attached.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============================= 4. RESOURCES ============================= -->
+<section>
+<div class="shead">
+  <div class="eyebrow">Screen 4 · My Progress — results &amp; resources</div>
+  <h2>Three of four results are out of range and the screen doesn’t say so</h2>
+  <p>Progress · populated. Blood pressure 128/82 against a goal of &lt;120/80, BMI 27.4 against 18.5–24.9, LDL 118 against &lt;100 — all outside goal. Every tile renders identically. Directly beneath sits a list of programs that presumably exist <em>because</em> of those results, with nothing connecting them.</p>
+</div>
+
+<div class="cols">
+  <!-- CURRENT -->
+  <div>
+    <div class="colhead now"><span class="dot"></span>Current · Progress · populated</div>
+    <div class="phone">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab">Status</div><div class="tab on">My Progress</div></div>
+      <div class="body">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin:8px 0 12px">
+          <h3 class="h20" style="margin:0">Your latest results</h3><span class="c12">Apr 28</span>
+        </div>
+        <div class="tiles">
+          <div class="tile"><div class="k">Blood Pressure</div><div class="v">128/82 <span style="font-size:11px">1 m m</span></div><div class="g">Goal &lt;120/80</div></div>
+          <div class="tile"><div class="k">BMI</div><div class="v">27.4</div><div class="g">Goal 18.5–24.9</div></div>
+          <div class="tile"><div class="k">LDL Cholesterol</div><div class="v">118</div><div class="g">Goal &lt;100</div></div>
+          <div class="tile"><div class="k">Resting HR</div><div class="v">64</div><div class="g">Goal &lt;70</div></div>
+        </div>
+        <div class="card" style="margin-top:12px"><div class="row"><div class="tx"><div class="v" style="font-weight:400;color:var(--navy)">See all recommendations &amp; handouts</div></div><span class="chev">›</span></div></div>
+
+        <h3 class="h20" style="margin:22px 0 12px">Recommended programs</h3>
+        <div class="card"><div class="row" style="border:0;padding:2px 0"><span class="ic" style="background:#e8f0e0">♡</span><div class="tx"><div class="v" style="font-size:16px;font-weight:500">Virta — Weight Loss</div><div class="c12">Lose weight, reduce medications and save money.</div></div></div></div>
+        <div class="card"><div class="row" style="border:0;padding:2px 0"><span class="ic" style="background:#eaf0f5">☺</span><div class="tx"><div class="v" style="font-size:16px;font-weight:500">Premise Health — Counseling</div><div class="c12">Free, confidential behavioral health support.</div></div></div></div>
+        <div class="card"><div class="row" style="border:0;padding:2px 0"><span class="ic" style="background:#f6f0eb">⚡</span><div class="tx"><div class="v" style="font-size:16px;font-weight:500">Truist Virtual Fitness</div><div class="c12">Move more and sit less — at work, at home and everywhere you go.</div></div></div></div>
+
+        <div class="card"><div class="row"><div class="tx"><div class="v" style="font-weight:400;color:var(--navy)">See all recommendations &amp; handouts</div></div><span class="chev">›</span></div></div>
+
+        <div class="card">
+          <div class="eyeb">Peak Health support</div>
+          <p class="b14">Phone:&nbsp; 1-888-385-4583</p>
+          <p class="b14">Email:&nbsp; appointment@peak-health.net</p>
+          <button class="btn sec" style="width:auto;padding:9px 16px">Peak Health portal</button>
+        </div>
+        <div class="card"><div class="row"><div class="tx"><div class="v">About LifeForce</div></div><span class="chev">›</span></div></div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="notes">
+    <div class="colhead"><span class="dot"></span>Notes</div>
+
+    <div class="note block">
+      <h4><span class="num">1</span>Range state is invisible — accessibility blocker</h4>
+      <p>The member is shown a value and a goal and left to do the comparison, twelve times on the full-results screen. Three of these four are out of goal and nothing indicates it.</p>
+      <div class="fix"><b>Fix:</b> a word plus tone — <b>“Above goal”</b> / <b>“In range”</b>. It must be text or a mark, not colour alone; a red number would swap one accessibility failure for the same one.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">2</span>The programs and the results are unconnected</h4>
+      <p>Virta is weight loss and BMI is 27.4. Those two facts are four inches apart on the same screen and nothing says one is the reason for the other. The list reads as generic marketing when it is in fact personalised care.</p>
+      <div class="fix"><b>Fix:</b> carry the reason on the card — <b>“Recommended because your BMI is above goal.”</b> Highest-value change on this screen: same content, transformed from an ad into a care plan.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">3</span>“See all recommendations &amp; handouts” appears twice</h4>
+      <p>Once after the results tiles, once after the programs list — same label, same destination, one screen.</p>
+      <div class="fix"><b>Fix:</b> <span class="tag rm">delete one</span>. Keep the one after the programs list, where it terminates a section rather than interrupting one.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">4</span>The blood pressure unit is broken</h4>
+      <p>The frame contains stray text nodes — <code>1</code>, <code>m</code>, <code>m</code> — beside 128/82. “mmHg” has fragmented into separate layers, and only BP carries a unit at all.</p>
+      <div class="fix"><b>Fix:</b> rebuild as one text node. Decide whether units appear at all — if not, drop them everywhere rather than on three of four tiles.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">5</span>Three decorative tints with no rule</h4>
+      <p>The program icons use a green, a blue and a warm tint. None maps to a category, a status or a severity — the variation is ornamental, and it competes with the tinting that range state now needs to use.</p>
+      <div class="fix"><b>Fix:</b> one neutral tile tint for all programs. Reserve tinted surfaces for range state, where tone carries meaning.</div>
+    </div>
+
+    <div class="note">
+      <h4><span class="num">6</span>Results aren’t ordered by what matters</h4>
+      <p>The four tiles are in arbitrary order, so the one in-range result (resting HR) sits alongside three that need attention.</p>
+      <div class="fix"><b>Fix:</b> sort out-of-range first. On the full-results screen, also de-emphasise the four unmeasured “—” tiles, which currently match real data in weight.</div>
+    </div>
+
+    <div class="alts">
+      <h4>Redesign alternatives</h4>
+      <div class="a"><b>A · Results-driven <span class="pick">shown right</span></b><span>Each out-of-range result carries its recommended program inline. Removes the separate programs section — cause and response are one object.</span></div>
+      <div class="a"><b>B · Two sections with explicit connectors</b><span>Keep results and programs separate, but every program states which result it responds to. Less disruptive to the existing content model and to whoever owns the programs list.</span></div>
+      <p class="small" style="margin:10px 0 0">A is the stronger experience and the bigger lift — it needs a mapping from biometric to program that may not exist in the data yet. <b>B is the recommendation if that mapping is manual</b>, since it delivers most of the value with a copy change.</p>
+    </div>
+  </div>
+
+  <!-- PROPOSED -->
+  <div>
+    <div class="colhead next"><span class="dot"></span>Proposed · A, results-driven</div>
+    <div class="phone alt">
+      <div class="nav"><span class="back">‹</span><span class="t">Lifeforce</span></div>
+      <div class="tabs"><div class="tab">Status</div><div class="tab on">My Progress</div></div>
+      <div class="body">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin:8px 0 4px">
+          <h3 class="h20" style="margin:0">Your latest results</h3><span class="c12">28 Apr</span>
+        </div>
+        <p class="c12" style="margin:0 0 12px">3 of 4 above goal. Your nurse has matched a program to each.</p>
+
+        <div class="card lift" style="padding:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2px">
+            <div class="tile-k" style="font-size:13px;color:var(--ink-2)">Blood Pressure</div>
+            <span class="flag over">Above goal</span>
+          </div>
+          <div style="font-size:26px;font-weight:600;letter-spacing:-.02em">128/82 <span style="font-size:12px;font-weight:400;color:var(--ink-3)">mmHg</span></div>
+          <div class="g" style="font-size:12px;color:var(--ink-3);margin-bottom:10px">Goal under 120/80</div>
+          <p class="because"><span>→</span><span>Because of this, your nurse recommends <b>Truist Virtual Fitness</b></span></p>
+          <button class="btn ghost" style="margin-top:0">View program</button>
+        </div>
+
+        <div class="card lift" style="padding:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2px">
+            <div style="font-size:13px;color:var(--ink-2)">BMI</div>
+            <span class="flag over">Above goal</span>
+          </div>
+          <div style="font-size:26px;font-weight:600;letter-spacing:-.02em">27.4</div>
+          <div style="font-size:12px;color:var(--ink-3);margin-bottom:10px">Goal 18.5–24.9</div>
+          <p class="because"><span>→</span><span>Because of this, your nurse recommends <b>Virta — Weight Loss</b></span></p>
+          <button class="btn ghost" style="margin-top:0">View program</button>
+        </div>
+
+        <div class="card lift" style="padding:14px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2px">
+            <div style="font-size:13px;color:var(--ink-2)">LDL Cholesterol</div>
+            <span class="flag over">Above goal</span>
+          </div>
+          <div style="font-size:26px;font-weight:600;letter-spacing:-.02em">118</div>
+          <div style="font-size:12px;color:var(--ink-3)">Goal under 100</div>
+        </div>
+
+        <div class="card sunk" style="padding:12px 14px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-size:13px;color:var(--ink-2)">Resting HR</div>
+              <div style="font-size:19px;font-weight:600">64</div>
+              <div style="font-size:12px;color:var(--ink-3)">Goal under 70</div></div>
+            <span class="flag ok">In range</span>
+          </div>
+        </div>
+
+        <div class="card lift">
+          <div class="row" style="border:0;padding:2px 0"><span class="ic" style="background:#efece7">☺</span><div class="tx"><div class="v" style="font-size:15px;font-weight:500">Premise Health — Counseling</div><div class="c12">Free, confidential behavioural health support. Available to everyone.</div></div></div>
+        </div>
+
+        <div class="card sunk">
+          <div class="row" style="padding-top:4px"><div class="tx"><div class="v">All recommendations &amp; handouts</div></div><span class="chev">›</span></div>
+          <div class="row"><div class="tx"><div class="v">Full biometric panel</div></div><span class="chev">›</span></div>
+          <div class="row" style="padding-bottom:4px"><div class="tx"><div class="v">Peak Health support</div><div class="c12">1-888-385-4583</div></div><span class="chev">›</span></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="on"><span class="ic">⌂</span>Home</div><div><span class="ic">♡</span>Digital Care</div>
+        <div><span class="ic">✿</span>Wellbeing</div><div><span class="ic">⛨</span>Benefits</div><div><span class="ic">☆</span>Rewards</div>
+      </div>
+    </div>
+    <p class="small" style="margin-top:10px">Out-of-range results lift onto white and lead; the in-range one recedes onto the recessed tone. Counselling stays as a standalone card because it isn’t triggered by a biometric — which is itself now visible.</p>
+  </div>
+</div>
+</section>
+
+<div class="callout" style="margin-top:8px">
+<b>Cross-cutting, all four screens:</b> the “Peak Health support / About LifeForce / Calculate premiums &amp; credit” trio repeats at the foot of every frame as three separate full-weight cards. In the proposals it becomes one recessed block. That single change is what frees the room for the timeline, the prep content, and the reasons on the program cards — none of which required a longer screen.
+</div>
+
+</div>
+</body>
+</html>

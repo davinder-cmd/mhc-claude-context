@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reward + progress — cleanup</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-mid:#B67D23;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1500px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:1000px;margin:0 0 4px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start;margin-top:24px}
+.col{display:flex;flex-direction:column;gap:11px;width:344px}
+.cap{font-size:12px;color:var(--ink-2)}.cap b{color:var(--ink)}
+.vtag{display:inline-block;font-size:11px;font-weight:700;color:var(--ink-2);background:#E7E1D4;padding:4px 10px;border-radius:6px}
+.vtag.rec{color:#fff;background:var(--teal)}
+.stagew{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px}
+/* shared bar */
+.bar{display:flex;gap:5px;height:9px}
+.bar i{flex:1;border-radius:5px;background:rgba(14,74,86,.14)}.bar i.on{background:var(--teal)}
+.coin{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid rgba(138,90,18,.35);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--amber);font-size:15px;flex:none}
+
+/* ---- CURRENT (two boxes) ---- */
+.cur-rcard{border:1px solid var(--amber-mid);background:var(--amber-tint);border-radius:16px;padding:15px 16px;display:flex;align-items:center;gap:13px}
+.cur-rcard .rm{font-size:17px;font-weight:730;color:var(--amber)}.cur-rcard .rs{font-size:12px;color:var(--ink-2);margin-top:1px}
+.cur-prog{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
+.cur-prog .h{font-size:14px;font-weight:700;margin-bottom:10px}
+.cur-prog .ends{display:flex;justify-content:space-between;font-size:12.5px;margin-top:9px}.cur-prog .ends .a{color:var(--ink-3)}
+
+/* ---- A unified ---- */
+.uni{border:1px solid var(--amber-mid);background:var(--amber-tint);border-radius:16px;padding:15px 16px}
+.uni .top{display:flex;align-items:center;gap:13px}
+.uni .rm{font-size:17px;font-weight:730;color:var(--amber)}.uni .rs{font-size:11.5px;color:var(--ink-2);margin-top:1px}
+.uni .rule{height:1px;background:rgba(138,90,18,.22);margin:13px 0 12px}
+.uni .prow{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;margin-bottom:9px}
+.uni .prow .l{font-weight:650;color:var(--ink)}.uni .prow .r{color:var(--ink-3)}
+
+/* ---- B count-led ---- */
+.count{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:0 14px 14px 0;padding:15px 16px;position:relative}
+.count .big{font-size:19px;font-weight:770;letter-spacing:-0.01em}
+.count .chip{position:absolute;top:14px;right:14px;background:var(--amber-warm);color:var(--amber);font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:20px}
+.count .bar{margin:12px 0 9px}
+.count .money{font-size:12.5px}.count .money b{color:var(--amber);font-weight:700}.count .money .to{color:var(--ink-3)}
+
+/* ---- C minimal ---- */
+.min{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+.min .evt{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:var(--amber);margin-bottom:12px}
+.min .evt .g{font-size:16px}.min .evt .w{color:var(--ink-3);font-weight:500;font-size:12px}
+.min .ends{display:flex;justify-content:space-between;font-size:12.5px;margin-top:9px}
+.min .ends .l{color:var(--ink-2);font-weight:600}.min .ends .r{color:var(--amber);font-weight:700}
+
+.rec-note{margin-top:30px;max-width:1000px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Reward + progress — one cleaner banner</h1>
+<p class="sub">The two stacked boxes (amber "$100 earned" card + bordered progress) read disjointed and repeat the money message. These collapse them into <b>one banner</b>: the $100 just earned, then a single "how many done · how much this year" summary. Numbers corrected to the model — <b>2 of 5 paths · $200 of $500</b> (the pips had drifted to 8/3).</p>
+
+<div class="grid">
+
+<!-- CURRENT -->
+<div class="col">
+<span class="vtag">Current · two boxes</span>
+<div class="stagew">
+<div class="lbl">Now</div>
+<div class="cur-rcard"><div class="coin">$</div><div><div class="rm">$100 Amazon gift card earned</div><div class="rs">On its way to your rewards — no action needed.</div></div></div>
+<div class="cur-prog"><div class="h">Care paths this year</div><div class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><div class="ends"><span>$200 earned</span><span class="a">$500 / year</span></div></div>
+</div>
+<div class="cap"><b>Current.</b> Two separate containers, two borders, "earned" said twice, a wordy sub-line, and 8 pips that don't match $200. That's the disjointedness.</div>
+</div>
+
+<!-- A unified -->
+<div class="col">
+<span class="vtag rec">A · Unified card  ·  lean</span>
+<div class="stagew">
+<div class="lbl">Now</div>
+<div class="uni">
+<div class="top"><div class="coin">$</div><div><div class="rm">$100 gift card earned</div><div class="rs">On its way — no action needed.</div></div></div>
+<div class="rule"></div>
+<div class="prow"><span class="l">2 of 5 care paths</span><span class="r">$200 of $500 this year</span></div>
+<div class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+</div>
+<div class="cap"><b>A — Unified card. (my lean.)</b> One container. The $100 stays the hero (it's the payoff), a hairline separates the year summary: "2 of 5 care paths · $200 of $500." One border, money said once as an event + once as a total, no repeated label.</div>
+</div>
+
+<!-- B count-led -->
+<div class="col">
+<span class="vtag">B · Count-led banner</span>
+<div class="stagew">
+<div class="lbl">Now</div>
+<div class="count">
+<span class="chip">+$100 just earned</span>
+<div class="big">2 of 5 care paths done</div>
+<div class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+<div class="money"><b>$200 earned</b> <span class="to">· $300 to go this year</span></div>
+</div>
+</div>
+<div class="cap"><b>B — Count-led.</b> Leads with the summary you liked — "2 of 5 care paths done" — and folds the just-earned $100 into a small corner chip. Neutral card (not amber), so the money is calmer. Best if the count should be the headline.</div>
+</div>
+
+<!-- C minimal -->
+<div class="col">
+<span class="vtag">C · Minimal</span>
+<div class="stagew">
+<div class="lbl">Now</div>
+<div class="min">
+<div class="evt"><span class="g">🎁</span>$100 earned <span class="w">· on its way</span></div>
+<div class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+<div class="ends"><span class="l">2 of 5 care paths</span><span class="r">$200 of $500</span></div>
+</div>
+</div>
+<div class="cap"><b>C — Minimal.</b> Fewest words: one event line, one bar, one summary line under it. No amber fill, no coin, no sub-paragraph. The flattest / lightest read.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>A — Unified card.</b> This is the completion moment, so the <b>$100 you just earned should keep the hero slot</b> (that's the payoff), with the year summary as a quiet second tier inside the same container — which is exactly what removes the disjointedness. If you'd rather the <b>count</b> lead (per "summary of how many they've done"), <b>B</b> does that with the $100 as a chip. <b>C</b> if you want it as light as possible. All three: one banner, one border, "earned" said once, and the pips fixed to 2 of 5.
+</div>
+</div>
+</body></html>

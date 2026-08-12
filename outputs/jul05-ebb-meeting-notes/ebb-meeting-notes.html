@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EBB Meeting Notes</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-strong:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:840px;margin:34px auto 80px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 52px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;line-height:1.12;margin:0 0 6px;text-wrap:balance}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin:34px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;font-weight:680;margin:22px 0 6px}
+h4{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--ink-2)}
+p{margin:10px 0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid rgba(20,99,111,0.3)}
+a:hover{border-bottom-color:var(--teal-2)}
+strong{font-weight:680;color:var(--ink)}
+code{font-family:var(--mono);font-size:0.86em;background:rgba(34,38,42,0.06);padding:1px 5px;border-radius:5px;color:var(--ink)}
+pre{background:#20242a;color:#e8e6df;border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:14px 0;padding:2px 16px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;color:var(--ink-2)}
+blockquote p{margin:8px 0}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+ul,ol{margin:10px 0;padding-left:24px}
+li{margin:4px 0}
+li>ul,li>ol{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal);font-weight:680;font-size:12.5px;letter-spacing:0.01em;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td code{font-size:0.82em}
+.docnav{max-width:840px;margin:0 auto;padding:16px 52px 0;font-size:12.5px;color:var(--ink-3)}
+.docnav a{color:var(--teal-2)}
+@media(max-width:620px){.docnav{padding:12px 22px 0}}
+</style></head><body>
+<div class="docnav">EBB docs · <a href="../../projects/feature-ebb/_share-guide.html">Share guide</a> · <a href="../../projects/feature-ebb/_brief.html">Brief</a> · <a href="../../projects/feature-ebb/_decisions.html">Decisions</a> · <a href="../../projects/feature-ebb/_screens.html">Screens</a> · <a href="../../projects/feature-ebb/engagement-loop-best-practices.html">Research</a></div>
+<div class="doc"><h1>EBB Meeting Notes</h1>
+<p>_Date: 2026-07-05_</p>
+<h2>Demo Assets: Client Logos for Configurable Nav</h2>
+<ul><li>Matt (Eng) requested sample client logos to test the configurable top navigation.</li><li>Logos are organized by demo folder (74 total), not in a single consolidated folder.</li><li>Isabel to try Claude / Claude Cowork to extract logos automatically (~15 min experiment).</li><li>If that fails, manually pull ~10 logos of varying shapes.</li><li><strong>Priority:</strong> square and horizontal logos; avoid taller-than-wide.</li><li>Include at least one MobileHealthConsumer logo.</li><li><strong>Preferred:</strong> mix of shapes including some "weird" edge cases for Matt to stress-test.</li></ul>
+<h2>EBB (Episode-Based Billing) Model and Scope</h2>
+<ul><li>Waystar contract signed; next step is aligning on exact data exchange.</li><li>14 of 15 DCPs eligible for EBB (pregnancy excluded — no cost-savings fit).</li><li>Alight House is the lighthouse account; goes live <strong>September 1</strong>, testing in August.</li><li>Reward structure: <strong>$100 Amazon gift card</strong> upon DCP completion (not HSA, not choice-based).</li><li>Billing model: per completed session (MHC gets paid per session; user gets $100 at full program completion).</li><li>User must complete ~50% before the $100 reward is guaranteed.</li><li>Payment lag from insurance (potentially 90 days) flagged as a cash flow consideration.</li></ul>
+<h3>Risk Stratification</h3>
+<ul><li>Risk stratification may be required for billing eligibility.</li><li>Options: health risk model, health assessment results, or DCP initial assessment.</li><li>Goal: widest possible funnel while meeting client/payer requirements.</li><li>Risk flag will be configurable; default is no risk requirement and no cap.</li><li>Best-practice default: up to <strong>$500/year per user</strong>, tied to risk categories.</li></ul>
+<h3>Internal Debate on Defaults</h3>
+<ul><li><strong>Jill:</strong> cap alone is sufficient protection.</li><li><strong>Steve:</strong> market will expect risk stratification.</li><li><strong>John:</strong> default should be no risk flag required.</li></ul>
+<h2>EBB UX and Enrollment Funnel</h2>
+<ul><li><strong>Key design goal:</strong> surface EBB eligibility and reward opportunity from multiple touchpoints:<ul><li>Post-health assessment</li><li>Post-wellbeing assessment</li><li>Mid-DCP entry</li></ul></li><li>Framing: _"Based on what we know about you, you may qualify to earn $100."_</li><li>Health assessment (12 questions across 5 pillars) is a natural handoff point.</li><li>Can surface DCP recommendations based on sleep, mental health, physical activity signals.</li><li>Example: user starts diabetes management DCP but hasn't been diagnosed → redirect to prevention program.</li><li><strong>"Daisy chain" concept:</strong> health assessment → DCP recommendation → EBB enrollment, all in one flow.</li><li>Homepage is out of scope for 9/1; current layout (hero banners + Just For You) stays as-is.</li><li>Davinder flagged tension between "focus" framing and the at-risk/interest model; to revisit.</li></ul>
+<h3>EBB-Only Clients</h3>
+<ul><li>Team discussed trimming the offering.</li><li>Journeys and habits may conflict with DCP focus.</li><li>Team challenges flagged as strong engagement drivers to keep ("get them in for fun, then do the clinical stuff").</li></ul>
+<h2>Data Architecture and Longer-Term Needs</h2>
+<ul><li><strong>Current limitation:</strong> DCP lesson data is siloed; no cross-lesson or cross-product memory.<ul><li>Health assessment data cannot pre-populate DCP lessons.</li><li>No cross-session memory within DCPs.</li></ul></li><li><strong>Ideal future state:</strong> unified health data layer that persists across assessments and DCPs.<ul><li>Not a 9/1 or even 1/1 priority, but flagged as critical for long-term effectiveness.</li></ul></li><li>Davinder working on wireframes and experience maps (flow architecture, not final designs).</li><li>Shared "Get in the Flow" and "Experience Map" docs in Slack for reference; updates coming.</li><li>Focus right now: overall architecture and the core loop.</li></ul>
+<h2>Next Steps</h2>
+<div class="tablewrap"><table><thead><tr><th>Owner</th><th>Action</th><th>Target</th></tr></thead><tbody><tr><td><strong>D'Arcy</strong></td><td>Document EBB requirements and decisions clearly. Share with Davinder once ready.</td><td>Monday, July 6</td></tr><tr><td><strong>Isabel</strong></td><td>Attempt Claude / Cowork logo extraction, then compile ~10 logos for Matt (varying shapes — square, horizontal, some edge cases; include MHC logo).</td><td>Early next week if manual</td></tr><tr><td><strong>Davinder</strong></td><td>Update and share revised EBB wireframes and experience maps (incorporating at-risk model, dual-funnel concept, and loop architecture).</td><td>Will share when ready</td></tr></tbody></table></div></div>
+</body></html>

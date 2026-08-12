@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>All Care Paths — browse catalog v1</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.10);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--amber:#8A5A12;--green:#3F7A46;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1180px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:760px;margin:0 0 22px;font-size:14px}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px;margin:22px 0 10px}
+.cap{font-size:12.5px;color:var(--ink-2);max-width:760px;margin-top:8px}.cap b{color:var(--ink)}
+.gallery{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+
+/* shared tile */
+.tile{position:relative}
+.ti{width:100%;border-radius:14px;position:relative;overflow:hidden}
+.ip{position:absolute;left:8px;top:8px;font-size:9.5px;font-weight:700;background:rgba(255,255,255,.92);color:var(--teal);padding:3px 8px;border-radius:20px}
+.tt{font-size:13px;font-weight:650;margin-top:6px;line-height:1.25}
+.td{font-size:11px;color:var(--ink-3);margin-top:1px}
+.c1{background:linear-gradient(135deg,#E7E1F0,#CFC3E4)}.c2{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}.c3{background:linear-gradient(135deg,#E7EFE2,#Bcd6B8)}.c4{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}.c5{background:linear-gradient(135deg,#F1DED8,#E3B3A3)}.c6{background:linear-gradient(135deg,#E0E7EE,#B9C7D6)}
+.areahd{font-size:13.5px;font-weight:750;margin:20px 0 4px}
+.areasub{font-size:11.5px;color:var(--ink-3);margin-bottom:10px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--teal-2)}
+.seeall{font-size:12px;font-weight:700;color:var(--teal-2)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chipf{font-size:12px;font-weight:650;padding:6px 13px;border-radius:20px;border:1px solid var(--line);color:var(--ink-2);background:var(--surface);white-space:nowrap}
+.chipf.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.search{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--ink-3);font-size:13.5px}
+.rwd{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2)}.rwd b{color:var(--ink)}
+
+/* phone */
+.phone{width:392px;background:var(--warm);border:9px solid #1c2330;border-radius:42px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:800px;overflow-y:auto}
+.statusbar{display:flex;justify-content:space-between;padding:13px 22px 2px;font-size:12px;font-weight:700}
+.mtop{display:flex;align-items:center;gap:10px;padding:8px 18px 10px}
+.mtop .chev{font-size:20px;color:var(--ink-2)}.mtop .t{font-size:19px;font-weight:750;letter-spacing:-0.01em}
+.mpad{padding:0 18px 16px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mpad .ti{height:84px}
+.msec{margin-top:18px}
+.mhead{display:flex;justify-content:space-between;align-items:baseline}
+.bnav{display:flex;justify-content:space-around;padding:9px 6px 13px;border-top:1px solid var(--line);background:var(--warm);position:sticky;bottom:0}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-decoration:none}.bnav a.on{color:var(--teal-2);font-weight:700}.bnav .ic{font-size:16px}
+
+/* web */
+.web{flex:1;min-width:660px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#F5F3EE;box-shadow:0 24px 60px -34px rgba(14,74,86,.5)}
+.chrome{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#ECEAE4;border-bottom:1px solid var(--line)}
+.chrome .d{width:11px;height:11px;border-radius:50%;background:#cfcfcf}.chrome .url{margin-left:14px;font-size:11.5px;color:var(--ink-3);background:#fff;border-radius:20px;padding:4px 14px}
+.topnav{display:flex;align-items:center;gap:24px;padding:14px 28px;background:#fff;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:750;font-size:15px}.brand .l{width:24px;height:24px;border-radius:7px;background:var(--teal)}
+.tn{font-size:13.5px;color:var(--ink-2)}.tn.on{color:var(--teal);font-weight:700}.avatar{margin-left:auto;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
+.wmain{padding:24px 30px;max-width:1000px;margin:0 auto}
+.wtop{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.wgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.wmain .ti{height:110px}.wmain .tt{font-size:14px}.wmain .td{font-size:12px}
+</style></head><body>
+<div class="page">
+<h1>All Care Paths — browse catalog (drill-down)</h1>
+<p class="sub">The "See all 14" destination — where breadth lives so the main list stays resume-first. Recommendations up top for guidance, then all 14 eligible paths grouped by area (pregnancy excluded). Search + area filters. Same warm, image-forward treatment; top-nav on wide.</p>
+
+<div class="gallery">
+
+<!-- MOBILE -->
+<div style="display:flex;flex-direction:column;gap:9px">
+<span class="tag">Mobile · catalog</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="mtop"><span class="chev">‹</span><span class="t">Browse care paths</span></div>
+<div class="mpad">
+<div class="search">🔍 Search care paths</div>
+<div class="rwd" style="margin:12px 2px 12px"><span>🎁</span> Earn <b>$100</b> for each path you finish</div>
+<div class="chips"><span class="chipf on">All</span><span class="chipf">Behavioral</span><span class="chipf">Movement</span><span class="chipf">Metabolic</span></div>
+
+<div class="msec"><div class="eyebrow">Recommended for you</div>
+<div class="mgrid" style="margin-top:9px">
+<div class="tile"><div class="ti c2"></div><div class="tt">Managing Anxiety</div><div class="td">Based on your health check</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Better Sleep</div><div class="td">Popular with members</div></div>
+</div></div>
+
+<div class="msec"><div class="areahd">Behavioral health</div><div class="areasub">3 paths</div>
+<div class="mgrid">
+<div class="tile"><div class="ti c1"><span class="ip">In progress</span></div><div class="tt">Managing Depression</div></div>
+<div class="tile"><div class="ti c2"><span class="ip">In progress</span></div><div class="tt">Managing Anxiety</div></div>
+<div class="tile"><div class="ti c6"></div><div class="tt">Treating Insomnia</div></div>
+</div></div>
+
+<div class="msec"><div class="areahd">Movement &amp; pain</div><div class="areasub">5 paths</div>
+<div class="mgrid">
+<div class="tile"><div class="ti c3"></div><div class="tt">Lower Back Care</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Neck Care</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Shoulder Care</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Hip Care</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Knee Care</div></div>
+</div></div>
+
+<div class="msec"><div class="areahd">Metabolic &amp; heart</div><div class="areasub">6 paths</div>
+<div class="mgrid">
+<div class="tile"><div class="ti c4"></div><div class="tt">Diabetes Prevention</div></div>
+<div class="tile"><div class="ti c4"></div><div class="tt">Continuing Prevention</div></div>
+<div class="tile"><div class="ti c4"></div><div class="tt">Diabetes Management</div></div>
+<div class="tile"><div class="ti c4"><span class="ip">In progress</span></div><div class="tt">Weight Management</div></div>
+<div class="tile"><div class="ti c4"></div><div class="tt">Weight Loss</div></div>
+<div class="tile"><div class="ti c5"></div><div class="tt">Healthy Blood Pressure</div></div>
+</div></div>
+
+</div>
+<div class="bnav"><a><span class="ic">⌂</span>Home</a><a class="on"><span class="ic">♡</span>Digital Care</a><a><span class="ic">❦</span>Wellbeing</a><a><span class="ic">▤</span>Benefits</a><a><span class="ic">☆</span>Rewards</a></div>
+</div></div>
+<div class="cap" style="max-width:392px"><b>Mobile:</b> search + area filter chips, a Recommended pair for guidance, then all 14 in a 2-col grid grouped by area. In-progress paths carry a small tag so the member sees what they've already started.</div>
+</div>
+
+<!-- WEB -->
+<div style="flex:1;min-width:660px;display:flex;flex-direction:column;gap:9px">
+<span class="tag">Web · wide (top nav)</span>
+<div class="web">
+<div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care/browse</span></div>
+<div class="topnav"><div class="brand"><span class="l"></span> mobilehealth</div><span class="tn">Home</span><span class="tn on">Digital Care</span><span class="tn">Wellbeing</span><span class="tn">Benefits</span><span class="tn">Rewards</span><span class="avatar">A</span></div>
+<div class="wmain">
+<div class="wtop"><h1 style="font-size:22px;margin:0">Browse care paths</h1><div class="search" style="width:280px">🔍 Search care paths</div></div>
+<div class="chips" style="margin-bottom:6px"><span class="chipf on">All</span><span class="chipf">Behavioral</span><span class="chipf">Movement &amp; pain</span><span class="chipf">Metabolic &amp; heart</span></div>
+
+<div class="areahd">Recommended for you</div>
+<div class="wgrid3">
+<div class="tile"><div class="ti c2"></div><div class="tt">Managing Anxiety</div><div class="td">Based on your health check</div></div>
+<div class="tile"><div class="ti c6"></div><div class="tt">Better Sleep</div><div class="td">Popular with members</div></div>
+<div class="tile"><div class="ti c5"></div><div class="tt">Healthy Blood Pressure</div><div class="td">Worth a look</div></div>
+</div>
+
+<div class="areahd">Behavioral health <span class="areasub" style="font-weight:400">· 3</span></div>
+<div class="wgrid">
+<div class="tile"><div class="ti c1"><span class="ip">In progress</span></div><div class="tt">Managing Depression</div></div>
+<div class="tile"><div class="ti c2"><span class="ip">In progress</span></div><div class="tt">Managing Anxiety</div></div>
+<div class="tile"><div class="ti c6"></div><div class="tt">Treating Insomnia</div></div>
+</div>
+
+<div class="areahd">Movement &amp; pain <span class="areasub" style="font-weight:400">· 5</span></div>
+<div class="wgrid">
+<div class="tile"><div class="ti c3"></div><div class="tt">Lower Back Care</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Neck Care</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Shoulder Care</div></div>
+<div class="tile"><div class="ti c3"></div><div class="tt">Hip Care</div></div>
+</div>
+<div class="wgrid" style="margin-top:14px"><div class="tile"><div class="ti c3"></div><div class="tt">Knee Care</div></div></div>
+
+<div class="areahd">Metabolic &amp; heart <span class="areasub" style="font-weight:400">· 6</span></div>
+<div class="wgrid">
+<div class="tile"><div class="ti c4"></div><div class="tt">Diabetes Prevention</div></div>
+<div class="tile"><div class="ti c4"></div><div class="tt">Continuing Prevention</div></div>
+<div class="tile"><div class="ti c4"></div><div class="tt">Diabetes Management</div></div>
+<div class="tile"><div class="ti c4"><span class="ip">In progress</span></div><div class="tt">Weight Management</div></div>
+</div>
+<div class="wgrid" style="margin-top:14px"><div class="tile"><div class="ti c4"></div><div class="tt">Weight Loss</div></div><div class="tile"><div class="ti c5"></div><div class="tt">Healthy Blood Pressure</div></div></div>
+</div>
+</div>
+<div class="cap" style="max-width:660px"><b>Web:</b> top nav, search + filters, a 3-up Recommended row, then each area as a 4-up grid. Breadth and guidance both live here so the resume-first list stays lean.</div>
+</div>
+
+</div>
+</div>
+</body></html>

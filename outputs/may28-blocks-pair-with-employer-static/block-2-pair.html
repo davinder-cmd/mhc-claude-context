@@ -1,0 +1,52 @@
+<!--
+  ============================================================
+  BLOCK 2 — Pair  (STATIC TEST VERSION · WITH-EMPLOYER)
+  ============================================================
+  Static content. No Mustache tokens. For layout testing only.
+  Two columns: "Based on your interest" + "From your employer".
+  Section is borderless on desktop; .rec-card carries the visual frame.
+  Mobile (<600px) reverts to bordered-section pattern via mhc-home.css.
+  ============================================================
+-->
+
+<div class="mhc-home">
+  <section class="pair pair--cols-2" aria-labelledby="mhc-pair-title">
+    <h2 id="mhc-pair-title" class="mhc-visually-hidden">Recommendations</h2>
+
+    <div class="pair-section">
+      <div class="pair-section__header">
+        <h3 class="title-1">Based on your interest</h3>
+        <a class="pill-edit" href="/settings/interests">Edit</a>
+      </div>
+      <a class="rec-card" href="/articles/wind-down-before-bed">
+        <div class="rec-card__thumb" aria-hidden="true"></div>
+        <div class="rec-card__body">
+          <div class="title-1">Wind down before bed</div>
+          <div class="body-3 ink-soft">Journey &middot; 3 min read</div>
+        </div>
+        <span class="rec-card__chev material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </a>
+      <div class="pair-section__footer">
+        <a class="btn btn-text" href="/interests">See 3 more<span class="medium-up-inline">&nbsp;matched to your interest</span></a>
+      </div>
+    </div>
+
+    <div class="pair-section">
+      <div class="pair-section__header">
+        <h3 class="title-1">From your employer</h3>
+      </div>
+      <a class="rec-card" href="/hra">
+        <div class="rec-card__thumb" aria-hidden="true"></div>
+        <div class="rec-card__body">
+          <div class="title-1">Health Assessment</div>
+          <div class="body-3 ink-soft">Earn $300</div>
+        </div>
+        <span class="rec-card__chev material-symbols-outlined" aria-hidden="true">chevron_right</span>
+      </a>
+      <div class="pair-section__footer">
+        <a class="btn btn-text" href="/employer-content">See 2 more<span class="medium-up-inline">&nbsp;from Acme</span></a>
+      </div>
+    </div>
+
+  </section>
+</div>

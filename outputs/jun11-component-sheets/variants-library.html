@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Variants library · jun 11</title>
+<link rel="stylesheet" href="styles.css">
+<!-- Font Awesome (matches the home fragment) -->
+<style>
+  @font-face {
+    font-family: 'Font Awesome 6 Free';
+    font-style: normal; font-weight: 900; font-display: block;
+    src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2') format('woff2'),
+         url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.ttf')   format('truetype');
+  }
+  .fa-icon {
+    font-family: 'Font Awesome 6 Free', sans-serif;
+    font-style: normal; font-weight: 900;
+    font-variant: normal; text-transform: none;
+    line-height: 1;
+    display: inline-block;
+  }
+  /* Variant block layout (sheet-shell extension) */
+  .variant-block {
+    margin-top: 28px;
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .variant-meta { padding: 14px 18px; border-bottom: 1px solid var(--hairline); }
+  .variant-meta__row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .variant-tag {
+    background: var(--ink); color: #fff;
+    padding: 3px 8px; border-radius: 4px;
+    font-family: var(--f-mono); font-size: 11px; font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .variant-name { font-family: var(--f-display); font-weight: 600; font-size: 15px; }
+  .variant-note { color: var(--ink-soft); font-size: 13px; margin: 6px 0 0; line-height: 1.5; }
+  .preview {
+    background: var(--tint);
+    padding: 20px;
+  }
+  .preview--narrow { max-width: 392px; margin: 0 auto; }
+  details.code summary { border-radius: 0; }
+</style>
+<link rel="stylesheet" href="home-styles.css">
+</head>
+<body>
+
+<nav class="bar">
+  <a class="bar__back" href="index.html">← All sheets</a>
+  <span class="bar__sep">/</span>
+  <span class="bar__name">Variants library</span>
+</nav>
+
+<div class="sheet">
+
+  <header class="sheet__head">
+    <div class="sheet__num">code library</div>
+    <h1 class="sheet__title">Variants library</h1>
+    <p class="sheet__sub">
+      Live preview + copy-able HTML source for every meaningful variant across the home page. Each variant uses the same CSS as the home fragment (extracted from <code>fragment-home-with-employer.html</code>, scoped to <code>.mhc-home</code> instead of <code>:host</code> so it renders in a regular HTML doc). Copy the markup from any variant's source block and drop it into the home fragment at the right slot.
+    </p>
+  </header>
+
+  <!-- ════════════════════════ HERO ════════════════════════ -->
+  <section class="section">
+    <h2>01 · Hero cards</h2>
+    <p>Replace the hero <code>&lt;section class="hero"&gt;</code> block in the fragment with whichever variant matches the user's state.</p>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">HERO 4.1</span><span class="variant-name">No interests selected — brand-new member</span></div>
+        <p class="variant-note">No onboarding signals yet. Eyebrow welcomes them; CTA opens the onboarding interest picker.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-hero-41"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-hero-41"></code></pre></details>
+      <template id="tpl-hero-41"><section class="hero" aria-labelledby="hero-title-41">
+  <a class="hero__stretched-link" href="/onboarding/interests" aria-label="Choose interests">Choose interests</a>
+  <div class="hero__media" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__title-group">
+      <div class="eyebrow ink-soft">Welcome to Acme Health</div>
+      <h2 class="heading-4" id="hero-title-41">Let's get personal</h2>
+    </div>
+    <div class="hero__copy-group">
+      <p class="paragraph-2 ink-soft">Tell us what matters to you. Your home will personalize from there — programs, articles, and rewards picked for you.</p>
+      <div class="hero__meta body-3">
+        <span>$100 reward</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>2 minutes</span>
+      </div>
+    </div>
+    <div class="hero__actions"><a class="btn btn-m btn-filled" href="/onboarding/interests">Choose interests</a></div>
+  </div>
+</section></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">HERO 4.2</span><span class="variant-name">Based on your interests — interest-driven recommendation</span></div>
+        <p class="variant-note">This is the canonical variant currently in the jun11 fragment.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-hero-42"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-hero-42"></code></pre></details>
+      <template id="tpl-hero-42"><section class="hero" aria-labelledby="hero-title-42">
+  <a class="hero__stretched-link" href="/programs/sleep/start" aria-label="Sleep better in 4 weeks — start the program">Start the program</a>
+  <div class="hero__media" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__title-group">
+      <div class="eyebrow ink-soft">Based on your interests</div>
+      <h2 class="heading-4" id="hero-title-42">Sleep better in 4 weeks</h2>
+    </div>
+    <div class="hero__copy-group">
+      <p class="paragraph-2 ink-soft">An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change.</p>
+      <div class="hero__meta body-3">
+        <span>Sleep DCP</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>$100 reward at completion</span>
+      </div>
+    </div>
+    <div class="hero__actions"><a class="btn btn-m btn-filled" href="/programs/sleep/start">Start the program</a></div>
+  </div>
+</section></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">HERO 4.3</span><span class="variant-name">From your employer — sponsored recommendation</span></div>
+        <p class="variant-note">Same shell, eyebrow signals it's an employer-driven push. Meta line carries program type + reward.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-hero-43"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-hero-43"></code></pre></details>
+      <template id="tpl-hero-43"><section class="hero" aria-labelledby="hero-title-43">
+  <a class="hero__stretched-link" href="/programs/breathing/start" aria-label="Try a 5-minute breathing reset">Start the program</a>
+  <div class="hero__media" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__title-group">
+      <div class="eyebrow ink-soft">From your employer</div>
+      <h2 class="heading-4" id="hero-title-43">Try a 5-minute breathing reset</h2>
+    </div>
+    <div class="hero__copy-group">
+      <p class="paragraph-2 ink-soft">An evidence-based program built around your sleep habits. Eight short sessions, a quiet routine, real change.</p>
+      <div class="hero__meta body-3">
+        <span>Treating Insomnia</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>$100 reward</span>
+      </div>
+    </div>
+    <div class="hero__actions"><a class="btn btn-m btn-filled" href="/programs/breathing/start">Start the program</a></div>
+  </div>
+</section></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">HERO 4.5</span><span class="variant-name">Continue where you left off — in-progress program</span></div>
+        <p class="variant-note">Already enrolled and progressing. Title includes session count; body adds a progress bar.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-hero-45"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-hero-45"></code></pre></details>
+      <template id="tpl-hero-45"><section class="hero" aria-labelledby="hero-title-45">
+  <a class="hero__stretched-link" href="/programs/sleep/continue" aria-label="Better Sleep — continue Session 3 of 8">Start the program</a>
+  <div class="hero__media" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__title-group">
+      <div class="eyebrow ink-soft">Continue where you left off</div>
+      <h2 class="heading-4" id="hero-title-45">Better Sleep — Session 3 of 8</h2>
+    </div>
+    <div class="hero__copy-group">
+      <p class="paragraph-2 ink-soft">You're 3 sessions in. Pick up where you left off — about 12 minutes tonight.</p>
+      <div class="progress" aria-hidden="true"><div class="progress__fill" style="--p:38%"></div></div>
+      <div class="hero__meta body-3">
+        <span>Treating Insomnia</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>$100 reward</span>
+      </div>
+    </div>
+    <div class="hero__actions"><a class="btn btn-m btn-filled" href="/programs/sleep/continue">Start the program</a></div>
+  </div>
+</section></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">HERO 4.7</span><span class="variant-name">No reward — habit-style program</span></div>
+        <p class="variant-note">Same shell as 4.2 but the $-chip drops out of the meta line. Used for habit programs and content with no monetary incentive.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-hero-47"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-hero-47"></code></pre></details>
+      <template id="tpl-hero-47"><section class="hero" aria-labelledby="hero-title-47">
+  <a class="hero__stretched-link" href="/programs/walking/start" aria-label="Build a consistent walking habit">Start the program</a>
+  <div class="hero__media" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="hero__title-group">
+      <div class="eyebrow ink-soft">Based on your interests</div>
+      <h2 class="heading-4" id="hero-title-47">Build a consistent walking habit</h2>
+    </div>
+    <div class="hero__copy-group">
+      <p class="paragraph-2 ink-soft">A four-week practice that meets you where you are. Most members start with 10 minutes a day.</p>
+      <div class="hero__meta body-3">
+        <span>Habit</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>4 weeks</span>
+      </div>
+    </div>
+    <div class="hero__actions"><a class="btn btn-m btn-filled" href="/programs/walking/start">Start the program</a></div>
+  </div>
+</section></template>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ CHALLENGE ════════════════════════ -->
+  <section class="section">
+    <h2>02 · Challenge card</h2>
+    <p>Replace the <code>&lt;div class="challenge"&gt;</code> markup inside the Your-challenge section with whichever state applies.</p>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">CHALLENGE · ACTIVE</span><span class="variant-name">In-progress team challenge</span></div>
+        <p class="variant-note">Default state. Trophy icon, eyebrow, name, "Day N of M · Currently Xth" meta.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-challenge-active"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-challenge-active"></code></pre></details>
+      <template id="tpl-challenge-active"><div class="challenge">
+  <div class="banner-icon banner-icon--challenge">
+    <span class="fa-icon" aria-hidden="true">&#xf091;</span>
+  </div>
+  <div class="challenge__body">
+    <div class="eyebrow ink-soft">Team Challenge</div>
+    <div class="heading-6">Spring Steps Challenge</div>
+    <div class="body-3 challenge__meta">Day 22 of 30 &middot; Currently 4th</div>
+  </div>
+  <a class="challenge__link" href="/challenges/spring-steps">
+    <span class="visually-hidden">Spring Steps Challenge — details</span>
+  </a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">CHALLENGE · COMPLETED</span><span class="variant-name">Recently completed challenge</span></div>
+        <p class="variant-note">Eyebrow shows completion date. Meta carries the result. Drill-in remains.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-challenge-completed"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-challenge-completed"></code></pre></details>
+      <template id="tpl-challenge-completed"><div class="challenge">
+  <div class="banner-icon banner-icon--challenge">
+    <span class="fa-icon" aria-hidden="true">&#xf091;</span>
+  </div>
+  <div class="challenge__body">
+    <div class="eyebrow ink-soft">Completed &middot; May 13</div>
+    <div class="heading-6">Spring Steps Challenge</div>
+    <div class="body-3 challenge__meta">3rd place &mdash; finished strong</div>
+  </div>
+  <a class="challenge__link" href="/challenges/spring-steps">
+    <span class="visually-hidden">Spring Steps Challenge — see leaderboard</span>
+  </a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">CHALLENGE · FINAL DAY</span><span class="variant-name">Final day of a challenge</span></div>
+        <p class="variant-note">Same active markup; section head adds "Final day" sub-text above the banner.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-challenge-finalday"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-challenge-finalday"></code></pre></details>
+      <template id="tpl-challenge-finalday"><section class="section" aria-labelledby="challenge-title-fd">
+  <div class="section-head">
+    <h2 id="challenge-title-fd" class="heading-6">Your challenge</h2>
+  </div>
+  <p class="body-3 ink-soft" style="margin: -10px 0 14px;">Final day</p>
+  <div class="challenge">
+    <div class="banner-icon banner-icon--challenge">
+      <span class="fa-icon" aria-hidden="true">&#xf091;</span>
+    </div>
+    <div class="challenge__body">
+      <div class="eyebrow ink-soft">Team Challenge</div>
+      <div class="heading-6">Spring Steps Challenge</div>
+      <div class="body-3 challenge__meta">Day 30 of 30 &middot; Currently 4th</div>
+    </div>
+    <a class="challenge__link" href="/challenges/spring-steps">
+      <span class="visually-hidden">Spring Steps Challenge — details</span>
+    </a>
+  </div>
+</section></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">CHALLENGE · EMPTY</span><span class="variant-name">No challenge active</span></div>
+        <p class="variant-note">Soft prompt to discover. Different copy + CTA — no Trophy disc since there's nothing to show.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-challenge-empty"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-challenge-empty"></code></pre></details>
+      <template id="tpl-challenge-empty"><div class="challenge">
+  <div class="banner-icon banner-icon--challenge">
+    <span class="fa-icon" aria-hidden="true">&#xf091;</span>
+  </div>
+  <div class="challenge__body">
+    <div class="eyebrow ink-soft">Challenges</div>
+    <div class="heading-6">Find a challenge to join</div>
+    <div class="body-3 challenge__meta">Step contests, mindfulness streaks, and team competitions</div>
+  </div>
+  <a class="challenge__link" href="/challenges">
+    <span class="visually-hidden">Browse challenges</span>
+  </a>
+</div></template>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ TRACKER TILE ════════════════════════ -->
+  <section class="section">
+    <h2>03 · Tracker tile (This week)</h2>
+    <p>One tile inside the <code>.trackers</code> grid. Repeat the markup four times for Steps / Sleep / Calories / Active min.</p>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">TRACKER · WITH TREND</span><span class="variant-name">Default — value + trend arrow + % to goal</span></div>
+      </div>
+      <div class="preview" style="max-width: 280px;"><div class="mhc-home" data-render="tpl-tracker-default"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-tracker-default"></code></pre></details>
+      <template id="tpl-tracker-default"><div class="tracker">
+  <div class="tracker__icon"><span class="fa-icon" aria-hidden="true">&#xf554;</span></div>
+  <div class="eyebrow tracker__label">Steps</div>
+  <div class="heading-6 tracker__value">
+    <span class="arrow fa-icon" aria-hidden="true">&#xf062;</span>
+    6,456
+  </div>
+  <div class="body-3 tracker__meta">78% of weekly goal</div>
+  <a class="tracker__link" href="/trackers/steps"><span class="visually-hidden">Steps</span></a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">TRACKER · SET GOAL</span><span class="variant-name">User hasn't configured a goal for this metric</span></div>
+        <p class="variant-note">Drops the trend arrow; sub line becomes a link.</p>
+      </div>
+      <div class="preview" style="max-width: 280px;"><div class="mhc-home" data-render="tpl-tracker-setgoal"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-tracker-setgoal"></code></pre></details>
+      <template id="tpl-tracker-setgoal"><div class="tracker">
+  <div class="tracker__icon"><span class="fa-icon" aria-hidden="true">&#xf186;</span></div>
+  <div class="eyebrow tracker__label">Sleep</div>
+  <div class="heading-6 tracker__value">6h 43m</div>
+  <a class="body-3 tracker__meta" href="/sleep/goal" style="color: var(--link); text-decoration: none;">Set a goal →</a>
+  <a class="tracker__link" href="/trackers/sleep"><span class="visually-hidden">Sleep</span></a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">TRACKER · NO DATA</span><span class="variant-name">Source not synced for this metric</span></div>
+      </div>
+      <div class="preview" style="max-width: 280px;"><div class="mhc-home" data-render="tpl-tracker-nodata"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-tracker-nodata"></code></pre></details>
+      <template id="tpl-tracker-nodata"><div class="tracker">
+  <div class="tracker__icon"><span class="fa-icon" aria-hidden="true">&#xf06d;</span></div>
+  <div class="eyebrow tracker__label">Calories</div>
+  <div class="heading-6 tracker__value">—</div>
+  <div class="body-3 tracker__meta ink-placeholder">Sync to see</div>
+  <a class="tracker__link" href="/trackers/calories"><span class="visually-hidden">Calories</span></a>
+</div></template>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ EMPTY DATA ════════════════════════ -->
+  <section class="section">
+    <h2>04 · Empty data</h2>
+    <p>Replaces the entire <code>.trackers</code> grid (not a single tile) when no metric has data yet.</p>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">EMPTY · NO SOURCE</span><span class="variant-name">No tracking source connected</span></div>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-empty-nosource"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-empty-nosource"></code></pre></details>
+      <template id="tpl-empty-nosource"><div class="insight" style="text-align:left">
+  <div class="banner-icon banner-icon--insight">
+    <span class="fa-icon" aria-hidden="true">&#xf021;</span>
+  </div>
+  <div class="insight__body">
+    <div class="title-1">Connect a source to see your trends</div>
+    <p class="body-3 ink-soft" style="margin-top: 4px;">Add Apple Health, Fitbit, or Garmin to see steps, sleep, calories, and active minutes here.</p>
+  </div>
+  <a class="btn btn-outlined" href="/sources/connect">Connect a source</a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">EMPTY · SYNCING</span><span class="variant-name">Source connected, waiting for first sync</span></div>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-empty-syncing"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-empty-syncing"></code></pre></details>
+      <template id="tpl-empty-syncing"><div class="insight" style="text-align:left">
+  <div class="banner-icon banner-icon--insight">
+    <span class="fa-icon" aria-hidden="true">&#xf021;</span>
+  </div>
+  <div class="insight__body">
+    <div class="title-1">Sync in progress</div>
+    <p class="body-3 ink-soft" style="margin-top: 4px;">Open your tracker app on your phone to start the first sync. Your data shows up here once it's done.</p>
+  </div>
+  <a class="btn btn-text" href="/data/refresh" style="color: var(--link);">Refresh</a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">EMPTY · SYNC ERROR</span><span class="variant-name">Last sync failed</span></div>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-empty-error"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-empty-error"></code></pre></details>
+      <template id="tpl-empty-error"><div class="insight" style="text-align:left; border-color: #E3B5B5; background: #FAEAEA;">
+  <div class="banner-icon" style="background: #F0CFCF; color: #C8272E;">
+    <span class="fa-icon" aria-hidden="true">&#xf071;</span>
+  </div>
+  <div class="insight__body">
+    <div class="title-1">Sync error</div>
+    <p class="body-3 ink-soft" style="margin-top: 4px;">Apple Health stopped sharing data 2 days ago. Reconnect to keep your trends up to date.</p>
+  </div>
+  <a class="btn btn-outlined" href="/sources/reconnect">Reconnect</a>
+</div></template>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ REWARD BANNER ════════════════════════ -->
+  <section class="section">
+    <h2>06 · Rewards row banner</h2>
+    <p>Replace the <code>&lt;div class="reward-banner"&gt;</code> markup inside the Your-rewards section with whichever variant matches the reward type.</p>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">REWARD · POINTS BALANCE + BAR</span><span class="variant-name">Points &amp; levels — balance focused</span></div>
+        <p class="variant-note">Canonical variant currently in the jun11 fragment.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-reward-points"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-reward-points"></code></pre></details>
+      <template id="tpl-reward-points"><div class="reward-banner">
+  <div class="banner-icon banner-icon--rewards">
+    <span class="fa-icon" aria-hidden="true">&#xf5a2;</span>
+  </div>
+  <div class="reward-banner__body">
+    <span class="tier-chip tier-chip--silver">Silver tier</span>
+    <div class="reward-banner__balance">
+      <span class="heading-5 reward-banner__hero">1,250</span>
+      <span class="body-3 ink-soft">points balance &middot; 750 to Gold</span>
+    </div>
+    <div class="progress" aria-hidden="true"><div class="progress__fill" style="--p:62%"></div></div>
+  </div>
+  <a class="btn btn-outlined" href="/rewards">Redeem</a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">REWARD · DIRECT BALANCE + BAR</span><span class="variant-name">Direct rewards — multi-action, balance focused</span></div>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-reward-direct"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-reward-direct"></code></pre></details>
+      <template id="tpl-reward-direct"><div class="reward-banner">
+  <div class="banner-icon" style="background: #D4EBE0; color: #2D6A4F;">
+    <span class="fa-icon" aria-hidden="true">&#xf06b;</span>
+  </div>
+  <div class="reward-banner__body">
+    <span class="tier-chip" style="background: #EFE7D6; color: var(--ink-soft);">Wellness rewards &middot; Q2 2026</span>
+    <div class="reward-banner__balance">
+      <span class="heading-5 reward-banner__hero">$75</span>
+      <span class="body-3 ink-soft">earned of $250 this quarter &middot; earn $25 per check-in</span>
+    </div>
+    <div class="progress" aria-hidden="true"><div class="progress__fill" style="--p:30%"></div></div>
+  </div>
+  <a class="btn btn-outlined" href="/rewards/wellness">Earn more</a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">REWARD · RAFFLE UNCAPPED</span><span class="variant-name">Raffle — balance focused, no progress (no cap)</span></div>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-reward-raffle"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-reward-raffle"></code></pre></details>
+      <template id="tpl-reward-raffle"><div class="reward-banner">
+  <div class="banner-icon" style="background: #E0E8C7; color: #5F7A3B;">
+    <span class="fa-icon" aria-hidden="true">&#xf3ff;</span>
+  </div>
+  <div class="reward-banner__body">
+    <span class="tier-chip" style="background: #EFE7D6; color: var(--ink-soft);">Spring raffle &middot; draws May 31</span>
+    <div class="reward-banner__balance">
+      <span class="heading-5 reward-banner__hero">12</span>
+      <span class="body-3 ink-soft">entries earned &middot; top prize $1,000 to charity</span>
+    </div>
+  </div>
+  <a class="btn btn-outlined" href="/rewards/raffle">Earn entries</a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">REWARD · STORE READY TO SPEND</span><span class="variant-name">Store credit — balance focused, no progress</span></div>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-reward-store"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-reward-store"></code></pre></details>
+      <template id="tpl-reward-store"><div class="reward-banner">
+  <div class="banner-icon" style="background: #FAE3D3; color: #B5571E;">
+    <span class="fa-icon" aria-hidden="true">&#xf07a;</span>
+  </div>
+  <div class="reward-banner__body">
+    <span class="tier-chip" style="background: #EFE7D6; color: var(--ink-soft);">Store credit &middot; ready to spend</span>
+    <div class="reward-banner__balance">
+      <span class="heading-5 reward-banner__hero">$25</span>
+      <span class="body-3 ink-soft">ready to spend in the store &middot; no expiry</span>
+    </div>
+  </div>
+  <a class="btn btn-outlined" href="/rewards/store">Shop now</a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">REWARD · HSA LOCKED</span><span class="variant-name">Direct · HSA — gated, user not enrolled</span></div>
+        <p class="variant-note">Locked badge. Button opens the HSA enrollment flow, not the rewards flow.</p>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-reward-hsa"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-reward-hsa"></code></pre></details>
+      <template id="tpl-reward-hsa"><div class="reward-banner">
+  <div class="banner-icon" style="background: #E6DDF0; color: #6B5C8F;">
+    <span class="fa-icon" aria-hidden="true">&#xf023;</span>
+  </div>
+  <div class="reward-banner__body">
+    <span class="tier-chip" style="background: #E6DDF0; color: #6B5C8F;">HSA reward &middot; locked</span>
+    <div class="reward-banner__balance">
+      <span class="heading-5 reward-banner__hero">$300</span>
+      <span class="body-3 ink-soft">available &middot; open an HSA to start earning</span>
+    </div>
+  </div>
+  <a class="btn btn-outlined" href="/hsa/enroll">Open HSA</a>
+</div></template>
+    </div>
+
+    <div class="variant-block">
+      <div class="variant-meta">
+        <div class="variant-meta__row"><span class="variant-tag">REWARD · PREMIUM DISCOUNT</span><span class="variant-name">Direct · monthly premium reduction</span></div>
+      </div>
+      <div class="preview"><div class="mhc-home" data-render="tpl-reward-premium"></div></div>
+      <details class="code"><summary>HTML source</summary><pre><code data-source="tpl-reward-premium"></code></pre></details>
+      <template id="tpl-reward-premium"><div class="reward-banner">
+  <div class="banner-icon" style="background: #DDE3F0; color: #1B355C;">
+    <span class="fa-icon" aria-hidden="true">&#xf0e7;</span>
+  </div>
+  <div class="reward-banner__body">
+    <span class="tier-chip" style="background: #DDE3F0; color: #1B355C;">Premium discount &middot; active</span>
+    <div class="reward-banner__balance">
+      <span class="heading-5 reward-banner__hero">$50 /mo</span>
+      <span class="body-3 ink-soft">off your premium &middot; applied automatically each month</span>
+    </div>
+  </div>
+  <a class="btn btn-outlined" href="/benefits/premium">View details</a>
+</div></template>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // For each .variant-block: clone the template into the preview, copy source into the <code> block.
+  document.querySelectorAll('.variant-block').forEach(block => {
+    block.querySelectorAll('template').forEach(tpl => {
+      const html = tpl.innerHTML.trim();
+      block.querySelectorAll('[data-render="' + tpl.id + '"]').forEach(t => t.innerHTML = html);
+      block.querySelectorAll('[data-source="' + tpl.id + '"]').forEach(t => t.textContent = html);
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Path — 5 variations</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-2:rgba(34,38,42,0.08);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--green:#3F7A46;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1200px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:780px;margin:0 0 8px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;margin-top:16px}
+.opt{width:340px}
+.olabel{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.onum{font-size:13px;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:2px 8px}
+.oname{font-size:15px;font-weight:700}
+.rec{font-size:10.5px;font-weight:700;color:var(--green);background:#E4EFE0;border-radius:5px;padding:2px 7px;margin-left:6px}
+.onote{font-size:12px;color:var(--ink-2);margin-top:11px}.onote b{color:var(--ink)}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.seeall{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;font-size:13px;font-weight:650;color:var(--teal-2)}
+/* marks */
+.mk{border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center}
+.mk.done{background:var(--teal);color:#fff}
+.mk.curr{background:var(--teal-tint);border:2px solid var(--teal)}
+.mk.curr::after{content:"";width:34%;height:34%;border-radius:50%;background:var(--teal)}
+.mk.lock{background:rgba(34,38,42,.06)}
+.sn{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.st{font-weight:620;letter-spacing:-0.005em}
+.tag{font-size:10.5px;font-weight:700;color:var(--teal)}
+
+/* V1 condensed */
+.v1 .step{display:flex;align-items:center;gap:11px;padding:9px 13px;border-top:1px solid var(--line-2)}
+.v1 .step:first-child{border-top:none}
+.v1 .mk{width:20px;height:20px;font-size:10px}
+.v1 .st{font-size:13.5px}
+.v1 .num{font-size:11px;font-weight:700;color:var(--ink-3);width:14px;text-align:center}
+
+/* V2 horizontal stepper */
+.v2 .track{position:relative;padding:16px 16px 10px}
+.v2 .line{position:absolute;left:24px;right:24px;top:26px;height:2px;background:var(--line)}
+.v2 .lfill{position:absolute;left:24px;top:26px;height:2px;width:20%;background:var(--teal)}
+.v2 .nodes{position:relative;display:flex;justify-content:space-between}
+.v2 .n{width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--line);display:flex;align-items:center;justify-content:center}
+.v2 .n.done{background:var(--teal);border-color:var(--teal)}
+.v2 .n.curr{border-color:var(--teal);background:var(--teal-tint)}
+.v2 .cur{padding:2px 16px 14px}
+.v2 .cur .sn{margin-bottom:1px}
+.v2 .cur .st{font-size:15px}
+
+/* V3 minimal numbered */
+.v3 .step{display:flex;align-items:center;gap:11px;padding:8px 4px}
+.v3 .mk{width:22px;height:22px;font-size:11px}
+.v3 .st{font-size:14px}
+.v3 .seeall{padding:9px 4px 2px}
+
+/* V4 collapsed current+next */
+.v4 .hd{display:flex;justify-content:space-between;align-items:baseline;padding:13px 14px 6px}
+.v4 .hd .l{font-size:13px;font-weight:700}
+.v4 .hd .r{font-size:11.5px;color:var(--ink-3)}
+.v4 .step{display:flex;align-items:center;gap:12px;padding:10px 14px;border-top:1px solid var(--line-2)}
+.v4 .mk{width:26px;height:26px;font-size:12px}
+.v4 .step.now{background:#FBF8F1}
+.v4 .st{font-size:14px}
+
+/* V5 timeline */
+.v5 .tl{padding:6px 14px 4px}
+.v5 .row{display:flex;gap:12px;position:relative}
+.v5 .rail{display:flex;flex-direction:column;align-items:center}
+.v5 .mk{width:22px;height:22px;font-size:11px;z-index:1}
+.v5 .conn{width:2px;flex:1;background:var(--line);margin:2px 0}
+.v5 .txt{padding:2px 0 16px}
+.v5 .st{font-size:14px}
+.ref{opacity:.92}
+</style></head><body>
+<div class="page">
+<h1>The Path — 5 variations</h1>
+<p class="sub">The session list, kept tight — with room to flex on size and placement. Each shows done · current · locked and the "See all 10" tail. Current version at the end.</p>
+
+<div class="grid">
+
+<!-- V1 condensed -->
+<div class="opt">
+<div class="olabel"><span class="onum">1</span><span class="oname">Condensed rows</span></div>
+<div class="lbl">The path</div>
+<div class="card v1">
+<div class="step"><span class="mk done">✓</span><span class="num">1</span><span class="st">Understanding Depression</span></div>
+<div class="step"><span class="mk done">✓</span><span class="num">2</span><span class="st">How Thoughts Affect Mood</span></div>
+<div class="step"><span class="mk curr"></span><span class="num" style="color:var(--teal)">3</span><span class="st">Recognizing Negative Thoughts</span><span class="tag" style="margin-left:auto">Now</span></div>
+<div class="step"><span class="mk lock"></span><span class="num">4</span><span class="st" style="color:var(--ink-3)">Challenging Your Thoughts</span></div>
+<div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+</div>
+<div class="onote"><b>Tighter version of today.</b> Smaller checks, the session number inline (not a full eyebrow), tighter rows. Same structure, less height.</div>
+</div>
+
+<!-- V2 horizontal stepper -->
+<div class="opt">
+<div class="olabel"><span class="onum">2</span><span class="oname">Horizontal stepper</span></div>
+<div class="lbl">The path</div>
+<div class="card v2">
+<div class="track"><div class="line"></div><div class="lfill"></div>
+<div class="nodes">
+<span class="n done">✓</span><span class="n done">✓</span><span class="n curr"></span><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span>
+</div></div>
+<div class="cur"><div class="sn">Session 3 · in progress</div><div class="st">Recognizing Negative Thoughts</div></div>
+<div class="seeall" style="border-top:1px solid var(--line-2)"><span>See all 10 sessions</span><span>›</span></div>
+</div>
+<div class="onote"><b>Smallest footprint.</b> The whole 10-session shape in one row of nodes; the current session named below. Great if the bottom of the page is tight — reads the journey at a glance.</div>
+</div>
+
+<!-- V3 minimal -->
+<div class="opt">
+<div class="olabel"><span class="onum">3</span><span class="oname">Minimal · no card</span></div>
+<div class="lbl">The path</div>
+<div class="v3">
+<div class="step"><span class="mk done">✓</span><span class="st">Understanding Depression</span></div>
+<div class="step"><span class="mk done">✓</span><span class="st">How Thoughts Affect Mood</span></div>
+<div class="step"><span class="mk curr"></span><span class="st">Recognizing Negative Thoughts</span><span class="tag" style="margin-left:auto">Now</span></div>
+<div class="step"><span class="mk lock"></span><span class="st" style="color:var(--ink-3)">Challenging Your Thoughts</span></div>
+<div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+</div>
+<div class="onote"><b>No box.</b> Drops the card chrome and dividers — a clean checklist that sits quietly on the page. Lightest visually.</div>
+</div>
+
+<!-- V4 collapsed -->
+<div class="opt">
+<div class="olabel"><span class="onum">4</span><span class="oname">Collapsed · now + next</span><span class="rec">tightest</span></div>
+<div class="card v4">
+<div class="hd"><span class="l">The path</span><span class="r">2 of 10 done</span></div>
+<div class="step now"><span class="mk curr"></span><div><div class="sn" style="color:var(--teal)">Session 3 · now</div><div class="st">Recognizing Negative Thoughts</div></div></div>
+<div class="step"><span class="mk lock"></span><div><div class="sn">Session 4 · next</div><div class="st" style="color:var(--ink-3)">Challenging Your Thoughts</div></div></div>
+<div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+</div>
+<div class="onote"><b>Only what matters.</b> Shows the current + next session; the completed ones + full list live behind "See all." Tightest — good if the path should defer to Continue and the outcome block.</div>
+</div>
+
+<!-- V5 timeline -->
+<div class="opt">
+<div class="olabel"><span class="onum">5</span><span class="oname">Connected timeline</span></div>
+<div class="lbl">The path</div>
+<div class="card v5"><div class="tl">
+<div class="row"><div class="rail"><span class="mk done">✓</span><span class="conn"></span></div><div class="txt"><div class="sn">Session 1</div><div class="st">Understanding Depression</div></div></div>
+<div class="row"><div class="rail"><span class="mk done">✓</span><span class="conn"></span></div><div class="txt"><div class="sn">Session 2</div><div class="st">How Thoughts Affect Mood</div></div></div>
+<div class="row"><div class="rail"><span class="mk curr"></span><span class="conn"></span></div><div class="txt"><div class="sn" style="color:var(--teal)">Session 3 · now</div><div class="st">Recognizing Negative Thoughts</div></div></div>
+<div class="row"><div class="rail"><span class="mk lock"></span></div><div class="txt" style="padding-bottom:4px"><div class="sn">Session 4</div><div class="st" style="color:var(--ink-3)">Challenging Your Thoughts</div></div></div>
+</div><div class="seeall" style="border-top:1px solid var(--line-2)"><span>See all 10 sessions</span><span>›</span></div>
+</div>
+<div class="onote"><b>A journey line.</b> Connected nodes make it read as a path you're moving along. Slightly more visual; still tight.</div>
+</div>
+
+<!-- reference -->
+<div class="opt">
+<div class="olabel"><span class="onum" style="background:#838890">·</span><span class="oname" style="color:var(--ink-3)">Current (reference)</span></div>
+<div class="lbl">The path</div>
+<div class="card ref v1" style="border-radius:14px">
+<div class="step" style="padding:12px 14px"><span class="mk done" style="width:26px;height:26px;font-size:12px">✓</span><div><div class="sn">Session 1</div><div class="st" style="font-size:14px">Understanding Depression</div></div></div>
+<div class="step" style="padding:12px 14px"><span class="mk done" style="width:26px;height:26px;font-size:12px">✓</span><div><div class="sn">Session 2</div><div class="st" style="font-size:14px">How Thoughts Affect Mood</div></div></div>
+<div class="step" style="padding:12px 14px"><span class="mk curr" style="width:26px;height:26px"></span><div><div class="sn">Session 3</div><div class="st" style="font-size:14px">Recognizing Negative Thoughts</div></div><span class="tag" style="margin-left:auto">In progress</span></div>
+<div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+</div>
+<div class="onote">Full-size rows with the session eyebrow stacked above each title.</div>
+</div>
+
+</div>
+<div style="margin-top:26px;max-width:780px;background:#fff;border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>My read:</b> <b>Option 4 (collapsed · now + next)</b> is the tightest and most on-strategy — the path defers to Continue and the outcome block, showing only where you are + what's next, full list one tap away. <b>Option 2 (horizontal stepper)</b> is the smallest footprint if you want the whole shape visible. <b>Option 1</b> if you want to keep the list but reclaim height.
+</div>
+</div>
+</body></html>

@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DCP List / All Topics — Scope Memo</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-strong:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:840px;margin:34px auto 80px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 52px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;line-height:1.12;margin:0 0 6px;text-wrap:balance}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin:34px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;font-weight:680;margin:22px 0 6px}
+h4{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--ink-2)}
+p{margin:10px 0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid rgba(20,99,111,0.3)}
+a:hover{border-bottom-color:var(--teal-2)}
+strong{font-weight:680;color:var(--ink)}
+code{font-family:var(--mono);font-size:0.86em;background:rgba(34,38,42,0.06);padding:1px 5px;border-radius:5px;color:var(--ink)}
+pre{background:#20242a;color:#e8e6df;border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:14px 0;padding:2px 16px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;color:var(--ink-2)}
+blockquote p{margin:8px 0}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+ul,ol{margin:10px 0;padding-left:24px}
+li{margin:4px 0}
+li>ul,li>ol{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal);font-weight:680;font-size:12.5px;letter-spacing:0.01em;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td code{font-size:0.82em}
+.docnav{max-width:840px;margin:0 auto;padding:16px 52px 0;font-size:12.5px;color:var(--ink-3)}
+.docnav a{color:var(--teal-2)}
+@media(max-width:620px){.docnav{padding:12px 22px 0}}
+</style></head><body>
+<div class="docnav">EBB docs · <a href="../../projects/feature-ebb/_share-guide.html">Share guide</a> · <a href="../../projects/feature-ebb/_brief.html">Brief</a> · <a href="../../projects/feature-ebb/_decisions.html">Decisions</a> · <a href="../../projects/feature-ebb/_screens.html">Screens</a> · <a href="../../projects/feature-ebb/engagement-loop-best-practices.html">Research</a></div>
+<div class="doc"><h1>DCP List / All Topics — Scope Memo</h1>
+<p><strong>To:</strong> EBB design review <strong>From:</strong> Davinder Rehal <strong>Date:</strong> 2026-07-07 <strong>Purpose:</strong> Pin the page's job, structure, and states before wireframing. Approve the direction and I'll produce the 3-breakpoint wireframes. <strong>Rev 2 (2026-07-07):</strong> incorporated review of the existing "Digital Care" all-topics screens — sharpened to <strong>resume-first</strong> and added the <strong>pace-over-speed</strong> principle.</p>
+<hr>
+<h2>The page's job — resume-first, not a storefront</h2>
+<p>One job: <strong>help the member find and resume their few active care paths.</strong> Members run <strong>1–3 paths at a time</strong>, so for the typical visit this page is almost entirely "continue what I'm doing."</p>
+<p>Starting a <em>new</em> path is an <strong>occasional, deliberate</strong> act — and it's better triggered by the <strong>completion tee-up</strong> (the daisy-chain: "you finished X → here's your next") than by an inline browse feed competing for attention on every visit. So:</p>
+<ul><li><strong>Lead with the 1–3 active paths.</strong> For most members that's the whole page.</li><li><strong>Demote browse/Discover to one quiet entry</strong> ("Browse all / add a path") — not a full recommendation feed. This is the single biggest complexity cut.</li><li><strong>It unblocks Lane B</strong> — a member with no assessment can still self-select from that one browse entry.</li><li><strong>It's a library, not the front door (resolved 2026-07-07).</strong> Reached from the <strong>2nd bottom-nav tab (next to Home)</strong> — high-value, deliberate arrival, <em>not</em> the app start. A <strong>front-door variant</strong> is defined for the DCP-Only config that launches here with no Home (see below). Center of gravity: <em>my care</em>, not a catalog.</li></ul>
+<h2>The uploaded "Digital Care" screens are a counter-example, NOT a template</h2>
+<p>Those screens were shared to react against, not to reskin. <strong>Do not anchor the design on them.</strong> They're heavily complex — a card-per-item media grid, a progress bar on every item, doubled reward messaging, chips everywhere. Design from <strong>best practice + best content + the MHC design system</strong>, not from that layout.</p>
+<p>Specifically, avoid what those screens do:</p>
+<ul><li><strong>A big media card per item</strong> → use the <strong>Row</strong> component (<code>design/_index.md</code> — C_Row, Ready). A calm grouped list, not boxed photo-cards.</li><li><strong>A progress bar on every item</strong> → <strong>one progress indicator, max</strong>, on the single current path; others carry light "Session 4 of 10" text. Too many bars is overwhelming.</li><li><strong>Per-card chips + reward lines + outcome hints</strong> → strip the chrome. Money → the slim rewards line only; outcome ("feeling better") → the topic page, not here.</li><li><strong>Two browse doors, interleaved/"recommended" completed, pregnancy shown eligible, two recommendation eyebrows</strong> → one browse row; a demoted Completed archive; exclude pregnancy; one recommendation voice.</li></ul>
+<p><strong>Design principles for this page:</strong> row-first · at most one progress bar · generous whitespace · calm and scannable (Hick's / cognitive load / aesthetic-minimalist) · one emphasized "continue" for the clear next (Von Restorff / D1), everything else quiet.</p>
+<h2>Recommended structure — the content model, DCP-scoped</h2>
+<p>This is not a new model; it's your <a href="../../design/IA/content-surfaces-ia.md">content-surfaces framework</a> scoped to care paths. Everything here is <strong>Do</strong>-mode; the sections are lifecycle states:</p>
+<div class="tablewrap"><table><thead><tr><th>Section</th><th>IA class</th><th>Member's question</th><th>Behavior inherited</th></tr></thead><tbody><tr><td><strong>Promoted "next"</strong> (top)</td><td>top-ranked Suggestion</td><td><em>"What should I do next?"</em></td><td>D1 queue model — one clear next, not a lock</td></tr><tr><td><strong>Continue</strong> (Ongoing)</td><td>In progress (Member)</td><td><em>"Where was I?"</em></td><td>Resume; Zeigarnik pull; progress + $ toward reward</td></tr><tr><td><strong>Discover</strong> (Recommended + Browse all)</td><td>Suggestion (System)</td><td><em>"What else could help me?"</em></td><td>Ranked; personalize (see more/less); <strong>this is Lane B</strong></td></tr><tr><td><strong>Completed</strong></td><td>Done</td><td><em>"What have I finished?"</em></td><td>Archive; $100-earned proof; Peak-End</td></tr></tbody></table></div>
+<p><strong>Reuses existing components</strong> — Feature Card / Preview Card / Row / Filter Group / Chip Group — no net-new atoms (escalate only if wireframing surfaces a real gap).</p>
+<h2>Structure decision to lock: state-adaptive single scroll (recommended)</h2>
+<p><strong>Recommendation:</strong> a <strong>single scrollable page that reorders by member state</strong>, not fixed tabs.</p>
+<ul><li><strong>New / Lane-B member (nothing in progress):</strong> Discover leads — the promoted "next" is a <em>recommended</em> path (from interests, or a sensible default), then Browse-all by category. No empty "Continue" section staring at them.</li><li><strong>Returning member (has an in-progress DCP):</strong> the promoted card is <strong>Continue</strong> (resume + progress + distance-to-$100), then Discover below.</li><li><strong>Completed</strong> is always the tail — a collapsed archive / count, not competing for the top.</li></ul>
+<p><strong>Why single scroll over tabs:</strong> tabs hide Discover behind a tap, which hurts the exact user we most need to serve on this page — the browse on-ramp with nothing yet in progress (Recognition over recall, Nielsen #6). A state-adaptive scroll always leads with the member's real next move (D1; Serial Position — lead and tail carry weight).</p>
+<p><strong>Rejected — fixed tabs (Ongoing | Discover | Completed):</strong> cleaner only once each bucket is substantial; penalizes the new/browse user by burying Discover, and adds a navigation decision this page shouldn't require. Keep as fallback if wireframing shows the scroll gets too long.</p>
+<h2>Taming 14 paths (Hick's / Miller's)</h2>
+<p>14 eligible DCPs is past a comfortable scan. The page must never read as a flat 14-item menu:</p>
+<ul><li>The <strong>promoted "next"</strong> does the triage — one obvious choice up front.</li><li><strong>Discover</strong> shows a <em>ranked</em> short set (6–7, per the home "Recommended" pattern), not all 14.</li><li><strong>Browse all</strong> is <strong>categorized</strong> — Behavioral · MSK · Metabolic · Cardiovascular — each group 5±2 items (Miller's), collapsible. Category is the chunking device, not a wall of tiles.</li><li><strong>Search</strong> for the expert who knows what they want (Nielsen #7, flexibility).</li></ul>
+<h2>Pace over speed — don't gamify velocity (the length insight)</h2>
+<p><strong>Observed:</strong> members who race through a path (chasing the money) don't get the clinical benefit; the ones who pace themselves do. The current cards optimize for the <em>wrong</em> behavior — "4 sessions to your reward," filling progress bars, "on track" — they train the rush.</p>
+<p>Design response:</p>
+<ul><li><strong>Reframe the caption from velocity to cadence.</strong> Not "4 sessions to your reward" → "Session 6 · 3 weeks in" / "2 sessions this week." Reward <em>showing up consistently</em>, not finishing fast.</li><li><strong>Keep money in the banner, off the cards.</strong> Removing the per-card reward line reduces clutter <em>and</em> removes the speed incentive — one fix, both goals.</li><li><strong>The rhythm is already enforced.</strong> <code>EBB_Specification.md</code> §11.5 locks a session-pacing gate — session N+1 unlocks only ≥7 days after session N <em>started</em>; the walkthrough decides <strong>1 session/week</strong>. The gate already "prevents going too FAST." So sessions <em>can't</em> be binged — this memo's job is to stop the <strong>surface</strong> from <em>encouraging</em> it.</li><li><strong>The real progress signal is "How you're doing" (outcome), not sessions-remaining</strong> — depth over distance-to-payout. Goal-gradient still helps near the <em>true</em> finish; we just stop dangling the payout at every step.</li></ul>
+<p>Grounded in: the <strong>Efficacy guardrail</strong> (<code>_decisions.md</code>), the §11.5 pacing gate (locked at <strong>1 session/week</strong>), the topic-page scope decision, and the Engagement–Efficacy Gap in <code>engagement-loop-best-practices.md</code>.</p>
+<h2>Key states to design</h2>
+<ul><li><strong>Empty Continue</strong> (new member) → collapses; Discover leads.</li><li><strong>Cap reached</strong> ($500/yr) → Discover shifts from "$100" framing to health framing (stop dangling a payout they can't collect).</li><li><strong>No strong recommendation</strong> → promoted card softens to "Explore care paths," not a forced pick.</li><li><strong>Consent not yet given</strong> → inherits the <code>gate_mode</code> variant from <a href="../../projects/feature-ebb/_open-decisions.html">_open-decisions #1</a> at the point of starting a path.</li><li><strong>Pregnancy excluded</strong> — 14 of 15; don't render it as eligible.</li></ul>
+<h2>Open decisions (resolve in / alongside the wireframe)</h2>
+<ol><li>~~Front door vs. library~~ <strong>RESOLVED:</strong> library (2nd nav tab); front-door is a header-variant (see <em>Library vs. front-door variant</em>).</li><li><strong>Browse guardrails</strong> — zero-qualification self-select means a member could pick a poorly-matched path. Any light "not sure where to start?" nudge risks re-introducing qualification. Needs a clinical view.</li><li><strong>Reward visibility on tiles</strong> — <em>resolved by the pace principle:</em> money lives in the <strong>banner</strong>, not on cards; cards carry a <strong>cadence</strong> caption, not a distance-to-payout line. (Was: "$100 on promoted + in-progress only.")</li></ol>
+<h2>Design principles applied</h2>
+<p>Hick's / Miller's (triage + chunking) · Zeigarnik + Goal-Gradient (Continue shows progress and distance-to-reward) · Serial Position (lead with next, tail with completed) · Von Restorff (one promoted card, not 14 equal tiles) · Peak-End (Completed as earned proof) · Nielsen #6 recognition-over-recall (state-adaptive, nothing hidden behind tabs), #7 flexibility (search), #2 match-the-real-world (plain category names).</p>
+<h2>Library vs. front-door variant (resolved)</h2>
+<p>One core body, two headers. The difference is entirely <em>above</em> the Continue list.</p>
+<div class="tablewrap"><table><thead><tr><th>Region</th><th><strong>Library</strong> (2nd nav tab — primary)</th><th><strong>Front door</strong> (DCP-Only, no Home)</th></tr></thead><tbody><tr><td>Top</td><td>Slim title</td><td>Greeting ("keep your momentum going")</td></tr><tr><td>Loop re-entry</td><td>Continue section does it</td><td>Elevated — promoted "next" as a hero CTA</td></tr><tr><td>Rewards</td><td>Slim status line / link</td><td>Full Care Path Rewards banner</td></tr><tr><td>Enrollment surfacing</td><td>On Home/other</td><td>Announcement/banner here if not opted in</td></tr><tr><td>Body (Continue · Browse · Completed)</td><td>—</td><td>identical</td></tr></tbody></table></div>
+<p><strong>Build:</strong> library as primary; front door = library + a "home-like" header stack. The screens we were shown are front-door-style; the library is the leaner one.</p>
+<h2>Responsive &amp; nav</h2>
+<ul><li><strong>Mobile (375):</strong> single column, bottom nav (Home · Digital Care · Wellbeing · Benefits · Rewards).</li><li><strong>Web today:</strong> left-sidebar nav + <strong>2-column card grid</strong>. Keep the 2-col grid for Continue at desktop/wide (it reads well), but the resume-first logic is unchanged — Continue leads, Discover/Browse demoted below.</li><li>Wide (~1440) may shift nav per the standing content-width direction (side-nav for Expanded/legacy → top-nav for Large/Extra-large); flag but don't block on it here.</li></ul>
+<h2>Ask</h2>
+<p>Approve <strong>(a)</strong> the section model (Promoted next · Continue · Discover · Completed) and <strong>(b)</strong> the <strong>state-adaptive single-scroll</strong> direction over fixed tabs. Then I'll wireframe the three breakpoints (wide ~1440 · desktop ~1024 · mobile 375) and we iterate.</p>
+<hr>
+<h2>Supporting material</h2>
+<ul><li>IA framework: <code>design/IA/content-surfaces-ia.md</code></li><li>Queue model + surfacing: <code>projects/feature-ebb/_decisions.md</code> (D1, D4)</li><li>Dual on-ramp (Lane B): <code>outputs/jul05-ebb-dual-onramp/</code></li><li>Inventory row: <code>projects/feature-ebb/_screens.md</code> §2</li></ul></div>
+</body></html>

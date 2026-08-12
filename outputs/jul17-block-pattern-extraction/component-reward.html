@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reward card · MHC Component Sheet</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<div class="g-top">
+  <div class="g-top__inner">
+    <a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Sheet</a>
+    <div class="g-top__spacer"></div>
+    <div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div>
+  </div>
+</div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+
+  <header class="g-head">
+    <div class="g-eyebrow">Card · Reward tile</div>
+    <h1 class="g-title">Reward card</h1>
+    <p class="g-lede">A reward with a coloured category chip, a large value, and two meta lines. Packs 2-up on phones and 4-up from tablet width. Four chip colourways: gift, points, raffle, store.</p>
+    <div class="g-tags">
+      <span class="g-tag">.reward</span>
+      <span class="g-tag g-tag--ok">Multi-instance (4)</span>
+      <span class="g-tag g-tag--ok">Authorable block</span>
+      <span class="g-tag g-tag--flag">.reward-chip bypasses type scale</span>
+    </div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Live playground</h2></div>
+    <p class="g-section__note">Drag to resize. 2-column below 600px, 4-column at and above — the same grid engine the tracker tiles use.</p>
+    <div class="g-pg" style="height:372px">
+      <div class="g-pg__hint">↔ Drag the bottom-right corner to resize · live <code>mhc-home.css</code></div>
+      <iframe src="frame-reward.html" title="Reward cards — resizable"></iframe>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Responsive breakpoints</h2></div>
+    <p class="g-section__note">True-width frames, scaled to fit. The four colourways are visible across each layout.</p>
+    <div class="g-bp-row">
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px · 2-col</span></div>
+        <div class="g-bp__vp" style="--w:375;--s:1;--h:360"><iframe src="frame-reward.html" title="Reward Compact"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px · 4-col</span></div>
+        <div class="g-bp__vp" style="--w:1024;--s:.7;--h:180"><iframe src="frame-reward.html" title="Reward Medium"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px · 4-col, large type</span></div>
+        <div class="g-bp__vp" style="--w:1440;--s:.6;--h:200"><iframe src="frame-reward.html" title="Reward Large"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Variants — chip colourways</h2></div>
+    <div class="g-tags">
+      <span class="g-tag"><code>.reward-chip--gift</code> — green</span>
+      <span class="g-tag"><code>.reward-chip--points</code> — periwinkle</span>
+      <span class="g-tag"><code>.reward-chip--raffle</code> — sage</span>
+      <span class="g-tag"><code>.reward-chip--store</code> — peach</span>
+    </div>
+    <p class="g-section__note" style="margin-top:16px">The chip modifier is driven by a token (<code>reward1_chip_modifier</code> → "gift" / "points" / …). The chip's uppercase 11sp treatment is a component-level style, not an atomic Label tier — flagged for token alignment later.</p>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Markup</h2></div>
+    <p class="g-section__note">One reward card, gated by <code>hasReward1</code>. Unroll one per reward (max 4).</p>
+    <div class="g-code">
+      <div class="g-code__bar">block-7-rewards.html <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>&lt;div class="rewards"&gt;
+  {{#formula.hasReward1}}
+  &lt;div class="reward"&gt;
+    &lt;span class="reward-chip reward-chip--{{formula.reward1_chip_modifier}}"&gt;{{formula.copy_reward1_chip}}&lt;/span&gt;
+    &lt;div class="heading-5"&gt;{{formula.copy_reward1_value}}&lt;/div&gt;
+    &lt;div class="body-3 reward__meta"&gt;{{formula.copy_reward1_meta}}&lt;/div&gt;
+    &lt;div class="body-3 reward__sub"&gt;{{formula.copy_reward1_sub}}&lt;/div&gt;
+    &lt;a class="reward__link" href="{{formula.reward1_href}}"&gt;
+      &lt;span class="mhc-visually-hidden"&gt;{{formula.copy_reward1_linkLabel}}&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  {{/formula.hasReward1}}
+  &lt;!-- repeat reward2 / reward3 / reward4 --&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">05</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Grid:</strong> <code>.rewards</code> is <code>repeat(2,1fr)</code> → <code>repeat(4,1fr)</code> at ≥600px.<br>
+      • <strong>Redeem vs navigate:</strong> cards are stretched-links (navigation). If redemption mutates state on tap, each card becomes a User Input block.<br>
+      • <strong>Chip type:</strong> hardcoded 11sp uppercase — align to a token when theming lands.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

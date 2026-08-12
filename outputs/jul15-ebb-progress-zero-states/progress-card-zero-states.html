@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progress card — states</title>
+<style>
+:root{
+  --bg:#F4F2ED;--card:#FFFFFF;--border:#E2E0DA;--ink:#000000;--ink-2:#3E3E3E;--ink-3:#5F5F5F;
+  --bar-on:#1C8EB4;--bar-off:#EAF2FA;--dot-off:#EADDD0;--year-track:#F0E7DE;
+  --pill-bg:#FFEDD0;--pill-ink:#87440A;
+  --f:-apple-system,"SF Pro Text",BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.4}
+.page{max-width:1180px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:24px;font-weight:700;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-3);max-width:900px;margin:0 0 4px;font-size:14px;font-weight:400}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.sw{display:flex;align-items:center;gap:6px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--ink-3);border:1px solid var(--border);background:#fff;border-radius:6px;padding:3px 8px}
+.sw i{width:13px;height:13px;border-radius:3px;border:1px solid rgba(0,0,0,.1)}
+.lbl{font-size:16px;font-weight:600;color:var(--ink);margin:32px 0 2px}
+.lblsub{font-size:13px;color:var(--ink-3);max-width:760px;margin:0 0 6px;font-weight:400}
+.row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-top:12px}
+.col{width:335px}
+.clbl{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.cap{font-size:12.5px;color:var(--ink-2);margin-top:9px;font-weight:400}.cap b{color:var(--ink);font-weight:600}
+/* card */
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
+.hrow{display:flex;justify-content:space-between;align-items:baseline}
+.hrow .l{font-size:14px;font-weight:600;color:var(--ink)}                 /* SF Pro Semibold 14 */
+.hrow .r{font-size:12px;font-weight:500;color:var(--ink)}                 /* SF Pro Text Medium 12 */
+.hrow .r.soft{color:var(--ink-3)}
+.hrow .r.done{color:var(--bar-on);font-weight:600}
+/* per-path bar */
+.bar{display:flex;gap:4px;margin:12px 0 0}
+.bar i{flex:1;height:6px;border-radius:4px;background:var(--bar-off)}
+.bar i.on{background:var(--bar-on)}
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.foot .s{font-size:12px;color:var(--ink-2);font-weight:400}               /* SF Pro Text Regular 12 */
+.pill{font-size:11px;font-weight:600;color:var(--pill-ink);background:var(--pill-bg);padding:4px 9px;border-radius:20px;white-space:nowrap}  /* SF Pro Text Semibold 11 */
+/* year dot-track */
+.dots{display:flex;align-items:center;margin:14px 0 0}
+.dot{width:14px;height:14px;border-radius:50%;flex:none;background:#fff;border:2px solid var(--dot-off)}
+.dot.on{background:var(--bar-on);border-color:#fff;box-shadow:0 0 0 1.5px var(--bar-on)}
+.conn{flex:1;height:4px;background:var(--year-track)}
+.conn.on{background:var(--bar-on)}
+.yend{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;margin-top:12px}
+.yend .a{color:var(--ink);font-weight:500}
+.yend .b{color:var(--ink-3);font-weight:500}
+.yend .full{color:var(--bar-on);font-weight:600}
+.yend .single{color:var(--ink-2);font-weight:400}
+/* wellness-rewards two-tone bar (earned + pending) */
+.rbar{height:14px;border-radius:8px;background:#E7E7E7;overflow:hidden;display:flex;margin:14px 0 6px}
+.rbar .earn{background:#5CA544}
+.rbar .pend{background:repeating-linear-gradient(135deg,#F0B32E 0 7px,#F7CE6E 7px 14px)}
+.rends{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3)}
+.legend{display:flex;gap:14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.leg{flex:1}
+.leg .k{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:center;gap:6px}
+.leg .k i{width:9px;height:9px;border-radius:50%;flex:none}
+.leg.earn .k i{background:#5CA544}.leg.pend .k i{background:#F0B32E}.leg.avail .k i{background:#C4C4C4}
+.leg .v{font-size:16px;font-weight:700;margin-top:3px;color:var(--ink)}
+.leg.avail .v{color:#1E5FA8}
+.ofgoal{font-weight:700}.ofgoal .g{color:#5CA544}.ofgoal .u{color:var(--ink-3);font-weight:500}
+.rec-note{margin-top:32px;max-width:900px;background:var(--card);border-left:3px solid var(--bar-on);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55;font-weight:400}.rec-note b{color:var(--ink);font-weight:600}
+</style></head><body>
+<div class="page">
+<h1>Progress card — states</h1>
+<p class="sub">SF Pro type scale + component colors (pulled from the Figma component). Two faces — <b style="font-weight:600">per-path progress</b> and the annual <b style="font-weight:600">"Your care this year"</b> banner — each across its states.</p>
+<div class="pal">
+  <span class="sw"><i style="background:#1C8EB4"></i>#1C8EB4 progress</span>
+  <span class="sw"><i style="background:#EAF2FA"></i>#EAF2FA track</span>
+  <span class="sw"><i style="background:#FFEDD0"></i>#FFEDD0 reward bg</span>
+  <span class="sw"><i style="background:#87440A"></i>#87440A reward ink</span>
+  <span class="sw"><i style="background:#5CA544"></i>#5CA544 earned</span>
+  <span class="sw"><i style="background:#F0B32E"></i>#F0B32E pending</span>
+  <span class="sw"><i style="background:#E7E7E7"></i>#E7E7E7 available</span>
+  <span class="sw"><i style="background:#E2E0DA"></i>#E2E0DA border</span>
+</div>
+
+<!-- PER-PATH -->
+<p class="lbl">1 · Per-path progress</p>
+<p class="lblsub">How far through <b style="font-weight:600">one program</b> — sessions completed within a single care path. Lives on that program's page; the reward shown is the $100 for finishing this path.</p>
+<div class="row">
+  <div class="col">
+    <div class="clbl">Not started</div>
+    <div class="pcard">
+      <div class="hrow"><span class="l">Your progress</span><span class="r soft">8 sessions</span></div>
+      <div class="bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="foot"><span class="s">Start when you're ready</span><span class="pill">🎁 $100 at finish</span></div>
+    </div>
+    <div class="cap"><b>Not started.</b> No sessions completed yet. Shows the path length ("8 sessions") and an empty track, with an inviting "Start when you're ready."</div>
+  </div>
+
+  <div class="col">
+    <div class="clbl">In progress</div>
+    <div class="pcard">
+      <div class="hrow"><span class="l">Your progress</span><span class="r">2 of 8 sessions</span></div>
+      <div class="bar"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="foot"><span class="s">6 sessions to go</span><span class="pill">🎁 $100 at finish</span></div>
+    </div>
+    <div class="cap"><b>In progress.</b> Some sessions done, more to go. Bar fills as sessions are completed; reward shows what they'll earn at completion.</div>
+  </div>
+
+  <div class="col">
+    <div class="clbl">Completed</div>
+    <div class="pcard">
+      <div class="hrow"><span class="l">Your progress</span><span class="r done">Complete ✓</span></div>
+      <div class="bar"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+      <div class="foot"><span class="s">All 8 sessions done</span><span class="pill">🎁 $100 earned</span></div>
+    </div>
+    <div class="cap"><b>Completed.</b> Every session done. Bar full, "Complete ✓," and the reward reads as earned rather than pending.</div>
+  </div>
+</div>
+
+<!-- YEAR BANNER -->
+<p class="lbl">2 · Your care this year (Wellness Rewards)</p>
+<p class="lblsub">The <b style="font-weight:600">annual reward roll-up across all paths</b>, toward $500. The bar shows two states: <b style="font-weight:600">earned</b> (green — cleared) and <b style="font-weight:600">pending</b> (amber striped — completed, reward still processing), over the available total.</p>
+<div class="row">
+  <div class="col">
+    <div class="clbl">Nothing yet</div>
+    <div class="pcard">
+      <div class="hrow"><span class="l">Your care this year</span><span class="r ofgoal"><span class="g">0%</span> <span class="u">of goal</span></span></div>
+      <div class="rbar"></div>
+      <div class="rends"><span>$0</span><span>$500 goal</span></div>
+      <div class="legend"><div class="leg earn"><div class="k"><i></i>Earned</div><div class="v">$0</div></div><div class="leg pend"><div class="k"><i></i>Pending</div><div class="v">$0</div></div><div class="leg avail"><div class="k"><i></i>Available</div><div class="v">$500</div></div></div>
+    </div>
+    <div class="cap"><b>Nothing yet.</b> No paths completed this year — bar sits on the available track. Finish a path to earn the first $100.</div>
+  </div>
+
+  <div class="col">
+    <div class="clbl">In progress (earned + pending)</div>
+    <div class="pcard">
+      <div class="hrow"><span class="l">Your care this year</span><span class="r ofgoal"><span class="g">20%</span> <span class="u">of goal</span></span></div>
+      <div class="rbar"><span class="earn" style="width:20%"></span><span class="pend" style="width:40%"></span></div>
+      <div class="rends"><span>$0</span><span>$500 goal</span></div>
+      <div class="legend"><div class="leg earn"><div class="k"><i></i>Earned</div><div class="v">$100</div></div><div class="leg pend"><div class="k"><i></i>Pending</div><div class="v">$200</div></div><div class="leg avail"><div class="k"><i></i>Available</div><div class="v">$500</div></div></div>
+    </div>
+    <div class="cap"><b>In progress.</b> Green = <b>earned</b> (cleared). Amber striped = <b>pending</b> (path finished, reward still processing). % of goal reflects the earned amount.</div>
+  </div>
+
+  <div class="col">
+    <div class="clbl">Completed · cap reached</div>
+    <div class="pcard">
+      <div class="hrow"><span class="l">Your care this year</span><span class="r ofgoal"><span class="g">100%</span> <span class="u">of goal</span></span></div>
+      <div class="rbar"><span class="earn" style="width:100%"></span></div>
+      <div class="rends"><span>$0</span><span>$500 goal</span></div>
+      <div class="legend"><div class="leg earn"><div class="k"><i></i>Earned</div><div class="v">$500</div></div><div class="leg pend"><div class="k"><i></i>Pending</div><div class="v">$0</div></div><div class="leg avail"><div class="k"><i></i>Available</div><div class="v">$500</div></div></div>
+    </div>
+    <div class="cap"><b>Completed · cap reached.</b> Full bar in earned green — the $500 annual maximum is cleared, nothing pending.</div>
+  </div>
+</div>
+
+<div class="rec-note">
+<b>Two components, one card family.</b> <b>Per-path progress</b> tracks a single program (sessions within one care path, $100 at finish; blue bar). <b>Your care this year</b> tracks the benefit-year reward toward $500 with a <b>two-state bar — earned (green, cleared) + pending (amber striped, still processing)</b> over the available track, plus an Earned / Pending / Available legend. Each shown across its states: <b>not started → in progress → completed</b>.
+</div>
+</div>
+</body></html>

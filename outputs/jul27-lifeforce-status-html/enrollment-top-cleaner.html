@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Enrollment top — cleaner, 5 options</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  body{background:var(--canvas);padding:32px;}
+  h1.page{font-family:var(--f-display);font-weight:500;font-size:24px;color:var(--navy);margin-bottom:6px;}
+  p.pageintro{font-family:var(--f-text);font-size:14px;color:var(--slate);max-width:80ch;margin-bottom:28px;}
+  .stage{display:flex;gap:28px;align-items:flex-start;flex-wrap:nowrap;}
+  .ideacol{width:392px;flex:0 0 392px;}
+  .lbl{font-family:var(--f-text);font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:8px;}
+  .cap{font-family:var(--f-text);font-size:13px;line-height:1.45;color:var(--slate);margin-top:12px;}
+  .phone{width:392px;background:#fff;border:1px solid var(--silver);border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:20px;box-shadow:0 12px 30px rgba(6,42,66,.08);}
+  .rest{opacity:.4;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+  .rest .rh{font-family:var(--f-display);font-weight:500;font-size:14px;color:var(--charcoal);}
+  .rest .bar{height:40px;border:1px solid var(--hair);border-radius:12px;background:#fff;}
+  .row{display:flex;align-items:center;gap:10px;}.space{justify-content:space-between;}.grow{flex:1;min-width:0;}
+  .top{display:flex;flex-direction:column;gap:8px;}
+  .dots{display:flex;gap:7px;}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--hair);}.dot.on{background:var(--green);}
+  .rule{height:3px;border-radius:3px;background:var(--cloud);overflow:hidden;}.rule .fill{height:100%;width:25%;background:var(--green);border-radius:3px;}
+  .strip{background:var(--tint-navy-05,rgba(15,73,127,.05));border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;}
+  .steps{display:flex;flex-direction:column;gap:10px;}
+  .steprow{display:flex;align-items:center;gap:13px;padding:14px 15px;border:1px solid var(--hair);border-radius:14px;}
+  .chip{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M9 3v-.5h6V3M8.5 10h7M8.5 14h4" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3M7.5 14h9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<h1 class="page">Enrollment top — cleaner (5 options)</h1>
+<p class="pageintro">Lightening the top vs. the segmented bar. Same message ("3 steps until your first visit"), same body below (equal Next-steps). The variable is <strong>presentation + whether it sits in a container.</strong> "1 of 4 done" is dropped from the top since the Completed section already carries the count.</p>
+
+<div class="stage">
+
+  <!-- 1 — Plain line, no container -->
+  <div class="ideacol">
+    <div class="lbl">1 · Plain line — no container, no bar</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="top"><span class="eyebrow c-navy">Getting started</span><h2 class="heading-6 c-charcoal">3 steps until Peak Health books your first visit</h2></div>
+      <div><div class="eyebrow c-charcoal" style="margin-bottom:10px">Next steps</div><div class="steps">
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--navy)"><svg width="20" height="20"><use href="#i-clip"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Program Acknowledgment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-green);color:var(--green)"><svg width="20" height="20"><use href="#i-flask"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div class="grow"><div class="eyebrow c-slate">In-app</div><div class="title-2 c-charcoal">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+      </div></div>
+      <div class="rest"><div class="rh">Completed · 1 of 4</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Lightest.</strong> Just an eyebrow + one plain sentence — the message with zero chrome. The steps list carries the "what's left"; the header states the goal. Minimalist (Nielsen #8), best Billboard-test read.</p>
+  </div>
+
+  <!-- 2 — Line + subtle dots -->
+  <div class="ideacol">
+    <div class="lbl">2 · Line + small dots (no container)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="top"><span class="eyebrow c-navy">Getting started</span><h2 class="heading-6 c-charcoal">3 steps until your first visit</h2><div class="dots"><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div></div>
+      <div><div class="eyebrow c-charcoal" style="margin-bottom:10px">Next steps</div><div class="steps">
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--navy)"><svg width="20" height="20"><use href="#i-clip"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Program Acknowledgment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-green);color:var(--green)"><svg width="20" height="20"><use href="#i-flask"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div class="grow"><div class="eyebrow c-slate">In-app</div><div class="title-2 c-charcoal">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+      </div></div>
+      <div class="rest"><div class="rh">Completed · 1 of 4</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Text + a whisper of progress.</strong> Four small dots (1 filled) give a proportion cue far lighter than a filled bar — no container needed. A touch of Goal-Gradient without the weight.</p>
+  </div>
+
+  <!-- 3 — Line + hairline rule -->
+  <div class="ideacol">
+    <div class="lbl">3 · Line + hairline rule (no container)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="top"><div class="row space"><span class="eyebrow c-navy">Getting started</span><span class="caption c-slate">1 of 4</span></div><h2 class="heading-6 c-charcoal">3 steps until your first visit</h2><div class="rule"><div class="fill"></div></div></div>
+      <div><div class="eyebrow c-charcoal" style="margin-bottom:10px">Next steps</div><div class="steps">
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--navy)"><svg width="20" height="20"><use href="#i-clip"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Program Acknowledgment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-green);color:var(--green)"><svg width="20" height="20"><use href="#i-flask"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div class="grow"><div class="eyebrow c-slate">In-app</div><div class="title-2 c-charcoal">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+      </div></div>
+      <div class="rest"><div class="rh">Completed · 1 of 4</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Keeps a bar, but hair-thin.</strong> A 3px rule that fills 25% — the same signal as the segmented bar with a fraction of the visual mass. If you like the bar concept, this is the diet version.</p>
+  </div>
+
+  <!-- 4 — Soft tint strip (container, no border) -->
+  <div class="ideacol">
+    <div class="lbl">4 · Soft tint strip (light container)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="strip"><span class="eyebrow c-navy">Getting started</span><span class="title-1 c-charcoal">3 steps until Peak Health books your first visit</span></div>
+      <div><div class="eyebrow c-charcoal" style="margin-bottom:10px">Next steps</div><div class="steps">
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--navy)"><svg width="20" height="20"><use href="#i-clip"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Program Acknowledgment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-green);color:var(--green)"><svg width="20" height="20"><use href="#i-flask"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div class="grow"><div class="eyebrow c-slate">In-app</div><div class="title-2 c-charcoal">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+      </div></div>
+      <div class="rest"><div class="rh">Completed · 1 of 4</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Contained, but soft.</strong> A faint tinted strip — no border, no bar — so it reads as a gentle callout, not a heavy card. Keeps a subtle "this is your status" region (Common Region) without the weight of the bordered banner.</p>
+  </div>
+
+  <!-- 5 — Folded into the page header -->
+  <div class="ideacol">
+    <div class="lbl">5 · Folded into the page header</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="top" style="gap:4px"><h1 class="heading-5 c-charcoal">Finish enrolling</h1><p class="paragraph-3 c-slate">3 steps until Peak Health books your first visit · 1 of 4 done.</p></div>
+      <div><div class="eyebrow c-charcoal" style="margin-bottom:10px">Next steps</div><div class="steps">
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--navy)"><svg width="20" height="20"><use href="#i-clip"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Program Acknowledgment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-green);color:var(--green)"><svg width="20" height="20"><use href="#i-flask"/></svg></span><div class="grow"><div class="eyebrow c-slate">Peak Health</div><div class="title-2 c-charcoal">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+        <div class="steprow"><span class="chip" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div class="grow"><div class="eyebrow c-slate">In-app</div><div class="title-2 c-charcoal">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+      </div></div>
+      <div class="rest"><div class="rh">Completed · 1 of 4</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>No separate element at all.</strong> The progress becomes the page's own headline + subtitle ("Finish enrolling" / "3 steps…"). Zero container, most integrated — reads like a normal screen header, not a widget.</p>
+  </div>
+
+</div>
+</body>
+</html>

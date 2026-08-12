@@ -1,0 +1,82 @@
+/* ============================================================
+   MH BRAND × MH Colors v2 — merged token layer
+   Brand source: MHC Brand Guidelines v1.2 (2021)
+   Palette:      Figma "MH colors v2" (i1nW5PTL7yU4MYOMgyAJ7c)
+   Method:       CIEDE2000 (verified against Sharma et al. test data)
+
+   Tolerance ladder used throughout:
+     dE00 <= 1.0   imperceptible
+     dE00 <= 2.0   brand-grade match      <- required for PRIMARY
+     dE00 <= 3.5   reads as the same color <- acceptable for SECONDARY
+     dE00 <= 5.0   visibly different       <- acceptable for TERTIARY only
+     dE00  > 5.0   a different color       <- not defensible as a match
+   ============================================================ */
+
+/* ── LAYER 0 — brand assets. Exact values. Never substituted. ──
+   Logo, app icon, marketing lockups, anything co-branded.       */
+:root {
+  --mh-logo-blue:    #0F497F;
+  --mh-logo-aqua:    #04A0B7;
+  --mh-logo-green:   #52A045;
+  --mh-logo-orange:  #F15922;
+}
+
+/* ── LAYER 1 — palette stops adopted as brand equivalents ──── */
+:root {
+  --mh-brand-blue:       #164677;   /* Ocean 1300                    dE  1.41  brand-grade         9.65:1 ink */
+  --mh-lava-orange:      #EF5D28;   /* Ember 700                     dE  0.77  imperceptible       3.35:1 ui */
+  --mh-tangerine:        #F9841A;   /* Orange 700                    dE  0.62  imperceptible       2.52:1 accent */
+  --mh-charcoal:         #393C3C;   /* Grey 1600                     dE  1.81  brand-grade        11.14:1 ink */
+  --mh-mango:            #F1B500;   /* Yellow 1000                   dE  1.92  brand-grade         1.85:1 tint */
+  --mh-zesty-green:      #CFDC4F;   /* Honeydew 700                  dE  2.26  reads the same      1.50:1 tint */
+  --mh-spring-green:     #52A353;   /* Green 900                     dE  2.37  reads the same      3.12:1 ui */
+  --mh-cloud:            #EBE9E4;   /* Mub 200                       dE  3.99  warm on purpose     1.21:1 wash */
+  --mh-night-sky:        #16314D;   /* Ocean 1600                    dE  3.57  EXCEPTION, see below 13.29:1 ink */
+  --mh-glacier:          #DFF5EE;   /* Jade 200                      dE  3.69  visibly different   1.14:1 wash */
+  --mh-silver:           #CDC9BF;   /* Mub 400                       dE  6.43  warm on purpose     1.65:1 tint */
+  --mh-sky-blue:         #A3E9EC;   /* Teal 400                      dE  4.64  visibly different   1.36:1 tint */
+  --mh-slate:            #777777;   /* Grey 800                      dE  5.67  different color     4.48:1 ui */
+  --mh-aqua-blue:        #04A0B7;   /* EXACT BRAND HEX (off-palette) dE     6  different color     3.03:1 ui */
+}
+
+/* LOGGED EXCEPTIONS — both breach the ladder, both on purpose.
+   1. night-sky -> Ocean 1600 at dE 3.57 is 0.07 over the secondary
+      bar of 3.5. Nothing is closer; the next stop is dE 5.42. It is a
+      dark background anchor with effectively no recognition load.
+      Accepted rather than silently rounded down.
+   2. cloud -> Mub 200 (3.99) and silver -> Mub 400 (6.43) are NOT
+      match claims. Grey 300 (2.62) and Grey 500 (3.94) are closer but
+      keep the cool cast. The extra dE buys warmth in the only place
+      it is safe to spend it. See decision D2.                        */
+
+/* ── LAYER 2 — roles. Everything in the product binds here. ──
+   A brand color that fails AA gets an accessible twin from the
+   SAME family, so the hue reads as brand while the text passes.  */
+:root {
+  /* surface — warmed on purpose (see decision D2) */
+  --surface:            #FFFFFF;
+  --surface-subtle:     #F8F8F9;   /* Grey 100     1.06:1 wash  */
+  --surface-warm:       #F3F2EF;   /* Mub 100      1.12:1 wash  — matches shipped beige, hue 97 vs 93 */
+  --surface-tinted:     #EBE9E4;   /* Mub 200      1.21:1 wash  — replaces brand "cloud"  */
+  --surface-dark:       #16314D;   /* Ocean 1600  13.29:1 ink   — replaces brand "night-sky" */
+
+  /* ink — neutral, never brown (warm families go brown below L*55) */
+  --ink:                #393C3C;   /* Grey 1600   11.14:1 ink   — replaces brand "charcoal" */
+  --ink-secondary:      #5F5F5F;   /* Grey 1100    6.39:1 text  — replaces brand "slate"    */
+  --ink-disabled:       #777777;   /* Grey 800     4.48:1 ui    */
+  --hairline:           #E2E0DA;   /* Mub 300      1.32:1 tint  — dE 0.91 to shipped hairline */
+
+  /* brand */
+  --brand:              #164677;   /* Ocean 1300   9.65:1 ink   dE 1.41 to brand blue */
+  --interactive:        #1C5C9A;   /* Ocean 1100   6.89:1 text  */
+
+  /* semantic — fill + accessible twin, same family */
+  --positive-fill:      #52A353;   /* Green 900    3.12:1 ui    */
+  --positive-text:      #3D7A3E;   /* Green 1200   5.18:1 text  */
+  --negative-fill:      #EF5D28;   /* Ember 700    3.35:1 ui    = brand lava-orange */
+  --negative-text:      #D73F0D;   /* Ember 1000   4.56:1 text  */
+  --notice-fill:        #F9841A;   /* Orange 700   2.55:1 accent = brand tangerine */
+  --notice-text:        #C34600;   /* Orange 1400  5.00:1 text  */
+  --informative-fill:   #04A0B7;   /* brand aqua   3.13:1 ui    off-palette, exact */
+  --informative-text:   #108188;   /* Teal 1200    4.65:1 text  */
+}

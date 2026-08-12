@@ -1,0 +1,204 @@
+{
+  "method": "LCH midpoint of steps 300 and 400, gamut-clamped to sRGB",
+  "rationale": "300->400 is the largest jump in the light half of every family (dE 5.7-11.0 vs 2.0-5.9 for 100->200 and 200->300)",
+  "tier": {
+    "Coffee": {
+      "hex": "#D0C4BB",
+      "clamped": false,
+      "dE300": 4.01,
+      "dE400": 4.1,
+      "gapWas": 8.06,
+      "onWhite": 1.71,
+      "inkOn": 9.93
+    },
+    "Cocoa": {
+      "hex": "#E2D0BF",
+      "clamped": false,
+      "dE300": 3.58,
+      "dE400": 3.71,
+      "gapWas": 7.24,
+      "onWhite": 1.5,
+      "inkOn": 9.12
+    },
+    "Mub": {
+      "hex": "#D7D4CC",
+      "clamped": false,
+      "dE300": 2.9,
+      "dE400": 2.8,
+      "gapWas": 5.7,
+      "onWhite": 1.48,
+      "inkOn": 9.64
+    },
+    "Grey": {
+      "hex": "#DDDDDC",
+      "clamped": false,
+      "dE300": 1.78,
+      "dE400": 1.61,
+      "gapWas": 3.38,
+      "onWhite": 1.36,
+      "inkOn": 8.19
+    },
+    "Honeydew": {
+      "hex": "#F1F6C2",
+      "clamped": false,
+      "dE300": 3.63,
+      "dE400": 2.94,
+      "gapWas": 6.51,
+      "onWhite": 1.12,
+      "inkOn": 8.02
+    },
+    "Lime": {
+      "hex": "#D9F1C5",
+      "clamped": false,
+      "dE300": 3.52,
+      "dE400": 3.26,
+      "gapWas": 6.72,
+      "onWhite": 1.21,
+      "inkOn": 8.48
+    },
+    "Green": {
+      "hex": "#CCEACC",
+      "clamped": false,
+      "dE300": 4.14,
+      "dE400": 3.19,
+      "gapWas": 7.27,
+      "onWhite": 1.3,
+      "inkOn": 8.49
+    },
+    "Jade": {
+      "hex": "#C2ECDF",
+      "clamped": false,
+      "dE300": 3.47,
+      "dE400": 3.35,
+      "gapWas": 6.78,
+      "onWhite": 1.28,
+      "inkOn": 8.38
+    },
+    "Teal": {
+      "hex": "#B7EEF0",
+      "clamped": false,
+      "dE300": 3.59,
+      "dE400": 3.01,
+      "gapWas": 6.54,
+      "onWhite": 1.27,
+      "inkOn": 8.17
+    },
+    "Turquoise": {
+      "hex": "#B9E1F0",
+      "clamped": false,
+      "dE300": 3.3,
+      "dE400": 3.19,
+      "gapWas": 6.46,
+      "onWhite": 1.39,
+      "inkOn": 8.65
+    },
+    "Ocean": {
+      "hex": "#BBD6F0",
+      "clamped": false,
+      "dE300": 3.76,
+      "dE400": 3.75,
+      "gapWas": 7.5,
+      "onWhite": 1.5,
+      "inkOn": 8.85
+    },
+    "Blue": {
+      "hex": "#BDCAF1",
+      "clamped": false,
+      "dE300": 4.7,
+      "dE400": 4.38,
+      "gapWas": 9.04,
+      "onWhite": 1.63,
+      "inkOn": 9.05
+    },
+    "Indigo": {
+      "hex": "#C4B9EF",
+      "clamped": false,
+      "dE300": 5.81,
+      "dE400": 5.4,
+      "gapWas": 11.12,
+      "onWhite": 1.82,
+      "inkOn": 9.42
+    },
+    "Purple": {
+      "hex": "#DAB3EC",
+      "clamped": false,
+      "dE300": 5.63,
+      "dE400": 5.32,
+      "gapWas": 10.87,
+      "onWhite": 1.8,
+      "inkOn": 9.1
+    },
+    "Violet": {
+      "hex": "#ECB4DE",
+      "clamped": false,
+      "dE300": 5.47,
+      "dE400": 5.26,
+      "gapWas": 10.63,
+      "onWhite": 1.73,
+      "inkOn": 8.35
+    },
+    "Pink": {
+      "hex": "#F7B7CD",
+      "clamped": false,
+      "dE300": 5.15,
+      "dE400": 4.88,
+      "gapWas": 9.91,
+      "onWhite": 1.67,
+      "inkOn": 7.77
+    },
+    "Coral": {
+      "hex": "#F8AFAF",
+      "clamped": false,
+      "dE300": 5.7,
+      "dE400": 5.46,
+      "gapWas": 11.03,
+      "onWhite": 1.79,
+      "inkOn": 6.92
+    },
+    "Ember": {
+      "hex": "#FBC7B4",
+      "clamped": false,
+      "dE300": 4.68,
+      "dE400": 4.3,
+      "gapWas": 8.91,
+      "onWhite": 1.51,
+      "inkOn": 6.86
+    },
+    "Orange": {
+      "hex": "#FFD1A9",
+      "clamped": true,
+      "dE300": 4.24,
+      "dE400": 3.74,
+      "gapWas": 7.92,
+      "onWhite": 1.41,
+      "inkOn": 5.96
+    },
+    "Mustard": {
+      "hex": "#FFE0AA",
+      "clamped": true,
+      "dE300": 3.86,
+      "dE400": 3.61,
+      "gapWas": 7.42,
+      "onWhite": 1.27,
+      "inkOn": 5.76
+    },
+    "Yellow": {
+      "hex": "#FFEBA3",
+      "clamped": true,
+      "dE300": 5.03,
+      "dE400": 4.11,
+      "gapWas": 9.04,
+      "onWhite": 1.19,
+      "inkOn": 5.55
+    },
+    "Lemon": {
+      "hex": "#FFF7AA",
+      "clamped": true,
+      "dE300": 3.96,
+      "dE400": 3.45,
+      "gapWas": 7.36,
+      "onWhite": 1.1,
+      "inkOn": 5.37
+    }
+  }
+}

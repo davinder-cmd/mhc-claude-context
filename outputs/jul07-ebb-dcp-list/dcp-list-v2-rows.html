@@ -1,0 +1,183 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DCP List — v2 (Row-based, calm)</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(34,38,42,0.11);--line-2:rgba(34,38,42,0.07);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--amber:#8A5A12;--green:#3F7A46;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1180px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:720px;margin:0 0 18px;font-size:14px}
+.cw{display:flex;height:24px;border-radius:7px;overflow:hidden;max-width:480px;font-size:10px;font-weight:700;color:#fff;margin:6px 0 3px;border:1px solid var(--line)}
+.cw div{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.cwnote{font-size:11.5px;color:var(--ink-3);margin-bottom:26px}
+.gallery{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:9px}
+.cap{font-size:12px;color:var(--ink-2);max-width:390px}
+.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal);background:var(--teal-tint);padding:3px 8px;border-radius:6px}
+
+/* phone */
+.phone{width:390px;background:var(--surface);border:9px solid #1c2330;border-radius:40px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:730px;overflow-y:auto;background:var(--surface)}
+.statusbar{display:flex;justify-content:space-between;padding:13px 22px 2px;font-size:12px;font-weight:700}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 22px 6px}
+.topbar .t{font-size:22px;font-weight:750;letter-spacing:-0.02em}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+
+.rwd{display:flex;align-items:center;gap:8px;margin:6px 22px 20px;font-size:12.5px;color:var(--ink-2)}
+.rwd .g{font-size:14px}
+.rwd b{color:var(--ink)}
+.rwd .chev{margin-left:auto;color:var(--ink-3)}
+
+.sec{font-size:11.5px;font-weight:700;letter-spacing:0.09em;color:var(--ink-3);margin:0 24px 9px}
+
+/* grouped list */
+.list{margin:0 18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.row{display:flex;align-items:center;gap:13px;padding:14px 16px}
+.row + .row{border-top:1px solid var(--line-2)}
+.thumb{width:42px;height:42px;border-radius:11px;flex:none;background:var(--teal-tint)}
+.thumb.a{background:linear-gradient(135deg,#DDE9EA,#Bcdcdc)}
+.thumb.b{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}
+.thumb.c{background:linear-gradient(135deg,#E6EDE2,#C4D8BC)}
+.thumb.d{background:linear-gradient(135deg,#E3E7EC,#C3CEDA)}
+.rbody{flex:1;min-width:0}
+.rttl{font-size:15.5px;font-weight:650;letter-spacing:-0.01em}
+.rcap{font-size:12.5px;color:var(--ink-2);margin-top:1px}
+.rcap.pause{color:var(--amber)}
+.chev{color:var(--ink-3);font-size:16px;flex:none}
+
+/* the single emphasized "continue" */
+.row.primary{padding:16px}
+.row.primary .rttl{font-size:17px;font-weight:700}
+.pline{height:6px;border-radius:4px;background:var(--line-2);margin-top:9px;overflow:hidden;max-width:230px}
+.pline i{display:block;height:100%;width:60%;background:var(--teal)}
+.go{flex:none;font-size:13.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:9px;padding:8px 15px}
+
+/* icon rows */
+.ric{width:42px;height:42px;border-radius:11px;flex:none;display:flex;align-items:center;justify-content:center;background:rgba(34,38,42,.05);color:var(--ink-2);font-size:16px}
+.ric.done{background:#E6EFE1;color:var(--green)}
+
+.bnav{display:flex;justify-content:space-around;padding:9px 6px 13px;border-top:1px solid var(--line);background:var(--surface);position:sticky;bottom:0}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-decoration:none}
+.bnav a.on{color:var(--teal-2);font-weight:700}
+.bnav .ic{font-size:17px}
+
+/* web */
+.web{flex:1;min-width:620px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#F5F5F4;box-shadow:0 24px 60px -34px rgba(14,74,86,.5)}
+.chrome{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#ECEDEE;border-bottom:1px solid var(--line)}
+.chrome .d{width:11px;height:11px;border-radius:50%;background:#cfcfcf}
+.chrome .url{margin-left:14px;font-size:11.5px;color:var(--ink-3);background:#fff;border-radius:20px;padding:4px 14px}
+.weblayout{display:flex;min-height:520px}
+.side{width:210px;background:#fff;border-right:1px solid var(--line);padding:18px 14px;flex:none}
+.brand{display:flex;align-items:center;gap:9px;font-weight:750;font-size:15px;margin-bottom:2px}
+.brand .l{width:26px;height:26px;border-radius:7px;background:var(--teal)}
+.brandsub{font-size:11px;color:var(--ink-3);margin:0 0 18px 35px}
+.navitem{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:13.5px;color:var(--ink-2);margin-bottom:3px}
+.navitem.on{background:var(--teal-tint);color:var(--teal);font-weight:700}
+.navitem .ic{font-size:15px}
+.main{flex:1;padding:26px 30px;max-width:720px}
+.webtitle{font-size:22px;font-weight:750;letter-spacing:-0.01em;margin:0 0 6px}
+.main .list{margin:0 0 20px}
+.main .sec{margin:0 0 9px}
+.main .rwd{margin:4px 0 20px}
+</style></head><body>
+<div class="page">
+<h1>DCP List / All Topics — v2 · Row-based (calm)</h1>
+<p class="sub">Reset from best practice + the design-system <b>Row</b> — <b>not</b> the uploaded screens. Grouped list, not media cards. <b>One progress bar</b> (on the single path you're most likely to resume); everyone else is a quiet row with "Session N of M" text. No per-row chips, no per-card money, generous whitespace.</p>
+
+<div class="cw">
+<div style="width:66%;background:#C9BfA8;color:#3a352b">66% · warm neutrals</div>
+<div style="width:27%;background:#3a4047">27% · graphite ink</div>
+<div style="width:7%;background:#0E4A56">7% teal</div>
+</div>
+<div class="cwnote">Even calmer weighting than v1 — teal appears once (the Continue action + its progress line); no amber unless a path is paused. The page reads as a quiet list.</div>
+
+<div class="gallery">
+
+<!-- mobile -->
+<div class="col">
+<span class="tag">Mobile · Library</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="topbar"><span class="t">Digital Care</span><span class="avatar">A</span></div>
+<div class="rwd"><span class="g">🎁</span> Rewards · <b>$200 of $500</b> this year <span class="chev">›</span></div>
+
+<div class="sec">CONTINUE</div>
+<div class="list">
+  <div class="row primary">
+    <div class="thumb a"></div>
+    <div class="rbody"><div class="rttl">Managing Anxiety</div><div class="rcap">Session 6 · 3 weeks in</div><div class="pline"><i></i></div></div>
+    <div class="go">Continue</div>
+  </div>
+  <div class="row">
+    <div class="thumb b"></div>
+    <div class="rbody"><div class="rttl">Weight Management</div><div class="rcap pause">Session 4 of 10 · paused</div></div>
+    <div class="chev">›</div>
+  </div>
+  <div class="row">
+    <div class="thumb c"></div>
+    <div class="rbody"><div class="rttl">Managing Depression</div><div class="rcap">Session 3 of 7</div></div>
+    <div class="chev">›</div>
+  </div>
+</div>
+
+<div class="list">
+  <div class="row">
+    <div class="ric">▦</div>
+    <div class="rbody"><div class="rttl">Browse all care paths</div><div class="rcap">Grouped by area</div></div>
+    <div class="chev">›</div>
+  </div>
+  <div class="row">
+    <div class="ric done">✓</div>
+    <div class="rbody"><div class="rttl">Completed</div><div class="rcap">2 paths · view past runs</div></div>
+    <div class="chev">⌄</div>
+  </div>
+</div>
+
+<div class="bnav">
+<a><span class="ic">⌂</span>Home</a>
+<a class="on"><span class="ic">♡</span>Digital Care</a>
+<a><span class="ic">❦</span>Wellbeing</a>
+<a><span class="ic">▤</span>Benefits</a>
+<a><span class="ic">☆</span>Rewards</a>
+</div>
+</div></div>
+<div class="cap"><b>One list, one bar.</b> Only the path you're most likely to resume is emphasized (bolder + the single progress line + Continue). The other active paths are quiet rows with text status. Browse + Completed are two more rows. That's the whole page.</div>
+</div>
+
+<!-- web -->
+<div class="col" style="flex:1;min-width:620px">
+<span class="tag">Web · wide (shown scaled) · Library</span>
+<div class="web">
+<div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care</span></div>
+<div class="weblayout">
+<div class="side">
+<div class="brand"><span class="l"></span> mobilehealth</div>
+<div class="brandsub">Digital Care</div>
+<div class="navitem"><span class="ic">⌂</span> Home</div>
+<div class="navitem on"><span class="ic">♡</span> Digital Care</div>
+<div class="navitem"><span class="ic">❦</span> Wellbeing</div>
+<div class="navitem"><span class="ic">▤</span> Benefits</div>
+<div class="navitem"><span class="ic">☆</span> Rewards</div>
+</div>
+<div class="main">
+<div class="webtitle">Digital Care Paths</div>
+<div class="rwd"><span class="g">🎁</span> Rewards · <b>$200 of $500</b> this year <span class="chev">›</span></div>
+<div class="sec">CONTINUE</div>
+<div class="list">
+  <div class="row primary"><div class="thumb a"></div><div class="rbody"><div class="rttl">Managing Anxiety</div><div class="rcap">Session 6 · 3 weeks in</div><div class="pline"><i></i></div></div><div class="go">Continue</div></div>
+  <div class="row"><div class="thumb b"></div><div class="rbody"><div class="rttl">Weight Management</div><div class="rcap pause">Session 4 of 10 · paused</div></div><div class="chev">›</div></div>
+  <div class="row"><div class="thumb c"></div><div class="rbody"><div class="rttl">Managing Depression</div><div class="rcap">Session 3 of 7</div></div><div class="chev">›</div></div>
+</div>
+<div class="list">
+  <div class="row"><div class="ric">▦</div><div class="rbody"><div class="rttl">Browse all care paths</div><div class="rcap">Grouped by area</div></div><div class="chev">›</div></div>
+  <div class="row"><div class="ric done">✓</div><div class="rbody"><div class="rttl">Completed</div><div class="rcap">2 paths · view past runs</div></div><div class="chev">⌄</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cap" style="max-width:640px"><b>Web = same rows, full-width single column</b> — not the 2-column card grid (that was the uploaded screens' weight). Slim title, no greeting (library). Calm carries straight across breakpoints because it's a list, not a gallery.</div>
+</div>
+
+</div>
+</div>
+</body></html>

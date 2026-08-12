@@ -1,0 +1,883 @@
+<!--
+  ============================================================
+  HOME FRAGMENT · NO-EMPLOYER scenario
+  ============================================================
+  Self-contained shadow-DOM fragment per html-fragment-authoring-guide.md.
+  Hard rules honored: no <html>/<head>/<body>, tokens on :host (NOT :root),
+  no <script>, no <svg>, no ligature-based icon fonts, OS font fallbacks,
+  class-based selectors, every <img> has explicit width/height/alt.
+
+  Icon strategy: Font Awesome 6.5.1 via @font-face + Unicode codepoint
+  references. Pinned to /6.5.1/ on cdnjs so a future CDN update can't
+  silently break the icons.
+  ============================================================
+-->
+
+<style>
+  /* ── Font Awesome 6.5.1 (pinned) ─────────────────────────── */
+  @font-face {
+    font-family: 'Font Awesome 6 Free';
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2') format('woff2'),
+         url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.ttf')   format('truetype');
+  }
+  .fa-icon {
+    font-family: 'Font Awesome 6 Free', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+  }
+
+  /* ── Design tokens — on :host so they apply inside the shadow root ── */
+  :host {
+    /* Colors */
+    --bg:              #FAF7F0;
+    --surface:         #FFFFFF;
+    --surface-tinted:  #EFE7D6;
+    --ink:             #1A1D21;
+    --ink-soft:        #5C5F66;
+    --ink-placeholder: #9A9EA6;
+    --hairline:        #E6E3DC;
+    --link:            #2E60A4;
+    --brand:           #1B355C;
+    --on-brand:        #FFFFFF;
+    --insight-bg:      #E8F0FA;
+    --insight-border:  #B5C8E0;
+    --insight-dot:     #2E60A4;
+    --red:             #C8272E;
+    --green:           #4FA858;
+    --blue-icon:       #3A6FA8;
+    --orange:          #B5571E;
+    --teal-dark:       #1E5A6B;
+    --progress-bg:     #DDD7C8;
+    --progress-fill:   #4A4A60;
+
+    /* Type families — OS fallbacks required per guide §7 */
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+
+    /* Shape */
+    --r-xs: 2px; --r-s: 4px; --r-m: 8px; --r-l: 12px; --r-xl: 16px; --r-full: 999px;
+
+    /* Spacing */
+    --s-01: 0.25rem; --s-02: 0.5rem; --s-03: 0.75rem; --s-04: 1rem;
+    --s-05: 1.5rem;  --s-06: 2rem;   --s-07: 2.5rem;  --s-08: 3rem;  --s-09: 4rem;
+
+    /* Base layout & typography */
+    display: block;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: 1.25;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Minimal universal reset (box-sizing only per guide §8) ── */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* ── Type scale ────────────────────────────────────────────── */
+  .heading-4   { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem;   line-height: 2rem;    margin: 0; }
+  .heading-5   { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: 1.75rem; margin: 0; }
+  .heading-6   { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem;   line-height: 1.5rem;  margin: 0; }
+  .title-1     { font-family: var(--f-text);    font-weight: 500; font-size: 1.125rem;  line-height: 1.5rem;  margin: 0; }
+  .body-2      { font-family: var(--f-text);    font-weight: 400; font-size: 1rem;      line-height: 1.25rem; margin: 0; }
+  .body-3      { font-family: var(--f-text);    font-weight: 400; font-size: 0.875rem;  line-height: 1.125rem; margin: 0; }
+  .paragraph-2 { font-family: var(--f-text);    font-weight: 400; font-size: 1rem;      line-height: 1.5rem;  margin: 0; }
+  .label-3     { font-family: var(--f-text);    font-weight: 500; font-size: 0.6875rem; line-height: 0.875rem; margin: 0; }
+  .caption     { font-family: var(--f-text);    font-weight: 500; font-size: 0.75rem;   line-height: 1rem; margin: 0; }
+  .eyebrow     { font-family: var(--f-text);    font-weight: 500; font-size: 0.6875rem; line-height: 0.875rem; letter-spacing: 0.04em; text-transform: uppercase; margin: 0; }
+  .ink-soft        { color: var(--ink-soft); }
+  .ink-placeholder { color: var(--ink-placeholder); }
+
+  @media (min-width: 1200px) {
+    .heading-4 { font-size: 2rem;     line-height: 2.25rem; }
+    .heading-5 { font-size: 1.8125rem; line-height: 2rem;    }
+    .heading-6 { font-size: 1.4375rem; line-height: 1.625rem; }
+    .title-1   { font-family: var(--f-display); font-size: 1.25rem; line-height: 1.5rem; }
+    .body-2    { font-size: 1.125rem; line-height: 1.5rem; }
+    .body-3    { font-size: 1rem;     line-height: 1.25rem; }
+    .eyebrow   { font-size: 0.75rem;  line-height: 1rem; }
+  }
+
+  /* ── Top bar ──────────────────────────────────────────────── */
+  .top-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--hairline);
+    position: sticky; top: 0; z-index: 30;
+  }
+  .top-bar__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 64px;
+    padding: 0 var(--s-04);
+    display: flex; align-items: center; gap: var(--s-03);
+  }
+  .icon-btn {
+    width: 48px; height: 48px;
+    border-radius: var(--r-full);
+    border: 0; background: transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--ink);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .icon-btn:hover { background: var(--hairline); }
+  .icon-btn--filled { background: var(--surface-tinted); }
+  .icon-btn--filled:hover { background: var(--hairline); }
+  .acme-logo {
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 2px solid var(--red);
+    padding: 2px 8px;
+    border-radius: var(--r-s);
+    color: var(--red);
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    background: var(--surface);
+  }
+
+  /* ── Shell ────────────────────────────────────────────────── */
+  .shell { padding: var(--s-04) var(--s-04) calc(var(--s-09) + 80px); }
+  .shell__rail { max-width: 1280px; margin: 0 auto; }
+  @media (min-width: 600px) {
+    .top-bar__inner { padding: 0 var(--s-05); }
+    .shell { padding: var(--s-06) var(--s-05) var(--s-09); }
+  }
+  @media (min-width: 1600px) {
+    .top-bar__inner, .shell__rail { max-width: 1440px; }
+  }
+
+  /* ── Greeting ─────────────────────────────────────────────── */
+  .greeting {
+    display: flex; justify-content: space-between; align-items: end;
+    gap: var(--s-04);
+    margin-bottom: var(--s-05);
+  }
+  .greeting__actions { display: flex; gap: var(--s-03); }
+  .greet-compact { display: inline; }
+  .greet-medium  { display: none; }
+  @media (min-width: 600px) {
+    .greet-compact { display: none; }
+    .greet-medium  { display: inline; }
+  }
+
+  /* ── Sections ─────────────────────────────────────────────── */
+  .section { margin-top: var(--s-07); }
+  .recommendations {
+    display: flex; flex-direction: column;
+    gap: var(--s-04);
+  }
+  @media (min-width: 600px) {
+    .recommendations { gap: var(--s-05); }
+  }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--s-03);
+    margin-bottom: var(--s-04);
+  }
+  .section-head__title { display: flex; flex-direction: column; gap: var(--s-01); }
+  .section-head .meta { color: var(--ink-soft); display: inline-flex; align-items: center; gap: var(--s-02); }
+
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+  }
+  .hero__stretched-link { display: none; }
+  @media (max-width: 599px) {
+    .hero__stretched-link {
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: var(--r-xl);
+      text-indent: -9999px;
+      overflow: hidden;
+    }
+    .hero__actions { display: none; }
+    .hero { cursor: pointer; }
+  }
+  .hero__media { height: 216px; background: var(--surface-tinted); }
+  .hero__content {
+    padding: var(--s-05);
+    display: flex; flex-direction: column; gap: var(--s-04);
+  }
+  .hero__title-group, .hero__copy-group { display: contents; }
+  .hero__meta {
+    color: var(--ink-soft);
+    display: flex; gap: var(--s-02); align-items: center; flex-wrap: wrap;
+  }
+  .hero__meta .dot { width: 3px; height: 3px; border-radius: var(--r-full); background: currentColor; }
+  @media (min-width: 600px) {
+    .hero { grid-template-columns: 5fr 7fr; height: 360px; }
+    .hero__media { height: 100%; }
+    .hero__content { padding: var(--s-06); overflow: hidden; justify-content: center; gap: var(--s-05); }
+  }
+
+  /* ── Buttons ──────────────────────────────────────────────── */
+  .btn {
+    height: 40px;
+    padding: 0 var(--s-04);
+    border-radius: var(--r-full);
+    border: 0;
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-02);
+    font-family: var(--f-text); font-weight: 500;
+    font-size: 0.875rem; line-height: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-m { height: 56px; padding: 0 var(--s-05); font-size: 1rem; line-height: 1.25rem; }
+  .btn-filled  { background: var(--brand); color: var(--on-brand); }
+  .btn-filled:hover { background: #14264A; }
+  .btn-outlined { background: var(--surface); color: var(--ink); border: 1px solid var(--hairline); }
+  .btn-outlined:hover { background: var(--surface-tinted); }
+  .btn-text { background: transparent; color: var(--link); padding: 0 var(--s-03); gap: 0; }
+  .btn-text:hover { background: rgba(46, 96, 164, 0.08); }
+
+  /* ── Pair row (v82 borderless treatment) ──────────────────── */
+  .pair {
+    display: grid;
+    gap: var(--s-05);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 600px) {
+    .pair.pair--cols-2 { grid-template-columns: 1fr 1fr; }
+  }
+  .pair-section {
+    display: flex; flex-direction: column;
+    gap: var(--s-03);
+    min-width: 0;
+  }
+  .pair-section__header {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: var(--s-03);
+    min-height: 32px;
+  }
+  .pair-section__footer { display: flex; }
+  .pair-section__cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--s-04);
+  }
+  @media (min-width: 600px) {
+    .pair-section__cards { grid-template-columns: 1fr 1fr; gap: var(--s-05); }
+  }
+  .rec-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-04);
+    display: flex; align-items: center;
+    gap: var(--s-04);
+    text-decoration: none; color: inherit;
+    transition: background-color .12s ease;
+  }
+  .rec-card:hover { background: var(--surface-tinted); }
+  .rec-card__thumb {
+    width: 80px; height: 80px;
+    border-radius: var(--r-l);
+    background: var(--surface-tinted);
+    flex: 0 0 auto;
+  }
+  @media (min-width: 1200px) {
+    .rec-card__thumb { width: 160px; height: auto; aspect-ratio: 4 / 3; }
+  }
+  .rec-card__body {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    gap: var(--s-01);
+  }
+  .rec-card__chev { color: var(--ink-placeholder); flex: 0 0 auto; }
+  .pill-edit {
+    background: var(--insight-bg);
+    color: var(--ink);
+    border: 0;
+    height: 32px;
+    padding: 0 var(--s-04);
+    border-radius: var(--r-full);
+    font-family: var(--f-text); font-weight: 500;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex; align-items: center;
+  }
+  .pill-edit:hover { background: var(--insight-border); }
+  @media (max-width: 599px) {
+    .pair-section {
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-xl);
+      padding: var(--s-04);
+      gap: var(--s-03);
+    }
+    .pair-section__header { min-height: 0; }
+    .rec-card { border: 0; padding: 0; background: transparent; }
+    .rec-card:hover { background: transparent; }
+  }
+
+  /* ── This week trackers ───────────────────────────────────── */
+  .trackers {
+    display: grid;
+    gap: var(--s-03);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 600px) {
+    .trackers { grid-template-columns: repeat(4, 1fr); gap: var(--s-04); }
+  }
+  .tracker {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-04);
+    display: flex; flex-direction: column; gap: var(--s-02);
+    position: relative;
+  }
+  .tracker__icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid var(--green);
+    display: grid; place-items: center;
+    color: var(--green);
+    background: var(--surface);
+    font-size: 22px;
+  }
+  .tracker--sleep    .tracker__icon { border-color: var(--blue-icon);  color: var(--blue-icon);  }
+  .tracker--calories .tracker__icon { border-color: var(--orange);     color: var(--orange);     }
+  .tracker--active   .tracker__icon { border-color: var(--teal-dark);  color: var(--teal-dark);  }
+  .tracker__label { color: var(--ink-soft); margin-top: var(--s-02); }
+  .tracker__value {
+    display: inline-flex; align-items: baseline; gap: var(--s-01);
+  }
+  .tracker__value .arrow {
+    color: var(--green);
+    font-size: 14px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+  }
+  .tracker--sleep    .tracker__value .arrow { color: var(--blue-icon); }
+  .tracker--calories .tracker__value .arrow { color: var(--orange);    }
+  .tracker--active   .tracker__value .arrow { color: var(--teal-dark); }
+  .tracker__meta { color: var(--ink-soft); }
+  .tracker__link {
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    text-decoration: none;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Insight ──────────────────────────────────────────────── */
+  .insight {
+    background: var(--insight-bg);
+    border: 1px solid var(--insight-border);
+    border-radius: var(--r-xl);
+    padding: var(--s-05);
+    display: flex; align-items: center;
+    gap: var(--s-04);
+  }
+  .insight__label {
+    display: inline-flex; align-items: center; gap: var(--s-02);
+    color: var(--insight-dot);
+  }
+  .insight__label .dot {
+    width: 8px; height: 8px; border-radius: var(--r-full);
+    background: var(--insight-dot);
+  }
+  .insight__body {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    gap: var(--s-02);
+  }
+  .insight__action {
+    display: flex; justify-content: center;
+    margin-top: var(--s-04);
+  }
+  .banner-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    flex: 0 0 auto;
+    font-size: 22px;
+  }
+  .banner-icon--challenge { background: rgba(0, 0, 0, 0.06); color: var(--ink); }
+  .banner-icon--insight   { background: rgba(46, 96, 164, 0.14); color: var(--insight-dot); }
+  @media (max-width: 599px) {
+    .insight .banner-icon, .challenge .banner-icon { display: none; }
+  }
+
+  /* ── Programs ─────────────────────────────────────────────── */
+  .programs {
+    display: grid;
+    gap: var(--s-04);
+    grid-template-columns: 1fr;
+  }
+  @media (max-width: 599px) {
+    .programs {
+      grid-auto-flow: column;
+      grid-auto-columns: 78%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: var(--s-03);
+      margin: 0 calc(var(--s-04) * -1);
+      padding-left: var(--s-04);
+      padding-right: var(--s-04);
+    }
+    .program { scroll-snap-align: start; }
+  }
+  @media (min-width: 600px) {
+    .programs { grid-template-columns: repeat(3, 1fr); gap: var(--s-04); }
+  }
+  .program {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    position: relative;
+  }
+  .program__media { aspect-ratio: 16 / 9; background: var(--surface-tinted); }
+  .program__body {
+    padding: var(--s-05);
+    display: flex; flex-direction: column; gap: var(--s-02);
+  }
+  .program__tag {
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: var(--s-02);
+  }
+  .program__tag .dot { width: 6px; height: 6px; border-radius: var(--r-full); background: var(--ink-soft); }
+  .program__footer {
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--ink-soft);
+  }
+  .program__link {
+    position: absolute; inset: 0;
+    text-decoration: none;
+  }
+  .progress {
+    height: 3px;
+    background: var(--progress-bg);
+    border-radius: var(--r-full);
+    overflow: hidden;
+  }
+  .progress__fill { height: 100%; background: var(--progress-fill); border-radius: inherit; width: var(--p, 0%); }
+
+  /* ── Challenge ────────────────────────────────────────────── */
+  .challenge {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-05);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: var(--s-04);
+    position: relative;
+  }
+  .challenge__body { display: flex; flex-direction: column; gap: var(--s-02); flex: 1; min-width: 0; }
+  .challenge__meta { color: var(--ink-soft); }
+  .challenge__link {
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    text-decoration: none;
+  }
+  @media (max-width: 599px) {
+    .challenge {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: start;
+      row-gap: var(--s-04);
+    }
+  }
+
+  /* ── Rewards ──────────────────────────────────────────────── */
+  .rewards {
+    display: grid;
+    gap: var(--s-03);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 600px) {
+    .rewards { grid-template-columns: repeat(3, 1fr); gap: var(--s-04); }
+  }
+  .reward {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-04);
+    display: flex; flex-direction: column; gap: var(--s-02);
+    position: relative;
+  }
+  .reward-chip {
+    align-self: flex-start;
+    display: inline-flex; align-items: center;
+    padding: var(--s-01) var(--s-02);
+    border-radius: var(--r-m);
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-weight: 600;
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  .reward-chip--gift   { background: #CFE9DB; }
+  .reward-chip--store  { background: #FAE3D3; }
+  .reward-chip--raffle { background: #DCEACE; }
+  .reward__meta { color: var(--ink-soft); }
+  .reward__sub  { color: var(--ink-placeholder); margin-top: var(--s-01); }
+  .reward__link { position: absolute; inset: 0; text-decoration: none; }
+
+  /* ── Bottom nav (Compact only) ────────────────────────────── */
+  .bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    height: 80px;
+    background: var(--surface);
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: var(--s-02) 0 var(--s-03);
+    z-index: 15;
+  }
+  .bn-item {
+    background: transparent; border: 0;
+    color: var(--ink-soft);
+    display: flex; flex-direction: column; align-items: center; gap: var(--s-01);
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .bn-item.active { color: var(--ink); }
+  @media (min-width: 600px) { .bottom-nav { display: none; } }
+
+  /* Inline text visible only at Large+ for fitting full labels in tight buttons */
+  .medium-up-inline { display: none; }
+  @media (min-width: 1200px) { .medium-up-inline { display: inline; } }
+</style>
+
+
+<!-- ──────────── TOP BAR ──────────── -->
+<header class="top-bar">
+  <div class="top-bar__inner">
+    <a class="icon-btn" href="/menu" aria-label="Open menu">
+      <span class="fa-icon" aria-hidden="true">&#xf0c9;</span>
+    </a>
+    <div class="acme-logo" aria-label="Acme">ACME</div>
+  </div>
+</header>
+
+<main class="shell">
+ <div class="shell__rail">
+
+  <!-- ──────────── GREETING + ACTIONS ──────────── -->
+  <div class="greeting">
+    <h1 class="heading-4">
+      <span class="greet-compact">Hi Davinder</span>
+      <span class="greet-medium">Afternoon Davinder</span>
+    </h1>
+    <div class="greeting__actions">
+      <a class="icon-btn icon-btn--filled" href="/messages" aria-label="Messages">
+        <span class="fa-icon" aria-hidden="true">&#xf0e0;</span>
+      </a>
+      <a class="icon-btn icon-btn--filled" href="/search" aria-label="Search">
+        <span class="fa-icon" aria-hidden="true">&#xf002;</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ──────────── RECOMMENDATIONS (hero + pair) ──────────── -->
+  <div class="recommendations">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <a class="hero__stretched-link" href="/programs/sleep/start" aria-label="Sleep better in 4 weeks — start the program">Start the program</a>
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="hero__content">
+        <div class="hero__title-group">
+          <div class="eyebrow ink-soft">Based on your interest</div>
+          <h2 class="heading-4" id="hero-title">Sleep better in 4 weeks</h2>
+        </div>
+        <div class="hero__copy-group">
+          <p class="paragraph-2 ink-soft">
+            An evidence-based program built around your sleep habits.
+            Eight short sessions, a quiet routine, real change.
+          </p>
+          <div class="hero__meta body-3">
+            <span>Sleep DCP</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span>$100 reward at completion</span>
+          </div>
+        </div>
+        <div class="hero__actions">
+          <a class="btn btn-m btn-filled" href="/programs/sleep/start">Start the program</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pair: NO-EMPLOYER scenario — single full-width section, two interest cards -->
+    <section class="pair" aria-labelledby="pair-title">
+      <h2 id="pair-title" class="visually-hidden">Recommendations</h2>
+
+      <div class="pair-section">
+        <div class="pair-section__header">
+          <h3 class="title-1">Based on your interest</h3>
+          <a class="pill-edit" href="/settings/interests">Edit</a>
+        </div>
+
+        <div class="pair-section__cards">
+          <a class="rec-card" href="/articles/wind-down-before-bed">
+            <div class="rec-card__thumb" aria-hidden="true"></div>
+            <div class="rec-card__body">
+              <div class="title-1">Wind down before bed</div>
+              <div class="body-3 ink-soft">Journey &middot; 3 min read</div>
+            </div>
+            <span class="rec-card__chev fa-icon" aria-hidden="true">&#xf054;</span>
+          </a>
+
+          <a class="rec-card" href="/programs/glp1">
+            <div class="rec-card__thumb" aria-hidden="true"></div>
+            <div class="rec-card__body">
+              <div class="title-1">GLP-1 Medications</div>
+              <div class="body-3 ink-soft">Digital Care &middot; Earn $25</div>
+            </div>
+            <span class="rec-card__chev fa-icon" aria-hidden="true">&#xf054;</span>
+          </a>
+        </div>
+
+        <div class="pair-section__footer">
+          <a class="btn btn-text" href="/interests">See 3 more<span class="medium-up-inline">&nbsp;matching your interest</span></a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.recommendations -->
+
+  <!-- ──────────── THIS WEEK ──────────── -->
+  <section class="section" aria-labelledby="thisweek-title">
+    <div class="section-head">
+      <div class="section-head__title">
+        <h2 id="thisweek-title" class="heading-6">This week</h2>
+        <div class="caption meta">Synced 4 minutes ago &middot; Apple Health</div>
+      </div>
+      <a class="btn btn-text" href="/data">All data</a>
+    </div>
+
+    <div class="trackers">
+      <div class="tracker">
+        <div class="tracker__icon"><span class="fa-icon" aria-hidden="true">&#xf554;</span></div>
+        <div class="eyebrow tracker__label">Steps</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow fa-icon" aria-hidden="true">&#xf062;</span>
+          6,456
+        </div>
+        <div class="body-3 tracker__meta">78% of weekly goal</div>
+        <a class="tracker__link" href="/trackers/steps"><span class="visually-hidden">Steps</span></a>
+      </div>
+
+      <div class="tracker tracker--sleep">
+        <div class="tracker__icon"><span class="fa-icon" aria-hidden="true">&#xf186;</span></div>
+        <div class="eyebrow tracker__label">Sleep</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow fa-icon" aria-hidden="true">&#xf062;</span>
+          6h 43m
+        </div>
+        <div class="body-3 tracker__meta">78% of weekly goal</div>
+        <a class="tracker__link" href="/trackers/sleep"><span class="visually-hidden">Sleep</span></a>
+      </div>
+
+      <div class="tracker tracker--calories">
+        <div class="tracker__icon"><span class="fa-icon" aria-hidden="true">&#xf06d;</span></div>
+        <div class="eyebrow tracker__label">Calories</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow fa-icon" aria-hidden="true">&#xf062;</span>
+          645
+        </div>
+        <div class="body-3 tracker__meta">78% of weekly goal</div>
+        <a class="tracker__link" href="/trackers/calories"><span class="visually-hidden">Calories</span></a>
+      </div>
+
+      <div class="tracker tracker--active">
+        <div class="tracker__icon"><span class="fa-icon" aria-hidden="true">&#xf2f2;</span></div>
+        <div class="eyebrow tracker__label">Active Min</div>
+        <div class="heading-6 tracker__value">
+          <span class="arrow fa-icon" aria-hidden="true">&#xf062;</span>
+          52,470
+        </div>
+        <div class="body-3 tracker__meta">78% of weekly goal</div>
+        <a class="tracker__link" href="/trackers/active"><span class="visually-hidden">Active Minutes</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────── INSIGHT ──────────── -->
+  <section class="section" aria-labelledby="insight-title">
+    <h2 id="insight-title" class="visually-hidden">Insight</h2>
+    <div class="insight">
+      <div class="banner-icon banner-icon--insight">
+        <span class="fa-icon" aria-hidden="true">&#xf005;</span>
+      </div>
+      <div class="insight__body">
+        <div class="eyebrow insight__label">
+          <span class="dot" aria-hidden="true"></span>
+          Insight
+        </div>
+        <p class="paragraph-2">
+          Sleep is averaging 38 minutes less than your goal this week. Try a 30-minute wind-down tonight at 9:30pm.
+        </p>
+      </div>
+    </div>
+    <div class="insight__action">
+      <button class="btn btn-outlined" type="button">Refresh Insight</button>
+    </div>
+  </section>
+
+  <!-- ──────────── KEEP GOING ──────────── -->
+  <section class="section" aria-labelledby="progress-title">
+    <div class="section-head">
+      <h2 id="progress-title" class="heading-6">Keep going</h2>
+      <a class="btn btn-text" href="/programs">All programs</a>
+    </div>
+
+    <div class="programs">
+      <article class="program">
+        <div class="program__media" aria-hidden="true"></div>
+        <div class="program__body">
+          <div class="eyebrow program__tag">
+            <span class="dot" aria-hidden="true"></span>
+            Sleep
+          </div>
+          <h3 class="title-1">Treating Insomnia</h3>
+          <div class="program__footer body-3">
+            <span>Session 5 of 8 &mdash; continue</span>
+          </div>
+          <div class="progress"><div class="progress__fill" style="--p:62.5%"></div></div>
+        </div>
+        <a class="program__link" href="/programs/treating-insomnia"><span class="visually-hidden">Treating Insomnia</span></a>
+      </article>
+
+      <article class="program">
+        <div class="program__media" aria-hidden="true"></div>
+        <div class="program__body">
+          <div class="eyebrow program__tag">
+            <span class="dot" aria-hidden="true"></span>
+            Stress
+          </div>
+          <h3 class="title-1">Manage Stress</h3>
+          <div class="program__footer body-3">
+            <span>Session 4 of 8 &mdash; continue</span>
+          </div>
+          <div class="progress"><div class="progress__fill" style="--p:50%"></div></div>
+        </div>
+        <a class="program__link" href="/programs/manage-stress"><span class="visually-hidden">Manage Stress</span></a>
+      </article>
+
+      <article class="program">
+        <div class="program__media" aria-hidden="true"></div>
+        <div class="program__body">
+          <div class="eyebrow program__tag">
+            <span class="dot" aria-hidden="true"></span>
+            Diabetes
+          </div>
+          <h3 class="title-1">Diabetes Prevention</h3>
+          <div class="program__footer body-3">
+            <span>Pick up where you left off</span>
+          </div>
+          <div class="progress"><div class="progress__fill" style="--p:37.5%"></div></div>
+        </div>
+        <a class="program__link" href="/programs/diabetes-prevention"><span class="visually-hidden">Diabetes Prevention</span></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ──────────── CHALLENGE ──────────── -->
+  <section class="section" aria-labelledby="challenge-title">
+    <div class="section-head">
+      <h2 id="challenge-title" class="heading-6">Your challenge</h2>
+    </div>
+    <div class="challenge">
+      <div class="banner-icon banner-icon--challenge">
+        <span class="fa-icon" aria-hidden="true">&#xf091;</span>
+      </div>
+      <div class="challenge__body">
+        <div class="eyebrow ink-soft">Team Challenge</div>
+        <div class="heading-6">Spring Steps Challenge</div>
+        <div class="body-3 challenge__meta">Day 22 of 30 &middot; Currently 4th of 8 teammates</div>
+      </div>
+      <a class="challenge__link" href="/challenges/spring-steps"><span class="visually-hidden">Spring Steps Challenge — details</span></a>
+    </div>
+  </section>
+
+  <!-- ──────────── REWARDS ──────────── -->
+  <section class="section" aria-labelledby="rewards-title">
+    <div class="section-head">
+      <h2 id="rewards-title" class="heading-6">Your rewards</h2>
+      <a class="btn btn-text" href="/rewards">Dashboard</a>
+    </div>
+
+    <div class="rewards">
+      <div class="reward">
+        <span class="reward-chip reward-chip--gift">Gift Card</span>
+        <div class="heading-5">$75</div>
+        <div class="body-3 reward__meta">Amazon &middot; ready to redeem</div>
+        <div class="body-3 reward__sub">$25 to next $25 card</div>
+        <a class="reward__link" href="/rewards/gift-card-amazon"><span class="visually-hidden">Amazon gift card — $75</span></a>
+      </div>
+      <div class="reward">
+        <span class="reward-chip reward-chip--store">Store Credit</span>
+        <div class="heading-5">565</div>
+        <div class="body-3 reward__meta">Available to redeem</div>
+        <div class="body-3 reward__sub">Spend in the store</div>
+        <a class="reward__link" href="/rewards/store-credit"><span class="visually-hidden">Store credit — 565 available</span></a>
+      </div>
+      <div class="reward">
+        <span class="reward-chip reward-chip--raffle">Raffle</span>
+        <div class="heading-5">745</div>
+        <div class="body-3 reward__meta">Active entries</div>
+        <div class="body-3 reward__sub">Draw on May 31</div>
+        <a class="reward__link" href="/rewards/raffle"><span class="visually-hidden">Raffle — 745 active entries</span></a>
+      </div>
+    </div>
+  </section>
+
+ </div><!-- /.shell__rail -->
+</main>
+
+<!-- ──────────── BOTTOM NAV (Compact only) ──────────── -->
+<nav class="bottom-nav" aria-label="Primary">
+  <a class="bn-item active" href="/home">
+    <span class="fa-icon" aria-hidden="true">&#xf015;</span>
+    <span class="label-3">Home</span>
+  </a>
+  <a class="bn-item" href="/digital-care">
+    <span class="fa-icon" aria-hidden="true">&#xf469;</span>
+    <span class="label-3">Digital Care</span>
+  </a>
+  <a class="bn-item" href="/wellbeing">
+    <span class="fa-icon" aria-hidden="true">&#xf004;</span>
+    <span class="label-3">Wellbeing</span>
+  </a>
+  <a class="bn-item" href="/benefits">
+    <span class="fa-icon" aria-hidden="true">&#xf5a2;</span>
+    <span class="label-3">Benefits</span>
+  </a>
+  <a class="bn-item" href="/rewards">
+    <span class="fa-icon" aria-hidden="true">&#xf06b;</span>
+    <span class="label-3">Rewards</span>
+  </a>
+</nav>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Status messaging across states — T1 & T2</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  body{background:var(--canvas);padding:32px;}
+  h1.page{font-family:var(--f-display);font-weight:500;font-size:24px;color:var(--navy);margin-bottom:6px;}
+  p.pageintro{font-family:var(--f-text);font-size:14px;color:var(--slate);max-width:88ch;margin-bottom:24px;}
+  h2.treat{font-family:var(--f-display);font-weight:500;font-size:18px;color:var(--charcoal);margin:28px 0 14px;}
+  .row{display:flex;gap:24px;align-items:flex-start;}
+  .col{width:360px;flex:0 0 360px;}
+  .st{font-family:var(--f-text);font-weight:600;font-size:13px;color:var(--charcoal);margin-bottom:8px;}
+  .phone{width:360px;background:#fff;border:1px solid var(--silver);border-radius:26px;padding:14px;display:flex;flex-direction:column;gap:18px;box-shadow:0 10px 26px rgba(6,42,66,.08);}
+  .rest{opacity:.38;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+  .rest .rh{font-family:var(--f-display);font-weight:500;font-size:13px;color:var(--charcoal);}
+  .rest .bar{height:34px;border:1px solid var(--hair);border-radius:11px;background:#fff;}
+  .grow{flex:1;min-width:0;}
+  .t-type{display:flex;flex-direction:column;gap:5px;}
+  .t-band{display:flex;flex-direction:column;gap:5px;background:rgba(15,73,127,.05);border-radius:14px;padding:13px 15px;}
+  .listhead{font-family:var(--f-text);font-weight:500;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);margin-bottom:9px;}
+  .steplist{border:1px solid var(--hair);border-radius:14px;overflow:hidden;}
+  .srow{display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;}
+  .srow + .srow{border-top:1px solid var(--divider);}
+  .srow .chip{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:0 0 auto;}
+  .srow .chip.done{background:rgba(82,160,69,.14);color:var(--green);}
+  .srow.done .name{color:var(--slate);}
+  .srow .name{font-family:var(--f-display);font-weight:500;font-size:14px;color:var(--charcoal);}
+  .srow .kick{font-family:var(--f-text);font-weight:500;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-tick" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L11 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M9 3v-.5h6V3M8.5 10h7M8.5 14h4" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3M7.5 14h9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<h1 class="page">Status message across states — treatments 1 & 2, with the tappable step list underneath</h1>
+<p class="pageintro">The top status message evolves through the journey; the list of steps stays put and gets checked off (every row stays tappable — completed ones open to review/update). Row A = Treatment 1 (typographic, no container). Row B = Treatment 2 (soft band). The last three states show it <strong>with all steps completed.</strong></p>
+
+<div id="mount"></div>
+
+<script>
+try{
+const STEPS=[
+ {name:'Set up your CarePlus account', icon:'i-clip', kick:''},
+ {name:'Program Acknowledgment', icon:'i-clip', kick:'Peak Health'},
+ {name:'Complete lab work', icon:'i-flask', kick:'Peak Health'},
+ {name:'Health Assessment', icon:'i-heart', kick:'In-app'}
+];
+const TINT={'i-clip':'background:rgba(15,73,127,.08);color:var(--navy)','i-flask':'background:rgba(82,160,69,.12);color:var(--green)','i-heart':'background:rgba(15,73,127,.08);color:var(--charcoal)'};
+const STATES=[
+ {eyebrow:'Getting started', msg:'3 steps until Peak Health books your first visit', done:1, label:'Enrolling · 3 left'},
+ {eyebrow:'Getting started', msg:'1 step until Peak Health books your first visit', done:3, label:'Enrolling · 1 left'},
+ {eyebrow:'Enrollment complete', msg:"You're enrolled — Peak Health is scheduling your first visit", done:4, label:'All done → scheduling'},
+ {eyebrow:'Scheduled · Telehealth', msg:'Your first visit · Thu, Jun 12 · 10:30 AM ET', done:4, label:'Scheduled'},
+ {eyebrow:'LifeForce status', msg:"You're active in LifeForce · Phase 2 of 5", done:4, label:'Active (post-visit)'}
+];
+function list(done){
+  let rows='';
+  STEPS.forEach((s,i)=>{
+    if(i<done){
+      rows+='<a class="srow done"><span class="chip done"><svg width="17" height="17"><use href="#i-tick"/></svg></span><div class="grow"><div class="name">'+s.name+'</div></div><svg width="19" height="19" style="color:var(--silver)"><use href="#i-chev"/></svg></a>';
+    }else{
+      rows+='<a class="srow"><span class="chip" style="'+TINT[s.icon]+'"><svg width="18" height="18"><use href="#'+s.icon+'"/></svg></span><div class="grow">'+(s.kick?'<div class="kick">'+s.kick+'</div>':'')+'<div class="name">'+s.name+'</div></div><svg width="19" height="19" style="color:var(--silver)"><use href="#i-chev"/></svg></a>';
+    }
+  });
+  const head = done===4 ? 'Enrollment · completed · tap to review' : 'Your steps · any order · tap to open';
+  return '<div><div class="listhead">'+head+'</div><div class="steplist">'+rows+'</div></div>';
+}
+function top(state,treat){
+  const inner='<span class="eyebrow c-navy">'+state.eyebrow.toUpperCase()+'</span>'+(treat===1?'<h2 class="heading-6 c-charcoal" style="margin:0">'+state.msg+'</h2>':'<span class="title-2 c-charcoal">'+state.msg+'</span>');
+  return '<div class="'+(treat===1?'t-type':'t-band')+'">'+inner+'</div>';
+}
+function phone(state,treat){
+  return '<div class="col"><div class="st">'+state.label+'</div><div class="phone">'+
+    '<nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>'+
+    top(state,treat)+ list(state.done)+
+    '<div class="rest"><div class="rh">Support</div><div class="bar"></div></div>'+
+    '</div></div>';
+}
+let html='';
+[1,2].forEach(t=>{
+  html+='<h2 class="treat">Treatment '+t+' — '+(t===1?'Typographic (no container)':'Soft info band')+'</h2><div class="row">';
+  STATES.forEach(s=>{ html+=phone(s,t); });
+  html+='</div>';
+});
+document.getElementById('mount').innerHTML=html;
+}catch(e){document.getElementById('mount').innerHTML='<pre style="color:red;font-size:16px">'+e.message+'\n'+e.stack+'</pre>';}
+</script>
+</body>
+</html>

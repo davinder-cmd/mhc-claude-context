@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rewards row cards · component sheet · 06</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="bar">
+  <a class="bar__back" href="index.html">← All sheets</a>
+  <span class="bar__sep">/</span>
+  <span class="bar__name">06 · Rewards row cards</span>
+</nav>
+
+<div class="sheet">
+
+  <header class="sheet__head">
+    <div class="sheet__num">06 / 07</div>
+    <h1 class="sheet__title">Rewards row cards · large + small form</h1>
+    <p class="sheet__sub">
+      The full primitive library for the single-reward banner. Same shell (icon disc · label chip + hero number · attribute · optional progress · optional action). What changes per variant is which primitives are present and what's emphasized — balance vs earnable, with bar vs dots vs levels vs nothing. Both desktop and mobile forms shown.
+    </p>
+    <a class="sheet__figma" href="https://www.figma.com/design/6nJg9r55Y3NSgqZetujnPI/Home-Page-redesign-v2?node-id=6972-22226" target="_blank">View in Figma</a>
+  </header>
+
+  <section class="section">
+    <h2>Variants</h2>
+    <p>Twelve cells in two columns — large form (1432-px desktop) on the left, small form (360-px mobile) on the right. Three hero formats × four progress / no-progress combinations.</p>
+
+    <div class="preview"><img src="img/06-rewards-row-cards.png" alt="Rewards row card variants — large and small form"></div>
+
+    <div class="variants">
+      <ul>
+        <li><strong>Hero · "X earned"</strong> — "12 earned" + attribute. The natural form for counts (entries, activities, points).</li>
+        <li><strong>Hero · "X"</strong> — just the number ("12") inline with attribute. Compact, no big-number emphasis.</li>
+        <li><strong>Hero · long sentence</strong> — "$25 earned of $100 this quarter" — single-line description carries the value and the context together.</li>
+        <li><strong>Progress · bar</strong> — single solid bar, percent-filled. Default for capped or quarterly-period rewards.</li>
+        <li><strong>Progress · dots</strong> — 10 small dots, filled = done. Best for discrete activity-count rewards.</li>
+        <li><strong>Progress · levels</strong> — 4-tier ladder with checkmark on completed tiers. Signature for Points &amp; levels rewards.</li>
+        <li><strong>No progress</strong> — strip the progress entirely. For balance-only displays, ready-to-spend store credit, or single-action HRA rewards.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Canonical HTML — current jun11 (Points &amp; levels · balance + bar)</h2>
+    <p>The fragment shipping today uses the Points &amp; levels balance + bar variant from this library:</p>
+    <details class="code">
+      <summary>Source — drop into shadow root</summary>
+<pre>&lt;section class="section" aria-labelledby="rewards-title"&gt;
+  &lt;div class="section-head"&gt;
+    &lt;h2 id="rewards-title" class="heading-6"&gt;Your rewards&lt;/h2&gt;
+    &lt;a class="btn btn-text" href="/rewards"&gt;Reward Dashboard&lt;/a&gt;
+  &lt;/div&gt;
+
+  &lt;div class="reward-banner"&gt;
+    &lt;div class="banner-icon banner-icon--rewards"&gt;
+      &lt;span class="fa-icon" aria-hidden="true"&gt;&amp;#xf5a2;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="reward-banner__body"&gt;
+      &lt;span class="tier-chip tier-chip--silver"&gt;Silver tier&lt;/span&gt;
+      &lt;div class="reward-banner__balance"&gt;
+        &lt;span class="heading-5 reward-banner__hero"&gt;1,250&lt;/span&gt;
+        &lt;span class="body-3 ink-soft"&gt;points balance &amp;middot; 750 to Gold&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="progress" aria-hidden="true"&gt;
+        &lt;div class="progress__fill" style="--p:62%"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;a class="btn btn-outlined" href="/rewards"&gt;Redeem&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Notes</h2>
+    <ul class="notes">
+      <li>Icon disc is <strong>56 × 56 px</strong> with a 26-px glyph. Hidden on mobile (<code>.reward-banner .banner-icon { display: none }</code>) to save horizontal width.</li>
+      <li>Desktop padding: <code>var(--s-06)</code> (32 px). Mobile padding: <code>20 px</code>.</li>
+      <li>Vertical body gap: <code>var(--s-04)</code> (16 px) between the tier chip, balance row, and progress bar.</li>
+      <li>For non-Points reward types (Direct, Raffle, Store credit), swap the chip, hero number, attribute, progress flavor, and CTA — see <a href="07-rewards-examples.html">sheet 07</a> for in-context examples.</li>
+      <li>"Redeem" button uses the existing <code>.btn-outlined</code> — no new button class needed.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

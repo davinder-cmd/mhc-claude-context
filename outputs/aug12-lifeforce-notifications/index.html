@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LifeForce · Notification components</title>
+<style>
+:root{
+  --ocean:#195188;--ocean-ink:#103459;--ocean100:#EAF2FA;
+  --turq:#1A85AB;--turq-ink:#0D4559;--turq100:#E9F6FA;
+  --green:#52A353;--green-ink:#3D7A3E;--green100:#EFF8EF;
+  --mustard:#D17100;--mustard-ink:#87440A;--mustard50:#FFF3E4;
+  --coral:#EA4444;--coral-ink:#C90000;--coral50:#FDECEC;
+  --ink:#26292B;--body:#4A4E50;--muted:#7A8083;--border:#E4E4E2;--hair:#E9E9E6;--canvas:#F6F6F3;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,"SF Pro Text","SF Pro Display",system-ui,sans-serif}
+body{background:#ECECEA;padding:40px;color:var(--body)}
+.wrap{max-width:1180px;margin:0 auto}
+h1{font-size:25px;color:var(--ink);font-weight:700;letter-spacing:-.01em}
+.sub{font-size:15px;color:var(--muted);margin:6px 0 30px;max-width:90ch}
+h2{font-size:15px;color:var(--ink);font-weight:700;margin:34px 0 14px;letter-spacing:.01em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:26px 24px}
+.spec{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 16px 18px}
+.spec .lab{font-size:12.5px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.spec .lab .p{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px}
+.p.low{background:#EFEFEC;color:var(--muted)}.p.med{background:var(--ocean100);color:var(--ocean)}
+.spec .desc{font-size:12px;color:var(--muted);margin-bottom:14px}
+.stage{background:var(--canvas);border:1px solid var(--hair);border-radius:12px;padding:16px}
+
+/* ── shared notification bits ── */
+.ntf{display:flex;align-items:flex-start;gap:10px;border-radius:12px;padding:11px 13px;font-size:13.5px;line-height:1.4}
+.ntf .ic{flex:0 0 auto;width:20px;height:20px;margin-top:1px}
+.ntf .tx{flex:1;min-width:0}.ntf .tx b{color:var(--ink)}
+.ntf.info{background:var(--ocean100);color:var(--ocean-ink)}
+.ntf.notice{background:var(--mustard50);color:var(--mustard-ink)}
+.ntf.alert{background:var(--coral50);color:var(--coral-ink)}
+.ntf.ok{background:var(--green100);color:var(--green-ink)}
+.ic{stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+
+/* reward highlight */
+.reward{display:flex;align-items:center;gap:12px;background:var(--green100);border:1px solid #CFE8D2;border-radius:12px;padding:12px 14px}
+.reward .coin{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.reward .amt{font-family:"SF Pro Display";font-weight:700;font-size:17px;color:var(--ink);line-height:1.1}
+.reward .cap{font-size:12px;color:var(--green-ink);font-weight:600;margin-top:2px}
+.reward .link{margin-left:auto;font-size:12.5px;font-weight:600;color:var(--ocean);white-space:nowrap}
+
+/* reward pill (inline) */
+.pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--green);color:var(--green-ink);border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:600}
+
+/* accent-bar callout */
+.callout{display:flex;gap:11px;background:#fff;border:1px solid var(--hair);border-left:3px solid var(--ocean);border-radius:10px;padding:12px 13px}
+.callout .t{font-weight:600;color:var(--ink);font-size:13.5px}
+.callout .b{font-size:12.5px;color:var(--body);margin-top:2px;line-height:1.4}
+
+/* tappable row */
+.row{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--hair);border-radius:12px;padding:12px 13px}
+.row .ric{width:34px;height:34px;border-radius:9px;background:var(--ocean100);color:var(--ocean);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.row .rt{font-weight:600;color:var(--ink);font-size:13.5px}
+.row .rm{font-size:12px;color:var(--muted);margin-top:1px}
+.row .cv{margin-left:auto;color:#B4B4B1}
+
+/* toast */
+.toast{display:inline-flex;align-items:center;gap:10px;background:#26292B;color:#fff;border-radius:999px;padding:10px 14px;font-size:13px;box-shadow:0 6px 20px -6px rgba(0,0,0,.4)}
+.toast .act{margin-left:6px;color:#8FD0E8;font-weight:700}
+
+/* dismissible banner */
+.dismiss{display:flex;align-items:center;gap:10px;background:var(--ocean100);color:var(--ocean-ink);border-radius:12px;padding:11px 13px;font-size:13.5px}
+.dismiss .x{margin-left:auto;color:var(--ocean);opacity:.7;cursor:pointer}
+
+/* before/after applied */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:6px}
+@media(max-width:820px){.ba{grid-template-columns:1fr}}
+.bacard{background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px}
+.bacard .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:12px}
+.bacard.b4 .tag{background:#F1F1EE;color:var(--muted)}.bacard.af .tag{background:var(--green100);color:var(--green-ink)}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.prose{font-size:13.5px;line-height:1.5;color:var(--body)}
+.prose b{color:var(--ink)}
+</style></head>
+<body><div class="wrap">
+<h1>LifeForce · Notification components</h1>
+<p class="sub">A small, standard kit for surfacing pertinent info (like rewards) without a big footprint. Low → medium prominence. Semantic color: ocean = info · green = reward/done · mustard = due-soon · coral = at-risk.</p>
+
+<h2>Reward-forward (for the About page)</h2>
+<div class="grid">
+  <div class="spec"><div class="lab">1 · Reward highlight <span class="p med">Medium</span></div><div class="desc">Lifts earning out of prose. The recommended fix for the About page.</div>
+    <div class="stage"><div class="reward"><span class="coin"><svg width="18" height="18" viewBox="0 0 24 24" class="ic" stroke="#D17100"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0"/></svg></span><div><div class="amt">Up to $[Y] a year</div><div class="cap">Medical credit · paid each pay period</div></div><span class="link">See how ›</span></div></div>
+  </div>
+  <div class="spec"><div class="lab">2 · Reward pill (inline) <span class="p low">Low</span></div><div class="desc">A quiet inline chip — drop it under a heading or beside a title.</div>
+    <div class="stage"><span class="pill"><svg width="14" height="14" viewBox="0 0 24 24" class="ic" stroke="#3D7A3E"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg> Earn up to $[Y]/yr</span></div>
+  </div>
+</div>
+
+<h2>Inline banners</h2>
+<div class="grid">
+  <div class="spec"><div class="lab">3 · Tip (info) <span class="p low">Low</span></div><div class="desc">Soft context; never competes with the primary action.</div>
+    <div class="stage"><div class="ntf info"><svg class="ic ic" width="20" height="20" viewBox="0 0 24 24" stroke="#195188"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg><div class="tx">Your phase reflects your health today — it can change over time as you work with your nurse.</div></div></div>
+  </div>
+  <div class="spec"><div class="lab">4 · Notice (due-soon) <span class="p med">Medium</span></div><div class="desc">A dated, gentle nudge. Warm, not alarming.</div>
+    <div class="stage"><div class="ntf notice"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" stroke="#D17100"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div class="tx"><b>Labs due before your visit.</b> Complete them at least 5 business days ahead.</div></div></div>
+  </div>
+  <div class="spec"><div class="lab">5 · Alert (at-risk) <span class="p med">Medium</span></div><div class="desc">Stakes are real — but still a banner, not a takeover.</div>
+    <div class="stage"><div class="ntf alert"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" stroke="#EA4444"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg><div class="tx"><b>Rebook within 60 days</b> to keep your LifeForce phase.</div></div></div>
+  </div>
+  <div class="spec"><div class="lab">6 · Success <span class="p low">Low</span></div><div class="desc">Quiet confirmation after an action.</div>
+    <div class="stage"><div class="ntf ok"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" stroke="#3D7A3E"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg><div class="tx">Health Assessment submitted — we'll confirm shortly.</div></div></div>
+  </div>
+  <div class="spec"><div class="lab">7 · Dismissible banner <span class="p med">Medium</span></div><div class="desc">One-time announcement; the ✕ lets it go away.</div>
+    <div class="stage"><div class="dismiss"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" stroke="#195188"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M3 12h18M12 8V5M9 5h6"/></svg><div class="tx">New — earn <b>200 points</b> for finishing your setup steps.</div><span class="x"><svg width="16" height="16" viewBox="0 0 24 24" class="ic" stroke="#195188"><path d="M6 6l12 12M18 6L6 18"/></svg></span></div></div>
+  </div>
+</div>
+
+<h2>Structured & transient</h2>
+<div class="grid">
+  <div class="spec"><div class="lab">8 · Accent-bar callout <span class="p med">Medium</span></div><div class="desc">A titled note; the bar carries the semantic color.</div>
+    <div class="stage"><div class="callout"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" stroke="#195188" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg><div><div class="t">How phase works</div><div class="b">You start at your current health phase and move toward Phase 5 with your nurse.</div></div></div></div>
+  </div>
+  <div class="spec"><div class="lab">9 · Tappable row <span class="p med">Medium</span></div><div class="desc">A notification that leads somewhere; icon + meta + chevron.</div>
+    <div class="stage"><div class="row"><span class="ric"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" stroke="#195188"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><div><div class="rt">Your LifeForce records</div><div class="rm">Last: Health Assessment · Jun 2026</div></div><span class="cv"><svg width="18" height="18" viewBox="0 0 24 24" class="ic" stroke="#B4B4B1"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+  </div>
+  <div class="spec"><div class="lab">10 · Toast / snackbar <span class="p low">Low</span></div><div class="desc">Transient confirmation; optional single action.</div>
+    <div class="stage" style="display:flex;justify-content:center"><span class="toast"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" stroke="#7BE0A3"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg> Invite sent<span class="act">Undo</span></span></div>
+  </div>
+</div>
+
+<h2>Applied — surfacing the reward on the About page</h2>
+<p class="sub" style="margin-bottom:16px">The small adjustment: pull the earning out of the "Earning potential" paragraph into the reward-highlight component. Same flow, same structure — the pertinent info just stops hiding in prose.</p>
+<div class="ba">
+  <div class="bacard b4"><span class="tag">Before · in prose</span>
+    <div class="eyebrow">Earning potential</div>
+    <div class="prose">Complete your Health Assessment, labs, and regular nurse visits to earn <b>**monthly medical credit**</b> toward your plan's premiums — up to <b>**$[Y] a year**</b>. New enrollees also earn <b>**200 points**</b> for finishing the enrollment steps.</div>
+  </div>
+  <div class="bacard af"><span class="tag">After · highlighted</span>
+    <div class="eyebrow">Earning potential</div>
+    <div class="reward" style="margin-bottom:10px"><span class="coin"><svg width="18" height="18" viewBox="0 0 24 24" class="ic" stroke="#D17100"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0"/></svg></span><div><div class="amt">Up to $[Y] a year</div><div class="cap">Medical credit · paid each pay period</div></div></div>
+    <span class="pill" style="margin-bottom:10px"><svg width="14" height="14" viewBox="0 0 24 24" class="ic" stroke="#3D7A3E"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg> +200 points for finishing setup</span>
+    <div class="prose" style="font-size:12.5px;color:var(--muted)">Earn by completing your Health Assessment, labs, and regular nurse visits. Your phase sets the amount.</div>
+  </div>
+</div>
+
+</div></body></html>

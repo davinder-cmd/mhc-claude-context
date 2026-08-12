@@ -32,8 +32,13 @@
 
 | ID | Decision | Status | Where |
 |---|---|---|---|
+| D1 | Adopt MH Colors v2 stops as brand equivalents within tier tolerance (primary ≤2.0, secondary ≤3.5, tertiary ≤5.0 ΔE2000) | draft | [decisions.md](decisions.md) |
+| D2 | Warm the brand only through the neutrals; ink stays chromatically neutral | draft | [decisions.md](decisions.md) |
+| D3 | Retire brand `slate` rather than map it (ΔE 5.67 — needs brand sign-off) | draft | [decisions.md](decisions.md) |
+| D4 | Keep `aqua-blue` exact as an off-palette stop (ΔE 6.00 to nearest) | draft | [decisions.md](decisions.md) |
+| D5 | Brand accents pair with an accessible twin from the same family | draft | [decisions.md](decisions.md) |
 
-*(populated as decisions are made — see [`decisions.md`](decisions.md) for the full log with rationale)*
+See [`decisions.md`](decisions.md) for the full log with rationale.
 
 ---
 
@@ -64,6 +69,8 @@ If a sourcing decision changes, update the source file first (build-2 for the in
 | Gap | Severity | Notes |
 |---|---|---|
 | First build | high | Run interview + build pipeline (1 → 1b → 2) to produce v1 palette, components, and Figma export. |
+| `Design Building Blocks` not measured | high | The brand↔palette merge (D1–D5) used Brand Guidelines v1.2 + production CSS as anchors. The design-system Figma file was not open, so its live token values are unreconciled. Open it and re-run the merge. |
+| Figma role tokens don't exist | medium | `MH colors v2` holds 704 duplicated primitives across two identically-named collections and zero role tokens. Layer 2 of [`mh-brand-merged.css`](../aug05-mh-brand-palette-merge/mh-brand-merged.css) is the spec for what to build. |
 | Typography pairing | medium | Candidates parked in DESIGN.md; budget question first. |
 | AI surface treatment | medium | Required because AI-competent is a brand attribute; specification deferred to a dedicated iteration. |
 | Dark mode posture | low | Undecided. Defer until a stakeholder asks. |

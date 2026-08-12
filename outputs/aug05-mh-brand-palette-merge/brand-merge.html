@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MH Brand × MH Colors v2 — Merge Analysis</title>
+<style>
+:root{--bg:#FAF7F0;--surface:#FFFFFF;--tint:#F0EDEA;--ink:#393C3C;--soft:#5F5F5F;--line:#E6E3DC;--brand:#164677;--link:#1C5C9A;
+--f:"SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--fd:"SF Pro Display",-apple-system,sans-serif;--m:ui-monospace,"SF Mono",Menlo,monospace}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:48px 24px 96px}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+h1{font-family:var(--fd);font-size:42px;line-height:1.06;font-weight:600;letter-spacing:-.02em}
+h2{font-family:var(--fd);font-size:25px;font-weight:600;letter-spacing:-.01em}
+h3{font-family:var(--fd);font-size:18px;font-weight:600}
+h4{font-family:var(--fd);font-size:15px;font-weight:600}
+.sub{font-size:17px;color:var(--soft);max-width:68ch;margin-top:13px}
+.src{margin-top:18px;font-size:12.5px;color:var(--soft);font-family:var(--m)}
+hr{border:0;border-top:1px solid var(--line);margin:52px 0}
+section+section{margin-top:52px}
+.lede{font-size:16px;color:var(--soft);max-width:74ch;margin-top:9px}
+.answers{display:grid;gap:14px;margin-top:22px}
+.ans{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:0 10px 10px 0;padding:16px 18px}
+.ans .q{font-family:var(--fd);font-weight:600;font-size:15.5px;margin-bottom:5px}
+.ans .a{font-size:15px}
+.ans .a b{color:var(--brand)}
+.ans .d{font-size:13.5px;color:var(--soft);margin-top:6px}
+.ladder{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.ladder th,.tbl th{text-align:left;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);padding:10px 12px;border-bottom:1px solid var(--line);background:var(--tint);font-weight:600}
+.ladder td,.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.ladder tr:last-child td,.tbl tr:last-child td{border-bottom:0}
+.tbl{width:100%;border-collapse:collapse;margin-top:18px;font-size:13.5px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.num{text-align:right;font-family:var(--m);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.warm{color:#B5571E}.cool{color:#1C5C9A}
+.bar-cell{width:150px}
+.bar{display:block;height:9px;border-radius:5px}
+.bar.warm{background:#B5571E}.bar.cool{background:#1C5C9A}
+.bar.sm{opacity:.35}.bar.mid{opacity:.65}.bar.big{opacity:1}
+code{font-family:var(--m);font-size:12px;background:var(--tint);padding:1.5px 5px;border-radius:4px}
+.chip{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
+.mini{display:block;font-family:var(--m);font-size:10.5px;color:var(--soft);margin-top:2px}
+.pair{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:12px}
+.pair-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:11px}
+.pair-h h4{margin-right:auto}
+.tier{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;padding:2px 7px;border-radius:999px}
+.t-primary{background:#164677;color:#fff}.t-secondary{background:#DDE7F2;color:#164677}.t-tertiary{background:var(--tint);color:var(--soft)}
+.de{font-family:var(--m);font-size:12.5px;font-weight:600}
+.act{font-size:11px;font-family:var(--m);padding:2px 7px;border-radius:4px;background:var(--tint);color:var(--soft)}
+.a-adopt{background:#E6F0E6;color:#2E6B3A}.a-warm{background:#FAF1E1;color:#8A5A1E}.a-keep{background:#E8F0FA;color:#164677}.a-drop{background:#FBE4E4;color:#9F1B1B}
+.fuse{display:flex;border-radius:8px;overflow:hidden}
+.half{flex:1;padding:14px 14px 12px;display:flex;flex-direction:column;gap:2px;min-height:84px}
+.half b{font-size:12.5px}
+.half span{font-family:var(--m);font-size:11px;opacity:.85}
+.note{font-size:13.5px;color:var(--soft);margin-top:9px}
+.note b{color:var(--ink)}
+.callout{background:var(--brand);color:#fff;border-radius:12px;padding:24px 26px;margin-top:22px}
+.callout h2{color:#fff}
+.callout p{color:#D3E0EE;margin-top:9px;max-width:72ch}
+.callout ol{margin-top:13px;padding-left:21px;color:#D3E0EE;font-size:15px}
+.callout li+li{margin-top:7px}
+.callout b{color:#fff}
+.scroll{overflow-x:auto}
+.steps{counter-reset:s;margin-top:20px;display:grid;gap:11px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px 14px 52px;position:relative}
+.step::before{counter-increment:s;content:counter(s);position:absolute;left:15px;top:13px;width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;font-family:var(--m);font-size:12px;font-weight:700;display:grid;place-items:center}
+.step b{display:block;margin-bottom:3px}
+.step p{font-size:13.5px;color:var(--soft)}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1A17;--surface:#252220;--tint:#2E2A26;--ink:#F2EFEA;--soft:#A8A29A;--line:#3A352F;--link:#8FB6E0;--brand:#2E60A4}
+ .t-secondary{background:#1E3A5C;color:#CFE0F2}.a-adopt{background:#1E3324;color:#9ED79F}.a-warm{background:#3A3020;color:#E8B36A}.a-keep{background:#1B2E47;color:#AECBEA}.a-drop{background:#3A2220;color:#F09A9A}
+ .warm{color:#E8A56A}.cool{color:#8FB6E0}}
+:root[data-theme="dark"]{--bg:#1C1A17;--surface:#252220;--tint:#2E2A26;--ink:#F2EFEA;--soft:#A8A29A;--line:#3A352F;--brand:#2E60A4}
+:root[data-theme="light"]{--bg:#FAF7F0;--surface:#FFFFFF;--tint:#F0EDEA;--ink:#393C3C;--soft:#5F5F5F;--line:#E6E3DC;--brand:#164677}
+</style></head><body>
+<div class="wrap">
+<h1>MH Brand × MH Colors v2</h1>
+<p class="sub">How far the 2021 brand palette sits from the Uber-derived working palette, measured in ΔE2000 — and which substitutions survive a brand review.</p>
+<p class="src">Brand: MHC Brand Guidelines v1.2 (2021) · Palette: Figma "MH colors v2" · CIEDE2000 verified against Sharma et al. test data · warm–cool span = 161 b* units</p>
+
+<hr>
+
+<section>
+<h2>Your four questions</h2>
+<div class="answers">
+ <div class="ans"><div class="q">Is MH Blue the same as Ocean 900?</div>
+  <div class="a">No — not close. MH Blue is <b>Ocean 1300</b> (ΔE 1.41, brand-grade). Ocean 900 is ΔE <b>13.1</b> away.</div>
+  <div class="d">Ocean 900 is 15 L* lighter. You'd be shipping a different blue. Ocean 1200 (ΔE 2.69) is the only other stop inside a defensible tolerance.</div></div>
+ <div class="ans"><div class="q">How about the orange?</div>
+  <div class="a">Both brand oranges are <b>effectively exact</b>. Lava-orange → Ember 700, ΔE <b>0.77</b>. Tangerine → Orange 700, ΔE <b>0.62</b>.</div>
+  <div class="d">Below ΔE 1 is imperceptible even side by side. These are the strongest matches in the whole set — adopt them without discussion.</div></div>
+ <div class="ans"><div class="q">How about the pale green?</div>
+  <div class="a">Weakest area. Glacier → Jade 200 at ΔE <b>3.69</b>; sky-blue → Teal 400 at ΔE <b>4.64</b>. Both only defensible at tertiary tier.</div>
+  <div class="d">The palette has no pale, low-chroma green-cyan. Its light stops are all more saturated than MH's pastels. If glacier matters, keep it exact.</div></div>
+ <div class="ans"><div class="q">The secondaries?</div>
+  <div class="a">Two of nine fail: <b>aqua-blue</b> (ΔE 6.0) and <b>slate</b> (ΔE 5.67). The rest land between ΔE 1.8 and 3.9.</div>
+  <div class="d">Keep aqua-blue exact — it carries CTA recognition. Let slate go: its cool blue-grey is precisely what you're warming away from.</div></div>
+</div>
+</section>
+
+<section>
+<h2>The tolerance ladder</h2>
+<p class="lede">This is what makes a substitution defensible in a brand review. Tolerance is budgeted by tier — the primary mark gets the tightest, tertiaries get latitude, because recognition load is not evenly distributed.</p>
+<table class="ladder"><thead><tr><th>ΔE2000</th><th>What the eye does</th><th>Defensible for</th></tr></thead><tbody>
+<tr><td class="num">≤ 1.0</td><td>Cannot see a difference, even side by side</td><td>Anything, including the logo</td></tr>
+<tr><td class="num">≤ 2.0</td><td>Visible only on close side-by-side inspection</td><td><b>Primary</b> brand color — the required bar</td></tr>
+<tr><td class="num">≤ 3.5</td><td>Visible when adjacent; reads as the same color alone</td><td><b>Secondary</b> palette</td></tr>
+<tr><td class="num">≤ 5.0</td><td>Clearly a different shade side by side</td><td><b>Tertiary</b> only</td></tr>
+<tr><td class="num">&gt; 5.0</td><td>A different color</td><td>Nothing — keep the brand hex instead</td></tr>
+</tbody></table>
+</section>
+
+<hr>
+
+<section>
+<h2>Every mapping, closest first</h2>
+<p class="lede">The two halves of each strip touch deliberately — no border, no gap. If you cannot find the seam, the substitution is safe.</p>
+<div class="pair">
+   <div class="pair-h"><h4>tangerine</h4>
+     <span class="tier t-tertiary">tertiary</span>
+     <span class="de" style="color:#2E6B3A">ΔE 
+     <b>0.62</b> · imperceptible</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#F6851F;color:#1A1D21"><b>brand</b><span>#F6851F</span><span>2.53:1 accent</span></div>
+     <div class="half" style="background:#F9841A;color:#1A1D21"><b>Orange 700</b><span>#F9841A</span><span>2.52:1 accent</span></div>
+   </div>
+   <p class="note">Imperceptible. Adopt Orange 700 outright. <b>Accessible twin:</b> Orange 1400 <code>#C34600</code> at 5:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>lava-orange</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#2E6B3A">ΔE 
+     <b>0.77</b> · imperceptible</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#F15922;color:#FFFFFF"><b>brand</b><span>#F15922</span><span>3.39:1 ui</span></div>
+     <div class="half" style="background:#EF5D28;color:#FFFFFF"><b>Ember 700</b><span>#EF5D28</span><span>3.35:1 ui</span></div>
+   </div>
+   <p class="note">Imperceptible. Adopt Ember 700 outright. <b>Accessible twin:</b> Ember 1000 <code>#D73F0D</code> at 4.56:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>brand-blue</h4>
+     <span class="tier t-primary">primary</span>
+     <span class="de" style="color:#2E6B3A">ΔE 
+     <b>1.41</b> · brand-grade</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#0F497F;color:#FFFFFF"><b>brand</b><span>#0F497F</span><span>9.21:1 ink</span></div>
+     <div class="half" style="background:#164677;color:#FFFFFF"><b>Ocean 1300</b><span>#164677</span><span>9.65:1 ink</span></div>
+   </div>
+   <p class="note">Adopt Ocean 1300 as the UI token. Keep the exact hex for the logo and app icon.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>charcoal</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#2E6B3A">ΔE 
+     <b>1.81</b> · brand-grade</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#373D3F;color:#FFFFFF"><b>brand</b><span>#373D3F</span><span>11.04:1 ink</span></div>
+     <div class="half" style="background:#393C3C;color:#FFFFFF"><b>Grey 1600</b><span>#393C3C</span><span>11.14:1 ink</span></div>
+   </div>
+   <p class="note">Brand-grade, and 1.6 b* warmer. Adopt Grey 1600 as primary ink.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>mango</h4>
+     <span class="tier t-tertiary">tertiary</span>
+     <span class="de" style="color:#2E6B3A">ΔE 
+     <b>1.92</b> · brand-grade</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#F3B31E;color:#1A1D21"><b>brand</b><span>#F3B31E</span><span>1.86:1 tint</span></div>
+     <div class="half" style="background:#F1B500;color:#1A1D21"><b>Yellow 1000</b><span>#F1B500</span><span>1.85:1 tint</span></div>
+   </div>
+   <p class="note">Brand-grade. Adopt Yellow 1000. <b>Accessible twin:</b> Yellow 1600 <code>#87500A</code> at 6.6:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>zesty-green</h4>
+     <span class="tier t-tertiary">tertiary</span>
+     <span class="de" style="color:#8A5A1E">ΔE 
+     <b>2.26</b> · reads the same</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#C4D939;color:#1A1D21"><b>brand</b><span>#C4D939</span><span>1.58:1 tint</span></div>
+     <div class="half" style="background:#CFDC4F;color:#1A1D21"><b>Honeydew 700</b><span>#CFDC4F</span><span>1.5:1 tint</span></div>
+   </div>
+   <p class="note">Reads the same. Tertiary — low recognition load. <b>Accessible twin:</b> Honeydew 1400 <code>#656B1D</code> at 5.72:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>spring-green</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#8A5A1E">ΔE 
+     <b>2.37</b> · reads the same</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#52A045;color:#FFFFFF"><b>brand</b><span>#52A045</span><span>3.24:1 ui</span></div>
+     <div class="half" style="background:#52A353;color:#FFFFFF"><b>Green 900</b><span>#52A353</span><span>3.12:1 ui</span></div>
+   </div>
+   <p class="note">Reads the same. Use Green 900 for fills, Green 1200 for text. <b>Accessible twin:</b> Green 1200 <code>#3D7A3E</code> at 5.18:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>lime-green</h4>
+     <span class="tier t-tertiary">tertiary</span>
+     <span class="de" style="color:#8A5A1E">ΔE 
+     <b>3.2</b> · reads the same</span>
+     <span class="act a-drop">drop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#90C73E;color:#1A1D21"><b>brand</b><span>#90C73E</span><span>2.01:1 accent</span></div>
+     <div class="half" style="background:#7DC240;color:#1A1D21"><b>Lime 800</b><span>#7DC240</span><span>2.17:1 accent</span></div>
+   </div>
+   <p class="note">Redundant with spring-green. Recommend dropping rather than mapping. <b>Accessible twin:</b> Lime 1300 <code>#4C7628</code> at 5.34:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>night-sky</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#B5571E">ΔE 
+     <b>3.57</b> · visibly different</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#062A42;color:#FFFFFF"><b>brand</b><span>#062A42</span><span>14.81:1 ink</span></div>
+     <div class="half" style="background:#16314D;color:#FFFFFF"><b>Ocean 1600</b><span>#16314D</span><span>13.29:1 ink</span></div>
+   </div>
+   <p class="note">Dark background anchor — low recognition load, drift is acceptable.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>glacier</h4>
+     <span class="tier t-tertiary">tertiary</span>
+     <span class="de" style="color:#B5571E">ΔE 
+     <b>3.69</b> · visibly different</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#D2E5E1;color:#1A1D21"><b>brand</b><span>#D2E5E1</span><span>1.31:1 tint</span></div>
+     <div class="half" style="background:#DFF5EE;color:#1A1D21"><b>Jade 200</b><span>#DFF5EE</span><span>1.14:1 wash</span></div>
+   </div>
+   <p class="note">Tertiary wash. Acceptable at this tier.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>cloud</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#B5571E">ΔE 
+     <b>3.99</b> · visibly different</span>
+     <span class="act a-warm">warm on purpose</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#E6EBEC;color:#1A1D21"><b>brand</b><span>#E6EBEC</span><span>1.2:1 wash</span></div>
+     <div class="half" style="background:#EBE9E4;color:#1A1D21"><b>Mub 200</b><span>#EBE9E4</span><span>1.21:1 wash</span></div>
+   </div>
+   <p class="note">Deliberate warming to <b>Mub 200</b>. Grey 300 is the closer match (ΔE 2.62) but keeps the cool cast. Mub beats Coffee on every axis and matches the shipped beige's hue.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>sky-blue</h4>
+     <span class="tier t-tertiary">tertiary</span>
+     <span class="de" style="color:#B5571E">ΔE 
+     <b>4.64</b> · visibly different</span>
+     <span class="act a-adopt">adopt palette stop</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#92D5DA;color:#1A1D21"><b>brand</b><span>#92D5DA</span><span>1.65:1 tint</span></div>
+     <div class="half" style="background:#A3E9EC;color:#1A1D21"><b>Teal 400</b><span>#A3E9EC</span><span>1.36:1 tint</span></div>
+   </div>
+   <p class="note">Tertiary. Acceptable at this tier.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>slate</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#9F1B1B">ΔE 
+     <b>5.67</b> · different color</span>
+     <span class="act a-warm">warm on purpose</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#6E7A7D;color:#FFFFFF"><b>brand</b><span>#6E7A7D</span><span>4.43:1 ui</span></div>
+     <div class="half" style="background:#777777;color:#FFFFFF"><b>Grey 800</b><span>#777777</span><span>4.48:1 ui</span></div>
+   </div>
+   <p class="note">Fails tolerance (dE 5.67). Replaced on purpose — the cool blue-grey is what we are warming away from. <b>Accessible twin:</b> Grey 900 <code>#717171</code> at 4.88:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>aqua-blue</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#9F1B1B">ΔE 
+     <b>6</b> · different color</span>
+     <span class="act a-keep">keep exact hex</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#04A0B7;color:#FFFFFF"><b>brand</b><span>#04A0B7</span><span>3.13:1 ui</span></div>
+     <div class="half" style="background:#13A4AB;color:#FFFFFF"><b>Teal 1000</b><span>#13A4AB</span><span>3.03:1 ui</span></div>
+   </div>
+   <p class="note">Fails tolerance (dE 6.0). Carries CTA recognition load — keep the exact brand hex off-palette. <b>Accessible twin:</b> Teal 1200 <code>#108188</code> at 4.65:1.</p>
+  </div><div class="pair">
+   <div class="pair-h"><h4>silver</h4>
+     <span class="tier t-secondary">secondary</span>
+     <span class="de" style="color:#9F1B1B">ΔE 
+     <b>6.43</b> · different color</span>
+     <span class="act a-warm">warm on purpose</span>
+   </div>
+   <div class="fuse">
+     <div class="half" style="background:#C6CCCD;color:#1A1D21"><b>brand</b><span>#C6CCCD</span><span>1.63:1 tint</span></div>
+     <div class="half" style="background:#CDC9BF;color:#1A1D21"><b>Mub 400</b><span>#CDC9BF</span><span>1.65:1 tint</span></div>
+   </div>
+   <p class="note">Deliberate warming to <b>Mub 400</b>. Grey 500 is closer (ΔE 3.94) but stays cool. Mub 400 is warmer, closer in lightness and lower ΔE than Coffee 300.</p>
+  </div>
+</section>
+
+<hr>
+
+<section>
+<h3 style="margin-bottom:8px">Logged exceptions</h3>
+<p class="lede" style="margin-top:0"><b>night-sky → Ocean 1600 at ΔE 3.57</b> is 0.07 over the secondary bar. Nothing is closer — the next stop is ΔE 5.42 — and it's a dark background anchor with effectively no recognition load, so I accept it. Recording it beats quietly calling 3.57 "about 3.5".<br><br><b>cloud and silver aren't match claims at all.</b> Grey 300 (2.62) and Grey 500 (3.94) are closer and keep the cool cast. The extra ΔE is the warming, bought on purpose.</p>
+<hr>
+<h2>How much flexibility you actually have</h2>
+<p class="lede">One step inside any family costs ΔE 4.3–5.4 — remarkably consistent across all 22. That gives you a unit of currency: every family swap can be priced in steps. A swap costing 1.4× is a cheap move; 2.5× is a different color decision.</p>
+<div class="scroll"><table class="tbl"><thead><tr><th>Family move</th><th class="num">ΔE2000</th><th class="num">= steps</th><th class="num">hue</th><th class="num">warmth</th><th>warm ← → cool</th></tr></thead><tbody><tr><td><b>Coffee</b> → Cocoa</td>
+   <td class="num">9.3</td>
+   <td class="num"><b>2.0×</b></td>
+   <td class="num">2°</td>
+   <td class="num warm">+5.3%</td>
+   <td class="bar-cell"><span class="bar warm mid" style="width:33.32238081714387%"></span></td></tr><tr><td><b>Cocoa</b> → Mub</td>
+   <td class="num">11.1</td>
+   <td class="num"><b>2.5×</b></td>
+   <td class="num">25°</td>
+   <td class="num cool">-8.2%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:51.264497533258314%"></span></td></tr><tr><td><b>Mub</b> → Grey</td>
+   <td class="num">8.2</td>
+   <td class="num"><b>1.8×</b></td>
+   <td class="num">29°</td>
+   <td class="num cool">-5.5%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:34.1146985101058%"></span></td></tr><tr><td><b>Honeydew</b> → Lime</td>
+   <td class="num">9.5</td>
+   <td class="num"><b>1.9×</b></td>
+   <td class="num">19°</td>
+   <td class="num cool">-5.4%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:33.45703728992558%"></span></td></tr><tr><td><b>Lime</b> → Green</td>
+   <td class="num">7.0</td>
+   <td class="num"><b>1.4×</b></td>
+   <td class="num">14°</td>
+   <td class="num cool">-8.1%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:50.34368441740451%"></span></td></tr><tr><td><b>Green</b> → Jade</td>
+   <td class="num">8.9</td>
+   <td class="num"><b>1.9×</b></td>
+   <td class="num">27°</td>
+   <td class="num cool">-10.1%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:63.09474374155234%"></span></td></tr><tr><td><b>Jade</b> → Teal</td>
+   <td class="num">11.3</td>
+   <td class="num"><b>2.4×</b></td>
+   <td class="num">34°</td>
+   <td class="num cool">-9.9%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:61.941734340397325%"></span></td></tr><tr><td><b>Teal</b> → Turquoise</td>
+   <td class="num">11.0</td>
+   <td class="num"><b>2.4×</b></td>
+   <td class="num">33°</td>
+   <td class="num cool">-5.9%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:36.85028739107836%"></span></td></tr><tr><td><b>Turquoise</b> → Ocean</td>
+   <td class="num">10.9</td>
+   <td class="num"><b>2.3×</b></td>
+   <td class="num">33°</td>
+   <td class="num cool">-6.3%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:39.24431467015365%"></span></td></tr><tr><td><b>Ocean</b> → Blue</td>
+   <td class="num">9.1</td>
+   <td class="num"><b>1.8×</b></td>
+   <td class="num">20°</td>
+   <td class="num cool">-5.7%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:35.86994627651748%"></span></td></tr><tr><td><b>Blue</b> → Indigo</td>
+   <td class="num">10.0</td>
+   <td class="num"><b>1.9×</b></td>
+   <td class="num">16°</td>
+   <td class="num cool">-5.2%</td>
+   <td class="bar-cell"><span class="bar cool mid" style="width:32.38173770742629%"></span></td></tr><tr><td><b>Indigo</b> → Purple</td>
+   <td class="num">8.5</td>
+   <td class="num"><b>1.6×</b></td>
+   <td class="num">14°</td>
+   <td class="num warm">+5.9%</td>
+   <td class="bar-cell"><span class="bar warm mid" style="width:37.118912618597136%"></span></td></tr><tr><td><b>Purple</b> → Violet</td>
+   <td class="num">11.5</td>
+   <td class="num"><b>2.2×</b></td>
+   <td class="num">24°</td>
+   <td class="num warm">+14.9%</td>
+   <td class="bar-cell"><span class="bar warm big" style="width:93.11699470618215%"></span></td></tr><tr><td><b>Violet</b> → Pink</td>
+   <td class="num">12.5</td>
+   <td class="num"><b>2.4×</b></td>
+   <td class="num">29°</td>
+   <td class="num warm">+15.9%</td>
+   <td class="bar-cell"><span class="bar warm big" style="width:99.41047774153913%"></span></td></tr><tr><td><b>Pink</b> → Coral</td>
+   <td class="num">12.0</td>
+   <td class="num"><b>2.4×</b></td>
+   <td class="num">22°</td>
+   <td class="num warm">+15.3%</td>
+   <td class="bar-cell"><span class="bar warm big" style="width:95.4753403480858%"></span></td></tr><tr><td><b>Coral</b> → Ember</td>
+   <td class="num">8.6</td>
+   <td class="num"><b>1.7×</b></td>
+   <td class="num">11°</td>
+   <td class="num warm">+2.0%</td>
+   <td class="bar-cell"><span class="bar warm sm" style="width:12.312708636907328%"></span></td></tr><tr><td><b>Ember</b> → Orange</td>
+   <td class="num">11.1</td>
+   <td class="num"><b>2.3×</b></td>
+   <td class="num">14°</td>
+   <td class="num warm">+7.0%</td>
+   <td class="bar-cell"><span class="bar warm mid" style="width:43.616401985336616%"></span></td></tr><tr><td><b>Orange</b> → Mustard</td>
+   <td class="num">10.4</td>
+   <td class="num"><b>2.2×</b></td>
+   <td class="num">14°</td>
+   <td class="num warm">+2.8%</td>
+   <td class="bar-cell"><span class="bar warm sm" style="width:17.73543412433672%"></span></td></tr><tr><td><b>Mustard</b> → Yellow</td>
+   <td class="num">8.2</td>
+   <td class="num"><b>1.7×</b></td>
+   <td class="num">11°</td>
+   <td class="num warm">+2.6%</td>
+   <td class="bar-cell"><span class="bar warm sm" style="width:16.488890765759283%"></span></td></tr><tr><td><b>Yellow</b> → Lemon</td>
+   <td class="num">7.7</td>
+   <td class="num"><b>1.6×</b></td>
+   <td class="num">9°</td>
+   <td class="num warm">+2.4%</td>
+   <td class="bar-cell"><span class="bar warm sm" style="width:15.02611690794266%"></span></td></tr></tbody></table></div>
+<p class="lede" style="margin-top:16px"><b>Green → Jade costs 1.9 steps and reads 10% cooler</b> across the palette's full warm–cool range, rotating hue 27°. Your instinct of "5% or 10%" was the right magnitude. Warmth here is b*, the CIELAB yellow–blue axis, normalised against the palette's total span of 161 units — percentages of a family's own chroma blow up on low-chroma families like Jade and are not usable.</p>
+</section>
+
+<section>
+<h2>Warming the neutrals — where the real move is</h2>
+<p class="lede">Every MH brand neutral is cool (b* −1.1 to −3.2). This is the one place the palette lets you shift the brand's temperature without touching a chromatic color. It also has a hard ceiling.</p>
+<div class="scroll"><table class="tbl"><thead><tr><th>Brand neutral</th><th>Closest (stays cool)</th><th>Warm option</th><th>Warmest option</th></tr></thead><tbody><tr>
+ <td><span class="chip" style="background:#E6EBEC"></span><b>cloud</b><br><code>#E6EBEC</code></td>
+ <td><span class="chip" style="background:#E5E5E4"></span>Grey 300<br><code>#E5E5E4</code><span class="mini">ΔE 2.6 · b* +1.6</span></td><td><span class="chip" style="background:#EBE9E4"></span><b>Mub 200</b><br><code>#EBE9E4</code><span class="mini">ΔE 4 · b* +3.7</span></td><td><span class="chip" style="background:#F6F0EB"></span>Cocoa 100<br><code>#F6F0EB</code><span class="mini">ΔE 5.6 · b* +4.2</span></td>
+</tr><tr>
+ <td><span class="chip" style="background:#C6CCCD"></span><b>silver</b><br><code>#C6CCCD</code></td>
+ <td><span class="chip" style="background:#C0C0C0"></span>Grey 500<br><code>#C0C0C0</code><span class="mini">ΔE 3.9 · b* +1.2</span></td><td><span class="chip" style="background:#CDC9BF"></span><b>Mub 400</b><br><code>#CDC9BF</code><span class="mini">ΔE 6.4 · b* +6.7</span></td><td><span class="chip" style="background:#C3B5A9"></span>Coffee 400<br><code>#C3B5A9</code><span class="mini">ΔE 11.2 · b* +9.1 ⚠ brown</span></td>
+</tr><tr>
+ <td><span class="chip" style="background:#6E7A7D"></span><b>slate</b><br><code>#6E7A7D</code></td>
+ <td><span class="chip" style="background:#777777"></span>Grey 800<br><code>#777777</code><span class="mini">ΔE 5.7 · b* +3.2</span></td><td><span class="chip" style="background:#717171"></span>Grey 900<br><code>#717171</code><span class="mini">ΔE 6.3 · b* +3.2</span></td><td><span class="chip" style="background:#886A53"></span>Coffee 600<br><code>#886A53</code><span class="mini">ΔE 20.5 · b* +20.6 ⚠ brown</span></td>
+</tr><tr>
+ <td><span class="chip" style="background:#373D3F"></span><b>charcoal</b><br><code>#373D3F</code></td>
+ <td><span class="chip" style="background:#393C3C"></span>Grey 1600<br><code>#393C3C</code><span class="mini">ΔE 1.8 · b* +1.6</span></td><td><span class="chip" style="background:#3E3E3E"></span>Grey 1400<br><code>#3E3E3E</code><span class="mini">ΔE 3.5 · b* +2.1</span></td><td><span class="chip" style="background:#3E392D"></span>Mub 1400<br><code>#3E392D</code><span class="mini">ΔE 9.4 · b* +10.4</span></td>
+</tr></tbody></table></div>
+<p class="lede" style="margin-top:16px"><b>The ceiling:</b> at slate and charcoal lightness the warm families have already turned brown — Coffee 600 is b* +20.6 from slate, Cocoa 1400 is +23.4 from charcoal. That is why warmth belongs to backgrounds and hairlines only, and ink stays neutral. The rule wasn't taste; it's where the ramps go.</p>
+</section>
+
+<hr>
+
+<section>
+<h2>The process, repeatable</h2>
+<div class="steps">
+<div class="step"><b>Fix the ground truth first</b><p>One file, one date, one source. Here: Brand Guidelines v1.2 (2021). If two candidate "brand blues" exist, resolve that before measuring anything.</p></div>
+<div class="step"><b>Measure in ΔE2000, never in hex or HSL</b><p>Hex distance and HSL both lie about perceived difference — they over-weight blues and under-weight greens. ΔE2000 is the standard brand-QA metric and is what a brand review will accept.</p></div>
+<div class="step"><b>Budget tolerance by tier, not uniformly</b><p>Primary ≤ 2.0, secondary ≤ 3.5, tertiary ≤ 5.0. Recognition load concentrates in the primary and the lockup; spending equal rigor on a tertiary wash is wasted.</p></div>
+<div class="step"><b>Separate brand assets from UI tokens</b><p>Logos and co-branded marks use exact values forever. UI tokens use palette stops within tolerance — that's what buys you the sibling steps, the hover states and the accessible twins.</p></div>
+<div class="step"><b>Give every failing color an accessible twin from its own family</b><p>Most brand accents fail AA as text. The fix is not to darken the brand color — it's to pair the brand fill with a darker stop of the same hue, so the color reads as brand and the text still passes.</p></div>
+<div class="step"><b>Verify in context, not in isolation</b><p>Albers' point, and it's measurable: the same hex on <code>#FFFFFF</code> and on <code>#FAF7F0</code> are different contrast problems. Always re-measure against the surface the color actually sits on.</p></div>
+<div class="step"><b>Log the exceptions with their ΔE</b><p>"We kept aqua-blue exact because the nearest stop was ΔE 6.0" is a defence. "It looked off" is not. The number is what survives the review.</p></div>
+</div>
+</section>
+
+<div class="callout">
+<h2>What I'd take to a brand review</h2>
+<p>Twelve of fifteen brand colors have a defensible palette equivalent. Two are deliberate replacements in service of warming. One stays exact.</p>
+<ol>
+<li><b>The oranges and the primary blue are settled.</b> ΔE 0.62, 0.77 and 1.41 — no reasonable reviewer contests these.</li>
+<li><b>Warming happens in the neutrals only.</b> Cloud → Mub 200, silver → Mub 400. Ink stays neutral Grey because the warm ramps go brown below L* 55.</li>
+<li><b>Aqua-blue stays exact</b> as an off-palette stop. It's a CTA color at ΔE 6.0 from anything — substituting it is the one change someone would notice.</li>
+<li><b>Slate is retired,</b> not matched. Replacing a cool blue-grey with neutral Grey 800 is the warming decision, stated plainly rather than hidden inside a tolerance argument.</li>
+</ol>
+</div>
+</div></body></html>

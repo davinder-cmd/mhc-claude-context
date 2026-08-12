@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rewards examples · component sheet · 07</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="bar">
+  <a class="bar__back" href="index.html">← All sheets</a>
+  <span class="bar__sep">/</span>
+  <span class="bar__name">07 · Rewards examples</span>
+</nav>
+
+<div class="sheet">
+
+  <header class="sheet__head">
+    <div class="sheet__num">07 / 07</div>
+    <h1 class="sheet__title">Rewards · examples in context</h1>
+    <p class="sheet__sub">
+      Worked examples of the single-reward banner across all four reward types — Direct rewards, Raffles, Points &amp; levels, Store credit — and both framings (balance-focused vs earnable-focused). Each row pairs the large form with the small form so you can see how the same banner adapts.
+    </p>
+    <a class="sheet__figma" href="https://www.figma.com/design/6nJg9r55Y3NSgqZetujnPI/Home-Page-redesign-v2?node-id=6969-18128" target="_blank">View in Figma</a>
+  </header>
+
+  <section class="section">
+    <h2>Scenarios</h2>
+    <p>Each scenario is built from the same primitives library (see <a href="06-rewards-row-cards.html">sheet 06</a>). What varies is which primitives are present and what they emphasize.</p>
+
+    <div class="preview"><img src="img/07-rewards-examples.png" alt="Rewards in-context examples — multiple scenarios across reward types"></div>
+
+    <div class="variants">
+      <ul>
+        <li><strong>Direct rewards</strong> — D1 multi-action balance + bar, D2 balance + dots, D3 balance no progress, D4 multi-action earnable + bar, D5 HSA reward gated/locked, D6 premium discount active, D7 single-action HRA one-time.</li>
+        <li><strong>Raffles</strong> — R1 uncapped balance no progress, R2 capped balance + bar, R3 capped earnable + bar, R4 prize-led (hero is the top prize).</li>
+        <li><strong>Points &amp; levels</strong> — P1 balance + levels (tier ladder), P2 balance + bar, P3 earnable to next tier + bar, P4 balance no progress.</li>
+        <li><strong>Store credit</strong> — S1 balance "ready to spend" no progress, S2 capped quarterly balance + bar, S3 capped quarterly earnable + bar.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Chip vs attribute logic</h2>
+    <p>Every banner uses two chip slots and one attribute line. The split between them is consistent across all reward types:</p>
+    <div class="variants">
+      <ul>
+        <li><strong>Chip 1 — program/category</strong>. Slow-changing identity (e.g., <code>WELLNESS REWARDS</code>, <code>SPRING RAFFLE</code>, <code>POINTS</code>, <code>STORE CREDIT</code>, <code>HSA REWARD</code>).</li>
+        <li><strong>Chip 2 — period/scope/status</strong>. The bucket the value belongs to (e.g., <code>Q2 2026</code>, <code>CAPPED AT 50</code>, <code>SILVER TIER</code>, <code>LOCKED</code>, <code>ACTIVE</code>).</li>
+        <li><strong>Attribute line — the math</strong>. Dynamic context for the hero number — the rate, the gap, the timeline, the next milestone. Examples: "of $250 this quarter · earn $25 per check-in", "38 still to earn · 12 of 50 earned so far · draws May 31", "750 pts to Gold · earn 50 pts per workout".</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Notes — Darcy meeting compliance</h2>
+    <ul class="notes">
+      <li>✅ Balance-focused vs earnable-focused — every reward type has at least one of each framing.</li>
+      <li>✅ Gated HSA / premium discount — D5 (locked HSA, ⊘ badge, button opens the HSA flow not the rewards flow) and D6 (premium discount, ⚡ badge, no progress because the benefit is recurring not cumulative).</li>
+      <li>✅ Points / levels progress — P1 uses the dedicated levels-progress variant (tier ladder with checkmarks).</li>
+      <li>✅ Raffle scenarios — uncapped vs capped vs prize-led, plus the balance/earnable distinction where it applies.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

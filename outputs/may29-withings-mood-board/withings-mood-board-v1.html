@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Withings — Health Mate App Mood Board</title>
+<style>
+  :root {
+    --ink: #0E0E14;            /* near-black text */
+    --ink-soft: #5A5C6B;       /* secondary text */
+    --bg: #F3F4F8;             /* cool lavender-tinted page surface */
+    --bg-2: #E9EAF1;           /* deeper neutral */
+    --card: #FFFFFF;           /* card */
+    --line: #E1E3EC;           /* hairlines */
+    --indigo: #5E5CE6;         /* Withings signature periwinkle indigo */
+    --indigo-soft: #E5E4FB;
+    --activity: #FBD9C0;       /* muted peach chip, replaces butter */
+    --body: #E5D4F2;           /* lilac chip */
+    --heart: #FAD5D5;          /* pink chip */
+    --cycle: #F2B96D;          /* warm peach for cycle */
+    --coral: #E94B5F;          /* cycle red */
+    --gold: #C99B3A;            /* running gold */
+    --green: #2BB673;          /* checkmark green */
+    --max: 1280px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: "SF Pro Display", -apple-system, "Inter", ui-sans-serif, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+  }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 700px) { .container { padding: 0 24px; } }
+
+  header.top { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .top-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .top-row .dot { display: inline-block; width: 8px; height: 8px; background: var(--indigo); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+  .hero { padding: 56px 0 80px; }
+  .eyebrow { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--indigo); font-weight: 700; }
+  h1.display {
+    font-weight: 800;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    margin: 16px 0 24px;
+  }
+  h1.display em { font-style: normal; color: var(--indigo); }
+  .lede { font-size: 20px; line-height: 1.5; max-width: 780px; color: var(--ink-soft); }
+
+  section { padding: 80px 0; border-top: 1px solid var(--line); }
+  section .label { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  section h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.025em; margin: 8px 0 24px; font-weight: 800; }
+  section .intro { font-size: 18px; max-width: 720px; color: var(--ink-soft); }
+
+  /* Keywords */
+  .keywords { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .keywords span { border: 1px solid var(--ink); color: var(--ink); padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; background: white; }
+  .keywords span.indigo { background: var(--indigo); color: white; border-color: var(--indigo); }
+  .keywords span.coral { background: var(--coral); color: white; border-color: var(--coral); }
+
+  /* Color */
+  .weight-bar { display: flex; height: 80px; border-radius: 12px; overflow: hidden; margin-top: 32px; box-shadow: 0 1px 0 rgba(14,14,20,0.05); }
+  .weight-bar > div { display: flex; align-items: flex-end; padding: 14px; font-size: 12px; font-weight: 600; }
+  .w-bg { background: var(--bg-2); color: var(--ink); flex: 0 0 46%; }
+  .w-ink { background: var(--ink); color: white; flex: 0 0 24%; }
+  .w-indigo { background: var(--indigo); color: white; flex: 0 0 14%; }
+  .w-pastel { background: linear-gradient(90deg, var(--activity) 0%, var(--body) 50%, var(--heart) 100%); color: var(--ink); flex: 0 0 12%; }
+  .w-accent { background: var(--coral); color: white; flex: 0 0 4%; }
+
+  .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .swatches { grid-template-columns: repeat(2, 1fr); } }
+  .swatch { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: white; }
+  .swatch .chip { height: 130px; display: flex; align-items: flex-end; padding: 14px; color: white; font-weight: 700; }
+  .swatch .meta { padding: 12px 14px; background: white; }
+  .swatch .meta .name { font-weight: 700; font-size: 14px; }
+  .swatch .meta .hex { font-family: ui-monospace, "SF Mono", monospace; font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .swatch .meta .role { font-size: 12px; color: var(--ink-soft); margin-top: 6px; }
+
+  .pastel-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+  @media (max-width: 700px) { .pastel-row { grid-template-columns: repeat(2, 1fr); } }
+  .pastel-card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .pastel-card .ico { width: 36px; height: 36px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 10px; }
+  .pastel-card .name { font-weight: 700; font-size: 14px; }
+  .pastel-card .meta { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .pastel-card.activity { background: var(--activity); }
+  .pastel-card.body { background: var(--body); }
+  .pastel-card.heart { background: var(--heart); }
+  .pastel-card.cycle { background: #FBE0CB; }
+
+  /* Typography */
+  .type-stack { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-top: 32px; }
+  @media (max-width: 900px) { .type-stack { grid-template-columns: 1fr; } }
+  .type-card { border: 1px solid var(--line); border-radius: 16px; padding: 32px; background: white; }
+  .type-card .role { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+  .type-card .h-large { font-size: 56px; line-height: 1.0; letter-spacing: -0.035em; font-weight: 800; margin: 16px 0 24px; }
+  .type-card .h-large em { color: var(--indigo); font-style: normal; }
+  .num-hero { display: flex; align-items: baseline; gap: 12px; margin: 16px 0 24px; }
+  .num-hero .figure { font-size: 96px; font-weight: 800; letter-spacing: -0.04em; line-height: 0.9; }
+  .num-hero .unit { font-size: 28px; font-weight: 700; color: var(--ink-soft); }
+  .num-hero + .status { font-size: 14px; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 6px; }
+  .num-hero + .status .pill { background: var(--indigo-soft); color: var(--indigo); border-radius: 999px; padding: 4px 10px; font-weight: 700; font-size: 12px; }
+  .body-specimen { font-size: 17px; line-height: 1.55; color: var(--ink-soft); margin: 16px 0; }
+  .specs { font-family: ui-monospace, "SF Mono", monospace; font-size: 12px; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 16px; }
+
+  /* Voice */
+  .quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .quotes { grid-template-columns: 1fr; } }
+  .quote {
+    background: white; border: 1px solid var(--line); border-left: 4px solid var(--indigo);
+    border-radius: 12px; padding: 24px; font-size: 20px; line-height: 1.35; letter-spacing: -0.005em;
+    font-weight: 600;
+  }
+  .quote.dark { background: var(--ink); color: white; border-color: var(--ink); border-left-color: var(--indigo); }
+  .quote .src { display: block; font-size: 13px; color: var(--ink-soft); font-weight: 400; margin-top: 12px; }
+  .quote.dark .src { color: rgba(255,255,255,0.6); }
+
+  /* Data viz showcase */
+  .viz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .viz-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .viz-grid { grid-template-columns: 1fr; } }
+  .viz-card { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+  .viz-card .row { display: flex; align-items: center; justify-content: space-between; }
+  .viz-card .ic { width: 22px; height: 22px; border-radius: 50%; background: var(--indigo-soft); display: inline-flex; align-items: center; justify-content: center; color: var(--indigo); font-weight: 800; font-size: 13px; margin-right: 8px; vertical-align: middle; }
+  .viz-card .ic.coral { background: #FBE1E5; color: var(--coral); }
+  .viz-card .ic.gold { background: #FBDFC8; color: var(--gold); }
+  .viz-card .label-row { font-size: 14px; font-weight: 600; }
+  .viz-card .time { font-size: 12px; color: var(--ink-soft); }
+  .viz-card .value { font-size: 36px; font-weight: 800; letter-spacing: -0.03em; margin-top: 6px; line-height: 1; }
+  .viz-card .value .unit { font-size: 18px; color: var(--ink-soft); margin-left: 4px; font-weight: 700; }
+  .viz-card .sub { font-size: 13px; color: var(--ink-soft); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+  .viz-card .sub .arrow { color: var(--indigo); font-weight: 800; }
+
+  /* Sparkline + bar chart svgs */
+  .spark { width: 100%; height: 60px; margin-top: 14px; }
+  .bars { width: 100%; height: 60px; margin-top: 14px; }
+  .dual-line { width: 100%; height: 72px; margin-top: 14px; }
+
+  /* Cycle dots */
+  .cycle-dots { display: flex; gap: 8px; align-items: center; margin-top: 14px; }
+  .cycle-dots .d { background: var(--coral); border-radius: 50%; }
+  .cycle-dots .d1 { width: 18px; height: 18px; opacity: 0.6; }
+  .cycle-dots .d2 { width: 32px; height: 32px; }
+  .cycle-dots .d3 { width: 22px; height: 22px; opacity: 0.85; }
+
+  /* Imagery / illustration */
+  .illos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .illos { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .illos { grid-template-columns: 1fr; } }
+  .illo { aspect-ratio: 4/3; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; color: var(--ink); position: relative; overflow: hidden; border: 1px solid var(--line); }
+  .illo .cat { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; }
+  .illo .desc { font-size: 15px; font-weight: 600; line-height: 1.3; }
+  .illo.i1 { background: linear-gradient(135deg, #B7A6DB 0%, #6F5DB9 100%); color: white; }
+  .illo.i2 { background: linear-gradient(135deg, #FBE0CB 0%, #F2B96D 100%); }
+  .illo.i3 { background: linear-gradient(135deg, #DDEEF7 0%, #82B0CC 100%); color: var(--ink); }
+  .illo.i4 { background: var(--bg-2); }
+  .illo.i5 { background: linear-gradient(135deg, var(--indigo-soft) 0%, #C2C0F4 100%); }
+  .illo.i6 { background: linear-gradient(135deg, var(--heart) 0%, #E89898 100%); }
+
+  /* Devices */
+  .devices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .devices { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .devices { grid-template-columns: 1fr; } }
+  .device { background: white; border: 1px solid var(--line); border-radius: 16px; padding: 28px; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; }
+  .device .glyph { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--indigo); font-weight: 700; }
+  .device h3 { font-size: 22px; line-height: 1.15; letter-spacing: -0.015em; margin: 8px 0 12px; font-weight: 800; }
+  .device p { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+
+  /* So what */
+  .so-what { background: var(--ink); color: white; border-radius: 20px; padding: 56px; margin-top: 32px; }
+  .so-what h2 { color: white; margin: 0 0 16px; }
+  .so-what p { color: rgba(255,255,255,0.78); font-size: 18px; max-width: 720px; margin: 0 0 16px; }
+  .so-what ul { padding-left: 18px; color: rgba(255,255,255,0.88); font-size: 16px; line-height: 1.6; }
+  .so-what ul li { margin-bottom: 8px; }
+  .so-what ul li strong { color: white; }
+  .so-what .accent { color: #B7B5FF; }
+
+  /* Featured illustration band */
+  .illo-band {
+    margin-top: 32px;
+    background: linear-gradient(180deg, #E5DEF7 0%, #C9C0EC 100%);
+    border-radius: 20px; overflow: hidden; position: relative;
+    padding: 0; min-height: 380px;
+  }
+  .illo-band .illo-svg { width: 100%; height: 420px; display: block; }
+  .illo-band .illo-caption { position: absolute; left: 32px; bottom: 24px; background: white; color: var(--ink); border-radius: 999px; padding: 10px 18px; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  footer { padding: 48px 0 96px; color: var(--ink-soft); font-size: 13px; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="container top-row">
+    <div><span class="dot"></span>Competitive Mood Board · Withings Health Mate app</div>
+    <div>2026-05-29 · Prepared for Davinder Rehal</div>
+  </div>
+</header>
+
+<div class="container hero">
+  <div class="eyebrow">App Aesthetic Study</div>
+  <h1 class="display">Numbers as <em>protagonist.</em></h1>
+  <p class="lede">Withings's Health Mate is the quietest health app in the category. There are no hero photos, no motivational illustrations on every screen, no aggressive color. The number is the story — measured, displayed huge, paired with a tiny sparkline and a one-word verdict. The brand sells European medical-grade hardware; the app behaves accordingly.</p>
+
+  <!-- FEATURED ILLUSTRATION -->
+  <div class="illo-band">
+    <svg class="illo-svg" viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-label="Editorial illustration: runner on lavender hills">
+      <!-- Sky -->
+      <rect width="1100" height="420" fill="url(#sky)"/>
+
+      <!-- Sun -->
+      <circle cx="850" cy="130" r="56" fill="#FBE0CB"/>
+      <circle cx="850" cy="130" r="42" fill="#F2B96D"/>
+
+      <!-- Distant lavender hills (back layer) -->
+      <path d="M 0 280 Q 220 200, 380 250 T 720 230 T 1100 240 L 1100 420 L 0 420 Z" fill="#9B8AD0"/>
+
+      <!-- Mid lavender hills -->
+      <path d="M 0 320 Q 180 260, 360 300 T 720 290 T 1100 310 L 1100 420 L 0 420 Z" fill="#7E6BBE"/>
+
+      <!-- Foreground darker purple hill -->
+      <path d="M 0 360 Q 240 320, 480 350 T 920 360 T 1100 370 L 1100 420 L 0 420 Z" fill="#5E4FA3"/>
+
+      <!-- Small dot of peach/sun reflection on sky -->
+      <circle cx="290" cy="100" r="6" fill="#FBD9C0" opacity="0.7"/>
+      <circle cx="620" cy="80" r="4" fill="#FBD9C0" opacity="0.6"/>
+      <circle cx="980" cy="200" r="5" fill="#FBD9C0" opacity="0.5"/>
+
+      <!-- Runner figure (flat editorial silhouette) -->
+      <g transform="translate(440, 200)">
+        <!-- Head -->
+        <circle cx="40" cy="0" r="18" fill="#5E5CE6"/>
+        <!-- Hair bun / cap -->
+        <circle cx="50" cy="-12" r="10" fill="#5E5CE6"/>
+        <!-- Torso (jersey) -->
+        <path d="M 24 14 Q 18 28, 22 60 L 60 60 Q 64 28, 56 14 Z" fill="#5E5CE6"/>
+        <!-- Vest stripe -->
+        <rect x="22" y="30" width="40" height="6" fill="#FAD5D5"/>
+        <!-- Front arm bent -->
+        <path d="M 22 24 Q 0 36, 4 64" stroke="#5E5CE6" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <!-- Back arm extended -->
+        <path d="M 58 24 Q 90 32, 100 12" stroke="#5E5CE6" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <!-- Shorts -->
+        <path d="M 22 58 L 60 58 L 64 92 L 52 92 L 48 70 L 32 70 L 30 92 L 18 92 Z" fill="#3F3DAB"/>
+        <!-- Front leg mid-stride -->
+        <path d="M 28 88 Q 18 116, 30 140" stroke="#5E5CE6" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <!-- Back leg extended -->
+        <path d="M 56 88 Q 80 96, 88 120" stroke="#5E5CE6" stroke-width="11" fill="none" stroke-linecap="round"/>
+        <!-- Shoes -->
+        <ellipse cx="32" cy="142" rx="14" ry="5" fill="#1F1F2D"/>
+        <ellipse cx="92" cy="124" rx="14" ry="5" fill="#1F1F2D"/>
+      </g>
+
+      <!-- Stride path (motion line) -->
+      <path d="M 380 360 Q 460 340, 540 360 Q 620 380, 700 360" stroke="white" stroke-width="2" fill="none" stroke-dasharray="3 6" opacity="0.6"/>
+
+      <!-- Floating metric card — "Number-as-hero" callout -->
+      <g transform="translate(80, 80)">
+        <rect width="280" height="120" rx="20" fill="white"/>
+        <text x="22" y="40" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#5A5C6B" letter-spacing="2">DAILY STEPS</text>
+        <text x="22" y="92" font-family="Inter,sans-serif" font-size="56" font-weight="800" fill="#0E0E14" letter-spacing="-2">8,432</text>
+        <text x="22" y="112" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#5E5CE6">→ 27% to goal</text>
+
+        <!-- mini sparkline -->
+        <g transform="translate(180, 60)">
+          <polyline fill="none" stroke="#5E5CE6" stroke-width="2" points="0,30 16,28 32,22 48,26 64,16 80,12 96,8"/>
+          <circle cx="96" cy="8" r="3.5" fill="#5E5CE6"/>
+        </g>
+      </g>
+
+      <!-- Cycle dots — distinctive Withings element -->
+      <g transform="translate(880, 320)">
+        <circle r="9" cx="-22" cy="0" fill="#E94B5F" opacity="0.6"/>
+        <circle r="18" cx="6" cy="0" fill="#E94B5F"/>
+        <circle r="11" cx="40" cy="0" fill="#E94B5F" opacity="0.85"/>
+      </g>
+
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E5DEF7"/>
+          <stop offset="100%" stop-color="#C9C0EC"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="illo-caption">Editorial flat · runner on lavender hills · French magazine register</div>
+  </div>
+</div>
+
+<!-- BRAND ESSENCE -->
+<section>
+  <div class="container">
+    <div class="label">01 · Brand Essence</div>
+    <h2>The register: precise, premium, polite.</h2>
+    <p class="intro">Where Sword reads as humanitarian healthcare, Withings reads as European consumer electronics that happens to be clinical. The app feels like the Apple Watch's calmer, more medical sibling — restraint as luxury signal, data as proof of care.</p>
+    <div class="keywords">
+      <span class="indigo">Quantified</span>
+      <span>Premium</span>
+      <span>Restrained</span>
+      <span>French-modern</span>
+      <span class="coral">Editorial</span>
+      <span>Clinically validated</span>
+      <span>Lifestyle-medical</span>
+      <span>Quiet</span>
+      <span>Hardware-led</span>
+      <span class="indigo">Data-first</span>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section>
+  <div class="container">
+    <div class="label">02 · Color</div>
+    <h2>Cool neutrals. One indigo. Four pastels.</h2>
+    <p class="intro">The page surface is a cool lavender-tinted gray — not warm cream like Sword. A single periwinkle indigo carries the brand. Four pastel category chips (Activity, Body, Heart, Cycle) are the only chromatic energy, and a coral red is reserved almost entirely for cycle tracking flow days.</p>
+
+    <div class="weight-bar" aria-label="Proportional color usage">
+      <div class="w-bg">Cool surface · ~46%</div>
+      <div class="w-ink">Ink · ~24%</div>
+      <div class="w-indigo">Indigo · ~14%</div>
+      <div class="w-pastel">Pastel chips · ~12%</div>
+      <div class="w-accent">Coral · ~4%</div>
+    </div>
+
+    <div class="swatches">
+      <div class="swatch">
+        <div class="chip" style="background: var(--bg-2); color: var(--ink);">Aa</div>
+        <div class="meta"><div class="name">Cool Surface</div><div class="hex">#F3F4F8 / #E9EAF1</div><div class="role">Page · between cards · negative space</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--ink);">Aa</div>
+        <div class="meta"><div class="name">Near-black Ink</div><div class="hex">~ #0E0E14</div><div class="role">Numbers · headlines · scaffolding</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--indigo);">Aa</div>
+        <div class="meta"><div class="name">Withings Indigo</div><div class="hex">~ #5E5CE6</div><div class="role">Logo · CTAs · sparkline dots</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--coral);">Aa</div>
+        <div class="meta"><div class="name">Cycle Coral</div><div class="hex">~ #E94B5F</div><div class="role">Cycle flow dots · alerts</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--green);">Aa</div>
+        <div class="meta"><div class="name">Confirm Green</div><div class="hex">~ #2BB673</div><div class="role">Checkmarks · completed missions</div></div>
+      </div>
+    </div>
+
+    <div class="pastel-row">
+      <div class="pastel-card activity">
+        <div class="ico">🏃</div>
+        <div class="name">Activity</div>
+        <div class="meta">~ #FBD9C0</div>
+      </div>
+      <div class="pastel-card body">
+        <div class="ico">X</div>
+        <div class="name">Body</div>
+        <div class="meta">~ #E5D4F2</div>
+      </div>
+      <div class="pastel-card heart">
+        <div class="ico">♥</div>
+        <div class="name">Heart</div>
+        <div class="meta">~ #FAD5D5</div>
+      </div>
+      <div class="pastel-card cycle">
+        <div class="ico">●</div>
+        <div class="name">Cycle</div>
+        <div class="meta">~ #FBE0CB</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section>
+  <div class="container">
+    <div class="label">03 · Typography</div>
+    <h2>Numbers loud, copy quiet.</h2>
+    <p class="intro">A neo-grotesque sans (close to SF Pro Display or a custom Withings variant) carries everything. The display move is not the headline — it's the metric. Numbers are set 60–96px and bold; labels above them are tiny and muted. The entire visual identity sits on this contrast.</p>
+
+    <div class="type-stack">
+      <div class="type-card">
+        <div class="role">Number-as-hero</div>
+        <div class="num-hero">
+          <div class="figure">69.9</div>
+          <div class="unit">kg</div>
+        </div>
+        <div class="status"><span class="pill">→ Stable Weight</span></div>
+        <div class="specs">Display weight 800 · −0.04em tracking · 90–96px · paired with 28px unit and a 12px status pill</div>
+      </div>
+      <div class="type-card">
+        <div class="role">Greeting · Section</div>
+        <div class="h-large">Good evening, <em>John.</em></div>
+        <div class="body-specimen">Latest Measurements · Past 7 days. Section headers are bold but never shout; numbers do the shouting.</div>
+        <div class="specs">Display weight 800 · −0.025em · 32–56px · body 17px LH 1.55</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section>
+  <div class="container">
+    <div class="label">04 · Voice &amp; Messaging</div>
+    <h2>Marketing speaks. The app barely does.</h2>
+    <p class="intro">Two voices, intentionally separated. Web marketing leans into clinical credibility and ecosystem language. Inside the app, copy reduces to a status word ("Stable", "Normal", "High HR") under each number. No coaching, no motivational flourishes, no second-person warmth.</p>
+
+    <div class="quotes">
+      <div class="quote">"360° picture of your health."<span class="src">— Marketing site</span></div>
+      <div class="quote">"Innovative measurements. Accurate information."<span class="src">— App Store</span></div>
+      <div class="quote dark">"Stable. Normal. High HR."<span class="src">— In-app status vocabulary (the entire copy register)</span></div>
+      <div class="quote">"Clinically validated. Developed by experts."<span class="src">— Recurring trust frame</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA VIZ -->
+<section>
+  <div class="container">
+    <div class="label">05 · Data Visualization</div>
+    <h2>The chart is the brand.</h2>
+    <p class="intro">Three repeated visualization moves make Withings instantly recognizable: (1) the indigo sparkline with dotted nodes, (2) the muted vertical-bar daily-step plot, and (3) the cycle-tracking coral disc cluster. No rings. No gauges. No big stat-of-the-day card. Charts are small and live inside metric cards — they're evidence, not theater.</p>
+
+    <div class="viz-grid">
+      <!-- Weight sparkline -->
+      <div class="viz-card">
+        <div class="row">
+          <div class="label-row"><span class="ic">X</span>Weight</div>
+          <div class="time">9:49 AM</div>
+        </div>
+        <div class="value">69.9<span class="unit">kg</span></div>
+        <div class="sub"><span class="arrow">→</span> Stable Weight</div>
+        <svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none">
+          <polyline fill="none" stroke="#5E5CE6" stroke-width="2"
+            points="10,35 55,30 100,28 145,32 190,30 235,26 290,22"/>
+          <circle cx="10" cy="35" r="3.5" fill="#5E5CE6"/>
+          <circle cx="55" cy="30" r="3.5" fill="#5E5CE6"/>
+          <circle cx="100" cy="28" r="3.5" fill="#5E5CE6"/>
+          <circle cx="145" cy="32" r="3.5" fill="#5E5CE6"/>
+          <circle cx="190" cy="30" r="3.5" fill="#5E5CE6"/>
+          <circle cx="235" cy="26" r="3.5" fill="#5E5CE6"/>
+          <circle cx="290" cy="22" r="4.5" fill="#5E5CE6"/>
+        </svg>
+      </div>
+
+      <!-- Heart rate -->
+      <div class="viz-card">
+        <div class="row">
+          <div class="label-row"><span class="ic coral">♥</span>Heart Rate</div>
+          <div class="time">10:55 PM</div>
+        </div>
+        <div class="value">78<span class="unit">bpm</span></div>
+        <div class="sub">Normal</div>
+        <svg class="spark" viewBox="0 0 300 60" preserveAspectRatio="none">
+          <polyline fill="none" stroke="#E94B5F" stroke-width="2"
+            points="10,40 30,42 50,20 70,38 90,40 110,18 130,42 150,40 170,22 190,40 210,38 230,16 250,42 270,40 290,38"/>
+        </svg>
+      </div>
+
+      <!-- Daily steps -->
+      <div class="viz-card">
+        <div class="row">
+          <div class="label-row"><span class="ic gold">🏃</span>Daily Steps</div>
+          <div class="time">14 Feb</div>
+        </div>
+        <div class="value">2,717<span class="unit"></span></div>
+        <div class="sub">27% Goal</div>
+        <svg class="bars" viewBox="0 0 300 60" preserveAspectRatio="none">
+          <rect x="20" y="40" width="6" height="14" fill="#5E5CE6"/>
+          <rect x="60" y="38" width="6" height="16" fill="#5E5CE6"/>
+          <rect x="100" y="20" width="6" height="34" fill="#5E5CE6"/>
+          <rect x="140" y="44" width="6" height="10" fill="#5E5CE6"/>
+          <rect x="180" y="34" width="6" height="20" fill="#5E5CE6"/>
+          <rect x="220" y="42" width="6" height="12" fill="#5E5CE6"/>
+          <rect x="260" y="28" width="6" height="26" fill="#5E5CE6"/>
+        </svg>
+      </div>
+
+      <!-- Cycle dots -->
+      <div class="viz-card">
+        <div class="row">
+          <div class="label-row"><span class="ic coral">●</span>Cycle Tracking</div>
+          <div class="time">Today</div>
+        </div>
+        <div class="value" style="font-size:24px;">Period<span class="unit" style="font-size:14px;">Ends tomorrow</span></div>
+        <div class="cycle-dots">
+          <div class="d d1"></div>
+          <div class="d d2"></div>
+          <div class="d d3"></div>
+        </div>
+      </div>
+
+      <!-- Body comp dual line -->
+      <div class="viz-card">
+        <div class="row">
+          <div class="label-row"><span class="ic">X</span>Body Composition</div>
+          <div class="time">9:49 AM</div>
+        </div>
+        <div class="value" style="font-size:22px;">Gaining muscle</div>
+        <div class="sub" style="gap: 16px;">
+          <span style="color:#2BB673; font-weight:700;">▲ Muscle 87.9%</span>
+          <span style="color:#5E5CE6; font-weight:700;">▼ Fat 7.9%</span>
+        </div>
+        <svg class="dual-line" viewBox="0 0 300 72" preserveAspectRatio="none">
+          <polyline fill="none" stroke="#2BB673" stroke-width="2" points="10,30 55,28 100,24 145,22 190,20 235,18 290,14"/>
+          <polyline fill="none" stroke="#5E5CE6" stroke-width="2" points="10,52 55,54 100,52 145,56 190,58 235,60 290,62"/>
+          <circle cx="290" cy="14" r="3" fill="#2BB673"/>
+          <circle cx="290" cy="62" r="3" fill="#5E5CE6"/>
+        </svg>
+      </div>
+
+      <!-- Mission complete -->
+      <div class="viz-card" style="background: var(--indigo-soft);">
+        <div class="row">
+          <div class="label-row">Today's Mission</div>
+          <div class="time" style="color: var(--indigo); font-weight: 700;">✓</div>
+        </div>
+        <div class="value" style="font-size:18px; font-weight:700; line-height:1.3;">Step on your scale</div>
+        <div class="sub" style="color: var(--indigo); font-weight: 600;">Complete</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGERY -->
+<section>
+  <div class="container">
+    <div class="label">06 · Imagery &amp; Illustration</div>
+    <h2>No photography. Editorial illustration only.</h2>
+    <p class="intro">This is the most distinctive choice Withings makes. Almost no member photography. Instead, the app uses occasional editorial illustrations — flat, slightly retro, with stylized figures and pastel landscapes — placed inside hero cards for moments like "A new week begins!" or "Quiet day." The visual register is closer to a French lifestyle magazine than a fitness app.</p>
+
+    <div class="illos">
+      <div class="illo i1">
+        <div class="cat">Hero Card · Weekly</div>
+        <div class="desc">Flat figure running through lavender hills. Editorial, slightly retro, lightly humanized.</div>
+      </div>
+      <div class="illo i2">
+        <div class="cat">Empty State</div>
+        <div class="desc">Warm peach gradients for cycle and energy moments. Never neon, never gradient-y-tech.</div>
+      </div>
+      <div class="illo i3">
+        <div class="cat">Notification · Quiet Day</div>
+        <div class="desc">Retro TV-style mid-century illustration. Confetti above a screen. Unexpectedly playful.</div>
+      </div>
+      <div class="illo i4">
+        <div class="cat">Default Surface</div>
+        <div class="desc">Cool gray neutral. The dominant "image" is the absence of one — restraint as visual choice.</div>
+      </div>
+      <div class="illo i5">
+        <div class="cat">Withings+ Premium</div>
+        <div class="desc">Indigo confetti or particle paths trace across white. The only sparkle the brand allows.</div>
+      </div>
+      <div class="illo i6">
+        <div class="cat">Cycle · Wellness</div>
+        <div class="desc">Soft pinks for cycle and heart. Pastel never crosses into childlike — pigment is muted.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVICES -->
+<section>
+  <div class="container">
+    <div class="label">07 · Signature Design Devices</div>
+    <h2>Six moves repeated on every screen.</h2>
+
+    <div class="devices">
+      <div class="device">
+        <div class="glyph">01 · Metric Card</div>
+        <div><h3>Icon → label → huge number → status → sparkline</h3><p>This exact stack appears 8–12 times per dashboard. It is the atomic unit of the entire app.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">02 · Pastel Chip Grid</div>
+        <div><h3>Four category pills: Activity, Body, Heart, Cycle</h3><p>The "Following" row uses peach / lilac / pink / apricot pastel cards as the primary IA at the top of Measure.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">03 · One-Word Verdict</div>
+        <div><h3>"Stable." "Normal." "High HR."</h3><p>Every metric earns one status word. No paragraphs, no coaching, no narrative — the data carries the meaning.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">04 · Indigo Sparkline</div>
+        <div><h3>Tiny line + dot nodes, never full chart</h3><p>The graph is small enough to live inside a card and confident enough to never need a Y-axis label.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">05 · Missions</div>
+        <div><h3>Three tasks. Green checks.</h3><p>"Today's Missions" structure (e.g. "Step on your scale") gamifies engagement without leaderboards or streaks.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">06 · Premium Gate</div>
+        <div><h3>Withings+ as confetti card</h3><p>The Health Improvement Score lives behind a paywall and is marketed with indigo confetti, the only "feature card" sparkle the brand permits.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SO WHAT -->
+<section>
+  <div class="container">
+    <div class="label">08 · So What</div>
+    <h2>What this means for MHC.</h2>
+    <p class="intro">Withings and MHC have similar surface area — wearable data, daily measurements, programs — but radically different brand jobs. Withings sells $300 hardware to lifestyle-medical consumers; we sell behavior change to overburdened employees managing real conditions. The lessons are about restraint, not register.</p>
+
+    <div class="so-what">
+      <h2>Two moves to steal — one to study — one to reject.</h2>
+      <ul>
+        <li><strong class="accent">Steal — number-as-hero.</strong> Withings's 96px metric value with a one-word status under it is the most economical health-data pattern in the category. Our wearable cards under-display the numbers. Make the value the protagonist; the chart is the supporting cast.</li>
+        <li><strong class="accent">Steal — pastel category chips.</strong> Four small pastel-tinted cards (Activity, Body, Heart, Cycle) handle Withings's top-level IA without icons or color systems fighting each other. We could organize program areas similarly — a calm, single-row, color-coded nav that doesn't shout.</li>
+        <li><strong class="accent">Study — illustration over photography.</strong> Withings can get away with editorial illustration because their hardware does the photography job on the marketing site. We can't. Our members need to see themselves represented; photography in the home and onboarding still earns its place for us.</li>
+        <li><strong class="accent">Reject — the one-word voice.</strong> Withings ships "Stable. Normal." as its entire app copy register. Our users are managing 2–3 conditions, often with low health literacy and high anxiety. They need one more sentence of context than Withings gives. Restraint, yes — silence, no.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container row">
+    <div>Sources: Mobbin Withings Health Mate iOS screens · withings.com (Health Mate, Withings+, Body Scan, ScanWatch 2) · App Store / Play listings</div>
+    <div>Mood board v1 · 2026-05-29</div>
+  </div>
+</footer>
+
+</body>
+</html>

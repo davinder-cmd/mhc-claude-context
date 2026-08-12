@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Challenge card · component sheet · 02</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="bar">
+  <a class="bar__back" href="index.html">← All sheets</a>
+  <span class="bar__sep">/</span>
+  <span class="bar__name">02 · Challenge card</span>
+</nav>
+
+<div class="sheet">
+
+  <header class="sheet__head">
+    <div class="sheet__num">02 / 07</div>
+    <h1 class="sheet__title">Challenge card · variants</h1>
+    <p class="sheet__sub">
+      The single-banner challenge module that sits below the data section. Covers active, recently-completed, and edge-case states. Always one banner — when multiple challenges are active, only the most recently engaged-with is featured here and the rest live behind the drill-in.
+    </p>
+    <a class="sheet__figma" href="https://www.figma.com/design/6nJg9r55Y3NSgqZetujnPI/Home-Page-redesign-v2?node-id=6519-33342" target="_blank">View in Figma</a>
+  </header>
+
+  <section class="section">
+    <h2>Variants</h2>
+    <p>All variants share the shell: 56-px disc icon on the left, body in the middle (eyebrow + title + meta), drill-in or action on the right.</p>
+
+    <div class="preview"><img src="img/02-challenge-card.png" alt="Challenge card variants from Figma"></div>
+
+    <div class="variants">
+      <ul>
+        <li><strong>Active</strong> — eyebrow <code>TEAM CHALLENGE</code>, title <code>Spring Steps Challenge</code>, meta "Day 22 of 30 · Currently 4th". Trophy icon. Whole card is the tap-target.</li>
+        <li><strong>Completed</strong> — eyebrow <code>Completed · May 13</code>, title same, meta "3rd place — finished strong" (or similar finish line). CTA on the right reads <code>See leaderboard</code> instead of the drill-in chevron.</li>
+        <li><strong>Final day</strong> — eyebrow gains "Final day" sub-text under the section title; banner copy emphasizes urgency.</li>
+        <li><strong>No challenge active</strong> — empty state. Soft prompt to discover/join a challenge. Different shell — flat copy + CTA to browse.</li>
+        <li><strong>Multiple challenges</strong> — same single-banner shell, but the section head adds a small "2 active" indicator next to "Your challenges" to hint that more exist behind the drill-in.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Canonical HTML — completed state (in current jun11 fragment)</h2>
+    <details class="code">
+      <summary>Source — drop into shadow root</summary>
+<pre>&lt;section class="section" aria-labelledby="challenge-title"&gt;
+  &lt;div class="section-head"&gt;
+    &lt;h2 id="challenge-title" class="heading-6"&gt;Your challenge&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div class="challenge"&gt;
+    &lt;div class="banner-icon banner-icon--challenge"&gt;
+      &lt;span class="fa-icon" aria-hidden="true"&gt;&amp;#xf091;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="challenge__body"&gt;
+      &lt;div class="eyebrow ink-soft"&gt;Team Challenge&lt;/div&gt;
+      &lt;div class="heading-6"&gt;Spring Steps Challenge&lt;/div&gt;
+      &lt;div class="body-3 challenge__meta"&gt;Day 22 of 30 &amp;middot; Currently 4th&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;a class="challenge__link" href="/challenges/spring-steps"&gt;
+      &lt;span class="visually-hidden"&gt;Spring Steps Challenge — details&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Notes</h2>
+    <ul class="notes">
+      <li>Icon disc is <strong>56 × 56 px</strong> on both desktop and mobile (bumped to match the rewards banner disc). Earlier the disc was hidden on mobile — that hide rule has been removed for the challenge banner.</li>
+      <li>Trophy glyph is Font Awesome <code>&amp;#xf091;</code>. For "no challenge" empty state, swap for a different glyph (or remove the icon altogether).</li>
+      <li>The stretched <code>.challenge__link</code> makes the whole card tappable — keep the visible body text as the accessible name; the link's <code>visually-hidden</code> label is for screen readers.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<title>EBB — DCP Topic Page (v1) + UX pass</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 64px 0 26px; }
+  .hero h1 { font-size: clamp(28px, 4.4vw, 46px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; text-wrap: balance; max-width: 20ch; }
+  .hero .thesis { margin: 18px 0 0; font-size: clamp(16px, 2vw, 19px); line-height: 1.5; color: var(--ink-2); max-width: 62ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+  .metabar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .tag { font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-2); background: var(--surface); }
+
+  .stage { display: grid; grid-template-columns: 392px 1fr; gap: 40px; padding: 26px 0 20px; align-items: start; }
+  @media (max-width: 900px) { .stage { grid-template-columns: 1fr; gap: 30px; justify-items: center; } }
+  .phone-wrap { position: sticky; top: 24px; justify-self: center; }
+  @media (max-width: 900px) { .phone-wrap { position: static; } }
+
+  .phone { width: 375px; border-radius: 46px; background: #000; padding: 11px; box-shadow: 0 24px 60px -26px rgba(14,74,86,0.45), 0 2px 8px rgba(0,0,0,0.12); }
+  .screen { border-radius: 36px; background: var(--surface); overflow: hidden; }
+
+  .appbar { display: flex; align-items: center; gap: 10px; padding: 14px 18px 12px; border-bottom: 1px solid var(--line); }
+  .appbar .chev { font-size: 20px; color: var(--ink-2); font-weight: 600; width: 24px; }
+  .appbar .title { flex: 1; text-align: center; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .appbar .help { width: 30px; height: 30px; border-radius: 50%; background: var(--teal-tint); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--teal); }
+
+  .scroll { padding: 16px 18px 18px; }
+
+  /* Continue hero (today) */
+  .today { border: 1.5px solid var(--teal); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 8px 20px -13px rgba(14,74,86,0.5); }
+  .today .t-img { height: 108px; background: linear-gradient(120deg, #123f52 0%, #1f5f6d 60%, #4d9098 100%); position: relative; }
+  .today .t-img .kicker { position: absolute; left: 13px; top: 12px; background: rgba(255,255,255,0.94); color: var(--teal); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
+  .today .t-body { padding: 14px 16px 16px; }
+  .today .t-body h3 { margin: 0; font-size: 19px; font-weight: 720; letter-spacing: -0.015em; line-height: 1.15; }
+  .today .t-body p { margin: 6px 0 0; font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+  .btn-primary { margin-top: 14px; width: 100%; background: var(--teal); color: #fff; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 680; font-family: inherit; }
+
+  /* progress + reward */
+  .progress-card { margin-top: 16px; border: 1px solid var(--line); border-radius: 15px; padding: 14px 16px; background: #fff; }
+  .pc-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .pc-head .l { font-size: 13.5px; font-weight: 680; }
+  .pc-head .r { font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .bar { height: 8px; border-radius: 5px; background: rgba(14,74,86,0.13); margin-top: 10px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; width: 20%; background: var(--teal); border-radius: 5px; }
+  .pc-foot { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); display: flex; align-items: center; gap: 7px; }
+  .pc-foot .money-dot { color: var(--amber); font-weight: 700; }
+
+  /* the path */
+  .sec-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 20px 0 0; }
+  .path { margin-top: 10px; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; background: #fff; }
+  .step { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
+  .step:first-child { border-top: none; }
+  .step .mark { width: 26px; height: 26px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .step .mark.done { background: var(--teal); color: #fff; }
+  .step .mark.curr { background: var(--teal-tint); color: var(--teal); border: 2px solid var(--teal); }
+  .step .mark.lock { background: rgba(34,38,42,0.06); color: var(--ink-3); }
+  .step .s-body { flex: 1; }
+  .step .s-body .sn { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .step .s-body .st { font-size: 14px; font-weight: 620; letter-spacing: -0.005em; margin-top: 1px; }
+  .step.is-locked .st { color: var(--ink-3); }
+  .step .s-tag { font-size: 11px; font-weight: 700; color: var(--teal); }
+  .step .chev { color: var(--ink-3); font-size: 15px; }
+  .seeall { display: flex; align-items: center; justify-content: space-between; padding: 13px 14px; border-top: 1px solid var(--line); font-size: 13.5px; font-weight: 650; color: var(--teal-2); }
+
+  /* this week */
+  .week { margin-top: 18px; border: 1px solid var(--line); border-radius: 15px; padding: 14px 16px; background: #fff; }
+  .week .w-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .week .w-head .l { font-size: 13.5px; font-weight: 680; }
+  .week .w-head .r { font-size: 12px; color: var(--teal-2); font-weight: 650; }
+  .week .insight { margin-top: 8px; font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+  .week .insight b { color: var(--ink); font-weight: 650; }
+
+  .botnav { display: flex; justify-content: space-around; border-top: 1px solid var(--line); padding: 9px 6px 11px; margin: 18px -18px -18px; background: var(--surface); }
+  .botnav .item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9.5px; color: var(--ink-3); font-weight: 600; }
+  .botnav .item.on { color: var(--teal); }
+  .botnav .ic { width: 20px; height: 20px; border-radius: 6px; background: currentColor; opacity: 0.9; }
+
+  /* UX rail */
+  .rail { display: flex; flex-direction: column; gap: 13px; max-width: 580px; }
+  .rail-intro { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin: 0 0 2px; }
+  .anno { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 15px 17px; }
+  .anno.flag { border-left: 3px solid var(--amber-mid); }
+  .anno .zone { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+  .anno h3 { margin: 5px 0 0; font-size: 15.5px; font-weight: 680; letter-spacing: -0.005em; }
+  .anno p { margin: 7px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+  .anno p b { color: var(--ink); font-weight: 650; }
+  .laws { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .law { font-size: 11px; font-weight: 650; padding: 3px 9px; border-radius: 999px; background: var(--teal-tint); color: var(--teal); }
+  .law.warn { background: var(--amber-tint); color: var(--amber); }
+  .rec-lead { font-weight: 700; color: var(--amber); }
+
+  section { padding: 40px 0; }
+  .sec-head { margin-bottom: 22px; }
+  .sec-head h2 { font-size: clamp(20px, 2.5vw, 26px); letter-spacing: -0.01em; font-weight: 680; margin: 8px 0 0; }
+  .sec-head p { margin: 9px 0 0; color: var(--ink-2); max-width: 68ch; }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .recs { display: flex; flex-direction: column; gap: 12px; }
+  .rec { display: grid; grid-template-columns: 30px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: 15px 17px; }
+  .rec .n { font-size: 13px; font-weight: 700; color: #fff; background: var(--amber-mid); width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+  .rec .rc h4 { margin: 0; font-size: 15px; font-weight: 670; }
+  .rec .rc p { margin: 5px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .rec .rc .law { display: inline-block; margin-top: 8px; }
+
+  footer { padding: 30px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 84ch; }
+  footer .note b { color: var(--ink-2); font-weight: 650; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Topic page</div>
+    <h1>The drive-to-completion screen</h1>
+    <p class="thesis">Where a member lives between sessions. Its one job: make the <strong>next session obvious</strong>, show <strong>how close the finish (and the $100) is</strong>, and keep the path visible — without turning the health work into a money meter. Run through Nielsen's heuristics and the UX laws below.</p>
+    <div class="metabar">
+      <span class="tag">Topic page v1 · for reaction</span>
+      <span class="tag">UX pass: Nielsen + Laws of UX</span>
+      <span class="tag">Feeds the completion screen</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stage">
+
+    <!-- PHONE -->
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="appbar">
+          <span class="chev" aria-hidden="true">‹</span>
+          <span class="title">Managing Depression</span>
+          <span class="help" role="button" aria-label="Ask Anna">?</span>
+        </div>
+
+        <div class="scroll">
+          <!-- TODAY / continue -->
+          <div class="today">
+            <div class="t-img"><span class="kicker">Pick up where you left off</span></div>
+            <div class="t-body">
+              <div class="sn" style="font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-3);">Session 3</div>
+              <h3>Recognizing Negative Thoughts</h3>
+              <p>A short video with Anna, then a quick reflection. About 8 minutes.</p>
+              <button class="btn-primary">Continue session</button>
+            </div>
+          </div>
+
+          <!-- progress + reward -->
+          <div class="progress-card">
+            <div class="pc-head"><span class="l">Your progress</span><span class="r">2 of 10 sessions</span></div>
+            <div class="bar"><i></i></div>
+            <div class="pc-foot"><span>8 sessions to the finish</span><span>·</span><span class="money-dot">$100 when you complete</span></div>
+          </div>
+
+          <!-- the path -->
+          <div class="sec-label">The path</div>
+          <div class="path">
+            <div class="step"><span class="mark done">✓</span><div class="s-body"><div class="sn">Session 1</div><div class="st">Understanding Depression</div></div></div>
+            <div class="step"><span class="mark done">✓</span><div class="s-body"><div class="sn">Session 2</div><div class="st">How Thoughts Affect Mood</div></div></div>
+            <div class="step"><span class="mark curr">●</span><div class="s-body"><div class="sn">Session 3</div><div class="st">Recognizing Negative Thoughts</div></div><span class="s-tag">In progress</span></div>
+            <div class="step is-locked"><span class="mark lock">🔒</span><div class="s-body"><div class="sn">Session 4</div><div class="st">Challenging Your Thoughts</div></div></div>
+            <div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+          </div>
+
+          <!-- this week (topic-relevant) -->
+          <div class="week">
+            <div class="w-head"><span class="l">Your mood this week</span><span class="r">Log today</span></div>
+            <div class="insight">You've logged <b>4 of 7 days</b>. Your mood is trending up since Session 1 — keep it going.</div>
+          </div>
+
+          <div class="botnav">
+            <div class="item"><span class="ic"></span>Home</div>
+            <div class="item on"><span class="ic"></span>Digital Care</div>
+            <div class="item"><span class="ic"></span>Wellbeing</div>
+            <div class="item"><span class="ic"></span>Benefits</div>
+            <div class="item"><span class="ic"></span>Rewards</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- UX PASS RAIL -->
+    <div class="rail">
+      <p class="rail-intro">Top to bottom — what each zone does, the heuristic or law it satisfies, and (amber) where I'd recommend a change.</p>
+
+      <div class="anno">
+        <div class="zone">Continue card · the one primary action</div>
+        <h3>Resume exactly where they left off</h3>
+        <p>The screen opens on the single next action — "Continue session 3," with what it involves and how long. One dominant, thumb-reachable button; everything else is quieter. A returning member never has to hunt for "what now."</p>
+        <div class="laws"><span class="law">Zeigarnik · resume incomplete</span><span class="law">Fitts · big CTA</span><span class="law">Von Restorff · one distinct action</span><span class="law">Nielsen #6 · recognition</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">Progress + reward line</div>
+        <h3>How close the finish is — with the $100 stated once</h3>
+        <p>"2 of 10 · 8 sessions to the finish" makes closing distance visible (motivation rises as the goal nears). The reward appears exactly <b>once</b>, as a calm "$100 when you complete" — present, not shouting.</p>
+        <div class="laws"><span class="law">Goal-Gradient</span><span class="law">Nielsen #1 · system status</span><span class="law">Reward + progress, together</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">The path · sessions list</div>
+        <h3>Show the shape, don't dump all 10</h3>
+        <p>Completed sessions carry a check, the current one is marked, the next is locked — the member reads their whole journey at a glance without remembering it. It shows only through the next locked step, then "See all 10."</p>
+        <div class="laws"><span class="law">Nielsen #6 · recognition</span><span class="law">Miller's Law · chunk</span><span class="law">Gestalt · similarity/region</span><span class="law">Goal-Gradient</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">Your mood this week · data</div>
+        <h3>Lead with the insight, not the numbers</h3>
+        <p>One sentence that means something ("trending up since Session 1"), tied to this topic — not a wall of metrics. It reinforces the health "why" that keeps behavior alive after the reward.</p>
+        <div class="laws"><span class="law">Cognitive Load</span><span class="law">Tesler's · system bears complexity</span><span class="law">Guardrail · health is the motor</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">App bar · ‹ back · title · ? Anna</div>
+        <h3>Standard chrome, help within reach</h3>
+        <p>Back and a centered title work the way every iOS screen does; the "?" opens Anna for "I don't get this" without leaving the page. Nothing reinvented.</p>
+        <div class="laws"><span class="law">Jakob's Law</span><span class="law">Nielsen #3 · control &amp; freedom</span><span class="law">Nielsen #10 · help</span></div>
+      </div>
+
+      <div class="anno flag">
+        <div class="zone">Watch-outs</div>
+        <h3>Two tensions I'm holding</h3>
+        <p><span class="rec-lead">Money restraint:</span> the $100 shows once here on purpose — if we add it to the card and the path too, the topic page starts to feel like a payout meter and undercuts the health framing (crowding-out). <span class="rec-lead">Data placement:</span> "mood this week" may belong on the tracker, not every topic page — see recommendations.</p>
+        <div class="laws"><span class="law warn">Nielsen #8 · minimalist</span><span class="law warn">Crowding-out risk</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Recommendations · through the filters</div>
+      <h2>What I'd change or watch</h2>
+      <p>The design above is solid on the heuristics; these are the calls worth making explicitly.</p>
+    </div>
+    <div class="recs">
+      <div class="rec"><div class="n">1</div><div class="rc"><h4>Keep the $100 to one appearance on this screen</h4><p>Reward at the progress line only — not on the Continue card or every session row. Repetition turns a health screen into a money meter and risks crowding out intrinsic motivation.</p><span class="law">Nielsen #8 · Aesthetic &amp; minimalist</span></div></div>
+      <div class="rec"><div class="n">2</div><div class="rc"><h4>Chunk the path — never show all 10 sessions expanded</h4><p>Show completed + current + the next locked step, then "See all 10." Ten open rows blows past working memory and buries the one action that matters.</p><span class="law">Miller's Law (7±2)</span></div></div>
+      <div class="rec"><div class="n">3</div><div class="rc"><h4>Make "Continue" feel instant</h4><p>Optimistically open the session on tap (skeleton while it loads) rather than spinning — this is the most-tapped control on the screen, so latency here costs the most.</p><span class="law">Doherty Threshold (&lt;400ms)</span></div></div>
+      <div class="rec"><div class="n">4</div><div class="rc"><h4>Decide whether topic-level data earns its place</h4><p>"Mood this week" is motivating for behavioral topics but may be noise on others (or redundant with the tracker). Recommend: show it only when the data is topic-relevant; otherwise drop it and let the path lead. Test before committing.</p><span class="law">Cognitive Load · Tesler's Law</span></div></div>
+      <div class="rec"><div class="n">5</div><div class="rc"><h4>One high-emphasis action, always</h4><p>Continue is the only filled button; "See all," "Log today," and rows stay low-emphasis. Guard against a second primary button creeping in — that's the muddle we just fixed on the completion screen.</p><span class="law">Von Restorff Effect</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Loaded for this pass:</b> ux-usability-experts.md (Nielsen's 10, Norman, Krug), ux-laws-quick-reference.md, design/_index.md, feature-ebb + feature-dcp context. <b>Grounded in:</b> the current DCP "Your progress" topic variant (evolved for EBB), the "All Sessions" lock/unlock path, and the locked decisions (D1 one clear next, D2 progress toward the payout, D4 interests). This topic page feeds directly into the completion screen. Topic page v1 — for reaction.</p>
+  </div>
+</footer>

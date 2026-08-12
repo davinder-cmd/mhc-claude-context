@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Status vs Next-step — 5 ideations</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  body{background:var(--canvas);padding:32px;}
+  h1.page{font-family:var(--f-display);font-weight:500;font-size:24px;color:var(--navy);margin-bottom:6px;}
+  p.pageintro{font-family:var(--f-text);font-size:14px;color:var(--slate);max-width:70ch;margin-bottom:28px;}
+  .stage{display:flex;gap:28px;align-items:flex-start;flex-wrap:nowrap;}
+  .ideacol{width:392px;flex:0 0 392px;}
+  .lbl{font-family:var(--f-text);font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:4px;}
+  .cap{font-family:var(--f-text);font-size:13px;line-height:1.45;color:var(--slate);margin-top:12px;}
+  .phone{width:392px;background:#fff;border:1px solid var(--silver);border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:16px;box-shadow:0 12px 30px rgba(6,42,66,.08);}
+  .rest{opacity:.45;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+  .rest .rh{font-family:var(--f-display);font-weight:500;font-size:15px;color:var(--charcoal);}
+  .rest .bar{height:44px;border:1px solid var(--hair);border-radius:12px;background:#fff;}
+  /* shared bits */
+  .row{display:flex;align-items:center;gap:10px;}
+  .grow{flex:1;min-width:0;}
+  .statuspill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-family:var(--f-text);font-weight:500;font-size:12px;}
+  .statuspill .d{width:7px;height:7px;border-radius:50%;}
+  .segline{display:flex;gap:5px;}
+  .seg{height:6px;border-radius:999px;flex:1;background:var(--hair);}.seg.on{background:var(--aqua);}
+  /* ideation-specific */
+  .i3 .tier-top{padding:4px 4px 14px;}
+  .i3 .tier-act{background:var(--navy);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px;}
+  .i5card{border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;background:#fdf6e6;border:1.5px solid #f0d79a;}
+  .i5foot{display:flex;align-items:center;gap:8px;padding-top:12px;margin-top:4px;border-top:1px solid #f0d79a;}
+  .miniamber,.minigreen{border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:10px;}
+  .miniamber{background:#fdf6e6;border:1px solid #f0d79a;}
+  .minigreen{background:rgba(82,160,69,.10);border:1px solid rgba(82,160,69,.35);}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 8v5M12 16h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l4 4 9-10" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<h1 class="page">Balancing status vs. next-step — 5 ideations</h1>
+<p class="pageintro">Same content in every version — status: <strong>Phase 2, active</strong>; next step: <strong>Complete your Health Assessment (due Jun 30)</strong>. Only the emphasis + color/visual treatment changes. Below each module is a dimmed hint of the rest of the page, so you can read where the weight lands.</p>
+
+<div class="stage">
+
+  <!-- 1 — Action hero, status as eyebrow -->
+  <div class="ideacol">
+    <div class="lbl">1 · Action-led, status as eyebrow</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;">
+        <span class="eyebrow" style="color:var(--slate)">Phase 2 of 5 · Active</span>
+        <h2 class="heading-5 c-charcoal">Complete your Health Assessment</h2>
+        <p class="paragraph-3 c-slate">Due Jun 30 · about 10 minutes. Keeps your LifeForce standing.</p>
+        <button class="btn primary full label-0" style="margin-top:8px">Start Health Assessment</button>
+      </section>
+      <div class="rest"><div class="rh">Completed steps</div><div class="bar"></div><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Hierarchy flip.</strong> The task is the headline (Heading-5); phase/status shrinks to a grey eyebrow. Restrained — weight comes from type size, not color.</p>
+  </div>
+
+  <!-- 2 — Quiet status strip + bold action card -->
+  <div class="ideacol">
+    <div class="lbl">2 · Quiet status strip + action card</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div style="display:flex;align-items:center;gap:12px;background:var(--cloud);border-radius:12px;padding:12px 16px;">
+        <div class="grow"><div class="label-1 c-charcoal">LifeForce · Phase 2 of 5</div><div class="segline" style="margin-top:8px"><i class="seg on"></i><i class="seg on"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i></div></div>
+        <span class="label-2 c-slate">Active</span>
+      </div>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;">
+        <div class="row"><span class="chip aqua c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-heart"/></svg></span><div class="grow"><span class="eyebrow c-navy">Do next · Due Jun 30</span><div class="title-1 c-charcoal">Complete your Health Assessment</div></div></div>
+        <button class="btn primary full label-0" style="margin-top:6px">Start Health Assessment</button>
+      </section>
+      <div class="rest"><div class="rh">Completed steps</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Two zones.</strong> Status is a calm tinted strip up top (glanceable); the action is the elevated card with the CTA. Balance via separation + elevation.</p>
+  </div>
+
+  <!-- 3 — Two-tier single card (status muted + action color block) -->
+  <div class="ideacol">
+    <div class="lbl">3 · One card, two tiers (color block)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <section class="focal i3" style="padding:16px;">
+        <div class="tier-top row"><div class="grow"><span class="label-1 c-charcoal">LifeForce Phase 2 of 5</span></div><span class="statuspill" style="background:rgba(82,160,69,.12);color:var(--green)"><span class="d" style="background:var(--green)"></span>Active</span></div>
+        <div class="tier-act">
+          <span class="eyebrow" style="color:var(--peach)">Do next · Due Jun 30</span>
+          <div class="heading-6 c-white">Complete your Health Assessment</div>
+          <button class="btn full label-0" style="margin-top:8px;background:#fff;color:var(--navy)">Start Health Assessment</button>
+        </div>
+      </section>
+      <div class="rest"><div class="rh">Completed steps</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Unified, action-forward.</strong> One card: quiet status tier on top, then the next step as a <em>navy color block</em> with the CTA. The color block carries the weight; status stays contextual.</p>
+  </div>
+
+  <!-- 4 — Status pill + action headline -->
+  <div class="ideacol">
+    <div class="lbl">4 · Status pill + action headline</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <section class="focal" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="row" style="justify-content:space-between">
+          <span class="statuspill" style="background:var(--tint-aqua);color:var(--aqua)"><span class="d" style="background:var(--aqua)"></span>Phase 2 · Active</span>
+          <span class="label-2 c-slate">Jun 30</span>
+        </div>
+        <h2 class="heading-5 c-charcoal">Complete your Health Assessment</h2>
+        <p class="paragraph-3 c-slate">About 10 minutes — keeps your standing and full medical credit.</p>
+        <button class="btn primary full label-0" style="margin-top:6px">Start Health Assessment</button>
+      </section>
+      <div class="rest"><div class="rh">Completed steps</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Compress the status.</strong> Status becomes a small colored pill (aqua = a light accent pop); the action headline is the hero. Minimal status footprint, maximum action clarity.</p>
+  </div>
+
+  <!-- 5 — State-driven color (adaptive) -->
+  <div class="ideacol">
+    <div class="lbl">5 · State-driven color (adaptive)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="i5card">
+        <div class="row"><span class="chip gold c40" style="border-radius:12px;background:rgba(243,179,30,.18);color:var(--gold)"><svg width="20" height="20"><use href="#i-warn"/></svg></span><div class="grow"><span class="eyebrow" style="color:var(--gold)">Action needed · Due Jun 30</span><div class="title-1 c-charcoal">Complete your Health Assessment</div></div></div>
+        <button class="btn primary full label-0" style="margin-top:4px">Start Health Assessment</button>
+        <div class="i5foot"><span class="label-2 c-slate">LifeForce Phase 2 of 5 · Active</span></div>
+      </div>
+      <div class="minigreen"><span class="chip green c34 round" style="background:rgba(82,160,69,.18);color:var(--green)"><svg width="18" height="18"><use href="#i-check"/></svg></span><span class="body-3 c-charcoal">When nothing's due, the card goes calm/green and the <strong>status leads</strong>.</span></div>
+      <div class="rest"><div class="rh">Completed steps</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Color = urgency; balance auto-adjusts.</strong> A pending task turns the card amber and puts the action first (status demoted to a footnote). No task → the card is calm green and the status becomes the hero. The green chip previews that other state.</p>
+  </div>
+
+</div>
+</body>
+</html>

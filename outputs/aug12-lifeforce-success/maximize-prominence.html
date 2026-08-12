@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LifeForce · Maximize — full → compact</title>
+<style>
+:root{--ink:#26292B;--body:#4A4E50;--muted:#7A8083;--ocean:#195188;--ocean50:#EAF2FA;--ocean2:#4A86C4;--green:#52A353;--green-ink:#3D7A3E;--navy:#103459;--border:#E4E4E2;--hair:#EAEAE7;--canvas:#F5F5F3;--mustard50:#FFF3E4;--mustardInk:#87440A}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,"SF Pro Display","SF Pro Text",system-ui,sans-serif}
+body{background:#E7E7E4;padding:40px;color:var(--body)}
+.head{max-width:820px;margin:0 auto 24px}
+.head h1{font-size:25px;color:var(--ink);font-weight:700;letter-spacing:-.01em}
+.head p{font-size:15px;color:var(--muted);margin-top:6px;max-width:84ch}
+.cols{max-width:820px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:11px}
+.lbl{font-size:13px;font-weight:700;color:var(--ink)}
+.lbl span{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:2px}
+.phone{background:var(--canvas);border:1px solid var(--border);border-radius:22px;padding:20px 15px;display:flex;flex-direction:column;gap:13px}
+.pt{font-family:"SF Pro Display";font-weight:700;font-size:22px;color:var(--ink);letter-spacing:-.01em;padding:2px 4px}
+.mic{width:38px;height:38px;border-radius:10px;background:var(--ocean50);color:var(--ocean);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.mic svg{width:22px;height:22px;fill:none;stroke:var(--ocean);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+/* success card */
+.success{background:#fff;border:1px solid var(--hair);border-radius:16px;overflow:hidden}
+.strip{position:relative;height:100px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#EFF8F1,#fff)}
+.strip .disc{width:52px;height:52px;border-radius:50%;background:linear-gradient(140deg,#5AAE5B,#3D8E44);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px -5px rgba(20,40,60,.3)}
+.strip .disc svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.spk{position:absolute}
+.success .c{padding:12px 20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px}
+.success .t{font-family:"SF Pro Display";font-weight:700;font-size:18px;color:var(--ink)}
+.success .b{font-size:12.5px;line-height:1.45;color:var(--body);max-width:32ch}
+.notice{background:var(--mustard50);color:var(--mustardInk);font-size:11.5px;font-weight:600;border-radius:9px;padding:7px 11px}
+
+/* appointment card */
+.appt{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:16px}
+.appt .cf{display:inline-block;background:#E9F6EC;color:var(--green-ink);font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+.appt .row{display:flex;gap:13px;align-items:center}
+.datebox{width:56px;flex:0 0 auto;border:1px solid #DCE3EA;border-radius:10px;overflow:hidden;text-align:center}
+.datebox .m{background:var(--navy);color:#fff;font-size:9px;font-weight:700;letter-spacing:.06em;padding:3px 0}
+.datebox .d{font-size:20px;font-weight:700;color:var(--ink);padding:3px 0 0}
+.datebox .mo{font-size:9px;font-weight:700;color:var(--muted);letter-spacing:.06em;padding:0 0 4px}
+.appt .when{font-family:"SF Pro Display";font-weight:600;font-size:15px;color:var(--ink)}
+.appt .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.appt .resched{display:block;text-align:center;margin-top:14px;background:#EEF0F1;color:var(--ocean);font-weight:600;font-size:14px;border-radius:999px;padding:11px}
+.divit{height:1px;background:var(--hair);margin:14px -16px 0}
+
+/* FULL maximize (primary) */
+.mFull{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.mFull .r{display:flex;align-items:center;gap:12px}
+.mFull .mt{font-family:"SF Pro Display";font-weight:600;font-size:17px;color:var(--ink)}
+.mFull .b{font-size:13px;line-height:1.45;color:var(--body)}
+.mFull .btn{display:block;text-align:center;background:var(--ocean);color:#fff;font-weight:600;font-size:14px;border-radius:999px;padding:12px}
+
+/* COMPACT maximize (secondary) */
+.mRow{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+.mRow .tx{flex:1;min-width:0}
+.mRow .mt{font-weight:600;font-size:14.5px;color:var(--ink)}
+.mRow .ms{font-size:12px;color:var(--muted);margin-top:1px}
+.mRow .inv{flex:0 0 auto;background:var(--ocean50);color:var(--ocean);font-weight:600;font-size:13px;border-radius:999px;padding:8px 14px}
+
+/* list row + support (context) */
+.linkrow{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--hair);border-radius:14px;padding:12px 13px}
+.linkrow .ric{width:34px;height:34px;border-radius:9px;background:var(--ocean50);color:var(--ocean);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.linkrow .ric svg{width:18px;height:18px;fill:none;stroke:var(--ocean);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.linkrow .rt{font-weight:600;font-size:14px;color:var(--ink)}
+.linkrow .rm{font-size:11.5px;color:var(--muted);margin-top:1px}
+.linkrow .cv{margin-left:auto;color:#B4B4B1}
+</style></head>
+<body>
+<div class="head"><h1>Maximize your credit — one card, two prominence levels</h1><p>Same identity (icon, title, "Invite dependent") across both states — only the density changes. Full &amp; loud while it's the only action; a compact row once the appointment becomes the hero.</p></div>
+<div class="cols">
+
+<!-- STATE 1 · Being scheduled -->
+<div class="col"><div class="lbl">State 1 · Being scheduled<span>Nothing else to do → maximize is the primary action (full card, solid button).</span></div>
+<div class="phone">
+  <div class="pt">Your first visit</div>
+  <div class="success"><div class="strip">
+    <svg class="spk" style="top:12px" width="220" height="80" viewBox="0 0 220 80" fill="none"><g fill="#E8A23A"><g transform="translate(40,10) scale(.55)"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></g><g transform="translate(168,12) scale(.6)"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></g></g><g stroke-linecap="round" stroke-width="3.5"><path d="M22 34l4 5" stroke="#EA6A5A"/><path d="M104 12l4 5" stroke="#52A353"/><path d="M196 36l4-4" stroke="#1A85AB"/></g><circle cx="66" cy="20" r="2.6" fill="#4A86C4"/><circle cx="150" cy="40" r="2.6" fill="#52A353"/></svg>
+    <div class="disc"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div></div>
+    <div class="c"><div class="t">You've finished setup</div><div class="b">All 4 steps done. Peak Health is now booking your first nurse visit.</div><div class="notice">We'll notify you the moment it's scheduled.</div></div></div>
+  <div class="mFull">
+    <div class="r"><span class="mic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.6-.2 5 1.6 5 4.4"/></svg></span><span class="mt">Maximize your credit</span></div>
+    <p class="b">Remind your spouse or domestic partner to complete their Health Assessment — it can increase your medical credit each pay period.</p>
+    <a class="btn">Invite dependent</a>
+  </div>
+  <div class="linkrow"><span class="ric"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></span><div><div class="rt">Your LifeForce history</div><div class="rm">Last: Health Assessment · Jun 2026</div></div><span class="cv">›</span></div>
+</div></div>
+
+<!-- STATE 2 · Scheduled -->
+<div class="col"><div class="lbl">State 2 · Scheduled<span>Appointment is the hero → maximize demotes to a compact row (same card, condensed).</span></div>
+<div class="phone">
+  <div class="pt">Your first visit</div>
+  <div class="appt"><span class="cf">Confirmed</span>
+    <div class="row"><div class="datebox"><div class="m">THU</div><div class="d">12</div><div class="mo">JUN</div></div><div><div class="when">Thu, Jun 12 · 10:30 AM ET</div><div class="sub">In-person nurse visit · Peak Health</div></div></div>
+    <div class="divit"></div><a class="resched">Reschedule</a></div>
+  <div class="mRow">
+    <span class="mic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.6-.2 5 1.6 5 4.4"/></svg></span>
+    <div class="tx"><div class="mt">Maximize your credit</div><div class="ms">Invite your dependent to earn more</div></div>
+    <a class="inv">Invite</a>
+  </div>
+  <div class="linkrow"><span class="ric"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></span><div><div class="rt">Your LifeForce history</div><div class="rm">Last: Health Assessment · Jun 2026</div></div><span class="cv">›</span></div>
+</div></div>
+
+</div>
+</body></html>

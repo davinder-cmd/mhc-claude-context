@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore section — rail vs grid</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.10);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:900px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:740px;margin:0 0 24px;font-size:14px}
+.gallery{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:10px}
+.cap{font-size:12.5px;color:var(--ink-2);max-width:392px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.phone{width:392px;background:var(--warm);border:9px solid #1c2330;border-radius:42px;overflow:hidden}
+.scr{padding:22px 18px 26px}
+.mtop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.sec{font-size:14px;font-weight:750}
+.seeall{font-size:12px;font-weight:700;color:var(--teal-2)}
+.lt1{background:linear-gradient(135deg,#E7E1F0,#CFC3E4)}.lt2{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}.lt3{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}.lt4{background:linear-gradient(135deg,#F1DED8,#E3B3A3)}
+.lttitle{font-size:13px;font-weight:650;margin-top:6px}.ltsub{font-size:11px;color:var(--ink-3)}
+.ltimg{border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:27px}
+/* rail */
+.rail{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px}.rail::-webkit-scrollbar{display:none}
+.rail .ltile{flex:none;width:132px}.rail .ltimg{width:132px;height:92px}
+.fade{position:absolute}
+/* grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid2 .ltimg{width:100%;height:96px}
+</style></head><body>
+<div class="page">
+<h1>Explore more paths — carousel vs grid (mobile)</h1>
+<p class="sub">The "Explore more paths" section is a small curated set (the full 14 live behind "See all"). Two ways to show ~4 on mobile. Carousels aren't inherently wrong at MHC — the failure mode is <b>peek-cards that hide content with no clear affordance</b>. For a curated few, a wrapping grid avoids that entirely.</p>
+
+<div class="gallery">
+
+<div class="col">
+<span class="tag">A · Carousel (rail)</span>
+<div class="phone"><div class="scr">
+<div class="mtop"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+<div class="rail">
+  <div class="ltile"><div class="ltimg lt1">🌙</div><div class="lttitle">Treating Insomnia</div><div class="ltsub">Sleep &amp; CBT-I</div></div>
+  <div class="ltile"><div class="ltimg lt3">🫁</div><div class="lttitle">Quitting Smoking</div><div class="ltsub">A guided path</div></div>
+  <div class="ltile"><div class="ltimg lt4">❤️</div><div class="lttitle">Heart Health</div><div class="ltsub">Blood pressure</div></div>
+  <div class="ltile"><div class="ltimg lt2">🥗</div><div class="lttitle">Diabetes Prev.</div><div class="ltsub">Habits</div></div>
+</div>
+</div></div>
+<div class="cap"><b>Horizontal scroll.</b> Compact, but items 3–4 are half-hidden and rely on a swipe users may not make (discovery + a11y concerns). Fine when the set is genuinely long and clearly "more →"; weaker for just 4.</div>
+</div>
+
+<div class="col">
+<span class="tag">B · Grid (2×2, wraps)</span>
+<div class="phone"><div class="scr">
+<div class="mtop"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+<div class="grid2">
+  <div class="ltile"><div class="ltimg lt1">🌙</div><div class="lttitle">Treating Insomnia</div><div class="ltsub">Sleep &amp; CBT-I</div></div>
+  <div class="ltile"><div class="ltimg lt3">🫁</div><div class="lttitle">Quitting Smoking</div><div class="ltsub">A guided path</div></div>
+  <div class="ltile"><div class="ltimg lt4">❤️</div><div class="lttitle">Heart Health</div><div class="ltsub">Blood pressure</div></div>
+  <div class="ltile"><div class="ltimg lt2">🥗</div><div class="lttitle">Diabetes Prevention</div><div class="ltsub">Habits that stick</div></div>
+</div>
+</div></div>
+<div class="cap"><b>Recommended.</b> All 4 visible at once, no hidden content, no swipe, bigger tap targets, cleaner. Anything past 4 wraps to the next row — and "See all 14" is the honest overflow. Scales to top-nav web as a 3–4-up grid.</div>
+</div>
+
+</div>
+
+<div style="margin-top:26px;max-width:760px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>Recommendation:</b> use the <b>2×2 grid</b> for Explore on mobile — a curated 4, everything visible, "See all 14" for the rest. Keep a carousel only where the set is long, clearly scrollable, and browsing-by-swipe is the point (not here). On web this grid becomes a 3–4-up row.
+</div>
+</div>
+</body></html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sword Health — Design Mood Board</title>
+<style>
+  :root {
+    --ink: #0B1F3A;          /* deep navy — primary text + UI ink */
+    --ink-soft: #2E3D55;     /* secondary text */
+    --paper: #FAF7F2;        /* off-white / warm cream — page */
+    --paper-2: #F1ECE3;      /* warmer surface */
+    --line: #E4DED3;         /* hairlines */
+    --orange: #FF5A1F;       /* signature warm accent */
+    --orange-soft: #FBE1D3;  /* tinted */
+    --teal: #1FB7B1;         /* AI / data accent */
+    --teal-soft: #D5EEEC;
+    --plum: #5B2A4E;         /* Bloom hint */
+    --rule: rgba(11,31,58,0.10);
+    --max: 1280px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink);
+    font-family: ui-sans-serif, -apple-system, "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.45;
+  }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 700px) { .container { padding: 0 24px; } }
+
+  /* ===== Header ===== */
+  header.top {
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .top-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .top-row .dot { display: inline-block; width: 8px; height: 8px; background: var(--orange); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+  .hero { padding: 56px 0 80px; }
+  .eyebrow { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--orange); font-weight: 600; }
+  h1.display {
+    font-family: "Söhne", "Inter", ui-sans-serif, -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 16px 0 24px;
+  }
+  h1.display em { font-style: normal; color: var(--orange); }
+  .lede { font-size: 21px; line-height: 1.5; max-width: 760px; color: var(--ink-soft); }
+
+  /* ===== Section scaffolding ===== */
+  section { padding: 80px 0; border-top: 1px solid var(--line); }
+  section .label {
+    font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); font-weight: 600;
+  }
+  section h2 {
+    font-size: clamp(32px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.02em;
+    margin: 8px 0 24px; font-weight: 700;
+  }
+  section .intro { font-size: 18px; max-width: 720px; color: var(--ink-soft); }
+
+  /* ===== Brand essence keywords ===== */
+  .keywords { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .keywords span {
+    border: 1px solid var(--ink); color: var(--ink);
+    padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;
+  }
+  .keywords span.warm { background: var(--orange); color: white; border-color: var(--orange); }
+  .keywords span.cool { background: var(--teal); color: white; border-color: var(--teal); }
+
+  /* ===== Color palette ===== */
+  .weight-bar {
+    display: flex; height: 80px; border-radius: 12px; overflow: hidden;
+    margin-top: 32px; box-shadow: 0 1px 0 var(--rule);
+  }
+  .weight-bar > div { display: flex; align-items: flex-end; padding: 14px; color: white; font-size: 12px; font-weight: 600; }
+  .w-paper { background: var(--paper-2); color: var(--ink); flex: 0 0 50%; }
+  .w-ink { background: var(--ink); flex: 0 0 28%; }
+  .w-orange { background: var(--orange); flex: 0 0 12%; }
+  .w-teal { background: var(--teal); flex: 0 0 6%; }
+  .w-neutral { background: #B8AFA1; flex: 0 0 4%; }
+
+  .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .swatches { grid-template-columns: repeat(2, 1fr); } }
+  .swatch { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); }
+  .swatch .chip { height: 140px; display: flex; align-items: flex-end; padding: 14px; color: white; font-weight: 600; }
+  .swatch .meta { padding: 12px 14px; background: white; }
+  .swatch .meta .name { font-weight: 600; font-size: 14px; }
+  .swatch .meta .hex { font-family: ui-monospace, "SF Mono", monospace; font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
+  .swatch .meta .role { font-size: 12px; color: var(--ink-soft); margin-top: 6px; }
+
+  /* ===== Typography ===== */
+  .type-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; }
+  @media (max-width: 900px) { .type-stack { grid-template-columns: 1fr; } }
+  .type-card { border: 1px solid var(--line); border-radius: 12px; padding: 32px; background: white; }
+  .type-card .role { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
+  .type-card .specimen-h { font-size: 56px; line-height: 1.0; letter-spacing: -0.025em; font-weight: 700; margin: 16px 0 24px; }
+  .type-card .specimen-h em { color: var(--orange); font-style: normal; }
+  .type-card .specimen-b { font-size: 17px; line-height: 1.55; color: var(--ink-soft); margin: 0 0 16px; }
+  .type-card .specs { font-family: ui-monospace, "SF Mono", monospace; font-size: 12px; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 16px; }
+
+  /* ===== Voice ===== */
+  .quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  @media (max-width: 900px) { .quotes { grid-template-columns: 1fr; } }
+  .quote {
+    background: white; border: 1px solid var(--line); border-left: 4px solid var(--orange);
+    border-radius: 8px; padding: 28px; font-size: 22px; line-height: 1.35; letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .quote.cool { border-left-color: var(--teal); }
+  .quote.dark { background: var(--ink); color: var(--paper); border-color: var(--ink); border-left-color: var(--orange); }
+  .quote .src { display: block; font-size: 13px; color: var(--ink-soft); font-weight: 400; margin-top: 16px; letter-spacing: 0.02em; }
+  .quote.dark .src { color: rgba(250,247,242,0.6); }
+
+  /* ===== Imagery tiles ===== */
+  .imagery {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px;
+  }
+  @media (max-width: 900px) { .imagery { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .imagery { grid-template-columns: 1fr; } }
+  .tile {
+    aspect-ratio: 3/2; border-radius: 12px; padding: 24px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    color: white; position: relative; overflow: hidden;
+    box-shadow: inset 0 -60px 60px rgba(0,0,0,0.25);
+  }
+  .tile .cat { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.9; font-weight: 600; }
+  .tile .desc { font-size: 17px; font-weight: 600; line-height: 1.25; }
+  .tile.t1 { background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 60%),
+    linear-gradient(135deg, #6B7B5C 0%, #2C3D2C 100%);
+  }
+  .tile.t2 { background:
+    radial-gradient(circle at 70% 20%, rgba(255,180,120,0.4), transparent 60%),
+    linear-gradient(135deg, #C97A4C 0%, #6B3B22 100%);
+  }
+  .tile.t3 { background:
+    linear-gradient(135deg, #34495E 0%, #0B1F3A 100%);
+  }
+  .tile.t4 { background:
+    radial-gradient(circle at 40% 40%, rgba(245,220,200,0.5), transparent 70%),
+    linear-gradient(135deg, #D4B59A 0%, #8C6B4F 100%);
+  }
+  .tile.t5 { background:
+    radial-gradient(circle at 20% 80%, rgba(31,183,177,0.35), transparent 60%),
+    linear-gradient(135deg, #1A3A52 0%, #0B1F3A 100%);
+  }
+  .tile.t6 { background:
+    linear-gradient(135deg, #E8DDC8 0%, #C9B79A 100%);
+    color: var(--ink); box-shadow: inset 0 -60px 60px rgba(0,0,0,0.10);
+  }
+
+  /* ===== Devices grid ===== */
+  .devices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .devices { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .devices { grid-template-columns: 1fr; } }
+  .device {
+    background: white; border: 1px solid var(--line); border-radius: 12px; padding: 28px;
+    min-height: 200px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .device .glyph { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 700; }
+  .device h3 { font-size: 22px; line-height: 1.15; letter-spacing: -0.01em; margin: 8px 0 12px; font-weight: 700; }
+  .device p { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+
+  /* Sample stat card */
+  .stat-demo { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 48px; margin-top: 32px; }
+  .stat-demo .figure { font-size: clamp(80px, 12vw, 160px); font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; }
+  .stat-demo .figure em { color: var(--orange); font-style: normal; }
+  .stat-demo .caption { font-size: 18px; max-width: 520px; color: rgba(250,247,242,0.75); margin-top: 16px; }
+
+  /* AI panel */
+  .ai-panel {
+    background: linear-gradient(135deg, var(--teal-soft) 0%, var(--paper-2) 100%);
+    border-radius: 16px; padding: 48px; margin-top: 32px;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center;
+  }
+  @media (max-width: 900px) { .ai-panel { grid-template-columns: 1fr; } }
+  .ai-panel h3 { font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px; }
+  .ai-panel p { color: var(--ink-soft); margin: 0 0 12px; }
+  .ai-bubble {
+    background: white; border-radius: 18px; padding: 20px; border: 1px solid var(--line);
+    box-shadow: 0 8px 24px rgba(11,31,58,0.06);
+  }
+  .ai-bubble .label-row { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .ai-bubble .label-row .badge { width: 28px; height: 28px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 12px; }
+  .ai-bubble .msg { font-size: 16px; line-height: 1.5; }
+
+  /* So what */
+  .so-what { background: var(--ink); color: var(--paper); border-radius: 16px; padding: 56px; margin-top: 32px; }
+  .so-what h2 { color: white; margin: 0 0 16px; }
+  .so-what p { color: rgba(250,247,242,0.8); font-size: 18px; max-width: 720px; margin: 0 0 16px; }
+  .so-what ul { padding-left: 18px; color: rgba(250,247,242,0.85); font-size: 16px; line-height: 1.6; }
+  .so-what ul li { margin-bottom: 8px; }
+  .so-what ul li strong { color: white; }
+
+  /* Featured illustration band */
+  .illo-band {
+    margin-top: 32px;
+    background: linear-gradient(180deg, var(--paper-2) 0%, #E6DDC8 100%);
+    border-radius: 24px; overflow: hidden; position: relative;
+    padding: 0; min-height: 380px;
+  }
+  .illo-band .illo-svg { width: 100%; height: 420px; display: block; }
+  .illo-band .illo-caption { position: absolute; left: 32px; bottom: 24px; background: var(--ink); color: var(--paper); border-radius: 999px; padding: 10px 18px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  footer { padding: 48px 0 96px; color: var(--ink-soft); font-size: 13px; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="container top-row">
+    <div><span class="dot"></span>Competitive Mood Board · Sword Health</div>
+    <div>2026-05-29 · Prepared for Davinder Rehal</div>
+  </div>
+</header>
+
+<div class="container hero">
+  <div class="eyebrow">Brand Aesthetic Study</div>
+  <h1 class="display">Clinical authority,<br><em>human warmth.</em></h1>
+  <p class="lede">Sword Health sits at the intersection of premium healthtech and humanitarian mission. The brand reads as confidently medical without ever feeling sterile — earned through warm cream backgrounds, deep ink typography, documentary-style workplace photography, and a single signature orange that does almost all of the energy work.</p>
+
+  <!-- FEATURED ILLUSTRATION -->
+  <div class="illo-band">
+    <svg class="illo-svg" viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-label="Documentary scene: worker stretching at end of shift">
+      <!-- Cream wall -->
+      <rect width="1100" height="420" fill="#F1ECE3"/>
+
+      <!-- Warm warehouse / workplace window -->
+      <rect x="620" y="40" width="380" height="260" rx="6" fill="#F8E9D4"/>
+      <rect x="620" y="40" width="380" height="260" rx="6" fill="url(#sun)" opacity="0.85"/>
+      <line x1="810" y1="40" x2="810" y2="300" stroke="#0B1F3A" stroke-width="2"/>
+      <line x1="620" y1="170" x2="1000" y2="170" stroke="#0B1F3A" stroke-width="2"/>
+      <rect x="620" y="40" width="380" height="260" rx="6" fill="none" stroke="#0B1F3A" stroke-width="3"/>
+
+      <!-- Sun -->
+      <circle cx="900" cy="120" r="44" fill="#FF5A1F"/>
+
+      <!-- Window light beams (subtle) -->
+      <path d="M 850 200 L 540 380 L 580 380 L 870 200 Z" fill="#FF5A1F" opacity="0.10"/>
+      <path d="M 760 200 L 460 380 L 500 380 L 780 200 Z" fill="#FF5A1F" opacity="0.07"/>
+
+      <!-- Floor line -->
+      <line x1="0" y1="360" x2="1100" y2="360" stroke="#0B1F3A" stroke-width="2"/>
+
+      <!-- Stacked boxes (warehouse signal) -->
+      <g stroke="#0B1F3A" stroke-width="2.5" fill="#E6DDC8">
+        <rect x="40" y="270" width="100" height="90"/>
+        <rect x="60" y="200" width="80" height="70"/>
+        <line x1="40" y1="315" x2="140" y2="315"/>
+        <line x1="60" y1="235" x2="140" y2="235"/>
+      </g>
+
+      <!-- Figure stretching (mid-shift break) -->
+      <g transform="translate(310, 110)">
+        <!-- Body torso -->
+        <path d="M 0 80 Q 8 50, 30 40 Q 60 32, 80 50 L 80 150 Q 60 170, 40 168 Q 18 165, 8 150 Z"
+              fill="#0B1F3A"/>
+        <!-- Head -->
+        <circle cx="40" cy="22" r="22" fill="#D6B89A" stroke="#0B1F3A" stroke-width="2.5"/>
+        <!-- Hair cap -->
+        <path d="M 18 14 Q 30 -2, 52 0 Q 64 6, 62 18 Q 50 8, 36 10 Q 24 12, 18 14 Z" fill="#0B1F3A"/>
+
+        <!-- Arms — stretched overhead -->
+        <path d="M 28 60 Q -10 30, -22 -10" stroke="#0B1F3A" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <path d="M 60 60 Q 100 30, 110 -10" stroke="#0B1F3A" stroke-width="14" fill="none" stroke-linecap="round"/>
+        <circle cx="-22" cy="-10" r="10" fill="#D6B89A" stroke="#0B1F3A" stroke-width="2"/>
+        <circle cx="110" cy="-10" r="10" fill="#D6B89A" stroke="#0B1F3A" stroke-width="2"/>
+
+        <!-- Legs -->
+        <path d="M 22 150 Q 18 200, 24 245" stroke="#0B1F3A" stroke-width="22" fill="none" stroke-linecap="round"/>
+        <path d="M 60 150 Q 64 200, 60 245" stroke="#0B1F3A" stroke-width="22" fill="none" stroke-linecap="round"/>
+
+        <!-- Shoes -->
+        <ellipse cx="22" cy="252" rx="22" ry="9" fill="#0B1F3A"/>
+        <ellipse cx="60" cy="252" rx="22" ry="9" fill="#0B1F3A"/>
+
+        <!-- High-vis vest stripe (worker signal) -->
+        <rect x="6" y="80" width="76" height="14" fill="#FF5A1F"/>
+        <rect x="6" y="110" width="76" height="6" fill="#FF5A1F"/>
+      </g>
+
+      <!-- Floating outcome stat -->
+      <g transform="translate(450, 80)">
+        <rect width="170" height="68" rx="34" fill="#0B1F3A"/>
+        <text x="22" y="32" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#FF5A1F" letter-spacing="2">PAIN</text>
+        <text x="22" y="56" font-family="Inter,sans-serif" font-size="22" font-weight="800" fill="#FAF7F2">−62% in 8 wks</text>
+      </g>
+
+      <!-- Caption tag at lower left: name + occupation -->
+      <g transform="translate(40, 380)">
+        <text font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#0B1F3A">Lisa, 47 — Warehouse Manager</text>
+      </g>
+
+      <defs>
+        <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFE2C2"/>
+          <stop offset="100%" stop-color="#F8E9D4"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="illo-caption">Documentary editorial · worker · warm light · outcome stat</div>
+  </div>
+</div>
+
+<!-- BRAND ESSENCE -->
+<section>
+  <div class="container">
+    <div class="label">01 · Brand Essence</div>
+    <h2>The vocabulary they live in.</h2>
+    <p class="intro">The brand never reads as a tech product. It reads as a healthcare mission with a tech backbone. Language is aspirational ("a world-class clinician in every home"), and visual choices reinforce equity, dignity, and outcomes over novelty.</p>
+    <div class="keywords">
+      <span>Premium-accessible</span>
+      <span class="warm">Hopeful</span>
+      <span>Clinical</span>
+      <span>Humanitarian</span>
+      <span class="cool">Evidence-led</span>
+      <span>Documentary</span>
+      <span>Confident</span>
+      <span class="warm">Warm</span>
+      <span>Outcome-obsessed</span>
+      <span>Equity-forward</span>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section>
+  <div class="container">
+    <div class="label">02 · Color</div>
+    <h2>One ink. One spark. A cream stage.</h2>
+    <p class="intro">Cream + navy carry the surface; a single signature orange does the emotional work. Teal appears only where the brand talks about AI and data. There is no rainbow — restraint is the point.</p>
+
+    <div class="weight-bar" aria-label="Proportional color usage">
+      <div class="w-paper">Paper · ~50%</div>
+      <div class="w-ink">Ink · ~28%</div>
+      <div class="w-orange">Orange · ~12%</div>
+      <div class="w-teal">Teal · ~6%</div>
+      <div class="w-neutral">Neutral · ~4%</div>
+    </div>
+
+    <div class="swatches">
+      <div class="swatch">
+        <div class="chip" style="background: var(--paper-2); color: var(--ink);">Aa</div>
+        <div class="meta"><div class="name">Warm Paper</div><div class="hex">#FAF7F2 / #F1ECE3</div><div class="role">Page surface · cards · sections</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--ink);">Aa</div>
+        <div class="meta"><div class="name">Deep Navy Ink</div><div class="hex">#0B1F3A</div><div class="role">Headlines · body · UI scaffolding</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--orange);">Aa</div>
+        <div class="meta"><div class="name">Sword Orange</div><div class="hex">~ #FF5A1F</div><div class="role">CTAs · stat highlights · eyebrows</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: var(--teal);">Aa</div>
+        <div class="meta"><div class="name">AI Teal</div><div class="hex">~ #1FB7B1</div><div class="role">AI / data viz · Phoenix moments</div></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background: #B8AFA1; color: var(--ink);">Aa</div>
+        <div class="meta"><div class="name">Stone Neutral</div><div class="hex">~ #B8AFA1</div><div class="role">Dividers · soft surfaces · meta text</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section>
+  <div class="container">
+    <div class="label">03 · Typography</div>
+    <h2>Big, tight, sans. No ornament.</h2>
+    <p class="intro">A contemporary geometric sans with tight tracking at display sizes does almost all the personality work. Body copy is unfussy and reads as editorial healthcare — not consumer tech, not legal pharma.</p>
+
+    <div class="type-stack">
+      <div class="type-card">
+        <div class="role">Display · Headline</div>
+        <div class="specimen-h">A life free of <em>pain</em> starts here.</div>
+        <div class="specimen-b">Tight letterspacing (-0.025em), heavy weights (700), 48–96px range. Color-jump on a single phrase is the only flourish.</div>
+        <div class="specs">Family: Söhne / Inter-class geometric sans · Weight 700 · LH 0.98 · Tracking −0.025em</div>
+      </div>
+      <div class="type-card">
+        <div class="role">Body · Lede</div>
+        <div class="specimen-b" style="font-size:21px; color:var(--ink);">Members get personalized care that adapts to them — guided by a licensed clinician, supported by AI Care, and grounded in evidence.</div>
+        <div class="specimen-b">Body copy sits 17–21px, line-height 1.45–1.55, ink-soft color for hierarchy without grayscale anemia.</div>
+        <div class="specs">Family: same geometric sans · Weight 400/500 · LH 1.5 · Tracking 0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section>
+  <div class="container">
+    <div class="label">04 · Voice &amp; Messaging</div>
+    <h2>Mission first. Evidence second. Product third.</h2>
+    <p class="intro">Sword talks about the world before it talks about itself. Copy is short, declarative, and emotionally weighted — paired with outcome metrics and clinician credibility to keep it from drifting into platitude.</p>
+
+    <div class="quotes">
+      <div class="quote">"A world-class clinician in every home."<span class="src">— Brand mission</span></div>
+      <div class="quote cool">"Built to free the world from pain."<span class="src">— About page</span></div>
+      <div class="quote dark">"Superhuman clinicians, powered by AI Care."<span class="src">— Platform positioning</span></div>
+      <div class="quote">"Breaking the iron triangle of cost, quality, and access."<span class="src">— Recurring frame</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGERY -->
+<section>
+  <div class="container">
+    <div class="label">05 · Imagery</div>
+    <h2>Documentary, not stock.</h2>
+    <p class="intro">People are shown at work — warehouses, train cabs, kitchens, gardens. Lighting is natural and slightly golden. Subjects are diverse across age, ethnicity, and body type, and they are doing things, not posing. This is the visual proof of "real people, real outcomes."</p>
+
+    <div class="imagery">
+      <div class="tile t1">
+        <div class="cat">Workplace · Daylight</div>
+        <div class="desc">Warehouse manager mid-shift. Natural light, slight handheld feel, no glamor lens.</div>
+      </div>
+      <div class="tile t2">
+        <div class="cat">Movement · Home</div>
+        <div class="desc">Member doing PT in a kitchen, not a clinic. Warm afternoon light. Real space.</div>
+      </div>
+      <div class="tile t3">
+        <div class="cat">Portrait · Clinical</div>
+        <div class="desc">Licensed clinician headshot. Editorial framing, eye contact, navy backdrop.</div>
+      </div>
+      <div class="tile t4">
+        <div class="cat">Lifestyle · Outdoors</div>
+        <div class="desc">Older woman walking through golden-hour fields. Active, recovered, in control.</div>
+      </div>
+      <div class="tile t5">
+        <div class="cat">Product · UI in context</div>
+        <div class="desc">Phone in hand, app on screen, real environment around it. Never floating mockups.</div>
+      </div>
+      <div class="tile t6">
+        <div class="cat">Texture · Skin &amp; cloth</div>
+        <div class="desc">Tight crops on hands, fabric, sensors. Tactile, human, intimate — not surgical.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVICES -->
+<section>
+  <div class="container">
+    <div class="label">06 · Signature Design Devices</div>
+    <h2>Six moves they repeat everywhere.</h2>
+
+    <div class="devices">
+      <div class="device">
+        <div class="glyph">01 · Stat</div>
+        <div><h3>Heroic outcome figures</h3><p>Massive numbers (60%, 2.5x, $2,500) anchor sections. Always paired with a one-line clinical or financial claim.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">02 · Testimonial</div>
+        <div><h3>Member name + occupation</h3><p>Quotes attributed to real people with job titles ("Lisa, Postal Worker"), not anonymous "happy users." Reinforces ICP credibility.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">03 · Cycle Diagram</div>
+        <div><h3>Continuous loops, not funnels</h3><p>"Continuous Learning Cycle," "Connected Signals." Care is shown as a flywheel, never a one-shot transaction.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">04 · Trust Wall</div>
+        <div><h3>Compliance badge clusters</h3><p>HIPAA, HiTrust, SOC 2 grouped near footer or trust sections. Logos of Alight, Elevance, etc. as channel proof.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">05 · Eyebrow</div>
+        <div><h3>Tiny orange tag-line</h3><p>Every section opens with a 12px orange uppercase eyebrow. It's the brand's most disciplined repeat element.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">06 · Color Jump</div>
+        <div><h3>One word in orange</h3><p>Within long display headlines, exactly one word breaks into orange. Used as emphasis, never decoration.</p></div>
+      </div>
+    </div>
+
+    <div class="stat-demo">
+      <div class="figure"><em>62%</em></div>
+      <div class="caption">Average pain reduction at 8 weeks across 100,000+ members. Stat-as-hero is the single most-repeated layout pattern on the site.</div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section>
+  <div class="container">
+    <div class="label">07 · AI Visual Language</div>
+    <h2>They refuse the neural-network cliché.</h2>
+    <p class="intro">Sword deliberately avoids the standard AI vocabulary — no glowing nodes, no purple gradients, no brain icons. Instead, AI is shown as messages, signals, and shared intelligence between clinician and member. Teal is the only chromatic tell.</p>
+
+    <div class="ai-panel">
+      <div>
+        <h3>"Phoenix" — AI surfaces as conversation, not interface.</h3>
+        <p>The AI is named, characterized, and presented as a clinical memory layer. It appears in the UI as a chat-style bubble, never as a dashboard. The message is: AI extends the clinician, it does not replace the relationship.</p>
+        <p>Visual cues: teal accent, soft circular avatar, conversational typography, plain English. No data viz fireworks.</p>
+      </div>
+      <div class="ai-bubble">
+        <div class="label-row"><div class="badge">P</div><div>Phoenix · AI Care</div></div>
+        <div class="msg">"Hi Maria — your sleep was a little lighter last night. Want to try the short evening reset before tomorrow's session?"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SO WHAT -->
+<section>
+  <div class="container">
+    <div class="label">08 · So What</div>
+    <h2>What this means for MHC.</h2>
+    <p class="intro">Sword is the brand to beat on visual credibility in our category. They've earned premium positioning through restraint, not ornament. Three takeaways worth importing or actively contrasting against.</p>
+
+    <div class="so-what">
+      <h2>Three moves to steal — and one to reject.</h2>
+      <p>If we want to read as Sword's peer rather than its budget alternative, the visual gaps are not subtle. The good news: most of what makes Sword premium is discipline, not budget.</p>
+      <ul>
+        <li><strong>Steal — single accent color.</strong> One signature warm color doing all the energy work. Our palette currently fans out; Sword's single orange is more confident than five harmonized tones.</li>
+        <li><strong>Steal — documentary photography.</strong> Real members in real environments, not staged wellness stock. This is the cheapest credibility move in our category.</li>
+        <li><strong>Steal — outcome-as-hero.</strong> Stat sections with a single huge figure and one-line clinical claim. Our reward and program pages bury our numbers.</li>
+        <li><strong>Reject — clinical-only register.</strong> Sword's mission language ("free the world from pain") works because their ICP is acute pain. Our ICP is the overburdened employee managing 2–3 conditions in private — closer to "support that fits your life" than "world-class clinician in every home." Warmth, yes. Salvation, no.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container row">
+    <div>Sources analyzed: swordhealth.com/ · /solutions/thrive · /solutions/bloom · /solutions/mind · /solutions/ai-care-platform · /about-us</div>
+    <div>Mood board v1 · 2026-05-29</div>
+  </div>
+</footer>
+
+</body>
+</html>

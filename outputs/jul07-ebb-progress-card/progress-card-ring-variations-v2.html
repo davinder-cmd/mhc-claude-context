@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progress card — ring variations</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.14);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--green:#3F7A46;--green-tint:#E4EFE0;--track:#E7E2D6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1200px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:780px;margin:0 0 8px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;margin-top:16px}
+.opt{width:340px}
+.olabel{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.onum{font-size:13px;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:2px 8px}
+.oname{font-size:15px;font-weight:700}
+.rec{font-size:10.5px;font-weight:700;color:var(--green);background:var(--green-tint);border-radius:5px;padding:2px 7px;margin-left:6px}
+.onote{font-size:12px;color:var(--ink-2);margin-top:11px}.onote b{color:var(--ink)}
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 16px}
+.row{display:flex;align-items:center;gap:14px}
+.pt{font-size:14px;font-weight:680}
+.cad{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.rew{font-size:11.5px;color:var(--amber);font-weight:700;margin-top:3px}
+.moneychip{display:inline-flex;align-items:center;gap:5px;background:var(--amber-tint);color:var(--amber);font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:6px}
+.pacepill{display:inline-flex;align-items:center;gap:4px;background:var(--green-tint);color:var(--green);font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle}
+.ref{opacity:.92}
+</style></head><body>
+<div class="page">
+<h1>Progress card — ring variations</h1>
+<p class="sub">Five variations on the ring + cadence card you picked. All keep the ring and reward-consistency-not-speed framing; they vary layout, the ring style, and how the $100 reads. Selected version at the end.</p>
+
+<div class="grid">
+
+<!-- 1 reward chip -->
+<div class="opt">
+<div class="olabel"><span class="onum">1</span><span class="oname">Reward as a chip</span></div>
+<div class="card"><div class="row">
+<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="21" fill="none" stroke="#E7E2D6" stroke-width="6"/><circle cx="26" cy="26" r="21" fill="none" stroke="#0E4A56" stroke-width="6" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="106" transform="rotate(-90 26 26)"/><text x="26" y="24" text-anchor="middle" font-size="13" font-weight="750" fill="#22262A">2</text><text x="26" y="35" text-anchor="middle" font-size="8.5" fill="#838890">of 10</text></svg>
+<div><div class="pt">Your progress</div><div class="cad">2 weeks in · a steady pace</div><span class="moneychip">🎁 $100 at finish</span></div>
+</div></div>
+<div class="onote"><b>Reward as an object.</b> The amber line becomes a small chip — pops a bit more and swaps cleanly to "$100 earned" later.</div>
+</div>
+
+<!-- 2 ring right -->
+<div class="opt">
+<div class="olabel"><span class="onum">2</span><span class="oname">Ring on the right</span></div>
+<div class="card"><div class="row" style="justify-content:space-between">
+<div><div class="pt">Your progress</div><div class="cad">Session 2 · 2 weeks in</div><div class="rew">$100 when you complete</div></div>
+<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="21" fill="none" stroke="#E7E2D6" stroke-width="6"/><circle cx="26" cy="26" r="21" fill="none" stroke="#0E4A56" stroke-width="6" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="106" transform="rotate(-90 26 26)"/><text x="26" y="24" text-anchor="middle" font-size="13" font-weight="750" fill="#22262A">2</text><text x="26" y="35" text-anchor="middle" font-size="8.5" fill="#838890">of 10</text></svg>
+</div></div>
+<div class="onote"><b>Mirrored.</b> Text leads (left-to-right reading), ring anchors the right. Same content, calmer entry.</div>
+</div>
+
+<!-- 3 halfway marker on ring -->
+<div class="opt">
+<div class="olabel"><span class="onum">3</span><span class="oname">Halfway marker</span><span class="rec">on-strategy</span></div>
+<div class="card"><div class="row">
+<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="21" fill="none" stroke="#E7E2D6" stroke-width="6"/><circle cx="26" cy="26" r="21" fill="none" stroke="#0E4A56" stroke-width="6" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="106" transform="rotate(-90 26 26)"/><circle cx="26" cy="47" r="4.5" fill="#fff" stroke="#8A5A12" stroke-width="2.5"/><text x="26" y="24" text-anchor="middle" font-size="13" font-weight="750" fill="#22262A">2</text><text x="26" y="35" text-anchor="middle" font-size="8.5" fill="#838890">of 10</text></svg>
+<div><div class="pt">Your progress</div><div class="cad">2 weeks in · a steady pace</div><div class="rew" style="color:var(--amber)">Halfway locks in your $100</div></div>
+</div></div>
+<div class="onote"><b>Reward tied to the ring.</b> An amber marker sits at the halfway point of the ring — the ~50% reward-eligible moment. Ties the $100 to a milestone, not a countdown.</div>
+</div>
+
+<!-- 4 dashed ring -->
+<div class="opt">
+<div class="olabel"><span class="onum">4</span><span class="oname">Dashed / sessions ring</span></div>
+<div class="card"><div class="row">
+<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="21" fill="none" stroke="#E7E2D6" stroke-width="6" stroke-dasharray="7 6.2"/><circle cx="26" cy="26" r="21" fill="none" stroke="#0E4A56" stroke-width="6" stroke-linecap="butt" stroke-dasharray="7 6.2" stroke-dashoffset="0" transform="rotate(-90 26 26)" style="stroke-dasharray:7 125"/><text x="26" y="24" text-anchor="middle" font-size="13" font-weight="750" fill="#22262A">2</text><text x="26" y="35" text-anchor="middle" font-size="8.5" fill="#838890">of 10</text></svg>
+<div><div class="pt">Your progress</div><div class="cad">2 weeks in · a steady pace</div><div class="rew">$100 when you complete</div></div>
+</div></div>
+<div class="onote"><b>Discrete ring.</b> The ring is dashed into session ticks (not a smooth sweep) — reinforces "sessions done," pace over speed.</div>
+</div>
+
+<!-- 5 bigger ring, minimal -->
+<div class="opt">
+<div class="olabel"><span class="onum">5</span><span class="oname">Bigger ring · minimal</span></div>
+<div class="card"><div class="row" style="gap:16px">
+<svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="#E7E2D6" stroke-width="7"/><circle cx="32" cy="32" r="26" fill="none" stroke="#0E4A56" stroke-width="7" stroke-linecap="round" stroke-dasharray="163" stroke-dashoffset="130" transform="rotate(-90 32 32)"/><text x="32" y="30" text-anchor="middle" font-size="16" font-weight="750" fill="#22262A">2</text><text x="32" y="43" text-anchor="middle" font-size="9.5" fill="#838890">of 10</text></svg>
+<div><div class="pt">Steady pace <span class="pacepill">on track</span></div><div class="rew" style="margin-top:4px">$100 when you finish</div></div>
+</div></div>
+<div class="onote"><b>Ring-forward.</b> A larger ring carries the card; copy trims to a "steady pace · on track" affirmation + the reward. Least text.</div>
+</div>
+
+<!-- reference -->
+<div class="opt">
+<div class="olabel"><span class="onum" style="background:#838890">·</span><span class="oname" style="color:var(--ink-3)">Selected (reference)</span></div>
+<div class="card ref"><div class="row">
+<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="21" fill="none" stroke="#E7E2D6" stroke-width="6"/><circle cx="26" cy="26" r="21" fill="none" stroke="#0E4A56" stroke-width="6" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="106" transform="rotate(-90 26 26)"/><text x="26" y="24" text-anchor="middle" font-size="13" font-weight="750" fill="#22262A">2</text><text x="26" y="35" text-anchor="middle" font-size="8.5" fill="#838890">of 10</text></svg>
+<div><div class="pt">Your progress</div><div class="cad">2 weeks in · a steady pace</div><div class="rew">$100 when you complete</div></div>
+</div></div>
+<div class="onote">The version you picked.</div>
+</div>
+
+</div>
+<div style="margin-top:26px;max-width:780px;background:#fff;border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>My read:</b> <b>Option 3 (halfway marker)</b> is the most on-strategy — it puts the reward on the ring at the ~50% eligible point, so the ring itself tells the reward story. <b>Option 1</b> if you just want the reward to pop as a chip. <b>Option 2</b> reads most naturally left-to-right.
+</div>
+</div>
+</body></html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tracker tile · MHC Component Sheet</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<div class="g-top">
+  <div class="g-top__inner">
+    <a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Sheet</a>
+    <div class="g-top__spacer"></div>
+    <div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div>
+  </div>
+</div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+
+  <header class="g-head">
+    <div class="g-eyebrow">Component · Stat tile</div>
+    <h1 class="g-title">Tracker tile</h1>
+    <p class="g-lede">A single health metric — icon, label, value with trend arrow, and a supporting meta line. Sits in a responsive grid that packs 2-up on phones and 4-up from tablet width. Four accent variants plus a link/zero state.</p>
+    <div class="g-tags">
+      <span class="g-tag">.tracker</span>
+      <span class="g-tag g-tag--ok">Multi-instance (4)</span>
+      <span class="g-tag g-tag--ok">Authorable block</span>
+      <span class="g-tag g-tag--flag">Zero-state modifier not yet in CSS</span>
+    </div>
+  </header>
+
+  <!-- 1 · LIVE PLAYGROUND ------------------------------------------------ -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Live playground</h2></div>
+    <p class="g-section__note">Drag the handle at the bottom-right edge to resize. The grid reflows through the real viewport breakpoints exactly as it will in production — 2 columns below 600px, 4 columns at and above.</p>
+    <div class="g-pg" style="height:392px">
+      <div class="g-pg__hint">↔ Drag the bottom-right corner to resize · live <code>mhc-home.css</code></div>
+      <iframe src="frame-tracker.html" title="Tracker tiles — resizable"></iframe>
+    </div>
+  </section>
+
+  <!-- 2 · BREAKPOINTS ---------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Responsive breakpoints</h2></div>
+    <p class="g-section__note">Each frame renders at its true pixel width, so the media queries in <code>mhc-home.css</code> fire authentically; the frames are only scaled down visually to sit side by side. Scroll horizontally to compare.</p>
+    <div class="g-bp-row">
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px · 2-col</span></div>
+        <div class="g-bp__vp" style="--w:375;--s:1;--h:392"><iframe src="frame-tracker.html" title="Tracker Compact"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px · 4-col</span></div>
+        <div class="g-bp__vp" style="--w:1024;--s:.7;--h:200"><iframe src="frame-tracker.html" title="Tracker Medium"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px · 4-col, large type</span></div>
+        <div class="g-bp__vp" style="--w:1440;--s:.6;--h:220"><iframe src="frame-tracker.html" title="Tracker Large"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · VARIANTS ------------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Variants</h2></div>
+    <p class="g-section__note">Accent colour is set by a modifier class on <code>.tracker</code>. The last tile is the link / zero state (no linked data source yet).</p>
+    <div class="g-frame">
+      <div class="g-frame__bar"><span class="g-frame__w">Variant set</span><span class="g-frame__class">.tracker · --sleep · --calories · --active · zero</span></div>
+      <iframe src="frame-tracker-variants.html" title="Tracker variants" style="width:100%;height:340px"></iframe>
+    </div>
+    <div class="g-tags" style="margin-top:16px">
+      <span class="g-tag"><code>.tracker</code> — green (default)</span>
+      <span class="g-tag"><code>.tracker--sleep</code> — blue</span>
+      <span class="g-tag"><code>.tracker--calories</code> — orange</span>
+      <span class="g-tag"><code>.tracker--active</code> — teal</span>
+      <span class="g-tag g-tag--flag"><code>.tracker--zero</code> — referenced in block-3 comments, not yet in CSS</span>
+    </div>
+  </section>
+
+  <!-- 4 · MARKUP --------------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Markup</h2></div>
+    <p class="g-section__note">The grid wrapper plus one tile (the repeatable unit, shown with its data / zero-state pair). Unroll one tile per tracker — no loops. This is the tokenised block you paste into CKEditor; styling lives in <code>mhc-home.css</code> (CodeMirror).</p>
+    <div class="g-code">
+      <div class="g-code__bar">block-3-thisweek.html <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>&lt;div class="trackers"&gt;
+
+  &lt;div class="tracker"&gt;
+    {{#formula.hasLinkedTracker_steps}}
+    &lt;div class="tracker__icon"&gt;
+      &lt;span class="material-symbols-outlined" aria-hidden="true"&gt;directions_walk&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="eyebrow tracker__label"&gt;{{formula.copy_tracker_steps_label}}&lt;/div&gt;
+    &lt;div class="heading-6 tracker__value"&gt;
+      &lt;span class="arrow material-symbols-outlined" aria-hidden="true"&gt;north_east&lt;/span&gt;
+      {{formula.tracker_steps_value}}
+    &lt;/div&gt;
+    &lt;div class="body-3 tracker__meta"&gt;{{formula.copy_tracker_steps_meta}}&lt;/div&gt;
+    &lt;a class="program__link" href="{{formula.tracker_steps_href}}"&gt;
+      &lt;span class="mhc-visually-hidden"&gt;{{formula.copy_tracker_steps_label}}&lt;/span&gt;
+    &lt;/a&gt;
+    {{/formula.hasLinkedTracker_steps}}
+    {{^formula.hasLinkedTracker_steps}}
+    &lt;div class="tracker__icon"&gt;&lt;span class="material-symbols-outlined" aria-hidden="true"&gt;add&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="eyebrow tracker__label"&gt;{{formula.copy_tracker_steps_label}}&lt;/div&gt;
+    &lt;div class="body-3 tracker__meta"&gt;{{formula.copy_tracker_steps_linkCta}}&lt;/div&gt;
+    &lt;a class="program__link" href="{{formula.tracker_steps_link_href}}"&gt;
+      &lt;span class="mhc-visually-hidden"&gt;{{formula.copy_tracker_steps_linkCta}}&lt;/span&gt;
+    &lt;/a&gt;
+    {{/formula.hasLinkedTracker_steps}}
+  &lt;/div&gt;
+
+  &lt;!-- repeat for sleep / calories / active, adding --sleep etc. --&gt;
+
+&lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <!-- 5 · NOTES ---------------------------------------------------------- -->
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">05</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • Grid: <code>.trackers</code> is <code>grid-template-columns: repeat(2,1fr)</code>, becoming <code>repeat(4,1fr)</code> at ≥600px.<br>
+      • Trend arrow is a static <code>north_east</code> glyph in v81 — add a <code>tracker_*_trend</code> flag if up/down/flat should vary.<br>
+      • The tile reuses <code>.program__link</code> for its stretched anchor rather than a dedicated <code>.tracker__link</code>. Intentional reuse, flagged for a naming decision.<br>
+      • Zero state renders today from the base tile (add icon + link CTA, no value). A <code>.tracker--zero</code> modifier is named in the block comments but does not exist in <code>mhc-home.css</code> yet — not fabricated here.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Overview reward — banner options</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.11);--navy:#123A52;--teal:#0E4A56;--teal-2:#1F6F7A;--teal-tint:#E4EDED;--amber:#8A5A12;--amber-2:#B87A1E;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1900px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:960px;margin:0 0 4px;font-size:14px}
+.flow{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}.flow b{color:var(--teal-2)}
+.ph{color:#B23B3B;font-weight:700}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:9px;width:330px}
+.cap{font-size:12px;color:var(--ink-2);max-width:330px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.rec{color:#fff;background:var(--navy)}
+.phone{width:330px;background:var(--surface);border:9px solid #1c2330;border-radius:40px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:706px;overflow-y:auto;position:relative;background:var(--surface)}
+.ab{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.ab .c{font-size:18px;color:var(--ink-2);width:20px}.ab .t{flex:1;text-align:center;font-size:15px;font-weight:700}
+.pad{padding:16px}
+.img{height:150px;border-radius:14px;background:linear-gradient(135deg,#C7E6DA,#EFE7D0);position:relative;overflow:hidden}
+.ttl{font-size:22px;font-weight:750;letter-spacing:-0.01em;margin-top:16px}
+.meta{font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.desc{font-size:13.5px;color:var(--ink-2);margin-top:14px;line-height:1.55}
+.btn{background:var(--navy);color:#fff;border-radius:24px;padding:13px;font-size:14px;font-weight:700;text-align:center;margin-top:16px}
+.hh{font-size:15px;font-weight:700;margin-top:20px}
+.hp{font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+.wt{font-size:11px;color:var(--amber-2);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+
+/* ---- Banner 1 · warm gradient full-width ---- */
+.b1{margin-top:14px;background:linear-gradient(135deg,#FBEFD6,#F2E1C2);border-radius:16px;padding:15px 16px;display:flex;align-items:center;gap:13px}
+.b1 .g{width:44px;height:44px;border-radius:13px;background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;font-size:23px;flex:none}
+.b1 .h{font-size:16px;font-weight:800;color:#1F2328;line-height:1.15}
+.b1 .h .amt{color:var(--amber-2)}
+.b1 .s{font-size:11.5px;color:var(--amber);font-weight:600;margin-top:3px}
+
+/* ---- Banner 2 · reward + segmented progress ---- */
+.b2{margin-top:14px;background:var(--surface);border:1px solid rgba(184,122,30,.28);border-radius:16px;padding:14px 15px;box-shadow:0 8px 22px -18px rgba(138,90,18,.6)}
+.b2top{display:flex;align-items:center;gap:11px}
+.b2 .g{font-size:22px}
+.b2 .h{font-size:15px;font-weight:800;flex:1}.b2 .h .amt{color:var(--amber-2)}
+.b2 .pill{font-size:10.5px;font-weight:800;color:var(--amber-2);background:var(--amber-warm);padding:3px 8px;border-radius:20px}
+.seg{display:flex;gap:4px;height:8px;border-radius:6px;overflow:hidden;margin-top:12px}
+.seg span{flex:1;background:#EAE4D8}.seg span.on{background:var(--amber-2)}
+.b2 .cap2{font-size:11px;color:var(--ink-2);margin-top:7px}.b2 .cap2 b{color:var(--amber-2)}
+
+/* ---- Banner 3 · big amount split ---- */
+.b3{margin-top:14px;background:var(--navy);border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;color:#fff}
+.b3 .l{flex:1}
+.b3 .k{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#9FC7CF}
+.b3 .h{font-size:15px;font-weight:750;margin-top:4px;line-height:1.25}
+.b3 .amtbox{text-align:center;flex:none}
+.b3 .amt{font-size:30px;font-weight:850;letter-spacing:-0.02em;color:#F3D89B;line-height:1}
+.b3 .amtl{font-size:10px;color:#9FC7CF;font-weight:700;margin-top:3px}
+
+/* ---- Banner 4 · hero ribbon + strip ---- */
+.ribbon{position:absolute;top:12px;left:0;background:var(--amber-2);color:#fff;font-size:12px;font-weight:800;padding:6px 14px 6px 12px;border-radius:0 8px 8px 0;box-shadow:0 6px 14px -8px rgba(0,0,0,.5);display:flex;align-items:center;gap:6px}
+.b4strip{margin-top:12px;background:var(--amber-warm);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px}
+.b4strip .g{font-size:18px}
+.b4strip .t{font-size:12.5px;font-weight:700;color:var(--amber);flex:1}
+.b4strip .t b{color:var(--ink)}
+
+/* ---- Banner 5 · accent bar + inline steps ---- */
+.b5{margin-top:14px;background:var(--warm);border-left:4px solid var(--amber-2);border-radius:0 14px 14px 0;padding:14px 16px}
+.b5 .k{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--amber-2)}
+.b5 .h{font-size:16px;font-weight:800;margin-top:4px}.b5 .h .amt{color:var(--amber-2)}
+.b5 .steps{display:flex;align-items:center;gap:7px;margin-top:11px;font-size:11.5px;font-weight:700;color:var(--ink-2);flex-wrap:wrap}
+.b5 .chip{background:#fff;border:1px solid var(--line);border-radius:20px;padding:4px 10px}
+.b5 .chip.gold{background:var(--amber-warm);border-color:rgba(184,122,30,.3);color:var(--amber-2)}
+.b5 .arw{color:var(--ink-3)}
+
+.rec-note{margin-top:28px;max-width:960px;background:var(--surface);border-left:3px solid var(--navy);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}
+.rec-note b{color:var(--ink)}
+.legend{font-size:11.5px;color:var(--ink-3);margin-top:6px}
+</style></head><body>
+<div class="page">
+<h1>Overview reward — banner options</h1>
+<p class="sub">The reward callout on the program Overview, given more presence — a <b>banner</b> instead of a chip/line. All five sit <b>below the hero + session meta</b> so the clinical framing still leads (efficacy guardrail: reward is confident but stays the accent, not the headline). Amounts use the pinned model — <span class="ph">$100</span> per path, up to $500/yr. Copy placeholder.</p>
+<p class="flow">Context shown: Treating Insomnia · 8 sessions · Not started. Banner placement varies per option.</p>
+
+<div class="grid">
+
+<!-- 1 warm gradient -->
+<div class="col">
+<span class="tag">1 · Warm gradient full-width</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad">
+<div class="img"></div>
+<div class="ttl">Treating Insomnia</div>
+<div class="meta">8 sessions · Not started</div>
+<div class="b1"><div class="g">🎁</div><div><div class="h">Earn <span class="amt">$100</span> when you finish</div><div class="s">Complete this path — up to $500 a year</div></div></div>
+<div class="desc">Insomnia is more common than you might think. Over 40 million Americans have chronic insomnia.</div>
+<div class="btn">Get Started</div>
+<div class="hh">What you'll learn</div>
+<div class="hp">Evidence-based CBT-I techniques to improve your sleep quality.</div>
+</div>
+</div></div>
+<div class="cap"><b>1 — Warm gradient, full-width.</b> A soft amber gradient band with gift tile + headline + sub. Reads clearly as a reward without a hard color block. The most versatile; feels native to the warm palette.</div>
+</div>
+
+<!-- 2 reward + progress -->
+<div class="col">
+<span class="tag rec">2 · Reward + progress  ·  lean</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad">
+<div class="img"></div>
+<div class="ttl">Treating Insomnia</div>
+<div class="meta">8 sessions · Not started</div>
+<div class="b2">
+<div class="b2top"><span class="g">🎁</span><span class="h">Finish this path, earn <span class="amt">$100</span></span><span class="pill">1 of 5</span></div>
+<div class="seg"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+<div class="cap2">Your first of up to <b>$500</b> in rewards this year.</div>
+</div>
+<div class="desc">Insomnia is more common than you might think. Over 40 million Americans have chronic insomnia.</div>
+<div class="btn">Get Started</div>
+<div class="hh">What you'll learn</div>
+<div class="hp">Evidence-based CBT-I techniques to improve your sleep quality.</div>
+</div>
+</div></div>
+<div class="cap"><b>2 — Reward + progress. (my lean.)</b> A bordered card that shows this path as <b>1 of 5</b> toward $500, using the segmented bar you liked. More presence than a chip and it seeds the year-long goal — while framing the reward around <i>finishing</i>, not activity.</div>
+</div>
+
+<!-- 3 big amount split -->
+<div class="col">
+<span class="tag">3 · Bold amount (navy)</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad">
+<div class="img"></div>
+<div class="ttl">Treating Insomnia</div>
+<div class="meta">8 sessions · Not started</div>
+<div class="b3">
+<div class="l"><div class="k">Reward</div><div class="h">Complete this path and earn a gift card</div></div>
+<div class="amtbox"><div class="amt">$100</div><div class="amtl">GIFT CARD</div></div>
+</div>
+<div class="desc">Insomnia is more common than you might think. Over 40 million Americans have chronic insomnia.</div>
+<div class="btn">Get Started</div>
+<div class="hh">What you'll learn</div>
+<div class="hp">Evidence-based CBT-I techniques to improve your sleep quality.</div>
+</div>
+</div></div>
+<div class="cap"><b>3 — Bold amount, navy.</b> Highest contrast — a navy band with a big "$100" on the right. Strongest presence of the five; watch that it doesn't visually compete with the Get Started button (both navy). Use if you want the reward unmissable.</div>
+</div>
+
+<!-- 4 hero ribbon -->
+<div class="col">
+<span class="tag">4 · Hero ribbon + strip</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad">
+<div class="img"><div class="ribbon">🎁 $100 reward</div></div>
+<div class="ttl">Treating Insomnia</div>
+<div class="meta">8 sessions · Not started</div>
+<div class="b4strip"><span class="g">🎁</span><span class="t">Earn <b>$100</b> when you complete — up to $500/yr</span></div>
+<div class="desc">Insomnia is more common than you might think. Over 40 million Americans have chronic insomnia.</div>
+<div class="btn">Get Started</div>
+<div class="hh">What you'll learn</div>
+<div class="hp">Evidence-based CBT-I techniques to improve your sleep quality.</div>
+</div>
+</div></div>
+<div class="cap"><b>4 — Hero ribbon + strip.</b> A reward ribbon rides the hero image (immediate signal), backed by a slim confirming strip. Playful and hard to miss; the ribbon is decorative so the strip carries the real copy. Most "fun."</div>
+</div>
+
+<!-- 5 accent bar + steps -->
+<div class="col">
+<span class="tag">5 · Accent bar + inline steps</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad">
+<div class="img"></div>
+<div class="ttl">Treating Insomnia</div>
+<div class="meta">8 sessions · Not started</div>
+<div class="b5">
+<div class="k">Reward</div>
+<div class="h">Finish this path, earn <span class="amt">$100</span></div>
+<div class="steps"><span class="chip">Start</span><span class="arw">→</span><span class="chip">Finish all 8</span><span class="arw">→</span><span class="chip gold">🎁 $100</span></div>
+</div>
+<div class="desc">Insomnia is more common than you might think. Over 40 million Americans have chronic insomnia.</div>
+<div class="btn">Get Started</div>
+<div class="hh">What you'll learn</div>
+<div class="hp">Evidence-based CBT-I techniques to improve your sleep quality.</div>
+</div>
+</div></div>
+<div class="cap"><b>5 — Accent bar + inline steps.</b> Left accent rule + a tiny "Start → Finish all 8 → 🎁 $100" flow. Banner presence <i>and</i> it teaches how earning works in one glance — the most explanatory, still compact.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>2 — Reward + progress.</b> It gives the callout real banner weight, ties directly to the segmented device you've been leaning on, and does something the others don't: it frames this single path as <b>1 of 5 toward $500</b>, planting the year-long goal at the moment of first commitment (goal-gradient) — all while keeping the reward tied to <i>completion</i>, not speed. <b>1</b> is the safe, warm default; <b>5</b> if you want the banner to also explain the mechanic. I'd avoid <b>3</b> as the everyday treatment — the navy band competes with the primary Get Started button, though it's great for a one-off "featured reward" moment.
+<div class="legend"><b>Restraint check (guardrail):</b> in all five, warm neutrals stay dominant (~60%), surface/clinical content the secondary weight (~30%), and the amber reward is the ~10% accent — the banner grows the accent's <i>presence</i>, not its share of the page.</div>
+</div>
+</div>
+</body></html>

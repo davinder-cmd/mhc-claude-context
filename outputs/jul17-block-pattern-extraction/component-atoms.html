@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atoms · MHC Component Kit</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<div class="g-top"><div class="g-top__inner"><a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Kit</a><div class="g-top__spacer"></div><div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div></div></div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+  <header class="g-head">
+    <div class="g-eyebrow">Atoms · M3 Chips, Buttons, Dividers, Badges, Progress</div>
+    <h1 class="g-title">Atoms</h1>
+    <p class="g-lede">The smallest shared pieces — the ones that keep everything from drifting. Chip, text-link, icon button, banner icon, progress bar, divider, and the stretched-link pattern that makes any surface clickable, CKEditor-safe.</p>
+    <div class="g-tags"><span class="g-tag">.reward-chip</span><span class="g-tag">.btn-text</span><span class="g-tag">.icon-btn</span><span class="g-tag">.banner-icon</span><span class="g-tag">.progress</span><span class="g-tag">.*__link</span></div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">All atoms</h2></div>
+    <p class="g-section__note">Every atom rendered live from <code>mhc-home.css</code>. Resize to confirm they hold at any width.</p>
+    <div class="g-pg" style="height:620px"><div class="g-pg__hint">↔ Drag to resize · live <code>mhc-home.css</code></div><iframe src="frame-atoms.html" title="Atoms — resizable"></iframe></div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Markup</h2></div>
+    <div class="g-code">
+      <div class="g-code__bar">atoms <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>&lt;!-- Chip (4 colourways: gift / points / raffle / store) --&gt;
+&lt;span class="reward-chip reward-chip--{{formula.chip_modifier}}"&gt;{{formula.copy_chip}}&lt;/span&gt;
+
+&lt;!-- Text-link (the only authorable button — a nav &lt;a&gt;) --&gt;
+&lt;a class="btn btn-text" href="{{formula.link_href}}"&gt;{{formula.copy_link}}&lt;/a&gt;
+
+&lt;!-- Icon button (nav) --&gt;
+&lt;a class="icon-btn icon-btn--filled" href="{{formula.href}}" aria-label="{{formula.copy_ariaLabel}}"&gt;
+  &lt;span class="material-symbols-outlined" aria-hidden="true"&gt;search&lt;/span&gt;
+&lt;/a&gt;
+
+&lt;!-- Banner icon (insight / challenge tint) --&gt;
+&lt;div class="banner-icon banner-icon--insight"&gt;
+  &lt;span class="material-symbols-outlined" aria-hidden="true"&gt;auto_awesome&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- Progress bar (width via --p custom property) --&gt;
+&lt;div class="progress"&gt;&lt;div class="progress__fill" style="--p:{{formula.progress_pct}}%"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;!-- Stretched-link (last child of a position:relative surface) --&gt;
+&lt;a class="reward__link" href="{{formula.href}}"&gt;
+  &lt;span class="mhc-visually-hidden"&gt;{{formula.copy_linkLabel}}&lt;/span&gt;
+&lt;/a&gt;</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Buttons:</strong> only the text-link (<code>a.btn.btn-text</code>) is authorable in a block. Filled/outlined action buttons are host-injected (mutating actions).<br>
+      • <strong>Chip</strong> type is hardcoded 11sp uppercase — align to a token when theming lands.<br>
+      • <strong>Progress</strong> inline <code>--p</code> may be stripped by CKEditor sanitizers — verify (handoff config #4).<br>
+      • <strong>Stretched-link</strong> is prototype-grade: production needs keyboard focus styling + <code>aria-hidden</code> on duplicated content. Always the last child; parent must be <code>position:relative</code>.
+    </p>
+  </section>
+</div>
+</body>
+</html>

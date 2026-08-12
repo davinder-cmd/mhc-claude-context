@@ -1,0 +1,193 @@
+<title>EBB — Surfacing Kit (the "$100" banners)</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 58px 0 18px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 70ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+
+  .rules { margin-top: 20px; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: 12px; padding: 14px 16px; max-width: 80ch; font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+  .rules b { color: var(--ink); }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; padding: 30px 0 10px; }
+  @media (max-width: 820px){ .grid { grid-template-columns: 1fr; justify-items: center; } }
+  .cell { display: flex; flex-direction: column; gap: 12px; max-width: 340px; }
+  .cell-head { display: flex; align-items: center; gap: 9px; }
+  .cell-head .n { width: 24px; height: 24px; border-radius: 7px; background: var(--teal); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .cell-head .t { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+  .cell-head .who { font-size: 11px; font-weight: 600; color: var(--ink-3); }
+
+  .phone { width: 300px; align-self: center; border-radius: 40px; background: #000; padding: 9px; }
+  .screen { border-radius: 32px; background: var(--surface); overflow: hidden; min-height: 400px; }
+  .sbar { display: flex; align-items: center; gap: 8px; padding: 10px 15px 8px; border-bottom: 1px solid var(--line); }
+  .sbar .l { font-size: 15px; color: var(--ink-2); width: 18px; }
+  .sbar .ttl { flex: 1; text-align: center; font-size: 13px; font-weight: 700; }
+  .sbar .r { width: 18px; text-align: right; font-size: 13px; }
+  .bodyp { padding: 14px; display: flex; flex-direction: column; gap: 11px; }
+  .faded { opacity: 0.45; }
+  .fcard { border: 1px solid var(--line); border-radius: 12px; padding: 11px 13px; }
+  .fcard .k { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .fcard .t { font-size: 12.5px; font-weight: 650; margin-top: 2px; }
+  .fbar { height: 8px; border-radius: 5px; background: rgba(14,74,86,0.13); }
+
+  /* the EBB banner (the star, inline) */
+  .ebb-banner { border: 1.5px solid var(--teal); border-radius: 14px; overflow: hidden; background: linear-gradient(180deg, var(--teal-tint) 0%, #fff 70%); box-shadow: 0 8px 18px -13px rgba(14,74,86,0.5); }
+  .ebb-banner .row1 { display: flex; align-items: flex-start; gap: 11px; padding: 13px 13px 0; }
+  .ebb-banner .coin { width: 38px; height: 38px; border-radius: 10px; background: var(--amber-tint); color: var(--amber); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .ebb-banner .k { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-2); }
+  .ebb-banner h4 { margin: 2px 0 0; font-size: 16px; font-weight: 730; letter-spacing: -0.015em; line-height: 1.15; }
+  .ebb-banner p { margin: 5px 0 0; font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+  .ebb-banner .x { margin-left: auto; color: var(--ink-3); font-size: 14px; }
+  .ebb-banner .cta { margin: 12px 13px 13px; background: var(--teal); color: #fff; border-radius: 10px; padding: 10px; text-align: center; font-size: 13px; font-weight: 680; }
+
+  /* notification variant */
+  .notif { display: flex; align-items: flex-start; gap: 11px; background: #fff; border: 1px solid var(--line); border-radius: 13px; padding: 12px 13px; box-shadow: 0 6px 16px -12px rgba(0,0,0,0.25); }
+  .notif .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--teal); color: #fff; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .notif .nt { font-size: 13px; font-weight: 700; }
+  .notif .ns { font-size: 11.5px; color: var(--ink-2); margin-top: 2px; line-height: 1.35; }
+  .notif .nm { font-size: 10px; color: var(--ink-3); margin-top: 4px; }
+  .notif-lockbg { background: linear-gradient(160deg,#2b4a54,#0e2d34); border-radius: 24px; padding: 40px 12px 14px; }
+  .notif-lockbg .time { color: #fff; text-align: center; }
+  .notif-lockbg .time .h { font-size: 40px; font-weight: 300; letter-spacing: 1px; }
+  .notif-lockbg .time .d { font-size: 13px; opacity: 0.9; margin-bottom: 22px; }
+
+  /* dcp mid banner (thinner, top of topic) */
+  .mid-banner { display: flex; align-items: center; gap: 10px; border: 1px solid var(--teal); background: var(--teal-tint); border-radius: 12px; padding: 11px 12px; }
+  .mid-banner .spark { color: var(--amber); font-weight: 800; }
+  .mid-banner .mt { font-size: 12.5px; font-weight: 700; line-height: 1.25; }
+  .mid-banner .ms { font-size: 11px; color: var(--ink-2); margin-top: 2px; }
+  .mid-banner .chev { margin-left: auto; color: var(--teal); font-weight: 700; }
+
+  /* rewards earn row */
+  .rw-hero { border: 1px solid var(--teal); border-radius: 12px; background: linear-gradient(180deg,var(--teal-tint),#fff 70%); padding: 12px 13px; }
+  .rw-hero .k { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-2); }
+  .rw-hero h4 { margin: 3px 0 0; font-size: 15px; font-weight: 730; }
+  .rw-hero p { margin: 4px 0 0; font-size: 11.5px; color: var(--ink-2); }
+  .rw-row { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 11px; padding: 10px 12px; background: #fff; }
+  .rw-row .ri { width: 32px; height: 32px; border-radius: 9px; background: var(--amber-tint); color: var(--amber); font-weight: 800; display: flex; align-items: center; justify-content: center; flex: none; }
+  .rw-row .rt { font-size: 13px; font-weight: 650; }
+  .rw-row .rr { margin-left: auto; font-size: 13px; font-weight: 800; color: var(--amber); }
+
+  .cap { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; }
+  .cap .cd { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+  .cap .cd b { color: var(--ink); font-weight: 650; }
+  .cap .copy { margin-top: 8px; font-size: 12px; color: var(--teal-2); font-weight: 600; border-top: 1px dashed var(--line); padding-top: 8px; }
+  .cap .beh { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .cap .b { font-size: 10px; font-weight: 650; padding: 2px 8px; border-radius: 999px; background: var(--teal-tint); color: var(--teal); }
+
+  footer { padding: 28px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 86ch; }
+  footer .note b { color: var(--ink-2); font-weight: 650; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Surfacing kit</div>
+    <h1>The "you can earn $100" messages</h1>
+    <p class="thesis">Every place we surface the EBB opportunity — <strong>all inline, no takeovers.</strong> Same offer, contextualized per surface. Shown in context, with copy + behavior notes below each.</p>
+    <div class="rules"><b>Shared rules:</b> inline &amp; dismissible (never a modal); prominent but calm (health app, not a money grab); value-forward; persists until the member acts. One consistent offer: <b>$100 Amazon gift card per completed care path, up to $500/yr.</b></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- 1 HOME -->
+    <div class="cell">
+      <div class="cell-head"><span class="n">1</span><span class="t">Home</span><span class="who">· all users, awareness</span></div>
+      <div class="phone"><div class="screen">
+        <div class="sbar"><span class="l">☰</span><span class="ttl">Home</span><span class="r"></span></div>
+        <div class="bodyp">
+          <div class="ebb-banner">
+            <div class="row1">
+              <div class="coin">$</div>
+              <div><div class="k">Earn rewards</div><h4>Get $100 for finishing a care path</h4><p>A $100 Amazon gift card each — up to $500 a year.</p></div>
+              <span class="x">✕</span>
+            </div>
+            <div class="cta">See how it works</div>
+          </div>
+          <div class="faded"><div class="fcard"><div class="k">Just for you</div><div class="t">Wind down before bed · 3-min read</div></div></div>
+          <div class="faded"><div class="fcard"><div class="k">Your challenge</div><div class="t">Spring Steps · day 22 of 30</div></div></div>
+        </div>
+      </div></div>
+      <div class="cap"><div class="cd"><b>Where:</b> a prominent hero / "Just For You" card, using existing home components (home is out of 9/1 redesign scope). Sits near the top; dismissible; returns until acted on.</div><div class="copy">"Get $100 for finishing a care path · $100 gift card each, up to $500/yr."</div><div class="beh"><span class="b">Inline card</span><span class="b">Prominent</span><span class="b">Dismissible</span></div></div>
+    </div>
+
+    <!-- 2 NOTIFICATION -->
+    <div class="cell">
+      <div class="cell-head"><span class="n">2</span><span class="t">In-app notification</span><span class="who">· re-engagement</span></div>
+      <div class="phone"><div class="screen">
+        <div class="notif-lockbg">
+          <div class="time"><div class="d">Monday, July 6</div><div class="h">9:41</div></div>
+          <div class="notif">
+            <div class="ic">MH</div>
+            <div><div class="nt">Mobile Health</div><div class="ns">New — you can now earn $100 for completing a care path.</div><div class="nm">now</div></div>
+          </div>
+        </div>
+        <div class="bodyp" style="padding-top:12px;">
+          <div class="notif">
+            <div class="ic">$</div>
+            <div><div class="nt">Earn $100 per care path</div><div class="ns">Finish a program, get a $100 Amazon gift card. Tap to see how.</div></div>
+          </div>
+        </div>
+      </div></div>
+      <div class="cap"><div class="cd"><b>Where:</b> a push/lock-screen notification and an in-app notification row (notification center) — <b>not</b> a modal. Behavior-timed, honest, health-first.</div><div class="copy">"New — you can now earn $100 for completing a care path."</div><div class="beh"><span class="b">Notification</span><span class="b">Inline row</span><span class="b">Tap → details</span></div></div>
+    </div>
+
+    <!-- 3 DCP MID -->
+    <div class="cell">
+      <div class="cell-head"><span class="n">3</span><span class="t">DCP section (mid-DCP)</span><span class="who">· existing users, in a program</span></div>
+      <div class="phone"><div class="screen">
+        <div class="sbar"><span class="l">‹</span><span class="ttl">Managing Depression</span><span class="r">?</span></div>
+        <div class="bodyp">
+          <div class="mid-banner">
+            <span class="spark">✦</span>
+            <div><div class="mt">You can now earn $100 for finishing this program</div><div class="ms">A $100 gift card for a care path you're already on.</div></div>
+            <span class="chev">›</span>
+          </div>
+          <div class="faded"><div class="fcard"><div class="k">Session 3 · Today</div><div class="t">Recognizing Negative Thoughts</div></div></div>
+          <div class="faded"><div class="fcard"><div class="k">Your progress</div><div class="t">2 of 10 sessions</div><div class="fbar" style="margin-top:7px;"></div></div></div>
+        </div>
+      </div></div>
+      <div class="cap"><div class="cd"><b>Where:</b> a slim banner at the top of the topic page (and DCP list) for members already mid-program at go-live. Framed as an <b>unlock/gift</b> — "reward for what you're already doing" — never a punitive gate.</div><div class="copy">"You can now earn $100 for finishing this program — a care path you're already on."</div><div class="beh"><span class="b">Inline banner</span><span class="b">Contextual</span><span class="b">Unlock framing</span></div></div>
+    </div>
+
+    <!-- 4 REWARDS -->
+    <div class="cell">
+      <div class="cell-head"><span class="n">4</span><span class="t">Rewards page</span><span class="who">· in the "ways to earn" context</span></div>
+      <div class="phone"><div class="screen">
+        <div class="sbar"><span class="l">☰</span><span class="ttl">Rewards</span><span class="r"></span></div>
+        <div class="bodyp">
+          <div class="rw-hero">
+            <div class="k">Care path rewards</div>
+            <h4>Earn $100 per care path</h4>
+            <p>Up to $500 a year. Start a care path to begin earning.</p>
+          </div>
+          <div class="rw-row"><span class="ri">$</span><span class="rt">Complete a care path</span><span class="rr">$100</span></div>
+          <div class="faded"><div class="rw-row"><span class="ri" style="background:var(--teal-tint);color:var(--teal);">✓</span><span class="rt">Annual physical</span><span class="rr" style="color:var(--teal-2);">5,000 pts</span></div></div>
+        </div>
+      </div></div>
+      <div class="cap"><div class="cd"><b>Where:</b> the rewards page — EBB leads as the top "way to earn." For a member not yet earning, it's the invitation; once earning, it becomes the $/$500 cap tracker (see rewards page v1).</div><div class="copy">"Earn $100 per care path · up to $500/yr. Start a care path to begin."</div><div class="beh"><span class="b">Inline hero</span><span class="b">EBB leads</span><span class="b">→ browse paths</span></div></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Surfacing kit v1.</b> Four inline placements for the EBB opportunity: Home card · in-app/push notification · mid-DCP banner (existing users) · Rewards page entry. All inline &amp; dismissible, value-forward, one consistent offer ($100 gift card / $500 cap). <b>Note:</b> exact CTA copy ("See how" vs "Start earning" vs "Opt in") flexes with the opt-in-placement decision (opt-in-first, pending legal). Companion: rewards page v1, get-in flow, master flow.</p>
+  </div>
+</footer>

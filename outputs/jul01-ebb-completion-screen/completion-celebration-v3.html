@@ -1,0 +1,216 @@
+<title>EBB — Completion Celebration (Screen v3, settled)</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 64px 0 30px; }
+  .hero h1 { font-size: clamp(28px, 4.4vw, 46px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; text-wrap: balance; max-width: 18ch; }
+  .hero .thesis { margin: 18px 0 0; font-size: clamp(16px, 2vw, 19px); line-height: 1.5; color: var(--ink-2); max-width: 60ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+  .metabar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+  .tag { font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-2); background: var(--surface); }
+
+  .stage { display: grid; grid-template-columns: 392px 1fr; gap: 40px; padding: 30px 0 20px; align-items: start; }
+  @media (max-width: 900px) { .stage { grid-template-columns: 1fr; gap: 30px; justify-items: center; } }
+  .phone-wrap { position: sticky; top: 24px; justify-self: center; }
+  @media (max-width: 900px) { .phone-wrap { position: static; } }
+
+  .phone { width: 375px; border-radius: 46px; background: #000; padding: 11px; box-shadow: 0 24px 60px -26px rgba(14,74,86,0.45), 0 2px 8px rgba(0,0,0,0.12); }
+  .screen { border-radius: 36px; background: var(--surface); overflow: hidden; position: relative; }
+
+  .closebar { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px 4px; }
+  .closebar .time { font-size: 13px; font-weight: 600; }
+  .closebar .x { width: 30px; height: 30px; border-radius: 50%; background: rgba(34,38,42,0.06); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--ink-2); cursor: pointer; }
+
+  .celebrate { position: relative; padding: 14px 24px 24px; text-align: center; background: linear-gradient(180deg, var(--teal-tint) 0%, rgba(224,234,235,0) 80%); overflow: hidden; }
+  .confetti { position: absolute; inset: 0; pointer-events: none; }
+  .confetti i { position: absolute; display: block; border-radius: 2px; opacity: 0.85; }
+  .medallion { width: 84px; height: 84px; margin: 6px auto 0; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 8px rgba(14,74,86,0.10), 0 10px 22px -10px rgba(14,74,86,0.7); }
+  .medallion svg { width: 40px; height: 40px; }
+  .eyebrow-sm { font-size: 11.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-2); margin-top: 16px; }
+  .topic-title { font-size: 24px; font-weight: 720; letter-spacing: -0.02em; line-height: 1.13; margin: 6px 0 0; color: var(--ink); }
+  .win-line { margin: 11px auto 0; font-size: 14px; line-height: 1.5; color: var(--ink-2); max-width: 30ch; }
+  .win-line b { color: var(--ink); font-weight: 650; }
+
+  .block { padding: 0 24px 24px; }
+  .reward-card { margin-top: 18px; border: 1px solid var(--amber-mid); background: var(--amber-tint); border-radius: 16px; padding: 15px 16px; display: flex; align-items: center; gap: 13px; }
+  .reward-card .coin { width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 1px solid rgba(138,90,18,0.35); display: flex; align-items: center; justify-content: center; flex: none; font-weight: 800; color: var(--amber); font-size: 15px; }
+  .reward-card .rc-main { font-size: 17px; font-weight: 720; color: var(--amber); letter-spacing: -0.01em; }
+  .reward-card .rc-sub { font-size: 12px; color: var(--ink-2); margin-top: 1px; }
+
+  .progress-row { margin-top: 16px; }
+  .pr-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; }
+  .pr-head .l { font-weight: 650; color: var(--ink); }
+  .pr-head .r { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .pips { display: flex; gap: 6px; margin-top: 9px; }
+  .pips i { height: 8px; border-radius: 5px; flex: 1; background: rgba(14,74,86,0.14); }
+  .pips i.on { background: var(--teal); }
+
+  .divider { height: 1px; background: var(--line); margin: 22px -24px 0; }
+  .bottom-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-top: 20px; }
+
+  /* Option A — tappable path card = CTA */
+  .tap-card { margin-top: 12px; border: 1.5px solid var(--teal); border-radius: 17px; overflow: hidden; background: #fff; box-shadow: 0 8px 20px -13px rgba(14,74,86,0.55); cursor: pointer; }
+  .tap-img { height: 100px; background: linear-gradient(120deg, #17636f 0%, #2b8b93 55%, #6fb7ba 100%); position: relative; }
+  .tap-img .why-tag { position: absolute; left: 12px; bottom: 10px; background: rgba(255,255,255,0.92); color: var(--teal); font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; }
+  .tap-foot { display: flex; align-items: center; justify-content: space-between; padding: 13px 15px; gap: 10px; }
+  .tap-foot .tt { font-size: 17px; font-weight: 720; letter-spacing: -0.01em; }
+  .tap-foot .tm { font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+  .tap-foot .tm .money { color: var(--amber); font-weight: 700; }
+  .tap-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 720; color: var(--teal); flex: none; }
+  .link-quiet { display: block; text-align: center; margin: 15px 0 4px; font-size: 13.5px; color: var(--teal-2); font-weight: 650; text-decoration: none; }
+
+  .rail { display: flex; flex-direction: column; gap: 14px; max-width: 560px; }
+  .rail-intro { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin: 0 0 4px; }
+  .anno { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .anno .zone { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+  .anno h3 { margin: 5px 0 0; font-size: 16px; font-weight: 680; letter-spacing: -0.005em; }
+  .anno p { margin: 8px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+  .anno .serves { margin-top: 11px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip2 { font-size: 11px; font-weight: 650; padding: 3px 9px; border-radius: 999px; }
+  .chip2.d { background: var(--teal-tint); color: var(--teal); }
+  .chip2.g { background: var(--amber-tint); color: var(--amber); }
+
+  section { padding: 40px 0; }
+  .sec-head { margin-bottom: 24px; }
+  .sec-head h2 { font-size: clamp(20px, 2.5vw, 26px); letter-spacing: -0.01em; font-weight: 680; margin: 8px 0 0; }
+  .sec-head p { margin: 9px 0 0; color: var(--ink-2); max-width: 66ch; }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .nextsteps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .nextsteps { grid-template-columns: 1fr; } }
+  .ns { background: var(--surface); border: 1px dashed var(--line-strong); border-radius: 14px; padding: 15px 17px; }
+  .ns h4 { margin: 0; font-size: 14.5px; font-weight: 670; }
+  .ns p { margin: 6px 0 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+
+  footer { padding: 32px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 84ch; }
+  footer .note b { color: var(--ink-2); font-weight: 650; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · First screen</div>
+    <h1>The completion celebration</h1>
+    <p class="thesis">The hinge of the loop, settled. Finishing a care path celebrates the health win, hands over the $100, and launches the next path — now with <strong>one tappable next-path card</strong> as the single action (Option A).</p>
+    <div class="metabar">
+      <span class="tag">Screen v3 · settled</span>
+      <span class="tag">Bottom: Option A (tappable path)</span>
+      <span class="tag">Close → top ✕</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stage">
+
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="closebar"><span class="time">9:41</span><span class="x" role="button" aria-label="Close">✕</span></div>
+
+        <div class="celebrate">
+          <div class="confetti" aria-hidden="true">
+            <i style="left:24px; top:22px; width:8px; height:8px; background:var(--amber-mid); transform:rotate(20deg);"></i>
+            <i style="left:64px; top:60px; width:6px; height:14px; background:var(--teal-2);"></i>
+            <i style="right:34px; top:26px; width:10px; height:10px; border-radius:50%; background:var(--amber-mid);"></i>
+            <i style="right:60px; top:74px; width:7px; height:7px; background:var(--teal); transform:rotate(45deg);"></i>
+            <i style="left:120px; top:12px; width:6px; height:6px; border-radius:50%; background:var(--teal-2);"></i>
+            <i style="right:100px; top:8px; width:6px; height:12px; background:var(--amber-mid); transform:rotate(-18deg);"></i>
+          </div>
+          <div class="medallion"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="eyebrow-sm">Care path complete</div>
+          <h2 class="topic-title">You finished<br>Managing Depression</h2>
+          <p class="win-line">All <b>10 sessions</b> done — real, lasting work for your mental health. That's something to be proud of.</p>
+        </div>
+
+        <div class="block">
+          <div class="reward-card">
+            <div class="coin">$</div>
+            <div><div class="rc-main">$100 Amazon gift card earned</div><div class="rc-sub">On its way to your rewards — no action needed.</div></div>
+          </div>
+
+          <div class="progress-row">
+            <div class="pr-head"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div>
+            <div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="bottom-eyebrow">Your next path</div>
+          <div class="tap-card" role="button" tabindex="0">
+            <div class="tap-img"><span class="why-tag">You said sleep matters</span></div>
+            <div class="tap-foot">
+              <div><div class="tt">Treating Insomnia</div><div class="tm">8 sessions · <span class="money">Earn $100</span></div></div>
+              <span class="tap-cta">Start ›</span>
+            </div>
+          </div>
+          <a class="link-quiet" href="#">Browse all care paths</a>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="rail">
+      <p class="rail-intro">Settled screen, Option A folded in. Top to bottom, each zone still maps to a locked decision — the bottom is now a single tappable object plus one quiet escape.</p>
+
+      <div class="anno">
+        <div class="zone">Top · the celebration</div>
+        <h3>Lead with the health win, not the money</h3>
+        <p>The accomplishment comes first — the topic and the real work done ("all 10 sessions"). Feeling capable and proud, before a dollar figure, is what makes the behavior last.</p>
+        <div class="serves"><span class="chip2 d">D2 · celebrate the finish</span><span class="chip2 g">Guardrail · reward is an accelerant</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">Middle · reward + progress</div>
+        <h3>The $100, then how much more is on the table</h3>
+        <p>The reward gets the headline slot (our bread and butter); the "$100 of $500 · this year" meter shows four more paths worth $400 still ahead — the quiet pull toward the next loop.</p>
+        <div class="serves"><span class="chip2 d">D3 · EBB leads</span><span class="chip2 d">Reward + progress together</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">Next-up · one tappable path <span style="color:var(--teal)">(Option A)</span></div>
+        <h3>The card is the action</h3>
+        <p>The recommended path — pulled from what they told us they care about — is a single tappable card that starts on tap. No separate button, nothing competing. One confident object at the highest-momentum moment.</p>
+        <div class="serves"><span class="chip2 d">D1 · one clear next</span><span class="chip2 d">D4 · from their interests</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">Escapes · quiet, not stacked</div>
+        <h3>Suggested — never forced</h3>
+        <p>"Browse all care paths" stays as one quiet link, and closing moved to the top-right ✕. That clears the old three-button pile-up while keeping it honest and autonomy-supportive — free to choose another path or step away.</p>
+        <div class="serves"><span class="chip2 d">D1 · keep browse open</span><span class="chip2 g">Guardrail · honest, not a slot machine</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Same screen, other states</div>
+      <h2>Variants to design next</h2>
+      <p>This is the everyday completion. The same layout flexes to a few important edge states:</p>
+    </div>
+    <div class="nextsteps">
+      <div class="ns"><h4>First-ever completion</h4><p>An extra beat — a bigger moment. "Your first care path. Here's your first $100." First-time moments punch above their weight.</p></div>
+      <div class="ns"><h4>Cap reached (5 of 5)</h4><p>The meter is full. Stop dangling payout; switch the tappable card to health framing — "You've earned the max this year; this one's still worth doing."</p></div>
+      <div class="ns"><h4>No strong next match</h4><p>When interests don't point to an obvious next path, the card softens to "Explore care paths" rather than forcing a weak recommendation.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Settled.</b> Implements D1 (one clear next + browse open), D2 (celebrate the finish; health win → $100 → tee up next), D3 (EBB leads), D4 (next from interests). Bottom = Option A (tappable path card as CTA); close moved to top-right ✕. Screen v3 — the working completion screen for the loop.</p>
+  </div>
+</footer>

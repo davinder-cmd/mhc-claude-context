@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Status message (not tappable) + tappable step list</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  body{background:var(--canvas);padding:32px;}
+  h1.page{font-family:var(--f-display);font-weight:500;font-size:24px;color:var(--navy);margin-bottom:6px;}
+  p.pageintro{font-family:var(--f-text);font-size:14px;color:var(--slate);max-width:82ch;margin-bottom:28px;}
+  .stage{display:flex;gap:28px;align-items:flex-start;}
+  .ideacol{width:392px;flex:0 0 392px;}
+  .lbl{font-family:var(--f-text);font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:8px;}
+  .cap{font-family:var(--f-text);font-size:13px;line-height:1.45;color:var(--slate);margin-top:12px;}
+  .phone{width:392px;background:#fff;border:1px solid var(--silver);border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:20px;box-shadow:0 12px 30px rgba(6,42,66,.08);}
+  .rest{opacity:.4;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+  .rest .rh{font-family:var(--f-display);font-weight:500;font-size:14px;color:var(--charcoal);}
+  .rest .bar{height:40px;border:1px solid var(--hair);border-radius:12px;background:#fff;}
+  .row{display:flex;align-items:center;gap:10px;}.grow{flex:1;min-width:0;}
+  /* ---- top status treatments (NON-tappable: no border, no shadow, no button) ---- */
+  .t-type{display:flex;flex-direction:column;gap:6px;}
+  .t-band{display:flex;flex-direction:column;gap:6px;background:var(--tint-navy-05,rgba(15,73,127,.05));border-radius:14px;padding:14px 16px;}
+  .t-accent{display:flex;gap:12px;align-items:stretch;}
+  .t-accent .barmark{width:4px;border-radius:2px;background:var(--navy);flex:0 0 auto;}
+  .t-accent .col{display:flex;flex-direction:column;gap:6px;}
+  .t-quiet{display:flex;flex-direction:column;gap:4px;}
+  /* ---- tappable step list (the actions) ---- */
+  .steplist{border:1px solid var(--hair);border-radius:14px;overflow:hidden;}
+  .srow{display:flex;align-items:center;gap:13px;padding:15px;cursor:pointer;}
+  .srow + .srow{border-top:1px solid var(--divider);}
+  .srow .chip{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;}
+  .srow .chip.done{background:rgba(82,160,69,.14);color:var(--green);}
+  .srow .body{flex:1;min-width:0;}
+  .srow.done .name{color:var(--slate);}
+  .listhead{font-family:var(--f-text);font-weight:500;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);margin-bottom:10px;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-tick" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L11 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M9 3v-.5h6V3M8.5 10h7M8.5 14h4" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3M7.5 14h9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<h1 class="page">Status message (info, not tappable) + tappable step list</h1>
+<p class="pageintro">The top is a <strong>status message</strong> — emphasized with type/color, <em>no border/shadow/button</em>, so it doesn't read as a control. Below is <strong>one tappable list of all four steps</strong> (completed = check, still tappable to revisit; to-do = tappable to do). Four treatments of the top; the list is identical. This is closer to the original product's model.</p>
+
+<script type="text/html" id="list">
+  <div>
+    <div class="listhead">Your steps · any order · tap to open</div>
+    <div class="steplist">
+      <a class="srow done"><span class="chip done"><svg width="18" height="18"><use href="#i-tick"/></svg></span><div class="body"><div class="name title-3">Set up your CarePlus account</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></a>
+      <a class="srow"><span class="chip" style="background:var(--tint-navy);color:var(--navy)"><svg width="18" height="18"><use href="#i-clip"/></svg></span><div class="body"><div class="eyebrow c-slate">Peak Health</div><div class="name title-3 c-charcoal">Program Acknowledgment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></a>
+      <a class="srow"><span class="chip" style="background:var(--tint-green);color:var(--green)"><svg width="18" height="18"><use href="#i-flask"/></svg></span><div class="body"><div class="eyebrow c-slate">Peak Health</div><div class="name title-3 c-charcoal">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></a>
+      <a class="srow"><span class="chip" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="18" height="18"><use href="#i-heart"/></svg></span><div class="body"><div class="eyebrow c-slate">In-app</div><div class="name title-3 c-charcoal">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></a>
+    </div>
+  </div>
+</script>
+
+<div class="stage">
+
+  <div class="ideacol">
+    <div class="lbl">1 · Typographic (no container)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="t-type"><span class="eyebrow c-navy">Getting started</span><h2 class="heading-6 c-charcoal">3 steps until Peak Health books your first visit</h2></div>
+      <div class="js-list"></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Pure type.</strong> No box at all — emphasis from size + navy eyebrow. Impossible to mistake for a button; the list below is clearly the only interactive thing.</p>
+  </div>
+
+  <div class="ideacol">
+    <div class="lbl">2 · Soft info band (no border/button)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="t-band"><span class="eyebrow c-navy">Getting started</span><span class="title-2 c-charcoal">3 steps until Peak Health books your first visit</span></div>
+      <div class="js-list"></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Soft callout.</strong> A faint tint gives it a "status region" (Common Region) without a border, shadow, chevron, or button — reads as a system message, not a control.</p>
+  </div>
+
+  <div class="ideacol">
+    <div class="lbl">3 · Accent-bar heading</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="t-accent"><span class="barmark"></span><div class="col"><span class="eyebrow c-navy">Getting started</span><h2 class="heading-6 c-charcoal">3 steps until Peak Health books your first visit</h2></div></div>
+      <div class="js-list"></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Editorial marker.</strong> A thin navy rule flags it as a status heading — emphasized and structured, but clearly a label, not a tappable surface.</p>
+  </div>
+
+  <div class="ideacol">
+    <div class="lbl">4 · Quiet (list leads)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="t-quiet"><span class="eyebrow c-slate">Getting started · 1 of 4 done</span><span class="title-2 c-charcoal">3 steps until your first visit</span></div>
+      <div class="js-list"></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>De-emphasized.</strong> Smaller, calmer status so the <em>list</em> is the clear focus. Closest to "the original was right" — status is a quiet header, the steps are the page.</p>
+  </div>
+
+</div>
+<script>document.querySelectorAll('.js-list').forEach(el=>el.innerHTML=document.getElementById('list').innerHTML);</script>
+</body>
+</html>

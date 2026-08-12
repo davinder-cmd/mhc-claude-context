@@ -1,0 +1,159 @@
+<title>EBB — Master Flow (end to end)</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 58px 0 20px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 46px); line-height: 1.04; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 70ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 20px; }
+  .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+  .lg .sw { width: 22px; height: 14px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+  .lg .sw.rew { background: var(--amber-tint); color: var(--amber); }
+  .lg .sw.gate { background: #fff; border: 1.5px solid var(--amber-mid); }
+  .lg .sw.loop { background: var(--teal-tint); color: var(--teal); }
+
+  section { padding: 24px 0; }
+  .phase-label { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+  .phase-label .pn { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-2); }
+  .phase-label .pd { font-size: 13px; color: var(--ink-3); }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .flowscroll { overflow-x: auto; padding: 14px 0 12px; }
+  .flow { display: flex; align-items: stretch; gap: 8px; min-width: min-content; }
+  .arrow { display: flex; align-items: center; color: var(--teal-2); font-size: 20px; font-weight: 700; flex: none; }
+
+  /* stage card = mini screen */
+  .stage { width: 176px; flex: none; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; display: flex; flex-direction: column; }
+  .stage .top { height: 34px; background: linear-gradient(120deg,#123f52,#2b8b93); display: flex; align-items: center; padding: 0 11px; }
+  .stage .top .n { width: 18px; height: 18px; border-radius: 5px; background: rgba(255,255,255,0.22); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .stage .top .nm { color: #fff; font-size: 11.5px; font-weight: 700; margin-left: 8px; letter-spacing: -0.005em; }
+  .stage .b { padding: 11px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .stage .line { font-size: 11.5px; color: var(--ink-2); line-height: 1.35; }
+  .stage .badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+  .rew { font-size: 10px; font-weight: 800; padding: 3px 7px; border-radius: 6px; background: var(--amber-tint); color: var(--amber); }
+  .rew.pend { background: #fff; border: 1px dashed var(--amber-mid); }
+  .gate { font-size: 9.5px; font-weight: 700; padding: 3px 7px; border-radius: 6px; background: #fff; border: 1px solid var(--amber-mid); color: var(--amber); }
+  .cap { font-size: 10px; font-weight: 700; padding: 3px 7px; border-radius: 6px; background: var(--teal-tint); color: var(--teal); }
+  .stage .lnk { font-size: 10px; font-weight: 650; color: var(--teal-2); }
+
+  .stage.pay .top { background: linear-gradient(120deg,#8a5a12,#b67d23); }
+  .stage.hinge .top { background: linear-gradient(120deg,#0e4a56,#14636f); }
+  .stage.gateS .top { background: linear-gradient(120deg,#5a3d0c,#8a5a12); }
+
+  .loopnote { margin-top: 12px; display: inline-flex; align-items: center; gap: 9px; background: var(--teal-tint); color: var(--teal); font-weight: 650; font-size: 13px; border-radius: 12px; padding: 10px 15px; }
+  .loopnote .arc { font-size: 19px; }
+
+  /* summary cards */
+  .sumrow { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 8px; }
+  @media (max-width:760px){ .sumrow { grid-template-columns: 1fr; } }
+  .sum { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: 15px 17px; }
+  .sum h4 { margin: 0; font-size: 14px; font-weight: 680; }
+  .sum p { margin: 6px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+  .sum.money { border-left: 3px solid var(--amber-mid); }
+  .sum.open { border-left: 3px solid var(--amber-mid); background: #fbf7ef; }
+  .sum b { color: var(--ink); }
+
+  .sec-head h2 { font-size: clamp(19px,2.3vw,24px); letter-spacing:-0.01em; font-weight:680; margin: 6px 0 0; }
+  .sec-head p { margin: 8px 0 0; color: var(--ink-2); font-size: 14px; max-width: 72ch; }
+  .sec-head { margin-bottom: 12px; }
+
+  footer { padding: 26px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 90ch; }
+  footer .note b { color: var(--ink-2); font-weight: 650; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Master flow</div>
+    <h1>The whole EBB journey, end to end</h1>
+    <p class="thesis">One map. A member gets in <strong>once</strong> — hooked by the $300 assessment, handed off to EBB (Option A) — then runs the <strong>repeating loop</strong>: do a care path, earn $100, get pulled into the next, up to the annual cap. Each stage links to its detailed screen.</p>
+    <div class="legend">
+      <span class="lg"><span class="sw rew">$</span> Reward moment</span>
+      <span class="lg"><span class="sw gate"></span> Gate / open decision</span>
+      <span class="lg"><span class="sw loop">↺</span> Loop</span>
+    </div>
+  </div>
+</header>
+
+<!-- PHASE 1 -->
+<section>
+  <div class="wrap">
+    <div class="phase-label"><span class="pn">Phase 1 · Get in</span><span class="pd">one-time acquisition funnel · Option A handoff</span></div>
+    <div class="flowscroll"><div class="flow">
+
+      <div class="stage"><div class="top"><span class="n">1</span><span class="nm">Home</span></div><div class="b"><div class="line">The $300 assessment as the first card.</div><div class="badges"><span class="rew pend">$300 offered</span></div><div class="lnk">bridge v2 →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage"><div class="top"><span class="n">2</span><span class="nm">Assessment</span></div><div class="b"><div class="line">~5 min · 7 sections. Produces health-risk results.</div><div class="badges"><span class="cap">HRA</span></div><div class="lnk">reference →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage pay"><div class="top"><span class="n">3</span><span class="nm">$300 payday</span></div><div class="b"><div class="line">"You earned $300." Its own moment (savor first).</div><div class="badges"><span class="rew">$300 earned</span></div><div class="lnk">bridge · A1 →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage"><div class="top"><span class="n">4</span><span class="nm">Earn more?</span></div><div class="b"><div class="line">"$300 to know → $100 to do." The pivot into EBB.</div><div class="badges"><span class="rew pend">$100/path</span></div><div class="lnk">bridge · A2 →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage"><div class="top"><span class="n">5</span><span class="nm">Recommendation</span></div><div class="b"><div class="line">"At risk → Diabetes Prevention." Risk-grounded.</div><div class="badges"><span class="gate">at-risk model</span></div><div class="lnk">enrollment →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage gateS"><div class="top"><span class="n">6</span><span class="nm">Opt in</span></div><div class="b"><div class="line">Consent + terms. "$100 Amazon gift card."</div><div class="badges"><span class="gate">gate: hard vs earn (open)</span></div><div class="lnk">enrollment →</div></div></div>
+
+    </div></div>
+  </div>
+</section>
+
+<!-- PHASE 2 -->
+<section class="band">
+  <div class="wrap">
+    <div class="phase-label"><span class="pn">Phase 2 · The loop</span><span class="pd">repeats per care path, up to the annual cap</span></div>
+    <div class="flowscroll"><div class="flow">
+
+      <div class="stage"><div class="top"><span class="n">7</span><span class="nm">Topic page</span></div><div class="b"><div class="line">Continue · progress · path · "how you're doing."</div><div class="badges"><span class="rew pend">$100 at finish</span></div><div class="lnk">topic v4 →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage"><div class="top"><span class="n">8</span><span class="nm">Sessions</span></div><div class="b"><div class="line">Video + Anna. ~7–12 lessons each; silent progress.</div><div class="badges"><span class="cap">×N sessions</span></div><div class="lnk">DCP →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage hinge"><div class="top"><span class="n">9</span><span class="nm">Completion</span></div><div class="b"><div class="line">Health win → $100 → tee up next. The hinge.</div><div class="badges"><span class="rew">$100 earned</span></div><div class="lnk">completion v3 →</div></div></div>
+      <div class="arrow">→</div>
+
+      <div class="stage"><div class="top"><span class="n">10</span><span class="nm">Tee up next</span></div><div class="b"><div class="line">One clear next path (from interests / risk).</div><div class="badges"><span class="cap">↺ back to topic</span></div><div class="lnk">completion v3 →</div></div></div>
+      <div class="arrow">↺</div>
+
+      <div class="stage"><div class="top"><span class="n">R</span><span class="nm">Rewards</span></div><div class="b"><div class="line">EBB leads · $ earned / $500 cap. Reachable anytime.</div><div class="badges"><span class="cap">cap: $500 or none</span></div><div class="lnk">rewards v1 →</div></div></div>
+
+    </div></div>
+    <div class="loopnote"><span class="arc">↺</span> Complete → paid → next path → repeat, until the cap. At 5 of 5 ($500), the loop shifts from money to health framing (cap-graceful).</div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Reading the map</div><h2>Three things it makes clear</h2></div>
+    <div class="sumrow">
+      <div class="sum money"><h4>The money ladder</h4><p><b>$300</b> once for the assessment (knowing) → <b>$100</b> per care path (doing), up to <b>$500/yr</b>. A member could earn up to <b>$800</b> in year one. The $300 is the hook; the $100s are the engine.</p></div>
+      <div class="sum"><h4>Get in once, loop forever</h4><p>Phase 1 happens a single time. Phase 2 is the durable engine — every trip through it is a completion (revenue) and a re-hook into the next path.</p></div>
+      <div class="sum open"><h4>Two open gates</h4><p><b>Opt-in (6):</b> hard-gate vs. earn-gate — still the pivotal decision. <b>At-risk model (5):</b> risk stratification default (config). Both are commercial/legal calls, awaiting Darcy's requirements.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Master flow v1.</b> Phase 1 (get in): Home $300 → Assessment → $300 payday → Earn-more (Option A) → Recommendation → Opt-in. Phase 2 (loop): Topic → Sessions → Completion $100 → Tee up next ↺, with the Rewards page reachable anytime. Detailed screens: `jul05-ebb-assessment-bridge` (v2), `jul05-ebb-enrollment-flow`, `jul02-ebb-topic-page` (v4), `jul01-ebb-completion-screen` (v3), `jul05-ebb-rewards-page`. Open: hard-gate vs earn-gate; at-risk default; home out of 9/1 scope. Reflects Darcy 7/5 + the assessment docs.</p>
+  </div>
+</footer>

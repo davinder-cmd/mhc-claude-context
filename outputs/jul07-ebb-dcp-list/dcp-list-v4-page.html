@@ -1,0 +1,214 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DCP List — v4 full page</title>
+<style>
+:root{--ground:#F3EFE6;--surface:#FCFBF8;--warm:#FBF6EC;--ink:#22262A;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(34,38,42,0.10);--line-2:rgba(34,38,42,0.06);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--amber:#8A5A12;--amber-tint:#F3E7CF;--green:#3F7A46;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1180px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:760px;margin:0 0 20px;font-size:14px}
+.cw{display:flex;height:24px;border-radius:7px;overflow:hidden;max-width:500px;font-size:10px;font-weight:700;color:#fff;margin:6px 0 3px;border:1px solid var(--line)}
+.cw div{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.cwnote{font-size:11.5px;color:var(--ink-3);margin-bottom:26px}
+.gallery{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:9px}
+.cap{font-size:12px;color:var(--ink-2);max-width:400px}
+.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal);background:var(--teal-tint);padding:3px 8px;border-radius:6px}
+
+.phone{width:392px;background:var(--warm);border:9px solid #1c2330;border-radius:42px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:760px;overflow-y:auto;background:var(--warm)}
+.statusbar{display:flex;justify-content:space-between;padding:13px 22px 2px;font-size:12px;font-weight:700}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 8px}
+.topbar .t{font-size:23px;font-weight:750;letter-spacing:-0.02em}
+.avatar{width:33px;height:33px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+
+/* reward-across-all summary */
+.rwd{margin:4px 18px 22px;padding:15px 16px;border-radius:16px;background:linear-gradient(180deg,#fff,#FAF3E6);border:1px solid var(--line)}
+.rwd .r1{display:flex;align-items:center;gap:10px}
+.rwd .g{width:32px;height:32px;border-radius:9px;background:var(--amber-tint);display:flex;align-items:center;justify-content:center;font-size:16px}
+.rwd .h{font-weight:700;font-size:14.5px}
+.rwd .amt{margin-left:auto;font-size:13px;font-weight:700;color:var(--teal-2)}
+.rwd .chev{color:var(--ink-3);margin-left:8px}
+.pips{display:flex;gap:6px;margin:12px 0 6px}
+.pips i{flex:1;height:8px;border-radius:5px;background:var(--line);overflow:hidden}
+.pips i.full{background:var(--teal)}
+.pips i.part{background:linear-gradient(90deg,var(--teal) 55%,var(--line) 55%)}
+.rwd .cap2{font-size:12px;color:var(--ink-2)}
+
+.sechead{display:flex;align-items:baseline;justify-content:space-between;margin:2px 20px 11px}
+.sec{font-size:12px;font-weight:750;letter-spacing:0.02em;color:var(--ink)}
+.seeall{font-size:12px;font-weight:700;color:var(--teal-2);letter-spacing:.02em}
+
+/* in-progress bigger cards */
+.ip{margin:0 18px 13px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:15px;display:flex;gap:14px;align-items:center}
+.ip.primary{box-shadow:0 12px 30px -22px rgba(14,74,86,.55);border-color:var(--teal-tint)}
+.ipimg{width:66px;height:66px;border-radius:18px;flex:none}
+.a{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}
+.b{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}
+.c{background:linear-gradient(135deg,#E7EFE2,#Bcd6B8)}
+.ipbody{flex:1;min-width:0}
+.iptitle{font-size:16.5px;font-weight:700;letter-spacing:-0.01em}
+.ipdesc{font-size:12.5px;color:var(--ink-2);margin-top:1px}
+.dots{display:flex;gap:4px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--line);display:block}
+.dots i.on{background:var(--teal)}
+.dots i.cur{background:var(--teal);box-shadow:0 0 0 3px var(--teal-tint)}
+.dots i.pon{background:var(--amber)}
+.dots span{font-size:11.5px;color:var(--ink-2);margin-left:6px}
+.dots span.pause{color:var(--amber)}
+.go{flex:none;font-size:13px;font-weight:700;color:#fff;background:var(--teal);border-radius:10px;padding:9px 15px;align-self:center}
+.go.ghost{color:var(--teal-2);background:transparent;border:1px solid var(--line)}
+
+/* library rail (smaller, don't hide browse) */
+.rail{display:flex;gap:12px;overflow-x:auto;padding:2px 18px 6px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.ltile{width:134px;flex:none}
+.ltimg{width:134px;height:96px;border-radius:15px;position:relative;overflow:hidden;background:var(--teal-tint)}
+.ltimg .glyph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;opacity:.85}
+.lt1{background:linear-gradient(135deg,#E7E1F0,#CFC3E4)}
+.lt2{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}
+.lt3{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}
+.lt4{background:linear-gradient(135deg,#F1DED8,#E3B3A3)}
+.lt5{background:linear-gradient(135deg,#E7EFE2,#Bcd6B8)}
+.lttitle{font-size:13px;font-weight:650;margin-top:7px;line-height:1.25}
+.ltsub{font-size:11px;color:var(--ink-3);margin-top:1px}
+
+.donerow{display:flex;align-items:center;gap:12px;margin:14px 18px 6px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.donerow .m{width:34px;height:34px;border-radius:10px;background:#E6EFE1;color:var(--green);display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+.donerow .h{font-weight:650;font-size:14px}
+.donerow .s{font-size:11.5px;color:var(--ink-3)}
+.donerow .chev{margin-left:auto;color:var(--ink-3)}
+
+.bnav{display:flex;justify-content:space-around;padding:9px 6px 13px;border-top:1px solid var(--line);background:var(--warm);position:sticky;bottom:0}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-decoration:none}
+.bnav a.on{color:var(--teal-2);font-weight:700}
+.bnav .ic{font-size:17px}
+
+/* web */
+.web{flex:1;min-width:640px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#F5F3EE;box-shadow:0 24px 60px -34px rgba(14,74,86,.5)}
+.chrome{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#ECEAE4;border-bottom:1px solid var(--line)}
+.chrome .d{width:11px;height:11px;border-radius:50%;background:#cfcfcf}
+.chrome .url{margin-left:14px;font-size:11.5px;color:var(--ink-3);background:#fff;border-radius:20px;padding:4px 14px}
+.weblayout{display:flex;min-height:560px}
+.side{width:208px;background:#fff;border-right:1px solid var(--line);padding:18px 14px;flex:none}
+.brand{display:flex;align-items:center;gap:9px;font-weight:750;font-size:15px;margin-bottom:18px}
+.brand .l{width:26px;height:26px;border-radius:7px;background:var(--teal)}
+.navitem{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:13.5px;color:var(--ink-2);margin-bottom:3px}
+.navitem.on{background:var(--teal-tint);color:var(--teal);font-weight:700}
+.main{flex:1;padding:24px 28px;max-width:760px}
+.webtitle{font-size:22px;font-weight:750;margin:0 0 14px}
+.ipgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ipgrid .ip{margin:0}
+.main .rwd,.main .sechead{margin-left:0;margin-right:0}
+.main .rail{margin-left:0;margin-right:0;padding-left:0;padding-right:0}
+</style></head><body>
+<div class="page">
+<h1>DCP List / All Topics — v4 · Full page (3 in progress)</h1>
+<p class="sub">The balance you described: <b>bigger in-progress cards</b> as the focus, a <b>small library rail</b> so browse isn't hidden, and reward shown as <b>progress across all</b> at the top (secondary, but real weight — not per-card money). Warm, Zero-inspired: illustrated squircle tiles, section rails with "See all." Dot-steppers keep it pace-not-speed.</p>
+
+<div class="cw">
+<div style="width:58%;background:#C9BfA8;color:#3a352b">58% warm neutrals</div>
+<div style="width:27%;background:#3a4047">27% ink</div>
+<div style="width:11%;background:#0E4A56">11% teal</div>
+<div style="width:4%;background:#8A5A12">4%</div>
+</div>
+<div class="cwnote">Warm ground carries it (Zero feel); teal for action + progress + the reward meter; amber only for paused. Reward gets a little more teal than v2/3 — it's present, not minimal.</div>
+
+<div class="gallery">
+
+<!-- MOBILE -->
+<div class="col">
+<span class="tag">Mobile · full page · 3 in progress</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="topbar"><span class="t">Digital Care</span><span class="avatar">A</span></div>
+
+<div class="rwd">
+  <div class="r1"><span class="g">🎁</span><span class="h">Care Path Rewards</span><span class="amt">$200 / $500</span><span class="chev">›</span></div>
+  <div class="pips"><i class="full"></i><i class="full"></i><i class="part"></i><i></i><i></i></div>
+  <div class="cap2">2 paths completed · 3 in progress this year</div>
+</div>
+
+<div class="sechead"><span class="sec">Continue</span></div>
+
+<div class="ip primary">
+  <div class="ipimg a"></div>
+  <div class="ipbody"><div class="iptitle">Managing Anxiety</div><div class="ipdesc">CBT tools for everyday anxiety</div>
+  <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><i></i><span>Session 6 · 3 weeks in</span></div></div>
+  <span class="go">Continue</span>
+</div>
+<div class="ip">
+  <div class="ipimg b"></div>
+  <div class="ipbody"><div class="iptitle">Weight Management</div><div class="ipdesc">Build a healthy routine</div>
+  <div class="dots"><i class="pon"></i><i class="pon"></i><i class="pon"></i><i class="pon"></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="pause">Session 4 · paused</span></div></div>
+  <span class="go ghost">Resume</span>
+</div>
+<div class="ip">
+  <div class="ipimg c"></div>
+  <div class="ipbody"><div class="iptitle">Managing Depression</div><div class="ipdesc">Understand and manage symptoms</div>
+  <div class="dots"><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><i></i><span>Session 3 · 2 weeks in</span></div></div>
+  <span class="go">Continue</span>
+</div>
+
+<div class="sechead" style="margin-top:20px"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+<div class="rail">
+  <div class="ltile"><div class="ltimg lt1"><span class="glyph">🌙</span></div><div class="lttitle">Treating Insomnia</div><div class="ltsub">Sleep &amp; CBT-I</div></div>
+  <div class="ltile"><div class="ltimg lt3"><span class="glyph">🫁</span></div><div class="lttitle">Quitting Smoking</div><div class="ltsub">A guided path</div></div>
+  <div class="ltile"><div class="ltimg lt4"><span class="glyph">❤️</span></div><div class="lttitle">Heart Health</div><div class="ltsub">Blood pressure</div></div>
+  <div class="ltile"><div class="ltimg lt2"><span class="glyph">🥗</span></div><div class="lttitle">Diabetes Prevention</div><div class="ltsub">Habits that stick</div></div>
+  <div class="ltile"><div class="ltimg lt5"><span class="glyph">🧘</span></div><div class="lttitle">Managing Stress</div><div class="ltsub">Calm the load</div></div>
+</div>
+
+<div class="donerow"><span class="m">✓</span><div><div class="h">Completed</div><div class="s">2 paths · view past runs</div></div><span class="chev">›</span></div>
+<div style="height:8px"></div>
+<div class="bnav">
+<a><span class="ic">⌂</span>Home</a>
+<a class="on"><span class="ic">♡</span>Digital Care</a>
+<a><span class="ic">❦</span>Wellbeing</a>
+<a><span class="ic">▤</span>Benefits</a>
+<a><span class="ic">☆</span>Rewards</a>
+</div>
+</div></div>
+<div class="cap"><b>Top → bottom:</b> reward progress-across-all (2 done, 1 partial toward $500) · <b>Continue</b> = 3 bigger cards, first emphasized, dots not bars · <b>Explore more paths</b> = a scrollable library rail (browse stays visible, "See all 14") · Completed demoted to a row.</div>
+</div>
+
+<!-- WEB -->
+<div class="col" style="flex:1;min-width:640px">
+<span class="tag">Web · wide (scaled)</span>
+<div class="web">
+<div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care</span></div>
+<div class="weblayout">
+<div class="side">
+<div class="brand"><span class="l"></span> mobilehealth</div>
+<div class="navitem"><span>⌂</span> Home</div>
+<div class="navitem on"><span>♡</span> Digital Care</div>
+<div class="navitem"><span>❦</span> Wellbeing</div>
+<div class="navitem"><span>▤</span> Benefits</div>
+<div class="navitem"><span>☆</span> Rewards</div>
+</div>
+<div class="main">
+<div class="webtitle">Digital Care Paths</div>
+<div class="rwd"><div class="r1"><span class="g">🎁</span><span class="h">Care Path Rewards</span><span class="amt">$200 / $500 this year</span><span class="chev">›</span></div><div class="pips"><i class="full"></i><i class="full"></i><i class="part"></i><i></i><i></i></div><div class="cap2">2 paths completed · 3 in progress</div></div>
+<div class="sechead"><span class="sec">Continue</span></div>
+<div class="ipgrid">
+  <div class="ip primary"><div class="ipimg a"></div><div class="ipbody"><div class="iptitle">Managing Anxiety</div><div class="ipdesc">CBT tools for everyday anxiety</div><div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i><span>Session 6 · 3 weeks in</span></div></div><span class="go">Continue</span></div>
+  <div class="ip"><div class="ipimg b"></div><div class="ipbody"><div class="iptitle">Weight Management</div><div class="ipdesc">Build a healthy routine</div><div class="dots"><i class="pon"></i><i class="pon"></i><i class="pon"></i><i class="pon"></i><i></i><i></i><span class="pause">Session 4 · paused</span></div></div><span class="go ghost">Resume</span></div>
+  <div class="ip"><div class="ipimg c"></div><div class="ipbody"><div class="iptitle">Managing Depression</div><div class="ipdesc">Understand and manage symptoms</div><div class="dots"><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><span>Session 3 · 2 weeks in</span></div></div><span class="go">Continue</span></div>
+</div>
+<div class="sechead" style="margin-top:20px"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+<div class="rail">
+  <div class="ltile"><div class="ltimg lt1"><span class="glyph">🌙</span></div><div class="lttitle">Treating Insomnia</div><div class="ltsub">Sleep &amp; CBT-I</div></div>
+  <div class="ltile"><div class="ltimg lt3"><span class="glyph">🫁</span></div><div class="lttitle">Quitting Smoking</div><div class="ltsub">A guided path</div></div>
+  <div class="ltile"><div class="ltimg lt4"><span class="glyph">❤️</span></div><div class="lttitle">Heart Health</div><div class="ltsub">Blood pressure</div></div>
+  <div class="ltile"><div class="ltimg lt2"><span class="glyph">🥗</span></div><div class="lttitle">Diabetes Prevention</div><div class="ltsub">Habits that stick</div></div>
+</div>
+<div class="donerow" style="margin-left:0;margin-right:0"><span class="m">✓</span><div><div class="h">Completed</div><div class="s">2 paths · view past runs</div></div><span class="chev">›</span></div>
+</div>
+</div>
+</div>
+<div class="cap" style="max-width:640px"><b>Web:</b> in-progress as a 2-col card grid, the library rail scrolls horizontally, same reward summary. Sidebar nav, slim title (library).</div>
+</div>
+
+</div>
+</div>
+</body></html>

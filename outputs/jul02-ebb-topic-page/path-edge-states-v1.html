@@ -1,0 +1,199 @@
+<title>EBB — The Path · Edge States (first & last)</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 60px 0 20px; }
+  .hero h1 { font-size: clamp(27px, 4vw, 42px); line-height: 1.06; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; text-wrap: balance; max-width: 22ch; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 68ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+
+  .rulebox { margin: 22px 0 0; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: 12px; padding: 16px 18px; max-width: 78ch; }
+  .rulebox h4 { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--teal-2); }
+  .rulebox ol { margin: 0; padding-left: 20px; }
+  .rulebox li { font-size: 13.5px; color: var(--ink-2); line-height: 1.55; margin-bottom: 4px; }
+  .rulebox li b { color: var(--ink); font-weight: 650; }
+
+  .cols { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; padding: 34px 0 10px; }
+  .col { width: 330px; display: flex; flex-direction: column; gap: 12px; }
+  .col-head { display: flex; align-items: center; gap: 10px; }
+  .col-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; background: var(--teal); padding: 4px 10px; border-radius: 7px; }
+  .col-badge.mid { background: var(--ink-3); }
+  .col-sub { font-size: 12.5px; color: var(--ink-3); }
+
+  .frame { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 16px; box-shadow: 0 14px 34px -22px rgba(14,74,86,0.4); }
+
+  /* progress line */
+  .progress-card { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; background: var(--surface); }
+  .pc-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .pc-head .l { font-size: 13px; font-weight: 680; }
+  .pc-head .r { font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .bar { height: 8px; border-radius: 5px; background: rgba(14,74,86,0.13); margin-top: 9px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; background: var(--teal); border-radius: 5px; }
+  .pc-foot { margin-top: 9px; font-size: 12px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .pc-foot .money { color: var(--amber); font-weight: 700; }
+  .pc-foot.near .money { font-size: 12.5px; }
+
+  .sec-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 16px 0 0; }
+  .path { margin-top: 9px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .step { display: flex; align-items: center; gap: 11px; padding: 11px 13px; border-top: 1px solid var(--line); }
+  .step:first-child { border-top: none; }
+  .step .mark { width: 25px; height: 25px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .mark.done { background: var(--teal); color: #fff; }
+  .mark.curr { background: #fff; color: var(--teal); border: 2px solid var(--teal); }
+  .mark.curr::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); }
+  .mark.lock { background: rgba(34,38,42,0.06); color: var(--ink-3); font-size: 11px; }
+  .mark.sumcheck { background: var(--teal-tint); color: var(--teal); }
+  .s-body { flex: 1; }
+  .s-body .sn { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .s-body .st { font-size: 13.5px; font-weight: 620; letter-spacing: -0.005em; margin-top: 1px; line-height: 1.25; }
+  .step.is-locked .st { color: var(--ink-3); }
+  .s-tag { font-size: 10.5px; font-weight: 700; color: var(--teal); flex: none; }
+  .s-tag.start { color: #fff; background: var(--teal); padding: 3px 8px; border-radius: 6px; }
+  .step.summary .s-body .st { color: var(--ink-2); }
+  .step.summary { background: var(--surface); }
+  .chevmini { color: var(--ink-3); font-size: 14px; }
+  .seeall { display: flex; align-items: center; justify-content: space-between; padding: 12px 13px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 650; color: var(--teal-2); }
+
+  /* finish marker (end of path) */
+  .finish { display: flex; align-items: center; gap: 11px; padding: 12px 13px; border-top: 1px dashed var(--amber-mid); background: var(--amber-tint); }
+  .finish .flag { width: 25px; height: 25px; border-radius: 50%; background: var(--amber-mid); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; flex: none; }
+  .finish .f-body .ft { font-size: 13px; font-weight: 700; color: var(--amber); }
+  .finish .f-body .fs { font-size: 11.5px; color: var(--ink-2); margin-top: 1px; }
+
+  .col-note { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .col-note b { color: var(--ink); font-weight: 650; }
+  .laws { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .law { font-size: 10.5px; font-weight: 650; padding: 3px 8px; border-radius: 999px; background: var(--teal-tint); color: var(--teal); }
+
+  section { padding: 38px 0; }
+  .sec-head h2 { font-size: clamp(19px, 2.4vw, 24px); letter-spacing: -0.01em; font-weight: 680; margin: 8px 0 0; }
+  .sec-head p { margin: 9px 0 0; color: var(--ink-2); max-width: 70ch; }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .takeaways { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+  @media (max-width: 760px){ .takeaways { grid-template-columns: 1fr; } }
+  .ta { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: 15px 17px; }
+  .ta h4 { margin: 0; font-size: 14.5px; font-weight: 670; }
+  .ta p { margin: 6px 0 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+
+  footer { padding: 28px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 84ch; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Topic page · the path component</div>
+    <h1>The path at the first and last session</h1>
+    <p class="thesis">The middle state you've seen. The ends behave differently: at the <strong>start</strong> there's nothing completed to show; near the <strong>finish</strong> there's too much. One windowing rule handles all three — and the last state gets to lean into the finish, because that's where motivation peaks.</p>
+    <div class="rulebox">
+      <h4>The one windowing rule</h4>
+      <ol>
+        <li>Always show the <b>current session</b>, clearly marked.</li>
+        <li>Show a little <b>context around it</b> — the session just finished, and the next locked one.</li>
+        <li>Collapse a long run of finished sessions into a single <b>"Sessions 1–N complete ✓"</b> row (tap to expand).</li>
+        <li>Always offer <b>"See all N sessions."</b> Never render all 10 rows inline.</li>
+        <li>At the <b>final session</b>, cap the path with a <b>finish marker</b> — the visual end of the road is the payout.</li>
+      </ol>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="cols">
+
+    <!-- FIRST -->
+    <div class="col">
+      <div class="col-head"><span class="col-badge">First</span><span class="col-sub">Just enrolled · 0 of 10</span></div>
+      <div class="frame">
+        <div class="progress-card">
+          <div class="pc-head"><span class="l">Your progress</span><span class="r">0 of 10 sessions</span></div>
+          <div class="bar"><i style="width:3%"></i></div>
+          <div class="pc-foot"><span>Begin your first session</span><span>·</span><span class="money">$100 when you complete</span></div>
+        </div>
+        <div class="sec-label">The path</div>
+        <div class="path">
+          <div class="step"><span class="mark curr"></span><div class="s-body"><div class="sn">Session 1</div><div class="st">Understanding Depression</div></div><span class="s-tag start">Start</span></div>
+          <div class="step is-locked"><span class="mark lock">🔒</span><div class="s-body"><div class="sn">Session 2</div><div class="st">How Thoughts Affect Mood</div></div></div>
+          <div class="step is-locked"><span class="mark lock">🔒</span><div class="s-body"><div class="sn">Session 3</div><div class="st">Recognizing Negative Thoughts</div></div></div>
+          <div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+        </div>
+      </div>
+      <p class="col-note"><b>No completed rows yet</b> — so we show Session 1 as the clear start, plus two locked previews so the journey has visible shape. Calm and inviting, not a wall of locks.</p>
+      <div class="laws"><span class="law">Serial Position · strong first</span><span class="law">Zeigarnik · start the loop</span><span class="law">Recognition</span></div>
+    </div>
+
+    <!-- MIDDLE -->
+    <div class="col">
+      <div class="col-head"><span class="col-badge mid">Middle</span><span class="col-sub">v1 · 2 of 10</span></div>
+      <div class="frame">
+        <div class="progress-card">
+          <div class="pc-head"><span class="l">Your progress</span><span class="r">2 of 10 sessions</span></div>
+          <div class="bar"><i style="width:20%"></i></div>
+          <div class="pc-foot"><span>8 sessions to the finish</span><span>·</span><span class="money">$100 at completion</span></div>
+        </div>
+        <div class="sec-label">The path</div>
+        <div class="path">
+          <div class="step"><span class="mark done">✓</span><div class="s-body"><div class="sn">Session 2</div><div class="st">How Thoughts Affect Mood</div></div></div>
+          <div class="step"><span class="mark curr"></span><div class="s-body"><div class="sn">Session 3</div><div class="st">Recognizing Negative Thoughts</div></div><span class="s-tag">In progress</span></div>
+          <div class="step is-locked"><span class="mark lock">🔒</span><div class="s-body"><div class="sn">Session 4</div><div class="st">Challenging Your Thoughts</div></div></div>
+          <div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+        </div>
+      </div>
+      <p class="col-note"><b>The steady state.</b> One finished for context, the current in progress, the next locked. (Refined from v1: it now shows just the <i>immediately</i> prior session, not both, so the window stays tight as you advance.)</p>
+      <div class="laws"><span class="law">Miller's · chunk</span><span class="law">Goal-Gradient</span><span class="law">Recognition</span></div>
+    </div>
+
+    <!-- LAST -->
+    <div class="col">
+      <div class="col-head"><span class="col-badge">Last</span><span class="col-sub">Final session · 9 of 10</span></div>
+      <div class="frame">
+        <div class="progress-card">
+          <div class="pc-head"><span class="l">Your progress</span><span class="r">9 of 10 sessions</span></div>
+          <div class="bar"><i style="width:90%"></i></div>
+          <div class="pc-foot near"><span><b style="color:var(--ink)">One session to go.</b></span><span class="money">Finish to earn $100</span></div>
+        </div>
+        <div class="sec-label">The path</div>
+        <div class="path">
+          <div class="step summary"><span class="mark sumcheck">✓</span><div class="s-body"><div class="sn">Sessions 1–8</div><div class="st">Complete</div></div><span class="chevmini">›</span></div>
+          <div class="step"><span class="mark done">✓</span><div class="s-body"><div class="sn">Session 9</div><div class="st">Coping with Setbacks</div></div></div>
+          <div class="step"><span class="mark curr"></span><div class="s-body"><div class="sn">Session 10 · Final</div><div class="st">Staying Well</div></div><span class="s-tag">In progress</span></div>
+          <div class="finish"><span class="flag">🏁</span><div class="f-body"><div class="ft">Finish the path</div><div class="fs">Complete Session 10 to earn your $100</div></div></div>
+        </div>
+      </div>
+      <p class="col-note"><b>Too many checks to list</b> — so the finished run collapses to one "Sessions 1–8 complete" row. No locked steps remain; instead the path ends on a <b>finish marker</b> that makes the payout the literal end of the road.</p>
+      <div class="laws"><span class="law">Serial Position · strong last</span><span class="law">Goal-Gradient · peak</span><span class="law">Peak-End</span></div>
+    </div>
+
+  </div>
+</div>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Why the ends differ</div>
+      <h2>What changes at each end — and why</h2>
+    </div>
+    <div class="takeaways">
+      <div class="ta"><h4>First → make starting effortless</h4><p>Nothing to celebrate yet, so the path invites rather than rewards: a clear "Start," two locked previews for shape. The reward is mentioned once, gently — the health reason leads.</p></div>
+      <div class="ta"><h4>Middle → hold a tight window</h4><p>As sessions pile up, only the immediately-prior one stays for context. The window never grows; "See all" absorbs the rest. Working memory stays protected.</p></div>
+      <div class="ta"><h4>Last → lean into the finish</h4><p>Motivation peaks here (goal-gradient), so this is the one place the reward cue can strengthen. The collapsed summary clears the clutter; the finish marker turns the end of the list into the celebration to come.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>UX basis:</b> Serial Position Effect (first & last are the most-remembered — design them deliberately), Goal-Gradient (motivation rises toward the goal — strengthen the reward cue only at the end), Peak-End Rule (the finish is the peak; the marker sets up the completion screen), Miller's Law (collapse long completed runs). The finish marker connects the path directly to the completion celebration (v3). Path edge-states v1 — for reaction.</p>
+  </div>
+</footer>

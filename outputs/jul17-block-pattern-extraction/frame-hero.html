@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hero — render frame</title>
+  <link rel="stylesheet" href="mhc-home.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    .mhc-home { padding: 16px; }
+    /* DEMO-ONLY: the locked mhc-home.css does not set background-size on media
+       shells (v81 used flat tint placeholders). These two lines make a real
+       photo crop-to-cover so the scaling behaviour is visible. Flagged on the
+       component page as a recommended addition to the locked CSS. */
+    .hero__media {
+      background-image: url('https://picsum.photos/seed/mhcsleep/1200/900');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
+</head>
+<body>
+<div class="mhc-home">
+  <section class="hero" aria-labelledby="demo-hero-title">
+    <div class="hero__media" aria-hidden="true"></div>
+    <div class="hero__content">
+      <div class="hero__title-group">
+        <div class="eyebrow ink-soft">Based on your interests</div>
+        <h2 id="demo-hero-title" class="heading-4">Sleep better in 4 weeks</h2>
+      </div>
+      <div class="hero__copy-group">
+        <p class="paragraph-2 ink-soft">A guided program to wind down, fall asleep faster, and wake up steadier — a few minutes a day.</p>
+        <div class="hero__meta body-3">
+          <span>Sleep DCP</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>$100 reward at completion</span>
+        </div>
+      </div>
+      <div class="hero__actions">
+        <!-- DEMO button. In production this is host-injected (MHC action), not in the block. -->
+        <a class="btn btn-m btn-filled" href="#">Start the program</a>
+      </div>
+    </div>
+    <a class="hero__stretched-link" href="#">
+      <span class="mhc-visually-hidden">Sleep better in 4 weeks</span>
+    </a>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,362 @@
+<title>Nav logo slot — sizing & the neutral plate</title>
+<style>
+  :root {
+    --bg: #F4F1EA;
+    --panel: #FFFFFF;
+    --ink: #26251F;
+    --muted: #6E6A60;
+    --line: #E4DFD5;
+    --line-strong: #D3CCBE;
+    --accent: #2E6E67;
+    --accent-soft: #E7F0EE;
+    --warn: #B4552B;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .page {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(24px, 5vw, 72px) 20px 96px;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 10px;
+  }
+  h1 {
+    font-size: clamp(28px, 4.5vw, 40px); line-height: 1.08; letter-spacing: -0.02em;
+    font-weight: 650; margin: 0 0 14px; text-wrap: balance;
+  }
+  .lede { font-size: 18px; color: var(--muted); max-width: 62ch; margin: 0; }
+
+  h2 {
+    font-size: 22px; letter-spacing: -0.01em; font-weight: 640; margin: 0 0 6px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .num {
+    font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent);
+    border: 1px solid var(--line-strong); border-radius: 6px; padding: 2px 7px; flex: none;
+  }
+  .section-sub { color: var(--muted); margin: 0 0 22px; max-width: 62ch; }
+
+  section { margin-top: 56px; }
+  hr.rule { border: 0; border-top: 1px solid var(--line); margin: 56px 0 0; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 14px; padding: 26px;
+  }
+  .card + .card { margin-top: 18px; }
+
+  /* ---- Nav bar mock ---- */
+  .navbar {
+    height: 64px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 22px; border-radius: 12px; overflow: hidden;
+  }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-link { font-size: 13px; font-weight: 500; opacity: .82; }
+  .nav-avatar { width: 30px; height: 30px; border-radius: 50%; opacity: .9; }
+
+  .theme-navy  { background: #182838; }
+  .theme-navy  .nav-link, .theme-navy .theme-tag { color: #E7ECF2; }
+  .theme-navy  .nav-avatar { background: #3A5170; }
+  .theme-teal  { background: #14807A; }
+  .theme-teal  .nav-link, .theme-teal .theme-tag { color: #EAF6F4; }
+  .theme-teal  .nav-avatar { background: #0E5F5A; }
+  .theme-plum  { background: #4A2F52; }
+  .theme-plum  .nav-link, .theme-plum .theme-tag { color: #F2E9F3; }
+  .theme-plum  .nav-avatar { background: #6E4A78; }
+  .theme-light { background: #EDF0F3; border: 1px solid var(--line); }
+  .theme-light .nav-link, .theme-light .theme-tag { color: #3A4149; }
+  .theme-light .nav-avatar { background: #C7CED6; }
+
+  /* ---- The plate ---- */
+  .plate {
+    background: #FFFFFF; border-radius: 9px; padding: 7px 13px;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,.14), 0 0 0 1px rgba(0,0,0,.04);
+  }
+  .logo { display: block; max-height: 30px; max-width: 168px; width: auto; height: auto; }
+
+  .theme-row { display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: center; }
+  .theme-row + .theme-row { margin-top: 14px; }
+  .theme-label { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .theme-label b { color: var(--ink); font-weight: 600; display: block; font-size: 12px; }
+
+  /* ---- Bounding-box diagram ---- */
+  .box-demo { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; }
+  .box-demo figure { margin: 0; }
+  .bbox {
+    position: relative; height: 30px; border: 1.5px dashed var(--accent);
+    border-radius: 3px; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--accent-soft);
+  }
+  .bbox .logo { max-height: 30px; }
+  .dim {
+    position: absolute; font-family: var(--mono); font-size: 10.5px; color: var(--accent);
+    white-space: nowrap;
+  }
+  .dim-h { right: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+  .dim-w { top: calc(100% + 7px); left: 50%; transform: translateX(-50%); }
+  figcaption { font-size: 13px; color: var(--muted); margin-top: 22px; max-width: 26ch; }
+  figcaption b { color: var(--ink); font-weight: 600; }
+
+  /* ---- With / without plate comparison ---- */
+  .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 620px) { .cmp { grid-template-columns: 1fr; } .theme-row { grid-template-columns: 1fr; gap: 8px; } }
+  .cmp .mini-nav {
+    height: 56px; border-radius: 10px; display: flex; align-items: center; padding: 0 16px; overflow: hidden;
+  }
+  .cmp-head { font-family: var(--mono); font-size: 12px; margin: 0 0 9px; display: flex; align-items: center; gap: 7px; }
+  .tag { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; padding: 2px 7px; border-radius: 5px; text-transform: uppercase; }
+  .tag.bad { background: #F6E4DB; color: var(--warn); }
+  .tag.good { background: var(--accent-soft); color: var(--accent); }
+  /* bare logo (no plate) sitting straight on the bar */
+  .bare { max-height: 26px; max-width: 150px; width: auto; height: auto; display: block; }
+
+  /* ---- Spec table ---- */
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { font-weight: 600; white-space: nowrap; }
+  td code, .inline-code { font-family: var(--mono); font-size: 12.5px; background: #EFE9DD; padding: 1px 5px; border-radius: 4px; }
+
+  .callout {
+    display: flex; gap: 13px; background: var(--accent-soft); border: 1px solid #CFE1DD;
+    border-radius: 12px; padding: 16px 18px; margin-top: 22px;
+  }
+  .callout .bar { width: 3px; border-radius: 3px; background: var(--accent); flex: none; }
+  .callout p { margin: 0; font-size: 14.5px; }
+  .callout b { color: var(--accent); }
+
+  .foot { margin-top: 64px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+</style>
+
+<div class="page">
+<div class="wrap">
+
+  <p class="eyebrow">Top nav · multi-tenant · logo handling</p>
+  <h1>One logo slot for every client — sizing, then the neutral plate</h1>
+  <p class="lede">Two problems are tangled together: <b style="color:var(--ink);font-weight:600">how big</b> a logo renders, and <b style="color:var(--ink);font-weight:600">how it looks</b> on a themed bar. They need different fixes. Solve sizing with one bounding box; solve appearance with a neutral plate — and drop per-client theming entirely.</p>
+
+  <!-- ============ 1. SIZING ============ -->
+  <section>
+    <h2><span class="num">1</span> Sizing — one box, scale to fit</h2>
+    <p class="section-sub">The bar has a fixed height. Give the logo one fixed bounding box inside it and let every logo scale down to fit — filling to whichever dimension it hits first. No square/wide variants, no per-client buckets.</p>
+
+    <div class="card">
+      <div class="box-demo">
+        <figure>
+          <span class="bbox" style="width:30px;">
+            <span class="dim dim-h">max-h 30</span>
+            <span class="dim dim-w">↔ fits</span>
+            <!-- square mark -->
+            <svg class="logo" width="72" height="72" viewBox="0 0 72 72" role="img" aria-label="Vitality square mark">
+              <rect width="72" height="72" rx="16" fill="#2E6E67"/>
+              <path d="M20 24 L36 50 L52 24" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <figcaption><b>Square mark</b> hits the height limit first. Renders 30×30.</figcaption>
+        </figure>
+
+        <figure>
+          <span class="bbox" style="width:168px;">
+            <span class="dim dim-w">max-w 168</span>
+            <!-- wide wordmark -->
+            <svg class="logo" width="360" height="60" viewBox="0 0 360 60" role="img" aria-label="NorthStar Benefits wordmark">
+              <path d="M16 44 L16 16 L40 40 L40 16" fill="none" stroke="#1F3A5F" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="58" y="40" font-family="system-ui, sans-serif" font-size="30" font-weight="700" fill="#1F3A5F" letter-spacing="-0.5">NorthStar</text>
+              <text x="220" y="40" font-family="system-ui, sans-serif" font-size="30" font-weight="400" fill="#6E8CB0">Benefits</text>
+            </svg>
+          </span>
+          <figcaption><b>Wide wordmark</b> hits the width limit first, floats shorter than 30. Same box.</figcaption>
+        </figure>
+      </div>
+
+      <div class="callout">
+        <span class="bar"></span>
+        <p>The whole rule: <span class="inline-code">object-fit: contain</span> inside a box with <span class="inline-code">max-height: 30px</span> and <span class="inline-code">max-width: 168px</span>, centered. One slot absorbs the entire aspect-ratio range.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. THE PLATE ============ -->
+  <section>
+    <h2><span class="num">2</span> Appearance — the neutral plate</h2>
+    <p class="section-sub">Don't theme the bar to the logo — that's manual, fragile, and still can't handle mixed-color marks. Instead, drop the logo on a small white plate. The client theme shows <em>around</em> it; the logo always sits on a predictable surface. Same plate on every tenant — zero per-client color work.</p>
+
+    <div class="card">
+      <!-- NAVY -->
+      <div class="theme-row">
+        <span class="theme-label"><b>Navy</b>#182838</span>
+        <div class="navbar theme-navy">
+          <span class="plate">
+            <svg class="logo" width="150" height="46" viewBox="0 0 150 46" role="img" aria-label="Path Group logo, green and black">
+              <circle cx="20" cy="23" r="14" fill="none" stroke="#3AA875" stroke-width="5"/>
+              <text x="42" y="32" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#3AA875">Path</text>
+              <text x="98" y="32" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#1B1B1B">Group</text>
+            </svg>
+          </span>
+          <div class="nav-right">
+            <span class="nav-link">Home</span><span class="nav-link">Rewards</span><span class="nav-avatar"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEAL -->
+      <div class="theme-row">
+        <span class="theme-label"><b>Teal</b>#14807A</span>
+        <div class="navbar theme-teal">
+          <span class="plate">
+            <!-- white letters on black baked background -->
+            <svg class="logo" width="150" height="46" viewBox="0 0 150 46" role="img" aria-label="Orbit logo, white on black">
+              <rect width="150" height="46" rx="6" fill="#141414"/>
+              <circle cx="24" cy="23" r="9" fill="none" stroke="#fff" stroke-width="3"/>
+              <circle cx="33" cy="15" r="2.6" fill="#fff"/>
+              <text x="44" y="31" font-family="system-ui, sans-serif" font-size="23" font-weight="700" fill="#fff" letter-spacing="1">ORBIT</text>
+            </svg>
+          </span>
+          <div class="nav-right">
+            <span class="nav-link">Home</span><span class="nav-link">Rewards</span><span class="nav-avatar"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLUM -->
+      <div class="theme-row">
+        <span class="theme-label"><b>Plum</b>#4A2F52</span>
+        <div class="navbar theme-plum">
+          <span class="plate">
+            <!-- square colored mark -->
+            <svg class="logo" width="46" height="46" viewBox="0 0 72 72" role="img" aria-label="Vitality square mark">
+              <rect width="72" height="72" rx="16" fill="#2E6E67"/>
+              <path d="M20 24 L36 50 L52 24" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <div class="nav-right">
+            <span class="nav-link">Home</span><span class="nav-link">Rewards</span><span class="nav-avatar"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIGHT -->
+      <div class="theme-row">
+        <span class="theme-label"><b>Light</b>#EDF0F3</span>
+        <div class="navbar theme-light">
+          <span class="plate">
+            <!-- black letters on white baked background -->
+            <svg class="logo" width="150" height="40" viewBox="0 0 150 40" role="img" aria-label="Meridian logo, black on white">
+              <rect width="150" height="40" fill="#fff"/>
+              <rect x="6" y="10" width="20" height="20" fill="#111"/>
+              <text x="34" y="28" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#111" letter-spacing=".5">MERIDIAN</text>
+            </svg>
+          </span>
+          <div class="nav-right">
+            <span class="nav-link">Home</span><span class="nav-link">Rewards</span><span class="nav-avatar"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <span class="bar"></span>
+        <p>Four different logo treatments — green+black mixed, white-on-black, full-color square, black-on-white — <b>all legible, all untouched.</b> The plate is identical across every theme.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. WHY THE PLATE ============ -->
+  <section>
+    <h2><span class="num">3</span> Why not float the logo directly?</h2>
+    <p class="section-sub">This is exactly the failure you flagged. A logo's baked-in color only works on one background — so on a themed bar it either disappears or fights the color. The plate is what removes the per-client tuning.</p>
+
+    <div class="cmp">
+      <div class="card">
+        <p class="cmp-head"><span class="tag bad">Problem</span> white-on-black logo, light bar</p>
+        <div class="mini-nav theme-light">
+          <svg class="bare" width="150" height="46" viewBox="0 0 150 46" role="img" aria-label="Orbit logo failing on light bar">
+            <circle cx="16" cy="23" r="9" fill="none" stroke="#fff" stroke-width="3"/>
+            <circle cx="25" cy="15" r="2.6" fill="#fff"/>
+            <text x="36" y="31" font-family="system-ui, sans-serif" font-size="23" font-weight="700" fill="#fff" letter-spacing="1">ORBIT</text>
+          </svg>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin:12px 0 0">White mark vanishes into the light bar.</p>
+      </div>
+
+      <div class="card">
+        <p class="cmp-head"><span class="tag good">Plate</span> same logo, same bar</p>
+        <div class="mini-nav theme-light">
+          <span class="plate">
+            <svg class="logo" width="150" height="46" viewBox="0 0 150 46" role="img" aria-label="Orbit logo on plate">
+              <rect width="150" height="46" rx="6" fill="#141414"/>
+              <circle cx="24" cy="23" r="9" fill="none" stroke="#fff" stroke-width="3"/>
+              <circle cx="33" cy="15" r="2.6" fill="#fff"/>
+              <text x="44" y="31" font-family="system-ui, sans-serif" font-size="23" font-weight="700" fill="#fff" letter-spacing="1">ORBIT</text>
+            </svg>
+          </span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin:12px 0 0">Reads instantly. Nothing tuned per client.</p>
+      </div>
+    </div>
+
+    <div class="cmp" style="margin-top:16px">
+      <div class="card">
+        <p class="cmp-head"><span class="tag bad">Problem</span> black-letter logo, navy bar</p>
+        <div class="mini-nav theme-navy">
+          <svg class="bare" width="150" height="40" viewBox="0 0 150 40" role="img" aria-label="Meridian logo failing on navy bar">
+            <rect x="0" y="10" width="20" height="20" fill="#111"/>
+            <text x="28" y="28" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#111" letter-spacing=".5">MERIDIAN</text>
+          </svg>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin:12px 0 0">Black serif mark disappears into the dark theme.</p>
+      </div>
+
+      <div class="card">
+        <p class="cmp-head"><span class="tag good">Plate</span> same logo, same bar</p>
+        <div class="mini-nav theme-navy">
+          <span class="plate">
+            <svg class="logo" width="150" height="40" viewBox="0 0 150 40" role="img" aria-label="Meridian logo on plate">
+              <rect width="150" height="40" fill="#fff"/>
+              <rect x="6" y="10" width="20" height="20" fill="#111"/>
+              <text x="34" y="28" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#111" letter-spacing=".5">MERIDIAN</text>
+            </svg>
+          </span>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin:12px 0 0">Legible on every theme with one rule.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="bar"></span>
+      <p><b>The trade:</b> a visible tile in the nav instead of a logo floating on the bar. For multi-tenant B2B that's the right call — it's the difference between <b>ships for every client</b> and hand-tuned per client forever. It's what most white-label products do.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. INTAKE SPEC ============ -->
+  <section>
+    <h2><span class="num">4</span> Asset intake spec</h2>
+    <p class="section-sub">To keep the plate bulletproof, standardize what we accept and normalize on ingest — so no logo shows up mis-padded or mis-scaled.</p>
+    <div class="card" style="padding:8px 8px 0;overflow-x:auto">
+      <table>
+        <thead><tr><th>Field</th><th>Requirement</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Format</td><td>SVG preferred; transparent PNG @2x fallback</td><td>Crisp at any density; scales in the box cleanly</td></tr>
+          <tr><td>Padding</td><td>Trimmed to the mark — no built-in whitespace</td><td>The plate owns the padding, not the asset</td></tr>
+          <tr><td>Background</td><td>Transparent, or on-white if baked</td><td>Blends into the white plate; on-black gets converted</td></tr>
+          <tr><td>Slot size</td><td><code>max-h 30</code> · <code>max-w 168</code> · <code>contain</code></td><td>One box; logo scales to whichever binds first</td></tr>
+          <tr><td>Plate</td><td>White, <code>radius 9</code>, <code>pad 7×13</code>, hairline shadow</td><td>Identical on every tenant — no theming</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="rule">
+  <p class="foot">One bounding box + one neutral plate + a short intake spec. Off per-client theming and off per-client sizing entirely. — Ping me and I'll tune the exact box dimensions against a real batch of client logos.</p>
+
+</div>
+</div>

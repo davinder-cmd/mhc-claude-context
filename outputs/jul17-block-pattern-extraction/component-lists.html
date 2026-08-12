@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lists &amp; grids · MHC Component Kit</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<div class="g-top"><div class="g-top__inner"><a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Kit</a><div class="g-top__spacer"></div><div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div></div></div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+  <header class="g-head">
+    <div class="g-eyebrow">Lists &amp; grids · M3 Lists, Carousel</div>
+    <h1 class="g-title">Lists &amp; grids</h1>
+    <p class="g-lede">The responsive column engine. Drop cards into a grid container and it packs them correctly at every width — no column math. Two forms: the reflowing grid and the Compact scroll-snap carousel.</p>
+    <div class="g-tags"><span class="g-tag">.trackers</span><span class="g-tag">.rewards</span><span class="g-tag">.programs</span><span class="g-tag">.pair</span></div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Grid engine — live</h2></div>
+    <p class="g-section__note">Reward grid shown. Drag to resize: 2 columns below 600px, 4 at and above. The same engine drives trackers (2→4), programs (→3), and pair (1→2).</p>
+    <div class="g-pg" style="height:372px"><div class="g-pg__hint">↔ Drag to resize · live <code>mhc-home.css</code></div><iframe src="frame-reward.html" title="Grid — resizable"></iframe></div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Grid at breakpoints</h2></div>
+    <div class="g-bp-row">
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px · 2-col</span></div><div class="g-bp__vp" style="--w:375;--s:1;--h:360"><iframe src="frame-reward.html" title="Grid Compact"></iframe></div></div>
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px · 4-col</span></div><div class="g-bp__vp" style="--w:1024;--s:.7;--h:180"><iframe src="frame-reward.html" title="Grid Medium"></iframe></div></div>
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px · 4-col</span></div><div class="g-bp__vp" style="--w:1440;--s:.6;--h:200"><iframe src="frame-reward.html" title="Grid Large"></iframe></div></div>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Carousel (Compact) — live</h2></div>
+    <p class="g-section__note">Below 600px the programs grid becomes a horizontal scroll-snap carousel — CSS-only, no JS. Resize narrow to see it engage; drag/scroll the cards sideways.</p>
+    <div class="g-pg" style="height:400px"><div class="g-pg__hint">↔ Resize narrow (&lt;600) to see the carousel · live <code>mhc-home.css</code></div><iframe src="frame-program.html" title="Carousel — resizable"></iframe></div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Grid reference</h2></div>
+    <div class="g-code">
+      <div class="g-code__bar">grid classes <span class="g-code__where">→ CodeMirror · mhc-home.css</span></div>
+      <pre>.trackers   2-col  → repeat(4,1fr) @600     stat tiles
+.rewards    2-col  → repeat(4,1fr) @600     reward cards
+.programs   carousel(&lt;600) → repeat(3,1fr) @600   program cards
+.pair       1-col  → 1fr 1fr @600           pair cards
+
+/* usage: wrap cards in the matching grid; columns are automatic */
+&lt;div class="rewards"&gt; &lt;div class="reward"&gt;…&lt;/div&gt; … &lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">05</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • The grid owns the gap and columns — cards never set their own width or margins.<br>
+      • Carousel uses <code>overflow-x:auto; scroll-snap-type:x mandatory</code> with 78% columns and negative page margins to bleed to the edges. No JS.<br>
+      • Adding a new collection? Reuse an existing grid class rather than minting a new column rule, so spacing stays identical.
+    </p>
+  </section>
+</div>
+</body>
+</html>

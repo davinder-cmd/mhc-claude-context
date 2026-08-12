@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DCP Program Detail v2 — three breakpoint views (ring)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<style>
+  :root {
+    --bg:#FAF7F0; --surface:#fff; --ink:#1A1D21; --ink-soft:#5C5F66;
+    --hairline:#E6E3DC; --brand:#1B355C; --link:#2E60A4;
+    --f: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f); -webkit-font-smoothing: antialiased; }
+  header.doc { max-width: 1200px; margin: 0 auto; padding: 40px 28px 8px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--link); }
+  h1 { font-family: "SF Pro Display", var(--f); font-size: 34px; letter-spacing: -0.02em; margin: 10px 0 0; }
+  .lede { color: var(--ink-soft); font-size: 15px; line-height: 1.5; max-width: 70ch; margin: 12px 0 0; }
+  .callout { background: #E8F0FA; border: 1px solid #B5C8E0; border-radius: 12px; padding: 14px 16px; margin: 16px 0 0; font-size: 13.5px; color: #274063; max-width: 70ch; }
+  .callout b { color: #1B355C; }
+  .loaded { font-size: 12px; color: var(--ink-soft); margin: 14px 0 0; }
+  .loaded b { color: var(--ink); }
+
+  .views { display: flex; gap: 40px; align-items: flex-start; overflow-x: auto; padding: 24px 28px 48px; }
+  .view { flex: none; }
+  .view__cap { margin-bottom: 12px; max-width: 420px; }
+  .view__cap .k { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .view__cap h2 { font-family: "SF Pro Display", var(--f); font-size: 19px; margin: 3px 0 6px; letter-spacing: -0.01em; }
+  .view__cap p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin: 0; }
+
+  .frame { border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px -34px rgba(27,53,92,.4); }
+  .chrome { display: flex; align-items: center; gap: 7px; padding: 11px 14px; background: #ECEAE4; border-bottom: 1px solid var(--hairline); }
+  .chrome .d { width: 11px; height: 11px; border-radius: 50%; background: #cfcac0; }
+  .chrome .url { margin-left: 12px; font-size: 11px; color: var(--ink-soft); background: #fff; border-radius: 20px; padding: 4px 14px; }
+  iframe { border: 0; display: block; background: var(--bg); }
+
+  .wide  iframe { width: 1440px; height: 980px; transform: scale(0.46); transform-origin: top left; }
+  .wide  .stage { width: calc(1440px * 0.46); height: calc(980px * 0.46); overflow: hidden; }
+  .desk  iframe { width: 1040px; height: 920px; transform: scale(0.52); transform-origin: top left; }
+  .desk  .stage { width: calc(1040px * 0.52); height: calc(920px * 0.52); overflow: hidden; }
+  .phone .frame { border-radius: 40px; border: 9px solid #12151b; padding: 0; }
+  .phone iframe { width: 375px; height: 760px; border-radius: 30px; }
+</style>
+</head>
+<body>
+
+<header class="doc">
+  <div class="eyebrow">DCP Suite · v81 system · ring primitive</div>
+  <h1>DCP Program Detail — v2</h1>
+  <p class="lede">The drive-to-completion surface for an enrolled member (Depression DCP, mid-program). One responsive page on <b>mhc-base.css</b>, shown at the three window-size classes. Content/IA from the EBB topic page; palette/type/shape/shell/responsive logic from home v81.</p>
+  <p class="callout"><b>Change from v1 — progress primitive.</b> Progress is now the shared circular <b>ring</b> (<code>.pring</code>), the standardized suite primitive ("ring everywhere", feature-dcp <code>_decisions.md</code> 2026-07-13). Ring fill is graphite — it never competes with the navy CTA and keeps progress off the payout-meter register (pace, not speed). Reward stays a graphite accent (the amber/gold banner was rejected — warm tones = backgrounds only). Zero-state framing "Ready when you are · at your own pace" adopted. <b>Follow-up: home v81 migrates its program cards to the ring too.</b></p>
+  <p class="loaded"><b>Loaded:</b> jul13-dcp-suite-kit · feature-dcp (_brief · _decisions) · feature-ebb (_brief) · ux-usability-experts · ux-laws-quick-reference · visual-design-experts. Full rationale + 60/30/10 weighting in <code>breakpoints-v1.html</code> (unchanged except the progress primitive).</p>
+</header>
+
+<div class="views">
+
+  <div class="view wide">
+    <div class="view__cap">
+      <div class="k">Extra-large · ~1440</div>
+      <h2>Top-nav target</h2>
+      <p>Hero splits image + resume content. Body is <b>two-column</b> — the path as main, progress ring + check-in as an aside. Type scale bumps (≥1200).</p>
+    </div>
+    <div class="frame">
+      <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care/depression</span></div>
+      <div class="stage"><iframe src="dcp-program-detail-v2-depression.html" title="1440 view" scrolling="no"></iframe></div>
+    </div>
+  </div>
+
+  <div class="view desk">
+    <div class="view__cap">
+      <div class="k">Expanded · ~1040</div>
+      <h2>Legacy side-nav era</h2>
+      <p>Hero splits, body stays a <b>single reading column</b> at Compact type. The ring sits in the progress card, text alongside.</p>
+    </div>
+    <div class="frame">
+      <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care/depression</span></div>
+      <div class="stage"><iframe src="dcp-program-detail-v2-depression.html" title="1040 view" scrolling="no"></iframe></div>
+    </div>
+  </div>
+
+  <div class="view phone">
+    <div class="view__cap">
+      <div class="k">Compact · 375</div>
+      <h2>Phone</h2>
+      <p>Single-column stack: Continue → progress ring → the path → check-in. Fixed bottom nav. Whole page thumb-reachable.</p>
+    </div>
+    <div class="frame">
+      <iframe src="dcp-program-detail-v2-depression.html" title="375 view"></iframe>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

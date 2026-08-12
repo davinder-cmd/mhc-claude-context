@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Aesthetic Studies — Index</title>
+<style>
+  :root {
+    --ink: #0E1226;
+    --ink-soft: #5A5E72;
+    --bg: #F7F5F0;        /* warm paper, Sword-feel */
+    --line: #E0DCD2;
+    --peach: #E89B6B;     /* muted peach-orange */
+    --peach-soft: #FBDFC8;
+    --peach-deep: #C97A4C;
+
+    --card-radius: 20px;
+    --max: 1280px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: "Söhne", "Inter", ui-sans-serif, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+  }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 700px) { .container { padding: 0 24px; } }
+
+  header.top { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .top-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .top-row .dot { display: inline-block; width: 8px; height: 8px; background: var(--peach); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+  /* Hero */
+  .hero { padding: 80px 0 64px; }
+  .eyebrow { font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--peach-deep); font-weight: 700; }
+  h1.display {
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin: 16px 0 24px;
+  }
+  h1.display em { font-style: normal; color: var(--peach-deep); }
+  .lede { font-size: 20px; line-height: 1.5; max-width: 760px; color: var(--ink-soft); }
+
+  /* Filter row */
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 48px 0 0;
+    padding: 24px 0; border-top: 1px solid var(--line);
+  }
+  .filters .label { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; padding: 10px 0 10px 0; margin-right: 16px; }
+  .filters .chip {
+    background: white; color: var(--ink); border: 1px solid var(--ink); border-radius: 999px;
+    padding: 10px 18px; font-size: 13px; font-weight: 600; cursor: default;
+  }
+  .filters .chip.active { background: var(--ink); color: white; }
+
+  /* Featured card */
+  .featured {
+    margin: 32px 0 24px;
+    border-radius: var(--card-radius);
+    overflow: hidden; position: relative;
+    background: linear-gradient(135deg, #1C1E48 0%, #2E2D6E 50%, #4E3B7A 100%);
+    color: white;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 0; min-height: 480px;
+  }
+  @media (max-width: 900px) { .featured { grid-template-columns: 1fr; } }
+  .featured .body { padding: 56px; display: flex; flex-direction: column; justify-content: space-between; }
+  .featured .cat { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--peach-soft); font-weight: 700; }
+  .featured h2 { font-size: clamp(36px, 4vw, 56px); line-height: 1.0; letter-spacing: -0.025em; margin: 16px 0 20px; font-weight: 700; }
+  .featured p { font-size: 17px; line-height: 1.5; color: rgba(255,255,255,0.78); margin: 0 0 24px; max-width: 480px; }
+  .featured .meta {
+    display: flex; gap: 20px; font-size: 13px; color: rgba(255,255,255,0.65);
+    letter-spacing: 0.04em;
+  }
+  .featured .meta a {
+    color: var(--peach-soft); text-decoration: none; font-weight: 700;
+    border-bottom: 1px solid var(--peach-soft); padding-bottom: 2px;
+  }
+  .featured .meta a:hover { color: white; border-color: white; }
+
+  .featured .visual {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+  }
+  .featured .visual svg { width: 100%; height: 100%; display: block; }
+
+  /* Grid cards */
+  .grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px;
+  }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    border-radius: var(--card-radius); overflow: hidden; position: relative;
+    color: white; min-height: 480px;
+    display: flex; flex-direction: column;
+  }
+  .card.sword {
+    background: linear-gradient(135deg, #0B1F3A 0%, #1A2C4E 60%, #3A2A1E 100%);
+  }
+  .card.withings {
+    background: linear-gradient(135deg, #1E1F4E 0%, #3A3380 60%, #5E5CE6 100%);
+  }
+  .card .body { padding: 40px 40px 0; }
+  .card .cat { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--peach-soft); font-weight: 700; }
+  .card h2 { font-size: 36px; line-height: 1.02; letter-spacing: -0.02em; margin: 14px 0 18px; font-weight: 700; }
+  .card p { font-size: 15px; line-height: 1.5; color: rgba(255,255,255,0.78); margin: 0 0 20px; }
+  .card .meta { display: flex; gap: 16px; font-size: 13px; color: rgba(255,255,255,0.65); padding: 0 40px 24px; }
+  .card .meta a { color: var(--peach-soft); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--peach-soft); padding-bottom: 2px; }
+  .card .meta a:hover { color: white; border-color: white; }
+  .card .visual { flex: 1; min-height: 220px; position: relative; overflow: hidden; }
+  .card .visual svg { width: 100%; height: 100%; display: block; }
+
+  /* Summary band */
+  .summary {
+    padding: 80px 0; border-top: 1px solid var(--line); margin-top: 32px;
+  }
+  .summary h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 24px; font-weight: 700; }
+  .summary .intro { font-size: 18px; max-width: 720px; color: var(--ink-soft); margin: 0 0 32px; }
+
+  .compare-table {
+    width: 100%; border-collapse: collapse; margin-top: 16px;
+    background: white; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .compare-table th, .compare-table td {
+    text-align: left; padding: 16px 20px; font-size: 14px; vertical-align: top;
+    border-bottom: 1px solid var(--line);
+  }
+  .compare-table th { background: var(--bg); font-weight: 700; color: var(--ink); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .compare-table tr:last-child td { border-bottom: 0; }
+  .compare-table .dim { font-weight: 700; color: var(--ink); width: 22%; }
+  .compare-table .swatch-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+  footer { padding: 48px 0 96px; color: var(--ink-soft); font-size: 13px; border-top: 1px solid var(--line); }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="container top-row">
+    <div><span class="dot"></span>Mood Boards · Index</div>
+    <div>2026-05-30 · Prepared for Davinder Rehal</div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="hero">
+    <div class="eyebrow">Reports &amp; Guides</div>
+    <h1 class="display">Competitive aesthetic <em>studies.</em></h1>
+    <p class="lede">Three deep reads on the visual languages our category competes in. Each study analyzes a single product's color, typography, voice, imagery, and signature design devices — then ends with a "so what" for MHC. Treated as a shelf, not a deck.</p>
+  </div>
+
+  <div class="filters">
+    <div class="label">Filter</div>
+    <div class="chip active">All studies</div>
+    <div class="chip">Platform-led</div>
+    <div class="chip">Hardware-led</div>
+    <div class="chip">Mission-led</div>
+  </div>
+
+  <!-- FEATURED: Google Health -->
+  <article class="featured">
+    <div class="body">
+      <div class="cat">Platform Study · Just shipped</div>
+      <h2>Google Health — a friendlier OS for wellness.</h2>
+      <p>Launched eleven days ago, replacing the Fitbit app. Material You + a Gemini-powered Health Coach. The smartest copy decision of the year: "Stress score" became "Resilience" (Optimal / Balanced / Low). The strategic question for MHC isn't whether to compete with the Coach — it's where not to.</p>
+      <div class="meta">
+        <span>Published 2026-05-29</span>
+        <span>·</span>
+        <a href="../may29-google-health-mood-board/google-health-mood-board-v1.html">Read the study →</a>
+      </div>
+    </div>
+    <div class="visual">
+      <svg viewBox="0 0 600 480" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="Material You composition">
+        <!-- Soft background blobs -->
+        <ellipse cx="180" cy="120" rx="200" ry="140" fill="#7C7FE0" opacity="0.45"/>
+        <ellipse cx="460" cy="360" rx="240" ry="180" fill="#E89B6B" opacity="0.35"/>
+
+        <!-- Activity rings, off-center -->
+        <g transform="translate(360, 220)">
+          <circle r="120" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="16"/>
+          <circle r="120" fill="none" stroke="#E89B6B" stroke-width="16" stroke-dasharray="500 754" stroke-linecap="round" transform="rotate(-90)"/>
+          <circle r="90" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="16"/>
+          <circle r="90" fill="none" stroke="#34A853" stroke-width="16" stroke-dasharray="380 565" stroke-linecap="round" transform="rotate(-90)"/>
+          <circle r="60" fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="16"/>
+          <circle r="60" fill="none" stroke="#4285F4" stroke-width="16" stroke-dasharray="240 377" stroke-linecap="round" transform="rotate(-90)"/>
+        </g>
+
+        <!-- Floating chip -->
+        <g transform="translate(60, 360)">
+          <rect width="240" height="56" rx="28" fill="white"/>
+          <circle cx="32" cy="28" r="14" fill="#7C7FE0"/>
+          <text x="58" y="26" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#1F1F23">Coach · 3 insights</text>
+          <text x="58" y="42" font-family="Inter,sans-serif" font-size="11" fill="#5F6368">Try a recovery walk today</text>
+        </g>
+      </svg>
+    </div>
+  </article>
+
+  <!-- GRID: Sword + Withings -->
+  <section class="grid">
+
+    <article class="card sword">
+      <div class="body">
+        <div class="cat">Mission Study · MSK competitor</div>
+        <h2>Sword Health — clinical authority, human warmth.</h2>
+        <p>Premium healthtech earned through restraint, not ornament. Cream + navy stage, one signature orange, documentary photography of real workers in real workplaces. The brand reads as healthcare mission with a tech backbone — not the other way around.</p>
+      </div>
+      <div class="visual">
+        <svg viewBox="0 0 600 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="Documentary scene">
+          <rect width="600" height="280" fill="#1A2C4E"/>
+          <!-- Warm window -->
+          <rect x="340" y="30" width="220" height="180" rx="6" fill="#3A2A1E"/>
+          <rect x="340" y="30" width="220" height="180" rx="6" fill="url(#sg)" opacity="0.6"/>
+          <circle cx="490" cy="100" r="32" fill="#E89B6B"/>
+          <!-- Figure stretching (simplified) -->
+          <g transform="translate(150, 80)">
+            <circle cx="40" cy="14" r="14" fill="#D6B89A"/>
+            <path d="M 22 50 Q 28 32, 40 28 Q 56 30, 60 50 L 60 130 Q 48 144, 38 142 Q 26 138, 20 130 Z" fill="#FAF7F2"/>
+            <rect x="20" y="58" width="44" height="10" fill="#E89B6B"/>
+            <path d="M 28 36 Q -2 16, -8 -10" stroke="#FAF7F2" stroke-width="9" fill="none" stroke-linecap="round"/>
+            <path d="M 54 36 Q 84 16, 90 -10" stroke="#FAF7F2" stroke-width="9" fill="none" stroke-linecap="round"/>
+            <path d="M 28 128 Q 26 168, 32 198" stroke="#FAF7F2" stroke-width="15" fill="none" stroke-linecap="round"/>
+            <path d="M 52 128 Q 54 168, 50 198" stroke="#FAF7F2" stroke-width="15" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- Outcome stat -->
+          <g transform="translate(40, 30)">
+            <rect width="130" height="52" rx="26" fill="#FAF7F2"/>
+            <text x="18" y="24" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#C97A4C" letter-spacing="1.5">PAIN</text>
+            <text x="18" y="42" font-family="Inter,sans-serif" font-size="16" font-weight="800" fill="#0B1F3A">−62%</text>
+          </g>
+          <defs>
+            <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#F8E9D4"/>
+              <stop offset="100%" stop-color="#C97A4C"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="meta">
+        <span>Published 2026-05-29</span>
+        <span>·</span>
+        <a href="../may29-sword-mood-board/sword-mood-board-v1.html">Read the study →</a>
+      </div>
+    </article>
+
+    <article class="card withings">
+      <div class="body">
+        <div class="cat">Hardware Study · Quantified-self</div>
+        <h2>Withings Health Mate — numbers as protagonist.</h2>
+        <p>The quietest health app in the category. Cool lavender surface, one periwinkle indigo, almost no photography — editorial flat illustration only. The number is the story, paired with a tiny sparkline and a one-word verdict. Restraint as luxury signal.</p>
+      </div>
+      <div class="visual">
+        <svg viewBox="0 0 600 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="Editorial illustration">
+          <rect width="600" height="280" fill="url(#wsky)"/>
+          <circle cx="460" cy="80" r="34" fill="#E89B6B"/>
+          <path d="M 0 200 Q 120 150, 260 180 T 480 170 T 600 180 L 600 280 L 0 280 Z" fill="#7E6BBE"/>
+          <path d="M 0 230 Q 160 200, 320 220 T 600 230 L 600 280 L 0 280 Z" fill="#5E4FA3"/>
+          <!-- Runner figure -->
+          <g transform="translate(220, 130)">
+            <circle cx="24" cy="0" r="11" fill="#5E5CE6"/>
+            <path d="M 14 12 Q 10 26, 14 50 L 38 50 Q 42 26, 34 12 Z" fill="#5E5CE6"/>
+            <rect x="14" y="24" width="24" height="4" fill="#FAD5D5"/>
+            <path d="M 14 22 Q -2 30, 0 50" stroke="#5E5CE6" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <path d="M 36 22 Q 56 28, 62 12" stroke="#5E5CE6" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <path d="M 16 50 Q 8 72, 18 90" stroke="#5E5CE6" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <path d="M 34 50 Q 50 60, 56 76" stroke="#5E5CE6" stroke-width="7" fill="none" stroke-linecap="round"/>
+          </g>
+          <!-- Floating metric card -->
+          <g transform="translate(40, 40)">
+            <rect width="170" height="76" rx="14" fill="white"/>
+            <text x="16" y="26" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#5A5C6B" letter-spacing="1.5">DAILY STEPS</text>
+            <text x="16" y="58" font-family="Inter,sans-serif" font-size="32" font-weight="800" fill="#0E0E14" letter-spacing="-1">8,432</text>
+            <g transform="translate(120, 38)">
+              <polyline fill="none" stroke="#5E5CE6" stroke-width="2" points="0,18 10,16 20,12 30,14 40,8"/>
+              <circle cx="40" cy="8" r="2.5" fill="#5E5CE6"/>
+            </g>
+          </g>
+          <defs>
+            <linearGradient id="wsky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E5DEF7"/>
+              <stop offset="100%" stop-color="#C9C0EC"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="meta">
+        <span>Published 2026-05-29</span>
+        <span>·</span>
+        <a href="../may29-withings-mood-board/withings-mood-board-v1.html">Read the study →</a>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- SUMMARY -->
+  <section class="summary">
+    <div class="eyebrow">At a glance</div>
+    <h2>Three brands. Three different jobs.</h2>
+    <p class="intro">The most useful frame after reading all three: each of these brands solved a different positioning problem with visual restraint, and the answers don't transfer cleanly to MHC. The table below is the shortest version of the comparison.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th class="dim">Dimension</th>
+          <th>Sword Health</th>
+          <th>Withings</th>
+          <th>Google Health</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="dim">Surface</td>
+          <td><span class="swatch-dot" style="background:#F1ECE3"></span>Warm cream</td>
+          <td><span class="swatch-dot" style="background:#E9EAF1"></span>Cool lavender-gray</td>
+          <td><span class="swatch-dot" style="background:#FBDFC8"></span>White + Material pastels</td>
+        </tr>
+        <tr>
+          <td class="dim">Accent</td>
+          <td><span class="swatch-dot" style="background:#FF5A1F"></span>Single orange</td>
+          <td><span class="swatch-dot" style="background:#5E5CE6"></span>Single indigo</td>
+          <td><span class="swatch-dot" style="background:#4285F4"></span>Full Google rainbow, softened</td>
+        </tr>
+        <tr>
+          <td class="dim">Imagery</td>
+          <td>Documentary worker portraits</td>
+          <td>Editorial flat illustration only</td>
+          <td>Aspirational athleisure photography</td>
+        </tr>
+        <tr>
+          <td class="dim">Voice</td>
+          <td>Mission-aspirational</td>
+          <td>Clinical-quiet</td>
+          <td>Coach-conversational</td>
+        </tr>
+        <tr>
+          <td class="dim">Hero unit</td>
+          <td>Outcome stat + claim</td>
+          <td>Metric number + status word</td>
+          <td>Activity rings + Coach insight chip</td>
+        </tr>
+        <tr>
+          <td class="dim">Brand job</td>
+          <td>Healthcare mission, tech backbone</td>
+          <td>European consumer electronics, clinically credentialed</td>
+          <td>Google's wellness OS, AI-native</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<footer>
+  <div class="container row">
+    <div>Treatment borrowed from swordhealth.com/reports-and-guides · Index of three studies</div>
+    <div>Index v1 · 2026-05-30</div>
+  </div>
+</footer>
+
+</body>
+</html>

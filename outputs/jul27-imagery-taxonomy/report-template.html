@@ -1,0 +1,596 @@
+<meta charset="utf-8">
+<title>Imagery audit — 276 photographs against our own standards</title>
+<!--IMAGES-->
+<style>
+:root{
+  --paper:#f0efec; --card:#fbfaf8; --strip:#232629;
+  --ink:#16181a; --ink2:#585d63; --ink3:#8a8f95; --line:#d6d5d1;
+  --mark:#b4261a; --ok:#38614b; --warn:#8a5d0d;
+  --bar:#4a5560; --track:#dedcd7;
+  --measure:66ch;
+  --grotesk:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#15161a; --card:#1d1f23; --strip:#0e0f11;
+    --ink:#eceae6; --ink2:#9aa0a7; --ink3:#71777e; --line:#2f3238;
+    --mark:#e0705f; --ok:#84b295; --warn:#d3a44a; --bar:#7b8794; --track:#2b2e33;}
+}
+:root[data-theme="dark"]{--paper:#15161a; --card:#1d1f23; --strip:#0e0f11;
+  --ink:#eceae6; --ink2:#9aa0a7; --ink3:#71777e; --line:#2f3238;
+  --mark:#e0705f; --ok:#84b295; --warn:#d3a44a; --bar:#7b8794; --track:#2b2e33;}
+:root[data-theme="light"]{--paper:#f0efec; --card:#fbfaf8; --strip:#232629;
+  --ink:#16181a; --ink2:#585d63; --ink3:#8a8f95; --line:#d6d5d1;
+  --mark:#b4261a; --ok:#38614b; --warn:#8a5d0d; --bar:#4a5560; --track:#dedcd7;}
+
+*{box-sizing:border-box}
+/* colour + face set on the root as well as body: tables don't inherit either in quirks mode */
+html{background:var(--paper);color:var(--ink);font-family:var(--grotesk)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:400 16px/1.62 var(--grotesk);-webkit-font-smoothing:antialiased}
+table{color:var(--ink)}
+.col{max-width:var(--measure);margin-inline:auto;padding-inline:24px}
+.wide{max-width:1180px;margin-inline:auto;padding-inline:24px}
+p{margin:0 0 1em}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:1px solid var(--line);padding:56px 0 30px;margin-bottom:44px}
+.eyebrow{font:700 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mark);margin:0 0 22px}
+h1{font-size:clamp(30px,4.4vw,46px);line-height:1.06;letter-spacing:-.028em;
+  font-weight:700;margin:0 0 18px;text-wrap:balance;max-width:22ch}
+.standfirst{font-size:19px;line-height:1.5;color:var(--ink2);max-width:56ch;margin:0 0 28px}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px 28px;
+  font:400 12.5px/1.45 var(--mono);color:var(--ink2);border-top:1px solid var(--line);padding-top:18px}
+.meta b{display:block;font:700 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:5px}
+
+/* ---------- headings ---------- */
+h2{font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  font-family:var(--mono);color:var(--ink3);margin:0 0 10px}
+h3{font-size:clamp(22px,2.7vw,30px);line-height:1.14;letter-spacing:-.022em;font-weight:700;
+  margin:0 0 14px;text-wrap:balance}
+h4{font-size:17px;line-height:1.3;letter-spacing:-.01em;font-weight:700;margin:0 0 8px}
+section{margin-bottom:64px}
+.finding{border-top:2px solid var(--ink);padding-top:26px}
+.lede{font-size:18px;line-height:1.55;color:var(--ink2);max-width:56ch}
+
+/* ---------- scoreboard ---------- */
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:0 0 14px}
+.score div{background:var(--card);border:1px solid var(--line);padding:20px 18px 18px}
+.score strong{display:block;font:700 40px/1 var(--grotesk);letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;margin-bottom:7px}
+.score span{font:400 13px/1.35 var(--grotesk);color:var(--ink2);display:block}
+.score em{font-style:normal;color:var(--mark)}
+.caption{font:400 12.5px/1.5 var(--mono);color:var(--ink3);margin:0}
+
+/* ---------- light table (evidence) ---------- */
+.light{background:var(--strip);color:#f2f1ee;padding:30px 0 34px;margin:30px 0}
+.light .wide>h4{color:#f2f1ee}
+.light .caption{color:#9ea3a8}
+.frames{display:grid;gap:16px}
+.demo{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}
+.shot{position:relative;overflow:hidden;background:#000;background-size:cover;background-position:center}
+.tag{font:700 10.5px/1.3 var(--mono);letter-spacing:.06em;color:#9ea3a8;margin-top:7px;display:block}
+.tag u{display:block;text-decoration:none;color:#f2f1ee;font-weight:700}
+.rowlabel{font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#f2f1ee;
+  margin:0 0 10px;padding-top:16px;border-top:1px solid #3a3e42}
+.rowlabel s{text-decoration:none;color:#9ea3a8;font-weight:400;letter-spacing:0;text-transform:none}
+
+/* ---------- failure wall ---------- */
+.wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.wall figure{margin:0}
+.wall .shot{aspect-ratio:4/1}
+.wall figcaption{font:400 12.5px/1.4 var(--mono);color:#9ea3a8;margin-top:7px}
+.wall figcaption b{color:#f2f1ee;font-weight:700}
+
+/* ---------- band diagram ---------- */
+.band{position:relative;aspect-ratio:3/2;background-size:cover;background-position:center;overflow:hidden}
+.band i{position:absolute;left:0;right:0;background:rgba(10,11,12,.72);display:block}
+.band i.t{top:0;height:31%;border-bottom:1px solid var(--mark)}
+.band i.b{bottom:0;height:31%;border-top:1px solid var(--mark)}
+.band em{position:absolute;left:12px;top:calc(31% + 10px);font:700 11px/1.3 var(--mono);
+  letter-spacing:.08em;text-transform:uppercase;color:#fff;font-style:normal;
+  background:var(--mark);padding:4px 8px}
+.band s{position:absolute;text-decoration:none;left:12px;font:400 11px/1.3 var(--mono);color:#cfd2d5}
+.band s.st{top:10px}.band s.sb{bottom:10px}
+
+/* ---------- example grids ---------- */
+.ex{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0 10px}
+.ex figure{margin:0}
+.ex .shot{aspect-ratio:3/2;border:1px solid var(--line)}
+.ex figcaption{font:400 12px/1.4 var(--mono);color:var(--ink2);margin-top:6px}
+.ex figcaption b{color:var(--ink);font-weight:700;display:block}
+
+/* ---------- data tables ---------- */
+.tw{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+caption{text-align:left;font:700 11px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);padding-bottom:10px}
+th,td{text-align:left;padding:9px 18px 9px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+tr>*:last-child{padding-right:0}
+thead th{font:700 10.5px/1.4 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;
+  white-space:nowrap}
+.fail{color:var(--mark);font-weight:700}
+.pass{color:var(--ok);font-weight:700}
+
+/* bar chart = table + bars, so the numbers are always readable */
+.bars th{font-weight:400;width:34%;white-space:nowrap}
+.bars td.b{width:66%;padding-right:0}
+.bars .brow{display:flex;align-items:center}
+.bars .track{background:var(--track);height:11px;flex:1}
+.bars .fill{background:var(--bar);height:11px;border-radius:0 3px 3px 0}
+.bars td.n{width:52px}
+.bars .flag{font:700 10px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--mark);padding-left:12px;flex:none;white-space:nowrap}
+
+/* ---------- callouts / lists ---------- */
+.note{border-left:3px solid var(--mark);padding:2px 0 2px 18px;margin:26px 0}
+.note h4{margin-bottom:6px}
+.note p{color:var(--ink2);margin-bottom:.6em}
+ol.asks{counter-reset:a;list-style:none;padding:0;margin:24px 0 0}
+ol.asks li{counter-increment:a;position:relative;padding:16px 0 16px 46px;border-top:1px solid var(--line)}
+ol.asks li::before{content:counter(a,decimal-leading-zero);position:absolute;left:0;top:17px;
+  font:700 12px/1 var(--mono);color:var(--mark);letter-spacing:.05em}
+ol.asks b{display:block;margin-bottom:3px}
+ol.asks span{color:var(--ink2);font-size:14.5px;line-height:1.5;display:block}
+.ids{font:400 12.5px/1.7 var(--mono);color:var(--ink2);word-spacing:.15em}
+footer{border-top:1px solid var(--line);margin-top:20px;padding:30px 0 70px;
+  font:400 13px/1.6 var(--mono);color:var(--ink3)}
+footer b{color:var(--ink2);font-weight:700}
+@media(max-width:720px){
+  .demo{grid-template-columns:repeat(2,1fr)}
+  .score strong{font-size:32px}
+}
+</style>
+
+<header class="mast">
+  <div class="col">
+    <p class="eyebrow">Imagery audit · Mobile Health Consumer</p>
+    <h1>276 photographs, measured against our own standards</h1>
+    <p class="standfirst">Our photography library was reviewed file by file against the brand
+      photography standards and against what the app’s image containers actually do to a picture.
+      Most of it holds up. Two things don’t, and one of them is a rule that needs rewriting rather
+      than a set of photos that needs replacing.</p>
+    <div class="meta">
+      <div><b>Scope</b>276 files in the shared imagery library</div>
+      <div><b>Measured against</b>Photography brand standards, 8 rules · image-sizing spec</div>
+      <div><b>Method</b>Every file viewed, then rendered into each container by a browser</div>
+      <div><b>Date</b>27 July 2026</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="wide">
+  <h2>Read this first</h2>
+  <div class="score">
+    <div><strong>276</strong><span>photographs reviewed, one by one</span></div>
+    <div><strong class="fail" style="color:var(--mark)">62</strong><span>lose their subject in at
+      least one container shape — <em>almost one in four</em></span></div>
+    <div><strong style="color:var(--mark)">124</strong><span>have blown-out highlights, against a
+      rule that asks for even exposure</span></div>
+    <div><strong>41</strong><span>are wide enough to carry a full-width hero at all</span></div>
+    <div><strong>12</strong><span>are vertical files, which no wide container can use</span></div>
+  </div>
+  <p class="caption">Counts are files, not percentages of a sample — every file was checked.</p>
+
+  <div class="col" style="padding-inline:0"><div class="note">
+    <h4>The short version</h4>
+    <p><b>Subject matter and colour discipline are in good shape.</b> The library is consistent,
+      inclusive, lifestyle-led, and free of the clinical imagery the standards rule out — only 15
+      files break subject-matter rules at all.</p>
+    <p><b>Lighting is the most-broken rule.</b> 124 files blow out more than 4% of the frame.
+      The standards forbid “cinematic or overly stylized” lighting by name, and heavy backlight
+      and lens flare are the library’s single most common visual habit.</p>
+    <p><b>The crop failures are a wording problem, not a photo problem.</b> The standards ask for
+      a “centred focal point.” Photographers centre the <em>body</em>, which puts the face in the
+      top third — and our widest containers crop from the vertical centre. The fix is one sentence,
+      and it is testable before we buy anything.</p>
+  </div></div>
+</section>
+
+<section>
+  <div class="col finding">
+    <h2>Finding 1</h2>
+    <h3>One in five photographs loses its subject in a full-width hero</h3>
+    <p class="lede">Images in the app are never displayed at their own shape. Each container has a
+      fixed shape, and the browser fills it by scaling the photo up and cutting off whatever
+      overflows — from the middle outward. The wider the container, the more of the top and bottom
+      of the photograph disappears.</p>
+  </div>
+
+  <div class="wide">
+    <div class="tw">
+      <table>
+        <caption>How much of a standard 3:2 photograph each container keeps</caption>
+        <thead><tr><th>Container</th><th>Shape</th><th class="n">Keeps</th><th>Failures</th></tr></thead>
+        <tbody>
+          <tr><td><b>Avatar / square thumbnail</b></td><td>1:1</td><td class="n">67% of width</td><td class="fail">7 fail · 27 marginal</td></tr>
+          <tr><td>Thumbnail</td><td>4:3</td><td class="n">89% of width</td><td class="pass">none</td></tr>
+          <tr><td>Split hero, image beside text · editorial card</td><td>3:2</td><td class="n">100%</td><td class="pass">none</td></tr>
+          <tr><td>Wide card</td><td>16:10</td><td class="n">94% of height</td><td class="pass">none</td></tr>
+          <tr><td>Programme tile</td><td>16:9</td><td class="n">84% of height</td><td class="pass">none</td></tr>
+          <tr><td>Banner / promo strip</td><td>2:1</td><td class="n">75% of height</td><td class="pass">none</td></tr>
+          <tr><td>Wide banner</td><td>3:1</td><td class="n">50% of height</td><td class="pass">none</td></tr>
+          <tr><td><b>Full-width hero at desktop</b></td><td>4:1</td><td class="n">37.5% of height</td><td class="fail">56 fail · 12 marginal</td></tr>
+          <tr><td><b>Full-bleed hero + overlay text</b></td><td>4.5:1</td><td class="n">33% of height</td><td class="fail">at least the same 56</td></tr>
+          <tr><td><b>Page header, 240 tall</b></td><td>6:1</td><td class="n">25% of height</td><td class="fail">at least the same 56</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="light">
+    <div class="wide">
+      <h4>The same three photographs in four containers</h4>
+      <p class="caption">Nothing is retouched here — the browser is doing the cropping, exactly as it
+        does in the product.</p>
+      <div class="frames" style="margin-top:22px">
+        <p class="rowlabel">Frame 014 <s>— survives everything. The subject is small, central, and the scene carries the meaning.</s></p>
+        <div class="demo">
+          <div><div class="shot" style="aspect-ratio:3/2;background-image:var(--i14)" role="img" aria-label="Runner on a boardwalk at sunrise, full frame"></div><span class="tag"><u>3:2</u>split hero · card</span></div>
+          <div><div class="shot" style="aspect-ratio:16/9;background-image:var(--i14)" role="img" aria-label="Same photograph in a 16:9 tile"></div><span class="tag"><u>16:9</u>programme tile</span></div>
+          <div><div class="shot" style="aspect-ratio:4/1;background-image:var(--i14)" role="img" aria-label="Same photograph in a 4:1 hero"></div><span class="tag"><u>4:1</u>full-width hero</span></div>
+          <div><div class="shot" style="aspect-ratio:6/1;background-image:var(--i14)" role="img" aria-label="Same photograph in a 6:1 page header"></div><span class="tag"><u>6:1</u>page header</span></div>
+        </div>
+
+        <p class="rowlabel">Frame 005 <s>— a normal, well-shot portrait. By the third container the face is gone.</s></p>
+        <div class="demo">
+          <div><div class="shot" style="aspect-ratio:3/2;background-image:var(--i5)" role="img" aria-label="Man holding a tablet, full frame"></div><span class="tag"><u>3:2</u>works</span></div>
+          <div><div class="shot" style="aspect-ratio:16/9;background-image:var(--i5)" role="img" aria-label="Same photograph in a 16:9 tile"></div><span class="tag"><u>16:9</u>works</span></div>
+          <div><div class="shot" style="aspect-ratio:4/1;background-image:var(--i5)" role="img" aria-label="Same photograph cropped to 4:1, the face is cut off"></div><span class="tag" style="color:var(--mark)"><u style="color:var(--mark)">4:1</u>face cut</span></div>
+          <div><div class="shot" style="aspect-ratio:6/1;background-image:var(--i5)" role="img" aria-label="Same photograph cropped to 6:1, only a torso remains"></div><span class="tag" style="color:var(--mark)"><u style="color:var(--mark)">6:1</u>torso only</span></div>
+        </div>
+
+        <p class="rowlabel">Frame 253 <s>— a vertical file. A 4:1 container keeps 16.7% of it. There are 12 of these.</s></p>
+        <div class="demo">
+          <div><div class="shot" style="aspect-ratio:3/2;background-image:var(--i253)" role="img" aria-label="Vertical portrait photograph shown in a 3:2 frame"></div><span class="tag"><u>3:2</u>already cropping</span></div>
+          <div><div class="shot" style="aspect-ratio:16/9;background-image:var(--i253)" role="img" aria-label="Same vertical file in a 16:9 tile"></div><span class="tag"><u>16:9</u>tight</span></div>
+          <div><div class="shot" style="aspect-ratio:4/1;background-image:var(--i253)" role="img" aria-label="Same vertical file in a 4:1 hero, unusable"></div><span class="tag" style="color:var(--mark)"><u style="color:var(--mark)">4:1</u>unusable</span></div>
+          <div><div class="shot" style="aspect-ratio:6/1;background-image:var(--i253)" role="img" aria-label="Same vertical file in a 6:1 header, unusable"></div><span class="tag" style="color:var(--mark)"><u style="color:var(--mark)">6:1</u>unusable</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="light" style="margin-top:0">
+    <div class="wide">
+      <h4>Eight of the fifty-six, as the full-width hero renders them</h4>
+      <p class="caption">The failure is the same every time: the crop passes through the face.</p>
+      <div class="wall" style="margin-top:22px">
+        <figure><div class="shot" style="background-image:var(--i73)" role="img" aria-label="Cropped photograph showing only arms and a back"></div><figcaption><b>073</b> two arms and a back</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i101)" role="img" aria-label="Cropped photograph showing a headless torso"></div><figcaption><b>101</b> a headless torso</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i116)" role="img" aria-label="Cropped photograph showing two forearms"></div><figcaption><b>116</b> two forearms</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i180)" role="img" aria-label="Cropped photograph showing the back of a head"></div><figcaption><b>180</b> the back of a head</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i197)" role="img" aria-label="Cropped photograph showing two pairs of legs"></div><figcaption><b>197</b> two pairs of legs</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i201)" role="img" aria-label="Cropped photograph showing a stethoscope on a white coat"></div><figcaption><b>201</b> a stethoscope</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i262)" role="img" aria-label="Cropped photograph showing two headless children"></div><figcaption><b>262</b> two headless children</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i25)" role="img" aria-label="Cropped photograph showing only a mouth"></div><figcaption><b>025</b> a mouth</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="light" style="margin-top:0">
+    <div class="wide">
+      <h4>And four of the forty-one that hold up</h4>
+      <p class="caption">Same crop, same width. A horizon, a small subject, and quiet space above and
+        below it — the shape a full-width hero actually wants.</p>
+      <div class="wall" style="margin-top:22px">
+        <figure><div class="shot" style="background-image:var(--i7)" role="img" aria-label="Person sitting by a turquoise mountain lake, cropped to 4:1"></div><figcaption><b>007</b> subject small, horizon centred</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i44)" role="img" aria-label="Walker on a hillside path at sunrise, cropped to 4:1"></div><figcaption><b>044</b> figure at one third</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i163)" role="img" aria-label="Person crouching with a dog on an empty beach, cropped to 4:1"></div><figcaption><b>163</b> clean space for type</figcaption></figure>
+        <figure><div class="shot" style="background-image:var(--i206)" role="img" aria-label="Person sitting on a jetty facing a lake, cropped to 4:1"></div><figcaption><b>206</b> reads at any width</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <h4>The square crop fails differently — and on the opposite photographs</h4>
+    <p>Wide shapes cut the top and bottom. The <b>square avatar crop cuts the sides</b>, and it
+      takes out a different set: <b>7 photographs fail outright and 27 are marginal</b>. The
+      failures are the ones where the subject sits to one side — crop to a square and you get an
+      empty beach, an empty office, a boardwalk with no runner on it. The marginals are mostly
+      groups losing a member: four people become three, a family of five becomes four.</p>
+    <p><b>The two sets barely overlap.</b> 50 photographs fail only the wide crop, 6 fail only the
+      square one, and exactly one fails both. So there is no single approved shortlist — a
+      photograph is safe <em>for a shape</em>, not in general.</p>
+    <p><b>And the two pull against each other.</b> Of the 41 photographs wide enough to carry a
+      full-width hero, <b>37% are compromised as a square avatar</b> — against 9% of ordinary card
+      photographs. That isn't a coincidence: hero-capable means a small off-centre subject with
+      clean space beside it, which is exactly what a square crop throws away. Buying more
+      hero-capable photography makes the avatar problem worse. They are two briefs, not one.</p>
+  </div>
+
+  <div class="col">
+    <h4>Why it happens — and the one sentence that fixes it</h4>
+    <p>The standards say: <em>“centred focal point for subject matter for cropping purposes.”</em>
+      The library obeys that <b>horizontally</b> — which is why the square thumbnail crop produces
+      zero failures. But a photographer centres the <b>body</b>, and that puts the face in the top
+      third of the frame. Every wide container crops from the <b>vertical</b> centre, so the face
+      is the first thing to go.</p>
+    <p>Replacing “centred focal point” with a measurable band would have caught all 56, and can be
+      checked on a contact sheet in seconds:</p>
+  </div>
+
+  <div class="wide">
+    <div style="max-width:620px;margin:26px auto 0">
+      <div class="band" style="background-image:var(--i131)" role="img" aria-label="Photograph with the top and bottom 31 percent dimmed, showing the band a wide crop preserves">
+        <i class="t"></i><i class="b"></i>
+        <s class="st">cut by a 4:1 hero</s>
+        <em>face must sit here · 31–69% of frame height</em>
+        <s class="sb">cut by a 4:1 hero</s>
+      </div>
+      <p class="caption" style="margin-top:10px">Frame 131, with the band drawn on. The face sits
+        <b style="color:var(--ink)">above</b> it, which is exactly why this photograph is one of the
+        56 — a wide crop keeps the towel and loses the person.</p>
+      <p class="caption" style="margin-top:8px">Proposed rule: <b style="color:var(--ink)">the face,
+        or the primary focal point, sits between 31% and 69% of frame height</b> (37.5–62.5% for the
+        240-tall page header) <b style="color:var(--ink)">and within the middle two-thirds
+        horizontally</b>, which is what a square avatar keeps. Photographs composed deliberately for
+        a full-bleed hero — subject at one third, space for type — are exempt from the horizontal
+        bound and get tagged <b style="color:var(--ink)">hero-only</b>: never used as avatars.</p>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="note">
+      <h4>The cheapest fix costs nothing</h4>
+      <p>Use the <b>split hero</b> — image beside the text rather than text on top of the image — as
+        the default on member-facing pages. It crops nothing at all, so 204 files become eligible
+        and this entire category of failure disappears. Keep full-width heroes for the 41 wide,
+        environmental photographs that can carry them.</p>
+    </div>
+    <p class="caption">Vertical files, thumbnail-only from here: <span class="ids">#11 #12 #127 #129
+      #157 #190 #197 #200 #202 #219 #248 #253</span></p>
+  </div>
+</section>
+
+<section>
+  <div class="col finding">
+    <h2>Finding 2</h2>
+    <h3>Lighting is the most-broken rule in the standards</h3>
+    <p class="lede">The standards ask for natural, soft, diffused light and even exposure, and rule
+      out harsh, dramatic or “cinematic” treatment. Heavy backlight and lens flare are the
+      library’s most common habit — measured across every file, not sampled.</p>
+  </div>
+  <div class="wide">
+    <div class="tw">
+      <table>
+        <caption>Exposure and contrast, measured on all 276 files</caption>
+        <thead><tr><th>Measure</th><th class="n">Files</th><th class="n">Share</th><th>Threshold</th></tr></thead>
+        <tbody>
+          <tr><td>Blown-out highlights</td><td class="n fail">124</td><td class="n">45%</td><td>more than 4% of the frame pure white</td></tr>
+          <tr><td>High-key overall</td><td class="n">86</td><td class="n">31%</td><td>average brightness above 170 of 255</td></tr>
+          <tr><td>High contrast</td><td class="n">46</td><td class="n">17%</td><td>brightness spread above 72</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ex">
+      <figure><div class="shot" style="background-image:var(--i34)" role="img" aria-label="Rollerskaters silhouetted against a blown-out sunset"></div><figcaption><b>034</b> sun flare, subjects in silhouette</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i221)" role="img" aria-label="Person with arms raised in a field, heavily backlit"></div><figcaption><b>221</b> backlit to white</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i248)" role="img" aria-label="Hiker with the sun directly behind them"></div><figcaption><b>248</b> flare across the face</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i252)" role="img" aria-label="Portrait shot into the sun with a strong warm cast"></div><figcaption><b>252</b> golden cast, blown background</figcaption></figure>
+    </div>
+    <div class="col" style="padding-inline:0">
+      <p style="margin-top:18px">This has two costs beyond the brand rule. White text over a
+        high-key photograph is unreadable without a dark scrim laid over the image. And in a grid
+        of cards, images this similar in tone read as a single texture — the eye stops
+        distinguishing one card from the next, which undoes the hierarchy the layout is building.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="col finding">
+    <h2>Finding 3</h2>
+    <h3>Colour is mostly disciplined, with two clear exceptions</h3>
+    <p class="lede">The standards ask for neutral, warm, restrained colour that harmonises with the
+      interface, and rule out heavy filters and strong casts. 41 files carry a strong warm cast and
+      33 are oversaturated. Seven sit on studio backdrops in colours we don’t use anywhere in the
+      product.</p>
+  </div>
+  <div class="wide">
+    <div class="ex">
+      <figure><div class="shot" style="background-image:var(--i136)" role="img" aria-label="Woman holding tomato halves over her eyes against a red backdrop"></div><figcaption><b>136</b> red backdrop, and a visual joke</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i261)" role="img" aria-label="Woman holding two puppies against a pink backdrop"></div><figcaption><b>261</b> pink backdrop</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i140)" role="img" aria-label="Woman eating salad against a pink backdrop"></div><figcaption><b>140</b> pink backdrop</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i102)" role="img" aria-label="Portrait at sunset with a strong orange cast"></div><figcaption><b>102</b> strong warm cast</figcaption></figure>
+    </div>
+    <p class="caption">Off-palette studio backdrops: <span class="ids">#3 #136 #140 #166 #253 #258 #261</span></p>
+  </div>
+</section>
+
+<section>
+  <div class="col finding">
+    <h2>Finding 4</h2>
+    <h3>Composition: too many close-ups, and a few frames with nowhere for type to go</h3>
+    <p class="lede">The standards ask for medium or wide shots with negative space, and warn against
+      overusing tight headshots or crowding the frame. Around 50 files break this — and it is the
+      same 50 that cause most of the crop failures in Finding 1.</p>
+  </div>
+  <div class="wide">
+    <div class="tw">
+      <table>
+        <caption>Composition breaches</caption>
+        <thead><tr><th>Type</th><th class="n">Files</th><th>Consequence in the product</th></tr></thead>
+        <tbody>
+          <tr><td>Tight headshots</td><td class="n">26</td><td>No room for overlaid type; fails every wide container</td></tr>
+          <tr><td>Object close-ups (hands, a watch, a bowl)</td><td class="n">10</td><td>Reads only at thumbnail size</td></tr>
+          <tr><td>Crowded frames, competing focal points</td><td class="n">15</td><td>Illegible below about 300px wide</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ex">
+      <figure><div class="shot" style="background-image:var(--i25)" role="img" aria-label="Extreme close-up of a smiling face"></div><figcaption><b>025</b> tight headshot</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i274)" role="img" aria-label="Close-up of a person making a heart shape with their hands"></div><figcaption><b>274</b> close-up, no negative space</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i110)" role="img" aria-label="Close-up of a phone showing a heart-rate screen"></div><figcaption><b>110</b> close-up of a screen</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i146)" role="img" aria-label="Hands on a laptop with a security shield graphic overlaid"></div><figcaption><b>146</b> graphic overlaid on the photo</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="col finding">
+    <h2>Finding 5</h2>
+    <h3>Subject matter is clean — 15 exceptions, and four identical gestures</h3>
+    <p class="lede">This is where the library is strongest. Only 15 files break the subject-matter
+      rules, and none of them are hard to replace.</p>
+  </div>
+  <div class="wide">
+    <div class="tw">
+      <table>
+        <caption>Subject-matter breaches</caption>
+        <thead><tr><th>Rule broken</th><th class="n">Files</th><th>Which</th></tr></thead>
+        <tbody>
+          <tr><td>Medical setting, or people shown as patients</td><td class="n">5</td>
+            <td class="ids">#96 #164 #170 #175 #201</td></tr>
+          <tr><td>Explicit health or clinical symbol</td><td class="n">9</td>
+            <td class="ids">#68 #101 #143 #161 #274 #138 #146 #136</td></tr>
+          <tr><td>Illness or symptom shown</td><td class="n">1</td><td class="ids">#203</td></tr>
+          <tr><td>Visible app interface inside the photograph</td><td class="n">5</td>
+            <td class="ids">#29 #82 #110 #146 #170</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ex">
+      <figure><div class="shot" style="background-image:var(--i68)" role="img" aria-label="Hands holding an apple with a heart carved into it"></div><figcaption><b>068</b> heart carved into an apple</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i143)" role="img" aria-label="Hands making a heart shape against a sunset"></div><figcaption><b>143</b> one of four heart-hands</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i164)" role="img" aria-label="Doctor talking with a patient in an examination room"></div><figcaption><b>164</b> examination room</figcaption></figure>
+      <figure><div class="shot" style="background-image:var(--i203)" role="img" aria-label="Person holding their lower back in discomfort"></div><figcaption><b>203</b> the only symptom photograph</figcaption></figure>
+    </div>
+    <p class="caption" style="margin-top:14px">Two of these are worth a decision rather than a
+      deletion — see “Two rules that block the product”, below. Files #29, #110 and #170 show real
+      app screens inside the photograph; those date the moment our interface changes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="col finding">
+    <h2>What the library is made of</h2>
+    <h3>Strong where we photograph lifestyle, thin where the product actually works</h3>
+    <p class="lede">Beyond compliance, the shape of the collection matters. Sorted by subject, it is
+      deep in family, movement and everyday lifestyle, and close to empty in the areas the clinical
+      side of the product depends on.</p>
+  </div>
+  <div class="wide">
+    <div class="tw">
+      <table class="bars">
+        <caption>Files per subject cluster · 276 total</caption>
+        <thead><tr><th>Cluster</th><th class="n">Files</th><th class="b">Share of library</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Family &amp; life stage</th><td class="n">39</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:100%"></div></div></div></td></tr>
+          <tr><th scope="row">Movement &amp; cardio</th><td class="n">38</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:97%"></div></div></div></td></tr>
+          <tr><th scope="row">App &amp; device in use</th><td class="n">35</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:90%"></div></div></div></td></tr>
+          <tr><th scope="row">Mind &amp; recovery</th><td class="n">31</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:79%"></div></div></div></td></tr>
+          <tr><th scope="row">Friends &amp; community</th><td class="n">27</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:69%"></div></div></div></td></tr>
+          <tr><th scope="row">Work &amp; workplace</th><td class="n">25</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:64%"></div></div></div></td></tr>
+          <tr><th scope="row">Food &amp; nutrition</th><td class="n">20</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:51%"></div></div></div></td></tr>
+          <tr><th scope="row">Outdoors &amp; place</th><td class="n">14</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:36%"></div></div></div></td></tr>
+          <tr><th scope="row">Portrait &amp; symbol</th><td class="n">14</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:36%"></div></div></div></td></tr>
+          <tr><th scope="row">Pets &amp; companionship</th><td class="n">10</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:26%"></div></div></div></td></tr>
+          <tr><th scope="row">Wearables &amp; health data</th><td class="n">7</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:18%"></div></div><span class="flag">thin</span></div></td></tr>
+          <tr><th scope="row">Clinical &amp; care</th><td class="n">7</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:18%"></div></div><span class="flag">thin</span></div></td></tr>
+          <tr><th scope="row">Play &amp; recreation</th><td class="n">6</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:15%"></div></div><span class="flag">thin</span></div></td></tr>
+          <tr><th scope="row">Strength</th><td class="n">3</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:8%"></div></div><span class="flag">critical gap</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tw">
+      <table class="bars">
+        <caption>Files by the moment they show · 276 total</caption>
+        <thead><tr><th>Moment</th><th class="n">Files</th><th class="b">Share of library</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Everyday life, nothing happening</th><td class="n">172</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:100%"></div></div></div></td></tr>
+          <tr><th scope="row">Mid-effort — working at something</th><td class="n">41</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:24%"></div></div></div></td></tr>
+          <tr><th scope="row">Celebration, reaching something</th><td class="n">30</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:17%"></div></div></div></td></tr>
+          <tr><th scope="row">Starting — first step, signing up</th><td class="n">16</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:9%"></div></div><span class="flag">thin</span></div></td></tr>
+          <tr><th scope="row">Tracking progress, checking in</th><td class="n">12</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:7%"></div></div><span class="flag">thin</span></div></td></tr>
+          <tr><th scope="row">Struggling — the reason to start</th><td class="n">5</td><td class="b"><div class="brow"><div class="track"><div class="fill" style="width:3%"></div></div><span class="flag">critical gap</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col" style="padding-inline:0">
+      <p><b>62% of the library shows everyday life with nothing happening in it.</b> That’s the
+        right feeling for the brand, and it is the wrong supply for the product: the app is mostly
+        made of cards that ask someone to start something, keep going, or acknowledge that they
+        finished. We have twelve photographs of anyone tracking anything, and five of anyone
+        finding it hard.</p>
+    </div>
+  </div>
+</section>
+
+<section class="col finding">
+  <h2>Two rules that block the product</h2>
+  <h3>Worth a decision, not a workaround</h3>
+  <p class="lede">Both of these are cases where the standards, read literally, rule out imagery the
+    product needs. Each surface is currently improvising, which is how inconsistency starts.</p>
+
+  <div class="note">
+    <h4>“Don’t show illness or treatment” vs. the clinical programmes</h4>
+    <p>Taken literally, this removes the entire vocabulary the condition and care-programme entry
+      points need — the honest <em>why you’d start</em> moment. The library reflects the rule
+      perfectly: exactly one symptom photograph and five care photographs, all of which
+      technically break it.</p>
+    <p><b>Proposed:</b> a narrow carve-out — non-clinical depictions of how a symptom feels are
+      permitted on condition and programme entry screens; clinical settings stay out of bounds
+      everywhere.</p>
+  </div>
+
+  <div class="note">
+    <h4>“No forced positivity” vs. rewards and completion</h4>
+    <p>This invalidates around 28 files, and they are nearly the whole celebration set that reward
+      screens, completion moments and earned-badge messages draw from.</p>
+    <p><b>Proposed:</b> keep the rule and change the vocabulary. Milestones become quiet earned
+      satisfaction — a look, a pause, a hand resting on a railing — rather than arms thrown wide on
+      a summit. More credible, and closer to what the rest of the standards ask for.</p>
+  </div>
+</section>
+
+<section class="col finding">
+  <h2>What we’re asking for</h2>
+  <h3>Five decisions and a buying brief</h3>
+  <ol class="asks">
+    <li><b>Rewrite the focal-point rule.</b><span>Replace “centred focal point” with the measurable
+      band: the face sits between 31% and 69% of frame height. One sentence, checkable on a contact
+      sheet, catches all 56 crop failures.</span></li>
+    <li><b>Add an exposure ceiling.</b><span>No more than ~2% of the frame pure white; average
+      brightness under 170. This is the most-violated rule in the set and the easiest to specify.</span></li>
+    <li><b>Two additions to the styling rules.</b><span>No visible app interface inside a
+      photograph — it dates. And no fine stripes or dense patterns: they shimmer and break up when
+      scaled down to a small thumbnail.</span></li>
+    <li><b>Settle the two conflicts above.</b><span>Condition and reward surfaces need an answer
+      before the next purchase, or they will keep choosing imagery that argues with their own
+      message.</span></li>
+    <li><b>Prioritise the next batch by gap, not by subject.</b><span>Tracking and progress
+      (12 files), the honest struggle moment (5), clinical and screening (7, with none of biometrics),
+      strength (3), and wide environmental frames that can carry a full-width hero (41).</span></li>
+  </ol>
+
+  <div class="note" style="margin-top:34px">
+    <h4>Buying brief, in one paragraph</h4>
+    <p>Mid-key, diffused light — no flare, nothing blown out. Face inside the middle third of the
+      frame vertically. Wide enough to leave clean, quiet space on one side for type. Environmental
+      over portrait, real rooms over studio backdrops, and no visible screens. If it’s the fifth
+      photograph of its kind, it replaces one rather than joining them.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="col">
+  <p><b>Working files.</b> Full tagged index of all 276 files, the browsable groupings gallery, the
+  container-by-container crop test, and the measured per-file metrics all live in
+  <code>outputs/jul27-imagery-taxonomy/</code>. Frame numbers in this report match the index, so
+  any file can be traced back to its original.</p>
+  <p><b>How the crop test was made.</b> Each photograph was rendered into every container shape by a
+  browser using the same fill behaviour the product uses. Nothing was cropped by hand, so the
+  results are reproducible. Exposure, contrast, saturation and colour cast were measured on every
+  file rather than sampled.</p>
+</footer>

@@ -1,0 +1,1689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MH Colors v2 — Reference</title>
+<style>
+:root{--bg:#FAF7F0;--surface:#FFFFFF;--tint:#F0EDEA;--ink:#1A1D21;--soft:#5F5F5F;--line:#E6E3DC;--brand:#103459;--link:#1C5C9A;
+--f:"SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--fd:"SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif;
+--m:ui-monospace,"SF Mono",Menlo,monospace}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:48px 24px 96px}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+h1{font-family:var(--fd);font-size:44px;line-height:1.05;font-weight:600;letter-spacing:-.02em}
+h2{font-family:var(--fd);font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.01em}
+h3{font-family:var(--fd);font-size:19px;font-weight:600}
+h4{font-family:var(--fd);font-size:16px;font-weight:600}
+.sub{font-size:17px;color:var(--soft);max-width:66ch;margin-top:14px}
+.src{margin-top:20px;font-size:13px;color:var(--soft);font-family:var(--m)}
+.src a{color:var(--link)}
+hr{border:0;border-top:1px solid var(--line);margin:56px 0}
+section+section{margin-top:56px}
+.lede{font-size:16px;color:var(--soft);max-width:74ch;margin-top:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:16px;margin-top:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.card .n{font-family:var(--fd);font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.card h4{margin:10px 0 6px}
+.card p{font-size:14px;color:var(--soft)}
+.tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tbl th{text-align:left;font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);padding:11px 12px;border-bottom:1px solid var(--line);background:var(--tint);white-space:nowrap}
+.tbl td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--m);font-size:13px}
+.na{color:#B0AAA0}
+.ok{color:#2E6B3A;font-weight:600}.mid{color:#8A5A1E}.bad-t{color:#9F1B1B;font-weight:600}
+code{font-family:var(--m);font-size:12.5px;background:var(--tint);padding:1.5px 5px;border-radius:4px}
+.chip{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:7px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.matrix td,.matrix th{padding:7px 10px}
+.matrix tbody tr:hover{background:var(--tint)}
+.grp{margin-top:40px}
+.grp-h{border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:20px}
+.grp-h p{font-size:14px;color:var(--soft);margin-top:4px}
+.fam{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fam-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px;margin-bottom:12px}
+.fam-meta{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:11.5px;font-family:var(--m);color:var(--soft);background:var(--tint);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.pill b{color:var(--ink)}
+.pill.warn{background:#FAF1E1;color:#8A5A1E}.pill.warn b{color:#8A5A1E}
+.pill.bad{background:#FBE4E4;color:#9F1B1B;font-weight:600}
+.ramp{display:grid;grid-template-columns:repeat(16,minmax(58px,1fr));gap:3px;min-width:960px}
+.sw{border-radius:6px;padding:8px 6px 6px;display:flex;flex-direction:column;gap:2px;min-height:84px;position:relative}
+.sw-bad{outline:2px solid #C8272E;outline-offset:1px}
+.sw-step{font-size:11px;font-weight:700;font-family:var(--m);opacity:.95}
+.sw-hex{font-size:9.5px;font-family:var(--m);opacity:.75;letter-spacing:.02em}
+.sw-cr{font-size:12px;font-family:var(--m);font-weight:600;margin-top:auto}
+.sw-band{font-size:8.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;padding:2px 4px;border-radius:3px;color:#1A1D21;text-align:center}
+.sw-dark .sw-band{box-shadow:0 0 0 1px rgba(255,255,255,.6)}
+.defects{margin-top:10px;padding:10px 12px 10px 28px;background:#FBE4E4;border-radius:8px;font-size:13px;color:#7A1414}
+.defects li+li{margin-top:3px}
+.core-row{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:14px}
+.core-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.pct{font-family:var(--m);font-size:13px;color:var(--soft)}
+.core-sw{display:flex;flex-wrap:wrap;gap:8px}
+.core-chip{flex:1 1 152px;border-radius:8px;padding:12px 12px 10px;display:flex;flex-direction:column;gap:3px;min-height:66px}
+.core-chip b{font-size:12.5px}
+.core-chip span{font-family:var(--m);font-size:11px;opacity:.8}
+.wt{display:flex;height:44px;border-radius:8px;overflow:hidden;margin-top:20px;font-size:12.5px;font-weight:600}
+.wt-seg{display:flex;align-items:center;justify-content:center}
+.rules{margin-top:20px;display:grid;gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:0 10px 10px 0;padding:14px 16px}
+.rule b{display:block;margin-bottom:3px}
+.rule p{font-size:14px;color:var(--soft)}
+.next{background:var(--brand);color:#fff;border-radius:12px;padding:26px 28px;margin-top:24px}
+.next h2{color:#fff}
+.next ol{margin-top:14px;padding-left:22px;font-size:15px;color:#D6E2F0}
+.next li+li{margin-top:8px}
+.next b{color:#fff}
+@media (prefers-color-scheme:dark){
+ :root{--bg:#1C1A17;--surface:#252220;--tint:#2E2A26;--ink:#F2EFEA;--soft:#A8A29A;--line:#3A352F;--link:#8FB6E0}
+ .sw-band{color:#1A1D21}
+ .defects{background:#3A2220;color:#F0C4C0}
+ .ok{color:#7DC97F}.mid{color:#E8B36A}.bad-t{color:#F09A9A}
+ .pill.warn{background:#3A3020;color:#E8B36A}.pill.warn b{color:#E8B36A}
+ .pill.bad{background:#3A2220;color:#F09A9A}
+ .next{background:#0E1C36}
+}
+:root[data-theme="dark"]{--bg:#1C1A17;--surface:#252220;--tint:#2E2A26;--ink:#F2EFEA;--soft:#A8A29A;--line:#3A352F;--link:#8FB6E0}
+:root[data-theme="dark"] .defects{background:#3A2220;color:#F0C4C0}
+:root[data-theme="dark"] .next{background:#0E1C36}
+:root[data-theme="light"]{--bg:#FAF7F0;--surface:#FFFFFF;--tint:#F0EDEA;--ink:#1A1D21;--soft:#5F5F5F;--line:#E6E3DC;--link:#1C5C9A}
+:root[data-theme="light"] .defects{background:#FBE4E4;color:#7A1414}
+:root[data-theme="light"] .next{background:#103459}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<h1>MH Colors v2 — Reference</h1>
+<p class="sub">The complete Uber-derived palette as it exists today: 22 families, 16 steps, 352 values — measured for contrast, checked for defects, and reconciled against what MHC actually ships. Reference only. Nothing here is a token.</p>
+<p class="src">Source: Figma <a href="https://www.figma.com/design/i1nW5PTL7yU4MYOMgyAJ7c/MH-colors-v2">MH colors v2</a> · extracted 4 Aug 2026 · contrast ratios are WCAG 2.1 against <code>#FFFFFF</code></p>
+
+<hr>
+
+<section>
+<h2>Why this palette fights you</h2>
+<p class="lede">Four structural problems, all measurable. None of them are taste.</p>
+<div class="cards">
+ <div class="card"><div class="n">10</div><h4>Steps of drift in the AA line</h4><p>Text hits 4.5:1 at Coffee <b>600</b> but not until Yellow <b>1600</b>. The step number carries no consistent meaning across families — so "use 800 for primary" is unbuildable.</p></div>
+ <div class="card"><div class="n">⅓</div><h4>of the range in the dark half</h4><p>Steps 100→800 cover 44–66 points of lightness. Steps 800→1600 cover only 16–32. Nine steps, barely any change — which is why reaching for a darker shade never gives you one.</p></div>
+ <div class="card"><div class="n">2</div><h4>Families that reverse</h4><p>Grey and Ocean each contain a step perceptually <i>lighter</i> than the one before it. Ocean 1000 is also a byte-identical duplicate of Ocean 800. (Corrected 5 Aug — two more were HSL artefacts.)</p></div>
+ <div class="card"><div class="n">0</div><h4>Neutral darks in 352 values</h4><p>The graphite ink carrying the current design has no equivalent anywhere — nearest is Mub 1600 at ΔE 9.49, and every other dark stop is chromatic. The palette can dress the product but cannot supply its primary text color.</p></div><div class="ramp"><div class="sw " style="background:#F3F2EF;color:#1A1D21" title="Coffee 100 — #F0EDEA — 1.17:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">F0EDEA</span>
+    <span class="sw-cr">1.17</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#EBE9E4;color:#1A1D21" title="Coffee 200 — #E7E1DC — 1.3:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">E7E1DC</span>
+    <span class="sw-cr">1.3</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#DDD4CD;color:#1A1D21" title="Coffee 300 — #DDD4CD — 1.46:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">DDD4CD</span>
+    <span class="sw-cr">1.46</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#C3B5A9;color:#1A1D21" title="Coffee 400 — #C3B5A9 — 2:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">C3B5A9</span>
+    <span class="sw-cr">2</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#A68F7E;color:#1A1D21" title="Coffee 500 — #A68F7E — 3.06:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">A68F7E</span>
+    <span class="sw-cr">3.06</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#886A53;color:#FFFFFF" title="Coffee 600 — #886A53 — 4.96:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">886A53</span>
+    <span class="sw-cr">4.96</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#75553C;color:#FFFFFF" title="Coffee 700 — #75553C — 6.73:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">75553C</span>
+    <span class="sw-cr">6.73</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#624025;color:#FFFFFF" title="Coffee 800 — #624025 — 9.21:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">624025</span>
+    <span class="sw-cr">9.21</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#5D3D23;color:#FFFFFF" title="Coffee 900 — #5D3D23 — 9.73:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">5D3D23</span>
+    <span class="sw-cr">9.73</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#573921;color:#FFFFFF" title="Coffee 1000 — #573921 — 10.43:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">573921</span>
+    <span class="sw-cr">10.43</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#4E331D;color:#FFFFFF" title="Coffee 1100 — #4E331D — 11.57:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">4E331D</span>
+    <span class="sw-cr">11.57</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#442D19;color:#FFFFFF" title="Coffee 1200 — #442D19 — 12.84:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">442D19</span>
+    <span class="sw-cr">12.84</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#3B2716;color:#FFFFFF" title="Coffee 1300 — #3B2716 — 14.12:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">3B2716</span>
+    <span class="sw-cr">14.12</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#322113;color:#FFFFFF" title="Coffee 1400 — #322113 — 15.41:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">322113</span>
+    <span class="sw-cr">15.41</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#2D1D10;color:#FFFFFF" title="Coffee 1500 — #2D1D10 — 16.22:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">2D1D10</span>
+    <span class="sw-cr">16.22</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#261A10;color:#FFFFFF" title="Coffee 1600 — #261A10 — 16.97:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">261A10</span>
+    <span class="sw-cr">16.97</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Cocoa</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>600</b></span>
+   <span class="pill">AA text from <b>800</b></span>
+   <span class="pill">AAA from <b>1100</b></span>
+   <span class="pill warn">L-span 54.7 / 23.1</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#F6F0EB;color:#1A1D21" title="Cocoa 100 — #F6F0EB — 1.13:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">F6F0EB</span>
+    <span class="sw-cr">1.13</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#F0E7DE;color:#1A1D21" title="Cocoa 200 — #F0E7DE — 1.22:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">F0E7DE</span>
+    <span class="sw-cr">1.22</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#EADDD0;color:#1A1D21" title="Cocoa 300 — #EADDD0 — 1.33:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">EADDD0</span>
+    <span class="sw-cr">1.33</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#DBC3AF;color:#1A1D21" title="Cocoa 400 — #DBC3AF — 1.69:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">DBC3AF</span>
+    <span class="sw-cr">1.69</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#C9A686;color:#1A1D21" title="Cocoa 500 — #C9A686 — 2.26:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">C9A686</span>
+    <span class="sw-cr">2.26</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#B7885E;color:#FFFFFF" title="Cocoa 600 — #B7885E — 3.14:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">B7885E</span>
+    <span class="sw-cr">3.14</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#A87548;color:#FFFFFF" title="Cocoa 700 — #A87548 — 3.96:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">A87548</span>
+    <span class="sw-cr">3.96</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#986232;color:#FFFFFF" title="Cocoa 800 — #986232 — 5.09:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">986232</span>
+    <span class="sw-cr">5.09</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#905D2F;color:#FFFFFF" title="Cocoa 900 — #905D2F — 5.54:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">905D2F</span>
+    <span class="sw-cr">5.54</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#88572C;color:#FFFFFF" title="Cocoa 1000 — #88572C — 6.09:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">88572C</span>
+    <span class="sw-cr">6.09</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#7A4E28;color:#FFFFFF" title="Cocoa 1100 — #7A4E28 — 7.12:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">7A4E28</span>
+    <span class="sw-cr">7.12</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#6B4523;color:#FFFFFF" title="Cocoa 1200 — #6B4523 — 8.4:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">6B4523</span>
+    <span class="sw-cr">8.4</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#5D3C1E;color:#FFFFFF" title="Cocoa 1300 — #5D3C1E — 9.86:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">5D3C1E</span>
+    <span class="sw-cr">9.86</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#4F3319;color:#FFFFFF" title="Cocoa 1400 — #4F3319 — 11.54:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">4F3319</span>
+    <span class="sw-cr">11.54</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#452D16;color:#FFFFFF" title="Cocoa 1500 — #452D16 — 12.81:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">452D16</span>
+    <span class="sw-cr">12.81</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#3C2A18;color:#FFFFFF" title="Cocoa 1600 — #3C2A18 — 13.67:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">3C2A18</span>
+    <span class="sw-cr">13.67</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Mub</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>600</b></span>
+   <span class="pill">AA text from <b>800</b></span>
+   <span class="pill">AAA from <b>1100</b></span>
+   <span class="pill warn">L-span 54.1 / 24.7</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#F3F2EF;color:#1A1D21" title="Mub 100 — #F3F2EF — 1.12:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">F3F2EF</span>
+    <span class="sw-cr">1.12</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#EBE9E4;color:#1A1D21" title="Mub 200 — #EBE9E4 — 1.21:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">EBE9E4</span>
+    <span class="sw-cr">1.21</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#E2E0DA;color:#1A1D21" title="Mub 300 — #E2E0DA — 1.32:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">E2E0DA</span>
+    <span class="sw-cr">1.32</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#CDC9BF;color:#1A1D21" title="Mub 400 — #CDC9BF — 1.65:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">CDC9BF</span>
+    <span class="sw-cr">1.65</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#B3AD9E;color:#1A1D21" title="Mub 500 — #B3AD9E — 2.24:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">B3AD9E</span>
+    <span class="sw-cr">2.24</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#9A927E;color:#FFFFFF" title="Mub 600 — #9A927E — 3.09:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">9A927E</span>
+    <span class="sw-cr">3.09</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#89806B;color:#FFFFFF" title="Mub 700 — #89806B — 3.92:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">89806B</span>
+    <span class="sw-cr">3.92</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#776E57;color:#FFFFFF" title="Mub 800 — #776E57 — 5.06:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">776E57</span>
+    <span class="sw-cr">5.06</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#716852;color:#FFFFFF" title="Mub 900 — #716852 — 5.52:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">716852</span>
+    <span class="sw-cr">5.52</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#6A624D;color:#FFFFFF" title="Mub 1000 — #6A624D — 6.06:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">6A624D</span>
+    <span class="sw-cr">6.06</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#5F5845;color:#FFFFFF" title="Mub 1100 — #5F5845 — 7.07:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">5F5845</span>
+    <span class="sw-cr">7.07</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#544D3D;color:#FFFFFF" title="Mub 1200 — #544D3D — 8.38:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">544D3D</span>
+    <span class="sw-cr">8.38</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#494335;color:#FFFFFF" title="Mub 1300 — #494335 — 9.82:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">494335</span>
+    <span class="sw-cr">9.82</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#3E392D;color:#FFFFFF" title="Mub 1400 — #3E392D — 11.49:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">3E392D</span>
+    <span class="sw-cr">11.49</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#373227;color:#FFFFFF" title="Mub 1500 — #373227 — 12.74:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">373227</span>
+    <span class="sw-cr">12.74</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#2E2A22;color:#FFFFFF" title="Mub 1600 — #2E2A22 — 14.28:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">2E2A22</span>
+    <span class="sw-cr">14.28</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div></section><section class="grp"><header class="grp-h"><h3>Cool neutral</h3><p>All MHC ink comes from here. 1500 is out of order — skip it.</p></header><div class="fam"><div class="fam-h"><h4>Grey</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>700</b></span>
+   <span class="pill">AA text from <b>900</b></span>
+   <span class="pill">AAA from <b>1200</b></span>
+   <span class="pill warn">L-span 50.8 / 23.8</span>
+   <span class="pill bad">1 defect</span>
+  </div></div><div class="ramp"><div class="sw " style="background:#F8F8F9;color:#1A1D21" title="Grey 100 — #F8F8F9 — 1.06:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">F8F8F9</span>
+    <span class="sw-cr">1.06</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#F1F1F1;color:#1A1D21" title="Grey 200 — #F1F1F1 — 1.13:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">F1F1F1</span>
+    <span class="sw-cr">1.13</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#E5E5E4;color:#1A1D21" title="Grey 300 — #E5E5E4 — 1.26:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">E5E5E4</span>
+    <span class="sw-cr">1.26</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#D6D6D5;color:#1A1D21" title="Grey 400 — #D6D6D5 — 1.45:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">D6D6D5</span>
+    <span class="sw-cr">1.45</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#C0C0C0;color:#1A1D21" title="Grey 500 — #C0C0C0 — 1.82:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">C0C0C0</span>
+    <span class="sw-cr">1.82</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#A6A5A5;color:#1A1D21" title="Grey 600 — #A6A5A5 — 2.46:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">A6A5A5</span>
+    <span class="sw-cr">2.46</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#777777;color:#FFFFFF" title="Grey 700 — #898989 — 3.5:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">898989</span>
+    <span class="sw-cr">3.5</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#777777;color:#FFFFFF" title="Grey 800 — #777777 — 4.48:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">777777</span>
+    <span class="sw-cr">4.48</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#717171;color:#FFFFFF" title="Grey 900 — #717171 — 4.88:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">717171</span>
+    <span class="sw-cr">4.88</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#6A6A6A;color:#FFFFFF" title="Grey 1000 — #6A6A6A — 5.41:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">6A6A6A</span>
+    <span class="sw-cr">5.41</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#5F5F5F;color:#FFFFFF" title="Grey 1100 — #5F5F5F — 6.39:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">5F5F5F</span>
+    <span class="sw-cr">6.39</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#545454;color:#FFFFFF" title="Grey 1200 — #545454 — 7.57:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">545454</span>
+    <span class="sw-cr">7.57</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#494949;color:#FFFFFF" title="Grey 1300 — #494949 — 9:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">494949</span>
+    <span class="sw-cr">9</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#3E3E3E;color:#FFFFFF" title="Grey 1400 — #3E3E3E — 10.7:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">3E3E3E</span>
+    <span class="sw-cr">10.7</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-bad sw-dark" style="background:#535051;color:#FFFFFF" title="Grey 1500 — #535051 — 7.97:1 on white — Lighter than 1400 — ramp reverses">
+    <span class="sw-step">1500 ⚠</span>
+    <span class="sw-hex">535051</span>
+    <span class="sw-cr">7.97</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#393C3C;color:#FFFFFF" title="Grey 1600 — #393C3C — 11.14:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">393C3C</span>
+    <span class="sw-cr">11.14</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div><ul class="defects"><li><b>Grey 1500</b> — Lighter than 1400 — ramp reverses</li></ul></div></section><section class="grp"><header class="grp-h"><h3>Yellow-greens</h3><p>Light-starved. No AAA text available in Honeydew.</p></header><div class="fam"><div class="fam-h"><h4>Honeydew</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>1200</b></span>
+   <span class="pill">AA text from <b>1400</b></span>
+   <span class="pill">AAA from <b>1600</b></span>
+   <span class="pill ">L-span 43.7 / 31.8</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FBFCEC;color:#1A1D21" title="Honeydew 100 — #FBFCEC — 1.04:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FBFCEC</span>
+    <span class="sw-cr">1.04</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#F8FADF;color:#1A1D21" title="Honeydew 200 — #F8FADF — 1.06:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">F8FADF</span>
+    <span class="sw-cr">1.06</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#F5F8D2;color:#1A1D21" title="Honeydew 300 — #F5F8D2 — 1.09:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">F5F8D2</span>
+    <span class="sw-cr">1.09</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#EDF3B2;color:#1A1D21" title="Honeydew 400 — #EDF3B2 — 1.16:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">EDF3B2</span>
+    <span class="sw-cr">1.16</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#E4ED8B;color:#1A1D21" title="Honeydew 500 — #E4ED8B — 1.25:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">E4ED8B</span>
+    <span class="sw-cr">1.25</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#DBE765;color:#1A1D21" title="Honeydew 600 — #DBE765 — 1.34:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">DBE765</span>
+    <span class="sw-cr">1.34</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#CFDC4F;color:#1A1D21" title="Honeydew 700 — #CFDC4F — 1.5:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">CFDC4F</span>
+    <span class="sw-cr">1.5</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#C3D039;color:#FFFFFF" title="Honeydew 800 — #C3D039 — 1.69:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">C3D039</span>
+    <span class="sw-cr">1.69</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#B8C436;color:#FFFFFF" title="Honeydew 900 — #B8C436 — 1.91:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">B8C436</span>
+    <span class="sw-cr">1.91</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#ADB933;color:#FFFFFF" title="Honeydew 1000 — #ADB933 — 2.15:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">ADB933</span>
+    <span class="sw-cr">2.15</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#9BA52E;color:#FFFFFF" title="Honeydew 1100 — #9BA52E — 2.69:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">9BA52E</span>
+    <span class="sw-cr">2.69</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#899128;color:#FFFFFF" title="Honeydew 1200 — #899128 — 3.42:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">899128</span>
+    <span class="sw-cr">3.42</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#777E23;color:#FFFFFF" title="Honeydew 1300 — #777E23 — 4.38:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">777E23</span>
+    <span class="sw-cr">4.38</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#656B1D;color:#FFFFFF" title="Honeydew 1400 — #656B1D — 5.72:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">656B1D</span>
+    <span class="sw-cr">5.72</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#595E1A;color:#FFFFFF" title="Honeydew 1500 — #595E1A — 6.91:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">595E1A</span>
+    <span class="sw-cr">6.91</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#494C1B;color:#FFFFFF" title="Honeydew 1600 — #494C1B — 9:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">494C1B</span>
+    <span class="sw-cr">9</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Lime</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>1100</b></span>
+   <span class="pill">AA text from <b>1300</b></span>
+   <span class="pill">AAA from <b>1500</b></span>
+   <span class="pill ">L-span 45.1 / 31</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#F3FBED;color:#1A1D21" title="Lime 100 — #F3FBED — 1.06:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">F3FBED</span>
+    <span class="sw-cr">1.06</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#EBF8E1;color:#1A1D21" title="Lime 200 — #EBF8E1 — 1.1:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">EBF8E1</span>
+    <span class="sw-cr">1.1</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#E3F5D4;color:#1A1D21" title="Lime 300 — #E3F5D4 — 1.15:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">E3F5D4</span>
+    <span class="sw-cr">1.15</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#CFEDB5;color:#1A1D21" title="Lime 400 — #CFEDB5 — 1.28:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">CFEDB5</span>
+    <span class="sw-cr">1.28</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#B6E490;color:#1A1D21" title="Lime 500 — #B6E490 — 1.45:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">B6E490</span>
+    <span class="sw-cr">1.45</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#9EDB6B;color:#1A1D21" title="Lime 600 — #9EDB6B — 1.64:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">9EDB6B</span>
+    <span class="sw-cr">1.64</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#8ECF56;color:#1A1D21" title="Lime 700 — #8ECF56 — 1.87:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">8ECF56</span>
+    <span class="sw-cr">1.87</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#7DC240;color:#FFFFFF" title="Lime 800 — #7DC240 — 2.17:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">7DC240</span>
+    <span class="sw-cr">2.17</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#76B73D;color:#FFFFFF" title="Lime 900 — #76B73D — 2.44:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">76B73D</span>
+    <span class="sw-cr">2.44</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#6EAC3A;color:#FFFFFF" title="Lime 1000 — #6EAC3A — 2.75:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">6EAC3A</span>
+    <span class="sw-cr">2.75</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#639A34;color:#FFFFFF" title="Lime 1100 — #639A34 — 3.39:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">639A34</span>
+    <span class="sw-cr">3.39</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#57882E;color:#FFFFFF" title="Lime 1200 — #57882E — 4.23:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">57882E</span>
+    <span class="sw-cr">4.23</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#4C7628;color:#FFFFFF" title="Lime 1300 — #4C7628 — 5.34:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">4C7628</span>
+    <span class="sw-cr">5.34</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#406422;color:#FFFFFF" title="Lime 1400 — #406422 — 6.85:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">406422</span>
+    <span class="sw-cr">6.85</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#39581E;color:#FFFFFF" title="Lime 1500 — #39581E — 8.11:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">39581E</span>
+    <span class="sw-cr">8.11</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#30471D;color:#FFFFFF" title="Lime 1600 — #30471D — 10.27:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">30471D</span>
+    <span class="sw-cr">10.27</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div></section><section class="grp"><header class="grp-h"><h3>Greens</h3><p>Green = positive semantic. Jade unused at MHC.</p></header><div class="fam"><div class="fam-h"><h4>Green</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>900</b></span>
+   <span class="pill">AA text from <b>1200</b></span>
+   <span class="pill">AAA from <b>1400</b></span>
+   <span class="pill ">L-span 44.5 / 30.6</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#EFF8EF;color:#1A1D21" title="Green 100 — #EFF8EF — 1.09:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">EFF8EF</span>
+    <span class="sw-cr">1.09</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#E4F3E4;color:#1A1D21" title="Green 200 — #E4F3E4 — 1.15:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">E4F3E4</span>
+    <span class="sw-cr">1.15</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#DAEFDA;color:#1A1D21" title="Green 300 — #DAEFDA — 1.21:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">DAEFDA</span>
+    <span class="sw-cr">1.21</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#BEE4BF;color:#1A1D21" title="Green 400 — #BEE4BF — 1.4:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">BEE4BF</span>
+    <span class="sw-cr">1.4</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#9ED79F;color:#1A1D21" title="Green 500 — #9ED79F — 1.66:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">9ED79F</span>
+    <span class="sw-cr">1.66</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#7DC97F;color:#1A1D21" title="Green 600 — #7DC97F — 1.99:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">7DC97F</span>
+    <span class="sw-cr">1.99</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#6ABB6B;color:#1A1D21" title="Green 700 — #6ABB6B — 2.35:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">6ABB6B</span>
+    <span class="sw-cr">2.35</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#57AD57;color:#FFFFFF" title="Green 800 — #57AD57 — 2.79:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">57AD57</span>
+    <span class="sw-cr">2.79</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#52A353;color:#FFFFFF" title="Green 900 — #52A353 — 3.12:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">52A353</span>
+    <span class="sw-cr">3.12</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#4C9A4E;color:#FFFFFF" title="Green 1000 — #4C9A4E — 3.48:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">4C9A4E</span>
+    <span class="sw-cr">3.48</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#458A46;color:#FFFFFF" title="Green 1100 — #458A46 — 4.22:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">458A46</span>
+    <span class="sw-cr">4.22</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#3D7A3E;color:#FFFFFF" title="Green 1200 — #3D7A3E — 5.18:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">3D7A3E</span>
+    <span class="sw-cr">5.18</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#356A36;color:#FFFFFF" title="Green 1300 — #356A36 — 6.43:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">356A36</span>
+    <span class="sw-cr">6.43</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#2C5A2E;color:#FFFFFF" title="Green 1400 — #2C5A2E — 8.05:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">2C5A2E</span>
+    <span class="sw-cr">8.05</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#274F28;color:#FFFFFF" title="Green 1500 — #274F28 — 9.39:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">274F28</span>
+    <span class="sw-cr">9.39</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#254325;color:#FFFFFF" title="Green 1600 — #254325 — 11:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">254325</span>
+    <span class="sw-cr">11</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Jade</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>900</b></span>
+   <span class="pill">AA text from <b>1200</b></span>
+   <span class="pill">AAA from <b>1400</b></span>
+   <span class="pill ">L-span 49.2 / 27.3</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#ECF9F5;color:#1A1D21" title="Jade 100 — #ECF9F5 — 1.08:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">ECF9F5</span>
+    <span class="sw-cr">1.08</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#DFF5EE;color:#1A1D21" title="Jade 200 — #DFF5EE — 1.14:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">DFF5EE</span>
+    <span class="sw-cr">1.14</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#D2F1E7;color:#1A1D21" title="Jade 300 — #D2F1E7 — 1.2:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">D2F1E7</span>
+    <span class="sw-cr">1.2</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#B1E7D6;color:#1A1D21" title="Jade 400 — #B1E7D6 — 1.38:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">B1E7D6</span>
+    <span class="sw-cr">1.38</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#89DAC1;color:#1A1D21" title="Jade 500 — #89DAC1 — 1.63:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">89DAC1</span>
+    <span class="sw-cr">1.63</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#62CEAD;color:#1A1D21" title="Jade 600 — #62CEAD — 1.92:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">62CEAD</span>
+    <span class="sw-cr">1.92</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#4DC19C;color:#FFFFFF" title="Jade 700 — #4DC19C — 2.23:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">4DC19C</span>
+    <span class="sw-cr">2.23</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#37B38B;color:#FFFFFF" title="Jade 800 — #37B38B — 2.63:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">37B38B</span>
+    <span class="sw-cr">2.63</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#2FA782;color:#FFFFFF" title="Jade 900 — #2FA782 — 3.01:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">2FA782</span>
+    <span class="sw-cr">3.01</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#309F7D;color:#FFFFFF" title="Jade 1000 — #309F7D — 3.29:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">309F7D</span>
+    <span class="sw-cr">3.29</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#2B8F70;color:#FFFFFF" title="Jade 1100 — #2B8F70 — 3.99:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">2B8F70</span>
+    <span class="sw-cr">3.99</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#267E63;color:#FFFFFF" title="Jade 1200 — #267E63 — 4.94:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">267E63</span>
+    <span class="sw-cr">4.94</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#216E56;color:#FFFFFF" title="Jade 1300 — #216E56 — 6.12:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">216E56</span>
+    <span class="sw-cr">6.12</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#1B5D48;color:#FFFFFF" title="Jade 1400 — #1B5D48 — 7.76:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">1B5D48</span>
+    <span class="sw-cr">7.76</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#185240;color:#FFFFFF" title="Jade 1500 — #185240 — 9.05:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">185240</span>
+    <span class="sw-cr">9.05</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#1A4538;color:#FFFFFF" title="Jade 1600 — #1A4538 — 10.76:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">1A4538</span>
+    <span class="sw-cr">10.76</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div></section><section class="grp"><header class="grp-h"><h3>Cyans</h3><p>Turquoise 1300 is the closest match to MHC teal-dark.</p></header><div class="fam"><div class="fam-h"><h4>Teal</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>1000</b></span>
+   <span class="pill">AA text from <b>1200</b></span>
+   <span class="pill">AAA from <b>1400</b></span>
+   <span class="pill warn">L-span 52.7 / 24.3</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#E8FAFA;color:#1A1D21" title="Teal 100 — #E8FAFA — 1.08:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">E8FAFA</span>
+    <span class="sw-cr">1.08</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#D4F1F2;color:#1A1D21" title="Teal 200 — #D4F1F2 — 1.19:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">D4F1F2</span>
+    <span class="sw-cr">1.19</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#CAF2F4;color:#1A1D21" title="Teal 300 — #CAF2F4 — 1.2:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">CAF2F4</span>
+    <span class="sw-cr">1.2</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#A3E9EC;color:#1A1D21" title="Teal 400 — #A3E9EC — 1.36:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">A3E9EC</span>
+    <span class="sw-cr">1.36</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#75DEE3;color:#1A1D21" title="Teal 500 — #75DEE3 — 1.58:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">75DEE3</span>
+    <span class="sw-cr">1.58</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#47D3D9;color:#1A1D21" title="Teal 600 — #47D3D9 — 1.81:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">47D3D9</span>
+    <span class="sw-cr">1.81</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#2FC5CC;color:#FFFFFF" title="Teal 700 — #2FC5CC — 2.1:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">2FC5CC</span>
+    <span class="sw-cr">2.1</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#17B8BE;color:#FFFFFF" title="Teal 800 — #17B8BE — 2.43:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">17B8BE</span>
+    <span class="sw-cr">2.43</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#15AEB4;color:#FFFFFF" title="Teal 900 — #15AEB4 — 2.71:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">15AEB4</span>
+    <span class="sw-cr">2.71</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#13A4AB;color:#FFFFFF" title="Teal 1000 — #13A4AB — 3.03:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">13A4AB</span>
+    <span class="sw-cr">3.03</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#11939A;color:#FFFFFF" title="Teal 1100 — #11939A — 3.71:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">11939A</span>
+    <span class="sw-cr">3.71</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#108188;color:#FFFFFF" title="Teal 1200 — #108188 — 4.65:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">108188</span>
+    <span class="sw-cr">4.65</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#0E7077;color:#FFFFFF" title="Teal 1300 — #0E7077 — 5.83:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">0E7077</span>
+    <span class="sw-cr">5.83</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#0B5F65;color:#FFFFFF" title="Teal 1400 — #0B5F65 — 7.4:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">0B5F65</span>
+    <span class="sw-cr">7.4</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#0A545A;color:#FFFFFF" title="Teal 1500 — #0A545A — 8.65:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">0A545A</span>
+    <span class="sw-cr">8.65</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#0F474A;color:#FFFFFF" title="Teal 1600 — #0F474A — 10.39:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">0F474A</span>
+    <span class="sw-cr">10.39</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Turquoise</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>800</b></span>
+   <span class="pill">AA text from <b>1100</b></span>
+   <span class="pill">AAA from <b>1300</b></span>
+   <span class="pill warn">L-span 51.6 / 25.6</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#E9F6FA;color:#1A1D21" title="Turquoise 100 — #E9F6FA — 1.1:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">E9F6FA</span>
+    <span class="sw-cr">1.1</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#DAF0F7;color:#1A1D21" title="Turquoise 200 — #DAF0F7 — 1.18:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">DAF0F7</span>
+    <span class="sw-cr">1.18</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#CBE9F4;color:#1A1D21" title="Turquoise 300 — #CBE9F4 — 1.27:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">CBE9F4</span>
+    <span class="sw-cr">1.27</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#A6DAEC;color:#1A1D21" title="Turquoise 400 — #A6DAEC — 1.52:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">A6DAEC</span>
+    <span class="sw-cr">1.52</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#79C7E3;color:#1A1D21" title="Turquoise 500 — #79C7E3 — 1.89:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">79C7E3</span>
+    <span class="sw-cr">1.89</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#4DB5D9;color:#1A1D21" title="Turquoise 600 — #4DB5D9 — 2.35:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">4DB5D9</span>
+    <span class="sw-cr">2.35</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#35A6CC;color:#FFFFFF" title="Turquoise 700 — #35A6CC — 2.81:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">35A6CC</span>
+    <span class="sw-cr">2.81</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#1E96BE;color:#FFFFFF" title="Turquoise 800 — #1E96BE — 3.41:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">1E96BE</span>
+    <span class="sw-cr">3.41</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#1C8EB4;color:#FFFFFF" title="Turquoise 900 — #1C8EB4 — 3.77:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">1C8EB4</span>
+    <span class="sw-cr">3.77</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#1A85AB;color:#FFFFFF" title="Turquoise 1000 — #1A85AB — 4.21:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">1A85AB</span>
+    <span class="sw-cr">4.21</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#17779A;color:#FFFFFF" title="Turquoise 1100 — #17779A — 5.07:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">17779A</span>
+    <span class="sw-cr">5.07</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#146988;color:#FFFFFF" title="Turquoise 1200 — #146988 — 6.17:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">146988</span>
+    <span class="sw-cr">6.17</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#125C77;color:#FFFFFF" title="Turquoise 1300 — #125C77 — 7.44:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">125C77</span>
+    <span class="sw-cr">7.44</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#0F4E65;color:#FFFFFF" title="Turquoise 1400 — #0F4E65 — 9.14:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">0F4E65</span>
+    <span class="sw-cr">9.14</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#0D4559;color:#FFFFFF" title="Turquoise 1500 — #0D4559 — 10.43:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">0D4559</span>
+    <span class="sw-cr">10.43</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#103B49;color:#FFFFFF" title="Turquoise 1600 — #103B49 — 12.04:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">103B49</span>
+    <span class="sw-cr">12.04</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div></section><section class="grp"><header class="grp-h"><h3>Blues</h3><p>Ocean is the MHC brand family. Blue and Indigo go purple — avoid.</p></header><div class="fam"><div class="fam-h"><h4>Ocean</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>600</b></span>
+   <span class="pill">AA text from <b>800</b></span>
+   <span class="pill">AAA from <b>1200</b></span>
+   <span class="pill warn">L-span 50.8 / 24.7</span>
+   <span class="pill bad">2 defects</span>
+  </div></div><div class="ramp"><div class="sw " style="background:#EAF2FA;color:#1A1D21" title="Ocean 100 — #EAF2FA — 1.13:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">EAF2FA</span>
+    <span class="sw-cr">1.13</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#DCEAF7;color:#1A1D21" title="Ocean 200 — #DCEAF7 — 1.22:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">DCEAF7</span>
+    <span class="sw-cr">1.22</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#CDE1F4;color:#1A1D21" title="Ocean 300 — #CDE1F4 — 1.34:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">CDE1F4</span>
+    <span class="sw-cr">1.34</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#A9CBED;color:#1A1D21" title="Ocean 400 — #A9CBED — 1.69:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">A9CBED</span>
+    <span class="sw-cr">1.69</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#7DB1E3;color:#1A1D21" title="Ocean 500 — #7DB1E3 — 2.27:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">7DB1E3</span>
+    <span class="sw-cr">2.27</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#5297DA;color:#1A1D21" title="Ocean 600 — #5297DA — 3.09:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">5297DA</span>
+    <span class="sw-cr">3.09</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#3B85CC;color:#FFFFFF" title="Ocean 700 — #3B85CC — 3.88:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">3B85CC</span>
+    <span class="sw-cr">3.88</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#2473BD;color:#FFFFFF" title="Ocean 800 — #2473BD — 4.93:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">2473BD</span>
+    <span class="sw-cr">4.93</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#226DB5;color:#FFFFFF" title="Ocean 900 — #226DB5 — 5.35:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">226DB5</span>
+    <span class="sw-cr">5.35</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-bad sw-dark" style="background:#2473BD;color:#FFFFFF" title="Ocean 1000 — #2473BD — 4.93:1 on white — Lighter than 900 — ramp reverses">
+    <span class="sw-step">1000 ⚠</span>
+    <span class="sw-hex">2473BD</span>
+    <span class="sw-cr">4.93</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#1C5C9A;color:#FFFFFF" title="Ocean 1100 — #1C5C9A — 6.89:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">1C5C9A</span>
+    <span class="sw-cr">6.89</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#195188;color:#FFFFFF" title="Ocean 1200 — #195188 — 8.16:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">195188</span>
+    <span class="sw-cr">8.16</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#164677;color:#FFFFFF" title="Ocean 1300 — #164677 — 9.65:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">164677</span>
+    <span class="sw-cr">9.65</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#133B65;color:#FFFFFF" title="Ocean 1400 — #133B65 — 11.41:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">133B65</span>
+    <span class="sw-cr">11.41</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#103459;color:#FFFFFF" title="Ocean 1500 — #103459 — 12.67:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">103459</span>
+    <span class="sw-cr">12.67</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#16314D;color:#FFFFFF" title="Ocean 1600 — #16314D — 13.29:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">16314D</span>
+    <span class="sw-cr">13.29</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div><ul class="defects"><li><b>Ocean 1000</b> — Lighter than 900 — ramp reverses</li><li><b>Ocean 1000</b> — Duplicate of 800</li></ul></div><div class="fam"><div class="fam-h"><h4>Blue</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>600</b></span>
+   <span class="pill">AA text from <b>700</b></span>
+   <span class="pill">AAA from <b>900</b></span>
+   <span class="pill ">L-span 49.2 / 26.1</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#EBEFFA;color:#1A1D21" title="Blue 100 — #EBEFFA — 1.15:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">EBEFFA</span>
+    <span class="sw-cr">1.15</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#DDE3F7;color:#1A1D21" title="Blue 200 — #DDE3F7 — 1.28:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">DDE3F7</span>
+    <span class="sw-cr">1.28</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#CFD8F4;color:#1A1D21" title="Blue 300 — #CFD8F4 — 1.42:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">CFD8F4</span>
+    <span class="sw-cr">1.42</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#ABBCED;color:#1A1D21" title="Blue 400 — #ABBCED — 1.88:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">ABBCED</span>
+    <span class="sw-cr">1.88</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#829AE3;color:#1A1D21" title="Blue 500 — #829AE3 — 2.73:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">829AE3</span>
+    <span class="sw-cr">2.73</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#5879DA;color:#1A1D21" title="Blue 600 — #5879DA — 4.07:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">5879DA</span>
+    <span class="sw-cr">4.07</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#4265CC;color:#FFFFFF" title="Blue 700 — #4265CC — 5.3:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">4265CC</span>
+    <span class="sw-cr">5.3</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#2C51BE;color:#FFFFFF" title="Blue 800 — #2C51BE — 6.94:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">2C51BE</span>
+    <span class="sw-cr">6.94</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#294CB5;color:#FFFFFF" title="Blue 900 — #294CB5 — 7.51:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">294CB5</span>
+    <span class="sw-cr">7.51</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#2647AC;color:#FFFFFF" title="Blue 1000 — #2647AC — 8.14:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">2647AC</span>
+    <span class="sw-cr">8.14</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#223F9A;color:#FFFFFF" title="Blue 1100 — #223F9A — 9.35:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">223F9A</span>
+    <span class="sw-cr">9.35</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#1E3788;color:#FFFFFF" title="Blue 1200 — #1E3788 — 10.73:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">1E3788</span>
+    <span class="sw-cr">10.73</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#1A3177;color:#FFFFFF" title="Blue 1300 — #1A3177 — 12:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">1A3177</span>
+    <span class="sw-cr">12</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#162A65;color:#FFFFFF" title="Blue 1400 — #162A65 — 13.52:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">162A65</span>
+    <span class="sw-cr">13.52</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#132559;color:#FFFFFF" title="Blue 1500 — #132559 — 14.62:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">132559</span>
+    <span class="sw-cr">14.62</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#18264D;color:#FFFFFF" title="Blue 1600 — #18264D — 14.75:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">18264D</span>
+    <span class="sw-cr">14.75</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Indigo</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>500</b></span>
+   <span class="pill">AA text from <b>600</b></span>
+   <span class="pill">AAA from <b>700</b></span>
+   <span class="pill ">L-span 49.2 / 28</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#EDE9FA;color:#1A1D21" title="Indigo 100 — #EDE9FA — 1.19:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">EDE9FA</span>
+    <span class="sw-cr">1.19</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#E1DBF6;color:#1A1D21" title="Indigo 200 — #E1DBF6 — 1.34:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">E1DBF6</span>
+    <span class="sw-cr">1.34</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#D4CCF3;color:#1A1D21" title="Indigo 300 — #D4CCF3 — 1.53:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">D4CCF3</span>
+    <span class="sw-cr">1.53</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#B4A7EB;color:#1A1D21" title="Indigo 400 — #B4A7EB — 2.17:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">B4A7EB</span>
+    <span class="sw-cr">2.17</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#8F7BE0;color:#1A1D21" title="Indigo 500 — #8F7BE0 — 3.46:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">8F7BE0</span>
+    <span class="sw-cr">3.46</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw " style="background:#694FD6;color:#1A1D21" title="Indigo 600 — #694FD6 — 5.69:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">694FD6</span>
+    <span class="sw-cr">5.69</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#5438C8;color:#FFFFFF" title="Indigo 700 — #5438C8 — 7.56:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">5438C8</span>
+    <span class="sw-cr">7.56</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#482BBD;color:#FFFFFF" title="Indigo 800 — #482BBD — 8.91:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">482BBD</span>
+    <span class="sw-cr">8.91</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#3B1EB1;color:#FFFFFF" title="Indigo 900 — #3B1EB1 — 10.47:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">3B1EB1</span>
+    <span class="sw-cr">10.47</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#371DA8;color:#FFFFFF" title="Indigo 1000 — #371DA8 — 11.03:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">371DA8</span>
+    <span class="sw-cr">11.03</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#321A97;color:#FFFFFF" title="Indigo 1100 — #321A97 — 12.14:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">321A97</span>
+    <span class="sw-cr">12.14</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#2C1685;color:#FFFFFF" title="Indigo 1200 — #2C1685 — 13.46:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">2C1685</span>
+    <span class="sw-cr">13.46</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#261474;color:#FFFFFF" title="Indigo 1300 — #261474 — 14.64:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">261474</span>
+    <span class="sw-cr">14.64</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#201163;color:#FFFFFF" title="Indigo 1400 — #201163 — 15.89:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">201163</span>
+    <span class="sw-cr">15.89</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#1C0F58;color:#FFFFFF" title="Indigo 1500 — #1C0F58 — 16.68:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">1C0F58</span>
+    <span class="sw-cr">16.68</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#1B1247;color:#FFFFFF" title="Indigo 1600 — #1B1247 — 17.16:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">1B1247</span>
+    <span class="sw-cr">17.16</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div></section><section class="grp"><header class="grp-h"><h3>Purples</h3><p>Unused at MHC.</p></header><div class="fam"><div class="fam-h"><h4>Purple</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>500</b></span>
+   <span class="pill">AA text from <b>600</b></span>
+   <span class="pill">AAA from <b>800</b></span>
+   <span class="pill warn">L-span 57.2 / 22.2</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#F3E7F9;color:#1A1D21" title="Purple 100 — #F3E7F9 — 1.19:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">F3E7F9</span>
+    <span class="sw-cr">1.19</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#ECD7F5;color:#1A1D21" title="Purple 200 — #ECD7F5 — 1.35:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">ECD7F5</span>
+    <span class="sw-cr">1.35</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#E4C7F1;color:#1A1D21" title="Purple 300 — #E4C7F1 — 1.53:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">E4C7F1</span>
+    <span class="sw-cr">1.53</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#D09FE6;color:#1A1D21" title="Purple 400 — #D09FE6 — 2.15:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">D09FE6</span>
+    <span class="sw-cr">2.15</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#B86EDA;color:#1A1D21" title="Purple 500 — #B86EDA — 3.34:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">B86EDA</span>
+    <span class="sw-cr">3.34</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#A13ECD;color:#FFFFFF" title="Purple 600 — #A13ECD — 5.14:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">A13ECD</span>
+    <span class="sw-cr">5.14</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#8D26B9;color:#FFFFFF" title="Purple 700 — #8D26B9 — 6.75:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">8D26B9</span>
+    <span class="sw-cr">6.75</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#820DAF;color:#FFFFFF" title="Purple 800 — #820DAF — 8:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">820DAF</span>
+    <span class="sw-cr">8</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#7A0DA6;color:#FFFFFF" title="Purple 900 — #7A0DA6 — 8.62:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">7A0DA6</span>
+    <span class="sw-cr">8.62</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#720C9D;color:#FFFFFF" title="Purple 1000 — #720C9D — 9.31:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">720C9D</span>
+    <span class="sw-cr">9.31</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#670B8C;color:#FFFFFF" title="Purple 1100 — #670B8C — 10.48:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">670B8C</span>
+    <span class="sw-cr">10.48</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#5C097A;color:#FFFFFF" title="Purple 1200 — #5C097A — 11.83:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">5C097A</span>
+    <span class="sw-cr">11.83</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#510869;color:#FFFFFF" title="Purple 1300 — #510869 — 13.22:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">510869</span>
+    <span class="sw-cr">13.22</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#460658;color:#FFFFFF" title="Purple 1400 — #460658 — 14.71:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">460658</span>
+    <span class="sw-cr">14.71</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#3F054C;color:#FFFFFF" title="Purple 1500 — #3F054C — 15.7:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">3F054C</span>
+    <span class="sw-cr">15.7</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#360B40;color:#FFFFFF" title="Purple 1600 — #360B40 — 16.42:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">360B40</span>
+    <span class="sw-cr">16.42</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Violet</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>600</b></span>
+   <span class="pill">AA text from <b>700</b></span>
+   <span class="pill">AAA from <b>1000</b></span>
+   <span class="pill warn">L-span 55.3 / 20.4</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#F9E8F5;color:#1A1D21" title="Violet 100 — #F9E8F5 — 1.17:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">F9E8F5</span>
+    <span class="sw-cr">1.17</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#F5D8EE;color:#1A1D21" title="Violet 200 — #F5D8EE — 1.32:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">F5D8EE</span>
+    <span class="sw-cr">1.32</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#F1C8E6;color:#1A1D21" title="Violet 300 — #F1C8E6 — 1.48:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">F1C8E6</span>
+    <span class="sw-cr">1.48</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#E79FD5;color:#1A1D21" title="Violet 400 — #E79FD5 — 2.04:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">E79FD5</span>
+    <span class="sw-cr">2.04</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#DA70BF;color:#1A1D21" title="Violet 500 — #DA70BF — 2.98:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">DA70BF</span>
+    <span class="sw-cr">2.98</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#CE40AA;color:#FFFFFF" title="Violet 600 — #CE40AA — 4.25:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">CE40AA</span>
+    <span class="sw-cr">4.25</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#C32899;color:#FFFFFF" title="Violet 700 — #C32899 — 5.14:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">C32899</span>
+    <span class="sw-cr">5.14</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#B80F87;color:#FFFFFF" title="Violet 800 — #B80F87 — 6.08:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">B80F87</span>
+    <span class="sw-cr">6.08</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#AE0E7F;color:#FFFFFF" title="Violet 900 — #AE0E7F — 6.63:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">AE0E7F</span>
+    <span class="sw-cr">6.63</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#A40D77;color:#FFFFFF" title="Violet 1000 — #A40D77 — 7.24:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">A40D77</span>
+    <span class="sw-cr">7.24</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#950C69;color:#FFFFFF" title="Violet 1100 — #950C69 — 8.29:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">950C69</span>
+    <span class="sw-cr">8.29</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#861D5C;color:#FFFFFF" title="Violet 1200 — #861D5C — 8.96:1 on white — Lighter than 1100 — ramp reverses">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">861D5C</span>
+    <span class="sw-cr">8.96</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#79094D;color:#FFFFFF" title="Violet 1300 — #79094D — 10.72:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">79094D</span>
+    <span class="sw-cr">10.72</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#6B083F;color:#FFFFFF" title="Violet 1400 — #6B083F — 12.13:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">6B083F</span>
+    <span class="sw-cr">12.13</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#620736;color:#FFFFFF" title="Violet 1500 — #620736 — 13.1:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">620736</span>
+    <span class="sw-cr">13.1</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#510E30;color:#FFFFFF" title="Violet 1600 — #510E30 — 14.43:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">510E30</span>
+    <span class="sw-cr">14.43</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div></section><section class="grp"><header class="grp-h"><h3>Reds & pinks</h3><p>Coral 800–1500 is eight near-identical reds.</p></header><div class="fam"><div class="fam-h"><h4>Pink</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>600</b></span>
+   <span class="pill">AA text from <b>800</b></span>
+   <span class="pill">AAA from <b>1200</b></span>
+   <span class="pill ">L-span 47.6 / 25</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FCE9EF;color:#1A1D21" title="Pink 100 — #FCE9EF — 1.16:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FCE9EF</span>
+    <span class="sw-cr">1.16</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FBDAE4;color:#1A1D21" title="Pink 200 — #FBDAE4 — 1.29:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">FBDAE4</span>
+    <span class="sw-cr">1.29</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#F9CADA;color:#1A1D21" title="Pink 300 — #F9CADA — 1.45:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">F9CADA</span>
+    <span class="sw-cr">1.45</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#F4A3BF;color:#1A1D21" title="Pink 400 — #F4A3BF — 1.94:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">F4A3BF</span>
+    <span class="sw-cr">1.94</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#EF769E;color:#1A1D21" title="Pink 500 — #EF769E — 2.71:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">EF769E</span>
+    <span class="sw-cr">2.71</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#E9487E;color:#1A1D21" title="Pink 600 — #E9487E — 3.69:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">E9487E</span>
+    <span class="sw-cr">3.69</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#E1316A;color:#FFFFFF" title="Pink 700 — #E1316A — 4.33:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">E1316A</span>
+    <span class="sw-cr">4.33</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#D91955;color:#FFFFFF" title="Pink 800 — #D91955 — 4.98:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">D91955</span>
+    <span class="sw-cr">4.98</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#CF1750;color:#FFFFFF" title="Pink 900 — #CF1750 — 5.4:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">CF1750</span>
+    <span class="sw-cr">5.4</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#C5154A;color:#FFFFFF" title="Pink 1000 — #C5154A — 5.87:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">C5154A</span>
+    <span class="sw-cr">5.87</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#B51241;color:#FFFFFF" title="Pink 1100 — #B51241 — 6.71:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">B51241</span>
+    <span class="sw-cr">6.71</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#A51037;color:#FFFFFF" title="Pink 1200 — #A51037 — 7.69:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">A51037</span>
+    <span class="sw-cr">7.69</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#970E2D;color:#FFFFFF" title="Pink 1300 — #970E2D — 8.69:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">970E2D</span>
+    <span class="sw-cr">8.69</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#880B23;color:#FFFFFF" title="Pink 1400 — #880B23 — 9.91:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">880B23</span>
+    <span class="sw-cr">9.91</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#7E0A1D;color:#FFFFFF" title="Pink 1500 — #7E0A1D — 10.78:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">7E0A1D</span>
+    <span class="sw-cr">10.78</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#63101D;color:#FFFFFF" title="Pink 1600 — #63101D — 12.94:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">63101D</span>
+    <span class="sw-cr">12.94</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Coral</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>600</b></span>
+   <span class="pill">AA text from <b>700</b></span>
+   <span class="pill">AAA from <b>1200</b></span>
+   <span class="pill warn">L-span 52 / 19.4</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FDE6E6;color:#1A1D21" title="Coral 100 — #FDE6E6 — 1.19:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FDE6E6</span>
+    <span class="sw-cr">1.19</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FBD4D4;color:#1A1D21" title="Coral 200 — #FBD4D4 — 1.36:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">FBD4D4</span>
+    <span class="sw-cr">1.36</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#F9C4C4;color:#1A1D21" title="Coral 300 — #F9C4C4 — 1.53:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">F9C4C4</span>
+    <span class="sw-cr">1.53</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#F59999;color:#1A1D21" title="Coral 400 — #F59999 — 2.12:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">F59999</span>
+    <span class="sw-cr">2.12</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#F06D6D;color:#1A1D21" title="Coral 500 — #F06D6D — 2.95:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">F06D6D</span>
+    <span class="sw-cr">2.95</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#EA4444;color:#1A1D21" title="Coral 600 — #EA4444 — 3.88:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">EA4444</span>
+    <span class="sw-cr">3.88</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#E31A1A;color:#FFFFFF" title="Coral 700 — #E31A1A — 4.74:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">E31A1A</span>
+    <span class="sw-cr">4.74</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#DA0000;color:#FFFFFF" title="Coral 800 — #DA0000 — 5.27:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">DA0000</span>
+    <span class="sw-cr">5.27</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#D20000;color:#FFFFFF" title="Coral 900 — #D20000 — 5.61:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">D20000</span>
+    <span class="sw-cr">5.61</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#C90000;color:#FFFFFF" title="Coral 1000 — #C90000 — 6.03:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">C90000</span>
+    <span class="sw-cr">6.03</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#BB0000;color:#FFFFFF" title="Coral 1100 — #BB0000 — 6.75:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">BB0000</span>
+    <span class="sw-cr">6.75</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#AC0000;color:#FFFFFF" title="Coral 1200 — #AC0000 — 7.62:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">AC0000</span>
+    <span class="sw-cr">7.62</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#9F0000;color:#FFFFFF" title="Coral 1300 — #9F0000 — 8.49:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">9F0000</span>
+    <span class="sw-cr">8.49</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#910000;color:#FFFFFF" title="Coral 1400 — #910000 — 9.53:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">910000</span>
+    <span class="sw-cr">9.53</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#880000;color:#FFFFFF" title="Coral 1500 — #880000 — 10.26:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">880000</span>
+    <span class="sw-cr">10.26</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#6D0A0A;color:#FFFFFF" title="Coral 1600 — #6D0A0A — 12.37:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">6D0A0A</span>
+    <span class="sw-cr">12.37</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Ember</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>700</b></span>
+   <span class="pill">AA text from <b>1000</b></span>
+   <span class="pill">AAA from <b>1400</b></span>
+   <span class="pill ">L-span 43.9 / 24.7</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FEEEE8;color:#1A1D21" title="Ember 100 — #FEEEE8 — 1.13:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FEEEE8</span>
+    <span class="sw-cr">1.13</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#F8DDD3;color:#1A1D21" title="Ember 200 — #F8DDD3 — 1.29:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">F8DDD3</span>
+    <span class="sw-cr">1.29</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FCD6C8;color:#1A1D21" title="Ember 300 — #FCD6C8 — 1.35:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">FCD6C8</span>
+    <span class="sw-cr">1.35</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#FAB8A0;color:#1A1D21" title="Ember 400 — #FAB8A0 — 1.69:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">FAB8A0</span>
+    <span class="sw-cr">1.69</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#F89570;color:#1A1D21" title="Ember 500 — #F89570 — 2.2:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">F89570</span>
+    <span class="sw-cr">2.2</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw " style="background:#F57141;color:#1A1D21" title="Ember 600 — #F57141 — 2.87:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">F57141</span>
+    <span class="sw-cr">2.87</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#EF5D28;color:#FFFFFF" title="Ember 700 — #EF5D28 — 3.35:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">EF5D28</span>
+    <span class="sw-cr">3.35</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#E7531F;color:#FFFFFF" title="Ember 800 — #E7531F — 3.71:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">E7531F</span>
+    <span class="sw-cr">3.71</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#DF4916;color:#FFFFFF" title="Ember 900 — #DF4916 — 4.12:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">DF4916</span>
+    <span class="sw-cr">4.12</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#D73F0D;color:#FFFFFF" title="Ember 1000 — #D73F0D — 4.56:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">D73F0D</span>
+    <span class="sw-cr">4.56</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#CA3B27;color:#FFFFFF" title="Ember 1100 — #CA3B27 — 5.04:1 on white — Lighter than 1000 — ramp reverses">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">CA3B27</span>
+    <span class="sw-cr">5.04</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#BE3009;color:#FFFFFF" title="Ember 1200 — #BE3009 — 5.81:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">BE3009</span>
+    <span class="sw-cr">5.81</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#B12907;color:#FFFFFF" title="Ember 1300 — #B12907 — 6.58:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">B12907</span>
+    <span class="sw-cr">6.58</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#A42105;color:#FFFFFF" title="Ember 1400 — #A42105 — 7.5:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">A42105</span>
+    <span class="sw-cr">7.5</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#9B1C04;color:#FFFFFF" title="Ember 1500 — #9B1C04 — 8.2:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">9B1C04</span>
+    <span class="sw-cr">8.2</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div><div class="sw sw-dark" style="background:#7A1F0E;color:#FFFFFF" title="Ember 1600 — #7A1F0E — 10.35:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">7A1F0E</span>
+    <span class="sw-cr">10.35</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div></section><section class="grp"><header class="grp-h"><h3>Oranges & yellows</h3><p>Never for text. Yellow and Lemon cannot reach AAA at any step.</p></header><div class="fam"><div class="fam-h"><h4>Orange</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>1000</b></span>
+   <span class="pill">AA text from <b>1400</b></span>
+   <span class="pill">AAA from <b>1600</b></span>
+   <span class="pill warn">L-span 45.5 / 20.2</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FFEDE1;color:#1A1D21" title="Orange 100 — #FFEDE1 — 1.14:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FFEDE1</span>
+    <span class="sw-cr">1.14</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFE5D0;color:#1A1D21" title="Orange 200 — #FFE5D0 — 1.21:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">FFE5D0</span>
+    <span class="sw-cr">1.21</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFDCBF;color:#1A1D21" title="Orange 300 — #FFDCBF — 1.29:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">FFDCBF</span>
+    <span class="sw-cr">1.29</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFC694;color:#1A1D21" title="Orange 400 — #FFC694 — 1.53:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">FFC694</span>
+    <span class="sw-cr">1.53</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#FFAD66;color:#1A1D21" title="Orange 500 — #FFAD66 — 1.84:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">FFAD66</span>
+    <span class="sw-cr">1.84</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#FF9333;color:#1A1D21" title="Orange 600 — #FF9333 — 2.22:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">FF9333</span>
+    <span class="sw-cr">2.22</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#F9841A;color:#FFFFFF" title="Orange 700 — #F9841A — 2.52:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">F9841A</span>
+    <span class="sw-cr">2.52</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#F87900;color:#FFFFFF" title="Orange 800 — #F87900 — 2.72:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">F87900</span>
+    <span class="sw-cr">2.72</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#F57400;color:#FFFFFF" title="Orange 900 — #F57400 — 2.85:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">F57400</span>
+    <span class="sw-cr">2.85</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#ED6C00;color:#FFFFFF" title="Orange 1000 — #ED6C00 — 3.11:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">ED6C00</span>
+    <span class="sw-cr">3.11</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#E86600;color:#FFFFFF" title="Orange 1100 — #E86600 — 3.32:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">E86600</span>
+    <span class="sw-cr">3.32</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#DF5D00;color:#FFFFFF" title="Orange 1200 — #DF5D00 — 3.68:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">DF5D00</span>
+    <span class="sw-cr">3.68</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#D15200;color:#FFFFFF" title="Orange 1300 — #D15200 — 4.27:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">D15200</span>
+    <span class="sw-cr">4.27</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#C34600;color:#FFFFFF" title="Orange 1400 — #C34600 — 5:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">C34600</span>
+    <span class="sw-cr">5</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#B43C00;color:#FFFFFF" title="Orange 1500 — #B43C00 — 5.85:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">B43C00</span>
+    <span class="sw-cr">5.85</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#87330A;color:#FFFFFF" title="Orange 1600 — #87330A — 8.37:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">87330A</span>
+    <span class="sw-cr">8.37</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Mustard</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>1300</b></span>
+   <span class="pill">AA text from <b>1500</b></span>
+   <span class="pill">AAA from <b>1600</b></span>
+   <span class="pill warn">L-span 45.5 / 20.2</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FFF2E1;color:#1A1D21" title="Mustard 100 — #FFF2E1 — 1.1:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FFF2E1</span>
+    <span class="sw-cr">1.1</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFEDD0;color:#1A1D21" title="Mustard 200 — #FFEDD0 — 1.15:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">FFEDD0</span>
+    <span class="sw-cr">1.15</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFE7BF;color:#1A1D21" title="Mustard 300 — #FFE7BF — 1.2:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">FFE7BF</span>
+    <span class="sw-cr">1.2</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFDA94;color:#1A1D21" title="Mustard 400 — #FFDA94 — 1.34:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">FFDA94</span>
+    <span class="sw-cr">1.34</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#FFC966;color:#1A1D21" title="Mustard 500 — #FFC966 — 1.52:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">FFC966</span>
+    <span class="sw-cr">1.52</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#FFB933;color:#1A1D21" title="Mustard 600 — #FFB933 — 1.72:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">FFB933</span>
+    <span class="sw-cr">1.72</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#F9AE1A;color:#FFFFFF" title="Mustard 700 — #F9AE1A — 1.89:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">F9AE1A</span>
+    <span class="sw-cr">1.89</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#F8A200;color:#FFFFFF" title="Mustard 800 — #F8A200 — 2.07:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">F8A200</span>
+    <span class="sw-cr">2.07</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#F59C00;color:#FFFFFF" title="Mustard 900 — #F59C00 — 2.18:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">F59C00</span>
+    <span class="sw-cr">2.18</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#F19500;color:#FFFFFF" title="Mustard 1000 — #F19500 — 2.32:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">F19500</span>
+    <span class="sw-cr">2.32</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#E88800;color:#FFFFFF" title="Mustard 1100 — #E88800 — 2.64:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">E88800</span>
+    <span class="sw-cr">2.64</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#DF8000;color:#FFFFFF" title="Mustard 1200 — #DF8000 — 2.91:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">DF8000</span>
+    <span class="sw-cr">2.91</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#D17100;color:#FFFFFF" title="Mustard 1300 — #D17100 — 3.46:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">D17100</span>
+    <span class="sw-cr">3.46</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#C36100;color:#FFFFFF" title="Mustard 1400 — #C36100 — 4.17:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">C36100</span>
+    <span class="sw-cr">4.17</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#B45300;color:#FFFFFF" title="Mustard 1500 — #B45300 — 5.03:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">B45300</span>
+    <span class="sw-cr">5.03</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div><div class="sw sw-dark" style="background:#87440A;color:#FFFFFF" title="Mustard 1600 — #87440A — 7.34:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">87440A</span>
+    <span class="sw-cr">7.34</span>
+    <span class="sw-band" style="background:#1B355C;color:#fff">ink</span></div></div></div><div class="fam"><div class="fam-h"><h4>Yellow</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>1300</b></span>
+   <span class="pill">AA text from <b>1600</b></span>
+   <span class="pill">AAA from <b>never</b></span>
+   <span class="pill warn">L-span 45.5 / 20.2</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FFF6E1;color:#1A1D21" title="Yellow 100 — #FFF6E1 — 1.08:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FFF6E1</span>
+    <span class="sw-cr">1.08</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFF3D0;color:#1A1D21" title="Yellow 200 — #FFF3D0 — 1.11:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">FFF3D0</span>
+    <span class="sw-cr">1.11</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFF0BF;color:#1A1D21" title="Yellow 300 — #FFF0BF — 1.14:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">FFF0BF</span>
+    <span class="sw-cr">1.14</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFE687;color:#1A1D21" title="Yellow 400 — #FFE687 — 1.24:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">FFE687</span>
+    <span class="sw-cr">1.24</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFDF66;color:#1A1D21" title="Yellow 500 — #FFDF66 — 1.31:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">FFDF66</span>
+    <span class="sw-cr">1.31</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw " style="background:#FFD633;color:#1A1D21" title="Yellow 600 — #FFD633 — 1.41:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">FFD633</span>
+    <span class="sw-cr">1.41</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#F9CD1A;color:#FFFFFF" title="Yellow 700 — #F9CD1A — 1.52:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">F9CD1A</span>
+    <span class="sw-cr">1.52</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#F8C400;color:#FFFFFF" title="Yellow 800 — #F8C400 — 1.63:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">F8C400</span>
+    <span class="sw-cr">1.63</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#F5BD00;color:#FFFFFF" title="Yellow 900 — #F5BD00 — 1.73:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">F5BD00</span>
+    <span class="sw-cr">1.73</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#F1B500;color:#FFFFFF" title="Yellow 1000 — #F1B500 — 1.85:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">F1B500</span>
+    <span class="sw-cr">1.85</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#E8A600;color:#FFFFFF" title="Yellow 1100 — #E8A600 — 2.12:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">E8A600</span>
+    <span class="sw-cr">2.12</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#DF9600;color:#FFFFFF" title="Yellow 1200 — #DF9600 — 2.47:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">DF9600</span>
+    <span class="sw-cr">2.47</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#D18300;color:#FFFFFF" title="Yellow 1300 — #D18300 — 3.02:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">D18300</span>
+    <span class="sw-cr">3.02</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#C37500;color:#FFFFFF" title="Yellow 1400 — #C37500 — 3.58:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">C37500</span>
+    <span class="sw-cr">3.58</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#B46500;color:#FFFFFF" title="Yellow 1500 — #B46500 — 4.37:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">B46500</span>
+    <span class="sw-cr">4.37</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#87500A;color:#FFFFFF" title="Yellow 1600 — #87500A — 6.6:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">87500A</span>
+    <span class="sw-cr">6.6</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div></div></div><div class="fam"><div class="fam-h"><h4>Lemon</h4><div class="fam-meta">
+   <span class="pill">UI 3:1 from <b>1400</b></span>
+   <span class="pill">AA text from <b>1600</b></span>
+   <span class="pill">AAA from <b>never</b></span>
+   <span class="pill warn">L-span 45.5 / 20.2</span>
+   
+  </div></div><div class="ramp"><div class="sw " style="background:#FFF9E1;color:#1A1D21" title="Lemon 100 — #FFF9E1 — 1.06:1 on white">
+    <span class="sw-step">100</span>
+    <span class="sw-hex">FFF9E1</span>
+    <span class="sw-cr">1.06</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFF9D0;color:#1A1D21" title="Lemon 200 — #FFF9D0 — 1.07:1 on white">
+    <span class="sw-step">200</span>
+    <span class="sw-hex">FFF9D0</span>
+    <span class="sw-cr">1.07</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFF8BF;color:#1A1D21" title="Lemon 300 — #FFF8BF — 1.08:1 on white">
+    <span class="sw-step">300</span>
+    <span class="sw-hex">FFF8BF</span>
+    <span class="sw-cr">1.08</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFF694;color:#1A1D21" title="Lemon 400 — #FFF694 — 1.11:1 on white">
+    <span class="sw-step">400</span>
+    <span class="sw-hex">FFF694</span>
+    <span class="sw-cr">1.11</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFF566;color:#1A1D21" title="Lemon 500 — #FFF566 — 1.13:1 on white">
+    <span class="sw-step">500</span>
+    <span class="sw-hex">FFF566</span>
+    <span class="sw-cr">1.13</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw " style="background:#FFF333;color:#1A1D21" title="Lemon 600 — #FFF333 — 1.16:1 on white">
+    <span class="sw-step">600</span>
+    <span class="sw-hex">FFF333</span>
+    <span class="sw-cr">1.16</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw sw-dark" style="background:#F9ED1A;color:#FFFFFF" title="Lemon 700 — #F9ED1A — 1.22:1 on white">
+    <span class="sw-step">700</span>
+    <span class="sw-hex">F9ED1A</span>
+    <span class="sw-cr">1.22</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw sw-dark" style="background:#F8E700;color:#FFFFFF" title="Lemon 800 — #F8E700 — 1.28:1 on white">
+    <span class="sw-step">800</span>
+    <span class="sw-hex">F8E700</span>
+    <span class="sw-cr">1.28</span>
+    <span class="sw-band" style="background:#EFE7D6;">wash</span></div><div class="sw sw-dark" style="background:#F5DE00;color:#FFFFFF" title="Lemon 900 — #F5DE00 — 1.37:1 on white">
+    <span class="sw-step">900</span>
+    <span class="sw-hex">F5DE00</span>
+    <span class="sw-cr">1.37</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#F1D500;color:#FFFFFF" title="Lemon 1000 — #F1D500 — 1.47:1 on white">
+    <span class="sw-step">1000</span>
+    <span class="sw-hex">F1D500</span>
+    <span class="sw-cr">1.47</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#E8C300;color:#FFFFFF" title="Lemon 1100 — #E8C300 — 1.72:1 on white">
+    <span class="sw-step">1100</span>
+    <span class="sw-hex">E8C300</span>
+    <span class="sw-cr">1.72</span>
+    <span class="sw-band" style="background:#DDD7C8;">tint</span></div><div class="sw sw-dark" style="background:#DFB100;color:#FFFFFF" title="Lemon 1200 — #DFB100 — 2.01:1 on white">
+    <span class="sw-step">1200</span>
+    <span class="sw-hex">DFB100</span>
+    <span class="sw-cr">2.01</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#D19B00;color:#FFFFFF" title="Lemon 1300 — #D19B00 — 2.5:1 on white">
+    <span class="sw-step">1300</span>
+    <span class="sw-hex">D19B00</span>
+    <span class="sw-cr">2.5</span>
+    <span class="sw-band" style="background:#C9B99A;">accent</span></div><div class="sw sw-dark" style="background:#C38400;color:#FFFFFF" title="Lemon 1400 — #C38400 — 3.17:1 on white">
+    <span class="sw-step">1400</span>
+    <span class="sw-hex">C38400</span>
+    <span class="sw-cr">3.17</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#B47600;color:#FFFFFF" title="Lemon 1500 — #B47600 — 3.8:1 on white">
+    <span class="sw-step">1500</span>
+    <span class="sw-hex">B47600</span>
+    <span class="sw-cr">3.8</span>
+    <span class="sw-band" style="background:#B5571E;color:#fff">ui</span></div><div class="sw sw-dark" style="background:#875C0A;color:#FFFFFF" title="Lemon 1600 — #875C0A — 5.89:1 on white">
+    <span class="sw-step">1600</span>
+    <span class="sw-hex">875C0A</span>
+    <span class="sw-cr">5.89</span>
+    <span class="sw-band" style="background:#1E5A6B;color:#fff">text</span></div></div></div></section>
+</section>
+
+<hr>
+
+<section>
+<h2>Reconciling with what ships</h2>
+<p class="lede">Production MHC CSS against its nearest neighbour in this palette. ΔE is perceptual distance — under 12 is effectively a match, over 30 is a different color.</p>
+<div class="scroll"><table class="tbl"><thead><tr><th>Production token</th><th>Ships as</th><th>Nearest in palette</th><th>Hex</th><th class="num">ΔE</th><th>Verdict</th></tr></thead><tbody><tr><td><code>--bg</code></td><td><span class="chip" style="background:#FAF7F0"></span><code>#FAF7F0</code></td><td>Honeydew 100</td><td><span class="chip" style="background:#FBFCEC"></span><code>#FBFCEC</code></td><td class="num ok">12</td><td>No real equivalent. Warm beige is off-system.</td></tr><tr><td><code>--surface-tinted</code></td><td><span class="chip" style="background:#EFE7D6"></span><code>#EFE7D6</code></td><td>Cocoa 200</td><td><span class="chip" style="background:#F0E7DE"></span><code>#F0E7DE</code></td><td class="num ok">12</td><td>Close in tone, palette version is pinker.</td></tr><tr><td><code>--ink</code></td><td><span class="chip" style="background:#1A1D21"></span><code>#1A1D21</code></td><td>Coffee 1600</td><td><span class="chip" style="background:#261A10"></span><code>#261A10</code></td><td class="num bad-t">34</td><td>Palette has no neutral-dark. Coffee 1600 is brown.</td></tr><tr><td><code>--ink-soft</code></td><td><span class="chip" style="background:#5C5F66"></span><code>#5C5F66</code></td><td>Grey 1100</td><td><span class="chip" style="background:#5F5F5F"></span><code>#5F5F5F</code></td><td class="num ok">12</td><td>Usable substitute.</td></tr><tr><td><code>--ink-placeholder</code></td><td><span class="chip" style="background:#9A9EA6"></span><code>#9A9EA6</code></td><td>Grey 600</td><td><span class="chip" style="background:#A6A5A5"></span><code>#A6A5A5</code></td><td class="num mid">24</td><td>Decorative band both ways — 2.69:1 shipped, 2.46:1 palette.</td></tr><tr><td><code>--hairline</code></td><td><span class="chip" style="background:#E6E3DC"></span><code>#E6E3DC</code></td><td>Coffee 200</td><td><span class="chip" style="background:#EBE9E4"></span><code>#E7E1DC</code></td><td class="num ok">4</td><td>Effectively a match. Adopt Coffee 200.</td></tr><tr><td><code>--link</code></td><td><span class="chip" style="background:#2E60A4"></span><code>#2E60A4</code></td><td>Ocean 1100</td><td><span class="chip" style="background:#1C5C9A"></span><code>#1C5C9A</code></td><td class="num bad-t">32</td><td>Ocean 1100 is darker and less saturated.</td></tr><tr><td><code>--brand</code></td><td><span class="chip" style="background:#1B355C"></span><code>#1B355C</code></td><td>Ocean 1500</td><td><span class="chip" style="background:#103459"></span><code>#103459</code></td><td class="num mid">17</td><td>Ocean is the brand family. Closest single value.</td></tr><tr><td><code>--insight-bg</code></td><td><span class="chip" style="background:#E8F0FA"></span><code>#E8F0FA</code></td><td>Ocean 100</td><td><span class="chip" style="background:#EAF2FA"></span><code>#EAF2FA</code></td><td class="num ok">5</td><td>Effectively a match. Adopt Ocean 100.</td></tr><tr><td><code>--insight-border</code></td><td><span class="chip" style="background:#B5C8E0"></span><code>#B5C8E0</code></td><td>Ocean 400</td><td><span class="chip" style="background:#A9CBED"></span><code>#A9CBED</code></td><td class="num mid">29</td><td>Palette version is bluer and brighter.</td></tr><tr><td><code>--red</code></td><td><span class="chip" style="background:#C8272E"></span><code>#C8272E</code></td><td>Ember 1100</td><td><span class="chip" style="background:#CA3B27"></span><code>#CA3B27</code></td><td class="num bad-t">41</td><td>No clean match. Coral 1000 (#C90000) is closer in hue.</td></tr><tr><td><code>--green</code></td><td><span class="chip" style="background:#4FA858"></span><code>#4FA858</code></td><td>Green 900</td><td><span class="chip" style="background:#52A353"></span><code>#52A353</code></td><td class="num mid">14</td><td>Both fail as text — 2.97:1 shipped, 3.12:1 palette.</td></tr><tr><td><code>--blue-icon</code></td><td><span class="chip" style="background:#3A6FA8"></span><code>#3A6FA8</code></td><td>Ocean 900</td><td><span class="chip" style="background:#226DB5"></span><code>#226DB5</code></td><td class="num bad-t">42</td><td>Palette version is far more saturated.</td></tr><tr><td><code>--orange</code></td><td><span class="chip" style="background:#B5571E"></span><code>#B5571E</code></td><td>Mustard 1500</td><td><span class="chip" style="background:#B45300"></span><code>#B45300</code></td><td class="num bad-t">46</td><td>Weak match. Ember 1300 (#B12907) is closer in hue.</td></tr><tr><td><code>--teal-dark</code></td><td><span class="chip" style="background:#1E5A6B"></span><code>#1E5A6B</code></td><td>Turquoise 1300</td><td><span class="chip" style="background:#125C77"></span><code>#125C77</code></td><td class="num mid">27</td><td>Turquoise 1300 is the family anchor.</td></tr><tr><td><code>--progress-bg</code></td><td><span class="chip" style="background:#DDD7C8"></span><code>#DDD7C8</code></td><td>Coffee 300</td><td><span class="chip" style="background:#DDD4CD"></span><code>#DDD4CD</code></td><td class="num ok">9</td><td>Close. Adopt Coffee 300.</td></tr><tr><td><code>--progress-fill</code></td><td><span class="chip" style="background:#4A4A60"></span><code>#4A4A60</code></td><td>Grey 1500</td><td><span class="chip" style="background:#535051"></span><code>#535051</code></td><td class="num bad-t">31</td><td>Grey 1500 is the broken step — use Grey 1300.</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>The subset worth keeping</h2>
+<p class="lede">Fifteen values out of 352. Everything MHC has shipped in the last six months fits inside this, and each value clears the band it is used in.</p>
+<div class="core-row"><div class="core-h"><h4>Surface</h4><span class="pct">60%</span></div><div class="core-sw"><div class="core-chip" style="background:#FFFFFF;color:#1A1D21;box-shadow:inset 0 0 0 1px #E6E3DC"><b>White</b><span>#FFFFFF</span></div><div class="core-chip" style="background:#F8F8F9;color:#1A1D21;"><b>Grey 100</b><span>#F8F8F9</span></div><div class="core-chip" style="background:#F3F2EF;color:#1A1D21;"><b>Mub 100</b><span>#F3F2EF</span></div><div class="core-chip" style="background:#EBE9E4;color:#1A1D21;"><b>Mub 200</b><span>#EBE9E4</span></div><div class="core-chip" style="background:#E2E0DA;color:#1A1D21"><b>Mub 300</b><span>#E2E0DA</span></div></div></div><div class="core-row"><div class="core-h"><h4>Ink</h4><span class="pct">30%</span></div><div class="core-sw"><div class="core-chip" style="background:#393C3C;color:#fff;"><b>Grey 1600</b><span>#393C3C</span></div><div class="core-chip" style="background:#494949;color:#fff;"><b>Grey 1300</b><span>#494949</span></div><div class="core-chip" style="background:#5F5F5F;color:#fff;"><b>Grey 1100</b><span>#5F5F5F</span></div><div class="core-chip" style="background:#777777;color:#fff;"><b>Grey 800</b><span>#777777</span></div></div></div><div class="core-row"><div class="core-h"><h4>Brand + semantic</h4><span class="pct">10%</span></div><div class="core-sw"><div class="core-chip" style="background:#103459;color:#fff;"><b>Ocean 1500</b><span>#103459</span></div><div class="core-chip" style="background:#1C5C9A;color:#fff;"><b>Ocean 1100</b><span>#1C5C9A</span></div><div class="core-chip" style="background:#3D7A3E;color:#fff;"><b>Green 1200</b><span>#3D7A3E</span></div><div class="core-chip" style="background:#BB0000;color:#fff;"><b>Coral 1100</b><span>#BB0000</span></div><div class="core-chip" style="background:#B45300;color:#fff;"><b>Mustard 1500</b><span>#B45300</span></div><div class="core-chip" style="background:#125C77;color:#fff"><b>Turquoise 1300</b><span>#125C77</span></div></div></div>
+<div class="wt"><div class="wt-seg" style="flex:60;background:#F3F2EF;color:#1A1D21">Surface 60%</div><div class="wt-seg" style="flex:30;background:#494949;color:#fff">Ink 30%</div><div class="wt-seg" style="flex:10;background:#103459;color:#fff">Brand 10%</div></div>
+</section>
+
+<section>
+<h2>Working rules</h2>
+<div class="rules">
+<div class="rule"><b>Warm at 100–400, never above — and use Mub</b><p>Coffee, Cocoa and Mub are backgrounds and hairlines only; from 500 up they read as brown, and brown ink looks like a mistake next to clinical content. Of the three, <b>Mub</b> is the one to reach for — its hue sits at 94–97°, matching the shipped beige (93°), while Coffee and Cocoa run pinker at 68–75°. All text and borders come from Grey.</p></div>
+<div class="rule"><b>Ocean is the brand family, not Blue</b><p>Ocean 1500 is the closest single value to the shipped navy. Blue and Indigo both push violet at every step and will never sit correctly next to it.</p></div>
+<div class="rule"><b>Lighter for area, darker for meaning</b><p>Wash and Tint carry surface area — the more of the screen a color covers, the lighter it must be. UI, Text and Ink carry meaning in small amounts. A color that appears at both scales needs two different steps, not one at reduced opacity.</p></div>
+<div class="rule"><b>Yellow, Lemon, Mustard and Orange never carry text</b><p>Orange needs step 1400 to reach AA and Yellow needs 1600, at which point neither reads as the color you picked. Use them as fills with graphite or white text on top.</p></div>
+<div class="rule"><b>Skip Grey 1500 and Ocean 1000</b><p>Two broken steps, each perceptually lighter than its predecessor, so any ramp, gradient or hover state passing through one will visibly kink. Violet 1200 and Ember 1100 were originally on this list in error — measured in HSL rather than CIELAB. Both are fine; Ember 1100 is in fact the value you want for negative text on a warm surface.</p></div>
+<div class="rule"><b>Semantic color always pairs with text or an icon</b><p>The shipped success green (#4FA858) is 2.97:1 on white; its palette neighbour Green 900 is 3.12:1. Both sit in the Accent band, so neither can be the only signal that something succeeded. Same for every accent-band value.</p></div>
+</div>
+</section>
+
+<div class="next">
+<h2>What this doesn't do yet</h2>
+<p style="color:#D6E2F0;margin-top:10px;max-width:70ch">This is the map, not the system. When the token work starts, in this order:</p>
+<ol>
+<li><b>Cut 22 families to 8.</b> Grey, Coffee, Ocean, Green, Coral, Mustard, Turquoise, plus one categorical set for data. The rest is optionality nobody asked for.</li>
+<li><b>Re-space the ramps.</b> Rebuild on even perceptual lightness so step numbers mean the same thing in every family — then the AA line lands in one place and semantic tokens become possible.</li>
+<li><b>Name by role, not by hue.</b> <b>surface / ink / brand / positive / negative / notice / informative</b>, each pointing at a step. Partner theming swaps the pointer, not the component.</li>
+<li><b>Fold the production values in.</b> The warm beige and graphite ink that ship today are better choices for health content than anything in this file. They should be in the palette, not beside it.</li>
+</ol>
+</div>
+</div>
+</body>
+</html>

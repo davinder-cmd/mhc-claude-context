@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LifeForce · Card pairing — differentiate the two</title>
+<style>
+:root{--ink:#26292B;--body:#4A4E50;--muted:#7A8083;--ocean:#195188;--ocean50:#EAF2FA;--ocean100:#DCEAF7;--turq:#1A85AB;--green:#52A353;--green-ink:#3D7A3E;--border:#E4E4E2;--hair:#EAEAE7;--canvas:#F5F5F3;--mustard50:#FFF3E4;--mustardInk:#87440A}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,"SF Pro Display","SF Pro Text",system-ui,sans-serif}
+body{background:#E7E7E4;padding:40px;color:var(--body)}
+.head{max-width:1180px;margin:0 auto 24px}
+.head h1{font-size:25px;color:var(--ink);font-weight:700;letter-spacing:-.01em}
+.head p{font-size:15px;color:var(--muted);margin-top:6px;max-width:92ch}
+.grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:32px 26px}
+.opt{display:flex;flex-direction:column;gap:11px}
+.cap{font-size:13px;font-weight:700;color:var(--ink)}
+.cap span{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:2px}
+.phone{background:var(--canvas);border:1px solid var(--border);border-radius:22px;padding:20px 15px;display:flex;flex-direction:column;gap:14px}
+.ph-title{font-family:"SF Pro Display";font-weight:600;font-size:22px;color:var(--ink);letter-spacing:-.01em;padding:2px 4px}
+
+/* success card (centered, celebratory) */
+.success{background:#fff;border:1px solid var(--hair);border-radius:16px;overflow:hidden}
+.strip{position:relative;height:104px;display:flex;align-items:center;justify-content:center;background:linear-gradient(120deg,#3E8FC2,#52A87C)}
+.strip .disc{width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px -5px rgba(20,40,60,.3)}
+.strip .disc svg{width:26px;height:26px;fill:none;stroke:#3E9A6E;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.strip i{position:absolute;display:block;background:#fff;border-radius:2px}
+.success .c{padding:16px 20px 18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.success .t{font-family:"SF Pro Display";font-weight:700;font-size:19px;color:var(--ink)}
+.success .b{font-size:13px;line-height:1.45;color:var(--body);max-width:32ch}
+.notice{background:var(--mustard50);color:var(--mustardInk);font-size:12px;font-weight:600;border-radius:9px;padding:8px 12px;margin-top:2px}
+
+/* ── maximize card treatments ── */
+.mic{width:38px;height:38px;border-radius:10px;background:var(--ocean50);color:var(--ocean);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.mic svg{width:22px;height:22px;fill:none;stroke:var(--ocean);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.btn{display:block;width:100%;text-align:center;background:var(--ocean);color:#fff;font-weight:600;font-size:14px;border-radius:999px;padding:12px;margin-top:12px}
+.mtitle{font-family:"SF Pro Display";font-weight:600;font-size:17px;color:var(--ink)}
+.mbody{font-size:13px;line-height:1.45;color:var(--body);margin-top:8px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ocean)}
+
+/* A · left-aligned action */
+.mA{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:18px}
+.mA .row{display:flex;align-items:center;gap:12px}
+
+/* B · content + illustration */
+.mB{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:18px;display:flex;gap:14px;align-items:flex-start}
+.mB .left{flex:1;min-width:0}
+.mB .art{flex:0 0 auto;width:76px;height:76px;border-radius:14px;background:linear-gradient(160deg,#EAF2FA,#E7F4EC);display:flex;align-items:center;justify-content:center;margin-top:2px}
+
+/* C · tinted accent surface */
+.mC{background:var(--ocean50);border:1px solid #D3E4F4;border-radius:16px;padding:18px}
+.mC .row{display:flex;align-items:center;gap:12px}
+.mC .mic{background:#fff}
+</style></head>
+<body>
+<div class="head"><h1>Differentiating the pair — success (moment) vs. maximize credit (action)</h1><p>Top card stays a centered celebration. The maximize-credit card becomes an <b>action card</b> — left-aligned, content-first, with a real primary button. Apple-Health logic: don't repeat the form; let the card <i>type</i> signal the job. Three ways to treat the action card.</p></div>
+<div class="grid">
+
+<!-- A -->
+<div class="opt"><div class="cap">A · Left-aligned action card<span>Icon inline with title, solid primary button. Clean contrast to the centered card.</span></div>
+<div class="phone">
+  <div class="ph-title">Your first visit</div>
+  <div class="success"><div class="strip"><i style="left:30px;top:24px;width:7px;height:7px"></i><i style="left:60px;top:44px;width:5px;height:5px;border-radius:50%;opacity:.85"></i><i style="right:44px;top:26px;width:8px;height:8px;transform:rotate(20deg);background:#DCF0E4"></i><i style="right:26px;top:46px;width:6px;height:6px;border-radius:50%"></i><div class="disc"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div></div>
+    <div class="c"><div class="t">You've finished setup</div><div class="b">All 4 steps done. Peak Health is now booking your first nurse visit.</div><div class="notice">We'll notify you the moment it's scheduled.</div></div></div>
+  <div class="mA">
+    <div class="row"><span class="mic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.6-.2 5 1.6 5 4.4"/></svg></span><span class="mtitle">Maximize your credit</span></div>
+    <p class="mbody">Remind your spouse or domestic partner to complete their Health Assessment — it can increase your medical credit each pay period.</p>
+    <a class="btn">Invite dependent</a>
+  </div>
+</div></div>
+
+<!-- B -->
+<div class="opt"><div class="cap">B · Content + illustration<span>Horizontal card with a right-side motif — reads as a different type entirely.</span></div>
+<div class="phone">
+  <div class="ph-title">Your first visit</div>
+  <div class="success"><div class="strip"><i style="left:30px;top:24px;width:7px;height:7px"></i><i style="left:60px;top:44px;width:5px;height:5px;border-radius:50%;opacity:.85"></i><i style="right:44px;top:26px;width:8px;height:8px;transform:rotate(20deg);background:#DCF0E4"></i><i style="right:26px;top:46px;width:6px;height:6px;border-radius:50%"></i><div class="disc"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div></div>
+    <div class="c"><div class="t">You've finished setup</div><div class="b">All 4 steps done. Peak Health is now booking your first nurse visit.</div><div class="notice">We'll notify you the moment it's scheduled.</div></div></div>
+  <div class="mB">
+    <div class="left"><span class="eyebrow">Maximize your credit</span><div class="mtitle" style="margin-top:4px">Invite your dependent</div><p class="mbody">A spouse or domestic partner who completes their Health Assessment adds to your credit.</p><a class="btn" style="width:auto;display:inline-block;padding:11px 20px">Invite dependent</a></div>
+    <div class="art"><svg width="42" height="42" viewBox="0 0 48 48" fill="none"><circle cx="18" cy="17" r="7" fill="#1A85AB"/><path d="M6 39c0-7 5.5-11 12-11s12 4 12 11" fill="#4AA0C4"/><circle cx="34" cy="20" r="5.5" fill="#52A353"/><path d="M29 33c1.5-2.5 4-4 8-4 4.5 0 8 3 8 8" fill="#6DBE6E"/><circle cx="40" cy="10" r="6" fill="#fff" stroke="#E8A23A" stroke-width="2"/><path d="M40 7v6M37 10h6" stroke="#E8A23A" stroke-width="2" stroke-linecap="round"/></svg></div>
+  </div>
+</div></div>
+
+<!-- C -->
+<div class="opt"><div class="cap">C · Tinted accent surface<span>Same action card on a soft ocean surface — separates it by color, not just layout.</span></div>
+<div class="phone">
+  <div class="ph-title">Your first visit</div>
+  <div class="success"><div class="strip"><i style="left:30px;top:24px;width:7px;height:7px"></i><i style="left:60px;top:44px;width:5px;height:5px;border-radius:50%;opacity:.85"></i><i style="right:44px;top:26px;width:8px;height:8px;transform:rotate(20deg);background:#DCF0E4"></i><i style="right:26px;top:46px;width:6px;height:6px;border-radius:50%"></i><div class="disc"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div></div>
+    <div class="c"><div class="t">You've finished setup</div><div class="b">All 4 steps done. Peak Health is now booking your first nurse visit.</div><div class="notice">We'll notify you the moment it's scheduled.</div></div></div>
+  <div class="mC">
+    <div class="row"><span class="mic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.6-.2 5 1.6 5 4.4"/></svg></span><span class="mtitle">Maximize your credit</span></div>
+    <p class="mbody">Remind your spouse or domestic partner to complete their Health Assessment — it can increase your medical credit each pay period.</p>
+    <a class="btn">Invite dependent</a>
+  </div>
+</div></div>
+
+</div>
+</body></html>

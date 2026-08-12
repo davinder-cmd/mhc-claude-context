@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · two-column layout alternatives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="responsive.css">
+<style>
+  .as-side-left{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;}
+  @media(min-width:960px){ .as-side-left{grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:32px;} .as-side-left .side{position:sticky;top:24px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="appbar"><span class="material-symbols-outlined back">arrow_back_ios_new</span><span class="appbar__title title-1">Two-column layout — alternatives</span></header>
+  <p class="body-3 c-slate" style="margin-bottom:8px">Same Status content, three responsive arrangements. Resize the window: grids flow by available space (auto-fit) and the split collapses to one column under ~960px — responsive, not fixed breakpoints.</p>
+
+  <!-- ALT A -->
+  <section class="alt">
+    <div class="alt__label"><span class="alt__tag">A · Main + right sidebar (≈8 / 4)</span><span class="alt__desc">primary work on the left; support &amp; info as a sticky rail on the right</span></div>
+    <div class="layout" data-a></div>
+  </section>
+
+  <!-- ALT B -->
+  <section class="alt">
+    <div class="alt__label"><span class="alt__tag">B · Left rail + wide main (≈5 / 7)</span><span class="alt__desc">a slim sticky rail (status + support) with the action area given the width</span></div>
+    <div class="as-side-left" data-b></div>
+  </section>
+
+  <!-- ALT C -->
+  <section class="alt">
+    <div class="alt__label"><span class="alt__tag">C · No fixed sidebar — everything flows</span><span class="alt__desc">one auto-fit grid; blocks reflow purely by space (the most responsive extreme)</span></div>
+    <div class="fluid cards" data-c style="align-items:start"></div>
+  </section>
+</div>
+
+<script>
+const band=`<section class="band"><p class="eyebrow">Getting started</p><h2 class="heading-6">3 steps until Peak Health books your first visit</h2><p class="helper body-3">You’ve finished 1 of 4.</p></section>`;
+const focal=`<div class="focal focal--rec"><div class="top"><span class="chip sm navy"><span class="material-symbols-outlined">assignment</span></span><span class="eyebrow">Recommended · Do this next</span></div><h4 class="title-1">Program Acknowledgment</h4><p class="body body-3">A good place to start — acknowledge the Company Release and Wellness Program Notice. Then 2 more steps until Peak Health books your first visit.</p><button class="btn primary" style="align-self:flex-start">Start</button></div>`;
+const next=`<div class="fluid"><a class="row" style="border:1px solid var(--hair);border-radius:var(--r-lg);background:#fff"><span class="chip green"><span class="material-symbols-outlined">science</span></span><div class="rbody"><p class="eyebrow c-slate">Peak Health</p><p class="title-2">Complete lab work</p></div><span class="material-symbols-outlined chev">chevron_right</span></a><a class="row" style="border:1px solid var(--hair);border-radius:var(--r-lg);background:#fff"><span class="chip navy"><span class="material-symbols-outlined">spa</span></span><div class="rbody"><p class="eyebrow c-slate">In-app</p><p class="title-2">Health Assessment</p></div><span class="material-symbols-outlined chev">chevron_right</span></a></div>`;
+const completed=`<div class="completed-sum"><div class="head"><p class="eyebrow c-slate grow">Completed</p></div><ul><li><span class="chip tick green"><span class="material-symbols-outlined">check</span></span><span class="body-3">Set up your CarePlus account · <span class="c-slate">Jan 4</span></span></li></ul></div>`;
+const support=`<div class="card support"><p class="eyebrow">Peak Health support</p><p class="kv body-3"><span>Phone</span><b>1-888-385-4583</b></p><p class="kv body-3"><span>Email</span><b>appointment@peak-health.net</b></p><button class="btn ghost sm" style="align-self:flex-start">Peak Health portal</button></div>`;
+const links=`<a class="linkrow"><span class="t title-2">About LifeForce</span><span class="material-symbols-outlined chev">chevron_right</span></a><a class="linkrow"><span class="t title-2">Calculate premiums &amp; credit</span><span class="material-symbols-outlined chev">chevron_right</span></a>`;
+const nsHead=`<h3 class="rowhead heading-6" style="margin:8px 0 0">Next steps</h3>`;
+
+document.querySelector('[data-a]').innerHTML =
+  `<div class="main">${band}${nsHead}${focal}<p class="eyebrow c-slate" style="margin:8px 0 0">Then · in any order</p>${next}</div>`+
+  `<div class="side">${completed}${support}${links}</div>`;
+
+document.querySelector('[data-b]').innerHTML =
+  `<div class="side">${completed}${support}${links}</div>`+
+  `<div class="main">${band}${nsHead}${focal}<p class="eyebrow c-slate" style="margin:8px 0 0">Then · in any order</p>${next}</div>`;
+
+document.querySelector('[data-c]').innerHTML =
+  band + focal +
+  `<a class="row" style="border:1px solid var(--hair);border-radius:var(--r-lg);background:#fff"><span class="chip green"><span class="material-symbols-outlined">science</span></span><div class="rbody"><p class="eyebrow c-slate">Peak Health</p><p class="title-2">Complete lab work</p></div><span class="material-symbols-outlined chev">chevron_right</span></a>`+
+  `<a class="row" style="border:1px solid var(--hair);border-radius:var(--r-lg);background:#fff"><span class="chip navy"><span class="material-symbols-outlined">spa</span></span><div class="rbody"><p class="eyebrow c-slate">In-app</p><p class="title-2">Health Assessment</p></div><span class="material-symbols-outlined chev">chevron_right</span></a>`+
+  completed + support + links;
+</script>
+</body>
+</html>

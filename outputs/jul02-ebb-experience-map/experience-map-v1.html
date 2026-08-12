@@ -1,0 +1,228 @@
+<title>EBB — Experience Map</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 58px 0 22px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 66ch; }
+
+  /* legend */
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 22px; }
+  .lg { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--ink-2); }
+  .sw { width: 15px; height: 15px; border-radius: 5px; }
+  .sw.done { background: var(--teal); }
+  .sw.exists { background: var(--ink-3); }
+  .sw.todo { background: #fff; border: 1.5px dashed var(--line-strong); }
+  .sw.blocked { background: var(--amber-tint); border: 1.5px solid var(--amber-mid); }
+
+  /* built band (the hero) */
+  .built { margin: 30px 0 0; background: var(--teal); color: #fff; border-radius: 18px; padding: 22px 24px; }
+  .built .bh { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.72); }
+  .built h2 { margin: 6px 0 0; font-size: 22px; font-weight: 720; letter-spacing: -0.01em; }
+  .built .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .built .chip { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); border-radius: 10px; padding: 9px 13px; font-size: 13.5px; font-weight: 620; display: flex; align-items: center; gap: 8px; }
+  .built .chip .ck { color: #fff; }
+
+  section { padding: 34px 0; }
+  .sec-head { margin-bottom: 18px; }
+  .sec-head h2 { font-size: clamp(19px, 2.3vw, 24px); letter-spacing: -0.01em; font-weight: 680; margin: 6px 0 0; }
+  .sec-head p { margin: 8px 0 0; color: var(--ink-2); max-width: 70ch; font-size: 14.5px; }
+
+  .bandlabel { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 4px 0 10px; }
+
+  .flowscroll { overflow-x: auto; padding-bottom: 8px; }
+  .flow { display: flex; align-items: stretch; gap: 8px; min-width: min-content; }
+  .node { width: 158px; flex: none; border-radius: 13px; padding: 12px 13px; background: #fff; border: 1px solid var(--line); display: flex; flex-direction: column; gap: 6px; }
+  .node .nt { font-size: 13.5px; font-weight: 700; letter-spacing: -0.005em; line-height: 1.2; }
+  .node .nd { font-size: 11.5px; color: var(--ink-3); line-height: 1.35; }
+  .node .stat { margin-top: auto; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 5px; }
+  .node.done { border-color: var(--teal); background: var(--teal-tint); box-shadow: 0 6px 16px -12px rgba(14,74,86,0.6); }
+  .node.done .nt { color: var(--teal); }
+  .node.done .stat { color: var(--teal); }
+  .node.exists { border-color: var(--line-strong); background: var(--surface); }
+  .node.exists .stat { color: var(--ink-2); }
+  .node.todo { border-style: dashed; background: #fff; }
+  .node.todo .nt { color: var(--ink-2); }
+  .node.todo .stat { color: var(--ink-3); }
+  .node.blocked { border-color: var(--amber-mid); background: var(--amber-tint); }
+  .node.blocked .nt { color: var(--amber); }
+  .node.blocked .stat { color: var(--amber); }
+  .arrow { display: flex; align-items: center; color: var(--teal-2); font-size: 20px; font-weight: 700; flex: none; }
+  .loopnote { margin-top: 8px; font-size: 12.5px; color: var(--teal-2); font-weight: 650; display: inline-flex; align-items: center; gap: 7px; }
+
+  /* grouped inventory */
+  .groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 760px){ .groups { grid-template-columns: 1fr; } }
+  .group { background: var(--surface); border: 1px solid var(--line); border-radius: 15px; padding: 16px 18px; }
+  .group h3 { margin: 0; font-size: 15.5px; font-weight: 700; letter-spacing: -0.005em; display: flex; align-items: center; gap: 8px; }
+  .group .new { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--amber); background: var(--amber-tint); padding: 2px 7px; border-radius: 5px; }
+  .group ul { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .group li { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; color: var(--ink-2); line-height: 1.4; }
+  .dot { width: 10px; height: 10px; border-radius: 3px; margin-top: 4px; flex: none; }
+  .dot.done { background: var(--teal); }
+  .dot.exists { background: var(--ink-3); }
+  .dot.todo { background: #fff; border: 1.5px dashed var(--line-strong); }
+  .dot.blocked { background: var(--amber-tint); border: 1.5px solid var(--amber-mid); }
+  .group li b { color: var(--ink); font-weight: 640; }
+  .group .blk { color: var(--amber); font-weight: 600; font-size: 12px; margin-top: 8px; display: block; }
+
+  footer { padding: 28px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 84ch; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Experience map</div>
+    <h1>How the EBB experience fits together</h1>
+    <p class="thesis">The whole surface at a glance. The two hardest nodes of the loop — the topic page and the completion celebration — already have a first version. Everything else is scoped and sequenced around them.</p>
+    <div class="legend">
+      <span class="lg"><span class="sw done"></span> Have a v1</span>
+      <span class="lg"><span class="sw exists"></span> Already exists (reuse)</span>
+      <span class="lg"><span class="sw todo"></span> To design</span>
+      <span class="lg"><span class="sw blocked"></span> Blocked on a decision</span>
+    </div>
+
+    <div class="built">
+      <div class="bh">What we have a first version for</div>
+      <h2>Four pieces of the spine are built</h2>
+      <div class="chips">
+        <span class="chip"><span class="ck">✓</span> Engagement-loop model</span>
+        <span class="chip"><span class="ck">✓</span> Topic page (v3)</span>
+        <span class="chip"><span class="ck">✓</span> Completion celebration (v3)</span>
+        <span class="chip"><span class="ck">✓</span> Path + "How you're doing" states</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The flow</div>
+      <h2>The loop, end to end</h2>
+      <p>Enter once, then repeat. Scroll each row →. Solid teal = built; grey = reuse what exists; dashed = to design; amber = waiting on a decision.</p>
+    </div>
+
+    <div class="bandlabel">1 · Get in — one time</div>
+    <div class="flowscroll"><div class="flow">
+      <div class="node exists"><div class="nt">Onboarding + Interest survey</div><div class="nd">Pick 2+ interests</div><div class="stat">● Exists</div></div>
+      <div class="arrow">→</div>
+      <div class="node blocked"><div class="nt">Consent / opt-in gate</div><div class="nd">Opt in to earn; new vs. existing users</div><div class="stat">▦ Blocked</div></div>
+      <div class="arrow">→</div>
+      <div class="node todo"><div class="nt">Enrolled — earning on</div><div class="nd">Enters the loop</div><div class="stat">◇ To design</div></div>
+    </div></div>
+
+    <div class="bandlabel" style="margin-top:22px;">2 · The loop — repeats</div>
+    <div class="flowscroll"><div class="flow">
+      <div class="node todo"><div class="nt">Home / triggers</div><div class="nd">Recommended path, cap meter, push + in-app</div><div class="stat">◇ To design</div></div>
+      <div class="arrow">→</div>
+      <div class="node done"><div class="nt">Topic page</div><div class="nd">Continue · progress+$100 · path · how you're doing</div><div class="stat">✓ v1</div></div>
+      <div class="arrow">→</div>
+      <div class="node exists"><div class="nt">Session</div><div class="nd">Video + Anna Q&amp;A · lessons</div><div class="stat">● Exists</div></div>
+      <div class="arrow">↺</div>
+      <div class="node done"><div class="nt">Completion celebration</div><div class="nd">Health win → $100 → tee up next</div><div class="stat">✓ v1</div></div>
+      <div class="arrow">→</div>
+      <div class="node done"><div class="nt">Tee up next path</div><div class="nd">One clear next (part of completion)</div><div class="stat">✓ v1</div></div>
+    </div></div>
+    <div class="loopnote">↺ Tee-up loops back to the Topic page for the next path — until the annual cap.</div>
+
+    <div class="bandlabel" style="margin-top:22px;">3 · Around the loop — reachable anytime</div>
+    <div class="flowscroll"><div class="flow">
+      <div class="node todo"><div class="nt">Rewards page</div><div class="nd">EBB leads · $ earned / $500 cap</div><div class="stat">◇ To design — next</div></div>
+      <div class="arrow">·</div>
+      <div class="node todo"><div class="nt">DCP list / All Topics</div><div class="nd">Ongoing · Discover · Completed</div><div class="stat">◇ To design</div></div>
+      <div class="arrow">·</div>
+      <div class="node todo"><div class="nt">Soft restart</div><div class="nd">Welcome back · resume from Session X</div><div class="stat">◇ To design</div></div>
+      <div class="arrow">·</div>
+      <div class="node todo"><div class="nt">Reward deadline</div><div class="nd">Complete-by · at-risk · expired</div><div class="stat">◇ To design</div></div>
+    </div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The full list, grouped</div>
+      <h2>Every screen, by workstream</h2>
+    </div>
+    <div class="groups">
+
+      <div class="group">
+        <h3>Core loop</h3>
+        <ul>
+          <li><span class="dot done"></span><b>Completion celebration</b> — v1 (v3)</li>
+          <li><span class="dot done"></span><b>Topic page</b> — v1 (v3)</li>
+          <li><span class="dot done"></span>Path — first / middle / last states</li>
+          <li><span class="dot done"></span>"How you're doing" — 3 states</li>
+          <li><span class="dot todo"></span>Rewards page (EBB leads) — <b>next</b></li>
+          <li><span class="dot todo"></span>Home — EBB variant</li>
+          <li><span class="dot todo"></span>DCP list / All Topics</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Completion variants</h3>
+        <ul>
+          <li><span class="dot todo"></span>First-ever completion</li>
+          <li><span class="dot todo"></span>Cap reached (5 of 5)</li>
+          <li><span class="dot todo"></span>No strong next match</li>
+        </ul>
+        <h3 style="margin-top:16px;">Check-in &amp; safety</h3>
+        <ul>
+          <li><span class="dot todo"></span>Check-in due prompt (one-tap)</li>
+          <li><span class="dot exists"></span>Crisis / escalation hand-off (exists)</li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>Consent &amp; eligibility <span class="new">New</span></h3>
+        <ul>
+          <li><span class="dot blocked"></span>New-user opt-in</li>
+          <li><span class="dot blocked"></span>Existing user — eligible (&gt;50%)</li>
+          <li><span class="dot blocked"></span>Existing user — not eligible this run (&lt;50%)</li>
+          <li><span class="dot blocked"></span>Mixed eligibility (multiple DCPs)</li>
+          <li><span class="dot todo"></span>Consent confirmation</li>
+          <li><span class="dot todo"></span>Annual re-consent</li>
+        </ul>
+        <span class="blk">⛔ Blocked: gate type · 50% rule final call · legal (HIPAA/ADA)</span>
+      </div>
+
+      <div class="group">
+        <h3>Re-engagement / soft restart <span class="new">New</span></h3>
+        <ul>
+          <li><span class="dot todo"></span>Welcome-back / soft-restart prompt</li>
+          <li><span class="dot todo"></span>Progress recap on return</li>
+          <li><span class="dot todo"></span>Inactivity nudge (push + in-app)</li>
+        </ul>
+        <span class="blk">⛔ Blocked: inactivity threshold (30–90d) · medical-pause handling</span>
+
+        <h3 style="margin-top:16px;">Reward deadline <span class="new">New</span></h3>
+        <ul>
+          <li><span class="dot todo"></span>Deadline on progress ("complete by…")</li>
+          <li><span class="dot todo"></span>Approaching / reward at risk</li>
+          <li><span class="dot todo"></span>Passed / expired + restart-to-reset</li>
+        </ul>
+        <span class="blk">⚠ Open: does a long deadline reduce urgency?</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Built (v1):</b> engagement-loop model, topic page, completion celebration, path + "how you're doing" states. <b>Next unblocked:</b> rewards page → home EBB variant → DCP list. <b>Blocked on decisions</b> (not design): consent/eligibility (gate type, 50% rule, legal) and soft restart (inactivity threshold). Mirrors `projects/feature-ebb/_screens.md`. Experience map v1.</p>
+  </div>
+</footer>

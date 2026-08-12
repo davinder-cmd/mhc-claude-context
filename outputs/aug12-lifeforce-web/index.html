@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Web build — all screens</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  :root{
+    --f-display:"SF Pro Display",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --f-text:"SF Pro Text",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --ink:#393C3C;--body:#545454;--muted:#717171;--ocean:#195188;
+    --card:#fff;--stroke:#E2E0DA;--canvas:#F4F3F1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--f-text);background:var(--canvas);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.4}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 20px 96px}
+  .head{margin-bottom:8px}
+  .kicker{font:600 12px var(--f-text);letter-spacing:.06em;text-transform:uppercase;color:var(--ocean)}
+  h1{font:600 32px/1.1 var(--f-display);letter-spacing:-.015em;color:#000;margin:6px 0 10px}
+  .lede{font:400 16px/1.5 var(--f-text);color:var(--body);max-width:60ch}
+  .act{margin-top:44px}
+  .act-h{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+  .act-n{font:600 11px var(--f-text);letter-spacing:.08em;text-transform:uppercase;color:var(--ocean)}
+  .act-t{font:600 18px var(--f-display);color:var(--ink)}
+  .act-s{font:400 14px var(--f-text);color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .tile{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px;transition:box-shadow .15s,transform .15s}
+  .tile:hover{box-shadow:0 8px 22px -12px rgba(0,0,0,.28);transform:translateY(-1px)}
+  .tile .ic{width:38px;height:38px;border-radius:10px;background:#E9F6FA;color:#103459;display:grid;place-items:center;margin-bottom:6px}
+  .tile.alert .ic{background:#FCF4EF;color:#9A3B12}
+  .tile.done .ic{background:#EAF5EC;color:#3D7A3E}
+  .tile .ic .material-symbols-outlined{font-size:22px}
+  .tile .tt{font:600 15px var(--f-display);color:var(--ink)}
+  .tile .td{font:400 13px/1.45 var(--f-text);color:var(--muted)}
+  .foot{margin-top:56px;font:400 13px var(--f-text);color:var(--muted)}
+  .foot code{background:#EDEBE7;border-radius:4px;padding:1px 5px;font-size:12px}
+</style>
+</head><body>
+<div class="wrap">
+  <div class="head">
+    <span class="kicker">LifeForce · Web build</span>
+    <h1>All screens</h1>
+    <p class="lede">The LifeForce member experience, rebuilt to the current UI and made responsive (single column on mobile, main + support rail on desktop). Open any screen — each has a flip-through bar at the bottom, or use ← / → to move between them.</p>
+  </div>
+
+  <div class="act">
+    <div class="act-h"><span class="act-t">Overview</span></div>
+    <div class="grid">
+      <a class="tile" href="about.html"><span class="ic material-symbols-outlined">info</span><span class="tt">About LifeForce</span><span class="td">What the program is and how the credit works</span></a>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="act-h"><span class="act-n">Act 1</span><span class="act-t">Getting set up</span><span class="act-s">Enrollment — the segmented checklist</span></div>
+    <div class="grid">
+      <a class="tile" href="01-getting-set-up.html"><span class="ic material-symbols-outlined">flag</span><span class="tt">Getting set up</span><span class="td">Step 1 of 4 · Program Acknowledgment next</span></a>
+      <a class="tile" href="02-complete-lab-work.html"><span class="ic material-symbols-outlined">science</span><span class="tt">Complete lab work</span><span class="td">Step 2 of 4 · image-card focal</span></a>
+      <a class="tile" href="02b-lab-submitted.html"><span class="ic material-symbols-outlined">hourglass_empty</span><span class="tt">Lab submitted</span><span class="td">Awaiting Peak Health confirmation</span></a>
+      <a class="tile" href="03-health-assessment.html"><span class="ic material-symbols-outlined">self_improvement</span><span class="tt">Health Assessment</span><span class="td">Step 3 of 4 · the last step</span></a>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="act-h"><span class="act-n">Act 2</span><span class="act-t">The visit</span><span class="act-s">Scheduling and confirmation</span></div>
+    <div class="grid">
+      <a class="tile" href="04-scheduling.html"><span class="ic material-symbols-outlined">event_upcoming</span><span class="tt">Being scheduled</span><span class="td">Peak Health is booking your visit</span></a>
+      <a class="tile" href="05-scheduled.html"><span class="ic material-symbols-outlined">event_available</span><span class="tt">Visit booked</span><span class="td">Appointment card · confirmed</span></a>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="act-h"><span class="act-n">Act 3</span><span class="act-t">Active</span><span class="act-s">Phase status and deadline nudges</span></div>
+    <div class="grid">
+      <a class="tile done" href="active.html"><span class="ic material-symbols-outlined">check_circle</span><span class="tt">You're active</span><span class="td">All caught up · gradient phase bar</span></a>
+      <a class="tile" href="08-deadline-labs.html"><span class="ic material-symbols-outlined">science</span><span class="tt">Labs due</span><span class="td">Notice card · before your visit</span></a>
+      <a class="tile" href="09-deadline-ha.html"><span class="ic material-symbols-outlined">self_improvement</span><span class="tt">Assessment due</span><span class="td">Notice card · before your visit</span></a>
+      <a class="tile alert" href="10-deadline-rebook.html"><span class="ic material-symbols-outlined">event_busy</span><span class="tt">Missed visit</span><span class="td">Coral alert · rebook needed</span></a>
+      <a class="tile alert" href="11-deadline-overdue.html"><span class="ic material-symbols-outlined">error</span><span class="tt">Overdue</span><span class="td">Coral alert · lab work overdue</span></a>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="act-h"><span class="act-t">Dependents</span><span class="act-s">Spouse invite lifecycle</span></div>
+    <div class="grid">
+      <a class="tile" href="dependent-sent.html"><span class="ic material-symbols-outlined">mail</span><span class="tt">Invitation sent</span><span class="td">Awaiting acceptance · actions available</span></a>
+      <a class="tile" href="dependent-reminder.html"><span class="ic material-symbols-outlined">schedule_send</span><span class="tt">Reminder sent</span><span class="td">Nudged · compact status</span></a>
+      <a class="tile done" href="dependent-done.html"><span class="ic material-symbols-outlined">check_circle</span><span class="tt">Credit maximized</span><span class="td">Spouse completed · nothing to do</span></a>
+    </div>
+  </div>
+
+  <div class="act">
+    <div class="act-h"><span class="act-t">Records &amp; Progress</span><span class="act-s">History and the My Progress tab</span></div>
+    <div class="grid">
+      <a class="tile" href="records.html"><span class="ic material-symbols-outlined">folder</span><span class="tt">Your records</span><span class="td">History and documents</span></a>
+      <a class="tile" href="progress-populated.html"><span class="ic material-symbols-outlined">monitoring</span><span class="tt">My Progress · populated</span><span class="td">Biometrics + nurse note + recs</span></a>
+      <a class="tile" href="progress-results.html"><span class="ic material-symbols-outlined">insights</span><span class="tt">My Progress · results ready</span><span class="td">New results with year-over-year trend</span></a>
+      <a class="tile" href="progress-awaiting.html"><span class="ic material-symbols-outlined">pending</span><span class="tt">My Progress · awaiting</span><span class="td">Blank state before the visit</span></a>
+    </div>
+  </div>
+
+  <p class="foot">19 screens · one stylesheet (<code>lifeforce.css</code>) · flip-through via <code>docnav.js</code>. Built to the current Figma UI (nodes 4381:78078 / 78194).</p>
+</div>
+</body></html>

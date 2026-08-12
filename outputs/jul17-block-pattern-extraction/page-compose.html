@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compose a page · MHC Component Kit</title>
+  <link rel="stylesheet" href="gallery.css">
+  <style>
+    .g-order { list-style:none; margin:0; padding:0; counter-reset:step; }
+    .g-order li { display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--g-line); border-radius:var(--g-radius-s); background:var(--g-surface); margin-bottom:8px; }
+    .g-order li::before { counter-increment:step; content:counter(step); flex:0 0 auto; width:24px; height:24px; border-radius:999px; background:var(--g-accent); color:#fff; font-size:12px; font-weight:600; display:grid; place-items:center; }
+    .g-order__name { font-weight:600; }
+    .g-order__meta { color:var(--g-ink-soft); font-size:13px; margin-left:auto; font-family:var(--g-mono); }
+  </style>
+</head>
+<body>
+<div class="g-top"><div class="g-top__inner"><a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Kit</a><div class="g-top__spacer"></div><div class="g-top__meta">Copy-and-go composition</div></div></div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+  <header class="g-head">
+    <div class="g-eyebrow">Capstone · Compose a page</div>
+    <h1 class="g-title">Compose a page</h1>
+    <p class="g-lede">Proof that the kit is copy-and-go: a full home page assembled entirely from kit snippets on the locked <code>mhc-home.css</code> — no new CSS, no per-page fiddling. Clone this as the starting point for each ideation session: keep the shell, reorder or swap the blocks, done.</p>
+    <div class="g-tags"><span class="g-tag g-tag--ok">Assembled from kit only</span><span class="g-tag">frame-page.html</span></div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">The assembled page — live</h2></div>
+    <p class="g-section__note">Every block here is a kit snippet in the shell. Drag to resize — the whole page reflows through the breakpoints as one coherent system.</p>
+    <div class="g-pg" style="height:680px"><div class="g-pg__hint">↔ Drag to resize · live <code>mhc-home.css</code></div><iframe src="frame-page.html" title="Assembled page — resizable"></iframe></div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">At breakpoints</h2></div>
+    <div class="g-bp-row">
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px</span></div><div class="g-bp__vp" style="--w:375;--s:.62;--h:2600"><iframe src="frame-page.html" title="Page Compact"></iframe></div></div>
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px</span></div><div class="g-bp__vp" style="--w:1024;--s:.34;--h:2100"><iframe src="frame-page.html" title="Page Medium"></iframe></div></div>
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px</span></div><div class="g-bp__vp" style="--w:1440;--s:.30;--h:2000"><iframe src="frame-page.html" title="Page Large"></iframe></div></div>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Block order (the recipe)</h2></div>
+    <p class="g-section__note">The proven home order. Each block is its own suppressible <code>&lt;div class="mhc-home"&gt;</code>; hero + pair cluster inside <code>.recommendations</code>. Click any to open its component page.</p>
+    <ol class="g-order">
+      <li><span class="g-order__name"><a href="component-rows.html#playground">Greeting</a></span><span class="g-order__meta">.greeting</span></li>
+      <li><span class="g-order__name"><a href="component-hero.html">Hero</a></span><span class="g-order__meta">.hero · in .recommendations</span></li>
+      <li><span class="g-order__name"><a href="component-pair.html">Pair</a></span><span class="g-order__meta">.pair · in .recommendations</span></li>
+      <li><span class="g-order__name"><a href="component-tracker.html">This week</a></span><span class="g-order__meta">.trackers</span></li>
+      <li><span class="g-order__name"><a href="component-insight.html">Insight</a></span><span class="g-order__meta">.insight</span></li>
+      <li><span class="g-order__name"><a href="component-program.html">Programs</a></span><span class="g-order__meta">.programs</span></li>
+      <li><span class="g-order__name"><a href="component-challenge.html">Challenge</a></span><span class="g-order__meta">.challenge</span></li>
+      <li><span class="g-order__name"><a href="component-reward.html">Rewards</a></span><span class="g-order__meta">.rewards</span></li>
+    </ol>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">How to reuse</h2></div>
+    <p class="g-section__note">
+      1. Copy <code>frame-page.html</code> as your page starting point (or an empty <code>.shell &gt; .shell__rail</code>).<br>
+      2. Reorder / add / remove blocks — grab each snippet from its component page's Markup section.<br>
+      3. For CKEditor, keep the <code>{{formula.*}}</code> tokens; for a static mock, swap in real values.<br>
+      4. Never add page CSS — if a size or spacing looks off, it belongs in <code>mhc-home.css</code> (CodeMirror), not the page.<br>
+      See <code>KIT.md</code> for the full composition recipe and grid table.
+    </p>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opt-in + Overview reward</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.11);--navy:#123A52;--teal-2:#1F6F7A;--teal-tint:#E4EDED;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:840px;margin:0 0 4px;font-size:14px}
+.flow{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}
+.flow b{color:var(--teal-2)}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:20px}
+.col{display:flex;flex-direction:column;gap:9px}
+.cap{font-size:12px;color:var(--ink-2);max-width:330px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.new{color:var(--amber);background:var(--amber-tint)}
+.phone{width:330px;background:var(--warm);border:9px solid #1c2330;border-radius:40px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:700px;overflow-y:auto;position:relative}
+.ab{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--line)}
+.ab .c{font-size:18px;color:var(--ink-2);width:20px}.ab .t{flex:1;text-align:center;font-size:15px;font-weight:700}
+.pad{padding:16px}
+.img{height:150px;border-radius:14px;background:linear-gradient(135deg,#C7E6DA,#EFE7D0)}
+.ttl{font-size:22px;font-weight:750;letter-spacing:-0.01em;margin-top:16px}
+.meta{font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.rchip{display:inline-flex;align-items:center;gap:5px;background:var(--amber-tint);color:var(--amber);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:20px;margin-top:10px}
+.desc{font-size:13.5px;color:var(--ink-2);margin-top:12px}
+.btn{background:var(--navy);color:#fff;border-radius:24px;padding:13px;font-size:14px;font-weight:700;text-align:center;margin-top:14px}
+.btn.block{display:block}
+.rline{font-size:12px;color:var(--amber);font-weight:700;text-align:center;margin-top:8px}
+.hh{font-size:15px;font-weight:700;margin-top:20px}
+.hp{font-size:13px;color:var(--ink-2);margin-top:6px}
+
+/* opt-in */
+.oi{padding:22px 20px}
+.oiclose{font-size:20px;color:var(--ink-3);text-align:right}
+.gift{width:56px;height:56px;border-radius:16px;background:var(--amber-tint);display:flex;align-items:center;justify-content:center;font-size:28px;margin:6px 0 14px}
+.oih{font-size:23px;font-weight:750;letter-spacing:-0.01em;line-height:1.15}
+.ois{font-size:13.5px;color:var(--ink-2);margin-top:8px}
+.steps{margin:16px 0 4px}
+.stp{display:flex;gap:11px;align-items:flex-start;padding:7px 0}
+.stp .n{width:22px;height:22px;border-radius:50%;background:var(--teal-tint);color:var(--navy);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.stp .x{font-size:13px}
+.legal{margin-top:14px;background:#F4F2EC;border-radius:12px;padding:12px 13px;font-size:11px;color:var(--ink-3);line-height:1.5}
+.legal .chk{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink);font-weight:600;margin-bottom:7px}
+.legal .box{width:18px;height:18px;border-radius:5px;border:2px solid var(--navy);flex:none;margin-top:1px}
+.legal a{color:var(--teal-2)}
+.ph{color:#B23B3B;font-weight:700}
+.notnow{text-align:center;font-size:13px;font-weight:700;color:var(--teal-2);margin-top:12px}
+.footnote{font-size:11px;color:var(--ink-3);text-align:center;margin-top:10px}
+/* bottom sheet */
+.dim{position:absolute;inset:0;background:rgba(20,30,34,.42)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:22px 22px 0 0;padding:20px 20px 22px;box-shadow:0 -12px 40px -18px rgba(0,0,0,.4)}
+.grab{width:38px;height:4px;border-radius:3px;background:#d9d4c8;margin:0 auto 12px}
+</style></head><body>
+<div class="page">
+<h1>Opt-in + Overview (reward)</h1>
+<p class="sub">Where the one-time opt-in fires and how the Overview references the reward. Legal/consent copy is <span class="ph">placeholder</span> — final wording is configurable and needs legal sign-off.</p>
+<p class="flow">Flow: Digital Care list → <b>Overview (Get Started)</b> → <b>Opt-in (once, first DCP)</b> → sessions. Earn-gate: "Not now" still lets them do the program — they just don't earn.</p>
+
+<div class="grid">
+
+<!-- Overview reward A: chip under meta -->
+<div class="col">
+<span class="tag">Overview · reward option A</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad">
+<div class="img"></div>
+<div class="ttl">Treating Insomnia</div>
+<div class="meta">8 sessions · Not started</div>
+<span class="rchip">🎁 Earn $100 when you finish</span>
+<div class="desc">Insomnia is more common than you might think. Over 40 million Americans have chronic insomnia.</div>
+<div class="btn block">Get Started</div>
+<div class="hh">What you'll learn</div>
+<div class="hp">Evidence-based CBT-I techniques to improve your sleep quality.</div>
+</div>
+</div></div>
+<div class="cap"><b>A — reward chip under the meta.</b> A small "🎁 Earn $100 when you finish" sits with the session count. Quiet, near the top, consistent with the session-page chip.</div>
+</div>
+
+<!-- Overview reward B: near Get Started -->
+<div class="col">
+<span class="tag">Overview · reward option B</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad">
+<div class="img"></div>
+<div class="ttl">Treating Insomnia</div>
+<div class="meta">8 sessions · Not started</div>
+<div class="desc">Insomnia is more common than you might think. Over 40 million Americans have chronic insomnia.</div>
+<div class="btn block">Get Started</div>
+<div class="rline">🎁 Finish this path to earn $100</div>
+<div class="hh">What you'll learn</div>
+<div class="hp">Evidence-based CBT-I techniques to improve your sleep quality.</div>
+</div>
+</div></div>
+<div class="cap"><b>B — reward line under Get Started.</b> Ties the reward to the action (start → finish → $100). Keeps the top clinical; reward reads at the decision point. <b>My lean.</b></div>
+</div>
+
+<!-- Opt-in full page -->
+<div class="col">
+<span class="tag new">Opt-in · full page</span>
+<div class="phone"><div class="scr">
+<div class="oi">
+<div class="oiclose">✕</div>
+<div class="gift">🎁</div>
+<div class="oih">Earn $100 for every care path you finish</div>
+<div class="ois">Opt in once — it covers every program you complete, up to $500 a year.</div>
+<div class="steps">
+<div class="stp"><span class="n">1</span><span class="x">Do the program at your own pace.</span></div>
+<div class="stp"><span class="n">2</span><span class="x">Finish it.</span></div>
+<div class="stp"><span class="n">3</span><span class="x">Get a <b>$100</b> gift card.</span></div>
+</div>
+<div class="legal">
+<div class="chk"><span class="box"></span><span>I agree to the terms below and want to earn rewards.</span></div>
+<span class="ph">[Placeholder — legal TBD]</span> By opting in, you authorize MHC to share care-path completion with your health plan to process your reward. See the <a href="#">Authorization</a> and <a href="#">Notice</a>. Configurable per client; annual re-consent.
+</div>
+<div class="btn block" style="border-radius:12px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+<div class="footnote">You can still do this program without opting in — you just won't earn the reward.</div>
+</div>
+</div></div>
+<div class="cap"><b>Full-page opt-in.</b> Value-forward headline, a 3-step "how it works," the consent checkbox + legal placeholder, then Opt in / Not now. Fires once, at the first Get Started.</div>
+</div>
+
+<!-- Opt-in bottom sheet -->
+<div class="col">
+<span class="tag new">Opt-in · bottom sheet</span>
+<div class="phone"><div class="scr">
+<div class="ab"><span class="c">‹</span><span class="t">Overview</span><span class="c"></span></div>
+<div class="pad"><div class="img"></div><div class="ttl">Treating Insomnia</div><div class="meta">8 sessions · Not started</div><div class="desc">Insomnia is more common than you might think…</div></div>
+<div class="dim"></div>
+<div class="sheet">
+<div class="grab"></div>
+<div style="display:flex;gap:11px;align-items:center;margin-bottom:6px"><span class="gift" style="width:40px;height:40px;border-radius:11px;font-size:20px;margin:0">🎁</span><div class="oih" style="font-size:18px">Earn $100 when you finish</div></div>
+<div class="ois">Opt in once — covers every path, up to $500 a year.</div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a></div>
+<div class="btn block" style="border-radius:12px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>Bottom sheet (lighter).</b> Same content as a sheet over the Overview — less of an interruption than a full takeover (mobile). Desktop = a right-side panel.</div>
+</div>
+
+</div>
+<div style="margin-top:26px;max-width:840px;background:var(--surface);border-left:3px solid var(--navy);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>Recommendation:</b> Overview <b>option B</b> (reward line under Get Started) — subtle, tied to the action. For the opt-in, I lean the <b>bottom sheet</b> on mobile (less punitive than a full takeover, fits the earn-gate "unlock not lockout" framing) with a full-page fallback; desktop uses the right-side panel per the surfacing model. All legal copy is placeholder pending counsel — the structure holds whatever the final wording is. Note: whether "Not now" is allowed (dismissible) vs. a hard wall is still the open <b>gate_mode</b> decision.
+</div>
+</div>
+</body></html>

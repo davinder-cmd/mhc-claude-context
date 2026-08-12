@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Program card · MHC Component Sheet</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<div class="g-top">
+  <div class="g-top__inner">
+    <a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Sheet</a>
+    <div class="g-top__spacer"></div>
+    <div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div>
+  </div>
+</div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+
+  <header class="g-head">
+    <div class="g-eyebrow">Card · Media + progress</div>
+    <h1 class="g-title">Program card</h1>
+    <p class="g-lede">An in-progress program — 16:9 media, eyebrow tag, title, footer (progress label + price), and a thin progress bar. On phones the row becomes a scroll-snap carousel; from tablet up it's a 3-column grid.</p>
+    <div class="g-tags">
+      <span class="g-tag">.program</span>
+      <span class="g-tag g-tag--ok">Multi-instance (3)</span>
+      <span class="g-tag g-tag--ok">Authorable block</span>
+      <span class="g-tag g-tag--flag">Progress uses --p (CKEditor caveat)</span>
+    </div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Live playground</h2></div>
+    <p class="g-section__note">Drag to resize. Below 600px the grid switches to a horizontal scroll-snap carousel (78%-width cards, CSS-only — no JS); at 600px and up it becomes a 3-column grid.</p>
+    <div class="g-pg" style="height:440px">
+      <div class="g-pg__hint">↔ Drag the bottom-right corner to resize · live <code>mhc-home.css</code></div>
+      <iframe src="frame-program.html" title="Program cards — resizable"></iframe>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Responsive breakpoints</h2></div>
+    <p class="g-section__note">True-width frames, scaled to fit. Compact is a swipeable carousel; Medium/Large pack 3-up with a fluid 16:9 image at every width.</p>
+    <div class="g-bp-row">
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px · carousel</span></div>
+        <div class="g-bp__vp" style="--w:375;--s:1;--h:380"><iframe src="frame-program.html" title="Program Compact"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px · 3-col</span></div>
+        <div class="g-bp__vp" style="--w:1024;--s:.62;--h:360"><iframe src="frame-program.html" title="Program Medium"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px · 3-col, large type</span></div>
+        <div class="g-bp__vp" style="--w:1440;--s:.5;--h:380"><iframe src="frame-program.html" title="Program Large"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Markup</h2></div>
+    <p class="g-section__note">One program card (the repeatable unit), gated by <code>hasProgram1</code>. Unroll one per program (max 3) — no loops. Progress % rides a <code>--p</code> custom property, not a hard-coded width.</p>
+    <div class="g-code">
+      <div class="g-code__bar">block-5-programs.html <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>&lt;div class="programs"&gt;
+  {{#formula.hasProgram1}}
+  &lt;article class="program"&gt;
+    &lt;div class="program__media" style="background-image: url('{{formula.program1_media_url}}')" aria-hidden="true"&gt;&lt;/div&gt;
+    &lt;div class="program__body"&gt;
+      &lt;div class="eyebrow program__tag"&gt;&lt;span class="dot" aria-hidden="true"&gt;&lt;/span&gt;{{formula.copy_program1_eyebrow}}&lt;/div&gt;
+      &lt;h3 class="title-1"&gt;{{formula.copy_program1_title}}&lt;/h3&gt;
+      &lt;div class="program__footer body-3"&gt;
+        &lt;span&gt;{{formula.copy_program1_progress}}&lt;/span&gt;
+        &lt;span class="price"&gt;{{formula.copy_program1_price}}&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="progress"&gt;&lt;div class="progress__fill" style="--p:{{formula.program1_progress_pct}}%"&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;a class="program__link" href="{{formula.program1_href}}"&gt;
+      &lt;span class="mhc-visually-hidden"&gt;{{formula.copy_program1_title}}&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/article&gt;
+  {{/formula.hasProgram1}}
+  &lt;!-- repeat program2 / program3, gated by hasProgram2 / hasProgram3 --&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Media:</strong> <code>.program__media</code> is <code>aspect-ratio:16/9</code>, fluid width — needs <code>background-size:cover</code> added to the locked CSS for real photos (applied demo-only here).<br>
+      • <strong>Progress bar:</strong> width is <code>var(--p)</code> set inline per card. Confirm CKEditor doesn't strip custom-property inline styles (handoff config check #4).<br>
+      • <strong>Carousel is CSS-only</strong> (<code>overflow-x:auto; scroll-snap-type</code>) — no JS, CKEditor-safe.<br>
+      • <strong>Resume vs navigate:</strong> the card is a stretched-link (navigation). If "resume" mutates server state, each card becomes its own User Input block.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

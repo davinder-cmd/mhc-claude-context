@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assembled home page — render frame</title>
+  <link rel="stylesheet" href="mhc-home.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    /* DEMO-ONLY: give media shells a real photo (locked CSS uses flat tint). */
+    .hero__media{ background-image:url('https://picsum.photos/seed/mhcsleep/1200/900'); background-size:cover; background-position:center; }
+    .program__media{ background-size:cover; background-position:center; }
+    .program:nth-child(1) .program__media{ background-image:url('https://picsum.photos/seed/mhcsleep/800/450'); }
+    .program:nth-child(2) .program__media{ background-image:url('https://picsum.photos/seed/mhcstress/800/450'); }
+    .program:nth-child(3) .program__media{ background-image:url('https://picsum.photos/seed/mhcdiabetes/800/450'); }
+    .pair-card__thumb{ background-size:cover; background-position:center; }
+    .pair-card:nth-child(2) .pair-card__thumb{ background-image:url('https://picsum.photos/seed/mhcyoga/320/240'); }
+    .pair-card:nth-child(3) .pair-card__thumb{ background-image:url('https://picsum.photos/seed/mhcbenefits/320/240'); }
+  </style>
+</head>
+<body>
+<div class="shell"><div class="shell__rail">
+
+  <!-- greeting -->
+  <div class="mhc-home">
+    <div class="greeting">
+      <h1 class="heading-4"><span class="greet-compact">Hi Davinder</span><span class="greet-medium">Afternoon Davinder</span></h1>
+      <div class="greeting__actions">
+        <a class="icon-btn icon-btn--filled" href="#" aria-label="Messages"><span class="material-symbols-outlined" aria-hidden="true">mail_outline</span></a>
+        <a class="icon-btn icon-btn--filled" href="#" aria-label="Search"><span class="material-symbols-outlined" aria-hidden="true">search</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- recommendations supergroup: hero + pair -->
+  <div class="recommendations">
+    <div class="mhc-home">
+      <section class="hero" aria-labelledby="p-hero-title">
+        <div class="hero__media" aria-hidden="true"></div>
+        <div class="hero__content">
+          <div class="hero__title-group">
+            <div class="eyebrow ink-soft">Based on your interests</div>
+            <h2 id="p-hero-title" class="heading-4">Sleep better in 4 weeks</h2>
+          </div>
+          <div class="hero__copy-group">
+            <p class="paragraph-2 ink-soft">A guided program to wind down, fall asleep faster, and wake up steadier — a few minutes a day.</p>
+            <div class="hero__meta body-3"><span>Sleep DCP</span><span class="dot" aria-hidden="true"></span><span>$100 reward at completion</span></div>
+          </div>
+          <div class="hero__actions"><a class="btn btn-m btn-filled" href="#">Start the program</a></div>
+        </div>
+        <a class="hero__stretched-link" href="#"><span class="mhc-visually-hidden">Sleep better in 4 weeks</span></a>
+      </section>
+    </div>
+
+    <div class="mhc-home">
+      <section class="pair" aria-labelledby="p-pair-title">
+        <h2 id="p-pair-title" class="mhc-visually-hidden">Recommendations</h2>
+        <div class="pair-card">
+          <div class="pair-card__title"><h3 class="title-1">Based on your interests</h3></div>
+          <div class="pair-card__row">
+            <div class="pair-card__thumb" aria-hidden="true"></div>
+            <div class="pair-card__row-body"><div class="title-1">Desk-friendly yoga</div><div class="body-3 ink-soft">10 min · Movement</div></div>
+          </div>
+          <div class="pair-card__footer">
+            <a class="btn btn-text" href="#">See 7 more<span class="medium-up-inline">&nbsp;interests</span></a>
+            <a class="btn btn-text" href="#">Edit interests</a>
+          </div>
+          <a class="pair-card__link" href="#"><span class="mhc-visually-hidden">Desk-friendly yoga</span></a>
+        </div>
+        <div class="pair-card">
+          <div class="pair-card__title"><h3 class="title-1">From your employer</h3></div>
+          <div class="pair-card__row">
+            <div class="pair-card__thumb" aria-hidden="true"></div>
+            <div class="pair-card__row-body"><div class="title-1">2026 Benefits guide</div><div class="body-3 ink-soft">New · Open enrollment</div></div>
+          </div>
+          <div class="pair-card__footer"><a class="btn btn-text" href="#">See 3 more<span class="medium-up-inline">&nbsp;from Acme</span></a></div>
+          <a class="pair-card__link" href="#"><span class="mhc-visually-hidden">2026 Benefits guide</span></a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- this week -->
+  <div class="mhc-home">
+    <section class="section" aria-labelledby="p-thisweek-title">
+      <div class="section-head">
+        <div class="section-head__title">
+          <h2 id="p-thisweek-title" class="heading-6">This week</h2>
+          <div class="caption meta">Synced 4 minutes ago · Apple Health</div>
+        </div>
+        <a class="btn btn-text" href="#">All data</a>
+      </div>
+      <div class="trackers">
+        <div class="tracker"><div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">directions_walk</span></div><div class="eyebrow tracker__label">Steps</div><div class="heading-6 tracker__value"><span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>8,432</div><div class="body-3 tracker__meta">78% of weekly goal</div></div>
+        <div class="tracker tracker--sleep"><div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">bedtime</span></div><div class="eyebrow tracker__label">Sleep</div><div class="heading-6 tracker__value"><span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>6h 43m</div><div class="body-3 tracker__meta">+12m vs last week</div></div>
+        <div class="tracker tracker--calories"><div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">local_fire_department</span></div><div class="eyebrow tracker__label">Calories</div><div class="heading-6 tracker__value"><span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>645</div><div class="body-3 tracker__meta">Active burn today</div></div>
+        <div class="tracker tracker--active"><div class="tracker__icon"><span class="material-symbols-outlined" aria-hidden="true">timer</span></div><div class="eyebrow tracker__label">Active</div><div class="heading-6 tracker__value"><span class="arrow material-symbols-outlined" aria-hidden="true">north_east</span>42 min</div><div class="body-3 tracker__meta">Goal 30 min</div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- insight -->
+  <div class="mhc-home">
+    <section class="section" aria-labelledby="p-insight-title">
+      <h2 id="p-insight-title" class="mhc-visually-hidden">Insight</h2>
+      <div class="insight">
+        <div class="banner-icon banner-icon--insight"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span></div>
+        <div class="insight__body">
+          <div class="eyebrow insight__label"><span class="dot" aria-hidden="true"></span>Insight</div>
+          <p class="paragraph-2">Your sleep has improved 12 minutes on average this week — the wind-down routine is paying off.</p>
+          <div class="body-3 ink-soft">Next refresh in 4h</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- programs -->
+  <div class="mhc-home">
+    <section class="section" aria-labelledby="p-programs-title">
+      <div class="section-head"><h2 id="p-programs-title" class="heading-6">Continue your programs</h2><a class="btn btn-text" href="#">All programs</a></div>
+      <div class="programs">
+        <article class="program"><div class="program__media" aria-hidden="true"></div><div class="program__body"><div class="eyebrow program__tag"><span class="dot" aria-hidden="true"></span>DCP · Sleep</div><h3 class="title-1">Better Sleep</h3><div class="program__footer body-3"><span>Session 3 of 8</span><span class="price">$100</span></div><div class="progress"><div class="progress__fill" style="--p:37.5%"></div></div></div><a class="program__link" href="#"><span class="mhc-visually-hidden">Better Sleep</span></a></article>
+        <article class="program"><div class="program__media" aria-hidden="true"></div><div class="program__body"><div class="eyebrow program__tag"><span class="dot" aria-hidden="true"></span>DCP · Stress</div><h3 class="title-1">Manage Stress</h3><div class="program__footer body-3"><span>Week 2 of 6</span><span class="price">$75</span></div><div class="progress"><div class="progress__fill" style="--p:33%"></div></div></div><a class="program__link" href="#"><span class="mhc-visually-hidden">Manage Stress</span></a></article>
+        <article class="program"><div class="program__media" aria-hidden="true"></div><div class="program__body"><div class="eyebrow program__tag"><span class="dot" aria-hidden="true"></span>DCP · Diabetes</div><h3 class="title-1">Diabetes Prevention</h3><div class="program__footer body-3"><span>Week 6 of 16</span><span class="price">$120</span></div><div class="progress"><div class="progress__fill" style="--p:62.5%"></div></div></div><a class="program__link" href="#"><span class="mhc-visually-hidden">Diabetes Prevention</span></a></article>
+      </div>
+    </section>
+  </div>
+
+  <!-- challenge -->
+  <div class="mhc-home">
+    <section class="section" aria-labelledby="p-challenge-title">
+      <div class="section-head"><h2 id="p-challenge-title" class="heading-6">Your challenge</h2></div>
+      <div class="challenge">
+        <div class="banner-icon banner-icon--challenge"><span class="material-symbols-outlined" aria-hidden="true">emoji_events</span></div>
+        <div class="challenge__body"><div class="eyebrow ink-soft">Team Challenge</div><div class="heading-6">Spring Steps Challenge</div><div class="body-3 challenge__meta">Day 22 of 30 · Currently 4th of 8 teammates</div></div>
+        <a class="challenge__link" href="#"><span class="mhc-visually-hidden">Spring Steps Challenge details</span></a>
+      </div>
+    </section>
+  </div>
+
+  <!-- rewards -->
+  <div class="mhc-home">
+    <section class="section" aria-labelledby="p-rewards-title">
+      <div class="section-head"><h2 id="p-rewards-title" class="heading-6">Your rewards</h2><a class="btn btn-text" href="#">Reward Details</a></div>
+      <div class="rewards">
+        <div class="reward"><span class="reward-chip reward-chip--gift">Gift Card</span><div class="heading-5">$75</div><div class="body-3 reward__meta">Amazon · ready to redeem</div><div class="body-3 reward__sub">$25 to next $25 card</div><a class="reward__link" href="#"><span class="mhc-visually-hidden">Gift card</span></a></div>
+        <div class="reward"><span class="reward-chip reward-chip--points">Points · Silver</span><div class="heading-5">1,250</div><div class="body-3 reward__meta">Silver tier</div><div class="body-3 reward__sub">250 to Gold</div><a class="reward__link" href="#"><span class="mhc-visually-hidden">Points</span></a></div>
+        <div class="reward"><span class="reward-chip reward-chip--raffle">Raffle</span><div class="heading-5">12</div><div class="body-3 reward__meta">Entries this month</div><div class="body-3 reward__sub">Drawing Jul 31</div><a class="reward__link" href="#"><span class="mhc-visually-hidden">Raffle</span></a></div>
+        <div class="reward"><span class="reward-chip reward-chip--store">Store Credit</span><div class="heading-5">$25</div><div class="body-3 reward__meta">Wellness store</div><div class="body-3 reward__sub">Expires in 60 days</div><a class="reward__link" href="#"><span class="mhc-visually-hidden">Store credit</span></a></div>
+      </div>
+    </section>
+  </div>
+
+</div></div>
+</body>
+</html>

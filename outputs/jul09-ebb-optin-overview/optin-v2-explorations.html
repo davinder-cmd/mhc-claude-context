@@ -1,0 +1,228 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opt-in v2 — bigger, more visual</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.11);--navy:#123A52;--teal:#0E4A56;--teal-2:#1F6F7A;--teal-tint:#E4EDED;--amber:#8A5A12;--amber-2:#B87A1E;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1560px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:900px;margin:0 0 4px;font-size:14px}
+.flow{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}.flow b{color:var(--teal-2)}
+.ph{color:#B23B3B;font-weight:700}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:9px;width:330px}
+.cap{font-size:12px;color:var(--ink-2);max-width:330px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.rec{color:#fff;background:var(--navy)}
+.phone{width:330px;background:var(--surface);border:9px solid #1c2330;border-radius:40px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:706px;overflow-y:auto;position:relative;background:var(--surface)}
+.close{position:absolute;top:14px;right:16px;font-size:19px;color:var(--ink-3);z-index:3}
+.btn{background:var(--navy);color:#fff;border-radius:14px;padding:15px;font-size:15px;font-weight:750;text-align:center}
+.notnow{text-align:center;font-size:13px;font-weight:700;color:var(--teal-2);margin-top:13px}
+.foot{font-size:11px;color:var(--ink-3);text-align:center;margin-top:10px;line-height:1.45}
+.legal{margin-top:14px;background:#F4F2EC;border-radius:12px;padding:12px 13px;font-size:11px;color:var(--ink-3);line-height:1.5}
+.legal .chk{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink);font-weight:600;margin-bottom:7px}
+.legal .box{width:18px;height:18px;border-radius:5px;border:2px solid var(--navy);flex:none;margin-top:1px}
+.legal a{color:var(--teal-2)}
+/* big bullets shared */
+.bul{display:flex;gap:13px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}
+.bul:last-child{border-bottom:none}
+.bt{width:46px;height:46px;border-radius:14px;background:var(--teal-tint);display:flex;align-items:center;justify-content:center;font-size:23px;flex:none}
+.bul.gold .bt{background:var(--amber-warm)}
+.bh{font-size:15.5px;font-weight:750;line-height:1.25}
+.bs{font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.4}
+.bh .amt{color:var(--amber-2)}
+
+/* A — reward hero */
+.heroA{background:linear-gradient(160deg,#FBEFD6,#F3E4C6);padding:34px 22px 26px;text-align:center;position:relative;overflow:hidden}
+.heroA .spark{position:absolute;font-size:14px;color:#D9B879;opacity:.8}
+.giftbig{width:78px;height:78px;border-radius:22px;background:#fff;box-shadow:0 10px 22px -12px rgba(138,90,18,.6);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 14px}
+.hh{font-size:24px;font-weight:800;letter-spacing:-0.02em;line-height:1.14;color:#20242a}
+.hh .big{color:var(--amber-2)}
+.hpill{display:inline-block;margin-top:11px;background:rgba(255,255,255,.7);border:1px solid rgba(138,90,18,.25);color:var(--amber);font-size:11.5px;font-weight:750;padding:5px 12px;border-radius:20px}
+.body{padding:18px 20px 22px}
+
+/* B — path */
+.pathwrap{padding:26px 22px 8px}
+.pk{font-size:12px;font-weight:750;color:var(--teal-2);text-transform:uppercase;letter-spacing:.05em}
+.ph2{font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-top:5px;line-height:1.15}
+.path{margin:20px 4px 4px;position:relative}
+.pn{display:flex;align-items:center;gap:14px;position:relative;padding-bottom:20px}
+.pn:last-child{padding-bottom:0}
+.pn .line{position:absolute;left:17px;top:34px;bottom:-2px;width:2px;background:linear-gradient(var(--teal-tint),var(--amber-warm))}
+.pn:last-child .line{display:none}
+.dot{width:36px;height:36px;border-radius:50%;background:var(--teal-tint);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--teal);flex:none;z-index:1}
+.dot.end{background:var(--amber-warm);color:var(--amber-2);box-shadow:0 0 0 5px rgba(184,122,30,.12)}
+.pt{font-size:15px;font-weight:700}.psub{font-size:12px;color:var(--ink-2);margin-top:1px}
+.pt .amt{color:var(--amber-2)}
+
+/* C — ladder collect */
+.cwrap{padding:26px 22px 6px}
+.ladder{margin:18px 0 6px;display:flex;flex-direction:column;gap:8px}
+.rung{display:flex;align-items:center;gap:11px;background:var(--warm);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.rung.on{background:var(--amber-warm);border-color:rgba(184,122,30,.35)}
+.rn{width:26px;height:26px;border-radius:50%;background:#fff;border:1px solid var(--line);color:var(--ink-3);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.rung.on .rn{background:var(--amber-2);color:#fff;border-color:var(--amber-2)}
+.rl{flex:1;font-size:13px;font-weight:700;color:var(--ink-2)}
+.rung.on .rl{color:var(--ink)}
+.rv{font-size:13px;font-weight:800;color:var(--ink-3)}
+.rung.on .rv{color:var(--amber-2)}
+.captot{text-align:center;font-size:12px;color:var(--ink-2);margin-top:10px}.captot b{color:var(--amber-2)}
+
+/* D — celebratory */
+.heroD{background:radial-gradient(120% 90% at 50% 0%,#FBF3E1,#F7F3EC);padding:30px 22px 22px;text-align:center;position:relative;overflow:hidden}
+.confetti span{position:absolute;width:7px;height:7px;border-radius:2px;opacity:.85}
+.giftD{font-size:46px;margin-bottom:6px}
+.hhD{font-size:23px;font-weight:800;letter-spacing:-0.02em;line-height:1.15}
+.hhD .amt{color:var(--amber-2)}
+.hsD{font-size:13px;color:var(--ink-2);margin-top:8px;max-width:250px;margin-left:auto;margin-right:auto}
+
+/* sheet */
+.dim{position:absolute;inset:0;background:rgba(20,30,34,.42)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:8px 20px 22px;box-shadow:0 -12px 40px -18px rgba(0,0,0,.4)}
+.grab{width:38px;height:4px;border-radius:3px;background:#d9d4c8;margin:12px auto 14px}
+.mini{display:flex;align-items:center;gap:12px;background:var(--amber-warm);border-radius:14px;padding:12px 14px;margin-bottom:14px}
+.mini .g{font-size:26px}.mini .t{font-size:16px;font-weight:800;line-height:1.15}.mini .s{font-size:11.5px;color:var(--amber);font-weight:600;margin-top:1px}
+.rec-note{margin-top:28px;max-width:900px;background:var(--surface);border-left:3px solid var(--navy);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}
+.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Opt-in — v2 explorations</h1>
+<p class="sub">More visual weight, bigger bullets, a hint of fun and of "this is where you earn" — kept warm, not money-loud or gambling-y. Copy is <span class="ph">placeholder</span>; legal is configurable and needs counsel. Earn-gate holds throughout: <b>"Not now" still lets them do the program</b> — they just don't earn.</p>
+<p class="flow">Fires once, at the first <b>Get Started</b>. Peak-End: this is an early emotional peak — it should feel like a small gift, not a form.</p>
+
+<div class="grid">
+
+<!-- A: reward hero -->
+<div class="col">
+<span class="tag">A · Reward hero</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="heroA">
+<span class="spark" style="top:22px;left:34px">✦</span><span class="spark" style="top:54px;right:40px;font-size:11px">✦</span><span class="spark" style="bottom:26px;left:54px;font-size:10px">✦</span>
+<div class="giftbig">🎁</div>
+<div class="hh">Finish a path,<br>earn <span class="big">$100</span></div>
+<div class="hpill">Up to $500 a year</div>
+</div>
+<div class="body">
+<div class="bul"><div class="bt">🧭</div><div><div class="bh">Go at your own pace</div><div class="bs">No streaks, no clock. Weeks are fine.</div></div></div>
+<div class="bul"><div class="bt">✅</div><div><div class="bh">Finish the whole path</div><div class="bs">Complete every session in the program.</div></div></div>
+<div class="bul gold"><div class="bt">🎁</div><div><div class="bh">Get a <span class="amt">$100</span> gift card</div><div class="bs">One per path you complete — up to 5.</div></div></div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> By opting in you authorize MHC to share care-path completion with your health plan to process your reward. <a href="#">Authorization</a> · <a href="#">Notice</a>.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+<div class="foot">You can still do this program without opting in — you just won't earn the reward.</div>
+</div>
+</div></div>
+<div class="cap"><b>A — Reward hero.</b> Warm gradient header, oversized gift, one big friendly "$100," a quiet "up to $500" pill. Bullets are 46px icon tiles — the reward row tinted amber (Von Restorff: one thing stands out). Fun via sparkles, not coins.</div>
+</div>
+
+<!-- B: the path -->
+<div class="col">
+<span class="tag rec">B · The path  ·  lean</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="pathwrap">
+<div class="pk">Rewards</div>
+<div class="ph2">Reach the end,<br>earn <span style="color:var(--amber-2)">$100</span></div>
+<div class="path">
+<div class="pn"><span class="line"></span><div class="dot">▶</div><div><div class="pt">Start the path</div><div class="psub">Opt in once — covers every program.</div></div></div>
+<div class="pn"><span class="line"></span><div class="dot">›</div><div><div class="pt">Work through it, your pace</div><div class="psub">Every session, no time pressure.</div></div></div>
+<div class="pn"><div class="dot end">🎁</div><div><div class="pt">Finish → <span class="amt">$100 gift card</span></div><div class="psub">Up to 5 paths · $500 a year.</div></div></div>
+</div>
+</div>
+<div class="body" style="padding-top:6px">
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan to process the reward. <a href="#">Details</a>. Configurable per client; annual re-consent.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+<div class="foot">You can do the program without opting in — you just won't earn.</div>
+</div>
+</div></div>
+<div class="cap"><b>B — The path. (my lean.)</b> Reward is the <b>end of a journey</b>, using the same node-and-line language as the DCP path component. Reads "earn by finishing," never "earn by playing" — the efficacy-safe framing. Goal-Gradient without any gamified pressure.</div>
+</div>
+
+<!-- C: collect ladder -->
+<div class="col">
+<span class="tag">C · Collect up to 5</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="cwrap">
+<div class="pk">Rewards</div>
+<div class="ph2">Every path adds <span style="color:var(--amber-2)">$100</span></div>
+<div class="ladder">
+<div class="rung on"><span class="rn">1</span><span class="rl">First path you finish</span><span class="rv">$100</span></div>
+<div class="rung"><span class="rn">2</span><span class="rl">Second</span><span class="rv">$200</span></div>
+<div class="rung"><span class="rn">3</span><span class="rl">Third</span><span class="rv">$300</span></div>
+<div class="rung"><span class="rn">4</span><span class="rl">Fourth</span><span class="rv">$400</span></div>
+<div class="rung"><span class="rn">5</span><span class="rl">Fifth</span><span class="rv">$500</span></div>
+</div>
+<div class="captot">Finish all five and earn <b>$500</b> this year.</div>
+</div>
+<div class="body" style="padding-top:12px">
+<div class="bul gold"><div class="bt">🎁</div><div><div class="bh">One <span class="amt">$100</span> card per finished path</div><div class="bs">At your own pace — no streaks, no clock.</div></div></div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a>.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>C — Collect up to 5.</b> The "$100 → $500" ladder makes the annual ceiling tangible and adds a light "collection" pull (goal-gradient). Watch: this is the most reward-forward of the four — closest to the "too gamified" line, so keep it calm if chosen.</div>
+</div>
+
+<!-- D: celebratory -->
+<div class="col">
+<span class="tag">D · Celebratory</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="heroD">
+<div class="confetti">
+<span style="top:20px;left:40px;background:#E4B04A;transform:rotate(20deg)"></span>
+<span style="top:34px;right:46px;background:#1F6F7A;transform:rotate(-15deg)"></span>
+<span style="top:60px;left:70px;background:#B87A1E"></span>
+<span style="top:16px;right:80px;background:#8FB9AE;transform:rotate(30deg)"></span>
+<span style="top:70px;right:34px;background:#E4B04A"></span>
+</div>
+<div class="giftD">🎉</div>
+<div class="hhD">Finishing feels good.<br>So does <span class="amt">$100</span>.</div>
+<div class="hsD">Opt in once and earn a gift card for every care path you complete.</div>
+</div>
+<div class="body">
+<div class="bul"><div class="bt">🌱</div><div><div class="bh">Start when you're ready</div><div class="bs">One opt-in covers every program.</div></div></div>
+<div class="bul"><div class="bt">🏁</div><div><div class="bh">Cross the finish line</div><div class="bs">Complete the full path, your pace.</div></div></div>
+<div class="bul gold"><div class="bt">🎁</div><div><div class="bh">Celebrate with <span class="amt">$100</span></div><div class="bs">Up to $500 a year — 5 paths.</div></div></div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a>.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>D — Celebratory.</b> Confetti + 🎉, warmest and most playful. Ties money to the <i>feeling</i> of finishing ("Finishing feels good. So does $100.") rather than to money itself. Fun dialed up; still no coins/odds.</div>
+</div>
+
+<!-- Sheet of B -->
+<div class="col">
+<span class="tag">B · as bottom sheet</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div style="padding:16px"><div style="height:150px;border-radius:14px;background:linear-gradient(135deg,#C7E6DA,#EFE7D0)"></div><div style="font-size:22px;font-weight:750;margin-top:16px">Treating Insomnia</div><div style="font-size:12.5px;color:var(--ink-3);margin-top:4px">8 sessions · Not started</div></div>
+<div class="dim"></div>
+<div class="sheet">
+<div class="grab"></div>
+<div class="mini"><span class="g">🎁</span><div><div class="t">Reach the end, earn $100</div><div class="s">Opt in once · up to $500 a year</div></div></div>
+<div class="path" style="margin:4px 4px 8px">
+<div class="pn" style="padding-bottom:14px"><span class="line"></span><div class="dot">▶</div><div><div class="pt">Start the path</div></div></div>
+<div class="pn" style="padding-bottom:14px"><span class="line"></span><div class="dot">›</div><div><div class="pt">Work through it, your pace</div></div></div>
+<div class="pn"><div class="dot end">🎁</div><div><div class="pt">Finish → <span class="amt">$100 gift card</span></div></div></div>
+</div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a></div>
+<div class="btn" style="margin-top:13px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>B as a sheet.</b> Same path framing, condensed, sliding over the Overview — the lighter, less-punitive presentation for the earn-gate ("unlock, not lockout"). Desktop = right-side panel per the surfacing model.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>B — The path</b>, delivered as the bottom sheet on mobile / right-side panel on desktop. It adds the visual weight and the "this is where you earn" hint you asked for, but frames the reward as the <b>end of finishing the program</b> — which protects the efficacy guardrail (we reward completion, not activity, and we don't gamify pace). <b>A</b> is the safe, friendly fallback if the path reads as too much. <b>C</b> is the most motivating but sits closest to the "too gamified" line — hold it in reserve. All four drop in whatever final legal + reward copy counsel lands on; the structure doesn't depend on the words.
+</div>
+</div>
+</body></html>

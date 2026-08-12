@@ -1,0 +1,251 @@
+/* ============================================================
+   LifeForce · responsive stylesheet
+   • Output treatment (type scale w/ ≥1200 bump, responsive shell,
+     SF Pro, Material Symbols, auto-fit grids) — from the May-26 home output.
+   • Color treatment — current LifeForce semantic system (Aug 2026 session):
+     ocean / turquoise / mustard / coral / green / neutral, lozenge eyebrows,
+     green progress, white cards + role-colored 1.5px stroke.
+   ============================================================ */
+:root{
+  --f-display:"SF Pro Display",-apple-system,BlinkMacSystemFont,"Roboto",Arial,sans-serif;
+  --f-text:"SF Pro Text",-apple-system,BlinkMacSystemFont,"Roboto",Arial,sans-serif;
+
+  /* ── semantic palette (stroke / ink-text / tint) ── */
+  --ocean:#195188;   --ocean-ink:#103459;  --ocean-100:#EAF2FA;   /* primary / action */
+  --turq:#1A85AB;    --turq-ink:#0D4559;    --turq-100:#E9F6FA;    /* active / on-track */
+  --mustard:#D17100; --mustard-ink:#87440A; --mustard-50:#FFF7ED;  /* notice / due-soon */
+  --coral:#EA4444;   --coral-ink:#C90000;   --coral-50:#FDECEC;    /* alert / at-risk */
+  --green:#52A353;   --green-ink:#3D7A3E;   --green-100:#EFF8EF;   /* progress / done */
+
+  --ink:#393C3C; --body:#545454; --muted:#717171; --label:#5F5F5F;
+  --hair:#E5E5E4; --border:#D6D6D5; --divider:#EDEBE7;
+  --white:#FFFFFF; --canvas:#F5F4F1; --tab-bg:#ECEBE8; --link:#195188;
+
+  --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;
+  --r:12px;--r-lg:16px;--r-xl:18px;--pill:999px;
+  --sh:0 1px 2px rgba(0,0,0,.05);
+}
+*{box-sizing:border-box;} h1,h2,h3,h4,p,ul{margin:0;padding:0;} ul{list-style:none;}
+a{color:var(--link);text-decoration:none;} a:hover{text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;}
+svg,img{display:block;}
+body{margin:0;font-family:var(--f-text);color:var(--ink);background:var(--canvas);-webkit-font-smoothing:antialiased;line-height:1.25;}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;user-select:none;line-height:1;}
+
+/* ── type scale (Compact <1200) ── */
+.body{font-size:.9375rem;line-height:1.45;color:var(--body);}
+.body-sm{font-size:.8125rem;line-height:1.4;color:var(--muted);}
+
+/* ── shell (centered column, responsive padding) ── */
+.wrap{max-width:600px;margin:0 auto;padding:20px 16px 40px;min-height:100vh;}
+@media (min-width:600px){ .wrap{padding:28px 24px 56px;} }
+@media (min-width:1200px){ .wrap{max-width:680px;} }
+.stack{display:flex;flex-direction:column;gap:16px;}
+
+/* ── kicker + phase title ── */
+.pagehead{display:flex;flex-direction:column;gap:2px;margin-bottom:2px;}
+.kicker{font-weight:600;font-size:.75rem;letter-spacing:.07em;text-transform:uppercase;color:var(--label);}
+.pagetitle{font-family:var(--f-display);font-weight:600;font-size:1.6875rem;line-height:1.1;color:var(--ink);letter-spacing:-.01em;}
+
+/* ── segmented tabs ── */
+.tabs{display:flex;background:var(--tab-bg);border-radius:12px;padding:3px;gap:2px;}
+.tabs a{flex:1;text-align:center;padding:9px;border-radius:9px;font-weight:600;font-size:.875rem;color:var(--muted);}
+.tabs a[aria-selected="true"]{background:var(--white);color:var(--ocean);box-shadow:var(--sh);}
+
+/* ── card + section heading ── */
+.card{background:var(--white);border:1px solid var(--hair);border-radius:var(--r-lg);padding:16px;}
+.sec-h{font-family:var(--f-display);font-weight:600;font-size:1.0625rem;color:var(--ink);margin:6px 2px -4px;}
+
+/* ── eyebrow lozenge (semantic) ── */
+.lozenge{align-self:flex-start;display:inline-block;padding:4px 9px;border-radius:7px;font-weight:700;font-size:.6875rem;letter-spacing:.06em;text-transform:uppercase;}
+.lz-ocean{background:var(--ocean-100);color:var(--ocean-ink);}
+.lz-mustard{background:var(--mustard-50);color:var(--mustard-ink);}
+.lz-coral{background:var(--coral-50);color:var(--coral-ink);}
+.lz-turq{background:var(--turq-100);color:var(--turq-ink);}
+.lz-neutral{background:#F1F1F1;color:var(--label);}
+
+/* ── focal card (white + role stroke) ── */
+.focal{background:var(--white);border:1.5px solid var(--ocean);border-radius:var(--r-xl);padding:18px;display:flex;flex-direction:column;gap:10px;}
+.focal--notice{border-color:var(--mustard);}
+.focal--alert{border-color:var(--coral);}
+.focal--active{border-color:var(--turq);}
+.focal--neutral{border-color:var(--border);}
+.focal__title{font-family:var(--f-display);font-weight:600;font-size:1.375rem;line-height:1.15;color:var(--ink);letter-spacing:-.01em;}
+.focal__body{font-size:.9375rem;line-height:1.45;color:var(--body);}
+
+/* ── buttons ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:var(--pill);font-weight:600;font-size:.9375rem;}
+.btn--filled{background:var(--ocean);color:#fff;}
+.btn--outline{border:1.5px solid var(--ocean);color:var(--ocean);padding:9px 16px;font-size:.875rem;}
+.btn--block{width:100%;}
+.linkbtn{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.9375rem;color:var(--ocean);}
+
+/* ── progress (green) ── */
+.phead{display:flex;flex-direction:column;gap:10px;}
+.phead__row{display:flex;justify-content:space-between;align-items:center;}
+.phead__label{font-weight:700;font-size:.6875rem;letter-spacing:.07em;text-transform:uppercase;color:var(--label);}
+.phead__count{font-size:.8125rem;color:var(--muted);}
+.phead__note{font-size:.8125rem;color:var(--muted);}
+.progress{height:6px;border-radius:999px;background:var(--green-100);overflow:hidden;}
+.progress__fill{height:100%;border-radius:999px;background:var(--green);width:var(--p,50%);}
+
+/* ── list rows (next steps / completed) ── */
+.rows{display:flex;flex-direction:column;}
+/* list card: drop card padding so the row divider bleeds to both edges;
+   rows carry 16px all-around (16 top/bottom + content inset restored) */
+.card:has(> .rows){padding:0;overflow:hidden;}
+.row{display:flex;align-items:center;gap:12px;padding:11px 0;color:var(--ink);}
+.rows .row{padding:16px;}
+.rows .row + .row{border-top:1px solid var(--divider);}
+.row__icon{width:48px;height:48px;border-radius:12px;background:var(--ocean-100);display:grid;place-items:center;color:var(--ocean);flex:0 0 auto;}
+.row__icon .material-symbols-outlined{font-size:26px;}
+.row__body{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+.row__eyebrow{font-size:.625rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);}
+.row__title{font-weight:600;font-size:.9375rem;color:var(--ink);}
+.row__chevron{color:#B4B4B1;}
+.tick{width:22px;height:22px;border-radius:999px;background:var(--green);display:grid;place-items:center;flex:0 0 auto;}
+.tick svg{width:12px;height:12px;}
+
+/* ── support / link rows ── */
+.support__label{font-weight:700;font-size:.6875rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px;}
+.support p{font-size:.9375rem;color:var(--body);margin-bottom:4px;}
+.support .btn{margin-top:12px;}
+.linkrow{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--white);border:1px solid var(--hair);border-radius:var(--r-lg);padding:16px;font-weight:600;color:var(--ink);}
+.linkrow .material-symbols-outlined{color:#B4B4B1;}
+
+/* ── auto-fit grids (biometrics / resources, later screens) ── */
+.grid-2{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+
+/* ── phase card ── */
+.phase{display:flex;flex-direction:column;gap:8px;}
+.phase__row{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.phase__title{font-family:var(--f-display);font-weight:600;font-size:1.125rem;color:var(--ink);}
+.dots{display:flex;gap:6px;flex:0 0 auto;}
+.dots i{width:7px;height:7px;border-radius:999px;background:var(--border);}
+.dots i.on{background:var(--turq);}
+.phase__note{font-size:.8125rem;color:var(--muted);line-height:1.45;}
+.calc-link{display:inline-flex;align-items:center;gap:6px;color:var(--ocean);font-weight:600;font-size:.9375rem;margin-top:2px;}
+.calc-link .material-symbols-outlined{font-size:18px;}
+
+/* ── nurse note ── */
+.nurse{display:flex;flex-direction:column;gap:12px;}
+.nurse__icon{width:56px;height:56px;border-radius:14px;background:var(--turq-100);display:grid;place-items:center;color:var(--turq);align-self:center;flex:0 0 auto;}
+.nurse__icon .material-symbols-outlined{font-size:30px;}
+.nurse__meta{font-size:.75rem;color:var(--muted);}
+.nurse__text{font-size:.9375rem;color:var(--body);line-height:1.5;}
+
+/* ── recommendation / handout rows ── */
+.rec{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--hair);border-radius:var(--r);background:var(--white);}
+.rec + .rec{margin-top:10px;}
+.rec__icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;flex:0 0 auto;background:var(--ocean-100);color:var(--ocean);}
+.rec__icon .material-symbols-outlined{font-size:26px;}
+.tint-green{background:#E3F1E6 !important;color:#3D7A3E !important;}
+.tint-tan{background:#F1EBE2 !important;color:#87440A !important;}
+.tint-doc{background:#E9F3EC !important;color:#3D7A3E !important;}
+.rec__title{font-weight:600;font-size:.9375rem;color:var(--ocean);}
+.rec__desc{font-size:.8125rem;color:var(--muted);line-height:1.35;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.seeall{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:13px 14px;color:var(--ocean);font-weight:600;font-size:.9375rem;}
+.seeall .material-symbols-outlined{color:#B4B4B1;}
+
+/* ── data card (biometric) ── */
+.data{background:var(--white);border:1px solid var(--hair);border-radius:var(--r);padding:12px 14px;}
+.data__label{font-size:.75rem;color:var(--muted);}
+.data__value{font-family:var(--f-display);font-weight:600;font-size:1.375rem;color:var(--ink);margin:2px 0;line-height:1.1;}
+.data__goal{font-size:.75rem;color:var(--muted);}
+.data--soft{background:#F4F7FB;border-color:transparent;}
+
+/* ── dependent / maximize-credit card ── */
+.dep{display:flex;flex-direction:column;gap:8px;}
+.dep__label{font-weight:700;font-size:.6875rem;letter-spacing:.07em;text-transform:uppercase;color:var(--ocean);}
+.dep__body{font-size:.9375rem;color:var(--body);line-height:1.45;}
+.dep .btn{align-self:flex-start;margin-top:4px;}
+
+/* ── records log card (chronological) ── */
+.chk{width:40px;height:40px;border-radius:10px;background:var(--ocean-100);display:grid;place-items:center;flex:0 0 auto;color:var(--ocean-ink);}
+.chk svg{width:20px;height:20px;}
+.card:has(> .logstep__head){padding:0;overflow:hidden;}
+.logstep__head{display:flex;align-items:flex-start;gap:12px;padding:16px;}
+.logstep__head .t{font-weight:600;font-size:.9375rem;color:var(--ink);}
+.logstep__head .d{font-size:.8125rem;color:var(--muted);margin-top:1px;}
+.logstep__links a{display:flex;align-items:center;justify-content:space-between;padding:15px 16px;border-top:1px solid var(--divider);color:var(--ocean);font-weight:600;font-size:.875rem;}
+.logstep__links a .material-symbols-outlined{color:#B4B4B1;}
+
+/* ── submitted / awaiting group (02b) ── */
+.groupcard{background:var(--white);border:1px solid var(--hair);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:12px;}
+.groupcard .g-icon{width:34px;height:34px;border-radius:999px;background:#F1F1F1;display:grid;place-items:center;color:var(--muted);flex:0 0 auto;}
+.groupcard .g-title{font-weight:600;font-size:.9375rem;color:var(--ink);}
+.groupcard .g-sub{font-size:.8125rem;color:var(--muted);}
+
+/* muted note under a section (placeholder caption) */
+.note-muted{font-size:.75rem;color:var(--muted);line-height:1.4;margin:2px 2px 0;font-style:italic;}
+
+/* appbar back (host chrome, minimal) */
+.appback{display:flex;align-items:center;height:32px;color:var(--ink);margin-bottom:2px;}
+
+/* ── bottom nav (host chrome; mobile only) ── */
+.bottomnav{display:flex;justify-content:space-around;background:var(--white);border-top:1px solid var(--hair);padding:10px 0 8px;margin-top:24px;}
+.bottomnav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.625rem;color:var(--muted);}
+.bottomnav a .material-symbols-outlined{font-size:22px;}
+.bottomnav a.active{color:var(--ocean);}
+@media (min-width:900px){ .bottomnav{display:none;} }
+
+/* ── large-form (≥1200): bump general spacing one step ──
+   more generous padding inside cards + rows to match the Medium+ type tier.
+   list/log cards stay padding:0 (their :has rule wins); their rows carry the bump. */
+@media (min-width:1200px){
+  .wrap{padding:36px 32px 64px;}
+  .stack{gap:20px;}
+  .card{padding:24px;}
+  .focal{padding:32px;} /* primary hero card — one step above the other cards on desktop */
+  .focal .btn{margin-top:14px;} /* separate the action from the content group (banners) */
+  .rows .row{padding:20px 24px;gap:20px;}
+  .row__icon{width:56px;height:56px;border-radius:14px;}
+  .row__icon .material-symbols-outlined{font-size:30px;}
+  .logstep__head{padding:20px 24px;}
+  .logstep__links a{padding:18px 24px;}
+  .groupcard{padding:18px 24px;}
+  .linkrow{padding:20px 24px;}
+  .rec{padding:16px;gap:20px;}
+  .rec__icon{width:56px;height:56px;border-radius:14px;}
+  .rec__icon .material-symbols-outlined{font-size:30px;}
+  .nurse__icon{width:64px;height:64px;border-radius:16px;} /* stepped up one from the 56 base */
+  .nurse__icon .material-symbols-outlined{font-size:34px;}
+  .data{padding:16px 18px;}
+}
+
+/* ============================================================
+   TYPE SCALE — MHC Type System v3  (design/foundation/typography.md)
+   Verbatim: size + line-height (absolute rem, 4dp grid) + weight + tracking.
+   Medium+ pair applied at ≥600 (canonical Medium size class per typography.md line 224),
+   so the full 1040–1440 desktop range renders in the Medium+ scale, not Compact.
+   Labels (Label-0/1/3) are STATIC across viewports per spec — they don't bump.
+   ============================================================ */
+/* Heading / Title — SF Pro Display · 500 medium · -0.008em */
+.pagetitle{font-family:var(--f-display);font-weight:500;font-size:1.5625rem;line-height:1.75rem;letter-spacing:-.008em;}                     /* heading-5 25/28 */
+.focal__title,.data__value{font-family:var(--f-display);font-weight:500;font-size:1.25rem;line-height:1.5rem;letter-spacing:-.008em;}        /* heading-6 20/24 */
+.sec-h,.phase__title{font-family:var(--f-display);font-weight:500;font-size:1.125rem;line-height:1.5rem;letter-spacing:-.008em;}             /* title-1 18/24 */
+.row__title,.rec__title,.logstep__head .t,.groupcard .g-title{font-family:var(--f-display);font-weight:500;font-size:1rem;line-height:1.25rem;letter-spacing:-.008em;} /* title-2 16/20 */
+.linkrow{font-family:var(--f-display);font-weight:500;font-size:.875rem;line-height:1.125rem;letter-spacing:-.008em;}                          /* title-3 14/18 */
+/* Body — SF Pro Text · 400 · -0.008em */
+.focal__body,.body,.support p,.dep__body,.nurse__text{font-family:var(--f-text);font-weight:400;font-size:1rem;line-height:1.25rem;letter-spacing:-.008em;} /* body-2 16/20 */
+.rec__desc,.phase__note{font-family:var(--f-text);font-weight:400;font-size:.875rem;line-height:1.125rem;letter-spacing:-.008em;}            /* body-3 14/18 */
+/* Caption — SF Pro Text · 500 · mixed-case (bumps 12→14) */
+.body-sm,.phead__count,.phead__note,.nurse__meta,.logstep__head .d,.groupcard .g-sub,.data__label,.data__goal,.note-muted{font-family:var(--f-text);font-weight:500;font-size:.75rem;line-height:1rem;letter-spacing:0;} /* caption 12/16 */
+/* Labels — SF Pro Text · 500 · STATIC (no bump) */
+.btn{font-family:var(--f-text);font-weight:500;font-size:1rem;line-height:1.25rem;letter-spacing:0;}                                          /* label-0 16/20 */
+.tabs a,.btn--outline,.seeall,.calc-link,.linkbtn{font-family:var(--f-text);font-weight:500;font-size:.875rem;line-height:1rem;letter-spacing:0;} /* label-1 14/16 */
+.bottomnav a{font-family:var(--f-text);font-weight:500;font-size:.6875rem;line-height:.875rem;letter-spacing:0;}                              /* label-3 11/14 */
+/* Eyebrow — SF Pro Text · 500 · uppercase · 0.04em (bumps 11→12) */
+.kicker,.lozenge,.phead__label,.support__label,.dep__label,.row__eyebrow{font-family:var(--f-text);font-weight:500;font-size:.6875rem;line-height:.875rem;letter-spacing:.04em;} /* eyebrow 11/14 */
+
+@media (min-width:600px){
+  .pagetitle{font-size:1.8125rem;line-height:2rem;}                                         /* 29/32 */
+  .focal__title,.data__value{font-size:1.4375rem;line-height:1.625rem;}                     /* 23/26 */
+  .sec-h,.phase__title{font-size:1.25rem;line-height:1.5rem;}                               /* 20/24 */
+  .row__title,.rec__title,.logstep__head .t,.groupcard .g-title{font-size:1.125rem;line-height:1.5rem;} /* 18/24 */
+  .linkrow{font-size:1rem;line-height:1.25rem;} /* title-3 → 16/20 */
+  .focal__body,.body,.support p,.dep__body,.nurse__text{font-size:1.125rem;line-height:1.5rem;} /* 18/24 */
+  .rec__desc,.phase__note{font-size:1rem;line-height:1.25rem;}                              /* 16/20 */
+  .body-sm,.phead__count,.phead__note,.nurse__meta,.logstep__head .d,.groupcard .g-sub,.data__label,.data__goal,.note-muted{font-size:.875rem;line-height:1.25rem;} /* caption 14/20 */
+  .kicker,.lozenge,.phead__label,.support__label,.dep__label,.row__eyebrow{font-size:.75rem;line-height:1rem;} /* eyebrow 12/16 */
+}

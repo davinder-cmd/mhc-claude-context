@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card Pattern Library — Batch 01</title>
+<style>
+  :root {
+    --ink: #1c1b19;
+    --ink-2: #56534e;
+    --ink-3: #8b8781;
+    --rule: #e3e0da;
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --accent: #0f497f;
+    --max: 1280px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 16px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    padding: 0 24px 96px;
+  }
+  .wrap { max-width: var(--max); margin: 0 auto; }
+
+  header { padding: 64px 0 40px; border-bottom: 1px solid var(--rule); margin-bottom: 8px; }
+  h1 { font-size: 34px; line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 12px; font-weight: 700; }
+  .lede { max-width: 62ch; color: var(--ink-2); margin: 0 0 20px; font-size: 17px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--ink-3); }
+  .meta b { color: var(--ink-2); font-weight: 600; }
+
+  nav { position: sticky; top: 0; z-index: 5; background: rgba(250,248,245,.92);
+        backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule);
+        padding: 12px 0; margin-bottom: 48px; }
+  nav ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; }
+  nav a { display: block; font-size: 12px; font-variant-numeric: tabular-nums;
+          color: var(--ink-2); text-decoration: none; padding: 4px 9px;
+          border: 1px solid var(--rule); border-radius: 999px; background: var(--card); }
+  nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .entry { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(0,1fr);
+           gap: 36px; padding: 40px 0; border-top: 1px solid var(--rule); align-items: start; }
+  .entry:first-of-type { border-top: 0; }
+
+  .shot { background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+          overflow: hidden; box-shadow: 0 1px 2px rgba(28,27,25,.05); }
+  .shot img { display: block; width: 100%; height: auto; }
+
+  .num { font: 600 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+         color: var(--ink-3); letter-spacing: .06em; margin-bottom: 10px; }
+  h2 { font-size: 21px; line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 4px; font-weight: 700; }
+  .src { font-size: 13px; color: var(--ink-3); margin: 0 0 18px; }
+  .src a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(15,73,127,.3); }
+  .src a:hover { border-bottom-color: var(--accent); }
+
+  .field { margin: 0 0 16px; }
+  .field .k { font: 600 11px/1 -apple-system, sans-serif; letter-spacing: .09em;
+              text-transform: uppercase; color: var(--ink-3); display: block; margin-bottom: 5px; }
+  .field p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+  .field p strong { color: var(--ink); font-weight: 600; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .tag { font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+         color: var(--ink-2); border: 1px solid var(--rule); background: var(--card);
+         border-radius: 4px; padding: 4px 8px; }
+
+  .closing { margin-top: 72px; padding-top: 40px; border-top: 2px solid var(--ink); }
+  .closing h2 { font-size: 24px; margin-bottom: 16px; }
+  .closing ol { max-width: 74ch; padding-left: 22px; }
+  .closing li { margin-bottom: 12px; color: var(--ink-2); font-size: 15px; }
+  .closing li strong { color: var(--ink); }
+  .runners { max-width: 74ch; margin-top: 40px; }
+  .runners table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  .runners th { text-align: left; font-size: 11px; letter-spacing: .09em; text-transform: uppercase;
+                color: var(--ink-3); border-bottom: 1px solid var(--rule); padding: 0 12px 8px 0; font-weight: 600; }
+  .runners td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); color: var(--ink-2); vertical-align: top; }
+  .runners td:first-child { color: var(--ink); font-weight: 600; white-space: nowrap; }
+  .runners a { color: var(--accent); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .entry { grid-template-columns: 1fr; gap: 20px; }
+    h1 { font-size: 27px; }
+    body { padding: 0 18px 64px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Card Pattern Library — Batch 01</h1>
+  <p class="lede">Twenty medium card variants — the size that has to survive both a 3–4 up grid and a horizontal carousel. No heroes, no bare thumbnails. Captured from Mobbin and read for internal layout and information hierarchy; colour and shadow are noted only where they carry the hierarchy.</p>
+  <div class="meta">
+    <span><b>Source</b> Mobbin, web</span>
+    <span><b>Captured</b> Aug 11</span>
+    <span><b>Count</b> 20 + 5 runners-up</span>
+    <span><b>Written record</b> INDEX.md</span>
+  </div>
+</header>
+
+<nav>
+  <ol>
+    <li><a href="#c01">01 Telescope</a></li>
+    <li><a href="#c02">02 Etsy</a></li>
+    <li><a href="#c03">03 Skillshare</a></li>
+    <li><a href="#c04">04 ClassDojo</a></li>
+    <li><a href="#c05">05 Mistral</a></li>
+    <li><a href="#c06">06 Perplexity</a></li>
+    <li><a href="#c07">07 Employment Hero</a></li>
+    <li><a href="#c08">08 Remote</a></li>
+    <li><a href="#c09">09 Whop</a></li>
+    <li><a href="#c10">10 Optimal Workshop</a></li>
+    <li><a href="#c11">11 Unity</a></li>
+    <li><a href="#c12">12 Uxcel exercise</a></li>
+    <li><a href="#c13">13 Uxcel syllabus</a></li>
+    <li><a href="#c14">14 SuperHi course</a></li>
+    <li><a href="#c15">15 SuperHi resource</a></li>
+    <li><a href="#c16">16 Zillow</a></li>
+    <li><a href="#c17">17 Julienne</a></li>
+    <li><a href="#c18">18 Going</a></li>
+    <li><a href="#c19">19 Midday</a></li>
+    <li><a href="#c20">20 Ferndesk</a></li>
+  </ol>
+</nav>
+
+<!-- 01 -->
+<section class="entry" id="c01">
+  <div class="shot"><img src="img/01-telescope.webp" alt="Telescope feed of image-first cards"></div>
+  <div>
+    <div class="num">01</div>
+    <h2>Image-first, caption outside</h2>
+    <p class="src">Telescope · <a href="https://mobbin.com/screens/80432a1a-0202-420c-83df-17958c2375d0">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Photo (variable aspect, masonry) → attribution chip overlaid top-left (avatar + name on a translucent scrim) → title below the image → subtitle/location in a lighter weight.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>The image is the whole first read. Text is deliberately small and <strong>outside</strong> the frame, so the grid scans as a wall of imagery with labels rather than a wall of cards. No border, no shadow — the photo edge is the card edge.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Content browse where imagery is the differentiator. Fails the moment photography is inconsistent, which makes it a stress test more than a default.</p></div>
+    <div class="tags"><span class="tag">Photo</span><span class="tag">Masonry</span><span class="tag">Overlay chip</span><span class="tag">Borderless</span></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="entry" id="c02">
+  <div class="shot"><img src="img/02-etsy.webp" alt="Etsy product grid with dense metadata"></div>
+  <div>
+    <div class="num">02</div>
+    <h2>Dense metadata stack</h2>
+    <p class="src">Etsy · <a href="https://mobbin.com/screens/02a6bf94-69ec-4eb6-a792-98744f221e28">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Square photo (play affordance where video exists) → title clamped to one line → shop name + rating + review count on one line → price, strikethrough original, discount % → badge line.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Six data points, no dividers, four type sizes. Price wins because it is the only bold dark value in the stack. It works only because every card carries the <strong>identical slot order</strong> — the eye learns the pattern once, then reads down a column.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>The density ceiling. Useful as the counter-example when someone argues a rewards or benefits card needs "just one more line."</p></div>
+    <div class="tags"><span class="tag">Photo</span><span class="tag">High density</span><span class="tag">Price-led</span><span class="tag">Badge line</span></div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="entry" id="c03">
+  <div class="shot"><img src="img/03-skillshare.webp" alt="Skillshare class project cards with ruled footers"></div>
+  <div>
+    <div class="num">03</div>
+    <h2>Three-zone with divided footer</h2>
+    <p class="src">Skillshare · <a href="https://mobbin.com/screens/e2f905ee-660b-4f72-a6b3-01e9674ca57b">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>16:9 image with a heart action overlaid top-right → avatar overlapping the bottom edge of the image → author name → title (bold) → hairline rule → footer with like count, comment count, relative date.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Three zones separated by two different devices — the image edge and a rule. The <strong>overlapping avatar stitches zone 1 to zone 2</strong> so the card doesn't read as two stacked blocks. Author sits above the title, subordinating the content to the person.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>The cleanest reference here for a card carrying both content and social proof. The ruled footer is the reusable idea.</p></div>
+    <div class="tags"><span class="tag">Photo</span><span class="tag">Ruled footer</span><span class="tag">Avatar overlap</span><span class="tag">Social proof</span></div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="entry" id="c04">
+  <div class="shot"><img src="img/04-classdojo.webp" alt="ClassDojo resource cards on full-bleed colour fields"></div>
+  <div>
+    <div class="num">04</div>
+    <h2>Full-bleed colour field</h2>
+    <p class="src">ClassDojo · <a href="https://mobbin.com/screens/ddc80bd2-c4db-4ccf-93cf-c818d37468cc">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Solid pastel fill, one per card → illustration bleeding off the right and top edges → title bottom-left → subtitle beneath in the same colour at lower opacity.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Colour does the categorisation work a tag row would otherwise do. Text anchors bottom-left with generous space above it, so the illustration reads as background and the label as foreground despite sharing the plane. <strong>The bleed is what stops it feeling like a coloured rectangle with text on it.</strong></p></div>
+    <div class="field"><span class="k">Where it fits</span><p>A set of 3–5 sibling entry points. Watch the accessibility cost — dark text on mid-saturation pastels is where this pattern usually fails contrast.</p></div>
+    <div class="tags"><span class="tag">Illustration</span><span class="tag">No image container</span><span class="tag">Colour = category</span><span class="tag">Edge bleed</span></div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="entry" id="c05">
+  <div class="shot"><img src="img/05-mistral.webp" alt="Mistral AI agent cards with icons in a media slot"></div>
+  <div>
+    <div class="num">05</div>
+    <h2>Icon in a media slot</h2>
+    <p class="src">Mistral AI · <a href="https://mobbin.com/screens/91a956f3-2594-47fe-af83-5b4d4238dec1">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Top ~45% is a saturated fill panel with a single centred glyph → title (bold) → description clamped to 2–3 lines → generous gap → attribution in small grey.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>The icon occupies an <strong>image slot</strong> rather than sitting inline with the title. That one decision lets an icon card sit in the same grid as an image card without looking like a different component. The gap before the attribution does the work a divider would.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>The answer to "we don't have photography for this." Strongest pattern in the set for icon-led content that must live next to image-led content.</p></div>
+    <div class="tags"><span class="tag">Icon</span><span class="tag">Media slot</span><span class="tag">Line clamp</span><span class="tag">Attribution footer</span></div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="entry" id="c06">
+  <div class="shot"><img src="img/06-perplexity.webp" alt="Perplexity Spaces cards with icon tiles and metadata rows"></div>
+  <div>
+    <div class="num">06</div>
+    <h2>Icon + icon-pair meta row</h2>
+    <p class="src">Perplexity · <a href="https://mobbin.com/screens/2a633253-700f-454d-a6fc-fa511e5fe747">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Rounded-square icon tile top-left on a light tint → generous vertical gap → title clamped to one line → meta row of two icon+label pairs (clock + date, lock + "Private").</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Almost no visual weight anywhere. The title is the only dark element. The meta row uses <strong>icons as delimiters instead of middots</strong>, which reads faster at small sizes and survives translation.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Quiet utility cards — saved items, collections, programs the member already owns. Deliberately un-promotional.</p></div>
+    <div class="tags"><span class="tag">Icon</span><span class="tag">Low emphasis</span><span class="tag">Icon-pair meta</span></div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="entry" id="c07">
+  <div class="shot"><img src="img/07-employment-hero.webp" alt="Employment Hero template cards with centred line icons"></div>
+  <div>
+    <div class="num">07</div>
+    <h2>Centred single label</h2>
+    <p class="src">Employment Hero · <a href="https://mobbin.com/screens/349ad239-c248-4f68-8950-2c210e792c52">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Thin-stroke line icon, centred, upper third → large empty middle → single centred label, one or two lines, in the brand accent.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>There is only one thing to read. <strong>The emptiness is the hierarchy</strong> — it signals "this is a choice, not content."</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Pick-one moments. Also the reference for a paired "Add new" affordance card, which this screen shows sitting in the same grid.</p></div>
+    <div class="tags"><span class="tag">Line icon</span><span class="tag">Minimal</span><span class="tag">Centred</span><span class="tag">Choice, not content</span></div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="entry" id="c08">
+  <div class="shot"><img src="img/08-remote.webp" alt="Remote things-to-do row cards with right-aligned dates"></div>
+  <div>
+    <div class="num">08</div>
+    <h2>Row card, meta right</h2>
+    <p class="src">Remote · <a href="https://mobbin.com/screens/eba81069-677a-49c5-8270-9de96a73ed8a">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Rounded icon tile left (~48px, tinted fill) → title (bold, one line) + description (grey, one line) centre → date right-aligned, vertically centred with the title baseline.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Three columns on one row. The <strong>right-aligned date creates a scannable second column</strong> down the stack, so the list reads as a table without being one. Separation by whitespace and a hairline border, not shadow.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>To-do / next-action stacks. Directly relevant to any "what should I do next" surface — the right column is where a status or due date goes.</p></div>
+    <div class="tags"><span class="tag">Icon</span><span class="tag">Horizontal</span><span class="tag">Right column</span><span class="tag">Next action</span></div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="entry" id="c09">
+  <div class="shot"><img src="img/09-whop.webp" alt="Whop course cards with progress bars and state badges"></div>
+  <div>
+    <div class="num">09</div>
+    <h2>Progress in card</h2>
+    <p class="src">Whop · <a href="https://mobbin.com/screens/aa901aec-5afb-437d-9d82-377a72748b8c">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Brand-fill thumbnail with the product name set into it (no photo) → state badge overlaid top-left ("New lesson") → title → progress bar with the percentage as a trailing label on the same line → meta line ("1 chapter · 1 lesson").</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>The progress bar sits <strong>above</strong> the meta line, putting state ahead of structure. Setting the % inline at the end of the track rather than above it saves a full line of height — that's the detail worth copying.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>The closest reference here to a DCP / learning-path card. The two cards shown differ only by badge + fill state — which is how one component should flex.</p></div>
+    <div class="tags"><span class="tag">Brand fill</span><span class="tag">Progress bar</span><span class="tag">State badge</span><span class="tag">Learning path</span></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="entry" id="c10">
+  <div class="shot"><img src="img/10-optimal-workshop.webp" alt="Optimal Workshop course cards with diagonal corner ribbons"></div>
+  <div>
+    <div class="num">10</div>
+    <h2>Corner-ribbon state</h2>
+    <p class="src">Optimal Workshop · <a href="https://mobbin.com/screens/7cb41553-8cd7-4d89-a3cd-a3d743d9b2a3">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Dark patterned thumbnail with a centred logo + word mark → diagonal ribbon top-right reading "Complete" → title in accent colour → description at 3–4 lines.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>State is pushed into the corner, so it <strong>costs zero vertical space</strong> and never competes with the title. The description is unusually long for a card this size and gets away with it because no metadata competes below it.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Completion state across a set of equal-weight modules. Cheaper than a badge that has to be laid out.</p></div>
+    <div class="tags"><span class="tag">Pattern fill</span><span class="tag">Corner ribbon</span><span class="tag">Completion state</span><span class="tag">Long description</span></div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="entry" id="c11">
+  <div class="shot"><img src="img/11-unity.webp" alt="Unity horizontal media cards with author footers"></div>
+  <div>
+    <div class="num">11</div>
+    <h2>Media-left + author footer</h2>
+    <p class="src">Unity · <a href="https://mobbin.com/screens/5857e5eb-0b02-4b21-9c7c-008a5e88f936">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>16:9 image occupying the left ~45% with a small sequence badge overlaid → right side: title (bold, up to 2 lines) → meta dot-row ("Tutorial · Beginner · 5 Mins") → hairline rule → author row with small avatar + name.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Title dominates because it is the largest type on the card by a wide margin. The dot-row compresses three attributes into one line. The rule separates content from provenance.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>A carousel or vertical stack where titles run long. <strong>Horizontal cards buy two lines of title without the card getting taller.</strong></p></div>
+    <div class="tags"><span class="tag">Photo</span><span class="tag">Horizontal</span><span class="tag">Dot-row meta</span><span class="tag">Ruled footer</span></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="entry" id="c12">
+  <div class="shot"><img src="img/12-uxcel-exercise.webp" alt="Uxcel exercise cards with all-caps eyebrow labels"></div>
+  <div>
+    <div class="num">12</div>
+    <h2>Eyebrow-led</h2>
+    <p class="src">Uxcel · <a href="https://mobbin.com/screens/de1ddcb2-c483-49d4-a118-d2d636ceab04">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Screenshot floated on a light tinted field (inset, not full-bleed) → bookmark icon overlaid top-right → ALL-CAPS type label ("EXERCISE") in small grey → title (bold) → footer line with a small glyph + source name.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>The eyebrow tells you <strong>what kind of thing</strong> this is before you read <strong>which</strong> thing it is — the right order when a grid mixes content types. Insetting the screenshot rather than bleeding it keeps UI imagery from looking broken at small sizes.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Mixed-type browse grids. The inset-on-tint treatment is the answer for any imagery that isn't photography.</p></div>
+    <div class="tags"><span class="tag">Screenshot</span><span class="tag">Eyebrow</span><span class="tag">Inset media</span><span class="tag">Save affordance</span></div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="entry" id="c13">
+  <div class="shot"><img src="img/13-uxcel-syllabus.webp" alt="Uxcel syllabus rows with right-side badges and a selected state"></div>
+  <div>
+    <div class="num">13</div>
+    <h2>Row + right-side badge</h2>
+    <p class="src">Uxcel · <a href="https://mobbin.com/screens/302c50f7-0ac2-4d8d-b435-e5bc9f4a855d">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Rounded icon tile left → title (bold) → meta line ("Course · 6h · Beginner") → pill badge pinned right ("Popular"). Selected state: 2px accent border + accent-tinted icon.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Near-flat by design — this is a queue, and every row is meant to look equally available. The accent border on one row is the only strong signal, and it is carrying <strong>"you are here."</strong></p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Long ordered lists where one item is the current step. Calmer than giving the active item a different layout.</p></div>
+    <div class="tags"><span class="tag">Icon</span><span class="tag">Horizontal</span><span class="tag">Right badge</span><span class="tag">Selected state</span></div>
+  </div>
+</section>
+
+<!-- 14 -->
+<section class="entry" id="c14">
+  <div class="shot"><img src="img/14-superhi-course.webp" alt="SuperHi course carousel cards with chip footers"></div>
+  <div>
+    <div class="num">14</div>
+    <h2>Tag-chip footer</h2>
+    <p class="src">SuperHi · <a href="https://mobbin.com/screens/6b7b46e8-2e03-4cca-a6c0-c8d358b16708">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Full-bleed graphic image top → title (large, 2 lines) → description (3–4 lines) → flexible gap → row of outlined chips ("FREE", "BEGINNER", "COURSE").</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>The title is genuinely large — close to a page heading — which is what makes this work in a carousel showing only three. Taxonomy is pushed to the bottom as chips, keeping qualifiers out of the title. <strong>Equal card heights with the chip row bottom-aligned</strong> forms a rail across the carousel.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>The reference for chips-as-footer. Bottom-aligning the chip row is what makes an unequal-copy-length set look ordered.</p></div>
+    <div class="tags"><span class="tag">Illustration</span><span class="tag">Carousel</span><span class="tag">Chip footer</span><span class="tag">Large title</span></div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="entry" id="c15">
+  <div class="shot"><img src="img/15-superhi-resource.webp" alt="SuperHi resource cards in solid colour with no imagery"></div>
+  <div>
+    <div class="num">15</div>
+    <h2>Colour-coded, text-only</h2>
+    <p class="src">SuperHi · <a href="https://mobbin.com/screens/aa4e077d-528a-4f32-aeb7-15c060bf9d8b">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Solid colour fill, one per card → title (bold, 2 lines) → description (3–4 lines) → single outlined chip bottom-left ("RESOURCES", "EVENTS").</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>No imagery at all, and it still reads as a designed card because the fill is doing categorisation and the chip confirms it. Text stays <strong>near-black on every fill rather than inverting</strong>, which keeps the set coherent.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>The honest answer for content with no art budget. Pair with #14 on one page and you get a two-tier system — image cards for featured, colour cards for the long tail.</p></div>
+    <div class="tags"><span class="tag">No media</span><span class="tag">Colour = category</span><span class="tag">Single chip</span><span class="tag">Carousel</span></div>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="entry" id="c16">
+  <div class="shot"><img src="img/16-zillow.webp" alt="Zillow three-up CTA cards with illustrations and outlined buttons"></div>
+  <div>
+    <div class="num">16</div>
+    <h2>Centred CTA card</h2>
+    <p class="src">Zillow · <a href="https://mobbin.com/screens/5786d9ec-2668-40a8-aed9-fde51ab6325d">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Illustration on the card's own white ground (no image container, no tint) → centred title (bold) → centred body, 3 lines → outlined button, centred.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Symmetrical and slow. Centring makes it read as an offer rather than content, and the <strong>outlined — not filled — button</strong> keeps three side-by-side cards from fighting each other.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Three-up "choose your path" rows. The restraint on the button is the lesson: three filled buttons in a row is three primary actions, which is none.</p></div>
+    <div class="tags"><span class="tag">Illustration</span><span class="tag">Centred</span><span class="tag">Outlined CTA</span><span class="tag">Three-up</span></div>
+  </div>
+</section>
+
+<!-- 17 -->
+<section class="entry" id="c17">
+  <div class="shot"><img src="img/17-julienne.webp" alt="Julienne cookbook cards with titles set above the image"></div>
+  <div>
+    <div class="num">17</div>
+    <h2>Title above image</h2>
+    <p class="src">Julienne · <a href="https://mobbin.com/screens/c5c37f34-b6fc-47dd-82ea-e58223bcd341">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Title (2 lines) → author, both <em>above</em> → product image centred on a warm tinted field with room around it → footer: sale price, strikethrough original, rating + review count → filled Buy button bottom-right.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Inverted. You read the name, then look at the object — the opposite of every other card here. It works because the products are books, where <strong>the title is the identity</strong>, and it makes the images read as a considered still-life row rather than a product grid.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Rare, but the right call when the name carries more meaning than the picture. Keep it as the argument that image-on-top isn't a law.</p></div>
+    <div class="tags"><span class="tag">Photo</span><span class="tag">Inverted order</span><span class="tag">Tinted field</span><span class="tag">Buy footer</span></div>
+  </div>
+</section>
+
+<!-- 18 -->
+<section class="entry" id="c18">
+  <div class="shot"><img src="img/18-going.webp" alt="Going blog grid mixing cards with and without images"></div>
+  <div>
+    <div class="num">18</div>
+    <h2>Chip → headline → meta</h2>
+    <p class="src">Going · <a href="https://mobbin.com/screens/e06cbaf5-8427-4a20-bb9c-982be8a34898">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Filled dark chip ("Airlines") → headline (bold, 2 lines) → meta line (date · read time · arrow glyph). Image, when present, sits <em>above</em> the chip; the same grid runs image and no-image cards side by side.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Identical text hierarchy whether or not there is an image, so the grid stays even. The trailing arrow does the affordance work without a button.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Editorial surfaces with partial art coverage. <strong>This is the pattern that makes a half-illustrated content set look intentional instead of incomplete.</strong></p></div>
+    <div class="tags"><span class="tag">Optional media</span><span class="tag">Chip-led</span><span class="tag">Editorial</span><span class="tag">Arrow affordance</span></div>
+  </div>
+</section>
+
+<!-- 19 -->
+<section class="entry" id="c19">
+  <div class="shot"><img src="img/19-midday.webp" alt="Midday integration cards with two equal-weight footer buttons"></div>
+  <div>
+    <div class="num">19</div>
+    <h2>Dual-action footer</h2>
+    <p class="src">Midday · <a href="https://mobbin.com/screens/03313f42-04ef-4481-80db-96429e4a63c7">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Logo top-left → state badge top-right ("Installed", "Beta") → title → description, 3 lines → two equal-width outlined buttons side by side ("Details" / "Install"), footer-aligned.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>The card carries two actions of equal weight without either becoming primary — both outlined, both half-width. State lives in the badge, so the buttons only change label ("Install" → "Disconnect").</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Any card where "learn more" and "do it" both need to be present. <strong>The equal-weight treatment is what keeps a grid of these from reading as a wall of CTAs.</strong></p></div>
+    <div class="tags"><span class="tag">Logo</span><span class="tag">Two actions</span><span class="tag">State badge</span><span class="tag">Footer-aligned</span></div>
+  </div>
+</section>
+
+<!-- 20 -->
+<section class="entry" id="c20">
+  <div class="shot"><img src="img/20-ferndesk.webp" alt="Ferndesk stat cards sharing one container with dividers"></div>
+  <div>
+    <div class="num">20</div>
+    <h2>Stat card</h2>
+    <p class="src">Ferndesk · <a href="https://mobbin.com/screens/a41b87bc-6104-4cc3-8cb6-cfd4620701b1">Mobbin</a></p>
+    <div class="field"><span class="k">Anatomy</span><p>Small accent-coloured icon → large numeral → label (bold, small) → description, 2 lines grey. Three cards share one container, separated by hairline dividers rather than individually bordered, with a coloured top rule per card.</p></div>
+    <div class="field"><span class="k">Hierarchy</span><p>Number first by size, label second by weight, description third by colour — three different devices, one per level. <strong>The shared container with dividers is the detail:</strong> it reads as one panel of related metrics rather than three competing cards.</p></div>
+    <div class="field"><span class="k">Where it fits</span><p>Any metric row. The description line is what most stat cards omit and then need a tooltip for.</p></div>
+    <div class="tags"><span class="tag">Icon</span><span class="tag">Big number</span><span class="tag">Shared container</span><span class="tag">Metric row</span></div>
+  </div>
+</section>
+
+<div class="closing">
+  <h2>What the set says</h2>
+  <p style="max-width:74ch;color:var(--ink-2);">Six devices are doing nearly all the hierarchy work across these twenty cards. They're worth naming as a vocabulary.</p>
+  <ol>
+    <li><strong>An image slot that isn't always an image</strong> (05, 04, 15) — the top block can be a photo, a tinted icon panel, or a colour fill, and the card stays the same component.</li>
+    <li><strong>The eyebrow</strong> (12, 18) — type label above the title, for grids that mix content types.</li>
+    <li><strong>The ruled footer</strong> (03, 11, 20) — a hairline separating content from provenance or metrics.</li>
+    <li><strong>Bottom-aligned chips</strong> (14, 15) — taxonomy as a rail across a carousel, keeping qualifiers out of titles.</li>
+    <li><strong>The overlay, not the row</strong> (09, 10, 12) — state and actions placed on the media so they cost no vertical space.</li>
+    <li><strong>The right column</strong> (08, 13) — right-aligning one attribute turns a card stack into a scannable table.</li>
+  </ol>
+
+  <div class="runners">
+    <h2 style="font-size:18px;margin-bottom:12px;">Runners-up — captured, not written up</h2>
+    <table>
+      <thead><tr><th>Source</th><th>Why it's here</th><th></th></tr></thead>
+      <tbody>
+        <tr><td>Fabric</td><td>Chevron set inside the title line as the affordance — no separate arrow</td><td><a href="https://mobbin.com/screens/46ce7cf7-8553-41cf-b695-99c7f089098d">Mobbin</a></td></tr>
+        <tr><td>Givingli</td><td>Pure image tile, aspect-locked, single overlay badge, zero text</td><td><a href="https://mobbin.com/screens/7109a2f4-4000-48e7-99a8-95f004ae2864">Mobbin</a></td></tr>
+        <tr><td>Hotjar</td><td>Footer swaps an availability line for a full-width Connect button on hover</td><td><a href="https://mobbin.com/screens/da542ad5-960c-4289-8d46-d73f10824061">Mobbin</a></td></tr>
+        <tr><td>Supabase</td><td>Dark row-card grid — logo, title, description, far-right chevron</td><td><a href="https://mobbin.com/screens/4680bf9b-b126-4254-a48a-cb8c821398e8">Mobbin</a></td></tr>
+        <tr><td>Portrait</td><td>Heterogeneous masonry — pure-image and card-in-card in one grid</td><td><a href="https://mobbin.com/screens/63d395a6-162e-437f-bf4f-4dafb77d026b">Mobbin</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

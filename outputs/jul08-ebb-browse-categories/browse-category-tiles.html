@@ -1,0 +1,118 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Browse — category tiles (WW Explore pattern)</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.10);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--amber:#8A5A12;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1120px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:800px;margin:0 0 8px;font-size:14px}
+.gallery{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;margin-top:18px}
+.col{display:flex;flex-direction:column;gap:9px}
+.cap{font-size:12.5px;color:var(--ink-2);max-width:392px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+
+.phone{width:392px;background:var(--warm);border:9px solid #1c2330;border-radius:42px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:800px;overflow-y:auto}
+.statusbar{display:flex;justify-content:space-between;padding:13px 22px 2px;font-size:12px;font-weight:700}
+.mtop{display:flex;align-items:center;gap:10px;padding:8px 18px 10px}
+.mtop .chev{font-size:20px;color:var(--ink-2)}.mtop .t{font-size:19px;font-weight:750;letter-spacing:-0.01em}
+.pad{padding:0 18px 16px}
+.search{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 14px;color:var(--ink-3);font-size:13.5px}
+.sec{font-size:14px;font-weight:750;margin:18px 2px 11px}
+
+/* category tile */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ctile{position:relative;border-radius:16px;overflow:hidden;height:150px;display:block}
+.ctile.wide{grid-column:1 / -1;height:130px}
+.ctile .ph{position:absolute;inset:0}
+.ctile .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(20,30,34,.28))}
+.b1{background:linear-gradient(135deg,#8FB4BC,#5E8C97)}
+.b2{background:linear-gradient(135deg,#93B58C,#5E8C6B)}
+.b3{background:linear-gradient(135deg,#D9A86B,#B9793E)}
+.pill{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.94);border-radius:24px;padding:7px 13px;box-shadow:0 3px 10px -4px rgba(0,0,0,.3)}
+.pill .ic{font-size:14px}
+.pill .lb{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.pill .ct{font-size:11px;font-weight:650;color:var(--ink-3)}
+.cnt{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.92);color:var(--ink);font-size:11px;font-weight:700;border-radius:20px;padding:3px 9px}
+
+/* recommended small */
+.rrow{display:flex;gap:12px;margin-top:6px}
+.rt{flex:1}
+.rti{height:88px;border-radius:13px}
+.rc1{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}.rc2{background:linear-gradient(135deg,#E7E1F0,#CFC3E4)}
+.rtt{font-size:12.5px;font-weight:650;margin-top:6px}
+.rts{font-size:11px;color:var(--ink-3)}
+
+.bnav{display:flex;justify-content:space-around;padding:9px 6px 13px;border-top:1px solid var(--line);background:var(--warm);position:sticky;bottom:0}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-decoration:none}.bnav a.on{color:var(--teal-2);font-weight:700}.bnav .ic{font-size:16px}
+
+/* treatment options */
+.opt{width:250px}
+.olabel{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.onum{font-size:12px;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:2px 7px}
+.oname{font-size:14px;font-weight:700}
+.onote{font-size:11.5px;color:var(--ink-2);margin-top:9px}
+.warmtile{height:150px;border-radius:16px;background:linear-gradient(135deg,#EDE6D6,#DCCBA6);position:relative}
+.warmtile .big{position:absolute;left:16px;top:14px;font-size:30px;opacity:.9}
+</style></head><body>
+<div class="page">
+<h1>Browse — DCP categories as Explore tiles</h1>
+<p class="sub">The WW "Achieve" Explore pattern applied to the top-level browse page: each care-path <b>area</b> is a full-bleed photo tile with an icon+label pill — tap in to see that area's paths. Warmer and more inviting than text headers over a 14-tile dump. Below: three pill/tile treatments to choose from.</p>
+
+<div class="gallery">
+
+<!-- MOBILE browse with category tiles -->
+<div class="col">
+<span class="tag">Browse · category-first</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="mtop"><span class="chev">‹</span><span class="t">Browse care paths</span></div>
+<div class="pad">
+<div class="search">🔍 Search care paths</div>
+<div class="sec">Explore by area</div>
+<div class="cgrid">
+  <a class="ctile"><div class="ph b1"></div><div class="grad"></div><span class="cnt">3 paths</span><span class="pill"><span class="ic">🧠</span><span class="lb">Behavioral</span></span></a>
+  <a class="ctile"><div class="ph b2"></div><div class="grad"></div><span class="cnt">5 paths</span><span class="pill"><span class="ic">🏃</span><span class="lb">Movement</span></span></a>
+  <a class="ctile wide"><div class="ph b3"></div><div class="grad"></div><span class="cnt">6 paths</span><span class="pill"><span class="ic">❤️</span><span class="lb">Metabolic &amp; heart</span></span></a>
+</div>
+<div class="sec">Recommended for you</div>
+<div class="rrow">
+  <div class="rt"><div class="rti rc1"></div><div class="rtt">Managing Anxiety</div><div class="rts">Based on your check-in</div></div>
+  <div class="rt"><div class="rti rc2"></div><div class="rtt">Better Sleep</div><div class="rts">Popular</div></div>
+</div>
+</div>
+<div class="bnav"><a><span class="ic">⌂</span>Home</a><a class="on"><span class="ic">♡</span>Digital Care</a><a><span class="ic">❦</span>Wellbeing</a><a><span class="ic">▤</span>Benefits</a><a><span class="ic">☆</span>Rewards</a></div>
+</div></div>
+<div class="cap"><b>Category-first browse.</b> Three area tiles (2-up + wide) with icon+label pills and a path count, then a small Recommended row. The full path list lives one level in, per area — keeps the top page calm and inviting instead of 14 tiles at once.</div>
+</div>
+
+<!-- treatment options -->
+<div class="col" style="gap:22px">
+<span class="tag">Tile treatments</span>
+
+<div class="opt">
+<div class="olabel"><span class="onum">A</span><span class="oname">Photo + pill (WW)</span></div>
+<a class="ctile" style="display:block"><div class="ph b1"></div><div class="grad"></div><span class="cnt">3 paths</span><span class="pill"><span class="ic">🧠</span><span class="lb">Behavioral</span></span></a>
+<div class="onote">Straight WW pattern — photo, icon+label pill bottom-left, count top-right. Editorial, human.</div>
+</div>
+
+<div class="opt">
+<div class="olabel"><span class="onum">B</span><span class="oname">Count in the pill</span></div>
+<a class="ctile" style="display:block"><div class="ph b2"></div><div class="grad"></div><span class="pill"><span class="ic">🏃</span><span class="lb">Movement</span><span class="ct">· 5</span></span></a>
+<div class="onote">Fold the count into the pill ("Movement · 5") — one clean object, no corner chip.</div>
+</div>
+
+<div class="opt">
+<div class="olabel"><span class="onum">C</span><span class="oname">Warm illustrated</span></div>
+<div class="warmtile"><span class="big">❤️</span><span class="cnt">6 paths</span><span class="pill"><span class="lb">Metabolic &amp; heart</span></span></div>
+<div class="onote">No stock photo — a warm brand tile with a large glyph + label pill. Calmer, more on-brand, avoids sourcing/vetting clinical photos.</div>
+</div>
+
+</div>
+
+</div>
+<div style="margin-top:26px;max-width:800px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>My read:</b> the category-first layout is the right call for the top of Browse — it turns 14 paths into 3 warm doorways. On the tile, I'd lean <b>B (count in the pill)</b> for cleanliness, and I'd seriously consider <b>C (warm illustrated)</b> over stock photos: clinical-condition photography is hard to source tastefully (and easy to get wrong/stigmatizing), whereas a warm brand tile is safe, consistent, and faster to ship. We can start illustrated and swap to photography later if we want.
+</div>
+</div>
+</body></html>

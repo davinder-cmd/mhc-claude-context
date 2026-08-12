@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progress representation — study</title>
+<style>
+:root{--ground:#F3EFE6;--surface:#FCFBF8;--warm:#FBF6EC;--ink:#22262A;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(34,38,42,0.11);--line-2:rgba(34,38,42,0.07);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1160px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:740px;margin:0 0 26px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.opt{width:320px}
+.olabel{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.onum{font-size:13px;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:2px 8px}
+.oname{font-size:15px;font-weight:700}
+.onote{font-size:12px;color:var(--ink-2);margin-top:11px}
+.onote b{color:var(--ink)}
+.rec{display:inline-block;font-size:10.5px;font-weight:700;color:#3F7A46;background:#E6EFE1;border-radius:5px;padding:2px 7px;margin-left:6px}
+
+/* warm banner card (v3 option 2) */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 16px 40px -32px rgba(14,74,86,.5)}
+.band{height:120px;border-radius:13px;background:linear-gradient(135deg,#E9DcC4,#D8B98A);position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 80% 15%,rgba(255,255,255,.35),transparent 60%)}
+.chip{position:absolute;left:12px;bottom:12px;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.85);color:var(--ink)}
+.title{font-size:17px;font-weight:700;letter-spacing:-0.01em;margin-top:12px}
+.cad{font-size:12.5px;color:var(--ink-2);margin-top:3px}
+.prog{margin:12px 0 2px}
+.go{display:inline-block;font-size:13.5px;font-weight:700;color:#fff;background:var(--teal);border-radius:10px;padding:9px 18px;margin-top:12px}
+
+/* 1 bar */
+.bar{height:7px;border-radius:5px;background:var(--line-2);overflow:hidden;max-width:230px}
+.bar i{display:block;height:100%;width:60%;background:var(--teal)}
+
+/* 2 ring */
+.ringwrap{display:flex;align-items:center;gap:11px}
+.ringtxt{font-size:12.5px;color:var(--ink-2)}
+
+/* 3 dots + elongated current */
+.segs{display:flex;align-items:center;gap:6px}
+.segs i{height:7px;width:7px;border-radius:20px;background:var(--line);display:block}
+.segs i.done{background:var(--teal)}
+.segs i.cur{width:26px;background:var(--teal)}
+.segstxt{font-size:12.5px;color:var(--ink-3);margin-left:8px}
+
+/* 4 text only */
+.txtonly{font-size:14px;font-weight:600;color:var(--ink)}
+.txtonly small{font-weight:400;color:var(--ink-3)}
+
+/* 5 chunky segmented bar */
+.segbar{display:flex;gap:4px;max-width:240px}
+.segbar i{flex:1;height:7px;border-radius:3px;background:var(--line)}
+.segbar i.done{background:var(--teal)}
+.segbar i.cur{background:var(--teal);opacity:.55}
+
+/* 6 faint track + milestone dots (Airalo) */
+.trackwrap{position:relative;max-width:250px;height:16px;margin-top:2px}
+.track{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:6px;border-radius:5px;background:#EAE2D3}
+.trackfill{position:absolute;left:0;top:50%;transform:translateY(-50%);height:6px;border-radius:5px;background:var(--teal)}
+.node{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;transform:translate(-50%,-50%);background:#fff;border:2.5px solid #D6CDBB;box-shadow:0 0 0 2px var(--surface)}
+.node.on{background:var(--teal);border-color:var(--teal)}
+.nodelabels{display:flex;justify-content:space-between;max-width:250px;margin-top:7px;font-size:10.5px;color:var(--ink-3)}
+</style></head><body>
+<div class="page">
+<h1>Progress representation — study</h1>
+<p class="sub">Same warm-banner card (v3 option 2), five ways to show "Session 6 of 10." Goal: <b>simplify</b>, and stay <b>pace-not-speed</b> (a filling bar reads as a countdown/velocity; discrete markers read as "sessions done," which is calmer and truer to the guardrail).</p>
+
+<div class="grid">
+
+<!-- 1 -->
+<div class="opt">
+<div class="olabel"><span class="onum">1</span><span class="oname">Thin bar</span></div>
+<div class="card"><div class="band"><span class="chip">Anxiety · CBT</span></div>
+<div class="title">Managing Anxiety</div>
+<div class="prog"><div class="bar"><i></i></div></div>
+<div class="cad">Session 6 of 10 · 3 weeks in</div>
+<span class="go">Continue</span></div>
+<div class="onote">Simplest, universally understood. But a filling bar reads as <b>velocity / a countdown</b> — the mild tension with pace-not-speed.</div>
+</div>
+
+<!-- 2 -->
+<div class="opt">
+<div class="olabel"><span class="onum">2</span><span class="oname">Ring / wheel</span><span class="rec">calmest</span></div>
+<div class="card"><div class="band"><span class="chip">Anxiety · CBT</span></div>
+<div class="title">Managing Anxiety</div>
+<div class="prog"><div class="ringwrap">
+<svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#e7e2d6" stroke-width="4"/><circle cx="20" cy="20" r="16" fill="none" stroke="#0E4A56" stroke-width="4" stroke-linecap="round" stroke-dasharray="100.5" stroke-dashoffset="40" transform="rotate(-90 20 20)"/><text x="20" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#22262A">6/10</text></svg>
+<span class="ringtxt">Session 6 · 3 weeks in</span>
+</div></div>
+<span class="go">Continue</span></div>
+<div class="onote">One compact element, no row of markers. Neutral (not a race). Scales to any session count without getting busy. <b>My lean for simplify.</b></div>
+</div>
+
+<!-- 3 -->
+<div class="opt">
+<div class="olabel"><span class="onum">3</span><span class="oname">Dots + current line</span></div>
+<div class="card"><div class="band"><span class="chip">Anxiety · CBT</span></div>
+<div class="title">Managing Anxiety</div>
+<div class="prog"><div class="segs">
+<i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="cur"></i><i></i><i></i><i></i><i></i>
+</div><div class="segstxt">Session 6 of 10</div></div>
+<span class="go">Continue</span></div>
+<div class="onote">The pattern you described — done = dots, <b>current = an elongated line</b>, upcoming = dots. Discrete (pace-friendly) and shows "you're here." At 10 sessions it's a touch busy; best when counts are ~5–8.</div>
+</div>
+
+<!-- 4 -->
+<div class="opt">
+<div class="olabel"><span class="onum">4</span><span class="oname">Text only</span></div>
+<div class="card"><div class="band"><span class="chip">Anxiety · CBT</span></div>
+<div class="title">Managing Anxiety</div>
+<div class="prog"><div class="txtonly">Session 6 of 10 <small>· 3 weeks in</small></div></div>
+<span class="go">Continue</span></div>
+<div class="onote">The absolute simplest — no visual at all. Calm and honest, but loses the at-a-glance sense of "how far." Good if we want the card near-textual.</div>
+</div>
+
+<!-- 5 -->
+<div class="opt">
+<div class="olabel"><span class="onum">5</span><span class="oname">Segmented bar</span></div>
+<div class="card"><div class="band"><span class="chip">Anxiety · CBT</span></div>
+<div class="title">Managing Anxiety</div>
+<div class="prog"><div class="segbar"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="cur"></i><i></i><i></i><i></i><i></i></div><div class="segstxt" style="margin-left:0;margin-top:6px">Session 6 of 10</div></div>
+<span class="go">Continue</span></div>
+<div class="onote">Middle ground — a bar split into session segments (story-style). Reads as discrete steps, not a smooth race, but still a single horizontal element.</div>
+</div>
+
+<!-- 6 -->
+<div class="opt">
+<div class="olabel"><span class="onum">6</span><span class="oname">Faint track + milestone dots</span><span class="rec">Airalo-style</span></div>
+<div class="card"><div class="band"><span class="chip">Anxiety · CBT</span></div>
+<div class="title">Managing Anxiety</div>
+<div class="prog">
+ <div class="trackwrap">
+   <div class="track"></div>
+   <div class="trackfill" style="width:60%"></div>
+   <div class="node on" style="left:3%"></div>
+   <div class="node on" style="left:53%"></div>
+   <div class="node" style="left:97%"></div>
+ </div>
+ <div class="nodelabels"><span>Start</span><span>Halfway</span><span>Complete</span></div>
+</div>
+<span class="go">Continue</span></div>
+<div class="onote">Your Airalo reference — a <b>faint track</b> with <b>milestone dots</b> on it, fill in teal to the current point. Dots mark <b>meaningful moments</b> (halfway, complete), not every session — cleaner than 10 dots, scales to any length, and the "halfway" node can double as the <b>~50% reward-eligible</b> marker. Strong candidate.</div>
+</div>
+
+</div>
+
+<div style="margin-top:28px;max-width:740px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>To simplify:</b> <b>Option 6 (faint track + milestone dots)</b> and <b>Option 2 (ring)</b> are the strongest. Option 6 stays calm via the <b>faint</b> track, scales to any length, and its dots carry meaning (halfway = the ~50% reward-eligible point, complete) instead of counting every session — a nice tie to the 50% rule. Option 2 (ring) is the most compact. <b>Option 3 (dots + current line)</b> suits shorter programs; <b>Option 5</b> is the segmented compromise. Drop the plain filling bar (Option 1) — it reads as a countdown.
+</div>
+</div>
+</body></html>

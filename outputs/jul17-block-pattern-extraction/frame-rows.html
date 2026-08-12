@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rows — render frame</title>
+  <link rel="stylesheet" href="mhc-home.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    .mhc-home{ padding:16px; display:flex; flex-direction:column; gap:28px; }
+    .demo-label{ color:var(--ink-placeholder); font-family:var(--f-text); font-size:11px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:8px; }
+    .demo-surface{ background:var(--surface); border:1px solid var(--hairline); border-radius:var(--r-xl); padding:var(--s-04); }
+    .pair-card__thumb{ background-size:cover; background-position:center; background-image:url('https://picsum.photos/seed/mhcyoga/320/240'); }
+  </style>
+</head>
+<body>
+<div class="mhc-home">
+
+  <div>
+    <div class="demo-label">Greeting row · .greeting</div>
+    <div class="greeting">
+      <h1 class="heading-4"><span class="greet-compact">Hi Davinder</span><span class="greet-medium">Afternoon Davinder</span></h1>
+      <div class="greeting__actions">
+        <a class="icon-btn icon-btn--filled" href="#" aria-label="Messages"><span class="material-symbols-outlined" aria-hidden="true">mail_outline</span></a>
+        <a class="icon-btn icon-btn--filled" href="#" aria-label="Search"><span class="material-symbols-outlined" aria-hidden="true">search</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Section head · .section-head</div>
+    <div class="section-head">
+      <div class="section-head__title">
+        <h2 class="heading-6">This week</h2>
+        <div class="caption meta">Synced 4 minutes ago · Apple Health</div>
+      </div>
+      <a class="btn btn-text" href="#">All data</a>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Media row · .pair-card__row (inside a surface)</div>
+    <div class="demo-surface">
+      <div class="pair-card__row">
+        <div class="pair-card__thumb" aria-hidden="true"></div>
+        <div class="pair-card__row-body">
+          <div class="title-1">Desk-friendly yoga</div>
+          <div class="body-3 ink-soft">10 min · Movement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Meta row · .eyebrow + dot-separated</div>
+    <div class="demo-surface">
+      <div class="eyebrow program__tag"><span class="dot" aria-hidden="true"></span>DCP · Sleep</div>
+      <div class="hero__meta body-3" style="margin-top:8px"><span>Sleep DCP</span><span class="dot" aria-hidden="true"></span><span>$100 reward at completion</span></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

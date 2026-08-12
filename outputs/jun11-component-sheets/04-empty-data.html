@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Empty data · component sheet · 04</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="bar">
+  <a class="bar__back" href="index.html">← All sheets</a>
+  <span class="bar__sep">/</span>
+  <span class="bar__name">04 · Empty data</span>
+</nav>
+
+<div class="sheet">
+
+  <header class="sheet__head">
+    <div class="sheet__num">04 / 07</div>
+    <h1 class="sheet__title">Empty data · variants</h1>
+    <p class="sheet__sub">
+      What replaces the tracker grid when there's no data to show. Covers the cases where the user hasn't connected a source, the source is connected but hasn't synced, or the sync errored. The empty-state shell takes the same row space as the tracker grid.
+    </p>
+    <a class="sheet__figma" href="https://www.figma.com/design/6nJg9r55Y3NSgqZetujnPI/Home-Page-redesign-v2?node-id=6510-24591" target="_blank">View in Figma</a>
+  </header>
+
+  <section class="section">
+    <h2>Variants</h2>
+
+    <div class="preview"><img src="img/04-empty-data.png" alt="Empty data state variants from Figma"></div>
+
+    <div class="variants">
+      <ul>
+        <li><strong>No source connected</strong> — primary action <code>Connect a source</code>. Body explains what connecting unlocks ("Add Apple Health, Fitbit, Garmin to see your trends").</li>
+        <li><strong>Source connected, no data yet</strong> — friendly waiting state. Body reads "Sync is in progress" or "Open your app on your phone to start syncing." No primary CTA, just a passive Refresh link.</li>
+        <li><strong>Sync error</strong> — alert tone (warning color). Body explains the error briefly. Primary CTA <code>Reconnect</code> or <code>Troubleshoot</code>.</li>
+        <li><strong>Partial data</strong> — some metrics have data, others don't. Mixed state shown as the tracker grid with empty tiles for missing metrics (covered by the regular Data Section variants — sheet 03).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Notes</h2>
+    <ul class="notes">
+      <li>Empty data replaces the full <code>.trackers</code> block, not a single tile. If you have one tile missing, use the per-tile "No data" variant from sheet 03 instead.</li>
+      <li>The container styling (bordered card, padding, rounded corners) matches the tracker grid's outer container so the page layout doesn't shift visually between states.</li>
+      <li>Icon for the empty state is illustrative (a generic chart or sync glyph), not a metric-specific one.</li>
+      <li>This component isn't yet in the jun11 fragment — when added, it goes between the section head ("This week") and the next section. The "This week" head can stay since the empty state still belongs to the data section.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<title>EBB — Dual On-Ramp (with & without the assessment)</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 58px 0 18px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.04; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 72ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 18px; }
+  .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+  .lg .sw { width: 22px; height: 14px; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; }
+  .lg .sw.rew { background: var(--amber-tint); color: var(--amber); }
+  .lg .sw.gate { background: #fff; border: 1.5px solid var(--amber-mid); }
+  .lg .sw.loop { background: var(--teal-tint); color: var(--teal); }
+
+  section { padding: 22px 0; }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .lane { margin-bottom: 18px; }
+  .lane-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
+  .lane-head .lt { font-size: 15px; font-weight: 720; letter-spacing: -0.01em; }
+  .lane-head .pill { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; }
+  .lane-head .pill.best { background: var(--teal); color: #fff; }
+  .lane-head .pill.base { background: rgba(34,38,42,0.08); color: var(--ink-2); }
+  .lane-head .ld { font-size: 12.5px; color: var(--ink-3); }
+
+  .flowscroll { overflow-x: auto; padding: 10px 0; }
+  .flow { display: flex; align-items: stretch; gap: 8px; min-width: min-content; }
+  .arrow { display: flex; align-items: center; color: var(--teal-2); font-size: 20px; font-weight: 700; flex: none; }
+
+  .stage { width: 172px; flex: none; border-radius: 13px; overflow: hidden; border: 1px solid var(--line); background: #fff; display: flex; flex-direction: column; }
+  .stage .top { height: 32px; background: linear-gradient(120deg,#123f52,#2b8b93); display: flex; align-items: center; padding: 0 11px; }
+  .stage .top .nm { color: #fff; font-size: 11.5px; font-weight: 700; letter-spacing: -0.005em; }
+  .stage .b { padding: 10px 11px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+  .stage .line { font-size: 11px; color: var(--ink-2); line-height: 1.35; }
+  .stage .badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; }
+  .rew { font-size: 9.5px; font-weight: 800; padding: 3px 6px; border-radius: 6px; background: var(--amber-tint); color: var(--amber); }
+  .rew.pend { background: #fff; border: 1px dashed var(--amber-mid); }
+  .gate { font-size: 9px; font-weight: 700; padding: 3px 6px; border-radius: 6px; background: #fff; border: 1px solid var(--amber-mid); color: var(--amber); }
+  .stage.pay .top { background: linear-gradient(120deg,#8a5a12,#b67d23); }
+  .stage.base .top { background: linear-gradient(120deg,#2f4a54,#4b7f88); }
+  .stage.optin .top { background: linear-gradient(120deg,#5a3d0c,#8a5a12); }
+  .stage.hinge .top { background: linear-gradient(120deg,#0e4a56,#14636f); }
+
+  .converge { text-align: center; margin: 6px 0 2px; }
+  .converge .txt { display: inline-flex; align-items: center; gap: 10px; background: var(--teal); color: #fff; font-weight: 680; font-size: 13.5px; border-radius: 999px; padding: 9px 18px; }
+  .converge .down { color: var(--teal); font-size: 26px; line-height: 1; margin-top: 6px; }
+
+  .loopnote { margin-top: 12px; display: inline-flex; align-items: center; gap: 9px; background: var(--teal-tint); color: var(--teal); font-weight: 650; font-size: 13px; border-radius: 12px; padding: 10px 15px; }
+  .loopnote .arc { font-size: 19px; }
+
+  .sec-head { margin-bottom: 8px; }
+  .sec-head h2 { font-size: clamp(19px,2.3vw,24px); letter-spacing:-0.01em; font-weight:680; margin: 6px 0 0; }
+  .sec-head p { margin: 8px 0 0; color: var(--ink-2); font-size: 14px; max-width: 74ch; }
+
+  .sumrow { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 10px; }
+  @media (max-width:760px){ .sumrow { grid-template-columns: 1fr; } }
+  .sum { background: var(--surface); border: 1px solid var(--line); border-radius: 13px; padding: 14px 16px; }
+  .sum h4 { margin: 0; font-size: 14px; font-weight: 680; }
+  .sum p { margin: 6px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+  .sum b { color: var(--ink); }
+  .sum.warn { border-left: 3px solid var(--amber-mid); background: #fbf7ef; }
+
+  footer { padding: 26px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 90ch; }
+  footer .note b { color: var(--ink-2); font-weight: 650; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Dual on-ramp</div>
+    <h1>Getting into EBB — with or without the assessment</h1>
+    <p class="thesis">The assessment is the <strong>best</strong> on-ramp when it's there (the $300 hook + risk-grounded recommendation), but it can't be the <strong>only</strong> one. A second, always-available on-ramp — interests or browse — means EBB works for every client and every user. <strong>Both converge on the same opt-in → loop.</strong></p>
+    <div class="legend">
+      <span class="lg"><span class="sw rew">$</span> Reward moment</span>
+      <span class="lg"><span class="sw gate"></span> Opt-in / gate</span>
+      <span class="lg"><span class="sw loop">↺</span> Shared loop</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Two ways in</div><h2>The on-ramps</h2></div>
+
+    <!-- LANE A -->
+    <div class="lane">
+      <div class="lane-head"><span class="lt">A · Assessment-driven</span><span class="pill best">Best · when present</span><span class="ld">hooked by the $300; recommendation from clinical risk</span></div>
+      <div class="flowscroll"><div class="flow">
+        <div class="stage"><div class="top"><span class="nm">Home</span></div><div class="b"><div class="line">$300 assessment as the first card.</div><div class="badges"><span class="rew pend">$300 offered</span></div></div></div>
+        <div class="arrow">→</div>
+        <div class="stage"><div class="top"><span class="nm">Assessment</span></div><div class="b"><div class="line">~5 min → health-risk results.</div></div></div>
+        <div class="arrow">→</div>
+        <div class="stage pay"><div class="top"><span class="nm">$300 payday</span></div><div class="b"><div class="line">"You earned $300." Its own moment.</div><div class="badges"><span class="rew">$300 earned</span></div></div></div>
+        <div class="arrow">→</div>
+        <div class="stage"><div class="top"><span class="nm">Earn more</span></div><div class="b"><div class="line">"At risk → this DCP." Risk-grounded rec.</div><div class="badges"><span class="rew pend">$100/path</span></div></div></div>
+        <div class="arrow">→</div>
+        <div class="stage optin"><div class="top"><span class="nm">Opt in</span></div><div class="b"><div class="line">Consent + terms.</div><div class="badges"><span class="gate">opt-in</span></div></div></div>
+      </div></div>
+    </div>
+
+    <!-- LANE B -->
+    <div class="lane">
+      <div class="lane-head"><span class="lt">B · Interest / browse-driven</span><span class="pill base">Baseline · always works</span><span class="ld">no assessment needed; motivated by the $100 itself</span></div>
+      <div class="flowscroll"><div class="flow">
+        <div class="stage base"><div class="top"><span class="nm">Surfacing</span></div><div class="b"><div class="line">"Earn $100 per care path" — home card / rewards / notification.</div><div class="badges"><span class="rew pend">$100/path</span></div></div></div>
+        <div class="arrow">→</div>
+        <div class="stage base"><div class="top"><span class="nm">Interests / Browse</span></div><div class="b"><div class="line">Recommendation from declared interests (D4), or browse the DCP list.</div></div></div>
+        <div class="arrow">→</div>
+        <div class="stage base"><div class="top"><span class="nm">Pick a path</span></div><div class="b"><div class="line">Member self-selects a care path.</div></div></div>
+        <div class="arrow">→</div>
+        <div class="stage optin"><div class="top"><span class="nm">Opt in</span></div><div class="b"><div class="line">Consent + terms (same as A).</div><div class="badges"><span class="gate">opt-in</span></div></div></div>
+      </div></div>
+    </div>
+
+    <div class="converge">
+      <div class="txt">Both opt-ins lead into the same loop</div>
+      <div class="down" aria-hidden="true">↓</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHARED LOOP -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Identical for both</div><h2>The shared loop</h2></div>
+    <div class="flowscroll"><div class="flow">
+      <div class="stage"><div class="top"><span class="nm">Topic page</span></div><div class="b"><div class="line">Continue · progress · $100 at finish.</div><div class="badges"><span class="rew pend">$100 at finish</span></div></div></div>
+      <div class="arrow">→</div>
+      <div class="stage"><div class="top"><span class="nm">Sessions</span></div><div class="b"><div class="line">Video + Anna; silent progress.</div></div></div>
+      <div class="arrow">→</div>
+      <div class="stage hinge"><div class="top"><span class="nm">Completion</span></div><div class="b"><div class="line">Health win → $100 → tee up next.</div><div class="badges"><span class="rew">$100 earned</span></div></div></div>
+      <div class="arrow">→</div>
+      <div class="stage"><div class="top"><span class="nm">Tee up next</span></div><div class="b"><div class="line">One clear next path (interests / risk).</div><div class="badges"><span class="rew pend">↺</span></div></div></div>
+      <div class="arrow">↺</div>
+      <div class="stage"><div class="top"><span class="nm">Rewards</span></div><div class="b"><div class="line">EBB leads · $ earned / $500 cap.</div></div></div>
+    </div></div>
+    <div class="loopnote"><span class="arc">↺</span> From opt-in on, the experience is the same regardless of how they got in.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div class="eyebrow">Why two on-ramps</div><h2>What this buys us</h2></div>
+    <div class="sumrow">
+      <div class="sum"><h4>Widest funnel</h4><p>No-$300 clients, users who skip the assessment, and existing members all still have a way into EBB. Matches Darcy's "widest possible funnel" + risk-default-off.</p></div>
+      <div class="sum"><h4>De-risks 9/1</h4><p>EBB doesn't wait on the assessment being funded or ready. Lane B can ship on its own; Lane A is the upgrade when the assessment is in play.</p></div>
+      <div class="sum warn"><h4>The tradeoff</h4><p>Without the $300 hook, the <b>$100 carries motivation alone</b> and the recommendation is weaker (interests, not risk). Lane B leans harder on the surfacing kit + easy browse.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Dual on-ramp v1.</b> Lane A (assessment-driven, with $300, risk-grounded) and Lane B (interest/browse, no assessment, $100-motivated) converge on one opt-in → shared loop. Decision: <b>assessment = accelerant, not prerequisite</b> (see `_decisions.md`, 2026-07-05). Lane A detail: `jul05-ebb-assessment-bridge` + `jul05-ebb-enrollment-flow`; Lane B leans on `jul05-ebb-surfacing-kit` + the DCP list (to design). Loop screens: topic v4 · completion v3 · rewards v1.</p>
+  </div>
+</footer>

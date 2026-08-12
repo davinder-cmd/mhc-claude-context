@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DCP Program Detail v1 — three breakpoint views</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<style>
+  :root {
+    --bg:#FAF7F0; --surface:#fff; --ink:#1A1D21; --ink-soft:#5C5F66;
+    --hairline:#E6E3DC; --brand:#1B355C; --link:#2E60A4;
+    --f: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f); -webkit-font-smoothing: antialiased; }
+  header.doc { max-width: 1200px; margin: 0 auto; padding: 40px 28px 8px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--link); }
+  h1 { font-family: "SF Pro Display", var(--f); font-size: 34px; letter-spacing: -0.02em; margin: 10px 0 0; }
+  .lede { color: var(--ink-soft); font-size: 15px; line-height: 1.5; max-width: 68ch; margin: 12px 0 0; }
+  .loaded { font-size: 12px; color: var(--ink-soft); margin: 14px 0 0; }
+  .loaded b { color: var(--ink); }
+
+  .views { display: flex; gap: 40px; align-items: flex-start; overflow-x: auto; padding: 24px 28px 48px; }
+  .view { flex: none; }
+  .view__cap { margin-bottom: 12px; max-width: 420px; }
+  .view__cap .k { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+  .view__cap h2 { font-family: "SF Pro Display", var(--f); font-size: 19px; margin: 3px 0 6px; letter-spacing: -0.01em; }
+  .view__cap p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin: 0; }
+
+  /* Device frames — each iframe renders the SAME responsive page at that width,
+     so mhc-base's media queries fire against the iframe viewport. Scaled to fit. */
+  .frame { border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px -34px rgba(27,53,92,.4); }
+  .frame.browser { }
+  .chrome { display: flex; align-items: center; gap: 7px; padding: 11px 14px; background: #ECEAE4; border-bottom: 1px solid var(--hairline); }
+  .chrome .d { width: 11px; height: 11px; border-radius: 50%; background: #cfcac0; }
+  .chrome .url { margin-left: 12px; font-size: 11px; color: var(--ink-soft); background: #fff; border-radius: 20px; padding: 4px 14px; }
+  iframe { border: 0; display: block; background: var(--bg); }
+
+  /* Wide 1440 — scaled to 46% so it fits alongside the others */
+  .wide  iframe { width: 1440px; height: 980px; transform: scale(0.46); transform-origin: top left; }
+  .wide  .stage { width: calc(1440px * 0.46); height: calc(980px * 0.46); overflow: hidden; }
+  /* Desktop ~1040 — scaled to 52% */
+  .desk  iframe { width: 1040px; height: 900px; transform: scale(0.52); transform-origin: top left; }
+  .desk  .stage { width: calc(1040px * 0.52); height: calc(900px * 0.52); overflow: hidden; }
+  /* Mobile 375 — phone frame, full scale */
+  .phone .frame { border-radius: 40px; border: 9px solid #12151b; padding: 0; }
+  .phone iframe { width: 375px; height: 760px; border-radius: 30px; }
+
+  .rationale { max-width: 1200px; margin: 0 auto; padding: 8px 28px 72px; }
+  .rationale h2 { font-family: "SF Pro Display", var(--f); font-size: 22px; letter-spacing: -0.01em; margin: 36px 0 4px; }
+  .rationale h3 { font-size: 15px; margin: 22px 0 6px; }
+  .rationale p, .rationale li { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  .rationale b { color: var(--ink); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  @media (max-width: 760px) { .grid2 { grid-template-columns: 1fr; } }
+  .box { background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px; padding: 16px 18px; }
+  .box .z { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+  .box h4 { font-size: 15px; margin: 4px 0 6px; }
+  .box p { font-size: 13px; margin: 0; }
+  .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 10.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: #E8F0FA; color: var(--link); }
+  .tag.dec { background: rgba(26,29,33,.06); color: var(--ink-soft); }
+
+  /* colour-weighting bar */
+  .cw { display: flex; height: 46px; border-radius: 10px; overflow: hidden; border: 1px solid var(--hairline); margin-top: 12px; font-size: 11px; font-weight: 600; }
+  .cw span { display: flex; align-items: center; justify-content: center; color: #fff; }
+  .cw .c60 { background: #FAF7F0; color: #5C5F66; flex: 60; box-shadow: inset 0 0 0 1px #E6E3DC; }
+  .cw .c30 { background: #5C5F66; flex: 30; }
+  .cw .c10 { background: #1B355C; flex: 10; }
+</style>
+</head>
+<body>
+
+<header class="doc">
+  <div class="eyebrow">DCP Suite · re-skinned to the v81 system</div>
+  <h1>DCP Program Detail — v1</h1>
+  <p class="lede">The drive-to-completion surface for an enrolled member (Depression DCP, mid-program). One responsive page built on <b>mhc-base.css</b>, shown at the three window-size classes. Content/IA lifted from the EBB topic page (<code>jul02-ebb-topic-page/topic-page-v4-full</code>); palette, type, shape, shell and responsive logic inherited from home v81. No teal/amber, no system-ui.</p>
+  <p class="loaded"><b>Loaded:</b> jul13-dcp-suite-kit (mhc-base.css · RESPONSIVE-RATIONALE · HANDOFF) · feature-dcp (_brief · _decisions) · feature-ebb (_brief) · ux-usability-experts · ux-laws-quick-reference · visual-design-experts.</p>
+</header>
+
+<div class="views">
+
+  <!-- WIDE 1440 -->
+  <div class="view wide">
+    <div class="view__cap">
+      <div class="k">Extra-large · ~1440</div>
+      <h2>Top-nav target</h2>
+      <p>Hero splits image + resume content. Body becomes <b>two-column</b> — the path as the main column, progress + check-in as an aside. Type scale bumps (≥1200).</p>
+    </div>
+    <div class="frame browser">
+      <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care/depression</span></div>
+      <div class="stage"><iframe src="dcp-program-detail-v1-depression.html" title="1440 view" scrolling="no"></iframe></div>
+    </div>
+  </div>
+
+  <!-- DESKTOP 1040 -->
+  <div class="view desk">
+    <div class="view__cap">
+      <div class="k">Expanded · ~1040</div>
+      <h2>Legacy side-nav era</h2>
+      <p>Hero splits, but the body stays a <b>single reading column</b> (Compact type scale). The width the side-nav leaves is used for a calmer, wider stack — not the 2-col density.</p>
+    </div>
+    <div class="frame browser">
+      <div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care/depression</span></div>
+      <div class="stage"><iframe src="dcp-program-detail-v1-depression.html" title="1040 view" scrolling="no"></iframe></div>
+    </div>
+  </div>
+
+  <!-- MOBILE 375 -->
+  <div class="view phone">
+    <div class="view__cap">
+      <div class="k">Compact · 375</div>
+      <h2>Phone</h2>
+      <p>Pure single-column stack in reading order: Continue → progress → the path → check-in. Fixed bottom nav returns. Whole page is thumb-reachable.</p>
+    </div>
+    <div class="frame">
+      <iframe src="dcp-program-detail-v1-depression.html" title="375 view"></iframe>
+    </div>
+  </div>
+
+</div>
+
+<div class="rationale">
+
+  <h2>Why this holds up — heuristics &amp; laws</h2>
+  <div class="grid2">
+    <div class="box">
+      <div class="z">Continue hero · one primary action</div>
+      <h4>Resume exactly where they left off</h4>
+      <p>A single dominant, thumb-reachable CTA opens on the next action; nothing competes. A returning member never hunts for "what now."</p>
+      <div class="tags"><span class="tag">Zeigarnik</span><span class="tag">Fitts's</span><span class="tag">Von Restorff</span><span class="tag">Doherty</span></div>
+    </div>
+    <div class="box">
+      <div class="z">Progress + reward</div>
+      <h4>Closing distance visible — $100 stated once</h4>
+      <p>"2 of 10 · 8 to the finish" makes the goal gradient legible. The reward appears <b>exactly once</b>, as a calm graphite accent — never a payout meter (efficacy guardrail: pace, not speed).</p>
+      <div class="tags"><span class="tag">Goal-Gradient</span><span class="tag">Nielsen #1 · status</span><span class="tag dec">$100-once (crowding-out)</span></div>
+    </div>
+    <div class="box">
+      <div class="z">The path</div>
+      <h4>Show the shape, not all 10</h4>
+      <p>Done ✓ / current ● / locked 🔒, windowed to prior + current + next, then "See all 10." The journey reads at a glance without dumping the full list.</p>
+      <div class="tags"><span class="tag">Miller's · chunk</span><span class="tag">Recognition (#6)</span><span class="tag">Serial Position</span><span class="tag">Peak-End</span></div>
+    </div>
+    <div class="box">
+      <div class="z">How you're doing · outcome check-in</div>
+      <h4>Is it working? — measurement-based care</h4>
+      <p>Separate from progress: reflects <b>outcome</b> (are they getting better) in plain language, no clinical score. What makes this a care path, not a tracker.</p>
+      <div class="tags"><span class="tag">Nielsen #2 · real world</span><span class="tag dec">Check-in charter</span></div>
+    </div>
+    <div class="box">
+      <div class="z">Same chrome as home</div>
+      <h4>A sibling surface, not a new world</h4>
+      <p>Same top bar, same bottom nav on Compact, same greeting-row header pattern — so arriving here <b>from home</b> feels continuous.</p>
+      <div class="tags"><span class="tag">Consistency (#4)</span><span class="tag">Jakob's Law</span></div>
+    </div>
+    <div class="box">
+      <div class="z">Readability over density</div>
+      <h4>Three densities, not three reflows</h4>
+      <p>~1040 stays a single calm reading column; only the top-nav target (≥1200) earns the 2-column layout + type bump. Below 1200 renders Compact sizing (mhc "real desktop starts at 1200").</p>
+      <div class="tags"><span class="tag">Aesthetic &amp; minimalist (#8)</span><span class="tag dec">1200 = real desktop</span></div>
+    </div>
+  </div>
+
+  <h2>Colour weighting (60 / 30 / 10)</h2>
+  <div class="cw">
+    <span class="c60">60% · warm beige ground + white surfaces</span>
+    <span class="c30">30% · graphite ink</span>
+    <span class="c10">10% · navy brand</span>
+  </div>
+  <p>Warm tones stay on backgrounds only; text and borders are near-neutral graphite. Navy (10%) carries the one primary CTA, the current-session dot, the progress fill and links. The reward is deliberately <b>not</b> in the accent budget — it's a muted graphite line, so money never dominates a clinical surface.</p>
+
+  <h2>What's deliberately NOT here</h2>
+  <p>Full health metrics → the Tracker (one outcome insight is enough here). "Learn more" / resources → in-lesson + Anna. The test for anything proposed for this page: <i>"Does it help them start the next session?"</i> (topic-page scope decision, feature-ebb <code>_decisions.md</code>.)</p>
+
+  <h2>Rejected alternatives</h2>
+  <ul>
+    <li><b>Two-button fork (Continue + Browse) in the hero</b> — rejected. Splits the one action into a decision (Hick's). Continue is the single dominant CTA; browse lives on the list surface.</li>
+    <li><b>Reward as a headline / repeated $100 / countdown</b> — rejected. Violates the efficacy guardrail (racing chases the reward and gets little clinical benefit). Money is loud only on the Rewards page, never here.</li>
+    <li><b>2-column layout at ~1040</b> — rejected for v1. In the legacy side-nav era usable width is ~940–1040; a 2-col split there crowds. The wider stack is calmer and the 2-col is reserved for the ≥1200 target.</li>
+    <li><b>Full 10-session list inline</b> — rejected (Miller's). Windowed + "See all 10" keeps the path scannable.</li>
+    <li><b>Phone-in-a-frame mock as the artifact</b> (the EBB house style) — rejected. The kit ships a real responsive system; building the live page proves the from-home continuity and the responsive logic, which a static phone mock cannot.</li>
+  </ul>
+
+  <h2>State matrix — next iterations</h2>
+  <p>v1 is the canonical <b>in-progress</b> state. The 11-state matrix (<code>jul07-ebb-topic-states</code>) still to re-skin: not-started/zero (hero shows "Start the program" → routes to opt-in), final-stretch (🏁 finish marker caps the path), completed, next-session-locked (pacing gate), reward-at-risk, not-opted-in (earn-gate), cap-reached, needs-support (check-in → Anna/coach doorway), check-in-due, welcome-back. The not-started state is the entry into the enrollment spine (detail → opt-in → success).</p>
+</div>
+
+</body>
+</html>

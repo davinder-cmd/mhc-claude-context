@@ -1,0 +1,248 @@
+<title>EBB — Rewards Page (v1) · EBB leads</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 60px 0 24px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 64ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+  .loaded { margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+  .loaded b { color: var(--ink-2); }
+
+  .stage { display: grid; grid-template-columns: 392px 1fr; gap: 40px; padding: 22px 0 20px; align-items: start; }
+  @media (max-width: 940px) { .stage { grid-template-columns: 1fr; gap: 30px; justify-items: center; } }
+  .phone-wrap { position: sticky; top: 24px; justify-self: center; }
+  @media (max-width: 940px) { .phone-wrap { position: static; } }
+
+  .phone { width: 375px; border-radius: 46px; background: #000; padding: 11px; box-shadow: 0 24px 60px -26px rgba(14,74,86,0.45), 0 2px 8px rgba(0,0,0,0.12); }
+  .screen { border-radius: 36px; background: var(--surface); overflow: hidden; }
+
+  .appbar { display: flex; align-items: center; gap: 12px; padding: 14px 18px 12px; border-bottom: 1px solid var(--line); }
+  .appbar .menu { font-size: 17px; color: var(--ink-2); width: 22px; }
+  .appbar .title { flex: 1; text-align: center; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .appbar .spacer { width: 22px; }
+
+  .scroll { padding: 16px 18px 18px; }
+
+  /* EBB hero (the headline) */
+  .ebb { border: 1.5px solid var(--teal); border-radius: 18px; background: linear-gradient(180deg, var(--teal-tint) 0%, #fff 62%); padding: 16px 17px 17px; box-shadow: 0 10px 24px -14px rgba(14,74,86,0.5); }
+  .ebb .k { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-2); }
+  .ebb .amt { margin-top: 6px; display: flex; align-items: baseline; gap: 8px; }
+  .ebb .amt .big { font-size: 34px; font-weight: 780; letter-spacing: -0.02em; color: var(--amber); font-variant-numeric: tabular-nums; }
+  .ebb .amt .of { font-size: 14px; color: var(--ink-2); font-weight: 600; }
+  .ebb .pips { display: flex; gap: 6px; margin-top: 12px; }
+  .ebb .pips i { height: 8px; border-radius: 5px; flex: 1; background: rgba(14,74,86,0.15); }
+  .ebb .pips i.on { background: var(--teal); }
+  .ebb .sub { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); }
+  .ebb .sub b { color: var(--ink); font-weight: 650; }
+  .ebb .cta { margin-top: 13px; width: 100%; background: var(--teal); color: #fff; border: none; border-radius: 12px; padding: 13px; font-size: 14.5px; font-weight: 680; font-family: inherit; }
+
+  .sec-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 22px 0 0; display: flex; justify-content: space-between; align-items: baseline; }
+  .sec-label .link { font-size: 11.5px; font-weight: 650; color: var(--teal-2); text-transform: none; letter-spacing: 0; }
+
+  /* balances (secondary) */
+  .balances { margin-top: 10px; border: 1px solid var(--line); border-radius: 14px; background: #fff; overflow: hidden; }
+  .brow { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-top: 1px solid var(--line); }
+  .brow:first-child { border-top: none; }
+  .brow .bl { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 600; }
+  .brow .bl .bi { width: 22px; height: 22px; border-radius: 6px; background: var(--teal-tint); flex: none; }
+  .brow .bv { font-size: 14px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+  /* ways to earn (list, no carousel) */
+  .earn { margin-top: 10px; display: flex; flex-direction: column; gap: 9px; }
+  .erow { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 13px; padding: 12px 14px; background: #fff; }
+  .erow.lead { border-color: var(--teal); background: linear-gradient(180deg, rgba(224,234,235,0.5) 0%, #fff 70%); }
+  .erow .ei { width: 34px; height: 34px; border-radius: 9px; flex: none; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; }
+  .erow .ei.money { background: var(--amber-tint); color: var(--amber); }
+  .erow .ei.pts { background: var(--teal-tint); color: var(--teal); }
+  .erow .eb { flex: 1; }
+  .erow .et { font-size: 14px; font-weight: 650; letter-spacing: -0.005em; }
+  .erow .es { font-size: 12px; color: var(--ink-2); margin-top: 1px; }
+  .erow .er { font-size: 13px; font-weight: 700; flex: none; }
+  .erow .er.money { color: var(--amber); }
+  .erow .er.pts { color: var(--teal-2); }
+
+  /* browse */
+  .browse { margin-top: 12px; display: flex; justify-content: space-around; border: 1px solid var(--line); border-radius: 14px; padding: 14px 8px; background: #fff; }
+  .browse .bcol { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--ink-2); }
+  .browse .bcol .bic { width: 26px; height: 26px; border-radius: 8px; background: var(--teal-tint); }
+
+  .botnav { display: flex; justify-content: space-around; border-top: 1px solid var(--line); padding: 9px 6px 11px; margin: 18px -18px -18px; background: var(--surface); }
+  .botnav .item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9.5px; color: var(--ink-3); font-weight: 600; }
+  .botnav .item.on { color: var(--teal); }
+  .botnav .ic { width: 20px; height: 20px; border-radius: 6px; background: currentColor; opacity: 0.9; }
+
+  /* rail */
+  .rail { display: flex; flex-direction: column; gap: 13px; max-width: 600px; }
+  .rail-intro { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin: 0 0 2px; }
+  .anno { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 15px 17px; }
+  .anno.charter { border-left: 3px solid var(--teal); }
+  .anno.state { border-left: 3px solid var(--amber-mid); background: #fbf7ef; }
+  .anno .num { font-size: 11px; font-weight: 700; color: var(--teal-2); letter-spacing: 0.04em; }
+  .anno .zone { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+  .anno h3 { margin: 4px 0 0; font-size: 15.5px; font-weight: 680; letter-spacing: -0.005em; }
+  .anno p { margin: 7px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+  .anno p b { color: var(--ink); font-weight: 650; }
+  .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 10.5px; font-weight: 650; padding: 3px 9px; border-radius: 999px; }
+  .tag.ux { background: var(--teal-tint); color: var(--teal); }
+  .tag.dtx { background: var(--amber-tint); color: var(--amber); }
+  .tag.dec { background: rgba(34,38,42,0.07); color: var(--ink-2); }
+  .open { margin-top: 9px; font-size: 12.5px; color: var(--amber); font-weight: 600; }
+
+  footer { padding: 30px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 86ch; }
+  footer .note b { color: var(--ink-2); font-weight: 650; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Rewards page</div>
+    <h1>Rewards, with EBB in the lead</h1>
+    <p class="thesis">The last core-loop surface. Unlike the topic page, <strong>this is where money can be loud</strong> — it's the rewards page. So the $100/care-path reward is the headline and the <strong>$500 cap meter</strong> is front and center; points, store, and raffles stay, but sit below it.</p>
+    <p class="loaded"><b>Loaded:</b> ux-usability-experts · ux-laws · engagement-behavior-experts · dtx-dcp-experts · design/_index · feature-ebb.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stage">
+
+    <!-- PHONE -->
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="appbar">
+          <span class="menu" aria-hidden="true">☰</span>
+          <span class="title">Rewards</span>
+          <span class="spacer"></span>
+        </div>
+        <div class="scroll">
+
+          <!-- EBB HERO -->
+          <div class="ebb">
+            <div class="k">Care Path Rewards · $100 Amazon gift card each</div>
+            <div class="amt"><span class="big">$300</span><span class="of">of $500 this year</span></div>
+            <div class="pips"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+            <div class="sub"><b>3 of 5 care paths</b> completed — earn another $100 gift card with your next.</div>
+            <button class="cta">Start your next care path</button>
+          </div>
+
+          <!-- BALANCES (secondary) -->
+          <div class="sec-label"><span>Other rewards</span></div>
+          <div class="balances">
+            <div class="brow"><span class="bl"><span class="bi"></span>Points</span><span class="bv">15,000</span></div>
+            <div class="brow"><span class="bl"><span class="bi"></span>Store credit</span><span class="bv">4,743</span></div>
+            <div class="brow"><span class="bl"><span class="bi"></span>Raffle entries</span><span class="bv">12</span></div>
+          </div>
+
+          <!-- WAYS TO EARN (list) -->
+          <div class="sec-label"><span>Ways to earn</span><span class="link">See all</span></div>
+          <div class="earn">
+            <div class="erow lead">
+              <span class="ei money">$</span>
+              <span class="eb"><span class="et">Complete a care path</span><span class="es">Finish all sessions of a program</span></span>
+              <span class="er money">$100</span>
+            </div>
+            <div class="erow">
+              <span class="ei pts">✓</span>
+              <span class="eb"><span class="et">Annual physical</span><span class="es">Visit your doctor</span></span>
+              <span class="er pts">5,000 pts</span>
+            </div>
+            <div class="erow">
+              <span class="ei pts">✓</span>
+              <span class="eb"><span class="et">Flu shot</span><span class="es">Get vaccinated</span></span>
+              <span class="er pts">100 entries</span>
+            </div>
+          </div>
+
+          <!-- BROWSE -->
+          <div class="sec-label"><span>Browse</span></div>
+          <div class="browse">
+            <span class="bcol"><span class="bic"></span>Marketplace</span>
+            <span class="bcol"><span class="bic"></span>Raffles</span>
+            <span class="bcol"><span class="bic"></span>Store</span>
+            <span class="bcol"><span class="bic"></span>History</span>
+          </div>
+
+          <div class="botnav">
+            <div class="item"><span class="ic"></span>Home</div>
+            <div class="item"><span class="ic"></span>Digital Care</div>
+            <div class="item"><span class="ic"></span>Wellbeing</div>
+            <div class="item"><span class="ic"></span>Benefits</div>
+            <div class="item on"><span class="ic"></span>Rewards</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <!-- RAIL -->
+    <div class="rail">
+      <p class="rail-intro">Full notes, top to bottom. Teal = UX heuristics/laws · amber = DCP experts · grey = a locked decision.</p>
+
+      <div class="anno charter">
+        <div class="zone">Page charter</div>
+        <h3>EBB leads; money is allowed to be loud here</h3>
+        <p>Opposite of the topic page. There, we kept the $100 to one calm mention (crowding-out risk on a health screen). <b>Here it's the rewards page</b> — leading with the dollar figure is honest and expected. The other reward types stay, but clearly subordinate.</p>
+        <div class="tags"><span class="tag dec">D3 · EBB leads</span><span class="tag ux">Von Restorff · one hero</span><span class="tag dec">Note to Darcy</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="num">1</div>
+        <div class="zone">EBB hero · the headline</div>
+        <h3>$ earned, cap meter, and the next $100</h3>
+        <p>"$300 of $500 · 3 of 5 care paths" is the reward + progress dual cue at full volume. The 5-pip meter shows exactly how much is left on the table, and "Start your next care path" wires the rewards page straight back into the loop — reward → more care.</p>
+        <div class="tags"><span class="tag ux">Goal-Gradient</span><span class="tag ux">Nielsen #1 · status</span><span class="tag dtx">Reward → care (loop)</span></div>
+        <div class="open">Cap-reached state below.</div>
+      </div>
+
+      <div class="anno">
+        <div class="num">2</div>
+        <div class="zone">Other rewards · balances</div>
+        <h3>Kept, but subordinate</h3>
+        <p>Points, store credit, raffle entries live on — moved from the old blue balances card into a labeled "Other rewards" list <b>below</b> EBB. Nobody loses their existing rewards; they just stop competing with the headline.</p>
+        <div class="tags"><span class="tag dec">D3 · others secondary</span><span class="tag ux">Gestalt · grouping</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="num">3</div>
+        <div class="zone">Ways to earn · list, not carousel</div>
+        <h3>Off the peek-carousel, onto a scannable list</h3>
+        <p>The old peek-card carousel is gone (your call). Full-width rows read faster and show more at once, with <b>"Complete a care path · $100"</b> pinned at the top. Consistent with the carousel principle: the failure was peek-cards without a toggle, not multiplicity — a list simply fits this better.</p>
+        <div class="tags"><span class="tag ux">Hick's · scanability</span><span class="tag ux">Miller's</span><span class="tag dec">Move off carousel</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="num">4</div>
+        <div class="zone">Browse + bottom nav</div>
+        <h3>Kept standard</h3>
+        <p>Marketplace · Raffles · Store · History, unchanged. Bottom nav consistent, Rewards active. Nothing reinvented.</p>
+        <div class="tags"><span class="tag ux">Jakob's Law</span><span class="tag ux">Consistency (#4)</span></div>
+      </div>
+
+      <div class="anno state">
+        <div class="zone">Key state to design next</div>
+        <h3>Cap reached (5 of 5 · $500)</h3>
+        <p>When the meter fills, we <b>stop dangling payout</b> — the hero flips to "You've earned the max this year ($500)" and the CTA shifts from "earn $100 more" to health framing ("keep going — here's what's worth doing next"). Same rule as the completion screen: never dangle a reward that can't be paid.</p>
+        <div class="tags"><span class="tag dec">Cap graceful</span><span class="tag dtx">Reward is an accelerant</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Rewards page v1.</b> Structure: EBB hero (headline, $/$500 cap) · Other rewards (points/store/raffle, subordinate) · Ways to earn (list, care-path pinned top) · Browse · bottom nav. Grounded in the live trimmed rewards page (Balances · Ways to Earn · Browse) and decisions D3 (EBB leads) + cap-graceful. Companion: completion screen sends the $100 here; home/topic reference the same $/$500 meter. Next state: cap-reached. For reaction.</p>
+  </div>
+</footer>

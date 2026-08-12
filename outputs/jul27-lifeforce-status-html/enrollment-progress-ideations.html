@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Enrollment progress cue — 5 variations of #1</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  body{background:var(--canvas);padding:32px;}
+  h1.page{font-family:var(--f-display);font-weight:500;font-size:24px;color:var(--navy);margin-bottom:6px;}
+  p.pageintro{font-family:var(--f-text);font-size:14px;color:var(--slate);max-width:80ch;margin-bottom:28px;}
+  .stage{display:flex;gap:28px;align-items:flex-start;flex-wrap:nowrap;}
+  .ideacol{width:392px;flex:0 0 392px;}
+  .lbl{font-family:var(--f-text);font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:4px;}
+  .cap{font-family:var(--f-text);font-size:13px;line-height:1.45;color:var(--slate);margin-top:12px;}
+  .phone{width:392px;background:#fff;border:1px solid var(--silver);border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:16px;box-shadow:0 12px 30px rgba(6,42,66,.08);}
+  .rest{opacity:.42;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+  .rest .rh{font-family:var(--f-display);font-weight:500;font-size:14px;color:var(--charcoal);}
+  .rest .bar{height:40px;border:1px solid var(--hair);border-radius:12px;background:#fff;}
+  .row{display:flex;align-items:center;gap:10px;}.space{justify-content:space-between;}.grow{flex:1;min-width:0;}
+  .upnext{display:flex;flex-direction:column;gap:10px;}
+  .steprow{display:flex;align-items:center;gap:13px;padding:14px 15px;border:1px solid var(--hair);border-radius:14px;background:#fff;opacity:.62;}
+  .steprow .t{color:var(--charcoal);}
+  /* progress treatments */
+  .prog{display:flex;flex-direction:column;gap:10px;}
+  .segbar{display:flex;gap:6px;}.segbar .seg{height:8px;border-radius:999px;flex:1;background:var(--cloud);}
+  .seg.done{background:var(--green);}.seg.now{background:var(--navy);}
+  .track{height:9px;border-radius:999px;background:var(--cloud);overflow:hidden;}.track .fill{height:100%;background:var(--navy);border-radius:999px;}
+  .mini4{display:flex;align-items:center;}
+  .mini4 .nd{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto;font-family:var(--f-text);font-weight:600;font-size:11px;}
+  .mini4 .nd.done{background:var(--green);color:#fff;}
+  .mini4 .nd.now{background:#fff;border:2px solid var(--navy);color:var(--navy);}
+  .mini4 .nd.future{background:var(--cloud);color:var(--slate);}
+  .mini4 .cn{height:2px;flex:1;background:var(--hair);}.mini4 .cn.on{background:var(--green);}
+  .ring{flex:0 0 auto;}
+  .goalflag{width:24px;height:24px;border-radius:6px;background:var(--tint-navy);display:grid;place-items:center;color:var(--navy);flex:0 0 auto;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-tick" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L11 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M9 3v-.5h6V3M8.5 10h7M8.5 14h4" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3M7.5 14h9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V4M6 5h11l-2 3 2 3H6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<h1 class="page">Enrollment · progress cue — 5 variations of #1</h1>
+<p class="pageintro">Same body every time (next step primary + "Up next"); only the <strong>progress indicator on top</strong> changes — the goal is <em>clearer, not louder</em>. State: 1 of 4 done, next = Program Acknowledgment.</p>
+
+<div class="stage">
+
+  <!-- V1 — labeled segmented bar -->
+  <div class="ideacol">
+    <div class="lbl">A · "Step 2 of 4" + marked segments</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="prog">
+        <div class="row space"><span class="title-3 c-charcoal">Step 2 of 4</span><span class="caption c-slate">3 steps until your first visit</span></div>
+        <div class="segbar"><i class="seg done"></i><i class="seg now"></i><i class="seg"></i><i class="seg"></i></div>
+      </div>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;"><div class="row"><span class="chip navy c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clip"/></svg></span><span class="eyebrow c-navy">Do next · Peak Health</span></div><h2 class="heading-6 c-charcoal">Program Acknowledgment</h2><p class="paragraph-3 c-slate">Acknowledge the Company Release and Wellness Program Notice on the Peak Health portal.</p><button class="btn primary full label-0" style="margin-top:6px">Start</button></section>
+      <div class="upnext"><span class="eyebrow c-slate">Up next</span><div class="steprow"><span class="chip green c34 round" style="background:var(--tint-green);color:var(--green)"><svg width="18" height="18"><use href="#i-flask"/></svg></span><div class="grow"><div class="title-3 t">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div><div class="steprow"><span class="chip navy c34 round" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="18" height="18"><use href="#i-heart"/></svg></span><div class="grow"><div class="title-3 t">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Position, made explicit.</strong> "Step 2 of 4" names where you are; segments now show done (green) + current (navy), not four identical ticks. Clear, still quiet.</p>
+  </div>
+
+  <!-- V2 — filled bar + endpoints -->
+  <div class="ideacol">
+    <div class="lbl">B · Filled bar → labeled goal</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="prog">
+        <span class="eyebrow c-navy">Getting started</span>
+        <div class="track"><div class="fill" style="width:25%"></div></div>
+        <div class="row space"><span class="caption c-charcoal">1 of 4 done</span><span class="caption c-slate">→ Your first visit</span></div>
+      </div>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;"><div class="row"><span class="chip navy c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clip"/></svg></span><span class="eyebrow c-navy">Do next · Peak Health</span></div><h2 class="heading-6 c-charcoal">Program Acknowledgment</h2><p class="paragraph-3 c-slate">Acknowledge the Company Release and Wellness Program Notice on the Peak Health portal.</p><button class="btn primary full label-0" style="margin-top:6px">Start</button></section>
+      <div class="upnext"><span class="eyebrow c-slate">Up next</span><div class="steprow"><span class="chip green c34 round" style="background:var(--tint-green);color:var(--green)"><svg width="18" height="18"><use href="#i-flask"/></svg></span><div class="grow"><div class="title-3 t">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div><div class="steprow"><span class="chip navy c34 round" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="18" height="18"><use href="#i-heart"/></svg></span><div class="grow"><div class="title-3 t">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>How far + where to.</strong> A single filled bar (reads faster than segments) with "1 of 4 done" and the destination ("→ Your first visit") labeled at the end.</p>
+  </div>
+
+  <!-- V3 — numbered mini-stepper -->
+  <div class="ideacol">
+    <div class="lbl">C · Numbered mini-stepper</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="prog">
+        <div class="mini4">
+          <span class="nd done"><svg width="11" height="11"><use href="#i-tick"/></svg></span><i class="cn on"></i>
+          <span class="nd now">2</span><i class="cn"></i>
+          <span class="nd future">3</span><i class="cn"></i>
+          <span class="nd future">4</span>
+        </div>
+        <span class="caption c-slate">Step 2 of 4 · 3 until your first visit</span>
+      </div>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;"><div class="row"><span class="chip navy c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clip"/></svg></span><span class="eyebrow c-navy">Do next · Peak Health</span></div><h2 class="heading-6 c-charcoal">Program Acknowledgment</h2><p class="paragraph-3 c-slate">Acknowledge the Company Release and Wellness Program Notice on the Peak Health portal.</p><button class="btn primary full label-0" style="margin-top:6px">Start</button></section>
+      <div class="upnext"><span class="eyebrow c-slate">Up next</span><div class="steprow"><span class="chip green c34 round" style="background:var(--tint-green);color:var(--green)"><svg width="18" height="18"><use href="#i-flask"/></svg></span><div class="grow"><div class="title-3 t">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div><div class="steprow"><span class="chip navy c34 round" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="18" height="18"><use href="#i-heart"/></svg></span><div class="grow"><div class="title-3 t">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>See the position.</strong> Numbered dots (1 done ✓, 2 current, 3–4 ahead) map 1:1 to the steps below. Most literal "where am I in the sequence."</p>
+  </div>
+
+  <!-- V4 — ring badge -->
+  <div class="ideacol">
+    <div class="lbl">D · Ring badge + line</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="row" style="gap:12px">
+        <svg class="ring" width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" fill="none" stroke="#e6ebec" stroke-width="4"/><circle cx="22" cy="22" r="17" fill="none" stroke="#0f497f" stroke-width="4" stroke-linecap="round" stroke-dasharray="106.8" stroke-dashoffset="80.1" transform="rotate(-90 22 22)"/><text x="22" y="26" text-anchor="middle" font-family="'SF Pro Text',-apple-system,sans-serif" font-size="12" font-weight="600" fill="#0f497f">1/4</text></svg>
+        <div class="grow"><div class="title-3 c-charcoal">3 steps until your first visit</div><div class="caption c-slate">Peak Health books it once you're done.</div></div>
+      </div>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;"><div class="row"><span class="chip navy c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clip"/></svg></span><span class="eyebrow c-navy">Do next · Peak Health</span></div><h2 class="heading-6 c-charcoal">Program Acknowledgment</h2><p class="paragraph-3 c-slate">Acknowledge the Company Release and Wellness Program Notice on the Peak Health portal.</p><button class="btn primary full label-0" style="margin-top:6px">Start</button></section>
+      <div class="upnext"><span class="eyebrow c-slate">Up next</span><div class="steprow"><span class="chip green c34 round" style="background:var(--tint-green);color:var(--green)"><svg width="18" height="18"><use href="#i-flask"/></svg></span><div class="grow"><div class="title-3 t">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div><div class="steprow"><span class="chip navy c34 round" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="18" height="18"><use href="#i-heart"/></svg></span><div class="grow"><div class="title-3 t">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Compact + confident.</strong> A small "1/4" progress ring paired with a plain-language line. Feels like a quiet dashboard stat, not a banner.</p>
+  </div>
+
+  <!-- V5 — milestone track to goal -->
+  <div class="ideacol">
+    <div class="lbl">E · Milestone track to first visit</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="prog">
+        <div class="mini4">
+          <span class="nd done"><svg width="11" height="11"><use href="#i-tick"/></svg></span><i class="cn on"></i>
+          <span class="nd now">2</span><i class="cn"></i>
+          <span class="nd future">3</span><i class="cn"></i>
+          <span class="nd future">4</span><i class="cn"></i>
+          <span class="goalflag"><svg width="14" height="14"><use href="#i-flag"/></svg></span>
+        </div>
+        <div class="row space"><span class="caption c-charcoal">3 steps to go</span><span class="caption c-slate">First visit</span></div>
+      </div>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;"><div class="row"><span class="chip navy c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clip"/></svg></span><span class="eyebrow c-navy">Do next · Peak Health</span></div><h2 class="heading-6 c-charcoal">Program Acknowledgment</h2><p class="paragraph-3 c-slate">Acknowledge the Company Release and Wellness Program Notice on the Peak Health portal.</p><button class="btn primary full label-0" style="margin-top:6px">Start</button></section>
+      <div class="upnext"><span class="eyebrow c-slate">Up next</span><div class="steprow"><span class="chip green c34 round" style="background:var(--tint-green);color:var(--green)"><svg width="18" height="18"><use href="#i-flask"/></svg></span><div class="grow"><div class="title-3 t">Complete lab work</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div><div class="steprow"><span class="chip navy c34 round" style="background:var(--tint-navy);color:var(--charcoal)"><svg width="18" height="18"><use href="#i-heart"/></svg></span><div class="grow"><div class="title-3 t">Health Assessment</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div></div>
+      <div class="rest"><div class="rh">Support</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Shows the destination.</strong> Same stepper as C, but the track ends in a "First visit" flag — so the steps visibly lead somewhere. Clearest sense of <em>why</em> the steps matter.</p>
+  </div>
+
+</div>
+</body>
+</html>

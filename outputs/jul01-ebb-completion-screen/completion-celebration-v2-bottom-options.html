@@ -1,0 +1,245 @@
+<title>EBB — Completion Screen · Bottom Options (v2)</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 60px 0 24px; }
+  .hero h1 { font-size: clamp(27px, 4vw, 42px); line-height: 1.06; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; text-wrap: balance; max-width: 22ch; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 66ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+
+  .sharednote { margin: 20px 0 0; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: 12px; padding: 14px 16px; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; max-width: 76ch; }
+  .sharednote b { color: var(--ink); font-weight: 660; }
+
+  /* options row */
+  .options-row { display: flex; flex-wrap: wrap; gap: 28px; justify-content: center; padding: 30px 0 10px; }
+  .option-col { width: 340px; display: flex; flex-direction: column; gap: 14px; }
+  .opt-head { display: flex; align-items: center; gap: 10px; }
+  .opt-badge { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: #fff; background: var(--teal); width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .opt-name { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+  .opt-why { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .opt-why b { color: var(--ink); font-weight: 640; }
+  .opt-tradeoff { font-size: 12px; color: var(--amber); font-weight: 600; }
+
+  /* phone */
+  .phone { width: 340px; border-radius: 44px; background: #000; padding: 10px; box-shadow: 0 20px 50px -24px rgba(14,74,86,0.45), 0 2px 8px rgba(0,0,0,0.12); }
+  .screen { border-radius: 34px; background: var(--surface); overflow: hidden; position: relative; }
+
+  .closebar { display: flex; justify-content: space-between; align-items: center; padding: 11px 18px 4px; }
+  .closebar .time { font-size: 12.5px; font-weight: 600; }
+  .closebar .x { width: 28px; height: 28px; border-radius: 50%; background: rgba(34,38,42,0.06); display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--ink-2); }
+
+  .celebrate { position: relative; padding: 12px 22px 20px; text-align: center; background: linear-gradient(180deg, var(--teal-tint) 0%, rgba(224,234,235,0) 82%); overflow: hidden; }
+  .confetti { position: absolute; inset: 0; pointer-events: none; }
+  .confetti i { position: absolute; display: block; border-radius: 2px; opacity: 0.85; }
+  .medallion { width: 72px; height: 72px; margin: 6px auto 0; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 7px rgba(14,74,86,0.10); }
+  .medallion svg { width: 34px; height: 34px; }
+  .eyebrow-sm { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-2); margin-top: 14px; }
+  .topic-title { font-size: 22px; font-weight: 720; letter-spacing: -0.02em; line-height: 1.14; margin: 5px 0 0; }
+  .win-line { margin: 9px auto 0; font-size: 13px; line-height: 1.45; color: var(--ink-2); max-width: 28ch; }
+  .win-line b { color: var(--ink); font-weight: 650; }
+
+  .block { padding: 0 22px 22px; }
+  .reward-card { margin-top: 16px; border: 1px solid var(--amber-mid); background: var(--amber-tint); border-radius: 15px; padding: 13px 14px; display: flex; align-items: center; gap: 12px; }
+  .reward-card .coin { width: 36px; height: 36px; border-radius: 50%; background: #fff; border: 1px solid rgba(138,90,18,0.35); display: flex; align-items: center; justify-content: center; flex: none; font-weight: 800; color: var(--amber); font-size: 14px; }
+  .reward-card .rc-main { font-size: 16px; font-weight: 720; color: var(--amber); }
+  .reward-card .rc-sub { font-size: 11.5px; color: var(--ink-2); margin-top: 1px; }
+
+  .progress-row { margin-top: 14px; }
+  .pr-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; }
+  .pr-head .l { font-weight: 650; color: var(--ink); }
+  .pr-head .r { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .pips { display: flex; gap: 5px; margin-top: 8px; }
+  .pips i { height: 7px; border-radius: 5px; flex: 1; background: rgba(14,74,86,0.14); }
+  .pips i.on { background: var(--teal); }
+
+  .divider { height: 1px; background: var(--line); margin: 20px -22px 0; }
+
+  .bottom-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-top: 18px; }
+
+  /* buttons + links shared */
+  .btn-primary { margin-top: 12px; width: 100%; background: var(--teal); color: #fff; border: none; border-radius: 13px; padding: 14px; font-size: 15px; font-weight: 680; font-family: inherit; }
+  .link-quiet { display: block; text-align: center; margin-top: 12px; font-size: 13px; color: var(--teal-2); font-weight: 650; text-decoration: none; }
+
+  /* Option A — tappable hero card = CTA */
+  .tap-card { margin-top: 12px; border: 1.5px solid var(--teal); border-radius: 16px; overflow: hidden; background: #fff; box-shadow: 0 6px 18px -12px rgba(14,74,86,0.55); }
+  .tap-img { height: 92px; background: linear-gradient(120deg, #17636f 0%, #2b8b93 55%, #6fb7ba 100%); position: relative; }
+  .tap-img .why-tag { position: absolute; left: 11px; bottom: 9px; background: rgba(255,255,255,0.92); color: var(--teal); font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 7px; border-radius: 6px; }
+  .tap-foot { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; }
+  .tap-foot .tt { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .tap-foot .tm { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+  .tap-foot .tm .money { color: var(--amber); font-weight: 700; }
+  .tap-cta { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--teal); flex: none; }
+
+  /* Option B — compact row + single button */
+  .row-card { margin-top: 12px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 14px; padding: 12px; background: #fff; }
+  .row-thumb { width: 46px; height: 46px; border-radius: 11px; background: linear-gradient(120deg, #17636f 0%, #4ba0a7 100%); flex: none; }
+  .row-body .rt { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+  .row-body .rm { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+  .row-body .rm .money { color: var(--amber); font-weight: 700; }
+  .row-body .why-mini { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--teal-2); margin-top: 5px; }
+
+  /* Option C — choose your next (two cards) */
+  .choice { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .choice-card { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 14px; padding: 11px 13px; background: #fff; }
+  .choice-card.lead { border-color: var(--teal); box-shadow: 0 5px 16px -13px rgba(14,74,86,0.55); }
+  .choice-thumb { width: 42px; height: 42px; border-radius: 10px; flex: none; }
+  .choice-thumb.a { background: linear-gradient(120deg, #17636f 0%, #4ba0a7 100%); }
+  .choice-thumb.b { background: linear-gradient(120deg, #6a4a86 0%, #a58ac0 100%); }
+  .choice-body { flex: 1; }
+  .choice-body .ct { font-size: 14.5px; font-weight: 700; letter-spacing: -0.01em; }
+  .choice-body .cm { font-size: 11.5px; color: var(--ink-2); margin-top: 1px; }
+  .choice-body .cm .money { color: var(--amber); font-weight: 700; }
+  .choice-go { font-size: 18px; color: var(--teal); font-weight: 700; flex: none; }
+
+  section { padding: 38px 0; }
+  .sec-head h2 { font-size: clamp(19px, 2.4vw, 24px); letter-spacing: -0.01em; font-weight: 680; margin: 8px 0 0; }
+  .sec-head p { margin: 9px 0 0; color: var(--ink-2); max-width: 68ch; }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .lean { font-size: 14px; color: var(--ink); line-height: 1.6; max-width: 74ch; }
+  .lean b { color: var(--teal); font-weight: 680; }
+
+  footer { padding: 30px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 84ch; }
+
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Completion screen · bottom rework</div>
+    <h1>Three ways to resolve the bottom</h1>
+    <p class="thesis">The top stays exactly as approved — celebration, $100, and the cap meter. Below the meter is where it got muddled (a header, a hint, a media card, and three stacked buttons all competing). Each option below reworks <strong>only that bottom third</strong> into one cohesive "here's your next path" moment.</p>
+    <div class="sharednote">Applied to all three — the <b>shared unclog:</b> "close / not now" moves to a top-right <b>✕</b> (standard for a celebration). That removes the third stacked button, so the bottom can be purely about the next path — one clear action plus a quiet "browse" escape.</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="options-row">
+
+    <!-- OPTION A -->
+    <div class="option-col">
+      <div class="opt-head"><span class="opt-badge">A</span><span class="opt-name">Tappable path — the card <em>is</em> the button</span></div>
+      <div class="phone"><div class="screen">
+        <div class="closebar"><span class="time">9:41</span><span class="x">✕</span></div>
+        <div class="celebrate">
+          <div class="confetti" aria-hidden="true"><i style="left:22px;top:20px;width:7px;height:7px;background:var(--amber-mid);transform:rotate(20deg);"></i><i style="right:30px;top:24px;width:8px;height:8px;border-radius:50%;background:var(--amber-mid);"></i><i style="right:54px;top:66px;width:6px;height:6px;background:var(--teal);transform:rotate(45deg);"></i><i style="left:56px;top:60px;width:5px;height:12px;background:var(--teal-2);"></i></div>
+          <div class="medallion"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="eyebrow-sm">Care path complete</div>
+          <div class="topic-title">You finished<br>Managing Depression</div>
+          <p class="win-line">All <b>10 sessions</b> done — real work for your mental health.</p>
+        </div>
+        <div class="block">
+          <div class="reward-card"><div class="coin">$</div><div><div class="rc-main">$100 reward earned</div><div class="rc-sub">On its way to your rewards.</div></div></div>
+          <div class="progress-row"><div class="pr-head"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="divider"></div>
+          <div class="bottom-eyebrow">Your next path</div>
+          <div class="tap-card">
+            <div class="tap-img"><span class="why-tag">You said sleep matters</span></div>
+            <div class="tap-foot">
+              <div><div class="tt">Treating Insomnia</div><div class="tm">8 sessions · <span class="money">Earn $100</span></div></div>
+              <span class="tap-cta">Start ›</span>
+            </div>
+          </div>
+          <a class="link-quiet" href="#">Browse all care paths</a>
+        </div>
+      </div></div>
+      <p class="opt-why"><b>One object to act on.</b> The recommended path becomes a single tappable card that starts on tap — no separate button. Image-forward and confident; the eye lands on one thing.</p>
+    </div>
+
+    <!-- OPTION B -->
+    <div class="option-col">
+      <div class="opt-head"><span class="opt-badge">B</span><span class="opt-name">Compact row + one clear button</span></div>
+      <div class="phone"><div class="screen">
+        <div class="closebar"><span class="time">9:41</span><span class="x">✕</span></div>
+        <div class="celebrate">
+          <div class="confetti" aria-hidden="true"><i style="left:22px;top:20px;width:7px;height:7px;background:var(--amber-mid);transform:rotate(20deg);"></i><i style="right:30px;top:24px;width:8px;height:8px;border-radius:50%;background:var(--amber-mid);"></i><i style="right:54px;top:66px;width:6px;height:6px;background:var(--teal);transform:rotate(45deg);"></i><i style="left:56px;top:60px;width:5px;height:12px;background:var(--teal-2);"></i></div>
+          <div class="medallion"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="eyebrow-sm">Care path complete</div>
+          <div class="topic-title">You finished<br>Managing Depression</div>
+          <p class="win-line">All <b>10 sessions</b> done — real work for your mental health.</p>
+        </div>
+        <div class="block">
+          <div class="reward-card"><div class="coin">$</div><div><div class="rc-main">$100 reward earned</div><div class="rc-sub">On its way to your rewards.</div></div></div>
+          <div class="progress-row"><div class="pr-head"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="divider"></div>
+          <div class="bottom-eyebrow">Your next path</div>
+          <div class="row-card">
+            <div class="row-thumb"></div>
+            <div class="row-body">
+              <div class="rt">Treating Insomnia</div>
+              <div class="rm">8 sessions · <span class="money">Earn $100</span></div>
+              <div class="why-mini">You said sleep matters</div>
+            </div>
+          </div>
+          <button class="btn-primary">Start Treating Insomnia</button>
+          <a class="link-quiet" href="#">Browse all care paths</a>
+        </div>
+      </div></div>
+      <p class="opt-why"><b>Calm and scannable.</b> Drops the big image for a tidy row, keeps one explicit primary button. Least visual weight — closest to your "readability over density" default.</p>
+    </div>
+
+    <!-- OPTION C -->
+    <div class="option-col">
+      <div class="opt-head"><span class="opt-badge">C</span><span class="opt-name">Choose your next (a clear lead + one alt)</span></div>
+      <div class="phone"><div class="screen">
+        <div class="closebar"><span class="time">9:41</span><span class="x">✕</span></div>
+        <div class="celebrate">
+          <div class="confetti" aria-hidden="true"><i style="left:22px;top:20px;width:7px;height:7px;background:var(--amber-mid);transform:rotate(20deg);"></i><i style="right:30px;top:24px;width:8px;height:8px;border-radius:50%;background:var(--amber-mid);"></i><i style="right:54px;top:66px;width:6px;height:6px;background:var(--teal);transform:rotate(45deg);"></i><i style="left:56px;top:60px;width:5px;height:12px;background:var(--teal-2);"></i></div>
+          <div class="medallion"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.2 4.2L19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="eyebrow-sm">Care path complete</div>
+          <div class="topic-title">You finished<br>Managing Depression</div>
+          <p class="win-line">All <b>10 sessions</b> done — real work for your mental health.</p>
+        </div>
+        <div class="block">
+          <div class="reward-card"><div class="coin">$</div><div><div class="rc-main">$100 reward earned</div><div class="rc-sub">On its way to your rewards.</div></div></div>
+          <div class="progress-row"><div class="pr-head"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+          <div class="divider"></div>
+          <div class="bottom-eyebrow">Choose your next path</div>
+          <div class="choice">
+            <div class="choice-card lead">
+              <div class="choice-thumb a"></div>
+              <div class="choice-body"><div class="ct">Treating Insomnia</div><div class="cm">8 sessions · <span class="money">$100</span> · Sleep</div></div>
+              <span class="choice-go">›</span>
+            </div>
+            <div class="choice-card">
+              <div class="choice-thumb b"></div>
+              <div class="choice-body"><div class="ct">Managing Stress</div><div class="cm">6 sessions · <span class="money">$100</span> · Stress</div></div>
+              <span class="choice-go">›</span>
+            </div>
+          </div>
+          <a class="link-quiet" href="#">See all care paths</a>
+        </div>
+      </div></div>
+      <p class="opt-why"><b>Choice-forward.</b> A highlighted lead pick plus one interest-matched alternative — every item is the same kind of object, so it reads as one clean chooser.</p>
+      <p class="opt-tradeoff">⚠ Softens D1's "one clear next" — two picks split attention slightly.</p>
+    </div>
+
+  </div>
+</div>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">My lean</div>
+      <h2>Where I'd land</h2>
+    </div>
+    <p class="lean"><b>Option A</b> is the most cohesive — collapsing the card and the "Start" button into one tappable object is the single biggest declutter, and it keeps the "one clear next" conviction from D1 while staying confident and image-forward. <b>Option B</b> is the safer, calmer pick if you want an explicit labeled button and less imagery — it's closest to your readability-first instinct. <b>Option C</b> is worth it only if research says people want a choice at this moment; it trades a little focus for a little agency. I'd ship <b>A</b>, keep <b>B</b> as the fallback, and hold <b>C</b> unless testing asks for choice.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note">All three keep the approved top (celebration → $100 → cap meter) and honor the locked decisions: D1 (one clear next + browse open), D2 (celebrate the finish), D3 (EBB leads), D4 (next from interests). Only the bottom third changes. Screen v2 — bottom options for reaction.</p>
+  </div>
+</footer>

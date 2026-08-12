@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>"Your care this year" — states</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.12);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--track:#EAE3D6;--amber:#8A5A12;--amber-tint:#F4E8D2;--green:#3F7A46;--green-tint:#E4EFE0;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:820px;margin:0 0 8px;font-size:14px}
+.grouphd{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin:30px 0 2px}
+.grid{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;margin-top:14px}
+.opt{width:384px}
+.olabel{display:flex;align-items:baseline;gap:8px;margin-bottom:9px}
+.onum{font-size:11.5px;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:2px 7px}
+.onum.z{background:#8b9096}.onum.cap{background:var(--green)}.onum.warn{background:var(--amber)}
+.oname{font-size:14px;font-weight:700}
+.onote{font-size:11.5px;color:var(--ink-2);margin-top:9px}.onote b{color:var(--ink)}
+/* the component */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.t{font-size:16px;font-weight:720}
+.s{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.bar{height:9px;border-radius:6px;background:var(--track);margin:13px 0 10px;overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:6px;background:var(--teal)}
+.bar.green>i{background:var(--green)}
+.foot{display:flex;justify-content:space-between;align-items:baseline;font-size:14px}
+.foot .l b{font-weight:750}.foot .l span{color:var(--ink-3)}
+.foot .r{color:var(--ink-2)}
+.note{font-size:11.5px;color:var(--ink-2);margin-top:8px}
+.pending{display:inline-flex;align-items:center;gap:5px;background:var(--teal-tint);color:var(--teal-2);font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-left:8px;vertical-align:1px}
+.cta{display:flex;align-items:center;justify-content:space-between;margin-top:12px;background:var(--amber-tint);color:var(--amber);border-radius:10px;padding:10px 13px;font-size:13px;font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:5px;background:var(--green-tint);color:var(--green);font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:10px}
+.g{width:26px;height:26px;border-radius:8px;background:var(--amber-tint);display:inline-flex;align-items:center;justify-content:center;font-size:14px;margin-right:9px;vertical-align:-7px}
+</style></head><body>
+<div class="page">
+<h1>"Your care this year" — states</h1>
+<p class="sub">The reward-summary banner across its states. It tracks paths in progress/completed and $ earned toward the yearly cap ($500 recommended). Reward stays secondary but clear; no halfway/50% shown (internal-only). Default (earning) at the end for reference.</p>
+
+<div class="grouphd">Getting started</div>
+<div class="grid">
+
+<div class="opt"><div class="olabel"><span class="onum z">1</span><span class="oname">Zero · enrolled, nothing earned</span></div>
+<div class="card"><div class="t">Your care this year</div><div class="s">Just getting started</div><div class="bar"><i style="width:0%"></i></div><div class="foot"><span class="l"><b>$0</b> <span>earned</span></span><span class="r">$500 / year</span></div><div class="note">Finish a care path to earn your first $100.</div></div>
+<div class="onote"><b>Zero.</b> Empty bar, but a forward line ("finish a path to earn your first $100") so it invites rather than reads dead.</div></div>
+
+<div class="opt"><div class="olabel"><span class="onum warn">2</span><span class="oname">Not opted in · earn-gate</span></div>
+<div class="card"><div class="t">Care Path Rewards</div><div class="s">Earn $100 for each care path you finish — up to $500 a year.</div><div class="cta"><span><span class="g">🎁</span>Opt in to start earning</span><span>→</span></div></div>
+<div class="onote"><b>Not opted in.</b> No bar/earnings yet — an opt-in prompt instead (earn-gate). Once opted in, it becomes the earning banner.</div></div>
+
+<div class="opt"><div class="olabel"><span class="onum">3</span><span class="oname">In progress · none earned yet</span></div>
+<div class="card"><div class="t">Your care this year</div><div class="s">2 in progress · 0 completed</div><div class="bar"><i style="width:0%"></i></div><div class="foot"><span class="l"><b>$0</b> <span>earned</span></span><span class="r">$500 / year</span></div><div class="note">You'll earn $100 when you finish your first path.</div></div>
+<div class="onote"><b>Working, not yet paid.</b> Shows momentum (2 in progress) with $0 earned and a clear "when you finish" line — honest, not discouraging.</div></div>
+
+</div>
+
+<div class="grouphd">Earning</div>
+<div class="grid">
+
+<div class="opt"><div class="olabel"><span class="onum">4</span><span class="oname">Payout pending</span></div>
+<div class="card"><div class="t">Your care this year</div><div class="s">3 in progress · 2 completed</div><div class="bar"><i style="width:40%"></i></div><div class="foot"><span class="l"><b>$200</b> <span>earned</span><span class="pending">🕐 $100 pending</span></span><span class="r">$500 / year</span></div></div>
+<div class="onote"><b>Payout pending.</b> A completed path whose gift card is still processing (Waystar). Honest status (Nielsen #1) so "earned" ≠ "in your hand yet."</div></div>
+
+<div class="opt"><div class="olabel"><span class="onum warn">5</span><span class="oname">Approaching cap</span></div>
+<div class="card"><div class="t">Your care this year</div><div class="s">1 in progress · 4 completed</div><div class="bar"><i style="width:80%"></i></div><div class="foot"><span class="l"><b>$400</b> <span>earned</span></span><span class="r">$500 / year</span></div><div class="note">One more finished path reaches your yearly max.</div></div>
+<div class="onote"><b>Near the cap.</b> Goal-gradient at the year level — one to go — without over-pushing.</div></div>
+
+<div class="opt"><div class="olabel"><span class="onum cap">6</span><span class="oname">Cap reached</span></div>
+<div class="card"><div class="t">Your care this year</div><div class="s">5 completed this year</div><div class="bar green"><i style="width:100%"></i></div><div class="foot"><span class="l"><b>$500</b> <span>earned · your max</span></span><span class="r">$500 / year</span></div><span class="pill">✓ Full year earned — keep going for your health</span></div>
+<div class="onote"><b>Cap reached.</b> Stop dangling a payout that can't be paid; shift to a health framing. Bar goes green, reward message becomes a health nudge.</div></div>
+
+</div>
+
+<div class="grouphd">Config / edge</div>
+<div class="grid">
+
+<div class="opt"><div class="olabel"><span class="onum">7</span><span class="oname">No cap configured</span></div>
+<div class="card"><div class="t">Your care this year</div><div class="s">3 in progress · 3 completed</div><div class="foot" style="margin-top:12px"><span class="l"><b>$300</b> <span>earned</span></span><span class="r">$100 / path</span></div></div>
+<div class="onote"><b>No cap (system default).</b> Some clients run no yearly limit — so no ceiling bar. Show total earned + the per-path rate instead of a bar-to-cap.</div></div>
+
+<div class="opt"><div class="olabel"><span class="onum">8</span><span class="oname">New benefit year</span></div>
+<div class="card"><div class="t">Your care this year</div><div class="s">New benefit year · fresh $500 to earn</div><div class="bar"><i style="width:0%"></i></div><div class="foot"><span class="l"><b>$0</b> <span>earned</span></span><span class="r">$500 / year</span></div><div class="note">Last year: $500 earned. <a href="#" style="color:var(--teal-2)">View history</a></div></div>
+<div class="onote"><b>Rollover.</b> Resets at the benefit-year boundary; nods to last year so it doesn't feel like lost progress.</div></div>
+
+<div class="opt"><div class="olabel"><span class="onum z">·</span><span class="oname" style="color:var(--ink-3)">Default (reference)</span></div>
+<div class="card" style="opacity:.92"><div class="t">Your care this year</div><div class="s">3 in progress · 2 completed</div><div class="bar"><i style="width:40%"></i></div><div class="foot"><span class="l"><b>$200</b> <span>earned</span></span><span class="r">$500 / year</span></div></div>
+<div class="onote">The earning state you have now (count fixed: 2 completed = $200).</div></div>
+
+</div>
+
+<div style="margin-top:26px;max-width:820px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>Notes:</b> keep <b>earned = paid or clearly-pending</b> (state 4) so we never imply money that isn't real. <b>Cap reached</b> (6) must drop the payout hook and switch to health. <b>No-cap</b> (7) hides the ceiling entirely. And the count/$ should always reconcile (2 completed = $200) — the current mock had "1 completed · $200," which is the one bug to fix.
+</div>
+</div>
+</body></html>

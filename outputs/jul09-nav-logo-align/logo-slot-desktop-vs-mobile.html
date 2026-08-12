@@ -1,0 +1,243 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Logo slot — desktop (left) vs mobile (centered)</title>
+<style>
+:root{
+  --bg:#F6F4EE;--panel:#FFFFFF;--ink:#26251F;--muted:#6E6A60;--line:#E4DFD5;--line-2:#D3CCBE;
+  --teal:#2E6E67;--crimson:#B23B3B;--dash:#C24C8B;--dash-soft:#FBEBF2;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:clamp(24px,5vw,64px) 24px 96px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson);margin:0 0 10px}
+h1{font-size:clamp(26px,4vw,36px);line-height:1.1;letter-spacing:-0.02em;font-weight:680;margin:0 0 12px}
+.lede{font-size:17px;color:var(--muted);max-width:70ch;margin:0}
+.fix{display:flex;gap:12px;background:#FBEDE9;border:1px solid #EBC9BF;border-radius:12px;padding:15px 17px;margin:22px 0 0}
+.fix .bar{width:3px;border-radius:3px;background:var(--crimson);flex:none}
+.fix p{margin:0;font-size:14px}.fix b{color:var(--crimson)}
+h2{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--crimson);margin:0 0 4px;display:flex;align-items:center;gap:10px}
+h2 .pill{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.02em;color:var(--teal);background:#E7F0EE;border:1px solid #CFE1DD;border-radius:20px;padding:2px 9px;text-transform:none}
+.section-sub{color:var(--muted);margin:0 0 20px;font-size:14px;max-width:70ch}
+section{margin-top:52px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:40px 44px}
+
+/* marks */
+.mark-sq{width:48px;height:48px;border-radius:12px;background:var(--teal);display:flex;align-items:center;justify-content:center;flex:none}
+.mark-sq .ring{width:20px;height:20px;border-radius:50%;border:5px solid #fff}
+.mark-sq.sm{width:40px;height:40px;border-radius:11px}.mark-sq.sm .ring{width:17px;height:17px;border-width:4.5px}
+.wordmark{display:flex;align-items:center;gap:9px;white-space:nowrap}
+.wordmark .m{width:22px;height:22px;border-radius:7px;background:var(--teal);flex:none}
+.wordmark .w{font-size:17px;font-weight:800;letter-spacing:-0.01em;color:var(--teal);line-height:1}
+.wordmark.sm{gap:7px}.wordmark.sm .m{width:20px;height:20px;border-radius:6px}.wordmark.sm .w{font-size:15px}
+
+/* bar + slot */
+.stage{position:relative;padding:34px 70px 52px 96px}
+.stage.mobile{padding:34px 24px 52px 24px}
+.barlabel{position:absolute;left:8px;top:0;bottom:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.barlabel .n{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--crimson)}
+.barlabel .t{font-size:10.5px;color:var(--muted);writing-mode:horizontal-tb}
+.barlabel .measure{position:absolute;left:44px;top:0;bottom:0;width:1px;background:var(--line-2)}
+.bar{position:relative;height:80px;background:#fff;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center}
+.bar.desktop{justify-content:flex-start;padding-left:28px}
+.bar.mob{height:56px;justify-content:center;width:390px;margin:0 auto}
+.gutterline{position:absolute;left:28px;top:-8px;bottom:-8px;border-left:1px dashed var(--line-2)}
+.bar.mob .centerline{position:absolute;left:50%;top:-8px;bottom:-8px;border-left:1px dashed var(--line-2)}
+
+/* the bounding slot (dashed) */
+.slot{border:1.5px dashed var(--dash);border-radius:5px;background:var(--dash-soft);height:48px;display:flex;align-items:center;padding:0 0;position:relative}
+.bar.mob .slot{height:40px}
+.slot.sq{width:48px;justify-content:center}
+.bar.mob .slot.sq{width:40px}
+.slot.word{width:auto;max-width:240px;padding:0 9px;justify-content:flex-start;overflow:hidden}
+.bar.mob .slot.word{width:auto;max-width:200px;padding:0 8px;justify-content:center}
+
+/* desktop: container hugs the logo, nav links sit right after (max-width model) */
+.navlinks{display:flex;align-items:center;gap:18px}
+.navlinks .lnk{font-size:13px;font-weight:600;color:#6E6A60;white-space:nowrap}
+.navlinks .avatar{width:26px;height:26px;border-radius:50%;background:#D8D2C6;flex:none}
+.pad-note{font-family:var(--mono);font-size:10px;color:#A7A093;letter-spacing:.02em;white-space:nowrap;margin:0 6px;align-self:center}
+.model-note{position:absolute;left:124px;bottom:10px;font-family:var(--mono);font-size:11px;color:var(--muted);max-width:600px;line-height:1.5}
+.model-note b{color:var(--crimson)}
+
+/* mobile platform diagrams (iOS + Android) — centered logo */
+.plat-eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--crimson)}
+.plat-sub{font-size:12.5px;color:var(--muted);margin:0 0 4px}
+.mstage{position:relative;padding:44px 160px 62px 90px}
+.mstage.ios .mbarlab{height:75px}
+.mstage.android .mbarlab{height:109px}
+.mbarlab{position:absolute;left:12px;top:44px;width:64px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.mbarlab .ln{position:absolute;right:0;top:0;bottom:0;width:1px;background:var(--line-2)}
+.mbarlab .n{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--crimson)}
+.mbarlab .t{font-size:10px;color:var(--muted);text-align:center}
+.mbar{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px}
+.mbar.ios{height:75px}
+.mbar.android{height:109px}
+.mslot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1.5px dashed var(--dash);border-radius:5px;background:var(--dash-soft);display:flex;align-items:center;justify-content:center}
+.mslot.ios{width:272px;height:48px}
+.mslot.android{width:272px;height:54px}
+.m-ios{width:48px;height:48px;border-radius:12px}
+.m-ios .ring{width:20px;height:20px;border-width:5px}
+.m-and{width:54px;height:54px;border-radius:14px}
+.m-and .ring{width:22px;height:22px;border-width:5.5px}
+.mguide{position:absolute;left:calc(50% - 136px);top:-8px;bottom:-8px;border-left:1px dashed var(--line-2)}
+.minset{position:absolute;left:calc(50% - 178px);font-family:var(--mono);font-size:12px;font-weight:700;color:var(--crimson)}
+.minset.top{top:6px}.minset.bot{bottom:6px}
+.mmh{position:absolute;left:calc(50% + 150px);top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:13px;font-weight:700;color:var(--crimson);white-space:nowrap;line-height:1.25}
+.mmh span{display:block;color:var(--muted);font-weight:400;font-size:10.5px}
+.mwbrk{position:absolute;left:calc(50% - 136px);width:272px;bottom:-16px;height:7px;border:1px solid var(--line-2);border-top:none}
+.mwlab{position:absolute;left:calc(50% - 146px);width:292px;bottom:-38px;text-align:center;font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--crimson)}
+.mwlab span{color:var(--muted);font-weight:400}
+.summary3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+@media(max-width:820px){.summary3{grid-template-columns:1fr}}
+
+/* inset labels (16 / 12) */
+.inset{position:absolute;left:6px;font-family:var(--mono);font-size:11px;color:var(--crimson)}
+.inset.top{top:-2px}.inset.bot{bottom:-2px}
+.bar .mh{position:absolute;font-family:var(--mono);font-size:11px;color:var(--crimson);right:-58px;top:50%;transform:translateY(-50%);white-space:nowrap}
+.bar.mob .mh{right:-52px}
+.mh b{display:block;font-size:13px}.mh span{color:var(--muted);font-weight:400}
+
+.rowlabel{font-family:var(--mono);font-size:12px;color:var(--muted);margin:0 0 10px}
+.rowlabel b{color:var(--ink)}
+.cap{font-size:13.5px;color:var(--muted);margin:16px 0 0;max-width:64ch}
+.cap b{color:var(--ink);font-weight:600}
+.cap .hl{color:var(--crimson);font-weight:600}
+.demo+.demo{margin-top:30px;padding-top:30px;border-top:1px dashed var(--line)}
+.split{font-size:12px;color:var(--muted);text-align:center;margin:8px 0 0;font-style:italic}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+@media(max-width:820px){.two{grid-template-columns:1fr}.bar.mob{width:100%}}
+.mini{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.mini h3{font-size:13px;margin:0 0 8px;font-weight:700}
+.mini .k{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line)}
+.mini .k:last-child{border-bottom:none}.mini .k b{color:var(--ink)}
+.foot{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+</style></head><body>
+<div class="wrap">
+
+<p class="eyebrow">Top nav · logo slot · alignment</p>
+<h1>Logo slot — desktop is left-aligned, mobile is centered</h1>
+<p class="lede">Same bounding-box idea, two different anchors. The earlier diagram showed the square mark <em>centered</em> inside the slot, which implied it floats in the middle of the bar. It doesn't — on desktop the logo hugs the left gutter.</p>
+
+<div class="fix"><span class="bar"></span><p><b>Correction:</b> desktop is a <b>max-width, hug-to-content model</b> — the logo container snaps to the logo's actual width (capped at 240px) and the nav links sit <b>right after it, snug</b> (with padding). A logo-mark-only client is ~48px wide, flush-left, links immediately following — <b>not</b> a fixed 240px box, and never centered. <b>Mobile</b> is the centered one. The two are separated below.</p></div>
+
+<!-- DESKTOP -->
+<section>
+  <h2>Desktop top bar <span class="pill">anchor: left</span></h2>
+  <p class="section-sub">Logo sits at the left gutter. It scales to fit the box — filling to whichever limit it hits first — but always anchored left. Short marks do not center.</p>
+  <div class="card">
+
+    <!-- square, flush left, links snug -->
+    <div class="demo">
+      <p class="rowlabel"><b>Square mark</b> → 48px tall · container hugs to ~48px wide · links snug after</p>
+      <div class="stage">
+        <div class="barlabel"><span class="measure"></span><span class="n">80</span><span class="t">bar height</span></div>
+        <div class="bar desktop">
+          <span class="gutterline"></span>
+          <span class="inset top">16</span><span class="inset bot">16</span>
+          <span class="slot sq"><span class="mark-sq"><span class="ring"></span></span></span>
+          <span class="pad-note">↔ padding</span>
+          <span class="navlinks"><span class="lnk">Home</span><span class="lnk">Rewards</span><span class="lnk">Benefits</span><span class="avatar"></span></span>
+        </div>
+        <span class="model-note"><b>Container = the logo (~48px).</b> 240px is only the max — not reached. Nav links start right after, snug.</span>
+      </div>
+      <p class="cap"><b>Hits the height limit first → 48px tall.</b> The container <span class="hl">hugs the mark</span> — the links sit immediately to its right (with padding). No fixed 240px box, no reserved empty space, no centering. This is the case the old diagram got wrong.</p>
+    </div>
+
+    <!-- wordmark, hits cap, links snug -->
+    <div class="demo">
+      <p class="rowlabel"><b>Wide wordmark</b> → scales down to the 240px cap · links snug after</p>
+      <div class="stage">
+        <div class="barlabel"><span class="measure"></span><span class="n">80</span><span class="t">bar height</span></div>
+        <div class="bar desktop">
+          <span class="gutterline"></span>
+          <span class="inset top">16</span><span class="inset bot">16</span>
+          <span class="slot word"><span class="wordmark"><span class="m"></span><span class="w">NORTHWIND HEALTH</span></span></span>
+          <span class="pad-note">↔ padding</span>
+          <span class="navlinks"><span class="lnk">Home</span><span class="lnk">Rewards</span><span class="avatar"></span></span>
+        </div>
+        <span class="model-note"><b>Container = the wordmark, capped at 240px.</b> A wide mark scales down to fit under the cap; links still sit right after it.</span>
+      </div>
+      <p class="cap"><b>Hits the width limit first.</b> The wordmark scales down so it fits within the 240px cap (shorter than 48px tall), the container hugs it, and — same as the square — the links follow immediately. Both marks start at the same left gutter.</p>
+    </div>
+
+  </div>
+</section>
+
+<p class="split">↑ desktop: everything anchored to the left gutter &nbsp;·&nbsp; ↓ mobile: everything centered</p>
+
+<!-- MOBILE -->
+<section>
+  <h2>Mobile top bar <span class="pill">anchor: center</span></h2>
+  <p class="section-sub">On mobile the logo is <b>centered</b>, and the frame follows each platform's standard bar. Both use a 160-unit max-width box with the mark centered inside — the mark fills to max-height, wordmarks scale down to the 160 cap.</p>
+  <div class="card">
+
+    <!-- iOS -->
+    <div class="demo">
+      <p class="platlabel"><span class="plat-eyebrow">iOS — Navigation bar</span></p>
+      <p class="plat-sub">44 pt standard (compact)</p>
+      <div class="mstage ios">
+        <div class="mbarlab"><span class="ln"></span><span class="n">44pt</span><span class="t">bar height</span></div>
+        <div class="mbar ios">
+          <span class="mguide"></span>
+          <span class="minset top">8pt</span><span class="minset bot">8pt</span>
+          <span class="mslot ios"><span class="mark-sq m-ios"><span class="ring"></span></span></span>
+          <span class="mmh">28pt<span>max-height</span></span>
+          <span class="mwbrk"></span>
+          <span class="mwlab">160pt <span>max-width</span></span>
+        </div>
+      </div>
+      <p class="cap"><b>iOS Navigation bar — 44pt.</b> Mark centered; 8pt top/bottom inset → 28pt max-height; 160pt max-width. A wordmark scales down to the 160pt cap, still centered.</p>
+    </div>
+
+    <!-- Android -->
+    <div class="demo">
+      <p class="platlabel"><span class="plat-eyebrow">Android — Top app bar</span></p>
+      <p class="plat-sub">64 dp standard (Material 3, small)</p>
+      <div class="mstage android">
+        <div class="mbarlab"><span class="ln"></span><span class="n">64dp</span><span class="t">bar height</span></div>
+        <div class="mbar android">
+          <span class="mguide"></span>
+          <span class="minset top">16dp</span><span class="minset bot">16dp</span>
+          <span class="mslot android"><span class="mark-sq m-and"><span class="ring"></span></span></span>
+          <span class="mmh">32dp<span>max-height</span></span>
+          <span class="mwbrk"></span>
+          <span class="mwlab">160dp <span>max-width</span></span>
+        </div>
+      </div>
+      <p class="cap"><b>Android Top app bar — 64dp (Material 3, small).</b> Mark centered; 16dp inset → 32dp max-height; 160dp max-width. Same centered behavior — taller bar and larger insets than iOS.</p>
+    </div>
+
+  </div>
+
+  <div class="summary3">
+    <div class="mini">
+      <h3>Desktop · top bar</h3>
+      <div class="k"><span>bar height</span><b>80px</b></div>
+      <div class="k"><span>inset (top/bottom)</span><b>16px</b></div>
+      <div class="k"><span>max-height</span><b>48px</b></div>
+      <div class="k"><span>max-width</span><b>240px (cap)</b></div>
+      <div class="k"><span>anchor</span><b>left · links snug</b></div>
+    </div>
+    <div class="mini">
+      <h3>iOS · Navigation bar</h3>
+      <div class="k"><span>bar height</span><b>44pt</b></div>
+      <div class="k"><span>inset (top/bottom)</span><b>8pt</b></div>
+      <div class="k"><span>max-height</span><b>28pt</b></div>
+      <div class="k"><span>max-width</span><b>160pt</b></div>
+      <div class="k"><span>anchor</span><b>center</b></div>
+    </div>
+    <div class="mini">
+      <h3>Android · Top app bar</h3>
+      <div class="k"><span>bar height</span><b>64dp</b></div>
+      <div class="k"><span>inset (top/bottom)</span><b>16dp</b></div>
+      <div class="k"><span>max-height</span><b>32dp</b></div>
+      <div class="k"><span>max-width</span><b>160dp</b></div>
+      <div class="k"><span>anchor</span><b>center</b></div>
+    </div>
+  </div>
+</section>
+
+<p class="foot">Three contexts, separated. Desktop = left-anchored, hug-to-content (240px cap), links snug. Mobile = centered, split into iOS (44pt / 8 / 28 / 160) and Android (64dp / 16 / 32 / 160) per platform standards. Confirm the numbers and I'll push all three to Figma as native frames.</p>
+
+</div>
+</body></html>

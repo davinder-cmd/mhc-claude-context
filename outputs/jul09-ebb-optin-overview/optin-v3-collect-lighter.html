@@ -1,0 +1,176 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opt-in v3 — collect, lighter</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.11);--navy:#123A52;--teal:#0E4A56;--teal-2:#1F6F7A;--teal-tint:#E4EDED;--amber:#8A5A12;--amber-2:#B87A1E;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1560px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:900px;margin:0 0 4px;font-size:14px}
+.flow{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}.flow b{color:var(--teal-2)}
+.ph{color:#B23B3B;font-weight:700}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:9px;width:330px}
+.cap{font-size:12px;color:var(--ink-2);max-width:330px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.rec{color:#fff;background:var(--navy)}
+.phone{width:330px;background:var(--surface);border:9px solid #1c2330;border-radius:40px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:706px;overflow-y:auto;position:relative;background:var(--surface)}
+.close{position:absolute;top:14px;right:16px;font-size:19px;color:var(--ink-3);z-index:3}
+.btn{background:var(--navy);color:#fff;border-radius:14px;padding:15px;font-size:15px;font-weight:750;text-align:center}
+.notnow{text-align:center;font-size:13px;font-weight:700;color:var(--teal-2);margin-top:13px}
+.foot{font-size:11px;color:var(--ink-3);text-align:center;margin-top:10px;line-height:1.45}
+.legal{margin-top:14px;background:#F4F2EC;border-radius:12px;padding:12px 13px;font-size:11px;color:var(--ink-3);line-height:1.5}
+.legal .chk{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink);font-weight:600;margin-bottom:7px}
+.legal .box{width:18px;height:18px;border-radius:5px;border:2px solid var(--navy);flex:none;margin-top:1px}
+.legal a{color:var(--teal-2)}
+.body{padding:8px 20px 22px}
+.pk{font-size:12px;font-weight:750;color:var(--teal-2);text-transform:uppercase;letter-spacing:.05em}
+.hd{font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-top:5px;line-height:1.15}
+.hd .amt{color:var(--amber-2)}
+.giftrow{display:flex;align-items:center;gap:12px;margin-bottom:2px}
+.giftsm{width:44px;height:44px;border-radius:13px;background:var(--amber-warm);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+/* bullets (kept, teal — reward carried by the collect element, not repeated heavy) */
+.bul{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.bul:last-child{border-bottom:none}
+.bt{width:40px;height:40px;border-radius:12px;background:var(--teal-tint);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.bh{font-size:14.5px;font-weight:700;line-height:1.25}.bs{font-size:12px;color:var(--ink-2);margin-top:1px}
+
+/* C1 — pip row */
+.pips{display:flex;gap:9px;align-items:center;margin:14px 0 8px}
+.pip{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--ink-3);background:var(--warm)}
+.pip.on{border-color:var(--amber-2);background:var(--amber-warm);color:var(--amber-2)}
+.pipcap{font-size:12.5px;color:var(--ink-2)}.pipcap b{color:var(--amber-2)}
+
+/* C2 — segmented slim bar */
+.segwrap{margin:16px 0 6px}
+.seg{display:flex;gap:4px;height:9px;border-radius:6px;overflow:hidden}
+.seg span{flex:1;background:#EAE4D8}.seg span.on{background:var(--amber-2)}
+.segends{display:flex;justify-content:space-between;margin-top:7px;font-size:11.5px;font-weight:700;color:var(--ink-3)}
+.segends .a{color:var(--amber-2)}
+
+/* C3 — quiet stat line, tiny pips inline */
+.stat{background:var(--amber-warm);border-radius:14px;padding:14px 15px;display:flex;align-items:center;gap:13px;margin:8px 0 4px}
+.stat .g{font-size:26px}
+.stat .big{font-size:19px;font-weight:800;line-height:1.1}.stat .big .amt{color:var(--amber-2)}
+.stat .sm{font-size:11.5px;color:var(--amber);font-weight:600;margin-top:3px;display:flex;align-items:center;gap:6px}
+.tinypips{display:inline-flex;gap:3px}
+.tinypips i{width:6px;height:6px;border-radius:50%;background:rgba(184,122,30,.35)}
+.tinypips i.on{background:var(--amber-2)}
+
+/* C4 — one rung + collapsed rest */
+.oner{margin:14px 0 6px;display:flex;flex-direction:column;gap:7px}
+.rung{display:flex;align-items:center;gap:11px;border-radius:12px;padding:11px 12px}
+.rung.on{background:var(--amber-warm);border:1px solid rgba(184,122,30,.3)}
+.rung.more{background:var(--warm);border:1px dashed var(--line)}
+.rn{width:24px;height:24px;border-radius:50%;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.rung.on .rn{background:var(--amber-2);color:#fff}
+.rung.more .rn{background:#fff;border:1px solid var(--line);color:var(--ink-3)}
+.rl{flex:1;font-size:13px;font-weight:700}.rung.more .rl{color:var(--ink-2);font-weight:600}
+.rv{font-size:13px;font-weight:800;color:var(--amber-2)}.rung.more .rv{color:var(--ink-3)}
+
+.rec-note{margin-top:28px;max-width:900px;background:var(--surface);border-left:3px solid var(--navy);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}
+.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Opt-in — v3 · collect, lighter</h1>
+<p class="sub">Same "every path adds up, up to $500" idea from C — with the visual weight pulled way down. The heavy full-width rungs with five dollar values are gone; each version carries the collect idea with a lighter device. Copy <span class="ph">placeholder</span>; earn-gate + legal preserved. Ordered lightest-touch → most.</p>
+<p class="flow">Read note: treating <b>"I don't like 2"</b> as option B (The path) being out. Dropped the enumerated $100→$500 list in all four either way.</p>
+
+<div class="grid">
+
+<!-- C3 lightest -->
+<div class="col">
+<span class="tag">C-i · Quiet stat</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="body" style="padding-top:26px">
+<div class="pk">Rewards</div>
+<div class="hd">Finish a path,<br>earn <span class="amt">$100</span></div>
+<div class="stat">
+<span class="g">🎁</span>
+<div><div class="big">Up to <span class="amt">$500</span> a year</div><div class="sm">5 paths <span class="tinypips"><i class="on"></i><i></i><i></i><i></i><i></i></span> $100 each</div></div>
+</div>
+<div class="bul"><div class="bt">🧭</div><div><div class="bh">Go at your own pace</div><div class="bs">No streaks, no clock.</div></div></div>
+<div class="bul"><div class="bt">✅</div><div><div class="bh">Finish the whole path</div><div class="bs">Every session in the program.</div></div></div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a>.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+<div class="foot">You can do the program without opting in — you just won't earn.</div>
+</div>
+</div></div>
+<div class="cap"><b>C-i — Quiet stat.</b> The collect idea shrinks to one warm stat chip + five tiny dots inline. Lightest possible; reads as a fact, not a ladder. "$500 a year" present without enumerating each rung.</div>
+</div>
+
+<!-- C2 segmented bar -->
+<div class="col">
+<span class="tag rec">C-ii · Segmented bar  ·  lean</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="body" style="padding-top:26px">
+<div class="pk">Rewards</div>
+<div class="hd">Every path you finish<br>adds <span class="amt">$100</span></div>
+<div class="segwrap">
+<div class="seg"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+<div class="segends"><span class="a">$100 · your first path</span><span>$500 · all 5</span></div>
+</div>
+<div class="bul" style="margin-top:6px"><div class="bt">🎁</div><div><div class="bh">$100 gift card per finished path</div><div class="bs">At your pace — no streaks, no clock.</div></div></div>
+<div class="bul"><div class="bt">✅</div><div><div class="bh">Opt in once</div><div class="bs">Covers every program you complete.</div></div></div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a>.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>C-ii — Segmented bar. (my lean.)</b> A slim 5-segment bar, only the endpoints labeled ($100 → $500). Keeps the "it stacks toward a ceiling" feel of C with a fraction of the weight, and it echoes the progress bars used elsewhere in EBB.</div>
+</div>
+
+<!-- C1 pip row -->
+<div class="col">
+<span class="tag">C-iii · Pip row</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="body" style="padding-top:26px">
+<div class="pk">Rewards</div>
+<div class="hd">Collect up to <span class="amt">$500</span><br>a year</div>
+<div class="pips">
+<div class="pip on">🎁</div><div class="pip">2</div><div class="pip">3</div><div class="pip">4</div><div class="pip">5</div>
+</div>
+<div class="pipcap">Each path you finish earns <b>$100</b> — up to five.</div>
+<div class="bul" style="margin-top:12px"><div class="bt">🧭</div><div><div class="bh">Your pace, no clock</div><div class="bs">Weeks are fine. No streaks.</div></div></div>
+<div class="bul"><div class="bt">✅</div><div><div class="bh">Finish the whole path</div><div class="bs">Then the next one counts too.</div></div></div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a>.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>C-iii — Pip row.</b> Five small circles, first one filled with the gift. The "collection" hint reads at a glance but takes one line, not five. A touch more playful than the bar; still calm.</div>
+</div>
+
+<!-- C4 one rung + collapsed -->
+<div class="col">
+<span class="tag">C-iv · One rung + rest folded</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="body" style="padding-top:26px">
+<div class="pk">Rewards</div>
+<div class="hd">Finish a path,<br>earn <span class="amt">$100</span></div>
+<div class="oner">
+<div class="rung on"><span class="rn">1</span><span class="rl">Your first finished path</span><span class="rv">$100</span></div>
+<div class="rung more"><span class="rn">+4</span><span class="rl">Each next path adds another $100</span><span class="rv">$500</span></div>
+</div>
+<div class="bul" style="margin-top:8px"><div class="bt">🧭</div><div><div class="bh">Go at your own pace</div><div class="bs">No streaks, no clock.</div></div></div>
+<div class="bul"><div class="bt">✅</div><div><div class="bh">Opt in once</div><div class="bs">Covers every program you complete.</div></div></div>
+<div class="legal"><div class="chk"><span class="box"></span><span>I agree to the terms and want to earn rewards.</span></div><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a>.</div>
+<div class="btn" style="margin-top:14px">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>C-iv — One rung + folded rest.</b> Keeps the rung look you liked, but shows only the first path in full and folds paths 2–5 into a single "+4 · up to $500" row. Ladder concept intact, weight cut ~60%.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>C-ii — the segmented bar.</b> It keeps the "stacks toward $500" motivation you liked about C, sheds almost all the weight, and reuses a progress-bar shape members already see across EBB — so it feels native rather than like a rewards billboard. <b>C-iv</b> is the pick if you specifically want the <i>rung</i> look retained. <b>C-i</b> if you want it whisper-quiet. All keep the earn-gate + legal placeholder and avoid coins/odds.
+</div>
+</div>
+</body></html>

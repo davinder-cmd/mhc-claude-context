@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LifeForce · Dependent invite — lifecycle states</title>
+<style>
+:root{--ink:#26292B;--body:#4A4E50;--muted:#7A8083;--ocean:#195188;--ocean50:#EAF2FA;--green:#52A353;--green-ink:#3D7A3E;--green50:#EFF8EF;--mustard:#C7791A;--mustard-ink:#87440A;--mustard50:#FFF3E4;--neutral:#8A9096;--neutral50:#F1F1EE;--border:#E4E4E2;--hair:#EAEAE7;--canvas:#F5F5F3}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,"SF Pro Text","SF Pro Display",system-ui,sans-serif}
+body{background:#E7E7E4;padding:40px;color:var(--body)}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:25px;color:var(--ink);font-weight:700;letter-spacing:-.01em}
+.sub{font-size:15px;color:var(--muted);margin:6px 0 26px;max-width:92ch}
+h2{font-size:14px;color:var(--ink);font-weight:700;margin:30px 0 6px}
+.h2s{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+.stack{background:var(--canvas);border:1px solid var(--border);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.tag{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.tag span{color:var(--muted);font-weight:500}
+.mic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.mic svg{width:22px;height:22px;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ocean{background:var(--ocean50)}.ocean svg{stroke:var(--ocean)}
+.neutral{background:var(--neutral50)}.neutral svg{stroke:var(--neutral)}
+.mus{background:var(--mustard50)}.mus svg{stroke:var(--mustard)}
+.grn{background:var(--green50)}.grn svg{stroke:var(--green-ink)}
+
+/* full action card */
+.full{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.full .r{display:flex;align-items:center;gap:12px}
+.full .mt{font-family:"SF Pro Display";font-weight:600;font-size:17px;color:var(--ink)}
+.full .b{font-size:13px;line-height:1.45;color:var(--body)}
+.full .btn{display:block;text-align:center;background:var(--ocean);color:#fff;font-weight:600;font-size:14px;border-radius:999px;padding:12px}
+
+/* compact row */
+.row{background:#fff;border:1px solid var(--hair);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px}
+.row .tx{flex:1;min-width:0}
+.row .mt{font-weight:600;font-size:14.5px;color:var(--ink)}
+.row .ms{font-size:12px;color:var(--muted);margin-top:1px}
+.act{flex:0 0 auto;font-weight:600;font-size:13px;border-radius:999px;padding:8px 14px}
+.act.solidish{background:var(--ocean50);color:var(--ocean)}
+.act.link{color:var(--ocean);padding:8px 4px}
+.act.linkmus{color:var(--mustard);padding:8px 4px}
+.chip{flex:0 0 auto;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
+.chip.pending{background:var(--neutral50);color:var(--neutral)}
+.chip.done{background:var(--green50);color:var(--green-ink)}
+.note{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:13.5px;color:var(--body);margin-top:8px}
+.note b{color:var(--ink)}
+</style></head>
+<body><div class="wrap">
+<h1>Dependent invite — the full lifecycle</h1>
+<p class="sub">One card identity across every stage. <b>Prominence</b> (full vs compact) tracks screen priority; <b>form</b> (action vs status) tracks where your spouse is in their journey.</p>
+
+<div class="cols">
+<div>
+  <h2>Stage 0 · Not invited yet — the two prominence levels</h2>
+  <div class="h2s">Same card, weighted to the screen. This is what we settled last round.</div>
+  <div class="stack">
+    <div><div class="tag">A · Prominent <span>· when it's the only thing to do (being scheduled)</span></div>
+      <div class="full"><div class="r"><span class="mic ocean"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.6-.2 5 1.6 5 4.4"/></svg></span><span class="mt">Maximize your credit</span></div>
+        <p class="b">Remind your spouse or domestic partner to complete their Health Assessment — it can increase your medical credit each pay period.</p>
+        <a class="btn">Invite dependent</a></div></div>
+    <div><div class="tag">B · Compact <span>· when the appointment leads (scheduled)</span></div>
+      <div class="row"><span class="mic ocean"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.6-.2 5 1.6 5 4.4"/></svg></span><div class="tx"><div class="mt">Maximize your credit</div><div class="ms">Invite your dependent to earn more</div></div><a class="act solidish">Invite</a></div></div>
+  </div>
+</div>
+
+<div>
+  <h2>Stages 1–3 · After inviting — status, not action</h2>
+  <div class="h2s">Once sent, there's nothing for you to do but wait, then celebrate. So these are quiet compact rows — never a big card.</div>
+  <div class="stack">
+    <div><div class="tag">1 · Invitation sent <span>· awaiting your spouse to register</span></div>
+      <div class="row"><span class="mic neutral"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg></span><div class="tx"><div class="mt">Invitation sent</div><div class="ms">We emailed your spouse Jan 12 — waiting for them to register</div></div><a class="act link">Resend</a></div></div>
+    <div><div class="tag">2 · Registered · HA pending <span>· nudge, low urgency</span></div>
+      <div class="row"><span class="mic mus"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15 14.6c2.6-.2 5 1.6 5 4.4"/></svg></span><div class="tx"><div class="mt">Almost there</div><div class="ms">Your spouse registered — ask them to finish their Health Assessment</div></div><a class="act linkmus">Remind</a></div></div>
+    <div><div class="tag">3 · Credit maximized <span>· complete, positive confirmation</span></div>
+      <div class="row"><span class="mic grn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span><div class="tx"><div class="mt">Credit maximized</div><div class="ms">Your spouse completed their Health Assessment</div></div><span class="chip done">Done</span></div></div>
+  </div>
+  <div class="note"><b>Balancing rule:</b> if <i>you</i> can act (invite / remind) it's an <b>action</b> row (button/link) and can go full when it's the screen's priority. If it's just <b>status</b> (sent, done) it stays a compact row — you can't hurry your spouse, so it shouldn't shout. The completed row can also simply retire after a while.</div>
+</div>
+</div>
+
+</div></body></html>

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DCP Program Detail — Managing Depression (v1)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="../jul13-dcp-suite-kit/mhc-base.css" />
+<style>
+  /* ==========================================================================
+     PAGE-SCOPED COMPONENTS — DCP program detail.
+     Built on mhc-base tokens/classes only. No token redefinition.
+     Re-skins the EBB topic-page IA (jul02-ebb-topic-page/topic-page-v4-full)
+     onto the v81 navy/SF-Pro system.
+     ========================================================================== */
+
+  /* ── Page header row (back · title-block · Anna) — greeting-row sibling ── */
+  .page-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: var(--s-04);
+    margin-bottom: var(--s-05);
+  }
+  .page-head__lead { display: flex; align-items: flex-start; gap: var(--s-02); min-width: 0; }
+  .page-head__titles { display: flex; flex-direction: column; gap: var(--s-01); min-width: 0; }
+  .page-head .back { margin-top: 2px; flex: none; }
+
+  /* ── Continue hero — the ONE primary action (resume next session) ──────── */
+  .chero {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;             /* Compact: stacked */
+  }
+  .chero__media {
+    position: relative;
+    height: 180px;
+    background: linear-gradient(135deg, #1B355C 0%, #2E4E7C 55%, #3A6FA8 100%);
+  }
+  .chero__kicker {
+    position: absolute; left: var(--s-04); top: var(--s-04);
+    background: rgba(255,255,255,0.94); color: var(--brand);
+    padding: var(--s-01) var(--s-03); border-radius: var(--r-s);
+  }
+  .chero__body { padding: var(--s-05); display: flex; flex-direction: column; gap: var(--s-03); }
+  .chero__copy { display: flex; flex-direction: column; gap: var(--s-02); }
+  .chero__actions { margin-top: var(--s-01); }
+  .chero__actions .btn { width: 100%; }
+
+  @media (min-width: 600px) {
+    .chero { grid-template-columns: 5fr 7fr; align-items: stretch; }
+    .chero__media { height: 100%; min-height: 236px; }
+    .chero__body { padding: var(--s-06); justify-content: center; }
+    .chero__actions .btn { width: auto; align-self: flex-start; }
+  }
+  @media (min-width: 1200px) {
+    .chero__media { min-height: 280px; }
+  }
+
+  /* ── Body layout: stack → single reading column → main/aside 2-col ─────── */
+  .detail-body { display: grid; gap: var(--s-05); margin-top: var(--s-06); }
+  @media (min-width: 1200px) {
+    .detail-body {
+      grid-template-columns: minmax(0, 1fr) 360px;
+      grid-template-rows: auto auto;
+      column-gap: var(--s-06);
+      align-items: start;
+    }
+    .path-section  { grid-column: 1; grid-row: 1 / span 2; }
+    .progress-card { grid-column: 2; grid-row: 1; }
+    .checkin-card  { grid-column: 2; grid-row: 2; }
+  }
+
+  /* ── Surface card shared shell ─────────────────────────────────────────── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: var(--s-05);
+  }
+
+  /* ── Progress + reward card ────────────────────────────────────────────── */
+  .progress-card__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-03); }
+  .progress-card .progress { margin: var(--s-04) 0 var(--s-03); }
+  .progress-card__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-02); }
+  .progress-card__foot .sep { color: var(--ink-placeholder); }
+  /* Reward = calm accent, never a headline (pace-not-speed guardrail) */
+  .reward-note { display: inline-flex; align-items: center; gap: var(--s-01); color: var(--ink-soft); }
+  .reward-note .material-symbols-outlined { font-size: 1.1em; color: var(--brand); }
+
+  /* ── The path (windowed session list) ──────────────────────────────────── */
+  .path {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+  .session {
+    display: flex; align-items: center; gap: var(--s-03);
+    padding: var(--s-04);
+    border-top: 1px solid var(--hairline);
+    text-align: left; width: 100%; background: transparent; border-left: 0; border-right: 0; border-bottom: 0;
+  }
+  .session:first-child { border-top: 0; }
+  .session--btn { cursor: pointer; }
+  .session--btn:hover { background: var(--surface-tinted); }
+  .session__mark {
+    width: 28px; height: 28px; border-radius: var(--r-full); flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--surface-tinted); color: var(--ink-soft);
+  }
+  .session__mark .material-symbols-outlined { font-size: 18px; }
+  .session__mark--done { background: var(--brand); color: var(--on-brand); }
+  .session__mark--curr { background: var(--surface); border: 2px solid var(--brand); position: relative; }
+  .session__mark--curr::before { content: ""; width: 10px; height: 10px; border-radius: var(--r-full); background: var(--brand); }
+  .session__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .session--locked .session__title { color: var(--ink-placeholder); }
+  .session__tag { color: var(--brand); flex: none; }
+  .session__chev { color: var(--ink-placeholder); flex: none; display: flex; }
+  .path__seeall {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--s-04); border-top: 1px solid var(--hairline);
+    width: 100%; background: transparent; border-left: 0; border-right: 0; border-bottom: 0;
+    color: var(--link); cursor: pointer;
+  }
+  .path__seeall:hover { background: var(--surface-tinted); }
+
+  /* ── How you're doing (outcome check-in) ───────────────────────────────── */
+  .checkin-card__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-03); }
+  .checkin-card__insight { margin-top: var(--s-02); color: var(--ink-soft); }
+  .checkin-card__insight b { color: var(--ink); font-weight: 500; }
+  .trend-chip {
+    margin-top: var(--s-03);
+    display: inline-flex; align-items: center; gap: var(--s-01);
+    padding: var(--s-01) var(--s-03); border-radius: var(--r-full);
+    background: var(--insight-bg); color: var(--insight-dot);
+  }
+  .trend-chip .material-symbols-outlined { font-size: 16px; }
+
+  .section-title { margin-bottom: var(--s-04); }
+</style>
+</head>
+<body>
+
+  <!-- ── Top bar (same chrome as home) ─────────────────────────────────── -->
+  <header class="top-bar">
+    <div class="top-bar__inner">
+      <button class="icon-btn" aria-label="Open menu"><span class="material-symbols-outlined">menu</span></button>
+      <span class="acme-logo">ACME</span>
+      <span class="top-bar__spacer"></span>
+      <button class="icon-btn icon-btn--filled" aria-label="Messages"><span class="material-symbols-outlined">mail</span></button>
+      <button class="icon-btn icon-btn--filled" aria-label="Search"><span class="material-symbols-outlined">search</span></button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <div class="shell__rail">
+
+      <!-- ── Page header: back · program title · Ask Anna ─────────────── -->
+      <div class="page-head">
+        <div class="page-head__lead">
+          <button class="icon-btn back" aria-label="Back to Digital Care"><span class="material-symbols-outlined">arrow_back</span></button>
+          <div class="page-head__titles">
+            <span class="eyebrow ink-soft">Depression · Digital Care Path</span>
+            <h1 class="heading-4">Managing Depression</h1>
+          </div>
+        </div>
+        <button class="btn btn-outlined" aria-label="Ask Anna">
+          <span class="material-symbols-outlined" style="font-size:20px">forum</span>
+          <span class="medium-up-inline">Ask&nbsp;Anna</span>
+        </button>
+      </div>
+
+      <!-- ── Continue hero — the one primary action ───────────────────── -->
+      <section class="chero" aria-label="Continue your program">
+        <div class="chero__media"><span class="chero__kicker caption">Pick up where you left off</span></div>
+        <div class="chero__body">
+          <div class="chero__copy">
+            <span class="eyebrow ink-soft">Session 3 of 10</span>
+            <h2 class="heading-5">Recognizing Negative Thoughts</h2>
+            <p class="paragraph-3 ink-soft">A short video with Anna, then a quick reflection. About 8 minutes.</p>
+          </div>
+          <div class="chero__actions">
+            <button class="btn btn-filled btn-m">Continue session</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Body: progress+reward · the path · how you're doing ──────── -->
+      <div class="detail-body">
+
+        <!-- Progress + reward (money stated ONCE) -->
+        <section class="card progress-card" aria-label="Your progress">
+          <div class="progress-card__head">
+            <span class="title-2">Your progress</span>
+            <span class="body-3 ink-soft">2 of 10 sessions</span>
+          </div>
+          <div class="progress" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height:6px">
+            <div class="progress__fill" style="width:20%"></div>
+          </div>
+          <div class="progress-card__foot">
+            <span class="body-3 ink-soft">8 sessions to the finish</span>
+            <span class="body-3 sep">·</span>
+            <span class="body-3 reward-note"><span class="material-symbols-outlined">redeem</span>$100 when you complete</span>
+          </div>
+        </section>
+
+        <!-- The path -->
+        <section class="path-section" aria-label="The path">
+          <div class="section-head section-title">
+            <div class="section-head__title"><h2 class="title-1">The path</h2></div>
+            <span class="meta body-3">2 of 10 complete</span>
+          </div>
+          <div class="path">
+            <div class="session">
+              <span class="session__mark session__mark--done"><span class="material-symbols-outlined">check</span></span>
+              <span class="session__body">
+                <span class="eyebrow ink-soft">Session 2</span>
+                <span class="title-3 session__title">How Thoughts Affect Mood</span>
+              </span>
+            </div>
+            <button class="session session--btn" type="button">
+              <span class="session__mark session__mark--curr"></span>
+              <span class="session__body">
+                <span class="eyebrow ink-soft">Session 3</span>
+                <span class="title-3 session__title">Recognizing Negative Thoughts</span>
+              </span>
+              <span class="label-2 session__tag">In progress</span>
+            </button>
+            <div class="session session--locked">
+              <span class="session__mark"><span class="material-symbols-outlined">lock</span></span>
+              <span class="session__body">
+                <span class="eyebrow ink-soft">Session 4</span>
+                <span class="title-3 session__title">Challenging Your Thoughts</span>
+              </span>
+            </div>
+            <button class="path__seeall" type="button">
+              <span class="title-3">See all 10 sessions</span>
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- How you're doing (outcome check-in) -->
+        <section class="card checkin-card" aria-label="How you're doing">
+          <div class="checkin-card__head">
+            <span class="title-2">How you're doing</span>
+            <button class="btn btn-text" type="button">Check in</button>
+          </div>
+          <p class="checkin-card__insight paragraph-3">You've been <b>feeling better</b> since you started — keep it going.</p>
+          <span class="trend-chip label-2"><span class="material-symbols-outlined">trending_up</span>Trending up since Session 1</span>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ── Bottom nav (Compact only, same as home) ──────────────────────── -->
+  <nav class="bottom-nav" aria-label="Primary">
+    <button class="bn-item"><span class="material-symbols-outlined">home</span><span class="label-3">Home</span></button>
+    <button class="bn-item active"><span class="material-symbols-outlined">medical_services</span><span class="label-3">Digital Care</span></button>
+    <button class="bn-item"><span class="material-symbols-outlined">favorite</span><span class="label-3">Wellbeing</span></button>
+    <button class="bn-item"><span class="material-symbols-outlined">redeem</span><span class="label-3">Benefits</span></button>
+    <button class="bn-item"><span class="material-symbols-outlined">stars</span><span class="label-3">Rewards</span></button>
+  </nav>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Resources (responsive fluid grid)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="appbar"><span class="material-symbols-outlined back">arrow_back_ios_new</span><span class="appbar__title title-1">Recommendations</span></header>
+  <h2 class="heading-6" style="margin:8px 0 16px">All programs &amp; resources</h2>
+  <div class="fluid cards" id="grid"></div>
+</div>
+<script>
+const R=[
+["Aetna — Behavioral Health Counseling","800-424-4047"],["Premise Health — Counseling","Free, confidential counseling with licensed specialists (GA, FL, NC, VA)."],
+["Virta — Diabetes Management","For type 2 diabetes, prediabetes, or a BMI of 30 or greater."],["Virta — Weight Loss","Lose weight, reduce medications, and save money."],
+["Premise Health — Weight Loss","Lose It For Life: a 10-week virtual weight-management program."],["Guidance Resources","No-cost, confidential solutions."],
+["Aetna — Nutritional Counseling","Search for a Registered Dietitian (R.D.)."],["Premise Health — Nutritional Counseling","$0 copay for nutritional counseling at Truist health centers."],
+["Premise Health — Health Center","Onsite preventive and acute care for all teammates."],["Truist Virtual Fitness","Move more and sit less — at work, at home, and everywhere."],
+["Lyra Health","Up to 12 free sessions, fast virtual or in-person care, fully confidential."],["Premise Onsite Fitness","Move more and sit less — at work, at home, and everywhere."],
+["Progyny — Fertility & Family-Building","Care and resources for those who need help having a baby."],["Progyny — Pregnancy & Post-Partum","Free personalized coaching from pregnancy through your return to work."],
+["Progyny — Parenting & Child Wellbeing","Free 1:1 coaching, parenting support, and benefits guidance."],["Progyny — Menopause & Mid-Life Care","Free 1:1 coaching, resources, and menopause specialists."],
+["Kaiser — Quit Smoking","One-on-one guidance and support to set goals and see results."],["National Quit Line","Free support to help you quit smoking."],
+["Scripta Pharmacy","Save money on Rx — register today."],["Kaiser — Wellness Coaching","One-on-one guidance to set goals and see results."],
+["Kaiser — Maternity Program","Pregnancy care and support at every step toward your new baby."],["Aetna — Hinge Health","Digital exercise therapy for back, muscle, pelvic, and joint health."],
+["Aetna — One Choice Case Management","A registered-nurse advocate and care team help you reach your goals."],["Equip","Available to all ages, in all 50 states."],
+["Care.com","Family-care benefits to help you manage caring for those you love."],["2nd.MD — Expert Medical Opinion","Free specialist opinions across 120 subspecialties, by video or phone."],
+["CVS Virtual Care","24/7 on-demand virtual care, mental health, and psychiatric services."],["LifeForce Dashboard","Access Truist’s well-being programs, health info, and rewards."],
+["Truist Benefits Site","Details on medical plan costs, options, and well-being programs."],["Calm","Free for KP members — sign in at kp.org, then set up Calm."],
+["Headspace","Free for KP members — sign in at kp.org, then set up Headspace."],["Kaiser Virtual Care","Quality virtual care — most at no extra cost."],
+["Kaiser Mental Health","Support when you’re struggling mentally or emotionally."],["Cancer Care Navigation","Log in to Aetna.com and select the Cancer Support Center."],
+["Genetic Testing","A genetic test today could help prevent cancer tomorrow."]];
+function icon(name){const s=name.toLowerCase();
+  if(/counsel|mental|behavioral|wellbeing|parent|menopause|maternity|pregnan|guidance|nurse|case|health center|virtual care|2nd|opinion|care\.com|equip/.test(s))return ["person","navy"];
+  if(/fitness|weight|move|hinge/.test(s))return ["bolt","beige"];
+  if(/nutrition|diabetes|calm|headspace|smok|quit|pharmacy|scripta|genetic|cancer/.test(s))return ["eco","green"];
+  return ["favorite","green"];}
+document.getElementById('grid').innerHTML=R.map(([n,d])=>{const [ic,cl]=icon(n);
+  return `<a class="reccard"><span class="chip ${cl}"><span class="material-symbols-outlined">${ic}</span></span><div class="rbody"><p class="name title-2">${n}</p><p class="desc body-3">${d}</p></div></a>`;}).join('');
+</script>
+</body>
+</html>

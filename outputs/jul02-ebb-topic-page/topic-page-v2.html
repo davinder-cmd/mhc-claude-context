@@ -1,0 +1,223 @@
+<title>EBB — DCP Topic Page (v2) · "How you're doing"</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 64px 0 26px; }
+  .hero h1 { font-size: clamp(28px, 4.4vw, 46px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; text-wrap: balance; max-width: 20ch; }
+  .hero .thesis { margin: 18px 0 0; font-size: clamp(16px, 2vw, 19px); line-height: 1.5; color: var(--ink-2); max-width: 62ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+  .metabar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .tag { font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-2); background: var(--surface); }
+
+  .stage { display: grid; grid-template-columns: 392px 1fr; gap: 40px; padding: 26px 0 20px; align-items: start; }
+  @media (max-width: 900px) { .stage { grid-template-columns: 1fr; gap: 30px; justify-items: center; } }
+  .phone-wrap { position: sticky; top: 24px; justify-self: center; }
+  @media (max-width: 900px) { .phone-wrap { position: static; } }
+
+  .phone { width: 375px; border-radius: 46px; background: #000; padding: 11px; box-shadow: 0 24px 60px -26px rgba(14,74,86,0.45), 0 2px 8px rgba(0,0,0,0.12); }
+  .screen { border-radius: 36px; background: var(--surface); overflow: hidden; }
+
+  .appbar { display: flex; align-items: center; gap: 10px; padding: 14px 18px 12px; border-bottom: 1px solid var(--line); }
+  .appbar .chev { font-size: 20px; color: var(--ink-2); font-weight: 600; width: 24px; }
+  .appbar .title { flex: 1; text-align: center; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .appbar .help { width: 30px; height: 30px; border-radius: 50%; background: var(--teal-tint); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--teal); }
+
+  .scroll { padding: 16px 18px 18px; }
+
+  .today { border: 1.5px solid var(--teal); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 8px 20px -13px rgba(14,74,86,0.5); }
+  .today .t-img { height: 108px; background: linear-gradient(120deg, #123f52 0%, #1f5f6d 60%, #4d9098 100%); position: relative; }
+  .today .t-img .kicker { position: absolute; left: 13px; top: 12px; background: rgba(255,255,255,0.94); color: var(--teal); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
+  .today .t-body { padding: 14px 16px 16px; }
+  .today .t-body .sn { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .today .t-body h3 { margin: 2px 0 0; font-size: 19px; font-weight: 720; letter-spacing: -0.015em; line-height: 1.15; }
+  .today .t-body p { margin: 6px 0 0; font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+  .btn-primary { margin-top: 14px; width: 100%; background: var(--teal); color: #fff; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 680; font-family: inherit; }
+
+  .progress-card { margin-top: 16px; border: 1px solid var(--line); border-radius: 15px; padding: 14px 16px; background: #fff; }
+  .pc-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .pc-head .l { font-size: 13.5px; font-weight: 680; }
+  .pc-head .r { font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .bar { height: 8px; border-radius: 5px; background: rgba(14,74,86,0.13); margin-top: 10px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; width: 20%; background: var(--teal); border-radius: 5px; }
+  .pc-foot { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); display: flex; align-items: center; gap: 7px; }
+  .pc-foot .money-dot { color: var(--amber); font-weight: 700; }
+
+  .sec-label { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin: 20px 0 0; }
+  .path { margin-top: 10px; border: 1px solid var(--line); border-radius: 15px; overflow: hidden; background: #fff; }
+  .step { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
+  .step:first-child { border-top: none; }
+  .step .mark { width: 26px; height: 26px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .step .mark.done { background: var(--teal); color: #fff; }
+  .step .mark.curr { background: #fff; color: var(--teal); border: 2px solid var(--teal); }
+  .step .mark.curr::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); }
+  .step .mark.lock { background: rgba(34,38,42,0.06); color: var(--ink-3); }
+  .step .s-body { flex: 1; }
+  .step .s-body .sn { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .step .s-body .st { font-size: 14px; font-weight: 620; letter-spacing: -0.005em; margin-top: 1px; }
+  .step.is-locked .st { color: var(--ink-3); }
+  .step .s-tag { font-size: 11px; font-weight: 700; color: var(--teal); }
+  .seeall { display: flex; align-items: center; justify-content: space-between; padding: 13px 14px; border-top: 1px solid var(--line); font-size: 13.5px; font-weight: 650; color: var(--teal-2); }
+
+  /* How you're doing — assessment check-in */
+  .checkin { margin-top: 18px; border: 1px solid var(--line); border-radius: 15px; padding: 14px 16px; background: #fff; }
+  .ci-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .ci-head .l { font-size: 13.5px; font-weight: 680; }
+  .ci-head .r { font-size: 11.5px; color: var(--teal-2); font-weight: 650; flex: none; }
+  .ci-insight { margin: 9px 0 0; font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+  .ci-insight b { color: var(--ink); font-weight: 660; }
+  .ci-track { margin-top: 12px; display: flex; align-items: stretch; gap: 9px; }
+  .ci-point { flex: 1; border: 1px solid var(--line); border-radius: 11px; padding: 9px 11px; }
+  .ci-point .cp-when { font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); }
+  .ci-point .cp-band { font-size: 15px; font-weight: 720; color: var(--ink-2); margin-top: 2px; }
+  .ci-point .cp-band .cp-score { font-size: 11.5px; font-weight: 650; color: var(--ink-3); }
+  .ci-point.now { border-color: var(--teal); background: var(--teal-tint); }
+  .ci-point.now .cp-band { color: var(--teal); }
+  .ci-point.now .cp-band .cp-score { color: var(--teal-2); }
+  .ci-arrow { display: flex; align-items: center; color: var(--teal); font-weight: 700; font-size: 16px; }
+  .ci-src { margin-top: 10px; font-size: 11px; color: var(--ink-3); }
+
+  .botnav { display: flex; justify-content: space-around; border-top: 1px solid var(--line); padding: 9px 6px 11px; margin: 18px -18px -18px; background: var(--surface); }
+  .botnav .item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 9.5px; color: var(--ink-3); font-weight: 600; }
+  .botnav .item.on { color: var(--teal); }
+  .botnav .ic { width: 20px; height: 20px; border-radius: 6px; background: currentColor; opacity: 0.9; }
+
+  .rail { display: flex; flex-direction: column; gap: 13px; max-width: 580px; }
+  .rail-intro { font-size: 14px; color: var(--ink-2); line-height: 1.55; margin: 0 0 2px; }
+  .anno { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 15px 17px; }
+  .anno.change { border-left: 3px solid var(--teal); }
+  .anno .zone { font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-3); }
+  .anno h3 { margin: 5px 0 0; font-size: 15.5px; font-weight: 680; letter-spacing: -0.005em; }
+  .anno p { margin: 7px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+  .anno p b { color: var(--ink); font-weight: 650; }
+  .laws { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .law { font-size: 11px; font-weight: 650; padding: 3px 9px; border-radius: 999px; background: var(--teal-tint); color: var(--teal); }
+
+  footer { padding: 30px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 84ch; }
+  footer .note b { color: var(--ink-2); font-weight: 650; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Topic page v2</div>
+    <h1>Topic page, with "How you're doing"</h1>
+    <p class="thesis">Same loop-focused page — the one change is the data block. The vague "mood this week" tracker is replaced by an <strong>assessment-based progress check-in</strong> that reflects the program's own clinical measure and shows the member they're genuinely getting better.</p>
+    <div class="metabar">
+      <span class="tag">Topic page v2</span>
+      <span class="tag">Change: "How you're doing" (assessment-based)</span>
+      <span class="tag">Reflects, doesn't ask them to log</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stage">
+
+    <div class="phone-wrap">
+      <div class="phone"><div class="screen">
+        <div class="appbar">
+          <span class="chev" aria-hidden="true">‹</span>
+          <span class="title">Managing Depression</span>
+          <span class="help" role="button" aria-label="Ask Anna">?</span>
+        </div>
+
+        <div class="scroll">
+          <div class="today">
+            <div class="t-img"><span class="kicker">Pick up where you left off</span></div>
+            <div class="t-body">
+              <div class="sn">Session 3</div>
+              <h3>Recognizing Negative Thoughts</h3>
+              <p>A short video with Anna, then a quick reflection. About 8 minutes.</p>
+              <button class="btn-primary">Continue session</button>
+            </div>
+          </div>
+
+          <div class="progress-card">
+            <div class="pc-head"><span class="l">Your progress</span><span class="r">2 of 10 sessions</span></div>
+            <div class="bar"><i></i></div>
+            <div class="pc-foot"><span>8 sessions to the finish</span><span>·</span><span class="money-dot">$100 when you complete</span></div>
+          </div>
+
+          <div class="sec-label">The path</div>
+          <div class="path">
+            <div class="step"><span class="mark done">✓</span><div class="s-body"><div class="sn">Session 2</div><div class="st">How Thoughts Affect Mood</div></div></div>
+            <div class="step"><span class="mark curr"></span><div class="s-body"><div class="sn">Session 3</div><div class="st">Recognizing Negative Thoughts</div></div><span class="s-tag">In progress</span></div>
+            <div class="step is-locked"><span class="mark lock">🔒</span><div class="s-body"><div class="sn">Session 4</div><div class="st">Challenging Your Thoughts</div></div></div>
+            <div class="seeall"><span>See all 10 sessions</span><span>›</span></div>
+          </div>
+
+          <!-- How you're doing -->
+          <div class="checkin">
+            <div class="ci-head"><span class="l">How you're doing</span><span class="r">Next check-in · Session 5</span></div>
+            <p class="ci-insight">You're improving — your check-ins have moved from <b>moderate</b> to <b>mild</b> since you started.</p>
+            <div class="ci-track">
+              <div class="ci-point"><div class="cp-when">Session 1</div><div class="cp-band">Moderate <span class="cp-score">· 14</span></div></div>
+              <div class="ci-arrow" aria-hidden="true">→</div>
+              <div class="ci-point now"><div class="cp-when">Now</div><div class="cp-band">Mild <span class="cp-score">· 9</span></div></div>
+            </div>
+            <div class="ci-src">Based on your depression check-ins (PHQ-9)</div>
+          </div>
+
+          <div class="botnav">
+            <div class="item"><span class="ic"></span>Home</div>
+            <div class="item on"><span class="ic"></span>Digital Care</div>
+            <div class="item"><span class="ic"></span>Wellbeing</div>
+            <div class="item"><span class="ic"></span>Benefits</div>
+            <div class="item"><span class="ic"></span>Rewards</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="rail">
+      <p class="rail-intro">Only the data block changed from v1. Here's the reasoning for it, through the same filters.</p>
+
+      <div class="anno change">
+        <div class="zone">The change · "How you're doing"</div>
+        <h3>Reflect the clinical outcome — don't ask them to log</h3>
+        <p>It uses the program's own periodic check-in (PHQ-9), shown as plain progress — <b>moderate → mild</b> — with the score in support, not a wall of numbers and not a new daily tracker to maintain. The system carries the measurement; the member just sees they're getting better.</p>
+        <div class="laws"><span class="law">Cognitive Load · insight first</span><span class="law">Tesler's · system bears it</span><span class="law">Nielsen #2 · real-world (clinical bands)</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">Why this over "mood tracking"</div>
+        <h3>It reinforces the health "why," which makes it stick</h3>
+        <p>Seeing real improvement ("you've moved from moderate to mild") builds <b>competence</b> — the SDT lever that keeps behavior alive after the reward is gone. A daily mood log would add homework and risk crowding out that intrinsic motivation. This does the opposite: proof it's working.</p>
+        <div class="laws"><span class="law">SDT · competence</span><span class="law">Guardrail · health is the motor</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">Universal frame, clinical inside</div>
+        <h3>"How you're doing" fits every DCP</h3>
+        <p>The component label stays neutral and universal; each topic fills the metric — depression shows PHQ-9 bands, back pain shows pain level, insomnia shows sleep. One component, condition-appropriate content, "slightly clinical" tone throughout.</p>
+        <div class="laws"><span class="law">Consistency (#4)</span><span class="law">Match real world (#2)</span></div>
+      </div>
+
+      <div class="anno">
+        <div class="zone">States to design</div>
+        <h3>When a check-in is due</h3>
+        <p>When the next assessment comes up (here, Session 5), this block flips to a light prompt — "Time for your check-in" with a one-tap start — so it stays reflective most of the time and only asks for input when there's a clinical reason to.</p>
+        <div class="laws"><span class="law">Zeigarnik</span><span class="law">Nielsen #1 · status</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Change from v1:</b> the "mood this week" tracker → "How you're doing," an assessment-based progress check-in (reflects the in-program PHQ-9, shown as bands + score; no new daily logging). Universal component label, condition-specific metric. Full tracking still lives on the Tracker per the topic-page scope decision. Everything else on the page is unchanged. Topic page v2 — for reaction.</p>
+  </div>
+</footer>

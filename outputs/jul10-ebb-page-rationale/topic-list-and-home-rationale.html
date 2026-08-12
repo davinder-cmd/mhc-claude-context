@@ -1,0 +1,117 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design rationale — Digital Care list & topic home</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:860px;margin:34px auto 90px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:46px 54px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--teal-2);margin:0 0 8px}
+h1{font-size:30px;font-weight:760;letter-spacing:-0.02em;line-height:1.12;margin:0 0 10px}
+.lede{font-size:17px;color:var(--ink-2);margin:0 0 6px}
+h2{font-size:21px;font-weight:720;margin:38px 0 4px;padding-top:22px;border-top:1px solid var(--line);letter-spacing:-0.01em}
+h3{font-size:16.5px;font-weight:700;margin:22px 0 4px}
+p{margin:9px 0}
+.thesis{background:var(--teal-tint);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;margin:20px 0;font-size:15px}
+.thesis b{color:var(--teal)}
+ul{margin:8px 0;padding-left:22px}li{margin:5px 0}
+.dec{margin:16px 0;padding:15px 17px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.dec .h{font-size:15.5px;font-weight:700;margin:0 0 4px}
+.dec p{margin:6px 0;font-size:14px;color:var(--ink-2)}
+.dec .why{color:var(--ink)}
+.chips{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11px;font-weight:650;padding:3px 9px;border-radius:999px;background:var(--teal-tint);color:var(--teal)}
+.chip.g{background:var(--amber-tint);color:var(--amber)}
+.rej{font-size:13.5px;color:var(--ink-2);margin-top:9px}.rej b{color:#B23B3B}
+.foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-3)}
+strong{font-weight:680}
+</style></head><body>
+<div class="doc">
+<p class="eyebrow">EBB · Digital Care Paths · design rationale</p>
+<h1>Why the Digital Care list and topic home look the way they do</h1>
+<p class="lede">Two pages, one job: move a member toward <strong>completing</strong> a care path. Not browsing, not reading around it — finishing. This documents the reasoning so the calls are defensible and revisitable.</p>
+
+<div class="thesis">The shared thesis: <b>completion is where both efficacy and reward live.</b> A member who finishes a path improves clinically <i>and</i> earns the $100; a member who browses, samples, and drifts does neither. So every decision on these two pages spends attention on the <b>next action and the sense of progress</b>, and demotes everything that competes with it — high-level browsing, secondary navigation, ancillary data. Focus is the feature.</div>
+
+<h2>1 · The Digital Care list (the library)</h2>
+<p><strong>What it is:</strong> the second-tab library — a member's <em>re-entry point to work already underway</em>, not the app's front door and not a marketplace. High value, but its job is getting people <b>back in</b>, not helping them shop.</p>
+
+<div class="dec">
+<div class="h">Lead with in-progress paths + the reward — resume-first</div>
+<p class="why">In-progress paths and the reward summary get the top and the visual weight. The list answers "where do I pick back up?" before anything else.</p>
+<p><b>Why:</b> an unfinished path is an open loop (<b>Zeigarnik effect</b>) and the closer it is to done the harder it pulls (<b>Goal-Gradient</b>). Surfacing it first turns latent intent into a tap. Fewer competing choices at the top means faster re-entry (<b>Hick's Law</b>). And completion is the outcome we're optimizing — clinically and commercially.</p>
+<div class="chips"><span class="chip">Zeigarnik</span><span class="chip">Goal-Gradient</span><span class="chip">Hick's Law</span><span class="chip g">Guardrail · completion over activity</span></div>
+</div>
+
+<div class="dec">
+<div class="h">Reward shown as progress, not as a headline</div>
+<p class="why">The reward is present — "how many paths done · toward $500" — because it's the accelerant that keeps the loop salient. But it reads as progress/accent, never a flashing prize.</p>
+<p><b>Why:</b> the reward is a real motivator, so hiding it wastes it; but making it the loudest thing on the page would invite reward-chasing over health work, which the <b>efficacy guardrail</b> forbids (racing a path ≠ clinical benefit). Present, quiet, in service of finishing.</p>
+<div class="chips"><span class="chip">Von Restorff (one accent)</span><span class="chip g">Efficacy guardrail</span><span class="chip">Peak-End</span></div>
+</div>
+
+<div class="dec">
+<div class="h">Browsing stays available, but de-emphasized</div>
+<p class="why">You can still browse the full catalog, but it isn't the front door and it isn't weighted equally with resuming. This is a place to <b>get in</b>, not to skim at a high level.</p>
+<p><b>Why:</b> per the IA, high-level discovery lives at the app's front door — the library is for committed work. Inviting casual, rapid browsing here pulls attention <i>out</i> of active paths. Keeping browse present preserves user control (<b>Nielsen: user freedom</b>) without letting it compete.</p>
+<div class="chips"><span class="chip">Jakob's Law / IA</span><span class="chip">User control &amp; freedom</span></div>
+</div>
+
+<p class="rej"><b>Rejected:</b> a discovery-first / catalog-marketplace treatment, or browse weighted equally with resume. <b>The risk it creates:</b> path-hopping — members start many paths and finish none. That's the worst outcome for us on both axes: no clinical benefit (efficacy regresses) and no completion (no reward earned, no revenue). The daisy chain only works if the list keeps pointing at the <i>one</i> path to finish next.</p>
+
+<h2>2 · The topic home (the program page)</h2>
+<p><strong>What it is:</strong> the inside of a single path. Its only job is to get the member <b>into the program — to the next action</b> — with as little friction as possible.</p>
+
+<div class="dec">
+<div class="h">Module 1 (top): the continue / next-step card — the single primary action</div>
+<p class="why">We used to lead with a card offering two buttons — "next step" <i>and</i> "all sessions." We removed that fork and prioritized one action: <b>resume the next session.</b> One confident CTA, top of page.</p>
+<p><b>Why:</b> two co-equal buttons force a decision before the member has done anything (<b>Hick's Law</b> — more options, more hesitation). One large primary action is faster to hit (<b>Fitts's Law</b>) and matches the highest-probability intent — continue where you left off (<b>Goal-Gradient</b>). The page should feel like it already knows what you're here to do.</p>
+<div class="chips"><span class="chip">Hick's Law</span><span class="chip">Fitts's Law</span><span class="chip">Goal-Gradient</span></div>
+</div>
+
+<div class="dec">
+<div class="h">Module 2 (middle): progress — where you are</div>
+<p class="why">A prominent progress read sits second: how far along, at a steady pace. It motivates without being the action.</p>
+<p><b>Why:</b> visible status is both orientation and fuel (<b>Nielsen: visibility of system status</b>; <b>Goal-Gradient</b> again). Framed as <b>pace, not speed</b> — "a steady pace," never a countdown — so it encourages finishing without pushing members to race (which the guardrail shows harms outcomes). At zero it's reframed so it never reads as a failing/empty gauge.</p>
+<div class="chips"><span class="chip">Visibility of status</span><span class="chip g">Pace not speed</span></div>
+</div>
+
+<div class="dec">
+<div class="h">Module 3 (bottom): the sessions timeline — de-prioritized link, richer visual</div>
+<p class="why">"All sessions" used to be a competing button up top; it's now the third module — a <b>timeline</b> showing where you were, where you are, and where you're going. Demoted as navigation, but presented more visually.</p>
+<p><b>Why:</b> the whole-path view is orientation, not the primary path — so it belongs lower. But rendering it as a timeline (done behind, next ahead) does real motivational work (<b>Zeigarnik</b> + <b>Goal-Gradient</b>) and preserves the member's ability to jump anywhere (<b>user freedom</b>). Moving it down removes it from competition with the next-step CTA while keeping it available and legible.</p>
+<div class="chips"><span class="chip">Zeigarnik</span><span class="chip">User freedom</span><span class="chip">Serial position (bottom = memorable)</span></div>
+</div>
+
+<div class="dec">
+<div class="h">Data &amp; resources: removed for now — and if they return, minimized</div>
+<p class="why">This version drops the data and resources modules to protect focus. They aren't gone for good: if we bring data back, it's in a much smaller format (e.g., a compact status strip, possibly at the top) so it can't take over the page; resources become a simple, quiet link rather than a module.</p>
+<p><b>Why:</b> a topic page crowded with data and reading material dilutes the one job — getting in (<b>Nielsen: aesthetic &amp; minimalist design</b>; lower cognitive load). <b>But data is not clutter — it's evidence.</b> Under measurement-based care, seeing your own improvement is the strongest non-monetary motivator and the proof EBB is working. So the design tension is <b>placement and size, not presence.</b> Progressive disclosure resolves it: the next action is loud; data and the full session list are available, quieter, on demand.</p>
+<div class="chips"><span class="chip">Aesthetic &amp; minimalist</span><span class="chip">Progressive disclosure</span><span class="chip g">Feedback-informed treatment</span></div>
+</div>
+
+<p class="rej"><b>Rejected:</b> a content-hub topic page (data + resources + articles as co-equal modules); two competing CTAs at the top; the session list as the primary navigation. Each spends attention the member needs for the next action.</p>
+
+<h2>3 · Cross-cutting rationalizations</h2>
+<p>Reasons that apply to both pages — and to the loop they sit inside.</p>
+
+<h3>One continuous "get back in" spine</h3>
+<p>List resumes a path → topic home resumes the session → session → completion celebration → the next path. Every surface points at the <b>next action</b>. The daisy chain isn't a single screen; it's this whole spine, and it only holds if no screen breaks the line by inviting a detour. Consistency across surfaces also lowers learning cost (<b>Jakob's Law</b>).</p>
+
+<h3>Progressive disclosure is the organizing rule</h3>
+<p>On both pages: <b>primary = the next action</b>, loud and singular; <b>secondary = everything else</b> (browse, all-sessions, data, resources), present but visually quieter and often on-demand. This is what lets us reduce clutter without removing capability — the answer to "do we need all that information?" is "not all at once."</p>
+
+<h3>Reward discipline is a guardrail, not a style choice</h3>
+<p>Reward appears as accent and progress on every surface, never as the headline that crowds out clinical content. This is the <b>efficacy guardrail</b> made concrete: engagement mechanics are subordinate to outcomes, and the reward must not tempt members into racing. Success is measured by outcomes holding/improving vs. baseline — not by clicks or speed.</p>
+
+<h3>Minimize friction between peaks</h3>
+<p>The emotional peak of the loop is completion (<b>Peak-End</b>). The topic home's job, between peaks, is to be nearly frictionless — get in, make progress, get out — so the member reaches the next peak. Anything that adds a decision or a distraction taxes that.</p>
+
+<h3>Ethical motivation, not dark patterns</h3>
+<p>We lean on progress and open-loop pull (Zeigarnik / Goal-Gradient) to encourage finishing — but framed honestly around the health work and a real completion reward, never manufactured urgency, loss-aversion pressure, or countdowns. The guardrail and pace-not-speed framing keep the motivation aligned with the member's interest.</p>
+
+<h3>Where control lives (IA)</h3>
+<p>High-level discovery and taxonomy live at the front door / browse — deliberately <i>not</i> in the library or on the topic page. Concentrating discovery elsewhere is exactly what frees these two pages to commit, without apology, to completion.</p>
+
+<p class="foot">Grounded in: Nielsen's heuristics (minimalist design, visibility of status, user control), UX laws (Hick, Fitts, Zeigarnik, Goal-Gradient, Von Restorff, Serial-position, Peak-End, Jakob), EBB engagement-behavior principles (habit loop, pace-not-speed), and the EBB efficacy guardrail. Companion to <code>projects/feature-ebb/_decisions.md</code>.</p>
+</div>
+</body></html>

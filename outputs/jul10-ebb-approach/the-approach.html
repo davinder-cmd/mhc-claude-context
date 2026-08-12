@@ -1,0 +1,111 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EBB — the approach</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.12);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-2:#B87A1E;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:56px 32px 80px}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-2);margin:0 0 14px}
+h1{font-size:clamp(30px,5vw,50px);font-weight:800;letter-spacing:-0.03em;line-height:1.03;margin:0 0 18px;text-wrap:balance}
+h1 .amt{color:var(--amber-2)}
+.thesis{font-size:clamp(17px,2.2vw,21px);color:var(--ink-2);max-width:60ch;line-height:1.5;margin:0}
+.thesis b{color:var(--ink);font-weight:680}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:44px 0}
+@media(max-width:760px){.pillars{grid-template-columns:1fr}}
+.pill{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px}
+.pill .n{width:34px;height:34px;border-radius:10px;background:var(--teal-tint);color:var(--teal);font-size:18px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.pill h3{font-size:18px;font-weight:760;margin:0 0 6px;letter-spacing:-0.01em}
+.pill p{font-size:14px;color:var(--ink-2);margin:0;line-height:1.5}
+
+/* daisy chain */
+.section-lbl{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 16px}
+.chain{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+.loop{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.link{flex:1;min-width:130px;text-align:center;padding:0 6px;position:relative}
+.link .dot{width:44px;height:44px;border-radius:50%;background:var(--teal-tint);color:var(--teal);font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.link.reward .dot{background:var(--amber-warm);color:var(--amber-2)}
+.link h4{font-size:14px;font-weight:730;margin:0;line-height:1.2}
+.link p{font-size:12px;color:var(--ink-2);margin:4px 0 0;line-height:1.35}
+.arw{align-self:flex-start;margin-top:18px;color:var(--ink-3);font-size:18px;flex:none;padding:0 2px}
+.repeat{text-align:center;margin-top:18px;font-size:13px;color:var(--teal-2);font-weight:650}
+.repeat b{color:var(--amber-2)}
+/* $ ladder */
+.ladder{display:flex;align-items:center;gap:8px;margin-top:22px;padding-top:20px;border-top:1px dashed var(--line);flex-wrap:wrap;justify-content:center}
+.rung{font-size:14px;font-weight:800;color:var(--ink-3);background:var(--ground);border:1px solid var(--line);border-radius:20px;padding:6px 13px}
+.rung.on{color:var(--amber-2);background:var(--amber-warm);border-color:rgba(184,122,30,.35)}
+.rung.max{color:#fff;background:var(--amber-2);border-color:var(--amber-2)}
+.ladder .to{color:var(--ink-3);font-size:14px}
+
+/* scope */
+.scope{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+@media(max-width:760px){.scope{grid-template-columns:1fr}}
+.box{border-radius:16px;padding:22px 22px}
+.box.is{background:#EAF2F0;border:1px solid #CDE2DD}
+.box.isnt{background:#F6ECE8;border:1px solid #E7CFC5}
+.box .k{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px}
+.box.is .k{color:var(--teal)}.box.isnt .k{color:#B23B3B}
+.box ul{margin:0;padding:0;list-style:none}
+.box li{font-size:14.5px;line-height:1.5;padding:7px 0 7px 26px;position:relative;color:var(--ink)}
+.box li+li{border-top:1px solid rgba(31,35,40,.07)}
+.box.is li:before{content:"✓";position:absolute;left:2px;color:var(--teal);font-weight:800}
+.box.isnt li:before{content:"✕";position:absolute;left:2px;color:#B23B3B;font-weight:800}
+.kicker{margin-top:38px;font-size:clamp(16px,2vw,19px);font-weight:700;color:var(--ink);text-align:center;line-height:1.4;max-width:56ch;margin-left:auto;margin-right:auto}
+.kicker .amt{color:var(--amber-2)}
+</style></head><body>
+<div class="wrap">
+
+<p class="eyebrow">EBB · Digital Care · the approach</p>
+<h1>Simplify, focus, and connect the chain to <span class="amt">$500</span>.</h1>
+<p class="thesis">We're <b>not rebuilding Digital Care Paths.</b> We're removing the fluff and connecting each step so members actually <b>finish</b> a path — and one finish hands them to the next, up to <b>$500 a year</b>.</p>
+
+<div class="pillars">
+  <div class="pill"><div class="n">✂️</div><h3>Simplify</h3><p>Strip the fluff. Every screen does one job — no competing buttons, no dashboard clutter, no distractions from the work.</p></div>
+  <div class="pill"><div class="n">🎯</div><h3>Focus</h3><p>Point each surface at the <b>next action</b>, not browsing. Get members <i>in</i> — to where they need to be to complete.</p></div>
+  <div class="pill"><div class="n">🔗</div><h3>Connect</h3><p>The daisy chain: finishing one path hands off to the next, so momentum — and rewards — compound toward $500.</p></div>
+</div>
+
+<p class="section-lbl">The daisy chain — connected interactions, one goal</p>
+<div class="chain">
+  <div class="loop">
+    <div class="link"><div class="dot">▶</div><h4>Pick up</h4><p>Resume the path you're on</p></div>
+    <div class="arw">→</div>
+    <div class="link"><div class="dot">›</div><h4>Next step</h4><p>One tap into the next session</p></div>
+    <div class="arw">→</div>
+    <div class="link reward"><div class="dot">🎁</div><h4>Finish → $100</h4><p>Complete the path, earn the card</p></div>
+    <div class="arw">→</div>
+    <div class="link"><div class="dot">↻</div><h4>Next path</h4><p>Hand off to the one that's next</p></div>
+  </div>
+  <div class="repeat">…repeat the loop → <b>up to $500 a year</b></div>
+  <div class="ladder">
+    <span class="rung on">$100</span><span class="to">→</span>
+    <span class="rung">$200</span><span class="to">→</span>
+    <span class="rung">$300</span><span class="to">→</span>
+    <span class="rung">$400</span><span class="to">→</span>
+    <span class="rung max">$500</span>
+  </div>
+</div>
+
+<div class="scope">
+  <div class="box is">
+    <p class="k">What this is</p>
+    <ul>
+      <li>Updating existing surfaces to reflect the goal</li>
+      <li>Removing fluff so the next action is obvious</li>
+      <li>Connecting the steps into one clean chain to $500</li>
+    </ul>
+  </div>
+  <div class="box isnt">
+    <p class="k">What this isn't</p>
+    <ul>
+      <li>Not redoing the Digital Care Paths</li>
+      <li>Not new clinical content or programs</li>
+      <li>Not boiling the ocean</li>
+    </ul>
+  </div>
+</div>
+
+<p class="kicker">Same programs. Pointed at one goal: <span class="amt">get members to finish — and to $500.</span></p>
+
+</div>
+</body></html>

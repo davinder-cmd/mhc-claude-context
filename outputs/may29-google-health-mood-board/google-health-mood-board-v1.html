@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Health — App Mood Board</title>
+<style>
+  :root {
+    --ink: #1F1F23;
+    --ink-soft: #5F6368;
+    --bg: #FFFFFF;
+    --bg-2: #F1F3F8;
+    --card: #FFFFFF;
+    --line: #E3E5EC;
+
+    /* Material You expressive — Google Health palette */
+    --g-blue: #4285F4;
+    --g-blue-soft: #D6E4FE;
+    --g-lavender: #7C7FE0;
+    --g-lavender-soft: #E1E2F8;
+    --g-green: #34A853;
+    --g-mint: #C9F0DA;
+    --g-yellow: #E89B6B;        /* muted peach-orange, replaces bright yellow */
+    --g-butter: #FBDFC8;        /* soft peach background tone */
+    --g-red: #EA4335;
+    --g-peach: #FFD7B5;
+    --g-blush: #F6CFD3;
+
+    --max: 1280px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: "Google Sans", "Google Sans Text", -apple-system, "Inter", "Roboto", ui-sans-serif, sans-serif;
+    line-height: 1.45;
+  }
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 48px; }
+  @media (max-width: 700px) { .container { padding: 0 24px; } }
+
+  header.top { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .top-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 0; font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .top-row .dot { display: inline-block; width: 8px; height: 8px; background: var(--g-blue); border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+  .hero { padding: 56px 0 56px; }
+  .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g-blue); font-weight: 700; }
+  h1.display {
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    margin: 16px 0 24px;
+  }
+  h1.display em { font-style: normal;
+    background: linear-gradient(90deg, var(--g-blue) 0%, var(--g-lavender) 50%, var(--g-green) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: 20px; line-height: 1.5; max-width: 780px; color: var(--ink-soft); }
+
+  section { padding: 80px 0; border-top: 1px solid var(--line); }
+  section .label { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  section h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.02em; margin: 8px 0 24px; font-weight: 700; }
+  section .intro { font-size: 18px; max-width: 720px; color: var(--ink-soft); }
+
+  /* Featured illustration band */
+  .illo-band {
+    margin-top: 32px;
+    background: linear-gradient(135deg, var(--g-lavender-soft) 0%, var(--g-mint) 60%, var(--g-butter) 100%);
+    border-radius: 32px; overflow: hidden; position: relative;
+    padding: 48px; min-height: 380px;
+  }
+  .illo-band .illo-svg { width: 100%; height: 380px; display: block; }
+  .illo-band .illo-caption { position: absolute; left: 48px; bottom: 32px; background: white; border-radius: 999px; padding: 10px 20px; font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: 0.02em; }
+
+  /* Keywords */
+  .keywords { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .keywords span { border: 1px solid var(--ink); color: var(--ink); padding: 8px 16px; border-radius: 999px; font-size: 14px; font-weight: 500; background: white; }
+  .keywords span.blue { background: var(--g-blue); color: white; border-color: var(--g-blue); }
+  .keywords span.green { background: var(--g-green); color: white; border-color: var(--g-green); }
+  .keywords span.lavender { background: var(--g-lavender); color: white; border-color: var(--g-lavender); }
+
+  /* Color */
+  .weight-bar { display: flex; height: 80px; border-radius: 16px; overflow: hidden; margin-top: 32px; box-shadow: 0 1px 0 rgba(0,0,0,0.05); }
+  .weight-bar > div { display: flex; align-items: flex-end; padding: 14px; font-size: 12px; font-weight: 600; }
+  .w-bg { background: var(--bg-2); color: var(--ink); flex: 0 0 40%; }
+  .w-blue { background: var(--g-blue); color: white; flex: 0 0 18%; }
+  .w-lavender { background: var(--g-lavender); color: white; flex: 0 0 14%; }
+  .w-green { background: var(--g-green); color: white; flex: 0 0 12%; }
+  .w-yellow { background: var(--g-yellow); color: var(--ink); flex: 0 0 8%; }
+  .w-red { background: var(--g-red); color: white; flex: 0 0 4%; }
+  .w-ink { background: var(--ink); color: white; flex: 0 0 4%; }
+
+  .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 32px; }
+  @media (max-width: 1000px) { .swatches { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .swatches { grid-template-columns: repeat(2, 1fr); } }
+  .swatch { border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: white; }
+  .swatch .chip { height: 110px; display: flex; align-items: flex-end; padding: 12px; color: white; font-weight: 700; font-size: 13px; }
+  .swatch .meta { padding: 12px; background: white; }
+  .swatch .meta .name { font-weight: 700; font-size: 13px; }
+  .swatch .meta .hex { font-family: ui-monospace, "SF Mono", monospace; font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+  .swatch .meta .role { font-size: 11px; color: var(--ink-soft); margin-top: 6px; }
+
+  /* Typography */
+  .type-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
+  @media (max-width: 900px) { .type-stack { grid-template-columns: 1fr; } }
+  .type-card { border: 1px solid var(--line); border-radius: 24px; padding: 32px; background: white; }
+  .type-card .role { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+  .type-card .h-large { font-size: 56px; line-height: 1.0; letter-spacing: -0.025em; font-weight: 700; margin: 16px 0 24px; }
+  .type-card .h-large em { font-style: normal; color: var(--g-blue); }
+  .body-specimen { font-size: 17px; line-height: 1.55; color: var(--ink-soft); margin: 12px 0; }
+  .specs { font-family: ui-monospace, "SF Mono", monospace; font-size: 12px; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 16px; }
+
+  /* Voice */
+  .quotes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .quotes { grid-template-columns: 1fr; } }
+  .quote {
+    background: white; border: 1px solid var(--line);
+    border-radius: 20px; padding: 24px; font-size: 20px; line-height: 1.35; font-weight: 600;
+    border-left: 4px solid var(--g-blue);
+  }
+  .quote.lavender { border-left-color: var(--g-lavender); }
+  .quote.green { border-left-color: var(--g-green); }
+  .quote.dark { background: var(--ink); color: white; border-color: var(--ink); border-left-color: var(--g-yellow); }
+  .quote .src { display: block; font-size: 13px; color: var(--ink-soft); font-weight: 400; margin-top: 12px; }
+  .quote.dark .src { color: rgba(255,255,255,0.65); }
+
+  /* AI Coach mockup */
+  .coach {
+    background: linear-gradient(135deg, var(--g-lavender-soft) 0%, var(--g-blue-soft) 100%);
+    border-radius: 28px; padding: 40px; margin-top: 32px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+  }
+  @media (max-width: 900px) { .coach { grid-template-columns: 1fr; } }
+  .coach h3 { font-size: 28px; line-height: 1.1; letter-spacing: -0.015em; margin: 0 0 12px; }
+  .coach p { color: var(--ink-soft); margin: 0; }
+  .chat { background: white; border-radius: 24px; padding: 20px; box-shadow: 0 12px 40px rgba(60,60,90,0.08); }
+  .chat .header-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .chat .header-row .badge {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--g-blue), var(--g-lavender), var(--g-green), var(--g-yellow), var(--g-blue));
+  }
+  .chat .header-row .name { font-weight: 700; font-size: 14px; }
+  .bubble {
+    background: var(--g-blue-soft); padding: 12px 16px; border-radius: 18px;
+    font-size: 14px; line-height: 1.4; margin-bottom: 8px; color: var(--ink);
+  }
+  .bubble.coach-msg { background: var(--bg-2); }
+  .bubble.user-msg { background: var(--g-blue); color: white; margin-left: 40px; }
+  .bubble strong { font-weight: 700; }
+
+  /* Data viz */
+  .viz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .viz-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .viz-grid { grid-template-columns: 1fr; } }
+  .viz-card { background: white; border: 1px solid var(--line); border-radius: 24px; padding: 24px; }
+  .viz-card .row { display: flex; align-items: center; justify-content: space-between; }
+  .viz-card .label-row { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .viz-card .label-row .ic { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; }
+  .viz-card .time { font-size: 12px; color: var(--ink-soft); }
+  .viz-card .value { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-top: 6px; line-height: 1; }
+  .viz-card .value .unit { font-size: 16px; color: var(--ink-soft); margin-left: 4px; font-weight: 600; }
+  .viz-card .sub { font-size: 13px; color: var(--ink-soft); margin-top: 6px; }
+
+  /* Activity rings */
+  .rings-card { background: linear-gradient(135deg, var(--g-lavender-soft) 0%, var(--g-blue-soft) 100%); }
+  .rings-card svg { display: block; margin: 8px auto 0; }
+
+  /* Resilience meter */
+  .meter { width: 100%; height: 10px; background: var(--bg-2); border-radius: 999px; overflow: hidden; margin-top: 14px; }
+  .meter .fill { height: 100%; width: 68%; background: linear-gradient(90deg, var(--g-green), var(--g-lavender)); border-radius: 999px; }
+  .meter-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); margin-top: 6px; }
+
+  /* Devices */
+  .devices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .devices { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .devices { grid-template-columns: 1fr; } }
+  .device { background: white; border: 1px solid var(--line); border-radius: 24px; padding: 28px; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; }
+  .device .glyph { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--g-blue); font-weight: 700; }
+  .device h3 { font-size: 22px; line-height: 1.15; letter-spacing: -0.015em; margin: 8px 0 12px; font-weight: 700; }
+  .device p { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+
+  /* So what */
+  .so-what { background: var(--ink); color: white; border-radius: 28px; padding: 56px; margin-top: 32px; }
+  .so-what h2 { color: white; margin: 0 0 16px; }
+  .so-what p { color: rgba(255,255,255,0.78); font-size: 18px; max-width: 720px; margin: 0 0 16px; }
+  .so-what ul { padding-left: 18px; color: rgba(255,255,255,0.88); font-size: 16px; line-height: 1.6; }
+  .so-what ul li { margin-bottom: 8px; }
+  .so-what ul li strong { color: white; }
+  .so-what .accent { color: #C6CBFF; }
+
+  /* Imagery tiles */
+  .imagery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 900px) { .imagery { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .imagery { grid-template-columns: 1fr; } }
+  .tile { aspect-ratio: 4/3; border-radius: 20px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; color: white; position: relative; overflow: hidden; }
+  .tile.t1 { background: linear-gradient(135deg, #B8A6E0 0%, #6F5DB9 100%); }
+  .tile.t2 { background: linear-gradient(135deg, #C9E5C3 0%, #5DB87E 100%); }
+  .tile.t3 { background: linear-gradient(135deg, #FBE0CB 0%, #F2B96D 100%); color: var(--ink); }
+  .tile .cat { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+  .tile .desc { font-size: 15px; font-weight: 600; line-height: 1.3; }
+
+  footer { padding: 48px 0 96px; color: var(--ink-soft); font-size: 13px; }
+  footer .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="container top-row">
+    <div><span class="dot"></span>Competitive Mood Board · Google Health</div>
+    <div>2026-05-29 · Prepared for Davinder Rehal</div>
+  </div>
+</header>
+
+<div class="container hero">
+  <div class="eyebrow">App Aesthetic Study · Launched May 19, 2026</div>
+  <h1 class="display">A friendlier <em>OS for wellness.</em></h1>
+  <p class="lede">Google Health is what Fitbit became when it grew up inside Google. It launched ten days ago, replacing the Fitbit app with a four-tab Material You design — Today, Fitness, Sleep, Health — anchored by a Gemini-powered Health Coach. Where Fitbit was gamified and stat-heavy, Google Health is calmer, more conversational, and softer in language: "Stress score" is now "Resilience," and the AI tells you whether you're Optimal, Balanced, or Low. The brand promise: proactive, personal, adaptive — for the whole you.</p>
+
+  <!-- FEATURED ILLUSTRATION -->
+  <div class="illo-band">
+    <svg class="illo-svg" viewBox="0 0 1100 380" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-label="Material You wellness composition">
+      <!-- Background organic shapes -->
+      <ellipse cx="180" cy="280" rx="220" ry="120" fill="#D6E4FE" opacity="0.7"/>
+      <ellipse cx="850" cy="120" rx="280" ry="150" fill="#FBDFC8" opacity="0.85"/>
+
+      <!-- Big lavender blob -->
+      <path d="M 320 70 C 480 30, 660 60, 700 200 C 730 320, 580 360, 440 340 C 280 320, 220 200, 280 130 C 295 110, 310 90, 320 70 Z"
+            fill="#7C7FE0"/>
+
+      <!-- Activity rings — Material You style -->
+      <g transform="translate(540, 200)">
+        <circle r="92" fill="none" stroke="#FFE0CC" stroke-width="14"/>
+        <circle r="92" fill="none" stroke="#EA4335" stroke-width="14" stroke-dasharray="430 580" stroke-linecap="round" transform="rotate(-90)"/>
+        <circle r="68" fill="none" stroke="#D2F4DE" stroke-width="14"/>
+        <circle r="68" fill="none" stroke="#34A853" stroke-width="14" stroke-dasharray="300 428" stroke-linecap="round" transform="rotate(-90)"/>
+        <circle r="44" fill="none" stroke="#D6E4FE" stroke-width="14"/>
+        <circle r="44" fill="none" stroke="#4285F4" stroke-width="14" stroke-dasharray="200 276" stroke-linecap="round" transform="rotate(-90)"/>
+      </g>
+
+      <!-- Floating cards / chips -->
+      <g transform="translate(80, 80)">
+        <rect width="180" height="56" rx="28" fill="white"/>
+        <circle cx="32" cy="28" r="14" fill="#34A853"/>
+        <text x="58" y="25" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#1F1F23">8,432 steps</text>
+        <text x="58" y="42" font-family="Inter,sans-serif" font-size="11" fill="#5F6368">+12% vs. last week</text>
+      </g>
+
+      <g transform="translate(820, 60)">
+        <rect width="200" height="56" rx="28" fill="white"/>
+        <circle cx="32" cy="28" r="14" fill="#4285F4"/>
+        <text x="58" y="25" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#1F1F23">7h 42m sleep</text>
+        <text x="58" y="42" font-family="Inter,sans-serif" font-size="11" fill="#5F6368">Resilience · Optimal</text>
+      </g>
+
+      <g transform="translate(60, 280)">
+        <rect width="170" height="56" rx="28" fill="white"/>
+        <circle cx="32" cy="28" r="14" fill="#E89B6B"/>
+        <text x="58" y="25" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#1F1F23">312 cal</text>
+        <text x="58" y="42" font-family="Inter,sans-serif" font-size="11" fill="#5F6368">Active zone min</text>
+      </g>
+
+      <g transform="translate(810, 270)">
+        <rect width="210" height="56" rx="28" fill="white"/>
+        <circle cx="32" cy="28" r="14" fill="#7C7FE0"/>
+        <text x="58" y="25" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#1F1F23">Coach · 3 insights</text>
+        <text x="58" y="42" font-family="Inter,sans-serif" font-size="11" fill="#5F6368">Try a recovery walk today</text>
+      </g>
+
+      <!-- Decorative dots & squiggle -->
+      <circle cx="420" cy="80" r="8" fill="#E89B6B"/>
+      <circle cx="280" cy="320" r="6" fill="#EA4335"/>
+      <circle cx="760" cy="340" r="10" fill="#34A853"/>
+      <path d="M 720 100 Q 740 80, 760 100 T 800 100" stroke="#EA4335" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="illo-caption">Material You · expressive blobs, activity rings, floating chips</div>
+  </div>
+</div>
+
+<!-- BRAND ESSENCE -->
+<section>
+  <div class="container">
+    <div class="label">01 · Brand Essence</div>
+    <h2>Google's voice. Fitbit's data. Gemini's coach.</h2>
+    <p class="intro">This is the first time Google has put its full design language behind a consumer health app. The result reads as Material You with a clinical conscience — friendlier than Fitbit's old gamification, softer in tone than Withings, and powered by the same conversational AI Google ships everywhere else.</p>
+    <div class="keywords">
+      <span class="blue">Material You</span>
+      <span>Conversational</span>
+      <span class="lavender">Holistic</span>
+      <span>Customizable</span>
+      <span class="green">Proactive</span>
+      <span>Soft-clinical</span>
+      <span>Aspirational</span>
+      <span>Gemini-native</span>
+      <span>Pixel-tied</span>
+      <span class="blue">Whole-you</span>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section>
+  <div class="container">
+    <div class="label">02 · Color</div>
+    <h2>The Google rainbow, softened.</h2>
+    <p class="intro">Google brought its full brand palette — blue, green, peach, red — but every color is dialed down. Pure Google blue is reserved for the logo and primary CTAs; the working palette is its softer cousins: lavender, mint, peach, and soft apricot. Material You tonalities dominate the actual app surface.</p>
+
+    <div class="weight-bar" aria-label="Proportional color usage">
+      <div class="w-bg">White / cool gray · ~40%</div>
+      <div class="w-blue">Blue · ~18%</div>
+      <div class="w-lavender">Lavender · ~14%</div>
+      <div class="w-green">Green · ~12%</div>
+      <div class="w-yellow">Peach · ~8%</div>
+      <div class="w-red">Red · ~4%</div>
+      <div class="w-ink">Ink · ~4%</div>
+    </div>
+
+    <div class="swatches">
+      <div class="swatch"><div class="chip" style="background: var(--g-blue);">Aa</div><div class="meta"><div class="name">Google Blue</div><div class="hex">#4285F4</div><div class="role">Logo · primary CTA</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--g-lavender);">Aa</div><div class="meta"><div class="name">Lavender</div><div class="hex">~ #7C7FE0</div><div class="role">Coach · Cycle health</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--g-green);">Aa</div><div class="meta"><div class="name">Wellness Green</div><div class="hex">#34A853</div><div class="role">Activity ring · Optimal</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--g-yellow);">Aa</div><div class="meta"><div class="name">Activity Peach</div><div class="hex">~ #E89B6B</div><div class="role">Active zone · steps</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--g-red);">Aa</div><div class="meta"><div class="name">Heart Red</div><div class="hex">#EA4335</div><div class="role">Heart rate · alerts</div></div></div>
+      <div class="swatch"><div class="chip" style="background: var(--ink);">Aa</div><div class="meta"><div class="name">Soft Ink</div><div class="hex">#1F1F23</div><div class="role">Headlines · body text</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section>
+  <div class="container">
+    <div class="label">03 · Typography</div>
+    <h2>Google Sans, all the way down.</h2>
+    <p class="intro">Google Sans (Product Sans–derived) is the entire type stack. Bold at display sizes, regular for body, never italic. The personality lives in the gradient color treatment Google applies to single words — usually whatever the Gemini brand needs to claim ownership of.</p>
+
+    <div class="type-stack">
+      <div class="type-card">
+        <div class="role">Display · with Gemini gradient</div>
+        <div class="h-large">Hi Sarah. Your <em>Resilience</em> is Optimal.</div>
+        <div class="body-specimen">Single-word gradient (blue → lavender → green) is the signature Gemini treatment. Used on any word the Coach is "owning."</div>
+        <div class="specs">Google Sans · Weight 700 · −0.025em · 32–56px</div>
+      </div>
+      <div class="type-card">
+        <div class="role">Body · friendly clinical</div>
+        <div class="body-specimen" style="font-size: 19px; color: var(--ink);">"You're trending up. Try a 20-minute recovery walk this afternoon — your heart rate variability suggests your body's ready for it."</div>
+        <div class="body-specimen">Conversational, second-person, gently directive. Always a recommendation, never a command.</div>
+        <div class="specs">Google Sans Text · 400/500 · LH 1.5 · 14–19px</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE -->
+<section>
+  <div class="container">
+    <div class="label">04 · Voice &amp; Messaging</div>
+    <h2>Softer language for harder data.</h2>
+    <p class="intro">The most strategic copy decision Google made: rename clinically-cold metrics with warmer human language. "Stress score" became "Resilience." "Menstrual health" became "Cycle health." Numeric scores became Optimal / Balanced / Low. The data is the same; the relationship with it is different.</p>
+
+    <div class="quotes">
+      <div class="quote">"A new era for your wellness."<span class="src">— Launch tagline (Google blog, May 19 2026)</span></div>
+      <div class="quote lavender">"For the whole you."<span class="src">— Hero positioning</span></div>
+      <div class="quote green">"Optimal. Balanced. Low."<span class="src">— Resilience scale, replacing the old numeric Stress score</span></div>
+      <div class="quote dark">"Give me a 30-minute upper-body routine I can do at home."<span class="src">— Sample Coach prompt featured in launch materials</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI COACH -->
+<section>
+  <div class="container">
+    <div class="label">05 · Gemini Health Coach</div>
+    <h2>The center of gravity is now a chat.</h2>
+    <p class="intro">The Coach is not a feature in Google Health — it's the strategy. Gemini analyzes wearable data continuously and offers proactive recommendations throughout the day. The interface borrows from Gemini elsewhere: conic-gradient avatar, soft lavender chat surface, suggested-prompt chips.</p>
+
+    <div class="coach">
+      <div>
+        <h3>Proactive, personal, adaptive.</h3>
+        <p>The Coach surfaces unprompted insights based on your last 48 hours of data, then accepts natural language follow-ups. You can ask for a workout, a sleep plan, or a check-in on a metric. It remembers context within a session.</p>
+        <p style="margin-top:12px;">Visual cues: Gemini conic-gradient avatar, light lavender bubble, suggested-prompt chips on first open.</p>
+      </div>
+      <div class="chat">
+        <div class="header-row">
+          <div class="badge"></div>
+          <div class="name">Health Coach</div>
+        </div>
+        <div class="bubble coach-msg">Your <strong>HRV is up 12%</strong> overnight — that's a recovery signal. Want a low-impact workout for today?</div>
+        <div class="bubble user-msg">Yes, something I can do at home in 30 min.</div>
+        <div class="bubble coach-msg">Got it. I built a 30-min mobility + light strength session. Tap to start.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA VIZ -->
+<section>
+  <div class="container">
+    <div class="label">06 · Data Visualization</div>
+    <h2>Rings return, softened.</h2>
+    <p class="intro">Google Health revives the activity-ring pattern Fitbit largely abandoned, but draws them in Material You colors: red, green, blue concentric arcs instead of Apple's red/green/blue. Add to that customizable metric cards on the Today and Health tabs, and a horizontal Resilience meter that replaces the old Stress score's numeric badge.</p>
+
+    <div class="viz-grid">
+      <div class="viz-card rings-card">
+        <div class="row">
+          <div class="label-row">Today's Activity</div>
+          <div class="time">Now</div>
+        </div>
+        <svg width="160" height="160" viewBox="-90 -90 180 180">
+          <circle r="76" fill="none" stroke="#FFE0CC" stroke-width="12"/>
+          <circle r="76" fill="none" stroke="#EA4335" stroke-width="12" stroke-dasharray="360 478" stroke-linecap="round" transform="rotate(-90)"/>
+          <circle r="56" fill="none" stroke="#D2F4DE" stroke-width="12"/>
+          <circle r="56" fill="none" stroke="#34A853" stroke-width="12" stroke-dasharray="220 352" stroke-linecap="round" transform="rotate(-90)"/>
+          <circle r="36" fill="none" stroke="#D6E4FE" stroke-width="12"/>
+          <circle r="36" fill="none" stroke="#4285F4" stroke-width="12" stroke-dasharray="160 226" stroke-linecap="round" transform="rotate(-90)"/>
+        </svg>
+      </div>
+
+      <div class="viz-card">
+        <div class="row">
+          <div class="label-row"><span class="ic" style="background: var(--g-lavender-soft); color: var(--g-lavender);">R</span>Resilience</div>
+          <div class="time">Today</div>
+        </div>
+        <div class="value" style="font-size: 28px;">Optimal</div>
+        <div class="sub">68 / 100 · trending up</div>
+        <div class="meter"><div class="fill"></div></div>
+        <div class="meter-labels"><span>Low</span><span>Balanced</span><span>Optimal</span></div>
+      </div>
+
+      <div class="viz-card">
+        <div class="row">
+          <div class="label-row"><span class="ic" style="background: var(--g-blue-soft); color: var(--g-blue);">Z</span>Sleep</div>
+          <div class="time">Last night</div>
+        </div>
+        <div class="value">7<span class="unit">h 42m</span></div>
+        <div class="sub">Deep 1h 18m · REM 1h 32m</div>
+        <svg viewBox="0 0 300 50" preserveAspectRatio="none" style="width:100%; height:50px; margin-top:14px;">
+          <rect x="0" y="20" width="40" height="14" rx="3" fill="#D6E4FE"/>
+          <rect x="42" y="10" width="60" height="24" rx="3" fill="#4285F4"/>
+          <rect x="104" y="22" width="80" height="12" rx="3" fill="#7C7FE0"/>
+          <rect x="186" y="14" width="50" height="20" rx="3" fill="#4285F4"/>
+          <rect x="238" y="24" width="60" height="10" rx="3" fill="#D6E4FE"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGERY -->
+<section>
+  <div class="container">
+    <div class="label">07 · Imagery</div>
+    <h2>Photo-led — aspirational athleisure.</h2>
+    <p class="intro">Unlike Withings (illustration-only) and Sword (documentary worker portraits), Google Health leans into lifestyle photography. The launch creative features diverse subjects in athletic-but-real moments — stretching on a track, yoga in lavender performance wear, dancing in a living room. Pixel Watch and Fitbit Air make subtle on-wrist appearances.</p>
+
+    <div class="imagery">
+      <div class="tile t1">
+        <div class="cat">Performance · Lifestyle</div>
+        <div class="desc">Lavender activewear, golden hour, woman mid-stretch. Athleisure-real, not gym-clinical.</div>
+      </div>
+      <div class="tile t2">
+        <div class="cat">Recovery · Wellness</div>
+        <div class="desc">Living-room yoga, plants, soft natural light. Wellness as home practice.</div>
+      </div>
+      <div class="tile t3">
+        <div class="cat">Daily · Outdoor</div>
+        <div class="desc">Older subject on a sunlit track, Pixel Watch on wrist. Active longevity.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVICES -->
+<section>
+  <div class="container">
+    <div class="label">08 · Signature Design Devices</div>
+    <h2>Six moves that make this Google.</h2>
+    <div class="devices">
+      <div class="device">
+        <div class="glyph">01 · Four Tabs</div>
+        <div><h3>Today · Fitness · Sleep · Health</h3><p>The same four-tab IA across all devices. Today and Health are user-customizable; Fitness and Sleep are fixed feature surfaces.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">02 · Coach Avatar</div>
+        <div><h3>Conic-gradient orb</h3><p>The Gemini brand mark — a multi-color conic gradient circle — appears wherever the AI Coach surfaces. Single, consistent, recognizable.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">03 · Gradient Word</div>
+        <div><h3>One word in Gemini gradient</h3><p>"Resilience," "Cycle health," "Coach." Whatever Gemini owns gets the blue→lavender→green text gradient.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">04 · Soft Renames</div>
+        <div><h3>"Stress" → "Resilience"</h3><p>Clinical metric names softened deliberately. Numeric scores replaced by Optimal / Balanced / Low. Reading comprehension over precision.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">05 · Material You Chips</div>
+        <div><h3>Floating rounded suggestion chips</h3><p>Above the Coach input. Pre-filled prompts ("Plan a workout," "Why am I tired?") in pill chips with subtle hairlines.</p></div>
+      </div>
+      <div class="device">
+        <div class="glyph">06 · Activity Rings, Reborn</div>
+        <div><h3>Three concentric arcs, Google colors</h3><p>Fitbit had moved away from rings; Google brought them back, now in red/green/blue Material You. Familiar pattern, new palette.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SO WHAT -->
+<section>
+  <div class="container">
+    <div class="label">09 · So What</div>
+    <h2>What this means for MHC.</h2>
+    <p class="intro">Google Health is the platform threat we need to plan around, not just the brand we compare against. When the Pixel Watch + Google Health Coach become the default for a chunk of our member base, our differentiation can't be "tracking + insights" anymore — they'll already have that.</p>
+
+    <div class="so-what">
+      <h2>One steal, one to study, one strategic call.</h2>
+      <ul>
+        <li><strong class="accent">Steal — soft language for clinical metrics.</strong> Google renaming Stress → Resilience, with words (Optimal/Balanced/Low) instead of a number, is the smartest copy decision of the year. Our DCP outcome metrics should follow — most of our members don't want a score, they want a verdict they can act on.</li>
+        <li><strong class="accent">Study — the Gemini gradient word.</strong> A single word getting a chromatic treatment is more disciplined than full headline gradients. We could use it to mark our own A.I. surfaces consistently across DCP Expert, Insights, and Motivator Coach.</li>
+        <li><strong class="accent">Strategic call — don't compete with the Coach on its turf.</strong> Google Health Coach will be the default conversational AI on Pixel + Fitbit. Our A.I. Health Insights is a daily summary tied to programs and outcomes — not a chat replacement. Our edge is the program, the clinical evidence base, and the cross-condition trust we earn over weeks. Lean into that. Don't try to out-chat Gemini.</li>
+        <li><strong class="accent">Watch — Resilience as a metric.</strong> If "Resilience" becomes the language consumers use to talk about their stress data, we should align — or have a defensible reason not to. This is the kind of vocabulary shift that defines a category quickly.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container row">
+    <div>Sources: blog.google (May 19 2026 launch) · healthapp.google · Google Health Help Center · 9to5Google · Geek Culture · TechRepublic</div>
+    <div>Mood board v1 · 2026-05-29</div>
+  </div>
+</footer>
+
+</body>
+</html>

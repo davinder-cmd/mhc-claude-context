@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hero cards · component sheet · 01</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="bar">
+  <a class="bar__back" href="index.html">← All sheets</a>
+  <span class="bar__sep">/</span>
+  <span class="bar__name">01 · Hero cards</span>
+</nav>
+
+<div class="sheet">
+
+  <header class="sheet__head">
+    <div class="sheet__num">01 / 07</div>
+    <h1 class="sheet__title">Hero cards · variants</h1>
+    <p class="sheet__sub">
+      The featured-program card at the top of the home page. Image-left, content-right on desktop; stacks on mobile. Five variants covering the meaningful states: brand-new member with no signals yet, interest-driven recommendation, employer-driven recommendation, in-progress program, and no-reward (habit) variant.
+    </p>
+    <a class="sheet__figma" href="https://www.figma.com/design/6nJg9r55Y3NSgqZetujnPI/Home-Page-redesign-v2?node-id=6462-14263" target="_blank">View in Figma</a>
+  </header>
+
+  <section class="section">
+    <h2>Variants</h2>
+    <p>All five variants share the same shell (rounded card, image panel on the left, body on the right with eyebrow + title + meta + CTA). What changes is the eyebrow / copy / meta line / progress treatment.</p>
+
+    <div class="preview"><img src="img/01-hero-cards.png" alt="Hero card variants from Figma — five rows showing the shell with different eyebrows, titles, meta lines, and CTAs"></div>
+
+    <div class="variants">
+      <ul>
+        <li><strong>4.1 · No interests selected</strong> — brand-new member, no onboarding signals yet. Eyebrow <code>WELCOME TO ACME HEALTH</code>, title "Let's get personal", reward chip + duration, CTA <code>Choose interests</code>.</li>
+        <li><strong>4.2 · Based on your interests</strong> — interest-driven recommendation. Eyebrow <code>BASED ON YOUR INTERESTS</code>, meta line "Digital Care · $100 reward", CTA <code>Start the program</code>.</li>
+        <li><strong>4.3 · From your employer</strong> — employer-driven recommendation. Eyebrow <code>FROM YOUR EMPLOYER</code>, meta line includes a small icon next to the program name + $ chip.</li>
+        <li><strong>4.5 · Continue where you left off</strong> — user is already enrolled and progressing. Title includes session count, body shows progress bar (38% in the example), CTA <code>Start the program</code>.</li>
+        <li><strong>4.7 · No reward</strong> — habit-style program with no $ incentive. Meta line drops the reward chip and shows program type + duration ("Habit · 4 weeks") instead.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Canonical HTML — variant 4.2 (in current jun11 fragment)</h2>
+    <p>The fragments shipping today use the 4.2 (interests-driven) variant. Other variants are the same shell with different body content — swap eyebrow / title / meta / CTA copy.</p>
+    <details class="code">
+      <summary>Source — drop into shadow root</summary>
+<pre>&lt;section class="hero" aria-labelledby="hero-title"&gt;
+  &lt;div class="hero__media" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;div class="hero__content"&gt;
+    &lt;span class="hero__eyebrow"&gt;
+      &lt;span class="fa-icon" aria-hidden="true"&gt;&amp;#xf005;&lt;/span&gt;
+      BASED ON YOUR INTERESTS
+    &lt;/span&gt;
+    &lt;h2 id="hero-title" class="heading-4 hero__title"&gt;Treating Insomnia&lt;/h2&gt;
+    &lt;p class="paragraph-2 hero__desc"&gt;
+      An evidence-based program built around your sleep habits.
+      Eight short sessions, a quiet routine, real change.
+    &lt;/p&gt;
+    &lt;div class="hero__meta caption ink-soft"&gt;
+      &lt;span&gt;Treating Insomnia&lt;/span&gt;
+      &lt;span class="dot"&gt;&lt;/span&gt;
+      &lt;span&gt;Digital Care&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;a class="btn btn-m btn-filled" href="/programs/sleep/start"&gt;Start the program&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Notes</h2>
+    <ul class="notes">
+      <li>The image panel uses a CSS gradient placeholder today (see <code>.hero__media</code>). When production photography lands, swap to <code>&lt;img&gt;</code> with explicit <code>width</code>, <code>height</code>, <code>alt</code>.</li>
+      <li>Variant 4.5 is the only one with a progress bar inside the hero. The pattern reuses the same <code>.progress</code> / <code>.progress__fill</code> classes already used by Keep going.</li>
+      <li>Variant 4.7 (no reward) just omits the dollar chip from the meta line — no separate component needed. Just config drives whether the chip renders.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

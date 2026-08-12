@@ -1,0 +1,206 @@
+/* ============================================================
+   gallery.css — HARNESS CHROME ONLY
+   ============================================================
+   This styles the sticker-sheet gallery pages, NOT the product.
+   Every real component renders inside an <iframe> that links the
+   locked mhc-home.css. This file never touches mhc-home.css and
+   is never pasted into CodeMirror — it exists only so the gallery
+   itself reads cleanly. Keep the two worlds separate.
+   ============================================================ */
+
+:root {
+  --g-bg:        #EFEFEC;   /* cool neutral — distinct from product warm beige */
+  --g-surface:   #FFFFFF;
+  --g-ink:       #1A1D21;
+  --g-ink-soft:  #5C5F66;
+  --g-ink-faint: #9A9EA6;
+  --g-line:      #DEDED8;
+  --g-line-soft: #E9E9E4;
+  --g-accent:    #1B355C;   /* MHC navy — ties gallery to product brand */
+  --g-code-bg:   #1C2230;
+  --g-code-ink:  #E7ECF5;
+  --g-radius:    12px;
+  --g-radius-s:  8px;
+  --g-mono: "SF Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --g-sans: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+  --g-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+}
+
+* , *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--g-bg);
+  color: var(--g-ink);
+  font-family: var(--g-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--g-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Top bar ─────────────────────────────────────────── */
+.g-top {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(239,239,236,0.85);
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--g-line);
+}
+.g-top__inner {
+  max-width: 1180px; margin: 0 auto;
+  padding: 14px 24px;
+  display: flex; align-items: center; gap: 16px;
+}
+.g-brand {
+  font-family: var(--g-display); font-weight: 600; font-size: 15px;
+  letter-spacing: -0.01em; color: var(--g-ink);
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.g-brand__dot { width: 10px; height: 10px; border-radius: 3px; background: var(--g-accent); }
+.g-top__spacer { flex: 1; }
+.g-top__meta { color: var(--g-ink-faint); font-size: 12px; }
+
+/* ── Page shell ──────────────────────────────────────── */
+.g-wrap { max-width: 1180px; margin: 0 auto; padding: 40px 24px 96px; }
+.g-back { font-size: 13px; color: var(--g-ink-soft); display: inline-flex; gap: 6px; align-items: center; margin-bottom: 20px; }
+
+.g-head { margin-bottom: 40px; }
+.g-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--g-accent); margin-bottom: 10px;
+}
+.g-title { font-family: var(--g-display); font-weight: 600; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px; }
+.g-lede { font-size: 16px; color: var(--g-ink-soft); max-width: 60ch; }
+
+.g-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.g-tag {
+  font-size: 12px; font-weight: 500; color: var(--g-ink-soft);
+  background: var(--g-surface); border: 1px solid var(--g-line);
+  padding: 4px 10px; border-radius: 999px;
+}
+.g-tag--ok    { color: #2E6B3A; border-color: #BFE0C6; background: #EAF6ED; }
+.g-tag--flag  { color: #8A5A1E; border-color: #EAD3AE; background: #FAF1E1; }
+
+/* ── Section ─────────────────────────────────────────── */
+.g-section { margin-bottom: 56px; }
+.g-section__head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.g-section__num { font-family: var(--g-mono); font-size: 12px; color: var(--g-ink-faint); }
+.g-section__title { font-family: var(--g-display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+.g-section__note { font-size: 14px; color: var(--g-ink-soft); margin: 4px 0 22px; max-width: 68ch; }
+
+/* ── Frame primitives ────────────────────────────────── */
+.g-frame {
+  background: var(--g-surface);
+  border: 1px solid var(--g-line);
+  border-radius: var(--g-radius);
+  overflow: hidden;
+}
+.g-frame__bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--g-line-soft);
+  font-size: 12px; color: var(--g-ink-soft);
+}
+.g-frame__w { font-family: var(--g-mono); font-weight: 600; color: var(--g-ink); }
+.g-frame__class { font-family: var(--g-mono); color: var(--g-ink-faint); margin-left: auto; }
+.g-frame iframe { border: 0; display: block; background: #FAF7F0; }
+
+/* ── Playground (drag-resizable, CSS `resize` — no JS) ── */
+.g-pg {
+  resize: horizontal;
+  overflow: auto;
+  min-width: 320px;
+  max-width: 100%;
+  width: 100%;
+  border: 1px solid var(--g-line);
+  border-radius: var(--g-radius);
+  background: var(--g-surface);
+}
+.g-pg__hint {
+  font-size: 12px; color: var(--g-ink-faint);
+  padding: 8px 12px; border-bottom: 1px solid var(--g-line-soft);
+  display: flex; align-items: center; gap: 6px;
+}
+.g-pg iframe { width: 100%; height: 100%; }
+
+/* ── Breakpoint row (frames at TRUE widths, visually scaled) ──
+   Each frame sets --w (true px), --s (scale), --h (true px height).
+   The iframe renders at true width so mhc-home.css media queries fire
+   correctly; transform:scale() only shrinks it visually to fit. */
+.g-bp-row {
+  display: flex; gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  align-items: flex-start;
+}
+.g-bp { flex: 0 0 auto; }
+.g-bp__label {
+  display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px;
+}
+.g-bp__name { font-weight: 600; font-size: 13px; }
+.g-bp__px { font-family: var(--g-mono); font-size: 12px; color: var(--g-ink-faint); }
+.g-bp__vp {
+  width:  calc(var(--w) * var(--s) * 1px);
+  height: calc(var(--h) * var(--s) * 1px);
+  overflow: hidden;
+  border: 1px solid var(--g-line);
+  border-radius: var(--g-radius-s);
+  background: #FAF7F0;
+}
+.g-bp__vp iframe {
+  width:  calc(var(--w) * 1px);
+  height: calc(var(--h) * 1px);
+  transform: scale(var(--s));
+  transform-origin: top left;
+}
+
+/* ── Code block (the CKEditor-pasteable markup) ──────── */
+.g-code {
+  background: var(--g-code-bg);
+  border-radius: var(--g-radius);
+  overflow: hidden;
+}
+.g-code__bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: #AEB6C6; font-size: 12px;
+}
+.g-code__where { margin-left: auto; font-family: var(--g-mono); font-size: 11px; color: #7C8698; }
+.g-code pre {
+  margin: 0; padding: 16px 18px; overflow-x: auto;
+  font-family: var(--g-mono); font-size: 12.5px; line-height: 1.6;
+  color: var(--g-code-ink);
+}
+
+/* ── Sticker-sheet index grid ────────────────────────── */
+.g-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+.g-card {
+  background: var(--g-surface);
+  border: 1px solid var(--g-line);
+  border-radius: var(--g-radius);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.g-card:hover { border-color: var(--g-ink-faint); box-shadow: 0 6px 22px rgba(0,0,0,0.06); transform: translateY(-2px); text-decoration: none; }
+.g-card__preview { height: 168px; overflow: hidden; background: #FAF7F0; border-bottom: 1px solid var(--g-line-soft); position: relative; }
+.g-card__preview iframe { border: 0; width: 200%; height: 336px; transform: scale(0.5); transform-origin: top left; pointer-events: none; }
+.g-card__body { padding: 16px 18px; }
+.g-card__name { font-family: var(--g-display); font-weight: 600; font-size: 17px; letter-spacing: -0.01em; color: var(--g-ink); margin-bottom: 4px; }
+.g-card__desc { font-size: 13px; color: var(--g-ink-soft); line-height: 1.45; }
+.g-card__foot { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.g-chip { font-family: var(--g-mono); font-size: 11px; color: var(--g-ink-soft); background: var(--g-bg); border: 1px solid var(--g-line); padding: 2px 7px; border-radius: 5px; }
+
+/* ── Group divider on the sticker sheet ──────────────── */
+.g-group { margin: 44px 0 18px; display: flex; align-items: baseline; gap: 10px; }
+.g-group__title { font-family: var(--g-display); font-weight: 600; font-size: 15px; letter-spacing: 0.02em; text-transform: uppercase; color: var(--g-ink-soft); }
+.g-group__rule { flex: 1; height: 1px; background: var(--g-line); }
+
+@media (max-width: 640px) {
+  .g-wrap { padding: 28px 16px 72px; }
+  .g-title { font-size: 27px; }
+}

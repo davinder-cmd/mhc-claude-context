@@ -1,0 +1,104 @@
+{
+ "subject": {
+  "mind": [
+   "Mind & recovery",
+   "Meditation, breath, stillness, rest, sleep, reading"
+  ],
+  "move": [
+   "Movement & cardio",
+   "Run, walk, hike-as-exercise, cycle, stretch, class"
+  ],
+  "strength": [
+   "Strength",
+   "Gym, weights, resistance"
+  ],
+  "play": [
+   "Play & recreation",
+   "Skate, tennis, ball, unstructured fun"
+  ],
+  "outdoors": [
+   "Outdoors & place",
+   "Landscape-led; nature is the subject, people are scale"
+  ],
+  "family": [
+   "Family & life stage",
+   "Parents + kids, multi-gen, maternity, newborn"
+  ],
+  "social": [
+   "Friends & community",
+   "Peer groups, couples, shared celebration, support"
+  ],
+  "nutrition": [
+   "Food & nutrition",
+   "Meals, cooking, produce, hydration"
+  ],
+  "digital": [
+   "App & device in use",
+   "Phone / tablet / laptop in hand \u2014 the product moment"
+  ],
+  "data": [
+   "Wearables & health data",
+   "Watch glance, tracking, dashboards, in-app screens"
+  ],
+  "clinical": [
+   "Clinical & care",
+   "Care team, telehealth, symptoms, prevention"
+  ],
+  "work": [
+   "Work & workplace",
+   "Desk, office, collaboration, work stress, service"
+  ],
+  "pets": [
+   "Pets & companionship",
+   "Dogs as motivation, comfort, routine"
+  ],
+  "portrait": [
+   "Portrait & symbol",
+   "Clean-bg smiles, heart-hands, confetti \u2014 affect only"
+  ]
+ },
+ "stage": {
+  "s1": [
+   "1 \u00b7 Struggle",
+   "Symptom, stress, pre-decision. Why someone starts."
+  ],
+  "s2": [
+   "2 \u00b7 First step",
+   "Prep, enrolling, opening the app, shoes on."
+  ],
+  "s3": [
+   "3 \u00b7 Effort",
+   "Mid-activity. Working, sweating, concentrating."
+  ],
+  "s4": [
+   "4 \u00b7 Progress",
+   "Checking, logging, comparing, streak-aware."
+  ],
+  "s5": [
+   "5 \u00b7 Milestone",
+   "Summit, high-five, confetti, arms up."
+  ],
+  "s6": [
+   "6 \u00b7 Maintenance",
+   "Unlabored everyday life. The point of all of it."
+  ]
+ },
+ "crop": {
+  "H": [
+   "Hero-capable",
+   "Wide composition, off-centre subject, negative sky/ground. Survives the 4:1 letterbox at 1440 and holds overlay text."
+  ],
+  "T": [
+   "Tile / card",
+   "Centre-weighted single subject. Reads at 240\u2013400dp wide, 16:9 or 3:2."
+  ],
+  "N": [
+   "Thumbnail only",
+   "Tight close-up or portrait file. Dies in a letterbox; excels at 4:3 / 1:1 80\u2013160dp."
+  ],
+  "X": [
+   "Retire",
+   "Off-brand, dated, literal metaphor, or redundant. Do not place."
+  ]
+ }
+}

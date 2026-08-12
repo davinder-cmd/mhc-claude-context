@@ -1,0 +1,41 @@
+/* ============================================================
+   LifeForce · responsive layout system (up to 1280)
+   Reuses the base (colors from Figma, type scale w/ ≥1200 bump,
+   components) and adds a fluid two-column shell + auto-fit grids.
+   RESPONSIVE, not adaptive: grids flow with available space via
+   auto-fit/minmax; the main/side split is proportional and collapses.
+   ============================================================ */
+@import url("../aug04-lifeforce-html/lifeforce.css");
+
+/* wider canvas, centered */
+.wrap{max-width:1280px;margin:0 auto;padding:24px 24px 48px;background:var(--canvas);min-height:100vh;}
+@media (max-width:600px){ .wrap{padding:16px 16px 40px;} }
+.wrap .appbar{padding-top:0;}
+.wrap .appbar__title{ text-align:left; }
+.wrap .appbar .spacer{ display:none; }
+
+/* ---- main / sidebar split : ≈ 8 / 4, proportional, collapses under 960 ---- */
+.layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;}
+@media (min-width:960px){
+  .layout{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:32px;} /* main : side ≈ 8:4 */
+  .layout.split-55{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);} /* softer 7:5 */
+  .side{position:sticky;top:24px;}
+}
+.main,.side{display:flex;flex-direction:column;gap:16px;min-width:0;}
+
+/* ---- fluid card grids : flow into as many columns as fit ---- */
+.fluid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));}
+.fluid.cards{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));}
+.fluid.metrics{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+
+/* section header row */
+.rowhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:8px 0 4px;}
+
+/* alternatives showcase */
+.alt{margin-top:48px;}
+.alt__label{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--hair);}
+.alt__tag{font-family:var(--f-display);font-weight:600;font-size:1.0625rem;color:var(--navy);}
+.alt__desc{color:var(--slate);font-size:.8125rem;}
+
+/* nav is a mobile pattern — hide the bottom bar once we're two-column */
+@media (min-width:960px){ .bottomnav{display:none;} }

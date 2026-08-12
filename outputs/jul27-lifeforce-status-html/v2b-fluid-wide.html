@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Status — v2b Fluid column (wide · 840)</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  /* V2b — Fluid single column, WIDE: same as v2 but the column maxes at 840 (Material "Expanded"
+     breakpoint) instead of 640. One reading column; nav bottom on mobile, top bar >=720. */
+  body{background:var(--canvas);}
+  .topbar{display:none;position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair);}
+  .topbar .in{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;}
+  .topbar nav{display:flex;gap:28px;}
+  .topbar nav a{color:var(--slate);}
+  .topbar nav a.active{color:var(--navy);}
+  .column{max-width:840px;margin:0 auto;padding:16px 16px 96px;display:flex;flex-direction:column;gap:24px;}
+  .pagehead{display:flex;align-items:center;gap:8px;}
+  .pagehead .back{width:26px;height:26px;color:var(--charcoal);}
+  .pagehead .t{flex:1;text-align:center;}.pagehead .spacer{width:38px;}
+  .cluster{display:flex;flex-direction:column;gap:16px;}
+  .bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:10;}
+  .block h3{margin-bottom:16px;}
+  @media (min-width:600px){ .column{padding:24px 24px 96px;} }
+  @media (min-width:720px){
+    .topbar{display:block;}
+    .pagehead .back,.pagehead .spacer{display:none;}
+    .pagehead .t{text-align:left;}
+    .bottomnav{display:none;}
+    .column{padding-bottom:48px;}
+  }
+  @media (min-width:1200px){ .column{max-width:840px;padding:32px 32px 48px;} }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M4 9h16M8 3v4M16 3v4M9 14l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6L20.5 9.4l-4.3 4 1.1 6-5.3-2.9L6.7 19.4l1.1-6-4.3-4 5.9-.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.6 4-2 1.4a11 11 0 0 0 5 5l1.4-2 4 1.6V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 11v5M12 8h.01" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 7h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15v3M8 18h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M10 5H5v14h14v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l4 4 9-10" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-tick" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L11 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.8 12 4l8 6.8V19a1 1 0 0 1-1 1h-4.3v-4.7a1 1 0 0 0-1-1h-1.4a1 1 0 0 0-1 1V20H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-care" viewBox="0 0 24 24"><circle cx="8" cy="5.8" r="2.4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.2 8.6 11.6 13.4 16.4 13.4 18.5 9.4M7.3 10.2 4.7 16.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-well" viewBox="0 0 24 24"><path d="M12 19.5c-2.1-1.2-3.4-3.5-3.4-6.1 0-2.7 1.3-5.1 3.4-6.6 2.1 1.5 3.4 3.9 3.4 6.6 0 2.6-1.3 4.9-3.4 6.1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-ben" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="topbar"><div class="in">
+  <span class="brand title-1 c-navy">CarePlus</span>
+  <nav><a class="label-1">Home</a><a class="label-1 active">Digital Care</a><a class="label-1">Wellbeing</a><a class="label-1">Benefits</a><a class="label-1">Rewards</a></nav>
+</div></header>
+
+<main class="column">
+  <div class="pagehead"><svg class="back" width="26" height="26"><use href="#i-back"/></svg><div class="t heading-6">LifeForce</div><span class="spacer"></span></div>
+  <div class="cluster">
+    <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+    <div class="earnstrip"><svg width="18" height="18"><use href="#i-star"/></svg><div class="es-body"><span class="es-amt title-2">$[X] of $[Y] earned</span><span class="es-sub caption">Medical credit toward your plan</span></div><a class="es-link label-2">Breakdown <svg width="16" height="16"><use href="#i-chev"/></svg></a></div>
+    <section class="focal">
+      <div class="f-head"><span class="chip navy round c34"><svg width="20" height="20"><use href="#i-cal"/></svg></span><span class="eyebrow c-navy">Scheduled · Telehealth</span></div>
+      <h2 class="f-headline heading-6">Thu, Jun 12 · 10:30 AM ET</h2>
+      <p class="f-sub paragraph-3">Telehealth visit with a Peak Health nurse. You'll get a reminder the day before.</p>
+      <button class="btn primary full label-0">Add to calendar</button>
+      <p class="f-note caption">Need to reschedule? Call Peak Health at 252-237-5090.</p>
+      <div class="f-phase"><span class="label-1">LifeForce Phase 2 of 5</span><span class="dots"><i class="dot"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></span></div>
+    </section>
+  </div>
+  <section class="block"><h3 class="sectionhead heading-6">Next steps</h3><div class="empty"><span class="circle"><svg width="24" height="24"><use href="#i-check"/></svg></span><p class="paragraph-3">You're all caught up — we'll let you know when something's due.</p></div></section>
+  <section class="completed"><div class="head"><span class="eyebrow c-navy">Enrollment</span><span class="badge label-2"><svg width="13" height="13"><use href="#i-tick"/></svg> Complete · 4/4 <svg width="16" height="16" style="color:var(--silver)"><use href="#i-chev"/></svg></span></div>
+    <ul>
+      <li class="body-3"><span class="tick"><svg width="11" height="11"><use href="#i-tick"/></svg></span>Set up your CarePlus account</li>
+      <li class="body-3"><span class="tick"><svg width="11" height="11"><use href="#i-tick"/></svg></span>Program Acknowledgment</li>
+      <li class="body-3"><span class="tick"><svg width="11" height="11"><use href="#i-tick"/></svg></span>Complete lab work</li>
+      <li class="body-3"><span class="tick"><svg width="11" height="11"><use href="#i-tick"/></svg></span>Health Assessment</li>
+    </ul>
+  </section>
+  <section class="reslist">
+    <div class="listrow"><span class="chip navy c40"><svg width="20" height="20"><use href="#i-phone"/></svg></span><div class="lr-body"><div class="title-2">Peak Health support</div><div class="lr-sub caption">252-237-5090 · appointment@peak-health.net</div></div><a class="lr-right label-2">Portal <svg width="14" height="14"><use href="#i-ext"/></svg></a></div>
+    <div class="listrow"><span class="chip aqua c40"><svg width="20" height="20"><use href="#i-info"/></svg></span><div class="lr-body title-2">About LifeForce</div><svg class="chev" width="20" height="20"><use href="#i-chev"/></svg></div>
+    <div class="listrow"><span class="chip green c40"><svg width="20" height="20"><use href="#i-calc"/></svg></span><div class="lr-body title-2">Calculate premiums &amp; credit</div><svg class="chev" width="20" height="20"><use href="#i-chev"/></svg></div>
+  </section>
+</main>
+
+<nav class="bottomnav">
+  <a><svg width="24" height="24"><use href="#i-home"/></svg><span class="label-3">Home</span></a>
+  <a class="active"><svg width="24" height="24"><use href="#i-care"/></svg><span class="label-3">Digital Care</span></a>
+  <a><svg width="24" height="24"><use href="#i-well"/></svg><span class="label-3">Wellbeing</span></a>
+  <a><svg width="24" height="24"><use href="#i-ben"/></svg><span class="label-3">Benefits</span></a>
+  <a><svg width="24" height="24"><use href="#i-star"/></svg><span class="label-3">Rewards</span></a>
+</nav>
+</body>
+</html>

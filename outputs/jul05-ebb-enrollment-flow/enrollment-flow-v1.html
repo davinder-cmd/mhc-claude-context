@@ -1,0 +1,282 @@
+<title>EBB — Enrollment Flow (home → assessment → unlock)</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 58px 0 20px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 70ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+  .loaded { margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+
+  section { padding: 30px 0; }
+  .sec-head { margin-bottom: 16px; }
+  .sec-head h2 { font-size: clamp(19px, 2.3vw, 24px); letter-spacing: -0.01em; font-weight: 680; margin: 6px 0 0; }
+  .sec-head p { margin: 8px 0 0; color: var(--ink-2); font-size: 14.5px; max-width: 72ch; }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  /* storyboard strip */
+  .stripscroll { overflow-x: auto; padding-bottom: 10px; }
+  .strip { display: flex; align-items: stretch; gap: 10px; min-width: min-content; }
+  .step { width: 260px; flex: none; display: flex; flex-direction: column; gap: 10px; }
+  .step-badge { display: flex; align-items: center; gap: 8px; }
+  .step-badge .n { width: 24px; height: 24px; border-radius: 7px; background: var(--teal); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .step-badge .t { font-size: 13px; font-weight: 700; letter-spacing: -0.005em; }
+  .arrow { display: flex; align-items: center; color: var(--teal-2); font-size: 22px; font-weight: 700; flex: none; padding-top: 200px; }
+
+  .phone { width: 260px; border-radius: 34px; background: #000; padding: 8px; }
+  .screen { border-radius: 27px; background: var(--surface); overflow: hidden; min-height: 440px; display: flex; flex-direction: column; }
+  .sbar { display: flex; align-items: center; gap: 8px; padding: 9px 13px 7px; border-bottom: 1px solid var(--line); }
+  .sbar .l { font-size: 14px; color: var(--ink-2); width: 16px; }
+  .sbar .ttl { flex: 1; text-align: center; font-size: 12.5px; font-weight: 700; }
+  .sbar .r { width: 16px; }
+  .body { padding: 12px 13px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+  .card { border: 1px solid var(--line); border-radius: 13px; background: #fff; overflow: hidden; }
+  .card.lead { border-color: var(--teal); box-shadow: 0 6px 16px -12px rgba(14,74,86,0.5); }
+  .card .img { height: 66px; background: linear-gradient(120deg,#123f52,#2b8b93); }
+  .card .cb { padding: 10px 12px; }
+  .card .kick { font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-2); }
+  .card .ct { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-top: 2px; }
+  .card .cs { font-size: 11.5px; color: var(--ink-2); margin-top: 3px; line-height: 1.35; }
+  .eligible { display: flex; align-items: center; gap: 7px; background: var(--amber-tint); color: var(--amber); border-radius: 9px; padding: 8px 10px; font-size: 12px; font-weight: 700; }
+  .btn { margin-top: auto; background: var(--teal); color: #fff; border: none; border-radius: 10px; padding: 11px; font-size: 13px; font-weight: 680; font-family: inherit; text-align: center; }
+  .btn.ghost { background: #fff; color: var(--teal-2); border: 1px solid var(--line-strong); }
+
+  .qprog { height: 6px; border-radius: 4px; background: rgba(14,74,86,0.14); overflow: hidden; }
+  .qprog > i { display: block; height: 100%; width: 25%; background: var(--teal); }
+  .qnum { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); }
+  .q { font-size: 14px; font-weight: 650; line-height: 1.3; }
+  .opt { border: 1px solid var(--line); border-radius: 9px; padding: 9px 11px; font-size: 12px; color: var(--ink-2); }
+  .opt.sel { border-color: var(--teal); background: var(--teal-tint); color: var(--teal); font-weight: 650; }
+
+  .consent { display: flex; gap: 8px; align-items: flex-start; font-size: 11px; color: var(--ink-2); line-height: 1.35; }
+  .consent .box { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid var(--teal); background: var(--teal); color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .how { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; font-size: 11.5px; color: var(--ink-2); line-height: 1.4; }
+  .how b { color: var(--ink); }
+
+  .celebrate { text-align: center; padding-top: 8px; }
+  .medal { width: 54px; height: 54px; border-radius: 50%; background: var(--teal); margin: 0 auto; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 24px; }
+  .celebrate h3 { margin: 10px 0 0; font-size: 17px; font-weight: 720; }
+  .celebrate p { margin: 6px 0 0; font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+
+  /* step captions */
+  .caps { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-top: 24px; }
+  @media (max-width: 1000px){ .caps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px){ .caps { grid-template-columns: 1fr; } }
+  .cap { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; }
+  .cap .cn { font-size: 11px; font-weight: 700; color: var(--teal-2); }
+  .cap h4 { margin: 3px 0 0; font-size: 13.5px; font-weight: 680; }
+  .cap p { margin: 6px 0 0; font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+  .cap .tag { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 650; padding: 2px 7px; border-radius: 999px; background: var(--teal-tint); color: var(--teal); }
+  .cap .tag.dtx { background: var(--amber-tint); color: var(--amber); }
+
+  /* cap configs */
+  .configs { display: flex; flex-wrap: wrap; gap: 22px; }
+  .cfg { flex: 1; min-width: 280px; }
+  .cfg .lbl { font-size: 12px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .cfg .pill { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; }
+  .cfg .pill.rec { background: var(--teal); color: #fff; }
+  .cfg .pill.def { background: rgba(34,38,42,0.08); color: var(--ink-2); }
+  .ebb { border: 1.5px solid var(--teal); border-radius: 16px; background: linear-gradient(180deg, var(--teal-tint) 0%, #fff 62%); padding: 15px 16px; }
+  .ebb .k { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-2); }
+  .ebb .amt { margin-top: 6px; display: flex; align-items: baseline; gap: 8px; }
+  .ebb .amt .big { font-size: 30px; font-weight: 780; color: var(--amber); font-variant-numeric: tabular-nums; }
+  .ebb .amt .of { font-size: 13px; color: var(--ink-2); font-weight: 600; }
+  .ebb .pips { display: flex; gap: 5px; margin-top: 11px; }
+  .ebb .pips i { height: 8px; border-radius: 5px; flex: 1; background: rgba(14,74,86,0.15); }
+  .ebb .pips i.on { background: var(--teal); }
+  .ebb .barless { margin-top: 11px; font-size: 12px; color: var(--teal); font-weight: 650; background: var(--teal-tint); border-radius: 999px; padding: 5px 10px; display: inline-block; }
+  .ebb .sub { margin-top: 10px; font-size: 12px; color: var(--ink-2); }
+  .cfg-note { margin-top: 10px; font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+  .cfg-note b { color: var(--ink); }
+
+  footer { padding: 28px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 86ch; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · Enrollment flow</div>
+    <h1>From home to "$100 unlocked," end to end</h1>
+    <p class="thesis">The assessment-driven funnel, as an example: a member lands on <strong>home</strong>, takes a <strong>health check</strong>, gets a <strong>DCP recommendation with an earn opportunity</strong>, <strong>opts in</strong>, and is dropped into the program with the reward unlocked. This is the "enrollment daisy-chain" — assessment → recommendation → EBB enrollment.</p>
+    <p class="loaded">Loaded: ux-usability-experts · ux-laws · engagement-behavior-experts · dtx-dcp-experts. Reflects Darcy 7/5 notes.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The five steps</div>
+      <h2>The journey</h2>
+      <p>Scroll →. Each screen is a step; notes for each are below.</p>
+    </div>
+
+    <div class="stripscroll"><div class="strip">
+
+      <!-- 1 HOME -->
+      <div class="step">
+        <div class="step-badge"><span class="n">1</span><span class="t">Home</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span class="l">☰</span><span class="ttl">Home</span><span class="r"></span></div>
+          <div class="body">
+            <div class="card lead">
+              <div class="img"></div>
+              <div class="cb">
+                <div class="kick">✦ Based on your health</div>
+                <div class="ct">See if you qualify to earn $100</div>
+                <div class="cs">Take a 2-minute health check.</div>
+              </div>
+            </div>
+            <div class="card"><div class="cb"><div class="kick">Just for you</div><div class="ct">Wind down before bed</div><div class="cs">3-min read</div></div></div>
+            <div class="btn">Start health check</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <!-- 2 ASSESSMENT -->
+      <div class="step">
+        <div class="step-badge"><span class="n">2</span><span class="t">Health check</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span class="l">‹</span><span class="ttl">Health check</span><span class="r"></span></div>
+          <div class="body">
+            <div class="qnum">Question 3 of 12</div>
+            <div class="qprog"><i></i></div>
+            <div class="q">Over the last 2 weeks, how often have you felt little interest or pleasure in doing things?</div>
+            <div class="opt">Not at all</div>
+            <div class="opt sel">Several days</div>
+            <div class="opt">More than half the days</div>
+            <div class="opt">Nearly every day</div>
+            <div class="btn">Continue</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <!-- 3 RECOMMENDATION -->
+      <div class="step">
+        <div class="step-badge"><span class="n">3</span><span class="t">Recommendation</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span class="l">‹</span><span class="ttl">Your results</span><span class="r"></span></div>
+          <div class="body">
+            <div class="cs" style="font-size:12px;color:var(--ink-2);">Based on what you told us:</div>
+            <div class="card lead">
+              <div class="img"></div>
+              <div class="cb">
+                <div class="kick">Recommended for you</div>
+                <div class="ct">Managing Depression</div>
+                <div class="cs">A program that could help with how you've been feeling.</div>
+              </div>
+            </div>
+            <div class="eligible">✦ You may qualify to earn $100</div>
+            <div class="btn">See the program</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <!-- 4 OPT-IN -->
+      <div class="step">
+        <div class="step-badge"><span class="n">4</span><span class="t">Opt in</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span class="l">‹</span><span class="ttl">Managing Depression</span><span class="r"></span></div>
+          <div class="body">
+            <div class="ct" style="font-size:16px;font-weight:720;">Earn $100 for finishing this program</div>
+            <div class="how">Complete all <b>10 sessions</b> → a <b>$100 Amazon gift card</b>. You can earn up to <b>$500 a year</b> across programs.</div>
+            <div class="consent"><span class="box">✓</span><span>I agree to the reward &amp; billing terms.</span></div>
+            <div class="btn">Opt in &amp; start</div>
+            <div class="cs" style="text-align:center;font-size:11px;">You can opt in later, too.</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <!-- 5 UNLOCKED -->
+      <div class="step">
+        <div class="step-badge"><span class="n">5</span><span class="t">Unlocked</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span class="l"></span><span class="ttl">You're in</span><span class="r"></span></div>
+          <div class="body">
+            <div class="celebrate">
+              <div class="medal">✓</div>
+              <h3>You're earning</h3>
+              <p>Finish Managing Depression to earn your <b>$100 Amazon gift card</b>.</p>
+            </div>
+            <div class="card lead" style="margin-top:6px;">
+              <div class="cb">
+                <div class="kick">Session 1</div>
+                <div class="ct">Understanding Depression</div>
+                <div class="cs">~8 min with Anna</div>
+              </div>
+            </div>
+            <div class="btn">Start Session 1</div>
+          </div>
+        </div></div>
+      </div>
+
+    </div></div>
+
+    <!-- captions -->
+    <div class="caps">
+      <div class="cap"><div class="cn">Step 1 · Home</div><h4>The invitation</h4><p>Rides the <b>existing</b> home components (hero banner / "Just For You") — home is out of 9/1 scope. Framing: "see if you qualify to earn $100." Prominent, not a takeover.</p><span class="tag">Existing components (9/1)</span></div>
+      <div class="cap"><div class="cn">Step 2 · Health check</div><h4>The measure</h4><p>12 questions across 5 pillars — the natural handoff point. Short and low-friction so people finish it.</p><span class="tag dtx">Assessment handoff</span></div>
+      <div class="cap"><div class="cn">Step 3 · Recommendation</div><h4>"You may qualify"</h4><p>Assessment → a matched DCP + the earn opportunity. The at-risk / interest signal drives the recommendation. <b>Note:</b> can't pre-populate the DCP from assessment yet (data siloed).</p><span class="tag dtx">Enrollment daisy-chain</span></div>
+      <div class="cap"><div class="cn">Step 4 · Opt in</div><h4>Consent, value-forward</h4><p>The reward terms + consent (HIPAA/ADA) at the point of value. "$100 Amazon gift card · up to $500/yr." Whether this is dismissible or a wall = the hard-gate vs. earn-gate decision.</p><span class="tag">Consent gate</span></div>
+      <div class="cap"><div class="cn">Step 5 · Unlocked</div><h4>Into the loop</h4><p>Reward unlocked → dropped onto the topic page at Session 1. The enrollment funnel hands off to the completion loop we've already built.</p><span class="tag">Loop begins</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The reward, two ways</div>
+      <h2>Capped vs. no cap — both configs</h2>
+      <p>The cap is a client-configurable setting. The <b>system default is no cap</b>; the <b>recommended</b> best-practice config is $500/year. Here's how the EBB reward reads in each.</p>
+    </div>
+    <div class="configs">
+      <div class="cfg">
+        <div class="lbl"><span class="pill rec">Recommended</span> Capped · $500/year</div>
+        <div class="ebb">
+          <div class="k">Care Path Rewards · $100 Amazon gift card each</div>
+          <div class="amt"><span class="big">$100</span><span class="of">of $500 this year</span></div>
+          <div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          <div class="sub"><b>1 of 5 care paths</b> — earn another $100 gift card with your next.</div>
+        </div>
+        <p class="cfg-note"><b>Bounded goal-gradient:</b> the 5-pip meter shows how much is left ($400 / 4 paths). Clear ceiling; graceful "max reached" state at 5 of 5.</p>
+      </div>
+      <div class="cfg">
+        <div class="lbl"><span class="pill def">System default</span> No cap</div>
+        <div class="ebb">
+          <div class="k">Care Path Rewards · $100 Amazon gift card each</div>
+          <div class="amt"><span class="big">$100</span><span class="of">earned this year</span></div>
+          <span class="barless">$100 per completed care path</span>
+          <div class="sub">Complete another program to earn another $100 gift card.</div>
+        </div>
+        <p class="cfg-note"><b>Open-ended:</b> no ceiling, no pips — just cumulative earned + the per-path value. The pull is "another $100," not "X of $500." Never a "max reached" state.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>Enrollment flow v1.</b> Example journey: home (existing components) → 12-question health check → DCP recommendation + "you may qualify to earn $100" → opt-in/consent ($100 Amazon gift card, up to $500/yr) → unlocked into the topic page. Plus the reward shown in both cap configs (recommended $500 vs. system-default no cap). Reflects Darcy 7/5. Open: hard-gate vs. earn-gate (Step 4); assessment→DCP pre-population blocked by data architecture. For reaction.</p>
+  </div>
+</footer>

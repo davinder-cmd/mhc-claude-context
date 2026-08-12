@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MHC Component Kit · Home blocks</title>
+  <link rel="stylesheet" href="gallery.css">
+  <style>
+    .g-card--pending { opacity: .5; pointer-events: none; }
+    .g-card--pending .g-card__preview { display: grid; place-items: center; color: var(--g-ink-faint); font-family: var(--g-mono); font-size: 12px; }
+    .g-intro-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px; margin: 28px 0 8px; }
+    .g-ic { background: var(--g-surface); border: 1px solid var(--g-line); border-radius: var(--g-radius); padding: 18px 20px; }
+    .g-ic h3 { font-family: var(--g-display); font-size: 15px; margin: 0 0 6px; }
+    .g-ic p { margin: 0; font-size: 13px; color: var(--g-ink-soft); line-height: 1.5; }
+    .g-group__m3 { font-family: var(--g-mono); font-size: 11px; color: var(--g-ink-faint); }
+  </style>
+</head>
+<body>
+
+<div class="g-top">
+  <div class="g-top__inner">
+    <a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Kit</a>
+    <div class="g-top__spacer"></div>
+    <div class="g-top__meta">v81 blocks · <code>mhc-home.css</code> locked · M3-modeled</div>
+  </div>
+</div>
+
+<div class="g-wrap">
+
+  <header class="g-head">
+    <div class="g-eyebrow">Home page · Block system</div>
+    <h1 class="g-title">Component Kit</h1>
+    <p class="g-lede">Copy-and-go building blocks for composing MHC pages — cards, rows, lists, heroes, and the page behavior underneath them. Organized like the Material 3 kit (component type → variants → responsive), each piece is complete and self-contained: grab the snippet, drop it into a page, and the containers, type, spacing, grids, and layout are already consistent. One shared stylesheet (<code>mhc-home.css</code>, edited in CodeMirror) drives all of it.</p>
+    <div class="g-intro-cards">
+      <div class="g-ic"><h3>Copy-and-go</h3><p>Every component is a whole, pasteable snippet. No re-fiddling padding, alignment, or type — the primitives handle it.</p></div>
+      <div class="g-ic"><h3>Responsive, for real</h3><p>Each frame renders at a true viewport width, so media queries fire authentically. Drag any playground to feel the reflow.</p></div>
+      <div class="g-ic"><h3>Image crop &amp; scale — locked</h3><p>Deterministic media shapes (hero 3:2→split, program 16:9, thumb 4:3) crop any photo predictably. No layout shift from image size.</p></div>
+    </div>
+  </header>
+
+  <!-- BUILD-STATUS NOTE -->
+  <div class="g-ic" style="border-color:#BFE0C6;background:#EAF6ED;margin-bottom:8px">
+    <h3 style="color:#2E6B3A">All groups live — Cards, Heroes, Lists, Rows, Atoms, Page behavior, Foundations</h3>
+    <p>Every group is built and interactive. Start with <strong><a href="page-compose.html">Compose a page →</a></strong> to see a full page assembled from kit snippets (your per-session clone template). See <code>KIT.md</code> for composition rules (page order, grid behavior, snippet-drop), <code>BREAKPOINTS.md</code> for thresholds, and <code>GAPS.md</code> for the M3 components that can't be authored as MHC blocks.</p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="g-group"><span class="g-group__title">Cards</span><span class="g-group__m3">M3 · Cards</span><span class="g-group__rule"></span></div>
+  <div class="g-grid">
+
+    <a class="g-card" href="component-pair.html">
+      <div class="g-card__preview"><iframe src="frame-pair.html" title="Pair preview" scrolling="no"></iframe></div>
+      <div class="g-card__body">
+        <div class="g-card__name">Pair card</div>
+        <div class="g-card__desc">Titled recommendation — thumb + title/meta + text-link footer. 1→2 col; thumb 80² → 160×120 4:3 at ≥1200.</div>
+        <div class="g-card__foot"><span class="g-chip">.pair-card</span><span class="g-chip">×2</span></div>
+      </div>
+    </a>
+
+    <a class="g-card" href="component-program.html">
+      <div class="g-card__preview"><iframe src="frame-program.html" title="Program preview" scrolling="no"></iframe></div>
+      <div class="g-card__body">
+        <div class="g-card__name">Program card</div>
+        <div class="g-card__desc">In-progress program — 16:9 media, progress bar. Carousel on Compact, 3-col from 600.</div>
+        <div class="g-card__foot"><span class="g-chip">.program</span><span class="g-chip">×3</span></div>
+      </div>
+    </a>
+
+    <a class="g-card" href="component-reward.html">
+      <div class="g-card__preview"><iframe src="frame-reward.html" title="Reward preview" scrolling="no"></iframe></div>
+      <div class="g-card__body">
+        <div class="g-card__name">Reward card</div>
+        <div class="g-card__desc">Reward tile with coloured chip. 2-up → 4-up. Four chip variants (gift / points / raffle / store).</div>
+        <div class="g-card__foot"><span class="g-chip">.reward</span><span class="g-chip">×4</span></div>
+      </div>
+    </a>
+
+    <a class="g-card" href="component-tracker.html">
+      <div class="g-card__preview"><iframe src="frame-tracker.html" title="Tracker preview" scrolling="no"></iframe></div>
+      <div class="g-card__body">
+        <div class="g-card__name">Tracker tile</div>
+        <div class="g-card__desc">Health metric — icon, value, trend, meta. 2-up → 4-up grid. Four accent variants + link state.</div>
+        <div class="g-card__foot"><span class="g-chip">.tracker</span><span class="g-chip">×4</span></div>
+      </div>
+    </a>
+
+    <a class="g-card" href="component-insight.html">
+      <div class="g-card__preview"><iframe src="frame-insight.html" title="Insight preview" scrolling="no"></iframe></div>
+      <div class="g-card__body">
+        <div class="g-card__name">Insight banner</div>
+        <div class="g-card__desc">AI insight card — state-flag driven (ready / refreshable / read-only / hidden). Action host-injected.</div>
+        <div class="g-card__foot"><span class="g-chip">.insight</span><span class="g-chip">states</span></div>
+      </div>
+    </a>
+
+    <a class="g-card" href="component-challenge.html">
+      <div class="g-card__preview"><iframe src="frame-challenge.html" title="Challenge preview" scrolling="no"></iframe></div>
+      <div class="g-card__body">
+        <div class="g-card__name">Challenge banner</div>
+        <div class="g-card__desc">Challenge summary — icon + body + stretched-link. Reflows to stacked on Compact.</div>
+        <div class="g-card__foot"><span class="g-chip">.challenge</span><span class="g-chip">single</span></div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- HEROES -->
+  <div class="g-group"><span class="g-group__title">Heroes</span><span class="g-group__m3">M3 · (hero pattern)</span><span class="g-group__rule"></span></div>
+  <div class="g-grid">
+    <a class="g-card" href="component-hero.html">
+      <div class="g-card__preview"><iframe src="frame-hero.html" title="Hero preview" scrolling="no"></iframe></div>
+      <div class="g-card__body">
+        <div class="g-card__name">Hero</div>
+        <div class="g-card__desc">Lead recommendation — image + content. Stacks then splits at 360px; photo recrops across breakpoints.</div>
+        <div class="g-card__foot"><span class="g-chip">.hero</span><span class="g-chip">single-instance</span></div>
+      </div>
+    </a>
+  </div>
+
+  <!-- LISTS & GRIDS -->
+  <div class="g-group"><span class="g-group__title">Lists &amp; grids</span><span class="g-group__m3">M3 · Lists, Carousel</span><span class="g-group__rule"></span></div>
+  <div class="g-grid">
+    <a class="g-card" href="component-lists.html">
+      <div class="g-card__preview"><iframe src="frame-reward.html" title="Grid preview" scrolling="no"></iframe></div>
+      <div class="g-card__body"><div class="g-card__name">Grid &amp; carousel</div><div class="g-card__desc">The responsive column engine — drop cards in, it packs 2→4 / 1→3 / 1→2. Plus the Compact scroll-snap carousel (CSS-only).</div><div class="g-card__foot"><span class="g-chip">.trackers · .rewards · .programs · .pair</span></div></div>
+    </a>
+  </div>
+
+  <!-- ROWS -->
+  <div class="g-group"><span class="g-group__title">Rows</span><span class="g-group__m3">M3 · List items</span><span class="g-group__rule"></span></div>
+  <div class="g-grid">
+    <a class="g-card" href="component-rows.html">
+      <div class="g-card__preview"><iframe src="frame-rows.html" title="Rows preview" scrolling="no"></iframe></div>
+      <div class="g-card__body"><div class="g-card__name">Rows</div><div class="g-card__desc">Section head, media row, meta row, greeting — the horizontal primitives that align every time.</div><div class="g-card__foot"><span class="g-chip">.section-head</span><span class="g-chip">.greeting</span><span class="g-chip">.pair-card__row</span></div></div>
+    </a>
+  </div>
+
+  <!-- ATOMS -->
+  <div class="g-group"><span class="g-group__title">Atoms</span><span class="g-group__m3">M3 · Chips, Buttons, Dividers, Badges, Progress</span><span class="g-group__rule"></span></div>
+  <div class="g-grid">
+    <a class="g-card" href="component-atoms.html">
+      <div class="g-card__preview"><iframe src="frame-atoms.html" title="Atoms preview" scrolling="no"></iframe></div>
+      <div class="g-card__body"><div class="g-card__name">Atoms</div><div class="g-card__desc">Chip, text-link, icon button, banner icon, progress bar, divider, and the stretched-link pattern.</div><div class="g-card__foot"><span class="g-chip">.reward-chip</span><span class="g-chip">.btn-text</span><span class="g-chip">.progress</span><span class="g-chip">.*__link</span></div></div>
+    </a>
+  </div>
+
+  <!-- PAGE BEHAVIOR -->
+  <div class="g-group"><span class="g-group__title">Page behavior</span><span class="g-group__m3">layout system</span><span class="g-group__rule"></span></div>
+  <div class="g-grid">
+    <a class="g-card" href="component-page-behavior.html">
+      <div class="g-card__preview"><iframe src="frame-page.html" title="Page behavior preview" scrolling="no"></iframe></div>
+      <div class="g-card__body"><div class="g-card__name">Shell, rhythm &amp; breakpoints</div><div class="g-card__desc">Container max-width + gutters (1280→1440), 40dp section rhythm, supergroup clustering, and the Compact/Medium/Large/XL engine.</div><div class="g-card__foot"><span class="g-chip">.shell</span><span class="g-chip">.section</span><span class="g-chip">599·600·1200·1600</span></div></div>
+    </a>
+    <a class="g-card" href="page-compose.html">
+      <div class="g-card__preview"><iframe src="frame-page.html" title="Compose preview" scrolling="no"></iframe></div>
+      <div class="g-card__body"><div class="g-card__name">Compose a page ★</div><div class="g-card__desc">A full page assembled from kit snippets — the copy-and-go proof and your per-session clone template.</div><div class="g-card__foot"><span class="g-chip">capstone</span></div></div>
+    </a>
+  </div>
+
+  <!-- FOUNDATIONS -->
+  <div class="g-group"><span class="g-group__title">Foundations</span><span class="g-group__m3">M3 · Styles</span><span class="g-group__rule"></span></div>
+  <div class="g-grid">
+    <a class="g-card" href="component-foundations.html">
+      <div class="g-card__preview"><iframe src="frame-foundations.html" title="Foundations preview" scrolling="no"></iframe></div>
+      <div class="g-card__body"><div class="g-card__name">Tokens &amp; type scale</div><div class="g-card__desc">Colour / shape / spacing tokens + 24 atomic type classes, shown at both tiers (Compact vs ≥1200). Theming deferred.</div><div class="g-card__foot"><span class="g-chip">:root</span><span class="g-chip">type-scale</span></div></div>
+    </a>
+  </div>
+
+</div>
+</body>
+</html>

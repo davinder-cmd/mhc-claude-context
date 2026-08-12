@@ -1,0 +1,216 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opt-in v4 — switch + more explanation</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.11);--navy:#123A52;--teal:#0E4A56;--teal-2:#1F6F7A;--teal-tint:#E4EDED;--amber:#8A5A12;--amber-2:#B87A1E;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1900px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:960px;margin:0 0 4px;font-size:14px}
+.flow{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}.flow b{color:var(--teal-2)}
+.ph{color:#B23B3B;font-weight:700}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:9px;width:340px}
+.cap{font-size:12px;color:var(--ink-2);max-width:340px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--navy);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.rec{color:#fff;background:var(--navy)}
+.phone{width:340px;background:var(--surface);border:9px solid #1c2330;border-radius:40px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:724px;overflow-y:auto;position:relative;background:var(--surface)}
+.scr::-webkit-scrollbar{width:0}
+.pad{padding:24px 20px 20px}
+.close{position:absolute;top:14px;right:16px;font-size:19px;color:var(--ink-3);z-index:3}
+.pk{font-size:12px;font-weight:750;color:var(--teal-2);text-transform:uppercase;letter-spacing:.05em}
+.h{font-size:22px;font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin-top:5px}
+.h .amt{color:var(--amber-2)}
+.lead{font-size:13.5px;color:var(--ink-2);margin-top:10px;line-height:1.55}
+.gift{width:52px;height:52px;border-radius:15px;background:var(--amber-warm);display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px}
+/* steps */
+.steps{margin:16px 0 4px;display:flex;flex-direction:column;gap:14px}
+.stp{display:flex;gap:12px;align-items:flex-start}
+.stp .n{width:26px;height:26px;border-radius:50%;background:var(--teal-tint);color:var(--navy);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.stp .sh{font-size:14px;font-weight:750}
+.stp .sd{font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.5}
+/* good-to-know */
+.gtk{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.gtkh{font-size:12.5px;font-weight:750;color:var(--ink);margin-bottom:8px}
+.gtk li{font-size:12.5px;color:var(--ink-2);line-height:1.5;margin:6px 0;padding-left:18px;position:relative}
+.gtk li:before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:50%;background:var(--amber-2)}
+/* info cards */
+.icard{display:flex;gap:12px;align-items:flex-start;background:var(--warm);border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:10px}
+.icard .ic{width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.icard .it{font-size:14px;font-weight:750}.icard .id{font-size:12.5px;color:var(--ink-2);margin-top:2px;line-height:1.5}
+/* q&a */
+.qa{border-top:1px solid var(--line);padding:13px 0;display:flex;gap:10px;align-items:flex-start}
+.qa .q{font-size:13.5px;font-weight:750}.qa .a{font-size:12.5px;color:var(--ink-2);margin-top:3px;line-height:1.55}
+.qa .ci{font-size:15px;color:var(--teal-2);margin-top:1px}
+/* reward strip (v5) */
+.rs{margin:6px 0 2px}
+.seg{display:flex;gap:4px;height:9px;border-radius:6px;overflow:hidden}
+.seg span{flex:1;background:#EAE4D8}.seg span.on{background:var(--amber-2)}
+.segends{display:flex;justify-content:space-between;margin-top:7px;font-size:11.5px;font-weight:700;color:var(--ink-3)}
+.segends .a{color:var(--amber-2)}
+/* narrative */
+.para{font-size:13.5px;color:var(--ink-2);line-height:1.6;margin:11px 0}
+.para b{color:var(--ink)}
+.pull{background:var(--amber-warm);border-radius:12px;padding:12px 14px;font-size:13px;font-weight:700;color:var(--ink);margin:14px 0}
+.pull .amt{color:var(--amber-2)}
+/* SWITCH opt-in row */
+.swrow{display:flex;align-items:center;gap:13px;background:var(--teal-tint);border:1px solid rgba(18,58,82,.18);border-radius:15px;padding:14px 15px;margin-top:18px}
+.swrow.plain{background:var(--warm);border-color:var(--line)}
+.swtext{flex:1}
+.swl{font-size:14px;font-weight:750;color:var(--ink)}
+.sws{font-size:11.5px;color:var(--ink-2);margin-top:2px;line-height:1.4}
+.sw{width:48px;height:28px;border-radius:20px;background:var(--navy);position:relative;flex:none}
+.sw.off{background:#CFC9BD}
+.sw i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.28);transition:.18s}
+.sw.on i{left:23px}
+.swstate{font-size:11px;font-weight:800;color:var(--teal-2);text-transform:uppercase;letter-spacing:.04em;margin-top:6px;text-align:right}
+.swstate.off{color:var(--ink-3)}
+/* legal + cta */
+.legal{margin-top:14px;font-size:11px;color:var(--ink-3);line-height:1.5}
+.legal .ph{color:#B23B3B;font-weight:700}.legal a{color:var(--teal-2)}
+.btn{background:var(--navy);color:#fff;border-radius:14px;padding:15px;font-size:15px;font-weight:750;text-align:center;margin-top:14px}
+.btn.dis{background:#C9D3D6;color:#8b9096}
+.notnow{text-align:center;font-size:13px;font-weight:700;color:var(--teal-2);margin-top:13px}
+.foot{font-size:11px;color:var(--ink-3);text-align:center;margin-top:10px;line-height:1.45}
+.rec-note{margin-top:28px;max-width:960px;background:var(--surface);border-left:3px solid var(--navy);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}
+.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Opt-in — v4 · more explanation + toggle switch</h1>
+<p class="sub">Fuller explanatory copy (what it is, your pace, how you get paid, your privacy) and the consent control is now a <b>toggle switch</b> instead of a checkbox. Copy is <span class="ph">placeholder</span>; legal needs counsel. Earn-gate holds: switch <b>off</b> / "Not now" still lets them do the program — they just don't earn. Five ways to organize the same content.</p>
+<p class="flow">Interaction note: the switch <b>is</b> the opt-in decision — most shown in the <b>On</b> state; V4 shows the <b>Off</b> state (button dims until turned on) so you can see both.</p>
+
+<div class="grid">
+
+<!-- V1 Guided explainer -->
+<div class="col">
+<span class="tag rec">V1 · Guided explainer  ·  lean</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="pad">
+<div class="gift">🎁</div>
+<div class="pk">Rewards</div>
+<div class="h">Finish a care path,<br>earn <span class="amt">$100</span></div>
+<div class="lead">Opt in once and you'll earn a $100 gift card for every Digital Care Path you complete — up to <b>$500 a year</b> (5 paths). Here's how it works.</div>
+<div class="steps">
+<div class="stp"><span class="n">1</span><div><div class="sh">Go at your own pace</div><div class="sd">No clock, no streaks. Move through the sessions over days or weeks — whatever fits your life.</div></div></div>
+<div class="stp"><span class="n">2</span><div><div class="sh">Finish the whole path</div><div class="sd">Complete every session in the program. What counts is finishing, not speed.</div></div></div>
+<div class="stp"><span class="n">3</span><div><div class="sh">Get your $100 gift card</div><div class="sd">It's issued automatically when you finish. We'll send a notification when it's on the way.</div></div></div>
+</div>
+<div class="gtk">
+<div class="gtkh">Good to know</div>
+<ul style="margin:0;padding:0;list-style:none">
+<li>To pay your reward, we share only that you <i>completed</i> the path with your health plan — never what you did in it.</li>
+<li>You can do the program without opting in — you just won't earn the reward.</li>
+</ul>
+</div>
+<div class="swrow"><div class="swtext"><div class="swl">Opt in to earn rewards</div><div class="sws">You can turn this off anytime before you finish.</div></div><div class="sw on"><i></i></div></div>
+<div class="legal"><span class="ph">[Legal TBD]</span> By opting in you authorize MHC to share care-path completion with your health plan to process your reward. <a href="#">Authorization</a> · <a href="#">Notice</a>. Configurable per client; annual re-consent.</div>
+<div class="btn">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>V1 — Guided explainer. (my lean.)</b> Hero → numbered "how it works" with a sentence each → a short "Good to know" (privacy + earn-gate) → switch → CTA. Most explanation, still chunked so it scans. Switch sits in a tinted commit row.</div>
+</div>
+
+<!-- V2 Info cards -->
+<div class="col">
+<span class="tag">V2 · Info cards</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="pad">
+<div class="pk">Rewards</div>
+<div class="h">Earn up to <span class="amt">$500</span> a year</div>
+<div class="lead">A $100 gift card for every care path you finish. Opt in once — here's everything it covers.</div>
+<div style="margin-top:16px">
+<div class="icard"><div class="ic">💳</div><div><div class="it">The reward</div><div class="id">$100 per completed path, up to 5 a year ($500). One opt-in covers them all.</div></div></div>
+<div class="icard"><div class="ic">🧭</div><div><div class="it">Your pace</div><div class="id">No clock, no streaks. Take days or weeks — finishing is what counts, not speed.</div></div></div>
+<div class="icard"><div class="ic">📩</div><div><div class="it">Getting paid</div><div class="id">Your gift card is issued automatically when you complete a path. We'll notify you.</div></div></div>
+<div class="icard"><div class="ic">🔒</div><div><div class="it">Your privacy</div><div class="id">We share only that you finished — not what you did in the path. <span class="ph">[Legal TBD]</span></div></div></div>
+</div>
+<div class="swrow"><div class="swtext"><div class="swl">Opt in to earn rewards</div><div class="sws">Turn off anytime before you finish.</div></div><div class="sw on"><i></i></div></div>
+<div class="legal"><span class="ph">[Legal TBD]</span> Authorizes sharing completion with your health plan. <a href="#">Details</a>.</div>
+<div class="btn">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>V2 — Info cards.</b> The same four explanations as labeled cards (reward / pace / paid / privacy). Very scannable, each topic self-contained; slightly more visual weight than V1. Good if content/legal wants clear topic boundaries.</div>
+</div>
+
+<!-- V3 Narrative -->
+<div class="col">
+<span class="tag">V3 · Narrative</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="pad">
+<div class="gift">🎁</div>
+<div class="h">A little reward for<br>taking care of you</div>
+<div class="para">Your plan will send you a <b>$100 gift card</b> for finishing a Digital Care Path — a set of short, evidence-based sessions built around your health goal.</div>
+<div class="para">There's <b>no clock and no streaks</b>. Work through it over days or weeks, whatever fits your life. When you complete the last session, the reward is issued automatically and we'll let you know it's on the way.</div>
+<div class="pull">Finish up to 5 paths and earn <span class="amt">$500</span> this year.</div>
+<div class="para" style="font-size:12.5px">To process your reward, we share only that you <b>completed</b> the path with your health plan — never what happened inside it. <span class="ph">[Legal TBD]</span></div>
+<div class="swrow"><div class="swtext"><div class="swl">Opt in to earn rewards</div><div class="sws">You can change this anytime before you finish.</div></div><div class="sw on"><i></i></div></div>
+<div class="btn">Opt in &amp; start</div>
+<div class="notnow">Not now — I'll just do the program</div>
+</div>
+</div></div>
+<div class="cap"><b>V3 — Narrative.</b> Warmer, prose-led ("A little reward for taking care of you"). More human, less list-y; the reward ceiling lives in a pull-quote. Best if brand voice wants warmth over structure — reads slower, so watch length.</div>
+</div>
+
+<!-- V4 Q&A + OFF state -->
+<div class="col">
+<span class="tag">V4 · Q&amp;A  ·  shows OFF state</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="pad">
+<div class="pk">Rewards</div>
+<div class="h">Earn <span class="amt">$100</span> per path —<br>the details</div>
+<div class="lead">Everything you might be wondering, before you decide.</div>
+<div style="margin-top:14px">
+<div class="qa" style="border-top:none"><span class="ci">?</span><div><div class="q">How do I earn it?</div><div class="a">Finish every session in a Digital Care Path. You'll get a $100 gift card — up to 5 paths, $500 a year.</div></div></div>
+<div class="qa"><span class="ci">?</span><div><div class="q">Is there a time limit?</div><div class="a">No. No clock, no streaks. Go at your own pace over days or weeks. Finishing is what counts.</div></div></div>
+<div class="qa"><span class="ci">?</span><div><div class="q">When do I get paid?</div><div class="a">Automatically, as soon as you complete the path. We'll send a notification when your card is on the way.</div></div></div>
+<div class="qa"><span class="ci">?</span><div><div class="q">What about my privacy?</div><div class="a">We share only that you completed the path with your health plan — never what you did inside it. <span class="ph">[Legal TBD]</span></div></div></div>
+</div>
+<div class="swrow plain"><div class="swtext"><div class="swl">Opt in to earn rewards</div><div class="sws">Turn this on to earn — or start without it.</div></div><div class="sw off"><i></i></div></div>
+<div class="swstate off">Off — you won't earn</div>
+<div class="btn dis">Turn on to opt in &amp; start</div>
+<div class="notnow">Start without rewards</div>
+</div>
+</div></div>
+<div class="cap"><b>V4 — Q&amp;A + Off state.</b> FAQ framing answers objections in place. Shown with the switch <b>off</b>: the CTA dims to "Turn on to opt in," and a clear "Start without rewards" keeps the earn-gate honest. Demonstrates the toggle's two states.</div>
+</div>
+
+<!-- V5 Reward-forward + reassurance -->
+<div class="col">
+<span class="tag">V5 · Reward-forward + reassurance</span>
+<div class="phone"><div class="scr">
+<div class="close">✕</div>
+<div class="pad">
+<div class="pk">Rewards</div>
+<div class="h">Every path you finish<br>adds <span class="amt">$100</span></div>
+<div class="rs">
+<div class="seg"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+<div class="segends"><span class="a">$100 · your first path</span><span>$500 · all 5</span></div>
+</div>
+<div class="lead" style="margin-top:16px">Opt in once and your plan rewards you for completing Digital Care Paths. A few things worth knowing:</div>
+<div class="steps" style="margin-top:14px">
+<div class="stp"><span class="n">✓</span><div><div class="sh">At your own pace</div><div class="sd">No clock, no streaks — finishing matters, not speed.</div></div></div>
+<div class="stp"><span class="n">✓</span><div><div class="sh">Paid automatically</div><div class="sd">Your gift card is issued the moment you complete a path.</div></div></div>
+<div class="stp"><span class="n">✓</span><div><div class="sh">Private by default</div><div class="sd">Only completion is shared with your plan — not your activity.</div></div></div>
+</div>
+<div class="swrow"><div class="swtext"><div class="swl">Opt in to earn rewards</div><div class="sws">Off anytime before you finish. <span class="ph">[Legal TBD]</span></div></div><div class="sw on"><i></i></div></div>
+<div class="btn">Opt in &amp; start</div>
+<div class="notnow">Not now</div>
+</div>
+</div></div>
+<div class="cap"><b>V5 — Reward-forward + reassurance.</b> Leads with the C-ii segmented bar you liked, then three tight reassurance points (pace / paid / privacy). Ties the winning reward device to the fuller explanation — most continuous with the v3 direction.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>V1 — Guided explainer</b> for the most explanation while staying scannable (Hick's: the copy is chunked into numbered steps + a short "good to know," so volume doesn't become friction). If you want the fuller copy to sit under the reward device you already picked, <b>V5</b> is the bridge. On the <b>switch</b>: I'd keep it as an explicit commit control in a tinted row (as in V1/V2/V5) and require it <b>on</b> to enable the primary CTA (V4 shows that off-state) — it reads as a deliberate choice, reinforces the earn-gate "opt-in is a decision, not a default," and gives a cleaner audit trail than a checkbox. All copy + legal are placeholder; the structure holds the final wording. Tell me which and I'll build it natively in Figma.
+</div>
+</div>
+</body></html>

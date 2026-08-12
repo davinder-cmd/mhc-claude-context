@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progress card — 5 alternatives</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.14);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1200px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:780px;margin:0 0 8px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start;margin-top:16px}
+.opt{width:340px}
+.olabel{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.onum{font-size:13px;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:2px 8px}
+.oname{font-size:15px;font-weight:700}
+.onote{font-size:12px;color:var(--ink-2);margin-top:11px}.onote b{color:var(--ink)}
+.rec{font-size:10.5px;font-weight:700;color:#3F7A46;background:#E4EFE0;border-radius:5px;padding:2px 7px;margin-left:6px}
+.pace{font-size:10.5px;font-weight:700;color:var(--teal);background:var(--teal-tint);border-radius:5px;padding:2px 7px;margin-left:6px}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px 16px}
+.head{display:flex;justify-content:space-between;align-items:baseline}
+.head .l{font-size:14px;font-weight:680}
+.head .r{font-size:12.5px;color:var(--ink-3)}
+.bar{height:8px;border-radius:5px;background:rgba(14,74,86,.13);margin-top:11px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--teal);border-radius:5px}
+.foot{margin-top:10px;font-size:12.5px;color:var(--ink-2)}
+.money{color:var(--amber);font-weight:700}
+.moneychip{display:inline-flex;align-items:center;gap:5px;background:var(--amber-tint);color:var(--amber);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:20px}
+/* milestone track */
+.tw{position:relative;height:16px;margin:12px 0 4px}
+.tk{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:7px;border-radius:5px;background:#EAE3D6}
+.tf{position:absolute;left:0;top:50%;transform:translateY(-50%);height:7px;border-radius:5px;background:var(--teal)}
+.nd{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;transform:translate(-50%,-50%);background:#fff;border:3px solid #D6CDBB;box-shadow:0 0 0 2px #fff}
+.nd.on{background:var(--teal);border-color:var(--teal)}
+.nlabs{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-3);margin-top:7px}
+.nlabs b{color:var(--amber)}
+/* ring */
+.ringrow{display:flex;align-items:center;gap:13px;margin-top:6px}
+/* segmented */
+.seg{display:flex;gap:4px;margin-top:11px}
+.seg i{flex:1;height:8px;border-radius:3px;background:rgba(14,74,86,.13)}
+.seg i.on{background:var(--teal)}
+.ref{opacity:.9}
+</style></head><body>
+<div class="page">
+<h1>"Your progress" card — 5 alternatives</h1>
+<p class="sub">Same data (2 of 10), five treatments. The <span class="pace">pace</span> tag marks options that drop the "8 sessions to the finish" countdown — more aligned with the locked pace-not-speed guardrail. Reward stays present in all, just handled differently. Current version at the end.</p>
+
+<div class="grid">
+
+<!-- 1 milestone track -->
+<div class="opt">
+<div class="olabel"><span class="onum">1</span><span class="oname">Milestone track</span><span class="rec">lean</span><span class="pace">pace</span></div>
+<div class="card"><div class="head"><span class="l">Your progress</span><span class="r">Session 2 of 10</span></div>
+<div class="tw"><div class="tk"></div><div class="tf" style="width:20%"></div><div class="nd on" style="left:3%"></div><div class="nd" style="left:50%"></div><div class="nd" style="left:97%"></div></div>
+<div class="nlabs"><span>Start</span><span><b>Halfway · earns $100</b></span><span>Complete</span></div></div>
+<div class="onote"><b>Airalo-style.</b> Faint track + milestone dots. The "Halfway" dot doubles as the ~50% reward-eligible point, so the $100 is tied to a meaningful marker — not a countdown. No velocity framing.</div>
+</div>
+
+<!-- 2 ring + cadence -->
+<div class="opt">
+<div class="olabel"><span class="onum">2</span><span class="oname">Ring + cadence</span><span class="pace">pace</span></div>
+<div class="card"><div class="ringrow">
+<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="21" fill="none" stroke="#E7E2D6" stroke-width="6"/><circle cx="26" cy="26" r="21" fill="none" stroke="#0E4A56" stroke-width="6" stroke-linecap="round" stroke-dasharray="132" stroke-dashoffset="106" transform="rotate(-90 26 26)"/><text x="26" y="24" text-anchor="middle" font-size="13" font-weight="750" fill="#22262A">2</text><text x="26" y="35" text-anchor="middle" font-size="8.5" fill="#838890">of 10</text></svg>
+<div><div style="font-size:14px;font-weight:680">Your progress</div><div style="font-size:12.5px;color:var(--ink-2);margin-top:2px">2 weeks in · a steady pace</div><div style="font-size:11.5px;color:var(--amber);font-weight:700;margin-top:3px">$100 when you complete</div></div>
+</div></div>
+<div class="onote"><b>Compact.</b> A ring instead of a bar, paired with cadence ("2 weeks in · steady pace") — rewards consistency, not speed. Reward is a small amber line.</div>
+</div>
+
+<!-- 3 segmented -->
+<div class="opt">
+<div class="olabel"><span class="onum">3</span><span class="oname">Segmented bar</span></div>
+<div class="card"><div class="head"><span class="l">Your progress</span><span class="r">2 of 10 sessions</span></div>
+<div class="seg"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="foot">Each step is a session · <span class="money">$100 when you complete</span></div></div>
+<div class="onote"><b>Discrete steps.</b> The bar splits into 10 session segments — reads as "sessions done," not a smooth race to a payout. Keeps the reward line.</div>
+</div>
+
+<!-- 4 cadence-forward -->
+<div class="opt">
+<div class="olabel"><span class="onum">4</span><span class="oname">Cadence-forward</span><span class="pace">pace</span></div>
+<div class="card"><div class="head"><span class="l">Your progress</span><span class="r">Session 2 · 2 weeks in</span></div>
+<div class="bar"><i style="width:20%"></i></div>
+<div class="foot">Keep your rhythm · <span class="money">$100 when you finish</span></div></div>
+<div class="onote"><b>Drops the countdown.</b> No "8 sessions to the finish." Leads with cadence ("2 weeks in"), keeps the bar, and states the reward once, calmly. Closest to the current layout while fixing the velocity framing.</div>
+</div>
+
+<!-- 5 reward-as-chip -->
+<div class="opt">
+<div class="olabel"><span class="onum">5</span><span class="oname">Reward as a chip</span></div>
+<div class="card"><div class="head"><span class="l">Your progress</span><span class="r">2 of 10 sessions</span></div>
+<div class="bar"><i style="width:20%"></i></div>
+<div class="foot" style="display:flex;align-items:center;justify-content:space-between;margin-top:11px"><span>8 sessions to go</span><span class="moneychip">🎁 $100 at finish</span></div></div>
+<div class="onote"><b>Reward as an object.</b> Keeps the bar; the $100 becomes a distinct amber chip (right) rather than an inline sentence — clearer, and easy to swap to "earned" later. Still shows a countdown, so less pace-aligned.</div>
+</div>
+
+<!-- reference -->
+<div class="opt">
+<div class="olabel"><span class="onum" style="background:#838890">·</span><span class="oname" style="color:var(--ink-3)">Current (reference)</span></div>
+<div class="card ref"><div class="head"><span class="l">Your progress</span><span class="r">2 of 10 sessions</span></div>
+<div class="bar"><i style="width:20%"></i></div>
+<div class="foot">8 sessions to the finish · <span class="money">$100 when you complete</span></div></div>
+<div class="onote">The current version — bar + "8 sessions to the finish · $100 when you complete."</div>
+</div>
+
+</div>
+<div style="margin-top:26px;max-width:780px;background:#fff;border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>My read:</b> <b>Option 1 (milestone track)</b> best fits the strategy — it ties the $100 to the halfway/reward-eligible marker instead of a countdown, and it's the same treatment as the DCP-list reward banner (consistency). <b>Option 4</b> is the lightest fix if you want to keep the current look but drop the velocity line. <b>Option 5</b> if the priority is making the reward pop as its own element.
+</div>
+</div>
+</body></html>

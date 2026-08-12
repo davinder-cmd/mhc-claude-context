@@ -1,0 +1,89 @@
+<!doctype html>
+<!--
+  Fragment test harness — adapted from html-fragment-authoring-guide.md §"Local preview harness".
+  Loads a fragment file via fetch() and injects it into a shadow root, reproducing how the host
+  Angular app will render it. The <script> here is a testing tool only; fragments themselves
+  contain no JavaScript.
+-->
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home fragment — test harness</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+      background: #ECE9E1;
+      color: #1A1D21;
+    }
+    .toolbar {
+      position: sticky; top: 0; z-index: 99;
+      background: #1A1D21; color: white;
+      padding: 12px 16px;
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    }
+    .toolbar h1 { font-size: 14px; font-weight: 600; margin: 0; }
+    .toolbar select, .toolbar button {
+      font: inherit;
+      background: white; color: #1A1D21;
+      border: 0; padding: 6px 12px; border-radius: 4px;
+      cursor: pointer;
+    }
+    .toolbar .status { color: #9A9EA6; font-size: 12px; margin-left: auto; }
+    #host { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h1>Home fragment · test harness</h1>
+  <label>
+    Fragment:
+    <select id="fragment-select">
+      <option value="fragment-home-with-employer.html">with-employer (V1)</option>
+      <option value="fragment-home-no-employer.html">no-employer (V2)</option>
+    </select>
+  </label>
+  <button id="reload">Reload</button>
+  <span class="status" id="status">idle</span>
+</div>
+
+<div id="host"></div>
+
+<script>
+  // Reproduces the host app's shadow-root injection.
+  const hostEl = document.getElementById('host');
+  const statusEl = document.getElementById('status');
+  const selectEl = document.getElementById('fragment-select');
+  const reloadEl = document.getElementById('reload');
+
+  // Attach a shadow root once. Re-injecting innerHTML wipes it between loads.
+  const shadow = hostEl.attachShadow({ mode: 'open' });
+
+  function loadFragment(path) {
+    statusEl.textContent = 'loading ' + path + '…';
+    return fetch(path, { cache: 'no-store' })
+      .then(r => {
+        if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+        return r.text();
+      })
+      .then(html => {
+        shadow.innerHTML = html;
+        statusEl.textContent = 'loaded ' + path;
+      })
+      .catch(err => {
+        shadow.innerHTML = '<p style="padding:24px;color:#C8272E">Failed to load ' +
+          path + ': ' + err.message + '</p>';
+        statusEl.textContent = 'error: ' + err.message;
+      });
+  }
+
+  selectEl.addEventListener('change', () => loadFragment(selectEl.value));
+  reloadEl.addEventListener('click', () => loadFragment(selectEl.value));
+
+  loadFragment(selectEl.value);
+</script>
+
+</body>
+</html>

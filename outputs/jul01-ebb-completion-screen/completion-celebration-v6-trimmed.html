@@ -1,0 +1,130 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Completion celebration — v6 trimmed copy</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-mid:#B67D23;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.55}
+.page{max-width:1400px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:1000px;margin:0 0 4px;font-size:14px}
+.flow{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}.flow b{color:var(--teal-2)}
+.grid{display:flex;flex-wrap:wrap;gap:34px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:9px;width:360px}
+.cap{font-size:12px;color:var(--ink-2);max-width:360px}.cap b{color:var(--ink)}
+.cap .cut{color:var(--ink-3);text-decoration:line-through}
+.vtag{display:inline-block;font-size:11px;font-weight:700;color:var(--ink-2);background:#E7E1D4;padding:4px 10px;border-radius:6px}
+.vtag.now{background:var(--teal-tint);color:var(--teal)}
+.vtag.rec{color:#fff;background:var(--teal)}
+.phone{width:360px;background:#000;border-radius:44px;padding:10px;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{border-radius:36px;overflow:hidden;background:var(--surface)}
+.cbar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px 4px}
+.cbar .t{font-size:13px;font-weight:600}
+.cbar .x{width:30px;height:30px;border-radius:50%;background:rgba(34,38,42,.06);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ink-2)}
+.cel{position:relative;padding:14px 24px 22px;text-align:center;background:linear-gradient(180deg,var(--teal-tint) 0%,rgba(224,234,235,0) 82%);overflow:hidden}
+.conf i{position:absolute;display:block;border-radius:2px;opacity:.85}
+.med{width:82px;height:82px;margin:6px auto 0;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:38px;box-shadow:0 0 0 8px rgba(14,74,86,.1),0 10px 22px -10px rgba(14,74,86,.7)}
+.ebs{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-2);margin-top:15px}
+.ttl{font-size:24px;font-weight:730;letter-spacing:-0.02em;line-height:1.13;margin:6px 0 0}
+.win{margin:11px auto 0;font-size:14px;line-height:1.5;color:var(--ink-2);max-width:31ch}.win b{color:var(--ink);font-weight:650}
+.block{padding:0 24px 22px}
+.rcard{margin-top:18px;border:1px solid var(--amber-mid);background:var(--amber-tint);border-radius:16px;padding:15px 16px;display:flex;align-items:center;gap:13px}
+.rcard .coin{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid rgba(138,90,18,.35);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--amber);font-size:15px;flex:none}
+.rcard .rm{font-size:17px;font-weight:730;color:var(--amber)}
+.rcard .rs{font-size:12px;color:var(--ink-2);margin-top:1px}
+.prog{margin-top:16px}
+.ph{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px}
+.ph .l{font-weight:650}.ph .r{color:var(--ink-3)}
+.pips{display:flex;gap:6px;margin-top:9px}.pips i{height:8px;border-radius:5px;flex:1;background:rgba(14,74,86,.14)}.pips i.on{background:var(--teal)}
+.divider{height:1px;background:var(--line);margin:22px -24px 0}
+.neyebrow{font-size:11.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:20px}
+.tapcard{margin-top:12px;border:1.5px solid var(--teal);border-radius:17px;overflow:hidden;background:#fff;box-shadow:0 8px 20px -13px rgba(14,74,86,.55)}
+.tapimg{height:100px;background:linear-gradient(120deg,#17636f,#2b8b93 55%,#6fb7ba);position:relative}
+.whytag{position:absolute;left:12px;bottom:10px;background:rgba(255,255,255,.92);color:var(--teal);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 8px;border-radius:6px}
+.tapfoot{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;gap:10px}
+.tapfoot .tt{font-size:17px;font-weight:730}.tapfoot .tm{font-size:12.5px;color:var(--ink-2);margin-top:2px}.tapfoot .tm .m{color:var(--amber);font-weight:700}
+.tapcta{font-size:14.5px;font-weight:730;color:var(--teal);flex:none}
+.qlink{display:block;text-align:center;margin:15px 0 4px;font-size:13.5px;color:var(--teal-2);font-weight:650}
+.rec-note{margin-top:28px;max-width:1000px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Completion celebration — trimmed copy</h1>
+<p class="sub">Same structure as settled v3 — nothing moved, nothing added. Just less verbose copy. Shown next to the current version so the cuts are visible.</p>
+<p class="flow">Structure unchanged: celebration → $100 → progress (top) · next-path card + browse (bottom).</p>
+
+<div class="grid">
+
+<!-- CURRENT -->
+<div class="col">
+<span class="vtag now">Current · v3</span>
+<div class="phone"><div class="scr">
+<div class="cbar"><span class="t">9:41</span><span class="x">✕</span></div>
+<div class="cel">
+<div class="med">✓</div>
+<div class="ebs">Care path complete</div>
+<div class="ttl">You finished<br>Managing Depression</div>
+<div class="win">All <b>10 sessions</b> done — real, lasting work for your mental health. That's something to be proud of.</div>
+</div>
+<div class="block">
+<div class="rcard"><div class="coin">$</div><div><div class="rm">$100 Amazon gift card earned</div><div class="rs">On its way to your rewards — no action needed.</div></div></div>
+<div class="prog"><div class="ph"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+<div class="divider"></div>
+<div class="neyebrow">Your next path</div>
+<div class="tapcard"><div class="tapimg"><span class="whytag">You said sleep matters</span></div><div class="tapfoot"><div><div class="tt">Treating Insomnia</div><div class="tm">8 sessions · <span class="m">Earn $100</span></div></div><span class="tapcta">Start ›</span></div></div>
+<a class="qlink">Browse all care paths</a>
+</div>
+</div></div>
+<div class="cap"><b>Current.</b> The settled screen. Two spots read long: the win line runs to two sentences, and the reward sub-line repeats "your rewards."</div>
+</div>
+
+<!-- TRIMMED -->
+<div class="col">
+<span class="vtag rec">Trimmed  ·  lean</span>
+<div class="phone"><div class="scr">
+<div class="cbar"><span class="t">9:41</span><span class="x">✕</span></div>
+<div class="cel">
+<div class="med">✓</div>
+<div class="ebs">Care path complete</div>
+<div class="ttl">You finished<br>Managing Depression</div>
+<div class="win">All <b>10 sessions</b> done — real, lasting work for your mental health.</div>
+</div>
+<div class="block">
+<div class="rcard"><div class="coin">$</div><div><div class="rm">$100 gift card earned</div><div class="rs">On its way — no action needed.</div></div></div>
+<div class="prog"><div class="ph"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+<div class="divider"></div>
+<div class="neyebrow">Your next path</div>
+<div class="tapcard"><div class="tapimg"><span class="whytag">You said sleep matters</span></div><div class="tapfoot"><div><div class="tt">Treating Insomnia</div><div class="tm">8 sessions · <span class="m">Earn $100</span></div></div><span class="tapcta">Start ›</span></div></div>
+<a class="qlink">Browse all care paths</a>
+</div>
+</div></div>
+<div class="cap"><b>Trimmed. (my lean.)</b> Win line drops the second sentence (<span class="cut">"That's something to be proud of."</span>); reward reads "$100 gift card earned" + "On its way — no action needed." Same warmth, less to read. Everything else identical.</div>
+</div>
+
+<!-- TRIMMED MORE -->
+<div class="col">
+<span class="vtag">Trimmed more</span>
+<div class="phone"><div class="scr">
+<div class="cbar"><span class="t">9:41</span><span class="x">✕</span></div>
+<div class="cel">
+<div class="med">✓</div>
+<div class="ebs">Care path complete</div>
+<div class="ttl">You finished<br>Managing Depression</div>
+<div class="win">All <b>10 sessions</b> done.</div>
+</div>
+<div class="block">
+<div class="rcard"><div class="coin">$</div><div><div class="rm">$100 gift card earned</div><div class="rs">On its way.</div></div></div>
+<div class="prog"><div class="ph"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+<div class="divider"></div>
+<div class="neyebrow">Your next path</div>
+<div class="tapcard"><div class="tapimg"><span class="whytag">You said sleep matters</span></div><div class="tapfoot"><div><div class="tt">Treating Insomnia</div><div class="tm">8 sessions · <span class="m">Earn $100</span></div></div><span class="tapcta">Start ›</span></div></div>
+<a class="qlink">Browse all</a>
+</div>
+</div></div>
+<div class="cap"><b>Trimmed more.</b> Tightest without losing structure: win line to a single clause, reward sub to "On its way," browse to "Browse all." Cleaner but the win line loses some of the "real work" warmth.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> the middle — <b>Trimmed</b>. It removes the two genuinely long bits (the second win sentence and the repetitive reward sub-line) while keeping the phrase that carries the meaning — "real, lasting work for your mental health." <b>Trimmed more</b> is there if you want it leaner, but "All 10 sessions done." alone loses the bit that makes the finish feel like it mattered. Structure is byte-for-byte the same as v3 in all three.
+</div>
+</div>
+</body></html>

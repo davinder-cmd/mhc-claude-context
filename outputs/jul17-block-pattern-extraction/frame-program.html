@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Program cards — render frame</title>
+  <link rel="stylesheet" href="mhc-home.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    .mhc-home { padding: 16px; }
+    /* DEMO-ONLY: locked CSS sets no background-size on media shells. */
+    .program__media { background-size: cover; background-position: center; }
+    .program:nth-child(1) .program__media { background-image: url('https://picsum.photos/seed/mhcsleep/800/450'); }
+    .program:nth-child(2) .program__media { background-image: url('https://picsum.photos/seed/mhcstress/800/450'); }
+    .program:nth-child(3) .program__media { background-image: url('https://picsum.photos/seed/mhcdiabetes/800/450'); }
+  </style>
+</head>
+<body>
+<div class="mhc-home">
+  <div class="programs">
+
+    <article class="program">
+      <div class="program__media" aria-hidden="true"></div>
+      <div class="program__body">
+        <div class="eyebrow program__tag"><span class="dot" aria-hidden="true"></span>DCP · Sleep</div>
+        <h3 class="title-1">Better Sleep</h3>
+        <div class="program__footer body-3"><span>Session 3 of 8</span><span class="price">$100</span></div>
+        <div class="progress"><div class="progress__fill" style="--p:37.5%"></div></div>
+      </div>
+      <a class="program__link" href="#"><span class="mhc-visually-hidden">Better Sleep</span></a>
+    </article>
+
+    <article class="program">
+      <div class="program__media" aria-hidden="true"></div>
+      <div class="program__body">
+        <div class="eyebrow program__tag"><span class="dot" aria-hidden="true"></span>DCP · Stress</div>
+        <h3 class="title-1">Manage Stress</h3>
+        <div class="program__footer body-3"><span>Week 2 of 6</span><span class="price">$75</span></div>
+        <div class="progress"><div class="progress__fill" style="--p:33%"></div></div>
+      </div>
+      <a class="program__link" href="#"><span class="mhc-visually-hidden">Manage Stress</span></a>
+    </article>
+
+    <article class="program">
+      <div class="program__media" aria-hidden="true"></div>
+      <div class="program__body">
+        <div class="eyebrow program__tag"><span class="dot" aria-hidden="true"></span>DCP · Diabetes</div>
+        <h3 class="title-1">Diabetes Prevention</h3>
+        <div class="program__footer body-3"><span>Week 6 of 16</span><span class="price">$120</span></div>
+        <div class="progress"><div class="progress__fill" style="--p:62.5%"></div></div>
+      </div>
+      <a class="program__link" href="#"><span class="mhc-visually-hidden">Diabetes Prevention</span></a>
+    </article>
+
+  </div>
+</div>
+</body>
+</html>

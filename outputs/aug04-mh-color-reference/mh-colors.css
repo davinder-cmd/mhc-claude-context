@@ -1,0 +1,455 @@
+/* ============================================================
+   MH Colors v2 — full reference palette
+   Source: Figma "MH colors v2" (i1nW5PTL7yU4MYOMgyAJ7c)
+   Extracted 2026-08-04. 22 families x 16 steps = 352 values.
+
+   This file is REFERENCE. Do not ship it as-is — pull the
+   handful of values a project needs into that project's own
+   token layer. See COLOR-REFERENCE.md for which steps are safe
+   for text, which are backgrounds only, and which are broken.
+   ============================================================ */
+
+:root {
+
+  /* ── Warm neutrals — Backgrounds only at 100–300. 400+ reads as brown ink. */
+  /* Coffee: AA text from 600 · UI from 500 */
+  --coffee-100: #F0EDEA;           /*  1.17:1 wash   */
+  --coffee-200: #E7E1DC;           /*   1.3:1 wash   */
+  --coffee-300: #DDD4CD;           /*  1.46:1 tint   */
+  --coffee-400: #C3B5A9;           /*     2:1 tint   */
+  --coffee-500: #A68F7E;           /*  3.06:1 ui     */
+  --coffee-600: #886A53;           /*  4.96:1 text   */
+  --coffee-700: #75553C;           /*  6.73:1 text   */
+  --coffee-800: #624025;           /*  9.21:1 ink    */
+  --coffee-900: #5D3D23;           /*  9.73:1 ink    */
+  --coffee-1000: #573921;          /* 10.43:1 ink    */
+  --coffee-1100: #4E331D;          /* 11.57:1 ink    */
+  --coffee-1200: #442D19;          /* 12.84:1 ink    */
+  --coffee-1300: #3B2716;          /* 14.12:1 ink    */
+  --coffee-1400: #322113;          /* 15.41:1 ink    */
+  --coffee-1500: #2D1D10;          /* 16.22:1 ink    */
+  --coffee-1600: #261A10;          /* 16.97:1 ink    */
+
+  /* Cocoa: AA text from 800 · UI from 600 */
+  --cocoa-100: #F6F0EB;            /*  1.13:1 wash   */
+  --cocoa-200: #F0E7DE;            /*  1.22:1 wash   */
+  --cocoa-300: #EADDD0;            /*  1.33:1 tint   */
+  --cocoa-400: #DBC3AF;            /*  1.69:1 tint   */
+  --cocoa-500: #C9A686;            /*  2.26:1 accent */
+  --cocoa-600: #B7885E;            /*  3.14:1 ui     */
+  --cocoa-700: #A87548;            /*  3.96:1 ui     */
+  --cocoa-800: #986232;            /*  5.09:1 text   */
+  --cocoa-900: #905D2F;            /*  5.54:1 text   */
+  --cocoa-1000: #88572C;           /*  6.09:1 text   */
+  --cocoa-1100: #7A4E28;           /*  7.12:1 ink    */
+  --cocoa-1200: #6B4523;           /*   8.4:1 ink    */
+  --cocoa-1300: #5D3C1E;           /*  9.86:1 ink    */
+  --cocoa-1400: #4F3319;           /* 11.54:1 ink    */
+  --cocoa-1500: #452D16;           /* 12.81:1 ink    */
+  --cocoa-1600: #3C2A18;           /* 13.67:1 ink    */
+
+  /* Mub: AA text from 800 · UI from 600 */
+  --mub-100: #F3F2EF;              /*  1.12:1 wash   */
+  --mub-200: #EBE9E4;              /*  1.21:1 wash   */
+  --mub-300: #E2E0DA;              /*  1.32:1 tint   */
+  --mub-400: #CDC9BF;              /*  1.65:1 tint   */
+  --mub-500: #B3AD9E;              /*  2.24:1 accent */
+  --mub-600: #9A927E;              /*  3.09:1 ui     */
+  --mub-700: #89806B;              /*  3.92:1 ui     */
+  --mub-800: #776E57;              /*  5.06:1 text   */
+  --mub-900: #716852;              /*  5.52:1 text   */
+  --mub-1000: #6A624D;             /*  6.06:1 text   */
+  --mub-1100: #5F5845;             /*  7.07:1 ink    */
+  --mub-1200: #544D3D;             /*  8.38:1 ink    */
+  --mub-1300: #494335;             /*  9.82:1 ink    */
+  --mub-1400: #3E392D;             /* 11.49:1 ink    */
+  --mub-1500: #373227;             /* 12.74:1 ink    */
+  --mub-1600: #2E2A22;             /* 14.28:1 ink    */
+
+
+  /* ── Cool neutral — All MHC ink comes from here. 1500 is out of order — skip it. */
+  /* Grey: AA text from 900 · UI from 700 */
+  --grey-100: #F8F8F9;             /*  1.06:1 wash   */
+  --grey-200: #F1F1F1;             /*  1.13:1 wash   */
+  --grey-300: #E5E5E4;             /*  1.26:1 wash   */
+  --grey-400: #D6D6D5;             /*  1.45:1 tint   */
+  --grey-500: #C0C0C0;             /*  1.82:1 tint   */
+  --grey-600: #A6A5A5;             /*  2.46:1 accent */
+  --grey-700: #898989;             /*   3.5:1 ui     */
+  --grey-800: #777777;             /*  4.48:1 ui     */
+  --grey-900: #717171;             /*  4.88:1 text   */
+  --grey-1000: #6A6A6A;            /*  5.41:1 text   */
+  --grey-1100: #5F5F5F;            /*  6.39:1 text   */
+  --grey-1200: #545454;            /*  7.57:1 ink    */
+  --grey-1300: #494949;            /*     9:1 ink    */
+  --grey-1400: #3E3E3E;            /*  10.7:1 ink    */
+  --grey-1500: #535051;            /*  7.97:1 ink    ⚠ Lighter than 1400 — ramp reverses */
+  --grey-1600: #393C3C;            /* 11.14:1 ink    */
+
+
+  /* ── Yellow-greens — Light-starved. No AAA text available in Honeydew. */
+  /* Honeydew: AA text from 1400 · UI from 1200 */
+  --honeydew-100: #FBFCEC;         /*  1.04:1 wash   */
+  --honeydew-200: #F8FADF;         /*  1.06:1 wash   */
+  --honeydew-300: #F5F8D2;         /*  1.09:1 wash   */
+  --honeydew-400: #EDF3B2;         /*  1.16:1 wash   */
+  --honeydew-500: #E4ED8B;         /*  1.25:1 wash   */
+  --honeydew-600: #DBE765;         /*  1.34:1 tint   */
+  --honeydew-700: #CFDC4F;         /*   1.5:1 tint   */
+  --honeydew-800: #C3D039;         /*  1.69:1 tint   */
+  --honeydew-900: #B8C436;         /*  1.91:1 tint   */
+  --honeydew-1000: #ADB933;        /*  2.15:1 accent */
+  --honeydew-1100: #9BA52E;        /*  2.69:1 accent */
+  --honeydew-1200: #899128;        /*  3.42:1 ui     */
+  --honeydew-1300: #777E23;        /*  4.38:1 ui     */
+  --honeydew-1400: #656B1D;        /*  5.72:1 text   */
+  --honeydew-1500: #595E1A;        /*  6.91:1 text   */
+  --honeydew-1600: #494C1B;        /*     9:1 ink    */
+
+  /* Lime: AA text from 1300 · UI from 1100 */
+  --lime-100: #F3FBED;             /*  1.06:1 wash   */
+  --lime-200: #EBF8E1;             /*   1.1:1 wash   */
+  --lime-300: #E3F5D4;             /*  1.15:1 wash   */
+  --lime-400: #CFEDB5;             /*  1.28:1 wash   */
+  --lime-500: #B6E490;             /*  1.45:1 tint   */
+  --lime-600: #9EDB6B;             /*  1.64:1 tint   */
+  --lime-700: #8ECF56;             /*  1.87:1 tint   */
+  --lime-800: #7DC240;             /*  2.17:1 accent */
+  --lime-900: #76B73D;             /*  2.44:1 accent */
+  --lime-1000: #6EAC3A;            /*  2.75:1 accent */
+  --lime-1100: #639A34;            /*  3.39:1 ui     */
+  --lime-1200: #57882E;            /*  4.23:1 ui     */
+  --lime-1300: #4C7628;            /*  5.34:1 text   */
+  --lime-1400: #406422;            /*  6.85:1 text   */
+  --lime-1500: #39581E;            /*  8.11:1 ink    */
+  --lime-1600: #30471D;            /* 10.27:1 ink    */
+
+
+  /* ── Greens — Green = positive semantic. Jade unused at MHC. */
+  /* Green: AA text from 1200 · UI from 900 */
+  --green-100: #EFF8EF;            /*  1.09:1 wash   */
+  --green-200: #E4F3E4;            /*  1.15:1 wash   */
+  --green-300: #DAEFDA;            /*  1.21:1 wash   */
+  --green-400: #BEE4BF;            /*   1.4:1 tint   */
+  --green-500: #9ED79F;            /*  1.66:1 tint   */
+  --green-600: #7DC97F;            /*  1.99:1 tint   */
+  --green-700: #6ABB6B;            /*  2.35:1 accent */
+  --green-800: #57AD57;            /*  2.79:1 accent */
+  --green-900: #52A353;            /*  3.12:1 ui     */
+  --green-1000: #4C9A4E;           /*  3.48:1 ui     */
+  --green-1100: #458A46;           /*  4.22:1 ui     */
+  --green-1200: #3D7A3E;           /*  5.18:1 text   */
+  --green-1300: #356A36;           /*  6.43:1 text   */
+  --green-1400: #2C5A2E;           /*  8.05:1 ink    */
+  --green-1500: #274F28;           /*  9.39:1 ink    */
+  --green-1600: #254325;           /*    11:1 ink    */
+
+  /* Jade: AA text from 1200 · UI from 900 */
+  --jade-100: #ECF9F5;             /*  1.08:1 wash   */
+  --jade-200: #DFF5EE;             /*  1.14:1 wash   */
+  --jade-300: #D2F1E7;             /*   1.2:1 wash   */
+  --jade-400: #B1E7D6;             /*  1.38:1 tint   */
+  --jade-500: #89DAC1;             /*  1.63:1 tint   */
+  --jade-600: #62CEAD;             /*  1.92:1 tint   */
+  --jade-700: #4DC19C;             /*  2.23:1 accent */
+  --jade-800: #37B38B;             /*  2.63:1 accent */
+  --jade-900: #2FA782;             /*  3.01:1 ui     */
+  --jade-1000: #309F7D;            /*  3.29:1 ui     */
+  --jade-1100: #2B8F70;            /*  3.99:1 ui     */
+  --jade-1200: #267E63;            /*  4.94:1 text   */
+  --jade-1300: #216E56;            /*  6.12:1 text   */
+  --jade-1400: #1B5D48;            /*  7.76:1 ink    */
+  --jade-1500: #185240;            /*  9.05:1 ink    */
+  --jade-1600: #1A4538;            /* 10.76:1 ink    */
+
+
+  /* ── Cyans — Turquoise 1300 is the closest match to MHC teal-dark. */
+  /* Teal: AA text from 1200 · UI from 1000 */
+  --teal-100: #E8FAFA;             /*  1.08:1 wash   */
+  --teal-200: #D4F1F2;             /*  1.19:1 wash   */
+  --teal-300: #CAF2F4;             /*   1.2:1 wash   */
+  --teal-400: #A3E9EC;             /*  1.36:1 tint   */
+  --teal-500: #75DEE3;             /*  1.58:1 tint   */
+  --teal-600: #47D3D9;             /*  1.81:1 tint   */
+  --teal-700: #2FC5CC;             /*   2.1:1 accent */
+  --teal-800: #17B8BE;             /*  2.43:1 accent */
+  --teal-900: #15AEB4;             /*  2.71:1 accent */
+  --teal-1000: #13A4AB;            /*  3.03:1 ui     */
+  --teal-1100: #11939A;            /*  3.71:1 ui     */
+  --teal-1200: #108188;            /*  4.65:1 text   */
+  --teal-1300: #0E7077;            /*  5.83:1 text   */
+  --teal-1400: #0B5F65;            /*   7.4:1 ink    */
+  --teal-1500: #0A545A;            /*  8.65:1 ink    */
+  --teal-1600: #0F474A;            /* 10.39:1 ink    */
+
+  /* Turquoise: AA text from 1100 · UI from 800 */
+  --turquoise-100: #E9F6FA;        /*   1.1:1 wash   */
+  --turquoise-200: #DAF0F7;        /*  1.18:1 wash   */
+  --turquoise-300: #CBE9F4;        /*  1.27:1 wash   */
+  --turquoise-400: #A6DAEC;        /*  1.52:1 tint   */
+  --turquoise-500: #79C7E3;        /*  1.89:1 tint   */
+  --turquoise-600: #4DB5D9;        /*  2.35:1 accent */
+  --turquoise-700: #35A6CC;        /*  2.81:1 accent */
+  --turquoise-800: #1E96BE;        /*  3.41:1 ui     */
+  --turquoise-900: #1C8EB4;        /*  3.77:1 ui     */
+  --turquoise-1000: #1A85AB;       /*  4.21:1 ui     */
+  --turquoise-1100: #17779A;       /*  5.07:1 text   */
+  --turquoise-1200: #146988;       /*  6.17:1 text   */
+  --turquoise-1300: #125C77;       /*  7.44:1 ink    */
+  --turquoise-1400: #0F4E65;       /*  9.14:1 ink    */
+  --turquoise-1500: #0D4559;       /* 10.43:1 ink    */
+  --turquoise-1600: #103B49;       /* 12.04:1 ink    */
+
+
+  /* ── Blues — Ocean is the MHC brand family. Blue and Indigo go purple — avoid. */
+  /* Ocean: AA text from 800 · UI from 600 */
+  --ocean-100: #EAF2FA;            /*  1.13:1 wash   */
+  --ocean-200: #DCEAF7;            /*  1.22:1 wash   */
+  --ocean-300: #CDE1F4;            /*  1.34:1 tint   */
+  --ocean-400: #A9CBED;            /*  1.69:1 tint   */
+  --ocean-500: #7DB1E3;            /*  2.27:1 accent */
+  --ocean-600: #5297DA;            /*  3.09:1 ui     */
+  --ocean-700: #3B85CC;            /*  3.88:1 ui     */
+  --ocean-800: #2473BD;            /*  4.93:1 text   */
+  --ocean-900: #226DB5;            /*  5.35:1 text   */
+  --ocean-1000: #2473BD;           /*  4.93:1 text   ⚠ Lighter than 900 — ramp reverses */
+  --ocean-1100: #1C5C9A;           /*  6.89:1 text   */
+  --ocean-1200: #195188;           /*  8.16:1 ink    */
+  --ocean-1300: #164677;           /*  9.65:1 ink    */
+  --ocean-1400: #133B65;           /* 11.41:1 ink    */
+  --ocean-1500: #103459;           /* 12.67:1 ink    */
+  --ocean-1600: #16314D;           /* 13.29:1 ink    */
+
+  /* Blue: AA text from 700 · UI from 600 */
+  --blue-100: #EBEFFA;             /*  1.15:1 wash   */
+  --blue-200: #DDE3F7;             /*  1.28:1 wash   */
+  --blue-300: #CFD8F4;             /*  1.42:1 tint   */
+  --blue-400: #ABBCED;             /*  1.88:1 tint   */
+  --blue-500: #829AE3;             /*  2.73:1 accent */
+  --blue-600: #5879DA;             /*  4.07:1 ui     */
+  --blue-700: #4265CC;             /*   5.3:1 text   */
+  --blue-800: #2C51BE;             /*  6.94:1 text   */
+  --blue-900: #294CB5;             /*  7.51:1 ink    */
+  --blue-1000: #2647AC;            /*  8.14:1 ink    */
+  --blue-1100: #223F9A;            /*  9.35:1 ink    */
+  --blue-1200: #1E3788;            /* 10.73:1 ink    */
+  --blue-1300: #1A3177;            /*    12:1 ink    */
+  --blue-1400: #162A65;            /* 13.52:1 ink    */
+  --blue-1500: #132559;            /* 14.62:1 ink    */
+  --blue-1600: #18264D;            /* 14.75:1 ink    */
+
+  /* Indigo: AA text from 600 · UI from 500 */
+  --indigo-100: #EDE9FA;           /*  1.19:1 wash   */
+  --indigo-200: #E1DBF6;           /*  1.34:1 tint   */
+  --indigo-300: #D4CCF3;           /*  1.53:1 tint   */
+  --indigo-400: #B4A7EB;           /*  2.17:1 accent */
+  --indigo-500: #8F7BE0;           /*  3.46:1 ui     */
+  --indigo-600: #694FD6;           /*  5.69:1 text   */
+  --indigo-700: #5438C8;           /*  7.56:1 ink    */
+  --indigo-800: #482BBD;           /*  8.91:1 ink    */
+  --indigo-900: #3B1EB1;           /* 10.47:1 ink    */
+  --indigo-1000: #371DA8;          /* 11.03:1 ink    */
+  --indigo-1100: #321A97;          /* 12.14:1 ink    */
+  --indigo-1200: #2C1685;          /* 13.46:1 ink    */
+  --indigo-1300: #261474;          /* 14.64:1 ink    */
+  --indigo-1400: #201163;          /* 15.89:1 ink    */
+  --indigo-1500: #1C0F58;          /* 16.68:1 ink    */
+  --indigo-1600: #1B1247;          /* 17.16:1 ink    */
+
+
+  /* ── Purples — Unused at MHC. Violet 1100→1200 is out of order. */
+  /* Purple: AA text from 600 · UI from 500 */
+  --purple-100: #F3E7F9;           /*  1.19:1 wash   */
+  --purple-200: #ECD7F5;           /*  1.35:1 tint   */
+  --purple-300: #E4C7F1;           /*  1.53:1 tint   */
+  --purple-400: #D09FE6;           /*  2.15:1 accent */
+  --purple-500: #B86EDA;           /*  3.34:1 ui     */
+  --purple-600: #A13ECD;           /*  5.14:1 text   */
+  --purple-700: #8D26B9;           /*  6.75:1 text   */
+  --purple-800: #820DAF;           /*     8:1 ink    */
+  --purple-900: #7A0DA6;           /*  8.62:1 ink    */
+  --purple-1000: #720C9D;          /*  9.31:1 ink    */
+  --purple-1100: #670B8C;          /* 10.48:1 ink    */
+  --purple-1200: #5C097A;          /* 11.83:1 ink    */
+  --purple-1300: #510869;          /* 13.22:1 ink    */
+  --purple-1400: #460658;          /* 14.71:1 ink    */
+  --purple-1500: #3F054C;          /*  15.7:1 ink    */
+  --purple-1600: #360B40;          /* 16.42:1 ink    */
+
+  /* Violet: AA text from 700 · UI from 600 */
+  --violet-100: #F9E8F5;           /*  1.17:1 wash   */
+  --violet-200: #F5D8EE;           /*  1.32:1 tint   */
+  --violet-300: #F1C8E6;           /*  1.48:1 tint   */
+  --violet-400: #E79FD5;           /*  2.04:1 accent */
+  --violet-500: #DA70BF;           /*  2.98:1 accent */
+  --violet-600: #CE40AA;           /*  4.25:1 ui     */
+  --violet-700: #C32899;           /*  5.14:1 text   */
+  --violet-800: #B80F87;           /*  6.08:1 text   */
+  --violet-900: #AE0E7F;           /*  6.63:1 text   */
+  --violet-1000: #A40D77;          /*  7.24:1 ink    */
+  --violet-1100: #950C69;          /*  8.29:1 ink    */
+  --violet-1200: #861D5C;          /*  8.96:1 ink    — ramp reverses */
+  --violet-1300: #79094D;          /* 10.72:1 ink    */
+  --violet-1400: #6B083F;          /* 12.13:1 ink    */
+  --violet-1500: #620736;          /*  13.1:1 ink    */
+  --violet-1600: #510E30;          /* 14.43:1 ink    */
+
+
+  /* ── Reds & pinks — Ember 1000→1100 is out of order. Coral 800–1500 is eight near-identical reds. */
+  /* Pink: AA text from 800 · UI from 600 */
+  --pink-100: #FCE9EF;             /*  1.16:1 wash   */
+  --pink-200: #FBDAE4;             /*  1.29:1 wash   */
+  --pink-300: #F9CADA;             /*  1.45:1 tint   */
+  --pink-400: #F4A3BF;             /*  1.94:1 tint   */
+  --pink-500: #EF769E;             /*  2.71:1 accent */
+  --pink-600: #E9487E;             /*  3.69:1 ui     */
+  --pink-700: #E1316A;             /*  4.33:1 ui     */
+  --pink-800: #D91955;             /*  4.98:1 text   */
+  --pink-900: #CF1750;             /*   5.4:1 text   */
+  --pink-1000: #C5154A;            /*  5.87:1 text   */
+  --pink-1100: #B51241;            /*  6.71:1 text   */
+  --pink-1200: #A51037;            /*  7.69:1 ink    */
+  --pink-1300: #970E2D;            /*  8.69:1 ink    */
+  --pink-1400: #880B23;            /*  9.91:1 ink    */
+  --pink-1500: #7E0A1D;            /* 10.78:1 ink    */
+  --pink-1600: #63101D;            /* 12.94:1 ink    */
+
+  /* Coral: AA text from 700 · UI from 600 */
+  --coral-100: #FDE6E6;            /*  1.19:1 wash   */
+  --coral-200: #FBD4D4;            /*  1.36:1 tint   */
+  --coral-300: #F9C4C4;            /*  1.53:1 tint   */
+  --coral-400: #F59999;            /*  2.12:1 accent */
+  --coral-500: #F06D6D;            /*  2.95:1 accent */
+  --coral-600: #EA4444;            /*  3.88:1 ui     */
+  --coral-700: #E31A1A;            /*  4.74:1 text   */
+  --coral-800: #DA0000;            /*  5.27:1 text   */
+  --coral-900: #D20000;            /*  5.61:1 text   */
+  --coral-1000: #C90000;           /*  6.03:1 text   */
+  --coral-1100: #BB0000;           /*  6.75:1 text   */
+  --coral-1200: #AC0000;           /*  7.62:1 ink    */
+  --coral-1300: #9F0000;           /*  8.49:1 ink    */
+  --coral-1400: #910000;           /*  9.53:1 ink    */
+  --coral-1500: #880000;           /* 10.26:1 ink    */
+  --coral-1600: #6D0A0A;           /* 12.37:1 ink    */
+
+  /* Ember: AA text from 1000 · UI from 700 */
+  --ember-100: #FEEEE8;            /*  1.13:1 wash   */
+  --ember-200: #F8DDD3;            /*  1.29:1 wash   */
+  --ember-300: #FCD6C8;            /*  1.35:1 tint   */
+  --ember-400: #FAB8A0;            /*  1.69:1 tint   */
+  --ember-500: #F89570;            /*   2.2:1 accent */
+  --ember-600: #F57141;            /*  2.87:1 accent */
+  --ember-700: #EF5D28;            /*  3.35:1 ui     */
+  --ember-800: #E7531F;            /*  3.71:1 ui     */
+  --ember-900: #DF4916;            /*  4.12:1 ui     */
+  --ember-1000: #D73F0D;           /*  4.56:1 text   */
+  --ember-1100: #CA3B27;           /*  5.04:1 text   — ramp reverses */
+  --ember-1200: #BE3009;           /*  5.81:1 text   */
+  --ember-1300: #B12907;           /*  6.58:1 text   */
+  --ember-1400: #A42105;           /*   7.5:1 ink    */
+  --ember-1500: #9B1C04;           /*   8.2:1 ink    */
+  --ember-1600: #7A1F0E;           /* 10.35:1 ink    */
+
+
+  /* ── Oranges & yellows — Never for text. Yellow and Lemon cannot reach AAA at any step. */
+  /* Orange: AA text from 1400 · UI from 1000 */
+  --orange-100: #FFEDE1;           /*  1.14:1 wash   */
+  --orange-200: #FFE5D0;           /*  1.21:1 wash   */
+  --orange-300: #FFDCBF;           /*  1.29:1 wash   */
+  --orange-400: #FFC694;           /*  1.53:1 tint   */
+  --orange-500: #FFAD66;           /*  1.84:1 tint   */
+  --orange-600: #FF9333;           /*  2.22:1 accent */
+  --orange-700: #F9841A;           /*  2.52:1 accent */
+  --orange-800: #F87900;           /*  2.72:1 accent */
+  --orange-900: #F57400;           /*  2.85:1 accent */
+  --orange-1000: #ED6C00;          /*  3.11:1 ui     */
+  --orange-1100: #E86600;          /*  3.32:1 ui     */
+  --orange-1200: #DF5D00;          /*  3.68:1 ui     */
+  --orange-1300: #D15200;          /*  4.27:1 ui     */
+  --orange-1400: #C34600;          /*     5:1 text   */
+  --orange-1500: #B43C00;          /*  5.85:1 text   */
+  --orange-1600: #87330A;          /*  8.37:1 ink    */
+
+  /* Mustard: AA text from 1500 · UI from 1300 */
+  --mustard-100: #FFF2E1;          /*   1.1:1 wash   */
+  --mustard-200: #FFEDD0;          /*  1.15:1 wash   */
+  --mustard-300: #FFE7BF;          /*   1.2:1 wash   */
+  --mustard-400: #FFDA94;          /*  1.34:1 tint   */
+  --mustard-500: #FFC966;          /*  1.52:1 tint   */
+  --mustard-600: #FFB933;          /*  1.72:1 tint   */
+  --mustard-700: #F9AE1A;          /*  1.89:1 tint   */
+  --mustard-800: #F8A200;          /*  2.07:1 accent */
+  --mustard-900: #F59C00;          /*  2.18:1 accent */
+  --mustard-1000: #F19500;         /*  2.32:1 accent */
+  --mustard-1100: #E88800;         /*  2.64:1 accent */
+  --mustard-1200: #DF8000;         /*  2.91:1 accent */
+  --mustard-1300: #D17100;         /*  3.46:1 ui     */
+  --mustard-1400: #C36100;         /*  4.17:1 ui     */
+  --mustard-1500: #B45300;         /*  5.03:1 text   */
+  --mustard-1600: #87440A;         /*  7.34:1 ink    */
+
+  /* Yellow: AA text from 1600 · UI from 1300 */
+  --yellow-100: #FFF6E1;           /*  1.08:1 wash   */
+  --yellow-200: #FFF3D0;           /*  1.11:1 wash   */
+  --yellow-300: #FFF0BF;           /*  1.14:1 wash   */
+  --yellow-400: #FFE687;           /*  1.24:1 wash   */
+  --yellow-500: #FFDF66;           /*  1.31:1 tint   */
+  --yellow-600: #FFD633;           /*  1.41:1 tint   */
+  --yellow-700: #F9CD1A;           /*  1.52:1 tint   */
+  --yellow-800: #F8C400;           /*  1.63:1 tint   */
+  --yellow-900: #F5BD00;           /*  1.73:1 tint   */
+  --yellow-1000: #F1B500;          /*  1.85:1 tint   */
+  --yellow-1100: #E8A600;          /*  2.12:1 accent */
+  --yellow-1200: #DF9600;          /*  2.47:1 accent */
+  --yellow-1300: #D18300;          /*  3.02:1 ui     */
+  --yellow-1400: #C37500;          /*  3.58:1 ui     */
+  --yellow-1500: #B46500;          /*  4.37:1 ui     */
+  --yellow-1600: #87500A;          /*   6.6:1 text   */
+
+  /* Lemon: AA text from 1600 · UI from 1400 */
+  --lemon-100: #FFF9E1;            /*  1.06:1 wash   */
+  --lemon-200: #FFF9D0;            /*  1.07:1 wash   */
+  --lemon-300: #FFF8BF;            /*  1.08:1 wash   */
+  --lemon-400: #FFF694;            /*  1.11:1 wash   */
+  --lemon-500: #FFF566;            /*  1.13:1 wash   */
+  --lemon-600: #FFF333;            /*  1.16:1 wash   */
+  --lemon-700: #F9ED1A;            /*  1.22:1 wash   */
+  --lemon-800: #F8E700;            /*  1.28:1 wash   */
+  --lemon-900: #F5DE00;            /*  1.37:1 tint   */
+  --lemon-1000: #F1D500;           /*  1.47:1 tint   */
+  --lemon-1100: #E8C300;           /*  1.72:1 tint   */
+  --lemon-1200: #DFB100;           /*  2.01:1 accent */
+  --lemon-1300: #D19B00;           /*   2.5:1 accent */
+  --lemon-1400: #C38400;           /*  3.17:1 ui     */
+  --lemon-1500: #B47600;           /*   3.8:1 ui     */
+  --lemon-1600: #875C0A;           /*  5.89:1 text   */
+
+}
+
+/* ============================================================
+   MHC PRODUCTION TOKENS (what actually ships today)
+   Kept separate on purpose: most of these are NOT in the Figma
+   palette above. See the reconciliation table in
+   COLOR-REFERENCE.md before changing any of them.
+   ============================================================ */
+
+:root {
+  --bg:              #FAF7F0;  /* warm beige — no palette equivalent  */
+  --surface:         #FFFFFF;
+  --surface-tinted:  #EFE7D6;  /* ~Cocoa 200, warmer                  */
+  --ink:             #1A1D21;  /* graphite — NOT Coffee 1600 (brown)   */
+  --ink-soft:        #5C5F66;  /* ~Grey 1100                           */
+  --ink-placeholder: #9A9EA6;  /* ~Grey 600 — 2.69:1, decorative only  */
+  --hairline:        #E6E3DC;  /* ~Coffee 200 ✓ closest real match     */
+  --link:            #2E60A4;  /* ~Ocean 1100                          */
+  --brand:           #1B355C;  /* ~Ocean 1500                          */
+  --insight-bg:      #E8F0FA;  /* ~Ocean 100 ✓                         */
+  --insight-border:  #B5C8E0;  /* ~Ocean 400                           */
+  --red:             #C8272E;  /* ~Ember 1100 / Coral 1000             */
+  --green:           #4FA858;  /* ~Green 900 — 2.97:1, fails as text   */
+  --blue-icon:       #3A6FA8;  /* ~Ocean 900                           */
+  --orange:          #B5571E;  /* ~Mustard 1500                        */
+  --teal-dark:       #1E5A6B;  /* ~Turquoise 1300                      */
+  --progress-bg:     #DDD7C8;  /* ~Coffee 300 ✓                        */
+  --progress-fill:   #4A4A60;  /* ~Grey 1500 (the broken step)         */
+}

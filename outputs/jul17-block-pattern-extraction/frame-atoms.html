@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atoms — render frame</title>
+  <link rel="stylesheet" href="mhc-home.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    .mhc-home{ padding:16px; display:flex; flex-direction:column; gap:26px; }
+    .demo-label{ color:var(--ink-placeholder); font-family:var(--f-text); font-size:11px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:10px; }
+    .demo-line{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    .demo-stack{ display:flex; flex-direction:column; gap:10px; max-width:360px; }
+    .demo-mini{ position:relative; background:var(--surface); border:1px solid var(--hairline); border-radius:var(--r-l); padding:var(--s-04); max-width:280px; }
+  </style>
+</head>
+<body>
+<div class="mhc-home">
+
+  <div>
+    <div class="demo-label">Chip · .reward-chip (4 colourways)</div>
+    <div class="demo-line">
+      <span class="reward-chip reward-chip--gift">Gift Card</span>
+      <span class="reward-chip reward-chip--points">Points · Silver</span>
+      <span class="reward-chip reward-chip--raffle">Raffle</span>
+      <span class="reward-chip reward-chip--store">Store Credit</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Text-link · a.btn.btn-text</div>
+    <div class="demo-line">
+      <a class="btn btn-text" href="#">All data</a>
+      <a class="btn btn-text" href="#">See 7 more<span class="medium-up-inline">&nbsp;interests</span></a>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Icon button · .icon-btn / --filled</div>
+    <div class="demo-line">
+      <a class="icon-btn" href="#" aria-label="Menu"><span class="material-symbols-outlined" aria-hidden="true">menu</span></a>
+      <a class="icon-btn icon-btn--filled" href="#" aria-label="Messages"><span class="material-symbols-outlined" aria-hidden="true">mail_outline</span></a>
+      <a class="icon-btn icon-btn--filled" href="#" aria-label="Search"><span class="material-symbols-outlined" aria-hidden="true">search</span></a>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Banner icon · .banner-icon (insight / challenge)</div>
+    <div class="demo-line">
+      <div class="banner-icon banner-icon--insight"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span></div>
+      <div class="banner-icon banner-icon--challenge"><span class="material-symbols-outlined" aria-hidden="true">emoji_events</span></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Progress bar · .progress + --p</div>
+    <div class="demo-stack">
+      <div class="progress"><div class="progress__fill" style="--p:25%"></div></div>
+      <div class="progress"><div class="progress__fill" style="--p:50%"></div></div>
+      <div class="progress"><div class="progress__fill" style="--p:80%"></div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Divider · --hairline border</div>
+    <div class="demo-stack">
+      <div style="border-top:1px solid var(--hairline); height:1px"></div>
+      <div class="body-3 ink-soft">Content above / below a hairline</div>
+      <div style="border-top:1px solid var(--hairline); height:1px"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="demo-label">Stretched-link · whole-surface anchor (last child)</div>
+    <div class="demo-mini">
+      <div class="title-1">Clickable card</div>
+      <div class="body-3 ink-soft">The whole surface is the target</div>
+      <a class="reward__link" href="#"><span class="mhc-visually-hidden">Clickable card</span></a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

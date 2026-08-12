@@ -1,0 +1,56 @@
+<!--
+  ============================================================
+  BLOCK 1 — Greeting + Hero  (STATIC TEST VERSION)
+  ============================================================
+  Static content. No Mustache tokens. For layout testing only.
+  Emits TWO sibling <div class="mhc-home"> wrappers:
+    1. Greeting row (sits at the top of the page)
+    2. Hero card  (sits inside the host-supplied .recommendations supergroup)
+  ============================================================
+-->
+
+<div class="mhc-home">
+  <div class="greeting">
+    <h1 id="mhc-greeting-title" class="heading-4">
+      <span class="greet-compact">Hi Davinder</span>
+      <span class="greet-medium">Afternoon Davinder</span>
+    </h1>
+    <div class="greeting__actions">
+      <a class="icon-btn icon-btn--filled" href="/messages" aria-label="Messages">
+        <span class="material-symbols-outlined" aria-hidden="true">mail_outline</span>
+      </a>
+      <a class="icon-btn icon-btn--filled" href="/search" aria-label="Search">
+        <span class="material-symbols-outlined" aria-hidden="true">search</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="mhc-home">
+  <section class="hero" aria-labelledby="mhc-hero-title">
+    <div class="hero__media" aria-hidden="true"></div>
+    <div class="hero__content">
+      <div class="hero__title-group">
+        <div class="eyebrow ink-soft">Based on your interest</div>
+        <h2 id="mhc-hero-title" class="heading-4">Sleep better in 4 weeks</h2>
+      </div>
+      <div class="hero__copy-group">
+        <p class="paragraph-2 ink-soft">
+          An evidence-based program built around your sleep habits.
+          Eight short sessions, a quiet routine, real change.
+        </p>
+        <div class="hero__meta body-3">
+          <span>Sleep DCP</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>$100 reward at completion</span>
+        </div>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn-m btn-filled" href="/programs/sleep/start">Start the program</a>
+      </div>
+    </div>
+    <a class="hero__stretched-link" href="/programs/sleep/start">
+      <span class="mhc-visually-hidden">Sleep better in 4 weeks — start the program</span>
+    </a>
+  </section>
+</div>

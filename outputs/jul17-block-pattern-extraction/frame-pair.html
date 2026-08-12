@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pair cards — render frame</title>
+  <link rel="stylesheet" href="mhc-home.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    .mhc-home{padding:16px}
+    /* DEMO-ONLY: give the thumb a real photo (locked CSS uses flat tint). */
+    .pair-card__thumb{ background-size:cover; background-position:center; }
+    .pair-card:nth-child(2) .pair-card__thumb{ background-image:url('https://picsum.photos/seed/mhcyoga/320/240'); }
+    .pair-card:nth-child(3) .pair-card__thumb{ background-image:url('https://picsum.photos/seed/mhcbenefits/320/240'); }
+  </style>
+</head>
+<body>
+<div class="mhc-home">
+  <section class="pair" aria-labelledby="demo-pair-title">
+    <h2 id="demo-pair-title" class="mhc-visually-hidden">Recommendations</h2>
+
+    <div class="pair-card">
+      <div class="pair-card__title"><h3 class="title-1">Based on your interests</h3></div>
+      <div class="pair-card__row">
+        <div class="pair-card__thumb" aria-hidden="true"></div>
+        <div class="pair-card__row-body">
+          <div class="title-1">Desk-friendly yoga</div>
+          <div class="body-3 ink-soft">10 min · Movement</div>
+        </div>
+      </div>
+      <div class="pair-card__footer">
+        <a class="btn btn-text" href="#">See 7 more<span class="medium-up-inline">&nbsp;interests</span></a>
+        <a class="btn btn-text" href="#">Edit interests</a>
+      </div>
+      <a class="pair-card__link" href="#"><span class="mhc-visually-hidden">Desk-friendly yoga</span></a>
+    </div>
+
+    <div class="pair-card">
+      <div class="pair-card__title"><h3 class="title-1">From your employer</h3></div>
+      <div class="pair-card__row">
+        <div class="pair-card__thumb" aria-hidden="true"></div>
+        <div class="pair-card__row-body">
+          <div class="title-1">2026 Benefits guide</div>
+          <div class="body-3 ink-soft">New · Open enrollment</div>
+        </div>
+      </div>
+      <div class="pair-card__footer">
+        <a class="btn btn-text" href="#">See 3 more<span class="medium-up-inline">&nbsp;from Acme</span></a>
+      </div>
+      <a class="pair-card__link" href="#"><span class="mhc-visually-hidden">2026 Benefits guide</span></a>
+    </div>
+
+  </section>
+</div>
+</body>
+</html>

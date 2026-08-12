@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Appointment vs status — 5 ideations</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  body{background:var(--canvas);padding:32px;}
+  h1.page{font-family:var(--f-display);font-weight:500;font-size:24px;color:var(--navy);margin-bottom:6px;}
+  p.pageintro{font-family:var(--f-text);font-size:14px;color:var(--slate);max-width:74ch;margin-bottom:28px;}
+  .stage{display:flex;gap:28px;align-items:flex-start;flex-wrap:nowrap;}
+  .ideacol{width:392px;flex:0 0 392px;}
+  .lbl{font-family:var(--f-text);font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:4px;}
+  .cap{font-family:var(--f-text);font-size:13px;line-height:1.45;color:var(--slate);margin-top:12px;}
+  .phone{width:392px;background:#fff;border:1px solid var(--silver);border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:16px;box-shadow:0 12px 30px rgba(6,42,66,.08);}
+  .rest{opacity:.42;display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+  .rest .rh{font-family:var(--f-display);font-weight:500;font-size:14px;color:var(--charcoal);}
+  .rest .bar{height:40px;border:1px solid var(--hair);border-radius:12px;background:#fff;}
+  .row{display:flex;align-items:center;gap:10px;}.grow{flex:1;min-width:0;}
+  .ctxstrip{display:flex;flex-direction:column;gap:2px;background:var(--tint-navy-05);border-radius:12px;padding:12px 16px;}
+  .appt-eyebrow{color:var(--gold);}
+  .goldchip{background:rgba(243,179,30,.18);color:var(--gold);}
+  /* timeline */
+  .tl{display:flex;gap:0;margin-top:4px;}
+  .tlnode{flex:1;text-align:center;position:relative;}
+  .tlnode::before{content:"";position:absolute;top:9px;left:-50%;width:100%;height:2px;background:var(--hair);}
+  .tlnode:first-child::before{display:none}
+  .tlnode.done::before{background:var(--green);}.tlnode.now::before{background:var(--gold);}
+  .tldot{width:20px;height:20px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;background:var(--hair);position:relative;z-index:1;}
+  .tlnode.done .tldot{background:var(--green);color:#fff;}
+  .tlnode.now .tldot{background:#fff;border:2px solid var(--gold);color:var(--gold);}
+  .tllbl{font-family:var(--f-text);font-size:10.5px;line-height:1.2;color:var(--slate);}
+  .tlnode.now .tllbl{color:var(--charcoal);font-weight:600;}
+  .meanwhile{display:flex;align-items:center;gap:12px;border:1px solid var(--hair);border-radius:12px;padding:12px 14px;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-tick" viewBox="0 0 16 16"><path d="M3 8l3.5 3.5L11 4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3M7.5 14h9" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<h1 class="page">Appointment vs. status — 5 ideations</h1>
+<p class="pageintro">Grounded in your <strong>03 · Being scheduled</strong> frame. Two things to balance: the <strong>credit/phase context</strong> ("credit starts after your first visit") and the <strong>appointment callout</strong> ("being scheduled"). Ranging from appointment-led → status-led, plus a journey take. Dimmed rows below hint at the rest of the page (Maximize credit · Getting started · Support).</p>
+
+<div class="stage">
+
+  <!-- 1 — Your current, refined: context strip + appointment focal -->
+  <div class="ideacol">
+    <div class="lbl">1 · Appointment-led (your current, refined)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <div class="ctxstrip"><span class="label-1 c-navy">Medical credit starts after your first visit</span><span class="caption c-slate">Your phase and credit appear once your nurse visit is complete.</span></div>
+      <section class="focal" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="row"><span class="chip goldchip c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clock"/></svg></span><span class="eyebrow appt-eyebrow">Being scheduled</span></div>
+        <h2 class="heading-6 c-charcoal">Your first appointment is being scheduled</h2>
+        <p class="paragraph-3 c-slate">Peak Health typically schedules your first nurse visit within about 20 business days. Watch for a confirmation by email.</p>
+      </section>
+      <div class="rest"><div class="rh">Maximize your credit</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Baseline.</strong> Quiet blue context strip up top; the appointment is the elevated gold-accented focal. Clean, and the appointment clearly wins — this is essentially your frame, tightened.</p>
+  </div>
+
+  <!-- 2 — Merged single card -->
+  <div class="ideacol">
+    <div class="lbl">2 · One card (context folded in)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <section class="focal" style="display:flex;flex-direction:column;gap:0;">
+        <div class="row"><span class="chip goldchip c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clock"/></svg></span><span class="eyebrow appt-eyebrow">Being scheduled</span></div>
+        <h2 class="heading-6 c-charcoal" style="margin-top:12px">Your first appointment is being scheduled</h2>
+        <p class="paragraph-3 c-slate" style="margin-top:6px">Peak Health typically schedules your first nurse visit within about 20 business days. Watch for a confirmation by email.</p>
+        <hr class="divider" style="margin:16px 0">
+        <span class="caption c-slate">Your <strong style="color:var(--charcoal)">phase and medical credit</strong> appear once your first nurse visit is complete.</span>
+      </section>
+      <div class="rest"><div class="rh">Maximize your credit</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Unified.</strong> No separate strip — the credit context becomes a quiet footnote inside the appointment card, under a divider. One object, appointment on top, status as the fine print.</p>
+  </div>
+
+  <!-- 3 — Journey timeline -->
+  <div class="ideacol">
+    <div class="lbl">3 · Appointment as a journey stage</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <section class="focal" style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <div class="row" style="margin-bottom:10px"><span class="chip goldchip c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clock"/></svg></span><div class="grow"><span class="eyebrow appt-eyebrow">Being scheduled</span><div class="title-1 c-charcoal">Your first appointment is being scheduled</div></div></div>
+          <p class="paragraph-3 c-slate">Within about 20 business days — watch for an email confirmation.</p>
+        </div>
+        <hr class="divider">
+        <div class="tl">
+          <div class="tlnode done"><span class="tldot"><svg width="11" height="11"><use href="#i-tick"/></svg></span><div class="tllbl">Enrolled</div></div>
+          <div class="tlnode now"><span class="tldot"><svg width="10" height="10"><use href="#i-clock"/></svg></span><div class="tllbl">Being scheduled</div></div>
+          <div class="tlnode"><span class="tldot"></span><div class="tllbl">First visit</div></div>
+          <div class="tlnode"><span class="tldot"></span><div class="tllbl">Phase &amp; credit</div></div>
+        </div>
+      </section>
+      <div class="rest"><div class="rh">Maximize your credit</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Status = your place in the journey.</strong> The appointment leads; a mini stepper shows where you are (and that phase/credit come after the visit). Answers "where am I + what's next" in one visual — no separate credit strip needed.</p>
+  </div>
+
+  <!-- 4 — Appointment + meanwhile -->
+  <div class="ideacol">
+    <div class="lbl">4 · Appointment + "while you wait"</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <section class="focal" style="display:flex;flex-direction:column;gap:10px;">
+        <div class="row"><span class="chip goldchip c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clock"/></svg></span><span class="eyebrow appt-eyebrow">Being scheduled</span></div>
+        <h2 class="heading-6 c-charcoal">Your first appointment is being scheduled</h2>
+        <p class="paragraph-3 c-slate">Peak Health schedules your first nurse visit within about 20 business days — watch for a confirmation email.</p>
+      </section>
+      <div class="meanwhile"><span class="chip green c34 round" style="background:var(--tint-green);color:var(--green)"><svg width="18" height="18"><use href="#i-flask"/></svg></span><div class="grow"><span class="eyebrow c-slate">While you wait</span><div class="title-3 c-charcoal">Confirm your labs are complete</div></div><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></div>
+      <div class="rest"><div class="rh">Maximize your credit</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Callout + a light next-step.</strong> Even in a "waiting" state, give the member one useful thing to do. Appointment stays the hero; the "while you wait" row is a quiet secondary action. (Credit context can live as the card footnote from #2.)</p>
+  </div>
+
+  <!-- 5 — Status-led contrast -->
+  <div class="ideacol">
+    <div class="lbl">5 · Status-led (contrast)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="active label-1">Status</a><a class="label-1">My Progress</a></nav>
+      <section class="focal" style="display:flex;flex-direction:column;gap:8px;background:var(--navy);border-color:var(--navy);">
+        <span class="eyebrow" style="color:var(--peach)">You're enrolled</span>
+        <h2 class="heading-6 c-white">Your phase &amp; credit unlock after your first nurse visit</h2>
+        <p class="paragraph-3" style="color:var(--cloudtext)">You've finished getting started. Next up: your first appointment.</p>
+      </section>
+      <div class="row" style="border:1px solid var(--hair);border-radius:14px;padding:14px;gap:12px;">
+        <span class="chip goldchip c40" style="border-radius:12px"><svg width="20" height="20"><use href="#i-clock"/></svg></span>
+        <div class="grow"><span class="eyebrow appt-eyebrow">Being scheduled</span><div class="title-2 c-charcoal">First appointment · within ~20 business days</div></div>
+      </div>
+      <div class="rest"><div class="rh">Maximize your credit</div><div class="bar"></div></div>
+    </div>
+    <p class="cap"><strong>Flip it — status leads.</strong> A navy "where you stand" hero owns the top; the appointment becomes a secondary row beneath. Shown for contrast: makes the program state the anchor, the appointment a detail. Probably too much for a waiting state, but useful once phase/credit exist.</p>
+  </div>
+
+</div>
+</body>
+</html>

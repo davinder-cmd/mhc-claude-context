@@ -1,0 +1,126 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progress card — a gentler zero</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.12);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-2:#B87A1E;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1700px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:1000px;margin:0 0 4px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:11px;width:335px}
+.cap{font-size:12px;color:var(--ink-2)}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.rec{color:#fff;background:var(--teal)}
+.tag.ref{background:#E7E1D4;color:var(--ink-2)}
+.pcard{width:335px;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.body{padding:24px 20px 20px;text-align:center}
+.ring{position:relative;width:126px;height:126px;margin:2px auto 0}
+.ring svg{transform:rotate(-90deg)}
+.rc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rc .big{font-size:34px;font-weight:800;line-height:1;letter-spacing:-0.02em}
+.rc .big.sm{font-size:22px}
+.rc .lab{font-size:13px;color:var(--ink-3);font-weight:600;margin-top:3px}
+.rc .play{font-size:26px;color:var(--teal)}
+.title{font-size:20px;font-weight:750;margin-top:16px}
+.subl{font-size:14px;color:var(--ink-2);margin-top:6px}
+.rbar{background:var(--amber-tint);padding:14px;text-align:center;color:var(--amber);font-size:15px;font-weight:730;display:flex;align-items:center;justify-content:center;gap:8px}
+.rbar .s{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--amber);display:flex;align-items:center;justify-content:center;font-size:12px}
+.rec-note{margin-top:28px;max-width:1000px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Progress card — a gentler zero</h1>
+<p class="sub">You like the prominent ring — keep it. The problem is only the literal "0 of 8," which reads as emptiness/failure. These reframe the center as the <b>path ahead</b> or the <b>first step</b>, and swap the pacing line ("2 weeks in…") for something that fits before you've started. Reward bar stays.</p>
+
+<div class="grid">
+
+<!-- Reference: harsh 0 -->
+<div class="col">
+<span class="tag ref">Reference · the harsh zero</span>
+<div class="pcard">
+<div class="body">
+<div class="ring"><svg width="126" height="126"><circle cx="63" cy="63" r="52" fill="none" stroke="#e3e0da" stroke-width="9"/></svg><div class="rc"><div class="big">0</div><div class="lab">of 8</div></div></div>
+<div class="title">Your progress</div>
+<div class="subl">Not started yet</div>
+</div>
+<div class="rbar"><span class="s">$</span>Complete to earn your $100</div>
+</div>
+<div class="cap"><b>Reference.</b> The literal "0 of 8" in an empty gray ring — reads like a failing gauge. This is what we're softening.</div>
+</div>
+
+<!-- A total-as-hero -->
+<div class="col">
+<span class="tag rec">A · Path-ahead  ·  lean</span>
+<div class="pcard">
+<div class="body">
+<div class="ring"><svg width="126" height="126"><circle cx="63" cy="63" r="52" fill="none" stroke="#E0EAEB" stroke-width="9"/></svg><div class="rc"><div class="big">8</div><div class="lab">sessions</div></div></div>
+<div class="title">Ready when you are</div>
+<div class="subl">8 short sessions · at your own pace</div>
+</div>
+<div class="rbar"><span class="s">$</span>Complete to earn your $100</div>
+</div>
+<div class="cap"><b>A — Path-ahead. (my lean.)</b> The ring center shows the <b>whole path (8)</b>, not a zero — soft teal-tint track, no empty gray. Frames the moment as "here's what's ahead," warm and pressure-free. Same prominence, no failing-gauge feeling.</div>
+</div>
+
+<!-- B start action -->
+<div class="col">
+<span class="tag">B · Start action</span>
+<div class="pcard">
+<div class="body">
+<div class="ring"><svg width="126" height="126"><circle cx="63" cy="63" r="52" fill="none" stroke="#E0EAEB" stroke-width="9"/></svg><div class="rc"><div class="play">▶</div><div class="lab" style="margin-top:6px">8 sessions</div></div></div>
+<div class="title">Your progress</div>
+<div class="subl">Start session 1 · ~8 min</div>
+</div>
+<div class="rbar"><span class="s">$</span>Complete to earn your $100</div>
+</div>
+<div class="cap"><b>B — Start action.</b> Center becomes an invitation (▶) rather than a count. Most action-forward — the ring reads "press play." Pairs well if this card is also tappable to begin.</div>
+</div>
+
+<!-- C dashed anticipatory -->
+<div class="col">
+<span class="tag">C · Dashed / anticipatory</span>
+<div class="pcard">
+<div class="body">
+<div class="ring"><svg width="126" height="126"><circle cx="63" cy="63" r="52" fill="none" stroke="#C9D6D3" stroke-width="9" stroke-dasharray="3 9" stroke-linecap="round"/></svg><div class="rc"><div class="big sm">Begin</div><div class="lab">8 sessions</div></div></div>
+<div class="title">Ready to start</div>
+<div class="subl">Your path is set — first session is short</div>
+</div>
+<div class="rbar"><span class="s">$</span>Complete to earn your $100</div>
+</div>
+<div class="cap"><b>C — Dashed / anticipatory.</b> A dashed ring signals "not yet filled, but ready" — the outline of a path waiting to be walked. Softest visual metaphor; the dashes will fill in as they progress.</div>
+</div>
+
+<!-- D soft 0 of 8 -->
+<div class="col">
+<span class="tag">D · Soft "0 of 8"</span>
+<div class="pcard">
+<div class="body">
+<div class="ring"><svg width="126" height="126"><circle cx="63" cy="63" r="52" fill="none" stroke="#E0EAEB" stroke-width="9"/><circle cx="63" cy="11" r="5.5" fill="#0E4A56"/></svg><div class="rc"><div class="big">0</div><div class="lab">of 8</div></div></div>
+<div class="title">Your progress</div>
+<div class="subl">You're at the start — session 1 is short</div>
+</div>
+<div class="rbar"><span class="s">$</span>Complete to earn your $100</div>
+</div>
+<div class="cap"><b>D — Soft "0 of 8".</b> Keeps the exact "N of 8" grammar (consistent with the in-progress card) but softens it: warm teal-tint track instead of harsh gray, a small teal "start dot" at the top so the ring isn't dead-empty, and encouraging copy. Least change, still honest.</div>
+</div>
+
+<!-- E first step -->
+<div class="col">
+<span class="tag">E · First-step</span>
+<div class="pcard">
+<div class="body">
+<div class="ring"><svg width="126" height="126"><circle cx="63" cy="63" r="52" fill="none" stroke="#E0EAEB" stroke-width="9"/></svg><div class="rc"><div class="big">1</div><div class="lab">up next</div></div></div>
+<div class="title">Your progress</div>
+<div class="subl">Session 1 · ~8 min to begin</div>
+</div>
+<div class="rbar"><span class="s">$</span>Complete to earn your $100</div>
+</div>
+<div class="cap"><b>E — First-step.</b> Center points at the <b>next session (1)</b> rather than the count of done. Turns "nothing done" into "here's your next" — forward-looking, and it mirrors how the in-progress card feels (always pointing at the current session).</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>A — Path-ahead.</b> Showing "8 · sessions" (the whole path) instead of "0 of 8" removes the failing-gauge feeling entirely while keeping the ring exactly as prominent as you like, and "Ready when you are" is pressure-free (good for the pace-not-speed guardrail). <b>D</b> is the pick if you'd rather keep the literal "N of 8" grammar consistent across states — it just softens the color + adds a start dot so zero never looks dead. <b>B/E</b> lean more action-forward if this card doubles as the start button. Whichever, the pacing line ("2 weeks in…") has to change at zero — it can't say time has passed.
+</div>
+</div>
+</body></html>

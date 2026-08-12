@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pair card · MHC Component Sheet</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<div class="g-top">
+  <div class="g-top__inner">
+    <a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Sheet</a>
+    <div class="g-top__spacer"></div>
+    <div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div>
+  </div>
+</div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+
+  <header class="g-head">
+    <div class="g-eyebrow">Card · Recommendation pair</div>
+    <h1 class="g-title">Pair card</h1>
+    <p class="g-lede">A titled recommendation card — thumbnail + title/meta row + text-link footer, with a whole-card stretched link. Two sit side by side ("Based on your interests" / "From your employer"): one column on phones, two from tablet. At ≥1200 the thumb grows from an 80² marker to a 160×120 4:3 photo.</p>
+    <div class="g-tags">
+      <span class="g-tag">.pair-card</span>
+      <span class="g-tag g-tag--ok">Multi-instance (2)</span>
+      <span class="g-tag g-tag--ok">Authorable block</span>
+      <span class="g-tag">Footer text-links</span>
+    </div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Live playground</h2></div>
+    <p class="g-section__note">Drag to resize. Watch two crossovers: 1→2 columns at 600px, and the thumbnail growing to a 4:3 photo plus full-length footer labels at 1200px.</p>
+    <div class="g-pg" style="height:500px">
+      <div class="g-pg__hint">↔ Drag the bottom-right corner to resize · live <code>mhc-home.css</code></div>
+      <iframe src="frame-pair.html" title="Pair cards — resizable"></iframe>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Responsive breakpoints</h2></div>
+    <p class="g-section__note">True-width frames, scaled to fit. Note the thumb: 80² identifying marker below 1200, 160×120 4:3 photo at and above.</p>
+    <div class="g-bp-row">
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px · 1-col</span></div>
+        <div class="g-bp__vp" style="--w:375;--s:1;--h:460"><iframe src="frame-pair.html" title="Pair Compact"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px · 2-col, 80² thumb</span></div>
+        <div class="g-bp__vp" style="--w:1024;--s:.62;--h:240"><iframe src="frame-pair.html" title="Pair Medium"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px · 4:3 thumb, full labels</span></div>
+        <div class="g-bp__vp" style="--w:1440;--s:.5;--h:260"><iframe src="frame-pair.html" title="Pair Large"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Markup</h2></div>
+    <p class="g-section__note">One pair card (interest variant). The <code>.pair</code> grid holds up to two, each gated by its own flag so a single card degrades gracefully. Footer "See more / Edit" are navigations (<code>&lt;a&gt;</code>), not buttons.</p>
+    <div class="g-code">
+      <div class="g-code__bar">block-2-pair.html <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>&lt;section class="pair" aria-labelledby="mhc-pair-title"&gt;
+  &lt;h2 id="mhc-pair-title" class="mhc-visually-hidden"&gt;Recommendations&lt;/h2&gt;
+  {{#formula.hasInterestPair}}
+  &lt;div class="pair-card"&gt;
+    &lt;div class="pair-card__title"&gt;&lt;h3 class="title-1"&gt;{{formula.copy_pair_interest_eyebrow}}&lt;/h3&gt;&lt;/div&gt;
+    &lt;div class="pair-card__row"&gt;
+      &lt;div class="pair-card__thumb" style="background-image: url('{{formula.pair_interest_thumb_url}}')" aria-hidden="true"&gt;&lt;/div&gt;
+      &lt;div class="pair-card__row-body"&gt;
+        &lt;div class="title-1"&gt;{{formula.copy_pair_interest_title}}&lt;/div&gt;
+        &lt;div class="body-3 ink-soft"&gt;{{formula.copy_pair_interest_meta}}&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="pair-card__footer"&gt;
+      {{#formula.hasInterestOverflow}}
+      &lt;a class="btn btn-text" href="{{formula.pair_interest_seeMore_href}}"&gt;{{formula.copy_pair_interest_seeMore}}&lt;span class="medium-up-inline"&gt;&amp;nbsp;{{formula.copy_pair_interest_seeMoreSuffix}}&lt;/span&gt;&lt;/a&gt;
+      {{/formula.hasInterestOverflow}}
+      &lt;a class="btn btn-text" href="{{formula.pair_interest_edit_href}}"&gt;{{formula.copy_pair_interest_editLabel}}&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;a class="pair-card__link" href="{{formula.pair_interest_href}}"&gt;
+      &lt;span class="mhc-visually-hidden"&gt;{{formula.copy_pair_interest_title}}&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  {{/formula.hasInterestPair}}
+  &lt;!-- employer card: same shape, gated by hasEmployerPair --&gt;
+&lt;/section&gt;</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Adaptive thumb:</strong> <code>80×80</code> below 1200px, <code>160×120</code> 4:3 at ≥1200 — the photo only earns real estate at the top-nav target width.<br>
+      • <strong>Footer alignment:</strong> negative margins pull the first/last text-link so their visible text sits flush with the card edge (Material card-action pattern).<br>
+      • <strong>Interactive footer links sit above the stretched link</strong> (<code>z-index:2</code>) so both remain clickable.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

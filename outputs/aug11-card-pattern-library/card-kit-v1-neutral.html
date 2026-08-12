@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card Kit v1 — neutral skin, 20 layouts</title>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS — the only block that changes when this is re-skinned.
+   Deliberately near-monochrome: one accent, everything else ink.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  /* ink */
+  --ink-1: #16171a;   /* titles, numerals */
+  --ink-2: #4c4f55;   /* body, descriptions */
+  --ink-3: #7c8189;   /* meta, eyebrows */
+  --ink-4: #a8adb4;   /* disabled, faintest */
+
+  /* surface */
+  --surface:   #ffffff;
+  --surface-2: #f6f7f8;   /* media wells, icon tiles */
+  --surface-3: #eceef0;   /* progress tracks */
+  --page:      #f2f3f5;
+
+  /* line */
+  --rule:      #e2e5e8;
+  --rule-firm: #cfd4d9;
+
+  /* one accent */
+  --accent:      #0f497f;
+  --accent-tint: #e8eff6;
+  --accent-ink:  #0d3d6b;
+
+  /* semantic — used sparingly, only where state is the point */
+  --ok:      #1e7a52;
+  --ok-tint: #e6f2eb;
+  --warn-tint: #fdf3e3;
+
+  /* radius */
+  --r-card: 12px;
+  --r-media: 8px;
+  --r-tile: 10px;
+  --r-chip: 6px;
+  --r-pill: 999px;
+
+  /* space */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;
+  --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px;
+
+  /* type */
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --fs-eyebrow: 10.5px;
+  --fs-meta:    12px;
+  --fs-body:    13px;
+  --fs-title:   15px;
+  --fs-title-l: 20px;
+  --fs-num:     34px;
+
+  --shadow: 0 1px 2px rgba(22,23,26,.05), 0 1px 1px rgba(22,23,26,.03);
+}
+
+/* ── media placeholders. Standing in for photography; muted on purpose
+      so they don't out-shout the layout being judged. ────────────── */
+.ph { background: var(--surface-2); position: relative; overflow: hidden; }
+.ph-1 { background: linear-gradient(135deg,#c7d3dd 0%,#9fb0bf 100%); }
+.ph-2 { background: linear-gradient(135deg,#d9d2c7 0%,#b8ab99 100%); }
+.ph-3 { background: linear-gradient(140deg,#c3d1cb 0%,#93a8a0 100%); }
+.ph-4 { background: linear-gradient(135deg,#d5cdd8 0%,#a99fb0 100%); }
+.ph-5 { background: linear-gradient(150deg,#cdd7c5 0%,#a0af95 100%); }
+.ph-6 { background: linear-gradient(135deg,#dcd3cb 0%,#c0aa96 100%); }
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE CHROME — not part of the kit. Everything below the
+   "COMPONENTS" banner is what would be rebuilt in Figma.
+   ═══════════════════════════════════════════════════════════════ */
+* { box-sizing: border-box; }
+body { margin:0; background: var(--page); color: var(--ink-1);
+       font: 400 16px/1.55 var(--font); padding: 0 24px 120px; }
+.wrap { max-width: 1200px; margin: 0 auto; }
+
+header { padding: 64px 0 36px; }
+h1 { font-size: 32px; line-height:1.15; letter-spacing:-.02em; margin:0 0 12px; font-weight:700; }
+.lede { max-width: 66ch; color: var(--ink-2); font-size: 16.5px; margin: 0 0 24px; }
+.lede b { color: var(--ink-1); font-weight:600; }
+
+.legend { display:flex; flex-wrap:wrap; gap:24px; padding:20px 24px; background:var(--surface);
+          border:1px solid var(--rule); border-radius:var(--r-card); margin-bottom:16px; }
+.legend > div { min-width: 130px; }
+.legend .lk { font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-3);
+              font-weight:600; display:block; margin-bottom:8px; }
+.sw { display:flex; gap:4px; }
+.sw i { width:22px; height:22px; border-radius:4px; display:block; border:1px solid rgba(0,0,0,.06); }
+.legend p { margin:0; font-size:12.5px; color:var(--ink-2); }
+
+.note { max-width:74ch; font-size:13.5px; color:var(--ink-2); background:var(--surface);
+        border-left:3px solid var(--accent); border-radius:0 8px 8px 0; padding:14px 18px; margin:0 0 48px; }
+
+.banner { margin: 56px 0 40px; padding: 14px 0; border-top:2px solid var(--ink-1);
+          border-bottom:1px solid var(--rule); font-size:11px; letter-spacing:.14em;
+          text-transform:uppercase; font-weight:700; color:var(--ink-1); }
+
+/* specimen framing */
+.spec { margin-bottom: 56px; }
+.spec-head { display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:6px; }
+.spec-num { font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--ink-3); letter-spacing:.06em; }
+.spec-name { font-size:17px; font-weight:700; letter-spacing:-.01em; margin:0; }
+.spec-kind { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
+             border:1px solid var(--rule-firm); border-radius:var(--r-pill); padding:3px 9px; }
+.spec-why { font-size:13.5px; color:var(--ink-2); max-width:80ch; margin:0 0 18px; }
+.spec-why b { color:var(--ink-1); font-weight:600; }
+
+/* containers the cards are being tested inside */
+.grid-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; align-items:stretch; }
+.grid-4 { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; align-items:stretch; }
+.stack  { display:flex; flex-direction:column; gap:12px; max-width:660px; }
+.rail   { display:flex; gap:20px; overflow-x:auto; padding-bottom:8px; scrollbar-width:thin; }
+.rail > * { flex:0 0 300px; }
+
+@media (max-width: 1000px) {
+  .grid-3, .grid-4 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 620px) {
+  .grid-3, .grid-4 { grid-template-columns:1fr; }
+  body { padding:0 16px 80px; }
+  h1 { font-size:26px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENTS — 20 card layouts. Shared base, then one block each.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* shared base */
+.card { background: var(--surface); border:1px solid var(--rule); border-radius: var(--r-card);
+        box-shadow: var(--shadow); display:flex; flex-direction:column; overflow:hidden; }
+.card-pad { padding: var(--sp-4); display:flex; flex-direction:column; flex:1; }
+
+/* shared atoms */
+.eyebrow { font-size:var(--fs-eyebrow); letter-spacing:.1em; text-transform:uppercase;
+           color:var(--ink-3); font-weight:600; }
+.title { font-size:var(--fs-title); font-weight:650; line-height:1.32; color:var(--ink-1); margin:0; letter-spacing:-.005em; }
+.desc  { font-size:var(--fs-body); line-height:1.5; color:var(--ink-2); margin:0; }
+.meta  { font-size:var(--fs-meta); color:var(--ink-3); margin:0; }
+.clamp2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.clamp3 { display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.chip { display:inline-block; font-size:var(--fs-eyebrow); letter-spacing:.07em; text-transform:uppercase;
+        font-weight:600; color:var(--ink-2); border:1px solid var(--rule-firm);
+        border-radius:var(--r-chip); padding:4px 7px; }
+.chip-solid { background:var(--ink-1); color:#fff; border-color:var(--ink-1); }
+.pill { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600;
+        border-radius:var(--r-pill); padding:4px 9px; }
+.pill-ok { background:var(--ok-tint); color:var(--ok); }
+.pill-new { background:var(--accent); color:#fff; }
+.pill-quiet { background:var(--surface-2); color:var(--ink-2); border:1px solid var(--rule); }
+.tile { width:40px; height:40px; border-radius:var(--r-tile); background:var(--accent-tint);
+        display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+        color:var(--accent); font-size:18px; line-height:1; }
+.btn { font:600 13px/1 var(--font); border-radius:8px; padding:10px 14px; cursor:pointer;
+       border:1px solid var(--rule-firm); background:var(--surface); color:var(--ink-1); }
+.btn-accent { background:var(--accent); border-color:var(--accent); color:#fff; }
+.btn-ghost { background:transparent; border-color:var(--accent); color:var(--accent); }
+.rule { height:1px; background:var(--rule); border:0; margin:0; }
+.spacer { flex:1; }
+.avatar { display:block; width:24px; height:24px; border-radius:var(--r-pill); flex:0 0 auto;
+          background:linear-gradient(135deg,#b6c3ce,#8d9ba8); }
+
+/* ── 01 · photo-first, caption outside the frame ───────────────── */
+.c-photo-caption { background:none; border:0; box-shadow:none; border-radius:0; }
+.c-photo-caption .media { aspect-ratio:4/5; border-radius:var(--r-media); position:relative; }
+.c-photo-caption .ovl { position:absolute; top:10px; left:10px; display:flex; align-items:center; gap:6px;
+        background:rgba(255,255,255,.92); border-radius:var(--r-pill); padding:3px 9px 3px 3px;
+        font-size:11.5px; font-weight:600; color:var(--ink-1); }
+.c-photo-caption .ovl .avatar { width:18px; height:18px; }
+.c-photo-caption .cap { padding-top:10px; }
+
+/* ── 02 · dense metadata stack ─────────────────────────────────── */
+.c-dense { border:0; box-shadow:none; background:none; }
+.c-dense .media { aspect-ratio:1/1; border-radius:var(--r-media); }
+.c-dense .cap { padding-top:10px; display:flex; flex-direction:column; gap:3px; }
+.c-dense .t { font-size:12.5px; font-weight:600; color:var(--ink-1); line-height:1.35; }
+.c-dense .sub { font-size:11.5px; color:var(--ink-3); }
+.c-dense .price { font-size:14px; font-weight:700; color:var(--ink-1); }
+.c-dense .was { font-size:11.5px; color:var(--ink-3); text-decoration:line-through; margin-left:5px; }
+.c-dense .off { font-size:11.5px; color:var(--ok); margin-left:5px; font-weight:600; }
+.c-dense .flag { font-size:10.5px; font-weight:700; color:var(--ok); text-transform:uppercase; letter-spacing:.05em; }
+
+/* ── 03 · three-zone, avatar overlap, ruled footer ─────────────── */
+.c-threezone .media { aspect-ratio:16/9; position:relative; }
+.c-threezone .heart { position:absolute; top:8px; right:8px; width:26px; height:26px; border-radius:var(--r-pill);
+        background:rgba(255,255,255,.94); display:flex; align-items:center; justify-content:center;
+        font-size:12px; color:var(--ink-2); }
+.c-threezone .body { padding:0 var(--sp-4) var(--sp-3); position:relative; }
+.c-threezone .avatar { position:relative; margin-top:-12px; border:2px solid var(--surface);
+        width:28px; height:28px; margin-bottom:6px; }
+.c-threezone .who { font-size:11.5px; color:var(--ink-3); margin-bottom:3px; }
+.c-threezone .foot { display:flex; align-items:center; gap:14px; padding:9px var(--sp-4);
+        border-top:1px solid var(--rule); font-size:11.5px; color:var(--ink-3); }
+.c-threezone .foot .spacer { flex:1; }
+
+/* ── 04 · full-bleed colour field, art bleeding off-edge ───────── */
+.c-colorfield { border:0; box-shadow:none; position:relative; min-height:132px;
+        justify-content:flex-end; padding:var(--sp-4); overflow:hidden; }
+.c-colorfield .blob { position:absolute; right:-26px; top:-26px; width:118px; height:118px;
+        border-radius:var(--r-pill); background:rgba(255,255,255,.34); }
+.c-colorfield .blob2 { position:absolute; right:14px; top:34px; width:52px; height:52px;
+        border-radius:var(--r-pill); background:rgba(255,255,255,.42); }
+.c-colorfield .t { position:relative; font-size:14.5px; font-weight:700; color:var(--ink-1); }
+.c-colorfield .s { position:relative; font-size:12px; color:var(--ink-1); opacity:.66; margin-top:2px; }
+.cf-a { background:#dbe7f2; } .cf-b { background:#e4e9dc; } .cf-c { background:#f0e3dc; }
+
+/* ── 05 · icon in a media slot ─────────────────────────────────── */
+.c-iconslot .media { aspect-ratio:16/10; display:flex; align-items:center; justify-content:center;
+        font-size:34px; color:#fff; }
+.is-a { background:#2f4f6d; } .is-b { background:#4a5c46; } .is-c { background:#6b5245; }
+.c-iconslot .attrib { font-size:11px; color:var(--ink-4); margin-top:var(--sp-4); }
+
+/* ── 06 · quiet icon card, icon-pair meta row ──────────────────── */
+.c-quiet .card-pad { padding:var(--sp-4); }
+.c-quiet .tile { background:var(--surface-2); color:var(--ink-2); margin-bottom:26px; }
+.c-quiet .metarow { display:flex; gap:14px; margin-top:7px; }
+.c-quiet .mp { display:inline-flex; align-items:center; gap:4px; font-size:11.5px; color:var(--ink-3); }
+
+/* ── 07 · centred single label ─────────────────────────────────── */
+.c-single { align-items:center; justify-content:center; text-align:center; min-height:168px; padding:var(--sp-5); }
+.c-single .ico { font-size:30px; color:var(--accent); opacity:.8; margin-bottom:auto; margin-top:var(--sp-3); }
+.c-single .t { font-size:14px; font-weight:650; color:var(--accent); margin-bottom:var(--sp-4); }
+.c-single.is-add .ico { color:var(--ink-4); } .c-single.is-add .t { color:var(--ink-3); }
+
+/* ── 08 · row card, meta right ─────────────────────────────────── */
+.c-row-meta { flex-direction:row; align-items:center; gap:var(--sp-3); padding:var(--sp-3) var(--sp-4); }
+.c-row-meta .tile { width:38px; height:38px; }
+.c-row-meta .mid { flex:1; min-width:0; }
+.c-row-meta .mid .title { font-size:13.5px; }
+.c-row-meta .mid .desc { font-size:12.5px; margin-top:2px; }
+.c-row-meta .right { font-size:12px; color:var(--ink-3); white-space:nowrap; flex:0 0 auto; }
+
+/* ── 09 · progress in card ─────────────────────────────────────── */
+.c-progress .media { aspect-ratio:16/9; position:relative; display:flex; align-items:center;
+        justify-content:center; background:var(--accent); color:#fff; font-weight:650; font-size:15px;
+        letter-spacing:-.01em; text-align:center; padding:0 var(--sp-4); }
+.c-progress .media.dim { background:#5a7fa3; }
+.c-progress .badge { position:absolute; top:8px; left:8px; }
+.c-progress .prog { display:flex; align-items:center; gap:8px; margin-top:10px; }
+.c-progress .track { display:block; flex:1; height:5px; border-radius:var(--r-pill);
+        background:var(--surface-3); overflow:hidden; }
+.c-progress .fill { display:block; height:100%; border-radius:var(--r-pill); background:var(--ok); }
+.c-progress .pct { font-size:11.5px; font-weight:650; color:var(--ink-2); flex:0 0 auto; }
+.c-progress .meta { margin-top:7px; }
+
+/* ── 10 · corner-ribbon state ─────────────────────────────────── */
+.c-ribbon .media { aspect-ratio:16/9; position:relative; background:#1d2733;
+        display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.c-ribbon .media::before { content:""; position:absolute; inset:-40%;
+        background:repeating-linear-gradient(45deg,transparent 0 12px,rgba(255,255,255,.045) 12px 24px); }
+.c-ribbon .media span { position:relative; color:#fff; font-weight:650; font-size:15px; }
+.c-ribbon .ribbon { position:absolute; top:0; right:0; width:96px; height:96px; overflow:hidden; }
+.c-ribbon .ribbon i { position:absolute; top:16px; right:-30px; width:132px; text-align:center;
+        transform:rotate(45deg); background:var(--ok); color:#fff; font-size:9.5px; font-weight:700;
+        letter-spacing:.1em; text-transform:uppercase; padding:4px 0; font-style:normal; }
+.c-ribbon .title { color:var(--accent); }
+
+/* ── 11 · media-left + ruled author footer ────────────────────── */
+.c-media-left { flex-direction:row; }
+.c-media-left .media { flex:0 0 44%; aspect-ratio:16/10; position:relative; }
+.c-media-left .seq { position:absolute; top:8px; left:8px; background:rgba(22,23,26,.72); color:#fff;
+        font-size:10.5px; font-weight:650; border-radius:var(--r-chip); padding:3px 7px; }
+.c-media-left .side { flex:1; min-width:0; padding:var(--sp-4); display:flex; flex-direction:column; }
+.c-media-left .title { font-size:16px; }
+.c-media-left .foot { display:flex; align-items:center; gap:8px; padding-top:10px; margin-top:var(--sp-4);
+        border-top:1px solid var(--rule); font-size:11.5px; color:var(--ink-3); }
+.c-media-left .avatar { width:20px; height:20px; }
+
+/* ── 12 · eyebrow-led, inset media ────────────────────────────── */
+.c-eyebrow .media { aspect-ratio:16/10; background:var(--surface-2); position:relative;
+        display:flex; align-items:center; justify-content:center; padding:18px; }
+.c-eyebrow .inset { width:100%; height:100%; border-radius:6px; box-shadow:0 2px 8px rgba(22,23,26,.14); }
+.c-eyebrow .save { position:absolute; top:8px; right:8px; width:26px; height:26px; border-radius:6px;
+        background:rgba(255,255,255,.94); display:flex; align-items:center; justify-content:center;
+        font-size:12px; color:var(--ink-2); }
+.c-eyebrow .foot { display:flex; align-items:center; gap:6px; margin-top:var(--sp-4);
+        font-size:11.5px; color:var(--ink-3); }
+.c-eyebrow .dot { width:14px; height:14px; border-radius:4px; background:var(--accent-tint); }
+
+/* ── 13 · row + right-side badge, selected state ───────────────── */
+.c-row-badge { flex-direction:row; align-items:center; gap:var(--sp-3); padding:var(--sp-3) var(--sp-4); }
+.c-row-badge .tile { width:34px; height:34px; font-size:15px; }
+.c-row-badge .mid { flex:1; min-width:0; }
+.c-row-badge .mid .title { font-size:13.5px; }
+.c-row-badge .mid .meta { margin-top:2px; }
+.c-row-badge.sel { border:2px solid var(--accent); }
+.c-row-badge.sel .tile { background:var(--accent); color:#fff; }
+.c-row-badge.done .tile { background:var(--ok-tint); color:var(--ok); }
+.c-row-badge.done .title { color:var(--ink-2); }
+
+/* ── 14 · tag-chip footer, bottom-aligned rail ─────────────────── */
+.c-chipfoot .media { aspect-ratio:16/9; }
+.c-chipfoot .title { font-size:var(--fs-title-l); line-height:1.22; font-weight:700; }
+.c-chipfoot .desc { margin-top:8px; }
+.c-chipfoot .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:var(--sp-4); }
+
+/* ── 15 · colour-coded, text-only ─────────────────────────────── */
+.c-textonly { border:0; box-shadow:none; padding:var(--sp-4); min-height:190px; }
+.c-textonly .title { font-size:16px; line-height:1.28; }
+.c-textonly .desc { margin-top:8px; color:var(--ink-1); opacity:.72; }
+.c-textonly .chip { border-color:rgba(22,23,26,.24); margin-top:var(--sp-4); align-self:flex-start; }
+.to-a { background:#cfe0d4; } .to-b { background:#d6e0ec; } .to-c { background:#f0dcd8; }
+
+/* ── 16 · centred CTA card ────────────────────────────────────── */
+.c-cta { align-items:center; text-align:center; padding:var(--sp-6) var(--sp-5); }
+.c-cta .art { width:76px; height:76px; border-radius:var(--r-pill); background:var(--accent-tint);
+        display:flex; align-items:center; justify-content:center; font-size:32px; color:var(--accent);
+        margin-bottom:var(--sp-4); }
+.c-cta .title { font-size:16px; }
+.c-cta .desc { margin-top:8px; }
+.c-cta .btn { margin-top:var(--sp-5); }
+
+/* ── 17 · title above image ───────────────────────────────────── */
+.c-titlefirst { background:var(--surface-2); border-color:var(--rule); }
+.c-titlefirst .head { padding:var(--sp-4) var(--sp-4) var(--sp-3); }
+.c-titlefirst .head .title { font-size:14px; }
+.c-titlefirst .head .meta { margin-top:3px; }
+.c-titlefirst .media { margin:0 var(--sp-4); aspect-ratio:3/4; border-radius:4px;
+        box-shadow:0 3px 10px rgba(22,23,26,.16); }
+.c-titlefirst .foot { padding:var(--sp-4); display:flex; align-items:flex-end; gap:var(--sp-3); margin-top:auto; }
+.c-titlefirst .foot .fl { flex:1; min-width:0; }
+.c-titlefirst .price { font-size:13px; font-weight:700; color:var(--ok); }
+.c-titlefirst .was { font-size:11.5px; color:var(--ink-3); text-decoration:line-through; margin-left:4px; }
+.c-titlefirst .btn { padding:7px 14px; font-size:12px; }
+
+/* ── 18 · chip → headline → meta, optional media ───────────────── */
+.c-chiplead .media { aspect-ratio:16/9; border-radius:var(--r-media); margin-bottom:var(--sp-3); }
+.c-chiplead { border:0; box-shadow:none; background:none; }
+.c-chiplead .chip-solid { align-self:flex-start; margin-bottom:9px; }
+.c-chiplead .title { font-size:15.5px; line-height:1.3; }
+.c-chiplead .meta { margin-top:9px; }
+
+/* ── 19 · dual-action footer ──────────────────────────────────── */
+.c-dualaction .top { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--sp-2); }
+.c-dualaction .logo { width:30px; height:30px; border-radius:7px; background:var(--surface-2);
+        border:1px solid var(--rule); display:flex; align-items:center; justify-content:center; font-size:14px; }
+.c-dualaction .title { margin-top:var(--sp-4); }
+.c-dualaction .desc { margin-top:6px; }
+.c-dualaction .acts { display:flex; gap:8px; margin-top:var(--sp-5); }
+.c-dualaction .acts .btn { flex:1; text-align:center; padding:9px 0; }
+
+/* ── 20 · stat cards in a shared container ────────────────────── */
+.statgroup { display:flex; background:var(--surface); border:1px solid var(--rule);
+        border-radius:var(--r-card); box-shadow:var(--shadow); overflow:hidden; }
+.statgroup .c-stat { flex:1; padding:var(--sp-5); border-left:1px solid var(--rule); position:relative; }
+.statgroup .c-stat:first-child { border-left:0; }
+.c-stat .toprule { position:absolute; top:0; left:0; right:0; height:3px; }
+.c-stat .ico { font-size:16px; margin-bottom:var(--sp-3); display:block; }
+.c-stat .num { font-size:var(--fs-num); font-weight:400; line-height:1; letter-spacing:-.02em; color:var(--ink-1); }
+.c-stat .lab { font-size:12.5px; font-weight:650; color:var(--ink-1); margin-top:8px; }
+.c-stat .sub { font-size:12px; color:var(--ink-3); margin-top:3px; line-height:1.45; }
+@media (max-width:620px){ .statgroup { flex-direction:column; }
+  .statgroup .c-stat { border-left:0; border-top:1px solid var(--rule); }
+  .statgroup .c-stat:first-child { border-top:0; } }
+
+footer.pg { margin-top:80px; padding-top:32px; border-top:2px solid var(--ink-1); max-width:78ch; }
+footer.pg h2 { font-size:20px; margin:0 0 14px; }
+footer.pg p, footer.pg li { font-size:14px; color:var(--ink-2); }
+footer.pg li { margin-bottom:9px; }
+footer.pg b { color:var(--ink-1); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Card Kit v1 — 20 layouts, neutral skin</h1>
+  <p class="lede">The twenty card patterns from <b>Batch 01</b>, rebuilt as live components instead of screenshots. Every card is real markup on one shared token set, filled with real MHC content so the layouts are being tested against true string lengths. <b>Neutral on purpose:</b> near-monochrome, one accent, no brand type — so what you're judging is layout and information hierarchy, not treatment.</p>
+
+  <div class="legend">
+    <div><span class="lk">Ink</span><div class="sw">
+      <i style="background:#16171a"></i><i style="background:#4c4f55"></i><i style="background:#7c8189"></i><i style="background:#a8adb4"></i></div></div>
+    <div><span class="lk">Surface</span><div class="sw">
+      <i style="background:#ffffff"></i><i style="background:#f6f7f8"></i><i style="background:#eceef0"></i><i style="background:#e2e5e8"></i></div></div>
+    <div><span class="lk">Accent — one</span><div class="sw">
+      <i style="background:#0f497f"></i><i style="background:#e8eff6"></i></div></div>
+    <div><span class="lk">State — sparing</span><div class="sw">
+      <i style="background:#1e7a52"></i><i style="background:#e6f2eb"></i></div></div>
+    <div style="flex:1;min-width:200px;"><span class="lk">Weighting</span>
+      <p>Roughly 88% surface + ink, 9% accent, 3% state colour. Colour is never carrying hierarchy except in 04 and 15, where categorisation <em>is</em> the pattern.</p></div>
+  </div>
+
+  <p class="note"><b>For the Figma pass:</b> the <code>:root</code> block at the top of this file is the only thing that changes when this is re-skinned to the v81 navy / SF Pro system. Radius, spacing, and type steps are all tokenised — map them to the existing variable collection and the twenty layouts come across unchanged. Media placeholders are CSS gradients standing in for photography.</p>
+</header>
+
+<div class="banner">Components · 20 layouts</div>
+
+<!-- 01 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">01</span><h2 class="spec-name">Photo-first, caption outside</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">Borderless — the photo edge <b>is</b> the card edge. Text sits outside the frame and stays small, so the grid scans as imagery with labels. Attribution rides on the image as an overlay chip.</p>
+  <div class="grid-3">
+    <div class="card c-photo-caption"><div class="media ph ph-3"><div class="ovl"><span class="avatar"></span>Coach Dana</div></div>
+      <div class="cap"><p class="title">Ten minutes of morning movement</p><p class="meta">Healthy Habits · 5 day streak</p></div></div>
+    <div class="card c-photo-caption"><div class="media ph ph-2"><div class="ovl"><span class="avatar"></span>MHC Kitchen</div></div>
+      <div class="cap"><p class="title">Batch cooking for a lower-sodium week</p><p class="meta">Nutrition · 8 min read</p></div></div>
+    <div class="card c-photo-caption"><div class="media ph ph-1"><div class="ovl"><span class="avatar"></span>Dr. Alvarez</div></div>
+      <div class="cap"><p class="title">Why your blood pressure reads differently at home</p><p class="meta">Biometrics · 4 min read</p></div></div>
+  </div>
+</section>
+
+<!-- 02 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">02</span><h2 class="spec-name">Dense metadata stack</h2><span class="spec-kind">Grid · 4-up</span></div>
+  <p class="spec-why">Six data points, no dividers, four type sizes. Works only because every card carries the identical slot order — the eye learns it once, then reads down a column. <b>The density ceiling:</b> keep this as the counter-example when a rewards card wants one more line.</p>
+  <div class="grid-4">
+    <div class="card c-dense"><div class="media ph ph-1"></div><div class="cap">
+      <span class="t">Fitbit Charge 6 activity tracker</span><span class="sub">Rewards Marketplace</span>
+      <span class="sub">★ 4.6 · 1,204 reviews</span>
+      <div><span class="price">3,500 pts</span><span class="was">5,000 pts</span><span class="off">30% off</span></div>
+      <span class="flag">In stock</span></div></div>
+    <div class="card c-dense"><div class="media ph ph-5"></div><div class="cap">
+      <span class="t">$25 grocery gift card</span><span class="sub">Rewards Marketplace</span>
+      <span class="sub">★ 4.9 · 3,881 reviews</span>
+      <div><span class="price">2,500 pts</span></div>
+      <span class="flag">Instant delivery</span></div></div>
+    <div class="card c-dense"><div class="media ph ph-4"></div><div class="cap">
+      <span class="t">Resistance band set, 5 levels</span><span class="sub">Rewards Marketplace</span>
+      <span class="sub">★ 4.3 · 612 reviews</span>
+      <div><span class="price">1,200 pts</span><span class="was">1,800 pts</span><span class="off">33% off</span></div>
+      <span class="flag">In stock</span></div></div>
+    <div class="card c-dense"><div class="media ph ph-6"></div><div class="cap">
+      <span class="t">Insulated water bottle, 32oz</span><span class="sub">Rewards Marketplace</span>
+      <span class="sub">★ 4.7 · 2,044 reviews</span>
+      <div><span class="price">900 pts</span></div>
+      <span class="flag">In stock</span></div></div>
+  </div>
+</section>
+
+<!-- 03 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">03</span><h2 class="spec-name">Three-zone, ruled footer</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">Three zones, two separating devices — the image edge and a hairline rule. The avatar <b>overlaps the image edge to stitch zone 1 to zone 2</b>, so the card doesn't read as stacked blocks. Author above title subordinates the content to the person.</p>
+  <div class="grid-3">
+    <div class="card c-threezone"><div class="media ph ph-2"><div class="heart">♡</div></div>
+      <div class="body"><span class="avatar"></span><p class="who">Marcus T.</p><p class="title">Walked 10,000 steps every day in June</p></div>
+      <div class="foot"><span>♡ 34</span><span>💬 6</span><span class="spacer"></span><span>2 days ago</span></div></div>
+    <div class="card c-threezone"><div class="media ph ph-5"><div class="heart">♡</div></div>
+      <div class="body"><span class="avatar"></span><p class="who">Priya R.</p><p class="title">Finished the Back Pain path — six weeks</p></div>
+      <div class="foot"><span>♡ 71</span><span>💬 12</span><span class="spacer"></span><span>1 week ago</span></div></div>
+    <div class="card c-threezone"><div class="media ph ph-3"><div class="heart">♡</div></div>
+      <div class="body"><span class="avatar"></span><p class="who">Deb K.</p><p class="title">First 5K since my knee surgery</p></div>
+      <div class="foot"><span>♡ 128</span><span>💬 23</span><span class="spacer"></span><span>2 weeks ago</span></div></div>
+  </div>
+</section>
+
+<!-- 04 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">04</span><h2 class="spec-name">Full-bleed colour field</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">No image container — colour <b>is</b> the card, and it does the categorisation a tag row would. Art bleeds off two edges; that bleed is what stops it reading as a coloured rectangle with text on it. Watch contrast: dark ink on mid-saturation tints is where this pattern fails.</p>
+  <div class="grid-3">
+    <div class="card c-colorfield cf-a"><span class="blob"></span><span class="blob2"></span>
+      <span class="t">Digital Advisor</span><span class="s">Ask about your results, any time</span></div>
+    <div class="card c-colorfield cf-b"><span class="blob"></span><span class="blob2"></span>
+      <span class="t">Challenges</span><span class="s">Join your team's step challenge</span></div>
+    <div class="card c-colorfield cf-c"><span class="blob"></span><span class="blob2"></span>
+      <span class="t">Health Assessment</span><span class="s">15 minutes, earn 500 points</span></div>
+  </div>
+</section>
+
+<!-- 05 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">05</span><h2 class="spec-name">Icon in a media slot</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">The icon occupies an <b>image slot</b> rather than sitting inline with the title. That one decision lets an icon card sit in the same grid as a photo card without looking like a different component — the strongest answer in the set to "we have no photography for this."</p>
+  <div class="grid-3">
+    <div class="card c-iconslot"><div class="media is-a">◔</div><div class="card-pad">
+      <p class="title">Diabetes Prevention</p><p class="desc clamp3">A 12-month CDC-recognised path with a coach, weekly lessons, and a connected scale.</p>
+      <span class="spacer"></span><p class="attrib">Clinical program</p></div></div>
+    <div class="card c-iconslot"><div class="media is-b">◈</div><div class="card-pad">
+      <p class="title">Back Pain</p><p class="desc clamp3">Guided movement and education for lower back pain, built around what you can do today.</p>
+      <span class="spacer"></span><p class="attrib">Clinical program</p></div></div>
+    <div class="card c-iconslot"><div class="media is-c">◍</div><div class="card-pad">
+      <p class="title">Managing Stress</p><p class="desc clamp3">Short daily practices for sleep, worry, and low mood. Private by default.</p>
+      <span class="spacer"></span><p class="attrib">Clinical program</p></div></div>
+  </div>
+</section>
+
+<!-- 06 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">06</span><h2 class="spec-name">Quiet icon card, icon-pair meta</h2><span class="spec-kind">Grid · 4-up</span></div>
+  <p class="spec-why">Almost no visual weight anywhere — the title is the only dark element. Metadata uses <b>icons as delimiters instead of middots</b>, which reads faster small and survives translation. Deliberately un-promotional: for things the member already owns.</p>
+  <div class="grid-4">
+    <div class="card c-quiet"><div class="card-pad"><span class="tile">◫</span><p class="title">My saved articles</p>
+      <div class="metarow"><span class="mp">◷ 2 days ago</span><span class="mp">⚿ Private</span></div></div></div>
+    <div class="card c-quiet"><div class="card-pad"><span class="tile">◷</span><p class="title">Screening history</p>
+      <div class="metarow"><span class="mp">◷ Mar 2026</span><span class="mp">⚿ Private</span></div></div></div>
+    <div class="card c-quiet"><div class="card-pad"><span class="tile">◇</span><p class="title">Connected devices</p>
+      <div class="metarow"><span class="mp">◷ Syncing</span><span class="mp">◈ 2 active</span></div></div></div>
+    <div class="card c-quiet"><div class="card-pad"><span class="tile">◎</span><p class="title">Points activity</p>
+      <div class="metarow"><span class="mp">◷ Today</span><span class="mp">◎ 4,250 pts</span></div></div></div>
+  </div>
+</section>
+
+<!-- 07 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">07</span><h2 class="spec-name">Centred single label</h2><span class="spec-kind">Grid · 4-up</span></div>
+  <p class="spec-why">One icon, one line, and a lot of air. <b>The emptiness is the hierarchy</b> — it signals "this is a choice, not content." Pairs naturally with an add-new affordance in the same grid.</p>
+  <div class="grid-4">
+    <div class="card c-single"><span class="ico">♡</span><span class="t">Heart health</span></div>
+    <div class="card c-single"><span class="ico">◐</span><span class="t">Sleep</span></div>
+    <div class="card c-single"><span class="ico">◍</span><span class="t">Stress &amp; mood</span></div>
+    <div class="card c-single is-add"><span class="ico">＋</span><span class="t">Add a goal</span></div>
+  </div>
+</section>
+
+<!-- 08 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">08</span><h2 class="spec-name">Row card, meta right</h2><span class="spec-kind">Stack · full width</span></div>
+  <p class="spec-why">Three columns on one row. The <b>right-aligned value creates a scannable second column</b> down the stack, so the list reads as a table without being one. This is the shape for any "what should I do next" surface.</p>
+  <div class="stack">
+    <div class="card c-row-meta"><span class="tile">◔</span><div class="mid">
+      <p class="title">Complete your Health Assessment</p><p class="desc">15 minutes. Unlocks your personalised plan.</p></div>
+      <span class="right">+500 pts</span></div>
+    <div class="card c-row-meta"><span class="tile">◈</span><div class="mid">
+      <p class="title">Schedule your biometric screening</p><p class="desc">Onsite events run through April 30.</p></div>
+      <span class="right">Due Apr 30</span></div>
+    <div class="card c-row-meta"><span class="tile">◇</span><div class="mid">
+      <p class="title">Connect a device</p><p class="desc">Sync steps automatically instead of logging them.</p></div>
+      <span class="right">+100 pts</span></div>
+    <div class="card c-row-meta"><span class="tile">◎</span><div class="mid">
+      <p class="title">Redeem 4,250 points</p><p class="desc">Your balance expires at the end of the plan year.</p></div>
+      <span class="right">Dec 31</span></div>
+  </div>
+</section>
+
+<!-- 09 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">09</span><h2 class="spec-name">Progress in card</h2><span class="spec-kind">Carousel · rail</span></div>
+  <p class="spec-why">Progress sits <b>above</b> the meta line — state ahead of structure. Setting the % inline at the end of the track rather than above it saves a full line of height. The four cards differ only by badge, fill, and progress value: one component, four states. Closest thing here to a DCP path card.</p>
+  <div class="rail">
+    <div class="card c-progress"><div class="media">Diabetes Prevention<span class="badge pill pill-ok">On track</span></div>
+      <div class="card-pad"><p class="title">Week 7 · Portion awareness</p>
+      <div class="prog"><span class="track"><span class="fill" style="width:58%"></span></span><span class="pct">58%</span></div>
+      <p class="meta">12 of 26 sessions · Coach Dana</p></div></div>
+    <div class="card c-progress"><div class="media dim">Back Pain<span class="badge pill pill-new">New lesson</span></div>
+      <div class="card-pad"><p class="title">Week 2 · Standing mobility</p>
+      <div class="prog"><span class="track"><span class="fill" style="width:22%"></span></span><span class="pct">22%</span></div>
+      <p class="meta">3 of 14 sessions · Self-guided</p></div></div>
+    <div class="card c-progress"><div class="media dim">Managing Stress<span class="badge pill pill-quiet">Not started</span></div>
+      <div class="card-pad"><p class="title">Start with a 3-minute reset</p>
+      <div class="prog"><span class="track"><span class="fill" style="width:0%"></span></span><span class="pct">0%</span></div>
+      <p class="meta">8 sessions · Self-guided</p></div></div>
+    <div class="card c-progress"><div class="media dim">Healthy Habits<span class="badge pill pill-ok">Complete</span></div>
+      <div class="card-pad"><p class="title">Hydration, 30 days</p>
+      <div class="prog"><span class="track"><span class="fill" style="width:100%"></span></span><span class="pct">100%</span></div>
+      <p class="meta">30 of 30 days · +250 pts earned</p></div></div>
+  </div>
+</section>
+
+<!-- 10 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">10</span><h2 class="spec-name">Corner-ribbon state</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">State is pushed into the corner, so it <b>costs zero vertical space</b> and never competes with the title. That's what buys the unusually long description room to exist — nothing is competing below it.</p>
+  <div class="grid-3">
+    <div class="card c-ribbon"><div class="media"><span>Module 1</span><div class="ribbon"><i>Complete</i></div></div>
+      <div class="card-pad"><p class="title">Understanding your numbers</p>
+      <p class="desc">What A1C, blood pressure, and cholesterol actually measure, and which of them move fastest when you change something.</p></div></div>
+    <div class="card c-ribbon"><div class="media"><span>Module 2</span><div class="ribbon"><i>Complete</i></div></div>
+      <div class="card-pad"><p class="title">Building a plate that holds</p>
+      <p class="desc">Portion strategies that survive a normal week — restaurant meals, family dinners, and the days you have nine minutes.</p></div></div>
+    <div class="card c-ribbon"><div class="media"><span>Module 3</span></div>
+      <div class="card-pad"><p class="title">Movement that fits your day</p>
+      <p class="desc">Finding activity you'll repeat rather than activity you'll admire. Starts from what you already do.</p></div></div>
+  </div>
+</section>
+
+<!-- 11 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">11</span><h2 class="spec-name">Media-left + ruled author footer</h2><span class="spec-kind">Stack · full width</span></div>
+  <p class="spec-why">Title dominates because it's the largest type on the card by a wide margin. The dot-row compresses three attributes into one line. <b>Horizontal buys two lines of title without the card getting taller</b> — the reason to reach for it when titles run long.</p>
+  <div class="stack">
+    <div class="card c-media-left"><div class="media ph ph-1"><span class="seq">1 of 6</span></div><div class="side">
+      <p class="title">What happens in your first coach session</p><p class="meta">Lesson · Beginner · 5 min</p>
+      <div class="foot"><span class="avatar"></span>Dana Whitfield, RD</div></div></div>
+    <div class="card c-media-left"><div class="media ph ph-3"><span class="seq">2 of 6</span></div><div class="side">
+      <p class="title">Reading a continuous glucose graph without panicking</p><p class="meta">Lesson · Beginner · 8 min</p>
+      <div class="foot"><span class="avatar"></span>Dr. Elena Alvarez</div></div></div>
+    <div class="card c-media-left"><div class="media ph ph-5"><span class="seq">3 of 6</span></div><div class="side">
+      <p class="title">Sleep and blood sugar are the same conversation</p><p class="meta">Lesson · Intermediate · 11 min</p>
+      <div class="foot"><span class="avatar"></span>Dr. Elena Alvarez</div></div></div>
+  </div>
+</section>
+
+<!-- 12 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">12</span><h2 class="spec-name">Eyebrow-led, inset media</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">The eyebrow says <b>what kind of thing</b> this is before you read <b>which</b> thing it is — the right order when a grid mixes content types. Insetting the media on a tint rather than bleeding it is the answer for any imagery that isn't photography.</p>
+  <div class="grid-3">
+    <div class="card c-eyebrow"><div class="media"><div class="inset ph ph-1"></div><div class="save">◫</div></div>
+      <div class="card-pad"><span class="eyebrow">Assessment</span><p class="title" style="margin-top:6px">Health Risk Assessment</p>
+      <div class="foot"><span class="dot"></span>15 minutes · +500 pts</div></div></div>
+    <div class="card c-eyebrow"><div class="media"><div class="inset ph ph-4"></div><div class="save">◫</div></div>
+      <div class="card-pad"><span class="eyebrow">Screening</span><p class="title" style="margin-top:6px">Biometric screening results</p>
+      <div class="foot"><span class="dot"></span>Updated Mar 12</div></div></div>
+    <div class="card c-eyebrow"><div class="media"><div class="inset ph ph-5"></div><div class="save">◫</div></div>
+      <div class="card-pad"><span class="eyebrow">Article</span><p class="title" style="margin-top:6px">Three questions for your next appointment</p>
+      <div class="foot"><span class="dot"></span>4 min read</div></div></div>
+  </div>
+</section>
+
+<!-- 13 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">13</span><h2 class="spec-name">Row + right badge, selected state</h2><span class="spec-kind">Stack · full width</span></div>
+  <p class="spec-why">Near-flat by design — this is a queue, and every row should look equally available. The accent border on one row is the only strong signal, and it's carrying <b>"you are here."</b> Calmer than giving the active item a different layout.</p>
+  <div class="stack">
+    <div class="card c-row-badge done"><span class="tile">✓</span><div class="mid">
+      <p class="title">Getting started</p><p class="meta">Lesson · 6 min · Complete</p></div>
+      <span class="pill pill-ok">Done</span></div>
+    <div class="card c-row-badge sel"><span class="tile">◔</span><div class="mid">
+      <p class="title">Portion awareness</p><p class="meta">Lesson · 12 min · Beginner</p></div>
+      <span class="pill pill-new">You're here</span></div>
+    <div class="card c-row-badge"><span class="tile">◈</span><div class="mid">
+      <p class="title">Reading nutrition labels</p><p class="meta">Lesson · 9 min · Beginner</p></div>
+      <span class="pill pill-quiet">Popular</span></div>
+    <div class="card c-row-badge"><span class="tile">◇</span><div class="mid">
+      <p class="title">Eating out without starting over</p><p class="meta">Lesson · 14 min · Intermediate</p></div></div>
+  </div>
+</section>
+
+<!-- 14 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">14</span><h2 class="spec-name">Tag-chip footer</h2><span class="spec-kind">Carousel · rail</span></div>
+  <p class="spec-why">Title is close to a page heading — that's what makes it work in a carousel showing only three. Taxonomy is pushed to the bottom as chips, keeping qualifiers out of the title. <b>Equal heights with the chip row bottom-aligned forms a rail across the set</b>, which is what makes unequal copy lengths look ordered.</p>
+  <div class="rail">
+    <div class="card c-chipfoot"><div class="media ph ph-1"></div><div class="card-pad">
+      <p class="title">Lower your blood pressure in 8 weeks</p>
+      <p class="desc">A guided path built around three habits, not thirty. Weekly check-ins with a coach who reads your readings.</p>
+      <span class="spacer"></span><div class="chips"><span class="chip">No cost</span><span class="chip">Beginner</span><span class="chip">Coached</span></div></div></div>
+    <div class="card c-chipfoot"><div class="media ph ph-5"></div><div class="card-pad">
+      <p class="title">Sleep, honestly</p>
+      <p class="desc">Six short lessons on what actually moves sleep quality.</p>
+      <span class="spacer"></span><div class="chips"><span class="chip">No cost</span><span class="chip">Beginner</span><span class="chip">Self-guided</span></div></div></div>
+    <div class="card c-chipfoot"><div class="media ph ph-3"></div><div class="card-pad">
+      <p class="title">Strength for people who don't lift</p>
+      <p class="desc">Twelve minutes, no equipment, three times a week. Designed for joints that already complain.</p>
+      <span class="spacer"></span><div class="chips"><span class="chip">No cost</span><span class="chip">Beginner</span><span class="chip">Video</span></div></div></div>
+    <div class="card c-chipfoot"><div class="media ph ph-4"></div><div class="card-pad">
+      <p class="title">Understanding your benefits before you need them</p>
+      <p class="desc">What your plan covers, in plain language.</p>
+      <span class="spacer"></span><div class="chips"><span class="chip">No cost</span><span class="chip">All levels</span></div></div></div>
+  </div>
+</section>
+
+<!-- 15 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">15</span><h2 class="spec-name">Colour-coded, text-only</h2><span class="spec-kind">Carousel · rail</span></div>
+  <p class="spec-why">No imagery at all, and it still reads as designed because the fill categorises and the chip confirms. Ink stays <b>near-black on every fill rather than inverting</b>, which keeps the set coherent. Pair with 14 and you get a two-tier system: image cards for featured, colour cards for the long tail.</p>
+  <div class="rail">
+    <div class="card c-textonly to-a"><p class="title">Your screening results are ready</p>
+      <p class="desc">Cholesterol, A1C, and blood pressure from your March 12 visit, with what each number means for you.</p>
+      <span class="chip">Results</span></div>
+    <div class="card c-textonly to-b"><p class="title">Open enrollment closes Friday</p>
+      <p class="desc">Review your elections and confirm your dependents before 11:59pm.</p>
+      <span class="chip">Deadline</span></div>
+    <div class="card c-textonly to-c"><p class="title">Your team is 4,000 steps from second place</p>
+      <p class="desc">The Spring Challenge ends Sunday. Everyone's logs count through midnight.</p>
+      <span class="chip">Challenge</span></div>
+    <div class="card c-textonly to-a"><p class="title">Ask the Digital Advisor anything</p>
+      <p class="desc">Questions about your results, your benefits, or what to do next.</p>
+      <span class="chip">Support</span></div>
+  </div>
+</section>
+
+<!-- 16 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">16</span><h2 class="spec-name">Centred CTA card</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">Symmetrical and slow — centring makes it read as an offer rather than content. The <b>outlined, not filled, button</b> is the lesson: three filled buttons in a row is three primary actions, which is none.</p>
+  <div class="grid-3">
+    <div class="card c-cta"><span class="art">◔</span><p class="title">Know your numbers</p>
+      <p class="desc">Take the Health Assessment and get a plan built from your own answers.</p>
+      <button class="btn btn-ghost">Start assessment</button></div>
+    <div class="card c-cta"><span class="art">◈</span><p class="title">Get screened</p>
+      <p class="desc">Onsite events, at-home kits, or your own doctor — results flow into one place.</p>
+      <button class="btn btn-ghost">Find an event</button></div>
+    <div class="card c-cta"><span class="art">◎</span><p class="title">Earn as you go</p>
+      <p class="desc">Points for the things you were doing anyway. Redeem any time before December 31.</p>
+      <button class="btn btn-ghost">See rewards</button></div>
+  </div>
+</section>
+
+<!-- 17 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">17</span><h2 class="spec-name">Title above image</h2><span class="spec-kind">Grid · 4-up</span></div>
+  <p class="spec-why">Inverted — you read the name, then look at the object. It works when <b>the title is the identity</b> and the picture is only confirmation, and it makes the row read as a considered still-life rather than a product grid. Keep it as the argument that image-on-top isn't a law.</p>
+  <div class="grid-4">
+    <div class="card c-titlefirst"><div class="head"><p class="title">Fitbit Charge 6</p><p class="meta">Activity tracker</p></div>
+      <div class="media ph ph-1"></div>
+      <div class="foot"><div class="fl"><span class="price">3,500 pts</span><span class="was">5,000</span><p class="meta">★ 4.6 · 1,204</p></div>
+      <button class="btn btn-accent">Redeem</button></div></div>
+    <div class="card c-titlefirst"><div class="head"><p class="title">Withings Body scale</p><p class="meta">Connected scale</p></div>
+      <div class="media ph ph-4"></div>
+      <div class="foot"><div class="fl"><span class="price">4,200 pts</span><p class="meta">★ 4.5 · 806</p></div>
+      <button class="btn btn-accent">Redeem</button></div></div>
+    <div class="card c-titlefirst"><div class="head"><p class="title">Omron blood pressure monitor</p><p class="meta">Home cuff</p></div>
+      <div class="media ph ph-3"></div>
+      <div class="foot"><div class="fl"><span class="price">2,800 pts</span><span class="was">3,400</span><p class="meta">★ 4.8 · 2,190</p></div>
+      <button class="btn btn-accent">Redeem</button></div></div>
+    <div class="card c-titlefirst"><div class="head"><p class="title">Theragun mini</p><p class="meta">Recovery</p></div>
+      <div class="media ph ph-6"></div>
+      <div class="foot"><div class="fl"><span class="price">5,000 pts</span><p class="meta">★ 4.4 · 512</p></div>
+      <button class="btn btn-accent">Redeem</button></div></div>
+  </div>
+</section>
+
+<!-- 18 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">18</span><h2 class="spec-name">Chip → headline → meta, optional media</h2><span class="spec-kind">Grid · 3-up, mixed</span></div>
+  <p class="spec-why">Identical text hierarchy whether or not there's an image, so the grid stays even. <b>This is the pattern that makes a half-illustrated content set look intentional instead of incomplete</b> — the honest answer when art coverage is partial. The trailing arrow does the affordance work without a button.</p>
+  <div class="grid-3">
+    <div class="card c-chiplead"><div class="media ph ph-5"></div><span class="chip chip-solid">Nutrition</span>
+      <p class="title">The sodium hiding in food you'd call healthy</p><p class="meta">Mar 12 · 6 min read →</p></div>
+    <div class="card c-chiplead"><span class="chip chip-solid">Movement</span>
+      <p class="title">Why ten minutes beats an hour you won't do</p><p class="meta">Mar 9 · 4 min read →</p></div>
+    <div class="card c-chiplead"><span class="chip chip-solid">Benefits</span>
+      <p class="title">What "in-network" actually costs you</p><p class="meta">Mar 6 · 7 min read →</p></div>
+    <div class="card c-chiplead"><span class="chip chip-solid">Sleep</span>
+      <p class="title">Screens aren't the whole story</p><p class="meta">Mar 2 · 5 min read →</p></div>
+    <div class="card c-chiplead"><div class="media ph ph-2"></div><span class="chip chip-solid">Stress</span>
+      <p class="title">Three minutes that reliably lower your heart rate</p><p class="meta">Feb 27 · 3 min read →</p></div>
+    <div class="card c-chiplead"><span class="chip chip-solid">Prevention</span>
+      <p class="title">The screenings worth asking for at 45</p><p class="meta">Feb 24 · 8 min read →</p></div>
+  </div>
+</section>
+
+<!-- 19 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">19</span><h2 class="spec-name">Dual-action footer</h2><span class="spec-kind">Grid · 3-up</span></div>
+  <p class="spec-why">Two actions of equal weight, neither becoming primary — both outlined, both half-width. State lives in the badge, so the buttons only change label. <b>The equal-weight treatment is what keeps a grid of these from reading as a wall of CTAs.</b></p>
+  <div class="grid-3">
+    <div class="card c-dualaction"><div class="card-pad"><div class="top"><span class="logo">◈</span><span class="pill pill-ok">Connected</span></div>
+      <p class="title">Apple Health</p><p class="desc">Sync steps, workouts, and sleep automatically. Updates a few times an hour.</p>
+      <span class="spacer"></span><div class="acts"><button class="btn">Details</button><button class="btn">Disconnect</button></div></div></div>
+    <div class="card c-dualaction"><div class="card-pad"><div class="top"><span class="logo">◇</span><span class="pill pill-quiet">Beta</span></div>
+      <p class="title">Dexcom</p><p class="desc">Bring continuous glucose readings into your Diabetes path.</p>
+      <span class="spacer"></span><div class="acts"><button class="btn">Details</button><button class="btn">Connect</button></div></div></div>
+    <div class="card c-dualaction"><div class="card-pad"><div class="top"><span class="logo">◎</span></div>
+      <p class="title">Fitbit</p><p class="desc">Steps, heart rate, and sleep stages. Counts toward challenges and points.</p>
+      <span class="spacer"></span><div class="acts"><button class="btn">Details</button><button class="btn">Connect</button></div></div></div>
+  </div>
+</section>
+
+<!-- 20 ─────────────────────────────────────────────────────────── -->
+<section class="spec">
+  <div class="spec-head"><span class="spec-num">20</span><h2 class="spec-name">Stat cards, shared container</h2><span class="spec-kind">Panel · 3-up</span></div>
+  <p class="spec-why">Number first by size, label second by weight, description third by colour — three devices, one per level. <b>The shared container with dividers is the detail:</b> it reads as one panel of related metrics rather than three competing cards. The description line is what most stat cards omit and then need a tooltip for.</p>
+  <div class="statgroup">
+    <div class="c-stat"><span class="toprule" style="background:var(--accent)"></span><span class="ico" style="color:var(--accent)">◎</span>
+      <div class="num">4,250</div><div class="lab">Points available</div><div class="sub">Earned this plan year. Expires December 31.</div></div>
+    <div class="c-stat"><span class="toprule" style="background:var(--ok)"></span><span class="ico" style="color:var(--ok)">◔</span>
+      <div class="num">7</div><div class="lab">Day streak</div><div class="sub">Consecutive days you've logged activity.</div></div>
+    <div class="c-stat"><span class="toprule" style="background:#b08034"></span><span class="ico" style="color:#b08034">◈</span>
+      <div class="num">2 of 4</div><div class="lab">Activities complete</div><div class="sub">Finish all four to earn the full incentive.</div></div>
+  </div>
+</section>
+
+<footer class="pg">
+  <h2>Notes for the Figma pass</h2>
+  <ul>
+    <li><b>One component, not twenty.</b> Six devices are doing nearly all the hierarchy work here — an image slot that isn't always an image (05, 04, 15), the eyebrow (12, 18), the ruled footer (03, 11, 20), bottom-aligned chips (14, 15), overlay-instead-of-row for state (09, 10, 12), and the right column (08, 13). That's a small enough vocabulary to build as one card with slots and variants rather than a family of separate components.</li>
+    <li><b>Three base frames cover all twenty:</b> vertical grid card (~300×auto), horizontal row card (~660×auto), and panel-segment (stat). Everything else is slot content and variant state.</li>
+    <li><b>Equal-height behaviour is load-bearing</b> in 09, 14, 15, and 19 — the chip row and button row must bottom-align across a set. In Figma that's a fill-container auto-layout with a spacer, not a fixed height.</li>
+    <li><b>Token mapping.</b> The <code>:root</code> block is the whole contract: 4 ink steps, 4 surfaces, 2 rules, 1 accent + tint, 2 state colours, 5 radii, 6 spacing steps, 6 type steps. Map onto the existing v81 collection and re-skin is mechanical.</li>
+    <li><b>17 needs a fixed-height head slot.</b> Because the title sits above the image, a title that wraps to two lines pushes that card's image down and breaks the still-life row the pattern exists to create. Every other card absorbs title wrap harmlessly; this one doesn't. Give the head a min-height of two lines.</li>
+    <li><b>11 is the one that strains at 375px</b> — verified, not assumed. Holding the image at 44% of a 343px card leaves ~180px for the title, which wraps to three or four lines and stretches the image column tall. It stays usable, but if this pattern ships it needs a stacked variant under ~480px.</li>
+    <li><b>Not yet covered:</b> empty, loading, locked, and error states; hover and focus-visible. That's the obvious v2.</li>
+  </ul>
+</footer>
+
+</div>
+</body>
+</html>

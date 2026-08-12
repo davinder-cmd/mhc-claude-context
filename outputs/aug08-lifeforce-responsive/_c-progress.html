@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · My Progress (Option C — two-column)</title>
+<link rel="stylesheet" href="lifeforce.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+<style>
+  /* Option C — two-column web layout, grid-aligned (Material 3) */
+  .wrap{max-width:1280px;}                                   /* Large body-max */
+  @media (min-width:1600px){ .wrap{max-width:1440px;} }      /* Extra-large body-max */
+  .layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;}
+  @media (min-width:1000px){ .layout{grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:40px;} }
+  .col{display:flex;flex-direction:column;gap:16px;min-width:0;}
+  /* recommendations + handouts go two-up inside the wide column */
+  .card-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media (min-width:700px){ .card-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+  .card-grid .rec{margin:0;}
+  /* rail is sticky so support/contact stays in view while the main column scrolls */
+  @media (min-width:1000px){ .col.side{position:sticky;top:24px;} }
+  .railcard{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="stack">
+    <a class="appback" href="#"><span class="material-symbols-outlined">arrow_back_ios_new</span></a>
+    <div class="pagehead"><span class="kicker">LifeForce</span><h1 class="pagetitle">You're active</h1></div>
+    <div class="tabs"><a href="active.html">Status</a><a href="#" aria-selected="true">My Progress</a></div>
+
+    <div class="layout">
+      <!-- MAIN: nurse note · results · recommendations (2-up) · handouts (2-up) -->
+      <div class="col">
+        <h3 class="sec-h">From your nurse</h3>
+        <div class="card nurse"><span class="nurse__icon"><span class="material-symbols-outlined">person</span></span><p class="nurse__text">Great work keeping up with your walks — your resting heart rate is trending down. Before our next appointment, aim for around 7,000 steps on most days, cut sugary drinks to one or fewer per day, and keep a home blood-pressure log to bring with you.</p><p class="nurse__meta">Received May 14, 2026</p></div>
+
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;"><h3 class="sec-h" style="margin:0">Your latest results</h3><span class="body-sm">Apr 28</span></div>
+        <div class="grid-2"><div class="data"><div class="data__label">Blood Pressure</div><div class="data__value">128/82</div><div class="data__goal">Goal &lt;120/80</div></div><div class="data"><div class="data__label">BMI</div><div class="data__value">27.4</div><div class="data__goal">Goal 18.5–24.9</div></div><div class="data"><div class="data__label">LDL Cholesterol</div><div class="data__value">118</div><div class="data__goal">Goal &lt;100</div></div><div class="data"><div class="data__label">Resting HR</div><div class="data__value">64</div><div class="data__goal">Goal &lt;70</div></div></div>
+        <a class="seeall" href="progress-full-results.html">See all results <span class="material-symbols-outlined">chevron_right</span></a>
+
+        <h3 class="sec-h" style="margin-top:10px">Recommended programs</h3>
+        <div class="card-grid"><div class="rec"><span class="rec__icon tint-green"><span class="material-symbols-outlined">favorite</span></span><div><div class="rec__title">Virta — Weight Loss</div><div class="rec__desc">Lose weight, reduce medications and save money.</div></div></div><div class="rec"><span class="rec__icon"><span class="material-symbols-outlined">person</span></span><div><div class="rec__title">Premise Health — Counseling</div><div class="rec__desc">Free, confidential behavioral health support.</div></div></div><div class="rec"><span class="rec__icon tint-tan"><span class="material-symbols-outlined">bolt</span></span><div><div class="rec__title">Truist Virtual Fitness</div><div class="rec__desc">Move more and sit less — at work, at home and everywhere you go.</div></div></div><div class="rec"><span class="rec__icon tint-green"><span class="material-symbols-outlined">restaurant</span></span><div><div class="rec__title">Foodsmart — Nutrition</div><div class="rec__desc">Personalized meal planning with a registered dietitian.</div></div></div></div>
+        <a class="seeall" href="#">See all programs <span class="material-symbols-outlined">chevron_right</span></a>
+
+        <h3 class="sec-h" style="margin-top:10px">Handouts</h3>
+        <div class="card-grid"><div class="rec"><span class="rec__icon tint-doc"><span class="material-symbols-outlined">description</span></span><div><div class="rec__title" style="color:var(--ink)">Understanding your cholesterol numbers</div></div></div><div class="rec"><span class="rec__icon tint-doc"><span class="material-symbols-outlined">description</span></span><div><div class="rec__title" style="color:var(--ink)">Move more, sit less: everyday activity</div></div></div><div class="rec"><span class="rec__icon tint-doc"><span class="material-symbols-outlined">description</span></span><div><div class="rec__title" style="color:var(--ink)">Building a better sleep routine</div></div></div><div class="rec"><span class="rec__icon tint-doc"><span class="material-symbols-outlined">description</span></span><div><div class="rec__title" style="color:var(--ink)">Reading a nutrition label</div></div></div></div>
+        <a class="seeall" href="#">See all handouts <span class="material-symbols-outlined">chevron_right</span></a>
+      </div>
+
+      <!-- RAIL: support & contact (persistent across pages) -->
+      <div class="col side">
+        <div class="card support"><div class="support__label">Peak Health Support</div><p class="body-sm" style="margin-bottom:10px">Your nurse-coach team is here to help with labs, scheduling, and program questions.</p><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><p class="body-sm" style="color:var(--muted)">Mon–Fri · 8am–8pm ET</p><button class="btn btn--outline" style="margin-top:12px">Peak Health portal</button></div>
+
+        <div class="railcard"><div class="support__label">Your appointment</div><p class="body-sm" style="margin:8px 0 12px">Next visit: <strong style="color:var(--ink)">Not scheduled</strong></p><button class="btn btn--outline">Schedule a visit</button></div>
+
+        <a class="linkrow" href="records.html">Your records <span class="material-symbols-outlined">chevron_right</span></a>
+        <a class="linkrow" href="#">About LifeForce <span class="material-symbols-outlined">chevron_right</span></a>
+        <a class="linkrow" href="#">Frequently asked questions <span class="material-symbols-outlined">chevron_right</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

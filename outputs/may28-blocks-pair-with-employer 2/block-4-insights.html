@@ -1,0 +1,70 @@
+<!--
+  ============================================================
+  BLOCK 4 — Insights
+  ============================================================
+  This is the canonical state-flag-driven, action-bearing block per guide §3.3.
+
+  Renders ONLY the content card. The action button (Get insight / Refresh)
+  is rendered by the HOST after this block's markup. The host reads the
+  state flags this block exposes and decides which action variant to attach.
+
+  v81 had:
+    <div class="insight__action"><button class="btn btn-outlined">Refresh Insight</button></div>
+  That button has been removed. The host injects it via the action-button slot.
+
+  State machine (mutually exclusive, exhaustive):
+    insightsState_ready        — host attaches "Get insight" (first-time generate)
+    insightsState_refreshable  — host attaches "Refresh" (insight currently shown)
+    insightsState_readOnly     — host attaches no button or a disabled cooldown chip
+    insightsState_hidden       — entire block suppresses; ZERO markup emitted
+
+  Conditionals:
+    {{^formula.insightsState_hidden}}…{{/}}       — top-level suppress wrapper
+    {{#formula.insightsState_ready}}…{{/}}        — "Get insight" copy variant in body
+    {{#formula.insightsState_refreshable}}…{{/}}  — refreshable copy (paragraph + cooldown line)
+    {{#formula.insightsState_readOnly}}…{{/}}     — read-only / cooldown copy
+
+  Tokens:
+    {{formula.copy_insight_eyebrow}}              — "Insight"
+    {{formula.copy_insight_paragraph}}            — the insight body itself
+    {{formula.copy_insight_readyPrompt}}          — "Generate your first insight"
+    {{formula.copy_insight_cooldownMeta}}         — "Next refresh in 4h"
+  ============================================================
+-->
+
+{{^formula.insightsState_hidden}}
+<div class="mhc-home">
+  <section class="section" aria-labelledby="mhc-insights-title">
+    <h2 id="mhc-insights-title" class="mhc-visually-hidden">{{formula.copy_insight_eyebrow}}</h2>
+    <div class="insight">
+      <div class="banner-icon banner-icon--insight">
+        <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+      </div>
+      <div class="insight__body">
+        <div class="eyebrow insight__label">
+          <span class="dot" aria-hidden="true"></span>
+          {{formula.copy_insight_eyebrow}}
+        </div>
+        {{#formula.insightsState_ready}}
+        <p class="paragraph-2">{{formula.copy_insight_readyPrompt}}</p>
+        {{/formula.insightsState_ready}}
+        {{#formula.insightsState_refreshable}}
+        <p class="paragraph-2">{{formula.copy_insight_paragraph}}</p>
+        {{/formula.insightsState_refreshable}}
+        {{#formula.insightsState_readOnly}}
+        <p class="paragraph-2">{{formula.copy_insight_paragraph}}</p>
+        <div class="body-3 ink-soft">{{formula.copy_insight_cooldownMeta}}</div>
+        {{/formula.insightsState_readOnly}}
+      </div>
+    </div>
+    <!--
+      HOST INJECTS THE ACTION BUTTON HERE.
+        - insightsState_ready       → render "Get insight" (MHC action: generateInsight)
+        - insightsState_refreshable → render "Refresh Insight" (MHC action: refreshInsight)
+        - insightsState_readOnly    → no button, or render a disabled chip
+      The visual slot wrapper `.insight__action` is defined in mhc-home.css —
+      the host uses it when rendering the button.
+    -->
+  </section>
+</div>
+{{/formula.insightsState_hidden}}

@@ -1,0 +1,133 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opt-in "how it works" — step options</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.12);--teal:#0E4A56;--teal-2:#1F6F7A;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-2:#B87A1E;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1700px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:1000px;margin:0 0 4px;font-size:14px}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:11px;width:360px}
+.cap{font-size:12px;color:var(--ink-2)}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.rec{color:#fff;background:var(--teal)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px}
+.pk{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--teal-2);margin-bottom:16px}
+/* shared vertical timeline */
+.step{display:flex;gap:14px;position:relative;padding-bottom:20px}
+.step:last-child{padding-bottom:0}
+.step .line{position:absolute;top:44px;bottom:-2px;width:2px;background:linear-gradient(var(--teal-tint),var(--amber-warm))}
+.step:last-child .line{display:none}
+.sh{font-size:16px;font-weight:750;line-height:1.2}
+.sh .amt{color:var(--amber-2)}
+.ss{font-size:12.5px;color:var(--ink-2);margin-top:3px}
+.node{flex:none;z-index:1;display:flex;align-items:center;justify-content:center}
+/* A numbered */
+.n-num{width:42px;height:42px;border-radius:50%;background:var(--teal-tint);color:var(--teal);font-size:16px;font-weight:800}
+.n-num.gold{background:var(--amber-warm);color:var(--amber-2)}
+.a .line{left:20px}
+/* B icons */
+.n-ico{width:44px;height:44px;border-radius:50%;background:var(--teal-tint);color:var(--teal);font-size:20px}
+.n-ico.gold{background:var(--amber-warm);color:var(--amber-2)}
+.b .line{left:21px}
+/* C images */
+.n-img{width:50px;height:50px;border-radius:13px;overflow:hidden;position:relative}
+.n-img.i1{background:linear-gradient(135deg,#17636f,#4fa3a8)}
+.n-img.i2{background:linear-gradient(135deg,#2b8b93,#8fc3c0)}
+.n-img.i3{background:linear-gradient(135deg,#E4B04A,#F3D89B)}
+.n-img .ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px}
+.c .line{left:24px;top:50px}
+/* D horizontal 123 */
+.hrow{display:flex;align-items:flex-start;gap:6px}
+.hstep{flex:1;text-align:center}
+.hnode{width:40px;height:40px;border-radius:50%;background:var(--teal-tint);color:var(--teal);font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 9px}
+.hnode.gold{background:var(--amber-warm);color:var(--amber-2)}
+.hh{font-size:13px;font-weight:730;line-height:1.2}
+.hs{font-size:11px;color:var(--ink-2);margin-top:3px;line-height:1.35}
+.harw{color:var(--ink-3);font-size:15px;margin-top:10px}
+/* E minimal inline */
+.mstep{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.mstep:last-child{border-bottom:none}
+.mbadge{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+.mbadge.gold{background:var(--amber-2)}
+.mh{font-size:14px;font-weight:730}.mh .amt{color:var(--amber-2)}
+.ms{font-size:12px;color:var(--ink-2);margin-top:1px}
+.rec-note{margin-top:28px;max-width:1000px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Opt-in "how it works" — step options</h1>
+<p class="sub">Filling the empty circles in the 3-step path block. Same copy in every option (fixed "5 paths"): Start → Finish → $100. Numbers, icons, images, and two layouts.</p>
+
+<div class="grid">
+
+<!-- A numbered -->
+<div class="col">
+<span class="tag rec">A · Numbered 1·2·3  ·  lean</span>
+<div class="card a">
+<div class="pk">Rewards · how it works</div>
+<div class="step"><span class="line"></span><span class="node n-num">1</span><div><div class="sh">Start the path</div><div class="ss">Opt in once · covers every program</div></div></div>
+<div class="step"><span class="line"></span><span class="node n-num">2</span><div><div class="sh">Finish the whole path</div><div class="ss">Complete every session</div></div></div>
+<div class="step"><span class="node n-num gold">3</span><div><div class="sh">Earn a <span class="amt">$100 gift card</span></div><div class="ss">Up to 5 paths · $500 a year</div></div></div>
+</div>
+<div class="cap"><b>A — Numbered. (my lean.)</b> Cleanest and most universal — "1·2·3" reads instantly as sequence, no icon interpretation needed. Step 3's number goes amber to mark the payoff. Zero art dependencies, scales to any copy.</div>
+</div>
+
+<!-- B icons -->
+<div class="col">
+<span class="tag">B · Icons</span>
+<div class="card b">
+<div class="pk">Rewards · how it works</div>
+<div class="step"><span class="line"></span><span class="node n-ico">▶</span><div><div class="sh">Start the path</div><div class="ss">Opt in once · covers every program</div></div></div>
+<div class="step"><span class="line"></span><span class="node n-ico">✓</span><div><div class="sh">Finish the whole path</div><div class="ss">Complete every session</div></div></div>
+<div class="step"><span class="node n-ico gold">🎁</span><div><div class="sh">Earn a <span class="amt">$100 gift card</span></div><div class="ss">Up to 5 paths · $500 a year</div></div></div>
+</div>
+<div class="cap"><b>B — Icons.</b> Start (▶) · finish (✓) · reward (🎁). Warmer and more scannable; the gift icon makes the payoff pop. Trade-off: icons must be consistent weight/style (the 🎁 emoji here would become a drawn glyph in production).</div>
+</div>
+
+<!-- C images -->
+<div class="col">
+<span class="tag">C · Images</span>
+<div class="card c">
+<div class="pk">Rewards · how it works</div>
+<div class="step"><span class="line"></span><span class="node n-img i1"><span class="ov">▶</span></span><div><div class="sh">Start the path</div><div class="ss">Opt in once · covers every program</div></div></div>
+<div class="step"><span class="line"></span><span class="node n-img i2"><span class="ov">✓</span></span><div><div class="sh">Finish the whole path</div><div class="ss">Complete every session</div></div></div>
+<div class="step"><span class="node n-img i3"><span class="ov">🎁</span></span><div><div class="sh">Earn a <span class="amt">$100 gift card</span></div><div class="ss">Up to 5 paths · $500 a year</div></div></div>
+</div>
+<div class="cap"><b>C — Images.</b> Rounded image/illustration tiles (gradients are placeholders). Richest and most branded — but heaviest, needs 3 quality assets, and can pull focus from the copy. Best if there's an illustration system to lean on.</div>
+</div>
+
+<!-- D horizontal -->
+<div class="col">
+<span class="tag">D · Horizontal 1·2·3</span>
+<div class="card">
+<div class="pk">Rewards · how it works</div>
+<div class="hrow">
+<div class="hstep"><div class="hnode">1</div><div class="hh">Start</div><div class="hs">Opt in once</div></div>
+<div class="harw">›</div>
+<div class="hstep"><div class="hnode">2</div><div class="hh">Finish</div><div class="hs">Every session</div></div>
+<div class="harw">›</div>
+<div class="hstep"><div class="hnode gold">🎁</div><div class="hh">Earn</div><div class="hs">$100 · up to $500</div></div>
+</div>
+</div>
+<div class="cap"><b>D — Horizontal.</b> Same 1·2·3 across one row — much shorter vertically. Great when the opt-in screen is tight on space. Trade-off: less room for supporting copy per step.</div>
+</div>
+
+<!-- E minimal -->
+<div class="col">
+<span class="tag">E · Minimal inline</span>
+<div class="card">
+<div class="pk">Rewards · how it works</div>
+<div class="mstep"><span class="mbadge">1</span><div><div class="mh">Start the path</div><div class="ms">Opt in once · covers every program</div></div></div>
+<div class="mstep"><span class="mbadge">2</span><div><div class="mh">Finish the whole path</div><div class="ms">Complete every session</div></div></div>
+<div class="mstep"><span class="mbadge gold">3</span><div><div class="mh">Earn a <span class="amt">$100 gift card</span></div><div class="ms">Up to 5 paths · $500 a year</div></div></div>
+</div>
+<div class="cap"><b>E — Minimal inline.</b> Small number badges, hairline rows, no connector line. Lightest visual weight — reads like a tidy list, not a "journey." Best if the path graphic felt too heavy.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>A — Numbered 1·2·3.</b> It communicates sequence with zero interpretation cost, needs no art pipeline, and survives copy changes — with step 3 going amber to flag the payoff, you still get the "reward at the end" beat. <b>B (icons)</b> is the upgrade if you want more warmth and have a consistent icon set; <b>C (images)</b> only if there's an illustration system worth the weight. <b>D</b> for tight vertical space, <b>E</b> if the journey graphic reads too heavy. All share one copy set and fix "5 paths."
+</div>
+</div>
+</body></html>

@@ -1,0 +1,221 @@
+<title>EBB — "How you're doing" v2 · event-driven check-in</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 58px 0 20px; }
+  .hero h1 { font-size: clamp(27px, 4vw, 42px); line-height: 1.06; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; text-wrap: balance; max-width: 24ch; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 70ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+
+  .whatbox { margin: 22px 0 0; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--teal); border-radius: 12px; padding: 16px 18px; max-width: 82ch; }
+  .whatbox h4 { margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--teal-2); }
+  .whatbox p { margin: 0 0 6px; font-size: 13.5px; color: var(--ink-2); line-height: 1.55; }
+  .whatbox b { color: var(--ink); font-weight: 650; }
+
+  /* lifecycle strip */
+  .lifecycle { margin: 24px 0 6px; }
+  .lc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+  .lc-scroll { overflow-x: auto; padding-bottom: 6px; }
+  .lc { display: flex; align-items: center; gap: 8px; min-width: min-content; }
+  .lc .pt { flex: none; border-radius: 10px; padding: 9px 12px; font-size: 12px; font-weight: 650; }
+  .lc .pt.event { background: var(--teal); color: #fff; }
+  .lc .pt.quiet { background: #fff; border: 1px dashed var(--line-strong); color: var(--ink-3); }
+  .lc .pt.result { background: var(--teal-tint); color: var(--teal); border: 1px solid var(--teal); }
+  .lc .a { color: var(--teal-2); font-weight: 700; flex: none; }
+  .lc-note { margin-top: 9px; font-size: 12.5px; color: var(--ink-2); }
+
+  section { padding: 30px 0; }
+  .sec-head { margin-bottom: 16px; }
+  .sec-head h2 { font-size: clamp(19px, 2.3vw, 24px); letter-spacing: -0.01em; font-weight: 680; margin: 6px 0 0; }
+  .sec-head p { margin: 8px 0 0; color: var(--ink-2); font-size: 14.5px; max-width: 70ch; }
+
+  .states { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+  .col { width: 340px; display: flex; flex-direction: column; gap: 12px; }
+  .col-head { display: flex; align-items: center; gap: 10px; }
+  .st-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; padding: 4px 10px; border-radius: 7px; }
+  .st-badge.rest { background: var(--ink-3); }
+  .st-badge.due { background: var(--amber-mid); }
+  .st-badge.up { background: var(--teal); }
+  .st-badge.need { background: var(--teal-2); }
+  .st-when { font-size: 12px; color: var(--ink-3); }
+
+  .surface-pad { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 16px; }
+
+  .checkin { border: 1px solid var(--line); border-radius: 15px; padding: 14px 16px; background: #fff; }
+  .checkin.needs { border-left: 3px solid var(--teal-2); }
+  .checkin.due { border: 1px solid var(--amber-mid); background: linear-gradient(180deg, var(--amber-tint) 0%, #fff 60%); }
+  .ci-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .ci-head .l { font-size: 13.5px; font-weight: 680; }
+  .ci-head .r { font-size: 11.5px; font-weight: 650; flex: none; color: var(--teal-2); }
+  .ci-head .r.mins { color: var(--amber); background: #fff; border: 1px solid var(--amber-mid); border-radius: 999px; padding: 2px 8px; }
+  .ci-insight { margin: 8px 0 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .ci-insight b { color: var(--ink); font-weight: 660; }
+  .ci-trend { margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 650; padding: 5px 10px; border-radius: 999px; color: var(--teal); background: var(--teal-tint); }
+  .ci-soon { margin-top: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 650; padding: 5px 10px; border-radius: 999px; color: var(--ink-2); background: rgba(34,38,42,0.06); }
+  .ci-cta { margin-top: 12px; width: 100%; background: var(--teal); color: #fff; border: none; border-radius: 11px; padding: 12px; font-size: 14px; font-weight: 680; font-family: inherit; }
+  .ci-support { margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .support-btn { border: 1px solid var(--line-strong); border-radius: 10px; padding: 8px 13px; font-size: 12.5px; font-weight: 650; color: var(--teal-2); background: #fff; font-family: inherit; }
+  .support-btn.solid { background: var(--teal); color: #fff; border-color: var(--teal); }
+
+  .trigger { font-size: 12px; color: var(--ink-3); background: var(--band); border-radius: 8px; padding: 8px 11px; line-height: 1.45; }
+  .trigger b { color: var(--ink-2); }
+  .notes { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .laws { display: flex; flex-wrap: wrap; gap: 6px; }
+  .law { font-size: 10.5px; font-weight: 650; padding: 3px 8px; border-radius: 999px; background: var(--teal-tint); color: var(--teal); }
+  .law.exp { background: var(--amber-tint); color: var(--amber); }
+
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .charter { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+  @media (max-width: 720px){ .charter { grid-template-columns: 1fr; } }
+  .ch { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .ch h4 { margin: 0; font-size: 13.5px; font-weight: 680; }
+  .ch p { margin: 5px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+
+  footer { padding: 26px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 84ch; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Topic page · "How you're doing" v2</div>
+    <h1>An outcome check-in, not a progress meter</h1>
+    <p class="thesis">Updated after the charter discussion. This block answers <strong>"is it working?"</strong> — the member's real goal — separate from "am I getting through it?" It's the member-facing face of <strong>measurement-based care</strong>: it speaks up at check-in points, celebrates real improvement, and — most importantly — turns "not improving" into <strong>help arriving</strong>, never a bad grade.</p>
+    <div class="whatbox">
+      <h4>What changed from v1</h4>
+      <p>1 · <b>Event-driven</b> — it's tied to the program's assessment checkpoints, not shown loudly on every view. Between checkpoints it rests.</p>
+      <p>2 · <b>The check-in prompt is now a state</b> — capturing the measure (2 min) is part of the block, so the signal is real.</p>
+      <p>3 · <b>"Needs support" is a doorway</b> — non-response surfaces a coach/Anna (and safety routing), never a score. This is the clinical value: catching it early.</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="lifecycle">
+      <div class="lc-label">The rhythm — event-driven</div>
+      <div class="lc-scroll"><div class="lc">
+        <span class="pt event">Baseline · Session 1</span>
+        <span class="a">→</span>
+        <span class="pt quiet">Rests between</span>
+        <span class="a">→</span>
+        <span class="pt event">Check-in · Session 5</span>
+        <span class="a">→</span>
+        <span class="pt result">Result: improving / support</span>
+        <span class="a">→</span>
+        <span class="pt quiet">Rests</span>
+        <span class="a">→</span>
+        <span class="pt event">Check-in · Session 8</span>
+      </div></div>
+      <div class="lc-note">The block only makes a claim when there's a fresh measure to back it. That keeps it honest and high-signal.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The four states</div>
+      <h2>How it renders across the rhythm</h2>
+    </div>
+
+    <div class="states">
+
+      <!-- RESTING -->
+      <div class="col">
+        <div class="col-head"><span class="st-badge rest">Resting</span><span class="st-when">between checkpoints</span></div>
+        <div class="surface-pad">
+          <div class="checkin">
+            <div class="ci-head"><span class="l">How you're doing</span></div>
+            <p class="ci-insight">Keep going — your next check-in is coming up. That's when we'll see how it's landing.</p>
+            <span class="ci-soon" aria-hidden="true">Next check-in · Session 5</span>
+          </div>
+        </div>
+        <div class="trigger"><b>When:</b> no fresh measure since the last checkpoint.</div>
+        <p class="notes">Quiet and honest — no claim it can't back. Sets the expectation for when the signal arrives.</p>
+        <div class="laws"><span class="law">Nielsen #1 · honest status</span></div>
+      </div>
+
+      <!-- CHECK-IN DUE -->
+      <div class="col">
+        <div class="col-head"><span class="st-badge due">Check-in due</span><span class="st-when">the measurement moment</span></div>
+        <div class="surface-pad">
+          <div class="checkin due">
+            <div class="ci-head"><span class="l">How you're doing</span><span class="r mins">2 min</span></div>
+            <p class="ci-insight">A quick check-in — a few questions to see how this is working for you.</p>
+            <button class="ci-cta">Start check-in</button>
+          </div>
+        </div>
+        <div class="trigger"><b>When:</b> a scheduled assessment checkpoint is reached.</div>
+        <p class="notes">The data-capture event — this is what makes the whole block real. Short and low-friction so people actually do it (attrition-aware).</p>
+        <div class="laws"><span class="law exp">Measurement-based care</span><span class="law exp">Eysenbach · reduce burden</span></div>
+      </div>
+
+      <!-- IMPROVING -->
+      <div class="col">
+        <div class="col-head"><span class="st-badge up">Improving</span><span class="st-when">after a good check-in</span></div>
+        <div class="surface-pad">
+          <div class="checkin">
+            <div class="ci-head"><span class="l">How you're doing</span></div>
+            <p class="ci-insight">You've been <b>feeling better</b> since you started — keep it going.</p>
+            <span class="ci-trend" aria-hidden="true">↗ Trending up since Session 1</span>
+          </div>
+        </div>
+        <div class="trigger"><b>When:</b> latest check-in beats baseline past the clinical threshold.</div>
+        <p class="notes">Plain-language proof it's working — the intrinsic motivator that outlasts the $100.</p>
+        <div class="laws"><span class="law">SDT · competence</span><span class="law exp">Human-in-the-loop</span></div>
+      </div>
+
+      <!-- NEEDS SUPPORT -->
+      <div class="col">
+        <div class="col-head"><span class="st-badge need">Needs support</span><span class="st-when">flat or declining</span></div>
+        <div class="surface-pad">
+          <div class="checkin needs">
+            <div class="ci-head"><span class="l">How you're doing</span></div>
+            <p class="ci-insight">The last few weeks have been tougher — that can happen, and it's worth adjusting. You don't have to do this alone.</p>
+            <div class="ci-support">
+              <button class="support-btn solid">Ask Anna</button>
+              <button class="support-btn">Talk to a coach</button>
+            </div>
+          </div>
+        </div>
+        <div class="trigger"><b>When:</b> no meaningful change or declining (below safety threshold → crisis routing instead).</div>
+        <p class="notes"><b>Help arriving, not a bad grade.</b> No score shown — the response is a human. This is the block's highest-value moment.</p>
+        <div class="laws"><span class="law exp">Feedback-informed treatment</span><span class="law">Nielsen #9 · help recover</span><span class="law">SDT · relatedness</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The charter (locked)</div>
+      <h2>Why this block exists — the rules it follows</h2>
+    </div>
+    <div class="charter">
+      <div class="ch"><h4>Purpose</h4><p>Reflects <b>outcome</b> ("is it working?"), separate from progress ("am I getting through it?"). The face of measurement-based care.</p></div>
+      <div class="ch"><h4>Only if we act on it</h4><p>Kept only because it drives a response (celebrate, or surface help). No decorative positivity — if we won't act, we cut it.</p></div>
+      <div class="ch"><h4>Good / bad is clinical</h4><p>Thresholds are clinician-owned (reliable change), not arbitrary. Design renders; clinical sets.</p></div>
+      <div class="ch"><h4>Show "bad" as a doorway</h4><p>Non-response → a coach/Anna (+ safety routing), never a verdict or number. Catching it early is the point.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>v2 update:</b> reframed as an event-driven outcome check-in (measurement-based care), added the "check-in due" capture state, and made "needs support" a doorway to human help rather than a score. Open sub-question: confirm event-driven placement (vs. always-on). Loaded: ux-usability-experts, ux-laws, engagement-behavior-experts, dtx-dcp-experts. Charter logged in `projects/feature-ebb/_decisions.md`.</p>
+  </div>
+</footer>

@@ -1,0 +1,346 @@
+/* ==========================================================================
+   MHC BASE — portable foundation extracted from home-figma-recreation-v81
+   (locked master, 2026-05-25). See ../may23-figma-recreation/ for lineage.
+
+   WHAT THIS IS
+   The system-level layer every DCP-suite page shares: color + type + shape +
+   spacing tokens, the full 25-class type scale (with the ≥1200 bump), the
+   two-tier shell, top bar, section heads, the full button system, bottom nav,
+   and utilities. Page-specific components (hero, pair cards, trackers, program
+   cards, rewards tiles, insight/challenge banners) are DELIBERATELY OMITTED —
+   they live on the home page. Build new page components on top of these tokens
+   and classes; see RESPONSIVE-RATIONALE.md for the reasoning that governs them.
+
+   HOW TO USE
+   <link rel="stylesheet" href="mhc-base.css"> then add a page-scoped <style>
+   block (or file) for that page's own components. Never redefine a token —
+   compose from --s-*, --r-*, the type classes, and the .btn system.
+   ========================================================================== */
+
+:root {
+  /* ── Colors — warm beige + graphite + navy ───────────── */
+  --bg:              #FAF7F0;
+  --surface:         #FFFFFF;
+  --surface-tinted:  #EFE7D6;
+  --ink:             #1A1D21;
+  --ink-soft:        #5C5F66;
+  --ink-placeholder: #9A9EA6;
+  --hairline:        #E6E3DC;
+  --link:            #2E60A4;
+  --brand:           #1B355C;
+  --on-brand:        #FFFFFF;
+  --insight-bg:      #E8F0FA;
+  --insight-border:  #B5C8E0;
+  --insight-dot:     #2E60A4;
+  --red:             #C8272E;
+  --green:           #4FA858;
+  --blue-icon:       #3A6FA8;
+  --orange:          #B5571E;
+  --teal-dark:       #1E5A6B;
+  --progress-bg:     #DDD7C8;
+  --progress-fill:   #4A4A60;
+
+  /* ── Type families ───────────────────────────────────── */
+  --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+  --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+
+  /* ── Shape (design/foundation/object-styles.md) ──────── */
+  --r-xs:   2px;
+  --r-s:    4px;
+  --r-m:    8px;
+  --r-l:   12px;
+  --r-xl:  16px;
+  --r-full: 999px;
+
+  /* ── Spacing (design/foundation/spacing.md) ──────────── */
+  --s-01: 0.25rem; --s-02: 0.5rem; --s-03: 0.75rem; --s-04: 1rem;
+  --s-05: 1.5rem;  --s-06: 2rem;   --s-07: 2.5rem;  --s-08: 3rem;  --s-09: 4rem;
+}
+
+/* ── Base reset (universal margin reset per typography.md) ── */
+*,*::before,*::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, dl, dd, dt, figure, hr { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-text);
+  font-size: 1rem;
+  line-height: 1.25;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font: inherit; cursor: pointer; }
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+  user-select: none;
+}
+
+/* ==========================================================================
+   MHC TYPE SCALE v3 — 25 atomic classes.
+   Absolute rem line-heights, grid-aligned. The "Medium+" bump fires at ≥1200
+   (NOT 600): Compact + Medium viewports render Compact sizes; only Large+ gets
+   the larger scale. Eyebrow + Label 1/2 static; Label 3 Compact-only.
+   Apple 20pt optical rule: classes reaching ≥20sp flip SF Pro Text → Display.
+   ========================================================================== */
+
+.display-1 { font-family: var(--f-display); font-weight: 400; font-size: 3.625rem;  line-height: 4rem;    letter-spacing: -0.01em; }
+.display-2 { font-family: var(--f-display); font-weight: 400; font-size: 3.1875rem; line-height: 3.5rem;  letter-spacing: -0.01em; }
+.display-3 { font-family: var(--f-display); font-weight: 400; font-size: 2.8125rem; line-height: 3.25rem; letter-spacing: -0.01em; }
+
+.heading-1 { font-family: var(--f-display); font-weight: 500; font-size: 2.5rem;    line-height: 2.75rem;  letter-spacing: -0.01em; }
+.heading-2 { font-family: var(--f-display); font-weight: 500; font-size: 2.25rem;   line-height: 2.5rem;   letter-spacing: -0.01em; }
+.heading-3 { font-family: var(--f-display); font-weight: 500; font-size: 2rem;      line-height: 2.25rem;  letter-spacing: -0.01em; }
+.heading-4 { font-family: var(--f-display); font-weight: 500; font-size: 1.75rem;   line-height: 2rem;     letter-spacing: -0.01em; }
+.heading-5 { font-family: var(--f-display); font-weight: 500; font-size: 1.5625rem; line-height: 1.75rem;  letter-spacing: -0.008em; }
+.heading-6 { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem;   line-height: 1.5rem;   letter-spacing: -0.008em; }
+
+/* Title — body-sized titles with title-feel (500 medium). Family per Apple's
+   20pt rule: <20pt = Text, ≥20pt = Display (Title 1 flips at ≥1200). */
+.title-1 { font-family: var(--f-text); font-weight: 500; font-size: 1.125rem; line-height: 1.5rem;   letter-spacing: -0.008em; }
+.title-2 { font-family: var(--f-text); font-weight: 500; font-size: 1rem;     line-height: 1.25rem;  letter-spacing: -0.008em; }
+.title-3 { font-family: var(--f-text); font-weight: 500; font-size: 0.875rem; line-height: 1.125rem; letter-spacing: -0.008em; }
+
+.body-1 { font-family: var(--f-text); font-weight: 400; font-size: 1.125rem; line-height: 1.5rem;   letter-spacing: -0.008em; }
+.body-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: 1.25rem;  letter-spacing: -0.008em; }
+.body-3 { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem; line-height: 1.125rem; letter-spacing: -0.008em; }
+
+/* Label — interactive UI labels (buttons, chips, tabs, nav). All static. */
+.label-0 { font-family: var(--f-text); font-weight: 500; font-size: 1rem;      line-height: 1.25rem;  letter-spacing: 0; }  /* 16/20 — hero/jumbo button labels */
+.label-1 { font-family: var(--f-text); font-weight: 500; font-size: 0.875rem;  line-height: 1rem;     letter-spacing: 0; }
+.label-2 { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem;   line-height: 1rem;     letter-spacing: 0; }
+.label-3 { font-family: var(--f-text); font-weight: 500; font-size: 0.6875rem; line-height: 0.875rem; letter-spacing: 0; }
+
+/* Caption / Eyebrow / Small */
+.caption { font-family: var(--f-text); font-weight: 500; font-size: 0.75rem;   line-height: 1rem;     letter-spacing: 0; }
+.eyebrow { font-family: var(--f-text); font-weight: 500; font-size: 0.6875rem; line-height: 0.875rem; letter-spacing: 0.04em; text-transform: uppercase; }  /* 11/14 Compact+Medium → 12/16 Large+ */
+.small   { font-family: var(--f-text); font-weight: 600; font-size: 0.6875rem; line-height: 0.875rem; letter-spacing: 0; }
+
+/* Paragraph — LH ~1.5 for long-form reading */
+.paragraph-1 { font-family: var(--f-text); font-weight: 400; font-size: 1.125rem; line-height: 1.6875rem; letter-spacing: -0.003em; }
+.paragraph-2 { font-family: var(--f-text); font-weight: 400; font-size: 1rem;     line-height: 1.5rem;    letter-spacing: -0.003em; }
+.paragraph-3 { font-family: var(--f-text); font-weight: 400; font-size: 0.875rem; line-height: 1.25rem;   letter-spacing: -0.003em; }
+
+/* The "Medium+" bump — fires at ≥1200, not ≥600. See RESPONSIVE-RATIONALE.md
+   §"Real desktop starts at 1200". */
+@media (min-width: 1200px) {
+  .display-1   { font-size: 4.125rem;  line-height: 4.625rem;  }
+  .display-2   { font-size: 3.625rem;  line-height: 4rem;      }
+  .display-3   { font-size: 3.25rem;   line-height: 3.75rem;   }
+  .heading-1   { font-size: 2.875rem;  line-height: 3.25rem;   }
+  .heading-2   { font-size: 2.5625rem; line-height: 2.875rem;  }
+  .heading-3   { font-size: 2.25rem;   line-height: 2.5rem;    }
+  .heading-4   { font-size: 2rem;      line-height: 2.25rem;   }
+  .heading-5   { font-size: 1.8125rem; line-height: 2rem;      }
+  .heading-6   { font-size: 1.4375rem; line-height: 1.625rem;  }
+  .title-1     { font-family: var(--f-display); font-size: 1.25rem;   line-height: 1.5rem;    }  /* 20 → Display */
+  .title-2     { font-size: 1.125rem;  line-height: 1.5rem;    }
+  .title-3     { font-size: 1rem;      line-height: 1.25rem;   }
+  .body-1      { font-family: var(--f-display); font-size: 1.25rem;   line-height: 1.5rem;    }  /* 20 → Display */
+  .body-2      { font-size: 1.125rem;  line-height: 1.5rem;    }
+  .body-3      { font-size: 1rem;      line-height: 1.25rem;   }
+  .caption     { font-size: 0.875rem;  line-height: 1.25rem;   }
+  .eyebrow     { font-size: 0.75rem;   line-height: 1rem;      }  /* 12/16 — bumped from 11/14 */
+  .small       { font-size: 0.75rem;   line-height: 1rem;      }
+  .paragraph-1 { font-family: var(--f-display); font-size: 1.25rem;   line-height: 1.875rem;  }  /* 20 → Display */
+  .paragraph-2 { font-size: 1.125rem;  line-height: 1.6875rem; }
+  .paragraph-3 { font-size: 1rem;      line-height: 1.5rem;    }
+}
+
+/* ==========================================================================
+   TOP BAR (current side-nav state: hamburger + brand only)
+   ========================================================================== */
+.top-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0; z-index: 30;
+}
+.top-bar__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 64px;
+  padding: 0 var(--s-04);
+  display: flex; align-items: center; gap: var(--s-03);
+}
+.icon-btn {
+  width: 48px; height: 48px;
+  border-radius: var(--r-full);
+  border: 0; background: transparent;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink);
+  cursor: pointer;
+}
+.icon-btn:hover { background: var(--hairline); }
+.icon-btn--filled { background: var(--surface-tinted); }
+.icon-btn--filled:hover { background: var(--hairline); }
+.acme-logo {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid var(--red);
+  padding: 2px 8px;
+  border-radius: var(--r-s);
+  color: var(--red);
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  background: var(--surface);
+}
+.top-bar__spacer { flex: 1; }
+
+/* ==========================================================================
+   SHELL — two-tier (Material 3 / industry standard).
+   .shell = gutter (padding outside the rail). .shell__rail = content container
+   with max-width. Usable content = 1280 (Large) / 1440 (Extra-large), no
+   "minus padding" math. See RESPONSIVE-RATIONALE.md §"Two-tier shell".
+   ========================================================================== */
+.shell { padding: var(--s-04) var(--s-04) calc(var(--s-09) + 80px); }
+.shell__rail { max-width: 1280px; margin: 0 auto; }
+@media (min-width: 600px) {
+  .top-bar__inner { padding: 0 var(--s-05); }
+  .shell { padding: var(--s-06) var(--s-05) var(--s-09); }
+}
+@media (min-width: 1600px) {
+  .top-bar__inner, .shell__rail { max-width: 1440px; }
+}
+
+/* ── Greeting / page-header row ───────────────────────── */
+.greeting {
+  display: flex; justify-content: space-between; align-items: end;
+  gap: var(--s-04);
+  margin-bottom: var(--s-05);
+}
+.greeting__actions { display: flex; gap: var(--s-03); }
+
+/* ── Sections + section heads ─────────────────────────── */
+.section { margin-top: var(--s-07); }   /* 40dp between top-level sections */
+.section-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: var(--s-03);
+  margin-bottom: var(--s-04);
+}
+.section-head__title { display: flex; flex-direction: column; gap: var(--s-01); }
+.section-head .meta {
+  color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: var(--s-02);
+}
+.section-head .meta .icon-inline { font-size: 1.1em; vertical-align: -2px; }
+
+/* ==========================================================================
+   BUTTONS — Material 3 size scale (XS 32 / S 40 default / M 56 / L 96 / XL 136).
+   MHC uses XS, S, M. Full state machine: default/hover/pressed/focus/disabled.
+   Universal :focus-visible ring for keyboard a11y.
+   ========================================================================== */
+.btn {
+  height: 40px;
+  padding: 0 var(--s-04);
+  border-radius: var(--r-full);
+  border: 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-02);
+  font-family: var(--f-text); font-weight: 500;
+  font-size: 0.875rem; line-height: 1rem; letter-spacing: 0;
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+.btn-xs { height: 32px; padding: 0 var(--s-03); font-size: 0.75rem; }
+.btn-m  { height: 56px; padding: 0 var(--s-05); font-size: 1rem; line-height: 1.25rem; }  /* Label 0 */
+.btn-l  { height: 96px;  padding: 0 var(--s-06); }
+.btn-xl { height: 136px; padding: 0 var(--s-07); }
+.btn:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+
+/* Filled — primary */
+.btn-filled               { background: var(--brand); color: var(--on-brand); }
+.btn-filled:hover         { background: #14264A; }
+.btn-filled:active        { background: #0E1C36; }
+.btn-filled:focus-visible { background: #14264A; }
+.btn-filled:disabled,
+.btn-filled[aria-disabled="true"] { background: var(--hairline); color: var(--ink-placeholder); cursor: not-allowed; }
+
+/* Outlined — secondary */
+.btn-outlined               { background: var(--surface); color: var(--ink); border: 1px solid var(--hairline); }
+.btn-outlined:hover         { background: var(--surface-tinted); border-color: var(--ink-placeholder); }
+.btn-outlined:active        { background: var(--hairline);       border-color: var(--ink-soft); }
+.btn-outlined:focus-visible { background: var(--surface-tinted); border-color: var(--ink-placeholder); }
+.btn-outlined:disabled,
+.btn-outlined[aria-disabled="true"] { background: var(--surface); color: var(--ink-placeholder); border-color: var(--hairline); cursor: not-allowed; }
+
+/* Text — invisible chrome, pill state layer on interaction. gap:0 prevents the
+   base .btn flex gap firing between text fragments + conditional inline spans. */
+.btn-text               { background: transparent; color: var(--link); padding: 0 var(--s-03); gap: 0; }
+.btn-text:hover         { background: rgba(46, 96, 164, 0.08); }
+.btn-text:active        { background: rgba(46, 96, 164, 0.12); }
+.btn-text:focus-visible { background: rgba(46, 96, 164, 0.12); }
+.btn-text:disabled,
+.btn-text[aria-disabled="true"] { color: var(--ink-placeholder); background: transparent; cursor: not-allowed; }
+
+/* ==========================================================================
+   PROGRESS — suite primitive.
+   As of 2026-07-13 the RING is the standardized progress primitive across the
+   DCP suite (decision: "ring everywhere"). The linear .progress bar below is
+   LEGACY — retained for home v81 until it migrates to the ring.
+   ========================================================================== */
+
+/* ── Progress ring (SVG, token-driven) ─────────────────────────────────────
+   Set completion with the --pct custom property (0–100) on .pring.
+   Circumference for r=52 is 2·π·52 ≈ 326.726 (kept in --pring-c).
+   Fill = graphite --progress-fill so it never competes with the navy CTA. */
+.pring {
+  --pring-c: 326.726;
+  position: relative;
+  width: 116px; height: 116px;
+  flex: none;
+}
+.pring--sm { width: 84px; height: 84px; }
+.pring__svg { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
+.pring__track, .pring__fill { fill: none; stroke-width: 8; }
+.pring--sm .pring__track, .pring--sm .pring__fill { stroke-width: 7; }
+.pring__track { stroke: var(--progress-bg); }
+.pring__fill {
+  stroke: var(--progress-fill);
+  stroke-linecap: round;
+  stroke-dasharray: var(--pring-c);
+  stroke-dashoffset: calc(var(--pring-c) - (var(--pring-c) * var(--pct, 0) / 100));
+  transition: stroke-dashoffset .45s ease;
+}
+.pring__center {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.pring__num { line-height: 1; }
+.pring__den { margin-top: 2px; }
+
+/* ── Progress bar (LEGACY — home v81 only; suite uses .pring) ─────────────── */
+.progress { height: 3px; background: var(--progress-bg); border-radius: var(--r-full); overflow: hidden; }
+.progress__fill { height: 100%; background: var(--progress-fill); border-radius: inherit; }
+
+/* ==========================================================================
+   BOTTOM NAV (Compact only) — uses .label-3 (11sp)
+   ========================================================================== */
+.bottom-nav {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  height: 80px;
+  background: var(--surface);
+  border-top: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: var(--s-02) 0 var(--s-03);
+  z-index: 15;
+}
+.bn-item {
+  background: transparent; border: 0;
+  color: var(--ink-soft);
+  display: flex; flex-direction: column; align-items: center; gap: var(--s-01);
+}
+.bn-item.active { color: var(--ink); }
+.bn-item .material-symbols-outlined { font-size: 22px; }
+@media (min-width: 600px) { .bottom-nav { display: none; } }
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+.ink-soft { color: var(--ink-soft); }
+.ink-placeholder { color: var(--ink-placeholder); }
+/* Full inline text shows only at Large+ (≥1200); below that the fragment hides
+   to shorten tight labels. */
+.medium-up-inline { display: none; }
+@media (min-width: 1200px) { .medium-up-inline { display: inline; } }

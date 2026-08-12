@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LifeForce · Success card — in context</title>
+<style>
+:root{
+  --ocean:#195188;--ocean-ink:#103459;--ocean100:#EAF2FA;
+  --turq:#1A85AB;--turq-ink:#0D4559;--turq100:#E9F6FA;
+  --green:#52A353;--green-ink:#3D7A3E;--green100:#EFF8EF;
+  --mustard:#D17100;--mustard-ink:#87440A;--mustard50:#FFF3E4;
+  --coral:#EA4444;--ink:#26292B;--body:#4A4E50;--muted:#7A8083;--border:#E4E4E2;--hair:#E5E5E4;--canvas:#F5F4F1;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,"SF Pro Display","SF Pro Text",system-ui,sans-serif}
+body{background:#E7E7E4;padding:40px;color:var(--body)}
+.head{max-width:1320px;margin:0 auto 26px}
+.head h1{font-size:25px;color:var(--ink);font-weight:700;letter-spacing:-.01em}
+.head p{font-size:15px;color:var(--muted);margin-top:6px;max-width:90ch}
+.grid{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:34px 26px}
+.opt{display:flex;flex-direction:column;gap:11px}
+.cap{font-size:13px;font-weight:700;color:var(--ink)}
+.cap span{display:block;font-weight:500;color:var(--muted);font-size:12px;margin-top:2px}
+
+/* the page (canvas + stacked cards) */
+.phone{background:var(--canvas);border:1px solid var(--border);border-radius:22px;padding:20px 15px 16px;display:flex;flex-direction:column;gap:13px}
+.ph-head{display:flex;flex-direction:column;gap:3px;margin-bottom:2px}
+.kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ph-title{font-family:"SF Pro Display";font-weight:600;font-size:22px;color:var(--ink);letter-spacing:-.01em}
+
+/* standard cards on the page (the "other cards") */
+.card{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:16px}
+.support .lbl{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px}
+.support p{font-size:14px;color:var(--body);margin-bottom:4px}
+.support .out{display:inline-flex;margin-top:10px;border:1.5px solid var(--ocean);color:var(--ocean);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600}
+.linkrow{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--hair);border-radius:16px;padding:15px 16px;font-weight:600;font-size:15px;color:var(--ink)}
+.linkrow .cv{color:#B4B4B1;font-size:20px}
+
+/* ── SUCCESS CARD (distinguished) ── */
+.scard{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:22px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:11px;position:relative;overflow:hidden}
+.scard .t{font-family:"SF Pro Display";font-weight:700;font-size:20px;line-height:1.15;color:var(--ink);letter-spacing:-.01em}
+.scard .b{font-size:14px;line-height:1.45;color:var(--body)}
+.scard .notice{background:var(--mustard50);color:var(--mustard-ink);font-size:12.5px;font-weight:600;border-radius:10px;padding:9px 13px;line-height:1.35;margin-top:2px}
+.scard .eyebrow{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green-ink)}
+.disc{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.conf i{position:absolute;display:block;border-radius:1.5px}
+svg{display:block}
+
+/* variant: immersive green fill */
+.scard--green{background:linear-gradient(155deg,#5AAE5B,#3D7A3E);border:0;color:#fff}
+.scard--green .t{color:#fff}.scard--green .b{color:#EAF6EA}
+/* variant: green hairline + tint (subtle distinguished) */
+.scard--tint{background:var(--green100);border-color:#CFE8D2}
+/* variant: illustrated banner (like image cards but drawn) */
+.scard--banner{padding:0;align-items:stretch;text-align:center}
+.scard--banner .ill{width:100%;height:118px;background:linear-gradient(180deg,#EAF5EA,#F4FAF4);display:flex;align-items:flex-end;justify-content:center}
+.scard--banner .in{padding:18px 20px 20px;display:flex;flex-direction:column;align-items:center;gap:11px}
+</style></head>
+<body>
+<div class="head"><h1>LifeForce · Success card — in page context</h1><p>Each success direction as its own card, shown on the page above the standard cards (support · links). The goal: distinguished from the notification focals, but sitting comfortably in the same stack.</p></div>
+<div class="grid">
+
+<!-- helper: support + links reused under each -->
+
+<!-- 1 · immersive green card -->
+<div class="opt"><div class="cap">1 · Immersive green card<span>Only filled card in the stack — instantly distinguished.</span></div>
+<div class="phone">
+  <div class="ph-head"><span class="kicker">LifeForce</span><span class="ph-title">Getting set up</span></div>
+  <div class="scard scard--green">
+    <div class="disc" style="background:#fff"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#3D7A3E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="t">You're all set</div>
+    <div class="b">All 4 steps done — Peak Health is booking your first nurse visit. Watch for an email.</div>
+  </div>
+  <div class="card support"><div class="lbl">Peak Health Support</div><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><span class="out">Peak Health portal</span></div>
+  <div class="linkrow">Your LifeForce records <span class="cv">›</span></div>
+  <div class="linkrow">About LifeForce <span class="cv">›</span></div>
+</div></div>
+
+<!-- 2 · confetti + medallion card -->
+<div class="opt"><div class="cap">2 · Confetti + medallion<span>White card, confetti + gradient badge inside.</span></div>
+<div class="phone">
+  <div class="ph-head"><span class="kicker">LifeForce</span><span class="ph-title">Getting set up</span></div>
+  <div class="scard">
+    <span class="conf">
+      <i style="left:26px;top:18px;width:8px;height:8px;background:var(--green);transform:rotate(20deg)"></i>
+      <i style="left:70px;top:34px;width:6px;height:6px;border-radius:50%;background:var(--turq)"></i>
+      <i style="right:60px;top:20px;width:9px;height:9px;background:var(--mustard);transform:rotate(-15deg)"></i>
+      <i style="right:24px;top:40px;width:7px;height:7px;background:var(--coral);transform:rotate(25deg)"></i>
+      <i style="left:20px;top:52px;width:6px;height:6px;border-radius:50%;background:var(--ocean)"></i>
+    </span>
+    <div class="disc" style="background:linear-gradient(140deg,var(--turq),var(--green));box-shadow:0 8px 18px -6px rgba(26,133,171,.5);margin-top:8px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="t">You've finished setup</div>
+    <div class="b">All 4 steps done. Peak Health is now booking your first nurse visit.</div>
+    <div class="notice">We'll notify you the moment it's scheduled.</div>
+  </div>
+  <div class="card support"><div class="lbl">Peak Health Support</div><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><span class="out">Peak Health portal</span></div>
+  <div class="linkrow">Your LifeForce records <span class="cv">›</span></div>
+</div></div>
+
+<!-- 3 · three-in-one journey card -->
+<div class="opt"><div class="cap">3 · Three-in-one journey<span>Celebrates + orients: setup ✓ → visit → phase.</span></div>
+<div class="phone">
+  <div class="ph-head"><span class="kicker">LifeForce</span><span class="ph-title">Getting set up</span></div>
+  <div class="scard">
+    <svg width="252" height="112" viewBox="0 0 270 112" fill="none">
+      <path d="M45 44 H225" stroke="#D9D9D6" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"/>
+      <circle cx="45" cy="44" r="24" fill="var(--green100)"/><circle cx="45" cy="44" r="24" stroke="var(--green)" stroke-width="1.5"/><path d="M37 44l6 6 11-12" stroke="var(--green-ink)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="135" cy="44" r="24" fill="var(--turq100)"/><path d="M135 54c-8-5-13-10-13-15a6.5 6.5 0 0 1 13-2 6.5 6.5 0 0 1 13 2c0 5-5 10-13 15z" fill="var(--turq)"/><path d="M135 39v7M132 42.5h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="225" cy="44" r="24" fill="var(--ocean100)"/><rect x="215" y="47" width="4.5" height="7" rx="1.5" fill="var(--ocean)"/><rect x="222.5" y="42" width="4.5" height="12" rx="1.5" fill="var(--ocean)"/><rect x="230" y="37" width="4.5" height="17" rx="1.5" fill="var(--ocean)"/>
+      <text x="45" y="84" font-size="9.5" font-weight="700" fill="var(--green-ink)" text-anchor="middle">SET UP ✓</text>
+      <text x="135" y="84" font-size="9.5" font-weight="700" fill="var(--turq-ink)" text-anchor="middle">VISIT</text>
+      <text x="225" y="84" font-size="9.5" font-weight="700" fill="var(--ocean-ink)" text-anchor="middle">PHASE</text>
+    </svg>
+    <div class="t">You've finished setup</div>
+    <div class="b">The hard part's done. Peak Health books your first visit next — then your phase unlocks.</div>
+    <div class="notice">We'll notify you the moment it's scheduled.</div>
+  </div>
+  <div class="card support"><div class="lbl">Peak Health Support</div><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><span class="out">Peak Health portal</span></div>
+  <div class="linkrow">Your LifeForce records <span class="cv">›</span></div>
+</div></div>
+
+<!-- 4 · party popper card -->
+<div class="opt"><div class="cap">4 · Party-popper spot<span>Playful flat illustration, otherwise a normal card.</span></div>
+<div class="phone">
+  <div class="ph-head"><span class="kicker">LifeForce</span><span class="ph-title">Getting set up</span></div>
+  <div class="scard">
+    <svg width="92" height="92" viewBox="0 0 112 112" fill="none">
+      <path d="M20 92 L58 54 L66 62 L28 100 Z" fill="var(--ocean)"/><path d="M20 92 L34 86 L40 98 Z" fill="var(--ocean-ink)"/><path d="M58 54 L66 62 L60 50 Z" fill="var(--turq)"/>
+      <circle cx="78" cy="34" r="5" fill="var(--mustard)"/><rect x="90" y="46" width="8" height="8" rx="2" fill="var(--green)" transform="rotate(20 94 50)"/><circle cx="96" cy="26" r="4" fill="var(--coral)"/><rect x="70" y="18" width="7" height="7" rx="2" fill="var(--turq)" transform="rotate(-15 73 21)"/>
+      <path d="M84 60 l4 4M100 38 l5 2M64 30 l2 5" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round"/><circle cx="88" cy="70" r="3.5" fill="var(--ocean)"/>
+    </svg>
+    <div class="t">You're all set!</div>
+    <div class="b">All 4 steps done. Peak Health is now booking your first nurse visit.</div>
+    <div class="notice">We'll notify you the moment it's scheduled.</div>
+  </div>
+  <div class="card support"><div class="lbl">Peak Health Support</div><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><span class="out">Peak Health portal</span></div>
+  <div class="linkrow">Your LifeForce records <span class="cv">›</span></div>
+</div></div>
+
+<!-- 5 · illustrated banner card -->
+<div class="opt"><div class="cap">5 · Illustrated banner card<span>Drawn banner top — pairs with the repo's image cards.</span></div>
+<div class="phone">
+  <div class="ph-head"><span class="kicker">LifeForce</span><span class="ph-title">Getting set up</span></div>
+  <div class="scard scard--banner">
+    <div class="ill">
+      <svg width="150" height="102" viewBox="0 0 150 108" fill="none">
+        <circle cx="120" cy="28" r="15" fill="var(--mustard)" opacity=".85"/>
+        <path d="M0 108 L52 46 L92 108 Z" fill="var(--turq)"/><path d="M52 108 L100 42 L150 108 Z" fill="var(--green)"/>
+        <path d="M100 42 V18" stroke="var(--ocean-ink)" stroke-width="3" stroke-linecap="round"/><path d="M100 20 L122 26 L100 33 Z" fill="var(--coral)"/>
+      </svg>
+    </div>
+    <div class="in">
+      <div class="t">You've reached the first milestone</div>
+      <div class="b">Setup's done. Peak Health books your first nurse visit next.</div>
+      <div class="notice">We'll notify you the moment it's scheduled.</div>
+    </div>
+  </div>
+  <div class="card support"><div class="lbl">Peak Health Support</div><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><span class="out">Peak Health portal</span></div>
+  <div class="linkrow">Your LifeForce records <span class="cv">›</span></div>
+</div></div>
+
+<!-- 6 · sunburst on green tint card -->
+<div class="opt"><div class="cap">6 · Sunburst on green tint<span>Green-tinted card + rayed check — quiet but clearly "done".</span></div>
+<div class="phone">
+  <div class="ph-head"><span class="kicker">LifeForce</span><span class="ph-title">Getting set up</span></div>
+  <div class="scard scard--tint">
+    <svg width="118" height="118" viewBox="0 0 150 150" fill="none">
+      <g stroke="var(--green)" stroke-width="3.4" stroke-linecap="round"><path d="M75 16v13M75 121v13M16 75h13M121 75h13M32 32l9 9M109 109l-9-9M118 32l-9 9M41 109l-9 9"/></g>
+      <circle cx="75" cy="75" r="33" fill="var(--green)"/><path d="M62 75l9 9 18-19" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="t">You've finished setup</div>
+    <div class="b">All 4 steps done. Peak Health is now booking your first nurse visit.</div>
+    <div class="notice">We'll notify you the moment it's scheduled.</div>
+  </div>
+  <div class="card support"><div class="lbl">Peak Health Support</div><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><span class="out">Peak Health portal</span></div>
+  <div class="linkrow">Your LifeForce records <span class="cv">›</span></div>
+</div></div>
+
+<!-- 7 · achievement badge card -->
+<div class="opt"><div class="cap">7 · Achievement badge<span>Eyebrow + medallion; reads as an earned thing.</span></div>
+<div class="phone">
+  <div class="ph-head"><span class="kicker">LifeForce</span><span class="ph-title">Getting set up</span></div>
+  <div class="scard">
+    <svg width="104" height="104" viewBox="0 0 128 128" fill="none">
+      <path d="M40 66c-14-4-20-16-20-30" stroke="var(--green)" stroke-width="3" stroke-linecap="round"/><path d="M88 66c14-4 20-16 20-30" stroke="var(--green)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M34 60c-9-3-13-11-13-21M94 60c9-3 13-11 13-21" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" opacity=".65"/>
+      <circle cx="64" cy="60" r="32" fill="url(#g7c)"/><circle cx="64" cy="60" r="32" stroke="#fff" stroke-width="3"/>
+      <path d="M64 45l5 9.5 10.5 1-7.5 7.5 1.8 10.5L64 68.5 54.2 74l1.8-10.5-7.5-7.5 10.5-1z" fill="#fff"/>
+      <defs><linearGradient id="g7c" x1="32" y1="28" x2="96" y2="92"><stop offset="0" stop-color="var(--turq)"/><stop offset="1" stop-color="var(--green)"/></linearGradient></defs>
+    </svg>
+    <div class="eyebrow">Setup complete</div>
+    <div class="t">Nice work — you're all set</div>
+    <div class="b">All 4 steps done. Peak Health is booking your first nurse visit.</div>
+    <div class="notice">We'll notify you the moment it's scheduled.</div>
+  </div>
+  <div class="card support"><div class="lbl">Peak Health Support</div><p>Phone:&nbsp; 1-888-385-4583</p><p>Email:&nbsp; appointment@peak-health.net</p><span class="out">Peak Health portal</span></div>
+  <div class="linkrow">Your LifeForce records <span class="cv">›</span></div>
+</div></div>
+
+</div>
+</body></html>

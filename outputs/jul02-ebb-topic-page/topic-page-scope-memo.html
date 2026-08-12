@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Keep the DCP Topic Page Focused on Completion — Where Data &amp; Resources Live in EBB</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-strong:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:840px;margin:34px auto 80px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 52px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;line-height:1.12;margin:0 0 6px;text-wrap:balance}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin:34px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;font-weight:680;margin:22px 0 6px}
+h4{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--ink-2)}
+p{margin:10px 0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid rgba(20,99,111,0.3)}
+a:hover{border-bottom-color:var(--teal-2)}
+strong{font-weight:680;color:var(--ink)}
+code{font-family:var(--mono);font-size:0.86em;background:rgba(34,38,42,0.06);padding:1px 5px;border-radius:5px;color:var(--ink)}
+pre{background:#20242a;color:#e8e6df;border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:14px 0;padding:2px 16px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;color:var(--ink-2)}
+blockquote p{margin:8px 0}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+ul,ol{margin:10px 0;padding-left:24px}
+li{margin:4px 0}
+li>ul,li>ol{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal);font-weight:680;font-size:12.5px;letter-spacing:0.01em;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td code{font-size:0.82em}
+.docnav{max-width:840px;margin:0 auto;padding:16px 52px 0;font-size:12.5px;color:var(--ink-3)}
+.docnav a{color:var(--teal-2)}
+@media(max-width:620px){.docnav{padding:12px 22px 0}}
+</style></head><body>
+<div class="docnav">EBB docs · <a href="../../projects/feature-ebb/_share-guide.html">Share guide</a> · <a href="../../projects/feature-ebb/_brief.html">Brief</a> · <a href="../../projects/feature-ebb/_decisions.html">Decisions</a> · <a href="../../projects/feature-ebb/_screens.html">Screens</a> · <a href="../../projects/feature-ebb/engagement-loop-best-practices.html">Research</a></div>
+<div class="doc"><h1>Keep the DCP Topic Page Focused on Completion — Where Data &amp; Resources Live in EBB</h1>
+<p><strong>To:</strong> Product &amp; Innovations (topic-page scope) — _edit to the specific owner of the data/resources request_ <strong>From:</strong> Davinder Rehal <strong>Date:</strong> 2026-07-02</p>
+<hr>
+<h2>Context</h2>
+<p>There's a push to add relevant health data and resource links to the DCP topic page. As we build the Engagement-Based Billing (EBB) experience, we need to settle the topic page's scope now — before it drifts back into a content hub.</p>
+<h2>Recommendation</h2>
+<p>Keep the topic page focused on <strong>one job — getting the member into their next session</strong> — and <strong>place data and resources where they help without competing with that action</strong>. This is a placement decision, not a rejection: the content still lives in the product, just not featured on the topic page.</p>
+<h2>Rationale</h2>
+<ul><li><strong>This page is the revenue engine.</strong> Under EBB we bill on session completion and pay the incentive on topic completion. The topic page exists to advance that. Every element that isn't the loop competes for attention with the one action that gets everyone paid.</li><li><strong>Attention is zero-sum, and more content ≠ better outcomes.</strong> Adding data + links increases decision time and dilutes the primary CTA (Hick's Law, Von Restorff, Cognitive Load). The engagement-loop research also found an "engagement–efficacy gap" — busier screens drive neither completion nor health outcomes, and can undermine them.</li><li><strong>A content-hub topic page reverts the strategy.</strong> The whole EBB bet — make the next step effortless — is the deliberate move <em>away</em> from the old browse-everything model. This isn't a small addition; it's a reversal of the direction we've already locked.</li></ul>
+<h2>Where it lives instead</h2>
+<div class="tablewrap"><table><thead><tr><th>Content type</th><th>Where it goes</th><th>On the topic page?</th></tr></thead><tbody><tr><td>Health data / metrics</td><td>The <strong>tracker</strong></td><td>At most <strong>one</strong> topic-relevant insight (e.g., "mood trending up") — reinforces the health <em>why</em></td></tr><tr><td>"Learn more" / resources</td><td><strong>Inside the lesson</strong> and via <strong>Anna's</strong> "I don't get this" Q&amp;A — contextual, exactly when needed</td><td>A clearly <strong>secondary</strong> entry below the loop, if at all — never competing with Continue</td></tr></tbody></table></div>
+<p><strong>The test for anything proposed for this page:</strong> <em>"Does it help them start the next session?"</em> If yes, it belongs. If it's nice-to-have-while-they're-here, it routes to the tracker, the lesson, or Anna.</p>
+<h2>Tradeoffs Considered</h2>
+<div class="tablewrap"><table><thead><tr><th>Option</th><th>Why Not</th></tr></thead><tbody><tr><td>Topic page as a data + resource hub</td><td>Dilutes the primary action, adds decision cost, and reverts the browse-everything model EBB moved away from — hurts the completion metric the page exists to drive.</td></tr><tr><td>Omit data &amp; resources entirely</td><td>Members genuinely need both — so we relocate rather than remove. Data → tracker; resources → lesson/Anna.</td></tr></tbody></table></div>
+<h2>Ask</h2>
+<p>Sign off that the <strong>DCP topic page stays loop-focused</strong>, and that data/resource requests route to the <strong>tracker, the lesson, or Anna</strong> rather than onto this page. Bring specific must-have items and we'll place them against the test above.</p>
+<hr>
+<h2>Supporting Material</h2>
+<ul><li>Decision record: <code>projects/feature-ebb/_decisions.md</code> (Topic page scope; D1–D4)</li><li>Topic page design + UX pass: <code>outputs/jul02-ebb-topic-page/topic-page-v1.html</code></li><li>Engagement-loop model: <code>outputs/jul01-ebb-engagement-loop/</code></li><li>Research basis (engagement–efficacy gap, crowding-out): <code>projects/feature-ebb/engagement-loop-best-practices.md</code> + <code>reference/engagement-behavior-experts.md</code></li></ul></div>
+</body></html>

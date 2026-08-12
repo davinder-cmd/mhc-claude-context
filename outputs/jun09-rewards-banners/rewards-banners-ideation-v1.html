@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Single-reward banners — ideation v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+  :root {
+    --bg:              #FAF7F0;
+    --surface:         #FFFFFF;
+    --surface-tinted:  #EFE7D6;
+    --tint-2:          #F4EEE2;
+    --ink:             #1A1D21;
+    --ink-soft:        #5C5F66;
+    --ink-placeholder: #9A9EA6;
+    --hairline:        #E6E3DC;
+    --hairline-2:      #DAD4C7;
+    --link:            #2E60A4;
+    --brand:           #1B355C;
+    --on-brand:        #FFFFFF;
+    --progress-bg:     #DDD7C8;
+    --progress-fill:   #1A1D21;
+    --gift:            #2D6A4F;  /* gift green */
+    --raffle:          #5F7A3B;  /* raffle olive */
+    --store:           #B5571E;  /* store orange */
+    --points:          #1B355C;  /* points navy */
+
+    --r-s: 4px; --r-m: 8px; --r-l: 12px; --r-xl: 16px; --r-full: 999px;
+    --s-01: .25rem; --s-02: .5rem; --s-03: .75rem; --s-04: 1rem;
+    --s-05: 1.5rem;  --s-06: 2rem;  --s-07: 2.5rem; --s-08: 3rem;
+
+    --f-display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+    --f-text:    "SF Pro Text",    -apple-system, BlinkMacSystemFont, "Roboto", Arial, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--f-text);
+    font-size: 1rem;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, p, ul { margin: 0; }
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .page { max-width: 1440px; margin: 0 auto; padding: 32px 24px 80px; }
+  .page__title { font-family: var(--f-display); font-weight: 600; font-size: 1.75rem; }
+  .page__sub { color: var(--ink-soft); font-size: .875rem; margin-top: 8px; max-width: 920px; line-height: 1.55; }
+  .page__hint { color: var(--ink-placeholder); font-size: .8125rem; margin-top: 10px; }
+
+  /* Section header for each reward type */
+  .type-section { margin-top: 56px; padding-top: 32px; border-top: 2px solid var(--ink); }
+  .type-section__head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .type-section__chip { font-size: .6875rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--surface); background: var(--ink); padding: 4px 10px; border-radius: var(--r-s); }
+  .type-section__title { font-family: var(--f-display); font-weight: 600; font-size: 1.375rem; }
+  .type-section__sub { color: var(--ink-soft); font-size: .875rem; margin-top: 8px; max-width: 920px; line-height: 1.55; }
+
+  /* One variant block */
+  .variant { margin-top: 36px; }
+  .variant__label { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .variant__tag { font-family: var(--f-display); font-weight: 600; font-size: 1rem; }
+  .variant__desc { color: var(--ink-soft); font-size: .8125rem; max-width: 720px; }
+  .variant__demos { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; }
+  .demo__cap { font-size: .6875rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-placeholder); margin-bottom: 8px; }
+  .demo--wide { flex: 1 1 700px; min-width: 600px; }
+  .demo--narrow { flex: 0 0 360px; }
+
+  /* ────────────────────────────────────────────────────────
+     Base banner — container-queried so it adapts to its frame
+     ──────────────────────────────────────────────────────── */
+  .bn {
+    container-type: inline-size;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: 20px 24px;
+  }
+  .bn__inner { display: flex; align-items: center; gap: 24px; min-width: 0; }
+  .bn__lead { flex: 0 0 auto; display: flex; align-items: center; gap: 12px; }
+  .bn__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+  .bn__trail { flex: 0 0 auto; }
+
+  .bn__chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: .6875rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--surface-tinted);
+    padding: 4px 10px; border-radius: var(--r-m);
+  }
+  .bn__title { font-family: var(--f-display); font-weight: 500; font-size: 1.125rem; color: var(--ink); }
+  .bn__meta  { color: var(--ink-soft); font-size: .875rem; }
+  .bn__big   { font-family: var(--f-display); font-weight: 600; font-size: 2.25rem; line-height: 1; }
+  .bn__huge  { font-family: var(--f-display); font-weight: 600; font-size: 3rem; line-height: 1; letter-spacing: -.01em; }
+  .bn__unit  { color: var(--ink-soft); font-size: 1rem; margin-left: 4px; }
+
+  .bn__cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--brand); color: var(--on-brand);
+    padding: 10px 18px;
+    border-radius: var(--r-full);
+    font-size: .875rem; font-weight: 500;
+    text-decoration: none;
+  }
+  .bn__cta:hover { background: #14264A; text-decoration: none; }
+  .bn__cta--ghost { background: transparent; color: var(--ink); border: 1px solid var(--hairline-2); }
+  .bn__cta--ghost:hover { background: var(--surface-tinted); }
+  .bn__cta--text { background: transparent; color: var(--link); padding: 8px 4px; }
+  .bn__cta--text:hover { background: rgba(46,96,164,.08); }
+
+  /* Progress primitives */
+  .bn-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--progress-bg);
+    border-radius: var(--r-full);
+    overflow: hidden;
+  }
+  .bn-bar__fill {
+    height: 100%; background: var(--progress-fill);
+    border-radius: inherit;
+    width: var(--p, 0%);
+  }
+  .bn-dots { display: flex; gap: 4px; }
+  .bn-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--progress-bg);
+  }
+  .bn-dot--done { background: var(--progress-fill); }
+
+  /* Icon disc — for big leading icons */
+  .bn-disc {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--surface-tinted);
+    display: grid; place-items: center;
+    font-size: 22px;
+    flex: 0 0 auto;
+  }
+  .bn-disc--gift   { color: var(--gift);   background: #D4EBE0; }
+  .bn-disc--raffle { color: var(--raffle); background: #E0E8C7; }
+  .bn-disc--points { color: var(--points); background: #DDE3F0; }
+  .bn-disc--store  { color: var(--store);  background: #FAE3D3; }
+
+  /* Tier badge */
+  .bn-tier {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: .6875rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: var(--r-full);
+    background: #C9D6E8; color: #1B355C;
+  }
+  .bn-tier--silver { background: #DCE3EC; color: #495766; }
+  .bn-tier--gold   { background: #F2E2B3; color: #6F5A1B; }
+
+  /* Tier dot ladder (for Points variant 2) */
+  .bn-ladder {
+    flex: 1; min-width: 0;
+    display: flex; align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+  .bn-ladder__track {
+    flex: 1;
+    position: relative;
+    height: 28px;
+    display: flex; align-items: center;
+  }
+  .bn-ladder__line {
+    position: absolute; left: 0; right: 0; top: 50%;
+    height: 2px; background: var(--progress-bg);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  .bn-ladder__line-fill {
+    position: absolute; left: 0; top: 50%;
+    height: 2px; background: var(--progress-fill);
+    transform: translateY(-50%);
+    width: var(--p, 0%);
+    z-index: 0;
+  }
+  .bn-ladder__stops {
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between; width: 100%;
+  }
+  .bn-ladder__stop { display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--surface); padding: 0 4px; }
+  .bn-ladder__dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--progress-bg);
+    border: 2px solid var(--surface);
+    outline: 1px solid var(--progress-bg);
+  }
+  .bn-ladder__dot--done { background: var(--progress-fill); outline-color: var(--progress-fill); }
+  .bn-ladder__dot--current { background: var(--surface); outline: 2px solid var(--progress-fill); width: 16px; height: 16px; }
+  .bn-ladder__label { font-size: .6875rem; color: var(--ink-soft); font-weight: 500; }
+  .bn-ladder__label--current { color: var(--ink); font-weight: 600; }
+
+  /* Prize chip cluster (for Raffle variant 3) */
+  .bn-prizes { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bn-prize-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: .75rem; font-weight: 500;
+    background: var(--surface-tinted);
+    color: var(--ink);
+    padding: 4px 10px;
+    border-radius: var(--r-full);
+  }
+
+  /* Featured product (for Store variant 1) */
+  .bn-product {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--tint-2);
+    padding: 8px 12px;
+    border-radius: var(--r-l);
+  }
+  .bn-product__thumb {
+    width: 40px; height: 40px;
+    border-radius: var(--r-m);
+    background: linear-gradient(135deg, #DCE7FA 0%, #EAF0FB 60%, #F0E9DD 100%);
+    flex: 0 0 auto;
+  }
+  .bn-product__body { display: flex; flex-direction: column; gap: 2px; }
+  .bn-product__name  { font-size: .8125rem; font-weight: 600; color: var(--ink); }
+  .bn-product__price { font-size: .75rem; color: var(--ink-soft); }
+
+  /* ────────────────────────────────────────────────────────
+     COLLAPSE LAYOUT for narrow containers (<600px)
+     ──────────────────────────────────────────────────────── */
+  @container (max-width: 600px) {
+    .bn__inner { flex-direction: column; align-items: stretch; gap: 14px; }
+    .bn__lead, .bn__trail { flex: 0 0 auto; }
+    .bn__cta { width: 100%; justify-content: center; }
+  }
+  @container (max-width: 400px) {
+    .bn { padding: 16px 18px; }
+    .bn__huge { font-size: 2.5rem; }
+    .bn__big  { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1 class="page__title">Single-reward banners — ideation v1</h1>
+  <p class="page__sub">
+    Twelve banner variants (4 reward types × 3 variants each) for the new rewards row. Each variant is shown at both desktop width (~700px+) and mobile width (360px) via container queries — same banner, different container size. The banners sit immediately below the interest/employer pair row and above This Week.
+  </p>
+  <p class="page__hint">Each banner fills the row at any width without looking empty. Drag the page narrower than 600px to see how the desktop frame collapses too — both render the same final state.</p>
+
+  <!-- ════════════════════════════════════════════════════════
+       1 · DIRECT REWARDS
+       ════════════════════════════════════════════════════════ -->
+  <section class="type-section">
+    <div class="type-section__head">
+      <span class="type-section__chip">Type 1</span>
+      <h2 class="type-section__title">Direct rewards</h2>
+    </div>
+    <p class="type-section__sub">Take action, get a tangible thing — gift card, paycheck credit, HSA credit, reimbursement. Can be one action (HRA / assessment) or many actions (weekly check-ins, program milestones). Progress maps to either actions completed or dollars earned.</p>
+
+    <!-- D-A · Single action -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">A · Single action (no progress)</span><span class="variant__desc">One thing to do, one reward at the end. HRA-style. No bar — the value IS the motivation.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--gift"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></div>
+                <div>
+                  <div class="bn__chip">Earn</div>
+                  <div class="bn__title" style="margin-top:6px">Complete your Health Assessment</div>
+                  <div class="bn__meta">Takes about 15 minutes</div>
+                </div>
+              </div>
+              <div class="bn__body" style="flex:0 0 auto; align-items:flex-end; text-align:right">
+                <div class="bn__huge">$300</div>
+                <div class="bn__meta">one-time reward</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Start <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--gift"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></div>
+                <div>
+                  <div class="bn__chip">Earn</div>
+                  <div class="bn__title" style="margin-top:6px">Complete your Health Assessment</div>
+                  <div class="bn__meta">Takes about 15 minutes</div>
+                </div>
+              </div>
+              <div class="bn__body" style="flex:0 0 auto; align-items:flex-end; text-align:right">
+                <div class="bn__huge">$300</div>
+                <div class="bn__meta">one-time reward</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Start <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D-B · Multi-action with stepped progress -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">B · Multi-action · stepped dots</span><span class="variant__desc">Several discrete actions, each one a checkbox toward the reward. 10-dot row reads as a journey.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__body">
+                <div class="bn__chip">Quarterly rewards</div>
+                <div class="bn__title">Complete 10 activities to earn $250</div>
+                <div class="bn-dots" style="margin-top:8px" aria-hidden="true">
+                  <span class="bn-dot bn-dot--done"></span>
+                  <span class="bn-dot bn-dot--done"></span>
+                  <span class="bn-dot bn-dot--done"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                </div>
+                <div class="bn__meta">3 of 10 done · $75 earned so far</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta bn__cta--ghost" href="#">View activities <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__body">
+                <div class="bn__chip">Quarterly rewards</div>
+                <div class="bn__title">Complete 10 activities to earn $250</div>
+                <div class="bn-dots" style="margin-top:8px" aria-hidden="true">
+                  <span class="bn-dot bn-dot--done"></span>
+                  <span class="bn-dot bn-dot--done"></span>
+                  <span class="bn-dot bn-dot--done"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                  <span class="bn-dot"></span>
+                </div>
+                <div class="bn__meta">3 of 10 done · $75 earned so far</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta bn__cta--ghost" href="#">View activities <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- D-C · Multi-action with $ linear progress -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">C · Multi-action · linear $ progress</span><span class="variant__desc">Earning rate matters more than action count. Bar shows $ progress toward an annual or quarterly cap.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--gift"><i class="fa-solid fa-gift" aria-hidden="true"></i></div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Wellness rewards · Q2 2026</div>
+                <div class="bn__title">$75 earned of $250 this quarter</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:30%"></div></div>
+                <div class="bn__meta">Earn $25 per weekly check-in &middot; 7 more check-ins to max</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn more <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--gift"><i class="fa-solid fa-gift" aria-hidden="true"></i></div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Wellness rewards · Q2 2026</div>
+                <div class="bn__title">$75 earned of $250 this quarter</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:30%"></div></div>
+                <div class="bn__meta">Earn $25 per weekly check-in &middot; 7 more check-ins to max</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn more <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       2 · RAFFLES
+       ════════════════════════════════════════════════════════ -->
+  <section class="type-section">
+    <div class="type-section__head">
+      <span class="type-section__chip">Type 2</span>
+      <h2 class="type-section__title">Raffles</h2>
+    </div>
+    <p class="type-section__sub">Earn entries; entries get drawn for a prize. Usually uncapped, so traditional progress doesn't apply. Three angles: lead with entries (most common), lead with the prize, or treat the cap as the progress when one exists.</p>
+
+    <!-- R-A · Open entries (no cap) -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">A · Open-ended entries</span><span class="variant__desc">Most common case. Big entry count, draw date, link to earn more. No cap = no progress bar.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--raffle"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
+                <div>
+                  <div class="bn__huge">12</div>
+                  <div class="bn__meta">active entries</div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Raffle</div>
+                <div class="bn__title">Spring Wellness Raffle</div>
+                <div class="bn__meta">Draw on May 31 &middot; Top prize: $1,000 to a charity of your choice</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn entries <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--raffle"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
+                <div>
+                  <div class="bn__huge">12</div>
+                  <div class="bn__meta">active entries</div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Raffle</div>
+                <div class="bn__title">Spring Wellness Raffle</div>
+                <div class="bn__meta">Draw on May 31 &middot; Top prize: $1,000 to a charity of your choice</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn entries <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- R-B · With prize highlight -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">B · Prize-first</span><span class="variant__desc">Lead with what you could win, not what you've earned. Prize chips read as aspirational.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__body">
+                <div class="bn__chip">Spring raffle · 12 entries</div>
+                <div class="bn__title">What you could win</div>
+                <div class="bn-prizes" style="margin-top:6px">
+                  <span class="bn-prize-chip"><i class="fa-solid fa-trophy" aria-hidden="true"></i> $1,000 charity donation</span>
+                  <span class="bn-prize-chip"><i class="fa-solid fa-spa" aria-hidden="true"></i> Wellness retreat</span>
+                  <span class="bn-prize-chip"><i class="fa-solid fa-watch-fitness" aria-hidden="true"></i> Apple Watch</span>
+                  <span class="bn-prize-chip">+12 more</span>
+                </div>
+                <div class="bn__meta" style="margin-top:6px">Draw on May 31</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn entries <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__body">
+                <div class="bn__chip">Spring raffle · 12 entries</div>
+                <div class="bn__title">What you could win</div>
+                <div class="bn-prizes" style="margin-top:6px">
+                  <span class="bn-prize-chip"><i class="fa-solid fa-trophy" aria-hidden="true"></i> $1,000</span>
+                  <span class="bn-prize-chip"><i class="fa-solid fa-spa" aria-hidden="true"></i> Retreat</span>
+                  <span class="bn-prize-chip">+13 more</span>
+                </div>
+                <div class="bn__meta" style="margin-top:6px">Draw on May 31</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn entries <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- R-C · Capped with progress -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">C · Capped entries · progress to max</span><span class="variant__desc">For raffles WITH an entry cap. Bar shows entries earned vs. cap. Encourages keeping going until maxed.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--raffle"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Spring raffle</div>
+                <div class="bn__title">12 of 50 entries earned</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:24%"></div></div>
+                <div class="bn__meta">38 entries to max out &middot; Draw on May 31</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn entries <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--raffle"><i class="fa-solid fa-ticket" aria-hidden="true"></i></div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Spring raffle</div>
+                <div class="bn__title">12 of 50 entries earned</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:24%"></div></div>
+                <div class="bn__meta">38 entries to max out &middot; Draw on May 31</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Earn entries <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       3 · POINTS & LEVELS
+       ════════════════════════════════════════════════════════ -->
+  <section class="type-section">
+    <div class="type-section__head">
+      <span class="type-section__chip">Type 3</span>
+      <h2 class="type-section__title">Points &amp; levels</h2>
+    </div>
+    <p class="type-section__sub">Earn points, climb tiers. Progress is native to this model. Three angles: lead with the bar to next tier, show the whole tier ladder, or hero the balance and call out the next milestone.</p>
+
+    <!-- P-A · Linear to next tier -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">A · Linear progress to next tier</span><span class="variant__desc">Current tier left, progress to next tier right. Single bar, single milestone.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--points"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
+                <div>
+                  <span class="bn-tier bn-tier--silver">Silver</span>
+                  <div class="bn__big" style="margin-top:6px">1,250<span class="bn__unit">pts</span></div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Next tier &middot; Gold at 2,000 pts</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:62%"></div></div>
+                <div class="bn__meta">750 pts to Gold &middot; Earn 50 pts per workout</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Redeem <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--points"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
+                <div>
+                  <span class="bn-tier bn-tier--silver">Silver</span>
+                  <div class="bn__big" style="margin-top:6px">1,250<span class="bn__unit">pts</span></div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Next tier &middot; Gold at 2,000 pts</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:62%"></div></div>
+                <div class="bn__meta">750 pts to Gold &middot; Earn 50 pts per workout</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Redeem <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P-B · Tier dot ladder -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">B · Tier dot ladder</span><span class="variant__desc">All tiers in one row, current position marked. Shows the whole journey, not just the next step.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div>
+                  <div class="bn__chip">Your tier</div>
+                  <div class="bn__big" style="margin-top:6px">1,250<span class="bn__unit">pts</span></div>
+                </div>
+              </div>
+              <div class="bn-ladder">
+                <div class="bn-ladder__track">
+                  <div class="bn-ladder__line"></div>
+                  <div class="bn-ladder__line-fill" style="--p:35%"></div>
+                  <div class="bn-ladder__stops">
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot bn-ladder__dot--done"></span><span class="bn-ladder__label">Bronze</span></div>
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot bn-ladder__dot--current"></span><span class="bn-ladder__label bn-ladder__label--current">Silver</span></div>
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot"></span><span class="bn-ladder__label">Gold</span></div>
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot"></span><span class="bn-ladder__label">Platinum</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Redeem <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div>
+                  <div class="bn__chip">Your tier</div>
+                  <div class="bn__big" style="margin-top:6px">1,250<span class="bn__unit">pts</span></div>
+                </div>
+              </div>
+              <div class="bn-ladder">
+                <div class="bn-ladder__track">
+                  <div class="bn-ladder__line"></div>
+                  <div class="bn-ladder__line-fill" style="--p:35%"></div>
+                  <div class="bn-ladder__stops">
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot bn-ladder__dot--done"></span><span class="bn-ladder__label">Bronze</span></div>
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot bn-ladder__dot--current"></span><span class="bn-ladder__label bn-ladder__label--current">Silver</span></div>
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot"></span><span class="bn-ladder__label">Gold</span></div>
+                    <div class="bn-ladder__stop"><span class="bn-ladder__dot"></span><span class="bn-ladder__label">Platinum</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Redeem <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P-C · Balance focal -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">C · Big balance focal</span><span class="variant__desc">Points balance is the hero — bigger than anything else on the page. Tier is a smaller secondary detail.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div>
+                  <div class="bn__chip">Points balance</div>
+                  <div class="bn__huge" style="margin-top:4px">1,250</div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <span class="bn-tier bn-tier--silver">Silver tier</span>
+                <div class="bn__meta" style="margin-top:8px">750 pts to Gold &middot; Trade 500 pts for a $25 gift card</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Redeem <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div>
+                  <div class="bn__chip">Points balance</div>
+                  <div class="bn__huge" style="margin-top:4px">1,250</div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <span class="bn-tier bn-tier--silver">Silver tier</span>
+                <div class="bn__meta" style="margin-top:8px">750 pts to Gold &middot; Trade 500 pts for a $25 gift card</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Redeem <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════
+       4 · STORE CREDIT
+       ════════════════════════════════════════════════════════ -->
+  <section class="type-section">
+    <div class="type-section__head">
+      <span class="type-section__chip">Type 4</span>
+      <h2 class="type-section__title">Store credit</h2>
+    </div>
+    <p class="type-section__sub">Earn credit, spend in the internal store. Progress doesn't have an obvious shape because spend is open-ended. Three angles: lead with a featured item that anchors what credit is for, treat a quarterly cap as the progress, or just hero the balance and let the user shop.</p>
+
+    <!-- S-A · Balance + featured item -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">A · Balance + featured item</span><span class="variant__desc">Anchors the abstract credit balance to a concrete thing the user can spend it on.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--store"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i></div>
+                <div>
+                  <div class="bn__chip">Store credit</div>
+                  <div class="bn__big" style="margin-top:4px">$25<span class="bn__unit">balance</span></div>
+                </div>
+              </div>
+              <div class="bn__body" style="flex-direction:row; align-items:center; gap:12px;">
+                <div class="bn-product">
+                  <div class="bn-product__thumb"></div>
+                  <div class="bn-product__body">
+                    <span class="bn-product__name">Resistance band set</span>
+                    <span class="bn-product__price">$25 in the store</span>
+                  </div>
+                </div>
+                <div class="bn__meta">Earn $5 more per workout</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Shop now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--store"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i></div>
+                <div>
+                  <div class="bn__chip">Store credit</div>
+                  <div class="bn__big" style="margin-top:4px">$25<span class="bn__unit">balance</span></div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <div class="bn-product">
+                  <div class="bn-product__thumb"></div>
+                  <div class="bn-product__body">
+                    <span class="bn-product__name">Resistance band set</span>
+                    <span class="bn-product__price">$25 in the store</span>
+                  </div>
+                </div>
+                <div class="bn__meta">Earn $5 more per workout</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Shop now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S-B · Quarterly cap progress -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">B · Quarterly cap progress</span><span class="variant__desc">If the client configures a quarterly earning cap on credit, the bar gives the section a natural progress shape.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--store"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i></div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Store credit &middot; Q2 2026</div>
+                <div class="bn__title">$25 earned of $100 this quarter</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:25%"></div></div>
+                <div class="bn__meta">$75 to max &middot; Earn $10 per health check &middot; No expiry</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Shop now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div class="bn-disc bn-disc--store"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i></div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__chip">Store credit &middot; Q2 2026</div>
+                <div class="bn__title">$25 earned of $100 this quarter</div>
+                <div class="bn-bar" style="margin-top:8px" aria-hidden="true"><div class="bn-bar__fill" style="--p:25%"></div></div>
+                <div class="bn__meta">$75 to max &middot; Earn $10 per health check &middot; No expiry</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Shop now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- S-C · Simple balance -->
+    <div class="variant">
+      <div class="variant__label"><span class="variant__tag">C · Simple balance · shop CTA</span><span class="variant__desc">No progress. Just balance, key facts (no expiry, where to spend), and a clear primary action. Calmest of the three.</span></div>
+      <div class="variant__demos">
+        <div class="demo--wide"><div class="demo__cap">Desktop</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div>
+                  <div class="bn__chip">Store credit</div>
+                  <div class="bn__huge" style="margin-top:4px">$25</div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__title">Ready to spend in the store</div>
+                <div class="bn__meta">No expiry &middot; Earn more by completing programs</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Shop now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+        <div class="demo--narrow"><div class="demo__cap">Mobile · 360</div>
+          <div class="bn">
+            <div class="bn__inner">
+              <div class="bn__lead">
+                <div>
+                  <div class="bn__chip">Store credit</div>
+                  <div class="bn__huge" style="margin-top:4px">$25</div>
+                </div>
+              </div>
+              <div class="bn__body">
+                <div class="bn__title">Ready to spend in the store</div>
+                <div class="bn__meta">No expiry &middot; Earn more by completing programs</div>
+              </div>
+              <div class="bn__trail"><a class="bn__cta" href="#">Shop now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations — render frame</title>
+  <link rel="stylesheet" href="mhc-home.css">
+  <style>
+    .mhc-home{ padding:20px; }
+    .f-h{ color:var(--ink-placeholder); font-family:var(--f-text); font-size:11px; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin:0 0 14px; }
+    .f-row{ display:grid; grid-template-columns:110px 1fr; align-items:baseline; gap:16px; padding:6px 0; border-bottom:1px solid var(--hairline); }
+    .f-name{ font-family:"SF Mono",ui-monospace,Menlo,monospace; font-size:11px; color:var(--ink-soft); }
+    .f-swatches{ display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px; margin-bottom:32px; }
+    .f-sw{ border:1px solid var(--hairline); border-radius:var(--r-m); overflow:hidden; }
+    .f-sw__chip{ height:56px; }
+    .f-sw__meta{ padding:8px 10px; }
+    .f-sw__name{ font-family:"SF Mono",ui-monospace,Menlo,monospace; font-size:11px; color:var(--ink); }
+    .f-scale{ display:flex; align-items:flex-end; gap:10px; flex-wrap:wrap; margin-bottom:32px; }
+    .f-scale__item{ text-align:center; }
+    .f-scale__box{ background:var(--surface-tinted); border:1px solid var(--hairline); border-radius:var(--r-s); }
+    .f-scale__lbl{ font-family:"SF Mono",ui-monospace,Menlo,monospace; font-size:10px; color:var(--ink-soft); margin-top:4px; }
+    .f-radii{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:32px; }
+    .f-radius{ width:72px; height:72px; background:var(--surface-tinted); border:1px solid var(--hairline); display:flex; align-items:flex-end; justify-content:center; }
+    .f-radius span{ font-family:"SF Mono",ui-monospace,Menlo,monospace; font-size:10px; color:var(--ink-soft); padding-bottom:4px; }
+  </style>
+</head>
+<body>
+<div class="mhc-home">
+
+  <p class="f-h">Colour tokens</p>
+  <div class="f-swatches">
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--bg)"></div><div class="f-sw__meta"><div class="f-sw__name">--bg</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--surface)"></div><div class="f-sw__meta"><div class="f-sw__name">--surface</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--surface-tinted)"></div><div class="f-sw__meta"><div class="f-sw__name">--surface-tinted</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--ink)"></div><div class="f-sw__meta"><div class="f-sw__name">--ink</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--ink-soft)"></div><div class="f-sw__meta"><div class="f-sw__name">--ink-soft</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--ink-placeholder)"></div><div class="f-sw__meta"><div class="f-sw__name">--ink-placeholder</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--hairline)"></div><div class="f-sw__meta"><div class="f-sw__name">--hairline</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--link)"></div><div class="f-sw__meta"><div class="f-sw__name">--link</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--brand)"></div><div class="f-sw__meta"><div class="f-sw__name">--brand</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--insight-bg)"></div><div class="f-sw__meta"><div class="f-sw__name">--insight-bg</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--green)"></div><div class="f-sw__meta"><div class="f-sw__name">--green</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--blue-icon)"></div><div class="f-sw__meta"><div class="f-sw__name">--blue-icon</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--orange)"></div><div class="f-sw__meta"><div class="f-sw__name">--orange</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--teal-dark)"></div><div class="f-sw__meta"><div class="f-sw__name">--teal-dark</div></div></div>
+    <div class="f-sw"><div class="f-sw__chip" style="background:var(--red)"></div><div class="f-sw__meta"><div class="f-sw__name">--red</div></div></div>
+  </div>
+
+  <p class="f-h">Spacing scale (--s-01 … --s-09)</p>
+  <div class="f-scale">
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-01);height:var(--s-01)"></div><div class="f-scale__lbl">01·4</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-02);height:var(--s-02)"></div><div class="f-scale__lbl">02·8</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-03);height:var(--s-03)"></div><div class="f-scale__lbl">03·12</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-04);height:var(--s-04)"></div><div class="f-scale__lbl">04·16</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-05);height:var(--s-05)"></div><div class="f-scale__lbl">05·24</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-06);height:var(--s-06)"></div><div class="f-scale__lbl">06·32</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-07);height:var(--s-07)"></div><div class="f-scale__lbl">07·40</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-08);height:var(--s-08)"></div><div class="f-scale__lbl">08·48</div></div>
+    <div class="f-scale__item"><div class="f-scale__box" style="width:var(--s-09);height:var(--s-09)"></div><div class="f-scale__lbl">09·64</div></div>
+  </div>
+
+  <p class="f-h">Radius scale</p>
+  <div class="f-radii">
+    <div class="f-radius" style="border-radius:var(--r-xs)"><span>xs·2</span></div>
+    <div class="f-radius" style="border-radius:var(--r-s)"><span>s·4</span></div>
+    <div class="f-radius" style="border-radius:var(--r-m)"><span>m·8</span></div>
+    <div class="f-radius" style="border-radius:var(--r-l)"><span>l·12</span></div>
+    <div class="f-radius" style="border-radius:var(--r-xl)"><span>xl·16</span></div>
+    <div class="f-radius" style="border-radius:var(--r-full)"><span>full</span></div>
+  </div>
+
+  <p class="f-h">Type scale · 24 atomic classes (resize past 1200 to see the large tier)</p>
+  <div class="f-row"><span class="f-name">.display-1</span><span class="display-1">Display 1</span></div>
+  <div class="f-row"><span class="f-name">.display-2</span><span class="display-2">Display 2</span></div>
+  <div class="f-row"><span class="f-name">.display-3</span><span class="display-3">Display 3</span></div>
+  <div class="f-row"><span class="f-name">.heading-1</span><span class="heading-1">Heading 1</span></div>
+  <div class="f-row"><span class="f-name">.heading-2</span><span class="heading-2">Heading 2</span></div>
+  <div class="f-row"><span class="f-name">.heading-3</span><span class="heading-3">Heading 3</span></div>
+  <div class="f-row"><span class="f-name">.heading-4</span><span class="heading-4">Heading 4</span></div>
+  <div class="f-row"><span class="f-name">.heading-5</span><span class="heading-5">Heading 5</span></div>
+  <div class="f-row"><span class="f-name">.heading-6</span><span class="heading-6">Heading 6</span></div>
+  <div class="f-row"><span class="f-name">.title-1</span><span class="title-1">Title 1</span></div>
+  <div class="f-row"><span class="f-name">.title-2</span><span class="title-2">Title 2</span></div>
+  <div class="f-row"><span class="f-name">.title-3</span><span class="title-3">Title 3</span></div>
+  <div class="f-row"><span class="f-name">.body-1</span><span class="body-1">Body 1 — the quick brown fox</span></div>
+  <div class="f-row"><span class="f-name">.body-2</span><span class="body-2">Body 2 — the quick brown fox</span></div>
+  <div class="f-row"><span class="f-name">.body-3</span><span class="body-3">Body 3 — the quick brown fox</span></div>
+  <div class="f-row"><span class="f-name">.label-0</span><span class="label-0">Label 0</span></div>
+  <div class="f-row"><span class="f-name">.label-1</span><span class="label-1">Label 1</span></div>
+  <div class="f-row"><span class="f-name">.label-2</span><span class="label-2">Label 2</span></div>
+  <div class="f-row"><span class="f-name">.label-3</span><span class="label-3">Label 3</span></div>
+  <div class="f-row"><span class="f-name">.caption</span><span class="caption">Caption</span></div>
+  <div class="f-row"><span class="f-name">.eyebrow</span><span class="eyebrow">Eyebrow</span></div>
+  <div class="f-row"><span class="f-name">.small</span><span class="small">Small</span></div>
+  <div class="f-row"><span class="f-name">.paragraph-2</span><span class="paragraph-2">Paragraph 2 — long-form reading line height for body copy.</span></div>
+  <div class="f-row"><span class="f-name">.paragraph-3</span><span class="paragraph-3">Paragraph 3 — long-form reading line height for body copy.</span></div>
+
+</div>
+</body>
+</html>

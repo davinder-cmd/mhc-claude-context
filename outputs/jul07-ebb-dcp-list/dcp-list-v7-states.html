@@ -1,0 +1,147 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DCP List — two states (populated vs empty)</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.10);--line-2:rgba(31,35,40,0.06);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--amber:#8A5A12;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:980px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:760px;margin:0 0 24px;font-size:14px}
+.gallery{display:flex;flex-wrap:wrap;gap:38px;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:10px}
+.cap{font-size:12.5px;color:var(--ink-2);max-width:392px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.alt{color:var(--amber);background:#F3E7CF}
+
+.phone{width:392px;background:var(--warm);border:9px solid #1c2330;border-radius:42px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:760px;overflow-y:auto}
+.statusbar{display:flex;justify-content:space-between;padding:13px 22px 2px;font-size:12px;font-weight:700}
+.mtop{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 10px}
+.mtop .t{font-size:23px;font-weight:750;letter-spacing:-0.02em}
+.avatar{width:33px;height:33px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+.pad{padding:0 18px 20px}
+.sechead{display:flex;justify-content:space-between;align-items:baseline;margin:14px 2px 10px}
+.sec{font-size:14px;font-weight:750}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--teal-2);margin:14px 2px 8px}
+.seeall{font-size:12px;font-weight:700;color:var(--teal-2)}
+
+/* banners */
+.banner{background:var(--surface);border-radius:18px;padding:16px;box-shadow:0 12px 34px -26px rgba(14,74,86,.45);margin-bottom:8px}
+.banner .bt{font-size:14px;font-weight:750}.banner .bs{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.trackwrap{position:relative;height:16px;margin:12px 0 4px}
+.track{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:7px;border-radius:5px;background:#EAE3D6}
+.trackfill{position:absolute;left:0;top:50%;transform:translateY(-50%);height:7px;border-radius:5px;background:var(--teal)}
+.node{position:absolute;top:50%;width:13px;height:13px;border-radius:50%;transform:translate(-50%,-50%);background:#fff;border:3px solid #D6CDBB;box-shadow:0 0 0 2px var(--surface)}
+.node.on{background:var(--teal);border-color:var(--teal)}
+.blabels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-top:8px}.blabels b{color:var(--ink)}
+.hook{background:linear-gradient(180deg,#fff,#FAF3E6);border-radius:18px;padding:16px;box-shadow:0 12px 34px -26px rgba(14,74,86,.45);display:flex;gap:12px;align-items:center;margin-bottom:8px}
+.hook .g{width:36px;height:36px;border-radius:10px;background:#F3E7CF;display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.hook .ht{font-size:14px;font-weight:700}.hook .hs{font-size:12px;color:var(--ink-2)}
+
+/* continue cards (populated) */
+.mcard{background:var(--surface);border-radius:16px;padding:13px;display:flex;align-items:center;gap:12px;margin-bottom:10px;box-shadow:0 10px 28px -26px rgba(14,74,86,.4)}
+.mcard .thumb{width:46px;height:46px;border-radius:13px;flex:none}
+.a{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}.b{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}.c{background:linear-gradient(135deg,#E7EFE2,#Bcd6B8)}
+.st{font-size:15px;font-weight:650}.ss{font-size:12px;color:var(--ink-3)}.ss.pause{color:var(--amber)}
+.chev{margin-left:auto;color:var(--ink-3);font-size:16px}
+
+/* recommendation cards (empty, more presence) */
+.rec{background:var(--surface);border-radius:18px;overflow:hidden;margin-bottom:11px;box-shadow:0 12px 30px -24px rgba(14,74,86,.45)}
+.rec .img{height:104px;position:relative}
+.rec .img .why{position:absolute;left:11px;top:11px;font-size:10.5px;font-weight:700;background:rgba(255,255,255,.9);padding:3px 9px;border-radius:20px;color:var(--teal)}
+.rec .rbody{padding:13px 15px;display:flex;align-items:center;gap:10px}
+.rec .rt{font-size:16px;font-weight:700}.rec .rd{font-size:12px;color:var(--ink-2);margin-top:1px}
+.rec .go{margin-left:auto;font-size:13px;font-weight:700;color:#fff;background:var(--teal);border-radius:9px;padding:8px 15px;white-space:nowrap;align-self:center}
+
+/* browse grid tiles */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tile{}
+.tile .ti{width:100%;height:82px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:25px}
+.tile .tt{font-size:12.5px;font-weight:650;margin-top:6px}
+.tile .ts{font-size:11px;color:var(--ink-3)}
+.lt1{background:linear-gradient(135deg,#E7E1F0,#CFC3E4)}.lt2{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}.lt3{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}.lt4{background:linear-gradient(135deg,#F1DED8,#E3B3A3)}.lt5{background:linear-gradient(135deg,#E7EFE2,#Bcd6B8)}.lt6{background:linear-gradient(135deg,#E0E7EE,#B9C7D6)}
+.areahd{font-size:13px;font-weight:700;margin:16px 2px 9px;display:flex;justify-content:space-between;align-items:baseline}
+.areahd .seeall{font-weight:700}
+
+.bnav{display:flex;justify-content:space-around;padding:9px 6px 13px;border-top:1px solid var(--line);background:var(--warm);position:sticky;bottom:0}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-decoration:none}.bnav a.on{color:var(--teal-2);font-weight:700}.bnav .ic{font-size:17px}
+</style></head><body>
+<div class="page">
+<h1>DCP List — two states of one page</h1>
+<p class="sub">The 2nd-most-important section, so it has to work in both states. <b>Populated → resume-first</b> (Continue leads, browse demoted). <b>Empty → discovery-rich</b> (recommendations lead, browse opens up, more recs at the bottom). Same page, state-adaptive — a starting point, but <b>not</b> a home page (care paths only, no challenges/wellbeing clutter).</p>
+
+<div class="gallery">
+
+<!-- POPULATED -->
+<div class="col">
+<span class="tag">Populated · resume-first</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="mtop"><span class="t">Digital Care</span><span class="avatar">A</span></div>
+<div class="pad">
+  <div class="banner"><div class="bt">Your care this year</div><div class="bs">3 in progress · 2 completed</div>
+    <div class="trackwrap"><div class="track"></div><div class="trackfill" style="width:44%"></div><div class="node on" style="left:3%"></div><div class="node on" style="left:44%"></div><div class="node" style="left:72%"></div><div class="node" style="left:97%"></div></div>
+    <div class="blabels"><span><b>$200</b> earned</span><span>$500 / year</span></div>
+  </div>
+  <div class="sechead"><span class="sec">Continue</span></div>
+  <div class="mcard"><div class="thumb a"></div><div><div class="st">Managing Anxiety</div><div class="ss">Session 6 of 10 · 3 weeks in</div></div><span class="chev">›</span></div>
+  <div class="mcard"><div class="thumb b"></div><div><div class="st">Weight Management</div><div class="ss pause">Session 4 of 10 · paused</div></div><span class="chev">›</span></div>
+  <div class="mcard"><div class="thumb c"></div><div><div class="st">Managing Depression</div><div class="ss">Session 3 of 7</div></div><span class="chev">›</span></div>
+  <div class="sechead"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+  <div class="grid2">
+    <div class="tile"><div class="ti lt1">🌙</div><div class="tt">Treating Insomnia</div></div>
+    <div class="tile"><div class="ti lt4">❤️</div><div class="tt">Heart Health</div></div>
+  </div>
+</div>
+<div class="bnav"><a><span class="ic">⌂</span>Home</a><a class="on"><span class="ic">♡</span>Digital Care</a><a><span class="ic">❦</span>Wellbeing</a><a><span class="ic">▤</span>Benefits</a><a><span class="ic">☆</span>Rewards</a></div>
+</div></div>
+<div class="cap"><b>When there's work in progress</b> — Continue owns the page, browse is a demoted grid + "See all." (This is v6.)</div>
+</div>
+
+<!-- EMPTY / DISCOVERY -->
+<div class="col">
+<span class="tag alt">Empty · nothing started · discovery-rich</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="mtop"><span class="t">Digital Care</span><span class="avatar">A</span></div>
+<div class="pad">
+  <div class="hook"><span class="g">🎁</span><div><div class="ht">Find your first care path</div><div class="hs">Earn $100 for each one you finish — up to $500 a year.</div></div></div>
+
+  <div class="eyebrow">Recommended for you</div>
+  <div class="rec"><div class="img a"><span class="why">Based on your health check</span></div><div class="rbody"><div><div class="rt">Managing Anxiety</div><div class="rd">CBT tools for everyday anxiety</div></div><span class="go">Start</span></div></div>
+  <div class="rec"><div class="img c"><span class="why">Popular with members like you</span></div><div class="rbody"><div><div class="rt">Better Sleep</div><div class="rd">Sleep &amp; CBT-I fundamentals</div></div><span class="go">Start</span></div></div>
+
+  <div class="areahd">Browse by area <span class="seeall">See all 14 ›</span></div>
+  <div class="eyebrow" style="margin-top:2px;color:var(--ink-2)">Behavioral health</div>
+  <div class="grid2">
+    <div class="tile"><div class="ti lt1">🧠</div><div class="tt">Managing Depression</div></div>
+    <div class="tile"><div class="ti lt3">🌙</div><div class="tt">Treating Insomnia</div></div>
+  </div>
+  <div class="eyebrow" style="margin-top:14px;color:var(--ink-2)">Movement &amp; pain</div>
+  <div class="grid2">
+    <div class="tile"><div class="ti lt5">🦵</div><div class="tt">Lower Back Care</div></div>
+    <div class="tile"><div class="ti lt2">🦿</div><div class="tt">Knee Care</div></div>
+  </div>
+  <div class="eyebrow" style="margin-top:14px;color:var(--ink-2)">Metabolic &amp; heart</div>
+  <div class="grid2">
+    <div class="tile"><div class="ti lt2">🥗</div><div class="tt">Diabetes Prevention</div></div>
+    <div class="tile"><div class="ti lt4">❤️</div><div class="tt">Heart Health</div></div>
+  </div>
+
+  <div class="eyebrow" style="margin-top:16px">More for you</div>
+  <div class="grid2">
+    <div class="tile"><div class="ti lt3">🫁</div><div class="tt">Quitting Smoking</div></div>
+    <div class="tile"><div class="ti lt6">🧘</div><div class="tt">Managing Stress</div></div>
+  </div>
+</div>
+<div class="bnav"><a><span class="ic">⌂</span>Home</a><a class="on"><span class="ic">♡</span>Digital Care</a><a><span class="ic">❦</span>Wellbeing</a><a><span class="ic">▤</span>Benefits</a><a><span class="ic">☆</span>Rewards</a></div>
+</div></div>
+<div class="cap"><b>When nothing's started</b> — no empty "Continue" staring back. A light reward hook, <b>strong recommendations up top</b> (why-tagged: health check / popular), then <b>browse opens up by area</b> (multiple paths, not one rail), and <b>more recs at the bottom</b>. Browse is a first-class citizen here, not a demoted link.</div>
+</div>
+
+</div>
+
+<div style="margin-top:26px;max-width:800px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px">
+<b>Threading the needle:</b> one page, two states driven by "is anything in progress?" The <b>reward banner</b> also adapts — a progress meter when they've earned, an invitation ("earn up to $500/yr") when they haven't. The empty state doubles as the natural <b>Lane B / starting-point</b> surface without becoming a home page: it stays care-paths-only. As paths get started, discovery recedes and Continue takes over — and the browse they used lives on behind "Browse by area / See all," so it's never truly hidden.
+</div>
+</div>
+</body></html>

@@ -1,0 +1,292 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A 50 tier for MH Colors v2</title>
+<style>
+:root{--bg:#FAF7F0;--surface:#FFF;--tint:#F3F2EF;--ink:#393C3C;--soft:#5F5F5F;--line:#E2E0DA;--brand:#103459;
+--f:"SF Pro Text",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--fd:"SF Pro Display",-apple-system,sans-serif;--m:ui-monospace,"SF Mono",Menlo,monospace}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding:48px 24px 96px}
+h1,h2,h3,h4,p{margin:0}
+h1{font-family:var(--fd);font-size:42px;line-height:1.06;font-weight:600;letter-spacing:-.02em}
+h2{font-family:var(--fd);font-size:25px;font-weight:600;letter-spacing:-.01em}
+h3{font-family:var(--fd);font-size:18px;font-weight:600}
+.sub{font-size:17px;color:var(--soft);max-width:66ch;margin-top:13px}
+.lede{font-size:16px;color:var(--soft);max-width:74ch;margin-top:9px}
+hr{border:0;border-top:1px solid var(--line);margin:48px 0}
+section+section{margin-top:48px}
+.verdicts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:22px}
+.v{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.v .k{font-family:var(--fd);font-size:15px;font-weight:600;margin-bottom:6px}
+.v .yes{color:#2E6B3A}.v .no{color:#9F1B1B}
+.v p{font-size:13.5px;color:var(--soft)}
+.hk-frame{background:#FFF;border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:22px}
+.hk{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.hk>div{border-radius:10px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.09)}
+.hk>div{padding:64px 24px 22px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;color:#393C3C}
+.hk span{color:#5F5F5F!important}
+.hk b{font-family:var(--fd);font-size:17px;font-weight:600}
+.hk span{font-family:var(--m);font-size:12.5px;color:var(--soft);margin-top:4px}
+.tbl{width:100%;border-collapse:collapse;margin-top:20px;font-size:13.5px;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tbl th{text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);padding:10px 10px;border-bottom:1px solid var(--line);background:var(--tint);font-weight:600;white-space:nowrap}
+.tbl td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.num{text-align:right;font-family:var(--m);font-size:12.5px;font-variant-numeric:tabular-nums}
+.bad{color:#9F1B1B;font-weight:700}
+.fam{font-weight:600;white-space:nowrap}
+.sw-cell{white-space:nowrap}
+.sw{width:74px;height:34px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.10);display:inline-block;vertical-align:middle}
+.sw.ghost{opacity:.4;background-image:repeating-linear-gradient(45deg,rgba(0,0,0,.07) 0 5px,transparent 5px 10px)}
+.mini{display:block;font-family:var(--m);font-size:10px;color:var(--soft);margin-top:2px}
+.dropped{background:rgba(159,27,27,.045)}
+.tag-drop{font-size:10px;text-transform:uppercase;letter-spacing:.05em;background:#FBE4E4;color:#9F1B1B;padding:1px 6px;border-radius:999px;font-weight:700}
+.scroll{overflow-x:auto}
+.callout{background:var(--brand);color:#fff;border-radius:12px;padding:24px 26px;margin-top:24px}
+.callout h2{color:#fff}.callout p{color:#D3E0EE;margin-top:9px;max-width:72ch}
+.callout ol{margin-top:13px;padding-left:21px;color:#D3E0EE}.callout li+li{margin-top:7px}.callout b{color:#fff}
+code{font-family:var(--m);font-size:12.5px;background:var(--tint);padding:1.5px 5px;border-radius:4px}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1A17;--surface:#252220;--tint:#2E2A26;--ink:#F2EFEA;--soft:#A8A29A;--line:#3A352F;--brand:#0E1C36}
+ .bad{color:#F09A9A}.tag-drop{background:#3A2220;color:#F09A9A}.dropped{background:rgba(240,154,154,.07)}}
+:root[data-theme="dark"]{--bg:#1C1A17;--surface:#252220;--tint:#2E2A26;--ink:#F2EFEA;--soft:#A8A29A;--line:#3A352F}
+:root[data-theme="light"]{--bg:#FAF7F0;--surface:#FFF;--tint:#F3F2EF;--ink:#393C3C;--soft:#5F5F5F;--line:#E2E0DA}
+</style></head><body><div class="wrap">
+
+<h1>A 50 tier</h1>
+<p class="sub">You asked for a step at half of 100, and a 25 across the neutrals. One of those works. The other fails precisely where you want it — and the reason points at what is actually bothering you.</p>
+
+<div class="verdicts">
+<div class="v"><div class="k yes">Yes — 50, for 21 of 22</div><p>A step at the perceptual midpoint clears the just-noticeable difference from both white and 100 in every family except one.</p></div>
+<div class="v"><div class="k no">No — Grey gets no 50</div><p>Grey 100 is already only ΔE 1.49 from white. A Grey 50 lands ΔE 0.95 from white and 0.60 from Grey 100. You would not be able to see it.</p></div>
+<div class="v"><div class="k no">No — no 25 tier</div><p>It dies in the neutrals: Grey 25 is ΔE 0.40 from white, Mub 25 is 0.81. Invisible tokens, in exactly the families you wanted them for.</p></div>
+<div class="v"><div class="k yes">You already built Mub 50</div><p>The beige you ship, <code>#FAF7F0</code>, is ΔE <b>0.20</b> from the computed value. You solved this months ago without naming it.</p></div>
+</div>
+
+<hr>
+
+<section>
+<h2>"Too dark" is usually "too grey"</h2>
+<p class="lede">Both panels below are the same lightness to within a third of a point. The left one is measurably <i>lighter</i>. Look at which one feels brighter.</p>
+<div class="hk-frame"><div class="hk">
+ <div style="background:#F8F8F9"><b>Grey 100</b><span>#F8F8F9 · L* 97.6 · C* 0.5</span></div>
+ <div style="background:#FAF7F0"><b>Mub 50 — what you ship</b><span>#FAF7F0 · L* 97.3 · C* 3.7</span></div>
+</div></div>
+<p class="lede" style="margin-top:18px">The right panel is <b>0.3 L* darker</b> and reads cleaner and brighter. That is the <b>Helmholtz–Kohlrausch effect</b>: chromatic colors appear lighter than achromatic ones of the same luminance. It is why an achromatic grey at 97 L* looks dingy while a warm tint at the same value looks like paper.</p>
+<p class="lede"><b>So the neutrals reading "dark" at 100 is only half a lightness problem.</b> Coffee 100 at L* 93.9 genuinely is dark — a 50 fixes that. But Grey 100 at L* 97.6 is not dark at all; it is <i>flat</i>. Adding lightness will not fix it, because there are only 2.4 points left to spend. Adding chroma will. That is why the warm-neutral 50s below hold C* 3.7 instead of taking the proportional 0.8 — at proportional chroma they render as plain white and lose the only quality you wanted from them.</p>
+</section>
+
+<hr>
+
+<section>
+<h2>The tier</h2>
+<p class="lede">L* at the midpoint between white and the family's 100. Chroma at 50% of the 100 step, capped to sRGB. Warm neutrals hold C* 3.7. A step needs ΔE ≥ 1.0 from <i>both</i> neighbours to earn its place.</p>
+<div class="scroll"><table class="tbl"><thead><tr>
+<th>Family</th><th>White</th><th>50 (new)</th><th>100</th><th class="num">L*</th><th class="num">C*</th><th class="num">ΔE white</th><th class="num">ΔE 100</th><th class="num">contrast</th>
+</tr></thead><tbody><tr class="">
+  <td class="fam">Coffee</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FBF5EF"></div><span class="mini">#FBF5EF</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#F0EDEA"></div><span class="mini">#F0EDEA</span></td>
+  <td class="num">96.9</td><td class="num">3.7</td>
+  <td class="num ">4.01</td>
+  <td class="num ">2.45</td>
+  <td class="num">1.082</td></tr><tr class="">
+  <td class="fam">Cocoa</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FEF7F1"></div><span class="mini">#FEF7F1</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#F6F0EB"></div><span class="mini">#F6F0EB</span></td>
+  <td class="num">97.6</td><td class="num">3.7</td>
+  <td class="num ">4.07</td>
+  <td class="num ">1.56</td>
+  <td class="num">1.061</td></tr><tr class="">
+  <td class="fam">Mub</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FAF7F0"></div><span class="mini">#FAF7F0</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#F3F2EF"></div><span class="mini">#F3F2EF</span></td>
+  <td class="num">97.7</td><td class="num">3.7</td>
+  <td class="num ">3.70</td>
+  <td class="num ">2.30</td>
+  <td class="num">1.061</td></tr><tr class="dropped">
+  <td class="fam">Grey <span class="tag-drop">no 50</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw ghost" style="background:#FBFBFC"></div><span class="mini">#FBFBFC</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#F8F8F9"></div><span class="mini">#F8F8F9</span></td>
+  <td class="num">98.8</td><td class="num">0.3</td>
+  <td class="num bad">0.95</td>
+  <td class="num bad">0.60</td>
+  <td class="num">1.034</td></tr><tr class="">
+  <td class="fam">Honeydew</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FDFDF5"></div><span class="mini">#FDFDF5</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FBFCEC"></div><span class="mini">#FBFCEC</span></td>
+  <td class="num">99.3</td><td class="num">4.1</td>
+  <td class="num ">3.99</td>
+  <td class="num ">3.49</td>
+  <td class="num">1.022</td></tr><tr class="">
+  <td class="fam">Lime</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F9FDF6"></div><span class="mini">#F9FDF6</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#F3FBED"></div><span class="mini">#F3FBED</span></td>
+  <td class="num">98.8</td><td class="num">3.9</td>
+  <td class="num ">4.37</td>
+  <td class="num ">3.68</td>
+  <td class="num">1.029</td></tr><tr class="">
+  <td class="fam">Green</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F7FCF7"></div><span class="mini">#F7FCF7</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#EFF8EF"></div><span class="mini">#EFF8EF</span></td>
+  <td class="num">98.4</td><td class="num">2.8</td>
+  <td class="num ">3.94</td>
+  <td class="num ">2.87</td>
+  <td class="num">1.038</td></tr><tr class="">
+  <td class="fam">Jade</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F6FCFA"></div><span class="mini">#F6FCFA</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#ECF9F5"></div><span class="mini">#ECF9F5</span></td>
+  <td class="num">98.4</td><td class="num">2.5</td>
+  <td class="num ">3.36</td>
+  <td class="num ">3.33</td>
+  <td class="num">1.038</td></tr><tr class="">
+  <td class="fam">Teal</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F4FDFC"></div><span class="mini">#F4FDFC</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#E8FAFA"></div><span class="mini">#E8FAFA</span></td>
+  <td class="num">98.5</td><td class="num">3.1</td>
+  <td class="num ">4.34</td>
+  <td class="num ">3.48</td>
+  <td class="num">1.034</td></tr><tr class="">
+  <td class="fam">Turquoise</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F4FAFD"></div><span class="mini">#F4FAFD</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#E9F6FA"></div><span class="mini">#E9F6FA</span></td>
+  <td class="num">98.0</td><td class="num">2.4</td>
+  <td class="num ">3.07</td>
+  <td class="num ">3.02</td>
+  <td class="num">1.053</td></tr><tr class="">
+  <td class="fam">Ocean</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F5F8FD"></div><span class="mini">#F5F8FD</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#EAF2FA"></div><span class="mini">#EAF2FA</span></td>
+  <td class="num">97.6</td><td class="num">2.5</td>
+  <td class="num ">2.96</td>
+  <td class="num ">2.64</td>
+  <td class="num">1.064</td></tr><tr class="">
+  <td class="fam">Blue</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F5F7FD"></div><span class="mini">#F5F7FD</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#EBEFFA"></div><span class="mini">#EBEFFA</span></td>
+  <td class="num">97.2</td><td class="num">2.9</td>
+  <td class="num ">3.36</td>
+  <td class="num ">2.78</td>
+  <td class="num">1.071</td></tr><tr class="">
+  <td class="fam">Indigo</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F6F4FD"></div><span class="mini">#F6F4FD</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#EDE9FA"></div><span class="mini">#EDE9FA</span></td>
+  <td class="num">96.5</td><td class="num">4.5</td>
+  <td class="num ">5.15</td>
+  <td class="num ">4.17</td>
+  <td class="num">1.089</td></tr><tr class="">
+  <td class="fam">Purple</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#F9F3FC"></div><span class="mini">#F9F3FC</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#F3E7F9"></div><span class="mini">#F3E7F9</span></td>
+  <td class="num">96.5</td><td class="num">5.1</td>
+  <td class="num ">6.00</td>
+  <td class="num ">5.01</td>
+  <td class="num">1.091</td></tr><tr class="">
+  <td class="fam">Violet</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FCF3FA"></div><span class="mini">#FCF3FA</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#F9E8F5"></div><span class="mini">#F9E8F5</span></td>
+  <td class="num">96.8</td><td class="num">4.5</td>
+  <td class="num ">6.15</td>
+  <td class="num ">4.53</td>
+  <td class="num">1.086</td></tr><tr class="">
+  <td class="fam">Pink</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FEF4F7"></div><span class="mini">#FEF4F7</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FCE9EF"></div><span class="mini">#FCE9EF</span></td>
+  <td class="num">97.0</td><td class="num">3.7</td>
+  <td class="num ">5.40</td>
+  <td class="num ">4.30</td>
+  <td class="num">1.077</td></tr><tr class="">
+  <td class="fam">Coral</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FEF2F2"></div><span class="mini">#FEF2F2</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FDE6E6"></div><span class="mini">#FDE6E6</span></td>
+  <td class="num">96.5</td><td class="num">4.2</td>
+  <td class="num ">5.83</td>
+  <td class="num ">4.61</td>
+  <td class="num">1.094</td></tr><tr class="">
+  <td class="fam">Ember</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FFF6F3"></div><span class="mini">#FFF6F3</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FEEEE8"></div><span class="mini">#FEEEE8</span></td>
+  <td class="num">97.6</td><td class="num">3.3</td>
+  <td class="num ">4.34</td>
+  <td class="num ">3.18</td>
+  <td class="num">1.064</td></tr><tr class="">
+  <td class="fam">Orange</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FFF6F0"></div><span class="mini">#FFF6F0</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FFEDE1"></div><span class="mini">#FFEDE1</span></td>
+  <td class="num">97.4</td><td class="num">4.4</td>
+  <td class="num ">4.70</td>
+  <td class="num ">4.15</td>
+  <td class="num">1.066</td></tr><tr class="">
+  <td class="fam">Mustard</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FFF9F0"></div><span class="mini">#FFF9F0</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FFF2E1"></div><span class="mini">#FFF2E1</span></td>
+  <td class="num">98.0</td><td class="num">4.8</td>
+  <td class="num ">4.67</td>
+  <td class="num ">3.97</td>
+  <td class="num">1.047</td></tr><tr class="">
+  <td class="fam">Yellow</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FFFAF0"></div><span class="mini">#FFFAF0</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FFF6E1"></div><span class="mini">#FFF6E1</span></td>
+  <td class="num">98.5</td><td class="num">5.3</td>
+  <td class="num ">4.88</td>
+  <td class="num ">4.32</td>
+  <td class="num">1.040</td></tr><tr class="">
+  <td class="fam">Lemon</td>
+  <td class="sw-cell"><div class="sw" style="background:#FFFFFF"></div><span class="mini">#FFFFFF</span></td>
+  <td class="sw-cell"><div class="sw " style="background:#FFFCF1"></div><span class="mini">#FFFCF1</span></td>
+  <td class="sw-cell"><div class="sw" style="background:#FFF9E1"></div><span class="mini">#FFF9E1</span></td>
+  <td class="num">98.9</td><td class="num">5.8</td>
+  <td class="num ">5.14</td>
+  <td class="num ">4.87</td>
+  <td class="num">1.027</td></tr></tbody></table></div>
+<p class="lede" style="margin-top:14px">Orange, Mustard, Yellow and Lemon are gamut-capped — their 100 steps already sit at <code>#FF</code> in the red channel, so there is no headroom to lighten while holding proportional chroma. The cap costs them 0.1–0.4 C*, which is immaterial.</p>
+</section>
+
+<section>
+<h2>Why 25 fails</h2>
+<p class="lede">A quarter step halves the ΔE again. In the chromatic families it survives; in the neutrals — the ones you asked about — it disappears.</p>
+<table class="tbl"><thead><tr><th>Family</th><th>25 would be</th><th class="num">ΔE white</th><th class="num">ΔE to 50</th><th>Verdict</th></tr></thead><tbody><tr><td class="fam">Coffee</td><td class="sw-cell"><div class="sw" style="background:#FBFAFA"></div><span class="mini">#FBFAFA</span></td>
+ <td class="num ">1.08</td><td class="num ">3.43</td>
+ <td>marginal</td></tr><tr><td class="fam">Cocoa</td><td class="sw-cell"><div class="sw" style="background:#FDFBFA"></div><span class="mini">#FDFBFA</span></td>
+ <td class="num ">1.23</td><td class="num ">2.98</td>
+ <td>marginal</td></tr><tr><td class="fam">Mub</td><td class="sw-cell"><div class="sw" style="background:#FCFCFB"></div><span class="mini">#FCFCFB</span></td>
+ <td class="num bad">0.81</td><td class="num ">3.11</td>
+ <td><b class="bad">invisible</b></td></tr><tr><td class="fam">Grey</td><td class="sw-cell"><div class="sw" style="background:#FDFDFD"></div><span class="mini">#FDFDFD</span></td>
+ <td class="num bad">0.40</td><td class="num bad">0.66</td>
+ <td><b class="bad">invisible</b></td></tr><tr><td class="fam">Ocean</td><td class="sw-cell"><div class="sw" style="background:#FAFCFE"></div><span class="mini">#FAFCFE</span></td>
+ <td class="num ">1.40</td><td class="num ">1.67</td>
+ <td>marginal</td></tr><tr><td class="fam">Coral</td><td class="sw-cell"><div class="sw" style="background:#FFF9F9"></div><span class="mini">#FFF9F9</span></td>
+ <td class="num ">3.02</td><td class="num ">2.83</td>
+ <td>marginal</td></tr></tbody></table>
+<p class="lede" style="margin-top:14px">This is not a limitation of the palette. It is arithmetic: a neutral has almost no chroma to spend, so the only axis available is lightness, and there are 2.4 points of it between Grey 100 and white. You cannot subdivide that into visible steps. <b>If a surface needs to be subtler than Grey 100, the answer is white.</b></p>
+</section>
+
+<div class="callout">
+<h2>What I'd do</h2>
+<ol>
+<li><b>Add 50 to 21 families.</b> It is a real step everywhere except Grey, and it fills a gap you have already been working around.</li>
+<li><b>Name <code>#FAF7F0</code> as Mub 50</b> rather than issuing the computed <code>#FBF8F1</code>. It is ΔE 0.20 away, it already ships, and adopting it means zero visual change to live screens.</li>
+<li><b>Skip Grey 50 and skip the 25 tier entirely.</b> Both are below the threshold of vision. Issuing them creates tokens designers will use and reviewers cannot verify.</li>
+<li><b>When a neutral surface feels dark, reach for chroma, not lightness.</b> That is the actual fix, and it is why the warm 50s are specced the way they are.</li>
+</ol>
+</div>
+</div></body></html>

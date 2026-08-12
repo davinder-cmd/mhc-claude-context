@@ -1,0 +1,224 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Completion celebration — v4 explorations</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-2:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-mid:#B67D23;--amber-tint:#F4E8D2;--amber-warm:#FBEFD6;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.55}
+.page{max-width:2050px;margin:0 auto;padding:34px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:1000px;margin:0 0 4px;font-size:14px}
+.flow{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}.flow b{color:var(--teal-2)}
+.grid{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start;margin-top:22px}
+.col{display:flex;flex-direction:column;gap:9px;width:360px}
+.cap{font-size:12px;color:var(--ink-2);max-width:360px}.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px}
+.tag.rec{color:#fff;background:var(--teal)}
+.tag.top{background:var(--amber-tint);color:var(--amber)}
+.tag.bot{background:#E7E1D4;color:var(--ink-2)}
+.phone{width:360px;background:var(--surface);border:9px solid #1c2330;border-radius:42px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:748px;overflow-y:auto;position:relative;background:var(--surface)}
+.scr::-webkit-scrollbar{width:0}
+.cbar{display:flex;justify-content:space-between;align-items:center;padding:12px 18px 4px}
+.cbar .t{font-size:13px;font-weight:600}
+.cbar .x{width:30px;height:30px;border-radius:50%;background:rgba(34,38,42,.06);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ink-2)}
+/* celebrate */
+.cel{position:relative;padding:12px 22px 20px;text-align:center;background:linear-gradient(180deg,var(--teal-tint) 0%,rgba(224,234,235,0) 85%);overflow:hidden}
+.conf i{position:absolute;display:block;border-radius:2px;opacity:.85}
+.med{width:80px;height:80px;margin:4px auto 0;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:38px;box-shadow:0 0 0 8px rgba(14,74,86,.1),0 10px 22px -10px rgba(14,74,86,.7)}
+.ebs{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-2);margin-top:14px}
+.ttl{font-size:23px;font-weight:760;letter-spacing:-0.02em;line-height:1.13;margin:6px 0 0}
+.win{margin:10px auto 0;font-size:13.5px;line-height:1.5;color:var(--ink-2);max-width:31ch}.win b{color:var(--ink);font-weight:650}
+.block{padding:0 22px 22px}
+/* reward */
+.rcard{margin-top:16px;border:1px solid var(--amber-mid);background:var(--amber-tint);border-radius:16px;padding:14px 15px;display:flex;align-items:center;gap:12px}
+.rcard .coin{width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid rgba(138,90,18,.35);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--amber);font-size:15px;flex:none}
+.rcard .rm{font-size:16px;font-weight:740;color:var(--amber)}
+.rcard .rs{font-size:11.5px;color:var(--ink-2);margin-top:1px}
+/* progress pips */
+.prog{margin-top:15px}
+.ph{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px}
+.ph .l{font-weight:650}.ph .r{color:var(--ink-3)}
+.pips{display:flex;gap:6px;margin-top:8px}.pips i{height:8px;border-radius:5px;flex:1;background:rgba(14,74,86,.14)}.pips i.on{background:var(--teal)}
+.divider{height:1px;background:var(--line);margin:20px -22px 0}
+.neyebrow{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:18px}
+/* tap card (full) */
+.tapcard{margin-top:11px;border:1.5px solid var(--teal);border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 8px 20px -13px rgba(14,74,86,.55)}
+.tapimg{height:96px;background:linear-gradient(120deg,#17636f,#2b8b93 55%,#6fb7ba);position:relative}
+.whytag{position:absolute;left:12px;bottom:10px;background:rgba(255,255,255,.92);color:var(--teal);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:4px 8px;border-radius:6px}
+.tapfoot{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;gap:10px}
+.tapfoot .tt{font-size:16px;font-weight:730}.tapfoot .tm{font-size:12px;color:var(--ink-2);margin-top:2px}.tapfoot .tm .m{color:var(--amber);font-weight:700}
+.tapcta{font-size:14px;font-weight:730;color:var(--teal);flex:none}
+.qlink{display:block;text-align:center;margin:14px 0 2px;font-size:13px;color:var(--teal-2);font-weight:650}
+/* outcome card (A/E) */
+.outcome{margin-top:14px;border:1px solid var(--teal-tint);background:#fff;border-radius:14px;padding:13px 14px;display:flex;align-items:center;gap:12px}
+.outcome .oi{width:38px;height:38px;border-radius:11px;background:var(--teal-tint);display:flex;align-items:center;justify-content:center;font-size:18px;flex:none}
+.outcome .ol{font-size:12px;color:var(--ink-2);font-weight:600}
+.outcome .od{font-size:15px;font-weight:750;color:var(--teal);margin-top:1px}
+.outcome .od .arw{color:var(--ink-3);font-weight:600;margin:0 5px}
+.outcome .delta{margin-left:auto;background:var(--teal);color:#fff;font-size:11px;font-weight:800;padding:4px 9px;border-radius:20px;flex:none}
+/* ladder (A) */
+.ladder{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.rung{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.rung .rn{width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;background:rgba(14,74,86,.1);color:var(--teal)}
+.rung.done .rn{background:var(--teal);color:#fff}
+.rung .rl{flex:1;color:var(--ink-2)}.rung.done .rl{color:var(--ink);font-weight:600}
+.rung .rv{color:var(--ink-3);font-weight:700}.rung.done .rv{color:var(--amber)}
+/* compact next (B/E) */
+.nextrow{margin-top:11px;display:flex;align-items:center;gap:12px;border:1.5px solid var(--teal);border-radius:14px;padding:12px 14px;background:#fff}
+.nextrow .thumb{width:40px;height:40px;border-radius:10px;background:linear-gradient(120deg,#17636f,#4fa3a8);flex:none}
+.nextrow .nt{font-size:15px;font-weight:730}.nextrow .nm{font-size:11.5px;color:var(--ink-2);margin-top:1px}.nextrow .nm .m{color:var(--amber);font-weight:700}
+.nextrow .go{margin-left:auto;font-size:14px;font-weight:730;color:var(--teal);flex:none}
+/* weighting bar */
+.wt{display:flex;height:7px;border-radius:5px;overflow:hidden;margin-top:10px;border:1px solid var(--line)}
+.wt span{display:block}.wt .n{background:#D9CFBB}.wt .s{background:var(--teal-tint)}.wt .a{background:var(--amber-mid)}
+.wtl{font-size:10.5px;color:var(--ink-3);margin-top:5px;display:flex;gap:12px;flex-wrap:wrap}
+.wtl b{color:var(--ink-2)}
+.rec-note{margin-top:28px;max-width:1000px;background:var(--surface);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:15px 18px;font-size:13px;line-height:1.55}.rec-note b{color:var(--ink)}
+</style></head><body>
+<div class="page">
+<h1>Completion celebration — v4 explorations</h1>
+<p class="sub">Same skeleton as settled v3 — <b>top = success + progress, bottom = recommendation</b> — flexed five ways. One expands the top, one shortens the bottom, and the rest push visual weight up and down. Numbers match the data model (Depression 10, Insomnia 8, $100 of $500). Guardrail held: the health win leads, reward stays the accent.</p>
+<p class="flow">Context: finished <b>Managing Depression</b> (10 sessions) → $100 earned → next path <b>Treating Insomnia</b>.</p>
+
+<div class="grid">
+
+<!-- A Expanded top -->
+<div class="col">
+<span class="tag top">A · Expanded top</span>
+<div class="phone"><div class="scr">
+<div class="cbar"><span class="t">9:41</span><span class="x">✕</span></div>
+<div class="cel">
+<div class="med">✓</div>
+<div class="ebs">Care path complete</div>
+<div class="ttl">You finished<br>Managing Depression</div>
+<div class="win">All <b>10 sessions</b> done over 6 weeks — steady, lasting work.</div>
+</div>
+<div class="block">
+<div class="outcome"><span class="oi">📉</span><div><div class="ol">Your depression check-in (PHQ-9)</div><div class="od">8<span class="arw">→</span>4</div></div><span class="delta">Improved</span></div>
+<div class="rcard"><div class="coin">$</div><div><div class="rm">$100 Amazon gift card earned</div><div class="rs">On its way — no action needed.</div></div></div>
+<div class="prog">
+<div class="ph"><span class="l">Care paths this year</span><span class="r">1 of 5 · $100 of $500</span></div>
+<div class="ladder">
+<div class="rung done"><span class="rn">✓</span><span class="rl">Managing Depression</span><span class="rv">$100</span></div>
+<div class="rung"><span class="rn">2</span><span class="rl">Next path</span><span class="rv">+$100</span></div>
+<div class="rung"><span class="rn">3</span><span class="rl">$300 more available this year</span><span class="rv">→ $500</span></div>
+</div>
+</div>
+<div class="divider"></div>
+<div class="neyebrow">Your next path</div>
+<div class="tapcard"><div class="tapimg"><span class="whytag">You said sleep matters</span></div><div class="tapfoot"><div><div class="tt">Treating Insomnia</div><div class="tm">8 sessions · <span class="m">Earn $100</span></div></div><span class="tapcta">Start ›</span></div></div>
+<a class="qlink">Browse all care paths</a>
+</div>
+</div></div>
+<div class="cap"><b>A — Expanded top.</b> Adds the payoff that matters most clinically: the <b>outcome delta</b> (PHQ-9 8→4) and a fuller <b>progress ladder</b> showing this path done + what's ahead. Makes the top feel earned, not just congratulatory. Bottom stays the full tap-card.</div>
+</div>
+
+<!-- B Shortened bottom -->
+<div class="col">
+<span class="tag bot">B · Shortened bottom</span>
+<div class="phone"><div class="scr">
+<div class="cbar"><span class="t">9:41</span><span class="x">✕</span></div>
+<div class="cel">
+<div class="med">✓</div>
+<div class="ebs">Care path complete</div>
+<div class="ttl">You finished<br>Managing Depression</div>
+<div class="win">All <b>10 sessions</b> done — real, lasting work for your mental health.</div>
+</div>
+<div class="block">
+<div class="rcard"><div class="coin">$</div><div><div class="rm">$100 Amazon gift card earned</div><div class="rs">On its way to your rewards — no action needed.</div></div></div>
+<div class="prog"><div class="ph"><span class="l">Care paths this year</span><span class="r">$100 of $500</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+<div class="divider"></div>
+<div class="neyebrow">Your next path</div>
+<div class="nextrow"><span class="thumb"></span><div><div class="nt">Treating Insomnia</div><div class="nm">8 sessions · <span class="m">Earn $100</span></div></div><span class="go">Start ›</span></div>
+<a class="qlink">Browse all</a>
+</div>
+</div></div>
+<div class="cap"><b>B — Shortened bottom.</b> Recommendation collapses to a single <b>compact row</b> (thumb + title + earn + Start) — lighter, less of a "next product pitch," faster to move on. Top unchanged. Best if the recommendation should feel like a suggestion, not a takeover.</div>
+</div>
+
+<!-- C Bold weight -->
+<div class="col">
+<span class="tag">C · Bold visual weight</span>
+<div class="phone"><div class="scr">
+<div class="cbar" style="background:#0E4A56"><span class="t" style="color:#EAF6F4">9:41</span><span class="x" style="background:rgba(255,255,255,.15);color:#EAF6F4">✕</span></div>
+<div class="cel" style="background:#0E4A56;color:#fff;padding-top:18px;padding-bottom:28px">
+<div class="conf" aria-hidden="true">
+<i style="left:26px;top:20px;width:8px;height:8px;background:#E4B04A;transform:rotate(20deg)"></i>
+<i style="right:34px;top:26px;width:10px;height:10px;border-radius:50%;background:#E4B04A"></i>
+<i style="left:64px;top:60px;width:6px;height:14px;background:#8FB9AE"></i>
+<i style="right:60px;top:70px;width:7px;height:7px;background:#fff;transform:rotate(45deg)"></i>
+<i style="left:150px;top:10px;width:6px;height:6px;border-radius:50%;background:#8FB9AE"></i>
+</div>
+<div class="med" style="background:#fff;color:var(--teal);width:90px;height:90px;font-size:42px;box-shadow:0 0 0 10px rgba(255,255,255,.12)">✓</div>
+<div class="ebs" style="color:#9FD3CE;margin-top:16px">Care path complete</div>
+<div class="ttl" style="color:#fff;font-size:26px">You finished<br>Managing Depression</div>
+<div class="win" style="color:#CFE6E4">All <b style="color:#fff">10 sessions</b> done. That's real, lasting work.</div>
+<div style="margin:16px auto 0;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:12px 15px;display:flex;align-items:center;gap:11px;max-width:290px">
+<span style="width:36px;height:36px;border-radius:50%;background:#F3D89B;color:#5a3c0a;display:flex;align-items:center;justify-content:center;font-weight:800;flex:none">$</span>
+<div style="text-align:left"><div style="font-size:16px;font-weight:800;color:#fff">$100 gift card earned</div><div style="font-size:11px;color:#CFE6E4">$100 of $500 this year</div></div>
+</div>
+</div>
+<div class="block">
+<div class="neyebrow" style="margin-top:14px">Your next path</div>
+<div class="tapcard"><div class="tapimg"><span class="whytag">You said sleep matters</span></div><div class="tapfoot"><div><div class="tt">Treating Insomnia</div><div class="tm">8 sessions · <span class="m">Earn $100</span></div></div><span class="tapcta">Start ›</span></div></div>
+<a class="qlink">Browse all care paths</a>
+</div>
+</div></div>
+<div class="cap"><b>C — Bold weight.</b> Full-bleed teal hero, bigger medallion, confetti, reward folded into the hero as a glass chip. Most celebratory / highest energy. <b>Watch the guardrail:</b> the money reads loud here — closest to over-celebrating the payout.</div>
+</div>
+
+<!-- D Calm weight -->
+<div class="col">
+<span class="tag">D · Calm visual weight</span>
+<div class="phone"><div class="scr">
+<div class="cbar"><span class="t">9:41</span><span class="x">✕</span></div>
+<div style="padding:34px 26px 8px;text-align:center">
+<div style="width:52px;height:52px;margin:0 auto;border-radius:50%;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:24px">✓</div>
+<div class="ebs" style="color:var(--ink-3);margin-top:16px">Care path complete</div>
+<div class="ttl" style="font-weight:700;margin-top:8px">You finished Managing Depression</div>
+<div class="win">All 10 sessions done — real, lasting work for your mental health.</div>
+</div>
+<div class="block" style="padding-top:14px">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<div><div style="font-size:15px;font-weight:700;color:var(--amber)">$100 earned</div><div style="font-size:11.5px;color:var(--ink-3);margin-top:2px">Amazon gift card · on its way</div></div>
+<div style="text-align:right;font-size:11.5px;color:var(--ink-3)">$100 of $500<div class="pips" style="width:90px;margin-top:6px"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+</div>
+<div class="neyebrow" style="margin-top:22px">Your next path</div>
+<div class="nextrow" style="border-color:var(--line);box-shadow:none"><span class="thumb"></span><div><div class="nt">Treating Insomnia</div><div class="nm">8 sessions · <span class="m">Earn $100</span></div></div><span class="go">Start ›</span></div>
+<a class="qlink" style="margin-top:18px">Browse all care paths</a>
+</div>
+</div></div>
+<div class="cap"><b>D — Calm weight.</b> No fill, no confetti — a thin ring check, hairline-bracketed reward+progress row, quiet next-row. Airy and restrained; most on-guardrail (reward barely raises its voice). Risk: may under-celebrate the peak moment.</div>
+</div>
+
+<!-- E Balanced blend -->
+<div class="col">
+<span class="tag rec">E · Balanced blend  ·  lean</span>
+<div class="phone"><div class="scr">
+<div class="cbar"><span class="t">9:41</span><span class="x">✕</span></div>
+<div class="cel">
+<div class="med">✓</div>
+<div class="ebs">Care path complete</div>
+<div class="ttl">You finished<br>Managing Depression</div>
+<div class="win">All <b>10 sessions</b> done over 6 weeks — steady, lasting work.</div>
+</div>
+<div class="block">
+<div class="outcome"><span class="oi">📉</span><div><div class="ol">Depression check-in (PHQ-9)</div><div class="od">8<span class="arw">→</span>4</div></div><span class="delta">Improved</span></div>
+<div class="rcard"><div class="coin">$</div><div><div class="rm">$100 gift card earned</div><div class="rs">$100 of $500 this year</div></div></div>
+<div class="prog"><div class="ph"><span class="l">Care paths this year</span><span class="r">1 of 5</span></div><div class="pips"><i class="on"></i><i></i><i></i><i></i><i></i></div></div>
+<div class="divider"></div>
+<div class="neyebrow">Your next path</div>
+<div class="nextrow"><span class="thumb"></span><div><div class="nt">Treating Insomnia</div><div class="nm">8 sessions · <span class="m">Earn $100</span></div></div><span class="go">Start ›</span></div>
+<a class="qlink">Browse all</a>
+</div>
+</div></div>
+<div class="cap"><b>E — Balanced blend. (my lean.)</b> Keeps the high-value top addition (the outcome delta, folded in <i>inline</i> not as a big block) + the settled celebration, then the <b>trimmed</b> compact next-row. Expanded where it earns attention, shortened where it doesn't.</div>
+</div>
+
+</div>
+
+<div class="rec-note">
+<b>Recommendation:</b> <b>E — the balanced blend.</b> The single most valuable thing to add up top isn't more celebration — it's the <b>outcome delta</b> (the PHQ-9 improvement). That's the health win made concrete, it reinforces the efficacy story, and it earns the peak moment more than a bigger medallion would. Pair it with the <b>trimmed bottom</b> so the recommendation stays a suggestion. Take <b>A</b>'s fuller ladder if you want the year-goal more present; keep <b>C</b> in reserve for the <i>first-ever</i> completion (one-time big moment) but not the everyday screen — it leans money-loud. <b>D</b> is the fallback if the room wants maximum restraint.
+<div class="wtl" style="margin-top:10px"><b>Weight, left→right:</b> D calm · B / E balanced · A content-rich · C boldest. All keep neutral/clinical dominant and reward as the accent.</div>
+</div>
+</div>
+</body></html>

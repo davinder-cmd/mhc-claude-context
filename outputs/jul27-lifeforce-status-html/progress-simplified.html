@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · My Progress — simplified (summary + drill-in)</title>
+<link rel="stylesheet" href="lifeforce-base.css">
+<style>
+  body{background:var(--canvas);padding:32px;}
+  h1.page{font-family:var(--f-display);font-weight:500;font-size:24px;color:var(--navy);margin-bottom:6px;}
+  p.pageintro{font-family:var(--f-text);font-size:14px;color:var(--slate);max-width:78ch;margin-bottom:28px;}
+  .stage{display:flex;gap:36px;align-items:flex-start;}
+  .ideacol{width:392px;flex:0 0 392px;}
+  .lbl{font-family:var(--f-text);font-weight:600;font-size:15px;color:var(--charcoal);margin-bottom:8px;}
+  .cap{font-family:var(--f-text);font-size:13px;line-height:1.45;color:var(--slate);margin-top:12px;}
+  .phone{width:392px;background:#fff;border:1px solid var(--silver);border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:22px;box-shadow:0 12px 30px rgba(6,42,66,.08);}
+  .row{display:flex;align-items:center;gap:10px;}.space{justify-content:space-between;}.grow{flex:1;min-width:0;}
+  .sec{display:flex;flex-direction:column;gap:12px;}
+  .card{border:1px solid var(--hair);border-radius:14px;background:#fff;}
+  .nursecard{border:1px solid var(--hair);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .goals{display:flex;flex-direction:column;gap:8px;}
+  .goal{display:flex;align-items:center;gap:10px;}
+  .gdot{width:18px;height:18px;border-radius:50%;border:2px solid var(--aqua);flex:0 0 auto;}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .stat{border:1px solid var(--hair);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:3px;}
+  .stat .v{color:var(--charcoal);}
+  .morelink{display:flex;align-items:center;justify-content:space-between;padding:14px 15px;border:1px solid var(--hair);border-radius:14px;background:#fff;}
+  .prog{display:flex;gap:13px;align-items:flex-start;padding:14px;border:1px solid var(--hair);border-radius:14px;}
+  .chip{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;flex:0 0 auto;}
+  .table .r{display:flex;align-items:center;padding:13px 14px;}
+  .table .r + .r{border-top:1px solid var(--divider);}
+  .table .h{background:var(--cloud);}
+  .support{background:var(--cloud);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;}
+  .btnghost{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--navy);color:var(--navy);border-radius:999px;padding:11px 18px;align-self:flex-start;}
+  .amber{display:flex;gap:10px;align-items:flex-start;background:var(--f6,#fdf6e6);border-radius:12px;padding:12px 14px;}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-chev" viewBox="0 0 20 20"><path d="M8 5l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-person" viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M4.5 20a6 6 0 0 1 11 0" fill="none" stroke="currentColor" stroke-width="1.9"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v5M12 16h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</defs></svg>
+
+<h1 class="page">My Progress — simplified (summary + drill-in)</h1>
+<p class="pageintro">Reordered to the page's intent (<strong>nurse guidance + goals → your results → recommendations</strong>) and cut to a scannable summary. The full 12-row table and full program list move to drill-in detail pages. Stat values shown are sample data to illustrate the snapshot.</p>
+
+<div class="stage">
+
+  <!-- Simplified summary -->
+  <div class="ideacol">
+    <div class="lbl">My Progress · summary (the tab)</div>
+    <div class="phone">
+      <nav class="tabs"><a class="label-1">Status</a><a class="active label-1">My Progress</a></nav>
+
+      <!-- 1. Nurse + goals (leads) -->
+      <div class="sec">
+        <div class="heading-6 c-charcoal">From your nurse</div>
+        <div class="nursecard">
+          <div class="caption c-slate">Received May 14, 2026</div>
+          <p class="paragraph-3 c-charcoal" style="margin:0">Great work on your walks — your resting heart rate is trending down. Here's what to focus on before our next visit:</p>
+          <div class="goals">
+            <div class="goal"><span class="gdot"></span><span class="body-3 c-charcoal">Aim for ~7,000 steps most days</span></div>
+            <div class="goal"><span class="gdot"></span><span class="body-3 c-charcoal">Cut sugary drinks to ≤1 per day</span></div>
+            <div class="goal"><span class="gdot"></span><span class="body-3 c-charcoal">Keep a home blood-pressure log</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Latest results (snapshot + drill-in) -->
+      <div class="sec">
+        <div class="row space"><span class="heading-6 c-charcoal">Your latest results</span><span class="caption c-slate">Apr 28</span></div>
+        <div class="stats">
+          <div class="stat"><span class="eyebrow c-slate">Blood pressure</span><span class="heading-6 v">128/82</span><span class="caption c-slate">Goal &lt;120/80</span></div>
+          <div class="stat"><span class="eyebrow c-slate">BMI</span><span class="heading-6 v">27.4</span><span class="caption c-slate">Goal 18.5–24.9</span></div>
+          <div class="stat"><span class="eyebrow c-slate">LDL cholesterol</span><span class="heading-6 v">118</span><span class="caption c-slate">Goal &lt;100</span></div>
+          <div class="stat"><span class="eyebrow c-slate">Resting HR</span><span class="heading-6 v">64</span><span class="caption c-slate">bpm · trending ↓</span></div>
+        </div>
+        <a class="morelink"><span class="title-3 c-navy">See all 12 results</span><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></a>
+      </div>
+
+      <!-- 3. Recommended (2 featured + drill-in) -->
+      <div class="sec">
+        <div class="heading-6 c-charcoal">Recommended for you</div>
+        <div class="prog"><span class="chip" style="background:var(--tint-aqua);color:var(--aqua)"><svg width="22" height="22"><use href="#i-heart"/></svg></span><div class="grow"><div class="title-2 c-navy">Virta — Weight Loss</div><div class="body-3 c-slate">Lose weight, reduce medications, save money.</div></div></div>
+        <div class="prog"><span class="chip" style="background:var(--tint-green);color:var(--green)"><svg width="22" height="22"><use href="#i-person"/></svg></span><div class="grow"><div class="title-2 c-navy">Premise Health — Counseling</div><div class="body-3 c-slate">Free, confidential behavioral health support.</div></div></div>
+        <a class="morelink"><span class="title-3 c-navy">See all recommendations &amp; handouts</span><svg width="20" height="20" style="color:var(--silver)"><use href="#i-chev"/></svg></a>
+      </div>
+
+      <!-- 4. Support / About -->
+      <div class="support"><span class="eyebrow c-navy">Peak Health support</span><span class="body-3 c-charcoal">1-888-385-4583 · appointment@peak-health.net</span><a class="btnghost label-1">Peak Health portal</a></div>
+    </div>
+    <p class="cap"><strong>~4 short sections vs. a 2,300px wall.</strong> Nurse guidance + goals lead; results are a 4-stat glance; recommendations show 2. <strong>Empty state:</strong> when no labs yet, the stat grid is replaced by a single "Labs not received yet" line — not 12 dashes.</p>
+  </div>
+
+  <!-- Drill-in detail -->
+  <div class="ideacol">
+    <div class="lbl">Drill-in · full lab results (where the table lives)</div>
+    <div class="phone" style="gap:16px">
+      <div class="row" style="padding:2px 0"><svg width="26" height="26" style="color:var(--charcoal)"><use href="#i-back"/></svg><div class="grow" style="text-align:center"><span class="title-1 c-charcoal">Lab results &amp; goals</span></div><span style="width:26px"></span></div>
+      <p class="paragraph-3 c-slate" style="margin:0">Your full biometric panel from your last lab work. Goals are set with your nurse.</p>
+      <div class="card table" style="overflow:hidden">
+        <div class="r h"><span class="grow eyebrow c-slate">Measurement</span><span class="eyebrow c-slate" style="width:60px;text-align:right">Result</span><span class="eyebrow c-slate" style="width:54px;text-align:right">Goal</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Blood pressure</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">128/82</span><span class="body-3 c-slate" style="width:54px;text-align:right">&lt;120/80</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">BMI</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">27.4</span><span class="body-3 c-slate" style="width:54px;text-align:right">18.5–24.9</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">LDL cholesterol</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">118</span><span class="body-3 c-slate" style="width:54px;text-align:right">&lt;100</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">HDL cholesterol</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">51</span><span class="body-3 c-slate" style="width:54px;text-align:right">&gt;40</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Total cholesterol</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">196</span><span class="body-3 c-slate" style="width:54px;text-align:right">&lt;200</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Triglycerides</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">140</span><span class="body-3 c-slate" style="width:54px;text-align:right">&lt;150</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Fasting glucose</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">98</span><span class="body-3 c-slate" style="width:54px;text-align:right">&lt;100</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Resting heart rate</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">64</span><span class="body-3 c-slate" style="width:54px;text-align:right">&lt;70</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Fitness score</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">42</span><span class="body-3 c-slate" style="width:54px;text-align:right">—</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">% Body fat</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">28</span><span class="body-3 c-slate" style="width:54px;text-align:right">—</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Weight (lbs)</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">184</span><span class="body-3 c-slate" style="width:54px;text-align:right">—</span></div>
+        <div class="r"><span class="grow body-3 c-charcoal">Waist (in)</span><span class="body-3 c-charcoal" style="width:60px;text-align:right">38</span><span class="body-3 c-slate" style="width:54px;text-align:right">—</span></div>
+      </div>
+    </div>
+    <p class="cap"><strong>Progressive disclosure.</strong> The exhaustive panel lives one tap deeper — available when the member wants it, out of the way when they don't. Same pattern for "See all recommendations."</p>
+  </div>
+
+</div>
+</body>
+</html>

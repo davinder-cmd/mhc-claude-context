@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rows · MHC Component Kit</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<div class="g-top"><div class="g-top__inner"><a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Kit</a><div class="g-top__spacer"></div><div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div></div></div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+  <header class="g-head">
+    <div class="g-eyebrow">Rows · M3 List items</div>
+    <h1 class="g-title">Rows</h1>
+    <p class="g-lede">Horizontal composition primitives — the pieces that align every time you stack content. Greeting, section head, media row, and meta row. They carry the spacing and baseline rules so you never hand-align.</p>
+    <div class="g-tags"><span class="g-tag">.greeting</span><span class="g-tag">.section-head</span><span class="g-tag">.pair-card__row</span><span class="g-tag">.eyebrow · .dot</span></div>
+  </header>
+
+  <section class="g-section" id="playground">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Live playground</h2></div>
+    <p class="g-section__note">Drag to resize. The greeting swaps its copy at 600px; the "See more" text-link reveals its full label at 1200px.</p>
+    <div class="g-pg" style="height:620px"><div class="g-pg__hint">↔ Drag to resize · live <code>mhc-home.css</code></div><iframe src="frame-rows.html" title="Rows — resizable"></iframe></div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Responsive breakpoints</h2></div>
+    <div class="g-bp-row">
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px</span></div><div class="g-bp__vp" style="--w:375;--s:1;--h:600"><iframe src="frame-rows.html" title="Rows Compact"></iframe></div></div>
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px</span></div><div class="g-bp__vp" style="--w:1024;--s:.62;--h:480"><iframe src="frame-rows.html" title="Rows Medium"></iframe></div></div>
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px</span></div><div class="g-bp__vp" style="--w:1440;--s:.5;--h:480"><iframe src="frame-rows.html" title="Rows Large"></iframe></div></div>
+    </div>
+  </section>
+
+  <section class="g-section" id="markup">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Markup</h2></div>
+    <div class="g-code">
+      <div class="g-code__bar">rows <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>&lt;!-- Section head: title + optional trailing link --&gt;
+&lt;div class="section-head"&gt;
+  &lt;div class="section-head__title"&gt;
+    &lt;h2 class="heading-6"&gt;{{formula.copy_section_title}}&lt;/h2&gt;
+    &lt;div class="caption meta"&gt;{{formula.copy_section_meta}}&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;a class="btn btn-text" href="{{formula.section_link_href}}"&gt;{{formula.copy_section_link}}&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;!-- Media row: thumb + title/meta body --&gt;
+&lt;div class="pair-card__row"&gt;
+  &lt;div class="pair-card__thumb" style="background-image: url('{{formula.thumb_url}}')" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;div class="pair-card__row-body"&gt;
+    &lt;div class="title-1"&gt;{{formula.copy_title}}&lt;/div&gt;
+    &lt;div class="body-3 ink-soft"&gt;{{formula.copy_meta}}&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Meta row: eyebrow + dot-separated meta --&gt;
+&lt;div class="eyebrow program__tag"&gt;&lt;span class="dot" aria-hidden="true"&gt;&lt;/span&gt;{{formula.copy_eyebrow}}&lt;/div&gt;
+
+&lt;!-- Greeting: heading + icon-button actions --&gt;
+&lt;div class="greeting"&gt;
+  &lt;h1 class="heading-4"&gt;&lt;span class="greet-compact"&gt;{{formula.copy_greeting_compact}}&lt;/span&gt;&lt;span class="greet-medium"&gt;{{formula.copy_greeting_medium}}&lt;/span&gt;&lt;/h1&gt;
+  &lt;div class="greeting__actions"&gt;
+    &lt;a class="icon-btn icon-btn--filled" href="{{formula.messages_href}}" aria-label="Messages"&gt;&lt;span class="material-symbols-outlined" aria-hidden="true"&gt;mail_outline&lt;/span&gt;&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Section head</strong> baseline-aligns the title and trailing link; the trailing link is always a text-link (<code>&lt;a&gt;</code>), never a button.<br>
+      • <strong>Greeting copy swap</strong> uses <code>.greet-compact</code> / <code>.greet-medium</code> — author both; CSS shows one per breakpoint.<br>
+      • <strong>Media row</strong> is the reusable list-row primitive — the same shape inside pair cards works for any thumb + title/meta list.
+    </p>
+  </section>
+</div>
+</body>
+</html>

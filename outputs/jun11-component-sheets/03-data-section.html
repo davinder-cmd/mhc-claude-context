@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Data section · component sheet · 03</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="bar">
+  <a class="bar__back" href="index.html">← All sheets</a>
+  <span class="bar__sep">/</span>
+  <span class="bar__name">03 · Data section</span>
+</nav>
+
+<div class="sheet">
+
+  <header class="sheet__head">
+    <div class="sheet__num">03 / 07</div>
+    <h1 class="sheet__title">Data section · variants</h1>
+    <p class="sheet__sub">
+      The "This week" tracker grid. Four tiles on desktop (steps, sleep, calories, active min), each with a ring-style icon, label, value, and a sub line ("78% of weekly goal" or "Set a goal →"). Variants cover the meaningful per-tile states.
+    </p>
+    <a class="sheet__figma" href="https://www.figma.com/design/6nJg9r55Y3NSgqZetujnPI/Home-Page-redesign-v2?node-id=6462-14265" target="_blank">View in Figma</a>
+  </header>
+
+  <section class="section">
+    <h2>Per-tile variants</h2>
+    <p>Each tile is the same shell — ring icon at top, eyebrow label, big value with optional trend arrow, sub line. The variants cover which copy/state lives in the sub-line slot.</p>
+
+    <div class="preview"><img src="img/03-data-section.png" alt="Data section tracker variants from Figma"></div>
+
+    <div class="variants">
+      <ul>
+        <li><strong>With trend & % to goal</strong> — green up-arrow next to the value, "78% of weekly goal" sub line. Default healthy state.</li>
+        <li><strong>Set a goal</strong> — no trend arrow, sub line becomes a link <code>Set a goal →</code>. Used when the user hasn't configured a goal for that metric.</li>
+        <li><strong>No data / not synced</strong> — value reads "—" or empty, sub line reads "Sync to see" or similar.</li>
+        <li><strong>Trending down</strong> — red down-arrow, "X% below your average" — used for metrics where a drop matters (sleep, active min).</li>
+        <li><strong>At goal</strong> — solid filled ring icon, sub line "Goal hit 🎯" or similar achievement copy.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Canonical HTML — single tracker tile</h2>
+    <details class="code">
+      <summary>Source — repeat for each metric inside <code>.trackers</code></summary>
+<pre>&lt;div class="tracker"&gt;
+  &lt;div class="tracker__icon"&gt;&lt;span class="fa-icon" aria-hidden="true"&gt;&amp;#xf554;&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="eyebrow tracker__label"&gt;Steps&lt;/div&gt;
+  &lt;div class="heading-6 tracker__value"&gt;
+    &lt;span class="arrow fa-icon" aria-hidden="true"&gt;&amp;#xf062;&lt;/span&gt;
+    6,456
+  &lt;/div&gt;
+  &lt;div class="body-3 tracker__meta"&gt;78% of weekly goal&lt;/div&gt;
+  &lt;a class="tracker__link" href="/trackers/steps"&gt;
+    &lt;span class="visually-hidden"&gt;Steps&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;</pre>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Notes</h2>
+    <ul class="notes">
+      <li>Four tiles on desktop, 2×2 grid on mobile (see <a href="05-data-section-small.html">sheet 05</a>).</li>
+      <li>Icon glyphs: steps <code>&amp;#xf554;</code>, sleep <code>&amp;#xf186;</code>, calories <code>&amp;#xf06d;</code>, active min <code>&amp;#xf2f2;</code>.</li>
+      <li>Trend up <code>&amp;#xf062;</code> (green), trend down <code>&amp;#xf063;</code> (red — add the <code>.tracker__trend--down</code> modifier).</li>
+      <li>The whole tile is tappable via the stretched <code>.tracker__link</code> — drill into the per-metric history.</li>
+      <li>If NO trackers have data at all, swap the entire section for the Empty Data variant — see <a href="04-empty-data.html">sheet 04</a>.</li>
+    </ul>
+  </section>
+
+</div>
+</body>
+</html>

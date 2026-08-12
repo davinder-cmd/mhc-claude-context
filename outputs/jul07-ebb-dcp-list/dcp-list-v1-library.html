@@ -1,0 +1,285 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DCP List / All Topics — v1 (Library)</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-2:rgba(34,38,42,0.08);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--green:#3F7A46;--green-tint:#E4EFE0;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:760px;margin:0 0 18px;font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink-3);margin-bottom:8px}
+.cw{display:flex;height:26px;border-radius:7px;overflow:hidden;max-width:520px;font-size:10.5px;font-weight:700;color:#fff;margin:8px 0 4px;border:1px solid var(--line)}
+.cw div{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.cwnote{font-size:11.5px;color:var(--ink-3);margin-bottom:26px}
+.gallery{display:flex;flex-wrap:wrap;gap:30px;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:8px}
+.cap{font-size:12px;color:var(--ink-2);max-width:375px}
+.cap b{color:var(--ink)}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--teal);background:var(--teal-tint);padding:3px 8px;border-radius:6px;margin-bottom:4px}
+.tag.alt{color:var(--amber);background:var(--amber-tint)}
+
+/* phone */
+.phone{width:375px;background:var(--surface);border:9px solid #1c2330;border-radius:38px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:720px;overflow-y:auto;background:var(--surface)}
+.statusbar{display:flex;justify-content:space-between;padding:12px 20px 4px;font-size:12px;font-weight:700;color:var(--ink)}
+.pad{padding:8px 18px 22px}
+
+/* top bars */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:6px 18px 12px}
+.topbar .t{font-size:21px;font-weight:750;letter-spacing:-0.02em}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.greet{font-size:20px;font-weight:750;letter-spacing:-0.01em;padding:4px 18px 12px;line-height:1.2}
+
+/* rewards */
+.rwd-slim{display:flex;align-items:center;gap:10px;margin:0 18px 16px;padding:9px 13px;border:1px solid var(--line);border-radius:11px;font-size:12.5px;color:var(--ink-2)}
+.rwd-slim .g{width:26px;height:26px;border-radius:7px;background:var(--amber-tint);display:flex;align-items:center;justify-content:center;font-size:14px}
+.rwd-slim b{color:var(--ink)}
+.rwd-slim .chev{margin-left:auto;color:var(--ink-3)}
+.rwd-full{margin:0 18px 18px;padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(180deg,#fff, #FBF7EE)}
+.rwd-full .row1{display:flex;align-items:center;gap:10px}
+.rwd-full .g{width:34px;height:34px;border-radius:9px;background:var(--amber-tint);display:flex;align-items:center;justify-content:center;font-size:17px}
+.rwd-full .h{font-weight:700;font-size:14px}
+.rwd-full .s{font-size:12px;color:var(--ink-2)}
+.rwd-full .meter{height:7px;border-radius:5px;background:var(--line-2);margin:11px 0 5px;overflow:hidden}
+.rwd-full .meter i{display:block;height:100%;width:40%;background:var(--teal)}
+.rwd-full .mlabel{font-size:11.5px;color:var(--ink-3)}
+
+.sec{font-size:11.5px;font-weight:700;letter-spacing:0.08em;color:var(--ink-3);margin:6px 18px 8px}
+
+/* card */
+.card{margin:0 18px 12px;border:1px solid var(--line);border-radius:15px;padding:14px 15px;background:var(--surface)}
+.card.hero{border-color:var(--teal-tint);box-shadow:0 10px 26px -20px rgba(14,74,86,.5)}
+.card .head{display:flex;gap:12px}
+.card .body{flex:1;min-width:0}
+.card .ttl{font-size:16.5px;font-weight:700;letter-spacing:-0.01em}
+.card .desc{font-size:12.5px;color:var(--ink-2);margin:1px 0 8px}
+.card .cad{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--ink)}
+.dot{width:15px;height:15px;border-radius:50%;border:2px solid var(--teal);flex:none;position:relative}
+.dot.done{border-color:var(--green);background:var(--green)}
+.dot.pause{border-color:var(--amber)}
+.thumb{width:62px;height:62px;border-radius:13px;flex:none;background:var(--teal-tint)}
+.thumb.a{background:linear-gradient(135deg,#DDE9EA,#Bcdcdc)}
+.thumb.b{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}
+.thumb.c{background:linear-gradient(135deg,#E6EDE2,#C4D8BC)}
+.thumb.d{background:linear-gradient(135deg,#E3E7EC,#C3CEDA)}
+.pbar{height:7px;border-radius:5px;background:var(--line-2);margin:11px 0 6px;overflow:hidden}
+.pbar i{display:block;height:100%;background:var(--teal)}
+.pbar.pause i{background:var(--amber)}
+.pbar.done i{background:var(--green);width:100%!important}
+.cadnote{font-size:12px;color:var(--ink-2)}
+.hint{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--green);background:var(--green-tint);padding:3px 9px;border-radius:20px;margin-top:9px}
+.hint.amber{color:var(--amber);background:var(--amber-tint)}
+.hint.neutral{color:var(--teal-2);background:var(--teal-tint)}
+.cta{margin-top:11px;display:block;text-align:center;font-weight:700;font-size:14px;color:#fff;background:var(--teal);border-radius:10px;padding:10px}
+.cta.ghost{color:var(--teal-2);background:transparent;border:1px solid var(--line-strong,rgba(34,38,42,.22))}
+
+/* browse + completed */
+.browse{display:flex;align-items:center;gap:12px;margin:2px 18px 14px;padding:14px 15px;border:1px dashed var(--line-strong,rgba(34,38,42,.22));border-radius:14px;background:transparent}
+.browse .gi{width:34px;height:34px;border-radius:9px;background:rgba(34,38,42,.06);display:flex;align-items:center;justify-content:center;font-size:15px}
+.browse .h{font-weight:700;font-size:14px}
+.browse .s{font-size:12px;color:var(--ink-2)}
+.browse .chev{margin-left:auto;color:var(--ink-3)}
+.arch{margin:2px 18px 14px;border-top:1px solid var(--line);padding-top:12px}
+.arch .hd{display:flex;align-items:center;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink-2);text-transform:uppercase}
+.arch .hd .chev{margin-left:auto;color:var(--ink-3)}
+.arch .item{display:flex;align-items:center;gap:10px;font-size:13px;margin-top:10px;color:var(--ink)}
+.arch .item .m{width:22px;height:22px;border-radius:6px;background:var(--green-tint);display:flex;align-items:center;justify-content:center;color:var(--green);font-size:12px;flex:none}
+.arch .item .pr{margin-left:auto;font-size:12px;color:var(--teal-2);font-weight:600}
+
+/* bottom nav */
+.bnav{display:flex;justify-content:space-around;padding:9px 6px 12px;border-top:1px solid var(--line);background:var(--surface);position:sticky;bottom:0}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-decoration:none}
+.bnav a.on{color:var(--teal-2);font-weight:700}
+.bnav .ic{font-size:17px}
+
+/* web */
+.web{flex:1;min-width:640px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#F4F5F6;box-shadow:0 24px 60px -34px rgba(14,74,86,.5)}
+.chrome{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#ECEDEE;border-bottom:1px solid var(--line)}
+.chrome .d{width:11px;height:11px;border-radius:50%;background:#cfcfcf}
+.chrome .url{margin-left:14px;font-size:11.5px;color:var(--ink-3);background:#fff;border-radius:20px;padding:4px 14px}
+.weblayout{display:flex;min-height:560px}
+.side{width:210px;background:#fff;border-right:1px solid var(--line);padding:18px 14px;flex:none}
+.brand{display:flex;align-items:center;gap:9px;font-weight:750;font-size:15px;margin-bottom:2px}
+.brand .l{width:26px;height:26px;border-radius:7px;background:var(--teal)}
+.brandsub{font-size:11px;color:var(--ink-3);margin:0 0 18px 35px}
+.navitem{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:13.5px;color:var(--ink-2);margin-bottom:3px}
+.navitem.on{background:var(--teal-tint);color:var(--teal);font-weight:700}
+.navitem .ic{font-size:15px}
+.main{flex:1;padding:24px 26px;overflow-y:auto;max-height:600px}
+.webtitle{font-size:22px;font-weight:750;letter-spacing:-0.01em;margin:0 0 14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid2 .card,.grid2 .browse{margin:0}
+.webfull{margin-top:12px}
+.note{background:var(--teal-tint);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:10px 14px;font-size:12.5px;color:var(--ink);margin:8px 18px 0}
+.delta{font-size:11.5px;color:var(--amber);font-weight:700;background:var(--amber-tint);border-radius:6px;padding:2px 8px;display:inline-block}
+</style></head><body>
+<div class="page">
+<h1>DCP List / All Topics — v1 · Library</h1>
+<p class="sub">The care-path <b>library</b> (2nd bottom-nav tab). Resume-first: leads with the member's 1–3 active paths, a single quiet browse entry, and a demoted Completed archive. <b>Pace, not speed</b> — cards show <b>cadence</b> ("Session 6 · 3 weeks in") and an outcome hint, never "N sessions to your reward"; the $100 lives only in the rewards strip. Frames: mobile library · empty/new state · front-door variant · web (wide).</p>
+
+<div class="cw">
+<div style="width:60%;background:#C9BfA8;color:#3a352b">60% · warm neutrals (ground / surface)</div>
+<div style="width:28%;background:#3a4047">28% · graphite ink</div>
+<div style="width:9%;background:#0E4A56">9% teal</div>
+<div style="width:3%;background:#8A5A12">3%</div>
+</div>
+<div class="cwnote">Warm neutrals carry the page; graphite ink for text/structure; teal reserved for primary action + progress; amber only for caution/paused. Money framing is contained, not spread.</div>
+
+<div class="gallery">
+
+<!-- FRAME 1: mobile library, returning member -->
+<div class="col">
+<span class="tag">Mobile 375 · Library · returning member</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="topbar"><span class="t">Digital Care</span><span class="avatar">A</span></div>
+<div class="rwd-slim"><span class="g">🎁</span><span>Care Path Rewards · <b>$200 of $500</b> this year</span><span class="chev">›</span></div>
+
+<div class="sec">CONTINUE</div>
+
+<div class="card hero"><div class="head"><div class="body">
+<div class="ttl">Managing Anxiety</div>
+<div class="desc">CBT tools for everyday anxiety</div>
+<div class="cad"><span class="dot"></span> Session 6 · 3 weeks in</div>
+</div><div class="thumb a"></div></div>
+<div class="pbar"><i style="width:60%"></i></div>
+<div class="cadnote">A steady rhythm — 2 sessions most weeks.</div>
+<span class="hint">↗ Feeling better since you started</span>
+<span class="cta">Continue</span>
+</div>
+
+<div class="card"><div class="head"><div class="body">
+<div class="ttl">Weight Management</div>
+<div class="desc">Build a healthy routine</div>
+<div class="cad"><span class="dot pause"></span> Session 4 · paused 2 weeks</div>
+</div><div class="thumb b"></div></div>
+<div class="pbar pause"><i style="width:40%"></i></div>
+<div class="cadnote">No rush — pick back up whenever you're ready.</div>
+<span class="hint amber">⏸ Paused</span>
+<span class="cta ghost">Resume</span>
+</div>
+
+<div class="browse"><span class="gi">▦</span><div><div class="h">Browse all care paths</div><div class="s">See every path, grouped by area</div></div><span class="chev">›</span></div>
+
+<div class="arch">
+<div class="hd">Completed · 2<span class="chev">⌄</span></div>
+<div class="item"><span class="m">✓</span> Lower Back Care <span class="pr">Past runs ›</span></div>
+<div class="item"><span class="m">✓</span> Knee Care <span class="pr">Past runs ›</span></div>
+</div>
+<div style="height:6px"></div>
+<div class="bnav">
+<a><span class="ic">⌂</span>Home</a>
+<a class="on"><span class="ic">♡</span>Digital Care</a>
+<a><span class="ic">❦</span>Wellbeing</a>
+<a><span class="ic">▤</span>Benefits</a>
+<a><span class="ic">☆</span>Rewards</a>
+</div>
+</div></div>
+<div class="cap"><b>The default view.</b> Continue leads; the promoted path is the hero card. Cadence + "feeling better" (outcome), not a countdown to $100. One browse door. Completed collapsed to a tail archive. Reward context lives in the slim strip only.</div>
+</div>
+
+<!-- FRAME 2: mobile library, empty / new member -->
+<div class="col">
+<span class="tag">Mobile 375 · Library · new / empty</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="topbar"><span class="t">Digital Care</span><span class="avatar">A</span></div>
+<div class="rwd-slim"><span class="g">🎁</span><span>Enrolled · <b>earn $100</b> per path you finish</span><span class="chev">›</span></div>
+
+<div class="sec">RECOMMENDED FOR YOU</div>
+<div class="card hero"><div class="head"><div class="body">
+<div class="ttl">Treating Insomnia</div>
+<div class="desc">Sleep &amp; CBT-I fundamentals</div>
+<div class="cad"><span class="dot" style="border-color:var(--ink-3)"></span> Not started</div>
+</div><div class="thumb d"></div></div>
+<span class="hint neutral">Based on your interests</span>
+<span class="cta">Start this path</span>
+</div>
+<div class="card"><div class="head"><div class="body">
+<div class="ttl">Managing Depression</div>
+<div class="desc">Understand and manage symptoms</div>
+<div class="cad"><span class="dot" style="border-color:var(--ink-3)"></span> Not started</div>
+</div><div class="thumb a"></div></div>
+<span class="cta ghost">Explore this path</span>
+</div>
+
+<div class="browse"><span class="gi">▦</span><div><div class="h">Browse all care paths</div><div class="s">See every path, grouped by area</div></div><span class="chev">›</span></div>
+<div class="note">Empty Continue → Discover leads (a short recommended set). Same page, state-adaptive — no empty "Continue" header staring back.</div>
+<div style="height:14px"></div>
+<div class="bnav">
+<a><span class="ic">⌂</span>Home</a>
+<a class="on"><span class="ic">♡</span>Digital Care</a>
+<a><span class="ic">❦</span>Wellbeing</a>
+<a><span class="ic">▤</span>Benefits</a>
+<a><span class="ic">☆</span>Rewards</a>
+</div>
+</div></div>
+<div class="cap"><b>Serves Lane B.</b> A member with no active path (browse on-ramp) lands on a short ranked set + the browse door — not a wall of 14.</div>
+</div>
+
+<!-- FRAME 3: front-door variant -->
+<div class="col">
+<span class="tag alt">Mobile 375 · Front-door variant</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="greet">Hi Alex — keep your momentum going.</div>
+<div class="rwd-full"><div class="row1"><span class="g">🎁</span><div><div class="h">Care Path Rewards</div><div class="s">Enrolled · earn up to $100 per path you finish</div></div></div>
+<div class="meter"><i></i></div><div class="mlabel">$200 of $500 this year</div></div>
+
+<div class="sec">PICK UP WHERE YOU LEFT OFF</div>
+<div class="card hero"><div class="head"><div class="body">
+<div class="ttl">Managing Anxiety</div>
+<div class="desc">CBT tools for everyday anxiety</div>
+<div class="cad"><span class="dot"></span> Session 6 · 3 weeks in</div>
+</div><div class="thumb a"></div></div>
+<div class="pbar"><i style="width:60%"></i></div>
+<span class="hint">↗ Feeling better since you started</span>
+<span class="cta">Continue</span>
+</div>
+<div class="browse"><span class="gi">▦</span><div><div class="h">Browse all care paths</div><div class="s">See every path, grouped by area</div></div><span class="chev">›</span></div>
+<div style="height:14px"></div>
+<div class="bnav">
+<a class="on"><span class="ic">⌂</span>Home</a>
+<a><span class="ic">♡</span>Digital Care</a>
+<a><span class="ic">❦</span>Wellbeing</a>
+<a><span class="ic">▤</span>Benefits</a>
+<a><span class="ic">☆</span>Rewards</a>
+</div>
+</div></div>
+<div class="cap"><span class="delta">DELTA vs library</span> Same body — but a <b>greeting</b>, the <b>full rewards banner</b>, and an <b>elevated next-action</b> up top (no Home to carry the loop). Used for DCP-Only configs that launch here. This is the treatment your current screens use.</div>
+</div>
+
+</div><!-- /gallery mobile row -->
+
+<div style="height:34px"></div>
+
+<!-- FRAME 4: web wide -->
+<span class="tag">Web · wide ~1440 (shown scaled) · Library</span>
+<div class="web" style="margin-top:8px">
+<div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care</span></div>
+<div class="weblayout">
+<div class="side">
+<div class="brand"><span class="l"></span> mobilehealth</div>
+<div class="brandsub">Digital Care</div>
+<div class="navitem"><span class="ic">⌂</span> Home</div>
+<div class="navitem on"><span class="ic">♡</span> Digital Care</div>
+<div class="navitem"><span class="ic">❦</span> Wellbeing</div>
+<div class="navitem"><span class="ic">▤</span> Benefits</div>
+<div class="navitem"><span class="ic">☆</span> Rewards</div>
+</div>
+<div class="main">
+<div class="webtitle">Digital Care Paths</div>
+<div class="rwd-slim" style="margin:0 0 18px"><span class="g">🎁</span><span>Care Path Rewards · <b>$200 of $500</b> this year</span><span class="chev">›</span></div>
+<div class="sec" style="margin:0 0 10px">CONTINUE</div>
+<div class="grid2">
+<div class="card hero"><div class="head"><div class="body"><div class="ttl">Managing Anxiety</div><div class="desc">CBT tools for everyday anxiety</div><div class="cad"><span class="dot"></span> Session 6 · 3 weeks in</div></div><div class="thumb a"></div></div><div class="pbar"><i style="width:60%"></i></div><span class="hint">↗ Feeling better since you started</span><span class="cta">Continue</span></div>
+<div class="card"><div class="head"><div class="body"><div class="ttl">Weight Management</div><div class="desc">Build a healthy routine</div><div class="cad"><span class="dot pause"></span> Session 4 · paused 2 weeks</div></div><div class="thumb b"></div></div><div class="pbar pause"><i style="width:40%"></i></div><span class="hint amber">⏸ Paused</span><span class="cta ghost">Resume</span></div>
+</div>
+<div class="browse webfull"><span class="gi">▦</span><div><div class="h">Browse all care paths</div><div class="s">See every path, grouped by area</div></div><span class="chev">›</span></div>
+<div class="arch" style="margin:14px 0 0"><div class="hd">Completed · 2<span class="chev">⌄</span></div><div class="item"><span class="m">✓</span> Lower Back Care <span class="pr">Past runs ›</span></div><div class="item"><span class="m">✓</span> Knee Care <span class="pr">Past runs ›</span></div></div>
+</div>
+</div>
+</div>
+<div class="cap" style="max-width:760px;margin-top:8px"><b>Web (library).</b> 2-column Continue grid (kept from the current design — it reads well), left-sidebar nav, <b>slim title, no greeting</b> — the library difference vs. the front-door screens. Wide (~1440) may shift to top-nav per the standing content-width direction.</div>
+
+</div>
+</body></html>

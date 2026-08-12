@@ -1,0 +1,158 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DCP List — responsive (placement B)</title>
+<style>
+:root{--ground:#F1EEE9;--surface:#FFFFFF;--warm:#F7F3EC;--ink:#1F2328;--ink-2:#565C62;--ink-3:#8b9096;--line:rgba(31,35,40,0.10);--line-2:rgba(31,35,40,0.06);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E4EDED;--amber:#8A5A12;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5}
+.page{max-width:1320px;margin:0 auto;padding:32px 28px 90px}
+h1{font-size:26px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+.sub{color:var(--ink-2);max-width:800px;margin:0 0 16px;font-size:14px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:var(--teal);background:var(--teal-tint);padding:4px 10px;border-radius:6px;margin:26px 0 10px}
+.cap{font-size:12.5px;color:var(--ink-2);max-width:900px;margin-top:8px}
+.cap b{color:var(--ink)}
+
+/* shared bits */
+.sec{font-size:12px;font-weight:750;color:var(--ink)}
+.seeall{font-size:12px;font-weight:700;color:var(--teal-2)}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:none}
+/* progress banner (placement B) */
+.banner{background:var(--surface);border-radius:20px;padding:18px;box-shadow:0 12px 34px -26px rgba(14,74,86,.45)}
+.banner .bt{font-size:14px;font-weight:750}.banner .bs{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.trackwrap{position:relative;height:16px;margin:14px 0 4px}
+.track{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:7px;border-radius:5px;background:#EAE3D6}
+.trackfill{position:absolute;left:0;top:50%;transform:translateY(-50%);height:7px;border-radius:5px;background:var(--teal)}
+.node{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);background:#fff;border:3px solid #D6CDBB;box-shadow:0 0 0 2px var(--surface)}
+.node.on{background:var(--teal);border-color:var(--teal)}
+.blabels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-top:8px}.blabels b{color:var(--ink)}
+.thumb{border-radius:14px;flex:none}
+.a{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}.b{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}.c{background:linear-gradient(135deg,#E7EFE2,#Bcd6B8)}
+.st{font-weight:650}.ss{color:var(--ink-3);margin-top:2px}.ss.pause{color:var(--amber)}
+.chev{margin-left:auto;color:var(--ink-3);font-size:16px}
+.go{font-size:13px;font-weight:700;color:#fff;background:var(--teal);border-radius:10px;padding:9px 16px;white-space:nowrap}
+.rail{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}
+.ltile{flex:none}.ltimg{border-radius:14px;display:flex;align-items:center;justify-content:center}
+.lt1{background:linear-gradient(135deg,#E7E1F0,#CFC3E4)}.lt2{background:linear-gradient(135deg,#F0E6CF,#E7C98E)}.lt3{background:linear-gradient(135deg,#E3EEEF,#Abd0d1)}.lt4{background:linear-gradient(135deg,#F1DED8,#E3B3A3)}
+
+/* ===== MOBILE 375 ===== */
+.phone{width:390px;background:var(--warm);border:9px solid #1c2330;border-radius:42px;overflow:hidden;box-shadow:0 24px 60px -30px rgba(14,74,86,.5)}
+.scr{height:730px;overflow-y:auto}
+.statusbar{display:flex;justify-content:space-between;padding:13px 22px 2px;font-size:12px;font-weight:700}
+.mtop{display:flex;align-items:center;justify-content:space-between;padding:10px 20px 10px}
+.mtop .t{font-size:23px;font-weight:750;letter-spacing:-0.02em}
+.m-pad{padding:0 18px}
+.m-banner{margin-bottom:18px}
+.m-sec{display:flex;justify-content:space-between;align-items:baseline;margin:6px 2px 11px}
+.mcard{background:var(--surface);border-radius:18px;padding:14px;display:flex;align-items:center;gap:13px;margin-bottom:11px;box-shadow:0 10px 28px -26px rgba(14,74,86,.4)}
+.mcard .thumb{width:48px;height:48px}
+.mcard .st{font-size:15.5px}.mcard .ss{font-size:12px}
+.rail .ltimg.m{width:120px;height:84px;font-size:25px}
+.rail .lttitle{font-size:12px;font-weight:650;margin-top:6px}
+.bnav{display:flex;justify-content:space-around;padding:9px 6px 13px;border-top:1px solid var(--line);background:var(--warm);position:sticky;bottom:0;margin-top:14px}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-decoration:none}.bnav a.on{color:var(--teal-2);font-weight:700}.bnav .ic{font-size:17px}
+
+/* ===== browser chrome (desktop + wide) ===== */
+.win{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#F5F3EE;box-shadow:0 24px 60px -34px rgba(14,74,86,.5)}
+.chrome{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#ECEAE4;border-bottom:1px solid var(--line)}
+.chrome .d{width:11px;height:11px;border-radius:50%;background:#cfcfcf}
+.chrome .url{margin-left:14px;font-size:11.5px;color:var(--ink-3);background:#fff;border-radius:20px;padding:4px 14px}
+
+/* desktop ~1024 : side nav, medium images */
+.dwrap{display:flex;min-height:540px}
+.side{width:210px;background:#fff;border-right:1px solid var(--line);padding:18px 14px;flex:none}
+.brand{display:flex;align-items:center;gap:9px;font-weight:750;font-size:15px;margin-bottom:18px}.brand .l{width:26px;height:26px;border-radius:7px;background:var(--teal)}
+.navitem{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:9px;font-size:13.5px;color:var(--ink-2);margin-bottom:3px}.navitem.on{background:var(--teal-tint);color:var(--teal);font-weight:700}
+.dmain{flex:1;padding:24px 28px}
+.dtitle{font-size:22px;font-weight:750;margin:0 0 14px}
+.d-sec{display:flex;justify-content:space-between;align-items:baseline;margin:18px 0 11px}
+.dcard{background:var(--surface);border-radius:16px;padding:14px;display:flex;align-items:center;gap:15px;margin-bottom:11px;box-shadow:0 10px 28px -26px rgba(14,74,86,.4)}
+.dcard .thumb{width:76px;height:76px;border-radius:16px}
+.dcard .st{font-size:16px}.dcard .ss{font-size:12.5px}
+.rail .ltimg.d{width:150px;height:100px;font-size:28px}.rail .lttitle{font-size:12.5px;font-weight:650;margin-top:6px}
+
+/* wide ~1440 : top nav, IMAGE-FORWARD cards, 2-col */
+.topnav{display:flex;align-items:center;gap:26px;padding:14px 30px;background:#fff;border-bottom:1px solid var(--line)}
+.topnav .brand{margin:0}
+.topnav .tn{font-size:14px;color:var(--ink-2)}.topnav .tn.on{color:var(--teal);font-weight:700}
+.topnav .avatar{margin-left:auto}
+.wmain{padding:26px 40px;max-width:1180px;margin:0 auto}
+.wtitle{font-size:24px;font-weight:750;margin:0 0 16px}
+.w-sec{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 12px}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.wcard{background:var(--surface);border-radius:18px;overflow:hidden;display:flex;box-shadow:0 12px 32px -26px rgba(14,74,86,.45)}
+.wcard .img{width:150px;flex:none;align-self:stretch}
+.wcard .wbody{padding:16px 18px;flex:1;min-width:0;display:flex;flex-direction:column}
+.wcard .st{font-size:17px}.wcard .ss{font-size:13px;margin-top:2px}
+.wcard .foot{margin-top:auto;padding-top:12px;display:flex;align-items:center}
+.rail .ltimg.w{width:190px;height:120px;font-size:30px}.rail .lttitle{font-size:13px;font-weight:650;margin-top:7px}
+</style></head><body>
+<div class="page">
+<h1>DCP List — responsive · placement B (top progress banner)</h1>
+<p class="sub">The picked placement — one progress banner up top (faint track + milestone dots, paths + $ toward cap) — shown across the three breakpoints. The <b>in-progress card grows an image as the viewport widens</b>: a small thumb on mobile → a medium image on desktop → a prominent image-forward card on wide.</p>
+
+<!-- MOBILE -->
+<span class="tag">Compact · 375</span>
+<div class="phone"><div class="scr">
+<div class="statusbar"><span>9:41</span><span>▵ ▮</span></div>
+<div class="mtop"><span class="t">Digital Care</span><span class="avatar">A</span></div>
+<div class="m-pad">
+  <div class="banner m-banner">
+    <div class="bt">Your care this year</div><div class="bs">3 in progress · 2 completed</div>
+    <div class="trackwrap"><div class="track"></div><div class="trackfill" style="width:44%"></div><div class="node on" style="left:3%"></div><div class="node on" style="left:44%"></div><div class="node" style="left:72%"></div><div class="node" style="left:97%"></div></div>
+    <div class="blabels"><span><b>$200</b> earned</span><span>$500 / year</span></div>
+  </div>
+  <div class="m-sec"><span class="sec">Continue</span></div>
+  <div class="mcard"><div class="thumb a"></div><div><div class="st">Managing Anxiety</div><div class="ss">Session 6 of 10 · 3 weeks in</div></div><span class="chev">›</span></div>
+  <div class="mcard"><div class="thumb b"></div><div><div class="st">Weight Management</div><div class="ss pause">Session 4 of 10 · paused</div></div><span class="chev">›</span></div>
+  <div class="mcard"><div class="thumb c"></div><div><div class="st">Managing Depression</div><div class="ss">Session 3 of 7</div></div><span class="chev">›</span></div>
+  <div class="m-sec" style="margin-top:14px"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+  <div class="rail">
+    <div class="ltile"><div class="ltimg m lt1">🌙</div><div class="lttitle">Treating Insomnia</div></div>
+    <div class="ltile"><div class="ltimg m lt3">🫁</div><div class="lttitle">Quitting Smoking</div></div>
+    <div class="ltile"><div class="ltimg m lt4">❤️</div><div class="lttitle">Heart Health</div></div>
+  </div>
+</div>
+<div class="bnav"><a><span class="ic">⌂</span>Home</a><a class="on"><span class="ic">♡</span>Digital Care</a><a><span class="ic">❦</span>Wellbeing</a><a><span class="ic">▤</span>Benefits</a><a><span class="ic">☆</span>Rewards</a></div>
+</div></div>
+<div class="cap"><b>Compact:</b> small 48px thumb, text status, single column. Banner carries all the progress; cards stay quiet.</div>
+
+<!-- DESKTOP 1024 -->
+<span class="tag">Expanded · ~1024 (side nav)</span>
+<div class="win">
+<div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care</span></div>
+<div class="dwrap">
+<div class="side"><div class="brand"><span class="l"></span> mobilehealth</div><div class="navitem"><span>⌂</span> Home</div><div class="navitem on"><span>♡</span> Digital Care</div><div class="navitem"><span>❦</span> Wellbeing</div><div class="navitem"><span>▤</span> Benefits</div><div class="navitem"><span>☆</span> Rewards</div></div>
+<div class="dmain">
+<div class="dtitle">Digital Care Paths</div>
+<div class="banner"><div class="bt">Your care this year</div><div class="bs">3 in progress · 2 completed</div><div class="trackwrap"><div class="track"></div><div class="trackfill" style="width:44%"></div><div class="node on" style="left:2%"></div><div class="node on" style="left:44%"></div><div class="node" style="left:72%"></div><div class="node" style="left:98%"></div></div><div class="blabels"><span><b>$200</b> earned</span><span>$500 / year</span></div></div>
+<div class="d-sec"><span class="sec">Continue</span></div>
+<div class="dcard"><div class="thumb a"></div><div style="flex:1"><div class="st">Managing Anxiety</div><div class="ss">CBT tools for everyday anxiety · Session 6 of 10</div></div><span class="go">Continue</span></div>
+<div class="dcard"><div class="thumb b"></div><div style="flex:1"><div class="st">Weight Management</div><div class="ss pause">Build a healthy routine · Session 4 of 10 · paused</div></div><span class="go" style="background:transparent;color:var(--teal-2);border:1px solid var(--line)">Resume</span></div>
+<div class="dcard"><div class="thumb c"></div><div style="flex:1"><div class="st">Managing Depression</div><div class="ss">Understand and manage symptoms · Session 3 of 7</div></div><span class="go">Continue</span></div>
+<div class="d-sec"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+<div class="rail"><div class="ltile"><div class="ltimg d lt1">🌙</div><div class="lttitle">Treating Insomnia</div></div><div class="ltile"><div class="ltimg d lt3">🫁</div><div class="lttitle">Quitting Smoking</div></div><div class="ltile"><div class="ltimg d lt4">❤️</div><div class="lttitle">Heart Health</div></div><div class="ltile"><div class="ltimg d lt2">🥗</div><div class="lttitle">Diabetes Prevention</div></div></div>
+</div>
+</div>
+</div>
+<div class="cap"><b>Expanded:</b> side nav (legacy), medium 76px image on each card, descriptor added, explicit Continue button (more room). Same banner.</div>
+
+<!-- WIDE 1440 -->
+<span class="tag">Extra-large · ~1440 (top nav · image-forward cards)</span>
+<div class="win">
+<div class="chrome"><span class="d"></span><span class="d"></span><span class="d"></span><span class="url">app.mobilehealth.com/care</span></div>
+<div class="topnav"><div class="brand"><span class="l"></span> mobilehealth</div><span class="tn">Home</span><span class="tn on">Digital Care</span><span class="tn">Wellbeing</span><span class="tn">Benefits</span><span class="tn">Rewards</span><span class="avatar">A</span></div>
+<div class="wmain">
+<div class="wtitle">Digital Care Paths</div>
+<div class="banner"><div style="display:flex;align-items:center;gap:20px"><div style="flex:1"><div class="bt">Your care this year</div><div class="bs">3 in progress · 2 completed</div><div class="trackwrap"><div class="track"></div><div class="trackfill" style="width:44%"></div><div class="node on" style="left:1%"></div><div class="node on" style="left:44%"></div><div class="node" style="left:72%"></div><div class="node" style="left:99%"></div></div><div class="blabels"><span><b>$200</b> earned</span><span>$500 / year</span></div></div></div></div>
+<div class="w-sec"><span class="sec">Continue</span></div>
+<div class="wgrid">
+  <div class="wcard"><div class="img a"></div><div class="wbody"><div class="st">Managing Anxiety</div><div class="ss">CBT tools for everyday anxiety</div><div class="ss" style="color:var(--ink-2);margin-top:6px">Session 6 of 10 · 3 weeks in</div><div class="foot"><span class="go">Continue</span></div></div></div>
+  <div class="wcard"><div class="img b"></div><div class="wbody"><div class="st">Weight Management</div><div class="ss">Build a healthy routine</div><div class="ss pause" style="margin-top:6px">Session 4 of 10 · paused</div><div class="foot"><span class="go" style="background:transparent;color:var(--teal-2);border:1px solid var(--line)">Resume</span></div></div></div>
+  <div class="wcard"><div class="img c"></div><div class="wbody"><div class="st">Managing Depression</div><div class="ss">Understand and manage symptoms</div><div class="ss" style="color:var(--ink-2);margin-top:6px">Session 3 of 7 · 2 weeks in</div><div class="foot"><span class="go">Continue</span></div></div></div>
+</div>
+<div class="w-sec"><span class="sec">Explore more paths</span><span class="seeall">See all 14 ›</span></div>
+<div class="rail"><div class="ltile"><div class="ltimg w lt1">🌙</div><div class="lttitle">Treating Insomnia</div></div><div class="ltile"><div class="ltimg w lt3">🫁</div><div class="lttitle">Quitting Smoking</div></div><div class="ltile"><div class="ltimg w lt4">❤️</div><div class="lttitle">Heart Health</div></div><div class="ltile"><div class="ltimg w lt2">🥗</div><div class="lttitle">Diabetes Prevention</div></div></div>
+</div>
+</div>
+<div class="cap"><b>Extra-large:</b> top nav (the content-width target), and the cards go <b>image-forward</b> — a full-height image panel per card in a 2-col grid. This is the "add an image to the card" for the large breakpoint. Banner spans full width. Progress stays in the banner; cards earn presence through imagery, not extra progress chrome.</div>
+
+</div>
+</body></html>

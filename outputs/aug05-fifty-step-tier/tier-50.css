@@ -1,0 +1,43 @@
+/* ============================================================
+   MH Colors v2 — proposed 50 tier
+   A step at the perceptual midpoint between white and each 100.
+
+   Method:  L* = (100 + L*of100) / 2
+            C* = 50% of the 100 step's chroma, capped to sRGB gamut
+            EXCEPT Coffee / Cocoa / Mub, which hold C* 3.7 — at
+            proportional chroma they render effectively achromatic
+            and lose the warmth that is the whole point.
+
+   Grey is deliberately absent. Grey 100 is already only dE 1.49
+   from white; a Grey 50 lands at dE 0.95 from white and 0.60 from
+   Grey 100 — both under the just-noticeable difference. It would
+   be a token you cannot see.
+
+   There is no 25 tier. See FIFTY-TIER.md.
+   ============================================================ */
+
+:root {
+  --coffee-50:       #FBF5EF;   /* L* 96.9  C*  3.7  1.082:1  dE-white 4.01 */
+  --cocoa-50:        #FEF7F1;   /* L* 97.6  C*  3.7  1.061:1  dE-white 4.07 */
+  --mub-50:          #FAF7F0;   /* L* 97.7  C*  3.7  1.061:1  dE-white 3.70  — ships today as --bg */
+  --honeydew-50:     #FDFDF5;   /* L* 99.3  C*  4.1  1.022:1  dE-white 3.99 */
+  --lime-50:         #F9FDF6;   /* L* 98.8  C*  3.9  1.029:1  dE-white 4.37 */
+  --green-50:        #F7FCF7;   /* L* 98.4  C*  2.8  1.038:1  dE-white 3.94 */
+  --jade-50:         #F6FCFA;   /* L* 98.4  C*  2.5  1.038:1  dE-white 3.36 */
+  --teal-50:         #F4FDFC;   /* L* 98.5  C*  3.1  1.034:1  dE-white 4.34 */
+  --turquoise-50:    #F4FAFD;   /* L* 98.0  C*  2.4  1.053:1  dE-white 3.07 */
+  --ocean-50:        #F5F8FD;   /* L* 97.6  C*  2.5  1.064:1  dE-white 2.96 */
+  --blue-50:         #F5F7FD;   /* L* 97.2  C*  2.9  1.071:1  dE-white 3.36 */
+  --indigo-50:       #F6F4FD;   /* L* 96.5  C*  4.5  1.089:1  dE-white 5.15 */
+  --purple-50:       #F9F3FC;   /* L* 96.5  C*  5.1  1.091:1  dE-white 6.00 */
+  --violet-50:       #FCF3FA;   /* L* 96.8  C*  4.5  1.086:1  dE-white 6.15 */
+  --pink-50:         #FEF4F7;   /* L* 97.0  C*  3.7  1.077:1  dE-white 5.40 */
+  --coral-50:        #FEF2F2;   /* L* 96.5  C*  4.2  1.094:1  dE-white 5.83 */
+  --ember-50:        #FFF6F3;   /* L* 97.6  C*  3.3  1.064:1  dE-white 4.34 */
+  --orange-50:       #FFF6F0;   /* L* 97.4  C*  4.4  1.066:1  dE-white 4.70  — chroma gamut-capped */
+  --mustard-50:      #FFF9F0;   /* L* 98.0  C*  4.8  1.047:1  dE-white 4.67  — chroma gamut-capped */
+  --yellow-50:       #FFFAF0;   /* L* 98.5  C*  5.3  1.040:1  dE-white 4.88  — chroma gamut-capped */
+  --lemon-50:        #FFFCF1;   /* L* 98.9  C*  5.8  1.027:1  dE-white 5.14  — chroma gamut-capped */
+}
+
+/* Grey 50 — NOT ISSUED. #FBFBFC, dE 0.95 from white. Below JND. */

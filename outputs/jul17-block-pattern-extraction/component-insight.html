@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Insight banner · MHC Component Sheet</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<div class="g-top">
+  <div class="g-top__inner">
+    <a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Sheet</a>
+    <div class="g-top__spacer"></div>
+    <div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div>
+  </div>
+</div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+
+  <header class="g-head">
+    <div class="g-eyebrow">Card · AI banner</div>
+    <h1 class="g-title">Insight banner</h1>
+    <p class="g-lede">A tinted, full-width banner for an AI-generated insight — icon badge, eyebrow label with a dot, body paragraph, optional cooldown meta. State-flag driven: the host attaches the action button (Get insight / Refresh) after the block; the block only exposes which state it's in.</p>
+    <div class="g-tags">
+      <span class="g-tag">.insight</span>
+      <span class="g-tag g-tag--flag">Single-instance</span>
+      <span class="g-tag g-tag--ok">Authorable (action host-injected)</span>
+      <span class="g-tag">4 states</span>
+    </div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Live playground</h2></div>
+    <p class="g-section__note">Drag to resize. Below 600px the icon badge is hidden and the body takes the full width.</p>
+    <div class="g-pg" style="height:260px">
+      <div class="g-pg__hint">↔ Drag the bottom-right corner to resize · live <code>mhc-home.css</code></div>
+      <iframe src="frame-insight.html" title="Insight banner — resizable"></iframe>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Responsive breakpoints</h2></div>
+    <p class="g-section__note">True-width frames, scaled to fit. Icon badge present from tablet up, hidden on Compact.</p>
+    <div class="g-bp-row">
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Compact</span><span class="g-bp__px">375px · no icon</span></div>
+        <div class="g-bp__vp" style="--w:375;--s:1;--h:230"><iframe src="frame-insight.html" title="Insight Compact"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Medium</span><span class="g-bp__px">1024px</span></div>
+        <div class="g-bp__vp" style="--w:1024;--s:.7;--h:180"><iframe src="frame-insight.html" title="Insight Medium"></iframe></div>
+      </div>
+      <div class="g-bp">
+        <div class="g-bp__label"><span class="g-bp__name">Large</span><span class="g-bp__px">1440px · large type</span></div>
+        <div class="g-bp__vp" style="--w:1440;--s:.6;--h:190"><iframe src="frame-insight.html" title="Insight Large"></iframe></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">States</h2></div>
+    <p class="g-section__note">Mutually exclusive and exhaustive. The block renders the content for its state; the host reads the flag and attaches the matching action button.</p>
+    <div class="g-tags">
+      <span class="g-tag"><code>insightsState_ready</code> → host: "Get insight"</span>
+      <span class="g-tag"><code>insightsState_refreshable</code> → host: "Refresh"</span>
+      <span class="g-tag"><code>insightsState_readOnly</code> → no button / cooldown chip</span>
+      <span class="g-tag g-tag--flag"><code>insightsState_hidden</code> → zero markup</span>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">04</span><h2 class="g-section__title">Markup</h2></div>
+    <p class="g-section__note">The whole block wraps in an inverse "hidden" conditional so the suppress case emits nothing. The action button is <strong>not</strong> here — the host injects it into the <code>.insight__action</code> slot from the state flags.</p>
+    <div class="g-code">
+      <div class="g-code__bar">block-4-insights.html <span class="g-code__where">→ CKEditor · tokenised</span></div>
+      <pre>{{^formula.insightsState_hidden}}
+&lt;div class="insight"&gt;
+  &lt;div class="banner-icon banner-icon--insight"&gt;
+    &lt;span class="material-symbols-outlined" aria-hidden="true"&gt;auto_awesome&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="insight__body"&gt;
+    &lt;div class="eyebrow insight__label"&gt;&lt;span class="dot" aria-hidden="true"&gt;&lt;/span&gt;{{formula.copy_insight_eyebrow}}&lt;/div&gt;
+    {{#formula.insightsState_ready}}
+    &lt;p class="paragraph-2"&gt;{{formula.copy_insight_readyPrompt}}&lt;/p&gt;
+    {{/formula.insightsState_ready}}
+    {{#formula.insightsState_refreshable}}
+    &lt;p class="paragraph-2"&gt;{{formula.copy_insight_paragraph}}&lt;/p&gt;
+    {{/formula.insightsState_refreshable}}
+    {{#formula.insightsState_readOnly}}
+    &lt;p class="paragraph-2"&gt;{{formula.copy_insight_paragraph}}&lt;/p&gt;
+    &lt;div class="body-3 ink-soft"&gt;{{formula.copy_insight_cooldownMeta}}&lt;/div&gt;
+    {{/formula.insightsState_readOnly}}
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- HOST INJECTS the action button here (.insight__action slot) --&gt;
+{{/formula.insightsState_hidden}}</pre>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">05</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Shares the banner-icon atom</strong> with the Challenge banner (<code>.banner-icon--insight</code> vs <code>--challenge</code>).<br>
+      • <strong>Single-instance:</strong> the refreshable state is the only one rendered in v81; other states are documented from the block comments, not sourced.<br>
+      • <strong>Action seam:</strong> keep this block in its own file — the host splices the button after it; bundling with a neighbour loses the splice point.
+    </p>
+  </section>
+
+</div>
+</body>
+</html>

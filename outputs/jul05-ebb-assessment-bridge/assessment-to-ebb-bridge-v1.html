@@ -1,0 +1,206 @@
+<title>EBB — The $300 → EBB Bridge</title>
+<style>
+  :root {
+    --ground: #F0ECE3; --band: #E8E2D6; --surface: #FCFBF8;
+    --ink: #22262A; --ink-2: #565C62; --ink-3: #838890;
+    --line: rgba(34,38,42,0.13); --line-strong: rgba(34,38,42,0.22);
+    --teal: #0E4A56; --teal-2: #14636F; --teal-tint: #E0EAEB;
+    --amber: #8A5A12; --amber-mid: #B67D23; --amber-tint: #F4E8D2;
+    --f-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f-sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal-2); }
+
+  header.hero { padding: 58px 0 18px; }
+  .hero h1 { font-size: clamp(28px, 4.2vw, 44px); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 14px 0 0; }
+  .hero .thesis { margin: 16px 0 0; font-size: clamp(15px, 1.8vw, 18px); line-height: 1.5; color: var(--ink-2); max-width: 68ch; }
+  .hero .thesis strong { color: var(--ink); font-weight: 650; }
+
+  section { padding: 26px 0; }
+  .sec-head { margin-bottom: 14px; }
+  .sec-head h2 { font-size: clamp(19px, 2.3vw, 24px); letter-spacing: -0.01em; font-weight: 680; margin: 6px 0 0; }
+  .sec-head p { margin: 8px 0 0; color: var(--ink-2); font-size: 14.5px; max-width: 70ch; }
+  .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+  .stripscroll { overflow-x: auto; padding-bottom: 10px; }
+  .strip { display: flex; align-items: stretch; gap: 12px; min-width: min-content; }
+  .step { width: 288px; flex: none; display: flex; flex-direction: column; gap: 10px; }
+  .step-badge { display: flex; align-items: center; gap: 8px; }
+  .step-badge .n { width: 24px; height: 24px; border-radius: 7px; background: var(--teal); color: #fff; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .step-badge .t { font-size: 13px; font-weight: 700; }
+  .arrow { display: flex; align-items: center; color: var(--teal-2); font-size: 24px; font-weight: 700; flex: none; padding-top: 220px; }
+
+  .phone { width: 288px; border-radius: 36px; background: #000; padding: 9px; }
+  .screen { border-radius: 28px; background: var(--surface); overflow: hidden; min-height: 470px; display: flex; flex-direction: column; }
+  .sbar { display: flex; align-items: center; gap: 8px; padding: 10px 14px 8px; }
+  .sbar.line { border-bottom: 1px solid var(--line); }
+  .sbar .l { font-size: 15px; color: var(--ink-2); width: 18px; }
+  .sbar .ttl { flex: 1; text-align: center; font-size: 13px; font-weight: 700; }
+  .sbar .r { width: 18px; text-align: right; font-size: 13px; }
+  .body { padding: 14px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+
+  /* home $300 card */
+  .money-card { border-radius: 15px; overflow: hidden; border: 1.5px solid var(--teal); box-shadow: 0 8px 20px -13px rgba(14,74,86,0.5); }
+  .money-card .top { background: linear-gradient(120deg, #0e4a56, #1f6f7d); color: #fff; padding: 16px; }
+  .money-card .top .k { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.8; }
+  .money-card .top .big { font-size: 30px; font-weight: 800; margin-top: 2px; }
+  .money-card .top .sm { font-size: 12.5px; opacity: 0.92; margin-top: 2px; }
+  .money-card .bot { background: #fff; padding: 12px 14px; }
+  .money-card .bot .cta { background: var(--teal); color: #fff; border-radius: 10px; padding: 11px; text-align: center; font-size: 13.5px; font-weight: 680; }
+  .faded { opacity: 0.5; border: 1px solid var(--line); border-radius: 13px; padding: 11px 13px; }
+  .faded .k { font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .faded .t { font-size: 13px; font-weight: 650; margin-top: 2px; }
+
+  /* completion */
+  .celebrate { text-align: center; position: relative; padding-top: 14px; }
+  .confetti { position: absolute; inset: 0; pointer-events: none; }
+  .confetti i { position: absolute; border-radius: 2px; opacity: 0.85; }
+  .medal { width: 66px; height: 66px; border-radius: 50%; background: var(--teal); margin: 0 auto; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 30px; box-shadow: 0 0 0 8px rgba(14,74,86,0.1); }
+  .celebrate .kick { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-2); margin-top: 16px; }
+  .celebrate h3 { margin: 6px 0 0; font-size: 22px; font-weight: 760; letter-spacing: -0.02em; }
+  .reward-chip { margin: 14px auto 0; display: inline-flex; align-items: baseline; gap: 8px; background: var(--amber-tint); color: var(--amber); border-radius: 12px; padding: 12px 18px; }
+  .reward-chip .rb { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .reward-chip .rt { font-size: 12.5px; font-weight: 650; }
+  .celebrate p { margin: 12px auto 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; max-width: 30ch; }
+  .btn { background: var(--teal); color: #fff; border: none; border-radius: 11px; padding: 12px; font-size: 13.5px; font-weight: 680; font-family: inherit; text-align: center; }
+  .btn.ghost { background: #fff; color: var(--teal-2); border: 1px solid var(--line-strong); }
+  .spacer { flex: 1; }
+
+  /* earn more bridge */
+  .bridge-hero { background: linear-gradient(180deg, var(--teal-tint), #fff 70%); border: 1px solid var(--teal); border-radius: 15px; padding: 15px; }
+  .bridge-hero .k { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-2); }
+  .bridge-hero h3 { margin: 5px 0 0; font-size: 19px; font-weight: 740; letter-spacing: -0.015em; line-height: 1.15; }
+  .bridge-hero .add { margin: 10px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+  .bridge-hero .add b { color: var(--ink); font-weight: 650; }
+  .rec { display: flex; gap: 11px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 11px; background: #fff; }
+  .rec .ri { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(120deg,#123f52,#2b8b93); flex: none; }
+  .rec .rt { font-size: 13.5px; font-weight: 700; }
+  .rec .rs { font-size: 11.5px; color: var(--ink-2); margin-top: 1px; }
+  .rec .rs .money { color: var(--amber); font-weight: 700; }
+  .riskflag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--amber); background: var(--amber-tint); border-radius: 999px; padding: 4px 9px; align-self: flex-start; }
+
+  .endcap { width: 210px; flex: none; align-self: center; background: var(--surface); border: 1px dashed var(--line-strong); border-radius: 16px; padding: 18px; text-align: center; }
+  .endcap .big { font-size: 15px; font-weight: 720; }
+  .endcap p { margin: 8px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+  .endcap .lnk { margin-top: 10px; font-size: 12px; font-weight: 650; color: var(--teal-2); }
+
+  .caps { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 22px; }
+  @media (max-width: 720px){ .caps { grid-template-columns: 1fr; } }
+  .cap { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px; }
+  .cap .cn { font-size: 11px; font-weight: 700; color: var(--teal-2); }
+  .cap h4 { margin: 3px 0 0; font-size: 13.5px; font-weight: 680; }
+  .cap p { margin: 6px 0 0; font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+  .cap .tag { display: inline-block; margin-top: 8px; font-size: 10px; font-weight: 650; padding: 2px 7px; border-radius: 999px; background: var(--teal-tint); color: var(--teal); }
+
+  footer { padding: 26px 0 60px; }
+  footer .note { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 86ch; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Engagement-Based Billing · The handoff</div>
+    <h1>From the $300 payday into EBB</h1>
+    <p class="thesis">The quick version — skip the assessment guts. A member earns <strong>$300</strong> for completing the health assessment, and we ride that excitement straight into the EBB loop: <strong>"you earned $300 for knowing your health — now earn $100 for improving it."</strong></p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="stripscroll"><div class="strip">
+
+      <!-- 1 HOME -->
+      <div class="step">
+        <div class="step-badge"><span class="n">1</span><span class="t">Home — the $300 hook</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar line"><span class="l">☰</span><span class="ttl">Home</span><span class="r"></span></div>
+          <div class="body">
+            <div class="money-card">
+              <div class="top"><div class="k">Earn</div><div class="big">$300</div><div class="sm">Complete your health assessment · 5 min</div></div>
+              <div class="bot"><div class="cta">Start assessment</div></div>
+            </div>
+            <div class="faded"><div class="k">Just for you</div><div class="t">Wind down before bed · 3-min read</div></div>
+            <div class="faded"><div class="k">Just for you</div><div class="t">Move more this week</div></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <!-- 2 COMPLETION -->
+      <div class="step">
+        <div class="step-badge"><span class="n">2</span><span class="t">Assessment complete</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span class="l"></span><span class="ttl"></span><span class="r">✕</span></div>
+          <div class="body">
+            <div class="celebrate">
+              <div class="confetti" aria-hidden="true">
+                <i style="left:30px;top:6px;width:8px;height:8px;background:var(--amber-mid);transform:rotate(20deg);"></i>
+                <i style="right:34px;top:12px;width:9px;height:9px;border-radius:50%;background:var(--amber-mid);"></i>
+                <i style="left:54px;top:52px;width:6px;height:13px;background:var(--teal-2);"></i>
+                <i style="right:52px;top:58px;width:7px;height:7px;background:var(--teal);transform:rotate(45deg);"></i>
+              </div>
+              <div class="medal">✓</div>
+              <div class="kick">Assessment complete</div>
+              <h3>Nice work!</h3>
+              <div class="reward-chip"><span class="rb">$300</span><span class="rt">reward<br>earned</span></div>
+              <p>Your $300 reward is waiting in the reward center.</p>
+            </div>
+            <div class="spacer"></div>
+            <button class="btn">Continue</button>
+            <button class="btn ghost">View reward center</button>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <!-- 3 EARN MORE BRIDGE -->
+      <div class="step">
+        <div class="step-badge"><span class="n">3</span><span class="t">Want to earn more?</span></div>
+        <div class="phone"><div class="screen">
+          <div class="sbar"><span class="l"></span><span class="ttl"></span><span class="r">✕</span></div>
+          <div class="body">
+            <div class="bridge-hero">
+              <div class="k">You're just getting started</div>
+              <h3>Want to earn even more?</h3>
+              <div class="add">You earned <b>$300 for knowing</b> your health. Now earn <b>$100 for each care path you complete</b> — up to $500 a year.</div>
+            </div>
+            <span class="riskflag">Based on your results · at risk</span>
+            <div class="rec">
+              <span class="ri"></span>
+              <span><span class="rt">Diabetes Prevention</span><span class="rs">9 sessions · <span class="money">Earn $100</span></span></span>
+            </div>
+            <div class="add" style="font-size:12px;color:var(--ink-2);">This could lower your risk — and pay you for finishing.</div>
+            <div class="spacer"></div>
+            <button class="btn">Show me how it works</button>
+            <button class="btn ghost">Maybe later</button>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="arrow">→</div>
+
+      <div class="endcap">
+        <div class="big">Into the EBB flow</div>
+        <p>Recommendation → opt-in → the care path, reward unlocked.</p>
+        <div class="lnk">See enrollment-flow-v1 →</div>
+      </div>
+
+    </div></div>
+
+    <div class="caps">
+      <div class="cap"><div class="cn">Step 1 · Home</div><h4>The $300 hook</h4><p>The assessment is the first card on home: "Earn $300." Big, unmissable — the reason people engage at all. (Existing home components; home out of 9/1 scope.)</p><span class="tag">Existing home card</span></div>
+      <div class="cap"><div class="cn">Step 2 · Complete</div><h4>The payday</h4><p>Confirmation + "$300 earned," visible in the reward center. The emotional peak — and the moment to hand off, before they leave.</p><span class="tag">Peak-End</span></div>
+      <div class="cap"><div class="cn">Step 3 · Earn more</div><h4>The bridge into EBB</h4><p>Additive framing ($300 to <i>know</i> → $100 to <i>do</i>), a risk-grounded recommendation ("at risk → this path"), then into the EBB flow. Dismissible ("Maybe later" → the home banner keeps offering).</p><span class="tag">Additive escalation</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="note"><b>The $300 → EBB bridge (v1).</b> Home ($300 hook) → assessment-complete ($300 earned, reward center) → "want to earn more?" (additive $100/path framing + risk-grounded recommendation) → hands into the EBB enrollment flow (`outputs/jul05-ebb-enrollment-flow/`). Assessment guts intentionally skipped. Open: exact $300 reward type/placement; whether the "earn more" prompt is its own screen or rides the completion screen.</p>
+  </div>
+</footer>

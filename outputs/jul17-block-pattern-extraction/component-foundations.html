@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundations · MHC Component Kit</title>
+  <link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<div class="g-top"><div class="g-top__inner"><a class="g-brand" href="index.html"><span class="g-brand__dot"></span> MHC Component Kit</a><div class="g-top__spacer"></div><div class="g-top__meta">Built on <code>mhc-home.css</code> (v81, locked)</div></div></div>
+
+<div class="g-wrap">
+  <a class="g-back" href="index.html">← All components</a>
+  <header class="g-head">
+    <div class="g-eyebrow">Foundations · M3 Styles</div>
+    <h1 class="g-title">Tokens &amp; type scale</h1>
+    <p class="g-lede">The variables every component references — colour, spacing, radius — plus the 24-class type scale. This is why pages stay consistent: nothing hand-sets a size or colour. <strong>Theming and token rework are deferred</strong>; the kit uses these values as-is for now.</p>
+    <div class="g-tags"><span class="g-tag">:root tokens</span><span class="g-tag">24 type classes</span><span class="g-tag g-tag--flag">theming deferred</span></div>
+  </header>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">01</span><h2 class="g-section__title">Tokens &amp; type — live</h2></div>
+    <p class="g-section__note">Colour swatches, spacing/radius scales, and every type class. Drag past 1200px to watch the type scale jump to its large tier (Title 1 / Body 1 / Paragraph 1 flip to the Display family at 20sp).</p>
+    <div class="g-pg" style="height:700px"><div class="g-pg__hint">↔ Drag past 1200 to see the large type tier · live <code>mhc-home.css</code></div><iframe src="frame-foundations.html" title="Foundations — resizable"></iframe></div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">02</span><h2 class="g-section__title">Type scale — both tiers</h2></div>
+    <p class="g-section__note">Compact and Medium share the smaller tier; Large (≥1200) bumps up. Compare the two frames.</p>
+    <div class="g-bp-row">
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Small tier</span><span class="g-bp__px">≤1199px</span></div><div class="g-bp__vp" style="--w:760;--s:.62;--h:1180"><iframe src="frame-foundations.html" title="Type small tier"></iframe></div></div>
+      <div class="g-bp"><div class="g-bp__label"><span class="g-bp__name">Large tier</span><span class="g-bp__px">≥1200px</span></div><div class="g-bp__vp" style="--w:1280;--s:.5;--h:1320"><iframe src="frame-foundations.html" title="Type large tier"></iframe></div></div>
+    </div>
+  </section>
+
+  <section class="g-section">
+    <div class="g-section__head"><span class="g-section__num">03</span><h2 class="g-section__title">Notes &amp; flags</h2></div>
+    <p class="g-section__note">
+      • <strong>Type families</strong> follow Apple's 20pt optical rule: &lt;20sp uses SF Pro Text, ≥20sp uses SF Pro Display. Classes that reach 20sp at ≥1200 flip family automatically.<br>
+      • <strong>Warmth rule:</strong> warm beige lives only on backgrounds (<code>--bg</code>, <code>--surface-tinted</code>); text and borders use near-neutral graphite (<code>--ink</code>, <code>--hairline</code>), never brown.<br>
+      • <strong>Deferred:</strong> theming and any token restructure. Treat these values as fixed for now; components bind to the token names, so a later theme swap is a values-only change.
+    </p>
+  </section>
+</div>
+</body>
+</html>
