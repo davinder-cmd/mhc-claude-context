@@ -1,0 +1,221 @@
+/* ============================================================
+   MobileHealth — Colors & Typography tokens
+   Source: MHC Brand Guidelines v1.2 (2021)
+   ============================================================ */
+
+/* Raleway — primary brand typeface (self-hosted). Helvetica — system fallback. */
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-Thin.ttf') format('truetype');             font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-ThinItalic.ttf') format('truetype');       font-weight: 100; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-ExtraLight.ttf') format('truetype');       font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-ExtraLightItalic.ttf') format('truetype'); font-weight: 200; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-Light.ttf') format('truetype');            font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-LightItalic.ttf') format('truetype');      font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-Regular.ttf') format('truetype');          font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-Italic.ttf') format('truetype');           font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-Medium.ttf') format('truetype');           font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-MediumItalic.ttf') format('truetype');     font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-SemiBold.ttf') format('truetype');         font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-SemiBoldItalic.ttf') format('truetype');   font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-Bold.ttf') format('truetype');             font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-BoldItalic.ttf') format('truetype');       font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-ExtraBold.ttf') format('truetype');        font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-ExtraBoldItalic.ttf') format('truetype');  font-weight: 800; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-Black.ttf') format('truetype');            font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Raleway'; src: url('fonts/Raleway-BlackItalic.ttf') format('truetype');      font-weight: 900; font-style: italic; font-display: swap; }
+
+:root {
+  /* ---------- PRIMARY ---------- */
+  --mh-brand-blue:      #0f497f;   /* Primary. App icon, hero moments. Guardian / trust. */
+
+  /* ---------- SECONDARY ---------- */
+  --mh-aqua-blue:       #04a0b7;   /* Headlines, CTAs, graphic accents */
+  --mh-spring-green:    #52a045;   /* Headlines, CTAs, graphic accents */
+  --mh-lava-orange:     #f15922;   /* Headlines, CTAs, graphic accents */
+
+  --mh-night-sky:       #062a42;   /* Dark bg, dark illustration anchors */
+  --mh-cloud:           #e6ebec;   /* Light neutral bg */
+  --mh-silver:          #c6cccd;   /* Mid neutral bg, dividers */
+  --mh-slate:           #6e7a7d;   /* Body text on light, muted UI */
+  --mh-charcoal:        #373d3f;   /* Primary text on light */
+
+  /* ---------- TERTIARY ---------- */
+  --mh-glacier:         #d2e5e1;
+  --mh-zesty-green:     #c4d939;
+  --mh-mango:           #f3b31e;
+  --mh-sky-blue:        #92d5da;
+  --mh-lime-green:      #90c73e;
+  --mh-tangerine:       #f6851f;
+
+  /* ---------- SEMANTIC: foreground ---------- */
+  --mh-fg-1:            var(--mh-charcoal);   /* primary text */
+  --mh-fg-2:            var(--mh-slate);      /* secondary text */
+  --mh-fg-brand:        var(--mh-brand-blue); /* brand-tinted text, links */
+  --mh-fg-accent:       var(--mh-lava-orange);/* orange subhead / accent */
+  --mh-fg-on-dark:      #ffffff;
+
+  /* ---------- SEMANTIC: background ---------- */
+  --mh-bg-surface:      #ffffff;              /* default paper */
+  --mh-bg-muted:        var(--mh-cloud);      /* soft section bg */
+  --mh-bg-brand:        var(--mh-brand-blue); /* hero / dark sections */
+  --mh-bg-dark:         var(--mh-night-sky);  /* deepest dark bg */
+
+  /* ---------- SEMANTIC: borders / lines ---------- */
+  --mh-border-1:        var(--mh-silver);
+  --mh-border-strong:   var(--mh-slate);
+  --mh-divider:         #dfe4e5;
+
+  /* ---------- SEMANTIC: state colors ---------- */
+  --mh-success:         var(--mh-spring-green);
+  --mh-warning:         var(--mh-mango);
+  --mh-danger:          var(--mh-lava-orange);
+  --mh-info:            var(--mh-aqua-blue);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --mh-font-brand:      'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --mh-font-system:     'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Scale — brand guidelines specify Bold titles / Regular body / Semibold callout */
+  --mh-size-display:    56px;    /* hero headline (print ≈ 72+) */
+  --mh-size-h1:         40px;
+  --mh-size-h2:         32px;
+  --mh-size-h3:         24px;
+  --mh-size-subhead:    20px;
+  --mh-size-body:       16px;
+  --mh-size-callout:    14px;
+  --mh-size-caption:    12px;
+
+  --mh-lh-tight:        1.1;
+  --mh-lh-snug:         1.25;
+  --mh-lh-normal:       1.5;
+  --mh-lh-loose:        1.65;
+
+  --mh-weight-regular:  400;
+  --mh-weight-medium:   500;
+  --mh-weight-semibold: 600;
+  --mh-weight-bold:     700;
+  --mh-weight-black:    800;
+
+  --mh-tracking-tight:  -0.01em;
+  --mh-tracking-normal: 0;
+  --mh-tracking-wide:   0.04em;
+  --mh-tracking-eyebrow:0.12em;
+
+  /* ---------- SPACING ---------- */
+  --mh-space-1:  4px;
+  --mh-space-2:  8px;
+  --mh-space-3:  12px;
+  --mh-space-4:  16px;
+  --mh-space-5:  24px;
+  --mh-space-6:  32px;
+  --mh-space-7:  48px;
+  --mh-space-8:  64px;
+  --mh-space-9:  96px;
+
+  /* ---------- RADII ---------- */
+  /* Brand is circle-forward — buttons use capsule radii; cards use gentle rounding */
+  --mh-radius-sm:       4px;
+  --mh-radius-md:       8px;
+  --mh-radius-lg:       16px;
+  --mh-radius-pill:     999px;
+  --mh-radius-circle:   50%;
+
+  /* ---------- SHADOWS / ELEVATION ---------- */
+  /* Brand does not lean on shadows; when used they are soft & cool */
+  --mh-shadow-1: 0 1px 2px rgba(6, 42, 66, 0.06), 0 1px 1px rgba(6, 42, 66, 0.04);
+  --mh-shadow-2: 0 4px 12px rgba(6, 42, 66, 0.08), 0 2px 4px rgba(6, 42, 66, 0.04);
+  --mh-shadow-3: 0 12px 32px rgba(6, 42, 66, 0.12), 0 4px 8px rgba(6, 42, 66, 0.06);
+
+  /* ---------- TRANSITIONS ---------- */
+  --mh-ease:      cubic-bezier(0.2, 0.6, 0.2, 1);
+  --mh-duration:  180ms;
+}
+
+/* ============================================================
+   Semantic type classes — apply directly for consistent hierarchy
+   Guidelines: headlines & subheads Title Case, body Sentence case.
+   ============================================================ */
+
+.mh-display {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-bold);
+  font-size: var(--mh-size-display);
+  line-height: var(--mh-lh-tight);
+  letter-spacing: var(--mh-tracking-tight);
+  color: var(--mh-fg-1);
+}
+
+.mh-h1, h1.mh {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-bold);
+  font-size: var(--mh-size-h1);
+  line-height: var(--mh-lh-tight);
+  color: var(--mh-fg-brand);
+}
+
+.mh-h2, h2.mh {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-bold);
+  font-size: var(--mh-size-h2);
+  line-height: var(--mh-lh-snug);
+  color: var(--mh-fg-brand);
+}
+
+.mh-subhead {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-bold);
+  font-size: var(--mh-size-subhead);
+  line-height: var(--mh-lh-snug);
+  color: var(--mh-fg-accent);  /* orange subheads per hero layout example */
+}
+
+.mh-h3, h3.mh {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-semibold);
+  font-size: var(--mh-size-h3);
+  line-height: var(--mh-lh-snug);
+  color: var(--mh-fg-1);
+}
+
+.mh-body, p.mh {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-regular);
+  font-size: var(--mh-size-body);
+  line-height: var(--mh-lh-normal);
+  color: var(--mh-fg-1);
+}
+
+.mh-callout {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-semibold);
+  font-size: var(--mh-size-callout);
+  line-height: var(--mh-lh-snug);
+  color: var(--mh-fg-1);
+}
+
+.mh-label {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-semibold);
+  font-size: var(--mh-size-callout);
+  line-height: var(--mh-lh-snug);
+  letter-spacing: var(--mh-tracking-wide);
+  text-transform: uppercase;
+  color: var(--mh-fg-2);
+}
+
+.mh-eyebrow {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-bold);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: var(--mh-tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--mh-fg-brand);
+}
+
+.mh-caption {
+  font-family: var(--mh-font-brand);
+  font-weight: var(--mh-weight-regular);
+  font-size: var(--mh-size-caption);
+  line-height: var(--mh-lh-snug);
+  color: var(--mh-fg-2);
+}

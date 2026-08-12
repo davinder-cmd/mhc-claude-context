@@ -1,0 +1,110 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EBB — Project Hub</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-strong:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:38px 40px 90px}
+@media(max-width:620px){.wrap{padding:22px 18px 60px}}
+header h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;margin:0 0 4px}
+header p{color:var(--ink-2);margin:0 0 18px;max-width:640px}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:8px 13px;font-size:13px}
+.fact b{color:var(--teal-2);font-weight:680}
+.legend{font-size:12px;color:var(--ink-3);margin:14px 0 4px;display:flex;flex-wrap:wrap;gap:14px}
+.legend span{white-space:nowrap}
+h2{font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);margin:34px 0 4px;padding-top:16px;border-top:1px solid var(--line)}
+h2 small{text-transform:none;letter-spacing:0;font-weight:500;color:var(--ink-3);font-size:12.5px;margin-left:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:14px}
+.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 16px;text-decoration:none;color:inherit;transition:border-color .12s,box-shadow .12s,transform .12s}
+.card:hover{border-color:var(--teal-2);box-shadow:0 10px 24px -18px rgba(14,74,86,0.55);transform:translateY(-1px)}
+.card.dead{opacity:.62}
+.card .t{font-weight:680;font-size:15px;letter-spacing:-0.01em;display:flex;align-items:baseline;gap:7px}
+.card .d{font-size:13px;color:var(--ink-2);margin-top:3px}
+.badge{font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap;letter-spacing:0.01em}
+.b-done{background:var(--teal-tint);color:var(--teal)}
+.b-wip{background:var(--amber-tint);color:var(--amber)}
+.b-todo{background:rgba(34,38,42,0.07);color:var(--ink-2)}
+.b-block{background:#F3DCDC;color:#8A2B2B}
+.b-dead{background:rgba(34,38,42,0.07);color:var(--ink-3)}
+.pill{margin-left:auto}
+.card .t .badge{margin-left:auto;align-self:center}
+.open{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:16px}
+.open h3{margin:0 0 6px;font-size:14px;font-weight:700}
+.open ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2)}
+.open li{margin:3px 0}
+.principle{background:var(--teal-tint);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;padding:12px 16px;margin:16px 0 4px;font-size:13.5px;color:var(--ink);line-height:1.5}
+.principle b{color:var(--teal)}
+footer{margin-top:40px;font-size:12px;color:var(--ink-3)}
+a.plain{color:var(--teal-2)}
+</style></head><body>
+<div class="wrap">
+<header>
+<h1>EBB — Project Hub</h1>
+<p>The single front door to the <b>“DCP Only” member experience</b> — the engagement loop driving Digital Care Path completion. One page, every doc and every design artifact. Files stay in their <code>outputs/</code> homes; this just links them.</p>
+<div class="facts">
+<div class="fact"><b>Go-live</b> Sept 1, 2026 · Alight House</div>
+<div class="fact"><b>Reward</b> $100 Amazon / completed DCP</div>
+<div class="fact"><b>Cap</b> $500/yr (recommended; default none)</div>
+<div class="fact"><b>Scope</b> 14 of 15 DCPs</div>
+<div class="fact"><b>Home</b> out of 9/1 scope</div>
+</div>
+<div class="principle"><b>⚠️ Guiding guardrail — protect efficacy.</b> Optimize for <b>pace, not speed</b>. Engagement is a means, not the goal; over-gamifying can backfire on outcomes (the engagement–efficacy gap). Every EBB choice keeps clinical efficacy from regressing. <a class="plain" href="_decisions.html">see rationale →</a></div>
+<div class="legend"><span>✅ designed</span><span>🎨 needs revision</span><span>📋 to design</span><span>⛔ blocked on a decision</span><span>🗄️ superseded</span></div>
+</header>
+
+<h2>Project docs</h2>
+<div class="grid">
+<a class="card" href="_brief.html"><div class="t">Brief<span class="badge b-done">core</span></div><div class="d">What EBB is, the design problem, the loop, launch scope.</div></a>
+<a class="card" href="_decisions.html"><div class="t">Decisions log<span class="badge b-done">current</span></div><div class="d">Every call + rationale + rejected alternatives. Up to date w/ 7/5.</div></a>
+<a class="card" href="_screens.html"><div class="t">Screen inventory<span class="badge b-done">7/6</span></div><div class="d">Every screen/state, its status, and where it lives.</div></a>
+<a class="card" href="_open-decisions.html"><div class="t">Open decisions<span class="badge b-wip">pending</span></div><div class="d">Forks the design must hold placeholders for — consent gate, naming, risk default.</div></a>
+<a class="card" href="engagement-loop-best-practices.html"><div class="t">Research<span class="badge b-done">ref</span></div><div class="d">Engagement-loop best practices (Duolingo/Headspace playbook).</div></a>
+<a class="card" href="_share-guide.html"><div class="t">Share guide<span class="badge b-done">ref</span></div><div class="d">How to navigate/share the doc set.</div></a>
+<a class="card" href="progress-reward-data-model.html"><div class="t">Progress &amp; reward data model<span class="badge b-done">7/9</span></div><div class="d">One source of truth for session counts + reward math — every surface agrees.</div></a>
+<a class="card" href="how-youre-doing-model.html"><div class="t">“How you’re doing” model<span class="badge b-done">7/8</span></div><div class="d">What we measure across DCPs + what the topic-page bottom third should be (daily logger retired).</div></a>
+<a class="card" href="../../outputs/jul05-ebb-meeting-notes/ebb-meeting-notes.html"><div class="t">Meeting notes 7/5<span class="badge b-done">source</span></div><div class="d">Darcy’s scope confirmations + the enrollment-funnel pivot.</div></a>
+</div>
+
+<h2>Phase 1 — Enrollment funnel <small>get in, one-time · assessment → recommendation → opt-in</small></h2>
+<div class="grid">
+<a class="card" href="../../outputs/jul05-ebb-master-flow/master-flow-v1.html"><div class="t">Master flow<span class="badge b-done">v1</span></div><div class="d">Whole journey end to end, Phase 1 + Phase 2 stitched. Start here.</div></a>
+<a class="card" href="../../outputs/jul05-ebb-dual-onramp/dual-onramp-v1.html"><div class="t">Dual on-ramp<span class="badge b-done">v1</span></div><div class="d">Lane A assessment-driven / Lane B interest-browse, converging.</div></a>
+<a class="card" href="../../outputs/jul05-ebb-assessment-bridge/assessment-to-ebb-bridge-v2.html"><div class="t">Assessment → EBB bridge<span class="badge b-done">v2</span></div><div class="d">$300 payday → “earn $100 more.” Option A handoff.</div></a>
+<a class="card" href="../../outputs/jul05-ebb-enrollment-flow/enrollment-flow-v1.html"><div class="t">Enrollment flow<span class="badge b-wip">needs v2</span></div><div class="d">Assessment → risk → recommendation → opt-in. Fix: 12-Q → real 7-section assessment; add $300 hook.</div></a>
+<a class="card" href="../../outputs/jul05-ebb-surfacing-kit/surfacing-kit-v1.html"><div class="t">Surfacing kit<span class="badge b-done">v1</span></div><div class="d">The “you may qualify to earn $100” surfaces across touchpoints.</div></a>
+<a class="card dead" href="../../outputs/jul02-ebb-getin-flow/getin-flow-v1.html"><div class="t">Get-in flow<span class="badge b-dead">superseded</span></div><div class="d">Pre-pivot sketch. Kept for history — do not build from this.</div></a>
+</div>
+
+<h2>Phase 2 — Core loop <small>the spine, repeats</small></h2>
+<div class="grid">
+<a class="card" href="../../outputs/jul01-ebb-engagement-loop/ebb-engagement-loop-model.html"><div class="t">Loop model<span class="badge b-done">North Star</span></div><div class="d">The engagement loop as a cycle with trigger points.</div></a>
+<a class="card" href="../../outputs/jul01-ebb-completion-screen/completion-celebration-v3.html"><div class="t">Completion celebration<span class="badge b-done">v3</span></div><div class="d">Health win → $100 Amazon → tee up next. The payout hinge.</div></a>
+<a class="card" href="../../outputs/jul02-ebb-topic-page/topic-page-v4-full.html"><div class="t">Topic page<span class="badge b-done">v4</span></div><div class="d">Continue → progress+reward → path → “How you’re doing.”</div></a>
+<a class="card" href="../../outputs/jul02-ebb-topic-page/path-edge-states-v1.html"><div class="t">Path edge states<span class="badge b-done">v1</span></div><div class="d">Path component — first / middle / last states.</div></a>
+<a class="card" href="../../outputs/jul02-ebb-topic-page/checkin-states-v2.html"><div class="t">“How you’re doing”<span class="badge b-done">clinical</span></div><div class="d">3 states: improving / too early / needs support.</div></a>
+<a class="card" href="../../outputs/jul05-ebb-rewards-page/rewards-page-v1.html"><div class="t">Rewards page<span class="badge b-done">v1</span></div><div class="d">EBB leads; $ earned / $500 cap. Points secondary.</div></a>
+<a class="card" href="../../outputs/jul02-ebb-topic-page/topic-page-scope-memo.html"><div class="t">Topic-page scope memo<span class="badge b-done">memo</span></div><div class="d">Why the topic page stays loop-focused, not a content hub.</div></a>
+</div>
+
+<h2>Not yet designed <small>tracked in the inventory · no artifact yet</small></h2>
+<div class="grid">
+<a class="card" href="../../outputs/jul07-ebb-dcp-list/_all-ideations.html"><div class="t">DCP list / All Topics<span class="badge b-done">gallery</span></div><div class="d">Library (2nd nav tab). All ideations on one scroll (v1→v7 + studies). Latest: <a class="plain" href="../../outputs/jul07-ebb-dcp-list/dcp-list-v7-states.html">v7 two states</a> · <a class="plain" href="../../outputs/jul07-ebb-dcp-list/dcp-list-scope-memo.html">memo</a>.</div></a>
+<a class="card" href="_screens.html"><div class="t">Consent & eligibility<span class="badge b-block">⛔</span></div><div class="d">6 states. Blocked on hard-gate vs earn-gate + legal.</div></a>
+<a class="card" href="_screens.html"><div class="t">Soft restart / re-engage<span class="badge b-block">⛔</span></div><div class="d">Welcome-back, progress recap, inactivity nudge.</div></a>
+<a class="card" href="_screens.html"><div class="t">Reward deadline<span class="badge b-todo">📋</span></div><div class="d">Configurable “complete by {date}.” Coordinate w/ Jill.</div></a>
+<a class="card" href="_screens.html"><div class="t">Supporting surfaces<span class="badge b-todo">📋</span></div><div class="d">Messages · Tracker · Interest Survey · Rewards shop · Notifications.</div></a>
+<a class="card" href="_screens.html"><div class="t">Assessment + risk results<span class="badge b-todo">📋</span></div><div class="d">~50–64 Q / 7 sections; per-condition risk results screen.</div></a>
+</div>
+
+<div class="open">
+<h3>Open — pending Darcy’s requirements <a class="plain" href="_open-decisions.html" style="font-weight:500;font-size:12px">→ full tracker &amp; design placeholders</a></h3>
+<ul>
+<li><b>Naming:</b> all designs say “Engagement-Based Billing”; Darcy’s notes say “Episode-Based.” Confirm canonical → global find-replace if it changes.</li>
+<li><b>Opt-in:</b> hard-gate vs. earn-gate (governs whether the consent modal is dismissible or a wall).</li>
+<li><b>Risk stratification default</b> (Jill / Steve / John debate) — default off for now.</li>
+</ul>
+</div>
+
+<footer>Hub · <a class="plain" href="_screens.html">full inventory</a> · files live under <code>outputs/</code>; this page is the index. Last updated 2026-07-06.</footer>
+</div>
+</body></html>

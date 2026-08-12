@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Progress &amp; reward — one data model (so every surface agrees)</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:840px;margin:34px auto 80px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 52px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;line-height:1.12;margin:0 0 6px}
+h2{font-size:22px;font-weight:700;margin:34px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;font-weight:680;margin:22px 0 6px}
+p{margin:10px 0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid rgba(20,99,111,0.3)}
+strong{font-weight:680;color:var(--ink)}
+code{font-family:var(--mono);font-size:0.86em;background:rgba(34,38,42,0.06);padding:1px 5px;border-radius:5px}
+pre{background:#20242a;color:#e8e6df;border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:14px 0;padding:2px 16px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;color:var(--ink-2)}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+ul,ol{margin:10px 0;padding-left:24px}
+li{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal);font-weight:680;font-size:12.5px;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+.docnav{max-width:840px;margin:0 auto;padding:16px 52px 0;font-size:12.5px;color:var(--ink-3)}
+.docnav a{color:var(--teal-2)}
+</style></head><body>
+<div class="docnav">EBB docs · <a href="_share-guide.html">Share guide</a> · <a href="_brief.html">Brief</a> · <a href="_decisions.html">Decisions</a> · <a href="_screens.html">Screens</a> · <a href="engagement-loop-best-practices.html">Research</a></div>
+<div class="doc"><h1>Progress &amp; reward — one data model (so every surface agrees)</h1>
+<blockquote><p>The numbers on the DCP list, topic page, All Sessions page, Overview, and the "Your care this year" banner must all derive from the <strong>same fields</strong>. This pins those fields, the per-DCP session counts (the source of truth), the reward math, and the corrections needed on current mocks. Date: 2026-07-09</p></blockquote>
+<hr>
+<h2>Source of truth: session counts per DCP</h2>
+<p>From <code>projects/feature-dcp/_brief.md</code> (deployed programs). <strong>Every surface uses these — no ad-hoc numbers.</strong> (14 EBB-eligible; pregnancy excluded.)</p>
+<div class="tablewrap"><table><thead><tr><th>DCP</th><th>Sessions (M)</th></tr></thead><tbody><tr><td>Depression</td><td>10</td></tr><tr><td>Anxiety</td><td>10</td></tr><tr><td>Insomnia</td><td><strong>8</strong></td></tr><tr><td>Lower Back</td><td>8</td></tr><tr><td>Neck</td><td>9</td></tr><tr><td>Shoulder</td><td>9</td></tr><tr><td>Hip</td><td>7</td></tr><tr><td>Knee</td><td>7</td></tr><tr><td>Healthy Blood Pressure</td><td>12</td></tr><tr><td>Diabetes Prevention</td><td>9</td></tr><tr><td>Continuing Diabetes Prevention</td><td>9</td></tr><tr><td>Diabetes Management</td><td>10</td></tr><tr><td>Weight Loss</td><td>12</td></tr><tr><td>Weight Management</td><td>10</td></tr></tbody></table></div>
+<h2>The canonical fields (per member × DCP)</h2>
+<ul><li><strong>M</strong> = <code>sessionsTotal</code> — from the table above.</li><li><strong>N</strong> = <code>sessionsDone</code> — completed sessions.</li><li><strong>currentSession</strong> = N + 1 (the one to do next).</li><li><strong>status</strong> = not-started (N=0) · in-progress (0&lt;N&lt;M) · completed (N=M).</li><li>Year-level: <strong>completedPaths</strong> (DCPs finished this benefit year), <strong>inProgressCount</strong>.</li></ul>
+<p><strong>Everything shown is derived from these — never entered per screen.</strong></p>
+<h2>Reward math (one rule)</h2>
+<ul><li><strong>$100 per completed DCP</strong> (N reaches M).</li><li><strong>earned</strong> = <code>completedPaths × $100</code>, capped at the config cap (<strong>$500/yr recommended = 5 paths</strong>; system default = no cap).</li><li>"pending" = earned but the gift card hasn't cleared (Waystar).</li><li>The <strong>50% rule is internal only</strong> — never a number/marker in the UI.</li></ul>
+<h2>Display conventions (pick once, apply everywhere)</h2>
+<ul><li><strong>Ring / bar = N of M</strong> (completed of total). The center number is <strong>N</strong> (sessions done). Insomnia at 2 done → "2 · of 8".</li><li><strong>Resume hero</strong> references the <strong>current</strong> session: "Session {N+1} · {title}" → "Continue."</li><li><strong>Care banner counts:</strong> "{inProgressCount} in progress · {completedPaths} completed"; earned = completedPaths × $100. So <strong>2 completed ⇒ $200</strong>, <strong>1 completed ⇒ $100</strong> — always reconciles.</li><li><strong>Cadence line</strong> = time-based ("3 weeks in"), not a countdown.</li></ul>
+<h2>What each surface shows (all from the same fields)</h2>
+<div class="tablewrap"><table><thead><tr><th>Surface</th><th>Progress element</th><th>Reward element</th></tr></thead><tbody><tr><td>DCP-list Continue card</td><td>ring N of M + "{weeks} in"</td><td>none per-card</td></tr><tr><td>"Your care this year" banner</td><td>bar = earned/cap</td><td>$earned (= completed×100) / cap</td></tr><tr><td>Topic page — progress</td><td>ring/bar N of M</td><td>"$100 when you complete" (once)</td></tr><tr><td>Topic page — path / All Sessions</td><td>session list, done/current/locked</td><td>reward <strong>once at the top</strong> + finish-line marker; not per card</td></tr><tr><td>Overview</td><td>"M sessions · {status}"</td><td>"Finish this path to earn $100" (subtle)</td></tr></tbody></table></div>
+<h2>Corrections needed on current mocks</h2>
+<ul><li><strong>Insomnia = 8 sessions</strong>, everywhere: topic page "Session 2 of <strong>8</strong>" (was "of 7"), All Sessions "Complete all <strong>8</strong> sessions" (was "7"), Overview "8 sessions" ✓, ring "2 of 8" ✓.</li><li><strong>Depression = 10</strong>: topic-states "Session 3 of <strong>10</strong>" (was "of 7").</li><li><strong>Anxiety = 10</strong>: "6 of 10" ✓.</li><li><strong>Care banner:</strong> "3 in progress · <strong>2</strong> completed · <strong>$200</strong> earned" (was "1 completed · $200" — didn't reconcile).</li><li><strong>All Sessions cards labeled "8 Sessions" each</strong> — see taxonomy below; likely wrong.</li></ul>
+<h2>Resolve the taxonomy (blocks the All Sessions page)</h2>
+<p>The All Sessions page shows ~8 cards each reading <strong>"8 Sessions"</strong> while the header says "Complete all 7 sessions." That conflates two models:</p>
+<ul><li><strong>Recommended — flat sessions:</strong> a DCP = <strong>M sessions</strong> (the table). The All Sessions page lists the <strong>M sessions</strong> (Insomnia → 8 session rows), header "Complete all 8 sessions to earn $100." No per-card "8 Sessions" label. Matches the brief and the ring's "N of M."</li><li><strong>If modules are real:</strong> a DCP = modules → sessions. Then define module count + sessions/module, and the page lists <strong>modules</strong> with their own counts, and M (for the ring) = total sessions across modules. The header/labels must then say "module" vs "session" precisely.</li></ul>
+<p><strong>Lean: flat sessions</strong> unless clinical/content confirms modules exist. Either way, one label system — a card is a <em>session</em> or a <em>module</em>, never ambiguously "8 Sessions" on a session list.</p>
+<h2>Open</h2>
+<ul><li>Confirm flat-sessions vs modules with content/clinical.</li><li>Confirm ring convention = N (done) of M — vs. showing currentSession index (pick one; this doc assumes N-done).</li></ul></div>
+</body></html>

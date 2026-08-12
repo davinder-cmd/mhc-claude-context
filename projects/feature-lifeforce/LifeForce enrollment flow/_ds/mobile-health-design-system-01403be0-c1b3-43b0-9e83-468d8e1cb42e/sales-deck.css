@@ -1,0 +1,208 @@
+/* MHC Deck — redesign using brand guidelines */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --blue:        #0f497f;
+  --blue-dark:   #062a42;
+  --aqua:        #04a0b7;
+  --green:       #52a045;
+  --orange:      #f15922;
+  --cloud:       #e6ebec;
+  --silver:      #c6cccd;
+  --slate:       #6e7a7d;
+  --charcoal:    #373d3f;
+  --sky:         #92d5da;
+  --glacier:     #d2e5e1;
+  --mango:       #f3b31e;
+
+  --font: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+deck-stage > section {
+  font-family: var(--font);
+  color: var(--charcoal);
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ---------- Shared primitives ---------- */
+.eyebrow {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.eyebrow.blue { color: var(--blue); }
+.eyebrow.white { color: rgba(255,255,255,0.8); }
+
+.display {
+  font-weight: 700;
+  font-size: 96px;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--blue);
+}
+
+.h1 {
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--blue);
+}
+
+.h2 {
+  font-weight: 700;
+  font-size: 52px;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--blue);
+}
+
+.subhead {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--orange);
+}
+
+.body {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--charcoal);
+}
+.body.dim { color: var(--slate); }
+
+.label {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--blue);
+  color: white;
+}
+.pill.ghost {
+  background: transparent;
+  border: 1.5px solid var(--blue);
+  color: var(--blue);
+}
+.pill.orange {
+  background: var(--orange);
+  color: white;
+}
+
+/* ---------- Logo ---------- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font);
+}
+.logo .mark {
+  width: 42px;
+  height: 42px;
+}
+.logo .wordmark {
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  color: var(--blue);
+}
+.logo.white .wordmark { color: white; }
+
+/* ---------- Slide footer ---------- */
+.slide-footer {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--silver);
+}
+.slide-footer.dark { color: rgba(255,255,255,0.5); }
+
+/* ---------- Section background variants ---------- */
+.bg-blue {
+  background: var(--blue) !important;
+  color: white;
+}
+.bg-blue .h1, .bg-blue .h2, .bg-blue .display { color: white; }
+.bg-blue .body { color: rgba(255,255,255,0.88); }
+.bg-blue .label { color: rgba(255,255,255,0.65); }
+
+.bg-dark {
+  background: var(--blue-dark) !important;
+  color: white;
+}
+.bg-dark .h1, .bg-dark .h2, .bg-dark .display { color: white; }
+
+.bg-cloud { background: var(--cloud) !important; }
+
+/* ---------- Circle decorations ---------- */
+.circle-decor {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ---------- Stat block ---------- */
+.stat { display: flex; flex-direction: column; gap: 8px; }
+.stat .num {
+  font-weight: 800;
+  font-size: 110px;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--blue);
+}
+.stat .unit {
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--slate);
+}
+.bg-blue .stat .num { color: white; }
+.bg-blue .stat .unit { color: rgba(255,255,255,0.75); }
+
+/* ---------- Layout helpers ---------- */
+.slide-pad {
+  padding: 80px 96px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.slide-pad-tight { padding: 64px 80px; }
+
+.divider {
+  height: 1px;
+  background: currentColor;
+  opacity: 0.15;
+  width: 100%;
+}
+
+/* Raleway numbers look better with tabular */
+.num, .display, .h1, .h2 { font-variant-numeric: tabular-nums; }

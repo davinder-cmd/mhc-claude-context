@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EBB — Project Guide &amp; Reading Order</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-strong:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:840px;margin:34px auto 80px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 52px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;line-height:1.12;margin:0 0 6px;text-wrap:balance}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin:34px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;font-weight:680;margin:22px 0 6px}
+h4{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--ink-2)}
+p{margin:10px 0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid rgba(20,99,111,0.3)}
+a:hover{border-bottom-color:var(--teal-2)}
+strong{font-weight:680;color:var(--ink)}
+code{font-family:var(--mono);font-size:0.86em;background:rgba(34,38,42,0.06);padding:1px 5px;border-radius:5px;color:var(--ink)}
+pre{background:#20242a;color:#e8e6df;border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:14px 0;padding:2px 16px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;color:var(--ink-2)}
+blockquote p{margin:8px 0}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+ul,ol{margin:10px 0;padding-left:24px}
+li{margin:4px 0}
+li>ul,li>ol{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal);font-weight:680;font-size:12.5px;letter-spacing:0.01em;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td code{font-size:0.82em}
+.docnav{max-width:840px;margin:0 auto;padding:16px 52px 0;font-size:12.5px;color:var(--ink-3)}
+.docnav a{color:var(--teal-2)}
+@media(max-width:620px){.docnav{padding:12px 22px 0}}
+</style></head><body>
+<div class="docnav">EBB docs · <a href="_share-guide.html">Share guide</a> · <a href="_brief.html">Brief</a> · <a href="_decisions.html">Decisions</a> · <a href="_screens.html">Screens</a> · <a href="engagement-loop-best-practices.html">Research</a></div>
+<div class="doc"><h1>EBB — Project Guide &amp; Reading Order</h1>
+<blockquote><p><strong>Purpose:</strong> one place that summarizes the EBB work, indexes every doc/deliverable, shows status &amp; sequencing, and tells you (and anyone you share with) what order to go through it in. Last updated: 2026-07-05.</p></blockquote>
+<hr>
+<h2>TL;DR</h2>
+<p><strong>What:</strong> the product design for <strong>Engagement/Episode-Based Billing (EBB)</strong> — the DCP-Only experience where a member completes Digital Care Paths and earns <strong>$100 (Amazon gift card) per completion, up to $500/yr</strong>, tied to a repeating engagement loop. <strong>Lighthouse:</strong> Alight House — <strong>go-live Sept 1</strong>, testing August. <strong>The model in one line:</strong> <em>Get in once (the $300 assessment hooks them → EBB), then run the loop — do a care path → earn $100 → get pulled into the next — up to the cap.</em> <strong>Where we are:</strong> the full journey is designed end-to-end (v1s). The core loop is settled; the get-in funnel is drafted; a cluster of consent/eligibility work is <strong>blocked on decisions</strong>, not design.</p>
+<blockquote><p>⚠️ <strong>Naming:</strong> source docs say "<strong>Engagement</strong>-Based Billing"; Darcy's 7/5 notes say "<strong>Episode</strong>-Based Billing." Confirm the canonical name.</p></blockquote>
+<hr>
+<h2>How to walk someone through it</h2>
+<p><strong>If you're presenting (start big, then drill in):</strong></p>
+<ol><li><strong><a href="../../outputs/jul05-ebb-master-flow/master-flow-v1.html">Master flow</a></strong> — the whole journey on one page. Open this first.</li><li><strong><a href="../../outputs/jul01-ebb-engagement-loop/ebb-engagement-loop-model.html">Engagement-loop model</a></strong> — the North Star + the 4 locked decisions.</li><li><strong>The get-in funnel:</strong> <a href="../../outputs/jul05-ebb-assessment-bridge/assessment-to-ebb-bridge-v2.html">Assessment → EBB bridge</a> → <a href="../../outputs/jul05-ebb-enrollment-flow/enrollment-flow-v1.html">Enrollment flow</a> → <a href="../../outputs/jul05-ebb-surfacing-kit/surfacing-kit-v1.html">Surfacing kit</a>.</li><li><strong>The loop screens:</strong> <a href="../../outputs/jul02-ebb-topic-page/topic-page-v4-full.html">Topic page (full)</a> → <a href="../../outputs/jul01-ebb-completion-screen/completion-celebration-v3.html">Completion celebration</a> → <a href="../../outputs/jul05-ebb-rewards-page/rewards-page-v1.html">Rewards page</a>.</li><li><strong>Decisions &amp; scope:</strong> <a href="_decisions.html">_decisions.md</a> → <a href="_screens.html">_screens.md</a> (status + 9/1 table stakes).</li></ol>
+<p><strong>If you're reading deep:</strong> <a href="_brief.html">_brief.md</a> → <a href="_decisions.html">_decisions.md</a> → <a href="_screens.html">_screens.md</a> → the source spec in <a href="source/">source/</a>.</p>
+<hr>
+<h2>Design deliverables (in <code>outputs/</code>)</h2>
+<p>Grouped by journey stage. Each folder has an <code>INDEX.md</code> iteration log.</p>
+<h3>The whole picture</h3>
+<div class="tablewrap"><table><thead><tr><th>Deliverable</th><th>What it shows</th><th>Status</th></tr></thead><tbody><tr><td><a href="../../outputs/jul05-ebb-master-flow/">master-flow</a></td><td>End-to-end journey (get-in funnel + the loop) on one map</td><td>v1</td></tr><tr><td><a href="../../outputs/jul01-ebb-engagement-loop/">engagement-loop-model</a></td><td>North Star loop + 4 locked decisions</td><td>v1 (decisions locked)</td></tr><tr><td><a href="../../outputs/jul02-ebb-experience-map/">experience-map</a></td><td>Screen inventory as a visual, status-coded</td><td>v1</td></tr></tbody></table></div>
+<h3>Get in (acquisition funnel)</h3>
+<div class="tablewrap"><table><thead><tr><th>Deliverable</th><th>What it shows</th><th>Status</th></tr></thead><tbody><tr><td><a href="../../outputs/jul05-ebb-assessment-bridge/">assessment-bridge</a></td><td>$300 payday → EBB handoff; <strong>two options</strong> (savor-first / combined) to test</td><td>v2</td></tr><tr><td><a href="../../outputs/jul05-ebb-enrollment-flow/">enrollment-flow</a></td><td>Home → assessment → recommendation → opt-in → unlock; + capped vs no-cap configs</td><td>v1</td></tr><tr><td><a href="../../outputs/jul05-ebb-surfacing-kit/">surfacing-kit</a></td><td>The inline "$100" messages: home · notification · mid-DCP · rewards</td><td>v1</td></tr><tr><td><a href="../../outputs/jul02-ebb-getin-flow/">getin-flow</a></td><td>Cohort routing (new / existing / mid-DCP) through the 3 surfacing layers</td><td>v1</td></tr><tr><td><a href="../../outputs/jul05-ebb-dual-onramp/">dual-onramp</a></td><td>EBB entry <strong>with &amp; without</strong> the assessment; two on-ramps → one loop (assessment = accelerant, not prerequisite)</td><td>v1</td></tr></tbody></table></div>
+<h3>The loop (core surfaces)</h3>
+<div class="tablewrap"><table><thead><tr><th>Deliverable</th><th>What it shows</th><th>Status</th></tr></thead><tbody><tr><td><a href="../../outputs/jul02-ebb-topic-page/">topic-page</a></td><td>Drive-to-completion screen (v4 full + annotated). Also: path edge-states, "How you're doing" check-in states, and the scope memo</td><td>v4 (definitive)</td></tr><tr><td><a href="../../outputs/jul01-ebb-completion-screen/">completion-screen</a></td><td>The hinge: health win → $100 → tee up next (Option A bottom)</td><td>v3 (settled)</td></tr><tr><td><a href="../../outputs/jul05-ebb-rewards-page/">rewards-page</a></td><td>EBB leads; $ earned / $500 cap</td><td>v1</td></tr></tbody></table></div>
+<h3>Stakeholder material</h3>
+<div class="tablewrap"><table><thead><tr><th>Deliverable</th><th>What it is</th></tr></thead><tbody><tr><td><a href="../../outputs/jul02-ebb-topic-page/topic-page-scope-memo.html">topic-page-scope-memo</a></td><td>One-pager defending the loop-focused topic page (data/resources → placement, not rejection)</td></tr><tr><td><a href="../../outputs/jul05-ebb-meeting-notes/ebb-meeting-notes.html">ebb-meeting-notes</a></td><td>Darcy's 7/5 notes (source)</td></tr></tbody></table></div>
+<hr>
+<h2>Project docs (context + decisions) — in <code>projects/feature-ebb/</code></h2>
+<div class="tablewrap"><table><thead><tr><th>Doc</th><th>What it holds</th></tr></thead><tbody><tr><td><a href="_brief.html">_brief.md</a></td><td>What the project is, design approach, engagement loop, consent workstream, launch update</td></tr><tr><td><a href="_decisions.html">_decisions.md</a></td><td><strong>The decision log</strong> — every call with rationale + rejected alternatives (defensibility)</td></tr><tr><td><a href="_screens.html">_screens.md</a></td><td>Every screen/state, status-coded, with blockers</td></tr><tr><td><a href="engagement-loop-best-practices.html">engagement-loop-best-practices.md</a></td><td>The research pass (goal-gradient, SDT, cautions)</td></tr><tr><td><a href="source/">source/</a></td><td>Raw inputs: EBB spec, playbook, "Digital Care Only," consent/restart notes, and current-state UX writeups (<code>source/current-dcp-ux/</code>, <code>source/current-rewards-ux/</code>)</td></tr><tr><td><a href="reference-only/">reference-only/</a></td><td>The "gel" mockups — reference/counter-example only, not a driver</td></tr></tbody></table></div>
+<p><strong>Reference layer</strong> (<code>reference/</code>): <a href="../../reference/engagement-behavior-experts.md">engagement-behavior-experts.md</a> · <a href="../../reference/dtx-dcp-experts.md">dtx-dcp-experts.md</a> · <a href="../../reference/health-assessment/">health-assessment/</a> (the NCQA HRA composition + risk models).</p>
+<hr>
+<h2>Sequencing &amp; status</h2>
+<p><strong>✅ Built (v1s):</strong> engagement-loop model · completion celebration (v3) · topic page (v4) + path/check-in states · rewards page · get-in flow · enrollment flow · assessment bridge · surfacing kit · master flow.</p>
+<p><strong>📋 Unblocked, not yet built:</strong> cap-reached state · DCP list · completion variants (first-ever / no-next).</p>
+<p><strong>⏸️ Deferred:</strong> Home EBB redesign (out of 9/1 scope — keep ideating) · reward deadline states · soft-restart · event-driven "how you're doing."</p>
+<p><strong>⛔ Blocked on decisions (not design):</strong> consent/eligibility screens (hard-gate vs earn-gate) · risk-stratification default · soft-restart inactivity threshold · full assessment→DCP pre-population (blocked by data architecture).</p>
+<h3>9/1 table stakes (the minimum to launch)</h3>
+<p>A member must be able to: <strong>learn they can earn (inline surfacing) → opt in (consent) → complete a DCP → get $100 (completion screen) → see it in the reward center → billed via Waystar.</strong> The load-bearing open item is <strong>consent</strong> (blocked on hard-gate vs earn-gate). Everything else we've designed is <em>should/later</em>.</p>
+<hr>
+<h2>Open decisions to resolve (ideally in Darcy's Mon 7/6 requirements)</h2>
+<ol><li><strong>Consent: hard-gate vs. earn-gate</strong> — the pivotal one; sets whether opt-in blocks access or just gates earning.</li><li><strong>Opt-in placement</strong> — opt-in-first/upfront (simpler; pending <strong>legal</strong> OK on blanket authorization) vs. at point of value.</li><li><strong>Risk-stratification default</strong> — off (John) vs. required (Steve); cap default (no cap vs. $500).</li><li><strong>Assessment bridge</strong> — Option A (savor-first, current lean) vs. B (combined) — to A/B test.</li><li><strong>Naming</strong> — Engagement vs. Episode-Based Billing.</li></ol>
+<hr>
+<h2>Audience cheat-sheet</h2>
+<ul><li><strong>Darcy / leadership:</strong> Master flow → engagement-loop model → _decisions → 9/1 table stakes.</li><li><strong>Engineering:</strong> _screens → the loop screens (topic/completion/rewards) → open gates.</li><li><strong>Clinical:</strong> the "How you're doing" charter (in topic-page check-in states + _decisions) → reference/health-assessment.</li><li><strong>Legal:</strong> consent workstream (in _brief) → opt-in placement decision.</li><li><strong>Sales/client:</strong> master flow → the money ladder ($300 + up to $500) → surfacing kit.</li></ul></div>
+</body></html>

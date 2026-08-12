@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#E9EEF2;font-family:-apple-system,'SF Pro Text','Segoe UI','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:#0f497f;text-decoration:none;font-weight:600;}
+  a:hover{color:#0c3a66;}
+  @keyframes fb-pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+  @keyframes fb-rise{0%{transform:translateY(14px);opacity:0}100%{transform:translateY(0);opacity:1}}
+  @keyframes fb-fall{0%{transform:translateY(-20px) rotate(0);opacity:0}12%{opacity:1}100%{transform:translateY(260px) rotate(320deg);opacity:0}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px 16px 60px;">
+
+  <sc-if value="{{ mapVisible }}" hint-placeholder-val="{{ true }}">
+    <div style="width:100%;max-width:880px;margin-bottom:22px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f15922;">MHC · Concept · Flow B — Enrolled</div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:6px;">
+        <div>
+          <div style="font-size:24px;font-weight:800;color:#0f497f;letter-spacing:-.01em;">LifeForce — enrolled teammate journey</div>
+          <div style="font-size:14px;color:#6e7a7d;margin-top:3px;">Phase status → nurse guidance → progress → maximize credit. Switch phase &amp; household states below.</div>
+        </div>
+        <button onClick="{{ resetFlow }}" style="border:1px solid #c6cccd;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:13px;padding:9px 16px;border-radius:999px;cursor:pointer;white-space:nowrap;">Reset</button>
+      </div>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6e7a7d;margin-bottom:6px;">LifeForce Phase</div>
+          <div style="display:flex;gap:6px;">
+            <button onClick="{{ setPhase1 }}" style="width:34px;height:34px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;border:1px solid {{ ph1Border }};background:{{ ph1Bg }};color:{{ ph1Fg }};">1</button>
+            <button onClick="{{ setPhase2 }}" style="width:34px;height:34px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;border:1px solid {{ ph2Border }};background:{{ ph2Bg }};color:{{ ph2Fg }};">2</button>
+            <button onClick="{{ setPhase3 }}" style="width:34px;height:34px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;border:1px solid {{ ph3Border }};background:{{ ph3Bg }};color:{{ ph3Fg }};">3</button>
+            <button onClick="{{ setPhase4 }}" style="width:34px;height:34px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;border:1px solid {{ ph4Border }};background:{{ ph4Bg }};color:{{ ph4Fg }};">4</button>
+            <button onClick="{{ setPhase5 }}" style="width:34px;height:34px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;border:1px solid {{ ph5Border }};background:{{ ph5Bg }};color:{{ ph5Fg }};">5</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6e7a7d;margin-bottom:6px;">Nurse guidance</div>
+          <div style="display:flex;gap:6px;">
+            <button onClick="{{ setNursePop }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ nPopBorder }};background:{{ nPopBg }};color:{{ nPopFg }};">Populated</button>
+            <button onClick="{{ setNurseEmpty }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ nEmpBorder }};background:{{ nEmpBg }};color:{{ nEmpFg }};">Empty</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6e7a7d;margin-bottom:6px;">Spouse / Domestic partner</div>
+          <div style="display:flex;gap:6px;">
+            <button onClick="{{ setHhNone }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ hhNoneBorder }};background:{{ hhNoneBg }};color:{{ hhNoneFg }};">None</button>
+            <button onClick="{{ setHhReg }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ hhRegBorder }};background:{{ hhRegBg }};color:{{ hhRegFg }};">No HA</button>
+            <button onClick="{{ setHhComplete }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ hhCompBorder }};background:{{ hhCompBg }};color:{{ hhCompFg }};">HA done</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6e7a7d;margin-bottom:6px;">Appointment (Enrollment tab)</div>
+          <div style="display:flex;gap:6px;">
+            <button onClick="{{ setApptRequested }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ apReqBorder }};background:{{ apReqBg }};color:{{ apReqFg }};">Requested</button>
+            <button onClick="{{ setApptScheduled }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ apSchBorder }};background:{{ apSchBg }};color:{{ apSchFg }};">Scheduled</button>
+            <button onClick="{{ setApptComplete }}" style="height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;border:1px solid {{ apCompBorder }};background:{{ apCompBg }};color:{{ apCompFg }};">Visit done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- PHONE -->
+  <div style="width:392px;height:844px;background:#fff;border-radius:46px;border:10px solid #10131A;box-shadow:0 30px 70px rgba(6,42,66,.26);position:relative;overflow:hidden;">
+
+    <!-- ============ B1 · HOME ============ -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 24px 8px;font-size:15px;font-weight:700;color:#373d3f;">
+          <span>9:41</span>
+          <span style="display:flex;align-items:center;gap:7px;"><svg width="17" height="11" viewBox="0 0 17 11" fill="#373d3f"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.6" y="5" width="3" height="6" rx="1"/><rect x="9.2" y="2.6" width="3" height="8.4" rx="1"/><rect x="13.8" y="0" width="3" height="11" rx="1"/></svg><svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#373d3f" stroke-width="1.5"><path d="M1 3.4a10 10 0 0 1 14 0"/><path d="M3.4 5.9a6.4 6.4 0 0 1 9.2 0"/><path d="M5.8 8.3a3 3 0 0 1 4.4 0"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="#373d3f" stroke-opacity=".4"/><rect x="2" y="2" width="17" height="8" rx="1.5" fill="#373d3f"/><rect x="22.5" y="4" width="1.6" height="4" rx=".8" fill="#373d3f" fill-opacity=".4"/></svg></span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 20px 12px;">
+          <button style="border:0;background:none;padding:6px;cursor:pointer;color:#373d3f;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+          <div style="display:flex;align-items:center;gap:8px;"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="6" r="3" fill="#04a0b7"/><circle cx="16" cy="11" r="3" fill="#0f497f"/><circle cx="11" cy="16" r="3" fill="#f3b31e"/><circle cx="6" cy="11" r="3" fill="#52a045"/></svg><span style="font-size:17px;font-weight:800;color:#0f497f;">CarePlus</span></div>
+          <button style="border:0;background:none;padding:6px;cursor:pointer;color:#373d3f;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></button>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:4px 20px 100px;">
+          <div style="font-size:28px;font-weight:800;color:#373d3f;margin:4px 0 4px;">Hi Davinder</div>
+          <div style="font-size:15px;color:#6e7a7d;margin-bottom:20px;">You're enrolled in LifeForce — here's where you stand.</div>
+
+          <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:12px;">Your programs</div>
+
+          <!-- In-progress LifeForce card -->
+          <div onClick="{{ goDetail }}" style="cursor:pointer;border-radius:16px;overflow:hidden;border:1px solid #dfe4e5;box-shadow:0 4px 12px rgba(6,42,66,.06);margin-bottom:22px;">
+            <div style="background:#0f497f;padding:18px 18px 16px;position:relative;overflow:hidden;">
+              <div style="position:absolute;width:120px;height:120px;border-radius:50%;border:22px solid rgba(255,255,255,.06);right:-42px;top:-40px;"></div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f6a98e;">In progress · Special Program</div>
+              <div style="font-size:22px;font-weight:800;color:#fff;margin:6px 0 2px;">LifeForce</div>
+              <div style="font-size:13px;color:#cfe0f0;">Phase {{ phase }} of 5</div>
+              <div style="display:flex;gap:5px;margin-top:12px;">
+                <div style="flex:1;height:6px;border-radius:999px;background:{{ homeSeg1 }};"></div>
+                <div style="flex:1;height:6px;border-radius:999px;background:{{ homeSeg2 }};"></div>
+                <div style="flex:1;height:6px;border-radius:999px;background:{{ homeSeg3 }};"></div>
+                <div style="flex:1;height:6px;border-radius:999px;background:{{ homeSeg4 }};"></div>
+                <div style="flex:1;height:6px;border-radius:999px;background:{{ homeSeg5 }};"></div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;">
+              <div style="width:44px;height:44px;border-radius:50%;background:rgba(15,73,127,.08);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#0f497f;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6L20.5 9.4l-4.3 4 1.1 6-5.3-2.9L6.7 19.4l1.1-6-4.3-4 5.9-.8z"/></svg></div>
+              <div style="flex:1;"><div style="font-size:16px;font-weight:700;color:#373d3f;">{{ rewardLine }}</div><div style="font-size:13px;color:#6e7a7d;">Medical credit toward your plan</div></div>
+              <svg width="20" height="20" fill="none" stroke="#c6cccd" stroke-width="2.2"><path d="M8 5l6 5-6 5"/></svg>
+            </div>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:12px;">Your action items</div>
+          <div onClick="{{ goDetail }}" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #dfe4e5;border-radius:14px;margin-bottom:12px;">
+            <div style="width:46px;height:46px;border-radius:11px;background:rgba(4,160,183,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#04a0b7;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z"/></svg></div>
+            <div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#373d3f;">Review your nurse's guidance</div><div style="font-size:13px;color:#6e7a7d;">From your last appointment</div></div>
+            <svg width="20" height="20" fill="none" stroke="#c6cccd" stroke-width="2.2"><path d="M8 5l6 5-6 5"/></svg>
+          </div>
+          <div onClick="{{ goDetailProgress }}" style="cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #dfe4e5;border-radius:14px;">
+            <div style="width:46px;height:46px;border-radius:11px;background:rgba(82,160,69,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#52a045;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3"/><path d="M7.5 14h9"/></svg></div>
+            <div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#373d3f;">Check your lab results &amp; goals</div><div style="font-size:13px;color:#6e7a7d;">My Progress</div></div>
+            <svg width="20" height="20" fill="none" stroke="#c6cccd" stroke-width="2.2"><path d="M8 5l6 5-6 5"/></svg>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ B0 · OVERVIEW ============ -->
+    <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 24px 8px;font-size:15px;font-weight:700;color:#373d3f;"><span>9:41</span><span style="display:flex;align-items:center;gap:7px;"><svg width="17" height="11" viewBox="0 0 17 11" fill="#373d3f"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.6" y="5" width="3" height="6" rx="1"/><rect x="9.2" y="2.6" width="3" height="8.4" rx="1"/><rect x="13.8" y="0" width="3" height="11" rx="1"/></svg><svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#373d3f" stroke-width="1.5"><path d="M1 3.4a10 10 0 0 1 14 0"/><path d="M3.4 5.9a6.4 6.4 0 0 1 9.2 0"/><path d="M5.8 8.3a3 3 0 0 1 4.4 0"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="#373d3f" stroke-opacity=".4"/><rect x="2" y="2" width="17" height="8" rx="1.5" fill="#373d3f"/><rect x="22.5" y="4" width="1.6" height="4" rx=".8" fill="#373d3f" fill-opacity=".4"/></svg></span></div>
+        <div style="display:flex;align-items:center;padding:6px 16px 10px;position:relative;">
+          <button onClick="{{ goDetail }}" style="border:0;background:none;padding:6px;cursor:pointer;color:#373d3f;"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="flex:1;text-align:center;font-size:17px;font-weight:800;color:#373d3f;">About LifeForce</div>
+          <div style="width:38px;"></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:0 0 100px;">
+          <div style="height:200px;background:#0f497f;position:relative;overflow:hidden;">
+            <div style="position:absolute;width:210px;height:210px;border-radius:50%;border:28px solid rgba(255,255,255,.06);right:-66px;top:-56px;"></div>
+            <div style="position:absolute;width:140px;height:140px;border-radius:50%;background:rgba(4,160,183,.3);left:-42px;bottom:-52px;"></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:92px;height:92px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,.2);"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#0f497f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h4l2.5-6 3.5 11 2.5-7 1.5 2h4"/></svg></div></div>
+          </div>
+          <div style="padding:22px 22px 0;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f15922;">Truist · Special Program</div>
+            <div style="font-size:32px;font-weight:800;color:#373d3f;letter-spacing:-.015em;margin:6px 0 10px;">LifeForce</div>
+            <p style="font-size:16px;line-height:1.55;color:#373d3f;margin:0;"><strong>LifeForce, Truist's premier well-being program, rewards you for building and maintaining a healthy lifestyle.</strong></p>
+
+            <div style="font-size:17px;font-weight:700;color:#373d3f;margin:26px 0 8px;">How it works</div>
+            <p style="font-size:15px;line-height:1.55;color:#6e7a7d;margin:0;">Meet regularly with a registered nurse coach by telehealth or phone. Your coach reviews your labs and health assessment, then sets personal goals with you. As you progress through the five LifeForce phases, you earn <strong style="color:#373d3f;">monthly medical credit</strong> toward your plan.</p>
+
+            <div style="font-size:17px;font-weight:700;color:#373d3f;margin:24px 0 8px;">Who it's for</div>
+            <p style="font-size:15px;line-height:1.55;color:#6e7a7d;margin:0;">Truist medically-enrolled teammates who want steady, one-on-one coaching toward their personal health goals.</p>
+
+            <div style="display:flex;gap:12px;align-items:flex-start;margin:22px 0 0;padding:16px;background:#e6ebec;border-radius:14px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#04a0b7" stroke-width="2" style="flex:0 0 auto;margin-top:1px;"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg>
+              <div style="font-size:14px;line-height:1.5;color:#373d3f;">Your phase reflects where you are today. Keep meeting with your nurse and working your goals to move toward Phase 5 and a fuller medical credit.</div>
+            </div>
+
+            <div style="margin-top:22px;padding:18px;background:#e6ebec;border-radius:14px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:8px;">Peak Health support</div>
+              <div style="font-size:14px;color:#373d3f;line-height:1.7;">Phone <a href="tel:2522375090">252-237-5090</a><br>Email <a href="mailto:appointment@peak-health.net">appointment@peak-health.net</a></div>
+              <button style="margin-top:12px;border:1px solid #0f497f;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;cursor:pointer;">Peak Health portal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ B2–B6 · PROGRAM DETAIL ============ -->
+    <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 24px 8px;font-size:15px;font-weight:700;color:#373d3f;"><span>9:41</span><span style="display:flex;align-items:center;gap:7px;"><svg width="17" height="11" viewBox="0 0 17 11" fill="#373d3f"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.6" y="5" width="3" height="6" rx="1"/><rect x="9.2" y="2.6" width="3" height="8.4" rx="1"/><rect x="13.8" y="0" width="3" height="11" rx="1"/></svg><svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#373d3f" stroke-width="1.5"><path d="M1 3.4a10 10 0 0 1 14 0"/><path d="M3.4 5.9a6.4 6.4 0 0 1 9.2 0"/><path d="M5.8 8.3a3 3 0 0 1 4.4 0"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="#373d3f" stroke-opacity=".4"/><rect x="2" y="2" width="17" height="8" rx="1.5" fill="#373d3f"/><rect x="22.5" y="4" width="1.6" height="4" rx=".8" fill="#373d3f" fill-opacity=".4"/></svg></span></div>
+        <div style="display:flex;align-items:center;padding:6px 16px 10px;position:relative;">
+          <button onClick="{{ goHome }}" style="border:0;background:none;padding:6px;cursor:pointer;color:#373d3f;"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="flex:1;text-align:center;font-size:17px;font-weight:800;color:#373d3f;">LifeForce</div>
+          <div style="width:38px;"></div>
+        </div>
+
+        <div style="flex:1;overflow-y:auto;padding:8px 20px 100px;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+            <div style="font-size:24px;font-weight:800;color:#373d3f;letter-spacing:-.01em;line-height:1.2;">Your LifeForce status</div>
+            <button onClick="{{ goOverview }}" title="About this program" style="flex:0 0 auto;margin-top:3px;border:0;background:none;padding:2px;cursor:pointer;color:#0f497f;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/></svg></button>
+          </div>
+
+          <!-- Toggle -->
+          <div style="display:flex;gap:4px;background:#eef0f1;border-radius:12px;padding:4px;margin:16px 0 18px;">
+            <button onClick="{{ setStatusTab }}" style="flex:1;border:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;padding:10px 0;border-radius:9px;background:{{ statusTabBg }};color:{{ statusTabFg }};box-shadow:{{ statusTabShadow }};transition:all .18s cubic-bezier(.2,.6,.2,1);">Status</button>
+            <button onClick="{{ setProgressTab }}" style="flex:1;border:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;padding:10px 0;border-radius:9px;background:{{ progressTabBg }};color:{{ progressTabFg }};box-shadow:{{ progressTabShadow }};transition:all .18s cubic-bezier(.2,.6,.2,1);">My Progress</button>
+            <button onClick="{{ setEnrollTab }}" style="flex:1;border:0;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;padding:10px 0;border-radius:9px;background:{{ enrollTabBg }};color:{{ enrollTabFg }};box-shadow:{{ enrollTabShadow }};transition:all .18s cubic-bezier(.2,.6,.2,1);">Enrollment</button>
+          </div>
+
+          <!-- ===== STATUS TAB ===== -->
+          <sc-if value="{{ onStatus }}" hint-placeholder-val="{{ true }}">
+            <!-- Phase hero -->
+            <div style="border-radius:16px;background:#0f497f;padding:22px 20px;position:relative;overflow:hidden;">
+              <div style="position:absolute;width:150px;height:150px;border-radius:50%;border:24px solid rgba(255,255,255,.055);right:-52px;top:-46px;"></div>
+              <sc-if value="{{ isPhase5 }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0 0 auto 0;height:120px;pointer-events:none;overflow:hidden;">
+                  <div style="position:absolute;left:14%;top:0;width:8px;height:12px;background:#04a0b7;border-radius:2px;animation:fb-fall 2.6s ease-in 0s infinite;"></div>
+                  <div style="position:absolute;left:34%;top:0;width:8px;height:8px;background:#52a045;border-radius:50%;animation:fb-fall 2.3s ease-in .3s infinite;"></div>
+                  <div style="position:absolute;left:54%;top:0;width:8px;height:12px;background:#f3b31e;border-radius:2px;animation:fb-fall 2.8s ease-in .15s infinite;"></div>
+                  <div style="position:absolute;left:74%;top:0;width:8px;height:8px;background:#f15922;border-radius:50%;animation:fb-fall 2.5s ease-in .5s infinite;"></div>
+                </div>
+              </sc-if>
+              <div style="position:relative;">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f6a98e;">LifeForce Phase</div>
+                <div style="display:flex;align-items:baseline;gap:8px;margin:6px 0 14px;"><span style="font-size:44px;font-weight:800;color:#fff;line-height:1;">{{ phase }}</span><span style="font-size:16px;font-weight:700;color:#cfe0f0;">of 5</span></div>
+                <div style="display:flex;gap:6px;margin-bottom:16px;">
+                  <div style="flex:1;height:8px;border-radius:999px;background:{{ heroSeg1 }};"></div>
+                  <div style="flex:1;height:8px;border-radius:999px;background:{{ heroSeg2 }};"></div>
+                  <div style="flex:1;height:8px;border-radius:999px;background:{{ heroSeg3 }};"></div>
+                  <div style="flex:1;height:8px;border-radius:999px;background:{{ heroSeg4 }};"></div>
+                  <div style="flex:1;height:8px;border-radius:999px;background:{{ heroSeg5 }};"></div>
+                </div>
+                <div style="font-size:15px;line-height:1.5;color:#eaf1f8;">{{ nudge }}</div>
+              </div>
+            </div>
+
+            <!-- Reward card -->
+            <div style="display:flex;align-items:center;gap:14px;padding:16px;border:1px solid #dfe4e5;border-radius:14px;margin-top:14px;">
+              <div style="width:50px;height:50px;border-radius:12px;background:rgba(15,73,127,.08);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#0f497f;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6L20.5 9.4l-4.3 4 1.1 6-5.3-2.9L6.7 19.4l1.1-6-4.3-4 5.9-.8z"/></svg></div>
+              <div style="flex:1;"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6e7a7d;">Medical credit</div><div style="font-size:19px;font-weight:800;color:#373d3f;">{{ rewardLine }}</div></div>
+            </div>
+
+            <a href="#" style="display:inline-block;margin:16px 0 4px;color:#0f497f;font-weight:600;font-size:15px;line-height:1.4;">Calculate your plan's medical premiums &amp; semi-monthly credit.</a>
+
+            <!-- B4 · Maximize credit (household) -->
+            <sc-if value="{{ hhShow }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:20px;padding:18px;border-radius:14px;background:#e6ebec;">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:8px;">Maximize your credit</div>
+                <sc-if value="{{ hhNone }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-size:15px;line-height:1.5;color:#373d3f;margin:0 0 14px;">Invite your Spouse or Domestic Partner to register and complete the Health Assessment to maximize your medical credit.</p>
+                  <button style="border:0;cursor:pointer;background:#0f497f;color:#fff;font-family:inherit;font-weight:700;font-size:15px;padding:13px 22px;border-radius:999px;">Invite dependent</button>
+                </sc-if>
+                <sc-if value="{{ hhReg }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-size:15px;line-height:1.5;color:#373d3f;margin:0 0 14px;">Don't forget to remind your Spouse or Domestic Partner to complete their Health Assessment to maximize your medical credit.</p>
+                  <button style="border:1px solid #0f497f;cursor:pointer;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:15px;padding:12px 22px;border-radius:999px;">Send a reminder</button>
+                </sc-if>
+              </div>
+            </sc-if>
+
+            <!-- Support -->
+            <div style="margin-top:20px;padding:18px;background:#e6ebec;border-radius:14px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:8px;">Peak Health support</div>
+              <div style="font-size:14px;color:#373d3f;line-height:1.7;">Phone <a href="tel:2522375090">252-237-5090</a><br>Email <a href="mailto:appointment@peak-health.net">appointment@peak-health.net</a></div>
+              <button style="margin-top:12px;border:1px solid #0f497f;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;cursor:pointer;">Peak Health portal</button>
+            </div>
+          </sc-if>
+
+          <!-- ===== MY PROGRESS TAB ===== -->
+          <sc-if value="{{ onProgress }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:15px;line-height:1.55;color:#6e7a7d;margin:0 0 16px;">Review your lab results, guidance from your nurse, and your individual goals to work on before your next appointment.</p>
+
+            <!-- B3a · From your nurse -->
+            <div style="font-size:17px;font-weight:700;color:#373d3f;margin-bottom:10px;">From your nurse</div>
+            <sc-if value="{{ nursePopulated }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:18px;border:1px solid #dfe4e5;border-radius:14px;margin-bottom:22px;">
+                <div style="font-size:12px;color:#6e7a7d;margin-bottom:8px;">Received May 14, 2026</div>
+                <p style="font-size:15px;line-height:1.55;color:#373d3f;margin:0;">Great work keeping up with your walks — your resting heart rate is trending down. Before our next appointment, aim for around 7,000 steps on most days, cut sugary drinks to one or fewer per day, and keep a home blood-pressure log to bring with you.</p>
+              </div>
+            </sc-if>
+            <sc-if value="{{ nurseEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:22px 18px;border:1px dashed #c6cccd;border-radius:14px;margin-bottom:22px;text-align:center;">
+                <div style="width:46px;height:46px;border-radius:50%;background:#e6ebec;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:#6e7a7d;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 10h7M8.5 14h4"/></svg></div>
+                <div style="font-size:15px;line-height:1.5;color:#6e7a7d;">Your nurse hasn't added new guidance yet — check back after your next appointment.</div>
+              </div>
+            </sc-if>
+
+            <!-- B3b · Lab results + biometrics -->
+            <div style="font-size:17px;font-weight:700;color:#373d3f;margin-bottom:6px;">My lab results &amp; goals</div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:12px;background:#fdf6e6;margin-bottom:16px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b9860b" stroke-width="2" style="flex:0 0 auto;margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+              <div style="font-size:13.5px;line-height:1.45;color:#7a5b12;">CarePlus has not received your lab results yet. Complete your labs to populate your results.</div>
+            </div>
+
+            <div style="border:1px solid #dfe4e5;border-radius:14px;overflow:hidden;margin-bottom:22px;">
+              <div style="display:flex;align-items:center;padding:11px 14px;background:#e6ebec;">
+                <div style="flex:1;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6e7a7d;">Measurement</div>
+                <div style="width:70px;text-align:right;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#6e7a7d;">Result</div>
+                <div style="width:60px;text-align:right;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#6e7a7d;">Goal</div>
+              </div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Weight (lbs)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Blood pressure (sys/dia)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Heart rate (beats/min)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">% Body fat</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Fitness score</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Total cholesterol (mg/dL)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Cholesterol LDL (mg/dL)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Cholesterol HDL (mg/dL)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Triglycerides (mg/dL)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Fasting glucose (mg/dL)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">BMI</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+              <div style="display:flex;align-items:center;padding:13px 14px;border-top:1px solid #eef1f2;"><div style="flex:1;font-size:14px;color:#373d3f;">Waist (in)</div><div style="width:70px;text-align:right;font-size:14px;color:#9aa6a8;">—</div><div style="width:60px;text-align:right;font-size:14px;color:#9aa6a8;">—</div></div>
+            </div>
+
+            <!-- B5 · Recommended for you -->
+            <div style="font-size:17px;font-weight:700;color:#373d3f;margin-bottom:10px;">Recommended programs</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+              <div style="display:flex;align-items:flex-start;gap:13px;padding:14px;border:1px solid #dfe4e5;border-radius:14px;"><div style="width:44px;height:44px;border-radius:11px;background:rgba(4,160,183,.12);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#04a0b7;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z"/></svg></div><div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#0f497f;">Virta — Weight Loss</div><div style="font-size:13px;line-height:1.45;color:#6e7a7d;margin-top:2px;">Lose weight, reduce medications and save money so you can get back to what you love.</div></div></div>
+              <div style="display:flex;align-items:flex-start;gap:13px;padding:14px;border:1px solid #dfe4e5;border-radius:14px;"><div style="width:44px;height:44px;border-radius:11px;background:rgba(82,160,69,.12);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#52a045;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="3.4"/><path d="M4.5 20a6 6 0 0 1 11 0"/></svg></div><div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#0f497f;">Premise Health — Counseling</div><div style="font-size:13px;line-height:1.45;color:#6e7a7d;margin-top:2px;">Meet with licensed behavioral health specialists for confidential, free counseling — virtually or in person.</div></div></div>
+              <div style="display:flex;align-items:flex-start;gap:13px;padding:14px;border:1px solid #dfe4e5;border-radius:14px;"><div style="width:44px;height:44px;border-radius:11px;background:rgba(15,73,127,.08);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#0f497f;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div><div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#0f497f;">Truist Virtual Fitness</div><div style="font-size:13px;line-height:1.45;color:#6e7a7d;margin-top:2px;">Move more and sit less — at work, at home and everywhere you go.</div></div></div>
+              <div style="display:flex;align-items:flex-start;gap:13px;padding:14px;border:1px solid #dfe4e5;border-radius:14px;"><div style="width:44px;height:44px;border-radius:11px;background:rgba(243,179,30,.16);flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#b9860b;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4-2.5-7-5.6-7-10a4.2 4.2 0 0 1 7-3 4.2 4.2 0 0 1 7 3c0 4.4-3 7.5-7 10z"/></svg></div><div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#0f497f;">Lyra Health</div><div style="font-size:13px;line-height:1.45;color:#6e7a7d;margin-top:2px;">Up to 12 free sessions, fast virtual or in-person care, and 24/7 confidential support.</div></div></div>
+            </div>
+
+            <div style="font-size:17px;font-weight:700;color:#373d3f;margin-bottom:10px;">Recommended educational handouts</div>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px;">
+              <div style="display:flex;align-items:center;gap:13px;padding:13px 14px;border:1px solid #dfe4e5;border-radius:14px;"><div style="width:40px;height:40px;border-radius:10px;background:#e6ebec;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#6e7a7d;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></div><div style="flex:1;font-size:14.5px;font-weight:600;color:#373d3f;">Understanding your cholesterol numbers</div></div>
+              <div style="display:flex;align-items:center;gap:13px;padding:13px 14px;border:1px solid #dfe4e5;border-radius:14px;"><div style="width:40px;height:40px;border-radius:10px;background:#e6ebec;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#6e7a7d;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></div><div style="flex:1;font-size:14.5px;font-weight:600;color:#373d3f;">Move more, sit less: everyday activity</div></div>
+              <div style="display:flex;align-items:center;gap:13px;padding:13px 14px;border:1px solid #dfe4e5;border-radius:14px;"><div style="width:40px;height:40px;border-radius:10px;background:#e6ebec;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#6e7a7d;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></div><div style="flex:1;font-size:14.5px;font-weight:600;color:#373d3f;">Building a better sleep routine</div></div>
+            </div>
+            <div style="font-size:12px;color:#9aa6a8;margin:8px 0 20px;font-style:italic;">Handout titles are placeholders — surfaced by the nurse/system.</div>
+
+            <!-- Support -->
+            <div style="padding:18px;background:#e6ebec;border-radius:14px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:8px;">Peak Health support</div>
+              <div style="font-size:14px;color:#373d3f;line-height:1.7;">Phone <a href="tel:2522375090">252-237-5090</a><br>Email <a href="mailto:appointment@peak-health.net">appointment@peak-health.net</a></div>
+              <button style="margin-top:12px;border:1px solid #0f497f;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;cursor:pointer;">Peak Health portal</button>
+            </div>
+          </sc-if>
+
+          <!-- ===== ENROLLMENT TAB ===== -->
+          <sc-if value="{{ onEnroll }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:15px;line-height:1.55;color:#6e7a7d;margin:0 0 16px;">You've completed every enrollment step. Here's your record and where your first appointment stands.</p>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+              <span style="font-size:17px;font-weight:700;color:#373d3f;">Enrollment steps</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#52a045;"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 10l4 4 10-11"/></svg>4 of 4 complete</span>
+            </div>
+
+            <!-- Completed checklist (cards → detail) -->
+            <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:22px;">
+              <div onClick="{{ openStep1 }}" style="cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px;border:1px solid #dfe4e5;border-radius:14px;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(4,160,183,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#04a0b7;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="8" r="3.4"/><path d="M4.5 20a6 6 0 0 1 11 0"/><path d="M16 12l2 2 3.5-3.5"/></svg></div>
+                <div style="flex:1;"><div style="font-size:11px;font-weight:700;color:#52a045;letter-spacing:.04em;">STEP 1 · DONE</div><div style="font-size:15px;font-weight:700;color:#373d3f;line-height:1.3;">Set up your CarePlus account</div></div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#52a045;display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><svg width="15" height="15" fill="none" stroke="#fff" stroke-width="2.6"><path d="M3 8l3.5 3.5L13 4"/></svg></div>
+              </div>
+              <div onClick="{{ openStep2 }}" style="cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px;border:1px solid #dfe4e5;border-radius:14px;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(15,73,127,.1);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#0f497f;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M9 3v-.5h6V3"/><path d="M8.5 10h7M8.5 14h4"/></svg></div>
+                <div style="flex:1;"><div style="font-size:11px;font-weight:700;color:#98a4b0;letter-spacing:.04em;">STEP 2 · PEAK HEALTH</div><div style="font-size:15px;font-weight:700;color:#373d3f;line-height:1.3;">Program Acknowledgment</div></div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#52a045;display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><svg width="15" height="15" fill="none" stroke="#fff" stroke-width="2.6"><path d="M3 8l3.5 3.5L13 4"/></svg></div>
+              </div>
+              <div onClick="{{ openStep3 }}" style="cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px;border:1px solid #dfe4e5;border-radius:14px;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(82,160,69,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#52a045;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3"/><path d="M7.5 14h9"/></svg></div>
+                <div style="flex:1;"><div style="font-size:11px;font-weight:700;color:#98a4b0;letter-spacing:.04em;">STEP 3 · PEAK HEALTH</div><div style="font-size:15px;font-weight:700;color:#373d3f;line-height:1.3;">Complete lab work</div></div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#52a045;display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><svg width="15" height="15" fill="none" stroke="#fff" stroke-width="2.6"><path d="M3 8l3.5 3.5L13 4"/></svg></div>
+              </div>
+              <div onClick="{{ openStep4 }}" style="cursor:pointer;display:flex;align-items:center;gap:13px;padding:15px;border:1px solid #dfe4e5;border-radius:14px;">
+                <div style="width:48px;height:48px;border-radius:12px;background:rgba(55,61,63,.1);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#373d3f;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z"/></svg></div>
+                <div style="flex:1;"><div style="font-size:11px;font-weight:700;color:#98a4b0;letter-spacing:.04em;">STEP 4 · IN-APP</div><div style="font-size:15px;font-weight:700;color:#373d3f;line-height:1.3;">Health Assessment</div></div>
+                <div style="width:26px;height:26px;border-radius:50%;background:#52a045;display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><svg width="15" height="15" fill="none" stroke="#fff" stroke-width="2.6"><path d="M3 8l3.5 3.5L13 4"/></svg></div>
+              </div>
+            </div>
+
+            <!-- Appointment status -->
+            <div style="font-size:17px;font-weight:700;color:#373d3f;margin-bottom:10px;">First nurse appointment</div>
+
+            <!-- REQUESTED (default / graceful fallback) -->
+            <sc-if value="{{ apptRequested }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:18px;border:1px solid #dfe4e5;border-radius:14px;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:44px;height:44px;border-radius:50%;background:rgba(4,160,183,.12);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#04a0b7;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg></div>
+                  <div style="flex:1;"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#04a0b7;">Being scheduled</div><div style="font-size:16px;font-weight:700;color:#373d3f;line-height:1.35;">Your first appointment is being scheduled</div></div>
+                </div>
+                <p style="font-size:14px;line-height:1.55;color:#6e7a7d;margin:12px 0 0;">Peak Health typically schedules your first nurse visit within about <strong style="color:#373d3f;">20 business days</strong>. Watch for a confirmation by email.</p>
+              </div>
+            </sc-if>
+
+            <!-- SCHEDULED -->
+            <sc-if value="{{ apptScheduled }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:18px;border:1px solid #dfe4e5;border-radius:14px;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:44px;height:44px;border-radius:50%;background:rgba(15,73,127,.08);display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#0f497f;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M4 9h16M8 3v4M16 3v4"/><path d="M9 14l2 2 4-4"/></svg></div>
+                  <div style="flex:1;"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#0f497f;">Scheduled</div><div style="font-size:16px;font-weight:700;color:#373d3f;line-height:1.35;">Thu, Jun 12 · 10:30 AM ET</div></div>
+                </div>
+                <p style="font-size:14px;line-height:1.55;color:#6e7a7d;margin:12px 0 14px;">Telehealth visit with a <strong style="color:#373d3f;">Peak Health nurse</strong>. You'll get a reminder the day before.</p>
+                <div style="display:flex;gap:10px;">
+                  <button style="border:0;cursor:pointer;background:#0f497f;color:#fff;font-family:inherit;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;">Add to calendar</button>
+                  <button style="border:1px solid #0f497f;cursor:pointer;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:14px;padding:10px 18px;border-radius:999px;">Reschedule</button>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- FIRST VISIT COMPLETE -->
+            <sc-if value="{{ apptComplete }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:18px;border:1px solid #dfe4e5;border-radius:14px;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:44px;height:44px;border-radius:50%;background:#52a045;display:flex;align-items:center;justify-content:center;flex:0 0 auto;"><svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 9-10"/></svg></div>
+                  <div style="flex:1;"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#52a045;">Active</div><div style="font-size:16px;font-weight:700;color:#373d3f;line-height:1.35;">You've completed your first visit</div></div>
+                </div>
+                <p style="font-size:14px;line-height:1.55;color:#6e7a7d;margin:12px 0 0;">You're now active in LifeForce. Follow your nurse's guidance under <strong style="color:#373d3f;">My Progress</strong> and keep working toward your next phase.</p>
+              </div>
+            </sc-if>
+
+            <!-- Support -->
+            <div style="margin-top:20px;padding:18px;background:#e6ebec;border-radius:14px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:8px;">Peak Health support</div>
+              <div style="font-size:14px;color:#373d3f;line-height:1.7;">Phone <a href="tel:2522375090">252-237-5090</a><br>Email <a href="mailto:appointment@peak-health.net">appointment@peak-health.net</a></div>
+              <button style="margin-top:12px;border:1px solid #0f497f;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;cursor:pointer;">Peak Health portal</button>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ STEP DETAIL (completed) ============ -->
+    <sc-if value="{{ isStepDetail }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 24px 8px;font-size:15px;font-weight:700;color:#373d3f;"><span>9:41</span><span style="display:flex;align-items:center;gap:7px;"><svg width="17" height="11" viewBox="0 0 17 11" fill="#373d3f"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.6" y="5" width="3" height="6" rx="1"/><rect x="9.2" y="2.6" width="3" height="8.4" rx="1"/><rect x="13.8" y="0" width="3" height="11" rx="1"/></svg><svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#373d3f" stroke-width="1.5"><path d="M1 3.4a10 10 0 0 1 14 0"/><path d="M3.4 5.9a6.4 6.4 0 0 1 9.2 0"/><path d="M5.8 8.3a3 3 0 0 1 4.4 0"/></svg><svg width="25" height="12" viewBox="0 0 25 12"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="#373d3f" stroke-opacity=".4"/><rect x="2" y="2" width="17" height="8" rx="1.5" fill="#373d3f"/><rect x="22.5" y="4" width="1.6" height="4" rx=".8" fill="#373d3f" fill-opacity=".4"/></svg></span></div>
+        <div style="display:flex;align-items:center;padding:6px 16px 10px;position:relative;">
+          <button onClick="{{ goEnroll }}" style="border:0;background:none;padding:6px;cursor:pointer;color:#373d3f;"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="flex:1;text-align:center;font-size:17px;font-weight:800;color:#373d3f;">{{ sdStepLabel }}</div>
+          <div style="width:38px;"></div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:8px 22px 100px;">
+          <div style="width:64px;height:64px;border-radius:16px;background:{{ sdChipBg }};display:flex;align-items:center;justify-content:center;color:{{ sdChipFg }};">{{ sdIcon }}</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#98a4b0;margin-top:18px;">{{ sdEyebrow }}</div>
+          <div style="font-size:28px;font-weight:800;color:#373d3f;letter-spacing:-.01em;margin:4px 0 14px;line-height:1.15;">{{ sdTitle }}</div>
+          <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(82,160,69,.12);color:#52a045;font-size:13px;font-weight:700;padding:8px 14px;border-radius:999px;margin-bottom:16px;"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M3 8l3.5 3.5L13 4"/></svg>Completed</div>
+          <p style="font-size:16px;line-height:1.55;color:#373d3f;margin:0;">{{ sdBody }}</p>
+          <div style="margin-top:24px;padding:18px;background:#e6ebec;border-radius:14px;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f497f;margin-bottom:8px;">Peak Health support</div>
+            <div style="font-size:14px;color:#373d3f;line-height:1.7;">Phone <a href="tel:2522375090">252-237-5090</a><br>Email <a href="mailto:appointment@peak-health.net">appointment@peak-health.net</a></div>
+            <button style="margin-top:12px;border:1px solid #0f497f;background:#fff;color:#0f497f;font-family:inherit;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;cursor:pointer;">Peak Health portal</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="position:absolute;left:0;right:0;bottom:0;height:78px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid #dfe4e5;display:flex;align-items:flex-start;padding:10px 10px 0;z-index:30;">
+      <button onClick="{{ goHome }}" style="flex:1;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:{{ navHome }};font-family:inherit;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.8 12 4l8 6.8V19a1 1 0 0 1-1 1h-4.3v-4.7a1 1 0 0 0-1-1h-1.4a1 1 0 0 0-1 1V20H5a1 1 0 0 1-1-1z"/></svg><span style="font-size:10.5px;font-weight:700;">Home</span></button>
+      <button onClick="{{ goDetail }}" style="flex:1;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:{{ navCare }};font-family:inherit;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="5.8" r="2.4"/><path d="M8.2 8.6 11.6 13.4 16.4 13.4 18.5 9.4"/><path d="M7.3 10.2 4.7 16.6"/></svg><span style="font-size:10.5px;font-weight:700;">Digital Care</span></button>
+      <button style="flex:1;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:#9aa6a8;font-family:inherit;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19.5c-2.1-1.2-3.4-3.5-3.4-6.1 0-2.7 1.3-5.1 3.4-6.6 2.1 1.5 3.4 3.9 3.4 6.6 0 2.6-1.3 4.9-3.4 6.1z"/><path d="M12 19.5c-3.6 0-6.5-2.4-6.5-5.7 1.9 0 3.6.8 4.9 2.1M12 19.5c3.6 0 6.5-2.4 6.5-5.7-1.9 0-3.6.8-4.9 2.1"/></svg><span style="font-size:10.5px;font-weight:700;">Wellbeing</span></button>
+      <button style="flex:1;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:#9aa6a8;font-family:inherit;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="M12 9.5v4M10 11.5h4"/></svg><span style="font-size:10.5px;font-weight:700;">Benefits</span></button>
+      <button style="flex:1;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;color:#9aa6a8;font-family:inherit;"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.6L20.5 9.4l-4.3 4 1.1 6-5.3-2.9L6.7 19.4l1.1-6-4.3-4 5.9-.8z"/></svg><span style="font-size:10.5px;font-weight:700;">Rewards</span></button>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:980},&quot;startScreen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;detail&quot;,&quot;overview&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;startTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;status&quot;,&quot;options&quot;:[&quot;status&quot;,&quot;progress&quot;,&quot;enroll&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;phase&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:2,&quot;options&quot;:[1,2,3,4,5],&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;nurseState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;populated&quot;,&quot;options&quot;:[&quot;populated&quot;,&quot;empty&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;householdState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;none&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;registered&quot;,&quot;complete&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;apptState&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;requested&quot;,&quot;options&quot;:[&quot;requested&quot;,&quot;scheduled&quot;,&quot;complete&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;showFlowMap&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  state = { screen: 'home', tab: 'status', phase: 2, nurse: 'populated', household: 'none', appt: 'requested', stepView: 2 };
+  KEY = 'lifeforce_flowB_v1';
+
+  componentDidMount() {
+    let saved = {};
+    try { const raw = localStorage.getItem(this.KEY); if (raw) saved = JSON.parse(raw) || {}; } catch (e) {}
+    this.setState({
+      screen: this.props.startScreen || saved.screen || 'home',
+      tab: this.props.startTab || saved.tab || 'status',
+      phase: this.props.phase || saved.phase || 2,
+      nurse: this.props.nurseState || saved.nurse || 'populated',
+      household: this.props.householdState || saved.household || 'none',
+      appt: this.props.apptState || saved.appt || 'requested',
+      stepView: saved.stepView || 2
+    });
+  }
+
+  persist() {
+    try { localStorage.setItem(this.KEY, JSON.stringify({ screen: this.state.screen, tab: this.state.tab, phase: this.state.phase, nurse: this.state.nurse, household: this.state.household, appt: this.state.appt, stepView: this.state.stepView })); } catch (e) {}
+  }
+  set(patch) { this.setState(patch, () => this.persist()); }
+
+  renderVals() {
+    const s = this.state, phase = s.phase;
+    const BLUE = '#0f497f', SLATE = '#6e7a7d', IDLE = '#9aa6a8';
+
+    // 5-stage indicator segment colors (on blue hero)
+    const heroSeg = (i) => (i <= phase ? '#ffffff' : 'rgba(255,255,255,.24)');
+    // home card mini indicator (on blue)
+    const homeSeg = (i) => (i <= phase ? '#04a0b7' : 'rgba(255,255,255,.28)');
+
+    const nudges = {
+      1: 'Welcome to LifeForce. Meet with your nurse coach to set your goals and start earning monthly medical credit.',
+      2: 'You are making progress. Save up to $[amount] more per year if you improve your health and reach LifeForce Phase 5.',
+      3: "You're over halfway. Keep working your goals with your nurse to save up to $[amount] more per year at LifeForce Phase 5.",
+      4: 'Almost there. Reaching LifeForce Phase 5 could unlock up to $[amount] more per year in medical credit.',
+      5: 'Congratulations on reaching the top LifeForce Phase! You are meeting, achieving and maintaining goals towards better health and well-being and earning your medical credit.'
+    };
+    const rewardLine = phase >= 5 ? 'You earned $[Y]' : '$[X] of $[Y] earned';
+
+    // demo control button styling
+    const seg = (active) => active ? { bg: BLUE, fg: '#fff', bd: BLUE } : { bg: '#fff', fg: SLATE, bd: '#c6cccd' };
+    const p1 = seg(phase === 1), p2 = seg(phase === 2), p3 = seg(phase === 3), p4 = seg(phase === 4), p5 = seg(phase === 5);
+    const nP = seg(s.nurse === 'populated'), nE = seg(s.nurse === 'empty');
+    const hN = seg(s.household === 'none'), hR = seg(s.household === 'registered'), hC = seg(s.household === 'complete');
+    const aReq = seg(s.appt === 'requested'), aSch = seg(s.appt === 'scheduled'), aComp = seg(s.appt === 'complete');
+    const R = React.createElement;
+    const iconCP = R('svg',{width:32,height:32,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','strokeWidth':1.9},R('circle',{cx:10,cy:8,r:3.4}),R('path',{d:'M4.5 20a6 6 0 0 1 11 0'}),R('path',{d:'M16 12l2 2 3.5-3.5'}));
+    const iconClip = R('svg',{width:32,height:32,fill:'none',stroke:'currentColor','strokeWidth':1.9},R('rect',{x:5,y:3,width:14,height:18,rx:2.5}),R('path',{d:'M9 3v-.5h6V3'}),R('path',{d:'M8.5 10h7M8.5 14h4'}));
+    const iconFlask = R('svg',{width:32,height:32,fill:'none',stroke:'currentColor','strokeWidth':1.9,'strokeLinejoin':'round'},R('path',{d:'M9 3h6M10 3v5.5L5.5 17a2 2 0 0 0 1.8 3h9.4a2 2 0 0 0 1.8-3L14 8.5V3'}),R('path',{d:'M7.5 14h9'}));
+    const iconHeart = R('svg',{width:32,height:32,fill:'none',stroke:'currentColor','strokeWidth':1.9,'strokeLinecap':'round','strokeLinejoin':'round'},R('path',{d:'M20 8.6c0 4.1-8 9.4-8 9.4s-8-5.3-8-9.4a4.5 4.5 0 0 1 8-2.9 4.5 4.5 0 0 1 8 2.9z'}));
+    const sd = {
+      1: { label: 'Step 1', eyebrow: 'CarePlus · Done', title: 'Set up your CarePlus account', chipBg: 'rgba(4,160,183,.12)', chipFg: '#04a0b7', icon: iconCP, body: 'Your CarePlus Mobile Health account is active — that\u2019s how you\u2019re reading this. Nothing more to do here.' },
+      2: { label: 'Step 2', eyebrow: 'Peak Health', title: 'Program Acknowledgment', chipBg: 'rgba(15,73,127,.1)', chipFg: '#0f497f', icon: iconClip, body: 'You acknowledged the Company Release and the Wellness Program Notice & Privacy Policy on the Peak Health portal.' },
+      3: { label: 'Step 3', eyebrow: 'Peak Health', title: 'Complete lab work', chipBg: 'rgba(82,160,69,.12)', chipFg: '#52a045', icon: iconFlask, body: 'Your lab order was completed. Results flow to your nurse coach automatically once they\u2019re processed.' },
+      4: { label: 'Step 4', eyebrow: 'In-app', title: 'Health Assessment', chipBg: 'rgba(55,61,63,.1)', chipFg: '#373d3f', icon: iconHeart, body: 'You completed your in-app Health Assessment. Your nurse reviews your responses before your first visit.' }
+    };
+    const sv = sd[s.stepView] || sd[2];
+
+    let navTab = s.screen === 'home' ? 'home' : 'care';
+
+    return {
+      isHome: s.screen === 'home',
+      isOverview: s.screen === 'overview',
+      isDetail: s.screen === 'detail',
+      isStepDetail: s.screen === 'stepdetail',
+      onStatus: s.tab === 'status',
+      onProgress: s.tab === 'progress',
+      onEnroll: s.tab === 'enroll',
+      mapVisible: this.props.showFlowMap ?? true,
+
+      phase,
+      nudge: nudges[phase],
+      rewardLine,
+      isPhase5: phase >= 5,
+
+      heroSeg1: heroSeg(1), heroSeg2: heroSeg(2), heroSeg3: heroSeg(3), heroSeg4: heroSeg(4), heroSeg5: heroSeg(5),
+      homeSeg1: homeSeg(1), homeSeg2: homeSeg(2), homeSeg3: homeSeg(3), homeSeg4: homeSeg(4), homeSeg5: homeSeg(5),
+
+      nursePopulated: s.nurse === 'populated',
+      nurseEmpty: s.nurse === 'empty',
+
+      hhNone: s.household === 'none',
+      hhReg: s.household === 'registered',
+      hhShow: s.household !== 'complete',
+
+      statusTabBg: s.tab === 'status' ? '#fff' : 'transparent',
+      statusTabFg: s.tab === 'status' ? BLUE : '#373d3f',
+      statusTabShadow: s.tab === 'status' ? '0 1px 3px rgba(6,42,66,.14)' : 'none',
+      progressTabBg: s.tab === 'progress' ? '#fff' : 'transparent',
+      progressTabFg: s.tab === 'progress' ? BLUE : '#373d3f',
+      progressTabShadow: s.tab === 'progress' ? '0 1px 3px rgba(6,42,66,.14)' : 'none',
+      enrollTabBg: s.tab === 'enroll' ? '#fff' : 'transparent',
+      enrollTabFg: s.tab === 'enroll' ? BLUE : '#373d3f',
+      enrollTabShadow: s.tab === 'enroll' ? '0 1px 3px rgba(6,42,66,.14)' : 'none',
+
+      apptRequested: s.appt === 'requested',
+      apptScheduled: s.appt === 'scheduled',
+      apptComplete: s.appt === 'complete',
+
+      sdStepLabel: sv.label, sdEyebrow: sv.eyebrow, sdTitle: sv.title,
+      sdChipBg: sv.chipBg, sdChipFg: sv.chipFg, sdIcon: sv.icon, sdBody: sv.body,
+
+      apReqBg: aReq.bg, apReqFg: aReq.fg, apReqBorder: aReq.bd,
+      apSchBg: aSch.bg, apSchFg: aSch.fg, apSchBorder: aSch.bd,
+      apCompBg: aComp.bg, apCompFg: aComp.fg, apCompBorder: aComp.bd,
+
+      navHome: navTab === 'home' ? BLUE : IDLE,
+      navCare: navTab === 'care' ? BLUE : IDLE,
+
+      // demo controls
+      ph1Bg: p1.bg, ph1Fg: p1.fg, ph1Border: p1.bd,
+      ph2Bg: p2.bg, ph2Fg: p2.fg, ph2Border: p2.bd,
+      ph3Bg: p3.bg, ph3Fg: p3.fg, ph3Border: p3.bd,
+      ph4Bg: p4.bg, ph4Fg: p4.fg, ph4Border: p4.bd,
+      ph5Bg: p5.bg, ph5Fg: p5.fg, ph5Border: p5.bd,
+      nPopBg: nP.bg, nPopFg: nP.fg, nPopBorder: nP.bd,
+      nEmpBg: nE.bg, nEmpFg: nE.fg, nEmpBorder: nE.bd,
+      hhNoneBg: hN.bg, hhNoneFg: hN.fg, hhNoneBorder: hN.bd,
+      hhRegBg: hR.bg, hhRegFg: hR.fg, hhRegBorder: hR.bd,
+      hhCompBg: hC.bg, hhCompFg: hC.fg, hhCompBorder: hC.bd,
+
+      // handlers
+      goHome: () => this.set({ screen: 'home' }),
+      goDetail: () => this.set({ screen: 'detail', tab: 'status' }),
+      goDetailProgress: () => this.set({ screen: 'detail', tab: 'progress' }),
+      goOverview: () => this.set({ screen: 'overview' }),
+      setStatusTab: () => this.set({ tab: 'status' }),
+      setProgressTab: () => this.set({ tab: 'progress' }),
+      setEnrollTab: () => this.set({ tab: 'enroll' }),
+      goEnroll: () => this.set({ screen: 'detail', tab: 'enroll' }),
+      openStep1: () => this.set({ screen: 'stepdetail', stepView: 1 }),
+      openStep2: () => this.set({ screen: 'stepdetail', stepView: 2 }),
+      openStep3: () => this.set({ screen: 'stepdetail', stepView: 3 }),
+      openStep4: () => this.set({ screen: 'stepdetail', stepView: 4 }),
+      setApptRequested: () => this.set({ appt: 'requested' }),
+      setApptScheduled: () => this.set({ appt: 'scheduled' }),
+      setApptComplete: () => this.set({ appt: 'complete' }),
+      setPhase1: () => this.set({ phase: 1 }),
+      setPhase2: () => this.set({ phase: 2 }),
+      setPhase3: () => this.set({ phase: 3 }),
+      setPhase4: () => this.set({ phase: 4 }),
+      setPhase5: () => this.set({ phase: 5 }),
+      setNursePop: () => this.set({ nurse: 'populated' }),
+      setNurseEmpty: () => this.set({ nurse: 'empty' }),
+      setHhNone: () => this.set({ household: 'none' }),
+      setHhReg: () => this.set({ household: 'registered' }),
+      setHhComplete: () => this.set({ household: 'complete' }),
+      resetFlow: () => this.set({ screen: 'home', tab: 'status', phase: 2, nurse: 'populated', household: 'none', appt: 'requested', stepView: 2 })
+    };
+  }
+}
+</script>
+</body>
+</html>

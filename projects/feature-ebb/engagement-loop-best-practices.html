@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Engagement Loop — Best Practices (Research, July 2026)</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-strong:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:840px;margin:34px auto 80px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 52px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;line-height:1.12;margin:0 0 6px;text-wrap:balance}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin:34px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;font-weight:680;margin:22px 0 6px}
+h4{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--ink-2)}
+p{margin:10px 0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid rgba(20,99,111,0.3)}
+a:hover{border-bottom-color:var(--teal-2)}
+strong{font-weight:680;color:var(--ink)}
+code{font-family:var(--mono);font-size:0.86em;background:rgba(34,38,42,0.06);padding:1px 5px;border-radius:5px;color:var(--ink)}
+pre{background:#20242a;color:#e8e6df;border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:14px 0;padding:2px 16px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;color:var(--ink-2)}
+blockquote p{margin:8px 0}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+ul,ol{margin:10px 0;padding-left:24px}
+li{margin:4px 0}
+li>ul,li>ol{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal);font-weight:680;font-size:12.5px;letter-spacing:0.01em;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td code{font-size:0.82em}
+.docnav{max-width:840px;margin:0 auto;padding:16px 52px 0;font-size:12.5px;color:var(--ink-3)}
+.docnav a{color:var(--teal-2)}
+@media(max-width:620px){.docnav{padding:12px 22px 0}}
+</style></head><body>
+<div class="docnav">EBB docs · <a href="_share-guide.html">Share guide</a> · <a href="_brief.html">Brief</a> · <a href="_decisions.html">Decisions</a> · <a href="_screens.html">Screens</a> · <a href="engagement-loop-best-practices.html">Research</a></div>
+<div class="doc"><h1>Engagement Loop — Best Practices (Research, July 2026)</h1>
+<blockquote><p>Evidence-based patterns for a repeatable education/health engagement loop, mapped to the EBB four stages. Source: deep-research pass (6 angles, 26 sources, 122 claims → 22 confirmed via 3-vote adversarial verification). Confidence tiers noted. Peer-reviewed = high; vendor/blog = medium/directional.</p></blockquote>
+<blockquote><p><strong>Read alongside <code>reference/engagement-behavior-experts.md</code></strong> — the expert reference tempers this doc. Its 2026 evidence check finds <strong>gamification is a marginal driver in health and may HURT retention in mental-health apps</strong> (JAMA Psychiatry Nov 2025); <strong>reminders + human/coach contact are the proven retainers.</strong> Primary lens for EBB = <strong>Bucher / Self-Determination Theory</strong> (autonomy-competence-relatedness), with the $100 as an honest accelerant, NOT the durable motor. Both this research and the expert doc converge on the <strong>crowding-out</strong> risk — the #1 EBB design hazard. Use the mechanics below (goal-gradient/progress visibility) for the <em>path</em>; use SDT/Bucher/Michie for the <em>motivation</em>.</p></blockquote>
+<h2>The one big idea</h2>
+<p><strong>Goal-gradient effect</strong> — people accelerate effort as they near a reward, and <em>manufacturing perceived progress</em> lifts completion for identical real effort. This is the empirical backbone for showing progress-to-reward at every stage.</p>
+<ul><li>Nunes &amp; Drèze (2006) car-wash: pre-filling 2 of 10 stamps (same 8 washes required) raised completion <strong>19% → 34%</strong>, and endowed customers finished <strong>faster</strong>. [high]</li><li>Kivetz et al. (2006, JMR): a <strong>steeper</strong> goal-gradient predicts <strong>better retention and faster re-engagement after the reward</strong> — the exact mechanism a "complete → reward → next" loop should exploit. Post-reward there's a dip, then re-acceleration toward the next goal. [high, correlational]</li></ul>
+<p><strong>Application:</strong> pre-fill/endow the first step of each DCP, show "Session X of 7 · %", let the bar visibly steepen near completion, and at the payout moment immediately present the next program with its own progress-to-reward.</p>
+<h2>Stage 1 — Getting the user IN (activation)</h2>
+<ul><li><strong>Personalization quiz creates "perceived fit" and more than doubled course starts</strong> at Headspace (<strong>31% → 63%</strong>); a quiz beat showing the <em>identical</em> recommended course by +7.6pts. [medium — vendor A/B; caveat below]</li><li><strong>Hook model + low friction</strong> (Duolingo): mascot push (trigger) → ~3-min lesson (action) → variable reward → streak (investment). Short, clearly-bounded first sessions raise start probability. [medium]</li><li><strong>Reward/progress callout here:</strong> state the reward up-front at the entry point ("Earn $100 for completing this program") and show the path is short/finishable.</li></ul>
+<h2>Stage 2 — Driving to COMPLETION</h2>
+<ul><li><strong>Make progress visible and concrete:</strong> "Session X of N", % complete, path maps, sequential lock/unlock. Goal-gradient says the bar should feel like it accelerates near the end. [high foundation / medium UI]</li><li><strong>Deliver the reward signal tightly coupled to the behavior</strong> — Duolingo shows XP <em>before the user closes the lesson screen</em>. [medium]</li><li><strong>Reward/progress callout:</strong> always show distance-to-reward ("2 sessions left to earn $100"), not just distance-traveled.</li></ul>
+<h2>Stage 3 — Getting them to the NEXT one (the hinge)</h2>
+<ul><li><strong>Celebration = the re-acceleration moment.</strong> Kivetz's post-reward re-acceleration means the completion/celebration screen is the highest-momentum point to present the next program. [high mechanism]</li><li>Celebrate <strong>completion</strong> (payout), not start; then surface a <strong>"what's next"</strong> affordance with the next program's progress-to-reward already visible.</li><li><strong>Reward/progress callout:</strong> the celebration should say what was <em>earned</em> ("You earned $100 — 1 of 5 this year") AND tee the next ("Start your next — earn $100 more"), tying the whole loop to reward in one screen.</li></ul>
+<h2>Stage 4 — REPEATING the loop (retention)</h2>
+<ul><li><strong>Streaks/daily goals</strong> work via loss aversion but <strong>can decouple from the real goal</strong> — users chase the streak, not the health behavior (Silverman &amp; Barasch 2023, 7 studies). Anchor rewards to <em>verified program completion</em>, not streak length. [high]</li><li>Behavior-timed push (Duolingo fires slightly before the user's habitual slot) beats fixed reminders. [medium]</li><li><strong>Reward/progress callout:</strong> cumulative annual progress toward the cap ("$300 of $500 earned this year") as a persistent, investment-style tracker.</li></ul>
+<h2>CRITICAL CAUTIONS (apply directly to EBB — all high confidence)</h2>
+<ol><li><strong>Bigger $ ≠ bigger effect.</strong> Higher incentive value did not reliably produce larger effects; effect sizes sometimes <em>decreased</em> as value rose. A $100 reward isn't automatically better than less. → don't over-scale; the ~5/year cap is reasonable.</li><li><strong>Effects are modest and often short-lived after removal.</strong> Financial incentives work <em>while active</em> (pooled RR 1.62; OR ~1.53 sustained to 18 months) but fade once gone. [and: strongest evidence is smoking/screening, NOT multi-session program completion — an extrapolation]</li><li><strong>Engagement–Efficacy Gap.</strong> More app usage does NOT reliably mean better clinical outcomes; maximizing engagement can even undermine efficacy (MDPI 2026 review).</li><li><strong>Crowding-out.</strong> Expected tangible completion-contingent rewards can erode pre-existing intrinsic motivation (Deci/Koestner/Ryan, 128 studies). → pair the $100 with intrinsic reasons (health progress, personal relevance); don't let money be the <em>only</em> frame.</li></ol>
+<h2>What was REFUTED (do not use)</h2>
+<ul><li>"Incentive effects dissipate beyond 3 months post-removal" as a hard rule (1-2).</li><li>"Breaking a streak drives platform abandonment" (0-3).</li><li>"Streaks so strong that millions maintain 1yr+ streaks" as proof streaks drive retention (1-2).</li></ul>
+<h2>Open questions the research couldn't close</h2>
+<ul><li>Does goal-gradient/endowed-progress hold for weeks-long <strong>clinical</strong> programs as strongly as for low-effort punch-cards? (All cited evidence is loyalty/consumer or self-reported app usage.)</li><li>Does the ~5/year <strong>cap dampen the goal-gradient</strong> on later programs (less reward pull as you approach the cap)?</li><li>Best intrinsic-motivation design to insulate behavior after the $100 is paid / cap is hit?</li></ul>
+<h2>Key sources</h2>
+<p>Kivetz, Urminsky &amp; Zheng 2006 (JMR, goal-gradient) · Nunes &amp; Drèze 2006 (endowed progress) · Giles et al. 2014 (PLOS ONE, incentives meta) · Mantzari/Marteau 2015 (Prev Med) · Glanz et al. 2026 (Annual Rev Public Health) · MDPI Information 17(2):168 2026 (Engagement–Efficacy Gap) · Deci/Koestner/Ryan 1999 (crowding-out) · Silverman &amp; Barasch 2023 (streaks) · Headspace/Irrational Labs onboarding · Duolingo Hook-model teardowns.</p></div>
+</body></html>

@@ -224,9 +224,7 @@ When starting a new session, load these files for full context:
 @outputs/apr18-home-ideation/home-module-wireframes.html
 
 # Reference (if reviewing designs)
-@reference/ux-usability-experts.md
-@reference/ux-laws-quick-reference.md
-@reference/visual-design-experts.md
+@reference/review/_kit.md
 ```
 
 ---

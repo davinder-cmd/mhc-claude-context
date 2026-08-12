@@ -1,0 +1,248 @@
+Delivered-To: davinder@mobilehealthconsumer.com
+Received: by 2002:a05:7011:108:b0:4ec:7dc8:e44c with SMTP id ht8csp1590572mdb;
+        Tue, 6 Jan 2026 12:53:04 -0800 (PST)
+X-Received: by 2002:a05:690e:140b:b0:646:c661:8f98 with SMTP id 956f58d0204a3-64716bb9b79mr313753d50.40.1767732784462;
+        Tue, 06 Jan 2026 12:53:04 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1767732784; cv=none;
+        d=google.com; s=arc-20240605;
+        b=cJh83tvwR8IZ9jLj0vaNwqw1Efdaobk+qSf71jOmSbS2W3G8jG8E4gZs2IvvKI7PjV
+         XPQVgX2FoZ0VvTv/bxSIm2+R8yYVybiVqVqRk822A+ldr46/6jelogFWR+8686WOXhfF
+         409pKMYsM/WTgT9DTXAQVvWZbUfSmnDtHmKhc4QjMEBZ5EkUnOvL0gExVUVlkAIR1dXg
+         m8EFCD0cApeG+pYHvNUMeuA6SNG1haQ2ezlkEPJklszfY0+zOUuuWCHDSB5TRlHtRLT2
+         Wz0w3pIW6VpV54L0PsIVQk0s5brBqLZokMlKtnBh+R1v4kDCwNH+KCfAZnPmcZGjsigD
+         vDKQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:from:subject:date:message-id:mime-version:dkim-signature;
+        bh=oXOlaZePEdgu+og3vIYGIgWxdWuSQg5XbmgRL07P7uQ=;
+        fh=zwR6sZm3FAN1K5ULvHBHcpc1rhd8Ifd51nFj94W8HOg=;
+        b=XwYXZS4lezl/0jhsiPj+IdnTSSxB2vVVnv2WPGDAYCX/KzAlNs8oYcX/2xEbv493CO
+         B9GrB6QOH+tXB7/IyNnKUsnGa/p2vbcx/zq29/z3//QtyyvOC/VWJ72vY+wU41ax8WR2
+         5Lcnw+ZRQq9oh1kOTFTQiuWx8SxRXftLFLOxVvIEWocGyhY7BK1zp4yBq3IWddd5pBWb
+         /hDu0Ze4Ye40vepUzgk9QEApTmB0VPupGB9WesakvujxipVj0gib2LTr57HA69Q2ASG2
+         r7WQH8P8Yv2Rjnts+gjqw2107W/nTD3qF7g16D+FcKuqpEDazIkbvwrSJa2Qv9lJ86Dp
+         +5mQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@google.com header.s=20230601 header.b=B0Kydmnw;
+       spf=pass (google.com: domain of 3mhzdaqwkaomljrnsn-styjxlttlqj.htr@rtc-meetings-api.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3MHZdaQwKAOMLJRNSN-STYJXLTTLQJ.HTR@rtc-meetings-api.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com;
+       dara=neutral header.i=@mobilehealthconsumer.com
+Return-Path: <3MHZdaQwKAOMLJRNSN-STYJXLTTLQJ.HTR@rtc-meetings-api.bounces.google.com>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id 00721157ae682-790aa56593csor17726137b3.1.2026.01.06.12.53.04
+        for <davinder@mobilehealthconsumer.com>
+        (Google Transport Security);
+        Tue, 06 Jan 2026 12:53:04 -0800 (PST)
+Received-SPF: pass (google.com: domain of 3mhzdaqwkaomljrnsn-styjxlttlqj.htr@rtc-meetings-api.bounces.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@google.com header.s=20230601 header.b=B0Kydmnw;
+       spf=pass (google.com: domain of 3mhzdaqwkaomljrnsn-styjxlttlqj.htr@rtc-meetings-api.bounces.google.com designates 209.85.220.69 as permitted sender) smtp.mailfrom=3MHZdaQwKAOMLJRNSN-STYJXLTTLQJ.HTR@rtc-meetings-api.bounces.google.com;
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=google.com;
+       dara=neutral header.i=@mobilehealthconsumer.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1767732784; x=1768337584; darn=mobilehealthconsumer.com;
+        h=to:from:subject:date:message-id:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=oXOlaZePEdgu+og3vIYGIgWxdWuSQg5XbmgRL07P7uQ=;
+        b=B0KydmnwJ9ZaZgrY/kFCWJxinekkir2qoH71JqVBwre8z/qavDKde3GLC5jHRuB6VJ
+         WSvybtVKskCshAniEScCxfNnbXqosuKhHnhi3Z4WZuCdEOfIdR9p9/BfHAf/NkBzDGR9
+         sI2R/TmxRT3pjhkHJ8njGOr/LUiDg58U/WN/G6Njrh1h2nXIbIn2y3Hk90urxHQUuNsv
+         G7jSWGK+6/UyXsm+8cvJHUnBCyiHaU8VDF6UkOmel9Fcvhp7296QY8jEmCnzCB8QC30W
+         HDelp+9F4nfQW2t6TJO9y6hMJolw7MoPS0wZn0nzwezlw4xbNiMsS1+BDXVaA1oDoCUh
+         ickA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1767732784; x=1768337584;
+        h=to:from:subject:date:message-id:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=oXOlaZePEdgu+og3vIYGIgWxdWuSQg5XbmgRL07P7uQ=;
+        b=IQhWscJfwX6tqqdMP45totqCQPPiDMIplsIj2VoZrZ4FQrY8nP3rI6421KTQg86fL1
+         6boRMksH1tVMPOYUDHBMSNoU0aXQHfPQ3heXvXKIZIhSi67ZUepoJo64axPVkNfXL7n2
+         4xwnh/fzET6nClDKwJ+5T7bIUOd4SmAxUSFq4ei4WZ7MWs9q2Rla76ZNHpJWM/lOFSkJ
+         gR0yV2gbjvIWtfiHDPYuBN6/VB+luqw/BWYyd1aKypUb4gG2l8VBkDCu9znkXg6UV0Cj
+         pjfnrgNOMDkPZiHa/AK1SHRCuHaVXAMgQUjieFHSb9JmVajkuRRvw88NfUGx3ThAdg5E
+         u9Sw==
+X-Gm-Message-State: AOJu0YzQhFmCipDgzZ4MGTO/d2rjJ++APGJ3bxnQB+clYOl+xW81bDTE
+	cv1yUi3+SjCK9yJ/RjMF3OdoJkFlWwpcZtbAhvCc/Amq9fEVP3jDt9QW/Jsv5Y2Ol/D0sxOxZ2k
+	mQQI=
+X-Google-Smtp-Source: AGHT+IGFfJhRDunaOVVLolJ837GcQFUOvYdTTNYlNAszVrHLEznpXfEejw+i2iKT+o+xVQ67lnXsKzlNVk0Ob9HT
+MIME-Version: 1.0
+X-Received: by 2002:a05:690e:1907:b0:63c:ed4b:e53 with SMTP id
+ 956f58d0204a3-64716b73205mr292056d50.25.1767732784041; Tue, 06 Jan 2026
+ 12:53:04 -0800 (PST)
+X-No-Auto-Attachment: 1
+X-Meet-Artifact-Email-Metadata: ChoxdDlmczR1dWlncm5uYjhkdDBiZ2ZoN2lkORImX3FkQ0J0S2hCcEFWcXhnbmpvVmZEeElXT0FJSWlnSWdBQmdCQ0EaCkJKWklIRUhUS0MiLDFmVEhwZlc0UWZQNzVhVk5iWDlBQXBQZ1ljVk9MQlJkcVJUYU45UmFiYXkw
+Message-ID: <autogen-java-d798f4cd-6067-4d95-a640-ff436789e624@google.com>
+Date: Tue, 06 Jan 2026 20:53:04 +0000
+Subject: =?UTF-8?B?Tm90ZXM6IOKAnE5ldyBJbnRlcmVzdCBTdXJ2ZXkgVUkvVVjigJ0gSmFuIDYsIDIwMjY=?=
+From: Gemini <gemini-notes@google.com>
+To: davinder@mobilehealthconsumer.com
+Content-Type: multipart/alternative; boundary="000000000000a68f8b0647be5c6d"
+
+--000000000000a68f8b0647be5c6d
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
+Content-Transfer-Encoding: base64
+
+Tm90ZXMgZnJvbSDigJxOZXcgSW50ZXJlc3QgU3VydmV5IFVJL1VY4oCdDQoNClRoZXNlIG5vdGVz
+IGhhdmUgYmVlbiBzZW50IHRvIGludml0ZWQgZ3Vlc3RzIGluIHlvdXIgb3JnYW5pemF0aW9uLg0K
+DQpPcGVuIG1lZXRpbmcgbm90ZXMNCg0KVGhlIGNvbnRlbnQgd2FzIGF1dG8tZ2VuZXJhdGVkIG9u
+IEphbnVhcnkgNiwgMjAyNiwgMTI6NTEgUE0gUFNUIGFuZCBtYXkgIA0KY29udGFpbiBlcnJvcnMu
+DQoNCg0KU3VtbWFyeQ0KDQpQYXJ0aWNpcGFudHMgRCdBcmN5IExvZWIsIEthaXRsaW4gTG9lYiwg
+QWwgV3JpZ2h0LCBhbmQgRGF2aW5kZXIgUmVoYWwgIA0KZGlzY3Vzc2VkIGVuaGFuY2luZyB0aGUg
+b25ib2FyZGluZyBwcm9jZXNzLCBzcGVjaWZpY2FsbHkgZm9yIERDUC1vbmx5ICANCmNsaWVudHMg
+bGlrZSBJQSBoZWFsdGgsIGNvbmZpcm1pbmcgdGhlIHVzZSBvZiBhIGhlYWx0aCBnb2FscyBzdXJ2
+ZXkgdG8gIA0Kc2ltcGxpZnkgdGhlIGV4cGVyaWVuY2UgYW5kIGxlYWQgdXNlcnMgdG8gYSBEQ1At
+b25seSBob21lIHNjcmVlbi4gRGF2aW5kZXIgIA0KUmVoYWwgb3V0bGluZWQgdGhyZWUgYmlsbGlu
+ZyBvcHRpb25zICh3ZWxsbmVzcyBvbmx5LCB3ZWxsbmVzcyBwbHVzIERDUCwgYW5kICANCkRDUCBv
+bmx5KSBhbmQgZW1waGFzaXplZCBvcHRpbWl6aW5nIHRoZSB1c2VyIGV4cGVyaWVuY2UgZm9yICAN
+CmVuZ2FnZW1lbnQtYmFzZWQgcHJpY2luZywgd2hpbGUgRCdBcmN5IExvZWIgYW5kIEFsIFdyaWdo
+dCBpbnRyb2R1Y2VkICANCnRoZSAiZGFpc3kgY2hhaW4iIGNvbmNlcHQgZm9yIGNvbnRpbnVvdXMg
+cHJvZ3JhbSBlbmdhZ2VtZW50IGFuZCBzdW1tYXJpemVkICANCmZvdXIgc291cmNlcyBmb3IgcGVy
+c29uYWxpemVkIERDUCByZWNvbW1lbmRhdGlvbnMgKHVzZXIgaW5wdXQsIGhlYWx0aCAgDQphc3Nl
+c3NtZW50LCB0cmFja2VyIGRhdGEsIGFuZCBhIGZpZnRoIHNvdXJjZSBhZGRlZCBieSBEYXZpbmRl
+ciBSZWhhbDogdXNlciAgDQphY3Rpdml0eSBpbiB0aGUgYXBwKS4gVGhlIGdyb3VwIGFncmVlZCB0
+byBpbml0aWFsbHkgZm9jdXMgb24gdGhlIElBIGhlYWx0aCAgDQpEQ1Atb25seSBzY2VuYXJpbyBh
+bmQgaW1wbGVtZW50IGEgc2ltcGxlIHNpeC1vcHRpb24gaW50ZXJlc3Qgc3VydmV5IGZvciB0aGUg
+IA0KaW1tZWRpYXRlIGRlbW8sIHdpdGggRGF2aW5kZXIgUmVoYWwgYXNzaWduZWQgdG8gbW9jayB1
+cCB0aGUgc2ltcGxlIHNpeC10aWxlICANCm9uYm9hcmRpbmcgc2NyZWVuIGZvciB0aGUgSUEgZGVt
+by4NCg0KDQpTdWdnZXN0ZWQgbmV4dCBzdGVwcw0KDQoNCkRhdmluZGVyIFJlaGFsIHdpbGwgbW9j
+ayB1cCB0aGUgb25ib2FyZGluZyBzdXJ2ZXkgd2l0aCB0aGUgc2l4IHByb3Bvc2VkICANCmNvbnRl
+bnQgdG9waWNzIGZvciB0aGUgSUEgZGVtby4NCg0KS2FpdGxpbiBMb2ViIHdpbGwgdXNlIENsYXVk
+ZSBvciBDaGF0IEdQVCB0byByZXZpZXcgYW5kIHVwZGF0ZSB0aGUgIA0KcmVxdWlyZW1lbnRzIGRv
+Y3VtZW50IGJhc2VkIG9uIHRoZSBjb252ZXJzYXRpb24gdG8gY3JlYXRlIGEgbW9yZSBjb21wbGV0
+ZSAgDQpQUkQsIGNvdmVyaW5nIGFsbCB1c2UgY2FzZXMgKERDUCBwbHVzIHdlbGwtYmVpbmcsIERD
+UCBvbmx5LCBhbmQgdXNlciBsaWZlICANCmN5Y2xlIGNoYW5nZXMpLg0KDQpEJ0FyY3kgTG9lYiBh
+bmQgRGF2aW5kZXIgUmVoYWwgd2lsbCBtZWV0IHdpdGggUGF1bCBhbmQgU3RldmUgdG9tb3Jyb3cg
+dG8gIA0Kd2FsayB0aHJvdWdoIHRoZSBkZW1vLCB1bmRlcnN0YW5kIHRoZWlyIGZpbmFsIHR3ZWFr
+cywgYW5kIGludHJvZHVjZSB0aGUgIA0Kb25ib2FyZGluZyBzdXJ2ZXkuDQoNCg0KTWVldGluZyBy
+ZWNvcmRzIERvY3VtZW50IE5vdGVzIGJ5IEdlbWluaQ0KDQoNCklzIHRoZSBzdW1tYXJ5IHNlY3Rp
+b24gaW4gdGhpcyBlbWFpbCBoZWxwZnVsPw0KTm90IFVzZWZ1bCBFbWFpbCBVc2VmdWwgRW1haWwN
+Cg0KDQpHb29nbGUgTExDLCAxNjAwIEFtcGl0aGVhdHJlIFBhcmt3YXksIE1vdW50YWluIFZpZXcs
+IENBIDk0MDQzLCBVU0ENCg0KWW91IGhhdmUgcmVjZWl2ZWQgdGhpcyBlbWFpbCBiZWNhdXNlIG1l
+ZXRpbmcgYXJ0aWZhY3RzIHdlcmUgaW5pdGlhdGVkIGluICANCkdvb2dsZSBNZWV0Lg0KDQoNCg==
+--000000000000a68f8b0647be5c6d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr" role=3D"article" style=3D"margin: auto; max-width: 672px; =
+min-width: 288px; text-align: left;"><style>
+    @import url(https://fonts.googleapis.com/css2?family=3DGoogle+Sans_old:=
+wght@400;500);
+    @import url(https://fonts.googleapis.com/css2?family=3DGoogle+Sans+Text=
+_old:wght@400;500);
+ =20
+    .link-button:hover {
+      background: #1e64d4 !important;
+    }
+    .artifact-chip:hover {
+      background: #fff !important;
+    }
+  </style><div style=3D"font-family: &quot;Google Sans Text&quot;, Roboto, =
+Arial, Helvetica, sans-serif; font-style: normal; font-weight: 400;border-r=
+adius: 24px; border: 1px solid #C4C7C5; padding: 48px 5% 5% 5%;"><div style=
+=3D"margin-bottom: 3.75%; padding: 0 16px; text-align: center;"><div><img a=
+lt=3D"" src=3D"https://gstatic.com/meet/symbols/pen_spark_gemini_gradient_6=
+4px.png" style=3D"display: inline-block; height: 32px; width: 32px; vertica=
+l-align: middle;"></div><div role=3D"heading" aria-level=3D"3" style=3D"col=
+or: #202124; font-family: &quot;Google Sans&quot;, Roboto, Arial, Helvetica=
+, sans-serif; font-size: 24px; line-height: 32px; margin: 32px 0 0;">Notes =
+from =E2=80=9CNew Interest Survey UI/UX=E2=80=9D</div><div style=3D"color: =
+#202124; font-size: 14px; line-height: 20px; margin-top: 1.875%;">These not=
+es have been sent to invited guests in your organization.</div><div style=
+=3D"margin-top: 3.75%; white-space: nowrap;"><a href=3D"https://docs.google=
+.com/document/d/1fTHpfW4QfP75aVNbX9AApPgYcVOLBRdqRTaN9Rabay0/edit?usp=3Dmee=
+t_tnfm_email" class=3D"link-button" style=3D"background: #0B57D0; border: t=
+hin solid transparent; border-radius: 100px; display: inline-block; padding=
+: 10px 24px 10px 16px; text-decoration: none;"><span style=3D"color: #FFFFF=
+F; display: inline-block; font-size: 14px; font-weight: 500; line-height: 2=
+0px; margin-left: 8px; text-wrap: wrap; vertical-align: middle;" target=3D"=
+_blank">Open meeting notes</span></a></div><div style=3D"color: #202124; di=
+splay: inline-block; font-size: 14px; line-height: 20px; margin-top: 3.75%;=
+ max-width: 400px;">The content was auto-generated on January 6, 2026, 12:5=
+1 PM PST and may contain errors.</div></div><div style=3D"background: #F8FA=
+FD; border: thin solid transparent; border-radius: 16px; color: #444746;fon=
+t-family: &quot;Google Sans Text&quot;, Roboto, Arial, Helvetica, sans-seri=
+f; font-style: normal; font-weight: 400;; margin-top: 8px; padding: 20px 24=
+px;"><div role=3D"heading" aria-level=3D"4" style=3D"color: #202124; font-f=
+amily: &quot;Google Sans&quot;, Roboto, Arial, Helvetica, sans-serif; font-=
+size: 16px; font-weight: 500; line-height: 24px; margin-bottom: 12px;">Summ=
+ary</div><div style=3D"font-size: 16px; line-height: 24px;">Participants D&=
+#39;Arcy Loeb, Kaitlin Loeb, Al Wright, and Davinder Rehal discussed enhanc=
+ing the onboarding process, specifically for DCP-only clients like IA healt=
+h, confirming the use of a health goals survey to simplify the experience a=
+nd lead users to a DCP-only home screen. Davinder Rehal outlined three bill=
+ing options (wellness only, wellness plus DCP, and DCP only) and emphasized=
+ optimizing the user experience for engagement-based pricing, while D&#39;A=
+rcy Loeb and Al Wright introduced the &quot;daisy chain&quot; concept for c=
+ontinuous program engagement and summarized four sources for personalized D=
+CP recommendations (user input, health assessment, tracker data, and a fift=
+h source added by Davinder Rehal: user activity in the app). The group agre=
+ed to initially focus on the IA health DCP-only scenario and implement a si=
+mple six-option interest survey for the immediate demo, with Davinder Rehal=
+ assigned to mock up the simple six-tile onboarding screen for the IA demo.
+</div></div><div style=3D"background: #F8FAFD; border: thin solid transpare=
+nt; border-radius: 16px; color: #444746;font-family: &quot;Google Sans Text=
+&quot;, Roboto, Arial, Helvetica, sans-serif; font-style: normal; font-weig=
+ht: 400;; margin-top: 8px; padding: 20px 24px;"><div role=3D"heading" aria-=
+level=3D"4" style=3D"color: #202124; font-family: &quot;Google Sans&quot;, =
+Roboto, Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 500; li=
+ne-height: 24px; margin-bottom: 12px;">Suggested next steps</div><table sty=
+le=3D"border-collapse: collapse; width: 100%;"><tr><td style=3D"padding: 4p=
+x 0; vertical-align: top;"><img alt=3D"" src=3D"https://gstatic.com/meet/sy=
+mbols/arrow_right_alt_blue_48px.png" style=3D"display: inline-block; height=
+: 24px; width: 24px; vertical-align: middle;"></td><td style=3D"padding: 6p=
+x 0 6px 12px; width: 100%;"><span style=3D"font-size: 14px; line-height: 20=
+px;">Davinder Rehal will mock up the onboarding survey with the six propose=
+d content topics for the IA demo.</span></td></tr><tr><td style=3D"padding:=
+ 4px 0; vertical-align: top;"><img alt=3D"" src=3D"https://gstatic.com/meet=
+/symbols/arrow_right_alt_blue_48px.png" style=3D"display: inline-block; hei=
+ght: 24px; width: 24px; vertical-align: middle;"></td><td style=3D"padding:=
+ 6px 0 6px 12px; width: 100%;"><span style=3D"font-size: 14px; line-height:=
+ 20px;">Kaitlin Loeb will use Claude or Chat GPT to review and update the r=
+equirements document based on the conversation to create a more complete PR=
+D, covering all use cases (DCP plus well-being, DCP only, and user life cyc=
+le changes).</span></td></tr><tr><td style=3D"padding: 4px 0; vertical-alig=
+n: top;"><img alt=3D"" src=3D"https://gstatic.com/meet/symbols/arrow_right_=
+alt_blue_48px.png" style=3D"display: inline-block; height: 24px; width: 24p=
+x; vertical-align: middle;"></td><td style=3D"padding: 6px 0 6px 12px; widt=
+h: 100%;"><span style=3D"font-size: 14px; line-height: 20px;">D&#39;Arcy Lo=
+eb and Davinder Rehal will meet with Paul and Steve tomorrow to walk throug=
+h the demo, understand their final tweaks, and introduce the onboarding sur=
+vey.</span></td></tr></table></div><div style=3D"background: #F8FAFD; borde=
+r: thin solid transparent; border-radius: 16px; color: #444746;font-family:=
+ &quot;Google Sans Text&quot;, Roboto, Arial, Helvetica, sans-serif; font-s=
+tyle: normal; font-weight: 400;; margin-top: 8px; padding: 20px 24px;"><tab=
+le role=3D"presentation" style=3D"border-collapse: collapse; width: 100%;">=
+<tr><td style=3D"padding-right: 24px; vertical-align: middle; white-space: =
+nowrap;"><img alt=3D"Meeting records" src=3D"https://gstatic.com/meet/symbo=
+ls/attachment_grey_48px.png" style=3D"display: inline-block; height: 24px; =
+width: 24px; vertical-align: middle;"></td><td style=3D"width: 100%;"><a hr=
+ef=3D"https://docs.google.com/document/d/1fTHpfW4QfP75aVNbX9AApPgYcVOLBRdqR=
+TaN9Rabay0/edit?usp=3Dmeet_tnfm_email" class=3D"artifact-chip" style=3D"bac=
+kground: #f0f4f9; border-radius: 32px; border: 1px solid #C4C7C5; display: =
+inline-block; margin: 4px 8px 4px 0; padding: 4px 16px 4px 12px; text-decor=
+ation: none; white-space: nowrap;"><img alt=3D"Document" src=3D"https://gst=
+atic.com/meet/symbols/article_blue_40px.png" style=3D"display: inline-block=
+; height: 20px; width: 20px; vertical-align: middle;"><span style=3D"color:=
+ #001D35; display: inline-block; font-size: 12px; font-weight: 500; line-he=
+ight: 16px; margin-left: 8px; text-wrap: wrap; vertical-align: middle;" tar=
+get=3D"_blank">Notes by Gemini</span></a></td></tr></table></div></div><div=
+ style=3D"margin-top: 32px; text-align: center;"><span style=3D"color: #202=
+124; font-size: 14px; line-height: 20px;font-family: &quot;Google Sans Text=
+&quot;, Roboto, Arial, Helvetica, sans-serif; font-style: normal; font-weig=
+ht: 400;;">Is the summary section in this email helpful?</span><div style=
+=3D"margin-top: 12px;"><a href=3Dhttps:&#47;&#47;goo.gle&#47;tnwg&#45;email=
+&#45;not&#45;useful&#45;external style=3D"display:inline-block;"><img alt=
+=3D"Not Useful Email" src=3D"https://gstatic.com/meet/symbols/thumb_down_gr=
+ey_48px.png" style=3D"display: inline-block; height: 24px; width: 24px; ver=
+tical-align: middle;"></a><a href=3Dhttps:&#47;&#47;goo.gle&#47;tnwg&#45;em=
+ail&#45;useful&#45;external style=3D"display:inline-block;margin-left:12px;=
+"><img alt=3D"Useful Email" src=3D"https://gstatic.com/meet/symbols/thumb_u=
+p_grey_48px.png" style=3D"display: inline-block; height: 24px; width: 24px;=
+ vertical-align: middle;"></a></div></div><div role=3D"contentinfo" style=
+=3D"color: #444746;font-family: &quot;Google Sans Text&quot;, Roboto, Arial=
+, Helvetica, sans-serif; font-style: normal; font-weight: 400;font-size: 12=
+px; line-height: 16px; margin-top: 32px; text-align: center;"><address styl=
+e=3D"font-style: normal;">Google LLC, 1600 Ampitheatre Parkway, Mountain Vi=
+ew, CA 94043, USA</address><div>You have received this email because meetin=
+g artifacts were initiated in Google Meet.</div></div></div>
+--000000000000a68f8b0647be5c6d--

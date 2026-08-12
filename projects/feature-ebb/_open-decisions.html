@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EBB — Open Decisions &amp; Spec Placeholders</title>
+<style>
+:root{--ground:#F0ECE3;--surface:#FCFBF8;--ink:#22262A;--ink-2:#565C62;--ink-3:#838890;--line:rgba(34,38,42,0.13);--line-strong:rgba(34,38,42,0.22);--teal:#0E4A56;--teal-2:#14636F;--teal-tint:#E0EAEB;--amber:#8A5A12;--amber-tint:#F4E8D2;--f:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.doc{max-width:840px;margin:34px auto 80px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 52px;box-shadow:0 20px 50px -30px rgba(14,74,86,0.4)}
+@media(max-width:620px){.doc{margin:14px;padding:26px 22px}}
+h1{font-size:30px;font-weight:750;letter-spacing:-0.02em;line-height:1.12;margin:0 0 6px;text-wrap:balance}
+h2{font-size:22px;font-weight:700;letter-spacing:-0.01em;margin:34px 0 8px;padding-top:18px;border-top:1px solid var(--line)}
+h3{font-size:17px;font-weight:680;margin:22px 0 6px}
+h4{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--ink-2)}
+p{margin:10px 0}
+a{color:var(--teal-2);text-decoration:none;border-bottom:1px solid rgba(20,99,111,0.3)}
+a:hover{border-bottom-color:var(--teal-2)}
+strong{font-weight:680;color:var(--ink)}
+code{font-family:var(--mono);font-size:0.86em;background:rgba(34,38,42,0.06);padding:1px 5px;border-radius:5px;color:var(--ink)}
+pre{background:#20242a;color:#e8e6df;border-radius:10px;padding:14px 16px;overflow-x:auto}
+pre code{background:none;color:inherit;padding:0}
+blockquote{margin:14px 0;padding:2px 16px;border-left:3px solid var(--teal);background:var(--teal-tint);border-radius:0 10px 10px 0;color:var(--ink-2)}
+blockquote p{margin:8px 0}
+hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+ul,ol{margin:10px 0;padding-left:24px}
+li{margin:4px 0}
+li>ul,li>ol{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal);font-weight:680;font-size:12.5px;letter-spacing:0.01em;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td code{font-size:0.82em}
+.docnav{max-width:840px;margin:0 auto;padding:16px 52px 0;font-size:12.5px;color:var(--ink-3)}
+.docnav a{color:var(--teal-2)}
+@media(max-width:620px){.docnav{padding:12px 22px 0}}
+</style></head><body>
+<div class="docnav">EBB docs · <a href="_share-guide.html">Share guide</a> · <a href="_brief.html">Brief</a> · <a href="_decisions.html">Decisions</a> · <a href="_screens.html">Screens</a> · <a href="engagement-loop-best-practices.html">Research</a></div>
+<div class="doc"><h1>EBB — Open Decisions &amp; Spec Placeholders</h1>
+<blockquote><p>Pending forks the <strong>design must account for before they're resolved.</strong> Each entry names the two branches, our lean, the outcome we <em>expect</em> (which may differ from the lean), and the <strong>design placeholder</strong> — what the build must hold either way so a late decision flips a variant instead of forcing a redesign.</p>
+<p>This is the <em>pending</em> companion to <a href="_decisions.html">_decisions.md</a> (resolved calls). When a fork here is decided, move it there as a proper entry and delete it here. Last updated: 2026-07-06. Most resolve on Darcy's Monday (7/6) requirements.</p></blockquote>
+<hr>
+<h2>1 · Opt-in consent gate — hard-gate vs. earn-gate ⚠️ <strong>primary</strong></h2>
+<p><strong>The fork:</strong> how consent is enforced for a member who is <em>mid-DCP</em> when EBB turns on.</p>
+<div class="tablewrap"><table><thead><tr><th></th><th>Option 1 — <strong>Hard gate</strong></th><th>Option 2 — <strong>Earn gate</strong></th></tr></thead><tbody><tr><td>Behavior</td><td>Can't continue the DCP without consenting</td><td>Keep doing the clinical work; only <strong>earning/billing</strong> is gated until consent</td></tr><tr><td>Consent UI</td><td><strong>Blocking wall</strong> — non-dismissible</td><td><strong>Dismissible unlock</strong> — "You can now earn $100 for the program you're already doing"</td></tr><tr><td>Framing</td><td>Lockout</td><td>Unlock (recommended)</td></tr></tbody></table></div>
+<p><strong>Our lean:</strong> <strong>Option 2 (earn-gate).</strong> Interrupting an in-progress mental-health program to force a billing consent is punitive and risks abandonment — violates the health/duty-of-care guardrail and Nielsen #3 (user control &amp; freedom). Earn-gate keeps the clinical work uninterrupted and frames EBB as additive.</p>
+<p><strong>Expected outcome:</strong> <strong>Option 1 (hard-gate)</strong> — commercial/legal will likely push it, since the model is cleanest to defend if only <em>consented</em> members ever accrue a billable event.</p>
+<p><strong>Design placeholder (what the build holds either way):</strong></p>
+<ul><li>Treat the consent moment as <strong>one component with a <code>gate_mode</code> variant: <code>earn</code> | <code>hard</code>.</strong></li><li>Design <strong>earn-gate as the primary</strong> (dismissible right-panel modal on desktop / full-page dismissible modal on mobile), with a <strong>hard-gate variant</strong> that removes the dismiss affordance and blocks the Continue action.</li><li>Everything upstream (announcement card, persistent banner) and the consent copy itself is <strong>identical</strong> across both — only the dismissibility + whether Continue is blocked changes.</li><li>Net: if they land on hard-gate, we flip the variant flag; no rework of the flow.</li></ul>
+<p><strong>Referenced in:</strong> <a href="_brief.html">_brief.md</a> Consent Gate workstream · <a href="_screens.html">_screens.md</a> §4 · owner: Darcy (legal + commercial).</p>
+<hr>
+<h2>2 · Product naming — "Episode" vs. "Engagement"-Based Billing</h2>
+<p><strong>The fork:</strong> the canonical expansion of "EBB."</p>
+<div class="tablewrap"><table><thead><tr><th></th><th>Option 1 — <strong>Episode-Based Billing</strong></th><th>Option 2 — <strong>Engagement-Based Billing</strong></th></tr></thead><tbody><tr><td>Source</td><td>Darcy's 7/5 meeting notes</td><td>Source spec docs + this project's brief</td></tr></tbody></table></div>
+<p><strong>Our lean:</strong> <strong>Option 2 (Engagement).</strong> It describes the actual model (billing tied to member engagement/completion of the path), and it's what every source doc and every current design already uses.</p>
+<p><strong>Expected outcome:</strong> <strong>Option 1 (Episode)</strong> — Darcy's notes are the newer artifact and commercial may prefer the clinical-episode framing.</p>
+<p><strong>Design placeholder:</strong> the full name appears as a label in a handful of places, not baked into logic. All designs currently render <strong>"Engagement-Based Billing."</strong> If Episode wins, it's a <strong>global find-replace</strong> across the doc + design set — cheap. No structural design impact.</p>
+<p><strong>Referenced in:</strong> <a href="_screens.html">_screens.md</a> naming note · every design artifact · owner: Darcy.</p>
+<hr>
+<h2>3 · Risk stratification default — off vs. required</h2>
+<p><strong>The fork:</strong> whether EBB eligibility requires a risk qualification by default.</p>
+<div class="tablewrap"><table><thead><tr><th></th><th>Option 1 — <strong>Risk required</strong></th><th>Option 2 — <strong>No risk requirement (default off)</strong></th></tr></thead><tbody><tr><td>Eligibility</td><td>Must qualify via a risk model / assessment / DCP intake</td><td>Anyone in an eligible DCP can earn</td></tr><tr><td>Advocates</td><td>Steve (market expects it)</td><td>John (default none); Jill (cap alone suffices)</td></tr></tbody></table></div>
+<p><strong>Our lean:</strong> <strong>Option 2 (default off)</strong> — widest funnel, matches Darcy's stated goal and the confirmed system default (no cap, no risk).</p>
+<p><strong>Expected outcome:</strong> <strong>Option 2</strong>, but <em>configurable per client</em> — Steve's point means some clients will turn risk on, so the design can't assume it's always off.</p>
+<p><strong>Design placeholder:</strong></p>
+<ul><li>The eligibility surface ("Based on what we know about you, you may qualify to earn $100") must work <strong>with and without</strong> a risk filter in front of it.</li><li>Risk source, when on, = the <strong>Health Risk results</strong> from the assessment ("at risk for X" → recommend matching DCP). Design the recommendation surface to consume a risk signal <em>when present</em> and fall back to interests/browse when absent (ties to the dual on-ramp — assessment-agnostic).</li></ul>
+<p><strong>Referenced in:</strong> <a href="_brief.html">_brief.md</a> · <a href="_screens.html">_screens.md</a> §1 · <a href="_decisions.html">_decisions.md</a> (dual on-ramp) · owner: Darcy + product.</p>
+<hr>
+<h2>How to use this</h2>
+<ul><li><strong>When designing:</strong> any screen touching consent, naming, or eligibility must be built to the <strong>placeholder</strong> above, not to a guessed resolution.</li><li><strong>When a fork resolves:</strong> write the real call into <a href="_decisions.html">_decisions.md</a> (with rationale + rejected option), then remove it here.</li></ul></div>
+</body></html>
