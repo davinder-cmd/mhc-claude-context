@@ -23,26 +23,43 @@ This analysis reveals that Mobile Health has significant competitive advantages 
 
 ## Market Landscape
 
-### Competitive Positioning Map
+### Competitive Market Map (v6)
+
+**Axes:** Population Cost-of-Care (COC) Reduction × Member Engagement. This maps Mobile Health against both cost-of-care point solutions and engagement & wellness vendors. Positions for added competitors are directional estimates from an internal session.
 
 ```
-                    HIGH CLINICAL DEPTH
-                           │
-                           │
-           Mobile Health ●─┼─● Personify Health
-              (DCPs)       │    (TPA + Wellbeing)
-                           │
-    SPECIALIZED ───────────┼─────────── COMPREHENSIVE
-    (Point Solution)       │            (Platform)
-                           │
-         Thrive Global ●───┼───● Sharecare
-           (Burnout)       │     (RealAge/AskMD)
-                           │
-                    Navigate ●
-                  Well.co ●
-                           │
-                    LOW CLINICAL DEPTH
+                          POPULATION COC REDUCTION (High)
+                                       │
+                                       │                              ┌──────────────┐
+                                       │                              │ Mobile Health│
+                                       │                              └──────────────┘
+                                       │
+                             Virta ●   │  ● Wellable
+                                       │        ● Personify
+                Sword ●                │
+       Hinge ●     Lark ● ● Uvongo     │                ● Castlight
+ Low ──────────────────────●──────────┼──────────────────────────────────── High
+                        Omada          │                              MEMBER ENGAGEMENT
+                                       │       ● Thrive
+              Ovia ●    ● Hello Heart  │           ● Navigate
+                    ● Big              │
+                  ● Vida   ● meQuilib. │
+        Wondr ●        ● Lyra          │   Sharecare ●   ● Well.co
+            ● Spring                   │                          ● WebMD
+                                       │   ● Vitality  ● Rally
+                          POPULATION COC REDUCTION (Low)
 ```
+
+**Quadrant read — the strategic "so what":**
+
+| Quadrant | Profile | Who's here | Implication for MHC |
+|----------|---------|-----------|---------------------|
+| **High COC × High Engagement** | Drives outcomes *and* keeps members active — the position buyers actually want | **Mobile Health** (alone, far corner), Wellable, Personify, Castlight | This is our wedge. We are the only vendor delivering both at scale — every other name here is partial. Own it. |
+| **High COC × Low Engagement** | Clinically effective point solutions that struggle to keep members engaged | Virta, Sword, Hinge, Lark, Uvongo, Omada | Strong outcomes, weak stickiness. We win by matching clinical depth *with* engagement. |
+| **Low COC × High Engagement** | Engagement & wellness vendors with little proven cost impact | Thrive, Navigate, Sharecare, Well.co, WebMD, Vitality, Rally | High activity, no ROI accountability. Our 3:1 guarantee is the direct counter. |
+| **Low COC × Low Engagement** | Narrow or under-adopted niche tools | Ovia, Hello Heart, Big, Vida, meQuilibrium, Lyra, Wondr, Spring | Not direct threats; consolidation targets we displace. |
+
+**Bottom line:** MHC occupies an otherwise-empty corner — high cost-of-care reduction *and* high engagement. Cost-of-care point solutions cluster top-left (outcomes, no engagement); wellness vendors cluster bottom-right (engagement, no outcomes). The whitespace between them is our positioning, and the 3:1 ROI guarantee is what makes the COC claim credible where competitors hedge.
 
 ### Market Segments
 

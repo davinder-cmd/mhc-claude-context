@@ -8,6 +8,7 @@ You are working with Davinder, a product leader at Mobile Health Consumer.
 - `working-preferences.md` — how to communicate and behave (non-negotiable)
 - `strategy/Product Service Information.md` — what the product is
 - `strategy/Ideal Customer Profile.md` — who the customer is
+- `design/IA/_index.md` — information architecture index (content classes, surfacing, where control lives); load the linked docs when the task touches IA, navigation, taxonomy, or surfacing
 
 ## When to load context
 
@@ -16,9 +17,11 @@ Load additional context based on the task at hand:
 | Task Type | Load These Files |
 |-----------|------------------|
 | **Feature work** | `projects/feature-[name]/_brief.md`, `_decisions.md` |
+| **DCP / clinical program work** (`feature-dcp` + sub-features) | `projects/feature-dcp/_brief.md`, `_decisions.md`, **+ `reference/dtx-dcp-experts.md`** (secondary layer — consult after UX experts, never supersedes them) |
 | **Design system** | `design/_index.md`, `reference/design-system-*.md` |
-| **UX review / usability** | `reference/ux-usability-experts.md`, `reference/ux-laws-quick-reference.md` |
-| **Visual design review** | `reference/visual-design-experts.md` |
+| **IA / navigation / taxonomy / surfacing** | `design/IA/_index.md` + the relevant docs it links |
+| **Any design / UX / visual review** | `reference/review/_kit.md` + the instruments it lists |
+| **Deeper argument or precedent needed** | `reference/ux-usability-experts.md`, `reference/visual-design-experts.md` (libraries — on demand, not every review) |
 | **Product strategy** | `reference/product-design-experts.md`, `competitive/competitive-analysis.md` |
 | **Competitive positioning** | `competitive/battlecards/*`, `competitive/profiles/*` |
 
@@ -29,6 +32,7 @@ Load additional context based on the task at hand:
 | `strategy/` | Brand voice, ICP, product info | Every session (core context) |
 | `projects/` | Feature briefs, decisions | When working on a specific feature |
 | `design/` | Design system docs (foundation, atoms, components) | Design system tasks |
+| `design/IA/` | Information architecture — app-wide content/surfacing frameworks | IA, navigation, taxonomy, surfacing tasks |
 | `reference/` | Experts, principles, UX laws | Evaluating or reviewing work |
 | `competitive/` | Battlecards, profiles, analysis | Positioning, strategy, differentiation |
 | `outputs/` | All deliverables saved here | Writing deliverables |
@@ -68,16 +72,30 @@ Each feature lives in `projects/feature-[name]/`. Read the feature's `_brief.md`
 
 ## Reference library
 
-The `reference/` folder contains expert guides and principles for different domains:
+The `reference/` folder splits into two kinds of file, and the distinction is load-bearing:
+
+**`reference/review/` — instruments.** Short, scoreable, always-on. Every file can *fail* a design. Loaded on every design review via [reference/review/_kit.md](reference/review/_kit.md).
+
+| File | Output | Use For |
+|------|--------|---------|
+| `review/_kit.md` | — | Index, scoring contract, applicability gate. **Start here.** |
+| `review/conformance.md` + `conformance-audit.js` | PASS / FAIL | Are all values legal? Measured via the Figma bridge, never eyeballed |
+| `review/accessibility.md` | PASS / FAIL | WCAG 2.2 AA floors, ICP-driven requirements |
+| `review/ux-heuristics.md` | Severity 0–4 | Nielsen's 10, Norman, Krug — MHC-specific checks |
+| `review/ux-laws.md` | Severity 0–4 | Cognitive/behavioral laws (Fitts, Hick, Gestalt, Peak-End) |
+| `review/art-direction.md` | Score /100 | Composition — emphasis, tone, density, accent, partner survivability |
+
+**Libraries — knowledge.** Long, consulted on demand when you need an argument or a precedent. Never loaded just to run a review.
 
 | File | Domain | Use For |
 |------|--------|---------|
 | `design-system-principles.md` | Design systems | Validating component decisions |
 | `design-system-people-to-follow.md` | Design systems | External experts and systems to study |
-| `ux-usability-experts.md` | UX | Nielsen heuristics, usability evaluation |
-| `ux-laws-quick-reference.md` | UX | Cognitive/behavioral laws (Fitts, Hick, etc.) |
-| `visual-design-experts.md` | Visual | Typography, color, layout principles |
+| `ux-usability-experts.md` | UX | The expert roster behind the heuristics instrument |
+| `visual-design-experts.md` | Visual | Typography, color, layout principles; Vignelli, Albers, Rams |
 | `product-design-experts.md` | Product | Strategy, discovery, execution frameworks |
+| `engagement-behavior-experts.md` | Engagement / behavior | Habit loops, gamification, behavior change, learning/mastery (EBB, rewards, habits) |
+| `dtx-dcp-experts.md` | DTx / clinical delivery | **Secondary cross-reference** for DCP work (feature-dcp) — DTx delivery + evidence standards. Consult AFTER UX experts; never supersedes them. |
 | `davinder-product-workflow.md` | Workflow | Davinder's tools and automation stack |
 
 ## Design system architecture
@@ -93,15 +111,22 @@ The `reference/` folder contains expert guides and principles for different doma
 
 | Context | File | What You Get |
 |---------|------|--------------|
+| **Review kit** | `reference/review/_kit.md` | The four instruments, the scoring contract, the applicability gate |
 | Component inventory | `design/_index.md` | What exists in the system |
-| UX heuristics | `reference/ux-usability-experts.md` | Nielsen's 10, Norman's principles |
-| Cognitive laws | `reference/ux-laws-quick-reference.md` | Fitts, Hick, Gestalt, Peak-End |
-| Visual principles | `reference/visual-design-experts.md` | Typography, hierarchy, Rams' 10 |
 | Feature context | `projects/feature-[name]/_brief.md` | If feature-specific |
+
+The kit index tells you which instruments apply to the artifact in front of you and how to report them. Do **not** load the expert libraries to run a routine review — they are for when you need a precedent or an argument.
+
+**Four rules from the kit that are non-negotiable:**
+
+1. **Never average the instruments.** Conformance, accessibility, UX, and art direction are reported side by side as four independent verdicts. An average hides which half is broken.
+2. **Run conformance first.** An art direction score measured through token noise is uninterpretable.
+3. **Respect the applicability gate.** A wireframe marked down for having no visual language is a broken review, not a finding.
+4. **Always name one highest-leverage fix.** Scores without a "so what" are analysis, not a recommendation.
 
 **State which files you loaded** at the start of your response before presenting analysis. Example:
 
-> "Loaded: `ux-usability-experts.md`, `ux-laws-quick-reference.md`, `feature-rewards/_brief.md`"
+> "Loaded: `reference/review/_kit.md` (conformance, accessibility, ux-heuristics, art-direction), `design/_index.md`, `feature-rewards/_brief.md`"
 
 This ensures reviews are grounded in principles, not just opinion.
 
