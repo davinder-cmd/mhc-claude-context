@@ -10,3 +10,7 @@
 .skills/
 .remote-plugins/
 .gstack/
+
+# Source photography library (660MB of licensed stock — kept local, not in history).
+# Audit outputs derived from it (CSVs, galleries, reports) ARE tracked under outputs/.
+projects/imagery/

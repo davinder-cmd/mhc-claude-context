@@ -2,6 +2,7 @@
 
 **Confluence:** https://mobilehealthc.atlassian.net/wiki/spaces/MDS/pages/1344045170
 **Status:** 🔶 Partial — token structure documented, full palette in Figma
+**Palette reference:** `outputs/aug04-mh-color-reference/` — all 352 values from Figma "MH colors v2", measured for contrast, with the four broken steps flagged and a reconciliation against shipped production CSS. Read it before picking any hex.
 
 ---
 

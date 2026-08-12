@@ -193,6 +193,10 @@ Specialized expertise in color theory, data visualization, and systematic design
 
 ## Visual Design Principles Quick Reference
 
+> **Not the instrument.** To *score* a design's visual layer, use **[reference/review/art-direction.md](review/art-direction.md)** (composition, 10 dimensions) and **[reference/review/conformance.md](review/conformance.md)** (are the values legal). The tables below are principles, not checks — they cannot fail a design, which is why visual reviews used to come out as opinion.
+>
+> Keep reading here when you need the reasoning behind a rubric dimension or an argument to defend a call.
+
 ### Hierarchy
 | Tool | How It Works |
 |------|--------------|

@@ -199,43 +199,15 @@ Deep expertise in specific UX domains.
 
 ---
 
-## Heuristics & Frameworks Quick Reference
+## Heuristics & Frameworks → moved to the review kit
 
-### Nielsen's 10 Usability Heuristics
-Use for: Evaluating any interface for basic usability problems
+Nielsen's 10, Norman's principles, Krug's three tests, and Walter's hierarchy are now the **instrument**, not a summary at the bottom of a roster:
 
-| # | Heuristic | Quick Check |
-|---|-----------|-------------|
-| 1 | Visibility of system status | Does the user know what's happening? |
-| 2 | Match system & real world | Does it use familiar language/concepts? |
-| 3 | User control & freedom | Can they undo, exit, go back? |
-| 4 | Consistency & standards | Does it work like similar products? |
-| 5 | Error prevention | Does it prevent mistakes before they happen? |
-| 6 | Recognition over recall | Can they see options vs. remember them? |
-| 7 | Flexibility & efficiency | Are there shortcuts for experts? |
-| 8 | Aesthetic & minimalist | Is everything necessary? |
-| 9 | Help with errors | Are error messages helpful and specific? |
-| 10 | Help & documentation | Is help available when needed? |
+> **[reference/review/ux-heuristics.md](review/ux-heuristics.md)**
 
-### Norman's Design Principles
-- **Affordances:** What actions does the design suggest?
-- **Signifiers:** What cues tell users what to do?
-- **Mapping:** Does the relationship between controls and outcomes make sense?
-- **Feedback:** Does the system communicate what's happening?
-- **Conceptual Model:** Can users build an accurate mental model?
+It adds what this section lacked: Nielsen's 0–4 severity scale, MHC-specific checks per heuristic, and a report format. One source of truth — do not re-summarise them here.
 
-### Krug's "Don't Make Me Think" Tests
-- **Trunk Test:** Drop someone in the middle — can they navigate?
-- **Billboard Test:** Can users get the point in 3 seconds?
-- **Squint Test:** Does the visual hierarchy work when blurred?
-
-### Walter's Emotional Design Hierarchy
-1. **Functional** — Does it work?
-2. **Reliable** — Does it work consistently?
-3. **Usable** — Is it easy to use?
-4. **Pleasurable** — Is it enjoyable?
-
-(Don't pursue level 4 until levels 1-3 are solid)
+This file remains the library: who these people are, what they wrote, and where to go for the underlying argument.
 
 ---
 
