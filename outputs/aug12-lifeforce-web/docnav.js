@@ -28,7 +28,7 @@
   var bar = document.createElement('div');
   bar.className = 'docnav';
   bar.innerHTML =
-    '<a href="index.html" title="All screens">☰</a>' +
+    '<a href="index.html" title="All screens" aria-label="All screens">☰</a>' +
     '<a href="'+prev[0]+'">‹ Prev</a>' +
     '<span class="dn-c">'+(i+1)+' / '+screens.length+'</span>' +
     '<a href="'+next[0]+'">Next ›</a>';

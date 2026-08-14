@@ -97,6 +97,7 @@ T_Settings Page
 |--------------|--------|------------|
 | Colors | 🔶 | Foundation/Colors |
 | Typography | ✅ | Foundation/Typography |
+| State Layers | ✅ | Foundation/State Layers (`foundation/state-layers.md`) |
 | Spacing | 🔶 | Foundation/Spacing |
 | Grid & Layout | 🚧 | Foundation/Grid & Layout |
 | Elevation | 🚧 | Foundation/Elevation |

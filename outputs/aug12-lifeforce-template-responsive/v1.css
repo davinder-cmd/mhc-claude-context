@@ -1,0 +1,7 @@
+/* ============================================================
+   VARIANT 1 — "Stacked + rail" (baseline / current build)
+   Image card is a VERTICAL stack (image on top, content below) at
+   every width. Page is single column on mobile → main + support
+   rail on desktop. Nothing overrides base.css.
+   ============================================================ */
+body::before{content:"Variant 1 · Stacked + rail (baseline)";position:fixed;top:8px;left:8px;z-index:200;background:#26292B;color:#fff;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.02em;padding:6px 9px;border-radius:6px}

@@ -1,0 +1,14 @@
+/* ============================================================
+   VARIANT 3 — "One calm column, no rail"
+   Simplest possible template: a single centered reading column at
+   every width (max ~680px). No side rail — support + About fold to
+   the bottom of the column. Image card stays a vertical stack.
+   Calmest to read, least to configure; trades away the desktop rail.
+   ============================================================ */
+body::before{content:"Variant 3 · One calm column, no rail";position:fixed;top:8px;left:8px;z-index:200;background:#3D7A3E;color:#fff;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.02em;padding:6px 9px;border-radius:6px}
+
+/* collapse to a single centered column at all widths */
+.layout{grid-template-columns:1fr;max-width:680px;margin-left:auto;margin-right:auto}
+@media(min-width:1000px){ .layout{grid-template-columns:1fr;gap:20px} .col.rail{position:static;top:auto} }
+/* the support rail becomes a quiet footer block, not a sidebar */
+.col.rail{padding-top:4px}

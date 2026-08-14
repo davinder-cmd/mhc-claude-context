@@ -43,7 +43,7 @@ Button labels use the `Label` tier from the type system (see [typography.md](../
 
 ## States
 
-Every variant supports five interaction states, matching the Figma button component spec:
+State opacities (hover/focus/pressed/dragged/disabled) are defined system-wide in [foundation/state-layers.md](../foundation/state-layers.md) — this section is the **button-specific application** of those tokens. Every variant supports five interaction states, matching the Figma button component spec:
 
 | State | CSS hook | When it applies |
 |---|---|---|

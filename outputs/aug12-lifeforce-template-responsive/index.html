@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Template responsive — variants</title>
+<style>
+  :root{--f:"SF Pro Text",-apple-system,system-ui,sans-serif;--ink:#393C3C;--muted:#717171;--ocean:#195188;--card:#fff;--stroke:#E2E0DA;--bg:#F4F3F1}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--f);background:var(--bg);color:var(--ink);line-height:1.45}
+  .wrap{max-width:1000px;margin:0 auto;padding:48px 20px 96px}
+  .kicker{font:600 12px var(--f);letter-spacing:.06em;text-transform:uppercase;color:var(--ocean)}
+  h1{font:600 30px/1.1 "SF Pro Display",var(--f);letter-spacing:-.015em;margin:6px 0 10px}
+  .lede{font-size:16px;color:#545454;max-width:64ch}
+  .rec{margin:22px 0 30px;background:#EAF2F9;border:1px solid #C7DDF0;border-radius:12px;padding:16px 18px;font-size:15px}
+  .rec b{color:var(--ocean)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .tile{background:var(--card);border:1px solid var(--stroke);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:8px}
+  .tag{align-self:flex-start;font:700 11px var(--f);letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:3px 8px;border-radius:5px}
+  .t1{background:#26292B}.t2{background:#1C5C9A}.t3{background:#3D7A3E}.t4{background:#87440A}
+  .tt{font:600 17px "SF Pro Display",var(--f)}
+  .td{font-size:14px;color:var(--muted)}
+  .row{font-size:13px;color:#545454;margin-top:2px}
+  .row b{color:var(--ink)}
+  .links{margin-top:8px;display:flex;gap:14px}
+  .links a{font:600 14px var(--f);color:var(--ocean);text-decoration:none}
+  .foot{margin-top:40px;font-size:13px;color:var(--muted)}
+  .foot code{background:#EDEBE7;border-radius:4px;padding:1px 5px;font-size:12px}
+</style></head><body>
+<div class="wrap">
+  <span class="kicker">LifeForce · one page template</span>
+  <h1>Responsive variants</h1>
+  <p class="lede">All three of these screens (Enroll, Lab work, Deadline) are the same template: app bar → title → focal card → progress/steps → support rail. The only real responsive question is <b>how the image card behaves</b> and <b>whether there's a side rail</b>. Same HTML in every tile below — only the CSS differs. Open each and resize to feel the reflow.</p>
+
+  <div class="rec">💡 <b>Recommendation: Variant 2 — Split hero + rail.</b> It's the "horizontal card on desktop, vertical card on mobile" pattern you described, keeps the support rail useful on wide screens, and reads calm on phones. Variant 3 is the fallback if we'd rather drop the rail for a simpler, single-column build.</div>
+
+  <div class="grid">
+    <div class="tile">
+      <span class="tag t1">Variant 1</span>
+      <span class="tt">Stacked + rail (baseline)</span>
+      <span class="td">Image card is a vertical banner at every width. Main + support rail on desktop.</span>
+      <span class="row"><b>Mobile:</b> stacked · <b>Desktop:</b> stacked, tall banner</span>
+      <span class="row">Safest, most consistent — but the image eats vertical space on desktop.</span>
+      <span class="links"><a href="01-v1.html" target="_blank">Open ↗</a></span>
+    </div>
+    <div class="tile">
+      <span class="tag t2">Variant 2 · recommended</span>
+      <span class="tt">Split hero on desktop</span>
+      <span class="td">Same card reflows: image left ~46% / content right on desktop; stacks vertically on mobile.</span>
+      <span class="row"><b>Mobile:</b> vertical card · <b>Desktop:</b> horizontal hero</span>
+      <span class="row">Matches the homepage horizontal card; less vertical bulk; rail retained.</span>
+      <span class="links"><a href="01-v2.html" target="_blank">Open ↗</a></span>
+    </div>
+    <div class="tile">
+      <span class="tag t3">Variant 3</span>
+      <span class="tt">One calm column, no rail</span>
+      <span class="td">Single centered reading column (~680px) at all widths. Support + About fold to the bottom.</span>
+      <span class="row"><b>Mobile:</b> stacked · <b>Desktop:</b> same column, centered</span>
+      <span class="row">Calmest, least to configure — trades away the desktop rail + wide space.</span>
+      <span class="links"><a href="01-v3.html" target="_blank">Open ↗</a></span>
+    </div>
+    <div class="tile">
+      <span class="tag t4">Variant 4</span>
+      <span class="tt">Compact thumbnail + rail</span>
+      <span class="td">Card reflows to a smaller image (~34%) beside content on desktop — a dashboard tile, not a hero.</span>
+      <span class="row"><b>Mobile:</b> vertical card · <b>Desktop:</b> thumbnail row</span>
+      <span class="row">Densest; good if the image should feel secondary to the task.</span>
+      <span class="links"><a href="01-v4.html" target="_blank">Open ↗</a></span>
+    </div>
+  </div>
+
+  <p class="foot">One stylesheet (<code>base.css</code>) + a per-variant override (<code>v1–v4.css</code>). The markup in <code>01-v1…v4.html</code> is identical — proving a single template carries every page. Pages without an image (deadline alerts, active/phase, records) use the same shell; their focal is a text/alert/phase card, so the reflow simply doesn't apply.</p>
+</div>
+</body></html>

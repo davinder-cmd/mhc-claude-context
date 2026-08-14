@@ -77,6 +77,38 @@ Sizes shown as **size / line-height** in sp (Android) / pt (iOS) / px (web). 1.0
 
 **Line-height rule:** every value above is chosen to land on the **4dp baseline grid** (or 2dp where 4dp doesn't fit at small sizes). Target ratios are approximately 1.125 for Display + Heading, 1.25 for Title + Body + Caption + Small, and 1.5 for Paragraph — but the actual line-height per class is the grid-aligned integer, not a strict mathematical ratio. This preserves vertical rhythm when stacking text blocks (e.g., Body 1 at 24dp LH composes cleanly with a 24dp icon row or a 24/32/40 spacing column).
 
+## Responsive tiers
+
+The scale renders in **three window-size tiers**, mapped to Material 3 window classes. Type changes at two breakpoints — **600** and **1200**:
+
+| Tier | Width | Devices |
+|---|---|---|
+| **Compact** | `<600` | phones |
+| **Medium** | `600–1199` | large phones, tablets, small windows |
+| **Large** | `≥1200` | desktop / wide web |
+
+- **Compact → Medium** are the two columns in the scale table above.
+- **Medium → Large** steps the **primary reading hierarchy up one role**. **Caption, Small, Eyebrow, and all Label classes do NOT grow past Medium** — this keeps hierarchy intact and stops small text ballooning on wide screens.
+
+### Large (≥1200) values
+| Class group | Medium | Large |
+|---|---|---|
+| Page title *(Heading 5)* | 29 | **32** |
+| Card / section headings *(Heading 6)* | 23 | **25** |
+| Row & section titles *(Title 2)* | 18 | **20** |
+| Sub-headings *(Title 3)* | 16 | **18** |
+| Body copy *(Body 3)* | 16 | **18** |
+| Caption · Small · Eyebrow · Labels | 14 · 12 · 12 · — | **unchanged** |
+
+**Guardrails — what makes a tiered scale hold up at any width:**
+- **Cap the measure** — hold body copy to ~65–75ch so wide screens don't produce over-long lines.
+- **Large is the ceiling** — no growth beyond ≥1200; ultrawide keeps the Large sizes.
+- **Small text is capped at Medium** — captions and labels never exceed their Medium size.
+
+**Native note:** Compact/Medium cover iOS/Android; the **Large tier is web-only** (wide browser windows) — a native app doesn't reach ≥1200 in a single pane.
+
+---
+
 ### What's new in v3 vs the Confluence v2 spec
 
 | Change | Why |

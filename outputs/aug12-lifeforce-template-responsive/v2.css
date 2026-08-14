@@ -1,0 +1,36 @@
+/* ============================================================
+   VARIANT 2 — "Split hero" (SELECTED) — two independent dials.
+
+   ≥1024px  desktop shell: two-column (main + support rail),
+            bottom nav hidden · card HORIZONTAL
+   600–1023 single column (rail drops to the bottom, bottom nav
+            shows) · card STAYS HORIZONTAL
+   <600px   single column · card flips to VERTICAL (image on top)
+
+   Rail collapses at 1024 (product content maxes ~912, so the rail
+   only appears once there's clean room). The image is held at ~46%
+   / max 420px, so it never becomes a giant full-bleed banner.
+   ============================================================ */
+body::before{content:"Variant 2 · Split hero (1024 shell / 600 card)";position:fixed;top:8px;left:8px;z-index:200;background:#1C5C9A;color:#fff;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.02em;padding:6px 9px;border-radius:6px}
+
+/* ── DIAL 1 · column model: one clean shell flip at 1024 ── */
+/* neutralize base.css's 1000px two-column rule so nothing splits before 1024 */
+@media(min-width:1000px){
+  .layout{grid-template-columns:1fr;gap:20px}
+  .col.rail{position:static;top:auto}
+}
+@media(min-width:1024px){
+  .layout{grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:28px}
+  .col.rail{position:sticky;top:84px}
+}
+/* keep the whole app shell on one line: bottom nav flips with the rail at 1024 */
+@media(min-width:900px){ .bottomnav{display:flex} }   /* undo base's hide-at-900 */
+@media(min-width:1024px){ .bottomnav{display:none} }
+
+/* ── DIAL 2 · image card: horizontal from 600 up, vertical below ── */
+@media(min-width:600px){
+  .image-card{display:flex;flex-direction:row;align-items:stretch}
+  .image-card__banner{width:46%;flex:0 0 46%;max-width:420px;aspect-ratio:auto;height:auto;object-fit:cover;object-position:center 50%;align-self:stretch;min-height:190px}
+  .image-card__banner.ph{aspect-ratio:auto;align-self:stretch}
+  .image-card__body{flex:1 1 auto;justify-content:center;padding:28px 24px}
+}

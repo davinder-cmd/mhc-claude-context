@@ -1,0 +1,15 @@
+/* ============================================================
+   VARIANT 4 — "Compact thumbnail + rail" (dashboard-dense)
+   Mobile: vertical stack. Desktop (≥1000): the card reflows to a
+   horizontal row with a SMALLER image (~34%) beside the content —
+   less "hero", more dashboard tile. Keeps the support rail.
+   Densest option; the image reads as a thumbnail, not a banner.
+   ============================================================ */
+body::before{content:"Variant 4 · Compact thumbnail + rail";position:fixed;top:8px;left:8px;z-index:200;background:#87440A;color:#fff;font:600 11px/1 -apple-system,sans-serif;letter-spacing:.02em;padding:6px 9px;border-radius:6px}
+
+@media(min-width:1000px){
+  .image-card{display:flex;flex-direction:row;align-items:stretch}
+  .image-card__banner{width:34%;flex:0 0 34%;aspect-ratio:auto;height:auto;object-fit:cover;align-self:stretch;min-height:170px}
+  .image-card__banner.ph{aspect-ratio:auto;align-self:stretch}
+  .image-card__body{flex:1 1 auto;justify-content:center;padding:24px 24px}
+}

@@ -1,0 +1,8583 @@
+{
+ "generated": "2026-08-12",
+ "source": "Figma \u2014 Imagery (Copy) / Icons page",
+ "fileKey": "KUaCMgRNNRXs9UotmT6ptF",
+ "count": 337,
+ "usage": {
+  "monochrome": "<i class=\"mhi mhi--{key}\"></i> + mhc-icons.css; tint via currentColor",
+  "multicolour": "<img src=\"svg/{class}/{key}.svg\">  \u2014 palette is baked, not themeable"
+ },
+ "icons": [
+  {
+   "key": "icon-large-actions-article",
+   "name": "icon-large-actions-article",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-article.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-actions-coach",
+   "name": "icon-large-actions-coach",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-coach.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-actions-health",
+   "name": "icon-large-actions-health",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-health.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-actions-learn",
+   "name": "icon-large-actions-learn",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-learn.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-actions-read",
+   "name": "icon-large-actions-read",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-read.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-actions-reflect",
+   "name": "icon-large-actions-reflect",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-reflect.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-actions-task",
+   "name": "icon-large-actions-task",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-task.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-actions-video",
+   "name": "icon-large-actions-video",
+   "class": "large",
+   "file": "svg/large/icon-large-actions-video.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-acrobatics",
+   "name": "icon-large-activity-acrobatics",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-acrobatics.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-add-data",
+   "name": "icon-large-activity-add-data",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-add-data.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-add-unlink",
+   "name": "icon-large-activity-add-unlink",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-add-unlink.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#F8F8F9"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-boat",
+   "name": "icon-large-activity-boat",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-boat.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-dance",
+   "name": "icon-large-activity-dance",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-dance.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-device-settings",
+   "name": "icon-large-activity-device-settings",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-device-settings.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-activity-device-settings",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-downhill",
+   "name": "icon-large-activity-downhill",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-downhill.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-google",
+   "name": "icon-large-activity-google",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-google.svg",
+   "mono": false,
+   "fills": [
+    "#34A853",
+    "#4285F4",
+    "#EA4335",
+    "#FBBC04"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-hike",
+   "name": "icon-large-activity-hike",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-hike.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-history",
+   "name": "icon-large-activity-history",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-history.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-activity-history",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-housework",
+   "name": "icon-large-activity-housework",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-housework.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-kick",
+   "name": "icon-large-activity-kick",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-kick.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-pilates",
+   "name": "icon-large-activity-pilates",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-pilates.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-pushup",
+   "name": "icon-large-activity-pushup",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-pushup.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-run",
+   "name": "icon-large-activity-run",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-run.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-stationary-bike",
+   "name": "icon-large-activity-stationary-bike",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-stationary-bike.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-activity-stationary-bike",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-stationary-bike-2",
+   "name": "icon-large-activity-stationary-bike",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-stationary-bike-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-activity-stationary-bike",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-stretch",
+   "name": "icon-large-activity-stretch",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-stretch.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-swim",
+   "name": "icon-large-activity-swim",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-swim.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-walk",
+   "name": "icon-large-activity-walk",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-walk.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-weight-lifting",
+   "name": "icon-large-activity-weight-lifting",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-weight-lifting.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-weightlifting",
+   "name": "icon-large-activity-weightlifting",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-weightlifting.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-wheelchair",
+   "name": "icon-large-activity-wheelchair",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-wheelchair.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-yardwork",
+   "name": "icon-large-activity-yardwork",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-yardwork.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-activity-yoga",
+   "name": "icon-large-activity-yoga",
+   "class": "large",
+   "file": "svg/large/icon-large-activity-yoga.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-assessment-basic",
+   "name": "icon-large-assessment-basic",
+   "class": "large",
+   "file": "svg/large/icon-large-assessment-basic.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#EAF2FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-assessment-biometrics",
+   "name": "icon-large-assessment-biometrics",
+   "class": "large",
+   "file": "svg/large/icon-large-assessment-biometrics.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-assessment-conditions",
+   "name": "icon-large-assessment-conditions",
+   "class": "large",
+   "file": "svg/large/icon-large-assessment-conditions.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#FFEDE1"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-assessment-history",
+   "name": "icon-large-assessment-history",
+   "class": "large",
+   "file": "svg/large/icon-large-assessment-history.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#F9E8F5"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-assessment-respiratory",
+   "name": "icon-large-assessment-respiratory",
+   "class": "large",
+   "file": "svg/large/icon-large-assessment-respiratory.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#EAF2FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-assessment-smoking",
+   "name": "icon-large-assessment-smoking",
+   "class": "large",
+   "file": "svg/large/icon-large-assessment-smoking.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#F6F0EB"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-401k",
+   "name": "icon-large-benefits-401k",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-401k.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-9",
+   "name": "icon-large-benefits-9",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-9.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-commuter-transit",
+   "name": "icon-large-benefits-commuter_transit",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-commuter-transit.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-commuter-transit",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-dental-insurance",
+   "name": "icon-large-benefits-dental-insurance",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-dental-insurance.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-dentist",
+   "name": "icon-large-benefits-dentist",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-dentist.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-dentist",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-details",
+   "name": "icon-large-benefits-details",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-details.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-details",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-disability-leaves",
+   "name": "icon-large-benefits-disability_leaves",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-disability-leaves.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-disability-leaves",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-doctor",
+   "name": "icon-large-benefits-doctor",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-doctor.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-doctor",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-large-benefits-doctor",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-doctor-2",
+   "name": "icon-large-benefits-doctor",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-doctor-2.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-large-benefits-doctor",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-document",
+   "name": "icon-large-benefits-document",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-document.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-document",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-fitness",
+   "name": "icon-large-benefits-fitness",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-fitness.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-grow",
+   "name": "icon-large-benefits-grow",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-grow.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-health",
+   "name": "icon-large-benefits-health",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-health.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-health",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-health-advocate",
+   "name": "icon-large-benefits-health_advocate",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-health-advocate.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-health-advocate",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-health-insurance",
+   "name": "icon-large-benefits-health-insurance",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-health-insurance.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-id-cards",
+   "name": "icon-large-benefits-id_cards",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-id-cards.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-id-cards",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-money",
+   "name": "icon-large-benefits-money",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-money.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-money",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-perscription",
+   "name": "icon-large-benefits-perscription",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-perscription.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-perscription",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-plus",
+   "name": "icon-large-benefits-plus",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-plus.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-plus",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-presciption",
+   "name": "icon-large-benefits-presciption",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-presciption.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-therapy",
+   "name": "icon-large-benefits-therapy",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-therapy.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-vision",
+   "name": "icon-large-benefits-vision",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-vision.svg",
+   "mono": true,
+   "fills": [
+    "#E9F6FA"
+   ],
+   "cssClass": "mhi mhi--icon-large-benefits-vision",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-large-benefits-vision",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-benefits-vision-2",
+   "name": "icon-large-benefits-vision",
+   "class": "large",
+   "file": "svg/large/icon-large-benefits-vision-2.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-large-benefits-vision",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-a1c",
+   "name": "icon-large-biometrics-a1c",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-a1c.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-a1c",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-bmi",
+   "name": "icon-large-biometrics-bmi",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-bmi.svg",
+   "mono": false,
+   "fills": [
+    "#393C3C",
+    "#EBEFFA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-bmi",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-bmi-2",
+   "name": "icon-large-biometrics-bmi",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-bmi-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-bmi",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-bp-diastolic",
+   "name": "icon-large-biometrics-bp-diastolic",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-bp-diastolic.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-bp-diastolic",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-bp-diastolic",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-bp-diastolic-2",
+   "name": "icon-large-biometrics-bp-diastolic",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-bp-diastolic-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-bp-diastolic",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-bp-emotional",
+   "name": "icon-large-biometrics-bp-emotional",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-bp-emotional.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#FFF2E1"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-bp-systolic",
+   "name": "icon-large-biometrics-bp-systolic",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-bp-systolic.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-bp-systolic",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-bp-systolic",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-bp-systolic-2",
+   "name": "icon-large-biometrics-bp-systolic",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-bp-systolic-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-bp-systolic",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-cholesterol-hdl",
+   "name": "icon-large-biometrics-cholesterol-hdl",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-cholesterol-hdl.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-cholesterol-hdl",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-cholesterol-hdl",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-cholesterol-hdl-2",
+   "name": "icon-large-biometrics-cholesterol-hdl",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-cholesterol-hdl-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-cholesterol-hdl",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-cholesterol-ldl",
+   "name": "icon-large-biometrics-cholesterol-ldl",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-cholesterol-ldl.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-cholesterol-ldl",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-cholesterol-ldl",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-cholesterol-ldl-2",
+   "name": "icon-large-biometrics-cholesterol-ldl",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-cholesterol-ldl-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-cholesterol-ldl",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-cholesterol-total",
+   "name": "icon-large-biometrics-cholesterol-total",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-cholesterol-total.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-cholesterol-total",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-cholesterol-total",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-cholesterol-total-2",
+   "name": "icon-large-biometrics-cholesterol-total",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-cholesterol-total-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-cholesterol-total",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-glucose-fasting",
+   "name": "icon-large-biometrics-glucose-fasting",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-glucose-fasting.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-glucose-fasting",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-glucose-fasting",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-glucose-fasting-2",
+   "name": "icon-large-biometrics-glucose-fasting",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-glucose-fasting-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-glucose-fasting",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-glucose-nonfasting",
+   "name": "icon-large-biometrics-glucose-nonfasting",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-glucose-nonfasting.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-glucose-nonfasting",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-glucose-nonfasting",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-glucose-nonfasting-2",
+   "name": "icon-large-biometrics-glucose-nonfasting",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-glucose-nonfasting-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-glucose-nonfasting",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-pulse",
+   "name": "icon-large-biometrics-pulse",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-pulse.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-pulse",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-pulse",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-pulse-2",
+   "name": "icon-large-biometrics-pulse",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-pulse-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-pulse",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-triglycerides",
+   "name": "icon-large-biometrics-triglycerides",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-triglycerides.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-triglycerides",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-triglycerides",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-triglycerides-2",
+   "name": "icon-large-biometrics-triglycerides",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-triglycerides-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-triglycerides",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-waste",
+   "name": "icon-large-biometrics-waste",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-waste.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-waste",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-waste",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-waste-2",
+   "name": "icon-large-biometrics-waste",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-waste-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-waste",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-weight",
+   "name": "icon-large-biometrics-weight",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-weight.svg",
+   "mono": true,
+   "fills": [
+    "#EBEFFA"
+   ],
+   "cssClass": "mhi mhi--icon-large-biometrics-weight",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-weight",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-biometrics-weight-2",
+   "name": "icon-large-biometrics-weight",
+   "class": "large",
+   "file": "svg/large/icon-large-biometrics-weight-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-biometrics-weight",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-challenge-reward-direct",
+   "name": "icon-large-challenge-reward-direct",
+   "class": "large",
+   "file": "svg/large/icon-large-challenge-reward-direct.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-challenge-reward-points",
+   "name": "icon-large-challenge-reward-points",
+   "class": "large",
+   "file": "svg/large/icon-large-challenge-reward-points.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-challenge-reward-raffle",
+   "name": "icon-large-challenge-reward-raffle",
+   "class": "large",
+   "file": "svg/large/icon-large-challenge-reward-raffle.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-challenge-reward-store",
+   "name": "icon-large-challenge-reward-store",
+   "class": "large",
+   "file": "svg/large/icon-large-challenge-reward-store.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-challenge-streak",
+   "name": "icon-large-challenge-streak",
+   "class": "large",
+   "file": "svg/large/icon-large-challenge-streak.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-device-ios",
+   "name": "icon-large-device-ios",
+   "class": "large",
+   "file": "svg/large/icon-large-device-ios.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-large-device-ios",
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-health-articles",
+   "name": "icon-large-health-articles",
+   "class": "large",
+   "file": "svg/large/icon-large-health-articles.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    88,
+    96,
+    128
+   ],
+   "variantCount": 9,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-health-biometrics",
+   "name": "icon-large-health-biometrics",
+   "class": "large",
+   "file": "svg/large/icon-large-health-biometrics.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    88,
+    96,
+    128
+   ],
+   "variantCount": 9,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-health-lifestyle",
+   "name": "icon-large-health-lifestyle",
+   "class": "large",
+   "file": "svg/large/icon-large-health-lifestyle.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    88,
+    96,
+    128
+   ],
+   "variantCount": 9,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-health-risks",
+   "name": "icon-large-health-risks",
+   "class": "large",
+   "file": "svg/large/icon-large-health-risks.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    88,
+    96,
+    128
+   ],
+   "variantCount": 9,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-health-video",
+   "name": "icon-large-health-video",
+   "class": "large",
+   "file": "svg/large/icon-large-health-video.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    88,
+    96,
+    128
+   ],
+   "variantCount": 9,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-notifications-default",
+   "name": "icon-large-notifications-default",
+   "class": "large",
+   "file": "svg/large/icon-large-notifications-default.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-notifications-health",
+   "name": "icon-large-notifications-health",
+   "class": "large",
+   "file": "svg/large/icon-large-notifications-health.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-notifications-reward",
+   "name": "icon-large-notifications-reward",
+   "class": "large",
+   "file": "svg/large/icon-large-notifications-reward.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-notifications-social",
+   "name": "icon-large-notifications-social",
+   "class": "large",
+   "file": "svg/large/icon-large-notifications-social.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-notifications-task-complete",
+   "name": "icon-large-notifications-task-complete",
+   "class": "large",
+   "file": "svg/large/icon-large-notifications-task-complete.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-direct-reward",
+   "name": "icon-large-rewards-direct-reward",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-direct-reward.svg",
+   "mono": false,
+   "fills": [
+    "#A9CBED",
+    "#DCEAF7"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-large-rewards-direct-reward",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-direct-reward-2",
+   "name": "icon-large-rewards-direct-reward",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-direct-reward-2.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-rewards-direct-reward",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-cart",
+   "name": "icon-large-rewards-filter-cart",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-cart.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-dependents",
+   "name": "icon-large-rewards-filter-dependents",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-dependents.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-direct-reward",
+   "name": "icon-large-rewards-filter-direct-reward",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-direct-reward.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-expiring",
+   "name": "icon-large-rewards-filter-expiring",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-expiring.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-gift-card",
+   "name": "icon-large-rewards-filter-gift-card",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-gift-card.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-ongoing",
+   "name": "icon-large-rewards-filter-ongoing",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-ongoing.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-person",
+   "name": "icon-large-rewards-filter-person",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-person.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-points",
+   "name": "icon-large-rewards-filter-points",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-points.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-raffle",
+   "name": "icon-large-rewards-filter-raffle",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-raffle.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-filter-store",
+   "name": "icon-large-rewards-filter-store",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-filter-store.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-raffle",
+   "name": "icon-large-rewards-raffle",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-raffle.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-rewards-raffle",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-raffle-2",
+   "name": "icon-large-rewards-raffle",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-raffle-2.svg",
+   "mono": false,
+   "fills": [
+    "#A9CBED",
+    "#DCEAF7"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-large-rewards-raffle",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-store",
+   "name": "icon-large-rewards-store",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-store.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-rewards-store",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-rewards-store-2",
+   "name": "icon-large-rewards-store",
+   "class": "large",
+   "file": "svg/large/icon-large-rewards-store-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#A9CBED",
+    "#DCEAF7"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-large-rewards-store",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-assessment",
+   "name": "icon-large-search-assessment",
+   "class": "large",
+   "file": "svg/large/icon-large-search-assessment.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-challenge",
+   "name": "icon-large-search-challenge",
+   "class": "large",
+   "file": "svg/large/icon-large-search-challenge.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-coach",
+   "name": "icon-large-search-coach",
+   "class": "large",
+   "file": "svg/large/icon-large-search-coach.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-health-data",
+   "name": "icon-large-search-health-data",
+   "class": "large",
+   "file": "svg/large/icon-large-search-health-data.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-help",
+   "name": "icon-large-search-help",
+   "class": "large",
+   "file": "svg/large/icon-large-search-help.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-search-help",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-help-2",
+   "name": "icon-large-search-help",
+   "class": "large",
+   "file": "svg/large/icon-large-search-help-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-large-search-help",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-reward",
+   "name": "icon-large-search-reward",
+   "class": "large",
+   "file": "svg/large/icon-large-search-reward.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-search",
+   "name": "icon-large-search-search",
+   "class": "large",
+   "file": "svg/large/icon-large-search-search.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-search-virtual-care",
+   "name": "icon-large-search-virtual-care",
+   "class": "large",
+   "file": "svg/large/icon-large-search-virtual-care.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-assessment",
+   "name": "icon-large-tasks-assessment",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-assessment.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-care-path",
+   "name": "icon-large-tasks-care-path",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-care-path.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-education",
+   "name": "icon-large-tasks-education",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-education.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-exercise",
+   "name": "icon-large-tasks-exercise",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-exercise.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-habit",
+   "name": "icon-large-tasks-habit",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-habit.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-journey",
+   "name": "icon-large-tasks-journey",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-journey.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-read",
+   "name": "icon-large-tasks-read",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-read.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-large-tasks-video",
+   "name": "icon-large-tasks-video",
+   "class": "large",
+   "file": "svg/large/icon-large-tasks-video.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-applet-rewards-points",
+   "name": "icon-applet-rewards-points",
+   "class": "other",
+   "file": "svg/other/icon-applet-rewards-points.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#8C896A",
+    "#A9CBED",
+    "#DCEAF7"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "size",
+   "collision": "icon-applet-rewards-points",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-applet-rewards-points-2",
+   "name": "icon-applet-rewards-points",
+   "class": "other",
+   "file": "svg/other/icon-applet-rewards-points-2.svg",
+   "mono": false,
+   "fills": [
+    "#1A3177",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-applet-rewards-points",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icons8-medical-1",
+   "name": "icons8-medical (1)",
+   "class": "other",
+   "file": "svg/other/icons8-medical-1.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icons8-medical-1",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "large-icons",
+   "name": "Large Icons",
+   "class": "other",
+   "file": "svg/other/large-icons.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--large-icons",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "system-icons",
+   "name": "System Icons",
+   "class": "other",
+   "file": "svg/other/system-icons.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--system-icons",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "System Icons",
+   "collisionIndex": 1,
+   "collisionOf": 4,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "system-icons-2",
+   "name": "System Icons",
+   "class": "other",
+   "file": "svg/other/system-icons-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--system-icons-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "System Icons",
+   "collisionIndex": 2,
+   "collisionOf": 4,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "system-icons-3",
+   "name": "System Icons",
+   "class": "other",
+   "file": "svg/other/system-icons-3.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--system-icons-3",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "System Icons",
+   "collisionIndex": 3,
+   "collisionOf": 4,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "system-icons-4",
+   "name": "System Icons",
+   "class": "other",
+   "file": "svg/other/system-icons-4.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--system-icons-4",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "System Icons",
+   "collisionIndex": 4,
+   "collisionOf": 4,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-acrobatics",
+   "name": "icon-small-activity-acrobatics",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-acrobatics.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-acrobatics",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-boat",
+   "name": "icon-small-activity-boat",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-boat.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-boat",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-category-activity-minutes",
+   "name": "icon-small-activity-category-activity minutes",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-activity-minutes.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-biometrics",
+   "name": "icon-small-activity-category-biometrics",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-biometrics.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-category-biometrics",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-calories",
+   "name": "icon-small-activity-category-calories",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-calories.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-category-calories",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-minutes",
+   "name": "icon-small-activity-category-minutes",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-minutes.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-category-minutes",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-minutes",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-minutes-2",
+   "name": "icon-small-activity-category-minutes",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-minutes-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-minutes",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-nutrition",
+   "name": "icon-small-activity-category-nutrition",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-nutrition.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-category-nutrition",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-nutrition",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-nutrition-2",
+   "name": "icon-small-activity-category-nutrition",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-nutrition-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-nutrition",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-sleep",
+   "name": "icon-small-activity-category-sleep",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-sleep.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-category-sleep",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-sleep",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-sleep-2",
+   "name": "icon-small-activity-category-sleep",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-sleep-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-sleep",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-steps",
+   "name": "icon-small-activity-category-steps",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-steps.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-category-steps",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-steps",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-category-steps-2",
+   "name": "icon-small-activity-category-steps",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-category-steps-2.svg",
+   "mono": false,
+   "fills": [
+    "#18264D",
+    "#E9F6FA"
+   ],
+   "cssClass": null,
+   "sizes": [
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    96,
+    128
+   ],
+   "variantCount": 8,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-category-steps",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-dance",
+   "name": "icon-small-activity-dance",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-dance.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-dance",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-downhill",
+   "name": "icon-small-activity-downhill",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-downhill.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-downhill",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-hike",
+   "name": "icon-small-activity-hike",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-hike.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-hike",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-housework",
+   "name": "icon-small-activity-housework",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-housework.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-housework",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-kick",
+   "name": "icon-small-activity-kick",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-kick.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-kick",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-kick",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-kick-2",
+   "name": "icon-small-activity-kick",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-kick-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-kick-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-kick",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-pilates",
+   "name": "icon-small-activity-pilates",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-pilates.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-pilates",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-pushup",
+   "name": "icon-small-activity-pushup",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-pushup.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-pushup",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-run",
+   "name": "icon-small-activity-run",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-run.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-run",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-run",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-run-2",
+   "name": "icon-small-activity-run",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-run-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-run-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-run",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-stationary-bike",
+   "name": "icon-small-activity-stationary-bike",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-stationary-bike.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-stationary-bike",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-stationary-bike",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-stationary-bike-2",
+   "name": "icon-small-activity-stationary-bike",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-stationary-bike-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-stationary-bike-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-stationary-bike",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-stretch",
+   "name": "icon-small-activity-stretch",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-stretch.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-stretch",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-stretch",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-stretch-2",
+   "name": "icon-small-activity-stretch",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-stretch-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-stretch-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-stretch",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-swim",
+   "name": "icon-small-activity-swim",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-swim.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-swim",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-swim",
+   "collisionIndex": 1,
+   "collisionOf": 3,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-swim-2",
+   "name": "icon-small-activity-swim",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-swim-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-swim-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-swim",
+   "collisionIndex": 2,
+   "collisionOf": 3,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-swim-3",
+   "name": "icon-small-activity-swim",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-swim-3.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-swim-3",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-swim",
+   "collisionIndex": 3,
+   "collisionOf": 3,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-walk",
+   "name": "icon-small-activity-walk",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-walk.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-walk",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-weight-lifting",
+   "name": "icon-small-activity-weight-lifting",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-weight-lifting.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-weight-lifting",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-weightlifting",
+   "name": "icon-small-activity-weightlifting",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-weightlifting.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-weightlifting",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-wheelchair",
+   "name": "icon-small-activity-wheelchair",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-wheelchair.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-wheelchair",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-wheelchair",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-wheelchair-2",
+   "name": "icon-small-activity-wheelchair",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-wheelchair-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-wheelchair-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-activity-wheelchair",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-activity-yardwork",
+   "name": "icon-small-activity-yardwork",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-yardwork.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-yardwork",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-activity-yoga",
+   "name": "icon-small-activity-yoga",
+   "class": "small",
+   "file": "svg/small/icon-small-activity-yoga.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-activity-yoga",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-biometrics-bmi",
+   "name": "icon-small-biometrics-bmi",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-bmi.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-bmi",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-bp-diastolic",
+   "name": "icon-small-biometrics-bp-diastolic",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-bp-diastolic.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-bp-diastolic",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-bp-systolic",
+   "name": "icon-small-biometrics-bp-systolic",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-bp-systolic.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-bp-systolic",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-cholesterol-ldl",
+   "name": "icon-small-biometrics-cholesterol-ldl",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-cholesterol-ldl.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-cholesterol-ldl",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-cholesterol-total",
+   "name": "icon-small-biometrics-cholesterol-total",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-cholesterol-total.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-cholesterol-total",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-cholestrol-hdl",
+   "name": "icon-small-biometrics-cholestrol-hdl",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-cholestrol-hdl.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-cholestrol-hdl",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-glucose-a1c",
+   "name": "icon-small-biometrics-glucose-a1c",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-glucose-a1c.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-glucose-a1c",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-glucose-fasting",
+   "name": "icon-small-biometrics-glucose-fasting",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-glucose-fasting.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-glucose-fasting",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-glucose-nonfasting",
+   "name": "icon-small-biometrics-glucose-nonfasting",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-glucose-nonfasting.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-glucose-nonfasting",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-pulse",
+   "name": "icon-small-biometrics-pulse",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-pulse.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-pulse",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-triglycerides",
+   "name": "icon-small-biometrics-triglycerides",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-triglycerides.svg",
+   "mono": true,
+   "fills": [
+    "#16314D"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-triglycerides",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-waist",
+   "name": "icon-small-biometrics-waist",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-waist.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-biometrics-waist",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-biometrics-weight",
+   "name": "icon-small-biometrics-weight",
+   "class": "small",
+   "file": "svg/small/icon-small-biometrics-weight.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-biometrics-weight",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-bottom-nav-benefits",
+   "name": "icon-small-bottom-nav-benefits",
+   "class": "small",
+   "file": "svg/small/icon-small-bottom-nav-benefits.svg",
+   "mono": true,
+   "fills": [
+    "#195188"
+   ],
+   "cssClass": "mhi mhi--icon-small-bottom-nav-benefits",
+   "sizes": [],
+   "variantCount": 2,
+   "figmaVariantProp": "State",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-bottom-nav-care",
+   "name": "icon-small-bottom-nav-care",
+   "class": "small",
+   "file": "svg/small/icon-small-bottom-nav-care.svg",
+   "mono": true,
+   "fills": [
+    "#195188"
+   ],
+   "cssClass": "mhi mhi--icon-small-bottom-nav-care",
+   "sizes": [],
+   "variantCount": 2,
+   "figmaVariantProp": "State",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-bottom-nav-challenges",
+   "name": "icon-small-bottom-nav-challenges",
+   "class": "small",
+   "file": "svg/small/icon-small-bottom-nav-challenges.svg",
+   "mono": true,
+   "fills": [
+    "#195188"
+   ],
+   "cssClass": "mhi mhi--icon-small-bottom-nav-challenges",
+   "sizes": [],
+   "variantCount": 2,
+   "figmaVariantProp": "State",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-bottom-nav-health",
+   "name": "icon-small-bottom-nav-health",
+   "class": "small",
+   "file": "svg/small/icon-small-bottom-nav-health.svg",
+   "mono": true,
+   "fills": [
+    "#195188"
+   ],
+   "cssClass": "mhi mhi--icon-small-bottom-nav-health",
+   "sizes": [],
+   "variantCount": 2,
+   "figmaVariantProp": "State",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-bottom-nav-home",
+   "name": "icon-small-bottom-nav-home",
+   "class": "small",
+   "file": "svg/small/icon-small-bottom-nav-home.svg",
+   "mono": true,
+   "fills": [
+    "#195188"
+   ],
+   "cssClass": "mhi mhi--icon-small-bottom-nav-home",
+   "sizes": [],
+   "variantCount": 2,
+   "figmaVariantProp": "State",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-bottom-nav-rewards",
+   "name": "icon-small-bottom-nav-rewards",
+   "class": "small",
+   "file": "svg/small/icon-small-bottom-nav-rewards.svg",
+   "mono": true,
+   "fills": [
+    "#195188"
+   ],
+   "cssClass": "mhi mhi--icon-small-bottom-nav-rewards",
+   "sizes": [],
+   "variantCount": 2,
+   "figmaVariantProp": "State",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-challenge-activity-checked",
+   "name": "icon-small-challenge-activity-checked",
+   "class": "small",
+   "file": "svg/small/icon-small-challenge-activity-checked.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-challenge-activity-checked",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-bp-heart-disease",
+   "name": "icon-small-health-risk-bp-heart-disease",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-bp-heart-disease.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-bp-heart-disease",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-bp-heart-failure",
+   "name": "icon-small-health-risk-bp-heart-failure",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-bp-heart-failure.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-bp-heart-failure",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-bp-stroke",
+   "name": "icon-small-health-risk-bp-stroke",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-bp-stroke.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-bp-stroke",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-breast-cancer",
+   "name": "icon-small-health-risk-breast-cancer",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-breast-cancer.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-breast-cancer",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-colon-cancer",
+   "name": "icon-small-health-risk-colon-cancer",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-colon-cancer.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-colon-cancer",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-diabetes",
+   "name": "icon-small-health-risk-diabetes",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-diabetes.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-diabetes",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-lung-disease",
+   "name": "icon-small-health-risk-lung-disease",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-lung-disease.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-lung-disease",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-health-risk-prostate-cancer",
+   "name": "icon-small-health-risk-prostate-cancer",
+   "class": "small",
+   "file": "svg/small/icon-small-health-risk-prostate-cancer.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-health-risk-prostate-cancer",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-rewards-marker",
+   "name": "icon-small-rewards-marker",
+   "class": "small",
+   "file": "svg/small/icon-small-rewards-marker.svg",
+   "mono": true,
+   "fills": [
+    "#5297DA"
+   ],
+   "cssClass": "mhi mhi--icon-small-rewards-marker",
+   "sizes": [],
+   "variantCount": 4,
+   "figmaVariantProp": "reward type",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-system-alerted",
+   "name": "icon-small-system-alerted",
+   "class": "small",
+   "file": "svg/small/icon-small-system-alerted.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-alerted",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-alerted-filled",
+   "name": "icon-small-system-alerted-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-alerted-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-alerted-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-bell",
+   "name": "icon-small-system-bell",
+   "class": "small",
+   "file": "svg/small/icon-small-system-bell.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-bell",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-bell-filled",
+   "name": "icon-small-system-bell-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-bell-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-bell-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-block",
+   "name": "icon-small-system-block",
+   "class": "small",
+   "file": "svg/small/icon-small-system-block.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-block",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-book",
+   "name": "icon-small-system-book",
+   "class": "small",
+   "file": "svg/small/icon-small-system-book.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-book",
+   "sizes": [
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-bookmark",
+   "name": "icon-small-system-bookmark",
+   "class": "small",
+   "file": "svg/small/icon-small-system-bookmark.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-bookmark",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-bookmark",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-bookmark-2",
+   "name": "icon-small-system-bookmark",
+   "class": "small",
+   "file": "svg/small/icon-small-system-bookmark-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-bookmark-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-bookmark",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-bookmark-filled",
+   "name": "icon-small-system-bookmark-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-bookmark-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-bookmark-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-bookmark-filled",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-bookmark-filled-2",
+   "name": "icon-small-system-bookmark-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-bookmark-filled-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-bookmark-filled-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-bookmark-filled",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-calendar",
+   "name": "icon-small-system-calendar",
+   "class": "small",
+   "file": "svg/small/icon-small-system-calendar.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-calendar",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-calendar-filled",
+   "name": "icon-small-system-calendar-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-calendar-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-calendar-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-camera",
+   "name": "icon-small-system-camera",
+   "class": "small",
+   "file": "svg/small/icon-small-system-camera.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-camera",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-camera-filled",
+   "name": "icon-small-system-camera-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-camera-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-camera-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-chat",
+   "name": "icon-small-system-chat",
+   "class": "small",
+   "file": "svg/small/icon-small-system-chat.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-chat",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-chat-filled",
+   "name": "icon-small-system-chat-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-chat-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-chat-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-check",
+   "name": "icon-small-system-check",
+   "class": "small",
+   "file": "svg/small/icon-small-system-check.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-check",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": 2
+  },
+  {
+   "key": "icon-small-system-check-2",
+   "name": "icon-small-system-check-2",
+   "class": "small",
+   "file": "svg/small/icon-small-system-check-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-check-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-check-2-filled",
+   "name": "icon-small-system-check-2-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-check-2-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-check-2-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-check-filled",
+   "name": "icon-small-system-check-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-check-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-check-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-checks",
+   "name": "icon-small-system-checks",
+   "class": "small",
+   "file": "svg/small/icon-small-system-checks.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-checks",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-clock",
+   "name": "icon-small-system-clock",
+   "class": "small",
+   "file": "svg/small/icon-small-system-clock.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-clock",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-close",
+   "name": "icon-small-system-close",
+   "class": "small",
+   "file": "svg/small/icon-small-system-close.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-close",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-device-filled",
+   "name": "icon-small-system-device-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-device-filled.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-device-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-devices",
+   "name": "icon-small-system-devices",
+   "class": "small",
+   "file": "svg/small/icon-small-system-devices.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-devices",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-diabetes",
+   "name": "icon-small-system-diabetes",
+   "class": "small",
+   "file": "svg/small/icon-small-system-diabetes.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-diabetes",
+   "sizes": [
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-diabetes",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-diabetes-2",
+   "name": "icon-small-system-diabetes",
+   "class": "small",
+   "file": "svg/small/icon-small-system-diabetes-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-diabetes-2",
+   "sizes": [
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-diabetes",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-doctors-bag-filled",
+   "name": "icon-small-system-doctors-bag-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-doctors-bag-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-doctors-bag-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-dollar",
+   "name": "icon-small-system-dollar",
+   "class": "small",
+   "file": "svg/small/icon-small-system-dollar.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-dollar",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-dollar-filled",
+   "name": "icon-small-system-dollar-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-dollar-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-dollar-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-ecg",
+   "name": "icon-small-system-ecg",
+   "class": "small",
+   "file": "svg/small/icon-small-system-ecg.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-ecg",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-ecg-filled",
+   "name": "icon-small-system-ecg-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-ecg-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-ecg-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-edit",
+   "name": "icon-small-system-edit",
+   "class": "small",
+   "file": "svg/small/icon-small-system-edit.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-edit",
+   "sizes": [
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-flag",
+   "name": "icon-small-system-flag",
+   "class": "small",
+   "file": "svg/small/icon-small-system-flag.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-flag",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-gear",
+   "name": "icon-small-system-gear",
+   "class": "small",
+   "file": "svg/small/icon-small-system-gear.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-gear",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-system-gear",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-gear-2",
+   "name": "icon-small-system-gear",
+   "class": "small",
+   "file": "svg/small/icon-small-system-gear-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-gear-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-gear",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-gear-filled",
+   "name": "icon-small-system-gear-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-gear-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-gear-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-gift",
+   "name": "icon-small-system-gift",
+   "class": "small",
+   "file": "svg/small/icon-small-system-gift.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-gift",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-gift-filled",
+   "name": "icon-small-system-gift-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-gift-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-gift-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-group",
+   "name": "icon-small-system-group",
+   "class": "small",
+   "file": "svg/small/icon-small-system-group.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-group",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-guardian-filled",
+   "name": "icon-small-system-guardian-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-guardian-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-guardian-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-handshake",
+   "name": "icon-small-system-handshake",
+   "class": "small",
+   "file": "svg/small/icon-small-system-handshake.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-handshake",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-handshake-filled",
+   "name": "icon-small-system-handshake-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-handshake-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-handshake-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-heart",
+   "name": "icon-small-system-heart",
+   "class": "small",
+   "file": "svg/small/icon-small-system-heart.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-heart",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-heart-filled",
+   "name": "icon-small-system-heart-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-heart-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-heart-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-heart-health",
+   "name": "icon-small-system-heart-health",
+   "class": "small",
+   "file": "svg/small/icon-small-system-heart-health.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-heart-health",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-heart-health-filled",
+   "name": "icon-small-system-heart-health-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-heart-health-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-heart-health-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-heart-monitor",
+   "name": "icon-small-system-heart-monitor",
+   "class": "small",
+   "file": "svg/small/icon-small-system-heart-monitor.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-heart-monitor",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-heart-monitor",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-heart-monitor-2",
+   "name": "icon-small-system-heart-monitor",
+   "class": "small",
+   "file": "svg/small/icon-small-system-heart-monitor-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-heart-monitor-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-heart-monitor",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-heart-with-pulse",
+   "name": "icon-small-system-heart-with-pulse",
+   "class": "small",
+   "file": "svg/small/icon-small-system-heart-with-pulse.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-heart-with-pulse",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-help",
+   "name": "icon-small-system-help",
+   "class": "small",
+   "file": "svg/small/icon-small-system-help.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-help",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-help-filled",
+   "name": "icon-small-system-help-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-help-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-help-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-history",
+   "name": "icon-small-system-history",
+   "class": "small",
+   "file": "svg/small/icon-small-system-history.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-history",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-history-filled",
+   "name": "icon-small-system-history-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-history-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-history-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-home",
+   "name": "icon-small-system-home",
+   "class": "small",
+   "file": "svg/small/icon-small-system-home.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-home",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-home",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-home-2",
+   "name": "icon-small-system-home",
+   "class": "small",
+   "file": "svg/small/icon-small-system-home-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-home-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-home",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-home-filled",
+   "name": "icon-small-system-home-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-home-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-home-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-home-filled",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-home-filled-2",
+   "name": "icon-small-system-home-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-home-filled-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-home-filled-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-home-filled",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-home-unlink",
+   "name": "icon-small-system-home-unlink",
+   "class": "small",
+   "file": "svg/small/icon-small-system-home-unlink.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-home-unlink",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-hospital",
+   "name": "icon-small-system-hospital",
+   "class": "small",
+   "file": "svg/small/icon-small-system-hospital.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-hospital",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-system-hospital",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-hospital-2",
+   "name": "icon-small-system-hospital",
+   "class": "small",
+   "file": "svg/small/icon-small-system-hospital-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-hospital-2",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-system-hospital",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-humidity",
+   "name": "icon-small-system-humidity",
+   "class": "small",
+   "file": "svg/small/icon-small-system-humidity.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-humidity",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-info",
+   "name": "icon-small-system-info",
+   "class": "small",
+   "file": "svg/small/icon-small-system-info.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-info",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-info-filled",
+   "name": "icon-small-system-info-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-info-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-info-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-leave",
+   "name": "icon-small-system-leave",
+   "class": "small",
+   "file": "svg/small/icon-small-system-leave.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-leave",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-system-leave",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-leave-2",
+   "name": "icon-small-system-leave",
+   "class": "small",
+   "file": "svg/small/icon-small-system-leave-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-leave-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": "icon-small-system-leave",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-lock",
+   "name": "icon-small-system-lock",
+   "class": "small",
+   "file": "svg/small/icon-small-system-lock.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-lock",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-lung",
+   "name": "icon-small-system-lung",
+   "class": "small",
+   "file": "svg/small/icon-small-system-lung.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-lung",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-lung-filled",
+   "name": "icon-small-system-lung-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-lung-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-lung-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-mail",
+   "name": "icon-small-system-mail",
+   "class": "small",
+   "file": "svg/small/icon-small-system-mail.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-mail",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-mail",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-mail-2",
+   "name": "icon-small-system-mail",
+   "class": "small",
+   "file": "svg/small/icon-small-system-mail-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-mail-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-mail",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-mail-filled",
+   "name": "icon-small-system-mail-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-mail-filled.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-mail-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-medicine",
+   "name": "icon-small-system-medicine",
+   "class": "small",
+   "file": "svg/small/icon-small-system-medicine.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-medicine",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-medicine-filled",
+   "name": "icon-small-system-medicine-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-medicine-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-medicine-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-menu",
+   "name": "icon-small-system-menu",
+   "class": "small",
+   "file": "svg/small/icon-small-system-menu.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-menu",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-microscope",
+   "name": "icon-small-system-microscope",
+   "class": "small",
+   "file": "svg/small/icon-small-system-microscope.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-microscope",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-microscope-filled",
+   "name": "icon-small-system-microscope-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-microscope-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-microscope-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-moon",
+   "name": "icon-small-system-moon",
+   "class": "small",
+   "file": "svg/small/icon-small-system-moon.svg",
+   "mono": true,
+   "fills": [
+    "#C7178B"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-moon",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-more",
+   "name": "icon-small-system-more",
+   "class": "small",
+   "file": "svg/small/icon-small-system-more.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-more",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-more",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-more-2",
+   "name": "icon-small-system-more",
+   "class": "small",
+   "file": "svg/small/icon-small-system-more-2.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-more-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-more",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-more-filled",
+   "name": "icon-small-system-more-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-more-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-more-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-movie-ticket",
+   "name": "icon-small-system-movie-ticket",
+   "class": "small",
+   "file": "svg/small/icon-small-system-movie-ticket.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-movie-ticket",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-movie-ticket-filled",
+   "name": "icon-small-system-movie-ticket-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-movie-ticket-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-movie-ticket-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-navigate-after",
+   "name": "icon-small-system-navigate-after",
+   "class": "small",
+   "file": "svg/small/icon-small-system-navigate-after.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-navigate-after",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-navigate-before",
+   "name": "icon-small-system-navigate-before",
+   "class": "small",
+   "file": "svg/small/icon-small-system-navigate-before.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-navigate-before",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-nutrition",
+   "name": "icon-small-system-nutrition",
+   "class": "small",
+   "file": "svg/small/icon-small-system-nutrition.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-nutrition",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-nutrition-filled",
+   "name": "icon-small-system-nutrition-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-nutrition-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-nutrition-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-paper-plane",
+   "name": "icon-small-system-paper-plane",
+   "class": "small",
+   "file": "svg/small/icon-small-system-paper-plane.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-paper-plane",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-paper-plane-filled",
+   "name": "icon-small-system-paper-plane-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-paper-plane-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-paper-plane-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-participation",
+   "name": "icon-small-system-participation",
+   "class": "small",
+   "file": "svg/small/icon-small-system-participation.svg",
+   "mono": true,
+   "fills": [
+    "#5F6368"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-participation",
+   "sizes": [
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-plus",
+   "name": "icon-small-system-plus",
+   "class": "small",
+   "file": "svg/small/icon-small-system-plus.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-plus",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-plus-circle",
+   "name": "icon-small-system-plus-circle",
+   "class": "small",
+   "file": "svg/small/icon-small-system-plus-circle.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-plus-circle",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-plus-circle-filled",
+   "name": "icon-small-system-plus-circle-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-plus-circle-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-plus-circle-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-qr",
+   "name": "icon-small-system-qr",
+   "class": "small",
+   "file": "svg/small/icon-small-system-qr.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-qr",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-refresh",
+   "name": "icon-small-system-refresh",
+   "class": "small",
+   "file": "svg/small/icon-small-system-refresh.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-refresh",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-scale",
+   "name": "icon-small-system-scale",
+   "class": "small",
+   "file": "svg/small/icon-small-system-scale.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-scale",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-scale-filled",
+   "name": "icon-small-system-scale-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-scale-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-scale-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-smoking",
+   "name": "icon-small-system-smoking",
+   "class": "small",
+   "file": "svg/small/icon-small-system-smoking.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-smoking",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-speech-bubble",
+   "name": "icon-small-system-speech-bubble",
+   "class": "small",
+   "file": "svg/small/icon-small-system-speech-bubble.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-speech-bubble",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-speech-bubble-filled",
+   "name": "icon-small-system-speech-bubble-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-speech-bubble-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-speech-bubble-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-star",
+   "name": "icon-small-system-star",
+   "class": "small",
+   "file": "svg/small/icon-small-system-star.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-star",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-star-filled",
+   "name": "icon-small-system-star-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-star-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-star-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-stethoscope",
+   "name": "icon-small-system-stethoscope",
+   "class": "small",
+   "file": "svg/small/icon-small-system-stethoscope.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-stethoscope",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-store",
+   "name": "icon-small-system-store",
+   "class": "small",
+   "file": "svg/small/icon-small-system-store.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-store",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-store-filled",
+   "name": "icon-small-system-store-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-store-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-store-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-strawberr",
+   "name": "icon-small-system-strawberr",
+   "class": "small",
+   "file": "svg/small/icon-small-system-strawberr.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-strawberr",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-syringe",
+   "name": "icon-small-system-syringe",
+   "class": "small",
+   "file": "svg/small/icon-small-system-syringe.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-syringe",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-syringe",
+   "collisionIndex": 1,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-syringe-2",
+   "name": "icon-small-system-syringe",
+   "class": "small",
+   "file": "svg/small/icon-small-system-syringe-2.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-syringe-2",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": "icon-small-system-syringe",
+   "collisionIndex": 2,
+   "collisionOf": 2,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-team",
+   "name": "icon-small-system-team",
+   "class": "small",
+   "file": "svg/small/icon-small-system-team.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-team",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-team-filled",
+   "name": "icon-small-system-team-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-team-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-team-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-thumbs-up",
+   "name": "icon-small-system-thumbs-up",
+   "class": "small",
+   "file": "svg/small/icon-small-system-thumbs-up.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-thumbs-up",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-thumbs-up-filled",
+   "name": "icon-small-system-thumbs-up-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-thumbs-up-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-thumbs-up-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-time",
+   "name": "icon-small-system-time",
+   "class": "small",
+   "file": "svg/small/icon-small-system-time.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-time",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-time-filled",
+   "name": "icon-small-system-time-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-time-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-time-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-trash",
+   "name": "icon-small-system-trash",
+   "class": "small",
+   "file": "svg/small/icon-small-system-trash.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-trash",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-treatment",
+   "name": "icon-small-system-treatment",
+   "class": "small",
+   "file": "svg/small/icon-small-system-treatment.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-treatment",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-treatment-filled",
+   "name": "icon-small-system-treatment-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-treatment-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-treatment-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-trophy",
+   "name": "icon-small-system-trophy",
+   "class": "small",
+   "file": "svg/small/icon-small-system-trophy.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-trophy",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-trophy-filled",
+   "name": "icon-small-system-trophy-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-trophy-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-trophy-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-umbrella",
+   "name": "icon-small-system-umbrella",
+   "class": "small",
+   "file": "svg/small/icon-small-system-umbrella.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-umbrella",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-umbrella-filled",
+   "name": "icon-small-system-umbrella-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-umbrella-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-umbrella-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-wallet",
+   "name": "icon-small-system-wallet",
+   "class": "small",
+   "file": "svg/small/icon-small-system-wallet.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-wallet",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-wallet-filled",
+   "name": "icon-small-system-wallet-filled",
+   "class": "small",
+   "file": "svg/small/icon-small-system-wallet-filled.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-wallet-filled",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-watch",
+   "name": "icon-small-system-watch",
+   "class": "small",
+   "file": "svg/small/icon-small-system-watch.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-watch",
+   "sizes": [],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": true,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-week",
+   "name": "icon-small-system-week",
+   "class": "small",
+   "file": "svg/small/icon-small-system-week.svg",
+   "mono": true,
+   "fills": [
+    "#393C3C"
+   ],
+   "cssClass": "mhi mhi--icon-small-system-week",
+   "sizes": [
+    16,
+    20,
+    24,
+    32,
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "Property 1",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  },
+  {
+   "key": "icon-small-system-wind",
+   "name": "icon-small-system-wind",
+   "class": "small",
+   "file": "svg/small/icon-small-system-wind.svg",
+   "mono": true,
+   "fills": [],
+   "cssClass": "mhi mhi--icon-small-system-wind",
+   "sizes": [
+    40
+   ],
+   "variantCount": 5,
+   "figmaVariantProp": "size",
+   "collision": null,
+   "collisionIndex": null,
+   "collisionOf": null,
+   "scalingBroken": false,
+   "mergedDuplicates": null
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LifeForce · Page background studio</title>
+<link rel="stylesheet" href="lifeforce.css">
+<link rel="stylesheet" href="icons.css">
+<style>
+  body{background:#DBDAD7;padding:28px}
+  .studio-head{max-width:1320px;margin:0 auto 20px;font-family:var(--f-text)}
+  .studio-head h1{font:600 22px var(--f-display);color:#26292B}
+  .studio-head p{font:400 14px/1.5 var(--f-text);color:#4b4b4b;max-width:70ch;margin-top:6px}
+  .grid{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:22px}
+  .panel{border:1px solid #cfceca;border-radius:16px;overflow:hidden;background:#fff}
+  .swatch{display:flex;align-items:baseline;gap:10px;padding:12px 16px;background:#26292B;color:#fff;font-family:var(--f-text)}
+  .swatch .name{font:600 14px var(--f-text)}
+  .swatch .hex{font:500 13px ui-monospace,monospace;color:#c9cdd0}
+  .swatch .temp{margin-left:auto;font:500 11px var(--f-text);letter-spacing:.04em;text-transform:uppercase;color:#9aa0a4}
+  .stage{padding:22px}
+  .stage > * + *{margin-top:16px}
+  .stage .btn{width:auto;display:inline-flex;min-height:40px;align-items:center;padding:0 22px;font-size:1rem}
+</style>
+</head><body>
+<div class="studio-head">
+  <h1>Page background — tonal options</h1>
+  <p>Real page-01 content on 7 neutral→warm off-whites, shifted down from <code>#F2F0ED</code> (~L95) toward ~L90 so white cards read against the page. Low saturation throughout — tonal, not gray. Warmest (yellow) at top-left → coolest (blue) at bottom-right.</p>
+</div>
+<div class="grid" id="grid"></div>
+
+<template id="tpl">
+  <div class="titleblock"><span class="kicker">LIFEFORCE</span><h2 class="page-title">Getting set up</h2></div>
+  <div class="card" style="padding:16px">
+    <div class="ph-row"><span class="ph-label">Getting set up</span><span class="ph-count">1 of 4 done</span></div>
+    <div class="segments" style="margin-top:12px"><span class="seg on"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span></div>
+    <p class="ph-note" style="margin-top:12px">Then you start earning your credit</p>
+  </div>
+  <div class="card list-group">
+    <a class="list-row" href="#"><span class="row-icon" aria-hidden="true"><span class="msym msym--science"></span></span><span class="row-body"><span class="row-eyebrow">Peak Health</span><span class="row-title">Complete lab work</span></span><span class="row-chev" aria-hidden="true"><span class="msym msym--chevron_right"></span></span></a>
+    <div class="list-row"><span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span><span class="row-body"><span class="row-title">Set up your CarePlus account</span><span class="row-meta">Completed Jan 4</span></span></div>
+  </div>
+  <div class="card support-card">
+    <div class="support-header">Peak Health Support</div>
+    <a class="support-row" href="#"><span class="sup-icon" aria-hidden="true"><span class="msym msym--call"></span></span><span class="sup-value">1-888-385-4583</span><span class="sup-chev" aria-hidden="true"><span class="msym msym--chevron_right"></span></span></a>
+  </div>
+</template>
+
+<script>
+  var opts = [
+    {name:'Amber',        hex:'#F4EDDE', temp:'warmest · yellow'},
+    {name:'Warm sand',    hex:'#F2ECE2', temp:'warm'},
+    {name:'Soft warm',    hex:'#F0EBE4', temp:'warm-neutral'},
+    {name:'Tonal',        hex:'#EFEAE5', temp:'neutral-warm'},
+    {name:'Balanced',     hex:'#EDECE9', temp:'neutral'},
+    {name:'Cool neutral', hex:'#EBEDEF', temp:'cool'},
+    {name:'Cool stone',   hex:'#E9ECF1', temp:'coolest · blue'}
+  ];
+  var grid = document.getElementById('grid'), tpl = document.getElementById('tpl');
+  opts.forEach(function(o){
+    var panel = document.createElement('div'); panel.className='panel';
+    var sw = document.createElement('div'); sw.className='swatch';
+    sw.innerHTML = '<span class="name">'+o.name+'</span><span class="hex">'+o.hex+'</span><span class="temp">'+o.temp+'</span>';
+    var stage = document.createElement('div'); stage.className='stage'; stage.style.background=o.hex;
+    stage.appendChild(tpl.content.cloneNode(true));
+    panel.appendChild(sw); panel.appendChild(stage); grid.appendChild(panel);
+  });
+</script>
+</body></html>

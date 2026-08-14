@@ -1666,3 +1666,25 @@ cry-wolf). A new-year HA is a warm nudge, not an emergency.
 - (d) Carryover sev-3 (not introduced by the refactor): phase→credit consequence is still only reachable
   via the *"See your amount in the calculator"* link.
 - (e) **Conformance bridge audit not yet run** on the refactored components — run before handoff to Ren.
+
+### D49 — Responsive template locked (V2 "split hero") + accessibility adopted (2026-08-12)
+**Decided:** one page template carries every LifeForce screen. Two independent responsive dials:
+- **Shell flip at 1024** — below 1024 a single column with the support rail dropped to the bottom and the bottom nav shown; at/above 1024 a two-column main + sticky rail with the bottom nav hidden. 1024 chosen because product content maxes ~912, so the rail only appears once there's clean room.
+- **Image card flip at 600** — horizontal split hero (image ~46%, capped 420px) from 600 up; vertical stack (image on top) below 600. Decoupling the two dials keeps the card horizontal through the mid-range and stops the image ever going full-bleed ("pic too large").
+
+**Why V2 over the alternatives:** V1 (always-stacked) let the hero image dominate on desktop; V3 (single calm column, no rail) was simpler but gave up the persistent support rail; V4 (compact thumbnail) made the image read as an afterthought. V2 matches the homepage horizontal-card pattern and keeps support one glance away. (Explorations: `outputs/aug12-lifeforce-template-responsive/`.)
+
+**Accessibility adopted across all 19 screens + index (review kit run 2026-08-12):**
+- CONFORMANCE pass · ACCESSIBILITY was FAIL (5 operability blockers) → fixed · UX 1×sev-2 · Art-direction ~75/100.
+- **Semantic controls:** primary actions are now real `<button>`s; navigation rows are focusable `<a href>`; the app-bar back control is a `<button aria-label="Back">`. (Previously inert `<a>`/`<span>` — unreachable by keyboard.)
+- **Visible focus:** `:focus-visible` ring (never suppressed).
+- **Icons:** decorative Material Symbols are `aria-hidden`; icon-only controls carry names.
+- **Landmarks:** `<header>` app bar, `<main>` content, labelled `<nav>`.
+- **Type in rem** (root default) — satisfies the 200%-zoom / Dynamic Type floor; **px→rem for all font sizes** (0 px font sizes remain). Layout px kept (flex/max-width survives zoom).
+- **Reduced motion** honoured. Back-target bumped to 44px.
+
+**Rejected / deferred:** (a) `rem` for *layout* px too — deferred; flex + max-width already survive zoom, not worth the churn. (b) `<ul>/<li>` list semantics for row groups — deferred (SHOULD, not a floor). (c) Art-direction note: the split hero is **content-height-driven**, a conscious deviation from the locked 3:2 image-driven hero rule — kept per Davinder's "avoid too-large pic" direction (guideline, not law).
+
+**Build-time follow-up (for Ren):** `aria-live` on progress / phase / status regions so updates announce.
+
+**Applied in:** `outputs/aug12-lifeforce-web/` — `lifeforce.css` (rem + focus + 1024/600 responsive + reduced-motion) and every screen's markup.
