@@ -55,6 +55,8 @@ Each feature lives in `projects/feature-[name]/`. Read the feature's `_brief.md`
 | `feature-health-data/` | Health Data (data layer: wearables, biometrics, HRA) |
 | `feature-biometrics/` | Biometrics (clinical screenings data) |
 | `feature-conditions/` | Conditions (health risk + DCP entry point) |
+| `feature-ebb/` | Engagement-Based Billing (EBB) |
+| `feature-lifeforce/` | LifeForce Dashboard reskin (client-specific: McGriff/Truist) |
 
 **Sub-features (read parent brief first, then sub-feature brief):**
 
