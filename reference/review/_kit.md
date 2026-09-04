@@ -2,7 +2,7 @@
 
 The always-on instruments. Every file in this folder can **fail a design**. That is the entry requirement.
 
-Expert libraries (`reference/ux-usability-experts.md`, `visual-design-experts.md`, `product-design-experts.md`, `engagement-behavior-experts.md`, `design-system-principles.md`) are **not** part of the kit. They are consulted when you need an argument or a precedent — not on every review. Loading 500 lines of biography to reach 80 lines of checklist is why visual reviews used to read as opinion.
+Expert libraries (`reference/experts/`: ux-usability-experts.md, visual-design-experts.md, product-design-experts.md, engagement-behavior-experts.md; `reference/process/design-system-principles.md`) are **not** part of the kit. They are consulted when you need an argument or a precedent — not on every review. Loading 500 lines of biography to reach 80 lines of checklist is why visual reviews used to read as opinion.
 
 ---
 

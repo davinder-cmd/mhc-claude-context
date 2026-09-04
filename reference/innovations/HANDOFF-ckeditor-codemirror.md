@@ -1,7 +1,7 @@
 # CKEditor + CodeMirror split — what goes where
 
 **For:** Jill, ops, anyone editing MHC home blocks
-**Companion to:** `CLAUDE-MHC-blocks (1) (2).md` (the authoring rules)
+**Companion to:** `mhc-blocks-authoring-guide.md` (the authoring rules)
 **Last updated:** 2026-05-28
 
 ---
@@ -48,7 +48,7 @@
 - `<form>`, `<input>`, `<button type="submit">`
 - `<html>`, `<head>`, `<body>`, `<link>`, `<meta>`, `<title>`
 
-See `CLAUDE-MHC-blocks (1) (2).md` for the full list.
+See `mhc-blocks-authoring-guide.md` for the full list.
 
 ---
 

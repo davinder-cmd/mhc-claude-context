@@ -75,7 +75,7 @@ Grouped by journey stage. Each folder has an `INDEX.md` iteration log.
 | [source/](source/) | Raw inputs: EBB spec, playbook, "Digital Care Only," consent/restart notes, and current-state UX writeups (`source/current-dcp-ux/`, `source/current-rewards-ux/`) |
 | [reference-only/](reference-only/) | The "gel" mockups — reference/counter-example only, not a driver |
 
-**Reference layer** (`reference/`): [engagement-behavior-experts.md](../../reference/engagement-behavior-experts.md) · [dtx-dcp-experts.md](../../reference/dtx-dcp-experts.md) · [health-assessment/](../../reference/health-assessment/) (the NCQA HRA composition + risk models).
+**Reference layer** (`reference/`): [engagement-behavior-experts.md](../../reference/experts/engagement-behavior-experts.md) · [dtx-dcp-experts.md](../../reference/experts/dtx-dcp-experts.md) · [health-assessment/](../../reference/health-assessment/) (the NCQA HRA composition + risk models).
 
 ---
 

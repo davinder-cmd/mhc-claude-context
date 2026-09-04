@@ -136,6 +136,7 @@ An insight is only useful if it changes a decision. Research that doesn't move s
 | Figma | All design work and handoff |
 | Jira | Tickets, engineering handoff, sprint tracking |
 | Confluence | Documentation, decisions, stakeholder communication |
+| Claude Code | Runs this reference repo — CLAUDE.md operating instructions, file edits, git, agent workflows |
 | Claude Cowork | File management, cross-app workflows, research |
 
 Outputs default to Confluence for documentation, Jira for tracked work. When in doubt, ask.

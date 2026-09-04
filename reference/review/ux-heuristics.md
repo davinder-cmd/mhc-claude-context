@@ -2,7 +2,7 @@
 
 **Instrument.** Nielsen's 10, Norman's principles, and Krug's tests — as checks, with a severity scale so findings can be ranked and triaged.
 
-Biography, sources, and the wider expert roster live in [reference/ux-usability-experts.md](../ux-usability-experts.md). This file is the part that can fail a design.
+Biography, sources, and the wider expert roster live in [reference/experts/ux-usability-experts.md](../experts/ux-usability-experts.md). This file is the part that can fail a design.
 
 **Output:** a list of findings, each with a severity 0–4. Not a score, and never averaged with the art direction score.
 

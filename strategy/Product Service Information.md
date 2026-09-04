@@ -10,18 +10,38 @@
 - **What it does:** A B2B2C employee wellbeing platform. Employers buy it; their employees (members) use it. MHC helps working adults prevent and manage chronic health conditions through structured digital care programs, wearable tracking, team challenges, and incentive-based rewards — all accessible on mobile, at no cost to the member.
 - **Stage:** Growth-stage, established player with partner distribution at scale
 - **Platform(s):** iOS, Android, Web; also distributed via SDK embedded in partner apps
-- **Business model:** B2B2C — sold to self-insured employers and distributed through channel partners (Alight, Elevance, Lockton, WTW, Aon)
+- **Business model:** B2B2C — sold to self-insured employers and distributed through channel partners (Alight, Elevance, Lockton, WTW, Aon). Two commercial offerings — see Pricing & Commercial Models below.
+
+---
+
+## Pricing & Commercial Models
+
+MHC sells two distinct commercial offerings to employers:
+
+- **Well-Being Offering (standard product)** — The full platform: DCPs, Challenges, Wearable Tracking, Rewards, and the Health Risk Assessment. Priced **PEPM (per-employee-per-month)**, a flat fee independent of usage. This is the default, broad-market offering — still important, but no longer where product focus is concentrated.
+- **Engagement-Based Billing (EBB)** — MHC's current primary strategic focus ("our bread and butter" — Davinder). Revenue is tied to **member completion of DCP programs**: employers are billed as members complete DCP sessions/programs (claims-based, à la Hinge/Sword), rather than a flat per-employee fee. The product makes it easy to configure DCPs together with Rewards as the completion incentive (see `projects/feature-ebb/`). Some clients are **EBB-only** — a leaner, DCP + Rewards-centered app variant; challenges are retained but other surfaces (journeys/habits) may be trimmed.
+
+**Design implication:** EBB is where near-term product design effort is weighted. Well-Being/PEPM clients still need full support, but new feature investment should default to asking "does this serve EBB's completion loop?" first.
 
 ---
 
 ## Core Features
 
 1. **Digital Care Paths (DCPs)** — Multi-week, condition-specific programs covering MSK (back/neck/knee/hip/shoulder pain), behavioral health (anxiety, depression, insomnia), diabetes (prevention + management), pregnancy, heart health, weight health, and GLP-1 support
-2. **Fitness Challenges** — Team step challenges with a social feed; drives broad participation and community engagement
+2. **Challenges** — Two current formats: **Destination Challenge** (company-wide, usually activity-based but not exclusively) and **Peer-to-Peer Challenge** (team/individual competitions within a company), both with a social feed. MHC's most-utilized feature by active member count, and the primary driver of broad participation and community engagement
 3. **Wearable Tracking** — Steps, sleep, active minutes synced from any device via HealthKit / Health Connect (device-agnostic)
 4. **Rewards** — Members earn gift cards ($100/program) for completing health activities; a primary enrollment and completion driver
 5. **SDK / White-label Distribution** — MHC experiences (including DCPs) are embedded in third-party partner apps; unique capability in the market
 6. **Health Risk Assessment** — Personalized risk assessment at onboarding; informs program recommendations
+
+---
+
+## Product Structure — Under Discussion (Not Settled)
+
+> Tentative directions currently being discussed. **Nothing here is decided** — do not treat as current scope or design against it. Recorded so agents have visibility into where structural thinking may be heading; revisit and update this section (and the feature folder structure in CLAUDE.md) once/if either direction firms up.
+
+- **Challenges as an umbrella:** possibly restructuring so **Healthy Habits** and **Journeys** (currently separate features — `projects/feature-healthy-habits/`, `projects/feature-journeys/`) fold underneath **Challenges**, alongside its two current formats (Destination Challenge, Peer-to-Peer Challenge).
+- **Health Data + Health Coach into Digital Care:** possibly moving **Health Data** (`feature-health-data/`) and the **Health Coach** (the Digital Advisor A.I. Health Coach, `feature-health-data/digital-advisor/`) into the **Digital Care (DCP)** bucket, given how closely they're aligned health-wise.
 
 ---
 
@@ -200,10 +220,9 @@ MHC's UI is **not built from hardcoded screens**. It uses a configurable buildin
 
 ## Current Roadmap Priorities
 
-[High-level current focus areas. Agents use this to understand what's active and avoid designing outside current scope.]
-
-- **Q[X] 20XX focus:** [e.g., Improving onboarding activation rate]
-- **Active feature areas:** [List 2–4 areas currently in design or dev]
+- **Current focus:** Engagement-Based Billing (EBB) — the primary strategic and design priority (go-live Sept 1, 2026). See Pricing & Commercial Models above and `projects/feature-ebb/_brief.md`.
+- **Active feature areas:** EBB member experience (the "DCP Only" app variant), Rewards tied to DCP completion, the DCP enrollment funnel
+- **Still important, secondary focus:** the Well-Being (PEPM) offering — the standard, full-platform product
 - **Off the table right now:** [What is explicitly not being worked on this cycle]
 
 ---

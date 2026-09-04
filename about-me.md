@@ -118,6 +118,7 @@ This section exists specifically to help agents write in my voice. Use it.
 | Jira | Tickets, sprint tracking, engineering handoff |
 | Confluence | Documentation, decisions, stakeholder communication |
 | Claude (claude.ai) | Primary AI reasoning and agent work |
+| Claude Code | Runs this reference repo — CLAUDE.md operating instructions, file edits, git, agent workflows |
 | Claude Cowork | File management, cross-app workflows |
 
 Default output destination: Confluence for documentation, Jira for tracked work, `outputs/` folder for files.

@@ -4,7 +4,7 @@
 > Source: deep-research pass (6 angles, 26 sources, 122 claims → 22 confirmed via 3-vote adversarial verification).
 > Confidence tiers noted. Peer-reviewed = high; vendor/blog = medium/directional.
 
-> **Read alongside `reference/engagement-behavior-experts.md`** — the expert reference tempers this doc.
+> **Read alongside `reference/experts/engagement-behavior-experts.md`** — the expert reference tempers this doc.
 > Its 2026 evidence check finds **gamification is a marginal driver in health and may HURT retention in
 > mental-health apps** (JAMA Psychiatry Nov 2025); **reminders + human/coach contact are the proven retainers.**
 > Primary lens for EBB = **Bucher / Self-Determination Theory** (autonomy-competence-relatedness), with the $100
