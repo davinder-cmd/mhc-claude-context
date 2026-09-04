@@ -4,6 +4,8 @@ The always-on instruments. Every file in this folder can **fail a design**. That
 
 Expert libraries (`reference/experts/`: ux-usability-experts.md, visual-design-experts.md, product-design-experts.md, engagement-behavior-experts.md; `reference/process/design-system-principles.md`) are **not** part of the kit. They are consulted when you need an argument or a precedent — not on every review. Loading 500 lines of biography to reach 80 lines of checklist is why visual reviews used to read as opinion.
 
+**Validation status:** the thresholds and rubric are drawn from MHC's own design-system specs (Type System v3, WCAG 2.2 AA, Nielsen/Norman/Krug, lawsofux.com) — not from any one project. But the kit has only been *run* twice, both on LifeForce (now closed), both flagging real defects (see revision logs in `conformance.md` / `art-direction.md`). If a future artifact sits on a very different surface (e.g. a different design system, web vs. native, a partner theme far outside MHC's palette), sanity-check the numeric ceilings before trusting a FAIL outright — they haven't been cross-validated against a second project yet.
+
 ---
 
 ## The four instruments
