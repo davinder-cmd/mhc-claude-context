@@ -28,9 +28,10 @@ A 12-column adaptive grid based on Google Material 3's window size classes. Prov
 
 ## Content-Width Strategy
 
-- **Current product** (left side nav): effective content body is ~1040dp at Large+ because the side nav consumes ~200dp — Expanded-class behavior on a Large viewport
+- **Current product** (left side nav): **measured, not estimated** (MST admin, DevTools, Aug 2026) — the app shell (`mat-sidenav-container`) hard-caps total width at **1210px**, and the sidenav itself is **265px**, leaving the content column at **~945px, always** — it cannot grow past that regardless of the user's actual monitor width. This is narrower than the ~1040dp this doc previously estimated; treat 945 as the real legacy ceiling, not 1040.
+  - **Consequence for engineering:** viewport-based `@media` breakpoints read the full browser window, not this capped column — on any normal desktop monitor the window is comfortably past 1200px even though the content area never is. Anything built against a ≥1200 breakpoint will fire that tier for nearly all real sidenav-era traffic. See [foundation/html-css-build-system.md](html-css-build-system.md) for the fix pattern (container queries, or a documented interim disable) and the full incident writeup.
 - **Target** (top-nav redesign — see [patterns/navigation-responsive.md](../patterns/navigation-responsive.md)): content opens up to the full body max — 1280 at Large, 1440 at Extra-large
-- Designs must validate at three widths: **1040** (legacy), **1280** (optimal target), **1440** (max target)
+- Designs must validate at three widths: **945** (legacy, corrected from 1040 — see above), **1280** (optimal target), **1440** (max target)
 
 ---
 
@@ -90,6 +91,7 @@ A 12-column adaptive grid based on Google Material 3's window size classes. Prov
 - [image-sizing.md](image-sizing.md) — how images behave across these breakpoints
 - [aspect-ratios.md](aspect-ratios.md) — which ratios to use
 - [patterns/navigation-responsive.md](../patterns/navigation-responsive.md) — the top-nav redesign that drives the new body widths
+- [html-css-build-system.md](html-css-build-system.md) — how this shows up in practice: the viewport-vs-content-column bug it caused in the Home page build, and the fix pattern for every page built until the top-nav migration ships
 
 ---
 
@@ -97,4 +99,5 @@ A 12-column adaptive grid based on Google Material 3's window size classes. Prov
 
 | Date | Change |
 |------|--------|
+| 2026-08-28 | Corrected legacy content-width estimate: 1040dp → **945px, measured** directly in MST admin (1210px shell cap, 265px sidenav). Documented the downstream engineering consequence (viewport-based `@media` breakpoints misfire) and linked the fix pattern in `html-css-build-system.md`. |
 | 2026-05-22 | Adopted Material 3 window size classes — replaced custom 5-tier system (XS/S/SM/M/L) with Compact/Medium/Expanded/Large/Extra-large. Standardized margins to 24dp at Medium+. Set body max-width: 1280dp at Large, 1440dp at Extra-large. Removed the 200dp fixed margin at "Medium laptop" — legacy of the side-nav layout. Removed the 8-column tablet phase — Material jumps 4→12 at Medium. |

@@ -1,0 +1,207 @@
+Type,Name,Short Description,Pillar
+Team,Pass the Positivity,Be a motivator,Career
+Team,Networking,Develop professional contacts,Career
+Team,Career Skills,Expand your skill set,Career
+Team,Grateful 5,Find 5 daily gratitudes,Emotional
+Team,The Great Read,Read for joy,Emotional
+Team,Manifest Your Goals,Make real progress,Emotional
+Team,Hobby Time,Develop your hobby,Emotional
+Team,Take Good Care,Prioritize self-care,Emotional
+Team,Meditation Nation,Daily meditation practice,Emotional
+Team,Mindful Minutes,Practice more mindful minutes,Emotional
+Team,Habit Builder,Create a habit,Emotional
+Team,Breathe in Balance,Relax with deep breathing,Emotional
+Team,Cheap Thrills,Find free fun,Financial
+Team,Chop the Costs,Cut your food costs,Financial
+Team,Health2Wealth,Walk your way to better finances,Financial
+Team,Raise the Funds,Save the most money for charity,Financial
+Team,Push-ups for Pennies,Push-ups for a cause,Financial
+Team,Veg Out,Eat more veggies,Physical
+Team,Stretch Your Limit,Stretch for ergonomics,Physical
+Team,Fit in Five,Get more workouts,Physical
+Team,Space Odyssey,Tour the planets,Physical/Destination
+Team,7 Natural Wonders,Visit the 7 natural wonders,Physical/Destination
+Team,Birding Expedition,Find the world's most unique birds,Physical/Destination
+Team,Blast from the Past,Walk through time,Physical/Destination
+Team,Walk to the Moon,Journey through space,Physical/Destination
+Team,Majestic National Parks,Tour U.S. national parks,Physical/Destination
+Team,March the Mississippi,Travel the mighty river,Physical/Destination
+Team,Amazon Expedition,Escape the forest,Physical/Destination
+Team,Explore the Great Barrier Reef,An adventure on the ocean,Physical/Destination
+Team,Great Wall of China,Travel the iconic wall,Physical/Destination
+Team,Survive the Sahara,Explore the desert,Physical/Destination
+Team,Andes Mountain Trek,Race across the Andes,Physical/Destination
+Team,Antarctic Cool Down,Trek the frozen tundra,Physical/Destination
+Team,New York to London,Skip the pond to London,Physical/Destination
+Team,Reduce and Reuse,Reduce your footprint,Social
+Team,The Daily Give,Give a gift each day,Social
+Team,Helping Hand,Get more volunteer hours,Social
+Team,Hunger Heros,Donate the most food,Social
+Team,Check In,Stay connected,Social
+Team,7 Wonders of the World,Visit the wonders of the world,Physical
+Team,7 New Wonders,Visit the new 7 wonders of the world,Physical
+Peer,Get Connected,Build your network,Career
+Peer,Workday Play,Bring fun to work,Career
+Peer,New People,Meet your co-workers,Career
+Peer,Good Work Vibes,Think positive,Career
+Peer,Neat and Tidy,Get organized,Career
+Peer,Better Together,Seek ideas from co-workers,Career
+Peer,Hourly Moves,Move more at work,Career
+Peer,Acts of Kindness,Be kind to a co-worker,Career
+Peer,Secure Passwords,Make safe passwords,Career
+Peer,Screen Safety,Lock computer screens,Career
+Peer,Install Updates,Check devices for updates,Career
+Peer,Gear It Up,Wear safety gear,Career
+Peer,Evading the Burnout,Decrease your chance of burnout,Career
+Peer,Buckle Up,Wear your seatbelt,Career
+Peer,Mindful Minutes,Be mindful each day,Emotional
+Peer,Hooked on Books,Read more,Emotional
+Peer,Reason to Smile,Add smiles to your day,Emotional
+Peer,Vocab Rehab,Boost your vocabulary,Emotional
+Peer,Push Yourself,Try a thing new each day,Emotional
+Peer,New Hobby,Find a new hobby,Emotional
+Peer,Morning Rituals,Start your day well,Emotional
+Peer,Be Brave,Face a fear,Emotional
+Peer,Flip It,Turn negatives into positives,Emotional
+Peer,Daily Meditation,Meditate 5 minutes a day,Emotional
+Peer,Go for Done,Get tasks done,Emotional
+Peer,Be Grateful,Note your thanks,Emotional
+Peer,No Regrets,Let go of resentments,Emotional
+Peer,Life 2.0,Make things a little better,Emotional
+Peer,Walk the Walk,Embrace your values,Emotional
+Peer,Tune In,Listen to music for stress,Emotional
+Peer,Tucked In,Make your bed,Emotional
+Peer,Tea Break,Take breaks for tea,Emotional
+Peer,Start Solving,Fix problems with questions,Emotional
+Peer,Start Small,Forgive the small stuff,Emotional
+Peer,Social Media Diet,Limit social media time,Emotional
+Peer,Self-Care for Stress,Take care of Yourself,Emotional
+Peer,See the Negative,Practice negative visualization,Emotional
+Peer,Relaxing Breathing,Try the 4-7-8 breathing exercise,Emotional
+Peer,Recharge in Nature,Take breaks outdoors,Emotional
+Peer,Press Play,Learn by video,Emotional
+Peer,Play Time,Make time for fun,Emotional
+Peer,Past Times,Make time for hobbies,Emotional
+Peer,My Mantra,Practice a personal mantra,Emotional
+Peer,Morning Pages,Journal in the morning,Emotional
+Peer,Mind Play,Play brain games,Emotional
+Peer,Make Your Luck,Increase your luck,Emotional
+Peer,Make New Music,Try a new instrument,Emotional
+Peer,Love It and List It,Write lists to remember,Emotional
+Peer,Listen and Learn,Listen to audiobooks and podcasts,Emotional
+Peer,Less Stress,Try 1 stress reducer a day,Emotional
+Peer,Lessons Learned,Grow from mistakes,Emotional
+Peer,Learn On the Go,Learn while you move,Emotional
+Peer,Learn Online,Take an online course,Emotional
+Peer,Laugh It Up,Destress with laughter,Emotional
+Peer,Keep It Simple,Increase efficiency with routines,Emotional
+Peer,Inspire Smiles,Share what made you smile,Emotional
+Peer,I Am Enough,Know your worth,Emotional
+Peer,Hindsight is 20/20,Plan for next time,Emotional
+Peer,Device-Free Hour,Take a device-free hour a day,Emotional
+Peer,Check Yourself,Set realistic expectations,Emotional
+Peer,Breathe 60,Take deep breaths,Emotional
+Peer,Attitude Adjustment,Improve your mood,Emotional
+Peer,Art Break,Lower stress with art,Emotional
+Peer,Eat In,Save $ by dining in,Financial
+Peer,Save 1,Skip one expense a day,Financial
+Peer,Turn It Down,Turn down the thermostat,Financial
+Peer,Travel Cheap,Spend less getting places,Financial
+Peer,Smart Investments,Research investment options,Financial
+Peer,Less Debt,Stay organized to reduce debt,Financial
+Peer,Drink Tap,Save money on beverages,Financial
+Peer,Coffee In,Drink coffee at home,Financial
+Peer,50/30/20 Budget,Stick to the budget,Financial
+Peer,Money Hound,Track your spending,Financial
+Peer,A Dollar a Day,Save $1 each day,Financial
+Peer,Money Must Haves,Buy only what you need,Financial
+Peer,Cash is King,Spend cash only,Financial
+Peer,Free Fun,Find free activities,Financial
+Peer,Make a Budget,Plan your spending,Financial
+Peer,Shop the Perimeter,Avoid the grocery store aisles,Financial
+Peer,Step It Up,Get the most steps,Physical
+Peer,Get Moving,Get more active minutes,Physical
+Peer,Biggest Snoozer,Get more sleep,Physical
+Peer,Let's Do Lunch,Eat healthy lunches,Physical
+Peer,Hydrate with 8,Drink more water,Physical
+Peer,Plank Strength,Build more core,Physical
+Peer,Sit and Be Fit,Do more sit-ups,Physical
+Peer,Push-up Power,Do more push-ups,Physical
+Peer,Posture Perfect,Improve your ergonomics,Physical
+Peer,Strive for Five,Eat more fruits and vegetables,Physical
+Peer,Digital Detox,Disconnect before bed,Physical
+Peer,Daily Workout,Get exercise every day,Physical
+Peer,Fit Families,Exercise with your family,Physical
+Peer,Check Your Servings,Know your serving sizes,Physical
+Peer,Active Days,Get daily physical activity,Physical
+Peer,Daily Yoga,Do yoga each day,Physical
+Peer,Clean Keys,Keep keyboards sanitary,Physical
+Peer,Stair Climbers,Climb the most flights of stairs,Physical
+Peer,Green Portions,Eat more veggies,Physical
+Peer,Yardwork,Do some work in the yard,Physical
+Peer,Workout Variety,Try new workouts,Physical
+Peer,Workout Ready,Pack your exercise bag,Physical
+Peer,Wall Sit,Hold a wall sit longer,Physical
+Peer,Wait and Get Fit,Use down time for exercise,Physical
+Peer,Veggie Snack,Eat vegetable snacks,Physical
+Peer,Sweet Cravings,"Eat fruit, not candy",Physical
+Peer,Spice Up Your Life,Eat less salt,Physical
+Peer,Solve It,Complete more puzzles,Physical
+Peer,Snack Less,Skip a snack,Physical
+Peer,Sleep Tight,Track your sleep,Physical
+Peer,Sleep Schedule,Set a sleep schedule,Physical
+Peer,Sleep for Parents,Be a well-rested parent,Physical
+Peer,Skip the Soda,Say no to sugary drinks,Physical
+Peer,Sipping Small,Drink fewer calories,Physical
+Peer,Shades On!,Wear sunglasses for eye health,Physical
+Peer,Push-up Program,Get better at push-ups,Physical
+Peer,Nighttime Mode,Keep electronics out of bed,Physical
+Peer,Mocktails,Choose alcohol-free beverages,Physical
+Peer,Mindful Sleep,Relax your mind for sleep,Physical
+Peer,Limber Slumber,Stretch before bed,Physical
+Peer,Jump Rope,Get more jump rope minutes,Physical
+Peer,Jump and Jack,Do the most jumping jacks,Physical
+Peer,Home Stretch,Work-from-home stretches,Physical
+Peer,Hold the Fries,Skip fried foods,Physical
+Peer,Happy Back,Improve back health,Physical
+Peer,Grow a Garden,Plant a garden,Physical
+Peer,Got It,Exercise your memory,Physical
+Peer,Go Natural,Use natural light,Physical
+Peer,Getting Stronger,Do more strength training,Physical
+Peer,Electronic Lights Out,Turn off electronics before bed,Physical
+Peer,Eat Your Heart Out,Eat heart-healthy foods,Physical
+Peer,Eat Whole Grains,A whole grain a day,Physical
+Peer,Drive Safe,Put your phone away,Physical
+Peer,Cycle Champ,Get the most minutes cycling,Physical
+Peer,Bed at 10,Go to bed by 10 p.m.,Physical
+Peer,16:8 Fasting,Fast for 16 hours a day,Physical
+Peer,Yoga Minutes,Get more yoga minutes,Physical
+Peer,Lunch Break,Take a break for lunch,Physical
+Peer,Show You Care,Give more compliments,Social
+Peer,Daily Give,Give to receive,Social
+Peer,Gift of Gratitude,Give more thanks,Social
+Peer,Party of Two,Eat meals together,Social
+Peer,Gift a Seat,Give up your seat,Social
+Peer,Go Old School,Be text free,Social
+Peer,Clean Up,Help Mother Earth,Social
+Peer,Grow the Good,Spread positivity,Social
+Peer,My Space,Learn about personal space,Social
+Peer,Meeting Manners,Be courteous in meetings,Social
+Peer,Zero Waste,"Reduce, reuse, recycle",Social
+Peer,TED Talks,Watch the most TED Talks,Social
+Peer,Talk the Talk,Learn a new language,Social
+Peer,Stay in the Know,Keep up on current events,Social
+Peer,Share Favorites,Introduce your favorites,Social
+Peer,Praise Potential,Encourage others' abilities,Social
+Peer,Offer Help,Pitch in big or small,Social
+Peer,No Litter,Pick up litter,Social
+Peer,Let Go,Don't be bothered,Social
+Peer,Kind Driver,Drive with compassion,Social
+Peer,Just Decisions,Be fair and ethical,Social
+Peer,Good Greetings,Practice starting conversations,Social
+Peer,Give Kudos,Applaud a job well done,Social
+Peer,Fun Facts,Learn interesting things,Social
+Peer,Fire Drill,Be proactive in problems,Social
+Peer,Dad Jokes,Tell silly jokes,Social
+Peer,Commit and Deliver,Keep your word,Social
+Peer,Body Talk,Know your body language,Social

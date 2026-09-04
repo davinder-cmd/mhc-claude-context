@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "shutterstock": {
+      "type": "http",
+      "url": "https://mcp.mcpbundles.com/bundle/shutterstock-com"
+    }
+  }
+}

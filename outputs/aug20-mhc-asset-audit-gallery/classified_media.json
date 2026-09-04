@@ -1,0 +1,4888 @@
+[
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S1M1_WhatisAnxiety_.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S1M5_AnxietyMisconceptions.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: misconception"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S1M6_WhyCBT_.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: cbt"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S1M7_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S2M7_DistressIntolerance.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S5M1_TheCBTModel.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: cbt"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S7M1_Exposure.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: exposure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Anxiety_S8M3_ExerciseandActivity.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S10M3_YourTakeaways.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S10M5_ReachingOut.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: reachingout"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S1M3_Anxiety%2CStressorBoth.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: stressor"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S2M1_TheFearSystem.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: fearsystem"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S2M3_HelpfulAnxiety.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: helpfulanxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S2M8_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S3M1_TheCyckeofAnxiety.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: cyckeofanxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S3M2_Avoidance.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: avoidance"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S3M4_SafetyBehaviors.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: behaviors"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S3M5_IntoleranceofUncertainty.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: uncertaint"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S3M6_MovingTowardDiscomfort.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: movingtowarddiscomfort"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S3M8_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S4M1_Mindfulness.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: mindfulness"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S4M3_AllowingEmotions.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: emotions"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S4M4_DailyMindfulnessPractice.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: mindfulness"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S4M5_CultivatingSelf-Compassion.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S4M7_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S5M2_ThinkingTraps.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S5M5_BalancedThinking.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S5M6_CatchandDefuse.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S5M7_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S6M1_TheWorryLoop.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S6M2_Worryvs.Problem-Solving.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S6M3_NegativePredictions.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S6M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S7M2_ExposureLadder.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: exposure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S7M3_ExposureTips.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: exposure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S7M4_ImaginalExposure.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: exposure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S7M6_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S8M1_Self-Care.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S8M2_SleepandAnxiety.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S8M4_FoodandAnxiety.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S8M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S9M1_YourValues.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S9M2_Goal-chunking.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S9M3_StayMotivated.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S9M4_ChooseaGoal.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/audioContent/Play.ht+-+Anxiety_S9M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/Affectionate+breathing+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/DTx+Anxiety+STOP+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/Guided+meditation+for+emotional+acceptance.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/RAIN+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/V043+Reason+with+your+fears.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/V045+Prescribed+laughter.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/V047+Social+Media_+The+answer+to+loneliness_.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/V052+Give+thanks.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/anxiety/resourceVideos/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S10M2_HowMedicationWorks.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: medication"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S10M3_MedicationConsiderations.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: medication"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S10M4_StartingMedication.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: medication"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S11M2_CognitiveFunction.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: cognitivefunction"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S11M3_SitLess.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: sitless"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S11M4_Alcohol.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: alcohol"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S11M5_SmokingandNicotine.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: smokingandnicotine"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S1M1_BloodPressureandHypertension.wav",
+  "media": "audio",
+  "category": "Finance",
+  "confidence": "medium",
+  "reason": "keyword: hypertension"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S1M2_WheretoCheckBloodPressure.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: bloodpressure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S1M3_MeasuringatHome.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: bloodpressure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S1M4_UnderstandingYourReading.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: understanding"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S1M5_HowOftentoMeasure.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: bloodpressure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S2M2_CausesandSymptoms.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: bloodpressure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S2M4_BloodPressureGoal.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: bloodpressure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S2M5_LifestyleGoals.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: goals"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S2M6_ExerciseandBloodPressure.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S3M3_EatHealthywithDASH.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: dash"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S3M4_Fruits%2CVegetables%2CWholeGrains.wav",
+  "media": "audio",
+  "category": "Nature",
+  "confidence": "medium",
+  "reason": "keyword: fruit"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S3M5_WhentoSeekCare.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: bloodpressure"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S4M2_BuildaHealthyPlate.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyplate"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S4M3_TrackYourMeals.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: trackyourmeals"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S4M4_5FitnessTips.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: fitnesstip"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S4M5_SignsofanEmergency.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: signsofanemergency"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S5M3_SetaSleepSchedule.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S5M4_DASH-Salt.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: dash"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S5M5_ReduceSalt.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: salt"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S6M2_StressandBloodPressure.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S6M3_MindfulnessandBloodPressure.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: mindfulness"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S6M4_BenefitsofYoga.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: yoga"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S6M5_Caffeine.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: caffeine"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S7M2_Water.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: water"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S7M3_SweetsandSweeteners.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: sweetsandsweeten"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S7M4_FindCommunity.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "keyword: communit"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S8M2_DASHFatsandProteins.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: dash"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S8M4_IncreaseIntensity.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: increaseintensity"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S8M5_WhatisaHeartAttack.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: heartattack"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S9M2_MaintainaHealthyWeight.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyweight"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S9M3_ChallengesofHealthyEating.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyeating"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S9M4_FitnessChallenges.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: fitnesschalleng"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/audioContent/Play.ht+-+BloodPressure_S9M5_5TipsforBetterSleep.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/introVideo/HealthyBloodPressureFINAL.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/Nutrition130_Skip_the_salt.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/Nutrition170_Read_before_you_buy.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/V026+How+much+physical+activity+do+you+need_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/V028+Water+for+a+healthy+weight.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/V040+Try+this+today_+Keep+a+food+log.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/V050+How+to+stack+your+habits.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/resourceVideos/V054+Why+meditate_.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/sessionResources/s3m2/V026+How+much+physical+activity+do+you+need_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/sessionResources/s3m3/Nutrition40_Try_a_nutrient-dense_food.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/sessionResources/s4m3/V040+Try+this+today_+Keep+a+food+log.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/sessionResources/s6m4/V036+Benefits+of+stretching.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/sessionResources/s6m5/V030+How+much+caffeine+is+too+much_.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/sessionResources/s7m2/V028+Water+for+a+healthy+weight.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/bloodPressure/sessionResources/s7m3/Nutrition100_Are_you_drinking_sugar.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S2M1_NewGoals.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: goals"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S2M4_OptimizeActivity.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S2M5_SitLess.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: sitless"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S3M1_WhatAreFoodTriggers_.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S3M2_ShoppingTriggers.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S3M5_EnvironmentalEatingTriggers.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S4M1_CausesofStress.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S4M2_StressSymptomsandResponses.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S4M4_ReduceStress.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S4M5_Sleep.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S5M1_WhyHeartHealthMatters.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S5M5_SpotlightonFats.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S6M1_HarmfulThoughts.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "keyword: thought"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S6M2_AllorNothingandFiltering.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S6M4_ExcusesandCatastrophizing.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S6M5_Self-labelingandComparing.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S7M1_OthersImpactYourHealth.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S7M2_IncreaseSupport.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "topic keyword: support"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S7M5_FindCommunity.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "keyword: communit"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S7M6_ProfessionalSupport.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "topic keyword: support"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S8M2_5StrategiesforEatingOut.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S8M4_EatingatEvents.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: continuingdiabetesprev"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/audioContent/Play.ht+-+ContinuingDiabetesPrev_S8M5_ActiveWhileAway.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "keyword: active"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/introVideo/ContinuingDiabetesPreventionIntroVideoFINAL.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/resourceVideos/V071+Share+your+victories.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/cont-diabetes-prevention/resourceVideos/V100+Cut+down+on+food+waste.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S10M3_YourTakeaways.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S10M5_ReachingOut.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: reachingout"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S1M1_WhatisDepression_.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S1M3_ANewViewofDepression.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S1M4_DepressionorGrief.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S1M5_WhatContributestoDepression.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S1M6_OtherContributingFactors.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S1M7_TakewawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S2M1_IntroductiontoCBT.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: cbt"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S2M3_UnderstandingDepression.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: understanding"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S2M4_CBTModel.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: cbt"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S2M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S3M1_WhyMindfulness.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: mindfulness"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S3M3_WhySelf-Compassion.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S3M4_BeaFriendtoYourself.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "keyword: friend"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S3M5_IdentifyYourValues.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S3M6_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S4M1_IntroductiontoYourThoughts.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "keyword: thought"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S4M3_CommonThinkingTraps.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S4M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S5M1_CollectingEvidence.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S5M3_Worryingvs.ProblemSolving.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S5M4_CognitiveDefusion.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S5M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S6M1_IntroductiontoEmotions.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: emotions"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S6M2_DifficultEmotions.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: emotions"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S6M3_EmotionalVocabulary.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S6M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S7M1_UnpackingComplexEmotions.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: emotions"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S7M2_Reactingvs.Responding.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S7M3_TheStopTechnique.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S7M4_RadicalAcceptance.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S7M5_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S8M3_PutanActiononIt.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S8M4_Goal-Setting.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: goals"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S8M5_EmotionalUrges.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S8M6_UrgeSurfing.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S8M7_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S9M1_OppositeActionExercise.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S9M3_SocialWithdrawal.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "keyword: social"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S9M4_Self-care.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "inferred",
+  "reason": "condition default: depression"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/audioContent/Play.ht+-+Depression_S9M6_TakeawaysandActionPlan.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: actionplan"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/guidedPracticeVideos/Affectionate+breathing+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/guidedPracticeVideos/Catch+negative+thoughts.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/guidedPracticeVideos/Guided+meditation+for+emotional+acceptance.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/guidedPracticeVideos/The+4-7-8+breathing+exercise.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/resourceVideos/STOP+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/resourceVideos/V042+Trade+screen+time+for+me+time.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/resourceVideos/V049+The+natural+mood+booster.mp4",
+  "media": "video",
+  "category": "Nature",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/resourceVideos/V050+How+to+stack+your+habits.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/resourceVideos/V051+Track+your+mood.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/resourceVideos/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/depression/resourceVideos/V054+Why+meditate_.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DIabetesManagement_S5M4_StayHydrated.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: hydrat"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S2M1_WhatisDiabetes_.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S2M2_DiabetesABCs.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S2M4_ManagingBloodSugar.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S2M6_BloodSugarExtremes.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S3M2_WhyWeightLoss.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S3M3_IdealBodyWeight.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S3M4_AerobicExercise.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S3M5_ExerciseSafely.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S3M6_BenefitsofActivity.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S4M2_Carbohydrates.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: hydrat"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S4M4_Protein.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S4M5_Fat.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S4M6_BuildaHealthyPlate.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyplate"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S5M2_StrengthTraining.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S5M3_PortionSize.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S5M5_AlcoholinModeration.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: alcohol"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S5M6_ChallengesofHealthyEating.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyeating"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S5M7_FitnessChallenges.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: fitnesschalleng"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S6M2_CaloriesandWeight.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S6M4_DailyCalorieIntake.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S7M2_OralMedications.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: medication"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S7M3_Insulin.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S7M4_PlanningCare.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S7M5_PrepareforSickDays.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S8M2_DiabetesDistress.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S8M3_DepressionandAnxiety.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: anxiety"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S8M4_ManagingStress.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S8M5_Support.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "topic keyword: support"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S9M2_DiabetesNerveDamage.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S9M3_DiabetesandKidneyHealth.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S9M4_DiabetesandHeartHealth.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/audioContent/Play.ht+-+DiabetesManagement_S9M5_OtherComplications.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesmanagement"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/introVideo/DiabetesManagementIntroVideoFINAL.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/sessionResources/s8m4/Guided+meditation+for+emotional+acceptance.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/sessionResources/s8m5/V073+Benefits+of+social+exercise.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V026+How+much+physical+activity+do+you+need_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V027+3+ways+to+avoid+buying+unhealthy+snacks.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V028+Water+for+a+healthy+weight.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V036+Benefits+of+stretching.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V040+Try+this+today_+Keep+a+food+log.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V054+Why+meditate_.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V059+Set+small+goals+to+achieve+big+things.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-management/videoResources/V073+Benefits+of+social+exercise.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S2M1_WhatisT2Diabetes.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S2M3_GoalsandMotivations.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: goals"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S2M4SetYourGoals.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: goals"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S2M5_TryItOut.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S3M1_Why150Minutes.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S3M3_BenefitsodPhysicalActvity.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "keyword: physical"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S3M4_FindingTime.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S4M1_AnEffectivePlan.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S4M4_UpsandDowns.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S5M1_ReduceCalories.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S5M2_BuildaHealthyPlate.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyplate"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S6M4_TrackingOptions.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S6M5_ServingSizes.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: serving"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S7M1_IsItStillModerate.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S7M2_IncreaseIntensity.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: increaseintensity"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S7M4_BuildMuscle.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S8M4_DailyCalorieIntake.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/audioContent/Play.ht+-+DiabetesPrevention_S9M3_Challenges.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: diabetesprevention"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V026+How+much+physical+activity+do+you+need_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V027+3+ways+to+avoid+buying+unhealthy+snacks.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V028+Water+for+a+healthy+weight.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V035+Ditch+Your+midnight+snack.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V036+Benefits+of+stretching.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V040+Try+this+today_+Keep+a+food+log.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/diabetes-prevention/resourceVideos/V059+Set+small+goals+to+achieve+big+things.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S2M1_ExtendedSitting.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: sitting"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S2M2_ExtendedStanding.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: standing"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S2M3_LyingDown.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: lyingdown"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S3M1_ExercisesandHipPain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S3M2_HipInjury.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S3M3_HipLunge.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S4M1_MoreHipExercises.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S4M2_KneetoChest.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S4M3_KneetoFloor.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S4M4_HipLunge.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S5M1_LateralHipPain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S5M2_LateralHipStrength.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S5M3_SquattingHipStrength.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S6M1_BreakUpYourDay.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S6M2_WalkMore.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S6M3_ImproveYourBalance.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S6M4_ConsistentWorkouts.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "keyword: workout"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S6M5_HealthyWeight.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyweight"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S7M1_DailyExercises.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipCare_S7M2_NewHipPain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hipcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipPain_S1M1_Introduction.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hippain"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/audioContent/Play.ht+-+HipPain_S1M4_CommonHipPainCauses.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: hippain"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/introVideo/HipCareIntroVideoFINAL.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/resourceVideos/V026+How+much+physical+activity+do+you+need_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/resourceVideos/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/hip/resourceVideos/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S1M1_UnderstandingInsomnia.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: understanding"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S1M4_SleepBasics.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "topic keyword: sleepbasics"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S1M5_SleepMedications.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: medication"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S1M6_WhyCBT-I_.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: cbt"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S2M2_Whatis+SleepHygiene_.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S2M3_OptimizeSleepSpace.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S2M4_BedtimeRoutine.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "topic keyword: bedtime"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S2M5_MorningRoutine.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S3M2_SleepConsolidation.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S3M4_StimulusControl.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S4M2_MindfulnesandRelaxationPractices.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: relax"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S4M6_GuidedImageryandSavoring.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S5M2_WorryandSleep.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S5M4_BalancedThoughts.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S5M5_ThinkingTraps.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S6M2_WorryTime.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S6M3_GroundingTechnique.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S7M2_NutritionforSleep.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S7M3_Caffeine%2CAlcoholandNicotine.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "topic keyword: alcohol"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S7M4_Naps.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S7M5_Exercise.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S7M6_StressandSleep.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S8M4_WhentoGetMoreHelp.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+Insomnia_S8M5_PersonalizedSleepPlan.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/audioContent/Play.ht+-+insomnia_S8M3_PreventingRelapse.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: insomnia"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/introVideo/InsomniaIntroVideoFINAL.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/sessionResources/s4m3/30+seconds+of+mindful+breathing.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/2-minute+body+awareness+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/30+seconds+of+mindful+breathing.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/Affectionate+breathing+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/Loving+kindness+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/The+4-7-8+breathing+exercise.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/V035+Ditch+Your+midnight+snack.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/V037+Why+you+want+a+bedtime+routine.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/insomnia/videoResources/V054+Why+meditate_.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S1M1_Introduction.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S2M1_InactiveLifestyle.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "keyword: active"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S2M2_Sitting+Posture.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S2M3_StandingPosture.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S2M4_SleepingPosture.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S2M5_Overweight.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S3M1_SevereKneePain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S3M2_AssessRangeofMotion.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S4M1_StartingLegStraightening.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S4M2_SeatedLegStraightening.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S4M3_SeatedwithLegStraight.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S4M4_SeatedwithPressure.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S4M5_StandingwithPressure.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: standing"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S4M6_ReassessRangeofMotion.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S5M1_StartingKneeBending.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S5M2_SeatedKneeBend.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S5M3_StandingKneeBending.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: standing"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S5M4_KneelingKneeBending.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S6M1_KneeStrenghtening.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S6M2_Mini-squats.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S6M3_Step-ups.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S7M1_PreventKneePain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/audioContent/KneeCare_S7M2_ReassessRangeofMotion.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: kneecare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/introVideo/KneeCareIntroVideoFINAL.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/resourceVideos/V026+How+much+physical+activity+do+you+need.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/resourceVideos/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/resourceVideos/V036+Benefits+of+stretching.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/knee/resourceVideos/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S1M1_Introduction.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S1M3_CausesofBackPain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S2M1_SitingandBackPain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S2M2_SittingTechnique.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: sitting"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S3M1_StandingandLiftingSafely.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: standing"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S3M2_StandingPosture.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S4M1_WhenBackBendingisHelping.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S4M2_WhyBendBackwards.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S4M3_AssessYpurRangeofMotion.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S4M4_RelaxYourBack.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: relax"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S4M5_PressUptoElbows.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S4M6_PressUptoStraightArms.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S5M1_ForwardBendingExercises.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S6M1_WhyStretch_.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: stretch"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S6M2_HamstringStretch.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: stretch"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S6M3_QadricepStretch.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: stretch"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S6M4_CalfStretch.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: stretch"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S7M1_StrengthTrainingtoReduceBackPain.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S7M2_ChairSquats.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S7M3_Crunches.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "keyword: crunch"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S7M4_SupermanHolds.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S7M5_Bridges.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/audioContent/Play.ht+-+LowerBack_S8M1_MaintainYourBackHealth.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: lowerback"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/resourceVideos/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/lowerback/resourceVideos/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S1M1_Introduction.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S2M1_PosturalStress.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posturalstress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S2M2_CorrectSittingPosture.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S2M3_SqueezeShouldersTogether.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "keyword: together"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S2M4WallAngels.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S3M1_CorrectHeadPosition.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S3M2_MovingYourHeadBackward.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S4M1_WhyThisExercise.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S4M2_LookUptotheSky.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S5M1_SideBending.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "keyword: sidebend"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S5M2_EarTowardShoulder.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S6M1_RotatingYourNeck.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S7M1_HeadacheRelief.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S7M2_ChintoChest.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: neckcare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S8M1_SleepPosture.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/audioContent/Play.ht+-+NeckCare_S9M1_PracticePostureandExercises.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/videoResources/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/neckCare/videoResources/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+PregnancY_S19M3_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+PregnancY_S21M3_Do-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S10M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S10M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S10M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S10M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S11M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S11M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S11M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S11M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S12M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S12M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S12M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S12M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S13M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S13M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S13M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S14M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S14M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S14M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S15M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S15M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S15M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S15M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S16M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S16M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S16M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S16M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S17M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S17M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S17M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S17M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S18M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S18M2_SymtpmsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S18M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S18M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S19M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S19M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S19M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S20M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S20M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S20M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S20M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S21M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S21M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S21M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S22M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S22M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S22M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S22M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S23M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S23M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S23M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S24M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S24M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S24M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S24M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S25M1_weeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S25M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S25M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S26M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S26M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S26M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S26M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S27M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S27M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S27M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S27M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S28M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S28M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S28M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S28M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S29M1weeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S29M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S29M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S29M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S2M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S2M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S2M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S30M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S30M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S30M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S30M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S31M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S31M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S31M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S31M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S32M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S32M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S32M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S32M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S33M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S33M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S33M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S33M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S34M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S34M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S34M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S34M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S35M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S35M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S35M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S35M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S36M1_Weekly+Development.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S36M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S36M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S36M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S37M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S37M2_SymptomsAndProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S37M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S37M4_Wellness+Tips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S38M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S38M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S38M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S38M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S39M1+_Weekly+Development.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S39M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S39M3_TodoList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S39M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S3M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S3M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S3M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S4M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S4M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S4M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S4M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S5M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S5M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S5M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S5M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S6M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S6M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S6M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S6M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S7M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S7M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S7M3_To-dolist.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S7M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S8M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S8M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S8M3_To-doList.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S8M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S9M1_WeeklyDevelopment.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S9M2_SymptomsandProgress.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/audioContent/Play.ht+-+Pregnancy_S9M4_WellnessTips.wav",
+  "media": "audio",
+  "category": "Family_home_life",
+  "confidence": "inferred",
+  "reason": "condition default: pregnancy"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/introVideo/PregnancyIntroVideoFINAL.mp4",
+  "media": "video",
+  "category": "Family_home_life",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/resourceVideos/V033+Get+your+vitamin+D.mp4",
+  "media": "video",
+  "category": "Nature",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/resourceVideos/V037+Why+you+want+a+bedtime+routine.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/resourceVideos/V041+Stress+and+your+immune+system.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/pregnancy/resourceVideos/V051+Track+your+mood.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S1M1_Introduction.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S2M1_CommonCauses.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S2M3_StandingPosture.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: posture"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S2M4_DailyShoulderStretch.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: stretch"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S2M5_SleepingandShoulderPain.wav",
+  "media": "audio",
+  "category": "Rest",
+  "confidence": "medium",
+  "reason": "keyword: sleep"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S3M1_ExerciseGuidelines.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S3M2_ArmSwings.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S4M1_ReachBackwards.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S4M2_ReachBehindYourBack.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S5M1_LieOnBackandRaiseArms.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S5M2_LiftArmsUpward.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S6M1_PressAgainstTheWall.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "inferred",
+  "reason": "condition default: shouldercare"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S7M1_UnderstandingFrozenShoulder.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: understanding"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S7M2_FrozenShoulderExercises.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/Play.ht+-+ShoulderCare_S8M2_DailyPreventionExercises.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: exercise"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/audioContent/ShoulderCare_S2M2_SittingTechnique.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: sitting"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/resources/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/shoulder/resources/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V026+How+much+physical+activity+do+you+need_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V027+3+ways+to+avoid+buying+unhealthy+snacks.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V034+Workout+warm-ups+and+cool-downs.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V035+Ditch+Your+midnight+snack.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V036+Benefits+of+stretching.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V037+Why+you+want+a+bedtime+routine.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V040+Try+this+today_+Keep+a+food+log.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V041+Stress+and+your+immune+system.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V059+Set+small+goals+to+achieve+big+things.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V074+3+reasons+to+eat+together.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/WeightLossResourceVideos/V099+Save+money+with+meal+plans.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S10M2_5StrategiesforEatingOut.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S10M3_ActiveWhileAway.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "keyword: active"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S10M4_EatingAtEvents.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S11M1_OthersImpactYourHealth.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S11M2_IncreaseSupport.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "topic keyword: support"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S11M4_FindCommunity.wav",
+  "media": "audio",
+  "category": "Connection",
+  "confidence": "medium",
+  "reason": "keyword: communit"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S12M3_Challanges.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S1M1_GoalsandMotivations.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "topic keyword: goals"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S1M3_SetYourGoal.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S1M5_TryItOut.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S1M6_BenefitsofPhysicalActivity.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: physicalactivity"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S2M1_AnEffectivePlan.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S2M3_Limit%2CNotEliminate.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S2M4_FoodstoLimit.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S2M5_FocusonNutrientDensity.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: nutrient"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S2M6_FoodShifts.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S3M2_WhyTrackFood_.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S3M5_UpsandDowns.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S4M1_BuildaHealthyPlate.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyplate"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S4M3_ServingShifts.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: serving"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S4M4_ChooseWater.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "keyword: water"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S4M5_ChallengesofHealthyEating.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "medium",
+  "reason": "topic keyword: healthyeating"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S5M1_CaloriesandWeight.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S5M3_DailyCalorieIntake.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S6M2_Cut75Minutes.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S6M5_BuildMuscle.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S7M2_StressandWeightLoss.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S7M3_ReduceStress.wav",
+  "media": "audio",
+  "category": "Breath",
+  "confidence": "medium",
+  "reason": "keyword: stress"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S7M5_EnvironmentandEating.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S8M1_PlanHealthyMeals.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S8M2_ShoppingDo_sandDon_ts.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S8M3_MoveMore.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S8M4_HealthyCooking.wav",
+  "media": "audio",
+  "category": "Nourishment",
+  "confidence": "inferred",
+  "reason": "condition default: weightloss"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S9M2_MindfulMeals.wav",
+  "media": "audio",
+  "category": "Focus",
+  "confidence": "medium",
+  "reason": "keyword: mindful"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/audioContent/Play.ht+-+WeightLoss_S9M5_SitLess.wav",
+  "media": "audio",
+  "category": "Movement",
+  "confidence": "medium",
+  "reason": "topic keyword: sitless"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/introVideo/WeightLossIntroVideoFINAL.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Affectionate+breathing+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Guided+meditation+for+emotional+acceptance.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Loving+kindness+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Nutrition100_Are_you_drinking_sugar.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Nutrition130_Skip_the_salt.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Nutrition40_Try_a_nutrient-dense_food.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Nutrition60_Try_a_healthy_fat.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/STOP+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/Stress60+Physical+health+%26+stress.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/The+4-7-8+breathing+exercise.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/V027+3+ways+to+avoid+buying+unhealthy+snacks.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/V036+Benefits+of+stretching.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/V054+Why+meditate_.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/DTX/weightLoss/sessionResources/V073+Benefits+of+social+exercise.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V026+How+much+exercise+do+you+need_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V028+Water+for+a+healthy+weight.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V035+Ditch+Your+midnight+snack.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V036+Benefits+of+stretching.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V037+Why+you+want+a+bedtime+routine.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V038+Is+sitting+the+new+smoking_.mp4",
+  "media": "video",
+  "category": "Movement",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V040+Try+this+today_+Keep+a+food+log.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V041+Stress+and+your+immune+system.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V042+Trade+screen+time+for+me+time.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V043+Reason+with+your+fears.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V046+How+to+avoid+burnout.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V049+The+natural+mood+booster.mp4",
+  "media": "video",
+  "category": "Nature",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V050+How+to+stack+your+habits.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V051+Track+your+mood.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V052+Give+thanks.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V054+Why+meditate_.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V055+3+hacks+for+a+better+morning.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V056+Find+that+elusive+work-life+balance.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V058+Use+those+vacation+hours_.mp4",
+  "media": "video",
+  "category": "Rest",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V059+Set+small+goals+to+achieve+big+things.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V061+A+simple+hack+for+productivity.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V065+Set+yourself+up+for+success.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V066+Cut+the+distractions+at+work.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V067+Boost+your+career+wellbeing.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V068+Keep+expanding+your+skillset.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V070+Balance+when+working+from+home.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V072+Donating+together+builds+community.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V073+Benefits+of+social+exercise.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V074+3+reasons+to+eat+together.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V075+Fight+elder+loneliness.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V078+Build+community+with+reciprocity.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V079+What+are+you+assuming.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V081+Tips+for+healthy+communication_+Active+listening.mp4",
+  "media": "video",
+  "category": "Connection",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V086+Money+habits_+Wants+vs.+needs.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V087+Are+you+paying+hidden+service+fees_.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V088+Automatic+savings.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V090+Do+you+know+your+score_.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V091+%2462+million+in+the+trash.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V093+Pause+before+you+purchase.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V096+Expenses+that+surprise.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V097+Breaking+financial+barriers.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V098+Plan+for+financial+planning.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V099+Save+money+with+meal+plans.mp4",
+  "media": "video",
+  "category": "Finance",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/HealthyHabits/Healthy+Habits+Resource+Videos/V100+Cut+down+on+food+waste.mp4",
+  "media": "video",
+  "category": "Nourishment",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Caregiver/Video+Resources/Guided+meditation+for+emotional+acceptance.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Caregiver/Video+Resources/RAIN+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Caregiver/Video+Resources/STOP+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Caregiver/Video+Resources/The+4-7-8+breathing+exercise.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Caregiver/Video+Resources/V053+Mindfulness+in+motion.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/1-minute+quiet+location+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/2-minute+body+awareness+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/2-minute+open+attitude+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/2-minutes+attention+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/3-minute+all+together+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/30+seconds+of+mindful+breathing.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/Loving+kindness+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/RAIN+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/ContentImages/MHC/Programs/WBJ+Mindfulness/STOP+micro+meditation.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Asthma.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/BloodPressure.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/BloodSugar.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Cancer-Breast.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Cancer-ColonVideo.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Cholesterol.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Diabetes.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Obesity.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Smoking.mp4",
+  "media": "video",
+  "category": "Focus",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ },
+ {
+  "url": "https://s3.amazonaws.com/www.mobilehealthconsumer.com/videos/Stress.mp4",
+  "media": "video",
+  "category": "Breath",
+  "confidence": "high",
+  "reason": "explicit video title map"
+ }
+]

@@ -102,6 +102,7 @@ T_Settings Page
 | Grid & Layout | 🚧 | Foundation/Grid & Layout |
 | Elevation | 🚧 | Foundation/Elevation |
 | Icons | 🔶 | Foundation/Icons |
+| HTML/CSS Build System | 🔶 | — (local only: [foundation/html-css-build-system.md](foundation/html-css-build-system.md)) |
 
 **Moved to Notion (guidelines, not tokens):**
 - Image Cropping → Guidelines/Image Cropping
@@ -212,6 +213,7 @@ Escalate to Davinder if:
 
 | Date | Change |
 |------|--------|
+| 2026-08-28 | Added HTML/CSS Build System doc — Home page build log, the viewport-vs-content-column breakpoint bug found in MST admin, and the per-page checklist for future HTML/CSS page recreations |
 | 2026-04-15 | Added Navigation IA pattern for app frame redesign |
 | 2026-04-10 | Restructured for v2: one page per component, prefixed naming, v2 priorities defined |
 | 2026-04-09 | Initial version |

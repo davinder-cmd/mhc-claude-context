@@ -14,6 +14,17 @@
 
 ---
 
+**Date:** 2026-09-02
+**Decision:** Video asset strategy for Anna/Nathan avatar lectures: **generate landscape in HeyGen, then crop a portrait version via Claude** — not a native 9:16 vendor render. Two delivery assets (landscape + portrait) from one paid generation call. Portrait remains **avatar-only**; all other video (walkthroughs, diagrams, Journeys) stays landscape, with a **rotate-to-view prompt** on mobile for landscape-only content. A per-video "portrait mode" toggle may be needed, defaulting on for AI avatar.
+**Why:** A second HeyGen run is not just a second cost — HeyGen generation isn't deterministic, so two separate calls produce two *different* videos, not a matching pair. Cropping one master with Claude gives two assets that actually match, for one render cost. (Davinder/Alex weekly sync, meeting notes: notes.granola.ai/t/734d532d-ef3f-45ce-b93b-baa276940a5b-009c2hma)
+**⚠️ Conflicts with the 2026-06-16 entry below**, which explicitly chose native 9:16 rendering and rejected "two separate render libraries (16:9 + 9:16) — maintenance trap" — calling that the "demo bridge only" approach, not the production one. Today's decision makes the demo-bridge approach the permanent one. **Not yet reconciled** — flagging rather than silently overwriting the June entry. If this supersession is intentional, the June 16 entry's Story 2.2 guidance should be updated to match.
+**Also newly confirmed (platform facts, corrects/extends Video Playback PRD Appendix A):** Android today won't fill the screen even with a portrait asset (not just landscape) — confirms the Media3 migration is required, not optional, regardless of asset strategy. iOS already expands to fill on device rotation.
+**Open, not decided:** Modal vs. inline display on desktop — panel-on-the-right is ruled out; the live choice is inline (lightbox expand) vs. a centered modal window. Whether desktop page-layout and mobile modal-layout can be configured **independently** is an unconfirmed technical constraint — to resolve with Keen. Production of both landscape and portrait assets starts now regardless (John wants videos ASAP), in parallel with the display spec.
+**Rejected:** A second independent HeyGen render for the portrait version (cost + non-matching output, per above).
+**Success signal:** Portrait and landscape assets visually match (same take, same delivery); rotate-prompt reduces the "video plays sideways with no warning" complaint on landscape content; Keen confirms the layout-mixing question before the spec is finalized.
+
+---
+
 **Date:** 2026-06-16
 **Decision:** Anna's lecture is delivered as a **full-screen, portrait "call"-style video, launched from a poster tile** on the lesson page — replacing the inline 16:9 player + Watch/Read toggle. Captions overlay the video; the read-along transcript is a pull-up sheet (mobile) / side rail (desktop). Completion is **implicit** (auto at ~90% watched) or **explicit** ("Mark complete"); the chat is **not hard-gated** on completion — a **soft "unlock" moment** celebrates completion and elevates the Chat-with-Anna CTA. Desktop renders the portrait video as a centered "call window," not full-bleed.
 **Why:** Matches the "talk with Anna like a call" product intent and the dominant mobile grammar for talking-head / AI presenters (Reels/Shorts, Duolingo Max "Video Call," HeyGen/Synthesia/Tavus default 9:16). Collapses Watch/Read into one page (matches the existing production lesson pattern) and unifies the lecture with the future live video-call into one portrait presentation.
