@@ -17,19 +17,23 @@ Load additional context based on the task at hand:
 | Task Type | Load These Files |
 |-----------|------------------|
 | **Feature work** | `projects/feature-[name]/_brief.md`, `_decisions.md` |
-| **DCP / clinical program work** (`feature-dcp` + sub-features) | `projects/feature-dcp/_brief.md`, `_decisions.md`, **+ `reference/experts/dtx-dcp-experts.md`** (secondary layer — consult after UX experts, never supersedes them) |
-| **Design system** | `design/_index.md`, `reference/process/design-system-principles.md`, `reference/experts/design-system-people-to-follow.md` |
+| **DCP / clinical program work** (`feature-dcp` + sub-features) | `projects/feature-dcp/_brief.md`, `_decisions.md`, **+ `dcp-clinical-delivery` skill** (auto-triggers; secondary layer — consult after UX experts, never supersedes them; internal MHC knowledge, not general UX/design practice) |
+| **Design system** | `design/_index.md`, `reference/process/design-system-principles.md`, **`design-systems` skill** (auto-triggers; use the narrower **`frost-atomic-design`** skill for questions about MHC's own Atoms/Components/Patterns/Templates hierarchy specifically) |
 | **IA / navigation / taxonomy / surfacing** | `design/IA/_index.md` + the relevant docs it links |
 | **Any design / UX / visual review** | `reference/review/_kit.md` + the instruments it lists |
-| **Deeper argument or precedent needed** | `reference/experts/ux-usability-experts.md`, `reference/experts/visual-design-experts.md` (libraries — on demand, not every review) |
-| **Product strategy** | `reference/experts/product-design-experts.md`, `competitive/competitive-analysis.md` |
-| **Competitive positioning** | `competitive/battlecards/*`, `competitive/profiles/*` |
-| **Color / palette / token work** | `reference/experts/color-systems-experts.md` |
+| **Deeper argument or precedent needed** | **`ux-usability`, `visual-brand-craft`** skills (auto-trigger on demand — not every review) |
+| **Product strategy** | **`product-strategy`** skill (auto-triggers; use the narrower **`dunford-positioning`** skill for positioning/competitive-framing specifically), `competitive/competitive-analysis.md` |
+| **Competitive positioning** | `competitive/battlecards/*`, `competitive/profiles/*`, **`dunford-positioning`** skill |
+| **Color / palette / token work** | **`visual-brand-craft`** skill (the former color-systems roster is merged into it) |
 | **User research / usability testing** | `reference/process/user-research-methods.md` (+ Tier 3 for any DCP/clinical-population recruiting) |
-| **UX writing / microcopy / error states** (member-facing, in-product copy) | `reference/experts/content-design-experts.md` (defers to `strategy/Brand Voice Guide - Member-Facing.md` as final authority) |
+| **UX writing / microcopy / error states** (member-facing, in-product copy) | **`content-design`** skill (defers to `strategy/Brand Voice Guide - Member-Facing.md` as final authority) |
 | **External / partner / clinical stakeholder communication** (executive & board readouts, health-system & payer partners, clinical audiences) | `strategy/Brand Voice Guide - Stakeholder & Partner.md` |
-| **Brand / identity work** | `reference/experts/brand-agency-studios.md` |
+| **Brand / identity work (routine — is this on-brand, consistent, well-written)** | **`visual-brand-craft`**, **`content-design`** skills |
+| **Brand / identity work (adopting a whole agency's end-to-end methodology)** | **`brand-agency-methodologies`** skill — deliberately narrow, only when explicitly borrowing IDEO/frog/Pentagram/Ammunition/Koto's whole process, not for routine brand checks |
+| **Engagement loops, habit mechanics, rewards, learning/mastery paths** | **`engagement-behavior`** skill (use the narrower **`bucher-behavior-design`** skill for a health-behavior/rewards mechanic specifically) |
 | **Starting a new feature, redesign, or brand effort** | `reference/process/design-thinking-process.md` (the operating loop) before diving into execution |
+
+**On the skill names above:** these are Claude Code skills under `.claude/skills/` that auto-trigger when a prompt matches their description — you generally don't need to load them manually the way you load a file. They're packaged from the `reference/experts/` files (still the source of truth; unchanged) plus three standalone by-name skills split out of those rosters. See the **Reference library** section below for the full file-to-skill mapping.
 
 ## Folder structure
 
@@ -93,19 +97,28 @@ The `reference/` folder splits into three kinds of file, and the distinction is 
 | `review/ux-laws.md` | Severity 0–4 | Cognitive/behavioral laws (Fitts, Hick, Gestalt, Peak-End) |
 | `review/art-direction.md` | Score /100 | Composition — emphasis, tone, density, accent, partner survivability |
 
-**`reference/experts/` — precedent rosters.** Who to think like. Consulted on demand for an argument or precedent — never loaded just to run a review.
+**`reference/experts/` — precedent rosters.** Who to think like. The files below remain the source of truth and are unchanged; each is also packaged as a Claude Code skill under `.claude/skills/` that auto-triggers when a prompt matches its description, so in practice you rarely load these manually anymore — the skill layer is the primary path, the file is the fallback (e.g. if you want to browse a full roster directly).
 
-| File | Domain | Use For |
-|------|--------|---------|
-| `experts/ux-usability-experts.md` | UX | The expert roster behind the heuristics instrument |
-| `experts/visual-design-experts.md` | Visual | Typography, color, layout principles; Vignelli, Albers, Rams |
-| `experts/product-design-experts.md` | Product | Strategy, discovery, execution frameworks |
-| `experts/engagement-behavior-experts.md` | Engagement / behavior | Habit loops, gamification, behavior change, learning/mastery (EBB, rewards, habits) |
-| `experts/dtx-dcp-experts.md` | DTx / clinical delivery | **Secondary cross-reference** for DCP work (feature-dcp) — DTx delivery + evidence standards. Consult AFTER UX experts; never supersedes them. |
-| `experts/color-systems-experts.md` | Color | Perceptual color science, systematic palette construction, accessible/clinical color |
-| `experts/content-design-experts.md` | UX writing | Microcopy, error states, voice/tone craft — defers to MHC's own brand voice guides as final authority |
-| `experts/brand-agency-studios.md` | Brand | 5 agencies/studios for product-and-brand fusion — process, strategy, identity craft, taste, living systems |
-| `experts/design-system-people-to-follow.md` | Design systems | External experts and systems to study |
+| File | Skill | Domain | Use For |
+|------|-------|--------|---------|
+| `experts/ux-usability-experts.md` | `ux-usability` | UX | The expert roster behind the heuristics instrument |
+| `experts/visual-design-experts.md` + `experts/color-systems-experts.md` | `visual-brand-craft` | Visual + color | Typography, layout principles (Vignelli, Albers, Rams) merged with perceptual color science and accessible/clinical palette construction — one skill, since the two files were already declared companions |
+| `experts/product-design-experts.md` | `product-strategy` | Product | Strategy, discovery, execution frameworks |
+| `experts/engagement-behavior-experts.md` | `engagement-behavior` | Engagement / behavior | Habit loops, gamification, behavior change, learning/mastery (EBB, rewards, habits) |
+| `experts/dtx-dcp-experts.md` | `dcp-clinical-delivery` | DTx / clinical delivery | **Secondary cross-reference** for DCP work (feature-dcp) — DTx delivery + evidence standards. Consult AFTER UX experts; never supersedes them. Marked internal MHC knowledge, distinct from general UX/design practice. |
+| `experts/content-design-experts.md` | `content-design` | UX writing | Microcopy, error states, voice/tone craft — defers to MHC's own brand voice guides as final authority |
+| `experts/brand-agency-studios.md` | `brand-agency-methodologies` | Brand | 5 agencies/studios for product-and-brand fusion — deliberately narrow trigger: only when adopting one agency's whole end-to-end process, not for routine brand-consistency checks |
+| `experts/design-system-people-to-follow.md` | `design-systems` | Design systems | External experts and systems to study |
+
+**Standalone by-name skills** — pulled out of the rosters above because either this file or the source file itself already invokes that one person specifically, not as roster background:
+
+| Skill | Person | Narrow trigger |
+|---|---|---|
+| `dunford-positioning` | April Dunford | Positioning / the "piggyback, not replace" argument specifically (see the Rebrand row below) |
+| `bucher-behavior-design` | Amy Bucher | Designing a health-behavior or rewards mechanic specifically (feature-ebb, feature-rewards) |
+| `frost-atomic-design` | Brad Frost | MHC's own Foundation/Atoms/Components/Patterns/Templates hierarchy specifically |
+
+Each still appears in its parent roster too (Dunford in `product-strategy`, Bucher in `engagement-behavior`, Frost in `design-systems`) — the standalone skill is the tighter, by-name version for when the task is exactly that narrow.
 
 **`reference/process/` — how to run the work.** Methodology, not precedent — the operating loop and playbooks, distinct from who-to-think-like.
 
@@ -140,7 +153,7 @@ The `reference/` folder splits into three kinds of file, and the distinction is 
 | Component inventory | `design/_index.md` | What exists in the system |
 | Feature context | `projects/feature-[name]/_brief.md` | If feature-specific |
 
-The kit index tells you which instruments apply to the artifact in front of you and how to report them. Do **not** load the expert libraries to run a routine review — they are for when you need a precedent or an argument.
+The kit index tells you which instruments apply to the artifact in front of you and how to report them. Do **not** manually load the expert libraries (or their skill equivalents) to run a routine review — they are for when you need a precedent or an argument, and the skills auto-trigger on their own when that need shows up in the prompt.
 
 **Four rules from the kit that are non-negotiable:**
 
@@ -162,10 +175,10 @@ Five recurring session types, each with a different opening move, load set, and 
 | Session type | Opening move | Loads | Process weight | Closes with |
 |---|---|---|---|---|
 | **Update an existing design** | Just describe the update — the trigger table auto-loads | `design/_index.md`, feature `_brief.md`, `reference/review/_kit.md` | "Component or pattern update" row — light discover, 2 directions minimum | Full review kit. If it's a live HTML output, layer `/design-review` (browser QA) on top |
-| **Complete redesign from the ground up** | Say explicitly it's a full redesign, not a tweak — changes the weight Claude applies | + `reference/process/design-thinking-process.md`, `reference/experts/product-design-experts.md` (discovery) | "New feature" row — full Discover→Define→Develop→Deliver loop | Full review kit + close the loop with a real user if possible. Consider `/plan-design-review` to gate the plan before build; `/office-hours` first if scope/ambition is genuinely unclear |
-| **Rebrand (product brand, piggyback not replace)** | State the constraint up front — "extends the existing bundling, doesn't replace it" — so it's captured before any direction is generated | `reference/experts/brand-agency-studios.md`, `reference/experts/content-design-experts.md`, `reference/experts/color-systems-experts.md` (if palette flexes), MHC's own brand voice guides in `strategy/`, `strategy/Product Service Information.md` (the bundling constraint) | "Brand or identity effort" row — full Discover+Define, directions informed by different studio angles (see the 5-studio comparison table) | Full review kit + Pentagram-level craft scrutiny. Keep a `_decisions.md` per [[feedback_decision_log_defensibility]] — that log *is* the defensibility the ask is asking for. April Dunford's positioning framework (`reference/experts/product-design-experts.md`) is the right tool for the "piggyback, not replace" argument specifically |
+| **Complete redesign from the ground up** | Say explicitly it's a full redesign, not a tweak — changes the weight Claude applies | + `reference/process/design-thinking-process.md`, **`product-strategy` skill** (discovery) | "New feature" row — full Discover→Define→Develop→Deliver loop | Full review kit + close the loop with a real user if possible. Consider `/plan-design-review` to gate the plan before build; `/office-hours` first if scope/ambition is genuinely unclear |
+| **Rebrand (product brand, piggyback not replace)** | State the constraint up front — "extends the existing bundling, doesn't replace it" — so it's captured before any direction is generated | **`brand-agency-methodologies` skill** (this is the one routine case that *is* a whole-methodology invocation), **`content-design` skill**, **`visual-brand-craft` skill** (if palette flexes), MHC's own brand voice guides in `strategy/`, `strategy/Product Service Information.md` (the bundling constraint) | "Brand or identity effort" row — full Discover+Define, directions informed by different studio angles (see the 5-studio comparison table) | Full review kit + Pentagram-level craft scrutiny. Keep a `_decisions.md` per [[feedback_decision_log_defensibility]] — that log *is* the defensibility the ask is asking for. **`dunford-positioning` skill** is the right tool for the "piggyback, not replace" argument specifically |
 | **User research project** | State the decision the research needs to inform, before picking a method | `reference/process/user-research-methods.md` (+ Tier 3 if DCP/clinical population) | N/A — this doc has its own one-week solo playbook | Write the decision down, save findings to `outputs/`; use `templates/stakeholder-memo-template.md` if reporting up |
-| **Accessibility audit** | Name the artifact — Figma frame, HTML page, or flow | `reference/review/_kit.md` → `accessibility.md` specifically; `reference/experts/color-systems-experts.md` Tier 3 if color-only-encoded meaning surfaces | N/A — this is an instrument run, not a design-thinking loop | PASS/FAIL + blocker list, `accessibility.md`'s own format. On a live HTML page, `/qa-only` or `/design-review` (browser-based) catches things the manual instrument won't |
+| **Accessibility audit** | Name the artifact — Figma frame, HTML page, or flow | `reference/review/_kit.md` → `accessibility.md` specifically; **`visual-brand-craft` skill** (color-systems Tier 3) if color-only-encoded meaning surfaces | N/A — this is an instrument run, not a design-thinking loop | PASS/FAIL + blocker list, `accessibility.md`'s own format. On a live HTML page, `/qa-only` or `/design-review` (browser-based) catches things the manual instrument won't |
 
 **On the `/design-review`, `/qa-only`, `/plan-design-review`, `/office-hours` skills above:** these are general Claude Code skills, not MHC-specific — they're genuinely useful for a *live, running* HTML page (browser-based QA, iterative fix-and-verify) but assume a git-committed app more than a Figma-first exploration. Reach for them when the artifact in front of you is a real running page; otherwise the reference-file-driven process above is the primary path.
 
