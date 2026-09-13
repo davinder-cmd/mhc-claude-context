@@ -3,8 +3,9 @@
 .AppleDouble
 .LSOverride
 
-# Claude internals
-.claude/
+# Claude internals (session cache, local settings) — but track hand-authored skills
+.claude/*
+!.claude/skills
 
 # Skills and plugins (managed separately)
 .skills/
