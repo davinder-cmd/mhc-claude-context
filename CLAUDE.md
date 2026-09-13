@@ -20,7 +20,7 @@ Load additional context based on the task at hand:
 | **DCP / clinical program work** (`feature-dcp` + sub-features) | `projects/feature-dcp/_brief.md`, `_decisions.md`, **+ `dcp-clinical-delivery` skill** (auto-triggers; secondary layer — consult after UX experts, never supersedes them; internal MHC knowledge, not general UX/design practice) |
 | **Design system** | `design/_index.md`, `reference/process/design-system-principles.md`, **`design-systems` skill** (auto-triggers; use the narrower **`frost-atomic-design`** skill for questions about MHC's own Atoms/Components/Patterns/Templates hierarchy specifically) |
 | **IA / navigation / taxonomy / surfacing** | `design/IA/_index.md` + the relevant docs it links |
-| **Any design / UX / visual review** | `reference/review/_kit.md` + the instruments it lists |
+| **Any design / UX / visual review** | **`design-review-kit`** skill (auto-triggers; runs conformance, accessibility, UX, art direction in order) — use the narrower **`accessibility-audit`** skill for an accessibility-only check |
 | **Deeper argument or precedent needed** | **`ux-usability`, `visual-brand-craft`** skills (auto-trigger on demand — not every review) |
 | **Product strategy** | **`product-strategy`** skill (auto-triggers; use the narrower **`dunford-positioning`** skill for positioning/competitive-framing specifically), `competitive/competitive-analysis.md` |
 | **Competitive positioning** | `competitive/battlecards/*`, `competitive/profiles/*`, **`dunford-positioning`** skill |
@@ -86,16 +86,16 @@ Each feature lives in `projects/feature-[name]/`. Read the feature's `_brief.md`
 
 The `reference/` folder splits into three kinds of file, and the distinction is load-bearing:
 
-**`reference/review/` — instruments.** Short, scoreable, always-on. Every file can *fail* a design. Loaded on every design review via [reference/review/_kit.md](reference/review/_kit.md).
+**`reference/review/` — instruments.** Short, scoreable, always-on. Every file can *fail* a design. The files below remain the source of truth and are unchanged; the whole kit is also packaged as the **`design-review-kit`** skill (auto-triggers on an actual review/audit/critique request), with `accessibility.md` additionally packaged as its own narrow **`accessibility-audit`** skill for an accessibility-only ask.
 
-| File | Output | Use For |
-|------|--------|---------|
-| `review/_kit.md` | — | Index, scoring contract, applicability gate. **Start here.** |
-| `review/conformance.md` + `conformance-audit.js` | PASS / FAIL | Are all values legal? Measured via the Figma bridge, never eyeballed |
-| `review/accessibility.md` | PASS / FAIL | WCAG 2.2 AA floors, ICP-driven requirements |
-| `review/ux-heuristics.md` | Severity 0–4 | Nielsen's 10, Norman, Krug — MHC-specific checks |
-| `review/ux-laws.md` | Severity 0–4 | Cognitive/behavioral laws (Fitts, Hick, Gestalt, Peak-End) |
-| `review/art-direction.md` | Score /100 | Composition — emphasis, tone, density, accent, partner survivability |
+| File | Skill | Output | Use For |
+|------|-------|--------|---------|
+| `review/_kit.md` | `design-review-kit` (as `kit-index.md`) | — | Index, scoring contract, applicability gate. **Start here.** |
+| `review/conformance.md` + `conformance-audit.js` | `design-review-kit` | PASS / FAIL | Are all values legal? Measured via the Figma bridge, never eyeballed |
+| `review/accessibility.md` | `design-review-kit` **and** standalone `accessibility-audit` | PASS / FAIL | WCAG 2.2 AA floors, ICP-driven requirements |
+| `review/ux-heuristics.md` | `design-review-kit` | Severity 0–4 | Nielsen's 10, Norman, Krug — MHC-specific checks |
+| `review/ux-laws.md` | `design-review-kit` | Severity 0–4 | Cognitive/behavioral laws (Fitts, Hick, Gestalt, Peak-End) |
+| `review/art-direction.md` | `design-review-kit` | Score /100 | Composition — emphasis, tone, density, accent, partner survivability |
 
 **`reference/experts/` — precedent rosters.** Who to think like. The files below remain the source of truth and are unchanged; each is also packaged as a Claude Code skill under `.claude/skills/` that auto-triggers when a prompt matches its description, so in practice you rarely load these manually anymore — the skill layer is the primary path, the file is the fallback (e.g. if you want to browse a full roster directly).
 
@@ -149,11 +149,11 @@ Each still appears in its parent roster too (Dunford in `product-strategy`, Buch
 
 | Context | File | What You Get |
 |---------|------|--------------|
-| **Review kit** | `reference/review/_kit.md` | The four instruments, the scoring contract, the applicability gate |
+| **Review kit** | **`design-review-kit`** skill (auto-triggers; `reference/review/_kit.md` is its unchanged source) | The four instruments, the scoring contract, the applicability gate |
 | Component inventory | `design/_index.md` | What exists in the system |
 | Feature context | `projects/feature-[name]/_brief.md` | If feature-specific |
 
-The kit index tells you which instruments apply to the artifact in front of you and how to report them. Do **not** manually load the expert libraries (or their skill equivalents) to run a routine review — they are for when you need a precedent or an argument, and the skills auto-trigger on their own when that need shows up in the prompt.
+The kit's index (`kit-index.md` inside the skill) tells you which instruments apply to the artifact in front of you and how to report them. Do **not** manually load the expert libraries (or their skill equivalents) to run a routine review — they are for when you need a precedent or an argument, and the skills (including `design-review-kit` itself) auto-trigger on their own when that need shows up in the prompt.
 
 **Four rules from the kit that are non-negotiable:**
 
@@ -174,11 +174,11 @@ Five recurring session types, each with a different opening move, load set, and 
 
 | Session type | Opening move | Loads | Process weight | Closes with |
 |---|---|---|---|---|
-| **Update an existing design** | Just describe the update — the trigger table auto-loads | `design/_index.md`, feature `_brief.md`, `reference/review/_kit.md` | "Component or pattern update" row — light discover, 2 directions minimum | Full review kit. If it's a live HTML output, layer `/design-review` (browser QA) on top |
+| **Update an existing design** | Just describe the update — the trigger table auto-loads | `design/_index.md`, feature `_brief.md`, **`design-review-kit` skill** | "Component or pattern update" row — light discover, 2 directions minimum | Full review kit. If it's a live HTML output, layer `/design-review` (browser QA) on top |
 | **Complete redesign from the ground up** | Say explicitly it's a full redesign, not a tweak — changes the weight Claude applies | + `reference/process/design-thinking-process.md`, **`product-strategy` skill** (discovery) | "New feature" row — full Discover→Define→Develop→Deliver loop | Full review kit + close the loop with a real user if possible. Consider `/plan-design-review` to gate the plan before build; `/office-hours` first if scope/ambition is genuinely unclear |
 | **Rebrand (product brand, piggyback not replace)** | State the constraint up front — "extends the existing bundling, doesn't replace it" — so it's captured before any direction is generated | **`brand-agency-methodologies` skill** (this is the one routine case that *is* a whole-methodology invocation), **`content-design` skill**, **`visual-brand-craft` skill** (if palette flexes), MHC's own brand voice guides in `strategy/`, `strategy/Product Service Information.md` (the bundling constraint) | "Brand or identity effort" row — full Discover+Define, directions informed by different studio angles (see the 5-studio comparison table) | Full review kit + Pentagram-level craft scrutiny. Keep a `_decisions.md` per [[feedback_decision_log_defensibility]] — that log *is* the defensibility the ask is asking for. **`dunford-positioning` skill** is the right tool for the "piggyback, not replace" argument specifically |
 | **User research project** | State the decision the research needs to inform, before picking a method | `reference/process/user-research-methods.md` (+ Tier 3 if DCP/clinical population) | N/A — this doc has its own one-week solo playbook | Write the decision down, save findings to `outputs/`; use `templates/stakeholder-memo-template.md` if reporting up |
-| **Accessibility audit** | Name the artifact — Figma frame, HTML page, or flow | `reference/review/_kit.md` → `accessibility.md` specifically; **`visual-brand-craft` skill** (color-systems Tier 3) if color-only-encoded meaning surfaces | N/A — this is an instrument run, not a design-thinking loop | PASS/FAIL + blocker list, `accessibility.md`'s own format. On a live HTML page, `/qa-only` or `/design-review` (browser-based) catches things the manual instrument won't |
+| **Accessibility audit** | Name the artifact — Figma frame, HTML page, or flow | **`accessibility-audit` skill** (auto-triggers); **`visual-brand-craft` skill** (color-systems Tier 3) if color-only-encoded meaning surfaces | N/A — this is an instrument run, not a design-thinking loop | PASS/FAIL + blocker list, `accessibility.md`'s own format. On a live HTML page, `/qa-only` or `/design-review` (browser-based) catches things the manual instrument won't |
 
 **On the `/design-review`, `/qa-only`, `/plan-design-review`, `/office-hours` skills above:** these are general Claude Code skills, not MHC-specific — they're genuinely useful for a *live, running* HTML page (browser-based QA, iterative fix-and-verify) but assume a git-committed app more than a Figma-first exploration. Reach for them when the artifact in front of you is a real running page; otherwise the reference-file-driven process above is the primary path.
 
