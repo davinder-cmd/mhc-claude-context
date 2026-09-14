@@ -25,7 +25,7 @@ Load additional context based on the task at hand:
 | **Product strategy** | **`product-strategy`** skill (auto-triggers; use the narrower **`dunford-positioning`** skill for positioning/competitive-framing specifically), `competitive/competitive-analysis.md` |
 | **Competitive positioning** | `competitive/battlecards/*`, `competitive/profiles/*`, **`dunford-positioning`** skill |
 | **Color / palette / token work** | **`visual-brand-craft`** skill (the former color-systems roster is merged into it) |
-| **User research / usability testing** | `reference/process/user-research-methods.md` (+ Tier 3 for any DCP/clinical-population recruiting) |
+| **User research / usability testing / research synthesis** | **`research-synthesis`** skill (auto-triggers; accelerates real guerrilla sessions or mines existing real user signal — never simulates a user; + Tier 3 for any DCP/clinical-population recruiting) |
 | **UX writing / microcopy / error states** (member-facing, in-product copy) | **`content-design`** skill (defers to `strategy/Brand Voice Guide - Member-Facing.md` as final authority) |
 | **External / partner / clinical stakeholder communication** (executive & board readouts, health-system & payer partners, clinical audiences) | `strategy/Brand Voice Guide - Stakeholder & Partner.md` |
 | **Brand / identity work (routine — is this on-brand, consistent, well-written)** | **`visual-brand-craft`**, **`content-design`** skills |
@@ -122,11 +122,11 @@ Each still appears in its parent roster too (Dunford in `product-strategy`, Buch
 
 **`reference/process/` — how to run the work.** Methodology, not precedent — the operating loop and playbooks, distinct from who-to-think-like.
 
-| File | Domain | Use For |
-|------|--------|---------|
-| `process/design-thinking-process.md` | Process | The operating loop (Discover/Define/Develop/Deliver) for a new feature, redesign, or brand effort |
-| `process/user-research-methods.md` | Research | Solo-practice research methods, session craft, clinical-population research conduct |
-| `process/design-system-principles.md` | Design systems | Validating component decisions |
+| File | Skill | Domain | Use For |
+|------|-------|--------|---------|
+| `process/design-thinking-process.md` | — | Process | The operating loop (Discover/Define/Develop/Deliver) for a new feature, redesign, or brand effort |
+| `process/user-research-methods.md` | `research-synthesis` | Research | Solo-practice research methods, session craft, clinical-population research conduct — packaged as a skill with two operating jobs (accelerate real sessions, mine existing real signal) and an explicit guardrail against AI-simulated "users" |
+| `process/design-system-principles.md` | — | Design systems | Validating component decisions |
 
 **Not in `reference/` — moved out because they aren't precedent or process:**
 
@@ -177,7 +177,7 @@ Five recurring session types, each with a different opening move, load set, and 
 | **Update an existing design** | Just describe the update — the trigger table auto-loads | `design/_index.md`, feature `_brief.md`, **`design-review-kit` skill** | "Component or pattern update" row — light discover, 2 directions minimum | Full review kit. If it's a live HTML output, layer `/design-review` (browser QA) on top |
 | **Complete redesign from the ground up** | Say explicitly it's a full redesign, not a tweak — changes the weight Claude applies | + `reference/process/design-thinking-process.md`, **`product-strategy` skill** (discovery) | "New feature" row — full Discover→Define→Develop→Deliver loop | Full review kit + close the loop with a real user if possible. Consider `/plan-design-review` to gate the plan before build; `/office-hours` first if scope/ambition is genuinely unclear |
 | **Rebrand (product brand, piggyback not replace)** | State the constraint up front — "extends the existing bundling, doesn't replace it" — so it's captured before any direction is generated | **`brand-agency-methodologies` skill** (this is the one routine case that *is* a whole-methodology invocation), **`content-design` skill**, **`visual-brand-craft` skill** (if palette flexes), MHC's own brand voice guides in `strategy/`, `strategy/Product Service Information.md` (the bundling constraint) | "Brand or identity effort" row — full Discover+Define, directions informed by different studio angles (see the 5-studio comparison table) | Full review kit + Pentagram-level craft scrutiny. Keep a `_decisions.md` per [[feedback_decision_log_defensibility]] — that log *is* the defensibility the ask is asking for. **`dunford-positioning` skill** is the right tool for the "piggyback, not replace" argument specifically |
-| **User research project** | State the decision the research needs to inform, before picking a method | `reference/process/user-research-methods.md` (+ Tier 3 if DCP/clinical population) | N/A — this doc has its own one-week solo playbook | Write the decision down, save findings to `outputs/`; use `templates/stakeholder-memo-template.md` if reporting up |
+| **User research project** | State the decision the research needs to inform, before picking a method | **`research-synthesis` skill** (auto-triggers; + Tier 3 if DCP/clinical population) | N/A — the skill carries its own one-week solo playbook | Write the decision down, save findings to `outputs/`; use `templates/stakeholder-memo-template.md` if reporting up |
 | **Accessibility audit** | Name the artifact — Figma frame, HTML page, or flow | **`accessibility-audit` skill** (auto-triggers); **`visual-brand-craft` skill** (color-systems Tier 3) if color-only-encoded meaning surfaces | N/A — this is an instrument run, not a design-thinking loop | PASS/FAIL + blocker list, `accessibility.md`'s own format. On a live HTML page, `/qa-only` or `/design-review` (browser-based) catches things the manual instrument won't |
 
 **On the `/design-review`, `/qa-only`, `/plan-design-review`, `/office-hours` skills above:** these are general Claude Code skills, not MHC-specific — they're genuinely useful for a *live, running* HTML page (browser-based QA, iterative fix-and-verify) but assume a git-committed app more than a Figma-first exploration. Reach for them when the artifact in front of you is a real running page; otherwise the reference-file-driven process above is the primary path.
